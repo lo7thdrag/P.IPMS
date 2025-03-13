@@ -1,0 +1,861 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{97CEF228-C90F-43A9-842F-06A5A0D9199E}</ProjectGuid>
+        <ProjectVersion>18.8</ProjectVersion>
+        <MainSource>instructor.dpr</MainSource>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+        <FrameworkType>VCL</FrameworkType>
+        <Base>True</Base>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>38017</TargetedPlatforms>
+        <AppType>Application</AppType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Android64' and '$(Base)'=='true') or '$(Base_Android64)'!=''">
+        <Base_Android64>true</Base_Android64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Android64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Android64)'!=''">
+        <Cfg_2_Android64>true</Cfg_2_Android64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='iOSDevice64' and '$(Cfg_2)'=='true') or '$(Cfg_2_iOSDevice64)'!=''">
+        <Cfg_2_iOSDevice64>true</Cfg_2_iOSDevice64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX64' and '$(Cfg_2)'=='true') or '$(Cfg_2_OSX64)'!=''">
+        <Cfg_2_OSX64>true</Cfg_2_OSX64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_BplOutput>..\sampah\</DCC_BplOutput>
+        <DCC_DcpOutput>..\sampah\</DCC_DcpOutput>
+        <DCC_PRIVATE_PROPACCESSOR>false</DCC_PRIVATE_PROPACCESSOR>
+        <DCC_IMPLICIT_STRING_CAST>false</DCC_IMPLICIT_STRING_CAST>
+        <DCC_SUSPICIOUS_TYPECAST>false</DCC_SUSPICIOUS_TYPECAST>
+        <DCC_WIDECHAR_REDUCED>false</DCC_WIDECHAR_REDUCED>
+        <DCC_SYMBOL_PLATFORM>false</DCC_SYMBOL_PLATFORM>
+        <DCC_IMPLICIT_STRING_CAST_LOSS>false</DCC_IMPLICIT_STRING_CAST_LOSS>
+        <DCC_OutputDRCFile>true</DCC_OutputDRCFile>
+        <DCC_ExeOutput>..\bin</DCC_ExeOutput>
+        <DCC_DependencyCheckOutputName>..\bin\instructor.exe</DCC_DependencyCheckOutputName>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_Platform>x86</DCC_Platform>
+        <DCC_E>false</DCC_E>
+        <DCC_N>false</DCC_N>
+        <DCC_S>false</DCC_S>
+        <DCC_F>false</DCC_F>
+        <DCC_K>false</DCC_K>
+        <SanitizedProjectName>instructor</SanitizedProjectName>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;Ics.Fmx;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Android64)'!=''">
+        <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;com-google-android-gms.play-services-ads-base.17.2.0.dex.jar;com-google-android-gms.play-services-ads-identifier.16.0.0.dex.jar;com-google-android-gms.play-services-ads-lite.17.2.0.dex.jar;com-google-android-gms.play-services-ads.17.2.0.dex.jar;com-google-android-gms.play-services-analytics-impl.16.0.8.dex.jar;com-google-android-gms.play-services-analytics.16.0.8.dex.jar;com-google-android-gms.play-services-base.16.0.1.dex.jar;com-google-android-gms.play-services-basement.16.2.0.dex.jar;com-google-android-gms.play-services-gass.17.2.0.dex.jar;com-google-android-gms.play-services-identity.16.0.0.dex.jar;com-google-android-gms.play-services-maps.16.1.0.dex.jar;com-google-android-gms.play-services-measurement-base.16.4.0.dex.jar;com-google-android-gms.play-services-measurement-sdk-api.16.4.0.dex.jar;com-google-android-gms.play-services-stats.16.0.1.dex.jar;com-google-android-gms.play-services-tagmanager-v4-impl.16.0.8.dex.jar;com-google-android-gms.play-services-tasks.16.0.1.dex.jar;com-google-android-gms.play-services-wallet.16.0.1.dex.jar;com-google-firebase.firebase-analytics.16.4.0.dex.jar;com-google-firebase.firebase-common.16.1.0.dex.jar;com-google-firebase.firebase-iid-interop.16.0.1.dex.jar;com-google-firebase.firebase-iid.17.1.1.dex.jar;com-google-firebase.firebase-measurement-connector.17.0.1.dex.jar;com-google-firebase.firebase-messaging.17.5.0.dex.jar;fmx.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar</EnabledSysJars>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_Namespace>System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <BT_BuildType>Debug</BT_BuildType>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <Icon_MainIcon>instructor_Icon.ico</Icon_MainIcon>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <Icon_MainIcon>instructor_Icon.ico</Icon_MainIcon>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Android64)'!=''">
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_iOSDevice64)'!=''">
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_OSX64)'!=''">
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="panels\uScenLoader.pas">
+            <Form>frmScenarioLoader</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uScenBuilder.pas">
+            <Form>frmScenBuilder</Form>
+        </DCCReference>
+        <DCCReference Include="..\ersimulator\uERManager.pas"/>
+        <DCCReference Include="..\ersimulator\uERNetwork.pas"/>
+        <DCCReference Include="..\ersimulator\uERSystem.pas"/>
+        <DCCReference Include="..\framework\LibBaseUtils\Counter\uSteppers.pas"/>
+        <DCCReference Include="..\framework\LibBaseUtils\Counter\uThreadTimer.pas"/>
+        <DCCReference Include="..\framework\LibBaseUtils\Counter\uVirtualTime.pas"/>
+        <DCCReference Include="..\engines\uEngineRoom.pas"/>
+        <DCCReference Include="..\engines\system\uAuxSystem.pas"/>
+        <DCCReference Include="..\engines\system\uBallastSystem.pas"/>
+        <DCCReference Include="..\engines\system\uCommonSystem.pas"/>
+        <DCCReference Include="..\engines\system\uFireFightingSystem.pas"/>
+        <DCCReference Include="..\engines\system\uFuelOilSystem.pas"/>
+        <DCCReference Include="..\engines\system\uNavComSystem.pas"/>
+        <DCCReference Include="..\engines\system\uPMSSystem.pas"/>
+        <DCCReference Include="..\engines\system\uPropulsionSystem.pas"/>
+        <DCCReference Include="..\engines\system\uSeaFWSystem.pas"/>
+        <DCCReference Include="..\engines\entity\uConsumption.pas"/>
+        <DCCReference Include="..\engines\entity\uEntity.pas"/>
+        <DCCReference Include="..\engines\entity\uGenerator.pas"/>
+        <DCCReference Include="..\engines\entity\uPump.pas"/>
+        <DCCReference Include="..\engines\entity\uTank.pas"/>
+        <DCCReference Include="..\common\uFunction.pas"/>
+        <DCCReference Include="..\common\uListener.pas"/>
+        <DCCReference Include="..\common\uDatabase.pas"/>
+        <DCCReference Include="..\common\uDataType.pas"/>
+        <DCCReference Include="..\network\uDataBuffer.pas"/>
+        <DCCReference Include="..\network\uNetBaseSocket.pas"/>
+        <DCCReference Include="..\network\uNetworkManager.pas"/>
+        <DCCReference Include="..\network\uPacketRegister.pas"/>
+        <DCCReference Include="..\network\uTCPClient.pas"/>
+        <DCCReference Include="..\network\uTCPDatatype.pas"/>
+        <DCCReference Include="..\network\uTCPServer.pas"/>
+        <DCCReference Include="..\common\uSetting.pas"/>
+        <DCCReference Include="uStarter.pas"/>
+        <DCCReference Include="..\ersimulator\panel\uBallastSystemPanel.pas">
+            <Form>frmBallastSystemPanel</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uERPanel.pas">
+            <Form>frmERPanel</Form>
+        </DCCReference>
+        <DCCReference Include="..\components\uVerticalBar.pas"/>
+        <DCCReference Include="..\components\uAnalogSensor.pas"/>
+        <DCCReference Include="..\components\uBaseComponent.pas"/>
+        <DCCReference Include="..\components\uChart.pas"/>
+        <DCCReference Include="..\components\uCircuitBreakerElement.pas"/>
+        <DCCReference Include="..\components\uControlElement.pas"/>
+        <DCCReference Include="..\components\uHorizontalBar.pas"/>
+        <DCCReference Include="..\components\uIPMS_Data.pas"/>
+        <DCCReference Include="..\components\uMotorControlDoubleSpeed.pas"/>
+        <DCCReference Include="..\components\uMotorControlElement.pas"/>
+        <DCCReference Include="..\components\uMotorControlStandby.pas"/>
+        <DCCReference Include="..\components\uRunningHour.pas"/>
+        <DCCReference Include="..\components\uSetpoint.pas"/>
+        <DCCReference Include="..\components\uShortcut.pas"/>
+        <DCCReference Include="..\components\uSwitchElement.pas"/>
+        <DCCReference Include="..\components\uSwitchEvent.pas"/>
+        <DCCReference Include="..\components\uSwitchNBCD.pas"/>
+        <DCCReference Include="..\components\uSwitchTriangle.pas"/>
+        <DCCReference Include="..\components\uTankSensor.pas"/>
+        <DCCReference Include="..\components\uValveControl.pas"/>
+        <DCCReference Include="..\components\uValveProportionally.pas"/>
+        <DCCReference Include="..\mimics\ufrmLogger.pas">
+            <Form>frmLogs</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\ufrmLogin.pas">
+            <Form>frmLogin</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\ufrmMain.pas">
+            <Form>frmMainDisplay</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\uMimicsManager.pas"/>
+        <DCCReference Include="..\mimics\uMimicsNetwork.pas"/>
+        <DCCReference Include="..\mimics\uMimicsSystem.pas"/>
+        <DCCReference Include="..\mimics\mimic\ufrm24vDCPowerDistribution.pas">
+            <Form>frm24vDCPowerDistribution</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrm230v115vPowerDistribution.pas">
+            <Form>frm230v115vPowerDistribution</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmHistory.pas">
+            <Form>frmAlarmHistory</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmPresentation.pas">
+            <Form>frmAlarmPresentation</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmSummary.pas">
+            <Form>frmAlarmSummary</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAuxiliarySystemOverview.pas">
+            <Form>frmAuxiliarySystemOverview</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmBallastSystem.pas">
+            <Form>frmBallastSystem</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmBilgeSystem.pas">
+            <Form>frmBilgeSystem</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmCAP.pas">
+            <Form>frmCAP</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmCommandHistory.pas">
+            <Form>frmCommandHistory</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmCPP.pas">
+            <Form>frmCPP</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmEmptyPage.pas">
+            <Form>frmEmptyPage</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmFireDetectionDeckTop.pas">
+            <Form>frmFireDetectionDeckTop</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmFireDetectionDeckBottom.pas">
+            <Form>frmFireDetectionDeckBottom</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmFireFightingSystem.pas">
+            <Form>frmFireFightingSystem</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmFuelOilSystem.pas">
+            <Form>frmFuelOilSystem</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmFunctionAllocation.pas">
+            <Form>frmFuncAllocation</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmListOfDisabledElement.pas">
+            <Form>frmListOfDisabledElement</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmListOfParameterChanges.pas">
+            <Form>frmListOfParameterChanges</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmMachinerySpaceVentSystem.pas">
+            <Form>frmMachinerySpaceVentSystem</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmMEPS.pas">
+            <Form>frmMEPS</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmMEPS_Exhaust.pas">
+            <Form>frmMEPS_Exhaust</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmMESB.pas">
+            <Form>frmMESB</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmMESB_Exhaust.pas">
+            <Form>frmMESB_Exhaust</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmMimics.pas">
+            <Form>frmMimics</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmNavComSystem.pas">
+            <Form>frmNavComs</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmNetArchitect.pas">
+            <Form>frmNetArchitect</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmPowerManagementOverview.pas">
+            <Form>frmPowerManagementOverview</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmPropultionConditions.pas">
+            <Form>frmPropultionConditions</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmPropultionSystemOverview.pas">
+            <Form>frmPropultionSystemOverview</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmRunningHours.pas">
+            <Form>frmRunningHours</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmSeaAndFreshWaterSystem.pas">
+            <Form>frmSeaAndFreshWaterSystem</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmTankOverview.pas">
+            <Form>frmTankOverview</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmTOC.pas">
+            <Form>frmTOC</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmUninterruptiblePS.pas">
+            <Form>frmUninterruptiblePS</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmMimicKey.pas">
+            <Form>frmMimicKey</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmAlarmConfiguration.pas">
+            <Form>frmAlarmConfiguration</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmAlarmString.pas">
+            <Form>frmSelectAlarmString</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmAlarmStringIndex.pas">
+            <Form>Form4</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmAttributeSet.pas">
+            <Form>frmNewAttribute</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmConfDateTime.pas">
+            <Form>frmConfDateTime</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmEdtAttribute.pas">
+            <Form>frmEdtAttribute</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmEdtEnumeration.pas">
+            <Form>frmEdtEnumeration</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmEdtExpression.pas">
+            <Form>frmEditExpression</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmEdtFilter.pas">
+            <Form>frmEdtFilter</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmEdtMeasure.pas">
+            <Form>frmEdtMeasure</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmHelp.pas">
+            <Form>frmHelp</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmHistoricalRealtime.pas">
+            <Form>frmHistoricalRealtime</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmLineDisplay.pas">
+            <Form>frmLineDisplay</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmLineMap.pas">
+            <Form>frmLineMap</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmNewAttribute.pas">
+            <Form>Form3</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmNewEnumeration.pas">
+            <Form>frmNewEnumeration</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmNewMeasure.pas">
+            <Form>frmNewMeasure</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmNewPoint.pas">
+            <Form>Form1</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmNewResource.pas">
+            <Form>frmNewResource</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmNewValue.pas">
+            <Form>frmNewValue</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmODBCAdmin.pas">
+            <Form>frmODBCAdmin</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmPointPropts.pas">
+            <Form>frmPointPropts</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmPointView.pas">
+            <Form>frmPointView</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmProperties.pas">
+            <Form>frmProperts</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmPropertiesContainer.pas">
+            <Form>frmContainer</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmPropertiesScreen.pas">
+            <Form>frmScreen</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmSelectAlarmClass.pas">
+            <Form>frmSelectAlarmClass</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmSelectDevice.pas">
+            <Form>frmSelectDevice</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmSelectEnumeration.pas">
+            <Form>frmSelectEnumeration</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmSelectFieldView.pas">
+            <Form>frmSelectFieldView</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmSelectMeasure.pas">
+            <Form>frmSelectMeasure</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmSelectPoint.pas">
+            <Form>Form2</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmSelectPointType.pas">
+            <Form>frmPointType</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmSelectResource.pas">
+            <Form>frmSelectResource</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmSelectSort.pas">
+            <Form>frmSelectSort</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmSelectValue.pas">
+            <Form>frmSelectValue</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmValuePropts.pas">
+            <Form>frmValuePropts</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uMimicPanel.pas">
+            <Form>frmMimicPanel</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\uControllerManager.pas"/>
+        <DCCReference Include="..\server\uControllerNetwork.pas"/>
+        <DCCReference Include="..\server\uControllerSystem.pas"/>
+        <DCCReference Include="..\server\tester\uVCPTestForm.pas">
+            <Form>frmVCPTest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uAAETestForm.pas">
+            <Form>frmAAETest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uCBATestForm.pas">
+            <Form>frmCBATest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uCBETestForm.pas">
+            <Form>frmCBETest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uCTRTestForm.pas">
+            <Form>frmCTRTest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uDAETestForm.pas">
+            <Form>frmDAETest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uElementTesterForm.pas">
+            <Form>frmTester</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uElementTestForm.pas">
+            <Form>frmElementTest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uMCDTestForm.pas">
+            <Form>frmMCDTest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uMCETestForm.pas">
+            <Form>frmMCETest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uMCSTestForm.pas">
+            <Form>frmMCSTest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uRHEtestForm.pas">
+            <Form>frmRHETest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uSAETestForm.pas">
+            <Form>frmSAETest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uSEETestForm.pas">
+            <Form>frmSEETest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uSPETestForm.pas">
+            <Form>frmSPETest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uSS1TestForm.pas">
+            <Form>frmSS1Test</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uSS2TestForm.pas">
+            <Form>frmSS2Test</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uSSETestForm.pas">
+            <Form>frmSSETest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uSSLTestForm.pas">
+            <Form>frmSSLTest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uSWBTestForm.pas">
+            <Form>frmSWBTest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uSWETestForm.pas">
+            <Form>frmSWETest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uSWNTestForm.pas">
+            <Form>frmSWNTest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uVCETestForm.pas">
+            <Form>frmVCETest</Form>
+        </DCCReference>
+        <DCCReference Include="..\server\tester\uVCHTestform.pas">
+            <Form>frmVCHTest</Form>
+        </DCCReference>
+        <DCCReference Include="..\elements\uSPE.pas"/>
+        <DCCReference Include="..\elements\uSS1.pas"/>
+        <DCCReference Include="..\elements\uSS2.pas"/>
+        <DCCReference Include="..\elements\uSSE.pas"/>
+        <DCCReference Include="..\elements\uSSL.pas"/>
+        <DCCReference Include="..\elements\uSWB.pas"/>
+        <DCCReference Include="..\elements\uSWE.pas"/>
+        <DCCReference Include="..\elements\uSWN.pas"/>
+        <DCCReference Include="..\elements\uVCE.pas"/>
+        <DCCReference Include="..\elements\uVCH.pas"/>
+        <DCCReference Include="..\elements\uVCP.pas"/>
+        <DCCReference Include="..\elements\uAAE.pas"/>
+        <DCCReference Include="..\elements\uCBA.pas"/>
+        <DCCReference Include="..\elements\uCBE.pas"/>
+        <DCCReference Include="..\elements\uCTR.pas"/>
+        <DCCReference Include="..\elements\uDAE.pas"/>
+        <DCCReference Include="..\elements\uElement.pas"/>
+        <DCCReference Include="..\elements\uElementController.pas"/>
+        <DCCReference Include="..\elements\uMCD.pas"/>
+        <DCCReference Include="..\elements\uMCE.pas"/>
+        <DCCReference Include="..\elements\uMCS.pas"/>
+        <DCCReference Include="..\elements\uRHE.pas"/>
+        <DCCReference Include="..\elements\uSAE.pas"/>
+        <DCCReference Include="..\elements\uSEE.pas"/>
+        <DCCReference Include="panels\uPCSPanel.pas">
+            <Form>frmPCSPanel</Form>
+        </DCCReference>
+        <DCCReference Include="..\PCS\uPCSSystem.pas"/>
+        <DCCReference Include="..\PCS\uPCSNetwork.pas"/>
+        <DCCReference Include="..\ersimulator\panel\uPMSSystemPanel.pas">
+            <Form>frmPMSSystemPanel</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmAuthorization.pas">
+            <Form>frmAuthorization</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uAvailableTimes.pas">
+            <Form>frmAvailTimes</Form>
+        </DCCReference>
+        <DCCReference Include="..\engines\entity\uSwitchboard.pas"/>
+        <DCCReference Include="..\common\uScenario.pas"/>
+        <DCCReference Include="..\components\uComputer.pas"/>
+        <DCCReference Include="..\common\uPMSDataElement.pas"/>
+        <DCCReference Include="..\common\uDBSupportClasses.pas"/>
+        <DCCReference Include="panels\uAvailableScenario.pas">
+            <Form>frmAvailScenario</Form>
+        </DCCReference>
+        <DCCReference Include="..\engines\entity\uCPP.pas"/>
+        <DCCReference Include="..\engines\entity\uGearBox.pas"/>
+        <DCCReference Include="..\engines\entity\uMainEngine.pas"/>
+        <DCCReference Include="panels\uPMSEditor.pas">
+            <Form>frmPMSEditor</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uAvailablePMSCondition.pas">
+            <Form>frmAvailPMSCondition</Form>
+        </DCCReference>
+        <DCCReference Include="uInstructorPanel.pas">
+            <Form>frmInstructorPanel</Form>
+        </DCCReference>
+        <DCCReference Include="uInstructorSystem.pas"/>
+        <DCCReference Include="panels\uNetArchitectur.pas">
+            <Form>frmNetPanel</Form>
+        </DCCReference>
+        <DCCReference Include="..\PCS\uPCSPanelBridge.pas">
+            <Form>frmPCSPanelBridge</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uDataLogger.pas">
+            <Form>frmLogger</Form>
+        </DCCReference>
+        <DCCReference Include="uInstructorNetwork.pas"/>
+        <DCCReference Include="panels\uNetworkStatus.pas">
+            <Form>frmNetStatus</Form>
+        </DCCReference>
+        <DCCReference Include="..\common\uFreezeFrom.pas">
+            <Form>frmFreeze</Form>
+        </DCCReference>
+        <DCCReference Include="..\elements\uElementTables.pas"/>
+        <DCCReference Include="..\ersimulator\panel\uPCSLocalControlPanel.pas">
+            <Form>frmPCSLocalControlPanel</Form>
+        </DCCReference>
+        <DCCReference Include="..\common\uPCSDataElement.pas"/>
+        <DCCReference Include="panels\uAvailablePCSCondition.pas">
+            <Form>frmAvailPCSCondition</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uPCSEditor.pas">
+            <Form>frmPCSEditor</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uClientControl.pas">
+            <Form>frmClientControl</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uProgress.pas">
+            <Form>frmProgress</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uAlarmRudder.pas">
+            <Form>frmAlarmRudder</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uAlarmRudderClass.pas"/>
+        <DCCReference Include="panels\uAvailableFACondition.pas">
+            <Form>frmAvailFACondition</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uFAEditor.pas">
+            <Form>frmFAEditor</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uTelegram.pas">
+            <Form>frmTelegram</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uRudderIndicator.pas">
+            <Form>frmRudderIndicator</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uFireFighting.pas">
+            <Form>frmFireFighting</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uNav_CommSystem.pas">
+            <Form>frmNav_CommSystem</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uTankOverview.pas">
+            <Form>frmTanksOverview</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uTankOverviewInput.pas">
+            <Form>frmTankOverInput</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uBilgeSystemIns.pas">
+            <Form>frmBilgeSystemIns</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uSWEInput.pas">
+            <Form>frmSWEInput</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uAuxSystemOverview.pas">
+            <Form>frmAuxSystemOverview</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uTanksEditor.pas">
+            <Form>frmTanksEditor</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uAvailableTanksCondition.pas">
+            <Form>frmTanksCondition</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uPowerManagementSys.pas">
+            <Form>frmPowerManagementSyst</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uVentSystem.pas">
+            <Form>frmVentSystem</Form>
+        </DCCReference>
+        <DCCReference Include="..\components\TrendChart\uAxisAttribute.pas"/>
+        <DCCReference Include="..\components\TrendChart\uGridAttribute.pas"/>
+        <DCCReference Include="..\components\TrendChart\uLegendAttribute.pas"/>
+        <DCCReference Include="..\components\TrendChart\uLineAttribute.pas"/>
+        <DCCReference Include="..\components\TrendChart\uTrendChart.pas"/>
+        <DCCReference Include="..\components\TrendChart\uTrendData.pas"/>
+        <DCCReference Include="..\components\TrendChart\uTrendDataSeries.pas"/>
+        <DCCReference Include="..\components\TrendChart\uTrendDataType.pas"/>
+        <DCCReference Include="..\datatrend\ufrmAxis.pas">
+            <Form>frmAxis</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmChart.pas">
+            <Form>frmChartOption</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmDataTrend.pas">
+            <Form>frmTrending</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmExpression.pas">
+            <Form>frmExpression</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmGridOption.pas">
+            <Form>frmGrid</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmLegend.pas">
+            <Form>frmLegend</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmLineAttribute.pas">
+            <Form>frmLineAttribute</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmLinePoint.pas">
+            <Form>frmPointID</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmLines.pas">
+            <Form>frmLines</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmLogged.pas">
+            <Form>frmLogged</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmLoggedExpression.pas">
+            <Form>frmLoggedExpression</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmNewAxis.pas">
+            <Form>frmNewAxis</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmSelectTrend.pas">
+            <Form>frmSelectTrend</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmSetAxisProp.pas">
+            <Form>frmSetAxisProp</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmSetXAxisProp.pas">
+            <Form>frmSetXAxisProp</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmSetYAxisProp.pas">
+            <Form>frmSetYAxisProp</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmTableSelect.pas">
+            <Form>frmTableSelect</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\ufrmTrendControlPropts.pas">
+            <Form>frmTrenControlPropts</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmSelectElement.pas">
+            <Form>frmSelectElement</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uFireFightingControlSystem.pas">
+            <Form>frmFFSystem</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmReport.pas">
+            <Form>frmReport</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\popmenu\ufrmSetpoint.pas">
+            <Form>frmSetpoint</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uACSControl.pas">
+            <Form>frmACSControl</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uPropulsionConditionsSet.pas">
+            <Form>frmPropulsionConditions</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uTankSystemPanel.pas">
+            <Form>frmTankSystemPanel</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmSummaryDG.pas">
+            <Form>frmAlarmSummaryDG</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmSummaryDIST.pas">
+            <Form>frmAlarmSummaryDIST</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmSummaryPROP.pas">
+            <Form>frmAlarmSummaryPROP</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmSummaryAUX.pas">
+            <Form>frmAlarmSummaryAUX</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmSummaryFUEL.pas">
+            <Form>frmAlarmSummaryFUEL</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmSummaryDMST.pas">
+            <Form>frmAlarmSummaryDMST</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmSummaryHVAC.pas">
+            <Form>frmAlarmSummaryHVAC</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmSummaryFFDC.pas">
+            <Form>frmAlarmSummaryFFDC</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmSummaryNAV.pas">
+            <Form>frmAlarmSummaryNAV</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmSummaryBALL.pas">
+            <Form>frmAlarmSummaryBALL</Form>
+        </DCCReference>
+        <DCCReference Include="..\mimics\mimic\ufrmAlarmSummaryIPMS.pas">
+            <Form>frmAlarmSummaryIPMS</Form>
+        </DCCReference>
+        <DCCReference Include="..\datatrend\lognya.pas">
+            <Form>Form5</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uFuelOilPanel.pas">
+            <Form>frmFuelOilPanel</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uBallastPanel.pas">
+            <Form>frmBallastPanel</Form>
+        </DCCReference>
+        <DCCReference Include="panels\uFreshWaterPanel.pas">
+            <Form>frmFreshWaterPanel</Form>
+        </DCCReference>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">instructor.dpr</Source>
+                </Source>
+                <Parameters>
+                    <Parameters Name="UseLauncher">False</Parameters>
+                    <Parameters Name="LoadAllSymbols">True</Parameters>
+                    <Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+                </Parameters>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">1</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">0</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1033</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription"/>
+                    <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright"/>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName"/>
+                    <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                </VersionInfoKeys>
+            </Delphi.Personality>
+            <ModelSupport>False</ModelSupport>
+            <Platforms>
+                <Platform value="Android64">True</Platform>
+                <Platform value="iOSDevice64">True</Platform>
+                <Platform value="Linux64">True</Platform>
+                <Platform value="OSX64">True</Platform>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>

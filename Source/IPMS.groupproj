@@ -1,0 +1,180 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{96CF453F-02FA-47D9-8E6C-F305965C3895}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="Emergency Stop\EmergencyStop.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Panel Throttle\PanelThrottle.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Alarm Rudder\AlarmRudder.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="PCS\pcsUI.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="ACS\ACS.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="loader\IPMSLoader.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="instructor\instructor.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="ersimulator\ERSimulator.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="components\IPMSComponent.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="server\controller.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="setting\setting.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="mimics\Mimics.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="components\TrendChart\TrendChart.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="EmergencyStop">
+			<MSBuild Projects="Emergency Stop\EmergencyStop.dproj"/>
+		</Target>
+		<Target Name="EmergencyStop:Clean">
+			<MSBuild Targets="Clean" Projects="Emergency Stop\EmergencyStop.dproj"/>
+		</Target>
+		<Target Name="EmergencyStop:Make">
+			<MSBuild Targets="Make" Projects="Emergency Stop\EmergencyStop.dproj"/>
+		</Target>
+		<Target Name="PanelThrottle">
+			<MSBuild Projects="Panel Throttle\PanelThrottle.dproj"/>
+		</Target>
+		<Target Name="PanelThrottle:Clean">
+			<MSBuild Targets="Clean" Projects="Panel Throttle\PanelThrottle.dproj"/>
+		</Target>
+		<Target Name="PanelThrottle:Make">
+			<MSBuild Targets="Make" Projects="Panel Throttle\PanelThrottle.dproj"/>
+		</Target>
+		<Target Name="AlarmRudder">
+			<MSBuild Projects="Alarm Rudder\AlarmRudder.dproj"/>
+		</Target>
+		<Target Name="AlarmRudder:Clean">
+			<MSBuild Targets="Clean" Projects="Alarm Rudder\AlarmRudder.dproj"/>
+		</Target>
+		<Target Name="AlarmRudder:Make">
+			<MSBuild Targets="Make" Projects="Alarm Rudder\AlarmRudder.dproj"/>
+		</Target>
+		<Target Name="pcsUI">
+			<MSBuild Projects="PCS\pcsUI.dproj"/>
+		</Target>
+		<Target Name="pcsUI:Clean">
+			<MSBuild Targets="Clean" Projects="PCS\pcsUI.dproj"/>
+		</Target>
+		<Target Name="pcsUI:Make">
+			<MSBuild Targets="Make" Projects="PCS\pcsUI.dproj"/>
+		</Target>
+		<Target Name="ACS">
+			<MSBuild Projects="ACS\ACS.dproj"/>
+		</Target>
+		<Target Name="ACS:Clean">
+			<MSBuild Targets="Clean" Projects="ACS\ACS.dproj"/>
+		</Target>
+		<Target Name="ACS:Make">
+			<MSBuild Targets="Make" Projects="ACS\ACS.dproj"/>
+		</Target>
+		<Target Name="IPMSLoader">
+			<MSBuild Projects="loader\IPMSLoader.dproj"/>
+		</Target>
+		<Target Name="IPMSLoader:Clean">
+			<MSBuild Targets="Clean" Projects="loader\IPMSLoader.dproj"/>
+		</Target>
+		<Target Name="IPMSLoader:Make">
+			<MSBuild Targets="Make" Projects="loader\IPMSLoader.dproj"/>
+		</Target>
+		<Target Name="instructor">
+			<MSBuild Projects="instructor\instructor.dproj"/>
+		</Target>
+		<Target Name="instructor:Clean">
+			<MSBuild Targets="Clean" Projects="instructor\instructor.dproj"/>
+		</Target>
+		<Target Name="instructor:Make">
+			<MSBuild Targets="Make" Projects="instructor\instructor.dproj"/>
+		</Target>
+		<Target Name="ERSimulator">
+			<MSBuild Projects="ersimulator\ERSimulator.dproj"/>
+		</Target>
+		<Target Name="ERSimulator:Clean">
+			<MSBuild Targets="Clean" Projects="ersimulator\ERSimulator.dproj"/>
+		</Target>
+		<Target Name="ERSimulator:Make">
+			<MSBuild Targets="Make" Projects="ersimulator\ERSimulator.dproj"/>
+		</Target>
+		<Target Name="IPMSComponent">
+			<MSBuild Projects="components\IPMSComponent.dproj"/>
+		</Target>
+		<Target Name="IPMSComponent:Clean">
+			<MSBuild Targets="Clean" Projects="components\IPMSComponent.dproj"/>
+		</Target>
+		<Target Name="IPMSComponent:Make">
+			<MSBuild Targets="Make" Projects="components\IPMSComponent.dproj"/>
+		</Target>
+		<Target Name="controller">
+			<MSBuild Projects="server\controller.dproj"/>
+		</Target>
+		<Target Name="controller:Clean">
+			<MSBuild Targets="Clean" Projects="server\controller.dproj"/>
+		</Target>
+		<Target Name="controller:Make">
+			<MSBuild Targets="Make" Projects="server\controller.dproj"/>
+		</Target>
+		<Target Name="setting">
+			<MSBuild Projects="setting\setting.dproj"/>
+		</Target>
+		<Target Name="setting:Clean">
+			<MSBuild Targets="Clean" Projects="setting\setting.dproj"/>
+		</Target>
+		<Target Name="setting:Make">
+			<MSBuild Targets="Make" Projects="setting\setting.dproj"/>
+		</Target>
+		<Target Name="Mimics">
+			<MSBuild Projects="mimics\Mimics.dproj"/>
+		</Target>
+		<Target Name="Mimics:Clean">
+			<MSBuild Targets="Clean" Projects="mimics\Mimics.dproj"/>
+		</Target>
+		<Target Name="Mimics:Make">
+			<MSBuild Targets="Make" Projects="mimics\Mimics.dproj"/>
+		</Target>
+		<Target Name="TrendChart">
+			<MSBuild Projects="components\TrendChart\TrendChart.dproj"/>
+		</Target>
+		<Target Name="TrendChart:Clean">
+			<MSBuild Targets="Clean" Projects="components\TrendChart\TrendChart.dproj"/>
+		</Target>
+		<Target Name="TrendChart:Make">
+			<MSBuild Targets="Make" Projects="components\TrendChart\TrendChart.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="EmergencyStop;PanelThrottle;AlarmRudder;pcsUI;ACS;IPMSLoader;instructor;ERSimulator;IPMSComponent;controller;setting;Mimics;TrendChart"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="EmergencyStop:Clean;PanelThrottle:Clean;AlarmRudder:Clean;pcsUI:Clean;ACS:Clean;IPMSLoader:Clean;instructor:Clean;ERSimulator:Clean;IPMSComponent:Clean;controller:Clean;setting:Clean;Mimics:Clean;TrendChart:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="EmergencyStop:Make;PanelThrottle:Make;AlarmRudder:Make;pcsUI:Make;ACS:Make;IPMSLoader:Make;instructor:Make;ERSimulator:Make;IPMSComponent:Make;controller:Make;setting:Make;Mimics:Make;TrendChart:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

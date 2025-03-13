@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2014/01/27 10:50:52.093.pas,C:\Documents and Settings\adminsoft\My Documents\RAD Studio\Projects\Unit6.pas=D:\IPMS YOGA\komponen\Unit6.pas</Transaction>
+    <Transaction>2014/01/27 10:50:58.328.dproj,C:\Documents and Settings\adminsoft\My Documents\RAD Studio\Projects\Package1.dproj=D:\IPMS YOGA\komponen\Package1.dproj</Transaction>
+    <Transaction>2014/02/03 09:04:45.667.dproj,D:\IPMS YOGA\komponen\Package1.dproj=D:\IPMS YOGA\komponen\LCPComponent.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

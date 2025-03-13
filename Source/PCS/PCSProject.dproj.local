@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/09/04 15:33:29.857.dproj,C:\Users\vostro\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\vostro\Documents\RAD Studio\Projects\PCS.dproj</Transaction>
+    <Transaction>2013/09/04 15:33:29.873.dproj,C:\Users\vostro\Documents\RAD Studio\Projects\PCS.dproj=C:\Users\vostro\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2013/09/04 15:34:05.506.dproj,C:\Users\vostro\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\vostro\Documents\RAD Studio\Projects\PCS.dproj</Transaction>
+    <Transaction>2013/09/04 15:34:05.510.dproj,C:\Users\vostro\Documents\RAD Studio\Projects\PCS.dproj=C:\Users\vostro\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2013/09/04 15:35:25.266.dproj,C:\Users\vostro\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\vostro\Documents\RAD Studio\Projects\Project.dproj</Transaction>
+    <Transaction>2013/09/04 15:35:40.418.dproj,C:\Users\vostro\Documents\RAD Studio\Projects\Project.dproj=C:\Users\vostro\Documents\RAD Studio\Projects\PCSProject.dproj</Transaction>
+    <Transaction>2013/09/04 15:37:13.406.pas,C:\Users\vostro\Documents\RAD Studio\Projects\Unit1.pas=D:\IPMS\source\PCS\uSBPanel.pas</Transaction>
+    <Transaction>2013/09/04 15:37:13.406.dfm,C:\Users\vostro\Documents\RAD Studio\Projects\Unit1.dfm=D:\IPMS\source\PCS\uSBPanel.dfm</Transaction>
+    <Transaction>2013/09/04 15:37:15.701.dproj,C:\Users\vostro\Documents\RAD Studio\Projects\PCSProject.dproj=D:\IPMS\source\PCS\PCSProject.dproj</Transaction>
+    <Transaction>2013/09/04 15:37:41.353.dproj,D:\IPMS\source\PCS\PCSProject.dproj=D:\IPMS\source\PCS\MainForm.dproj</Transaction>
+    <Transaction>2013/09/04 15:38:05.481.dproj,D:\IPMS\source\PCS\MainForm.dproj=D:\IPMS\source\PCS\PCSProject.dproj</Transaction>
+    <Transaction>2013/09/04 15:38:13.593.pas,D:\IPMS\source\PCS\uSBPanel.pas=D:\IPMS\source\PCS\MainForm.pas</Transaction>
+    <Transaction>2013/09/04 15:38:13.593.dfm,D:\IPMS\source\PCS\uSBPanel.dfm=D:\IPMS\source\PCS\MainForm.dfm</Transaction>
+    <Transaction>2013/09/04 15:41:44.560.pas,D:\IPMS\source\PCS\uGeneralPanel.pas=</Transaction>
+    <Transaction>2013/09/04 15:41:44.560.dfm,D:\IPMS\source\PCS\uGeneralPanel.dfm=</Transaction>
+    <Transaction>2013/09/09 09:58:37.104.pas,D:\IPMS\source\PCS\Unit1.pas=D:\IPMS\source\PCS\PCSMAnager.pas</Transaction>
+    <Transaction>2013/09/09 09:59:52.764.pas,D:\IPMS\source\PCS\Unit1.pas=D:\IPMS\source\PCS\PCSManager.pas</Transaction>
+    <Transaction>2013/09/09 10:10:30.273.pas,D:\IPMS\source\PCS\PCSManager.pas=D:\IPMS\source\PCS\uPCSManager.pas</Transaction>
+    <Transaction>2013/09/09 10:11:29.865.pas,D:\IPMS\source\PCS\Unit1.pas=D:\IPMS\source\PCS\uEventForm.pas</Transaction>
+    <Transaction>2013/09/09 13:55:09.134.pas,D:\IPMS\source\PCS\Unit1.pas=D:\IPMS\source\PCS\LibPCS.pas</Transaction>
+    <Transaction>2013/09/09 14:40:50.722.pas,D:\IPMS\source\PCS\LibPCS.pas=D:\IPMS\source\PCS\uLibPCS.pas</Transaction>
+    <Transaction>2013/09/13 09:38:18.354.pas,D:\IPMS\source\PCS\Unit2.pas=D:\IPMS\source\PCS\uMCRDua.pas</Transaction>
+    <Transaction>2013/09/13 09:38:18.354.dfm,D:\IPMS\source\PCS\Unit2.dfm=D:\IPMS\source\PCS\uMCRDua.dfm</Transaction>
+    <Transaction>2013/09/13 15:30:44.612.pas,D:\IPMS\source\PCS\uPCSManager.pas=</Transaction>
+    <Transaction>2013/09/13 16:32:41.067.pas,D:\IPMS\source\PCS\uMCRDua.pas=D:\IPMS\source\PCS\uLeftPCSPanel.pas</Transaction>
+    <Transaction>2013/09/13 16:32:41.067.dfm,D:\IPMS\source\PCS\uMCRDua.dfm=D:\IPMS\source\PCS\uLeftPCSPanel.dfm</Transaction>
+    <Transaction>2013/09/13 17:02:26.512.pas,D:\IPMS\source\PCS\Unit2.pas=D:\IPMS\source\PCS\uRightPCSPanel.pas</Transaction>
+    <Transaction>2013/09/13 17:02:26.512.dfm,D:\IPMS\source\PCS\Unit2.dfm=D:\IPMS\source\PCS\uRightPCSPanel.dfm</Transaction>
+    <Transaction>2013/09/16 09:13:41.117.pas,D:\IPMS\source\PCS\Unit2.pas=D:\IPMS\source\PCS\uControlLeverPanel.pas</Transaction>
+    <Transaction>2013/09/16 09:13:41.117.dfm,D:\IPMS\source\PCS\Unit2.dfm=D:\IPMS\source\PCS\uControlLeverPanel.dfm</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="MainForm.pas"/>
+    <File Path="MainForm.dfm"/>
+    <File Path="uGeneralPanel.pas"/>
+    <File Path="uGeneralPanel.dfm"/>
+    <File Path="uEventForm.pas"/>
+    <File Path="uLibPCS.pas"/>
+    <File Path="uLeftPCSPanel.pas"/>
+    <File Path="uLeftPCSPanel.dfm"/>
+    <File Path="uPSPanel.pas"/>
+    <File Path="uPSPanel.dfm"/>
+    <File Path="uSBPanel.pas"/>
+    <File Path="uSBPanel.dfm"/>
+    <File Path="uRightPCSPanel.pas"/>
+    <File Path="uRightPCSPanel.dfm"/>
+    <File Path="uControlLeverPanel.pas"/>
+    <File Path="uControlLeverPanel.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>
