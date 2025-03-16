@@ -5,7 +5,7 @@ object frmPMSEditor: TfrmPMSEditor
   Caption = 'PMS Editor'
   ClientHeight = 503
   ClientWidth = 1356
-  Color = clBtnFace
+  Color = clGray
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -195,8 +195,8 @@ object frmPMSEditor: TfrmPMSEditor
     ParentFont = False
   end
   object Label47: TLabel
-    Left = 77
-    Top = 132
+    Left = 74
+    Top = 100
     Width = 357
     Height = 23
     Align = alCustom
@@ -256,11 +256,13 @@ object frmPMSEditor: TfrmPMSEditor
     Height = 23
     ActionManager = actmgr1
     Caption = 'acttb1'
-    ColorMap.HighlightColor = 14410210
-    ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = 14410210
+    Color = clMenuBar
+    ColorMap.DisabledFontColor = 10461087
+    ColorMap.HighlightColor = clWhite
+    ColorMap.BtnSelectedFont = clBlack
+    ColorMap.UnusedColor = clWhite
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
@@ -1701,7 +1703,6 @@ object frmPMSEditor: TfrmPMSEditor
     Top = 159
     Width = 177
     Height = 103
-    Caption = 'grpGenerator3'
     Color = clBtnFace
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -1765,8 +1766,8 @@ object frmPMSEditor: TfrmPMSEditor
       ParentFont = False
     end
     object lblgen3: TLabel
-      Left = 3
-      Top = 2
+      Left = 6
+      Top = -1
       Width = 171
       Height = 20
       Alignment = taCenter
@@ -1774,7 +1775,7 @@ object frmPMSEditor: TfrmPMSEditor
       Caption = 'GEN 3'
       Color = clLime
       Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
+      Font.Color = clBlack
       Font.Height = -16
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]

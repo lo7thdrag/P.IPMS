@@ -758,8 +758,6 @@ begin
         mmoCtrl.Lines.Add(Clients[i].ConnectedIP);
       end;
     end;
-
-
   end;
 
 end;

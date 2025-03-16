@@ -1,9 +1,10 @@
 object frmInstructorPanel: TfrmInstructorPanel
   Left = -1398
   Top = 329
+  BorderStyle = bsNone
   Caption = 'Instructor Panel'
-  ClientHeight = 747
-  ClientWidth = 1358
+  ClientHeight = 720
+  ClientWidth = 1300
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,39 +20,46 @@ object frmInstructorPanel: TfrmInstructorPanel
   TextHeight = 13
   object ctgrypnlgrpbtnrg1: TCategoryPanelGroup
     Left = 0
-    Top = 0
+    Top = 77
     Width = 230
-    Height = 747
+    Height = 643
     VertScrollBar.Tracking = True
-    ChevronHotColor = 3749426
-    Color = clBtnFace
+    BevelInner = bvNone
+    BevelOuter = bvNone
+    ChevronColor = clWhite
+    ChevronHotColor = clRed
+    Color = 3749426
     GradientBaseColor = 3683636
-    GradientColor = clGray
+    GradientColor = 3683636
     GradientDirection = gdHorizontal
-    HeaderFont.Charset = DEFAULT_CHARSET
-    HeaderFont.Color = clWindowText
-    HeaderFont.Height = -15
+    HeaderFont.Charset = ANSI_CHARSET
+    HeaderFont.Color = clWhite
+    HeaderFont.Height = -13
     HeaderFont.Name = 'Tahoma'
     HeaderFont.Style = [fsBold]
+    HeaderHeight = 26
+    HeaderStyle = hsImage
     TabOrder = 0
     object ctgrypnlACS: TCategoryPanel
       Tag = 7
-      Top = 400
-      Height = 30
+      Top = 192
+      Height = 32
       Caption = 'Alarm Control System'
+      Color = 3749426
       Collapsed = True
       Enabled = False
       TabOrder = 0
-      ExpandedHeight = 66
+      ExpandedHeight = 80
       object btnACSControl: TFlatSpeedButton
         Tag = 30
-        Left = 10
+        Left = 16
         Top = 9
-        Width = 191
-        Height = 25
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Fire Alarm'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -76,22 +84,24 @@ object frmInstructorPanel: TfrmInstructorPanel
     end
     object ctgrypnlAuxilary: TCategoryPanel
       Tag = 6
-      Top = 370
-      Height = 30
+      Top = 160
+      Height = 32
       Caption = 'Auxilary'
+      Color = 3749426
       Collapsed = True
       Enabled = False
       TabOrder = 1
-      ExpandedHeight = 191
+      ExpandedHeight = 258
       object btnTanksOverview: TFlatSpeedButton
         Tag = 23
-        Left = 11
-        Top = 166
-        Width = 191
-        Height = 25
+        Left = 16
+        Top = 188
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Tanks Overview'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -116,13 +126,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnBilgeSystem: TFlatSpeedButton
         Tag = 24
-        Left = 9
-        Top = 40
-        Width = 191
-        Height = 25
+        Left = 17
+        Top = 44
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Bilge System'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -146,13 +157,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnAuxSystemOverview: TFlatSpeedButton
         Tag = 25
-        Left = 10
-        Top = 102
-        Width = 191
-        Height = 25
+        Left = 17
+        Top = 116
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'System Overview'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -176,13 +188,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnFuelOil: TFlatSpeedButton
         Tag = 34
-        Left = 9
-        Top = 71
-        Width = 191
-        Height = 25
+        Left = 17
+        Top = 80
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Fuel Oil System'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -206,13 +219,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnBallastPanel: TFlatSpeedButton
         Tag = 35
-        Left = 11
+        Left = 17
         Top = 8
-        Width = 191
-        Height = 25
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Ballast System'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -236,13 +250,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btn1: TFlatSpeedButton
         Tag = 36
-        Left = 11
-        Top = 133
-        Width = 191
-        Height = 25
+        Left = 17
+        Top = 152
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Sea and Fresh Water Syst.'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -267,22 +282,24 @@ object frmInstructorPanel: TfrmInstructorPanel
     end
     object ctgrypnlPropCondition: TCategoryPanel
       Tag = 5
-      Top = 340
-      Height = 30
+      Top = 128
+      Height = 32
       Caption = 'Propulsion'
+      Color = 3749426
       Collapsed = True
       Enabled = False
       TabOrder = 2
-      ExpandedHeight = 103
+      ExpandedHeight = 115
       object btnRudder1: TFlatSpeedButton
         Tag = 31
-        Left = 10
-        Top = 39
-        Width = 191
-        Height = 25
+        Left = 17
+        Top = 45
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Propulsion Conditions'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -306,13 +323,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnLocalControl: TFlatSpeedButton
         Tag = 16
-        Left = 10
+        Left = 17
         Top = 9
-        Width = 191
-        Height = 25
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Local Control'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -337,22 +355,24 @@ object frmInstructorPanel: TfrmInstructorPanel
     end
     object ctgrypnlPCSConditions: TCategoryPanel
       Tag = 4
-      Top = 310
-      Height = 30
+      Top = 96
+      Height = 32
       Caption = 'Energy'
+      Color = 3749426
       Collapsed = True
       Enabled = False
       TabOrder = 3
-      ExpandedHeight = 102
+      ExpandedHeight = 114
       object btnPCSConditions: TFlatSpeedButton
         Tag = 27
-        Left = 10
-        Top = 39
-        Width = 191
-        Height = 25
+        Left = 17
+        Top = 45
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Power Mgmt. Conditions'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -376,13 +396,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnPMS: TFlatSpeedButton
         Tag = 6
-        Left = 10
+        Left = 17
         Top = 9
-        Width = 191
-        Height = 25
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Power Mgmt. Control'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -407,22 +428,24 @@ object frmInstructorPanel: TfrmInstructorPanel
     end
     object ctgrypnlSafety: TCategoryPanel
       Tag = 3
-      Top = 280
-      Height = 30
+      Top = 64
+      Height = 32
       Caption = 'Safety'
+      Color = 3749426
       Collapsed = True
       Enabled = False
       TabOrder = 4
-      ExpandedHeight = 129
+      ExpandedHeight = 185
       object btnFF: TFlatSpeedButton
         Tag = 7
-        Left = 10
+        Left = 17
         Top = 9
-        Width = 191
-        Height = 25
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Fire Fighting Detection'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -446,13 +469,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnVent: TFlatSpeedButton
         Tag = 28
-        Left = 10
-        Top = 39
-        Width = 191
-        Height = 25
+        Left = 17
+        Top = 45
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Vent System'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -476,13 +500,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnFFSystem: TFlatSpeedButton
         Tag = 29
-        Left = 10
-        Top = 99
-        Width = 191
-        Height = 25
+        Left = 17
+        Top = 117
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Fire Fighting System'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -507,13 +532,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnAlarmRudder: TFlatSpeedButton
         Tag = 21
-        Left = 10
-        Top = 69
-        Width = 191
-        Height = 25
+        Left = 17
+        Top = 81
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Alarm Rudder'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -538,22 +564,24 @@ object frmInstructorPanel: TfrmInstructorPanel
     end
     object ctgrypnlGeneral: TCategoryPanel
       Tag = 2
-      Top = 250
-      Height = 30
+      Top = 32
+      Height = 32
       Caption = 'General'
+      Color = 3749426
       Collapsed = True
       Enabled = False
       TabOrder = 5
-      ExpandedHeight = 193
+      ExpandedHeight = 221
       object btnNav_ComSystem: TFlatSpeedButton
         Tag = 22
-        Left = 10
-        Top = 39
-        Width = 191
-        Height = 25
+        Left = 17
+        Top = 45
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Nav_Comm System'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -577,13 +605,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnNetArc1: TFlatSpeedButton
         Tag = 9
-        Left = 10
-        Top = 69
-        Width = 191
-        Height = 25
+        Left = 17
+        Top = 81
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Network System'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -607,13 +636,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnElemntModif: TFlatSpeedButton
         Tag = 17
-        Left = 10
+        Left = 17
         Top = 9
-        Width = 191
-        Height = 25
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Elements Mod.'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -637,13 +667,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnMimic: TFlatSpeedButton
         Tag = 8
-        Left = 10
-        Top = 129
-        Width = 191
-        Height = 25
+        Left = 17
+        Top = 153
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Mimic'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -667,14 +698,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnPropBridge: TFlatSpeedButton
         Tag = 13
-        Left = 10
-        Top = 99
-        Width = 191
-        Height = 25
-        Color = clBtnFace
+        Left = 17
+        Top = 117
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Telegraph'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -694,22 +725,30 @@ object frmInstructorPanel: TfrmInstructorPanel
         Layout = blGlyphLeft
         NumGlyphs = 2
         ParentFont = False
-        ParentColor = False
         OnClick = OnCategoryBtnClick
       end
     end
     object ctgrypnlScenario: TCategoryPanel
       Top = 0
-      Height = 250
+      Height = 32
       Caption = 'Scenario'
       Color = 3749426
+      Collapsed = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 6
+      ExpandedHeight = 294
       object btnScenBuilder: TFlatSpeedButton
         Tag = 1
-        Left = 11
-        Top = 9
+        Left = 18
+        Top = 81
         Width = 190
-        Height = 25
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Scenario Builder'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -736,13 +775,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnScenLoader: TFlatSpeedButton
         Tag = 5
-        Left = 11
-        Top = 159
+        Left = 18
+        Top = 45
         Width = 190
-        Height = 25
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Scenario Loader'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -766,13 +806,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnPMSEditor: TFlatSpeedButton
         Tag = 2
-        Left = 11
-        Top = 39
+        Left = 18
+        Top = 117
         Width = 190
-        Height = 25
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Power Mngt. Editor'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -796,13 +837,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnPCSEditor: TFlatSpeedButton
         Tag = 3
-        Left = 11
-        Top = 69
+        Left = 18
+        Top = 153
         Width = 190
-        Height = 25
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Propulsion Ctrl. Editor'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -826,13 +868,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnFAEditor: TFlatSpeedButton
         Tag = 4
-        Left = 11
-        Top = 99
+        Left = 18
+        Top = 189
         Width = 190
-        Height = 25
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Function Alloc. Editor'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -856,13 +899,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnTanksEditor: TFlatSpeedButton
         Tag = 26
-        Left = 11
-        Top = 129
+        Left = 18
+        Top = 225
         Width = 190
-        Height = 25
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Tanks Editor'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -886,13 +930,14 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object btnClientApp: TFlatSpeedButton
         Tag = 20
-        Left = 10
-        Top = 189
-        Width = 191
-        Height = 25
+        Left = 18
+        Top = 9
+        Width = 190
+        Height = 28
+        Cursor = crHandPoint
         Caption = 'Client Control'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clWhite
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -918,27 +963,28 @@ object frmInstructorPanel: TfrmInstructorPanel
   end
   object pnlContent: TPanel
     Left = 230
-    Top = 0
-    Width = 1128
-    Height = 747
+    Top = 77
+    Width = 1070
+    Height = 643
     Align = alClient
+    BevelOuter = bvNone
     TabOrder = 1
     object pnl2: TPanel
-      Left = 1
-      Top = 1
-      Width = 1126
-      Height = 647
+      Left = 0
+      Top = 0
+      Width = 1070
+      Height = 545
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object pnl3: TPanel
         Left = 0
         Top = 0
-        Width = 1126
+        Width = 1070
         Height = 33
         Align = alTop
         BevelOuter = bvNone
-        Color = clNavy
+        Color = 3749426
         ParentBackground = False
         TabOrder = 0
         object lblTitle: TLabel
@@ -1000,34 +1046,33 @@ object frmInstructorPanel: TfrmInstructorPanel
       object scrlbxContent: TScrollBox
         Left = 0
         Top = 33
-        Width = 1126
-        Height = 614
+        Width = 1070
+        Height = 512
         Align = alClient
         BorderStyle = bsNone
+        Color = clGray
+        ParentColor = False
         TabOrder = 1
-        OnClick = scrlbxContentClick
       end
     end
     object pnl1: TPanel
-      Left = 1
-      Top = 648
-      Width = 1126
+      Left = 0
+      Top = 545
+      Width = 1070
       Height = 98
       Align = alBottom
       BevelOuter = bvNone
-      Color = clNavy
+      BorderWidth = 5
+      Color = 3749426
       ParentBackground = False
       TabOrder = 0
-      DesignSize = (
-        1126
-        98)
       object grpSimControl: TGroupBox
-        Left = 344
-        Top = 6
-        Width = 777
-        Height = 83
-        Anchors = [akLeft, akTop, akRight]
-        Color = clNavy
+        Left = 804
+        Top = 5
+        Width = 261
+        Height = 88
+        Align = alClient
+        Color = 3749426
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
         Font.Height = -11
@@ -1037,23 +1082,13 @@ object frmInstructorPanel: TfrmInstructorPanel
         ParentColor = False
         ParentFont = False
         TabOrder = 0
-        object lblRunScenario: TLabel
-          Left = 16
-          Top = 6
-          Width = 90
-          Height = 13
-          Caption = 'Running Scenario :'
-        end
-        object lblScenarioRun: TLabel
-          Left = 112
-          Top = 6
-          Width = 25
-          Height = 13
-          Caption = 'None'
-        end
+        ExplicitLeft = 551
+        ExplicitTop = 6
+        ExplicitWidth = 514
+        ExplicitHeight = 83
         object btnStartSim: TFlatSpeedButton
-          Left = 16
-          Top = 34
+          Left = 15
+          Top = 31
           Width = 73
           Height = 25
           Color = clBtnFace
@@ -1085,8 +1120,8 @@ object frmInstructorPanel: TfrmInstructorPanel
           OnClick = btnStartSimClick
         end
         object btnPauseSim: TFlatSpeedButton
-          Left = 95
-          Top = 34
+          Left = 94
+          Top = 31
           Width = 73
           Height = 25
           Color = clBtnFace
@@ -1119,8 +1154,8 @@ object frmInstructorPanel: TfrmInstructorPanel
           OnClick = btnPauseSimClick
         end
         object btnStop: TFlatSpeedButton
-          Left = 174
-          Top = 34
+          Left = 173
+          Top = 31
           Width = 73
           Height = 25
           Color = clBtnFace
@@ -1154,11 +1189,12 @@ object frmInstructorPanel: TfrmInstructorPanel
         end
       end
       object grp1: TGroupBox
-        Left = 9
-        Top = 6
-        Width = 329
-        Height = 83
-        Color = clNavy
+        Left = 5
+        Top = 5
+        Width = 799
+        Height = 88
+        Align = alLeft
+        Color = 3749426
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
         Font.Height = -11
@@ -1170,62 +1206,174 @@ object frmInstructorPanel: TfrmInstructorPanel
         TabOrder = 1
         object lbl1: TLabel
           Left = 17
-          Top = 6
-          Width = 84
+          Top = 22
+          Width = 100
           Height = 13
           Caption = 'Simulation State :'
+          Color = 3749426
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
         end
         object lblSimState: TLabel
-          Left = 107
-          Top = 6
-          Width = 40
+          Left = 124
+          Top = 22
+          Width = 47
           Height = 13
           Caption = 'Stopped'
+          Color = 3749426
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
         end
         object lbl5: TLabel
           Left = 17
-          Top = 25
-          Width = 53
+          Top = 46
+          Width = 62
           Height = 13
           Caption = 'Real Time :'
+          Color = 3749426
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
         end
         object lblRealTime: TLabel
-          Left = 107
-          Top = 25
-          Width = 25
+          Left = 124
+          Top = 46
+          Width = 28
           Height = 13
           Caption = 'None'
+          Color = 3749426
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
         end
         object lbl7: TLabel
-          Left = 17
-          Top = 42
-          Width = 78
+          Left = 273
+          Top = 22
+          Width = 97
           Height = 13
-          Caption = 'Simulated Time :'
+          Caption = 'Simulated Time : '
+          Color = 3749426
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
         end
         object lblSimTime: TLabel
-          Left = 107
-          Top = 42
-          Width = 25
+          Left = 375
+          Top = 22
+          Width = 28
           Height = 13
           Caption = 'None'
+          Color = 3749426
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
         end
         object lbl4: TLabel
-          Left = 17
-          Top = 60
-          Width = 71
+          Left = 273
+          Top = 46
+          Width = 83
           Height = 13
           Caption = 'Running Time :'
+          Color = 3749426
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
         end
         object lblRunTime: TLabel
-          Left = 107
-          Top = 60
-          Width = 4
+          Left = 375
+          Top = 46
+          Width = 5
           Height = 13
           Caption = '-'
+          Color = 3749426
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+        object lblRunScenario: TLabel
+          Left = 512
+          Top = 22
+          Width = 104
+          Height = 13
+          Caption = 'Running Scenario :'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblScenarioRun: TLabel
+          Left = 628
+          Top = 22
+          Width = 28
+          Height = 13
+          Caption = 'None'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
         end
       end
     end
+  end
+  object pnlSparatorHeader: TPanel
+    Left = 0
+    Top = 75
+    Width = 1300
+    Height = 2
+    Align = alTop
+    BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 2
+  end
+  object pnlHeader: TPanel
+    Left = 0
+    Top = 0
+    Width = 1300
+    Height = 75
+    Align = alTop
+    BevelOuter = bvNone
+    Color = 3749426
+    ParentBackground = False
+    TabOrder = 3
   end
   object tmrTelegrap: TTimer
     Enabled = False
@@ -1238,6 +1386,7 @@ object frmInstructorPanel: TfrmInstructorPanel
     Top = 520
     object mniHelp1: TMenuItem
       Caption = 'Help'
+      Visible = False
       object mniManualIPMS1: TMenuItem
         Tag = 1
         Caption = 'Manual IPMS'
@@ -1274,10 +1423,5 @@ object frmInstructorPanel: TfrmInstructorPanel
         OnClick = mniManualIPMS1Click
       end
     end
-  end
-  object tmr1: TTimer
-    OnTimer = tmr1Timer
-    Left = 384
-    Top = 520
   end
 end

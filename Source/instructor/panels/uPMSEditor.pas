@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, ComCtrls, ToolWin, ActnMan, ActnCtrls, ActnList,
   PlatformDefaultStyleActnCtrls, uDatabase, uDBSupportClasses, VrControls,
-  VrButtons;
+  VrButtons, System.Actions;
 
 type
   TfrmPMSEditor = class(TForm)
