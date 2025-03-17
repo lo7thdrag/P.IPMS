@@ -1,10 +1,11 @@
 object frmClientControl: TfrmClientControl
   Left = -985
   Top = 33
+  BorderStyle = bsNone
   Caption = 'Client Application Control'
-  ClientHeight = 586
-  ClientWidth = 1284
-  Color = clBtnFace
+  ClientHeight = 872
+  ClientWidth = 1688
+  Color = clGray
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -17,10 +18,12 @@ object frmClientControl: TfrmClientControl
   object grpClients: TGroupBox
     Left = 0
     Top = 0
-    Width = 1284
-    Height = 586
+    Width = 1688
+    Height = 872
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 1284
+    ExplicitHeight = 586
     object Label14: TLabel
       Left = 13
       Top = 300
