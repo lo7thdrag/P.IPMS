@@ -20,14 +20,14 @@ object frmInstructorPanel: TfrmInstructorPanel
   TextHeight = 13
   object ctgrypnlgrpbtnrg1: TCategoryPanelGroup
     Left = 0
-    Top = 77
+    Top = 107
     Width = 230
-    Height = 643
+    Height = 613
     VertScrollBar.Tracking = True
     BevelInner = bvNone
     BevelOuter = bvNone
     ChevronColor = clWhite
-    ChevronHotColor = clRed
+    ChevronHotColor = clSilver
     Color = 3749426
     GradientBaseColor = 3683636
     GradientColor = 3683636
@@ -42,13 +42,14 @@ object frmInstructorPanel: TfrmInstructorPanel
     TabOrder = 0
     object ctgrypnlACS: TCategoryPanel
       Tag = 7
-      Top = 192
+      Top = 571
       Height = 32
+      Cursor = crHandPoint
       Caption = 'Alarm Control System'
       Color = 3749426
       Collapsed = True
-      Enabled = False
       TabOrder = 0
+      ExplicitTop = 192
       ExpandedHeight = 80
       object btnACSControl: TFlatSpeedButton
         Tag = 30
@@ -57,6 +58,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Fire Alarm'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -84,14 +86,12 @@ object frmInstructorPanel: TfrmInstructorPanel
     end
     object ctgrypnlAuxilary: TCategoryPanel
       Tag = 6
-      Top = 160
-      Height = 32
+      Top = 313
+      Height = 258
+      Cursor = crHandPoint
       Caption = 'Auxilary'
       Color = 3749426
-      Collapsed = True
-      Enabled = False
       TabOrder = 1
-      ExpandedHeight = 258
       object btnTanksOverview: TFlatSpeedButton
         Tag = 23
         Left = 16
@@ -99,6 +99,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Tanks Overview'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -121,7 +122,6 @@ object frmInstructorPanel: TfrmInstructorPanel
         Layout = blGlyphLeft
         NumGlyphs = 2
         ParentFont = False
-        Visible = False
         OnClick = OnCategoryBtnClick
       end
       object btnBilgeSystem: TFlatSpeedButton
@@ -131,6 +131,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Bilge System'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -162,6 +163,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'System Overview'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -193,6 +195,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Fuel Oil System'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -224,6 +227,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Ballast System'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -255,6 +259,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Sea and Fresh Water Syst.'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -282,13 +287,14 @@ object frmInstructorPanel: TfrmInstructorPanel
     end
     object ctgrypnlPropCondition: TCategoryPanel
       Tag = 5
-      Top = 128
+      Top = 281
       Height = 32
+      Cursor = crHandPoint
       Caption = 'Propulsion'
       Color = 3749426
       Collapsed = True
-      Enabled = False
       TabOrder = 2
+      ExplicitTop = 128
       ExpandedHeight = 115
       object btnRudder1: TFlatSpeedButton
         Tag = 31
@@ -297,6 +303,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Propulsion Conditions'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -328,6 +335,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Local Control'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -355,13 +363,14 @@ object frmInstructorPanel: TfrmInstructorPanel
     end
     object ctgrypnlPCSConditions: TCategoryPanel
       Tag = 4
-      Top = 96
+      Top = 249
       Height = 32
+      Cursor = crHandPoint
       Caption = 'Energy'
       Color = 3749426
       Collapsed = True
-      Enabled = False
       TabOrder = 3
+      ExplicitTop = 96
       ExpandedHeight = 114
       object btnPCSConditions: TFlatSpeedButton
         Tag = 27
@@ -370,6 +379,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Power Mgmt. Conditions'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -401,6 +411,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Power Mgmt. Control'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -429,13 +440,11 @@ object frmInstructorPanel: TfrmInstructorPanel
     object ctgrypnlSafety: TCategoryPanel
       Tag = 3
       Top = 64
-      Height = 32
+      Height = 185
+      Cursor = crHandPoint
       Caption = 'Safety'
       Color = 3749426
-      Collapsed = True
-      Enabled = False
       TabOrder = 4
-      ExpandedHeight = 185
       object btnFF: TFlatSpeedButton
         Tag = 7
         Left = 17
@@ -443,6 +452,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Fire Fighting Detection'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -474,6 +484,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Vent System'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -505,6 +516,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Fire Fighting System'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -527,7 +539,6 @@ object frmInstructorPanel: TfrmInstructorPanel
         Layout = blGlyphLeft
         NumGlyphs = 2
         ParentFont = False
-        Visible = False
         OnClick = OnCategoryBtnClick
       end
       object btnAlarmRudder: TFlatSpeedButton
@@ -537,6 +548,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Alarm Rudder'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -566,10 +578,10 @@ object frmInstructorPanel: TfrmInstructorPanel
       Tag = 2
       Top = 32
       Height = 32
+      Cursor = crHandPoint
       Caption = 'General'
       Color = 3749426
       Collapsed = True
-      Enabled = False
       TabOrder = 5
       ExpandedHeight = 221
       object btnNav_ComSystem: TFlatSpeedButton
@@ -579,6 +591,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Nav_Comm System'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -610,6 +623,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Network System'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -641,6 +655,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Elements Mod.'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -672,6 +687,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Mimic'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -703,6 +719,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Telegraph'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -731,6 +748,7 @@ object frmInstructorPanel: TfrmInstructorPanel
     object ctgrypnlScenario: TCategoryPanel
       Top = 0
       Height = 32
+      Cursor = crHandPoint
       Caption = 'Scenario'
       Color = 3749426
       Collapsed = True
@@ -745,10 +763,11 @@ object frmInstructorPanel: TfrmInstructorPanel
       object btnScenBuilder: TFlatSpeedButton
         Tag = 1
         Left = 18
-        Top = 81
+        Top = 83
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Scenario Builder'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -780,6 +799,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Scenario Loader'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -811,6 +831,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Power Mngt. Editor'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -842,6 +863,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Propulsion Ctrl. Editor'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -873,6 +895,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Function Alloc. Editor'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -904,6 +927,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Tanks Editor'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -935,6 +959,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Width = 190
         Height = 28
         Cursor = crHandPoint
+        ColorFocused = clGray
         Caption = 'Client Control'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -962,31 +987,38 @@ object frmInstructorPanel: TfrmInstructorPanel
     end
   end
   object pnlContent: TPanel
-    Left = 230
-    Top = 77
-    Width = 1070
-    Height = 643
+    Left = 233
+    Top = 107
+    Width = 1067
+    Height = 613
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitLeft = 232
+    ExplicitTop = 77
+    ExplicitWidth = 1068
+    ExplicitHeight = 643
     object pnl2: TPanel
       Left = 0
       Top = 0
-      Width = 1070
-      Height = 545
+      Width = 1067
+      Height = 515
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitWidth = 1068
+      ExplicitHeight = 545
       object pnl3: TPanel
         Left = 0
         Top = 0
-        Width = 1070
+        Width = 1067
         Height = 33
         Align = alTop
         BevelOuter = bvNone
         Color = 3749426
         ParentBackground = False
         TabOrder = 0
+        ExplicitWidth = 1068
         object lblTitle: TLabel
           Left = 144
           Top = 10
@@ -1027,6 +1059,7 @@ object frmInstructorPanel: TfrmInstructorPanel
           Layout = blGlyphLeft
           NumGlyphs = 2
           ParentFont = False
+          Visible = False
           OnClick = btnDockedClick
         end
         object lblCr: TLabel
@@ -1046,19 +1079,21 @@ object frmInstructorPanel: TfrmInstructorPanel
       object scrlbxContent: TScrollBox
         Left = 0
         Top = 33
-        Width = 1070
-        Height = 512
+        Width = 1067
+        Height = 482
         Align = alClient
         BorderStyle = bsNone
         Color = clGray
         ParentColor = False
         TabOrder = 1
+        ExplicitWidth = 1068
+        ExplicitHeight = 512
       end
     end
     object pnl1: TPanel
       Left = 0
-      Top = 545
-      Width = 1070
+      Top = 515
+      Width = 1067
       Height = 98
       Align = alBottom
       BevelOuter = bvNone
@@ -1066,10 +1101,12 @@ object frmInstructorPanel: TfrmInstructorPanel
       Color = 3749426
       ParentBackground = False
       TabOrder = 0
+      ExplicitTop = 545
+      ExplicitWidth = 1068
       object grpSimControl: TGroupBox
         Left = 804
         Top = 5
-        Width = 261
+        Width = 258
         Height = 88
         Align = alClient
         Color = 3749426
@@ -1082,10 +1119,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         ParentColor = False
         ParentFont = False
         TabOrder = 0
-        ExplicitLeft = 551
-        ExplicitTop = 6
-        ExplicitWidth = 514
-        ExplicitHeight = 83
+        ExplicitWidth = 259
         object btnStartSim: TFlatSpeedButton
           Left = 15
           Top = 31
@@ -1235,8 +1269,8 @@ object frmInstructorPanel: TfrmInstructorPanel
           ParentFont = False
         end
         object lbl5: TLabel
-          Left = 17
-          Top = 46
+          Left = 273
+          Top = 54
           Width = 62
           Height = 13
           Caption = 'Real Time :'
@@ -1250,8 +1284,8 @@ object frmInstructorPanel: TfrmInstructorPanel
           ParentFont = False
         end
         object lblRealTime: TLabel
-          Left = 124
-          Top = 46
+          Left = 380
+          Top = 54
           Width = 28
           Height = 13
           Caption = 'None'
@@ -1295,8 +1329,8 @@ object frmInstructorPanel: TfrmInstructorPanel
           ParentFont = False
         end
         object lbl4: TLabel
-          Left = 273
-          Top = 46
+          Left = 17
+          Top = 54
           Width = 83
           Height = 13
           Caption = 'Running Time :'
@@ -1310,8 +1344,8 @@ object frmInstructorPanel: TfrmInstructorPanel
           ParentFont = False
         end
         object lblRunTime: TLabel
-          Left = 375
-          Top = 46
+          Left = 119
+          Top = 54
           Width = 5
           Height = 13
           Caption = '-'
@@ -1355,9 +1389,9 @@ object frmInstructorPanel: TfrmInstructorPanel
   end
   object pnlSparatorHeader: TPanel
     Left = 0
-    Top = 75
+    Top = 104
     Width = 1300
-    Height = 2
+    Height = 3
     Align = alTop
     BevelOuter = bvNone
     Color = clWhite
@@ -1368,12 +1402,34 @@ object frmInstructorPanel: TfrmInstructorPanel
     Left = 0
     Top = 0
     Width = 1300
-    Height = 75
+    Height = 104
     Align = alTop
     BevelOuter = bvNone
     Color = 3749426
     ParentBackground = False
     TabOrder = 3
+  end
+  object pnlSparatorLeft: TPanel
+    Left = 230
+    Top = 107
+    Width = 3
+    Height = 613
+    Align = alLeft
+    BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 4
+    ExplicitTop = 109
+    ExplicitHeight = 611
+  end
+  object Button1: TButton
+    Left = 680
+    Top = 568
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 5
+    OnClick = Button1Click
   end
   object tmrTelegrap: TTimer
     Enabled = False

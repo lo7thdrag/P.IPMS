@@ -3,8 +3,8 @@ object frmClientControl: TfrmClientControl
   Top = 33
   BorderStyle = bsNone
   Caption = 'Client Application Control'
-  ClientHeight = 872
-  ClientWidth = 1688
+  ClientHeight = 842
+  ClientWidth = 1687
   Color = clGray
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,29 +18,35 @@ object frmClientControl: TfrmClientControl
   object grpClients: TGroupBox
     Left = 0
     Top = 0
-    Width = 1688
-    Height = 872
+    Width = 1687
+    Height = 842
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 1284
-    ExplicitHeight = 586
+    ExplicitWidth = 1688
+    ExplicitHeight = 872
     object Label14: TLabel
-      Left = 13
-      Top = 300
-      Width = 83
-      Height = 13
+      Left = 897
+      Top = 12
+      Width = 105
+      Height = 14
       Caption = 'Status Console :.'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object grp3: TGroupBox
-      Left = 483
-      Top = 0
-      Width = 881
-      Height = 559
+      Left = 10
+      Top = 12
+      Width = 867
+      Height = 533
       TabOrder = 5
       object imgDenahIPMS: TImage
-        Left = 10
-        Top = 16
-        Width = 870
+        Left = 0
+        Top = 0
+        Width = 866
         Height = 530
         Picture.Data = {
           0A544A504547496D616765F3CF0300FFD8FFE000104A46494600010201006400
@@ -7857,7 +7863,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgEmergencyStop: TImage
         Left = 500
-        Top = 430
+        Top = 415
         Width = 15
         Height = 15
         AutoSize = True
@@ -7891,7 +7897,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgMimicKanan: TImage
         Left = 500
-        Top = 378
+        Top = 363
         Width = 15
         Height = 15
         AutoSize = True
@@ -7925,7 +7931,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgMimicKiri: TImage
         Left = 500
-        Top = 171
+        Top = 156
         Width = 15
         Height = 15
         AutoSize = True
@@ -7959,7 +7965,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgMimicTengah: TImage
         Left = 500
-        Top = 276
+        Top = 261
         Width = 15
         Height = 15
         AutoSize = True
@@ -7993,7 +7999,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgPCSKanan: TImage
         Left = 500
-        Top = 327
+        Top = 312
         Width = 15
         Height = 15
         AutoSize = True
@@ -8027,7 +8033,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgPCSKiri: TImage
         Left = 500
-        Top = 221
+        Top = 206
         Width = 15
         Height = 15
         AutoSize = True
@@ -8061,7 +8067,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgCCTV: TImage
         Left = 267
-        Top = 287
+        Top = 270
         Width = 15
         Height = 15
         AutoSize = True
@@ -8095,7 +8101,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgACS: TImage
         Left = 500
-        Top = 120
+        Top = 105
         Width = 15
         Height = 15
         AutoSize = True
@@ -8129,8 +8135,8 @@ object frmClientControl: TfrmClientControl
       end
     end
     object lstLoader: TListBox
-      Left = 13
-      Top = 509
+      Left = 898
+      Top = 649
       Width = 221
       Height = 50
       ItemHeight = 13
@@ -8138,8 +8144,8 @@ object frmClientControl: TfrmClientControl
       Visible = False
     end
     object grpSimControl: TGroupBox
-      Left = 252
-      Top = 509
+      Left = 1036
+      Top = 789
       Width = 221
       Height = 50
       Color = clBtnFace
@@ -8196,86 +8202,92 @@ object frmClientControl: TfrmClientControl
       end
     end
     object grp2: TGroupBox
-      Left = 323
-      Top = 30
+      Left = 1523
+      Top = 14
       Width = 150
       Height = 256
       Caption = ' Engine Room :. '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 4
       object lbl10: TLabel
         Left = 13
         Top = 90
-        Width = 32
+        Width = 38
         Height = 13
         Caption = 'Clients'
       end
       object lbl3: TLabel
         Left = 13
         Top = 25
-        Width = 32
+        Width = 38
         Height = 13
         Caption = 'Server'
       end
       object lbl4: TLabel
         Left = 13
         Top = 41
-        Width = 20
+        Width = 24
         Height = 13
         Caption = 'Port'
       end
       object lbl9: TLabel
         Left = 13
         Top = 57
-        Width = 26
+        Width = 31
         Height = 13
         Caption = 'State'
       end
       object Label6: TLabel
         Left = 45
         Top = 90
-        Width = 16
+        Width = 15
         Height = 13
         Caption = '  :  '
       end
       object Label7: TLabel
         Left = 45
         Top = 57
-        Width = 16
+        Width = 15
         Height = 13
         Caption = '  :  '
       end
       object Label8: TLabel
         Left = 45
         Top = 41
-        Width = 16
+        Width = 15
         Height = 13
         Caption = '  :  '
       end
       object Label9: TLabel
         Left = 45
         Top = 25
-        Width = 16
+        Width = 15
         Height = 13
         Caption = '  :  '
       end
       object lblERServer: TLabel
         Left = 60
         Top = 25
-        Width = 41
+        Width = 46
         Height = 13
         Caption = '<None>'
       end
       object lblERPort: TLabel
         Left = 60
         Top = 41
-        Width = 41
+        Width = 46
         Height = 13
         Caption = '<None>'
       end
       object lblERState: TLabel
         Left = 60
         Top = 57
-        Width = 40
+        Width = 47
         Height = 13
         Caption = 'Stopped'
       end
@@ -8284,66 +8296,108 @@ object frmClientControl: TfrmClientControl
         Top = 110
         Width = 123
         Height = 132
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
         ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object grp4: TGroupBox
-      Left = 483
-      Top = 0
-      Width = 438
-      Height = 559
+      Left = 1210
+      Top = 276
+      Width = 463
+      Height = 552
       TabOrder = 6
       Visible = False
       object lbl14: TLabel
-        Left = 16
-        Top = 24
+        Left = 13
+        Top = 17
         Width = 67
         Height = 13
         Caption = 'Network Log :'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
       object lbl15: TLabel
-        Left = 16
-        Top = 205
+        Left = 13
+        Top = 195
         Width = 55
         Height = 13
         Caption = 'Event Log :'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
       object lbl16: TLabel
         Left = 16
-        Top = 380
+        Top = 373
         Width = 51
         Height = 13
         Caption = 'Error Log :'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
       object mmoNetLogger: TMemo
-        Left = 16
-        Top = 43
-        Width = 401
+        Left = 13
+        Top = 36
+        Width = 436
         Height = 137
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         ScrollBars = ssVertical
         TabOrder = 0
       end
       object mmoEvntLog: TMemo
-        Left = 14
-        Top = 224
-        Width = 401
+        Left = 13
+        Top = 214
+        Width = 436
         Height = 137
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         ScrollBars = ssVertical
         TabOrder = 1
       end
       object mmoErrorLog: TMemo
-        Left = 14
-        Top = 399
-        Width = 401
+        Left = 13
+        Top = 392
+        Width = 436
         Height = 137
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         ScrollBars = ssVertical
         TabOrder = 2
       end
     end
     object chkDataLogger: TCheckBox
-      Left = 3
-      Top = 565
+      Left = 837
+      Top = 595
       Width = 97
       Height = 17
       Caption = 'Data Logger'
@@ -8351,10 +8405,10 @@ object frmClientControl: TfrmClientControl
       OnClick = chkDataLoggerClick
     end
     object lvStatusConsole: TListView
-      Left = 13
-      Top = 319
-      Width = 463
-      Height = 184
+      Left = 897
+      Top = 32
+      Width = 232
+      Height = 513
       Columns = <
         item
           Caption = 'Console'
@@ -8415,44 +8469,50 @@ object frmClientControl: TfrmClientControl
       OnMouseDown = lvStatusConsoleMouseDown
     end
     object GroupBox1: TGroupBox
-      Left = 10
-      Top = 30
+      Left = 1210
+      Top = 14
       Width = 150
       Height = 256
       Caption = ' Instructor :. '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 8
       object lbl1: TLabel
         Left = 13
         Top = 25
-        Width = 22
+        Width = 26
         Height = 13
         Caption = 'Host'
       end
       object lbl2: TLabel
         Left = 13
         Top = 43
-        Width = 20
+        Width = 24
         Height = 13
         Caption = 'Port'
       end
       object lbl7: TLabel
         Left = 13
         Top = 61
-        Width = 26
+        Width = 31
         Height = 13
         Caption = 'State'
       end
       object Label1: TLabel
         Left = 45
         Top = 90
-        Width = 16
+        Width = 15
         Height = 13
         Caption = '  :  '
       end
       object Label2: TLabel
         Left = 13
         Top = 90
-        Width = 32
+        Width = 38
         Height = 13
         Caption = 'Clients'
       end
@@ -8480,21 +8540,21 @@ object frmClientControl: TfrmClientControl
       object lblInsHost: TLabel
         Left = 60
         Top = 25
-        Width = 41
+        Width = 46
         Height = 13
         Caption = '<None>'
       end
       object lblInsPort: TLabel
         Left = 60
         Top = 43
-        Width = 41
+        Width = 46
         Height = 13
         Caption = '<None>'
       end
       object lblInsState: TLabel
         Left = 60
         Top = 61
-        Width = 40
+        Width = 47
         Height = 13
         Caption = 'Stopped'
       end
@@ -8503,91 +8563,103 @@ object frmClientControl: TfrmClientControl
         Top = 110
         Width = 123
         Height = 132
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
         ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object grp1: TGroupBox
-      Left = 167
-      Top = 30
+      Left = 1367
+      Top = 14
       Width = 150
       Height = 256
       Caption = ' Controller :. '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 2
       object lbl5: TLabel
         Left = 13
         Top = 25
-        Width = 32
+        Width = 38
         Height = 13
         Caption = 'Server'
       end
       object lbl6: TLabel
         Left = 13
         Top = 41
-        Width = 20
+        Width = 24
         Height = 13
         Caption = 'Port'
       end
       object lbl11: TLabel
         Left = 13
         Top = 57
-        Width = 26
+        Width = 31
         Height = 13
         Caption = 'State'
       end
       object lbl12: TLabel
         Left = 13
         Top = 90
-        Width = 32
+        Width = 38
         Height = 13
         Caption = 'Clients'
       end
       object Label10: TLabel
         Left = 45
         Top = 25
-        Width = 16
+        Width = 15
         Height = 13
         Caption = '  :  '
       end
       object Label11: TLabel
         Left = 45
         Top = 41
-        Width = 16
+        Width = 15
         Height = 13
         Caption = '  :  '
       end
       object Label12: TLabel
         Left = 45
         Top = 57
-        Width = 16
+        Width = 15
         Height = 13
         Caption = '  :  '
       end
       object Label13: TLabel
         Left = 45
         Top = 90
-        Width = 16
+        Width = 15
         Height = 13
         Caption = '  :  '
       end
       object lblLPUState: TLabel
         Left = 60
         Top = 57
-        Width = 40
+        Width = 47
         Height = 13
         Caption = 'Stopped'
       end
       object lblLPUPort: TLabel
         Left = 60
         Top = 41
-        Width = 41
+        Width = 46
         Height = 13
         Caption = '<None>'
       end
       object lblLPUServer: TLabel
         Left = 60
         Top = 25
-        Width = 41
+        Width = 46
         Height = 13
         Caption = '<None>'
       end
@@ -8596,6 +8668,12 @@ object frmClientControl: TfrmClientControl
         Top = 110
         Width = 123
         Height = 132
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
         ScrollBars = ssVertical
         TabOrder = 0
       end

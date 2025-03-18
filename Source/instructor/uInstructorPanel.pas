@@ -77,6 +77,8 @@ type
     scrlbxContent: TScrollBox;
     lblRunScenario: TLabel;
     lblScenarioRun: TLabel;
+    pnlSparatorLeft: TPanel;
+    Button1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnDockedClick(Sender: TObject);
     procedure btnPMSClick(Sender: TObject);
@@ -89,6 +91,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure scrlbxContentClick(Sender: TObject);
     procedure mniManualIPMS1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     FDockedForm : TForm;
@@ -169,6 +172,11 @@ begin
   if (InstructorSys.Scenario.RunState = esrRun) or
      (InstructorSys.Scenario.RunState = esrPause) then
     InstructorSys.Scenario.RunState := esrStop;
+end;
+
+procedure TfrmInstructorPanel.Button1Click(Sender: TObject);
+begin
+  ShowMessage('Width : ' + FloatToStr(scrlbxContent.Width)+'Height : ' + FloatToStr(scrlbxContent.Height));
 end;
 
 procedure TfrmInstructorPanel.DockForm(aForm: TForm);
