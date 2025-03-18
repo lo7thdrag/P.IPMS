@@ -207,7 +207,7 @@ begin
 
   with TrayIconData do
     begin
-      cbSize := SizeOf(TrayIconData);
+//      cbSize := SizeOf(TrayIconData);
       Wnd := Handle;
       uID := 0;
       uFlags := NIF_MESSAGE + NIF_ICON + NIF_TIP;
