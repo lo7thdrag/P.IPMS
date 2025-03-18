@@ -10,3 +10,6 @@
 /Source/components
 /Source/server
 /Source/server
+/Source/components/TrendChart
+/Source/common
+*.dcu
