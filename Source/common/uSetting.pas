@@ -139,6 +139,42 @@ type
     function GetMaintenanceIPMS: string;
     function GetServerIP: string;
 
+    function GetGenPsFwd: string;
+    procedure SetGenPsFwd(const Value: string);
+    function GetGenSbFwd: string;
+    procedure SetGenSbFwd(const Value: string);
+    function GetGenPsAft: string;
+    procedure SetGenPsAft(const Value: string);
+    function GetGenSbAft: string;
+    procedure SetGenSbAft(const Value: string);
+    function GetGenEmergency: string;
+    procedure SetGenEmergency(const Value: string);
+    function GetShore: string;
+    procedure SetShore(const Value: string);
+    function GetMainEngine1Ps: string;
+    procedure SetMainEngine1Ps(const Value: string);
+    function GetMainEngine2Ps: string;
+    procedure SetMainEngine2Ps(const Value: string);
+    function GetMainEngine1Sb: string;
+    procedure SetMainEngine1Sb(const Value: string);
+    function GetMainEngine2Sb: string;
+    procedure SetMainEngine2Sb(const Value: string);
+    function GetAuxiliary1: string;
+    procedure SetAuxiliary1(const Value: string);
+    function GetAuxiliary2: string;
+    procedure SetAuxiliary2(const Value: string);
+    function GetAuxiliary3: string;
+    procedure SetAuxiliary3(const Value: string);
+    function GetDieselGenerator1: string;
+    procedure SetDieselGenerator1(const Value: string);
+    function GetDieselGenerator2: string;
+    procedure SetDieselGenerator2(const Value: string);
+    function GetDieselGenerator3: string;
+    procedure SetDieselGenerator3(const Value: string);
+    function GetDieselGenerator4: string;
+    procedure SetDieselGenerator4(const Value: string);
+
+
     procedure SetServerIP(const Value: string);  public
     constructor Create;
     destructor Destroy; override;
@@ -153,15 +189,11 @@ type
     property UserApp : string read GetPassApp write SetUserApp;
     property PassApp : string read GetUserApp write SetPassApp;
 
-    property SimEngineServer : string read GetSimEngineServer
-      write SetSimEngineServer;
-    property SimEnginePort : string read GetSimEnginePort
-      write SetSimEnginePort;
+    property SimEngineServer : string read GetSimEngineServer write SetSimEngineServer;
+    property SimEnginePort : string read GetSimEnginePort write SetSimEnginePort;
 
-    property InstructorHost : string read GetInstructorHost
-      write SetInstructorHost;
-    property InstructorPort : string read GetInstructorPort
-      write SetInstructorPort;
+    property InstructorHost : string read GetInstructorHost write SetInstructorHost;
+    property InstructorPort : string read GetInstructorPort write SetInstructorPort;
 
     property LPUServer : string read GetLPUServer write SetLPUServer;
     property LPUPort : string read GetLPUPort write SetLPUPort;
@@ -182,27 +214,38 @@ type
     property AcsIP : string read GetAcsIP write SetAcsIP;
     property MimicKiriIP : string read GetMimicKiriIP write SetMimicKiriIP;
     property PcsKiriIP : string read GetPcsKiriIP write SetPcsKiriIP;
-    property MimicTengahIP : string read GetMimicTengahIP
-      write SetMimicTengahIP;
+    property MimicTengahIP : string read GetMimicTengahIP write SetMimicTengahIP;
     property PcsKananIP : string read GetPcsKananIP write SetPcsKananIP;
     property MimicKananIP : string read GetMimicKananIP write SetMimicKananIP;
-    property EmergencyStopIP : string read GetEmergencyStopIP
-      write SetEmergencyStopIP;
+    property EmergencyStopIP : string read GetEmergencyStopIP write SetEmergencyStopIP;
     property CctvIP : string read GetCctvIP write SetCctvIP;
     property ServerIP : string read GetServerIP write SetServerIP;
 
+    property GenPsFwd : string read GetGenPsFwd write SetGenPsFwd;
+    property GenSbFwd : string read GetGenSbFwd write SetGenSbFwd;
+    property GenPsAft : string read GetGenPsAft  write SetGenPsAft ;
+    property GenSbAft : string read GetGenSbAft write SetGenSbAft;
+    property GenEmergency : string read GetGenEmergency write SetGenEmergency;
+    property Shore: string read GetShore write SetShore;
+    property MainEngine1Ps : string read GetMainEngine1Ps write SetMainEngine1Ps;
+    property MainEngine2Ps: string read GetMainEngine2Ps write SetMainEngine2Ps;
+    property MainEngine1Sb: string read GetMainEngine1Sb write SetMainEngine1Sb;
+    property MainEngine2Sb: string read GetMainEngine2Sb write SetMainEngine2Sb;
+    property Auxiliary1: string read GetAuxiliary1 write SetAuxiliary1;
+    property Auxiliary2: string read GetAuxiliary2 write SetAuxiliary2;
+    property Auxiliary3: string read GetAuxiliary3 write SetAuxiliary3;
+    property DieselGenerator1: string read GetDieselGenerator1 write SetDieselGenerator1;
+    property DieselGenerator2: string read GetDieselGenerator2 write SetDieselGenerator2;
+    property DieselGenerator3: string read GetDieselGenerator3 write SetDieselGenerator3;
+    property DieselGenerator4: string read GetDieselGenerator4 write SetDieselGenerator4;
+
     property ManualIPMS : string read GetManualIPMS write SetManualIPMS;
-    property OperationalInstruktur : string read GetOperationalInstruktur
-      write SetOperationalInstruktur;
-    property OperationalACS : string read GetOperationalACS
-      write SetOperationalACS;
-    property OperationalVoip : string read GetOperationalVoip
-      write SetOperationalVoip;
+    property OperationalInstruktur : string read GetOperationalInstruktur write SetOperationalInstruktur;
+    property OperationalACS : string read GetOperationalACS write SetOperationalACS;
+    property OperationalVoip : string read GetOperationalVoip write SetOperationalVoip;
     property ModulPCS : string read GetModulPCS write SetModulPCS;
-    property CatalogHardware : string read GetCatalogHardware
-      write SetCatalogHardware;
-    property MaintenanceIPMS : string read GetMaintenanceIPMS
-      write SetMaintenanceIPMS;
+    property CatalogHardware : string read GetCatalogHardware write SetCatalogHardware;
+    property MaintenanceIPMS : string read GetMaintenanceIPMS write SetMaintenanceIPMS;
   end;
 
 var
@@ -351,6 +394,21 @@ begin
   Result := FIniFile.ReadString('CONSOLE', 'acs', '192.168.1.11');
 end;
 
+function TSetting.GetAuxiliary1: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetAuxiliary1', '192.168.1.18');
+end;
+
+function TSetting.GetAuxiliary2: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetAuxiliary2', '192.168.1.18');
+end;
+
+function TSetting.GetAuxiliary3: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetAuxiliary3', '192.168.1.18');
+end;
+
 function TSetting.GetCatalogHardware: string;
 begin
   Result := FIniFile.ReadString(C_Section_Help, 'CatalogHardware',
@@ -370,6 +428,26 @@ end;
 function TSetting.GetDBName: string;
 begin
   Result := FIniFile.ReadString(C_Section_DB, C_Ident_DBName, C_Database_Name);
+end;
+
+function TSetting.GetDieselGenerator1: string;
+begin
+   Result := FIniFile.ReadString('CONSOLE', 'GetDieselGenerator1', '192.168.1.18');
+end;
+
+function TSetting.GetDieselGenerator2: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetDieselGenerator2', '192.168.1.18');
+end;
+
+function TSetting.GetDieselGenerator3: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetDieselGenerator3', '192.168.1.18');
+end;
+
+function TSetting.GetDieselGenerator4: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetDieselGenerator4', '192.168.1.18');
 end;
 
 function TSetting.GetEmergencyStopIP: string;
@@ -427,6 +505,31 @@ begin
     'Operational VOIP.pdf');
 end;
 
+function TSetting.GetGenEmergency: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetGenEmergency', '192.168.1.18');
+end;
+
+function TSetting.GetGenPsAft: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetGenPsAft', '192.168.1.18');
+end;
+
+function TSetting.GetGenPsFwd: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetGenPsFwd', '192.168.1.18');
+end;
+
+function TSetting.GetGenSbAft: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetGenSbAft', '192.168.1.18');
+end;
+
+function TSetting.GetGenSbFwd: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetGenSbFwd', '192.168.1.18');
+end;
+
 function TSetting.GetInstructorHost: string;
 begin
   Result := FIniFile.ReadString(C_Section_Instructor, C_Ident_Server,
@@ -452,6 +555,26 @@ end;
 function TSetting.GetLPUServer: string;
 begin
   Result := FIniFile.ReadString(C_Section_LPU, C_Ident_Server, C_LPU_Server);
+end;
+
+function TSetting.GetMainEngine1Ps: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetMainEngine1Ps', '192.168.1.18');
+end;
+
+function TSetting.GetMainEngine1Sb: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetMainEngine1Sb', '192.168.1.18');
+end;
+
+function TSetting.GetMainEngine2Ps: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetMainEngine2Ps', '192.168.1.18');
+end;
+
+function TSetting.GetMainEngine2Sb: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetMainEngine2Sb', '192.168.1.18');
 end;
 
 function TSetting.GetMaintenanceIPMS: string;
@@ -587,6 +710,11 @@ begin
     servoIDRUDDERSB));
 end;
 
+function TSetting.GetShore: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GetShore', '192.168.1.18');
+end;
+
 function TSetting.GetSimEnginePort: string;
 begin
   Result := FIniFile.ReadString(C_Section_SimEng, C_Ident_Port,
@@ -629,6 +757,24 @@ begin
   FIniFile.WriteString('CONSOLE', 'acs', Value);
 end;
 
+procedure TSetting.SetAuxiliary1(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetAuxiliary1', Value);
+end;
+
+procedure TSetting.SetAuxiliary2(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetAuxiliary2', Value);
+end;
+
+procedure TSetting.SetAuxiliary3(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetAuxiliary3', Value);
+end;
+
 procedure TSetting.SetCatalogHardware(const Value: string);
 begin
   FCatalogHardware := Value;
@@ -651,6 +797,30 @@ procedure TSetting.SetDBName(const Value: string);
 begin
   FDBName := Value;
   FIniFile.WriteString(C_Section_DB, C_Ident_DBName, Value);
+end;
+
+procedure TSetting.SetDieselGenerator1(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetDieselGenerator1', Value);
+end;
+
+procedure TSetting.SetDieselGenerator2(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetDieselGenerator2', Value);
+end;
+
+procedure TSetting.SetDieselGenerator3(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetDieselGenerator3', Value);
+end;
+
+procedure TSetting.SetDieselGenerator4(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetDieselGenerator4', Value);
 end;
 
 procedure TSetting.SetEmergencyStopIP(const Value: string);
@@ -689,6 +859,36 @@ begin
   FIniFile.WriteString(C_Section_PCS, C_idFormPCS, liststring[0]);
 end;
 
+procedure TSetting.SetGenEmergency(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetGenEmergency', Value);
+end;
+
+procedure TSetting.SetGenPsAft(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetGenPsAft', Value);
+end;
+
+procedure TSetting.SetGenPsFwd(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetGenPsFwd', Value);
+end;
+
+procedure TSetting.SetGenSbAft(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetGenSbAft', Value);
+end;
+
+procedure TSetting.SetGenSbFwd(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetGenSbFwd', Value);
+end;
+
 procedure TSetting.SetInstructorHost(const Value: string);
 begin
   FInstructorHost := Value;
@@ -717,6 +917,30 @@ procedure TSetting.SetLPUServer(const Value: string);
 begin
   FLPUServer := Value;
   FIniFile.WriteString(C_Section_LPU, C_Ident_Server, Value);
+end;
+
+procedure TSetting.SetMainEngine1Ps(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetMainEngine1Ps', Value);
+end;
+
+procedure TSetting.SetMainEngine1Sb(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetMainEngine1Sb', Value);
+end;
+
+procedure TSetting.SetMainEngine2Ps(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetMainEngine2Ps', Value);
+end;
+
+procedure TSetting.SetMainEngine2Sb(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetMainEngine2Sb', Value);
 end;
 
 procedure TSetting.SetMaintenanceIPMS(const Value: string);
@@ -878,6 +1102,12 @@ begin
   FIniFile.WriteString(C_Section_ServoID, C_serID_RUDDER_SB, IntToStr(serIDRUDDERSB));
 end;
 }
+
+procedure TSetting.SetShore(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'SetShore', Value);
+end;
 
 procedure TSetting.SetSimEnginePort(const Value: string);
 begin

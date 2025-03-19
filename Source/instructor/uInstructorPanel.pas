@@ -6,23 +6,16 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, StdCtrls, TFlatSpeedButtonUnit,
   uDatabase, uScenario, Mask, Buttons, uDataType, uFunction, DateUtils, Menus,
-  ShellAPI;
+  ShellAPI, Vcl.Imaging.pngimage;
 
 type
     TfrmInstructorPanel = class(TForm)
-    ctgrypnlgrpbtnrg1: TCategoryPanelGroup;
-    pnlContent: TPanel;
-    ctgrypnlScenario: TCategoryPanel;
-    btnScenBuilder: TFlatSpeedButton;
-    btnScenLoader: TFlatSpeedButton;
-    btnFF: TFlatSpeedButton;
-    pnl1: TPanel;
-    pnl2: TPanel;
-    pnl3: TPanel;
+    pnlMain: TPanel;
+    pnlDescription: TPanel;
+    pnlMainContent: TPanel;
+    pnlHeaderContent: TPanel;
     lblTitle: TLabel;
     btnDocked: TFlatSpeedButton;
-    lblCr: TLabel;
-    btnPMSEditor: TFlatSpeedButton;
     grpSimControl: TGroupBox;
     grp1: TGroupBox;
     lbl1: TLabel;
@@ -34,35 +27,9 @@ type
     btnStartSim: TFlatSpeedButton;
     btnPauseSim: TFlatSpeedButton;
     btnStop: TFlatSpeedButton;
-    btnNetArc1: TFlatSpeedButton;
-    ctgrypnlSafety: TCategoryPanel;
-    ctgrypnlGeneral: TCategoryPanel;
-    btnNav_ComSystem: TFlatSpeedButton;
-    ctgrypnlAuxilary: TCategoryPanel;
-    btnTanksOverview: TFlatSpeedButton;
-    btnBilgeSystem: TFlatSpeedButton;
-    btnAuxSystemOverview: TFlatSpeedButton;
-    btnTanksEditor: TFlatSpeedButton;
-    ctgrypnlPropCondition: TCategoryPanel;
-    btnRudder1: TFlatSpeedButton;
-    btnFFSystem: TFlatSpeedButton;
-    ctgrypnlACS: TCategoryPanel;
-    btnACSControl: TFlatSpeedButton;
     tmrTelegrap: TTimer;
     lbl4: TLabel;
     lblRunTime: TLabel;
-    ctgrypnlPCSConditions: TCategoryPanel;
-    btnPCSConditions: TFlatSpeedButton;
-    btnElemntModif: TFlatSpeedButton;
-    btnClientApp: TFlatSpeedButton;
-    btnPMS: TFlatSpeedButton;
-    btnMimic: TFlatSpeedButton;
-    btnLocalControl: TFlatSpeedButton;
-    btnAlarmRudder: TFlatSpeedButton;
-    btnPropBridge: TFlatSpeedButton;
-    btnFuelOil: TFlatSpeedButton;
-    btnBallastPanel: TFlatSpeedButton;
-    btn1: TFlatSpeedButton;
     pnlSparatorHeader: TPanel;
     mm1: TMainMenu;
     mniHelp1: TMenuItem;
@@ -74,11 +41,51 @@ type
     mniKatalogHardwareIPMS1: TMenuItem;
     mniMaintenanceIPMS1: TMenuItem;
     pnlHeader: TPanel;
-    scrlbxContent: TScrollBox;
     lblRunScenario: TLabel;
     lblScenarioRun: TLabel;
     pnlSparatorLeft: TPanel;
+    Image1: TImage;
     Button1: TButton;
+    pnlLeft: TPanel;
+    ctgrypnlgrpbtnrg1: TCategoryPanelGroup;
+    ctgrypnlACS: TCategoryPanel;
+    btnACSControl: TFlatSpeedButton;
+    ctgrypnlAuxilary: TCategoryPanel;
+    btnTanksOverview: TFlatSpeedButton;
+    btnBilgeSystem: TFlatSpeedButton;
+    btnAuxSystemOverview: TFlatSpeedButton;
+    btnFuelOil: TFlatSpeedButton;
+    btnBallastPanel: TFlatSpeedButton;
+    btn1: TFlatSpeedButton;
+    ctgrypnlPropCondition: TCategoryPanel;
+    btnRudder1: TFlatSpeedButton;
+    btnLocalControl: TFlatSpeedButton;
+    ctgrypnlPCSConditions: TCategoryPanel;
+    btnPCSConditions: TFlatSpeedButton;
+    btnPMS: TFlatSpeedButton;
+    ctgrypnlSafety: TCategoryPanel;
+    btnFF: TFlatSpeedButton;
+    btnVent: TFlatSpeedButton;
+    btnFFSystem: TFlatSpeedButton;
+    btnAlarmRudder: TFlatSpeedButton;
+    ctgrypnlGeneral: TCategoryPanel;
+    btnNav_ComSystem: TFlatSpeedButton;
+    btnNetArc1: TFlatSpeedButton;
+    btnElemntModif: TFlatSpeedButton;
+    btnMimic: TFlatSpeedButton;
+    btnPropBridge: TFlatSpeedButton;
+    ctgrypnlScenario: TCategoryPanel;
+    btnScenBuilder: TFlatSpeedButton;
+    btnScenLoader: TFlatSpeedButton;
+    btnPMSEditor: TFlatSpeedButton;
+    btnPCSEditor: TFlatSpeedButton;
+    btnFAEditor: TFlatSpeedButton;
+    btnTanksEditor: TFlatSpeedButton;
+    btnClientApp: TFlatSpeedButton;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    GroupBox1: TGroupBox;
+    pnlContent: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure btnDockedClick(Sender: TObject);
     procedure btnPMSClick(Sender: TObject);
@@ -176,7 +183,7 @@ end;
 
 procedure TfrmInstructorPanel.Button1Click(Sender: TObject);
 begin
-  ShowMessage('Width : ' + FloatToStr(scrlbxContent.Width)+'Height : ' + FloatToStr(scrlbxContent.Height));
+//  ShowMessage('Width : ' + FloatToStr(pnlHeader.Width)+'Height : ' + FloatToStr(scrlbxContent.Height));
 end;
 
 procedure TfrmInstructorPanel.DockForm(aForm: TForm);
@@ -194,7 +201,7 @@ begin
     Position := poDefault;
     BorderStyle := bsNone;
     ParentColor := True;
-    Parent := scrlbxContent;
+    Parent := pnlContent;//scrlbxContent;
     lblTitle.Caption := Caption;
     OnClose := FormOnClose;
     Show;
