@@ -13,3 +13,5 @@
 /Source/components/TrendChart
 /Source/common
 *.dcu
+/Source/ersimulator/panel/__history
+/Source/instructor/panels/__recovery

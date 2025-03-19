@@ -64,20 +64,6 @@ type
     imgPreheatingPumpOff_PS: TImage;
     lbl4: TLabel;
     vrtryswtchPumpHeaterPS: TVrRotarySwitch;
-    pnlCPP_PS: TPanel;
-    grpPS_CPP1: TGroupBox;
-    btnPS_Start1: TVrDemoButton;
-    btnPS_Standby1: TVrDemoButton;
-    btnPS_Stop1: TVrDemoButton;
-    grpPS_CPP2: TGroupBox;
-    btnPS_Start2: TVrDemoButton;
-    btnPS_Standby2: TVrDemoButton;
-    btnPS_Stop2: TVrDemoButton;
-    grpPS_CPP3: TGroupBox;
-    btnPS_Start3: TVrDemoButton;
-    btnPS_Auto3: TVrDemoButton;
-    btnPS_Stop3: TVrDemoButton;
-    grpPS: TGroupBox;
     btnAlarmPropulsion: TVrDemoButton;
     pgc1: TPageControl;
     tsPS: TTabSheet;
@@ -245,6 +231,19 @@ type
     vrtryswtchHeaterSB: TVrRotarySwitch;
     lbl83: TLabel;
     lbl85: TLabel;
+    pnlLCPPS: TPanel;
+    grpPS_CPP1: TGroupBox;
+    btnPS_Start1: TVrDemoButton;
+    btnPS_Standby1: TVrDemoButton;
+    btnPS_Stop1: TVrDemoButton;
+    grpPS_CPP2: TGroupBox;
+    btnPS_Start2: TVrDemoButton;
+    btnPS_Standby2: TVrDemoButton;
+    btnPS_Stop2: TVrDemoButton;
+    grpPS_CPP3: TGroupBox;
+    btnPS_Start3: TVrDemoButton;
+    btnPS_Auto3: TVrDemoButton;
+    btnPS_Stop3: TVrDemoButton;
     procedure FormCreate(Sender: TObject);
     procedure vrtryswtchChange(Sender: TObject);
     procedure btnONClick(Sender: TObject);
@@ -843,14 +842,14 @@ begin
 
       VK_NUMPAD1 :
       begin
-        pnlCPP_PS.Visible := True;
+//        pnlCPP_PS.Visible := True;
         pnlCPP_SB.Visible := True;
       end;
 
       VK_SPACE :
       begin
         btnAlarmPropulsion.Visible := False;
-        pnlCPP_PS.Visible := False;
+//        pnlCPP_PS.Visible := False;
         pnlCPP_SB.Visible := False;
       end;
     end;

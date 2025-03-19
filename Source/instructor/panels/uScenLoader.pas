@@ -33,6 +33,9 @@ type
     lblTime: TLabel;
     rzDatePick: TRzDateTimePicker;
     rzTimePick: TRzDateTimePicker;
+    pnlSessionScenarioLoader: TPanel;
+    pnlScenarioLoader: TPanel;
+    Label1: TLabel;
     procedure btnRefreshScenClick(Sender: TObject);
     procedure btnLoadClick(Sender: TObject);
     procedure lstScenarioMouseUp(Sender: TObject; Button: TMouseButton;
