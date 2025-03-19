@@ -9,7 +9,6 @@ uses
 
 type
   TfrmClientControl = class(TForm)
-    grpClients: TGroupBox;
     lstLoader: TListBox;
     grpSimControl: TGroupBox;
     btn3: TFlatSpeedButton;
@@ -87,6 +86,7 @@ type
     Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
+    Panel1: TPanel;
 //    procedure btn3Click(Sender: TObject);
 //    procedure btn4Click(Sender: TObject);
 //    procedure btn1Click(Sender: TObject);
@@ -270,10 +270,10 @@ var
   system : TCommonSystem;
 
 begin
-  lvStatusConsole.Column[0].Width := 125;
-  lvStatusConsole.Column[1].Width := 99;
-  lvStatusConsole.Column[2].Width := 110;
-  lvStatusConsole.Column[3].Width := 110;
+//  lvStatusConsole.Column[0].Width := 125;
+//  lvStatusConsole.Column[1].Width := 99;
+//  lvStatusConsole.Column[2].Width := 110;
+//  lvStatusConsole.Column[3].Width := 110;
 
   {Prince}
   loadSettingAlarm('../Bin/setting.ini');
@@ -455,8 +455,41 @@ begin
   else if str = 'MONITORING' then
     result := Setting.CctvIP // '192.168.1.18'
   else if str = 'SERVER' then
-    result := Setting.ServerIP; // '192.168.1.2'
-
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'GEN PS FWD' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'GEN SB FWD' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'GEN PS AFT' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'GEN SB AFT' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'GEN EMERGENCY' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'SHORE' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'ME 1 PS' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'ME 2 PS' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'ME 1 SB' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'ME 2 SB' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'AUX 1' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'AUX 2' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'AUX 3' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'DG 1' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'DG 2' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'DG 3' then
+    result := Setting.ServerIP // '192.168.1.2'
+  else if str = 'DG 4' then
+    result := Setting.ServerIP;
 end;
 
 procedure TfrmClientControl.LoadImageLight(aIP, imgStat: string);

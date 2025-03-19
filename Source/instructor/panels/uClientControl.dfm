@@ -15,15 +15,18 @@ object frmClientControl: TfrmClientControl
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object grpClients: TGroupBox
+  object Panel1: TPanel
     Left = 0
     Top = 0
     Width = 1687
     Height = 842
     Align = alClient
+    BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1688
-    ExplicitHeight = 872
+    ExplicitLeft = 464
+    ExplicitTop = 624
+    ExplicitWidth = 185
+    ExplicitHeight = 41
     object Label14: TLabel
       Left = 897
       Top = 12
@@ -37,12 +40,336 @@ object frmClientControl: TfrmClientControl
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object chkDataLogger: TCheckBox
+      Left = 1427
+      Top = 825
+      Width = 97
+      Height = 17
+      Caption = 'Data Logger'
+      TabOrder = 0
+      OnClick = chkDataLoggerClick
+    end
+    object GroupBox1: TGroupBox
+      Left = 1210
+      Top = 14
+      Width = 150
+      Height = 256
+      Caption = ' Instructor :. '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      object lbl1: TLabel
+        Left = 13
+        Top = 25
+        Width = 26
+        Height = 13
+        Caption = 'Host'
+      end
+      object lbl2: TLabel
+        Left = 13
+        Top = 43
+        Width = 24
+        Height = 13
+        Caption = 'Port'
+      end
+      object lbl7: TLabel
+        Left = 13
+        Top = 61
+        Width = 31
+        Height = 13
+        Caption = 'State'
+      end
+      object Label1: TLabel
+        Left = 45
+        Top = 90
+        Width = 15
+        Height = 13
+        Caption = '  :  '
+      end
+      object Label2: TLabel
+        Left = 13
+        Top = 90
+        Width = 38
+        Height = 13
+        Caption = 'Clients'
+      end
+      object Label3: TLabel
+        Left = 45
+        Top = 43
+        Width = 20
+        Height = 13
+        Caption = '  :  -'
+      end
+      object Label4: TLabel
+        Left = 45
+        Top = 61
+        Width = 20
+        Height = 13
+        Caption = '  :  -'
+      end
+      object Label5: TLabel
+        Left = 45
+        Top = 25
+        Width = 20
+        Height = 13
+        Caption = '  :  -'
+      end
+      object lblInsHost: TLabel
+        Left = 60
+        Top = 25
+        Width = 46
+        Height = 13
+        Caption = '<None>'
+      end
+      object lblInsPort: TLabel
+        Left = 60
+        Top = 43
+        Width = 46
+        Height = 13
+        Caption = '<None>'
+      end
+      object lblInsState: TLabel
+        Left = 60
+        Top = 61
+        Width = 47
+        Height = 13
+        Caption = 'Stopped'
+      end
+      object mmoInstructor: TMemo
+        Left = 13
+        Top = 110
+        Width = 123
+        Height = 132
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+    end
+    object grp1: TGroupBox
+      Left = 1367
+      Top = 14
+      Width = 150
+      Height = 256
+      Caption = ' Controller :. '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      object lbl5: TLabel
+        Left = 13
+        Top = 25
+        Width = 38
+        Height = 13
+        Caption = 'Server'
+      end
+      object lbl6: TLabel
+        Left = 13
+        Top = 41
+        Width = 24
+        Height = 13
+        Caption = 'Port'
+      end
+      object lbl11: TLabel
+        Left = 13
+        Top = 57
+        Width = 31
+        Height = 13
+        Caption = 'State'
+      end
+      object lbl12: TLabel
+        Left = 13
+        Top = 90
+        Width = 38
+        Height = 13
+        Caption = 'Clients'
+      end
+      object Label10: TLabel
+        Left = 45
+        Top = 25
+        Width = 15
+        Height = 13
+        Caption = '  :  '
+      end
+      object Label11: TLabel
+        Left = 45
+        Top = 41
+        Width = 15
+        Height = 13
+        Caption = '  :  '
+      end
+      object Label12: TLabel
+        Left = 45
+        Top = 57
+        Width = 15
+        Height = 13
+        Caption = '  :  '
+      end
+      object Label13: TLabel
+        Left = 45
+        Top = 90
+        Width = 15
+        Height = 13
+        Caption = '  :  '
+      end
+      object lblLPUState: TLabel
+        Left = 60
+        Top = 57
+        Width = 47
+        Height = 13
+        Caption = 'Stopped'
+      end
+      object lblLPUPort: TLabel
+        Left = 60
+        Top = 41
+        Width = 46
+        Height = 13
+        Caption = '<None>'
+      end
+      object lblLPUServer: TLabel
+        Left = 60
+        Top = 25
+        Width = 46
+        Height = 13
+        Caption = '<None>'
+      end
+      object mmoCtrl: TMemo
+        Left = 13
+        Top = 110
+        Width = 123
+        Height = 132
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+    end
+    object grp2: TGroupBox
+      Left = 1523
+      Top = 14
+      Width = 150
+      Height = 256
+      Caption = ' Engine Room :. '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      object lbl10: TLabel
+        Left = 13
+        Top = 90
+        Width = 38
+        Height = 13
+        Caption = 'Clients'
+      end
+      object lbl3: TLabel
+        Left = 13
+        Top = 25
+        Width = 38
+        Height = 13
+        Caption = 'Server'
+      end
+      object lbl4: TLabel
+        Left = 13
+        Top = 41
+        Width = 24
+        Height = 13
+        Caption = 'Port'
+      end
+      object lbl9: TLabel
+        Left = 13
+        Top = 57
+        Width = 31
+        Height = 13
+        Caption = 'State'
+      end
+      object Label6: TLabel
+        Left = 45
+        Top = 90
+        Width = 15
+        Height = 13
+        Caption = '  :  '
+      end
+      object Label7: TLabel
+        Left = 45
+        Top = 57
+        Width = 15
+        Height = 13
+        Caption = '  :  '
+      end
+      object Label8: TLabel
+        Left = 45
+        Top = 41
+        Width = 15
+        Height = 13
+        Caption = '  :  '
+      end
+      object Label9: TLabel
+        Left = 45
+        Top = 25
+        Width = 15
+        Height = 13
+        Caption = '  :  '
+      end
+      object lblERServer: TLabel
+        Left = 60
+        Top = 25
+        Width = 46
+        Height = 13
+        Caption = '<None>'
+      end
+      object lblERPort: TLabel
+        Left = 60
+        Top = 41
+        Width = 46
+        Height = 13
+        Caption = '<None>'
+      end
+      object lblERState: TLabel
+        Left = 60
+        Top = 57
+        Width = 47
+        Height = 13
+        Caption = 'Stopped'
+      end
+      object mmoER: TMemo
+        Left = 13
+        Top = 110
+        Width = 123
+        Height = 132
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+    end
     object grp3: TGroupBox
       Left = 10
       Top = 12
       Width = 867
       Height = 533
-      TabOrder = 5
+      TabOrder = 4
       object imgDenahIPMS: TImage
         Left = 0
         Top = 0
@@ -8134,185 +8461,12 @@ object frmClientControl: TfrmClientControl
         Transparent = True
       end
     end
-    object lstLoader: TListBox
-      Left = 898
-      Top = 649
-      Width = 221
-      Height = 50
-      ItemHeight = 13
-      TabOrder = 0
-      Visible = False
-    end
-    object grpSimControl: TGroupBox
-      Left = 1036
-      Top = 789
-      Width = 221
-      Height = 50
-      Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBackground = False
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 1
-      object btn3: TFlatSpeedButton
-        Tag = 2
-        Left = 17
-        Top = 14
-        Width = 86
-        Height = 25
-        Color = clBtnFace
-        ColorFocused = clBtnFace
-        ColorDown = clBtnFace
-        Caption = 'Load All'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Layout = blGlyphLeft
-        NumGlyphs = 2
-        ParentFont = False
-        ParentColor = False
-        OnClick = mniLoadClick
-      end
-      object btn4: TFlatSpeedButton
-        Tag = 4
-        Left = 118
-        Top = 14
-        Width = 86
-        Height = 25
-        Color = clBtnFace
-        ColorFocused = clBtnFace
-        ColorDown = clBtnFace
-        Caption = 'Unload All'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Layout = blGlyphLeft
-        NumGlyphs = 2
-        ParentFont = False
-        ParentColor = False
-        OnClick = mniLoadClick
-      end
-    end
-    object grp2: TGroupBox
-      Left = 1523
-      Top = 14
-      Width = 150
-      Height = 256
-      Caption = ' Engine Room :. '
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 4
-      object lbl10: TLabel
-        Left = 13
-        Top = 90
-        Width = 38
-        Height = 13
-        Caption = 'Clients'
-      end
-      object lbl3: TLabel
-        Left = 13
-        Top = 25
-        Width = 38
-        Height = 13
-        Caption = 'Server'
-      end
-      object lbl4: TLabel
-        Left = 13
-        Top = 41
-        Width = 24
-        Height = 13
-        Caption = 'Port'
-      end
-      object lbl9: TLabel
-        Left = 13
-        Top = 57
-        Width = 31
-        Height = 13
-        Caption = 'State'
-      end
-      object Label6: TLabel
-        Left = 45
-        Top = 90
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object Label7: TLabel
-        Left = 45
-        Top = 57
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object Label8: TLabel
-        Left = 45
-        Top = 41
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object Label9: TLabel
-        Left = 45
-        Top = 25
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object lblERServer: TLabel
-        Left = 60
-        Top = 25
-        Width = 46
-        Height = 13
-        Caption = '<None>'
-      end
-      object lblERPort: TLabel
-        Left = 60
-        Top = 41
-        Width = 46
-        Height = 13
-        Caption = '<None>'
-      end
-      object lblERState: TLabel
-        Left = 60
-        Top = 57
-        Width = 47
-        Height = 13
-        Caption = 'Stopped'
-      end
-      object mmoER: TMemo
-        Left = 13
-        Top = 110
-        Width = 123
-        Height = 132
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clGreen
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ScrollBars = ssVertical
-        TabOrder = 0
-      end
-    end
     object grp4: TGroupBox
       Left = 1210
       Top = 276
       Width = 463
       Height = 552
-      TabOrder = 6
-      Visible = False
+      TabOrder = 5
       object lbl14: TLabel
         Left = 13
         Top = 17
@@ -8395,288 +8549,157 @@ object frmClientControl: TfrmClientControl
         TabOrder = 2
       end
     end
-    object chkDataLogger: TCheckBox
-      Left = 837
-      Top = 595
-      Width = 97
-      Height = 17
-      Caption = 'Data Logger'
+    object grpSimControl: TGroupBox
+      Left = 897
+      Top = 562
+      Width = 296
+      Height = 50
+      Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 6
+      object btn3: TFlatSpeedButton
+        Tag = 2
+        Left = 17
+        Top = 14
+        Width = 86
+        Height = 25
+        Color = clBtnFace
+        ColorFocused = clBtnFace
+        ColorDown = clBtnFace
+        Caption = 'Load All'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Layout = blGlyphLeft
+        NumGlyphs = 2
+        ParentFont = False
+        ParentColor = False
+        OnClick = mniLoadClick
+      end
+      object btn4: TFlatSpeedButton
+        Tag = 4
+        Left = 118
+        Top = 14
+        Width = 86
+        Height = 25
+        Color = clBtnFace
+        ColorFocused = clBtnFace
+        ColorDown = clBtnFace
+        Caption = 'Unload All'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Layout = blGlyphLeft
+        NumGlyphs = 2
+        ParentFont = False
+        ParentColor = False
+        OnClick = mniLoadClick
+      end
+    end
+    object lstLoader: TListBox
+      Left = 1210
+      Top = 792
+      Width = 221
+      Height = 50
+      ItemHeight = 13
       TabOrder = 7
-      OnClick = chkDataLoggerClick
+      Visible = False
     end
     object lvStatusConsole: TListView
       Left = 897
       Top = 32
-      Width = 232
+      Width = 296
       Height = 513
       Columns = <
         item
           Caption = 'Console'
-          Width = 125
+          Width = 150
         end
         item
           Alignment = taCenter
           Caption = 'Status'
-          Width = 99
+          Width = 140
         end
         item
           Alignment = taCenter
           Caption = 'Servo'
-          Width = 110
+          Width = 0
         end
         item
           Alignment = taCenter
           Caption = 'Comport'
-          Width = 110
+          Width = 0
         end>
       ColumnClick = False
       GridLines = True
       Items.ItemData = {
-        059B0300000900000000000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000
-        0003410043005300074F00460046004C0049004E00450000000000032D002D00
-        2D0000000000032D002D002D000000000000000000FFFFFFFFFFFFFFFF030000
-        00FFFFFFFF000000000C4D0049004D004900430020002D0020004B0049005200
-        4900074F00460046004C0049004E00450000000000032D002D002D0000000000
-        032D002D002D000000000000000000FFFFFFFFFFFFFFFF03000000FFFFFFFF00
-        0000000A50004300530020002D0020004B00490052004900074F00460046004C
-        0049004E004500000000000B4E004F0054002000520055004E004E0049004E00
-        4700000000000B4E004F0054002000520055004E004E0049004E004700000000
-        0000000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000E4D0049004D00
-        4900430020002D002000540045004E00470041004800074F00460046004C0049
-        004E00450000000000032D002D002D0000000000032D002D002D000000000000
-        000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000B5000430053002000
-        2D0020004B0041004E0041004E00074F00460046004C0049004E004500000000
-        000B4E004F0054002000520055004E004E0049004E004700000000000B4E004F
-        0054002000520055004E004E0049004E0047000000000000000000FFFFFFFFFF
-        FFFFFF03000000FFFFFFFF000000000D4D0049004D004900430020002D002000
-        4B0041004E0041004E00074F00460046004C0049004E00450000000000032D00
-        2D002D0000000000032D002D002D000000000000000000FFFFFFFFFFFFFFFF03
-        000000FFFFFFFF000000000E45004D0045005200470045004E00430059002000
-        530054004F005000074F00460046004C0049004E00450000000000032D002D00
-        2D00000000000B4E004F0054002000520055004E004E0049004E004700000000
-        0000000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000A4D004F004E00
-        490054004F00520049004E004700074F00460046004C0049004E004500000000
-        00032D002D002D0000000000032D002D002D000000000000000000FFFFFFFFFF
-        FFFFFF03000000FFFFFFFF0000000006530045005200560045005200074F0046
-        0046004C0049004E00450000000000032D002D002D0000000000032D002D002D
-        0000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        05280600001000000000000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000
+        0006530045005200560045005200074F00460046004C0049004E004500D0D79A
+        3D032D002D002D0060E59A3D032D002D002D0030E39A3D00000000FFFFFFFFFF
+        FFFFFF03000000FFFFFFFF0000000003410043005300074F00460046004C0049
+        004E004500D08D993D032D002D002D000082993D032D002D002D002073993D00
+        000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000C4D0049004D004900
+        430020002D0020004B00490052004900074F00460046004C0049004E00450008
+        87993D032D002D002D003092993D032D002D002D003890993D00000000FFFFFF
+        FFFFFFFFFF03000000FFFFFFFF000000000A50004300530020002D0020004B00
+        490052004900074F00460046004C0049004E004500408E993D0B4E004F005400
+        2000520055004E004E0049004E0047008085993D0B4E004F0054002000520055
+        004E004E0049004E004700C87A993D00000000FFFFFFFFFFFFFFFF03000000FF
+        FFFFFF000000000E4D0049004D004900430020002D002000540045004E004700
+        41004800074F00460046004C0049004E0045005091993D032D002D002D007074
+        993D032D002D002D002886993D00000000FFFFFFFFFFFFFFFF03000000FFFFFF
+        FF000000000B50004300530020002D0020004B0041004E0041004E00074F0046
+        0046004C0049004E0045004095993D0B4E004F0054002000520055004E004E00
+        49004E004700C091993D0B4E004F0054002000520055004E004E0049004E0047
+        007887993D00000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000D4D00
+        49004D004900430020002D0020004B0041004E0041004E00074F00460046004C
+        0049004E004500B087993D032D002D002D006892993D032D002D002D00909D99
+        3D00000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000E45004D004500
+        5200470045004E00430059002000530054004F005000074F00460046004C0049
+        004E004500A08B993D032D002D002D00B080993D0B4E004F0054002000520055
+        004E004E0049004E004700D086993D00000000FFFFFFFFFFFFFFFF03000000FF
+        FFFFFF000000000A4D004F004E00490054004F00520049004E004700074F0046
+        0046004C0049004E004500807E993D032D002D002D00C881993D032D002D002D
+        0028E59A3D00000000FFFFFFFFFFFFFFFF03000000FFFFFFFF00000000105000
+        41004E0045004C002000470045004E002000500053002000460057004400074F
+        00460046004C0049004E00450010B42A3C032D002D002D0000252A3C032D002D
+        002D00A0902A3C00000000FFFFFFFFFFFFFFFF03000000FFFFFFFF0000000010
+        500041004E0045004C002000470045004E002000500053002000460057004400
+        074F00460046004C0049004E00450058242A3C032D002D002D00A8252A3C032D
+        002D002D00189D2A3C00000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000
+        0010500041004E0045004C002000470045004E00200053004200200046005700
+        4400074F00460046004C0049004E00450040FC2A3C032D002D002D00E85B2A3C
+        032D002D002D0098A72A3C00000000FFFFFFFFFFFFFFFF03000000FFFFFFFF00
+        00000010500041004E0045004C002000470045004E0020005000530020004100
+        46005400074F00460046004C0049004E004500A0432A3C032D002D002D0090A2
+        2A3C032D002D002D00E0F72A3C00000000FFFFFFFFFFFFFFFF01000000FFFFFF
+        FF0000000010500041004E0045004C002000470045004E002000530042002000
+        410046005400074F00460046004C0049004E00450090552A3C00000000FFFFFF
+        FFFFFFFFFF01000000FFFFFFFF0000000013500041004E0045004C0020004700
+        45004E00200045004D0045005200470045004E0043005900074F00460046004C
+        0049004E00450088A42A3C00000000FFFFFFFFFFFFFFFF01000000FFFFFFFF00
+        0000000B500041004E0045004C002000530048004F0052004500074F00460046
+        004C0049004E00450080592A3CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FF}
       ReadOnly = True
       RowSelect = True
-      TabOrder = 3
+      TabOrder = 8
       ViewStyle = vsReport
       OnCustomDrawSubItem = lvStatusConsoleCustomDrawSubItem
       OnMouseDown = lvStatusConsoleMouseDown
-    end
-    object GroupBox1: TGroupBox
-      Left = 1210
-      Top = 14
-      Width = 150
-      Height = 256
-      Caption = ' Instructor :. '
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 8
-      object lbl1: TLabel
-        Left = 13
-        Top = 25
-        Width = 26
-        Height = 13
-        Caption = 'Host'
-      end
-      object lbl2: TLabel
-        Left = 13
-        Top = 43
-        Width = 24
-        Height = 13
-        Caption = 'Port'
-      end
-      object lbl7: TLabel
-        Left = 13
-        Top = 61
-        Width = 31
-        Height = 13
-        Caption = 'State'
-      end
-      object Label1: TLabel
-        Left = 45
-        Top = 90
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object Label2: TLabel
-        Left = 13
-        Top = 90
-        Width = 38
-        Height = 13
-        Caption = 'Clients'
-      end
-      object Label3: TLabel
-        Left = 45
-        Top = 43
-        Width = 20
-        Height = 13
-        Caption = '  :  -'
-      end
-      object Label4: TLabel
-        Left = 45
-        Top = 61
-        Width = 20
-        Height = 13
-        Caption = '  :  -'
-      end
-      object Label5: TLabel
-        Left = 45
-        Top = 25
-        Width = 20
-        Height = 13
-        Caption = '  :  -'
-      end
-      object lblInsHost: TLabel
-        Left = 60
-        Top = 25
-        Width = 46
-        Height = 13
-        Caption = '<None>'
-      end
-      object lblInsPort: TLabel
-        Left = 60
-        Top = 43
-        Width = 46
-        Height = 13
-        Caption = '<None>'
-      end
-      object lblInsState: TLabel
-        Left = 60
-        Top = 61
-        Width = 47
-        Height = 13
-        Caption = 'Stopped'
-      end
-      object mmoInstructor: TMemo
-        Left = 13
-        Top = 110
-        Width = 123
-        Height = 132
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clGreen
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ScrollBars = ssVertical
-        TabOrder = 0
-      end
-    end
-    object grp1: TGroupBox
-      Left = 1367
-      Top = 14
-      Width = 150
-      Height = 256
-      Caption = ' Controller :. '
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 2
-      object lbl5: TLabel
-        Left = 13
-        Top = 25
-        Width = 38
-        Height = 13
-        Caption = 'Server'
-      end
-      object lbl6: TLabel
-        Left = 13
-        Top = 41
-        Width = 24
-        Height = 13
-        Caption = 'Port'
-      end
-      object lbl11: TLabel
-        Left = 13
-        Top = 57
-        Width = 31
-        Height = 13
-        Caption = 'State'
-      end
-      object lbl12: TLabel
-        Left = 13
-        Top = 90
-        Width = 38
-        Height = 13
-        Caption = 'Clients'
-      end
-      object Label10: TLabel
-        Left = 45
-        Top = 25
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object Label11: TLabel
-        Left = 45
-        Top = 41
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object Label12: TLabel
-        Left = 45
-        Top = 57
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object Label13: TLabel
-        Left = 45
-        Top = 90
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object lblLPUState: TLabel
-        Left = 60
-        Top = 57
-        Width = 47
-        Height = 13
-        Caption = 'Stopped'
-      end
-      object lblLPUPort: TLabel
-        Left = 60
-        Top = 41
-        Width = 46
-        Height = 13
-        Caption = '<None>'
-      end
-      object lblLPUServer: TLabel
-        Left = 60
-        Top = 25
-        Width = 46
-        Height = 13
-        Caption = '<None>'
-      end
-      object mmoCtrl: TMemo
-        Left = 13
-        Top = 110
-        Width = 123
-        Height = 132
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clGreen
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ScrollBars = ssVertical
-        TabOrder = 0
-      end
     end
   end
   object pmClient: TPopupMenu

@@ -153,15 +153,11 @@ type
     property UserApp : string read GetPassApp write SetUserApp;
     property PassApp : string read GetUserApp write SetPassApp;
 
-    property SimEngineServer : string read GetSimEngineServer
-      write SetSimEngineServer;
-    property SimEnginePort : string read GetSimEnginePort
-      write SetSimEnginePort;
+    property SimEngineServer : string read GetSimEngineServer write SetSimEngineServer;
+    property SimEnginePort : string read GetSimEnginePort write SetSimEnginePort;
 
-    property InstructorHost : string read GetInstructorHost
-      write SetInstructorHost;
-    property InstructorPort : string read GetInstructorPort
-      write SetInstructorPort;
+    property InstructorHost : string read GetInstructorHost write SetInstructorHost;
+    property InstructorPort : string read GetInstructorPort write SetInstructorPort;
 
     property LPUServer : string read GetLPUServer write SetLPUServer;
     property LPUPort : string read GetLPUPort write SetLPUPort;
@@ -182,27 +178,20 @@ type
     property AcsIP : string read GetAcsIP write SetAcsIP;
     property MimicKiriIP : string read GetMimicKiriIP write SetMimicKiriIP;
     property PcsKiriIP : string read GetPcsKiriIP write SetPcsKiriIP;
-    property MimicTengahIP : string read GetMimicTengahIP
-      write SetMimicTengahIP;
+    property MimicTengahIP : string read GetMimicTengahIP write SetMimicTengahIP;
     property PcsKananIP : string read GetPcsKananIP write SetPcsKananIP;
     property MimicKananIP : string read GetMimicKananIP write SetMimicKananIP;
-    property EmergencyStopIP : string read GetEmergencyStopIP
-      write SetEmergencyStopIP;
+    property EmergencyStopIP : string read GetEmergencyStopIP write SetEmergencyStopIP;
     property CctvIP : string read GetCctvIP write SetCctvIP;
     property ServerIP : string read GetServerIP write SetServerIP;
 
     property ManualIPMS : string read GetManualIPMS write SetManualIPMS;
-    property OperationalInstruktur : string read GetOperationalInstruktur
-      write SetOperationalInstruktur;
-    property OperationalACS : string read GetOperationalACS
-      write SetOperationalACS;
-    property OperationalVoip : string read GetOperationalVoip
-      write SetOperationalVoip;
+    property OperationalInstruktur : string read GetOperationalInstruktur write SetOperationalInstruktur;
+    property OperationalACS : string read GetOperationalACS write SetOperationalACS;
+    property OperationalVoip : string read GetOperationalVoip write SetOperationalVoip;
     property ModulPCS : string read GetModulPCS write SetModulPCS;
-    property CatalogHardware : string read GetCatalogHardware
-      write SetCatalogHardware;
-    property MaintenanceIPMS : string read GetMaintenanceIPMS
-      write SetMaintenanceIPMS;
+    property CatalogHardware : string read GetCatalogHardware write SetCatalogHardware;
+    property MaintenanceIPMS : string read GetMaintenanceIPMS write SetMaintenanceIPMS;
   end;
 
 var
