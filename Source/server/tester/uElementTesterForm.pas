@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, uElementTestForm, uElement, uDatabase,
-  uDBSupportClasses;
+  uDBSupportClasses, Vcl.ExtCtrls;
 
 type
   TfrmTester = class(TForm)
@@ -32,6 +32,8 @@ type
     btnGoto: TButton;
     btnEnableElment: TButton;
     btnDisableElement: TButton;
+    pnlElementTesterBackground: TPanel;
+    Label1: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure cbbControllerSelect(Sender: TObject);
     procedure cbbElementSelect(Sender: TObject);

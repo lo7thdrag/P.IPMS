@@ -244,6 +244,8 @@ type
     btnPS_Start3: TVrDemoButton;
     btnPS_Auto3: TVrDemoButton;
     btnPS_Stop3: TVrDemoButton;
+    Label1: TLabel;
+    Label2: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure vrtryswtchChange(Sender: TObject);
     procedure btnONClick(Sender: TObject);

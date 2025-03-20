@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, ToolWin,
   ActnCtrls, Mask, Buttons, uDBSupportClasses, ComCtrls, ExtCtrls, StrUtils,
-  Grids;
+  Grids, System.Actions;
 
 type
   TfrmScenBuilder = class(TForm)
@@ -76,6 +76,13 @@ type
     act2: TAction;
     act4: TAction;
     act5: TAction;
+    pnlRunningSessionBackground: TPanel;
+    pnlScenarioBuilderBackgraound: TPanel;
+    pnlPMSBackgraound: TPanel;
+    pnlPCSBackgraound: TPanel;
+    pnlTANkBackgraound: TPanel;
+    pnlFABackgraound: TPanel;
+    Label1: TLabel;
     procedure actNewExecute(Sender: TObject);
     procedure actSaveExecute(Sender: TObject);
     procedure actCancelExecute(Sender: TObject);
