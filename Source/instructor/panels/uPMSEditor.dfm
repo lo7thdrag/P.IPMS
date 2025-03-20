@@ -2210,8 +2210,8 @@ object frmPMSEditor: TfrmPMSEditor
           end>
         ActionBar = acttb1
       end>
-    Left = 950
-    Top = 35
+    Left = 854
+    Top = 43
     StyleName = 'Platform Default'
     object actNew: TAction
       Caption = 'Ne&w'

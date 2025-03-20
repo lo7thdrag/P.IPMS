@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, ComCtrls, ToolWin, ActnMan, ActnCtrls, ActnList,
-  PlatformDefaultStyleActnCtrls, uDatabase;
+  PlatformDefaultStyleActnCtrls, uDatabase, System.Actions;
 
 type
   TfrmPCSEditor = class(TForm)
@@ -40,11 +40,18 @@ type
     lblModeEngPort: TLabel;
     lbl3: TLabel;
     cbbRemoteStar: TComboBox;
-    Label37: TLabel;
-    Label38: TLabel;
     Label1: TLabel;
     Label2: TLabel;
     lblWarning2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure actPickExecute(Sender: TObject);
     procedure actNewExecute(Sender: TObject);
