@@ -37203,7 +37203,7 @@ object frmInstructorPanel: TfrmInstructorPanel
       ExplicitHeight = 65
     end
     object VrClock1: TVrClock
-      Left = 1137
+      Left = 1345
       Top = 25
       Width = 140
       Height = 40
@@ -37215,8 +37215,36 @@ object frmInstructorPanel: TfrmInstructorPanel
       Color = 3749426
       ParentColor = False
     end
+    object lblScenarioRun: TLabel
+      Left = 24
+      Top = 48
+      Width = 21
+      Height = 15
+      Caption = '---'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Consolas'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblSimTime: TLabel
+      Left = 23
+      Top = 22
+      Width = 21
+      Height = 15
+      Caption = '---'
+      Color = 3749426
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Consolas'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
     object Panel1: TPanel
-      Left = 1427
+      Left = 1635
       Top = 25
       Width = 245
       Height = 40
@@ -37327,56 +37355,8 @@ object frmInstructorPanel: TfrmInstructorPanel
         OnClick = btnStopClick
       end
     end
-    object Panel3: TPanel
-      Left = 25
-      Top = 25
-      Width = 328
-      Height = 40
-      BevelOuter = bvNone
-      Color = 3749426
-      ParentBackground = False
-      TabOrder = 1
-      object lblSimTime: TLabel
-        Left = 10
-        Top = 12
-        Width = 27
-        Height = 19
-        Caption = '---'
-        Color = 3749426
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Consolas'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-    end
-    object Panel7: TPanel
-      Left = 358
-      Top = 25
-      Width = 619
-      Height = 40
-      BevelOuter = bvNone
-      Color = 3749426
-      ParentBackground = False
-      TabOrder = 2
-      object lblScenarioRun: TLabel
-        Left = 12
-        Top = 12
-        Width = 27
-        Height = 19
-        Caption = '---'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Consolas'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-    end
     object Panel5: TPanel
-      Left = 1282
+      Left = 1490
       Top = 25
       Width = 140
       Height = 40
@@ -37384,7 +37364,7 @@ object frmInstructorPanel: TfrmInstructorPanel
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
-      TabOrder = 3
+      TabOrder = 1
       object lblSimState: TLabel
         Left = 6
         Top = 8

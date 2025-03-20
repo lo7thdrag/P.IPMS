@@ -73,14 +73,12 @@ type
     btnStartSim: TFlatSpeedButton;
     btnPauseSim: TFlatSpeedButton;
     btnStop: TFlatSpeedButton;
-    Panel3: TPanel;
     Panel4: TPanel;
     VrClock1: TVrClock;
-    Panel7: TPanel;
-    lblScenarioRun: TLabel;
-    lblSimTime: TLabel;
     Panel5: TPanel;
     lblSimState: TLabel;
+    lblScenarioRun: TLabel;
+    lblSimTime: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnDockedClick(Sender: TObject);
     procedure btnPMSClick(Sender: TObject);
