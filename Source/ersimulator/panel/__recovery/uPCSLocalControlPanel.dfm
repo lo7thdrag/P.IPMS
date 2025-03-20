@@ -41,6 +41,19 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
         Color = clGray
         ParentBackground = False
         TabOrder = 0
+        object Label2: TLabel
+          Left = 464
+          Top = 351
+          Width = 31
+          Height = 13
+          Caption = 'Label2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clYellow
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
         object pnlControl: TPanel
           Left = 766
           Top = 569
@@ -85,7 +98,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Caption = ''
             Flat = True
             OnClick = btnClutchClick
-            Color = clGray
+            Color = clSilver
           end
           object btnDeclutchPS: TSpeedButtonImage
             Left = 158
@@ -96,7 +109,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Caption = ''
             Flat = True
             OnClick = btnDeclutchClick
-            Color = clGray
+            Color = clSilver
           end
           object btnSafetiesStopPS: TSpeedButtonImage
             Left = 288
@@ -11029,12 +11042,19 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object grpPS_CPP1: TGroupBox
-          Left = 767
+          Left = 763
           Top = 357
           Width = 166
           Height = 206
-          Caption = 'CPP Hydraulic Pump 1'
+          Caption = '                              '
           TabOrder = 7
+          object Label1: TLabel
+            Left = 135
+            Top = -16
+            Width = 37
+            Height = 16
+            Caption = 'Label1'
+          end
           object btnPS_Start1: TVrDemoButton
             Tag = 1
             Left = 34
