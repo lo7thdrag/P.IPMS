@@ -6,30 +6,16 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, StdCtrls, TFlatSpeedButtonUnit,
   uDatabase, uScenario, Mask, Buttons, uDataType, uFunction, DateUtils, Menus,
-  ShellAPI, Vcl.Imaging.pngimage;
+  ShellAPI, Vcl.Imaging.pngimage, VrControls, VrLcd;
 
 type
     TfrmInstructorPanel = class(TForm)
     pnlMain: TPanel;
-    pnlDescription: TPanel;
     pnlMainContent: TPanel;
     pnlHeaderContent: TPanel;
     lblTitle: TLabel;
     btnDocked: TFlatSpeedButton;
-    grpSimControl: TGroupBox;
-    grp1: TGroupBox;
-    lbl1: TLabel;
-    lblSimState: TLabel;
-    lbl5: TLabel;
-    lblRealTime: TLabel;
-    lbl7: TLabel;
-    lblSimTime: TLabel;
-    btnStartSim: TFlatSpeedButton;
-    btnPauseSim: TFlatSpeedButton;
-    btnStop: TFlatSpeedButton;
     tmrTelegrap: TTimer;
-    lbl4: TLabel;
-    lblRunTime: TLabel;
     pnlSparatorHeader: TPanel;
     mm1: TMainMenu;
     mniHelp1: TMenuItem;
@@ -41,11 +27,8 @@ type
     mniKatalogHardwareIPMS1: TMenuItem;
     mniMaintenanceIPMS1: TMenuItem;
     pnlHeader: TPanel;
-    lblRunScenario: TLabel;
-    lblScenarioRun: TLabel;
     pnlSparatorLeft: TPanel;
     Image1: TImage;
-    Button1: TButton;
     pnlLeft: TPanel;
     ctgrypnlgrpbtnrg1: TCategoryPanelGroup;
     ctgrypnlACS: TCategoryPanel;
@@ -86,7 +69,18 @@ type
     pnlContent: TPanel;
     pnlBottom: TPanel;
     Image2: TImage;
-    Button2: TButton;
+    Panel1: TPanel;
+    btnStartSim: TFlatSpeedButton;
+    btnPauseSim: TFlatSpeedButton;
+    btnStop: TFlatSpeedButton;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    VrClock1: TVrClock;
+    Panel7: TPanel;
+    lblScenarioRun: TLabel;
+    lblSimTime: TLabel;
+    Panel5: TPanel;
+    lblSimState: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnDockedClick(Sender: TObject);
     procedure btnPMSClick(Sender: TObject);
@@ -99,7 +93,6 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure scrlbxContentClick(Sender: TObject);
     procedure mniManualIPMS1Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     FDockedForm : TForm;
@@ -180,11 +173,6 @@ begin
   if (InstructorSys.Scenario.RunState = esrRun) or
      (InstructorSys.Scenario.RunState = esrPause) then
     InstructorSys.Scenario.RunState := esrStop;
-end;
-
-procedure TfrmInstructorPanel.Button1Click(Sender: TObject);
-begin
-//  ShowMessage('Width : ' + FloatToStr(pnlHeader.Width)+'Height : ' + FloatToStr(scrlbxContent.Height));
 end;
 
 procedure TfrmInstructorPanel.DockForm(aForm: TForm);
@@ -359,6 +347,7 @@ begin
           btnPauseSim.Enabled := true;
 
           lblSimState.Caption := 'Running';
+          lblSimState.Font.Color := clLime;
 
 //          ctgrypnlControlPanel.Enabled := True;
           ctgrypnlGeneral.Enabled := True;
@@ -381,6 +370,7 @@ begin
         esrPause:
         begin
           lblSimState.Caption := 'Paused';
+          lblSimState.Font.Color := clRed;
           btnPauseSim.Enabled := False;
           btnStartSim.Enabled := False;
 
@@ -412,6 +402,7 @@ begin
         esrStop:
         begin
           lblSimState.Caption := 'Stopped';
+          lblSimState.Font.Color := clRed;
           btnStop.Enabled := False;
           btnPauseSim.Enabled := False;
           btnStartSim.Enabled := False;
@@ -532,7 +523,7 @@ var
   y, m, d, h, n, s, nn : Word;
   ss : string;
 begin
-  lblRealTime.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',Now);
+//  lblRealTime.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',Now);
 
   if InstructorSys.Scenario.RunState = esrRun then
   begin
@@ -575,7 +566,7 @@ begin
     if s > 0 then
       ss := ss + IntToStr(s) + ' sec ';
 
-    lblRunTime.Caption := ss;
+//    lblRunTime.Caption := ss;
 
     CtrlSystem.Controller.SetRunningScenarioTime(InstructorSys.Scenario.CurrentRunningScenarioTime);
   end;
