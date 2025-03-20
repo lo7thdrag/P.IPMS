@@ -82,10 +82,11 @@ type
     btnFAEditor: TFlatSpeedButton;
     btnTanksEditor: TFlatSpeedButton;
     btnClientApp: TFlatSpeedButton;
-    Panel1: TPanel;
     Panel2: TPanel;
-    GroupBox1: TGroupBox;
     pnlContent: TPanel;
+    pnlBottom: TPanel;
+    Image2: TImage;
+    Button2: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnDockedClick(Sender: TObject);
     procedure btnPMSClick(Sender: TObject);

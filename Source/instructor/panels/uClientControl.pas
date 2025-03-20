@@ -30,7 +30,6 @@ type
     grp3: TGroupBox;
     imgACS: TImage;
     imgCCTV: TImage;
-    imgDenahIPMS: TImage;
     imgEmergencyStop: TImage;
     imgMimicKanan: TImage;
     imgMimicKiri: TImage;
@@ -87,6 +86,7 @@ type
     Label13: TLabel;
     Label14: TLabel;
     Panel1: TPanel;
+    imgDenahIPMS: TImage;
 //    procedure btn3Click(Sender: TObject);
 //    procedure btn4Click(Sender: TObject);
 //    procedure btn1Click(Sender: TObject);

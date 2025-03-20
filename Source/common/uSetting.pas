@@ -30,6 +30,7 @@ type
     FExecutedApp3 : string;
     FMonitorMimic : Integer;
 
+    FServerIP : string;
     FInstrukturIP : string;
     FAcsIP : string;
     FMimicKiriIP : string;
@@ -39,7 +40,28 @@ type
     FMimicKananIP : string;
     FEmergencyStopIP : string;
     FCctvIP : string;
-    FServerIP : string;
+
+    FGenPsFwdIP : string;
+    FGenSbFwdIP : string;
+//    property GenPsAftIP : string read GetGenPsAft  write SetGenPsAft ;
+//    property GenSbAftIP : string read GetGenSbAft write SetGenSbAft;
+//    property GenEmergencyIP : string read GetGenEmergency write SetGenEmergency;
+//    property ShoreIP: string read GetShore write SetShore;
+//
+//    property MainEngine1PsIP : string read GetMainEngine1Ps write SetMainEngine1Ps;
+//    property MainEngine2PsIP: string read GetMainEngine2Ps write SetMainEngine2Ps;
+//    property MainEngine1Sb: string read GetMainEngine1Sb write SetMainEngine1Sb;
+//    property MainEngine2Sb: string read GetMainEngine2Sb write SetMainEngine2Sb;
+//
+//    property Auxiliary1: string read GetAuxiliary1 write SetAuxiliary1;
+//    property Auxiliary2: string read GetAuxiliary2 write SetAuxiliary2;
+//    property Auxiliary3: string read GetAuxiliary3 write SetAuxiliary3;
+//
+//    property DieselGenerator1: string read GetDieselGenerator1 write SetDieselGenerator1;
+//    property DieselGenerator2: string read GetDieselGenerator2 write SetDieselGenerator2;
+//    property DieselGenerator3: string read GetDieselGenerator3 write SetDieselGenerator3;
+//    property DieselGenerator4: string read GetDieselGenerator4 write SetDieselGenerator4;
+
 
     FManualIPMS : string;
     FOperationalInstruktur : string;
@@ -139,8 +161,8 @@ type
     function GetMaintenanceIPMS: string;
     function GetServerIP: string;
 
-    function GetGenPsFwd: string;
-    procedure SetGenPsFwd(const Value: string);
+    function GetGenPsFwdIP: string;
+    procedure SetGenPsFwdIP(const Value: string);
     function GetGenSbFwd: string;
     procedure SetGenSbFwd(const Value: string);
     function GetGenPsAft: string;
@@ -210,6 +232,7 @@ type
     property mode : TStringList read getMode write setMode;
     property formPCS : TStringList read getFormPCS write setFormPCS;
 
+    property ServerIP : string read GetServerIP write SetServerIP;
     property InstrukturIP : string read GetInstrukturIP write SetInstrukturIP;
     property AcsIP : string read GetAcsIP write SetAcsIP;
     property MimicKiriIP : string read GetMimicKiriIP write SetMimicKiriIP;
@@ -219,21 +242,23 @@ type
     property MimicKananIP : string read GetMimicKananIP write SetMimicKananIP;
     property EmergencyStopIP : string read GetEmergencyStopIP write SetEmergencyStopIP;
     property CctvIP : string read GetCctvIP write SetCctvIP;
-    property ServerIP : string read GetServerIP write SetServerIP;
 
-    property GenPsFwd : string read GetGenPsFwd write SetGenPsFwd;
-    property GenSbFwd : string read GetGenSbFwd write SetGenSbFwd;
-    property GenPsAft : string read GetGenPsAft  write SetGenPsAft ;
-    property GenSbAft : string read GetGenSbAft write SetGenSbAft;
-    property GenEmergency : string read GetGenEmergency write SetGenEmergency;
-    property Shore: string read GetShore write SetShore;
-    property MainEngine1Ps : string read GetMainEngine1Ps write SetMainEngine1Ps;
-    property MainEngine2Ps: string read GetMainEngine2Ps write SetMainEngine2Ps;
+    property GenPsFwdIP : string read GetGenPsFwdIP write SetGenPsFwdIP;
+    property GenSbFwdIP : string read GetGenSbFwd write SetGenSbFwd;
+    property GenPsAftIP : string read GetGenPsAft  write SetGenPsAft ;
+    property GenSbAftIP : string read GetGenSbAft write SetGenSbAft;
+    property GenEmergencyIP : string read GetGenEmergency write SetGenEmergency;
+    property ShoreIP: string read GetShore write SetShore;
+
+    property MainEngine1PsIP : string read GetMainEngine1Ps write SetMainEngine1Ps;
+    property MainEngine2PsIP: string read GetMainEngine2Ps write SetMainEngine2Ps;
     property MainEngine1Sb: string read GetMainEngine1Sb write SetMainEngine1Sb;
     property MainEngine2Sb: string read GetMainEngine2Sb write SetMainEngine2Sb;
+
     property Auxiliary1: string read GetAuxiliary1 write SetAuxiliary1;
     property Auxiliary2: string read GetAuxiliary2 write SetAuxiliary2;
     property Auxiliary3: string read GetAuxiliary3 write SetAuxiliary3;
+
     property DieselGenerator1: string read GetDieselGenerator1 write SetDieselGenerator1;
     property DieselGenerator2: string read GetDieselGenerator2 write SetDieselGenerator2;
     property DieselGenerator3: string read GetDieselGenerator3 write SetDieselGenerator3;
@@ -515,9 +540,9 @@ begin
   Result := FIniFile.ReadString('CONSOLE', 'GetGenPsAft', '192.168.1.18');
 end;
 
-function TSetting.GetGenPsFwd: string;
+function TSetting.GetGenPsFwdIP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'GetGenPsFwd', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'GetGenPsFwdIP', '192.168.1.18');
 end;
 
 function TSetting.GetGenSbAft: string;
@@ -871,10 +896,10 @@ begin
   FIniFile.WriteString('CONSOLE', 'SetGenPsAft', Value);
 end;
 
-procedure TSetting.SetGenPsFwd(const Value: string);
+procedure TSetting.SetGenPsFwdIP(const Value: string);
 begin
-  FCctvIP := Value;
-  FIniFile.WriteString('CONSOLE', 'SetGenPsFwd', Value);
+  FGenPsFwdIP := Value;
+  FIniFile.WriteString('CONSOLE', 'GenPsFwd', Value);
 end;
 
 procedure TSetting.SetGenSbAft(const Value: string);
