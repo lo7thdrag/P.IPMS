@@ -61,10 +61,9 @@ object frmInstructorPanel: TfrmInstructorPanel
       Height = 33
       Align = alTop
       BevelOuter = bvNone
-      Color = 3749426
+      Color = 9451819
       ParentBackground = False
       TabOrder = 1
-      Visible = False
       ExplicitWidth = 1067
       object lblTitle: TLabel
         Left = 7
@@ -80,8 +79,8 @@ object frmInstructorPanel: TfrmInstructorPanel
         ParentFont = False
       end
       object btnDocked: TFlatSpeedButton
-        Left = 972
-        Top = 4
+        Left = 1572
+        Top = 6
         Width = 90
         Height = 25
         Caption = 'Undocked'
@@ -18198,8 +18197,134 @@ object frmInstructorPanel: TfrmInstructorPanel
       HeaderHeight = 26
       HeaderStyle = hsImage
       TabOrder = 0
-      ExplicitWidth = 220
-      ExplicitHeight = 501
+      object ctgrypnlExit: TCategoryPanel
+        Top = 518
+        Height = 32
+        Cursor = crHandPoint
+        Caption = 'Exit'
+        Color = 3749426
+        Collapsed = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        ExpandedHeight = 78
+        object btnClose: TFlatSpeedButton
+          Tag = 20
+          Left = 18
+          Top = 9
+          Width = 190
+          Height = 28
+          Cursor = crHandPoint
+          ColorFocused = clGray
+          Caption = 'Close'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000120B0000120B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+            5555555555555555555555555555555555555555555555555555555555555555
+            555555555555555555555555555555555555555FFFFFFFFFF555550000000000
+            55555577777777775F55500B8B8B8B8B05555775F555555575F550F0B8B8B8B8
+            B05557F75F555555575F50BF0B8B8B8B8B0557F575FFFFFFFF7F50FBF0000000
+            000557F557777777777550BFBFBFBFB0555557F555555557F55550FBFBFBFBF0
+            555557F555555FF7555550BFBFBF00055555575F555577755555550BFBF05555
+            55555575FFF75555555555700007555555555557777555555555555555555555
+            5555555555555555555555555555555555555555555555555555}
+          Layout = blGlyphLeft
+          NumGlyphs = 2
+          ParentFont = False
+          OnClick = OnCategoryBtnClick
+        end
+      end
+      object ctgrypnlHelp: TCategoryPanel
+        Top = 486
+        Height = 32
+        Cursor = crHandPoint
+        Caption = 'Help'
+        Color = 3749426
+        Collapsed = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        ExpandedHeight = 115
+        object btnHardwareCatalogue: TFlatSpeedButton
+          Tag = 5
+          Left = 18
+          Top = 45
+          Width = 190
+          Height = 28
+          Cursor = crHandPoint
+          ColorFocused = clGray
+          Caption = 'Hardware Catalogue'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000120B0000120B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+            5555555555555555555555555555555555555555555555555555555555555555
+            555555555555555555555555555555555555555FFFFFFFFFF555550000000000
+            55555577777777775F55500B8B8B8B8B05555775F555555575F550F0B8B8B8B8
+            B05557F75F555555575F50BF0B8B8B8B8B0557F575FFFFFFFF7F50FBF0000000
+            000557F557777777777550BFBFBFBFB0555557F555555557F55550FBFBFBFBF0
+            555557F555555FF7555550BFBFBF00055555575F555577755555550BFBF05555
+            55555575FFF75555555555700007555555555557777555555555555555555555
+            5555555555555555555555555555555555555555555555555555}
+          Layout = blGlyphLeft
+          NumGlyphs = 2
+          ParentFont = False
+          OnClick = OnCategoryBtnClick
+        end
+        object btnManualBook: TFlatSpeedButton
+          Tag = 20
+          Left = 18
+          Top = 9
+          Width = 190
+          Height = 28
+          Cursor = crHandPoint
+          ColorFocused = clGray
+          Caption = 'Manual Book'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000120B0000120B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+            5555555555555555555555555555555555555555555555555555555555555555
+            555555555555555555555555555555555555555FFFFFFFFFF555550000000000
+            55555577777777775F55500B8B8B8B8B05555775F555555575F550F0B8B8B8B8
+            B05557F75F555555575F50BF0B8B8B8B8B0557F575FFFFFFFF7F50FBF0000000
+            000557F557777777777550BFBFBFBFB0555557F555555557F55550FBFBFBFBF0
+            555557F555555FF7555550BFBFBF00055555575F555577755555550BFBF05555
+            55555575FFF75555555555700007555555555557777555555555555555555555
+            5555555555555555555555555555555555555555555555555555}
+          Layout = blGlyphLeft
+          NumGlyphs = 2
+          ParentFont = False
+          OnClick = OnCategoryBtnClick
+        end
+      end
       object ctgrypnlACS: TCategoryPanel
         Tag = 7
         Top = 454
@@ -18208,9 +18333,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Caption = 'Alarm Control System'
         Color = 3749426
         Collapsed = True
-        TabOrder = 0
-        ExplicitTop = 192
-        ExplicitWidth = 218
+        TabOrder = 2
         ExpandedHeight = 80
         object btnACSControl: TFlatSpeedButton
           Tag = 30
@@ -18253,9 +18376,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Caption = 'Auxilary'
         Color = 3749426
         Collapsed = True
-        TabOrder = 1
-        ExplicitTop = 160
-        ExplicitWidth = 218
+        TabOrder = 3
         ExpandedHeight = 258
         object btnTanksOverview: TFlatSpeedButton
           Tag = 23
@@ -18458,9 +18579,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Caption = 'Propulsion'
         Color = 3749426
         Collapsed = True
-        TabOrder = 2
-        ExplicitTop = 128
-        ExplicitWidth = 218
+        TabOrder = 4
         ExpandedHeight = 115
         object btnRudder1: TFlatSpeedButton
           Tag = 31
@@ -18535,9 +18654,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Caption = 'Energy'
         Color = 3749426
         Collapsed = True
-        TabOrder = 3
-        ExplicitTop = 96
-        ExplicitWidth = 218
+        TabOrder = 5
         ExpandedHeight = 114
         object btnPCSConditions: TFlatSpeedButton
           Tag = 27
@@ -18612,9 +18729,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Caption = 'Safety'
         Color = 3749426
         Collapsed = True
-        TabOrder = 4
-        ExplicitTop = 64
-        ExplicitWidth = 218
+        TabOrder = 6
         ExpandedHeight = 185
         object btnFF: TFlatSpeedButton
           Tag = 7
@@ -18753,9 +18868,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Caption = 'General'
         Color = 3749426
         Collapsed = True
-        TabOrder = 5
-        ExplicitTop = 32
-        ExplicitWidth = 218
+        TabOrder = 7
         ExpandedHeight = 221
         object btnNav_ComSystem: TFlatSpeedButton
           Tag = 22
@@ -18930,8 +19043,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 6
-        ExplicitWidth = 218
+        TabOrder = 8
         object btnScenBuilder: TFlatSpeedButton
           Tag = 1
           Left = 18
@@ -37243,6 +37355,19 @@ object frmInstructorPanel: TfrmInstructorPanel
       ParentColor = False
       ParentFont = False
     end
+    object Label1: TLabel
+      Left = 1143
+      Top = 37
+      Width = 164
+      Height = 19
+      Caption = 'Powered By : Prince'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object Panel1: TPanel
       Left = 1635
       Top = 25
@@ -37384,7 +37509,7 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
     end
   end
-  object Panel4: TPanel
+  object pnlSparatorFooter: TPanel
     Left = 0
     Top = 617
     Width = 1916
@@ -37444,5 +37569,10 @@ object frmInstructorPanel: TfrmInstructorPanel
         OnClick = mniManualIPMS1Click
       end
     end
+  end
+  object tmr1: TTimer
+    OnTimer = tmr1Timer
+    Left = 336
+    Top = 536
   end
 end

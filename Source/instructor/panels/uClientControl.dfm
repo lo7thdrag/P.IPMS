@@ -2,7 +2,7 @@ object frmClientControl: TfrmClientControl
   Left = -985
   Top = 33
   BorderStyle = bsNone
-  Caption = 'Client Application Control'
+  Caption = 'Client Control'
   ClientHeight = 842
   ClientWidth = 1687
   Color = clGray
@@ -23,38 +23,21 @@ object frmClientControl: TfrmClientControl
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 464
-    ExplicitTop = 624
-    ExplicitWidth = 185
-    ExplicitHeight = 41
-    object Label14: TLabel
-      Left = 897
-      Top = 12
-      Width = 105
-      Height = 14
-      Caption = 'Status Console :.'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
     object chkDataLogger: TCheckBox
-      Left = 1427
-      Top = 825
+      Left = 382
+      Top = 325
       Width = 97
       Height = 17
       Caption = 'Data Logger'
       TabOrder = 0
+      Visible = False
       OnClick = chkDataLoggerClick
     end
     object GroupBox1: TGroupBox
-      Left = 1210
-      Top = 14
+      Left = 16
+      Top = 19
       Width = 150
-      Height = 256
-      Caption = ' Instructor :. '
+      Height = 308
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -11
@@ -64,86 +47,93 @@ object frmClientControl: TfrmClientControl
       TabOrder = 1
       object lbl1: TLabel
         Left = 13
-        Top = 25
+        Top = 40
         Width = 26
         Height = 13
         Caption = 'Host'
       end
       object lbl2: TLabel
         Left = 13
-        Top = 43
+        Top = 56
         Width = 24
         Height = 13
         Caption = 'Port'
       end
       object lbl7: TLabel
         Left = 13
-        Top = 61
+        Top = 72
         Width = 31
         Height = 13
         Caption = 'State'
       end
-      object Label1: TLabel
-        Left = 45
-        Top = 90
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
       object Label2: TLabel
         Left = 13
-        Top = 90
+        Top = 101
         Width = 38
         Height = 13
         Caption = 'Clients'
       end
       object Label3: TLabel
         Left = 45
-        Top = 43
+        Top = 56
         Width = 20
         Height = 13
         Caption = '  :  -'
       end
       object Label4: TLabel
         Left = 45
-        Top = 61
+        Top = 72
         Width = 20
         Height = 13
         Caption = '  :  -'
       end
       object Label5: TLabel
         Left = 45
-        Top = 25
+        Top = 40
         Width = 20
         Height = 13
         Caption = '  :  -'
       end
       object lblInsHost: TLabel
         Left = 60
-        Top = 25
+        Top = 40
         Width = 46
         Height = 13
         Caption = '<None>'
       end
       object lblInsPort: TLabel
         Left = 60
-        Top = 43
+        Top = 56
         Width = 46
         Height = 13
         Caption = '<None>'
       end
       object lblInsState: TLabel
         Left = 60
-        Top = 61
+        Top = 72
         Width = 47
         Height = 13
         Caption = 'Stopped'
       end
+      object Label51: TLabel
+        Left = 44
+        Top = 13
+        Width = 61
+        Height = 13
+        Alignment = taCenter
+        Caption = ' Instructor'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object mmoInstructor: TMemo
         Left = 13
-        Top = 110
+        Top = 120
         Width = 123
-        Height = 132
+        Height = 175
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clGreen
         Font.Height = -11
@@ -155,11 +145,10 @@ object frmClientControl: TfrmClientControl
       end
     end
     object grp1: TGroupBox
-      Left = 1367
-      Top = 14
+      Left = 172
+      Top = 19
       Width = 150
-      Height = 256
-      Caption = ' Controller :. '
+      Height = 308
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -11
@@ -169,86 +158,93 @@ object frmClientControl: TfrmClientControl
       TabOrder = 2
       object lbl5: TLabel
         Left = 13
-        Top = 25
+        Top = 40
         Width = 38
         Height = 13
         Caption = 'Server'
       end
       object lbl6: TLabel
         Left = 13
-        Top = 41
+        Top = 56
         Width = 24
         Height = 13
         Caption = 'Port'
       end
       object lbl11: TLabel
         Left = 13
-        Top = 57
+        Top = 72
         Width = 31
         Height = 13
         Caption = 'State'
       end
       object lbl12: TLabel
         Left = 13
-        Top = 90
+        Top = 101
         Width = 38
         Height = 13
         Caption = 'Clients'
       end
       object Label10: TLabel
-        Left = 45
-        Top = 25
+        Left = 51
+        Top = 40
         Width = 15
         Height = 13
         Caption = '  :  '
       end
       object Label11: TLabel
-        Left = 45
-        Top = 41
+        Left = 51
+        Top = 56
         Width = 15
         Height = 13
         Caption = '  :  '
       end
       object Label12: TLabel
-        Left = 45
-        Top = 57
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object Label13: TLabel
-        Left = 45
-        Top = 90
+        Left = 51
+        Top = 72
         Width = 15
         Height = 13
         Caption = '  :  '
       end
       object lblLPUState: TLabel
-        Left = 60
-        Top = 57
+        Left = 66
+        Top = 72
         Width = 47
         Height = 13
         Caption = 'Stopped'
       end
       object lblLPUPort: TLabel
-        Left = 60
-        Top = 41
+        Left = 66
+        Top = 56
         Width = 46
         Height = 13
         Caption = '<None>'
       end
       object lblLPUServer: TLabel
-        Left = 60
-        Top = 25
+        Left = 66
+        Top = 40
         Width = 46
         Height = 13
         Caption = '<None>'
       end
+      object Label52: TLabel
+        Left = 52
+        Top = 13
+        Width = 56
+        Height = 13
+        Alignment = taCenter
+        Caption = 'Controller'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object mmoCtrl: TMemo
         Left = 13
-        Top = 110
+        Top = 120
         Width = 123
-        Height = 132
+        Height = 175
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clGreen
         Font.Height = -11
@@ -260,11 +256,10 @@ object frmClientControl: TfrmClientControl
       end
     end
     object grp2: TGroupBox
-      Left = 1523
-      Top = 14
+      Left = 329
+      Top = 19
       Width = 150
-      Height = 256
-      Caption = ' Engine Room :. '
+      Height = 308
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -11
@@ -274,86 +269,93 @@ object frmClientControl: TfrmClientControl
       TabOrder = 3
       object lbl10: TLabel
         Left = 13
-        Top = 90
+        Top = 101
         Width = 38
         Height = 13
         Caption = 'Clients'
       end
       object lbl3: TLabel
         Left = 13
-        Top = 25
+        Top = 40
         Width = 38
         Height = 13
         Caption = 'Server'
       end
       object lbl4: TLabel
         Left = 13
-        Top = 41
+        Top = 56
         Width = 24
         Height = 13
         Caption = 'Port'
       end
       object lbl9: TLabel
         Left = 13
-        Top = 57
+        Top = 72
         Width = 31
         Height = 13
         Caption = 'State'
       end
-      object Label6: TLabel
-        Left = 45
-        Top = 90
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
       object Label7: TLabel
-        Left = 45
-        Top = 57
+        Left = 53
+        Top = 72
         Width = 15
         Height = 13
         Caption = '  :  '
       end
       object Label8: TLabel
-        Left = 45
-        Top = 41
+        Left = 53
+        Top = 56
         Width = 15
         Height = 13
         Caption = '  :  '
       end
       object Label9: TLabel
-        Left = 45
-        Top = 25
+        Left = 53
+        Top = 40
         Width = 15
         Height = 13
         Caption = '  :  '
       end
       object lblERServer: TLabel
-        Left = 60
-        Top = 25
+        Left = 68
+        Top = 40
         Width = 46
         Height = 13
         Caption = '<None>'
       end
       object lblERPort: TLabel
-        Left = 60
-        Top = 41
+        Left = 68
+        Top = 56
         Width = 46
         Height = 13
         Caption = '<None>'
       end
       object lblERState: TLabel
-        Left = 60
-        Top = 57
+        Left = 68
+        Top = 72
         Width = 47
         Height = 13
         Caption = 'Stopped'
       end
+      object Label53: TLabel
+        Left = 60
+        Top = 13
+        Width = 73
+        Height = 13
+        Alignment = taCenter
+        Caption = 'Engine Room'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object mmoER: TMemo
         Left = 13
-        Top = 110
+        Top = 120
         Width = 123
-        Height = 132
+        Height = 175
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clGreen
         Font.Height = -11
@@ -365,10 +367,10 @@ object frmClientControl: TfrmClientControl
       end
     end
     object grp4: TGroupBox
-      Left = 1210
-      Top = 276
+      Left = 16
+      Top = 336
       Width = 463
-      Height = 552
+      Height = 492
       TabOrder = 4
       object lbl14: TLabel
         Left = 13
@@ -385,7 +387,7 @@ object frmClientControl: TfrmClientControl
       end
       object lbl15: TLabel
         Left = 13
-        Top = 195
+        Top = 175
         Width = 55
         Height = 13
         Caption = 'Event Log :'
@@ -398,7 +400,7 @@ object frmClientControl: TfrmClientControl
       end
       object lbl16: TLabel
         Left = 16
-        Top = 373
+        Top = 334
         Width = 51
         Height = 13
         Caption = 'Error Log :'
@@ -411,9 +413,9 @@ object frmClientControl: TfrmClientControl
       end
       object mmoNetLogger: TMemo
         Left = 13
-        Top = 36
+        Top = 34
         Width = 436
-        Height = 137
+        Height = 127
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clGreen
         Font.Height = -11
@@ -425,9 +427,9 @@ object frmClientControl: TfrmClientControl
       end
       object mmoEvntLog: TMemo
         Left = 13
-        Top = 214
+        Top = 192
         Width = 436
-        Height = 137
+        Height = 127
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clGreen
         Font.Height = -11
@@ -439,9 +441,9 @@ object frmClientControl: TfrmClientControl
       end
       object mmoErrorLog: TMemo
         Left = 13
-        Top = 392
+        Top = 351
         Width = 436
-        Height = 137
+        Height = 127
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clGreen
         Font.Height = -11
@@ -452,203 +454,26 @@ object frmClientControl: TfrmClientControl
         TabOrder = 2
       end
     end
-    object grpSimControl: TGroupBox
-      Left = 897
-      Top = 519
-      Width = 296
-      Height = 50
-      Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentBackground = False
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 5
-      object btn3: TFlatSpeedButton
-        Tag = 2
-        Left = 39
-        Top = 14
-        Width = 86
-        Height = 25
-        Color = clBtnFace
-        ColorFocused = clBtnFace
-        ColorDown = clBtnFace
-        Caption = 'Load All'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Layout = blGlyphLeft
-        NumGlyphs = 2
-        ParentFont = False
-        ParentColor = False
-        OnClick = mniLoadClick
-      end
-      object btn4: TFlatSpeedButton
-        Tag = 4
-        Left = 172
-        Top = 14
-        Width = 86
-        Height = 25
-        Color = clBtnFace
-        ColorFocused = clBtnFace
-        ColorDown = clBtnFace
-        Caption = 'Unload All'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Layout = blGlyphLeft
-        NumGlyphs = 2
-        ParentFont = False
-        ParentColor = False
-        OnClick = mniLoadClick
-      end
-    end
     object lstLoader: TListBox
-      Left = 1210
-      Top = 792
+      Left = 29
+      Top = 764
       Width = 221
       Height = 50
       ItemHeight = 13
-      TabOrder = 6
+      TabOrder = 5
       Visible = False
     end
-    object lvStatusConsole: TListView
-      Left = 897
-      Top = 32
-      Width = 296
-      Height = 481
-      Columns = <
-        item
-          Caption = 'Console'
-          Width = 150
-        end
-        item
-          Alignment = taCenter
-          Caption = 'Status'
-          Width = 140
-        end
-        item
-          Alignment = taCenter
-          Caption = 'Servo'
-          Width = 0
-        end
-        item
-          Alignment = taCenter
-          Caption = 'Comport'
-          Width = 0
-        end>
-      ColumnClick = False
-      GridLines = True
-      Items.ItemData = {
-        05640A00001A00000000000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000
-        0006530045005200560045005200074F00460046004C0049004E00450078AB7F
-        33032D002D002D0090CF7F33032D002D002D00A09A7F3300000000FFFFFFFFFF
-        FFFFFF03000000FFFFFFFF0000000003410043005300074F00460046004C0049
-        004E00450090827F33032D002D002D0018927F33032D002D002D00B0CE7F3300
-        000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000C4D0049004D004900
-        430020002D0020004B00490052004900074F00460046004C0049004E00450060
-        797F33032D002D002D0090AC7F33032D002D002D00E87A7F3300000000FFFFFF
-        FFFFFFFFFF03000000FFFFFFFF000000000A50004300530020002D0020004B00
-        490052004900074F00460046004C0049004E004500E8887F330B4E004F005400
-        2000520055004E004E0049004E00470038AD7F330B4E004F0054002000520055
-        004E004E0049004E004700E0BB7F3300000000FFFFFFFFFFFFFFFF03000000FF
-        FFFFFF000000000E4D0049004D004900430020002D002000540045004E004700
-        41004800074F00460046004C0049004E004500B87F7F33032D002D002D005889
-        7F33032D002D002D00409D7F3300000000FFFFFFFFFFFFFFFF03000000FFFFFF
-        FF000000000B50004300530020002D0020004B0041004E0041004E00074F0046
-        0046004C0049004E004500C8827F330B4E004F0054002000520055004E004E00
-        49004E00470010867F330B4E004F0054002000520055004E004E0049004E0047
-        0020827F3300000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000D4D00
-        49004D004900430020002D0020004B0041004E0041004E00074F00460046004C
-        0049004E00450000B47F33032D002D002D00609C7F33032D002D002D0008887F
-        3300000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000E45004D004500
-        5200470045004E00430059002000530054004F005000074F00460046004C0049
-        004E00450040887F33032D002D002D00F0787F330B4E004F0054002000520055
-        004E004E0049004E004700E8817F3300000000FFFFFFFFFFFFFFFF03000000FF
-        FFFFFF000000000A4D004F004E00490054004F00520049004E004700074F0046
-        0046004C0049004E004500F88B7F33032D002D002D0020C87F33032D002D002D
-        0070D07F3300000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000A4700
-        45004E002000500053002000460057004400074F00460046004C0049004E0045
-        0098C67F33032D002D002D00F8C37F33032D002D002D00E07C7F3300000000FF
-        FFFFFFFFFFFFFF03000000FFFFFFFF000000000A470045004E00200053004200
-        2000460057004400074F00460046004C0049004E004500B0C0E137032D002D00
-        2D007806E237032D002D002D0088D1E13700000000FFFFFFFFFFFFFFFF030000
-        00FFFFFFFF000000000A470045004E002000500053002000410046005400074F
-        00460046004C0049004E004500F8F4E137032D002D002D008868E137032D002D
-        002D003860E13700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000A
-        470045004E002000530042002000410046005400074F00460046004C0049004E
-        0045002007E237032D002D002D0068C4E137032D002D002D003011E237000000
-        00FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000D470045004E0020004500
-        4D0045005200470045004E0043005900074F00460046004C0049004E004500E8
-        9DE137032D002D002D0038D0E137032D002D002D00587BE13700000000FFFFFF
-        FFFFFFFFFF03000000FFFFFFFF0000000005530048004F0052004500074F0046
-        0046004C0049004E00450030BDE137032D002D002D00D885E137032D002D002D
-        0060E9E13700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF00000000104D00
-        410049004E00200045004E00470049004E00450020003100200050005300074F
-        00460046004C0049004E004500D8E0E137032D002D002D0038FAE137032D002D
-        002D0048DAE13700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF0000000010
-        4D00410049004E00200045004E00470049004E00450020003200200050005300
-        074F00460046004C0049004E004500486AE137032D002D002D0038A6E137032D
-        002D002D00102EE23700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000
-        00104D00410049004E00200045004E00470049004E0045002000310020005300
-        4200074F00460046004C0049004E004500081BE237032D002D002D0070B4E137
-        032D002D002D0090CFE13700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF00
-        000000104D00410049004E00200045004E00470049004E004500200032002000
-        53004200074F00460046004C0049004E0045005010E237032D002D002D005866
-        E137032D002D002D00C068E13700000000FFFFFFFFFFFFFFFF03000000FFFFFF
-        FF000000000E41005500580049004C00490041005200590020002D0020003100
-        2000084F00460046004C0049004E00450020009051E137032D002D002D00E0AD
-        E137032D002D002D0088DFE13700000000FFFFFFFFFFFFFFFF03000000FFFFFF
-        FF000000000D41005500580049004C00490041005200590020002D0020003200
-        074F00460046004C0049004E0045003816E237032D002D002D0098D4E137032D
-        002D002D00B08FE13700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000
-        000E41005500580049004C00490041005200590020002D00200033002000074F
-        00460046004C0049004E0045009007E237032D002D002D007830E237032D002D
-        002D00100BE23700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF0000000014
-        440049004500530045004C002000470045004E0045005200410054004F005200
-        20002D0020003100084F00460046004C0049004E0045002000D021E237032D00
-        2D002D00580EE237032D002D002D004006E23700000000FFFFFFFFFFFFFFFF03
-        000000FFFFFFFF0000000014440049004500530045004C002000470045004E00
-        45005200410054004F00520020002D0020003200074F00460046004C0049004E
-        004500F0DAE137032D002D002D008019E237032D002D002D00A0AFE137000000
-        00FFFFFFFFFFFFFFFF03000000FFFFFFFF000000001544004900450053004500
-        4C002000470045004E0045005200410054004F00520020002D00200033002000
-        074F00460046004C0049004E0045006877E137032D002D002D002864E137032D
-        002D002D00F086E13700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000
-        0015440049004500530045004C002000470045004E0045005200410054004F00
-        520020002D00200034002000084F00460046004C0049004E0045002000C01EE2
-        37032D002D002D00D8A1E137032D002D002D009879E137FFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      ReadOnly = True
-      RowSelect = True
-      TabOrder = 7
-      ViewStyle = vsReport
-      OnCustomDrawSubItem = lvStatusConsoleCustomDrawSubItem
-      OnMouseDown = lvStatusConsoleMouseDown
-    end
-    object Panel2: TPanel
-      Left = 16
+    object pnlDenah: TPanel
+      Left = 495
       Top = 18
       Width = 866
-      Height = 805
-      Caption = 'Panel2'
-      TabOrder = 8
+      Height = 810
+      TabOrder = 6
       object imgDenahIPMS: TImage
         Left = 1
         Top = 1
         Width = 864
-        Height = 803
+        Height = 808
         Align = alClient
         Picture.Data = {
           0A544A504547496D616765689F0700FFD8FFE114324578696600004D4D002A00
@@ -16264,10 +16089,9 @@ object frmClientControl: TfrmClientControl
           F41F0FF7A3D3F4FF00DB7C5B83D3BB1ECFB0E1BF23CB7E1ECBB6E1ED78ADCB6A
           D296E5B71F0538E96E469C751B24C543A7FF00A967FFD9}
         Stretch = True
-        ExplicitLeft = 112
-        ExplicitTop = 44
-        ExplicitWidth = 866
-        ExplicitHeight = 805
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitHeight = 803
       end
       object imgEmergencyStop: TImage
         Left = 500
@@ -16305,7 +16129,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgMimicKanan: TImage
         Left = 500
-        Top = 337
+        Top = 341
         Width = 15
         Height = 15
         AutoSize = True
@@ -16339,7 +16163,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgPCSKanan: TImage
         Left = 500
-        Top = 291
+        Top = 292
         Width = 15
         Height = 15
         AutoSize = True
@@ -16373,7 +16197,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgMimicTengah: TImage
         Left = 500
-        Top = 240
+        Top = 243
         Width = 15
         Height = 15
         AutoSize = True
@@ -16441,7 +16265,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgMimicKiri: TImage
         Left = 500
-        Top = 142
+        Top = 145
         Width = 15
         Height = 15
         AutoSize = True
@@ -16475,7 +16299,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgACS: TImage
         Left = 500
-        Top = 96
+        Top = 97
         Width = 15
         Height = 15
         AutoSize = True
@@ -16509,7 +16333,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgCCTV: TImage
         Left = 251
-        Top = 252
+        Top = 256
         Width = 15
         Height = 15
         AutoSize = True
@@ -16540,6 +16364,1341 @@ object frmClientControl: TfrmClientControl
           0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
+      end
+      object Label15: TLabel
+        Left = 528
+        Top = 94
+        Width = 15
+        Height = 20
+        Caption = 'ACS'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label16: TLabel
+        Left = 528
+        Top = 136
+        Width = 15
+        Height = 33
+        Alignment = taCenter
+        Caption = 'MIMIC'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label17: TLabel
+        Left = 541
+        Top = 142
+        Width = 15
+        Height = 21
+        Alignment = taCenter
+        Caption = 'KIRI'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label18: TLabel
+        Left = 528
+        Top = 190
+        Width = 15
+        Height = 19
+        Alignment = taCenter
+        Caption = 'PCS'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label19: TLabel
+        Left = 541
+        Top = 189
+        Width = 15
+        Height = 21
+        Alignment = taCenter
+        Caption = 'KIRI'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label20: TLabel
+        Left = 528
+        Top = 234
+        Width = 15
+        Height = 33
+        Alignment = taCenter
+        Caption = 'MIMIC'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label21: TLabel
+        Left = 541
+        Top = 230
+        Width = 15
+        Height = 40
+        Alignment = taCenter
+        Caption = 'TENGAH'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label22: TLabel
+        Left = 528
+        Top = 290
+        Width = 15
+        Height = 19
+        Alignment = taCenter
+        Caption = 'PCS'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label23: TLabel
+        Left = 541
+        Top = 282
+        Width = 15
+        Height = 34
+        Alignment = taCenter
+        Caption = 'KANAN'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label24: TLabel
+        Left = 528
+        Top = 332
+        Width = 15
+        Height = 33
+        Alignment = taCenter
+        Caption = 'MIMIC'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label25: TLabel
+        Left = 541
+        Top = 331
+        Width = 15
+        Height = 34
+        Alignment = taCenter
+        Caption = 'KANAN'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label26: TLabel
+        Left = 528
+        Top = 389
+        Width = 15
+        Height = 15
+        Alignment = taCenter
+        Caption = 'EM'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label27: TLabel
+        Left = 541
+        Top = 383
+        Width = 15
+        Height = 26
+        Alignment = taCenter
+        Caption = 'STOP'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label28: TLabel
+        Left = 312
+        Top = 230
+        Width = 15
+        Height = 67
+        Alignment = taCenter
+        Caption = 'MONITORING'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label29: TLabel
+        Left = 73
+        Top = 438
+        Width = 15
+        Height = 20
+        Alignment = taCenter
+        Caption = 'GEN'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label30: TLabel
+        Left = 86
+        Top = 429
+        Width = 15
+        Height = 38
+        Alignment = taCenter
+        Caption = 'PS FWD'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label31: TLabel
+        Left = 73
+        Top = 375
+        Width = 15
+        Height = 20
+        Alignment = taCenter
+        Caption = 'GEN'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label32: TLabel
+        Left = 86
+        Top = 366
+        Width = 15
+        Height = 39
+        Alignment = taCenter
+        Caption = 'SB FWD'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label33: TLabel
+        Left = 73
+        Top = 313
+        Width = 15
+        Height = 20
+        Alignment = taCenter
+        Caption = 'GEN'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label34: TLabel
+        Left = 86
+        Top = 306
+        Width = 15
+        Height = 34
+        Alignment = taCenter
+        Caption = 'PS AFT'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label35: TLabel
+        Left = 73
+        Top = 252
+        Width = 15
+        Height = 20
+        Alignment = taCenter
+        Caption = 'GEN'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label36: TLabel
+        Left = 86
+        Top = 245
+        Width = 15
+        Height = 35
+        Alignment = taCenter
+        Caption = 'SB AFT'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label37: TLabel
+        Left = 73
+        Top = 190
+        Width = 15
+        Height = 20
+        Alignment = taCenter
+        Caption = 'GEN'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label38: TLabel
+        Left = 86
+        Top = 193
+        Width = 15
+        Height = 15
+        Alignment = taCenter
+        Caption = 'EM'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label40: TLabel
+        Left = 80
+        Top = 123
+        Width = 15
+        Height = 34
+        Alignment = taCenter
+        Caption = 'SHORE'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Image1: TImage
+        Left = 35
+        Top = 441
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image2: TImage
+        Left = 35
+        Top = 378
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image3: TImage
+        Left = 35
+        Top = 316
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image4: TImage
+        Left = 35
+        Top = 255
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image5: TImage
+        Left = 35
+        Top = 193
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image6: TImage
+        Left = 35
+        Top = 133
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image7: TImage
+        Left = 430
+        Top = 773
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image8: TImage
+        Left = 502
+        Top = 773
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image9: TImage
+        Left = 571
+        Top = 773
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image10: TImage
+        Left = 645
+        Top = 773
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image11: TImage
+        Left = 119
+        Top = 773
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image12: TImage
+        Left = 171
+        Top = 773
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image13: TImage
+        Left = 225
+        Top = 773
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image14: TImage
+        Left = 27
+        Top = 685
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image15: TImage
+        Left = 27
+        Top = 613
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image16: TImage
+        Left = 312
+        Top = 611
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Image17: TImage
+        Left = 312
+        Top = 683
+        Width = 15
+        Height = 15
+        AutoSize = True
+        Picture.Data = {
+          07544269746D617006030000424D060300000000000036000000280000000F00
+          00000F0000000100180000000000D0020000C30E0000C30E0000000000000000
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF516B98485F955A7299FF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF415A
+          A20A109800009500009500009111168F54689BFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3F59AD0000A00000AC0000B40000B30000AE0000A0
+          00008D53689BFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FF0308AD0000
+          B60000C40000CA0000CB0000C40000B60000A20D1192FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FF5C77C90000B30000C70000D30000DC0000E00000D70000C6
+          0000B20000965D76A1FF00FFFF00FF000000FF00FFFF00FF4F67CD0000BA0000
+          CF0000DA0000E60000EC0000E20000CF0000BB00009D4F64A3FF00FFFF00FF00
+          0000FF00FFFF00FF5570CB0000BE0000D10000DB0000E40000E70000E00000D1
+          0000BE0000A16179AEFF00FFFF00FF000000FF00FFFF00FFFF00FF060BC30000
+          CC0000D80000DC0000DD0000D80000CE0000B9090DA9FF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FF3952C40000C50000CD0000D40000D40000D00000C3
+          0000AE6A7FD1FF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FF344D
+          C1080EC70000C60000C60000C0090EBB586ECCFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3F5BBC374EBE4A65BFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000FF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+          0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FF000000}
+        Transparent = True
+      end
+      object Label39: TLabel
+        Left = 427
+        Top = 743
+        Width = 23
+        Height = 13
+        Alignment = taCenter
+        Caption = 'DG 1'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label41: TLabel
+        Left = 502
+        Top = 743
+        Width = 23
+        Height = 13
+        Alignment = taCenter
+        Caption = 'DG 2'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label42: TLabel
+        Left = 568
+        Top = 743
+        Width = 23
+        Height = 13
+        Alignment = taCenter
+        Caption = 'DG 3'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label43: TLabel
+        Left = 641
+        Top = 743
+        Width = 23
+        Height = 13
+        Alignment = taCenter
+        Caption = 'DG 4'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label44: TLabel
+        Left = 115
+        Top = 743
+        Width = 29
+        Height = 13
+        Alignment = taCenter
+        Caption = 'AUX 1'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label45: TLabel
+        Left = 167
+        Top = 743
+        Width = 29
+        Height = 13
+        Alignment = taCenter
+        Caption = 'AUX 2'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label46: TLabel
+        Left = 221
+        Top = 743
+        Width = 29
+        Height = 13
+        Alignment = taCenter
+        Caption = 'AUX 3'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label47: TLabel
+        Left = 62
+        Top = 673
+        Width = 15
+        Height = 39
+        Alignment = taCenter
+        Caption = 'ME 1 PS'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label48: TLabel
+        Left = 62
+        Top = 601
+        Width = 15
+        Height = 39
+        Alignment = taCenter
+        Caption = 'ME 2 PS'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label49: TLabel
+        Left = 274
+        Top = 599
+        Width = 15
+        Height = 40
+        Alignment = taCenter
+        Caption = 'ME 2 SB'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+      object Label50: TLabel
+        Left = 274
+        Top = 673
+        Width = 15
+        Height = 40
+        Alignment = taCenter
+        Caption = 'ME 1 SB'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Orientation = 900
+        Font.Style = []
+        ParentFont = False
+        WordWrap = True
+      end
+    end
+    object pnlListConsole: TPanel
+      Left = 1375
+      Top = 18
+      Width = 296
+      Height = 810
+      BevelKind = bkFlat
+      BevelOuter = bvNone
+      BorderWidth = 10
+      TabOrder = 7
+      object Label14: TLabel
+        Left = 10
+        Top = 10
+        Width = 272
+        Height = 18
+        Align = alTop
+        AutoSize = False
+        Caption = ' Status Console'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lvStatusConsole: TListView
+        Left = 10
+        Top = 28
+        Width = 272
+        Height = 733
+        Align = alClient
+        Columns = <
+          item
+            Caption = 'CONSOLE NAME'
+            Width = 140
+          end
+          item
+            Alignment = taCenter
+            Caption = 'CONNECTION STATUS'
+            Width = 128
+          end
+          item
+            Alignment = taCenter
+            Caption = 'Servo'
+            Width = 0
+          end
+          item
+            Alignment = taCenter
+            Caption = 'Comport'
+            Width = 0
+          end>
+        ColumnClick = False
+        GridLines = True
+        Items.ItemData = {
+          05640A00001A00000000000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000
+          0006530045005200560045005200074F00460046004C0049004E00450078AB7F
+          33032D002D002D0090CF7F33032D002D002D00A09A7F3300000000FFFFFFFFFF
+          FFFFFF03000000FFFFFFFF0000000003410043005300074F00460046004C0049
+          004E00450090827F33032D002D002D0018927F33032D002D002D00B0CE7F3300
+          000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000C4D0049004D004900
+          430020002D0020004B00490052004900074F00460046004C0049004E00450060
+          797F33032D002D002D0090AC7F33032D002D002D00E87A7F3300000000FFFFFF
+          FFFFFFFFFF03000000FFFFFFFF000000000A50004300530020002D0020004B00
+          490052004900074F00460046004C0049004E004500E8887F330B4E004F005400
+          2000520055004E004E0049004E00470038AD7F330B4E004F0054002000520055
+          004E004E0049004E004700E0BB7F3300000000FFFFFFFFFFFFFFFF03000000FF
+          FFFFFF000000000E4D0049004D004900430020002D002000540045004E004700
+          41004800074F00460046004C0049004E004500B87F7F33032D002D002D005889
+          7F33032D002D002D00409D7F3300000000FFFFFFFFFFFFFFFF03000000FFFFFF
+          FF000000000B50004300530020002D0020004B0041004E0041004E00074F0046
+          0046004C0049004E004500C8827F330B4E004F0054002000520055004E004E00
+          49004E00470010867F330B4E004F0054002000520055004E004E0049004E0047
+          0020827F3300000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000D4D00
+          49004D004900430020002D0020004B0041004E0041004E00074F00460046004C
+          0049004E00450000B47F33032D002D002D00609C7F33032D002D002D0008887F
+          3300000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000E45004D004500
+          5200470045004E00430059002000530054004F005000074F00460046004C0049
+          004E00450040887F33032D002D002D00F0787F330B4E004F0054002000520055
+          004E004E0049004E004700E8817F3300000000FFFFFFFFFFFFFFFF03000000FF
+          FFFFFF000000000A4D004F004E00490054004F00520049004E004700074F0046
+          0046004C0049004E004500F88B7F33032D002D002D0020C87F33032D002D002D
+          0070D07F3300000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000A4700
+          45004E002000500053002000460057004400074F00460046004C0049004E0045
+          0098C67F33032D002D002D00F8C37F33032D002D002D00E07C7F3300000000FF
+          FFFFFFFFFFFFFF03000000FFFFFFFF000000000A470045004E00200053004200
+          2000460057004400074F00460046004C0049004E004500B0C0E137032D002D00
+          2D007806E237032D002D002D0088D1E13700000000FFFFFFFFFFFFFFFF030000
+          00FFFFFFFF000000000A470045004E002000500053002000410046005400074F
+          00460046004C0049004E004500F8F4E137032D002D002D008868E137032D002D
+          002D003860E13700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000A
+          470045004E002000530042002000410046005400074F00460046004C0049004E
+          0045002007E237032D002D002D0068C4E137032D002D002D003011E237000000
+          00FFFFFFFFFFFFFFFF03000000FFFFFFFF000000000D470045004E0020004500
+          4D0045005200470045004E0043005900074F00460046004C0049004E004500E8
+          9DE137032D002D002D0038D0E137032D002D002D00587BE13700000000FFFFFF
+          FFFFFFFFFF03000000FFFFFFFF0000000005530048004F0052004500074F0046
+          0046004C0049004E00450030BDE137032D002D002D00D885E137032D002D002D
+          0060E9E13700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF00000000104D00
+          410049004E00200045004E00470049004E00450020003100200050005300074F
+          00460046004C0049004E004500D8E0E137032D002D002D0038FAE137032D002D
+          002D0048DAE13700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF0000000010
+          4D00410049004E00200045004E00470049004E00450020003200200050005300
+          074F00460046004C0049004E004500486AE137032D002D002D0038A6E137032D
+          002D002D00102EE23700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000
+          00104D00410049004E00200045004E00470049004E0045002000310020005300
+          4200074F00460046004C0049004E004500081BE237032D002D002D0070B4E137
+          032D002D002D0090CFE13700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF00
+          000000104D00410049004E00200045004E00470049004E004500200032002000
+          53004200074F00460046004C0049004E0045005010E237032D002D002D005866
+          E137032D002D002D00C068E13700000000FFFFFFFFFFFFFFFF03000000FFFFFF
+          FF000000000E41005500580049004C00490041005200590020002D0020003100
+          2000084F00460046004C0049004E00450020009051E137032D002D002D00E0AD
+          E137032D002D002D0088DFE13700000000FFFFFFFFFFFFFFFF03000000FFFFFF
+          FF000000000D41005500580049004C00490041005200590020002D0020003200
+          074F00460046004C0049004E0045003816E237032D002D002D0098D4E137032D
+          002D002D00B08FE13700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000
+          000E41005500580049004C00490041005200590020002D00200033002000074F
+          00460046004C0049004E0045009007E237032D002D002D007830E237032D002D
+          002D00100BE23700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF0000000014
+          440049004500530045004C002000470045004E0045005200410054004F005200
+          20002D0020003100084F00460046004C0049004E0045002000D021E237032D00
+          2D002D00580EE237032D002D002D004006E23700000000FFFFFFFFFFFFFFFF03
+          000000FFFFFFFF0000000014440049004500530045004C002000470045004E00
+          45005200410054004F00520020002D0020003200074F00460046004C0049004E
+          004500F0DAE137032D002D002D008019E237032D002D002D00A0AFE137000000
+          00FFFFFFFFFFFFFFFF03000000FFFFFFFF000000001544004900450053004500
+          4C002000470045004E0045005200410054004F00520020002D00200033002000
+          074F00460046004C0049004E0045006877E137032D002D002D002864E137032D
+          002D002D00F086E13700000000FFFFFFFFFFFFFFFF03000000FFFFFFFF000000
+          0015440049004500530045004C002000470045004E0045005200410054004F00
+          520020002D00200034002000084F00460046004C0049004E0045002000C01EE2
+          37032D002D002D00D8A1E137032D002D002D009879E137FFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        ReadOnly = True
+        RowSelect = True
+        TabOrder = 0
+        ViewStyle = vsReport
+        OnCustomDrawSubItem = lvStatusConsoleCustomDrawSubItem
+        OnMouseDown = lvStatusConsoleMouseDown
+        ExplicitHeight = 759
+      end
+      object Panel2: TPanel
+        Left = 10
+        Top = 761
+        Width = 272
+        Height = 35
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 1
+        ExplicitTop = 786
+        object btn3: TFlatSpeedButton
+          Tag = 2
+          Left = 94
+          Top = 8
+          Width = 86
+          Height = 25
+          Color = clBtnFace
+          ColorFocused = clBtnFace
+          ColorDown = clBtnFace
+          Caption = 'Load All'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Layout = blGlyphLeft
+          NumGlyphs = 2
+          ParentFont = False
+          ParentColor = False
+          OnClick = mniLoadClick
+        end
+        object btn4: TFlatSpeedButton
+          Tag = 4
+          Left = 186
+          Top = 8
+          Width = 86
+          Height = 25
+          Color = clBtnFace
+          ColorFocused = clBtnFace
+          ColorDown = clBtnFace
+          Caption = 'Unload All'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Layout = blGlyphLeft
+          NumGlyphs = 2
+          ParentFont = False
+          ParentColor = False
+          OnClick = mniLoadClick
+        end
       end
     end
   end
