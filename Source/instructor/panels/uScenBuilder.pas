@@ -83,6 +83,9 @@ type
     pnlTANkBackgraound: TPanel;
     pnlFABackgraound: TPanel;
     Label1: TLabel;
+    Panel1: TPanel;
+    Memo1: TMemo;
+    Panel2: TPanel;
     procedure actNewExecute(Sender: TObject);
     procedure actSaveExecute(Sender: TObject);
     procedure actCancelExecute(Sender: TObject);

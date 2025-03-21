@@ -3,7 +3,7 @@ object frmPMSEditor: TfrmPMSEditor
   Top = 0
   BorderStyle = bsToolWindow
   Caption = 'PMS Editor'
-  ClientHeight = 503
+  ClientHeight = 702
   ClientWidth = 1356
   Color = clGray
   Font.Charset = DEFAULT_CHARSET

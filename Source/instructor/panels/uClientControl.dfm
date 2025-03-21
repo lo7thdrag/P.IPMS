@@ -138,7 +138,7 @@ object frmClientControl: TfrmClientControl
         Font.Color = clGreen
         Font.Height = -11
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         ScrollBars = ssVertical
         TabOrder = 0
@@ -227,7 +227,7 @@ object frmClientControl: TfrmClientControl
         Caption = '<None>'
       end
       object Label52: TLabel
-        Left = 52
+        Left = 47
         Top = 13
         Width = 56
         Height = 13
@@ -249,7 +249,7 @@ object frmClientControl: TfrmClientControl
         Font.Color = clGreen
         Font.Height = -11
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         ScrollBars = ssVertical
         TabOrder = 0
@@ -338,7 +338,7 @@ object frmClientControl: TfrmClientControl
         Caption = 'Stopped'
       end
       object Label53: TLabel
-        Left = 60
+        Left = 39
         Top = 13
         Width = 73
         Height = 13
@@ -360,7 +360,7 @@ object frmClientControl: TfrmClientControl
         Font.Color = clGreen
         Font.Height = -11
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         ScrollBars = ssVertical
         TabOrder = 0

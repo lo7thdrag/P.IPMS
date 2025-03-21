@@ -86,6 +86,7 @@ type
     ctgrypnlExit: TCategoryPanel;
     btnClose: TFlatSpeedButton;
     tmr1: TTimer;
+    Panel3: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure btnDockedClick(Sender: TObject);
     procedure btnPMSClick(Sender: TObject);

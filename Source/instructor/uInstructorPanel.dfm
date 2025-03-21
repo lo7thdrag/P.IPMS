@@ -26,9 +26,6 @@ object frmInstructorPanel: TfrmInstructorPanel
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 233
-    ExplicitWidth = 1067
-    ExplicitHeight = 517
     object pnlMainContent: TPanel
       Left = 0
       Top = 33
@@ -37,8 +34,6 @@ object frmInstructorPanel: TfrmInstructorPanel
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 1067
-      ExplicitHeight = 386
       object pnlContent: TPanel
         Left = 0
         Top = 0
@@ -50,8 +45,6 @@ object frmInstructorPanel: TfrmInstructorPanel
         Color = clGray
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 1067
-        ExplicitHeight = 386
       end
     end
     object pnlHeaderContent: TPanel
@@ -61,13 +54,12 @@ object frmInstructorPanel: TfrmInstructorPanel
       Height = 33
       Align = alTop
       BevelOuter = bvNone
-      Color = 9451819
+      Color = clGray
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 1067
       object lblTitle: TLabel
-        Left = 7
-        Top = 9
+        Left = 775
+        Top = 11
         Width = 85
         Height = 16
         Caption = 'Page Caption'
@@ -120,7 +112,6 @@ object frmInstructorPanel: TfrmInstructorPanel
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 1300
   end
   object pnlHeader: TPanel
     Left = 0
@@ -132,7 +123,6 @@ object frmInstructorPanel: TfrmInstructorPanel
     Color = 3749426
     ParentBackground = False
     TabOrder = 2
-    ExplicitWidth = 1300
     object Image1: TImage
       Left = 0
       Top = 0
@@ -18160,8 +18150,6 @@ object frmInstructorPanel: TfrmInstructorPanel
     Color = clWhite
     ParentBackground = False
     TabOrder = 3
-    ExplicitLeft = 230
-    ExplicitHeight = 517
   end
   object pnlLeft: TPanel
     Left = 0
@@ -19280,8 +19268,6 @@ object frmInstructorPanel: TfrmInstructorPanel
       Color = 3749426
       ParentBackground = False
       TabOrder = 1
-      ExplicitTop = 506
-      ExplicitWidth = 220
     end
   end
   object pnlBottom: TPanel
@@ -19294,7 +19280,6 @@ object frmInstructorPanel: TfrmInstructorPanel
     Color = 3749426
     ParentBackground = False
     TabOrder = 5
-    ExplicitWidth = 1300
     DesignSize = (
       1916
       100)
@@ -37508,6 +37493,17 @@ object frmInstructorPanel: TfrmInstructorPanel
         ParentFont = False
       end
     end
+    object Panel3: TPanel
+      Left = 840
+      Top = 35
+      Width = 193
+      Height = 24
+      Anchors = [akTop, akRight]
+      BevelOuter = bvNone
+      Color = 9451819
+      ParentBackground = False
+      TabOrder = 2
+    end
   end
   object pnlSparatorFooter: TPanel
     Left = 0
@@ -37519,7 +37515,6 @@ object frmInstructorPanel: TfrmInstructorPanel
     Color = clWhite
     ParentBackground = False
     TabOrder = 6
-    ExplicitTop = 108
   end
   object tmrTelegrap: TTimer
     Enabled = False

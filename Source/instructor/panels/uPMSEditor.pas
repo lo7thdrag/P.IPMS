@@ -174,15 +174,13 @@ type
     function CheckCB(Val : Integer): Integer;
     procedure edtCondNameChange(Sender: TObject);
 
-
-
   private
     CondNameBuffer : string;
     FDatabase : TIPMSDatabase;
     FCondition_ID : Integer;
-    procedure GetPMSInfo(const aIndex: Integer; var aPMSName: string;
-        var aType, aMode, aEngine, aPref, aCB: Integer);
+    procedure GetPMSInfo(const aIndex: Integer; var aPMSName: string; var aType, aMode, aEngine, aPref, aCB: Integer);
     procedure GetPMSVarInfo(const aIndex: Integer; var aStateRunFull, aStateRunFwd, aStateRunAft : Integer);
+
   public
     { Public declarations }
     procedure SetDatabase(aDB : TIPMSDatabase);

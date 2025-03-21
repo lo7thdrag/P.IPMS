@@ -5,37 +5,38 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Mask, StdCtrls, Buttons, uDataType, uControllerSystem, ExtCtrls,
-  ComCtrls, RzDTP,uDBSupportClasses;
+  ComCtrls, RzDTP,uDBSupportClasses, RzBmpBtn, Vcl.Imaging.pngimage;
 
 type
   TfrmScenarioLoader = class(TForm)
-    pgc1: TPageControl;
-    tsSession: TTabSheet;
-    tsScenario: TTabSheet;
-    lblNames: TLabel;
-    lstScenario: TListBox;
-    mmoDesc: TMemo;
-    lblScenarioDesc: TLabel;
-    mmoInitial: TMemo;
+    pnlMenu: TPanel;
+    Image1: TImage;
+    Image2: TImage;
+    RzBmpButton1: TRzBmpButton;
+    pnlScenarioLoader: TPanel;
+    lblTime: TLabel;
+    lblDate: TLabel;
     lblInitial: TLabel;
-    btnRefreshScen: TBitBtn;
-    btnLoad: TBitBtn;
+    lblNames: TLabel;
+    lblScenarioDesc: TLabel;
+    Label1: TLabel;
+    mmoDesc: TMemo;
+    lstScenario: TListBox;
+    mmoInitial: TMemo;
     btn1: TBitBtn;
     btn2: TBitBtn;
-    lbl1: TLabel;
-    lstAvailSession: TListBox;
-    btnRefreshSession: TBitBtn;
-    btnResumeSession: TBitBtn;
-    lbl2: TLabel;
-    mmoSessionDesc: TMemo;
+    btnLoad: TBitBtn;
+    btnRefreshScen: TBitBtn;
     chkOverrideDate: TCheckBox;
-    lblDate: TLabel;
-    lblTime: TLabel;
     rzDatePick: TRzDateTimePicker;
     rzTimePick: TRzDateTimePicker;
     pnlSessionScenarioLoader: TPanel;
-    pnlScenarioLoader: TPanel;
-    Label1: TLabel;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    btnRefreshSession: TBitBtn;
+    btnResumeSession: TBitBtn;
+    mmoSessionDesc: TMemo;
+    lstAvailSession: TListBox;
     procedure btnRefreshScenClick(Sender: TObject);
     procedure btnLoadClick(Sender: TObject);
     procedure lstScenarioMouseUp(Sender: TObject; Button: TMouseButton;
@@ -46,6 +47,8 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure FormCreate(Sender: TObject);
     procedure btnResumeSessionClick(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
   private
     { Private declarations }
 
@@ -207,6 +210,16 @@ procedure TfrmScenarioLoader.FormCreate(Sender: TObject);
 begin
   rzDatePick.DateTime := Now;
   rzTimePick.DateTime := Now;
+end;
+
+procedure TfrmScenarioLoader.Image1Click(Sender: TObject);
+begin
+  pnlScenarioLoader.BringToFront
+end;
+
+procedure TfrmScenarioLoader.Image2Click(Sender: TObject);
+begin
+  pnlSessionScenarioLoader.BringToFront;
 end;
 
 procedure TfrmScenarioLoader.lstAvailSessionMouseUp(Sender: TObject;

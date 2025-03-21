@@ -35,59 +35,49 @@ object frmScenBuilder: TfrmScenBuilder
     TabOrder = 1
     object tsBuilder: TTabSheet
       Caption = 'Scenario Builder'
-      object acttb1: TActionToolBar
-        Left = 0
-        Top = 0
-        Width = 1679
-        Height = 23
-        ActionManager = actmgr1
-        Caption = 'acttb1'
-        Color = clMenuBar
-        ColorMap.DisabledFontColor = 10461087
-        ColorMap.HighlightColor = clWhite
-        ColorMap.BtnSelectedFont = clBlack
-        ColorMap.UnusedColor = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        Spacing = 0
-      end
       object pnlScenarioBuilderBackgraound: TPanel
-        Left = 0
-        Top = 23
-        Width = 1679
-        Height = 791
+        Left = 278
+        Top = 0
+        Width = 1401
+        Height = 814
         Align = alClient
         BevelOuter = bvNone
         Color = clGray
         ParentBackground = False
-        TabOrder = 1
+        TabOrder = 0
+        ExplicitLeft = 0
+        ExplicitTop = 23
+        ExplicitWidth = 1679
+        ExplicitHeight = 791
         object pgc1: TPageControl
           Left = 0
           Top = 158
-          Width = 1679
-          Height = 633
-          ActivePage = tsFA
+          Width = 1401
+          Height = 656
+          ActivePage = tsPMS
           Align = alClient
           DoubleBuffered = True
           ParentDoubleBuffered = False
           TabOrder = 0
+          ExplicitWidth = 1679
+          ExplicitHeight = 633
           object tsPMS: TTabSheet
             Caption = 'PMS'
+            ExplicitWidth = 1671
+            ExplicitHeight = 605
             object pnlPMSBackgraound: TPanel
               Left = 0
               Top = 0
-              Width = 1671
-              Height = 605
+              Width = 1393
+              Height = 628
               Align = alClient
               Color = clGray
               DoubleBuffered = True
               ParentBackground = False
               ParentDoubleBuffered = False
               TabOrder = 0
+              ExplicitWidth = 1671
+              ExplicitHeight = 605
               object lblPMSState: TLabel
                 Left = 12
                 Top = 22
@@ -158,16 +148,20 @@ object frmScenBuilder: TfrmScenBuilder
           object tsPCS: TTabSheet
             Caption = 'PCS'
             ImageIndex = 1
+            ExplicitWidth = 1671
+            ExplicitHeight = 605
             object pnlPCSBackgraound: TPanel
               Left = 0
               Top = 0
-              Width = 1671
-              Height = 605
+              Width = 1393
+              Height = 628
               Align = alClient
               BevelOuter = bvNone
               Color = clGray
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 1671
+              ExplicitHeight = 605
               object lblPCSState: TLabel
                 Left = 12
                 Top = 22
@@ -239,6 +233,8 @@ object frmScenBuilder: TfrmScenBuilder
             Caption = 'Element Data'
             ImageIndex = 2
             TabVisible = False
+            ExplicitWidth = 1671
+            ExplicitHeight = 605
             object lbl1: TLabel
               Left = 3
               Top = 22
@@ -280,16 +276,20 @@ object frmScenBuilder: TfrmScenBuilder
           object tsTANK: TTabSheet
             Caption = 'TANK'
             ImageIndex = 2
+            ExplicitWidth = 1671
+            ExplicitHeight = 605
             object pnlTANkBackgraound: TPanel
               Left = 0
               Top = 0
-              Width = 1671
-              Height = 605
+              Width = 1393
+              Height = 628
               Align = alClient
               BevelOuter = bvNone
               Color = clGray
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 1671
+              ExplicitHeight = 605
               object lblFFState: TLabel
                 Left = 12
                 Top = 22
@@ -359,16 +359,20 @@ object frmScenBuilder: TfrmScenBuilder
           object tsFA: TTabSheet
             Caption = 'Function Allocation'
             ImageIndex = 3
+            ExplicitWidth = 1671
+            ExplicitHeight = 605
             object pnlFABackgraound: TPanel
               Left = 0
               Top = 0
-              Width = 1671
-              Height = 605
+              Width = 1393
+              Height = 628
               Align = alClient
               BevelOuter = bvNone
               Color = clGray
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 1671
+              ExplicitHeight = 605
               object lblFAState: TLabel
                 Left = 12
                 Top = 22
@@ -439,11 +443,12 @@ object frmScenBuilder: TfrmScenBuilder
         object grpScenario: TGroupBox
           Left = 0
           Top = 0
-          Width = 1679
+          Width = 1401
           Height = 158
           Align = alTop
           Caption = '                   '
           TabOrder = 1
+          ExplicitWidth = 1679
           object lblName: TLabel
             Left = 16
             Top = 32
@@ -500,6 +505,62 @@ object frmScenBuilder: TfrmScenBuilder
             TabOrder = 1
           end
         end
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 276
+        Height = 814
+        Align = alLeft
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 1
+        object acttb1: TActionToolBar
+          Left = 0
+          Top = 0
+          Width = 276
+          Height = 23
+          ActionManager = actmgr1
+          Caption = 'acttb1'
+          Color = clMenuBar
+          ColorMap.DisabledFontColor = 10461087
+          ColorMap.HighlightColor = clWhite
+          ColorMap.BtnSelectedFont = clBlack
+          ColorMap.UnusedColor = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Spacing = 0
+          ExplicitLeft = 1
+          ExplicitTop = 1
+          ExplicitWidth = 183
+          ExplicitHeight = 48
+        end
+        object Memo1: TMemo
+          Left = 0
+          Top = 23
+          Width = 276
+          Height = 791
+          Align = alClient
+          TabOrder = 1
+          ExplicitLeft = -41
+          ExplicitTop = 56
+          ExplicitWidth = 317
+          ExplicitHeight = 89
+        end
+      end
+      object Panel2: TPanel
+        Left = 276
+        Top = 0
+        Width = 2
+        Height = 814
+        Align = alLeft
+        BevelOuter = bvNone
+        TabOrder = 2
       end
     end
     object tsRunScenario: TTabSheet
