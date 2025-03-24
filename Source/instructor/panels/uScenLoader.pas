@@ -10,7 +10,6 @@ uses
 type
   TfrmScenarioLoader = class(TForm)
     pnlMenu: TPanel;
-    Image1: TImage;
     Image2: TImage;
     RzBmpButton1: TRzBmpButton;
     pnlScenarioLoader: TPanel;
@@ -37,6 +36,7 @@ type
     btnResumeSession: TBitBtn;
     mmoSessionDesc: TMemo;
     lstAvailSession: TListBox;
+    Label2: TLabel;
     procedure btnRefreshScenClick(Sender: TObject);
     procedure btnLoadClick(Sender: TObject);
     procedure lstScenarioMouseUp(Sender: TObject; Button: TMouseButton;

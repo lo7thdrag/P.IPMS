@@ -84,8 +84,8 @@ type
     pnlFABackgraound: TPanel;
     Label1: TLabel;
     Panel1: TPanel;
-    Memo1: TMemo;
     Panel2: TPanel;
+    lstAvail: TListBox;
     procedure actNewExecute(Sender: TObject);
     procedure actSaveExecute(Sender: TObject);
     procedure actCancelExecute(Sender: TObject);
@@ -106,6 +106,7 @@ type
     procedure strngrdConditionSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure act4Execute(Sender: TObject);
+    procedure pgc2Change(Sender: TObject);
   private
     { Private declarations }
     FScenarioID : Integer;
@@ -116,6 +117,8 @@ type
     FFAConditionID : Integer;
     FSelectedConditionID : integer;
   public
+
+    procedure UpdateScenarioList(aList : TStrings);
     { Public declarations }
   end;
 
@@ -692,6 +695,11 @@ begin
 
 end;
 
+procedure TfrmScenBuilder.pgc2Change(Sender: TObject);
+begin
+  UpdateScenarioList();
+end;
+
 procedure TfrmScenBuilder.strngrdConditionSelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
 begin
@@ -705,6 +713,29 @@ begin
 //
 //    FSelectedConditionID := StrToInt(strngrdCondition.Cells[0,ARow]);
 //  end;
+
+end;
+
+procedure TfrmScenBuilder.UpdateScenarioList(aList : TStrings);
+var
+  i : Integer;
+  scenarios : TStrings;
+begin
+  scenarios := nil;
+  InstructorSys.Scenario.getScenarios(scenarios);
+
+  if not Assigned(scenarios) then
+    Exit;
+
+  if lstAvail.Count > 0 then
+  lstAvail.Clear;
+
+  for i := 0 to scenarios.Count - 1 do
+  begin
+    lstAvail.Items.Add(scenarios[i]);
+  end;
+
+  scenarios.Free;
 
 end;
 
