@@ -14,23 +14,6 @@ type
     mniShutdown1: TMenuItem;
     mniShutdown2: TMenuItem;
     mniShutdownAll1: TMenuItem;
-    grp1: TGroupBox;
-    lbl5: TLabel;
-    lbl6: TLabel;
-    lblLPUServer: TLabel;
-    lblLPUPort: TLabel;
-    lbl11: TLabel;
-    lblLPUState: TLabel;
-    grp2: TGroupBox;
-    lbl10: TLabel;
-    mmoER: TMemo;
-    grp4: TGroupBox;
-    lbl14: TLabel;
-    mmoNetLogger: TMemo;
-    lbl15: TLabel;
-    mmoEvntLog: TMemo;
-    lbl16: TLabel;
-    mmoErrorLog: TMemo;
     chkDataLogger: TCheckBox;
     mniLoad1: TMenuItem;
     mniUnload1: TMenuItem;
@@ -42,32 +25,6 @@ type
     mniRestart2: TMenuItem;
     mniRestartAll1: TMenuItem;
     N1: TMenuItem;
-    GroupBox1: TGroupBox;
-    lbl1: TLabel;
-    lbl2: TLabel;
-    lbl7: TLabel;
-    lblInsHost: TLabel;
-    lblInsPort: TLabel;
-    lblInsState: TLabel;
-    Label2: TLabel;
-    mmoInstructor: TMemo;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    lbl3: TLabel;
-    lbl4: TLabel;
-    lbl9: TLabel;
-    lblERServer: TLabel;
-    lblERPort: TLabel;
-    lblERState: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label9: TLabel;
-    mmoCtrl: TMemo;
-    lbl12: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
     Panel1: TPanel;
     pnlDenah: TPanel;
     imgDenahIPMS: TImage;
@@ -138,9 +95,52 @@ type
     Panel2: TPanel;
     btn3: TFlatSpeedButton;
     btn4: TFlatSpeedButton;
+    Panel3: TPanel;
     Label51: TLabel;
+    lbl1: TLabel;
+    Label5: TLabel;
+    lblInsHost: TLabel;
+    lbl2: TLabel;
+    Label3: TLabel;
+    lblInsPort: TLabel;
+    lbl7: TLabel;
+    Label4: TLabel;
+    lblInsState: TLabel;
+    Label2: TLabel;
+    mmoInstructor: TMemo;
+    Panel4: TPanel;
+    Panel5: TPanel;
     Label52: TLabel;
+    lbl5: TLabel;
+    Label10: TLabel;
+    lblLPUServer: TLabel;
+    lbl6: TLabel;
+    Label11: TLabel;
+    lblLPUPort: TLabel;
+    lbl11: TLabel;
+    Label12: TLabel;
+    lblLPUState: TLabel;
+    lbl12: TLabel;
+    mmoCtrl: TMemo;
     Label53: TLabel;
+    lbl3: TLabel;
+    Label9: TLabel;
+    lblERServer: TLabel;
+    lbl4: TLabel;
+    Label8: TLabel;
+    lblERPort: TLabel;
+    lbl9: TLabel;
+    lblERState: TLabel;
+    Label7: TLabel;
+    lbl10: TLabel;
+    mmoER: TMemo;
+    Panel6: TPanel;
+    lbl14: TLabel;
+    mmoNetLogger: TMemo;
+    lbl15: TLabel;
+    mmoEvntLog: TMemo;
+    lbl16: TLabel;
+    mmoErrorLog: TMemo;
 //    procedure btn3Click(Sender: TObject);
 //    procedure btn4Click(Sender: TObject);
 //    procedure btn1Click(Sender: TObject);
@@ -252,10 +252,10 @@ end;
 
 procedure TfrmClientControl.chkDataLoggerClick(Sender: TObject);
 begin
-  if chkDataLogger.Checked then
-    grp4.Visible := True
-  else
-    grp4.Visible := False;
+//  if chkDataLogger.Checked then
+//    grp4.Visible := True
+//  else
+//    grp4.Visible := False;
 end;
 
 procedure TfrmClientControl.EventLogger(Sender: Tobject; Props_ID: E_PropsID;

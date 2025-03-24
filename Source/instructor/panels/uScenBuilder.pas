@@ -6,11 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, ToolWin,
   ActnCtrls, Mask, Buttons, uDBSupportClasses, ComCtrls, ExtCtrls, StrUtils,
-  Grids, System.Actions;
+  Grids, System.Actions, RzBmpBtn, Vcl.Imaging.pngimage;
 
 type
   TfrmScenBuilder = class(TForm)
-    scrlbx1: TScrollBox;
     acttb1: TActionToolBar;
     actmgr1: TActionManager;
     actNew: TAction;
@@ -86,6 +85,10 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     lstAvail: TListBox;
+    pnlMenu: TPanel;
+    Image2: TImage;
+    Label2: TLabel;
+    RzBmpButton1: TRzBmpButton;
     procedure actNewExecute(Sender: TObject);
     procedure actSaveExecute(Sender: TObject);
     procedure actCancelExecute(Sender: TObject);
@@ -697,7 +700,7 @@ end;
 
 procedure TfrmScenBuilder.pgc2Change(Sender: TObject);
 begin
-  UpdateScenarioList();
+//  UpdateScenarioList;
 end;
 
 procedure TfrmScenBuilder.strngrdConditionSelectCell(Sender: TObject; ACol,

@@ -5,13 +5,13 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Mask, StdCtrls, Buttons, uDataType, uControllerSystem, ExtCtrls,
-  ComCtrls, RzDTP,uDBSupportClasses, RzBmpBtn, Vcl.Imaging.pngimage;
+  ComCtrls, RzDTP,uDBSupportClasses, RzBmpBtn, Vcl.Imaging.pngimage,
+  Vcl.Imaging.jpeg;
 
 type
   TfrmScenarioLoader = class(TForm)
     pnlMenu: TPanel;
-    Image2: TImage;
-    RzBmpButton1: TRzBmpButton;
+    btnScenario: TRzBmpButton;
     pnlScenarioLoader: TPanel;
     lblTime: TLabel;
     lblDate: TLabel;
@@ -36,7 +36,9 @@ type
     btnResumeSession: TBitBtn;
     mmoSessionDesc: TMemo;
     lstAvailSession: TListBox;
-    Label2: TLabel;
+    pnlHeader: TPanel;
+    lblHeader: TLabel;
+    btnSession: TRzBmpButton;
     procedure btnRefreshScenClick(Sender: TObject);
     procedure btnLoadClick(Sender: TObject);
     procedure lstScenarioMouseUp(Sender: TObject; Button: TMouseButton;
@@ -47,8 +49,8 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure FormCreate(Sender: TObject);
     procedure btnResumeSessionClick(Sender: TObject);
-    procedure Image1Click(Sender: TObject);
-    procedure Image2Click(Sender: TObject);
+    procedure btnScenarioClick(Sender: TObject);
+    procedure btnSessionClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -190,6 +192,18 @@ begin
   end;
 end;
 
+procedure TfrmScenarioLoader.btnScenarioClick(Sender: TObject);
+begin
+  pnlScenarioLoader.BringToFront;
+  lblHeader.Caption := 'SCENARIO'
+end;
+
+procedure TfrmScenarioLoader.btnSessionClick(Sender: TObject);
+begin
+  pnlSessionScenarioLoader.BringToFront;
+  lblHeader.Caption := 'SESSION'
+end;
+
 procedure TfrmScenarioLoader.chkOverrideDateClick(Sender: TObject);
 begin
   if TCheckBox(Sender).Checked then
@@ -210,16 +224,6 @@ procedure TfrmScenarioLoader.FormCreate(Sender: TObject);
 begin
   rzDatePick.DateTime := Now;
   rzTimePick.DateTime := Now;
-end;
-
-procedure TfrmScenarioLoader.Image1Click(Sender: TObject);
-begin
-  pnlScenarioLoader.BringToFront
-end;
-
-procedure TfrmScenarioLoader.Image2Click(Sender: TObject);
-begin
-  pnlSessionScenarioLoader.BringToFront;
 end;
 
 procedure TfrmScenarioLoader.lstAvailSessionMouseUp(Sender: TObject;
