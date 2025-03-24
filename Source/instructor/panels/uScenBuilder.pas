@@ -20,13 +20,42 @@ type
     pgc2: TPageControl;
     tsBuilder: TTabSheet;
     tsRunScenario: TTabSheet;
-    grpScenario: TGroupBox;
+    acttb2: TActionToolBar;
+    actmgr2: TActionManager;
+    Action1: TAction;
+    actDeleteRS: TAction;
+    actChooseRS: TAction;
+    actDeleteAll: TAction;
+    actmgr3: TActionManager;
+    act2: TAction;
+    act4: TAction;
+    act5: TAction;
+    pnlRunningSessionBackground: TPanel;
+    pnlScenarioBuilderBackgraound: TPanel;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    lstAvail: TListBox;
+    pnlMenu: TPanel;
+    btnScenario: TRzBmpButton;
+    btnSession: TRzBmpButton;
+    btnPMS: TRzBmpButton;
+    btnPCS: TRzBmpButton;
+    btnTank: TRzBmpButton;
+    btnFA: TRzBmpButton;
+    pnlHeader: TPanel;
+    lblHeader: TLabel;
+    pnlScenario: TPanel;
+    lblNames: TLabel;
+    lstScenario: TListBox;
+    btnLoad: TBitBtn;
+    btnRefreshScen: TBitBtn;
     lblName: TLabel;
     lblDescription: TLabel;
     edtName: TEdit;
     mmoDescription: TMemo;
     pgc1: TPageControl;
     tsPMS: TTabSheet;
+    pnlPMSBackgraound: TPanel;
     lblPMSState: TLabel;
     lblPMSInfo: TLabel;
     edtPMSName: TEdit;
@@ -34,61 +63,84 @@ type
     mmoPMSInfo: TMemo;
     btnClearPMS: TButton;
     tsPCS: TTabSheet;
+    pnlPCSBackgraound: TPanel;
     lblPCSState: TLabel;
     lblPCSInfo: TLabel;
-    edtPCSName: TEdit;
     btnPCSPick: TButton;
     mmoPCSInfo: TMemo;
     btnClearPCS: TButton;
+    edtPCSName: TEdit;
     tsElement: TTabSheet;
     lbl1: TLabel;
     edtElementName: TEdit;
     btnPickElement: TButton;
     btnClearElement: TButton;
     tsTANK: TTabSheet;
+    pnlTANkBackgraound: TPanel;
     lblFFState: TLabel;
     lblFFInfo: TLabel;
-    edtTANKName: TEdit;
     btnFFPick: TButton;
     mmoTANKInfo: TMemo;
     btnClearTANK: TButton;
+    edtTANKName: TEdit;
     tsFA: TTabSheet;
+    pnlFABackgraound: TPanel;
     lblFAState: TLabel;
     lblFAInfo: TLabel;
     edtFAName: TEdit;
     btnFAPick: TButton;
     mmoFAInfo: TMemo;
     btnClearFA: TButton;
-    acttb2: TActionToolBar;
-    actmgr2: TActionManager;
-    Action1: TAction;
-    actDeleteRS: TAction;
-    actChooseRS: TAction;
-    lbl2: TLabel;
-    edt1: TEdit;
-    lbl3: TLabel;
-    mmo1: TMemo;
-    lblSessionID: TLabel;
-    actDeleteAll: TAction;
-    lbl4: TLabel;
-    actmgr3: TActionManager;
-    act2: TAction;
-    act4: TAction;
-    act5: TAction;
-    pnlRunningSessionBackground: TPanel;
-    pnlScenarioBuilderBackgraound: TPanel;
-    pnlPMSBackgraound: TPanel;
-    pnlPCSBackgraound: TPanel;
-    pnlTANkBackgraound: TPanel;
-    pnlFABackgraound: TPanel;
+    pnlSession: TPanel;
     Label1: TLabel;
-    Panel1: TPanel;
-    Panel2: TPanel;
-    lstAvail: TListBox;
-    pnlMenu: TPanel;
-    Image2: TImage;
     Label2: TLabel;
-    RzBmpButton1: TRzBmpButton;
+    Label3: TLabel;
+    lstSession: TListBox;
+    BitBtn2: TBitBtn;
+    edt1: TEdit;
+    mmo1: TMemo;
+    lbl4: TLabel;
+    lblSessionID: TLabel;
+    pnlPMS: TPanel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    lstPMS: TListBox;
+    BitBtn1: TBitBtn;
+    edtPMSCond: TEdit;
+    Memo1: TMemo;
+    pnlPCS: TPanel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    lstPropulsion: TListBox;
+    BitBtn3: TBitBtn;
+    edtPCSConditionName: TEdit;
+    Memo2: TMemo;
+    pnlTank: TPanel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    lstTank: TListBox;
+    BitBtn4: TBitBtn;
+    Edit2: TEdit;
+    Memo3: TMemo;
+    pnlFA: TPanel;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    lstFA: TListBox;
+    BitBtn5: TBitBtn;
+    Edit3: TEdit;
+    Memo4: TMemo;
     procedure actNewExecute(Sender: TObject);
     procedure actSaveExecute(Sender: TObject);
     procedure actCancelExecute(Sender: TObject);
@@ -110,8 +162,9 @@ type
       var CanSelect: Boolean);
     procedure act4Execute(Sender: TObject);
     procedure pgc2Change(Sender: TObject);
+    procedure btnMenuClick(Sender: TObject);
+
   private
-    { Private declarations }
     FScenarioID : Integer;
     FPMSConditionID : Integer;
     FPCSConditionID : Integer;
@@ -119,10 +172,15 @@ type
     FTANKConditionID : Integer;
     FFAConditionID : Integer;
     FSelectedConditionID : integer;
-  public
 
-    procedure UpdateScenarioList(aList : TStrings);
-    { Public declarations }
+  public
+    procedure UpdateScenarioList;
+    procedure UpdateSessionList;
+    procedure UpdatePMSList;
+    procedure UpdatePCSList;
+    procedure UpdateTankList;
+    procedure UpdateFAList;
+
   end;
 
 var
@@ -688,6 +746,48 @@ begin
   end;
 end;
 
+procedure TfrmScenBuilder.btnMenuClick(Sender: TObject);
+begin
+  case TRzBmpButton(Sender).Tag of
+    0:
+    begin
+      pnlScenario.BringToFront;
+      lblHeader.Caption := 'SCENARIO EDITOR';
+      UpdateScenarioList;
+    end;
+    1:
+    begin
+      pnlSession.BringToFront;
+      lblHeader.Caption := 'SESSION EDITOR';
+      UpdateSessionList;
+    end;
+    2:
+    begin
+      pnlPMS.BringToFront;
+      lblHeader.Caption := 'POWER EDITOR';
+      UpdatePMSList;
+    end;
+    3:
+    begin
+      pnlPCS.BringToFront;
+      lblHeader.Caption := 'PPROPULSION EDITOR';
+      UpdatePCSList;
+    end;
+    4:
+    begin
+      pnlTank.BringToFront;
+      lblHeader.Caption := 'TANK EDITOR';
+      UpdateTankList;
+    end;
+    5:
+    begin
+      pnlFA.BringToFront;
+      lblHeader.Caption := 'FUNCTION ALLOCATION EDITOR';
+      UpdateFAList;
+    end;
+  end;
+end;
+
 procedure TfrmScenBuilder.FormCreate(Sender: TObject);
 begin
   FScenarioID := 0;
@@ -719,7 +819,7 @@ begin
 
 end;
 
-procedure TfrmScenBuilder.UpdateScenarioList(aList : TStrings);
+procedure TfrmScenBuilder.UpdateScenarioList;
 var
   i : Integer;
   scenarios : TStrings;
@@ -740,6 +840,50 @@ begin
 
   scenarios.Free;
 
+end;
+
+procedure TfrmScenBuilder.UpdatePMSList;
+var
+  i : Integer;
+  tempList : TStrings;
+
+begin
+  tempList := nil;
+  InstructorSys.Scenario.GetPMSConditions(tempList);
+
+  if not Assigned(tempList) then
+    Exit;
+
+  if lstPMS.Count > 0 then
+  lstAvail.Clear;
+
+  for i := 0 to tempList.Count - 1 do
+  begin
+    lstPMS.Items.Add(tempList[i]);
+  end;
+
+  tempList.Free;
+
+end;
+
+procedure TfrmScenBuilder.UpdatePCSList;
+begin
+//
+end;
+
+procedure TfrmScenBuilder.UpdateSessionList;
+begin
+//
+end;
+
+procedure TfrmScenBuilder.UpdateTankList;
+begin
+//
+end;
+
+procedure TfrmScenBuilder.UpdateFAList;
+begin
+//
 end;
 
 end.

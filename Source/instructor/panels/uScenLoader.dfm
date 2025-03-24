@@ -16,6 +16,125 @@ object frmScenarioLoader: TfrmScenarioLoader
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object pnlSessionScenarioLoader: TPanel
+    Left = 328
+    Top = 45
+    Width = 1342
+    Height = 786
+    BevelOuter = bvNone
+    Color = 3749426
+    ParentBackground = False
+    TabOrder = 2
+    object lbl1: TLabel
+      Left = 14
+      Top = 15
+      Width = 112
+      Height = 14
+      Caption = 'Available Session :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lbl2: TLabel
+      Left = 296
+      Top = 119
+      Width = 68
+      Height = 14
+      Caption = 'Description :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object btnRefreshSession: TBitBtn
+      Left = 14
+      Top = 738
+      Width = 267
+      Height = 34
+      Caption = 'Refresh Session'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333FFFFF3333333333999993333333333F77777FFF333333999999999
+        3333333777333777FF33339993707399933333773337F3777FF3399933000339
+        9933377333777F3377F3399333707333993337733337333337FF993333333333
+        399377F33333F333377F993333303333399377F33337FF333373993333707333
+        333377F333777F333333993333101333333377F333777F3FFFFF993333000399
+        999377FF33777F77777F3993330003399993373FF3777F37777F399933000333
+        99933773FF777F3F777F339993707399999333773F373F77777F333999999999
+        3393333777333777337333333999993333333333377777333333}
+      NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btnRefreshSessionClick
+    end
+    object btnResumeSession: TBitBtn
+      Left = 1163
+      Top = 738
+      Width = 153
+      Height = 34
+      Caption = 'Resume Session'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333FF3333333333333C0C333333333333F777F3333333333CC0F0C3
+        333333333777377F33333333C30F0F0C333333337F737377F333333C00FFF0F0
+        C33333F7773337377F333CC0FFFFFF0F0C3337773F33337377F3C30F0FFFFFF0
+        F0C37F7373F33337377F00FFF0FFFFFF0F0C7733373F333373770FFFFF0FFFFF
+        F0F073F33373F333373730FFFFF0FFFFFF03373F33373F333F73330FFFFF0FFF
+        00333373F33373FF77333330FFFFF000333333373F333777333333330FFF0333
+        3333333373FF7333333333333000333333333333377733333333333333333333
+        3333333333333333333333333333333333333333333333333333}
+      NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+      OnClick = btnResumeSessionClick
+    end
+    object mmoSessionDesc: TMemo
+      Left = 296
+      Top = 138
+      Width = 1020
+      Height = 592
+      Color = clBtnFace
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 2
+    end
+    object lstAvailSession: TListBox
+      Left = 14
+      Top = 34
+      Width = 267
+      Height = 696
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Berlin Sans FB'
+      Font.Style = []
+      ItemHeight = 13
+      ParentFont = False
+      TabOrder = 3
+      OnMouseUp = lstAvailSessionMouseUp
+    end
+  end
   object pnlScenarioLoader: TPanel
     Left = 328
     Top = 45
@@ -6463,125 +6582,6 @@ object frmScenarioLoader: TfrmScenarioLoader
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-    end
-  end
-  object pnlSessionScenarioLoader: TPanel
-    Left = 326
-    Top = 149
-    Width = 1342
-    Height = 769
-    BevelOuter = bvNone
-    Color = 3749426
-    ParentBackground = False
-    TabOrder = 2
-    object lbl1: TLabel
-      Left = 14
-      Top = 15
-      Width = 112
-      Height = 14
-      Caption = 'Available Session :'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object lbl2: TLabel
-      Left = 296
-      Top = 119
-      Width = 68
-      Height = 14
-      Caption = 'Description :'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object btnRefreshSession: TBitBtn
-      Left = 30
-      Top = 692
-      Width = 267
-      Height = 34
-      Caption = 'Refresh Session'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      Glyph.Data = {
-        76010000424D7601000000000000760000002800000020000000100000000100
-        04000000000000010000130B0000130B00001000000000000000000000000000
-        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-        3333333333FFFFF3333333333999993333333333F77777FFF333333999999999
-        3333333777333777FF33339993707399933333773337F3777FF3399933000339
-        9933377333777F3377F3399333707333993337733337333337FF993333333333
-        399377F33333F333377F993333303333399377F33337FF333373993333707333
-        333377F333777F333333993333101333333377F333777F3FFFFF993333000399
-        999377FF33777F77777F3993330003399993373FF3777F37777F399933000333
-        99933773FF777F3F777F339993707399999333773F373F77777F333999999999
-        3393333777333777337333333999993333333333377777333333}
-      NumGlyphs = 2
-      ParentFont = False
-      TabOrder = 0
-      OnClick = btnRefreshSessionClick
-    end
-    object btnResumeSession: TBitBtn
-      Left = 1163
-      Top = 676
-      Width = 153
-      Height = 34
-      Caption = 'Resume Session'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      Glyph.Data = {
-        76010000424D7601000000000000760000002800000020000000100000000100
-        04000000000000010000120B0000120B00001000000000000000000000000000
-        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-        333333333333FF3333333333333C0C333333333333F777F3333333333CC0F0C3
-        333333333777377F33333333C30F0F0C333333337F737377F333333C00FFF0F0
-        C33333F7773337377F333CC0FFFFFF0F0C3337773F33337377F3C30F0FFFFFF0
-        F0C37F7373F33337377F00FFF0FFFFFF0F0C7733373F333373770FFFFF0FFFFF
-        F0F073F33373F333373730FFFFF0FFFFFF03373F33373F333F73330FFFFF0FFF
-        00333373F33373FF77333330FFFFF000333333373F333777333333330FFF0333
-        3333333373FF7333333333333000333333333333377733333333333333333333
-        3333333333333333333333333333333333333333333333333333}
-      NumGlyphs = 2
-      ParentFont = False
-      TabOrder = 1
-      OnClick = btnResumeSessionClick
-    end
-    object mmoSessionDesc: TMemo
-      Left = 296
-      Top = 138
-      Width = 1020
-      Height = 620
-      Color = clBtnFace
-      ReadOnly = True
-      ScrollBars = ssVertical
-      TabOrder = 2
-    end
-    object lstAvailSession: TListBox
-      Left = 14
-      Top = 34
-      Width = 267
-      Height = 723
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Berlin Sans FB'
-      Font.Style = []
-      ItemHeight = 13
-      ParentFont = False
-      TabOrder = 3
-      OnMouseUp = lstAvailSessionMouseUp
     end
   end
 end
