@@ -21,7 +21,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
     Top = 0
     Width = 1687
     Height = 856
-    ActivePage = tsSB
+    ActivePage = tsPS
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -56,7 +56,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           Height = 260
           TabOrder = 0
           object Image13: TImage
-            Left = 12
+            Left = 13
             Top = 30
             Width = 80
             Height = 60
@@ -3134,7 +3134,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object btnStopPS: TSpeedButtonImage
-            Left = 19
+            Left = 20
             Top = 35
             Width = 66
             Height = 49
@@ -3196,7 +3196,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object btnEmergencStopPS: TSpeedButtonImage
             Left = 275
-            Top = 106
+            Top = 105
             Width = 66
             Height = 49
             Caption = ''
@@ -3255,7 +3255,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnDeclutchClick
           end
           object lbl44: TLabel
-            Left = 36
+            Left = 37
             Top = 53
             Width = 32
             Height = 13
@@ -3357,7 +3357,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object pnlHTELECTRICALWATERHEATERPS: TPanel
-          Left = 756
+          Left = 750
           Top = 24
           Width = 310
           Height = 441
@@ -12376,7 +12376,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object pnlHTPREHEATINGELECTRICPUMP1: TPanel
-          Left = 395
+          Left = 393
           Top = 24
           Width = 310
           Height = 441
@@ -13123,7 +13123,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object pnlSTANDBYPUMPGEARBOXPS: TPanel
-          Left = 1116
+          Left = 1108
           Top = 24
           Width = 310
           Height = 441
@@ -13865,7 +13865,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object grpPS_CPP1: TGroupBox
-          Left = 1034
+          Left = 1026
           Top = 505
           Width = 124
           Height = 260
@@ -13965,7 +13965,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object grpPS_CPP2: TGroupBox
-          Left = 1168
+          Left = 1160
           Top = 505
           Width = 124
           Height = 260
@@ -14065,7 +14065,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object grpPS_CPP3: TGroupBox
-          Left = 1302
+          Left = 1294
           Top = 505
           Width = 124
           Height = 260
@@ -14165,15 +14165,15 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object pnl4ControlLCPPORTSIDE: TPanel
-          Left = 1464
+          Left = 1443
           Top = 24
-          Width = 185
+          Width = 193
           Height = 741
           TabOrder = 9
           object grpRemote: TGroupBox
-            Left = 20
-            Top = 23
-            Width = 145
+            Left = 17
+            Top = 18
+            Width = 160
             Height = 170
             Color = clSilver
             Ctl3D = False
@@ -14182,7 +14182,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             ParentCtl3D = False
             TabOrder = 0
             object lbl1: TLabel
-              Left = 47
+              Left = 54
               Top = 26
               Width = 51
               Height = 13
@@ -14195,7 +14195,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               ParentFont = False
             end
             object vrtryswtchRemotePS: TVrRotarySwitch
-              Left = 2
+              Left = 10
               Top = 68
               Width = 140
               Height = 95
@@ -14217,9 +14217,9 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             end
           end
           object grpSpeed: TGroupBox
-            Left = 20
-            Top = 198
-            Width = 145
+            Left = 17
+            Top = 196
+            Width = 160
             Height = 170
             Color = clSilver
             Ctl3D = False
@@ -14228,7 +14228,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             ParentCtl3D = False
             TabOrder = 1
             object lbl7: TLabel
-              Left = 55
+              Left = 63
               Top = 26
               Width = 34
               Height = 13
@@ -14241,13 +14241,14 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               ParentFont = False
             end
             object vrtryswtchSpeedPS: TVrRotarySwitch
-              Left = 3
+              Left = 10
               Top = 68
               Width = 140
               Height = 95
               Radius = 30
               SwitchPositions.Strings = (
                 'Lower'
+                ''
                 'Rise')
               SwitchAngleStart = 140
               SwitchAngleEnd = 220
@@ -14263,9 +14264,9 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             end
           end
           object grpSTCControl: TGroupBox
-            Left = 20
-            Top = 548
-            Width = 145
+            Left = 17
+            Top = 552
+            Width = 160
             Height = 170
             Color = clSilver
             Ctl3D = False
@@ -14274,7 +14275,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             ParentCtl3D = False
             TabOrder = 2
             object lbl10: TLabel
-              Left = 35
+              Left = 43
               Top = 26
               Width = 75
               Height = 13
@@ -14287,7 +14288,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               ParentFont = False
             end
             object vrtryswtchSTC_PS: TVrRotarySwitch
-              Left = 2
+              Left = 10
               Top = 68
               Width = 140
               Height = 104
@@ -14311,9 +14312,9 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             end
           end
           object grpPreStartingInhibition: TGroupBox
-            Left = 20
-            Top = 373
-            Width = 145
+            Left = 17
+            Top = 374
+            Width = 160
             Height = 170
             Color = clSilver
             Ctl3D = False
@@ -14322,8 +14323,8 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             ParentCtl3D = False
             TabOrder = 3
             object lbl11: TLabel
-              Left = 32
-              Top = 14
+              Left = 39
+              Top = 26
               Width = 81
               Height = 13
               Caption = 'PRE STARTING'
@@ -14334,28 +14335,15 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Font.Style = [fsBold]
               ParentFont = False
             end
-            object lbl14: TLabel
-              Left = 40
-              Top = 41
-              Width = 64
-              Height = 13
-              Caption = 'INHIBITION'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clBlack
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
             object vrtryswtchPreStartPS: TVrRotarySwitch
-              Left = 3
+              Left = 10
               Top = 68
               Width = 140
               Height = 95
               Radius = 30
               SwitchPositions.Strings = (
-                'OFF'
-                'ON')
+                'Inhibition'
+                'On')
               SwitchAngleStart = 140
               SwitchAngleEnd = 220
               SwitchColor = clBlack
@@ -17138,7 +17126,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           object Image5: TImage
             Tag = 1
             Left = 183
-            Top = 29
+            Top = 30
             Width = 80
             Height = 60
             Picture.Data = {
@@ -18189,7 +18177,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           object btnAlarm_Accept3: TSpeedButtonImage
             Tag = 1
             Left = 190
-            Top = 34
+            Top = 35
             Width = 66
             Height = 49
             Caption = ''
@@ -18364,7 +18352,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           object lbl59: TLabel
             Tag = 1
             Left = 197
-            Top = 39
+            Top = 40
             Width = 52
             Height = 39
             Alignment = taCenter
@@ -25947,7 +25935,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object pnlHTELECTRICPUMPSB: TPanel
-          Left = 756
+          Left = 750
           Top = 24
           Width = 310
           Height = 441
@@ -27447,7 +27435,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object pnlSTANDBYPUMPGEARBOXSB: TPanel
-          Left = 1116
+          Left = 1108
           Top = 24
           Width = 310
           Height = 441
@@ -28192,7 +28180,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object pnlHTPREHEATINGELECTRICPUMPSB: TPanel
-          Left = 395
+          Left = 393
           Top = 24
           Width = 310
           Height = 441
@@ -28942,15 +28930,15 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object pnl4ControlLCPSTARTBOARDSIDE: TPanel
-          Left = 1464
+          Left = 1443
           Top = 24
-          Width = 185
+          Width = 193
           Height = 741
           TabOrder = 6
           object grp1: TGroupBox
-            Left = 20
-            Top = 23
-            Width = 145
+            Left = 17
+            Top = 18
+            Width = 160
             Height = 170
             Color = clSilver
             Ctl3D = False
@@ -28959,7 +28947,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             ParentCtl3D = False
             TabOrder = 0
             object lbl29: TLabel
-              Left = 47
+              Left = 54
               Top = 26
               Width = 51
               Height = 13
@@ -28973,7 +28961,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             end
             object vrtryswtchRemoteSB: TVrRotarySwitch
               Tag = 1
-              Left = 2
+              Left = 10
               Top = 68
               Width = 140
               Height = 95
@@ -28996,9 +28984,9 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             end
           end
           object grp2: TGroupBox
-            Left = 20
-            Top = 198
-            Width = 145
+            Left = 17
+            Top = 196
+            Width = 160
             Height = 170
             Color = clSilver
             Ctl3D = False
@@ -29007,7 +28995,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             ParentCtl3D = False
             TabOrder = 1
             object lbl38: TLabel
-              Left = 55
+              Left = 63
               Top = 26
               Width = 34
               Height = 13
@@ -29021,7 +29009,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             end
             object vrtryswtchSpeedSB: TVrRotarySwitch
               Tag = 1
-              Left = 3
+              Left = 10
               Top = 68
               Width = 140
               Height = 95
@@ -29029,6 +29017,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               OnChange = vrtryswtchSpeedChange
               SwitchPositions.Strings = (
                 'Lower'
+                ''
                 'Rise')
               SwitchAngleStart = 140
               SwitchAngleEnd = 220
@@ -29044,9 +29033,9 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             end
           end
           object grp3: TGroupBox
-            Left = 20
-            Top = 548
-            Width = 145
+            Left = 17
+            Top = 552
+            Width = 160
             Height = 170
             Color = clSilver
             Ctl3D = False
@@ -29055,7 +29044,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             ParentCtl3D = False
             TabOrder = 2
             object lbl41: TLabel
-              Left = 35
+              Left = 43
               Top = 26
               Width = 75
               Height = 13
@@ -29069,7 +29058,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             end
             object vrtryswtchSTC_SB: TVrRotarySwitch
               Tag = 1
-              Left = 2
+              Left = 10
               Top = 68
               Width = 140
               Height = 104
@@ -29094,9 +29083,9 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             end
           end
           object grp7: TGroupBox
-            Left = 20
-            Top = 373
-            Width = 145
+            Left = 17
+            Top = 374
+            Width = 160
             Height = 170
             Color = clSilver
             Ctl3D = False
@@ -29105,8 +29094,8 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             ParentCtl3D = False
             TabOrder = 3
             object lbl43: TLabel
-              Left = 32
-              Top = 14
+              Left = 39
+              Top = 26
               Width = 81
               Height = 13
               Caption = 'PRE STARTING'
@@ -29117,30 +29106,17 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Font.Style = [fsBold]
               ParentFont = False
             end
-            object lbl49: TLabel
-              Left = 40
-              Top = 41
-              Width = 64
-              Height = 13
-              Caption = 'INHIBITION'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
             object vrtryswtchPreStartSB: TVrRotarySwitch
               Tag = 1
-              Left = 3
+              Left = 10
               Top = 68
               Width = 140
               Height = 95
               Radius = 30
               OnChange = vrtryswtchPreStartInhibitionChange
               SwitchPositions.Strings = (
-                'OFF'
-                'ON')
+                'Inhibition'
+                'On')
               SwitchAngleStart = 140
               SwitchAngleEnd = 220
               SwitchColor = clBlack
@@ -29156,7 +29132,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object grpCPPPUMP1: TGroupBox
-          Left = 1034
+          Left = 1026
           Top = 505
           Width = 124
           Height = 260
@@ -29256,7 +29232,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object grpCPPPUMP2: TGroupBox
-          Left = 1168
+          Left = 1160
           Top = 505
           Width = 124
           Height = 260
@@ -29356,7 +29332,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object grpCPPPUMP3: TGroupBox
-          Left = 1302
+          Left = 1294
           Top = 505
           Width = 124
           Height = 260

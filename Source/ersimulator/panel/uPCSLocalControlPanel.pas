@@ -203,7 +203,6 @@ type
     vrtryswtchSTC_PS: TVrRotarySwitch;
     grpPreStartingInhibition: TGroupBox;
     lbl11: TLabel;
-    lbl14: TLabel;
     vrtryswtchPreStartPS: TVrRotarySwitch;
     grp1: TGroupBox;
     lbl29: TLabel;
@@ -216,7 +215,6 @@ type
     vrtryswtchSTC_SB: TVrRotarySwitch;
     grp7: TGroupBox;
     lbl43: TLabel;
-    lbl49: TLabel;
     vrtryswtchPreStartSB: TVrRotarySwitch;
     grpCPPPUMP1: TGroupBox;
     btnSB_Start1: TVrDemoButton;
