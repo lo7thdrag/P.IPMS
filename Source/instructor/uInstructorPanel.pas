@@ -87,6 +87,7 @@ type
     btnClose: TFlatSpeedButton;
     tmr1: TTimer;
     Panel3: TPanel;
+    Image3: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btnDockedClick(Sender: TObject);
     procedure btnPMSClick(Sender: TObject);

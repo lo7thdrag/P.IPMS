@@ -33,434 +33,13 @@ object frmClientControl: TfrmClientControl
       Visible = False
       OnClick = chkDataLoggerClick
     end
-    object GroupBox1: TGroupBox
-      Left = 16
-      Top = 19
-      Width = 150
-      Height = 308
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-      object lbl1: TLabel
-        Left = 13
-        Top = 40
-        Width = 26
-        Height = 13
-        Caption = 'Host'
-      end
-      object lbl2: TLabel
-        Left = 13
-        Top = 56
-        Width = 24
-        Height = 13
-        Caption = 'Port'
-      end
-      object lbl7: TLabel
-        Left = 13
-        Top = 72
-        Width = 31
-        Height = 13
-        Caption = 'State'
-      end
-      object Label2: TLabel
-        Left = 13
-        Top = 101
-        Width = 38
-        Height = 13
-        Caption = 'Clients'
-      end
-      object Label3: TLabel
-        Left = 45
-        Top = 56
-        Width = 20
-        Height = 13
-        Caption = '  :  -'
-      end
-      object Label4: TLabel
-        Left = 45
-        Top = 72
-        Width = 20
-        Height = 13
-        Caption = '  :  -'
-      end
-      object Label5: TLabel
-        Left = 45
-        Top = 40
-        Width = 20
-        Height = 13
-        Caption = '  :  -'
-      end
-      object lblInsHost: TLabel
-        Left = 60
-        Top = 40
-        Width = 46
-        Height = 13
-        Caption = '<None>'
-      end
-      object lblInsPort: TLabel
-        Left = 60
-        Top = 56
-        Width = 46
-        Height = 13
-        Caption = '<None>'
-      end
-      object lblInsState: TLabel
-        Left = 60
-        Top = 72
-        Width = 47
-        Height = 13
-        Caption = 'Stopped'
-      end
-      object Label51: TLabel
-        Left = 44
-        Top = 13
-        Width = 61
-        Height = 13
-        Alignment = taCenter
-        Caption = ' Instructor'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object mmoInstructor: TMemo
-        Left = 13
-        Top = 120
-        Width = 123
-        Height = 175
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clGreen
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ScrollBars = ssVertical
-        TabOrder = 0
-      end
-    end
-    object grp1: TGroupBox
-      Left = 172
-      Top = 19
-      Width = 150
-      Height = 308
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 2
-      object lbl5: TLabel
-        Left = 13
-        Top = 40
-        Width = 38
-        Height = 13
-        Caption = 'Server'
-      end
-      object lbl6: TLabel
-        Left = 13
-        Top = 56
-        Width = 24
-        Height = 13
-        Caption = 'Port'
-      end
-      object lbl11: TLabel
-        Left = 13
-        Top = 72
-        Width = 31
-        Height = 13
-        Caption = 'State'
-      end
-      object lbl12: TLabel
-        Left = 13
-        Top = 101
-        Width = 38
-        Height = 13
-        Caption = 'Clients'
-      end
-      object Label10: TLabel
-        Left = 51
-        Top = 40
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object Label11: TLabel
-        Left = 51
-        Top = 56
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object Label12: TLabel
-        Left = 51
-        Top = 72
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object lblLPUState: TLabel
-        Left = 66
-        Top = 72
-        Width = 47
-        Height = 13
-        Caption = 'Stopped'
-      end
-      object lblLPUPort: TLabel
-        Left = 66
-        Top = 56
-        Width = 46
-        Height = 13
-        Caption = '<None>'
-      end
-      object lblLPUServer: TLabel
-        Left = 66
-        Top = 40
-        Width = 46
-        Height = 13
-        Caption = '<None>'
-      end
-      object Label52: TLabel
-        Left = 47
-        Top = 13
-        Width = 56
-        Height = 13
-        Alignment = taCenter
-        Caption = 'Controller'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object mmoCtrl: TMemo
-        Left = 13
-        Top = 120
-        Width = 123
-        Height = 175
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clGreen
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ScrollBars = ssVertical
-        TabOrder = 0
-      end
-    end
-    object grp2: TGroupBox
-      Left = 329
-      Top = 19
-      Width = 150
-      Height = 308
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 3
-      object lbl10: TLabel
-        Left = 13
-        Top = 101
-        Width = 38
-        Height = 13
-        Caption = 'Clients'
-      end
-      object lbl3: TLabel
-        Left = 13
-        Top = 40
-        Width = 38
-        Height = 13
-        Caption = 'Server'
-      end
-      object lbl4: TLabel
-        Left = 13
-        Top = 56
-        Width = 24
-        Height = 13
-        Caption = 'Port'
-      end
-      object lbl9: TLabel
-        Left = 13
-        Top = 72
-        Width = 31
-        Height = 13
-        Caption = 'State'
-      end
-      object Label7: TLabel
-        Left = 53
-        Top = 72
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object Label8: TLabel
-        Left = 53
-        Top = 56
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object Label9: TLabel
-        Left = 53
-        Top = 40
-        Width = 15
-        Height = 13
-        Caption = '  :  '
-      end
-      object lblERServer: TLabel
-        Left = 68
-        Top = 40
-        Width = 46
-        Height = 13
-        Caption = '<None>'
-      end
-      object lblERPort: TLabel
-        Left = 68
-        Top = 56
-        Width = 46
-        Height = 13
-        Caption = '<None>'
-      end
-      object lblERState: TLabel
-        Left = 68
-        Top = 72
-        Width = 47
-        Height = 13
-        Caption = 'Stopped'
-      end
-      object Label53: TLabel
-        Left = 39
-        Top = 13
-        Width = 73
-        Height = 13
-        Alignment = taCenter
-        Caption = 'Engine Room'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object mmoER: TMemo
-        Left = 13
-        Top = 120
-        Width = 123
-        Height = 175
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clGreen
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ScrollBars = ssVertical
-        TabOrder = 0
-      end
-    end
-    object grp4: TGroupBox
-      Left = 16
-      Top = 336
-      Width = 463
-      Height = 492
-      TabOrder = 4
-      object lbl14: TLabel
-        Left = 13
-        Top = 17
-        Width = 67
-        Height = 13
-        Caption = 'Network Log :'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lbl15: TLabel
-        Left = 13
-        Top = 175
-        Width = 55
-        Height = 13
-        Caption = 'Event Log :'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lbl16: TLabel
-        Left = 16
-        Top = 334
-        Width = 51
-        Height = 13
-        Caption = 'Error Log :'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object mmoNetLogger: TMemo
-        Left = 13
-        Top = 34
-        Width = 436
-        Height = 127
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clGreen
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ScrollBars = ssVertical
-        TabOrder = 0
-      end
-      object mmoEvntLog: TMemo
-        Left = 13
-        Top = 192
-        Width = 436
-        Height = 127
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clGreen
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ScrollBars = ssVertical
-        TabOrder = 1
-      end
-      object mmoErrorLog: TMemo
-        Left = 13
-        Top = 351
-        Width = 436
-        Height = 127
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clGreen
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ScrollBars = ssVertical
-        TabOrder = 2
-      end
-    end
     object lstLoader: TListBox
       Left = 29
       Top = 764
       Width = 221
       Height = 50
       ItemHeight = 13
-      TabOrder = 5
+      TabOrder = 1
       Visible = False
     end
     object pnlDenah: TPanel
@@ -468,7 +47,7 @@ object frmClientControl: TfrmClientControl
       Top = 18
       Width = 866
       Height = 810
-      TabOrder = 6
+      TabOrder = 2
       object imgDenahIPMS: TImage
         Left = 1
         Top = 1
@@ -17509,14 +17088,15 @@ object frmClientControl: TfrmClientControl
       Top = 18
       Width = 296
       Height = 810
-      BevelKind = bkFlat
       BevelOuter = bvNone
       BorderWidth = 10
-      TabOrder = 7
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 3
       object Label14: TLabel
         Left = 10
         Top = 10
-        Width = 272
+        Width = 276
         Height = 18
         Align = alTop
         AutoSize = False
@@ -17527,12 +17107,13 @@ object frmClientControl: TfrmClientControl
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
+        ExplicitWidth = 272
       end
       object lvStatusConsole: TListView
         Left = 10
         Top = 28
-        Width = 272
-        Height = 733
+        Width = 276
+        Height = 737
         Align = alClient
         Columns = <
           item
@@ -17646,17 +17227,19 @@ object frmClientControl: TfrmClientControl
         ViewStyle = vsReport
         OnCustomDrawSubItem = lvStatusConsoleCustomDrawSubItem
         OnMouseDown = lvStatusConsoleMouseDown
+        ExplicitWidth = 272
         ExplicitHeight = 759
       end
       object Panel2: TPanel
         Left = 10
-        Top = 761
-        Width = 272
+        Top = 765
+        Width = 276
         Height = 35
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitTop = 786
+        ExplicitTop = 761
+        ExplicitWidth = 272
         object btn3: TFlatSpeedButton
           Tag = 2
           Left = 94
@@ -17699,6 +17282,445 @@ object frmClientControl: TfrmClientControl
           ParentColor = False
           OnClick = mniLoadClick
         end
+      end
+    end
+    object Panel3: TPanel
+      Left = 16
+      Top = 19
+      Width = 150
+      Height = 308
+      BevelOuter = bvNone
+      Color = 3749426
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 4
+      object Label51: TLabel
+        Left = 37
+        Top = 13
+        Width = 61
+        Height = 13
+        Alignment = taCenter
+        Caption = ' Instructor'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lbl1: TLabel
+        Left = 14
+        Top = 40
+        Width = 25
+        Height = 14
+        Caption = 'Host'
+      end
+      object Label5: TLabel
+        Left = 48
+        Top = 40
+        Width = 24
+        Height = 14
+        Caption = '  :  -'
+      end
+      object lblInsHost: TLabel
+        Left = 76
+        Top = 40
+        Width = 47
+        Height = 14
+        Caption = '<None>'
+      end
+      object lbl2: TLabel
+        Left = 14
+        Top = 56
+        Width = 23
+        Height = 14
+        Caption = 'Port'
+      end
+      object Label3: TLabel
+        Left = 48
+        Top = 56
+        Width = 24
+        Height = 14
+        Caption = '  :  -'
+      end
+      object lblInsPort: TLabel
+        Left = 76
+        Top = 56
+        Width = 47
+        Height = 14
+        Caption = '<None>'
+      end
+      object lbl7: TLabel
+        Left = 14
+        Top = 72
+        Width = 30
+        Height = 14
+        Caption = 'State'
+      end
+      object Label4: TLabel
+        Left = 48
+        Top = 72
+        Width = 24
+        Height = 14
+        Caption = '  :  -'
+      end
+      object lblInsState: TLabel
+        Left = 76
+        Top = 72
+        Width = 47
+        Height = 14
+        Caption = 'Stopped'
+      end
+      object Label2: TLabel
+        Left = 14
+        Top = 101
+        Width = 35
+        Height = 14
+        Caption = 'Clients'
+      end
+      object mmoInstructor: TMemo
+        Left = 14
+        Top = 120
+        Width = 123
+        Height = 175
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+    end
+    object Panel4: TPanel
+      Left = 173
+      Top = 19
+      Width = 150
+      Height = 308
+      BevelOuter = bvNone
+      Color = 3749426
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 5
+      object Label52: TLabel
+        Left = 40
+        Top = 13
+        Width = 56
+        Height = 13
+        Alignment = taCenter
+        Caption = 'Controller'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lbl5: TLabel
+        Left = 14
+        Top = 40
+        Width = 35
+        Height = 14
+        Caption = 'Server'
+      end
+      object Label10: TLabel
+        Left = 48
+        Top = 40
+        Width = 20
+        Height = 14
+        Caption = '  :  '
+      end
+      object lblLPUServer: TLabel
+        Left = 72
+        Top = 40
+        Width = 47
+        Height = 14
+        Caption = '<None>'
+      end
+      object lbl6: TLabel
+        Left = 14
+        Top = 56
+        Width = 23
+        Height = 14
+        Caption = 'Port'
+      end
+      object Label11: TLabel
+        Left = 48
+        Top = 56
+        Width = 20
+        Height = 14
+        Caption = '  :  '
+      end
+      object lblLPUPort: TLabel
+        Left = 72
+        Top = 56
+        Width = 47
+        Height = 14
+        Caption = '<None>'
+      end
+      object lbl11: TLabel
+        Left = 14
+        Top = 72
+        Width = 30
+        Height = 14
+        Caption = 'State'
+      end
+      object Label12: TLabel
+        Left = 48
+        Top = 72
+        Width = 20
+        Height = 14
+        Caption = '  :  '
+      end
+      object lblLPUState: TLabel
+        Left = 72
+        Top = 72
+        Width = 47
+        Height = 14
+        Caption = 'Stopped'
+      end
+      object lbl12: TLabel
+        Left = 14
+        Top = 101
+        Width = 35
+        Height = 14
+        Caption = 'Clients'
+      end
+      object mmoCtrl: TMemo
+        Left = 14
+        Top = 120
+        Width = 123
+        Height = 175
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+    end
+    object Panel5: TPanel
+      Left = 329
+      Top = 19
+      Width = 150
+      Height = 308
+      BevelOuter = bvNone
+      Color = 3749426
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 6
+      object Label53: TLabel
+        Left = 39
+        Top = 13
+        Width = 73
+        Height = 13
+        Alignment = taCenter
+        Caption = 'Engine Room'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lbl3: TLabel
+        Left = 13
+        Top = 40
+        Width = 35
+        Height = 14
+        Caption = 'Server'
+      end
+      object Label9: TLabel
+        Left = 47
+        Top = 40
+        Width = 20
+        Height = 14
+        Caption = '  :  '
+      end
+      object lblERServer: TLabel
+        Left = 73
+        Top = 40
+        Width = 47
+        Height = 14
+        Caption = '<None>'
+      end
+      object lbl4: TLabel
+        Left = 13
+        Top = 56
+        Width = 23
+        Height = 14
+        Caption = 'Port'
+      end
+      object Label8: TLabel
+        Left = 47
+        Top = 56
+        Width = 20
+        Height = 14
+        Caption = '  :  '
+      end
+      object lblERPort: TLabel
+        Left = 73
+        Top = 56
+        Width = 47
+        Height = 14
+        Caption = '<None>'
+      end
+      object lbl9: TLabel
+        Left = 13
+        Top = 72
+        Width = 30
+        Height = 14
+        Caption = 'State'
+      end
+      object lblERState: TLabel
+        Left = 73
+        Top = 72
+        Width = 47
+        Height = 14
+        Caption = 'Stopped'
+      end
+      object Label7: TLabel
+        Left = 47
+        Top = 72
+        Width = 20
+        Height = 14
+        Caption = '  :  '
+      end
+      object lbl10: TLabel
+        Left = 13
+        Top = 101
+        Width = 35
+        Height = 14
+        Caption = 'Clients'
+      end
+      object mmoER: TMemo
+        Left = 13
+        Top = 120
+        Width = 123
+        Height = 175
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+    end
+    object Panel6: TPanel
+      Left = 16
+      Top = 335
+      Width = 463
+      Height = 492
+      BevelOuter = bvNone
+      Color = 3749426
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 7
+      object lbl14: TLabel
+        Left = 13
+        Top = 17
+        Width = 67
+        Height = 13
+        Caption = 'Network Log :'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl15: TLabel
+        Left = 13
+        Top = 175
+        Width = 55
+        Height = 13
+        Caption = 'Event Log :'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl16: TLabel
+        Left = 16
+        Top = 334
+        Width = 51
+        Height = 13
+        Caption = 'Error Log :'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object mmoNetLogger: TMemo
+        Left = 13
+        Top = 34
+        Width = 436
+        Height = 127
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+      object mmoEvntLog: TMemo
+        Left = 13
+        Top = 192
+        Width = 436
+        Height = 127
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ScrollBars = ssVertical
+        TabOrder = 1
+      end
+      object mmoErrorLog: TMemo
+        Left = 13
+        Top = 351
+        Width = 436
+        Height = 127
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGreen
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ScrollBars = ssVertical
+        TabOrder = 2
       end
     end
   end
