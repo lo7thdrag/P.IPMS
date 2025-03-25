@@ -30,8 +30,7 @@ type
 
     procedure getScenarios(var aList: TStrings);
     procedure getSessions(var aList: TStrings);
-    function insertScenario(aID: Integer; aName, aDesc: string;
-      intArr: array of Integer): Integer;
+    function insertScenario(aID: Integer; aName, aDesc: string; intArr: array of Integer): Integer;
     function deleteScenario(aID: Integer): Boolean;
     function getScenario(aName: string): TScenario_Data; overload;
     function getScenario(aID: Integer): TScenario_Data; overload;
@@ -40,63 +39,59 @@ type
     function getSession(aSessionID: Integer): TSession_Data; overload;
     function getSession(aSessionName: string): TSession_Data; overload;
     procedure loadScenario(aSessionID: Integer);
-    function PrepareRunningScenario(aName: string;
-      var aDateTimeStart: TDateTime): Boolean;
+    function PrepareRunningScenario(aName: string; var aDateTimeStart: TDateTime): Boolean;
 
     {prince}
     function setBooltoInt(valbool : Boolean): Integer;
     function setInttoBool(valint : Integer): Boolean;
 
     function GetConditionID(aName: string): Integer;
+    procedure GetElementConditions(var aList: TStrings);
+    procedure SaveElementCondition(aName: string; aList: TList; var ConditionID: Integer);
+
+    {$REGION ' PMS '}
     function GetPMSCondID(aID, aIndex: Integer): Integer;
+    function DeletePMSCondition(aID: Integer): Boolean;
     procedure GetPMSConditions(var aList: TStrings);
     procedure GetPMSCondition(aID: Integer; var aList: TList);
-    procedure SavePMSCondition(aIsNew: Boolean; aName: string; aList: TList;
-      var ConditionID: Integer);
+    procedure SavePMSCondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer);
     procedure SaveRS_PMSCondition(aSessionID: Integer);
-    function DeletePMSCondition(aID: Integer): Boolean;
-    procedure GetElementConditions(var aList: TStrings);
+    {$ENDREGION}
 
+    {$REGION ' PCS '}
     function DeletePCSCondition(aID: Integer): Boolean;
     procedure GetPCSConditions(var aList: TStrings);
     procedure GetPCSCondition(aID: Integer; var aList : TList);
-    procedure SavePCSCondition(aIsNew: Boolean; aName: string;
-      var aList: TList);
+    procedure SavePCSCondition(aIsNew: Boolean; aName: string; var aList: TList);
     procedure SaveRS_PCSCondition(aSessionID: Integer);
+    {$ENDREGION}
 
+    {$REGION ' FA '}
     function DeleteFACondition(aID: Integer): Boolean;
     function GetFACondID(aID, aIndex: Integer): Integer;
     procedure GetFACondition(aID: Integer; var aList: TList);
     procedure GetFAConditions(var aList: TStrings);
-    procedure SaveFACondition(aIsNew: Boolean; aName: string; aList: TList;
-      var ConditionID: Integer);
+    procedure SaveFACondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer);
+    {$ENDREGION}
 
+    {$REGION ' TANK '}
     function GetTanksCondID(aID, aIndex: Integer): Integer;
     function DeleteTanksCondition(aID: Integer): Boolean;
     function cekValidateTankValue(aID: string; aValue: Double): Boolean;
-    function cekValidateTankName(aIsNew: Boolean; aType, aName,
-      aOldName: string): Boolean;
+    function cekValidateTankName(aIsNew: Boolean; aType, aName,aOldName: string): Boolean;
     function getMaxTankValue(aElementID: string): Double;
     procedure GetTanksCondition(aID: Integer; var aList: TList);
     procedure GetTanksConditions(var aList: TStrings);
-    procedure SaveTanksCondition(aIsNew: Boolean; aName, aOldName: string;
-      aList: TList; var ConditionID: Integer);
-
-    procedure SaveElementCondition(aName: string; aList: TList;
-      var ConditionID: Integer);
+    procedure SaveTanksCondition(aIsNew: Boolean; aName, aOldName: string; aList: TList; var ConditionID: Integer);
+    {$ENDREGION}
 
     property RunState : E_ScenarioRunState read FRunState write SetRunState;
     property Listener : TListeners read FListener;
 
-    property CurrentRunningScenario : Integer read FCurrentRunningScenario
-      write SetRunningScenario;
-    property CurrentRunningScenarioTime : TDateTime
-      read FCurrentRunningScenarioTime write SetRunningScenarioTime;
-    property CurrentRunningScenarioStart : TDateTime
-      read FCurrentRunningScenarioStart write SetCurrentScenarioStart;
-
-    property OnProgressStep : T_OnProgressStep read FOnProgressStep
-      write SetOnProgressStep;
+    property CurrentRunningScenario : Integer read FCurrentRunningScenario write SetRunningScenario;
+    property CurrentRunningScenarioTime : TDateTime read FCurrentRunningScenarioTime write SetRunningScenarioTime;
+    property CurrentRunningScenarioStart : TDateTime read FCurrentRunningScenarioStart write SetCurrentScenarioStart;
+    property OnProgressStep : T_OnProgressStep read FOnProgressStep write SetOnProgressStep;
   end;
 
 implementation

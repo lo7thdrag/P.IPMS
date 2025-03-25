@@ -167,8 +167,6 @@ object frmScenBuilder: TfrmScenBuilder
       TabWidth = 130
       object tsPMS: TTabSheet
         Caption = 'PMS'
-        ExplicitWidth = 1012
-        ExplicitHeight = 460
         object pnlPMSBackgraound: TPanel
           Left = 0
           Top = 0
@@ -180,8 +178,6 @@ object frmScenBuilder: TfrmScenBuilder
           ParentBackground = False
           ParentDoubleBuffered = False
           TabOrder = 0
-          ExplicitWidth = 1012
-          ExplicitHeight = 460
           object lblPMSState: TLabel
             Left = 32
             Top = 22
@@ -252,6 +248,8 @@ object frmScenBuilder: TfrmScenBuilder
       object tsPCS: TTabSheet
         Caption = 'PCS'
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
         ExplicitWidth = 1012
         ExplicitHeight = 460
         object pnlPCSBackgraound: TPanel
@@ -349,6 +347,8 @@ object frmScenBuilder: TfrmScenBuilder
         Caption = 'Element Data'
         ImageIndex = 2
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
         ExplicitWidth = 1012
         ExplicitHeight = 460
         object lbl1: TLabel
@@ -392,6 +392,8 @@ object frmScenBuilder: TfrmScenBuilder
       object tsTANK: TTabSheet
         Caption = 'TANK'
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitTop = 0
         ExplicitWidth = 1012
         ExplicitHeight = 460
         object pnlTANkBackgraound: TPanel
@@ -475,6 +477,8 @@ object frmScenBuilder: TfrmScenBuilder
       object tsFA: TTabSheet
         Caption = 'FA'
         ImageIndex = 3
+        ExplicitLeft = 0
+        ExplicitTop = 0
         ExplicitWidth = 1012
         ExplicitHeight = 460
         object pnlFABackgraound: TPanel

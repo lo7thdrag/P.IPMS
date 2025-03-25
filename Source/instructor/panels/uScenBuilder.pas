@@ -822,27 +822,26 @@ end;
 procedure TfrmScenBuilder.UpdateScenarioList;
 var
   i : Integer;
-  scenarios : TStrings;
+  tempList : TStrings;
 begin
-  scenarios := nil;
-  InstructorSys.Scenario.getScenarios(scenarios);
+  tempList := nil;
+  InstructorSys.Scenario.getScenarios(tempList);
 
-  if not Assigned(scenarios) then
+  if not Assigned(tempList) then
     Exit;
 
   if lstAvail.Count > 0 then
   lstAvail.Clear;
 
-  for i := 0 to scenarios.Count - 1 do
+  for i := 0 to tempList.Count - 1 do
   begin
-    lstAvail.Items.Add(scenarios[i]);
+    lstAvail.Items.Add(tempList[i]);
   end;
 
-  scenarios.Free;
-
+  tempList.Free;
 end;
 
-procedure TfrmScenBuilder.UpdatePMSList;
+procedure TfrmScenBuilder.UpdateSessionList;
 var
   i : Integer;
   tempList : TStrings;
@@ -863,27 +862,98 @@ begin
   end;
 
   tempList.Free;
+end;
 
+procedure TfrmScenBuilder.UpdatePMSList;
+var
+  i : Integer;
+  tempList : TStrings;
+
+begin
+  tempList := nil;
+  InstructorSys.Scenario.GetPMSConditions(tempList);
+
+  if not Assigned(tempList) then
+    Exit;
+
+  if lstPMS.Count > 0 then
+  lstPMS.Clear;
+
+  for i := 0 to tempList.Count - 1 do
+  begin
+    lstPMS.Items.Add(tempList[i]);
+  end;
+
+  tempList.Free;
 end;
 
 procedure TfrmScenBuilder.UpdatePCSList;
-begin
-//
-end;
+var
+  i : Integer;
+  tempList : TStrings;
 
-procedure TfrmScenBuilder.UpdateSessionList;
 begin
-//
+  tempList := nil;
+  InstructorSys.Scenario.GetPCSConditions(tempList);
+
+  if not Assigned(tempList) then
+    Exit;
+
+  if lstPropulsion.Count > 0 then
+  lstPropulsion.Clear;
+
+  for i := 0 to tempList.Count - 1 do
+  begin
+    lstPropulsion.Items.Add(tempList[i]);
+  end;
+
+  tempList.Free;
 end;
 
 procedure TfrmScenBuilder.UpdateTankList;
+var
+  i : Integer;
+  tempList : TStrings;
+
 begin
-//
+  tempList := nil;
+  InstructorSys.Scenario.GetTanksConditions(tempList);
+
+  if not Assigned(tempList) then
+    Exit;
+
+  if lstTank.Count > 0 then
+  lstTank.Clear;
+
+  for i := 0 to tempList.Count - 1 do
+  begin
+    lstTank.Items.Add(tempList[i]);
+  end;
+
+  tempList.Free;
 end;
 
 procedure TfrmScenBuilder.UpdateFAList;
+var
+  i : Integer;
+  tempList : TStrings;
+
 begin
-//
+  tempList := nil;
+  InstructorSys.Scenario.GetFAConditions(tempList);
+
+  if not Assigned(tempList) then
+    Exit;
+
+  if lstFA.Count > 0 then
+  lstFA.Clear;
+
+  for i := 0 to tempList.Count - 1 do
+  begin
+    lstFA.Items.Add(tempList[i]);
+  end;
+
+  tempList.Free;
 end;
 
 end.
