@@ -73,11 +73,11 @@ object frmScenBuilder: TfrmScenBuilder
       TabOrder = 0
     end
     object btnLoad: TBitBtn
-      Left = 1156
+      Left = 1200
       Top = 738
-      Width = 153
+      Width = 109
       Height = 34
-      Caption = 'Load Scenario'
+      Caption = 'Save'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
@@ -128,7 +128,7 @@ object frmScenBuilder: TfrmScenBuilder
       ParentFont = False
       TabOrder = 2
     end
-    object edtName: TEdit
+    object edtScenarioName: TEdit
       Left = 390
       Top = 54
       Width = 433
@@ -141,7 +141,7 @@ object frmScenBuilder: TfrmScenBuilder
       ParentFont = False
       TabOrder = 3
     end
-    object mmoDescription: TMemo
+    object mmoScenarioDescription: TMemo
       Left = 390
       Top = 117
       Width = 919
@@ -241,17 +241,13 @@ object frmScenBuilder: TfrmScenBuilder
             Height = 25
             Caption = 'Clear'
             TabOrder = 3
-            OnClick = btnClearPMSClick
+            OnClick = btnClearPickClick
           end
         end
       end
       object tsPCS: TTabSheet
         Caption = 'PCS'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 1012
-        ExplicitHeight = 460
         object pnlPCSBackgraound: TPanel
           Left = 0
           Top = 0
@@ -259,13 +255,11 @@ object frmScenBuilder: TfrmScenBuilder
           Height = 458
           Align = alClient
           BevelOuter = bvNone
-          Color = clGray
+          Color = 3749426
           ParentBackground = False
           TabOrder = 0
-          ExplicitWidth = 1012
-          ExplicitHeight = 460
           object lblPCSState: TLabel
-            Left = 12
+            Left = 32
             Top = 22
             Width = 84
             Height = 14
@@ -278,8 +272,8 @@ object frmScenBuilder: TfrmScenBuilder
             ParentFont = False
           end
           object lblPCSInfo: TLabel
-            Left = 12
-            Top = 49
+            Left = 32
+            Top = 84
             Width = 68
             Height = 14
             Caption = 'Description :'
@@ -292,8 +286,8 @@ object frmScenBuilder: TfrmScenBuilder
           end
           object btnPCSPick: TButton
             Tag = 2
-            Left = 367
-            Top = 16
+            Left = 839
+            Top = 41
             Width = 50
             Height = 25
             Caption = 'Pick..'
@@ -301,12 +295,12 @@ object frmScenBuilder: TfrmScenBuilder
             OnClick = btnPickClick
           end
           object mmoPCSInfo: TMemo
-            Left = 93
-            Top = 45
-            Width = 268
-            Height = 148
+            Left = 32
+            Top = 103
+            Width = 793
+            Height = 326
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
+            Font.Color = clBlack
             Font.Height = -12
             Font.Name = 'Tahoma'
             Font.Style = []
@@ -316,23 +310,23 @@ object frmScenBuilder: TfrmScenBuilder
             TabOrder = 1
           end
           object btnClearPCS: TButton
-            Tag = 1
-            Left = 367
-            Top = 47
+            Tag = 2
+            Left = 839
+            Top = 103
             Width = 50
             Height = 25
             Caption = 'Clear'
             TabOrder = 2
-            OnClick = btnClearPCSClick
+            OnClick = btnClearPickClick
           end
           object edtPCSName: TEdit
-            Left = 93
-            Top = 18
-            Width = 268
+            Left = 32
+            Top = 41
+            Width = 793
             Height = 22
             Enabled = False
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
+            Font.Color = clBlack
             Font.Height = -12
             Font.Name = 'Tahoma'
             Font.Style = []
@@ -347,10 +341,6 @@ object frmScenBuilder: TfrmScenBuilder
         Caption = 'Element Data'
         ImageIndex = 2
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 1012
-        ExplicitHeight = 460
         object lbl1: TLabel
           Left = 3
           Top = 22
@@ -386,16 +376,11 @@ object frmScenBuilder: TfrmScenBuilder
           Height = 25
           Caption = 'Clear'
           TabOrder = 2
-          OnClick = btnClearElementClick
         end
       end
       object tsTANK: TTabSheet
         Caption = 'TANK'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 1012
-        ExplicitHeight = 460
         object pnlTANkBackgraound: TPanel
           Left = 0
           Top = 0
@@ -403,41 +388,39 @@ object frmScenBuilder: TfrmScenBuilder
           Height = 458
           Align = alClient
           BevelOuter = bvNone
-          Color = clGray
+          Color = 3749426
           ParentBackground = False
           TabOrder = 0
-          ExplicitWidth = 1012
-          ExplicitHeight = 460
           object lblFFState: TLabel
-            Left = 12
+            Left = 32
             Top = 22
-            Width = 81
-            Height = 13
+            Width = 94
+            Height = 14
             Caption = 'TANK Condition :'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
-            Font.Height = -11
+            Font.Height = -12
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object lblFFInfo: TLabel
-            Left = 12
-            Top = 49
-            Width = 60
-            Height = 13
+            Left = 32
+            Top = 84
+            Width = 68
+            Height = 14
             Caption = 'Description :'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
-            Font.Height = -11
+            Font.Height = -12
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object btnFFPick: TButton
             Tag = 4
-            Left = 367
-            Top = 16
+            Left = 839
+            Top = 41
             Width = 50
             Height = 25
             Caption = 'Pick..'
@@ -445,27 +428,33 @@ object frmScenBuilder: TfrmScenBuilder
             OnClick = btnPickClick
           end
           object mmoTANKInfo: TMemo
-            Left = 93
-            Top = 45
-            Width = 268
-            Height = 148
+            Left = 32
+            Top = 103
+            Width = 793
+            Height = 326
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
             ReadOnly = True
             TabOrder = 1
           end
           object btnClearTANK: TButton
-            Tag = 1
-            Left = 367
-            Top = 47
+            Tag = 4
+            Left = 839
+            Top = 103
             Width = 50
             Height = 25
             Caption = 'Clear'
             TabOrder = 2
-            OnClick = btnClearTANKClick
+            OnClick = btnClearPickClick
           end
           object edtTANKName: TEdit
-            Left = 93
-            Top = 18
-            Width = 268
+            Left = 32
+            Top = 41
+            Width = 793
             Height = 22
             Enabled = False
             ReadOnly = True
@@ -477,10 +466,6 @@ object frmScenBuilder: TfrmScenBuilder
       object tsFA: TTabSheet
         Caption = 'FA'
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 1012
-        ExplicitHeight = 460
         object pnlFABackgraound: TPanel
           Left = 0
           Top = 0
@@ -488,51 +473,55 @@ object frmScenBuilder: TfrmScenBuilder
           Height = 458
           Align = alClient
           BevelOuter = bvNone
-          Color = clGray
+          Color = 3749426
           ParentBackground = False
           TabOrder = 0
-          ExplicitWidth = 1012
-          ExplicitHeight = 460
           object lblFAState: TLabel
-            Left = 12
+            Left = 32
             Top = 22
-            Width = 68
-            Height = 13
+            Width = 77
+            Height = 14
             Caption = 'FA Condition :'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
-            Font.Height = -11
+            Font.Height = -12
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object lblFAInfo: TLabel
-            Left = 12
-            Top = 49
-            Width = 60
-            Height = 13
+            Left = 32
+            Top = 84
+            Width = 68
+            Height = 14
             Caption = 'Description :'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
-            Font.Height = -11
+            Font.Height = -12
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object edtFAName: TEdit
-            Left = 93
-            Top = 18
-            Width = 268
+            Left = 32
+            Top = 41
+            Width = 793
             Height = 22
             Enabled = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -12
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
             ReadOnly = True
             TabOrder = 0
             Text = '<None>'
           end
           object btnFAPick: TButton
             Tag = 5
-            Left = 367
-            Top = 16
+            Left = 839
+            Top = 41
             Width = 50
             Height = 25
             Caption = 'Pick..'
@@ -540,22 +529,28 @@ object frmScenBuilder: TfrmScenBuilder
             OnClick = btnPickClick
           end
           object mmoFAInfo: TMemo
-            Left = 93
-            Top = 45
-            Width = 268
-            Height = 148
+            Left = 32
+            Top = 103
+            Width = 793
+            Height = 326
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -12
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
             ReadOnly = True
             TabOrder = 2
           end
           object btnClearFA: TButton
-            Tag = 1
-            Left = 367
-            Top = 47
+            Tag = 5
+            Left = 839
+            Top = 103
             Width = 50
             Height = 25
             Caption = 'Clear'
             TabOrder = 3
-            OnClick = btnClearFAClick
+            OnClick = btnClearPickClick
           end
         end
       end
@@ -33579,7 +33574,6 @@ object frmScenBuilder: TfrmScenBuilder
     TabOrder = 0
     TabWidth = 150
     Visible = False
-    OnChange = pgc2Change
     object tsBuilder: TTabSheet
       Caption = 'Scenario Builder'
       object pnlScenarioBuilderBackgraound: TPanel
@@ -33675,6 +33669,7 @@ object frmScenBuilder: TfrmScenBuilder
           Font.Style = []
           ParentFont = False
           Spacing = 0
+          ExplicitTop = 56
         end
       end
     end
@@ -33803,268 +33798,6 @@ object frmScenBuilder: TfrmScenBuilder
       TabOrder = 2
     end
     object mmo1: TMemo
-      Left = 390
-      Top = 117
-      Width = 919
-      Height = 100
-      TabOrder = 3
-    end
-  end
-  object pnlTank: TPanel
-    Left = 343
-    Top = 45
-    Width = 1325
-    Height = 786
-    BevelOuter = bvNone
-    Color = 3749426
-    ParentBackground = False
-    TabOrder = 7
-    object Label14: TLabel
-      Left = 14
-      Top = 15
-      Width = 159
-      Height = 14
-      Caption = 'Available Tank Condition :'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label15: TLabel
-      Left = 390
-      Top = 34
-      Width = 94
-      Height = 14
-      Caption = 'Condition Name :'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label16: TLabel
-      Left = 390
-      Top = 97
-      Width = 68
-      Height = 14
-      Caption = 'Description :'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label17: TLabel
-      Left = 394
-      Top = 232
-      Width = 64
-      Height = 14
-      Caption = 'Session ID :'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label18: TLabel
-      Left = 478
-      Top = 232
-      Width = 7
-      Height = 14
-      Caption = '0'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object lstTank: TListBox
-      Left = 14
-      Top = 35
-      Width = 355
-      Height = 696
-      ItemHeight = 13
-      TabOrder = 0
-    end
-    object BitBtn4: TBitBtn
-      Left = 14
-      Top = 738
-      Width = 355
-      Height = 34
-      Caption = 'Refresh Scenario'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      Glyph.Data = {
-        76010000424D7601000000000000760000002800000020000000100000000100
-        04000000000000010000130B0000130B00001000000000000000000000000000
-        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-        3333333333FFFFF3333333333999993333333333F77777FFF333333999999999
-        3333333777333777FF33339993707399933333773337F3777FF3399933000339
-        9933377333777F3377F3399333707333993337733337333337FF993333333333
-        399377F33333F333377F993333303333399377F33337FF333373993333707333
-        333377F333777F333333993333101333333377F333777F3FFFFF993333000399
-        999377FF33777F77777F3993330003399993373FF3777F37777F399933000333
-        99933773FF777F3F777F339993707399999333773F373F77777F333999999999
-        3393333777333777337333333999993333333333377777333333}
-      NumGlyphs = 2
-      ParentFont = False
-      TabOrder = 1
-    end
-    object Edit2: TEdit
-      Left = 390
-      Top = 54
-      Width = 433
-      Height = 22
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 2
-    end
-    object Memo3: TMemo
-      Left = 390
-      Top = 117
-      Width = 919
-      Height = 100
-      TabOrder = 3
-    end
-  end
-  object pnlFA: TPanel
-    Left = 343
-    Top = 45
-    Width = 1325
-    Height = 786
-    BevelOuter = bvNone
-    Color = 3749426
-    ParentBackground = False
-    TabOrder = 8
-    object Label19: TLabel
-      Left = 14
-      Top = 15
-      Width = 248
-      Height = 14
-      Caption = 'Available Function Allocation Condition :'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label20: TLabel
-      Left = 390
-      Top = 34
-      Width = 94
-      Height = 14
-      Caption = 'Condition Name :'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label21: TLabel
-      Left = 390
-      Top = 97
-      Width = 68
-      Height = 14
-      Caption = 'Description :'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label22: TLabel
-      Left = 394
-      Top = 232
-      Width = 64
-      Height = 14
-      Caption = 'Session ID :'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label23: TLabel
-      Left = 478
-      Top = 232
-      Width = 7
-      Height = 14
-      Caption = '0'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object lstFA: TListBox
-      Left = 14
-      Top = 35
-      Width = 355
-      Height = 696
-      ItemHeight = 13
-      TabOrder = 0
-    end
-    object BitBtn5: TBitBtn
-      Left = 14
-      Top = 738
-      Width = 355
-      Height = 34
-      Caption = 'Refresh Scenario'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      Glyph.Data = {
-        76010000424D7601000000000000760000002800000020000000100000000100
-        04000000000000010000130B0000130B00001000000000000000000000000000
-        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-        3333333333FFFFF3333333333999993333333333F77777FFF333333999999999
-        3333333777333777FF33339993707399933333773337F3777FF3399933000339
-        9933377333777F3377F3399333707333993337733337333337FF993333333333
-        399377F33333F333377F993333303333399377F33337FF333373993333707333
-        333377F333777F333333993333101333333377F333777F3FFFFF993333000399
-        999377FF33777F77777F3993330003399993373FF3777F37777F399933000333
-        99933773FF777F3F777F339993707399999333773F373F77777F333999999999
-        3393333777333777337333333999993333333333377777333333}
-      NumGlyphs = 2
-      ParentFont = False
-      TabOrder = 1
-    end
-    object Edit3: TEdit
-      Left = 390
-      Top = 54
-      Width = 433
-      Height = 22
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 2
-    end
-    object Memo4: TMemo
       Left = 390
       Top = 117
       Width = 919
@@ -34239,12 +33972,12 @@ object frmScenBuilder: TfrmScenBuilder
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 390
-      Top = 97
-      Width = 68
+      Left = 392
+      Top = 127
+      Width = 43
       Height = 14
-      Caption = 'Description :'
-      Font.Charset = DEFAULT_CHARSET
+      Caption = 'Control '
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -12
       Font.Name = 'Tahoma'
@@ -34252,12 +33985,25 @@ object frmScenBuilder: TfrmScenBuilder
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 394
-      Top = 232
-      Width = 64
+      Left = 582
+      Top = 124
+      Width = 4
       Height = 14
-      Caption = 'Session ID :'
-      Font.Charset = DEFAULT_CHARSET
+      Caption = ':'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl2: TLabel
+      Left = 392
+      Top = 154
+      Width = 74
+      Height = 14
+      Caption = 'Remote Port '
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -12
       Font.Name = 'Tahoma'
@@ -34265,12 +34011,224 @@ object frmScenBuilder: TfrmScenBuilder
       ParentFont = False
     end
     object Label13: TLabel
-      Left = 478
-      Top = 232
-      Width = 7
+      Left = 582
+      Top = 153
+      Width = 4
       Height = 14
-      Caption = '0'
-      Font.Charset = DEFAULT_CHARSET
+      Caption = ':'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl3: TLabel
+      Left = 392
+      Top = 181
+      Width = 104
+      Height = 28
+      Caption = 'Remote Starboard '#13#10
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label24: TLabel
+      Left = 582
+      Top = 180
+      Width = 4
+      Height = 14
+      Caption = ':'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl12: TLabel
+      Left = 392
+      Top = 210
+      Width = 135
+      Height = 14
+      Caption = 'Main Engine Port Status '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label25: TLabel
+      Left = 582
+      Top = 209
+      Width = 4
+      Height = 14
+      Caption = ':'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl13: TLabel
+      Left = 392
+      Top = 237
+      Width = 165
+      Height = 14
+      Caption = 'Main Engine Starboard Status '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label26: TLabel
+      Left = 582
+      Top = 235
+      Width = 4
+      Height = 14
+      Caption = ':'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl5: TLabel
+      Left = 392
+      Top = 264
+      Width = 128
+      Height = 14
+      Caption = 'Gear Box Port Engaged'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label27: TLabel
+      Left = 582
+      Top = 261
+      Width = 4
+      Height = 14
+      Caption = ':'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl7: TLabel
+      Left = 392
+      Top = 291
+      Width = 158
+      Height = 14
+      Caption = 'Gear Box Starboard Engaged'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label28: TLabel
+      Left = 582
+      Top = 291
+      Width = 4
+      Height = 14
+      Caption = ':'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblModeEngPort: TLabel
+      Left = 913
+      Top = 298
+      Width = 85
+      Height = 14
+      Caption = 'lblModeEngPort'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Visible = False
+    end
+    object lbl10: TLabel
+      Left = 392
+      Top = 320
+      Width = 98
+      Height = 28
+      Caption = 'Mode Engine Port'#13#10
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Visible = False
+    end
+    object Label29: TLabel
+      Left = 582
+      Top = 318
+      Width = 4
+      Height = 14
+      Caption = ':'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblModeEngStar: TLabel
+      Left = 913
+      Top = 349
+      Width = 84
+      Height = 14
+      Caption = 'lblModeEngStar'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Visible = False
+    end
+    object lbl11: TLabel
+      Left = 392
+      Top = 346
+      Width = 132
+      Height = 14
+      Caption = 'Mode Engine Starboard '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Visible = False
+    end
+    object Label30: TLabel
+      Left = 582
+      Top = 345
+      Width = 4
+      Height = 14
+      Caption = ':'
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -12
       Font.Name = 'Tahoma'
@@ -34326,12 +34284,1810 @@ object frmScenBuilder: TfrmScenBuilder
       ParentFont = False
       TabOrder = 2
     end
-    object Memo2: TMemo
-      Left = 390
-      Top = 117
-      Width = 919
-      Height = 100
+    object cbbControl: TComboBox
+      Tag = 1
+      Left = 593
+      Top = 125
+      Width = 145
+      Height = 22
+      Hint = 'Control'
+      Style = csDropDownList
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ItemIndex = 0
+      ParentFont = False
       TabOrder = 3
+      Text = 'Local'
+      Items.Strings = (
+        'Local'
+        'Remote')
+    end
+    object cbbRemotePort: TComboBox
+      Tag = 2
+      Left = 593
+      Top = 152
+      Width = 145
+      Height = 22
+      Hint = 'Remote Port'
+      Style = csDropDownList
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ItemIndex = 0
+      ParentFont = False
+      TabOrder = 4
+      Text = 'Auto'
+      Items.Strings = (
+        'Auto'
+        'Manual')
+    end
+    object cbbRemoteStar: TComboBox
+      Tag = 3
+      Left = 593
+      Top = 180
+      Width = 145
+      Height = 22
+      Hint = 'Remote Starboard'
+      Style = csDropDownList
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ItemIndex = 0
+      ParentFont = False
+      TabOrder = 5
+      Text = 'Auto'
+      Items.Strings = (
+        'Auto'
+        'Manual')
+    end
+    object cbbMainEnginePort: TComboBox
+      Tag = 4
+      Left = 593
+      Top = 208
+      Width = 145
+      Height = 22
+      Hint = 'Main Engine Port Status'
+      Style = csDropDownList
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ItemIndex = 0
+      ParentFont = False
+      TabOrder = 6
+      Text = 'Not Running'
+      Items.Strings = (
+        'Not Running'
+        'Running')
+    end
+    object cbbMainEngineStar: TComboBox
+      Tag = 5
+      Left = 593
+      Top = 235
+      Width = 145
+      Height = 22
+      Hint = 'Main Engine Starboard Status'
+      Style = csDropDownList
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ItemIndex = 0
+      ParentFont = False
+      TabOrder = 7
+      Text = 'Not Running'
+      Items.Strings = (
+        'Not Running'
+        'Running')
+    end
+    object cbbGearBoxPort: TComboBox
+      Tag = 6
+      Left = 593
+      Top = 262
+      Width = 145
+      Height = 22
+      Hint = 'Gear Box Port Engaged'
+      Style = csDropDownList
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ItemIndex = 0
+      ParentFont = False
+      TabOrder = 8
+      Text = 'Engaged'
+      Items.Strings = (
+        'Engaged'
+        'Disengaged')
+    end
+    object cbbGearBoxStar: TComboBox
+      Tag = 7
+      Left = 593
+      Top = 290
+      Width = 145
+      Height = 22
+      Hint = 'Gear Box Starboard Engaged'
+      Style = csDropDownList
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ItemIndex = 0
+      ParentFont = False
+      TabOrder = 9
+      Text = 'Engaged'
+      Items.Strings = (
+        'Engaged'
+        'Disengaged')
+    end
+    object trckbrHelmEngPort: TTrackBar
+      Left = 757
+      Top = 274
+      Width = 150
+      Height = 36
+      TabOrder = 10
+      Visible = False
+    end
+    object cbbModeEngPort: TComboBox
+      Tag = 8
+      Left = 593
+      Top = 318
+      Width = 145
+      Height = 22
+      Hint = 'Mode Engine Port'
+      Style = csDropDownList
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ItemIndex = 0
+      ParentFont = False
+      TabOrder = 11
+      Text = 'Manouvering'
+      Visible = False
+      Items.Strings = (
+        'Manouvering'
+        'Transit')
+    end
+    object trckbrHelmEngStar: TTrackBar
+      Left = 757
+      Top = 329
+      Width = 150
+      Height = 36
+      TabOrder = 12
+      Visible = False
+    end
+    object cbbModeEngStar: TComboBox
+      Tag = 9
+      Left = 593
+      Top = 344
+      Width = 145
+      Height = 22
+      Hint = 'Mode Engine Starboard'
+      Style = csDropDownList
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ItemIndex = 0
+      ParentFont = False
+      TabOrder = 13
+      Text = 'Manouvering'
+      Visible = False
+      Items.Strings = (
+        'Manouvering'
+        'Transit')
+    end
+  end
+  object pnlTank: TPanel
+    Left = 343
+    Top = 45
+    Width = 1325
+    Height = 786
+    BevelOuter = bvNone
+    Color = 3749426
+    ParentBackground = False
+    TabOrder = 7
+    object Label14: TLabel
+      Left = 14
+      Top = 15
+      Width = 159
+      Height = 14
+      Caption = 'Available Tank Condition :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label15: TLabel
+      Left = 390
+      Top = 34
+      Width = 94
+      Height = 14
+      Caption = 'Condition Name :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl38: TLabel
+      Left = 805
+      Top = 100
+      Width = 12
+      Height = 14
+      Caption = '%'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label16: TLabel
+      Left = 456
+      Top = 157
+      Width = 157
+      Height = 14
+      Caption = 'WATER BALLAST TANK PS :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl20: TLabel
+      Left = 744
+      Top = 157
+      Width = 180
+      Height = 14
+      Caption = '(Input Range : 0.00 - 21.96 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label17: TLabel
+      Left = 456
+      Top = 185
+      Width = 157
+      Height = 14
+      Caption = 'WATER BALLAST TANK SB :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label18: TLabel
+      Left = 744
+      Top = 185
+      Width = 180
+      Height = 14
+      Caption = '(Input Range : 0.00 - 21.96 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label31: TLabel
+      Left = 445
+      Top = 213
+      Width = 169
+      Height = 14
+      Caption = 'WATER BALLAST TANK FWD :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label32: TLabel
+      Left = 466
+      Top = 241
+      Width = 142
+      Height = 14
+      Caption = 'FRESH WATER TANK PS :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl9: TLabel
+      Left = 466
+      Top = 269
+      Width = 142
+      Height = 14
+      Caption = 'FRESH WATER TANK SB :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label33: TLabel
+      Left = 414
+      Top = 297
+      Width = 203
+      Height = 14
+      Caption = 'FRESH WATER ROLL STABLE TANK :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl6: TLabel
+      Left = 744
+      Top = 213
+      Width = 180
+      Height = 14
+      Caption = '(Input Range : 0.00 - 37.02 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl8: TLabel
+      Left = 744
+      Top = 241
+      Width = 180
+      Height = 14
+      Caption = '(Input Range : 0.00 - 15.29 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label34: TLabel
+      Left = 744
+      Top = 269
+      Width = 180
+      Height = 14
+      Caption = '(Input Range : 0.00 - 15.29 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label35: TLabel
+      Left = 744
+      Top = 297
+      Width = 187
+      Height = 14
+      Caption = '(Input Range : 0.00 - 120.64 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label36: TLabel
+      Left = 499
+      Top = 325
+      Width = 104
+      Height = 14
+      Caption = 'FUEL OIL TANK 1 :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl14: TLabel
+      Left = 744
+      Top = 325
+      Width = 180
+      Height = 14
+      Caption = '(Input Range : 0.00 - 80.35 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl15: TLabel
+      Left = 499
+      Top = 353
+      Width = 104
+      Height = 14
+      Caption = 'FUEL OIL TANK 2 :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl16: TLabel
+      Left = 744
+      Top = 353
+      Width = 180
+      Height = 14
+      Caption = '(Input Range : 0.00 - 35.17 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl17: TLabel
+      Left = 499
+      Top = 381
+      Width = 104
+      Height = 14
+      Caption = 'FUEL OIL TANK 3 :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl18: TLabel
+      Left = 744
+      Top = 381
+      Width = 180
+      Height = 14
+      Caption = '(Input Range : 0.00 - 45.43 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl19: TLabel
+      Left = 499
+      Top = 409
+      Width = 104
+      Height = 14
+      Caption = 'FUEL OIL TANK 4 :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl21: TLabel
+      Left = 744
+      Top = 409
+      Width = 180
+      Height = 14
+      Caption = '(Input Range : 0.00 - 41.76 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl22: TLabel
+      Left = 469
+      Top = 437
+      Width = 138
+      Height = 14
+      Caption = 'FUEL OVERFLOW TANK :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl23: TLabel
+      Left = 744
+      Top = 437
+      Width = 173
+      Height = 14
+      Caption = '(Input Range : 0.00 - 9.42 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl24: TLabel
+      Left = 453
+      Top = 465
+      Width = 155
+      Height = 14
+      Caption = 'FUEL OIL LOADING TRUNK :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl25: TLabel
+      Left = 744
+      Top = 465
+      Width = 173
+      Height = 14
+      Caption = '(Input Range : 0.00 - 9.00 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl26: TLabel
+      Left = 481
+      Top = 493
+      Width = 126
+      Height = 14
+      Caption = 'FUEL DAILY TANK PS :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl27: TLabel
+      Left = 744
+      Top = 493
+      Width = 173
+      Height = 14
+      Caption = '(Input Range : 0.00 - 7.59 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl28: TLabel
+      Left = 481
+      Top = 521
+      Width = 126
+      Height = 14
+      Caption = 'FUEL DAILY TANK SB :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl29: TLabel
+      Left = 744
+      Top = 521
+      Width = 173
+      Height = 14
+      Caption = '(Input Range : 0.00 - 7.59 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl30: TLabel
+      Left = 522
+      Top = 549
+      Width = 78
+      Height = 14
+      Caption = 'ME LO TANK :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl31: TLabel
+      Left = 744
+      Top = 549
+      Width = 173
+      Height = 14
+      Caption = '(Input Range : 0.00 - 5.69 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl32: TLabel
+      Left = 489
+      Top = 577
+      Width = 115
+      Height = 14
+      Caption = 'GEARBOX LO TANK :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl33: TLabel
+      Left = 744
+      Top = 577
+      Width = 173
+      Height = 14
+      Caption = '(Input Range : 0.00 - 1.50 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl34: TLabel
+      Left = 485
+      Top = 605
+      Width = 121
+      Height = 14
+      Caption = 'BILGE WATER TANK :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl35: TLabel
+      Left = 744
+      Top = 605
+      Width = 173
+      Height = 14
+      Caption = '(Input Range : 0.00 - 4.49 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl36: TLabel
+      Left = 461
+      Top = 633
+      Width = 149
+      Height = 14
+      Caption = 'SLUDGE DIRTY OIL TANK :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl37: TLabel
+      Left = 744
+      Top = 633
+      Width = 173
+      Height = 14
+      Caption = '(Input Range : 0.00 - 4.49 m3)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lstTank: TListBox
+      Left = 14
+      Top = 35
+      Width = 355
+      Height = 696
+      ItemHeight = 13
+      TabOrder = 0
+    end
+    object BitBtn4: TBitBtn
+      Left = 14
+      Top = 738
+      Width = 355
+      Height = 34
+      Caption = 'Refresh Scenario'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333FFFFF3333333333999993333333333F77777FFF333333999999999
+        3333333777333777FF33339993707399933333773337F3777FF3399933000339
+        9933377333777F3377F3399333707333993337733337333337FF993333333333
+        399377F33333F333377F993333303333399377F33337FF333373993333707333
+        333377F333777F333333993333101333333377F333777F3FFFFF993333000399
+        999377FF33777F77777F3993330003399993373FF3777F37777F399933000333
+        99933773FF777F3F777F339993707399999333773F373F77777F333999999999
+        3393333777333777337333333999993333333333377777333333}
+      NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+    end
+    object Edit2: TEdit
+      Left = 390
+      Top = 54
+      Width = 433
+      Height = 22
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+    end
+    object cbbSetValue: TComboBox
+      Left = 546
+      Top = 97
+      Width = 192
+      Height = 22
+      Style = csDropDownList
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      Items.Strings = (
+        'SET FOR ALL'
+        'WATER BALLAST TANK PS LEVEL'
+        'WATER BALLAST TANK SB LEVEL'
+        'WATER BALLAST TANK FWD LEVEL'
+        'FW TANK PS LEVEL'
+        'FW TANK SB LEVEL'
+        'FW ROLL STABIL TANK LEVEL'
+        'FUEL OIL TK 1 LEVEL LT'
+        'FUEL OIL TK 2 LEVEL LT'
+        'FUEL OIL TK 3 LEVEL LT'
+        'FUEL OIL TK 4 LEVEL LT'
+        'FUEL OVERFLOW TK LEVEL LT'
+        'FUEL OIL LOADING TRUNK'
+        'FUEL DAILY TK PS LEVEL LT'
+        'FUEL DAILY TK SB LEVEL LT'
+        'ME LO TANK LEVEL'
+        'GEARBOX LO TANK LEVEL'
+        'BILGE WATER TANK LEVEL LT'
+        'SLUDGE DIRTY OIL TANK LEVEL')
+    end
+    object edtPersen: TEdit
+      Tag = 19
+      Left = 744
+      Top = 97
+      Width = 57
+      Height = 22
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      Text = '0'
+    end
+    object btnFullAll: TButton
+      Left = 824
+      Top = 95
+      Width = 75
+      Height = 25
+      Caption = 'Set Value'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+    end
+    object edtWBPS: TEdit
+      Tag = 1
+      Left = 617
+      Top = 153
+      Width = 121
+      Height = 22
+      Hint = '5292S0002A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
+      Text = '0'
+    end
+    object edtWBSB: TEdit
+      Tag = 2
+      Left = 617
+      Top = 181
+      Width = 121
+      Height = 22
+      Hint = '5292S0003A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+      Text = '0'
+    end
+    object edtWBFWD: TEdit
+      Tag = 3
+      Left = 617
+      Top = 209
+      Width = 121
+      Height = 22
+      Hint = '5292S0001A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 8
+      Text = '0'
+    end
+    object edtFWTKPS: TEdit
+      Tag = 4
+      Left = 617
+      Top = 237
+      Width = 121
+      Height = 22
+      Hint = '5321S0002A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 9
+      Text = '0'
+    end
+    object edtFWTKSB: TEdit
+      Tag = 5
+      Left = 617
+      Top = 265
+      Width = 121
+      Height = 22
+      Hint = '5321S0001A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 10
+      Text = '0'
+    end
+    object edtFWROLLSTABTK: TEdit
+      Tag = 6
+      Left = 617
+      Top = 293
+      Width = 121
+      Height = 22
+      Hint = '5321S0003A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 11
+      Text = '0'
+    end
+    object edtFOTK1: TEdit
+      Tag = 7
+      Left = 617
+      Top = 321
+      Width = 121
+      Height = 22
+      Hint = '5411S0001A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 12
+      Text = '0'
+    end
+    object edtFOTK2: TEdit
+      Tag = 8
+      Left = 617
+      Top = 349
+      Width = 121
+      Height = 22
+      Hint = '5411S0002A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 13
+      Text = '0'
+    end
+    object edtFOTK3: TEdit
+      Tag = 9
+      Left = 617
+      Top = 377
+      Width = 121
+      Height = 22
+      Hint = '5411S0003A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 14
+      Text = '0'
+    end
+    object edtFOTK4: TEdit
+      Tag = 10
+      Left = 617
+      Top = 405
+      Width = 121
+      Height = 22
+      Hint = '5411S0004A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 15
+      Text = '0'
+    end
+    object edtFOOVTK: TEdit
+      Tag = 11
+      Left = 617
+      Top = 433
+      Width = 121
+      Height = 22
+      Hint = '5412S0010A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 16
+      Text = '0'
+    end
+    object edtFOLOADTRUNK: TEdit
+      Tag = 12
+      Left = 617
+      Top = 461
+      Width = 121
+      Height = 22
+      Hint = '5411S0006A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 17
+      Text = '0'
+    end
+    object edtFODAILYPS: TEdit
+      Tag = 13
+      Left = 617
+      Top = 489
+      Width = 121
+      Height = 22
+      Hint = '5412S0004A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 18
+      Text = '0'
+    end
+    object edtFODAILYSB: TEdit
+      Tag = 14
+      Left = 617
+      Top = 517
+      Width = 121
+      Height = 22
+      Hint = '5412S0001A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 19
+      Text = '0'
+    end
+    object edtMELOTK: TEdit
+      Tag = 15
+      Left = 617
+      Top = 545
+      Width = 121
+      Height = 22
+      Hint = '2621S0002A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 20
+      Text = '0'
+    end
+    object edtGBXLOTK: TEdit
+      Tag = 16
+      Left = 617
+      Top = 573
+      Width = 121
+      Height = 22
+      Hint = '2621S0001A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 21
+      Text = '0'
+    end
+    object edtBILGEWTK: TEdit
+      Tag = 17
+      Left = 617
+      Top = 601
+      Width = 121
+      Height = 22
+      Hint = '5932S0001A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 22
+      Text = '0'
+    end
+    object edtSLDIRTYTK: TEdit
+      Tag = 18
+      Left = 617
+      Top = 629
+      Width = 121
+      Height = 22
+      Hint = '2622S0001A'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 23
+      Text = '0'
+    end
+  end
+  object pnlFA: TPanel
+    Left = 343
+    Top = 45
+    Width = 1325
+    Height = 786
+    BevelOuter = bvNone
+    Color = 3749426
+    ParentBackground = False
+    TabOrder = 8
+    object Label19: TLabel
+      Left = 14
+      Top = 15
+      Width = 248
+      Height = 14
+      Caption = 'Available Function Allocation Condition :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label20: TLabel
+      Left = 390
+      Top = 34
+      Width = 94
+      Height = 14
+      Caption = 'Condition Name :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblAlarm_DGSETS: TLabel
+      Left = 406
+      Top = 127
+      Width = 47
+      Height = 16
+      Caption = 'DGSETS'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblRole_PCS: TLabel
+      Left = 793
+      Top = 95
+      Width = 24
+      Height = 16
+      Caption = 'PCS'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblRole_IPMS: TLabel
+      Left = 584
+      Top = 95
+      Width = 32
+      Height = 16
+      Caption = 'IPMS'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblRole_E: TLabel
+      Left = 892
+      Top = 95
+      Width = 7
+      Height = 16
+      Caption = 'E'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblRole_AUX: TLabel
+      Left = 691
+      Top = 95
+      Width = 27
+      Height = 16
+      Caption = 'AUX'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblAlarm_Propultion: TLabel
+      Left = 406
+      Top = 179
+      Width = 66
+      Height = 16
+      Caption = 'Propultion'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblAlarm_Navigation: TLabel
+      Left = 406
+      Top = 335
+      Width = 68
+      Height = 16
+      Caption = 'Navigation'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblAlarm_IPMS: TLabel
+      Left = 406
+      Top = 387
+      Width = 32
+      Height = 16
+      Caption = 'IPMS'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblAlarm_IAS: TLabel
+      Left = 406
+      Top = 413
+      Width = 23
+      Height = 16
+      Caption = 'IAS'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblAlarm_HVAC: TLabel
+      Left = 406
+      Top = 283
+      Width = 36
+      Height = 16
+      Caption = 'HVAC'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblAlarm_Fuel: TLabel
+      Left = 406
+      Top = 231
+      Width = 25
+      Height = 16
+      Caption = 'Fuel'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblAlarm_FFDC: TLabel
+      Left = 406
+      Top = 309
+      Width = 29
+      Height = 16
+      Caption = 'FFDC'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblAlarm_Domest: TLabel
+      Left = 406
+      Top = 257
+      Width = 49
+      Height = 16
+      Caption = 'Domest'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblAlarm_Distribution: TLabel
+      Left = 406
+      Top = 153
+      Width = 75
+      Height = 16
+      Caption = 'Distribution'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblAlarm_Ballast: TLabel
+      Left = 406
+      Top = 361
+      Width = 43
+      Height = 16
+      Caption = 'Ballast'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblAlarm_Auxiliary: TLabel
+      Left = 406
+      Top = 205
+      Width = 56
+      Height = 16
+      Caption = 'Auxiliary'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lstFA: TListBox
+      Left = 14
+      Top = 35
+      Width = 355
+      Height = 696
+      ItemHeight = 13
+      TabOrder = 0
+    end
+    object BitBtn5: TBitBtn
+      Left = 14
+      Top = 738
+      Width = 355
+      Height = 34
+      Caption = 'Refresh Scenario'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333FFFFF3333333333999993333333333F77777FFF333333999999999
+        3333333777333777FF33339993707399933333773337F3777FF3399933000339
+        9933377333777F3377F3399333707333993337733337333337FF993333333333
+        399377F33333F333377F993333303333399377F33337FF333373993333707333
+        333377F333777F333333993333101333333377F333777F3FFFFF993333000399
+        999377FF33777F77777F3993330003399993373FF3777F37777F399933000333
+        99933773FF777F3F777F339993707399999333773F373F77777F333999999999
+        3393333777333777337333333999993333333333377777333333}
+      NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+    end
+    object Edit3: TEdit
+      Left = 390
+      Top = 54
+      Width = 433
+      Height = 22
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+    end
+    object CheckBox9: TCheckBox
+      Tag = 9
+      Left = 591
+      Top = 335
+      Width = 17
+      Height = 17
+      TabOrder = 3
+    end
+    object CheckBox8: TCheckBox
+      Tag = 8
+      Left = 591
+      Top = 309
+      Width = 17
+      Height = 17
+      TabOrder = 4
+    end
+    object CheckBox7: TCheckBox
+      Tag = 7
+      Left = 591
+      Top = 283
+      Width = 17
+      Height = 17
+      TabOrder = 5
+    end
+    object CheckBox6: TCheckBox
+      Tag = 6
+      Left = 591
+      Top = 257
+      Width = 17
+      Height = 17
+      TabOrder = 6
+    end
+    object CheckBox5: TCheckBox
+      Tag = 5
+      Left = 591
+      Top = 231
+      Width = 17
+      Height = 17
+      TabOrder = 7
+    end
+    object CheckBox48: TCheckBox
+      Tag = 12
+      Left = 887
+      Top = 412
+      Width = 17
+      Height = 17
+      Enabled = False
+      TabOrder = 8
+    end
+    object CheckBox47: TCheckBox
+      Tag = 11
+      Left = 887
+      Top = 386
+      Width = 17
+      Height = 17
+      TabOrder = 9
+    end
+    object CheckBox46: TCheckBox
+      Tag = 10
+      Left = 887
+      Top = 360
+      Width = 17
+      Height = 17
+      TabOrder = 10
+    end
+    object CheckBox45: TCheckBox
+      Tag = 9
+      Left = 887
+      Top = 334
+      Width = 17
+      Height = 17
+      TabOrder = 11
+    end
+    object CheckBox44: TCheckBox
+      Tag = 8
+      Left = 887
+      Top = 308
+      Width = 17
+      Height = 17
+      TabOrder = 12
+    end
+    object CheckBox43: TCheckBox
+      Tag = 7
+      Left = 887
+      Top = 282
+      Width = 17
+      Height = 17
+      TabOrder = 13
+    end
+    object CheckBox42: TCheckBox
+      Tag = 6
+      Left = 887
+      Top = 256
+      Width = 17
+      Height = 17
+      TabOrder = 14
+    end
+    object CheckBox41: TCheckBox
+      Tag = 5
+      Left = 887
+      Top = 230
+      Width = 17
+      Height = 17
+      TabOrder = 15
+    end
+    object CheckBox40: TCheckBox
+      Tag = 4
+      Left = 887
+      Top = 204
+      Width = 17
+      Height = 17
+      TabOrder = 16
+    end
+    object CheckBox4: TCheckBox
+      Tag = 4
+      Left = 591
+      Top = 205
+      Width = 17
+      Height = 17
+      TabOrder = 17
+    end
+    object CheckBox39: TCheckBox
+      Tag = 3
+      Left = 887
+      Top = 178
+      Width = 17
+      Height = 17
+      TabOrder = 18
+    end
+    object CheckBox38: TCheckBox
+      Tag = 2
+      Left = 887
+      Top = 152
+      Width = 17
+      Height = 17
+      TabOrder = 19
+    end
+    object CheckBox37: TCheckBox
+      Tag = 1
+      Left = 887
+      Top = 127
+      Width = 17
+      Height = 17
+      TabOrder = 20
+    end
+    object CheckBox36: TCheckBox
+      Tag = 12
+      Left = 796
+      Top = 412
+      Width = 17
+      Height = 17
+      Enabled = False
+      TabOrder = 21
+    end
+    object CheckBox35: TCheckBox
+      Tag = 11
+      Left = 796
+      Top = 386
+      Width = 17
+      Height = 17
+      TabOrder = 22
+    end
+    object CheckBox34: TCheckBox
+      Tag = 10
+      Left = 796
+      Top = 360
+      Width = 17
+      Height = 17
+      TabOrder = 23
+    end
+    object CheckBox33: TCheckBox
+      Tag = 9
+      Left = 796
+      Top = 334
+      Width = 17
+      Height = 17
+      TabOrder = 24
+    end
+    object CheckBox32: TCheckBox
+      Tag = 8
+      Left = 796
+      Top = 308
+      Width = 17
+      Height = 17
+      TabOrder = 25
+    end
+    object CheckBox31: TCheckBox
+      Tag = 7
+      Left = 796
+      Top = 282
+      Width = 17
+      Height = 17
+      TabOrder = 26
+    end
+    object CheckBox30: TCheckBox
+      Tag = 6
+      Left = 796
+      Top = 256
+      Width = 17
+      Height = 17
+      TabOrder = 27
+    end
+    object CheckBox3: TCheckBox
+      Tag = 3
+      Left = 591
+      Top = 179
+      Width = 17
+      Height = 17
+      TabOrder = 28
+    end
+    object CheckBox29: TCheckBox
+      Tag = 5
+      Left = 796
+      Top = 230
+      Width = 17
+      Height = 17
+      TabOrder = 29
+    end
+    object CheckBox28: TCheckBox
+      Tag = 4
+      Left = 796
+      Top = 204
+      Width = 17
+      Height = 17
+      TabOrder = 30
+    end
+    object CheckBox27: TCheckBox
+      Tag = 3
+      Left = 796
+      Top = 178
+      Width = 17
+      Height = 17
+      TabOrder = 31
+    end
+    object CheckBox26: TCheckBox
+      Tag = 2
+      Left = 796
+      Top = 152
+      Width = 17
+      Height = 17
+      TabOrder = 32
+    end
+    object CheckBox25: TCheckBox
+      Tag = 1
+      Left = 796
+      Top = 127
+      Width = 17
+      Height = 17
+      TabOrder = 33
+    end
+    object CheckBox24: TCheckBox
+      Tag = 12
+      Left = 696
+      Top = 412
+      Width = 17
+      Height = 17
+      Enabled = False
+      TabOrder = 34
+    end
+    object CheckBox23: TCheckBox
+      Tag = 11
+      Left = 696
+      Top = 386
+      Width = 17
+      Height = 17
+      TabOrder = 35
+    end
+    object CheckBox22: TCheckBox
+      Tag = 10
+      Left = 696
+      Top = 360
+      Width = 17
+      Height = 17
+      TabOrder = 36
+    end
+    object CheckBox21: TCheckBox
+      Tag = 9
+      Left = 696
+      Top = 334
+      Width = 17
+      Height = 17
+      TabOrder = 37
+    end
+    object CheckBox20: TCheckBox
+      Tag = 8
+      Left = 696
+      Top = 308
+      Width = 17
+      Height = 17
+      TabOrder = 38
+    end
+    object CheckBox2: TCheckBox
+      Tag = 2
+      Left = 591
+      Top = 153
+      Width = 17
+      Height = 17
+      TabOrder = 39
+    end
+    object CheckBox19: TCheckBox
+      Tag = 7
+      Left = 696
+      Top = 282
+      Width = 17
+      Height = 17
+      TabOrder = 40
+    end
+    object CheckBox18: TCheckBox
+      Tag = 6
+      Left = 696
+      Top = 256
+      Width = 17
+      Height = 17
+      TabOrder = 41
+    end
+    object CheckBox17: TCheckBox
+      Tag = 5
+      Left = 696
+      Top = 230
+      Width = 17
+      Height = 17
+      TabOrder = 42
+    end
+    object CheckBox16: TCheckBox
+      Tag = 4
+      Left = 696
+      Top = 204
+      Width = 17
+      Height = 17
+      TabOrder = 43
+    end
+    object CheckBox15: TCheckBox
+      Tag = 3
+      Left = 696
+      Top = 178
+      Width = 17
+      Height = 17
+      TabOrder = 44
+    end
+    object CheckBox14: TCheckBox
+      Tag = 2
+      Left = 696
+      Top = 152
+      Width = 17
+      Height = 17
+      TabOrder = 45
+    end
+    object CheckBox13: TCheckBox
+      Tag = 1
+      Left = 696
+      Top = 127
+      Width = 17
+      Height = 17
+      TabOrder = 46
+    end
+    object CheckBox12: TCheckBox
+      Tag = 12
+      Left = 591
+      Top = 413
+      Width = 17
+      Height = 17
+      Enabled = False
+      TabOrder = 47
+    end
+    object CheckBox11: TCheckBox
+      Tag = 11
+      Left = 591
+      Top = 387
+      Width = 17
+      Height = 17
+      TabOrder = 48
+    end
+    object CheckBox10: TCheckBox
+      Tag = 10
+      Left = 591
+      Top = 361
+      Width = 17
+      Height = 17
+      TabOrder = 49
+    end
+    object CheckBox1: TCheckBox
+      Tag = 1
+      Left = 591
+      Top = 127
+      Width = 17
+      Height = 17
+      TabOrder = 50
     end
   end
   object actmgr1: TActionManager

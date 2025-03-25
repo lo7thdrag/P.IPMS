@@ -51,8 +51,8 @@ type
     btnRefreshScen: TBitBtn;
     lblName: TLabel;
     lblDescription: TLabel;
-    edtName: TEdit;
-    mmoDescription: TMemo;
+    edtScenarioName: TEdit;
+    mmoScenarioDescription: TMemo;
     pgc1: TPageControl;
     tsPMS: TTabSheet;
     pnlPMSBackgraound: TPanel;
@@ -114,33 +114,174 @@ type
     pnlPCS: TPanel;
     Label9: TLabel;
     Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    Label13: TLabel;
     lstPropulsion: TListBox;
     BitBtn3: TBitBtn;
     edtPCSConditionName: TEdit;
-    Memo2: TMemo;
     pnlTank: TPanel;
     Label14: TLabel;
     Label15: TLabel;
-    Label16: TLabel;
-    Label17: TLabel;
-    Label18: TLabel;
     lstTank: TListBox;
     BitBtn4: TBitBtn;
     Edit2: TEdit;
-    Memo3: TMemo;
     pnlFA: TPanel;
     Label19: TLabel;
     Label20: TLabel;
-    Label21: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
     lstFA: TListBox;
     BitBtn5: TBitBtn;
     Edit3: TEdit;
-    Memo4: TMemo;
+    Label11: TLabel;
+    Label12: TLabel;
+    cbbControl: TComboBox;
+    lbl2: TLabel;
+    Label13: TLabel;
+    cbbRemotePort: TComboBox;
+    lbl3: TLabel;
+    Label24: TLabel;
+    cbbRemoteStar: TComboBox;
+    lbl12: TLabel;
+    Label25: TLabel;
+    cbbMainEnginePort: TComboBox;
+    lbl13: TLabel;
+    Label26: TLabel;
+    cbbMainEngineStar: TComboBox;
+    lbl5: TLabel;
+    Label27: TLabel;
+    cbbGearBoxPort: TComboBox;
+    lbl7: TLabel;
+    Label28: TLabel;
+    cbbGearBoxStar: TComboBox;
+    trckbrHelmEngPort: TTrackBar;
+    lblModeEngPort: TLabel;
+    lbl10: TLabel;
+    Label29: TLabel;
+    cbbModeEngPort: TComboBox;
+    trckbrHelmEngStar: TTrackBar;
+    lblModeEngStar: TLabel;
+    lbl11: TLabel;
+    Label30: TLabel;
+    cbbModeEngStar: TComboBox;
+    cbbSetValue: TComboBox;
+    edtPersen: TEdit;
+    lbl38: TLabel;
+    btnFullAll: TButton;
+    Label16: TLabel;
+    edtWBPS: TEdit;
+    lbl20: TLabel;
+    Label17: TLabel;
+    edtWBSB: TEdit;
+    Label18: TLabel;
+    Label31: TLabel;
+    Label32: TLabel;
+    lbl9: TLabel;
+    Label33: TLabel;
+    edtWBFWD: TEdit;
+    edtFWTKPS: TEdit;
+    edtFWTKSB: TEdit;
+    edtFWROLLSTABTK: TEdit;
+    lbl6: TLabel;
+    lbl8: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    Label36: TLabel;
+    edtFOTK1: TEdit;
+    lbl14: TLabel;
+    lbl15: TLabel;
+    edtFOTK2: TEdit;
+    lbl16: TLabel;
+    lbl17: TLabel;
+    edtFOTK3: TEdit;
+    lbl18: TLabel;
+    lbl19: TLabel;
+    edtFOTK4: TEdit;
+    lbl21: TLabel;
+    lbl22: TLabel;
+    edtFOOVTK: TEdit;
+    lbl23: TLabel;
+    lbl24: TLabel;
+    edtFOLOADTRUNK: TEdit;
+    lbl25: TLabel;
+    lbl26: TLabel;
+    edtFODAILYPS: TEdit;
+    lbl27: TLabel;
+    lbl28: TLabel;
+    edtFODAILYSB: TEdit;
+    lbl29: TLabel;
+    lbl30: TLabel;
+    edtMELOTK: TEdit;
+    lbl31: TLabel;
+    lbl32: TLabel;
+    edtGBXLOTK: TEdit;
+    lbl33: TLabel;
+    lbl34: TLabel;
+    edtBILGEWTK: TEdit;
+    lbl35: TLabel;
+    lbl36: TLabel;
+    edtSLDIRTYTK: TEdit;
+    lbl37: TLabel;
+    lblAlarm_DGSETS: TLabel;
+    lblRole_PCS: TLabel;
+    lblRole_IPMS: TLabel;
+    lblRole_E: TLabel;
+    lblRole_AUX: TLabel;
+    lblAlarm_Propultion: TLabel;
+    lblAlarm_Navigation: TLabel;
+    lblAlarm_IPMS: TLabel;
+    lblAlarm_IAS: TLabel;
+    lblAlarm_HVAC: TLabel;
+    lblAlarm_Fuel: TLabel;
+    lblAlarm_FFDC: TLabel;
+    lblAlarm_Domest: TLabel;
+    lblAlarm_Distribution: TLabel;
+    lblAlarm_Ballast: TLabel;
+    lblAlarm_Auxiliary: TLabel;
+    CheckBox9: TCheckBox;
+    CheckBox8: TCheckBox;
+    CheckBox7: TCheckBox;
+    CheckBox6: TCheckBox;
+    CheckBox5: TCheckBox;
+    CheckBox48: TCheckBox;
+    CheckBox47: TCheckBox;
+    CheckBox46: TCheckBox;
+    CheckBox45: TCheckBox;
+    CheckBox44: TCheckBox;
+    CheckBox43: TCheckBox;
+    CheckBox42: TCheckBox;
+    CheckBox41: TCheckBox;
+    CheckBox40: TCheckBox;
+    CheckBox4: TCheckBox;
+    CheckBox39: TCheckBox;
+    CheckBox38: TCheckBox;
+    CheckBox37: TCheckBox;
+    CheckBox36: TCheckBox;
+    CheckBox35: TCheckBox;
+    CheckBox34: TCheckBox;
+    CheckBox33: TCheckBox;
+    CheckBox32: TCheckBox;
+    CheckBox31: TCheckBox;
+    CheckBox30: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox29: TCheckBox;
+    CheckBox28: TCheckBox;
+    CheckBox27: TCheckBox;
+    CheckBox26: TCheckBox;
+    CheckBox25: TCheckBox;
+    CheckBox24: TCheckBox;
+    CheckBox23: TCheckBox;
+    CheckBox22: TCheckBox;
+    CheckBox21: TCheckBox;
+    CheckBox20: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox19: TCheckBox;
+    CheckBox18: TCheckBox;
+    CheckBox17: TCheckBox;
+    CheckBox16: TCheckBox;
+    CheckBox15: TCheckBox;
+    CheckBox14: TCheckBox;
+    CheckBox13: TCheckBox;
+    CheckBox12: TCheckBox;
+    CheckBox11: TCheckBox;
+    CheckBox10: TCheckBox;
+    CheckBox1: TCheckBox;
     procedure actNewExecute(Sender: TObject);
     procedure actSaveExecute(Sender: TObject);
     procedure actCancelExecute(Sender: TObject);
@@ -148,20 +289,13 @@ type
     procedure actPickExecute(Sender: TObject);
     procedure actDeleteExecute(Sender: TObject);
     procedure btnPickClick(Sender: TObject);
-    procedure btnClearPMSClick(Sender: TObject);
-    procedure btnClearPCSClick(Sender: TObject);
-    procedure btnClearElementClick(Sender: TObject);
-    procedure btnClearFAClick(Sender: TObject);
-    procedure btnClearTANKClick(Sender: TObject);
+    procedure btnClearPickClick(Sender: TObject);
     procedure actChooseRSExecute(Sender: TObject);
     procedure actDeleteRSExecute(Sender: TObject);
     procedure actDeleteAllExecute(Sender: TObject);
     procedure Action1Execute(Sender: TObject);
     procedure act2Execute(Sender: TObject);
-    procedure strngrdConditionSelectCell(Sender: TObject; ACol, ARow: Integer;
-      var CanSelect: Boolean);
     procedure act4Execute(Sender: TObject);
-    procedure pgc2Change(Sender: TObject);
     procedure btnMenuClick(Sender: TObject);
 
   private
@@ -172,6 +306,8 @@ type
     FTANKConditionID : Integer;
     FFAConditionID : Integer;
     FSelectedConditionID : integer;
+
+    procedure ClearTabPickScen(value : Integer);
 
   public
     procedure UpdateScenarioList;
@@ -252,26 +388,15 @@ begin
       Exit;
 
     FScenarioID := scenData.ID;
-    edtName.Text := scenData.Name;
+    edtScenarioName.Text := scenData.Name;
 
-    mmoDescription.Lines.Clear;
-    mmoDescription.Lines.Add(scenData.Description);
+    mmoScenarioDescription.Lines.Clear;
+    mmoScenarioDescription.Lines.Add(scenData.Description);
 
-    FPMSConditionID := 0;
-    edtPMSName.Text := '<None>';
-    FPCSConditionID := 0;
-    edtPCSName.Text := '<None>';
-    FElementConditionID := 0;
-    edtElementName.Text := '<None>';
-    FTANKConditionID := 0;
-    edtTANKName.Text := '<None>';
-    FFAConditionID := 0;
-    edtFAName.Text := '<None>';
-
-    mmoPMSInfo.Lines.Clear;
-    mmoPCSInfo.Lines.Clear;
-    mmoTANKInfo.Lines.Clear;
-    mmoFAInfo.Lines.Clear;
+    for i := 1 to 4 do
+    begin
+      ClearTabPickScen(i);
+    end;
 
     for i := 0 to Length(scenData.ArrConditionID) - 1 do
     begin
@@ -381,9 +506,9 @@ begin
   if FScenarioID = 0then
     Exit;
 
-  conname := edtName.Text;
+  conname := edtScenarioName.Text;
 
-  if MessageDlg('Are You Sure To Delete "' + edtName.Text + '" Scenario ? '+#13+#10+
+  if MessageDlg('Are You Sure To Delete "' + edtScenarioName.Text + '" Scenario ? '+#13+#10+
       'All Sessions Linked To Scenario Will Be Deleted..!', mtWarning, [mbYes, mbNo], 0) = mrYes then;
   begin
     InstructorSys.Scenario.deleteScenario(FScenarioID);
@@ -434,8 +559,8 @@ end;
 
 procedure TfrmScenBuilder.actNewExecute(Sender: TObject);
 begin
-  edtName.Text := '';
-  mmoDescription.Text := '';
+  edtScenarioName.Text := '';
+  mmoScenarioDescription.Text := '';
 
   edtPMSName.Text := '<None>';
   mmoPMSInfo.Clear;
@@ -481,10 +606,10 @@ begin
       Exit;
 
     FScenarioID := scenData.ID;
-    edtName.Text := scenData.Name;
+    edtScenarioName.Text := scenData.Name;
 
-    mmoDescription.Lines.Clear;
-    mmoDescription.Lines.Add(scenData.Description);
+    mmoScenarioDescription.Lines.Clear;
+    mmoScenarioDescription.Lines.Add(scenData.Description);
 
     FPMSConditionID := 0;
     edtPMSName.Text := '<None>';
@@ -553,7 +678,7 @@ var
   intArr : array of integer;
   i : integer;
 begin
-  if Trim(edtName.Text) = '' then
+  if Trim(edtScenarioName.Text) = '' then
   begin
     ShowMessage('Scenario Name Is Empty, Please Insert Scenario Name');
     Exit;
@@ -595,155 +720,8 @@ begin
   end;
 
 
-  FScenarioID := InstructorSys.Scenario.insertScenario(FScenarioID, edtName.Text,
-    mmoDescription.Lines.Text, intArr);
-end;
-
-procedure TfrmScenBuilder.btnClearElementClick(Sender: TObject);
-begin
-  edtElementName.Text := '<None>';
-  FElementConditionID := 0;
-end;
-
-procedure TfrmScenBuilder.btnClearFAClick(Sender: TObject);
-begin
-  edtFAName.Text := '<None>';
-  FFAConditionID := 0;
-  mmoFAInfo.Lines.Clear;
-end;
-
-procedure TfrmScenBuilder.btnClearTANKClick(Sender: TObject);
-begin
-  edtTANKName.Text := '<None>';
-  FTANKConditionID := 0;
-  mmoTANKInfo.Lines.Clear;
-end;
-
-procedure TfrmScenBuilder.btnClearPCSClick(Sender: TObject);
-begin
-  edtPCSName.Text := '<None>';
-  FPCSConditionID := 0;
-  mmoPCSInfo.Lines.Clear;
-end;
-
-procedure TfrmScenBuilder.btnClearPMSClick(Sender: TObject);
-begin
-  edtPMSName.Text := '<None>';
-  FPMSConditionID := 0;
-  mmoPMSInfo.Lines.Clear;
-end;
-
-procedure TfrmScenBuilder.btnPickClick(Sender: TObject);
-var
-  pickList,l : TStrings;
-begin
-  pickList := nil;
-
-  case TButton(Sender).Tag of
-    1:
-    begin
-      if not Assigned(frmAvailPMSCondition)  then
-        frmAvailPMSCondition := TfrmAvailPMSCondition.Create(self);
-
-      frmAvailPMSCondition.Caption := 'Available PMS';
-
-      InstructorSys.Scenario.GetPMSConditions(pickList);
-      frmAvailPMSCondition.SetAvailableCondition(pickList);
-      pickList.Free;
-
-      if frmAvailPMSCondition.ShowModal = mrOk then
-      begin
-        if frmAvailPMSCondition.PMSCondName = '' then
-          Exit;
-
-        edtPMSName.Text := frmAvailPMSCondition.PMSCondName;
-        FPMSConditionID := InstructorSys.Database.GetConditionID(edtPMSName.Text);
-
-        mmoPMSInfo.Lines.Clear;
-        l := InstructorSys.Database.GetConditions(edtPMSName.Text,'PMS');
-        mmoPMSInfo.Lines.AddStrings(l);
-        l.Free;
-      end;
-    end;
-    2:
-    begin
-      if not Assigned(frmAvailPCSCondition)  then
-        frmAvailPCSCondition := TfrmAvailPCSCondition.Create(self);
-
-      InstructorSys.Scenario.GetPCSConditions(pickList);
-      frmAvailPCSCondition.SetAvailableCondition(pickList);
-      pickList.Free;
-
-      if frmAvailPCSCondition.ShowModal = mrOk then
-      begin
-        if frmAvailPCSCondition.PCSCondName = '' then
-          Exit;
-
-        edtPCSName.Text := frmAvailPCSCondition.PCSCondName;
-        FPCSConditionID := InstructorSys.Database.GetConditionID(edtPCSName.Text);
-
-        mmoPCSInfo.Lines.Clear;
-        l := InstructorSys.Database.GetConditions(edtPCSName.Text,'PCS');
-        mmoPCSInfo.Lines.AddStrings(l);
-        l.Free;
-      end;
-    end;
-    3:
-    begin
-      if not Assigned(frmAvailPMSCondition)  then
-        frmAvailPMSCondition := TfrmAvailPMSCondition.Create(self);
-      frmAvailPMSCondition.Caption := 'Available Element Data';
-
-      InstructorSys.Scenario.GetElementConditions(pickList);
-      frmAvailPMSCondition.SetAvailableCondition(pickList);
-      pickList.Free;
-
-      if frmAvailPMSCondition.ShowModal = mrOk then
-      begin
-        if frmAvailPMSCondition.PMSCondName = '' then
-          Exit;
-
-        edtElementName.Text := frmAvailPMSCondition.PMSCondName;
-        FElementConditionID := InstructorSys.Database.GetConditionID(edtElementName.Text);
-      end;
-    end;
-    4:
-    begin
-      if not Assigned(frmTanksCondition)  then
-        frmTanksCondition := TfrmTanksCondition.Create(self);
-
-      InstructorSys.Scenario.GetTanksConditions(pickList);
-      frmTanksCondition.SetAvailableCondition(pickList);
-      pickList.Free;
-
-      if frmTanksCondition.ShowModal = mrOk then
-      begin
-        if frmTanksCondition.TanksCondName = '' then
-          Exit;
-
-        edtTANKName.Text := frmTanksCondition.TanksCondName;
-        FTANKConditionID := InstructorSys.Database.GetConditionID(edtTANKName.Text);
-      end;
-    end;
-    5:
-    begin
-      if not Assigned(frmAvailFACondition)  then
-        frmAvailFACondition := TfrmAvailFACondition.Create(self);
-
-      InstructorSys.Scenario.GetFAConditions(pickList);
-      frmAvailFACondition.SetAvailableCondition(pickList);
-      pickList.Free;
-
-      if frmAvailFACondition.ShowModal = mrOk then
-      begin
-        if frmAvailFACondition.FACondName = '' then
-          Exit;
-
-        edtFAName.Text := frmAvailFACondition.FACondName;
-        FFAConditionID := InstructorSys.Database.GetConditionID(edtFAName.Text);
-      end;
-    end;
-  end;
+  FScenarioID := InstructorSys.Scenario.insertScenario(FScenarioID, edtScenarioName.Text,
+    mmoScenarioDescription.Lines.Text, intArr);
 end;
 
 procedure TfrmScenBuilder.btnMenuClick(Sender: TObject);
@@ -792,32 +770,186 @@ procedure TfrmScenBuilder.FormCreate(Sender: TObject);
 begin
   FScenarioID := 0;
   FSelectedConditionID := 0;
-
-//  strngrdCondition.Cells[0,0] := 'ID';
-//  strngrdCondition.Cells[1,0] := 'Condition Name';
-
 end;
 
-procedure TfrmScenBuilder.pgc2Change(Sender: TObject);
+{$REGION ' Scenario Section '}
+
+procedure TfrmScenBuilder.btnPickClick(Sender: TObject);
+var
+  pickList,l : TStrings;
 begin
-//  UpdateScenarioList;
+  pickList := nil;
+
+  case TButton(Sender).Tag of
+    1:
+    begin
+      {$REGION ' PMS '}
+      if not Assigned(frmAvailPMSCondition)  then
+        frmAvailPMSCondition := TfrmAvailPMSCondition.Create(self);
+
+      frmAvailPMSCondition.Caption := 'Available PMS';
+
+      InstructorSys.Scenario.GetPMSConditions(pickList);
+      frmAvailPMSCondition.SetAvailableCondition(pickList);
+      pickList.Free;
+
+      if frmAvailPMSCondition.ShowModal = mrOk then
+      begin
+        if frmAvailPMSCondition.PMSCondName = '' then
+          Exit;
+
+        edtPMSName.Text := frmAvailPMSCondition.PMSCondName;
+        FPMSConditionID := InstructorSys.Database.GetConditionID(edtPMSName.Text);
+
+        mmoPMSInfo.Lines.Clear;
+        l := InstructorSys.Database.GetConditions(edtPMSName.Text,'PMS');
+        mmoPMSInfo.Lines.AddStrings(l);
+        l.Free;
+      end;
+      {$ENDREGION}
+    end;
+    2:
+    begin
+      {$REGION ' PCS '}
+      if not Assigned(frmAvailPCSCondition)  then
+        frmAvailPCSCondition := TfrmAvailPCSCondition.Create(self);
+
+      InstructorSys.Scenario.GetPCSConditions(pickList);
+      frmAvailPCSCondition.SetAvailableCondition(pickList);
+      pickList.Free;
+
+      if frmAvailPCSCondition.ShowModal = mrOk then
+      begin
+        if frmAvailPCSCondition.PCSCondName = '' then
+          Exit;
+
+        edtPCSName.Text := frmAvailPCSCondition.PCSCondName;
+        FPCSConditionID := InstructorSys.Database.GetConditionID(edtPCSName.Text);
+
+        mmoPCSInfo.Lines.Clear;
+        l := InstructorSys.Database.GetConditions(edtPCSName.Text,'PCS');
+        mmoPCSInfo.Lines.AddStrings(l);
+        l.Free;
+      end;
+      {$ENDREGION}
+    end;
+    3:
+    begin
+      {$REGION ' Element Data '}
+      if not Assigned(frmAvailPMSCondition)  then
+        frmAvailPMSCondition := TfrmAvailPMSCondition.Create(self);
+      frmAvailPMSCondition.Caption := 'Available Element Data';
+
+      InstructorSys.Scenario.GetElementConditions(pickList);
+      frmAvailPMSCondition.SetAvailableCondition(pickList);
+      pickList.Free;
+
+      if frmAvailPMSCondition.ShowModal = mrOk then
+      begin
+        if frmAvailPMSCondition.PMSCondName = '' then
+          Exit;
+
+        edtElementName.Text := frmAvailPMSCondition.PMSCondName;
+        FElementConditionID := InstructorSys.Database.GetConditionID(edtElementName.Text);
+      end;
+      {$ENDREGION}
+    end;
+    4:
+    begin
+      {$REGION ' TANK '}
+      if not Assigned(frmTanksCondition)  then
+        frmTanksCondition := TfrmTanksCondition.Create(self);
+
+      InstructorSys.Scenario.GetTanksConditions(pickList);
+      frmTanksCondition.SetAvailableCondition(pickList);
+      pickList.Free;
+
+      if frmTanksCondition.ShowModal = mrOk then
+      begin
+        if frmTanksCondition.TanksCondName = '' then
+          Exit;
+
+        edtTANKName.Text := frmTanksCondition.TanksCondName;
+        FTANKConditionID := InstructorSys.Database.GetConditionID(edtTANKName.Text);
+      end;
+      {$ENDREGION}
+    end;
+    5:
+    begin
+      {$REGION ' FA '}
+      if not Assigned(frmAvailFACondition)  then
+        frmAvailFACondition := TfrmAvailFACondition.Create(self);
+
+      InstructorSys.Scenario.GetFAConditions(pickList);
+      frmAvailFACondition.SetAvailableCondition(pickList);
+      pickList.Free;
+
+      if frmAvailFACondition.ShowModal = mrOk then
+      begin
+        if frmAvailFACondition.FACondName = '' then
+          Exit;
+
+        edtFAName.Text := frmAvailFACondition.FACondName;
+        FFAConditionID := InstructorSys.Database.GetConditionID(edtFAName.Text);
+      end;
+      {$ENDREGION}
+    end;
+  end;
 end;
 
-procedure TfrmScenBuilder.strngrdConditionSelectCell(Sender: TObject; ACol,
-  ARow: Integer; var CanSelect: Boolean);
+procedure TfrmScenBuilder.btnClearPickClick(Sender: TObject);
 begin
-//  mmo2.Clear;
-//
-//  if ARow > 0 then
-//  begin
-//    mmo2.Lines.Add(strngrdCondition.Cells[1,ARow]);
-//    mmo2.Lines.Add(InstructorSys.Database.GetConditionInfo(
-//      StrToInt(strngrdCondition.Cells[0,ARow])));
-//
-//    FSelectedConditionID := StrToInt(strngrdCondition.Cells[0,ARow]);
-//  end;
-
+  ClearTabPickScen(TButton(Sender).Tag)
 end;
+
+procedure TfrmScenBuilder.ClearTabPickScen(value: Integer);
+begin
+  case value of
+    1:
+    begin
+      {$REGION ' PMS '}
+      edtPMSName.Text := '<None>';
+      FPMSConditionID := 0;
+      mmoPMSInfo.Lines.Clear;
+      {$ENDREGION}
+    end;
+    2:
+    begin
+      {$REGION ' PCS '}
+      edtPCSName.Text := '<None>';
+      FPCSConditionID := 0;
+      mmoPCSInfo.Lines.Clear;
+      {$ENDREGION}
+    end;
+    3:
+    begin
+      {$REGION ' Element Data '}
+      edtElementName.Text := '<None>';
+      FElementConditionID := 0;
+      {$ENDREGION}
+    end;
+    4:
+    begin
+      {$REGION ' TANK '}
+      edtTANKName.Text := '<None>';
+      FTANKConditionID := 0;
+      mmoTANKInfo.Lines.Clear;
+      {$ENDREGION}
+    end;
+    5:
+    begin
+      {$REGION ' FA '}
+      edtFAName.Text := '<None>';
+      FFAConditionID := 0;
+      mmoFAInfo.Lines.Clear;
+      {$ENDREGION}
+    end;
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION ' Update Procedure Section '}
 
 procedure TfrmScenBuilder.UpdateScenarioList;
 var
@@ -955,5 +1087,7 @@ begin
 
   tempList.Free;
 end;
+
+{$ENDREGION}
 
 end.
