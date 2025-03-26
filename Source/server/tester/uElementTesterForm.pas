@@ -5,35 +5,38 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, uElementTestForm, uElement, uDatabase,
-  uDBSupportClasses, Vcl.ExtCtrls;
+  uDBSupportClasses, Vcl.ExtCtrls, Vcl.Imaging.pngimage;
 
 type
   TfrmTester = class(TForm)
-    cbbController: TComboBox;
-    lblController: TLabel;
-    cbbElement: TComboBox;
-    lblElement: TLabel;
-    grpInfo: TGroupBox;
-    lblName: TLabel;
-    edtElementName: TEdit;
-    lblElementType: TLabel;
-    edtElementType: TEdit;
-    lblSysDec: TLabel;
-    edtSysDesc: TEdit;
-    lblAlarmGroup: TLabel;
-    edtAlarmGroup: TEdit;
-    grpElementInput: TGroupBox;
-    btnFollwer: TButton;
-    lblMimicID: TLabel;
-    edtMimicID: TEdit;
+    Panel3: TPanel;
+    Image1: TImage;
+    pnlHeader: TPanel;
+    pnlElementTesterBackground: TPanel;
     pgcElement: TPageControl;
     tsElement: TTabSheet;
+    grpElementInput: TGroupBox;
+    lblController: TLabel;
+    cbbController: TComboBox;
+    lblElement: TLabel;
+    cbbElement: TComboBox;
     mmoFollower: TMemo;
-    btnGoto: TButton;
     btnEnableElment: TButton;
     btnDisableElement: TButton;
-    pnlElementTesterBackground: TPanel;
+    grpInfo: TGroupBox;
+    lblName: TLabel;
+    lblElementType: TLabel;
+    lblSysDec: TLabel;
+    lblAlarmGroup: TLabel;
+    lblMimicID: TLabel;
     Label1: TLabel;
+    edtElementName: TEdit;
+    edtElementType: TEdit;
+    edtSysDesc: TEdit;
+    edtAlarmGroup: TEdit;
+    edtMimicID: TEdit;
+    btnGoto: TButton;
+    btnFollwer: TButton;
     procedure FormCreate(Sender: TObject);
     procedure cbbControllerSelect(Sender: TObject);
     procedure cbbElementSelect(Sender: TObject);

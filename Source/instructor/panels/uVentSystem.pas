@@ -9,15 +9,6 @@ uses
 
 type
   TfrmVentSystem = class(TForm)
-    img1: TImage;
-    MotorControlDoubleSpeed1: TMotorControlDoubleSpeed;
-    MotorControlDoubleSpeed2: TMotorControlDoubleSpeed;
-    MotorControlDoubleSpeed3: TMotorControlDoubleSpeed;
-    MotorControlDoubleSpeed4: TMotorControlDoubleSpeed;
-    MotorControlDoubleSpeed5: TMotorControlDoubleSpeed;
-    MotorControlElement1: TMotorControlElement;
-    MotorControlElement2: TMotorControlElement;
-    MotorControlElement3: TMotorControlElement;
     pmMCD: TPopupMenu;
     mniDisabled1: TMenuItem;
     mniStopped1: TMenuItem;
@@ -36,6 +27,16 @@ type
     mniNotReadyForUse1: TMenuItem;
     mniFailedToStart1: TMenuItem;
     mniRunningFailStopFaultedUndetermined1: TMenuItem;
+    pnlBackground: TPanel;
+    img1: TImage;
+    MotorControlDoubleSpeed1: TMotorControlDoubleSpeed;
+    MotorControlDoubleSpeed2: TMotorControlDoubleSpeed;
+    MotorControlDoubleSpeed3: TMotorControlDoubleSpeed;
+    MotorControlDoubleSpeed4: TMotorControlDoubleSpeed;
+    MotorControlDoubleSpeed5: TMotorControlDoubleSpeed;
+    MotorControlElement1: TMotorControlElement;
+    MotorControlElement2: TMotorControlElement;
+    MotorControlElement3: TMotorControlElement;
     procedure MotorControlDoubleSpeed1MouseDown(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure mniDisabled1Click(Sender: TObject);

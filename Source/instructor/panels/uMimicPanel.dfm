@@ -3,7 +3,7 @@ object frmMimicPanel: TfrmMimicPanel
   Top = 283
   BorderStyle = bsNone
   Caption = 'Mimic Panel'
-  ClientHeight = 480
+  ClientHeight = 800
   ClientWidth = 735
   Color = clBlack
   Font.Charset = DEFAULT_CHARSET
@@ -20,11 +20,12 @@ object frmMimicPanel: TfrmMimicPanel
     Left = 0
     Top = 3
     Width = 735
-    Height = 474
+    Height = 794
     Align = alClient
     AutoScroll = False
     BorderStyle = bsNone
     TabOrder = 0
+    ExplicitHeight = 750
   end
   object pnlHideShowBarTop: TPanel
     Left = 0
@@ -41,7 +42,7 @@ object frmMimicPanel: TfrmMimicPanel
   end
   object pnlHideShowBtm: TPanel
     Left = 0
-    Top = 477
+    Top = 797
     Width = 735
     Height = 3
     Align = alBottom
@@ -51,5 +52,6 @@ object frmMimicPanel: TfrmMimicPanel
     ParentBackground = False
     TabOrder = 2
     OnClick = pnlHideShowBarTopClick
+    ExplicitTop = 477
   end
 end

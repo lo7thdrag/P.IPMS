@@ -39,6 +39,8 @@ type
     pnlHeader: TPanel;
     lblHeader: TLabel;
     btnSession: TRzBmpButton;
+    Panel3: TPanel;
+    Image1: TImage;
     procedure btnRefreshScenClick(Sender: TObject);
     procedure btnLoadClick(Sender: TObject);
     procedure lstScenarioMouseUp(Sender: TObject; Button: TMouseButton;

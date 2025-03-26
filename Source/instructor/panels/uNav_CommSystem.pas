@@ -8,22 +8,23 @@ uses
 
 type
   TfrmNav_CommSystem = class(TForm)
-    img1: TImage;
+    pnlBackground: TPanel;
     cbb1: TComboBox;
-    cbb2: TComboBox;
-    cbb3: TComboBox;
-    cbb4: TComboBox;
-    cbb5: TComboBox;
-    cbb6: TComboBox;
-    cbb8: TComboBox;
-    cbb9: TComboBox;
     cbb10: TComboBox;
     cbb11: TComboBox;
     cbb12: TComboBox;
     cbb13: TComboBox;
     cbb14: TComboBox;
     cbb15: TComboBox;
+    cbb2: TComboBox;
+    cbb3: TComboBox;
+    cbb4: TComboBox;
+    cbb5: TComboBox;
+    cbb6: TComboBox;
     cbb7: TComboBox;
+    cbb8: TComboBox;
+    cbb9: TComboBox;
+    img1: TImage;
     procedure cbb1Select(Sender: TObject);
   private
     { Private declarations }
