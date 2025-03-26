@@ -65,13 +65,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object lbl17: TLabel
         Left = 45
         Top = 309
-        Width = 83
-        Height = 13
+        Width = 96
+        Height = 14
         Caption = 'Lub Oil Press Low'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -80,13 +80,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object lbl19: TLabel
         Left = 45
         Top = 353
-        Width = 121
-        Height = 13
+        Width = 141
+        Height = 14
         Caption = 'Cooling Water Temp High'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -95,13 +95,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object lbl20: TLabel
         Left = 45
         Top = 331
-        Width = 78
-        Height = 13
+        Width = 91
+        Height = 14
         Caption = 'Emergency Stop'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -110,13 +110,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object lbl30: TLabel
         Left = 45
         Top = 287
-        Width = 57
-        Height = 13
+        Width = 65
+        Height = 14
         Caption = 'Over Speed'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -189,12 +189,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label2: TLabel
         Left = 41
         Top = 32
-        Width = 40
-        Height = 13
+        Width = 45
+        Height = 14
         Caption = 'Standby'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -202,12 +202,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label10: TLabel
         Left = 130
         Top = 32
-        Width = 34
-        Height = 13
+        Width = 37
+        Height = 14
         Caption = 'Manual'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -215,12 +215,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label13: TLabel
         Left = 43
         Top = 74
-        Width = 93
-        Height = 13
+        Width = 109
+        Height = 14
         Caption = 'Supply Voltage Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -228,12 +228,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label24: TLabel
         Left = 43
         Top = 95
-        Width = 106
-        Height = 13
+        Width = 121
+        Height = 14
         Caption = 'Automatic Start Failed'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -241,12 +241,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label26: TLabel
         Left = 43
         Top = 116
-        Width = 101
-        Height = 13
+        Width = 114
+        Height = 14
         Caption = 'Speed Sensor Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -254,12 +254,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label27: TLabel
         Left = 43
         Top = 139
-        Width = 83
-        Height = 13
+        Width = 96
+        Height = 14
         Caption = 'Lub Oil Press Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -267,12 +267,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label31: TLabel
         Left = 43
         Top = 158
-        Width = 85
-        Height = 13
+        Width = 101
+        Height = 14
         Caption = 'Lub Oil Temp High'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -280,12 +280,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label32: TLabel
         Left = 43
         Top = 179
-        Width = 121
-        Height = 13
+        Width = 141
+        Height = 14
         Caption = 'Cooling Water Temp High'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -293,12 +293,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label33: TLabel
         Left = 43
         Top = 200
-        Width = 118
-        Height = 13
+        Width = 136
+        Height = 14
         Caption = 'Cooling Water Level Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -306,12 +306,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label34: TLabel
         Left = 43
         Top = 221
-        Width = 78
-        Height = 13
+        Width = 88
+        Height = 14
         Caption = 'Fuel Oil Leakage'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -319,12 +319,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label35: TLabel
         Left = 43
         Top = 242
-        Width = 88
-        Height = 13
+        Width = 100
+        Height = 14
         Caption = 'FU/ WA Separator'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -498,13 +498,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label3: TLabel
         Left = 45
         Top = 287
-        Width = 57
-        Height = 13
+        Width = 65
+        Height = 14
         Caption = 'Over Speed'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -513,13 +513,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label6: TLabel
         Left = 45
         Top = 309
-        Width = 83
-        Height = 13
+        Width = 96
+        Height = 14
         Caption = 'Lub Oil Press Low'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -528,13 +528,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label8: TLabel
         Left = 45
         Top = 331
-        Width = 78
-        Height = 13
+        Width = 91
+        Height = 14
         Caption = 'Emergency Stop'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -543,13 +543,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label7: TLabel
         Left = 45
         Top = 353
-        Width = 121
-        Height = 13
+        Width = 141
+        Height = 14
         Caption = 'Cooling Water Temp High'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -622,12 +622,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label37: TLabel
         Left = 43
         Top = 32
-        Width = 40
-        Height = 13
+        Width = 45
+        Height = 14
         Caption = 'Standby'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -635,12 +635,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label38: TLabel
         Left = 131
         Top = 32
-        Width = 34
-        Height = 13
+        Width = 37
+        Height = 14
         Caption = 'Manual'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -648,12 +648,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label41: TLabel
         Left = 43
         Top = 74
-        Width = 93
-        Height = 13
+        Width = 109
+        Height = 14
         Caption = 'Supply Voltage Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -661,12 +661,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label42: TLabel
         Left = 43
         Top = 95
-        Width = 106
-        Height = 13
+        Width = 121
+        Height = 14
         Caption = 'Automatic Start Failed'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -674,12 +674,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label43: TLabel
         Left = 43
         Top = 116
-        Width = 101
-        Height = 13
+        Width = 114
+        Height = 14
         Caption = 'Speed Sensor Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -687,12 +687,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label44: TLabel
         Left = 43
         Top = 137
-        Width = 83
-        Height = 13
+        Width = 96
+        Height = 14
         Caption = 'Lub Oil Press Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -700,12 +700,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label45: TLabel
         Left = 43
         Top = 158
-        Width = 85
-        Height = 13
+        Width = 101
+        Height = 14
         Caption = 'Lub Oil Temp High'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -713,12 +713,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label46: TLabel
         Left = 43
         Top = 179
-        Width = 121
-        Height = 13
+        Width = 141
+        Height = 14
         Caption = 'Cooling Water Temp High'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -726,12 +726,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label47: TLabel
         Left = 43
         Top = 200
-        Width = 118
-        Height = 13
+        Width = 136
+        Height = 14
         Caption = 'Cooling Water Level Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -739,12 +739,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label48: TLabel
         Left = 43
         Top = 221
-        Width = 78
-        Height = 13
+        Width = 88
+        Height = 14
         Caption = 'Fuel Oil Leakage'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -752,12 +752,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label49: TLabel
         Left = 43
         Top = 242
-        Width = 88
-        Height = 13
+        Width = 100
+        Height = 14
         Caption = 'FU/ WA Separator'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -971,13 +971,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label14: TLabel
         Left = 46
         Top = 287
-        Width = 57
-        Height = 13
+        Width = 65
+        Height = 14
         Caption = 'Over Speed'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -986,13 +986,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label17: TLabel
         Left = 46
         Top = 309
-        Width = 83
-        Height = 13
+        Width = 96
+        Height = 14
         Caption = 'Lub Oil Press Low'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -1001,13 +1001,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label19: TLabel
         Left = 46
         Top = 331
-        Width = 78
-        Height = 13
+        Width = 91
+        Height = 14
         Caption = 'Emergency Stop'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -1016,13 +1016,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label18: TLabel
         Left = 46
         Top = 353
-        Width = 121
-        Height = 13
+        Width = 141
+        Height = 14
         Caption = 'Cooling Water Temp High'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -1095,12 +1095,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label50: TLabel
         Left = 44
         Top = 74
-        Width = 93
-        Height = 13
+        Width = 109
+        Height = 14
         Caption = 'Supply Voltage Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1108,12 +1108,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label51: TLabel
         Left = 44
         Top = 95
-        Width = 106
-        Height = 13
+        Width = 121
+        Height = 14
         Caption = 'Automatic Start Failed'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1121,12 +1121,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label52: TLabel
         Left = 44
         Top = 116
-        Width = 101
-        Height = 13
+        Width = 114
+        Height = 14
         Caption = 'Speed Sensor Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1134,12 +1134,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label53: TLabel
         Left = 44
         Top = 137
-        Width = 83
-        Height = 13
+        Width = 96
+        Height = 14
         Caption = 'Lub Oil Press Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1147,12 +1147,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label54: TLabel
         Left = 44
         Top = 158
-        Width = 85
-        Height = 13
+        Width = 101
+        Height = 14
         Caption = 'Lub Oil Temp High'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1160,12 +1160,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label55: TLabel
         Left = 44
         Top = 179
-        Width = 121
-        Height = 13
+        Width = 141
+        Height = 14
         Caption = 'Cooling Water Temp High'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1173,12 +1173,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label56: TLabel
         Left = 44
         Top = 200
-        Width = 118
-        Height = 13
+        Width = 136
+        Height = 14
         Caption = 'Cooling Water Level Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1186,12 +1186,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label57: TLabel
         Left = 44
         Top = 221
-        Width = 78
-        Height = 13
+        Width = 88
+        Height = 14
         Caption = 'Fuel Oil Leakage'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1199,12 +1199,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label58: TLabel
         Left = 44
         Top = 242
-        Width = 88
-        Height = 13
+        Width = 100
+        Height = 14
         Caption = 'FU/ WA Separator'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1212,12 +1212,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label79: TLabel
         Left = 44
         Top = 32
-        Width = 40
-        Height = 13
+        Width = 45
+        Height = 14
         Caption = 'Standby'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1225,12 +1225,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label80: TLabel
         Left = 133
         Top = 32
-        Width = 34
-        Height = 13
+        Width = 37
+        Height = 14
         Caption = 'Manual'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1513,13 +1513,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label30: TLabel
         Left = 44
         Top = 331
-        Width = 78
-        Height = 13
+        Width = 91
+        Height = 14
         Caption = 'Emergency Stop'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -1528,13 +1528,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label29: TLabel
         Left = 44
         Top = 353
-        Width = 121
-        Height = 13
+        Width = 141
+        Height = 14
         Caption = 'Cooling Water Temp High'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -1543,13 +1543,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label28: TLabel
         Left = 44
         Top = 309
-        Width = 83
-        Height = 13
+        Width = 96
+        Height = 14
         Caption = 'Lub Oil Press Low'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -1558,13 +1558,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label25: TLabel
         Left = 44
         Top = 287
-        Width = 57
-        Height = 13
+        Width = 65
+        Height = 14
         Caption = 'Over Speed'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -1573,12 +1573,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label59: TLabel
         Left = 42
         Top = 74
-        Width = 93
-        Height = 13
+        Width = 109
+        Height = 14
         Caption = 'Supply Voltage Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1586,12 +1586,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label60: TLabel
         Left = 42
         Top = 95
-        Width = 106
-        Height = 13
+        Width = 121
+        Height = 14
         Caption = 'Automatic Start Failed'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1599,12 +1599,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label61: TLabel
         Left = 42
         Top = 116
-        Width = 101
-        Height = 13
+        Width = 114
+        Height = 14
         Caption = 'Speed Sensor Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1612,12 +1612,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label62: TLabel
         Left = 42
         Top = 137
-        Width = 83
-        Height = 13
+        Width = 96
+        Height = 14
         Caption = 'Lub Oil Press Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1625,12 +1625,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label63: TLabel
         Left = 42
         Top = 158
-        Width = 85
-        Height = 13
+        Width = 101
+        Height = 14
         Caption = 'Lub Oil Temp High'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1638,12 +1638,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label64: TLabel
         Left = 42
         Top = 179
-        Width = 121
-        Height = 13
+        Width = 141
+        Height = 14
         Caption = 'Cooling Water Temp High'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1651,12 +1651,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label65: TLabel
         Left = 42
         Top = 200
-        Width = 118
-        Height = 13
+        Width = 136
+        Height = 14
         Caption = 'Cooling Water Level Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1664,12 +1664,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label66: TLabel
         Left = 42
         Top = 221
-        Width = 78
-        Height = 13
+        Width = 88
+        Height = 14
         Caption = 'Fuel Oil Leakage'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1677,12 +1677,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label67: TLabel
         Left = 42
         Top = 242
-        Width = 88
-        Height = 13
+        Width = 100
+        Height = 14
         Caption = 'FU/ WA Separator'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1690,12 +1690,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label81: TLabel
         Left = 42
         Top = 32
-        Width = 40
-        Height = 13
+        Width = 45
+        Height = 14
         Caption = 'Standby'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1703,12 +1703,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label82: TLabel
         Left = 131
         Top = 32
-        Width = 34
-        Height = 13
+        Width = 37
+        Height = 14
         Caption = 'Manual'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1927,13 +1927,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label36: TLabel
         Left = 44
         Top = 309
-        Width = 57
-        Height = 13
+        Width = 65
+        Height = 14
         Caption = 'Over Speed'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -1942,13 +1942,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label39: TLabel
         Left = 44
         Top = 329
-        Width = 83
-        Height = 13
+        Width = 96
+        Height = 14
         Caption = 'Lub Oil Press Low'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -1957,13 +1957,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label40: TLabel
         Left = 44
         Top = 349
-        Width = 121
-        Height = 13
+        Width = 141
+        Height = 14
         Caption = 'Cooling Water Temp High'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
@@ -2020,12 +2020,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label68: TLabel
         Left = 42
         Top = 74
-        Width = 93
-        Height = 13
+        Width = 109
+        Height = 14
         Caption = 'Supply Voltage Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2033,12 +2033,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label69: TLabel
         Left = 42
         Top = 95
-        Width = 106
-        Height = 13
+        Width = 121
+        Height = 14
         Caption = 'Automatic Start Failed'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2046,12 +2046,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label70: TLabel
         Left = 42
         Top = 116
-        Width = 101
-        Height = 13
+        Width = 114
+        Height = 14
         Caption = 'Speed Sensor Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2059,12 +2059,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label71: TLabel
         Left = 42
         Top = 137
-        Width = 83
-        Height = 13
+        Width = 96
+        Height = 14
         Caption = 'Lub Oil Press Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2072,12 +2072,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label72: TLabel
         Left = 42
         Top = 158
-        Width = 85
-        Height = 13
+        Width = 101
+        Height = 14
         Caption = 'Lub Oil Temp High'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2085,12 +2085,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label73: TLabel
         Left = 42
         Top = 179
-        Width = 121
-        Height = 13
+        Width = 141
+        Height = 14
         Caption = 'Cooling Water Temp High'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2098,12 +2098,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label74: TLabel
         Left = 42
         Top = 200
-        Width = 118
-        Height = 13
+        Width = 136
+        Height = 14
         Caption = 'Cooling Water Level Low'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2111,12 +2111,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label75: TLabel
         Left = 42
         Top = 221
-        Width = 78
-        Height = 13
+        Width = 88
+        Height = 14
         Caption = 'Fuel Oil Leakage'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2124,12 +2124,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label76: TLabel
         Left = 42
         Top = 242
-        Width = 88
-        Height = 13
+        Width = 100
+        Height = 14
         Caption = 'FU/ WA Separator'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2137,12 +2137,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label77: TLabel
         Left = 42
         Top = 262
-        Width = 71
-        Height = 13
+        Width = 81
+        Height = 14
         Caption = 'Fault Page Led'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2150,12 +2150,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label78: TLabel
         Left = 42
         Top = 281
-        Width = 131
-        Height = 13
+        Width = 152
+        Height = 14
         Caption = '24V DC Int Pow Sup Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2163,12 +2163,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label83: TLabel
         Left = 42
         Top = 32
-        Width = 40
-        Height = 13
+        Width = 45
+        Height = 14
         Caption = 'Standby'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2176,12 +2176,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label84: TLabel
         Left = 131
         Top = 32
-        Width = 34
-        Height = 13
+        Width = 37
+        Height = 14
         Caption = 'Manual'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2824,12 +2824,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label85: TLabel
         Left = 50
         Top = 50
-        Width = 74
-        Height = 13
+        Width = 81
+        Height = 14
         Caption = 'Can Bus Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2837,12 +2837,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label86: TLabel
         Left = 50
         Top = 82
-        Width = 145
-        Height = 13
+        Width = 167
+        Height = 14
         Caption = '24V DC Int Pow Supply Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2902,12 +2902,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label87: TLabel
         Left = 50
         Top = 50
-        Width = 74
-        Height = 13
+        Width = 81
+        Height = 14
         Caption = 'Can Bus Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2915,12 +2915,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label88: TLabel
         Left = 50
         Top = 82
-        Width = 145
-        Height = 13
+        Width = 167
+        Height = 14
         Caption = '24V DC Int Pow Supply Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2983,12 +2983,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label89: TLabel
         Left = 50
         Top = 50
-        Width = 74
-        Height = 13
+        Width = 81
+        Height = 14
         Caption = 'Can Bus Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -2996,12 +2996,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label90: TLabel
         Left = 50
         Top = 82
-        Width = 145
-        Height = 13
+        Width = 167
+        Height = 14
         Caption = '24V DC Int Pow Supply Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -3064,12 +3064,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label91: TLabel
         Left = 50
         Top = 50
-        Width = 74
-        Height = 13
+        Width = 81
+        Height = 14
         Caption = 'Can Bus Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -3077,12 +3077,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object Label92: TLabel
         Left = 50
         Top = 82
-        Width = 145
-        Height = 13
+        Width = 167
+        Height = 14
         Caption = '24V DC Int Pow Supply Failure'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False

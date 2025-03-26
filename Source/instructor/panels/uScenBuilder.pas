@@ -306,99 +306,95 @@ type
     BitBtn8: TBitBtn;
     Label6: TLabel;
     GroupBox4: TGroupBox;
-    Label47: TLabel;
-    Label39: TLabel;
     grpGenerator3: TGroupBox;
     Label8: TLabel;
-    rbManGen3: TRadioButton;
-    rbSemGen3: TRadioButton;
-    rbAutGen3: TRadioButton;
     chkEngine3: TCheckBox;
     chkG3Pref: TCheckBox;
     grpGenerator4: TGroupBox;
     Label7: TLabel;
-    rbManGen4: TRadioButton;
-    rbSemGen4: TRadioButton;
-    rbAutGen4: TRadioButton;
     chkEngine4: TCheckBox;
     chkG4Pref: TCheckBox;
     grpGenerator1: TGroupBox;
     Label37: TLabel;
-    rbManGen1: TRadioButton;
-    rbSemGen1: TRadioButton;
-    rbAutGen1: TRadioButton;
     chkEngine1: TCheckBox;
     chkG1Pref: TCheckBox;
     grpGenerator2: TGroupBox;
     Label38: TLabel;
-    rbManGen2: TRadioButton;
-    rbSemGen2: TRadioButton;
-    rbAutGen2: TRadioButton;
     chkEngine2: TCheckBox;
     chkG2Pref: TCheckBox;
-    grpCB3: TGroupBox;
-    btnopen3: TVrDemoButton;
-    btnclose3: TVrDemoButton;
-    grpCB4: TGroupBox;
-    btnopen4: TVrDemoButton;
-    btnclose4: TVrDemoButton;
-    grpCB1: TGroupBox;
-    btnopen1: TVrDemoButton;
-    btnclose1: TVrDemoButton;
-    grpCB2: TGroupBox;
-    btnopen2: TVrDemoButton;
-    btnclose2: TVrDemoButton;
     grpForward: TGroupBox;
     Label40: TLabel;
     lblCBOpenInn1: TLabel;
     lblCBCloseInn1: TLabel;
     Label41: TLabel;
-    rbManInn1: TRadioButton;
-    rbAutInn1: TRadioButton;
-    btnopen6: TVrDemoButton;
-    btnclose6: TVrDemoButton;
     grpAfter: TGroupBox;
     lblCBOpenInn2: TLabel;
     lblCBCloseInn2: TLabel;
     Label42: TLabel;
-    Label43: TLabel;
     rbManInn2: TRadioButton;
     rbAutInn2: TRadioButton;
-    btnclose7: TVrDemoButton;
-    btnopen7: TVrDemoButton;
-    grpShore: TGroupBox;
-    Label44: TLabel;
-    lblCBOpenShore: TLabel;
-    lblCBCloseShore: TLabel;
-    Label46: TLabel;
-    rbAutShore: TRadioButton;
-    rbManShore: TRadioButton;
-    VrDemoButton3: TVrDemoButton;
-    VrDemoButton4: TVrDemoButton;
-    grpEmergencyCon: TGroupBox;
-    Label45: TLabel;
-    Label48: TLabel;
-    rbFwdDistrE: TRadioButton;
-    rbAftDistrE: TRadioButton;
-    btnopen8: TVrDemoButton;
-    btnclose8: TVrDemoButton;
-    grpCBE: TGroupBox;
-    Label49: TLabel;
-    btnopen5: TVrDemoButton;
-    btnclose5: TVrDemoButton;
-    grpEmergency: TGroupBox;
-    Label50: TLabel;
-    Label51: TLabel;
-    lblemergency: TLabel;
-    rbManGen5: TRadioButton;
-    rbSemGen5: TRadioButton;
-    rbAutGen5: TRadioButton;
-    chkEngine5: TCheckBox;
-    Label52: TLabel;
     RzBmpButton16: TRzBmpButton;
     RzBmpButton17: TRzBmpButton;
     RzBmpButton18: TRzBmpButton;
     BitBtn9: TBitBtn;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    Label53: TLabel;
+    Label54: TLabel;
+    ComboBox3: TComboBox;
+    Label55: TLabel;
+    ComboBox4: TComboBox;
+    Label56: TLabel;
+    ComboBox5: TComboBox;
+    Label57: TLabel;
+    Label58: TLabel;
+    ComboBox6: TComboBox;
+    Label59: TLabel;
+    ComboBox7: TComboBox;
+    Label60: TLabel;
+    ComboBox8: TComboBox;
+    ComboBox9: TComboBox;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
+    GroupBox5: TGroupBox;
+    Label61: TLabel;
+    Label62: TLabel;
+    Label63: TLabel;
+    RadioButton3: TRadioButton;
+    RadioButton4: TRadioButton;
+    Label43: TLabel;
+    ComboBox10: TComboBox;
+    ComboBox11: TComboBox;
+    Label64: TLabel;
+    GroupBox6: TGroupBox;
+    Label44: TLabel;
+    Label46: TLabel;
+    Label65: TLabel;
+    Label66: TLabel;
+    ComboBox12: TComboBox;
+    RadioButton5: TRadioButton;
+    RadioButton6: TRadioButton;
+    GroupBox7: TGroupBox;
+    Label49: TLabel;
+    Label50: TLabel;
+    Label51: TLabel;
+    CheckBox49: TCheckBox;
+    ComboBox13: TComboBox;
+    ComboBox14: TComboBox;
+    GroupBox8: TGroupBox;
+    Label67: TLabel;
+    Label68: TLabel;
+    Label69: TLabel;
+    Label70: TLabel;
+    ComboBox16: TComboBox;
+    RadioButton7: TRadioButton;
+    RadioButton8: TRadioButton;
+    Panel5: TPanel;
+    Label52: TLabel;
+    Panel6: TPanel;
+    Label47: TLabel;
+    Panel4: TPanel;
+    Label39: TLabel;
     procedure actNewExecute(Sender: TObject);
     procedure actSaveExecute(Sender: TObject);
     procedure actCancelExecute(Sender: TObject);
@@ -425,6 +421,11 @@ type
     procedure cbbModeEngPortChange(Sender: TObject);
     procedure cbbModeEngStarChange(Sender: TObject);
     procedure trckbrHelmEngStarChange(Sender: TObject);
+    procedure btnFullAllClick(Sender: TObject);
+    procedure edtWBPSKeyPress(Sender: TObject; var Key: Char);
+    procedure edtMELOTKKeyPress(Sender: TObject; var Key: Char);
+    procedure edtGBXLOTKKeyPress(Sender: TObject; var Key: Char);
+    procedure Edit3Change(Sender: TObject);
 
   private
     FScenarioID : Integer;
@@ -1075,6 +1076,11 @@ begin
   end;
 end;
 
+procedure TfrmScenBuilder.Edit3Change(Sender: TObject);
+begin
+
+end;
+
 {$ENDREGION}
 
 {$REGION ' Session Section '}
@@ -1474,6 +1480,78 @@ end;
 {$ENDREGION}
 
 {$REGION ' TANK Section '}
+
+procedure TfrmScenBuilder.btnFullAllClick(Sender: TObject);
+var
+  i, j : integer;
+begin
+  if cbbSetValue.Text = '' then
+  begin
+    MessageDlg('Select the tank to be filled..!!', mtInformation, [mbOK], 0);
+    Exit;
+  end;
+
+  if strtofloat(edtPersen.Text) > 100 then
+    edtPersen.Text := '100'
+  else if strtofloat(edtPersen.Text) < 0 then
+    edtPersen.Text := '0';
+
+  if cbbSetValue.ItemIndex = 0 then
+  begin
+
+    for I := 1 to 18 do
+    begin
+      for j := 0 to ComponentCount - 1 do
+      begin
+        if Components[j] is TEdit then
+        begin
+          if TEdit(Components[j]).Tag = i then
+          begin
+            TEdit(Components[j]).Text := floattostr(InstructorSys.Scenario.getMaxTankValue(TEdit(Components[j]).Hint)*
+                                                    (strtofloat(edtPersen.Text)/100));
+            break;
+          end;
+        end;
+      end;
+    end;
+  end
+  else
+  begin
+    for j := 0 to ComponentCount - 1 do
+    begin
+      if Components[j] is TEdit then
+      begin
+        if TEdit(Components[j]).Tag = (cbbSetValue.ItemIndex) then
+        begin
+          TEdit(Components[j]).Text := floattostr(InstructorSys.Scenario.getMaxTankValue(TEdit(Components[j]).Hint)*
+                                                  (strtofloat(edtPersen.Text)/100));
+          break;
+        end;
+      end;
+    end;
+  end;
+
+
+end;
+
+procedure TfrmScenBuilder.edtGBXLOTKKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (key in ['0'..'9', #8, #13, #46]) then
+    key := #0;
+end;
+
+procedure TfrmScenBuilder.edtMELOTKKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (key in ['0'..'9', #8, #13, #46]) then
+    key := #0;
+end;
+
+procedure TfrmScenBuilder.edtWBPSKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (key in ['0'..'9', #8, #13, #46]) then
+    key := #0;
+end;
+
 {$ENDREGION}
 
 {$REGION ' FA Section '}
