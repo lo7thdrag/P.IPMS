@@ -415,6 +415,16 @@ type
     procedure act4Execute(Sender: TObject);
     procedure btnMenuClick(Sender: TObject);
     procedure trckbrHelmEngPortChange(Sender: TObject);
+    procedure cbbControlChange(Sender: TObject);
+    procedure cbbRemotePortChange(Sender: TObject);
+    procedure cbbRemoteStarChange(Sender: TObject);
+    procedure cbbMainEnginePortChange(Sender: TObject);
+    procedure cbbMainEngineStarChange(Sender: TObject);
+    procedure cbbGearBoxPortChange(Sender: TObject);
+    procedure cbbGearBoxStarChange(Sender: TObject);
+    procedure cbbModeEngPortChange(Sender: TObject);
+    procedure cbbModeEngStarChange(Sender: TObject);
+    procedure trckbrHelmEngStarChange(Sender: TObject);
 
   private
     FScenarioID : Integer;
@@ -890,11 +900,6 @@ begin
   FSelectedConditionID := 0;
 end;
 
-procedure TfrmScenBuilder.trckbrHelmEngPortChange(Sender: TObject);
-begin
-
-end;
-
 {$REGION ' Scenario Section '}
 
 procedure TfrmScenBuilder.btnPickClick(Sender: TObject);
@@ -1070,6 +1075,408 @@ begin
   end;
 end;
 
+{$ENDREGION}
+
+{$REGION ' Session Section '}
+{$ENDREGION}
+
+{$REGION ' PMS Section '}
+{$ENDREGION}
+
+{$REGION ' PCS Section '}
+
+procedure TfrmScenBuilder.cbbControlChange(Sender: TObject);
+begin
+  if cbbControl.ItemIndex = 1 then
+  begin
+    if (cbbRemotePort.ItemIndex = 0) and (cbbMainEnginePort.ItemIndex = 1)
+    and (cbbGearBoxPort.ItemIndex = 0) then
+    begin
+      lblModeEngPort.Visible := True;
+      cbbModeEngPort.Visible := True;
+      trckbrHelmEngPort.Visible := True;
+      lbl10.Visible := True;
+    end
+    else
+    begin
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+    end;
+
+    if (cbbRemoteStar.ItemIndex = 0) and (cbbMainEngineStar.ItemIndex = 1)
+    and (cbbGearBoxStar.ItemIndex = 0) then
+    begin
+      lblModeEngStar.Visible := True;
+      cbbModeEngStar.Visible := True;
+      trckbrHelmEngStar.Visible := True;
+      lbl11.Visible := True;
+    end
+    else
+    begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+    end;
+  end
+  else
+  begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+  end;
+end;
+
+procedure TfrmScenBuilder.cbbGearBoxPortChange(Sender: TObject);
+begin
+  if cbbControl.ItemIndex = 1 then
+  begin
+    if (cbbRemotePort.ItemIndex = 0) and (cbbMainEnginePort.ItemIndex = 1)
+    and (cbbGearBoxPort.ItemIndex = 0) then
+    begin
+      lblModeEngPort.Visible := True;
+      cbbModeEngPort.Visible := True;
+      trckbrHelmEngPort.Visible := True;
+      lbl10.Visible := True;
+    end
+    else
+    begin
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+    end;
+
+    if (cbbRemoteStar.ItemIndex = 0) and (cbbMainEngineStar.ItemIndex = 1)
+    and (cbbGearBoxStar.ItemIndex = 0) then
+    begin
+      lblModeEngStar.Visible := True;
+      cbbModeEngStar.Visible := True;
+      trckbrHelmEngStar.Visible := True;
+      lbl11.Visible := True;
+    end
+    else
+    begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+    end;
+  end
+  else
+  begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+  end;
+end;
+
+procedure TfrmScenBuilder.cbbGearBoxStarChange(Sender: TObject);
+begin
+  if cbbControl.ItemIndex = 1 then
+  begin
+    if (cbbRemotePort.ItemIndex = 0) and (cbbMainEnginePort.ItemIndex = 1)
+    and (cbbGearBoxPort.ItemIndex = 0) then
+    begin
+      lblModeEngPort.Visible := True;
+      cbbModeEngPort.Visible := True;
+      trckbrHelmEngPort.Visible := True;
+      lbl10.Visible := True;
+    end
+    else
+    begin
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+    end;
+
+    if (cbbRemoteStar.ItemIndex = 0) and (cbbMainEngineStar.ItemIndex = 1)
+    and (cbbGearBoxStar.ItemIndex = 0) then
+    begin
+      lblModeEngStar.Visible := True;
+      cbbModeEngStar.Visible := True;
+      trckbrHelmEngStar.Visible := True;
+      lbl11.Visible := True;
+    end
+    else
+    begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+    end;
+  end
+  else
+  begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+  end;
+end;
+
+procedure TfrmScenBuilder.cbbMainEnginePortChange(Sender: TObject);
+begin
+  if cbbControl.ItemIndex = 1 then
+  begin
+    if (cbbRemotePort.ItemIndex = 0) and (cbbMainEnginePort.ItemIndex = 1)
+    and (cbbGearBoxPort.ItemIndex = 0) then
+    begin
+      lblModeEngPort.Visible := True;
+      cbbModeEngPort.Visible := True;
+      trckbrHelmEngPort.Visible := True;
+      lbl10.Visible := True;
+    end
+    else
+    begin
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+    end;
+
+    if (cbbRemoteStar.ItemIndex = 0) and (cbbMainEngineStar.ItemIndex = 1)
+    and (cbbGearBoxStar.ItemIndex = 0) then
+    begin
+      lblModeEngStar.Visible := True;
+      cbbModeEngStar.Visible := True;
+      trckbrHelmEngStar.Visible := True;
+      lbl11.Visible := True;
+    end
+    else
+    begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+    end;
+  end
+  else
+  begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+  end;
+end;
+
+procedure TfrmScenBuilder.cbbMainEngineStarChange(Sender: TObject);
+begin
+  if cbbControl.ItemIndex = 1 then
+  begin
+    if (cbbRemotePort.ItemIndex = 0) and (cbbMainEnginePort.ItemIndex = 1)
+    and (cbbGearBoxPort.ItemIndex = 0) then
+    begin
+      lblModeEngPort.Visible := True;
+      cbbModeEngPort.Visible := True;
+      trckbrHelmEngPort.Visible := True;
+      lbl10.Visible := True;
+    end
+    else
+    begin
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+    end;
+
+    if (cbbRemoteStar.ItemIndex = 0) and (cbbMainEngineStar.ItemIndex = 1)
+    and (cbbGearBoxStar.ItemIndex = 0) then
+    begin
+      lblModeEngStar.Visible := True;
+      cbbModeEngStar.Visible := True;
+      trckbrHelmEngStar.Visible := True;
+      lbl11.Visible := True;
+    end
+    else
+    begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+    end;
+  end
+  else
+  begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+  end;
+end;
+
+procedure TfrmScenBuilder.cbbModeEngPortChange(Sender: TObject);
+begin
+  if cbbModeEngPort.ItemIndex = 0 then
+  begin
+    trckbrHelmEngPort.Min := -10;
+  end
+  else if cbbModeEngPort.ItemIndex = 1 then
+  begin
+    trckbrHelmEngPort.Min := 0;
+  end;
+end;
+
+procedure TfrmScenBuilder.cbbModeEngStarChange(Sender: TObject);
+begin
+    if cbbModeEngStar.ItemIndex = 0 then
+  begin
+    trckbrHelmEngStar.Min := -10;
+  end
+  else if cbbModeEngStar.ItemIndex = 1 then
+  begin
+    trckbrHelmEngStar.Min := 0;
+  end;
+end;
+
+procedure TfrmScenBuilder.cbbRemotePortChange(Sender: TObject);
+begin
+if cbbControl.ItemIndex = 1 then
+  begin
+    if (cbbRemotePort.ItemIndex = 0) and (cbbMainEnginePort.ItemIndex = 1)
+    and (cbbGearBoxPort.ItemIndex = 0) then
+    begin
+      lblModeEngPort.Visible := True;
+      cbbModeEngPort.Visible := True;
+      trckbrHelmEngPort.Visible := True;
+      lbl10.Visible := True;
+    end
+    else
+    begin
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+    end;
+
+    if (cbbRemoteStar.ItemIndex = 0) and (cbbMainEngineStar.ItemIndex = 1)
+    and (cbbGearBoxStar.ItemIndex = 0) then
+    begin
+      lblModeEngStar.Visible := True;
+      cbbModeEngStar.Visible := True;
+      trckbrHelmEngStar.Visible := True;
+      lbl11.Visible := True;
+    end
+    else
+    begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+    end;
+  end
+  else
+  begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+  end;
+end;
+
+procedure TfrmScenBuilder.cbbRemoteStarChange(Sender: TObject);
+begin
+  if cbbControl.ItemIndex = 1 then
+  begin
+    if (cbbRemotePort.ItemIndex = 0) and (cbbMainEnginePort.ItemIndex = 1)
+    and (cbbGearBoxPort.ItemIndex = 0) then
+    begin
+      lblModeEngPort.Visible := True;
+      cbbModeEngPort.Visible := True;
+      trckbrHelmEngPort.Visible := True;
+      lbl10.Visible := True;
+    end
+    else
+    begin
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+    end;
+
+    if (cbbRemoteStar.ItemIndex = 0) and (cbbMainEngineStar.ItemIndex = 1)
+    and (cbbGearBoxStar.ItemIndex = 0) then
+    begin
+      lblModeEngStar.Visible := True;
+      cbbModeEngStar.Visible := True;
+      trckbrHelmEngStar.Visible := True;
+      lbl11.Visible := True;
+    end
+    else
+    begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+    end;
+  end
+  else
+  begin
+      lblModeEngStar.Visible := False;
+      cbbModeEngStar.Visible := False;
+      trckbrHelmEngStar.Visible := False;
+      lbl11.Visible := False;
+
+      lblModeEngPort.Visible := False;
+      cbbModeEngPort.Visible := False;
+      trckbrHelmEngPort.Visible := False;
+      lbl10.Visible := False;
+  end;
+end;
+
+procedure TfrmScenBuilder.trckbrHelmEngPortChange(Sender: TObject);
+begin
+  lblModeEngPort.Visible := True;
+  lblModeEngPort.Caption := IntToStr(trckbrHelmEngPort.Position);
+end;
+
+procedure TfrmScenBuilder.trckbrHelmEngStarChange(Sender: TObject);
+begin
+  lblModeEngStar.Visible := True;
+  lblModeEngStar.Caption := IntToStr(trckbrHelmEngStar.Position);
+end;
+
+{$ENDREGION}
+
+{$REGION ' TANK Section '}
+{$ENDREGION}
+
+{$REGION ' FA Section '}
 {$ENDREGION}
 
 {$REGION ' Update Procedure Section '}
