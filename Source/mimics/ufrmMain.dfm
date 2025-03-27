@@ -11,6 +11,7 @@ object frmMainDisplay: TfrmMainDisplay
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  WindowState = wsMaximized
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -351,7 +352,9 @@ object frmMainDisplay: TfrmMainDisplay
     Top = 8
     Width = 253
     Height = 30
+    DoubleBuffered = True
     Visible = False
+    ParentDoubleBuffered = False
     TabOrder = 1
     OnNotify = mpAlarmNotify
   end

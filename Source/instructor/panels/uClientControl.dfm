@@ -44,15 +44,15 @@ object frmClientControl: TfrmClientControl
     end
     object pnlDenah: TPanel
       Left = 495
-      Top = 18
+      Top = 8
       Width = 866
-      Height = 810
+      Height = 822
       TabOrder = 2
       object imgDenahIPMS: TImage
         Left = 1
         Top = 1
         Width = 864
-        Height = 808
+        Height = 820
         Align = alClient
         Picture.Data = {
           0A544A504547496D616765689F0700FFD8FFE114324578696600004D4D002A00
@@ -15674,7 +15674,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgEmergencyStop: TImage
         Left = 500
-        Top = 389
+        Top = 395
         Width = 15
         Height = 15
         AutoSize = True
@@ -15708,7 +15708,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgMimicKanan: TImage
         Left = 500
-        Top = 341
+        Top = 346
         Width = 15
         Height = 15
         AutoSize = True
@@ -15742,7 +15742,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgPCSKanan: TImage
         Left = 500
-        Top = 292
+        Top = 295
         Width = 15
         Height = 15
         AutoSize = True
@@ -15776,7 +15776,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgMimicTengah: TImage
         Left = 500
-        Top = 243
+        Top = 247
         Width = 15
         Height = 15
         AutoSize = True
@@ -15810,7 +15810,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgPCSKiri: TImage
         Left = 500
-        Top = 192
+        Top = 195
         Width = 15
         Height = 15
         AutoSize = True
@@ -15844,7 +15844,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgMimicKiri: TImage
         Left = 500
-        Top = 145
+        Top = 148
         Width = 15
         Height = 15
         AutoSize = True
@@ -15912,7 +15912,7 @@ object frmClientControl: TfrmClientControl
       end
       object imgCCTV: TImage
         Left = 251
-        Top = 256
+        Top = 260
         Width = 15
         Height = 15
         AutoSize = True
@@ -15960,7 +15960,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label16: TLabel
         Left = 528
-        Top = 136
+        Top = 139
         Width = 15
         Height = 33
         Alignment = taCenter
@@ -15976,7 +15976,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label17: TLabel
         Left = 541
-        Top = 142
+        Top = 145
         Width = 15
         Height = 21
         Alignment = taCenter
@@ -15992,7 +15992,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label18: TLabel
         Left = 528
-        Top = 190
+        Top = 193
         Width = 15
         Height = 19
         Alignment = taCenter
@@ -16008,7 +16008,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label19: TLabel
         Left = 541
-        Top = 189
+        Top = 192
         Width = 15
         Height = 21
         Alignment = taCenter
@@ -16024,7 +16024,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label20: TLabel
         Left = 528
-        Top = 234
+        Top = 238
         Width = 15
         Height = 33
         Alignment = taCenter
@@ -16040,7 +16040,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label21: TLabel
         Left = 541
-        Top = 230
+        Top = 234
         Width = 15
         Height = 40
         Alignment = taCenter
@@ -16056,7 +16056,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label22: TLabel
         Left = 528
-        Top = 290
+        Top = 293
         Width = 15
         Height = 19
         Alignment = taCenter
@@ -16072,7 +16072,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label23: TLabel
         Left = 541
-        Top = 282
+        Top = 285
         Width = 15
         Height = 34
         Alignment = taCenter
@@ -16088,7 +16088,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label24: TLabel
         Left = 528
-        Top = 332
+        Top = 337
         Width = 15
         Height = 33
         Alignment = taCenter
@@ -16104,7 +16104,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label25: TLabel
         Left = 541
-        Top = 331
+        Top = 336
         Width = 15
         Height = 34
         Alignment = taCenter
@@ -16120,7 +16120,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label26: TLabel
         Left = 528
-        Top = 389
+        Top = 395
         Width = 15
         Height = 15
         Alignment = taCenter
@@ -16136,7 +16136,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label27: TLabel
         Left = 541
-        Top = 383
+        Top = 389
         Width = 15
         Height = 26
         Alignment = taCenter
@@ -16152,7 +16152,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label28: TLabel
         Left = 312
-        Top = 230
+        Top = 234
         Width = 15
         Height = 67
         Alignment = taCenter
@@ -16168,7 +16168,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label29: TLabel
         Left = 73
-        Top = 438
+        Top = 444
         Width = 15
         Height = 20
         Alignment = taCenter
@@ -16184,7 +16184,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label30: TLabel
         Left = 86
-        Top = 429
+        Top = 435
         Width = 15
         Height = 38
         Alignment = taCenter
@@ -16200,7 +16200,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label31: TLabel
         Left = 73
-        Top = 375
+        Top = 381
         Width = 15
         Height = 20
         Alignment = taCenter
@@ -16216,7 +16216,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label32: TLabel
         Left = 86
-        Top = 366
+        Top = 372
         Width = 15
         Height = 39
         Alignment = taCenter
@@ -16232,7 +16232,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label33: TLabel
         Left = 73
-        Top = 313
+        Top = 317
         Width = 15
         Height = 20
         Alignment = taCenter
@@ -16248,7 +16248,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label34: TLabel
         Left = 86
-        Top = 306
+        Top = 310
         Width = 15
         Height = 34
         Alignment = taCenter
@@ -16264,7 +16264,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label35: TLabel
         Left = 73
-        Top = 252
+        Top = 257
         Width = 15
         Height = 20
         Alignment = taCenter
@@ -16280,7 +16280,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label36: TLabel
         Left = 86
-        Top = 245
+        Top = 250
         Width = 15
         Height = 35
         Alignment = taCenter
@@ -16296,7 +16296,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label37: TLabel
         Left = 73
-        Top = 190
+        Top = 195
         Width = 15
         Height = 20
         Alignment = taCenter
@@ -16312,7 +16312,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label38: TLabel
         Left = 86
-        Top = 193
+        Top = 198
         Width = 15
         Height = 15
         Alignment = taCenter
@@ -16328,7 +16328,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label40: TLabel
         Left = 80
-        Top = 123
+        Top = 126
         Width = 15
         Height = 34
         Alignment = taCenter
@@ -16344,7 +16344,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image1: TImage
         Left = 35
-        Top = 441
+        Top = 447
         Width = 15
         Height = 15
         AutoSize = True
@@ -16378,7 +16378,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image2: TImage
         Left = 35
-        Top = 378
+        Top = 384
         Width = 15
         Height = 15
         AutoSize = True
@@ -16412,7 +16412,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image3: TImage
         Left = 35
-        Top = 316
+        Top = 320
         Width = 15
         Height = 15
         AutoSize = True
@@ -16446,7 +16446,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image4: TImage
         Left = 35
-        Top = 255
+        Top = 260
         Width = 15
         Height = 15
         AutoSize = True
@@ -16480,7 +16480,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image5: TImage
         Left = 35
-        Top = 193
+        Top = 198
         Width = 15
         Height = 15
         AutoSize = True
@@ -16514,7 +16514,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image6: TImage
         Left = 35
-        Top = 133
+        Top = 136
         Width = 15
         Height = 15
         AutoSize = True
@@ -16548,7 +16548,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image7: TImage
         Left = 430
-        Top = 773
+        Top = 783
         Width = 15
         Height = 15
         AutoSize = True
@@ -16582,7 +16582,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image8: TImage
         Left = 502
-        Top = 773
+        Top = 783
         Width = 15
         Height = 15
         AutoSize = True
@@ -16616,7 +16616,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image9: TImage
         Left = 571
-        Top = 773
+        Top = 783
         Width = 15
         Height = 15
         AutoSize = True
@@ -16650,7 +16650,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image10: TImage
         Left = 645
-        Top = 773
+        Top = 783
         Width = 15
         Height = 15
         AutoSize = True
@@ -16684,7 +16684,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image11: TImage
         Left = 119
-        Top = 773
+        Top = 783
         Width = 15
         Height = 15
         AutoSize = True
@@ -16718,7 +16718,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image12: TImage
         Left = 171
-        Top = 773
+        Top = 783
         Width = 15
         Height = 15
         AutoSize = True
@@ -16752,7 +16752,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image13: TImage
         Left = 225
-        Top = 773
+        Top = 783
         Width = 15
         Height = 15
         AutoSize = True
@@ -16786,7 +16786,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image14: TImage
         Left = 27
-        Top = 685
+        Top = 695
         Width = 15
         Height = 15
         AutoSize = True
@@ -16820,7 +16820,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image15: TImage
         Left = 27
-        Top = 613
+        Top = 623
         Width = 15
         Height = 15
         AutoSize = True
@@ -16854,7 +16854,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image16: TImage
         Left = 312
-        Top = 611
+        Top = 623
         Width = 15
         Height = 15
         AutoSize = True
@@ -16888,7 +16888,7 @@ object frmClientControl: TfrmClientControl
       end
       object Image17: TImage
         Left = 312
-        Top = 683
+        Top = 695
         Width = 15
         Height = 15
         AutoSize = True
@@ -16922,7 +16922,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label39: TLabel
         Left = 427
-        Top = 743
+        Top = 753
         Width = 23
         Height = 13
         Alignment = taCenter
@@ -16936,7 +16936,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label41: TLabel
         Left = 502
-        Top = 743
+        Top = 753
         Width = 23
         Height = 13
         Alignment = taCenter
@@ -16950,7 +16950,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label42: TLabel
         Left = 568
-        Top = 743
+        Top = 753
         Width = 23
         Height = 13
         Alignment = taCenter
@@ -16964,7 +16964,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label43: TLabel
         Left = 641
-        Top = 743
+        Top = 753
         Width = 23
         Height = 13
         Alignment = taCenter
@@ -16978,7 +16978,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label44: TLabel
         Left = 115
-        Top = 743
+        Top = 753
         Width = 29
         Height = 13
         Alignment = taCenter
@@ -16992,7 +16992,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label45: TLabel
         Left = 167
-        Top = 743
+        Top = 753
         Width = 29
         Height = 13
         Alignment = taCenter
@@ -17006,7 +17006,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label46: TLabel
         Left = 221
-        Top = 743
+        Top = 753
         Width = 29
         Height = 13
         Alignment = taCenter
@@ -17020,7 +17020,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label47: TLabel
         Left = 62
-        Top = 673
+        Top = 683
         Width = 15
         Height = 39
         Alignment = taCenter
@@ -17036,7 +17036,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label48: TLabel
         Left = 62
-        Top = 601
+        Top = 611
         Width = 15
         Height = 39
         Alignment = taCenter
@@ -17052,7 +17052,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label49: TLabel
         Left = 274
-        Top = 599
+        Top = 610
         Width = 15
         Height = 40
         Alignment = taCenter
@@ -17068,7 +17068,7 @@ object frmClientControl: TfrmClientControl
       end
       object Label50: TLabel
         Left = 274
-        Top = 673
+        Top = 682
         Width = 15
         Height = 40
         Alignment = taCenter
@@ -17085,9 +17085,9 @@ object frmClientControl: TfrmClientControl
     end
     object pnlListConsole: TPanel
       Left = 1375
-      Top = 18
+      Top = 8
       Width = 296
-      Height = 810
+      Height = 822
       BevelOuter = bvNone
       BorderWidth = 10
       Color = 3749426
@@ -17113,7 +17113,7 @@ object frmClientControl: TfrmClientControl
         Left = 10
         Top = 28
         Width = 276
-        Height = 737
+        Height = 749
         Align = alClient
         Columns = <
           item
@@ -17232,14 +17232,13 @@ object frmClientControl: TfrmClientControl
       end
       object Panel2: TPanel
         Left = 10
-        Top = 765
+        Top = 777
         Width = 276
         Height = 35
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitTop = 761
-        ExplicitWidth = 272
+        ExplicitTop = 765
         object btn3: TFlatSpeedButton
           Tag = 2
           Left = 94
@@ -17286,7 +17285,7 @@ object frmClientControl: TfrmClientControl
     end
     object Panel3: TPanel
       Left = 16
-      Top = 19
+      Top = 8
       Width = 150
       Height = 308
       BevelOuter = bvNone
@@ -17400,7 +17399,7 @@ object frmClientControl: TfrmClientControl
     end
     object Panel4: TPanel
       Left = 173
-      Top = 19
+      Top = 8
       Width = 150
       Height = 308
       BevelOuter = bvNone
@@ -17514,7 +17513,7 @@ object frmClientControl: TfrmClientControl
     end
     object Panel5: TPanel
       Left = 329
-      Top = 19
+      Top = 8
       Width = 150
       Height = 308
       BevelOuter = bvNone
@@ -17628,9 +17627,9 @@ object frmClientControl: TfrmClientControl
     end
     object Panel6: TPanel
       Left = 16
-      Top = 335
+      Top = 322
       Width = 463
-      Height = 492
+      Height = 508
       BevelOuter = bvNone
       Color = 3749426
       Font.Charset = DEFAULT_CHARSET

@@ -1414,7 +1414,7 @@ begin
 
   pnlCIPButton.Height := Round(0.044 * FAppHeight);
 
-  pnlMimic.Height := FAppHeight - (pnlAlarm.Height + pnlCIPInfo.Height + pnlCIPButton.Height);
+  pnlMimic.Height := FAppHeight;// - (pnlAlarm.Height + pnlCIPInfo.Height + pnlCIPButton.Height);
   pnlMimic.Width := FAppWidth;
 
   BorderStyle := bsNone;

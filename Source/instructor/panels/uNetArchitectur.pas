@@ -11,7 +11,10 @@ type
   E_NetState = (nsOFF, nsON);
 
   TfrmNetPanel = class(TForm)
-    Image1: TImage;
+    pmNetArch: TPopupMenu;
+    mniON: TMenuItem;
+    mniOFF: TMenuItem;
+    pnlBackground: TPanel;
     Computer1: TComputer;
     Computer10: TComputer;
     Computer11: TComputer;
@@ -24,6 +27,7 @@ type
     Computer7: TComputer;
     Computer8: TComputer;
     Computer9: TComputer;
+    Image1: TImage;
     SwitchElement1: TSwitchElement;
     SwitchElement10: TSwitchElement;
     SwitchElement100: TSwitchElement;
@@ -125,9 +129,6 @@ type
     SwitchElement97: TSwitchElement;
     SwitchElement98: TSwitchElement;
     SwitchElement99: TSwitchElement;
-    pmNetArch: TPopupMenu;
-    mniON: TMenuItem;
-    mniOFF: TMenuItem;
     procedure IPMSComponentMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ChangeState(Sender: TObject);

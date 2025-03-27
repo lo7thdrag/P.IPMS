@@ -9,10 +9,18 @@ uses
 
 type
   TfrmTelegram = class(TForm)
-    GroupBox1: TGroupBox;
-    lbl1: TLabel;
     tmrKanan: TTimer;
+    tmrKiri: TTimer;
+    lbl28: TLabel;
+    lbl29: TLabel;
+    lbl30: TLabel;
+    lbl31: TLabel;
+    Panel1: TPanel;
+    Panel2: TPanel;
     lbl2: TLabel;
+    lbl1: TLabel;
+    pnlPort: TPanel;
+    pnlStarboard: TPanel;
     grpTelegrapPS: TGroupBox;
     lbl3: TLabel;
     imgpsimgtelegrapps: TImage;
@@ -38,19 +46,9 @@ type
     lbl13: TLabel;
     lbl14: TLabel;
     lbl15: TLabel;
+    RotarySwitchPS: TVrRotarySwitch;
     grpTelegrapSB: TGroupBox;
     lbl16: TLabel;
-    lbl17: TLabel;
-    lbl18: TLabel;
-    lbl19: TLabel;
-    lbl20: TLabel;
-    lbl21: TLabel;
-    lbl22: TLabel;
-    lbl23: TLabel;
-    lbl24: TLabel;
-    lbl25: TLabel;
-    lbl26: TLabel;
-    lbl27: TLabel;
     imgtelegrapsb: TImage;
     imgsb1: TImage;
     imgsb2: TImage;
@@ -63,13 +61,18 @@ type
     imgsb9: TImage;
     imgsb10: TImage;
     imgsb11: TImage;
-    tmrKiri: TTimer;
-    lbl28: TLabel;
-    lbl29: TLabel;
-    lbl30: TLabel;
-    lbl31: TLabel;
+    lbl24: TLabel;
+    lbl21: TLabel;
+    lbl19: TLabel;
+    lbl18: TLabel;
+    lbl27: TLabel;
+    lbl26: TLabel;
+    lbl25: TLabel;
+    lbl17: TLabel;
+    lbl20: TLabel;
+    lbl22: TLabel;
+    lbl23: TLabel;
     RotarySwitchSB: TVrRotarySwitch;
-    RotarySwitchPS: TVrRotarySwitch;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);

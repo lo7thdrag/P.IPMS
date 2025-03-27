@@ -42,6 +42,7 @@ procedure TfrmMimicPanel.FormCreate(Sender: TObject);
 begin
   frmMainDisplay := TfrmMainDisplay.Create(Self);
   frmMainDisplay.Parent := scrlbxMimic;
+  frmMainDisplay.Height := 875;
   HideBar;
   frmMainDisplay.Show;
 
