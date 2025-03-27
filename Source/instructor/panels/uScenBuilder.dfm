@@ -51072,7 +51072,7 @@ object frmScenBuilder: TfrmScenBuilder
           ParentFont = False
         end
         object lbl2: TLabel
-          Left = 8
+          Left = 17
           Top = 49
           Width = 74
           Height = 14
@@ -51085,7 +51085,7 @@ object frmScenBuilder: TfrmScenBuilder
           ParentFont = False
         end
         object lbl3: TLabel
-          Left = 8
+          Left = 17
           Top = 117
           Width = 104
           Height = 28
@@ -51099,7 +51099,7 @@ object frmScenBuilder: TfrmScenBuilder
         end
         object cbbRemotePort: TComboBox
           Tag = 2
-          Left = 8
+          Left = 17
           Top = 73
           Width = 145
           Height = 22
@@ -51120,7 +51120,7 @@ object frmScenBuilder: TfrmScenBuilder
         end
         object cbbRemoteStar: TComboBox
           Tag = 3
-          Left = 8
+          Left = 17
           Top = 141
           Width = 145
           Height = 22
@@ -51166,7 +51166,7 @@ object frmScenBuilder: TfrmScenBuilder
           Left = 8
           Top = 49
           Width = 98
-          Height = 14
+          Height = 28
           Caption = 'Mode Engine Port'#13#10
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
@@ -51349,7 +51349,7 @@ object frmScenBuilder: TfrmScenBuilder
           ParentFont = False
         end
         object lbl5: TLabel
-          Left = 8
+          Left = 11
           Top = 49
           Width = 128
           Height = 14
@@ -51362,7 +51362,7 @@ object frmScenBuilder: TfrmScenBuilder
           ParentFont = False
         end
         object lbl7: TLabel
-          Left = 8
+          Left = 11
           Top = 117
           Width = 158
           Height = 14
@@ -51376,7 +51376,7 @@ object frmScenBuilder: TfrmScenBuilder
         end
         object cbbGearBoxPort: TComboBox
           Tag = 6
-          Left = 8
+          Left = 11
           Top = 73
           Width = 145
           Height = 22
@@ -51397,7 +51397,7 @@ object frmScenBuilder: TfrmScenBuilder
         end
         object cbbGearBoxStar: TComboBox
           Tag = 7
-          Left = 8
+          Left = 11
           Top = 141
           Width = 145
           Height = 22
