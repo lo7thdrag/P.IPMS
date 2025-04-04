@@ -10,17 +10,12 @@ uses
 
 type
   TfrmScenBuilder = class(TForm)
-    acttb1: TActionToolBar;
     actmgr1: TActionManager;
     actNew: TAction;
     actPick: TAction;
     actSave: TAction;
     actDelete: TAction;
     actCancel: TAction;
-    pgc2: TPageControl;
-    tsBuilder: TTabSheet;
-    tsRunScenario: TTabSheet;
-    acttb2: TActionToolBar;
     actmgr2: TActionManager;
     Action1: TAction;
     actDeleteRS: TAction;
@@ -30,11 +25,6 @@ type
     act2: TAction;
     act4: TAction;
     act5: TAction;
-    pnlRunningSessionBackground: TPanel;
-    pnlScenarioBuilderBackgraound: TPanel;
-    Panel1: TPanel;
-    Panel2: TPanel;
-    lstAvail: TListBox;
     pnlMenu: TPanel;
     btnScenario: TRzBmpButton;
     btnSession: TRzBmpButton;
@@ -47,8 +37,6 @@ type
     pnlScenario: TPanel;
     lblNames: TLabel;
     lstScenario: TListBox;
-    btnLoad: TBitBtn;
-    btnRefreshScen: TBitBtn;
     lblName: TLabel;
     lblDescription: TLabel;
     edtScenarioName: TEdit;
@@ -96,7 +84,6 @@ type
     Label2: TLabel;
     Label3: TLabel;
     lstSession: TListBox;
-    BitBtn2: TBitBtn;
     edt1: TEdit;
     mmo1: TMemo;
     lbl4: TLabel;
@@ -105,42 +92,37 @@ type
     Label4: TLabel;
     Label5: TLabel;
     lstPMS: TListBox;
-    BitBtn1: TBitBtn;
     edtPMSCond: TEdit;
     pnlPCS: TPanel;
     Label9: TLabel;
     Label10: TLabel;
     lstPropulsion: TListBox;
-    BitBtn3: TBitBtn;
     edtPCSConditionName: TEdit;
     pnlTank: TPanel;
     Label14: TLabel;
     Label15: TLabel;
     lstTank: TListBox;
-    BitBtn4: TBitBtn;
     Edit2: TEdit;
     pnlFA: TPanel;
     Label19: TLabel;
     Label20: TLabel;
     lstFA: TListBox;
-    BitBtn5: TBitBtn;
     Edit3: TEdit;
-    BitBtn6: TBitBtn;
-    RzBmpButton1: TRzBmpButton;
-    RzBmpButton2: TRzBmpButton;
-    RzBmpButton3: TRzBmpButton;
+    btnNewPCS: TRzBmpButton;
+    btnEditPCS: TRzBmpButton;
+    btnDeletePCS: TRzBmpButton;
     Label21: TLabel;
     Panel3: TPanel;
     Image1: TImage;
-    RzBmpButton4: TRzBmpButton;
-    RzBmpButton5: TRzBmpButton;
-    RzBmpButton6: TRzBmpButton;
-    RzBmpButton7: TRzBmpButton;
-    RzBmpButton8: TRzBmpButton;
-    RzBmpButton9: TRzBmpButton;
-    RzBmpButton10: TRzBmpButton;
-    RzBmpButton11: TRzBmpButton;
-    RzBmpButton12: TRzBmpButton;
+    btnNewScenario: TRzBmpButton;
+    btnEditScenario: TRzBmpButton;
+    btnDeleteScenario: TRzBmpButton;
+    btnNewSession: TRzBmpButton;
+    btnEditSession: TRzBmpButton;
+    btnDeleteSession: TRzBmpButton;
+    btnNewFA: TRzBmpButton;
+    btnEditFA: TRzBmpButton;
+    btnDeleteFA: TRzBmpButton;
     GroupBox2: TGroupBox;
     lblAlarm_DGSETS: TLabel;
     lblAlarm_Distribution: TLabel;
@@ -207,71 +189,11 @@ type
     CheckBox47: TCheckBox;
     CheckBox48: TCheckBox;
     Label22: TLabel;
-    BitBtn7: TBitBtn;
-    RzBmpButton13: TRzBmpButton;
-    RzBmpButton14: TRzBmpButton;
-    RzBmpButton15: TRzBmpButton;
+    btnNewTANK: TRzBmpButton;
+    btnEditTANK: TRzBmpButton;
+    btnDeleteTANK: TRzBmpButton;
     GroupBox3: TGroupBox;
-    cbbSetValue: TComboBox;
-    edtPersen: TEdit;
-    lbl38: TLabel;
-    btnFullAll: TButton;
-    Label16: TLabel;
-    edtWBPS: TEdit;
-    lbl20: TLabel;
-    Label17: TLabel;
-    edtWBSB: TEdit;
-    Label18: TLabel;
-    Label31: TLabel;
-    edtWBFWD: TEdit;
-    lbl6: TLabel;
-    Label32: TLabel;
-    edtFWTKPS: TEdit;
-    lbl8: TLabel;
-    lbl9: TLabel;
-    edtFWTKSB: TEdit;
-    Label34: TLabel;
-    Label33: TLabel;
-    edtFWROLLSTABTK: TEdit;
-    Label35: TLabel;
-    Label36: TLabel;
-    edtFOTK1: TEdit;
-    lbl14: TLabel;
-    lbl15: TLabel;
-    edtFOTK2: TEdit;
-    lbl16: TLabel;
-    lbl17: TLabel;
-    edtFOTK3: TEdit;
-    lbl18: TLabel;
-    lbl19: TLabel;
-    edtFOTK4: TEdit;
-    lbl21: TLabel;
-    lbl22: TLabel;
-    edtFOOVTK: TEdit;
-    lbl23: TLabel;
-    lbl24: TLabel;
-    edtFOLOADTRUNK: TEdit;
-    lbl25: TLabel;
-    lbl26: TLabel;
-    edtFODAILYPS: TEdit;
-    lbl27: TLabel;
-    lbl28: TLabel;
-    edtFODAILYSB: TEdit;
-    lbl29: TLabel;
-    lbl30: TLabel;
-    edtMELOTK: TEdit;
-    lbl31: TLabel;
-    lbl32: TLabel;
-    edtGBXLOTK: TEdit;
-    lbl33: TLabel;
-    lbl34: TLabel;
-    edtBILGEWTK: TEdit;
-    lbl35: TLabel;
-    lbl36: TLabel;
-    edtSLDIRTYTK: TEdit;
-    lbl37: TLabel;
     Label23: TLabel;
-    BitBtn8: TBitBtn;
     Label6: TLabel;
     GroupBox4: TGroupBox;
     grpGenerator3: TGroupBox;
@@ -301,10 +223,9 @@ type
     Label42: TLabel;
     rbManInn2: TRadioButton;
     rbAutInn2: TRadioButton;
-    RzBmpButton16: TRzBmpButton;
-    RzBmpButton17: TRzBmpButton;
-    RzBmpButton18: TRzBmpButton;
-    BitBtn9: TBitBtn;
+    btnNewPMS: TRzBmpButton;
+    btnEditPMS: TRzBmpButton;
+    btnDeletePMS: TRzBmpButton;
     ComboBox1: TComboBox;
     ComboBox2: TComboBox;
     Label53: TLabel;
@@ -396,14 +317,133 @@ type
     lblModeEngPort: TLabel;
     lblModeEngStar: TLabel;
     Label13: TLabel;
-    procedure actNewExecute(Sender: TObject);
+    btnSaveScenario: TRzBmpButton;
+    btnRefreshScenario: TRzBmpButton;
+    btnRefreshSession: TRzBmpButton;
+    btnRefreshPMS: TRzBmpButton;
+    btnSavePMS: TRzBmpButton;
+    btnRefreshPCS: TRzBmpButton;
+    btnSavePCS: TRzBmpButton;
+    btnRefreshTANK: TRzBmpButton;
+    btnSaveTANK: TRzBmpButton;
+    btnRefreshFA: TRzBmpButton;
+    btnSaveFA: TRzBmpButton;
+    Panel1: TPanel;
+    cbbSetValue: TComboBox;
+    edtPersen: TEdit;
+    lbl38: TLabel;
+    btnFullAll: TButton;
+    Panel2: TPanel;
+    edtBILGEWTK: TEdit;
+    edtFODAILYPS: TEdit;
+    edtFODAILYSB: TEdit;
+    edtFOLOADTRUNK: TEdit;
+    edtFOOVTK: TEdit;
+    edtFOTK1: TEdit;
+    edtFOTK2: TEdit;
+    edtFOTK3: TEdit;
+    edtFOTK4: TEdit;
+    edtFWROLLSTABTK: TEdit;
+    edtFWTKPS: TEdit;
+    edtFWTKSB: TEdit;
+    edtGBXLOTK: TEdit;
+    edtMELOTK: TEdit;
+    edtSLDIRTYTK: TEdit;
+    edtWBFWD: TEdit;
+    edtWBPS: TEdit;
+    edtWBSB: TEdit;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label31: TLabel;
+    Label32: TLabel;
+    Label33: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    Label36: TLabel;
+    lbl14: TLabel;
+    lbl15: TLabel;
+    lbl16: TLabel;
+    lbl17: TLabel;
+    lbl18: TLabel;
+    lbl19: TLabel;
+    lbl20: TLabel;
+    lbl21: TLabel;
+    lbl22: TLabel;
+    lbl23: TLabel;
+    lbl24: TLabel;
+    lbl25: TLabel;
+    lbl26: TLabel;
+    lbl27: TLabel;
+    lbl28: TLabel;
+    lbl29: TLabel;
+    lbl30: TLabel;
+    lbl31: TLabel;
+    lbl32: TLabel;
+    lbl33: TLabel;
+    lbl34: TLabel;
+    lbl35: TLabel;
+    lbl36: TLabel;
+    lbl37: TLabel;
+    lbl6: TLabel;
+    lbl8: TLabel;
+    lbl9: TLabel;
+
+    {$REGION ' Scenario Section '}
+    procedure btnRefreshScenarioClick(Sender: TObject);
+    procedure btnNewScenarioClick(Sender: TObject);
+    procedure btnEditScenarioClick(Sender: TObject);
+    procedure btnDeleteScenarioClick(Sender: TObject);
+    procedure btnSaveScenarioClick(Sender: TObject);
+    procedure btnPickClick(Sender: TObject);
+    procedure btnClearPickClick(Sender: TObject);
+    {$ENDREGION}
+
+    {$REGION ' Session Section '}
+    procedure btnRefreshSessionClick(Sender: TObject);
+    procedure btnNewSessionClick(Sender: TObject);
+    procedure btnEditSessionClick(Sender: TObject);
+    procedure btnDeleteSessionClick(Sender: TObject);
+    procedure btnSaveSessionClick(Sender: TObject);
+    {$ENDREGION}
+
+    {$REGION ' PMS Section '}
+    procedure btnRefreshPMSClick(Sender: TObject);
+    procedure btnNewPMSClick(Sender: TObject);
+    procedure btnEditPMSClick(Sender: TObject);
+    procedure btnDeletePMSClick(Sender: TObject);
+    procedure btnSavePMSClick(Sender: TObject);
+    {$ENDREGION}
+
+    {$REGION ' PCS Section '}
+    procedure btnRefreshPCSClick(Sender: TObject);
+    procedure btnNewPCSClick(Sender: TObject);
+    procedure btnEditPCSClick(Sender: TObject);
+    procedure btnDeletePCSClick(Sender: TObject);
+    procedure btnSavePCSClick(Sender: TObject);
+    {$ENDREGION}
+
+    {$REGION ' TANK Section '}
+    procedure btnRefreshTANKClick(Sender: TObject);
+    procedure btnNewTANKClick(Sender: TObject);
+    procedure btnEditTANKClick(Sender: TObject);
+    procedure btnDeleteTANKClick(Sender: TObject);
+    procedure btnSaveTANKClick(Sender: TObject);
+    {$ENDREGION}
+
+    {$REGION ' FA Section '}
+    procedure btnRefreshFAClick(Sender: TObject);
+    procedure btnNewFAClick(Sender: TObject);
+    procedure btnEditFAClick(Sender: TObject);
+    procedure btnDeleteFAClick(Sender: TObject);
+    procedure btnSaveFAClick(Sender: TObject);
+    {$ENDREGION}
+
     procedure actSaveExecute(Sender: TObject);
     procedure actCancelExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure actPickExecute(Sender: TObject);
-    procedure actDeleteExecute(Sender: TObject);
-    procedure btnPickClick(Sender: TObject);
-    procedure btnClearPickClick(Sender: TObject);
+
     procedure actChooseRSExecute(Sender: TObject);
     procedure actDeleteRSExecute(Sender: TObject);
     procedure actDeleteAllExecute(Sender: TObject);
@@ -426,7 +466,7 @@ type
     procedure edtWBPSKeyPress(Sender: TObject; var Key: Char);
     procedure edtMELOTKKeyPress(Sender: TObject; var Key: Char);
     procedure edtGBXLOTKKeyPress(Sender: TObject; var Key: Char);
-    procedure Edit3Change(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
   private
     FScenarioID : Integer;
@@ -509,7 +549,7 @@ var
   l : TStrings;
 begin
   if FScenarioID = 0 then
-    actNewExecute(nil)
+    btnNewScenarioClick(nil)
   else
   begin
     scenData := InstructorSys.Scenario.getScenario(FScenarioID);
@@ -629,24 +669,6 @@ begin
   end;
 end;
 
-procedure TfrmScenBuilder.actDeleteExecute(Sender: TObject);
-var
-  conname : string;
-begin
-  if FScenarioID = 0then
-    Exit;
-
-  conname := edtScenarioName.Text;
-
-  if MessageDlg('Are You Sure To Delete "' + edtScenarioName.Text + '" Scenario ? '+#13+#10+
-      'All Sessions Linked To Scenario Will Be Deleted..!', mtWarning, [mbYes, mbNo], 0) = mrYes then;
-  begin
-    InstructorSys.Scenario.deleteScenario(FScenarioID);
-    actNewExecute(nil);
-    MessageDlg('Delete "' + conname + '" Scenario Success', mtInformation, [mbOK], 0)
-  end;
-end;
-
 procedure TfrmScenBuilder.actDeleteRSExecute(Sender: TObject);
 var
   conname : string;
@@ -685,29 +707,6 @@ begin
       Screen.Cursor := crDefault;
     end;
 
-end;
-
-procedure TfrmScenBuilder.actNewExecute(Sender: TObject);
-begin
-  edtScenarioName.Text := '';
-  mmoScenarioDescription.Text := '';
-
-  edtPMSName.Text := '<None>';
-  mmoPMSInfo.Clear;
-  edtPCSName.Text := '<None>';
-  mmoPCSInfo.Clear;
-  edtElementName.Text := '<None>';
-  edtTANKName.Text := '<None>';
-  mmoTANKInfo.Clear;
-  edtFAName.Text := '<None>';
-  mmoFAInfo.Clear;
-
-  FScenarioID := 0;
-  FPMSConditionID := 0;
-  FPCSConditionID := 0;
-  FElementConditionID := 0;
-  FTANKConditionID := 0;
-  FFAConditionID := 0;
 end;
 
 procedure TfrmScenBuilder.actPickExecute(Sender: TObject);
@@ -902,7 +901,78 @@ begin
   FSelectedConditionID := 0;
 end;
 
+procedure TfrmScenBuilder.FormShow(Sender: TObject);
+begin
+  pnlScenario.BringToFront;
+  lblHeader.Caption := 'SCENARIO EDITOR';
+  UpdateScenarioList;
+end;
+
 {$REGION ' Scenario Section '}
+
+procedure TfrmScenBuilder.btnRefreshScenarioClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnNewScenarioClick(Sender: TObject);
+begin
+  edtScenarioName.Text := '';
+  mmoScenarioDescription.Text := '';
+  FScenarioID := 0;
+
+  ClearTabPickScen(1);
+  ClearTabPickScen(2);
+  ClearTabPickScen(3);
+  ClearTabPickScen(4);
+  ClearTabPickScen(5);
+
+//  edtPMSName.Text := '<None>';
+//  mmoPMSInfo.Clear;
+//  FPMSConditionID := 0;
+
+//  edtPCSName.Text := '<None>';
+//  mmoPCSInfo.Clear;
+//  FPCSConditionID := 0;
+
+//  edtElementName.Text := '<None>';
+//  FElementConditionID := 0;
+
+//  edtTANKName.Text := '<None>';
+//  mmoTANKInfo.Clear;
+
+//  edtFAName.Text := '<None>';
+//  mmoFAInfo.Clear;
+//  FFAConditionID := 0;
+end;
+
+procedure TfrmScenBuilder.btnEditScenarioClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnDeleteScenarioClick(Sender: TObject);
+var
+  conname : string;
+begin
+  if FScenarioID = 0then
+    Exit;
+
+  conname := edtScenarioName.Text;
+
+  if MessageDlg('Are You Sure To Delete "' + edtScenarioName.Text + '" Scenario ? '+#13+#10+
+      'All Sessions Linked To Scenario Will Be Deleted..!', mtWarning, [mbYes, mbNo], 0) = mrYes then;
+  begin
+    InstructorSys.Scenario.deleteScenario(FScenarioID);
+//    btnNewScenario(nil);
+    MessageDlg('Delete "' + conname + '" Scenario Success', mtInformation, [mbOK], 0)
+  end;
+end;
+
+procedure TfrmScenBuilder.btnSaveScenarioClick(Sender: TObject);
+begin
+//
+end;
 
 procedure TfrmScenBuilder.btnPickClick(Sender: TObject);
 var
@@ -1077,20 +1147,192 @@ begin
   end;
 end;
 
-procedure TfrmScenBuilder.Edit3Change(Sender: TObject);
-begin
+{$ENDREGION}
 
+{$REGION ' Session Section '}
+
+procedure TfrmScenBuilder.btnRefreshSessionClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnNewSessionClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnEditSessionClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnDeleteSessionClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnSaveSessionClick(Sender: TObject);
+begin
+//
 end;
 
 {$ENDREGION}
 
-{$REGION ' Session Section '}
+{$REGION ' PMS Section '}
+
+procedure TfrmScenBuilder.btnRefreshPMSClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnNewPMSClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnEditPMSClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnDeletePMSClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnSavePMSClick(Sender: TObject);
+begin
+//
+end;
+
 {$ENDREGION}
 
-{$REGION ' PMS Section '}
+{$REGION ' TANK Section '}
+
+procedure TfrmScenBuilder.btnRefreshTANKClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnNewTANKClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnEditTANKClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnDeleteTANKClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnSaveTANKClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnFullAllClick(Sender: TObject);
+var
+  i, j : integer;
+begin
+  if cbbSetValue.Text = '' then
+  begin
+    MessageDlg('Select the tank to be filled..!!', mtInformation, [mbOK], 0);
+    Exit;
+  end;
+
+  if strtofloat(edtPersen.Text) > 100 then
+    edtPersen.Text := '100'
+  else if strtofloat(edtPersen.Text) < 0 then
+    edtPersen.Text := '0';
+
+  if cbbSetValue.ItemIndex = 0 then
+  begin
+
+    for I := 1 to 18 do
+    begin
+      for j := 0 to ComponentCount - 1 do
+      begin
+        if Components[j] is TEdit then
+        begin
+          if TEdit(Components[j]).Tag = i then
+          begin
+            TEdit(Components[j]).Text := floattostr(InstructorSys.Scenario.getMaxTankValue(TEdit(Components[j]).Hint)*
+                                                    (strtofloat(edtPersen.Text)/100));
+            break;
+          end;
+        end;
+      end;
+    end;
+  end
+  else
+  begin
+    for j := 0 to ComponentCount - 1 do
+    begin
+      if Components[j] is TEdit then
+      begin
+        if TEdit(Components[j]).Tag = (cbbSetValue.ItemIndex) then
+        begin
+          TEdit(Components[j]).Text := floattostr(InstructorSys.Scenario.getMaxTankValue(TEdit(Components[j]).Hint)*
+                                                  (strtofloat(edtPersen.Text)/100));
+          break;
+        end;
+      end;
+    end;
+  end;
+
+
+end;
+
+procedure TfrmScenBuilder.edtGBXLOTKKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (key in ['0'..'9', #8, #13, #46]) then
+    key := #0;
+end;
+
+procedure TfrmScenBuilder.edtMELOTKKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (key in ['0'..'9', #8, #13, #46]) then
+    key := #0;
+end;
+
+procedure TfrmScenBuilder.edtWBPSKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (key in ['0'..'9', #8, #13, #46]) then
+    key := #0;
+end;
+
 {$ENDREGION}
 
 {$REGION ' PCS Section '}
+
+procedure TfrmScenBuilder.btnRefreshPCSClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnNewPCSClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnEditPCSClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnDeletePCSClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnSavePCSClick(Sender: TObject);
+begin
+//
+end;
 
 procedure TfrmScenBuilder.cbbControlChange(Sender: TObject);
 begin
@@ -1480,82 +1722,33 @@ end;
 
 {$ENDREGION}
 
-{$REGION ' TANK Section '}
-
-procedure TfrmScenBuilder.btnFullAllClick(Sender: TObject);
-var
-  i, j : integer;
-begin
-  if cbbSetValue.Text = '' then
-  begin
-    MessageDlg('Select the tank to be filled..!!', mtInformation, [mbOK], 0);
-    Exit;
-  end;
-
-  if strtofloat(edtPersen.Text) > 100 then
-    edtPersen.Text := '100'
-  else if strtofloat(edtPersen.Text) < 0 then
-    edtPersen.Text := '0';
-
-  if cbbSetValue.ItemIndex = 0 then
-  begin
-
-    for I := 1 to 18 do
-    begin
-      for j := 0 to ComponentCount - 1 do
-      begin
-        if Components[j] is TEdit then
-        begin
-          if TEdit(Components[j]).Tag = i then
-          begin
-            TEdit(Components[j]).Text := floattostr(InstructorSys.Scenario.getMaxTankValue(TEdit(Components[j]).Hint)*
-                                                    (strtofloat(edtPersen.Text)/100));
-            break;
-          end;
-        end;
-      end;
-    end;
-  end
-  else
-  begin
-    for j := 0 to ComponentCount - 1 do
-    begin
-      if Components[j] is TEdit then
-      begin
-        if TEdit(Components[j]).Tag = (cbbSetValue.ItemIndex) then
-        begin
-          TEdit(Components[j]).Text := floattostr(InstructorSys.Scenario.getMaxTankValue(TEdit(Components[j]).Hint)*
-                                                  (strtofloat(edtPersen.Text)/100));
-          break;
-        end;
-      end;
-    end;
-  end;
-
-
-end;
-
-procedure TfrmScenBuilder.edtGBXLOTKKeyPress(Sender: TObject; var Key: Char);
-begin
-  if not (key in ['0'..'9', #8, #13, #46]) then
-    key := #0;
-end;
-
-procedure TfrmScenBuilder.edtMELOTKKeyPress(Sender: TObject; var Key: Char);
-begin
-  if not (key in ['0'..'9', #8, #13, #46]) then
-    key := #0;
-end;
-
-procedure TfrmScenBuilder.edtWBPSKeyPress(Sender: TObject; var Key: Char);
-begin
-  if not (key in ['0'..'9', #8, #13, #46]) then
-    key := #0;
-end;
-
-{$ENDREGION}
-
 {$REGION ' FA Section '}
+
+procedure TfrmScenBuilder.btnRefreshFAClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnNewFAClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnEditFAClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnDeleteFAClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmScenBuilder.btnSaveFAClick(Sender: TObject);
+begin
+//
+end;
+
 {$ENDREGION}
 
 {$REGION ' Update Procedure Section '}
