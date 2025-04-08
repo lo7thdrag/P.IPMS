@@ -3,7 +3,7 @@ unit uStarter;
 interface
 
 uses
-  uERSystem, uMimicsSystem, uControllerSystem, uPCSSystem, SysUtils,
+  uERSystem, uMimicsSystem, uControllerSystem, uPCSSystem, uDieselGeneratorSystem, SysUtils,
   uInstructorSystem;
 
 procedure BeginSimulation;
@@ -35,6 +35,7 @@ begin
 
   SysMimics.Network.StartNetwork;
   PCSSystem.Network.StartNetwork;
+  DieselGeneratorSystem.Network.StartNetwork;
 end;
 
 procedure StopNetwork;
@@ -44,6 +45,7 @@ begin
   CtrlSystem.Network.StopNetwork;
   SysMimics.Network.StopNetwork;
   PCSSystem.Network.StopNetwork;
+  DieselGeneratorSystem.Network.StopNetwork;
 end;
 
 procedure BeginSimulation;
@@ -68,6 +70,9 @@ begin
   {PCS System }
   PCSSystem := TPCSSystem.Create;
 
+  {PMS System }
+  DieselGeneratorSystem := TDieselGeneratorSystem.Create;
+
   { instructor system }
   InstructorSys := TInstructorSystem.Create(FDatabase);
 
@@ -79,6 +84,7 @@ begin
 
   InstructorSys.Free;
   PCSSystem.Free;
+  DieselGeneratorSystem.Free;
   CtrlSystem.Free;
   ERSystem.Free;
   SysMimics.Free;

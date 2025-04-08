@@ -539,6 +539,8 @@ type
       epPMSMsbIntrMode, epPMSEsbIntrMode, epPMSMsbShoreMode, epPMSMsbCBShore, epPMSMsbCBIntr, epPMSEsbCBIntr, epPMSMsbCBNavNaut,
       epPMSEmergencyCon, epPMSMsbBusbar, epPMSMsbTripReduct, epPMSSycnFail, epPMSTrafo115Volt, epPMSTrafo230Volt,
 
+      epPMSFreezed,
+
       {use in panel hardware}
       epBoardAlarmLamp, epBoardAlarmLampKanan, epBoardTelegramKiri, epBoardTelegramKanan, epRudderIndicator,
 

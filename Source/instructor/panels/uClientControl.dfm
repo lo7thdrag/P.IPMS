@@ -17238,7 +17238,6 @@ object frmClientControl: TfrmClientControl
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitTop = 765
         object btn3: TFlatSpeedButton
           Tag = 2
           Left = 94

@@ -537,7 +537,7 @@ begin
   else if str = 'AUXILIARY - 3' then
     result := Setting.ServerIP // '192.168.1.2'
   else if str = 'DIESEL GENERATOR - 1' then
-    result := Setting.ServerIP // '192.168.1.2'
+    result := Setting.DieselGenerator1 // '192.168.1.2'
   else if str = 'DIESEL GENERATOR - 2' then
     result := Setting.ServerIP // '192.168.1.2'
   else if str = 'DIESEL GENERATOR - 3' then

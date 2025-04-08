@@ -1,5 +1,5 @@
 object MainForm: TMainForm
-  Left = 0
+  Left = 1920
   Top = 0
   BorderIcons = []
   BorderStyle = bsNone
@@ -13,6 +13,9 @@ object MainForm: TMainForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesigned
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object imgBackground: TImage
@@ -5395,6 +5398,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgAutomaticStartFailed: TImage
     Left = 84
@@ -5510,6 +5514,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgSpeedSensorFailure: TImage
     Left = 84
@@ -5625,6 +5630,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgLubOilPressLow: TImage
     Left = 84
@@ -5740,6 +5746,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgLubOilTempHigh: TImage
     Left = 84
@@ -5855,6 +5862,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgCoolingWaterTempHigh: TImage
     Left = 84
@@ -5970,6 +5978,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgCoolongWaterLevelLow: TImage
     Left = 84
@@ -6085,6 +6094,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgFuelOilLeakage: TImage
     Left = 84
@@ -6200,6 +6210,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgSpare: TImage
     Left = 84
@@ -6315,6 +6326,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgShutdownOverSpeed: TImage
     Left = 363
@@ -11629,7 +11641,8 @@ object MainForm: TMainForm
       48DD625C93589416A559FD5894F3C4A2B428CDEAC7A29C27FF1FADAC362FC4BE
       368C0000000049454E44AE426082}
     Stretch = True
-    OnClick = btnLampTestClick
+    OnMouseDown = btnLampTestMouseDown
+    OnMouseUp = btnLampTestMouseUp
   end
   object lblRunningHours: TLabel
     Left = 390

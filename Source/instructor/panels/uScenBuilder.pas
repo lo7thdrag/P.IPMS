@@ -112,7 +112,7 @@ type
     btnEditPCS: TRzBmpButton;
     btnDeletePCS: TRzBmpButton;
     Label21: TLabel;
-    Panel3: TPanel;
+    pnlVariasi: TPanel;
     Image1: TImage;
     btnNewScenario: TRzBmpButton;
     btnEditScenario: TRzBmpButton;
@@ -1764,13 +1764,13 @@ begin
   if not Assigned(tempList) then
     Exit;
 
-  if lstAvail.Count > 0 then
-  lstAvail.Clear;
-
-  for i := 0 to tempList.Count - 1 do
-  begin
-    lstAvail.Items.Add(tempList[i]);
-  end;
+//  if lstAvail.Count > 0 then
+//  lstAvail.Clear;
+//
+//  for i := 0 to tempList.Count - 1 do
+//  begin
+//    lstAvail.Items.Add(tempList[i]);
+//  end;
 
   tempList.Free;
 end;
@@ -1788,7 +1788,7 @@ begin
     Exit;
 
   if lstPMS.Count > 0 then
-  lstAvail.Clear;
+//  lstAvail.Clear;
 
   for i := 0 to tempList.Count - 1 do
   begin

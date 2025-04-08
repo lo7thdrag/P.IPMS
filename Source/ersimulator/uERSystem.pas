@@ -134,9 +134,11 @@ begin
       rPmsCmd.ValueBool   := Value;
       rPmsCmd.ValueKind   := 'boolean';
 
+      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+
       if Assigned(FOnPMSCommand) then
         FOnPMSCommand(rPmsCmd);
-//      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+
     end;
     {epPMSGeneratorCBClosedE}epPMSEsbCBIntr :
     begin
@@ -322,7 +324,7 @@ begin
       rPmsCmd.CommandID   := PropsID;
       rPmsCmd.ValueInt    := Value;
       rPmsCmd.ValueKind   := 'integer';
-//      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
       if Assigned(FOnPMSCommand) then
         FOnPMSCommand(rPmsCmd);
     end;
@@ -333,7 +335,7 @@ begin
       rPmsCmd.CommandID   := PropsID;
       rPmsCmd.ValueInt    := Value;
       rPmsCmd.ValueKind   := 'integer';
-//      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
       if Assigned(FOnPMSCommand) then
         FOnPMSCommand(rPmsCmd);
     end;

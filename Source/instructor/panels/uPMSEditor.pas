@@ -911,17 +911,17 @@ end;
 
 procedure TfrmPMSEditor.chkGen2Click(Sender: TObject);
 begin
-  if (chkEngine2.Checked) then
-    lblgen2.Visible := True
-  else
-  begin
-    if (chkG2Pref.Checked) then
-    begin
-      chkEngine2.Checked := True;
-      Exit;
-    end;
-    lblgen2.Visible := False;
-  end;
+//  if (chkEngine2.Checked) then
+//    lblgen2.Visible := True
+//  else
+//  begin
+//    if (chkG2Pref.Checked) then
+//    begin
+//      chkEngine2.Checked := True;
+//      Exit;
+//    end;
+//    lblgen2.Visible := False;
+//  end;
 
   emergencyCheck(Sender);
 end;
