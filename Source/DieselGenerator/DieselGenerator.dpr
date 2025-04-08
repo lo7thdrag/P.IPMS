@@ -2,13 +2,13 @@ program DieselGenerator;
 
 uses
   Vcl.Forms,
-  Unit6 in 'Unit6.pas' {Form6};
+  uMainForm in 'uMainForm.pas' {MainForm};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm6, Form6);
+  Application.CreateForm(TMainForm, MainForm);
   Application.Run;
 end.
