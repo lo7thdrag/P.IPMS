@@ -84,7 +84,7 @@ type
     Label2: TLabel;
     Label3: TLabel;
     lstSession: TListBox;
-    edt1: TEdit;
+    edtSessionName: TEdit;
     mmo1: TMemo;
     lbl4: TLabel;
     lblSessionID: TLabel;
@@ -92,7 +92,7 @@ type
     Label4: TLabel;
     Label5: TLabel;
     lstPMS: TListBox;
-    edtPMSCond: TEdit;
+    edtPMSConditionName: TEdit;
     pnlPCS: TPanel;
     Label9: TLabel;
     Label10: TLabel;
@@ -102,12 +102,12 @@ type
     Label14: TLabel;
     Label15: TLabel;
     lstTank: TListBox;
-    Edit2: TEdit;
+    edtTankConditionName: TEdit;
     pnlFA: TPanel;
     Label19: TLabel;
     Label20: TLabel;
     lstFA: TListBox;
-    Edit3: TEdit;
+    edtFAConditionName: TEdit;
     btnNewPCS: TRzBmpButton;
     btnEditPCS: TRzBmpButton;
     btnDeletePCS: TRzBmpButton;
@@ -1726,7 +1726,7 @@ end;
 
 procedure TfrmScenBuilder.btnRefreshFAClick(Sender: TObject);
 begin
-//
+  UpdateFAList
 end;
 
 procedure TfrmScenBuilder.btnNewFAClick(Sender: TObject);
@@ -1745,8 +1745,205 @@ begin
 end;
 
 procedure TfrmScenBuilder.btnSaveFAClick(Sender: TObject);
+//var
+//  i, ConditionID : Integer;
+//  faData : TFACond_Data;
+//  faList : TList;
 begin
+  if edtFAConditionName.Text = '' then
+  begin
+    ShowMessage('Condition Name Is Empty, Please Insert Condition Name');
+    Exit;
+  end;
+
+//  faList := nil;
+//  faData := nil;
+
+//  if FCondition_ID = 0 then
+//  begin
+//    faList := TList.Create;
 //
+//    for i := 1 to 4 do
+//    begin
+//      if InstructorSys.Scenario.GetConditionID(edtName.Text) > 0 then
+//      begin
+//        lblWarning2.Caption := '* Condition Name Is Already In Use, Please Use Another Condition Name';
+//        lblWarning2.Visible := True;
+//        Exit;
+//      end;
+//
+//      faData := TFACond_Data.Create;
+//
+//      case i of
+//        1:
+//        begin
+//          faData.Role := 'MCR_IPMS';
+//          faData.FA_DGSETS_State := Ord(CheckBox1.Checked);
+//          faData.FA_Distribution_State := Ord(CheckBox2.Checked);
+//          faData.FA_Propultion_State := Ord(CheckBox3.Checked);
+//          faData.FA_Auxiliary_State := Ord(CheckBox4.Checked);
+//          faData.FA_Fuel_State := Ord(CheckBox5.Checked);
+//          faData.FA_Domest_State := Ord(CheckBox6.Checked);
+//          faData.FA_HVAC_State := Ord(CheckBox7.Checked);
+//          faData.FA_FFDC_State := Ord(CheckBox8.Checked);
+//          faData.FA_Navigation_State := Ord(CheckBox9.Checked);
+//          faData.FA_Ballast_State := Ord(CheckBox10.Checked);
+//          faData.FA_IPMS_State := Ord(CheckBox11.Checked);
+//          faData.FA_IAS_State := Ord(CheckBox12.Checked);
+//        end;
+//        2:
+//        begin
+//          faData.Role := 'MCR_AUX';
+//          faData.FA_DGSETS_State := Ord(CheckBox13.Checked);
+//          faData.FA_Distribution_State := Ord(CheckBox14.Checked);
+//          faData.FA_Propultion_State := Ord(CheckBox15.Checked);
+//          faData.FA_Auxiliary_State := Ord(CheckBox16.Checked);
+//          faData.FA_Fuel_State := Ord(CheckBox17.Checked);
+//          faData.FA_Domest_State := Ord(CheckBox18.Checked);
+//          faData.FA_HVAC_State := Ord(CheckBox19.Checked);
+//          faData.FA_FFDC_State := Ord(CheckBox20.Checked);
+//          faData.FA_Navigation_State := Ord(CheckBox21.Checked);
+//          faData.FA_Ballast_State := Ord(CheckBox22.Checked);
+//          faData.FA_IPMS_State := Ord(CheckBox23.Checked);
+//          faData.FA_IAS_State := Ord(CheckBox24.Checked);
+//        end;
+//        3:
+//        begin
+//          faData.Role := 'MCR_PCS';
+//          faData.FA_DGSETS_State := Ord(CheckBox25.Checked);
+//          faData.FA_Distribution_State := Ord(CheckBox26.Checked);
+//          faData.FA_Propultion_State := Ord(CheckBox27.Checked);
+//          faData.FA_Auxiliary_State := Ord(CheckBox28.Checked);
+//          faData.FA_Fuel_State := Ord(CheckBox29.Checked);
+//          faData.FA_Domest_State := Ord(CheckBox30.Checked);
+//          faData.FA_HVAC_State := Ord(CheckBox31.Checked);
+//          faData.FA_FFDC_State := Ord(CheckBox32.Checked);
+//          faData.FA_Navigation_State := Ord(CheckBox33.Checked);
+//          faData.FA_Ballast_State := Ord(CheckBox34.Checked);
+//          faData.FA_IPMS_State := Ord(CheckBox35.Checked);
+//          faData.FA_IAS_State := Ord(CheckBox36.Checked);
+//        end;
+//        4:
+//        begin
+//          faData.Role := 'MCR_E';
+//          faData.FA_DGSETS_State := Ord(CheckBox37.Checked);
+//          faData.FA_Distribution_State := Ord(CheckBox38.Checked);
+//          faData.FA_Propultion_State := Ord(CheckBox39.Checked);
+//          faData.FA_Auxiliary_State := Ord(CheckBox40.Checked);
+//          faData.FA_Fuel_State := Ord(CheckBox41.Checked);
+//          faData.FA_Domest_State := Ord(CheckBox42.Checked);
+//          faData.FA_HVAC_State := Ord(CheckBox43.Checked);
+//          faData.FA_FFDC_State := Ord(CheckBox44.Checked);
+//          faData.FA_Navigation_State := Ord(CheckBox45.Checked);
+//          faData.FA_Ballast_State := Ord(CheckBox46.Checked);
+//          faData.FA_IPMS_State := Ord(CheckBox47.Checked);
+//          faData.FA_IAS_State := Ord(CheckBox48.Checked);
+//        end;
+//      end;
+//
+//      faList.Add(faData);
+//    end;
+//
+//    InstructorSys.Scenario.SaveFACondition(True, edtName.Text, faList, ConditionID);
+//    MessageDlg('"' + edtName.Text + '" Condition Has Been Saved', mtInformation, [mbOK], 0);
+//    actNewExecute(nil);
+//  end
+//  else if FCondition_ID > 0 then
+//  begin
+//    if CondNameBuffer <> edtName.Text then
+//    begin
+//      ShowMessage('Can Not Update FA Condition With a Different Name');
+//      Exit;
+//    end;
+//
+//    faList := TList.Create;
+//
+//    for i := 1 to 4 do
+//    begin
+//      faData := TFACond_Data.Create;
+//      faData.FA_ID := InstructorSys.Scenario.GetFACondID(FCondition_ID, i);
+//
+//      case i of
+//        1:
+//        begin
+//          faData.Role := 'MCR_IPMS';
+//          faData.FA_DGSETS_State := Ord(CheckBox1.Checked);
+//          faData.FA_Distribution_State := Ord(CheckBox2.Checked);
+//          faData.FA_Propultion_State := Ord(CheckBox3.Checked);
+//          faData.FA_Auxiliary_State := Ord(CheckBox4.Checked);
+//          faData.FA_Fuel_State := Ord(CheckBox5.Checked);
+//          faData.FA_Domest_State := Ord(CheckBox6.Checked);
+//          faData.FA_HVAC_State := Ord(CheckBox7.Checked);
+//          faData.FA_FFDC_State := Ord(CheckBox8.Checked);
+//          faData.FA_Navigation_State := Ord(CheckBox9.Checked);
+//          faData.FA_Ballast_State := Ord(CheckBox10.Checked);
+//          faData.FA_IPMS_State := Ord(CheckBox11.Checked);
+//          faData.FA_IAS_State := Ord(CheckBox12.Checked);
+//        end;
+//        2:
+//        begin
+//          faData.Role := 'MCR_AUX';
+//          faData.FA_DGSETS_State := Ord(CheckBox13.Checked);
+//          faData.FA_Distribution_State := Ord(CheckBox14.Checked);
+//          faData.FA_Propultion_State := Ord(CheckBox15.Checked);
+//          faData.FA_Auxiliary_State := Ord(CheckBox16.Checked);
+//          faData.FA_Fuel_State := Ord(CheckBox17.Checked);
+//          faData.FA_Domest_State := Ord(CheckBox18.Checked);
+//          faData.FA_HVAC_State := Ord(CheckBox19.Checked);
+//          faData.FA_FFDC_State := Ord(CheckBox20.Checked);
+//          faData.FA_Navigation_State := Ord(CheckBox21.Checked);
+//          faData.FA_Ballast_State := Ord(CheckBox22.Checked);
+//          faData.FA_IPMS_State := Ord(CheckBox23.Checked);
+//          faData.FA_IAS_State := Ord(CheckBox24.Checked);
+//        end;
+//        3:
+//        begin
+//          faData.Role := 'MCR_PCS';
+//          faData.FA_DGSETS_State := Ord(CheckBox25.Checked);
+//          faData.FA_Distribution_State := Ord(CheckBox26.Checked);
+//          faData.FA_Propultion_State := Ord(CheckBox27.Checked);
+//          faData.FA_Auxiliary_State := Ord(CheckBox28.Checked);
+//          faData.FA_Fuel_State := Ord(CheckBox29.Checked);
+//          faData.FA_Domest_State := Ord(CheckBox30.Checked);
+//          faData.FA_HVAC_State := Ord(CheckBox31.Checked);
+//          faData.FA_FFDC_State := Ord(CheckBox32.Checked);
+//          faData.FA_Navigation_State := Ord(CheckBox33.Checked);
+//          faData.FA_Ballast_State := Ord(CheckBox34.Checked);
+//          faData.FA_IPMS_State := Ord(CheckBox35.Checked);
+//          faData.FA_IAS_State := Ord(CheckBox36.Checked);
+//        end;
+//        4:
+//        begin
+//          faData.Role := 'MCR_E';
+//          faData.FA_DGSETS_State := Ord(CheckBox37.Checked);
+//          faData.FA_Distribution_State := Ord(CheckBox38.Checked);
+//          faData.FA_Propultion_State := Ord(CheckBox39.Checked);
+//          faData.FA_Auxiliary_State := Ord(CheckBox40.Checked);
+//          faData.FA_Fuel_State := Ord(CheckBox41.Checked);
+//          faData.FA_Domest_State := Ord(CheckBox42.Checked);
+//          faData.FA_HVAC_State := Ord(CheckBox43.Checked);
+//          faData.FA_FFDC_State := Ord(CheckBox44.Checked);
+//          faData.FA_Navigation_State := Ord(CheckBox45.Checked);
+//          faData.FA_Ballast_State := Ord(CheckBox46.Checked);
+//          faData.FA_IPMS_State := Ord(CheckBox47.Checked);
+//          faData.FA_IAS_State := Ord(CheckBox48.Checked);
+//        end;
+//      end;
+//
+//      faData.Condition_ID := FCondition_ID;
+//      faList.Add(faData);
+//    end;
+//
+//    InstructorSys.Scenario.SaveFACondition(False, edtName.Text, faList, ConditionID);
+//    MessageDlg('"' + edtName.Text + '" Condition Has Been Updated', mtInformation, [mbOK], 0);
+//    actNewExecute(nil);
+//  end;
+//
+//  if Assigned(faData) then
+//    faData.Free;
+//
+//  if Assigned(faList) then
+//    faList.Free;
 end;
 
 {$ENDREGION}
