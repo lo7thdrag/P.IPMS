@@ -43,27 +43,29 @@ type
     Label19: TLabel;
     pnlartboard1: TPanel;
     Image2: TImage;
-    RzBmpOP1: TRzBmpButton;
-    RzBmpOP2: TRzBmpButton;
-    RzBmpHLP1: TRzBmpButton;
-    RzBmpCFP1: TRzBmpButton;
-    RzBmpCFP2: TRzBmpButton;
-    RzBmpPFP1: TRzBmpButton;
-    RzBmpPFP2: TRzBmpButton;
-    RzBmpHLP2: TRzBmpButton;
-    RzBmpPowerFP1: TRzBmpButton;
-    RzBmpPowerFP2: TRzBmpButton;
-    RzBmpPFS: TRzBmpButton;
-    RzBmpPFC1: TRzBmpButton;
-    RzBmpPFC2: TRzBmpButton;
-    RzBmpLOLP1: TRzBmpButton;
-    RzBmpST: TRzBmpButton;
-    RzBmpAuxdible: TRzBmpButton;
-    RzBmpButton1: TRzBmpButton;
-    RzBmpLOLP2: TRzBmpButton;
+    imgOP1: TImage;
+    ImgOP2: TImage;
+    ImgCFP2: TImage;
+    ImgHLP1: TImage;
+    ImgCFP1: TImage;
+    ImgPFP1: TImage;
+    ImgPFP2: TImage;
+    ImgHLP2: TImage;
+    ImgPowerFP1: TImage;
+    ImgPowerFP2: TImage;
+    ImgPFS: TImage;
+    ImgPFC1: TImage;
+    ImgPFC2: TImage;
+    ImgLOLP1: TImage;
+    ImgLOLP2: TImage;
+    ImgST: TImage;
+    ImgAuxdible: TImage;
   private
     { Private declarations }
   public
+  FAlarmIndicator : array[0..16] of Boolean;
+
+  procedure SetAlarmIndicator;
     { Public declarations }
   end;
 
@@ -73,5 +75,28 @@ var
 implementation
 
 {$R *.dfm}
+
+{ TfrmMachineRight }
+
+procedure TfrmMachineRight.SetAlarmIndicator;
+begin
+    imgOP1.Visible        := not FAlarmIndicator[0];
+    ImgPFP1.Visible       := not FAlarmIndicator[1];
+    ImgPFS.Visible        := not FAlarmIndicator[2];
+    ImgLOLP1.Visible      := not FAlarmIndicator[3];
+    ImgLOLP2.Visible      := not FAlarmIndicator[4];
+    ImgST.Visible         := not FAlarmIndicator[5];
+    imgOP2.Visible        := not FAlarmIndicator[6];
+    ImgPFP2.Visible       := not FAlarmIndicator[7];
+    ImgPFC1.Visible       := not FAlarmIndicator[8];
+    ImgHLP1.Visible       := not FAlarmIndicator[9];
+    ImgHLP2.Visible       := not FAlarmIndicator[10];
+    ImgPFC2.Visible       := not FAlarmIndicator[11];
+    ImgCFP1.Visible       := not FAlarmIndicator[12];
+    ImgPowerFP1.Visible   := not FAlarmIndicator[13];
+    ImgAuxdible.Visible   := not FAlarmIndicator[14];
+    ImgCFP2.Visible       := not FAlarmIndicator[15];
+    ImgPowerFP2.Visible   := not FAlarmIndicator[16];
+end;
 
 end.

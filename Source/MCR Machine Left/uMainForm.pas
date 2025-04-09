@@ -78,60 +78,58 @@ type
     Label50: TLabel;
     Label51: TLabel;
     VrRotarySwitch1: TVrRotarySwitch;
-    RzBmpStandbyPS1: TRzBmpButton;
-    RzBmpStartPS1: TRzBmpButton;
-    RzBmpStanbySB1: TRzBmpButton;
-    RzBmpStartSB1: TRzBmpButton;
     VrRotarySwitch2: TVrRotarySwitch;
-    RzBmpStanbyPS2: TRzBmpButton;
-    RzBmpStartPS2: TRzBmpButton;
-    RzBmpStanbySB2: TRzBmpButton;
-    RzBmpStartSB2: TRzBmpButton;
     VrRotarySwitch3: TVrRotarySwitch;
     VrRotarySwitch4: TVrRotarySwitch;
-    RzBmpStanbyPS3: TRzBmpButton;
-    RzBmpStartPS3: TRzBmpButton;
-    RzBmpStanbySB3: TRzBmpButton;
-    RzBmpStartSB3: TRzBmpButton;
     VrRotarySwitch5: TVrRotarySwitch;
     VrRotarySwitch6: TVrRotarySwitch;
     pnlartboard1: TPanel;
     Image2: TImage;
-    RzBmpOP1: TRzBmpButton;
-    RzBmpOP2: TRzBmpButton;
-    RzBmpHLP1: TRzBmpButton;
-    RzBmpCFP1: TRzBmpButton;
-    RzBmpCFP2: TRzBmpButton;
-    RzBmpPFP1: TRzBmpButton;
-    RzBmpPFP2: TRzBmpButton;
-    RzBmpHLP2: TRzBmpButton;
-    RzBmpPowerFP1: TRzBmpButton;
-    RzBmpPowerFP2: TRzBmpButton;
-    RzBmpPFS: TRzBmpButton;
-    RzBmpPFC1: TRzBmpButton;
-    RzBmpPFC2: TRzBmpButton;
-    RzBmpLOLP1: TRzBmpButton;
-    RzBmpST: TRzBmpButton;
-    RzBmpAuxdible: TRzBmpButton;
-    RzBmpButton1: TRzBmpButton;
-    RzBmpLOLP2: TRzBmpButton;
     pnlartboard2: TPanel;
     Image5: TImage;
-    RzBmpRP1: TRzBmpButton;
-    RzBmpRP2: TRzBmpButton;
-    RzBmpSTOP2: TRzBmpButton;
-    RzBmpSTOP1: TRzBmpButton;
-    RzBmpASP2: TRzBmpButton;
-    RzBmpASP1: TRzBmpButton;
     pnlartboard3: TPanel;
     Image1: TImage;
-    RzBmpRP3: TRzBmpButton;
-    RzBmpRP4: TRzBmpButton;
-    RzBmpSTOP3: TRzBmpButton;
-    RzBmpSTOP4: TRzBmpButton;
-    RzBmpASN3: TRzBmpButton;
-    RzBmpASN4: TRzBmpButton;
-    Image4: TImage;
+    imgOP1: TImage;
+    ImgOP2: TImage;
+    ImgCFP2: TImage;
+    ImgHLP1: TImage;
+    ImgCFP1: TImage;
+    ImgPFP1: TImage;
+    ImgPFP2: TImage;
+    ImgHLP2: TImage;
+    ImgPowerFP1: TImage;
+    ImgPowerFP2: TImage;
+    ImgPFS: TImage;
+    ImgPFC1: TImage;
+    ImgPFC2: TImage;
+    ImgLOLP1: TImage;
+    ImgLOLP2: TImage;
+    ImgST: TImage;
+    ImgAuxdible: TImage;
+    ImgStandbyPS1: TImage;
+    ImgStartPS1: TImage;
+    ImgStandbyPS2: TImage;
+    ImgStartPS2: TImage;
+    ImgStandbyPS3: TImage;
+    ImgStartPS3: TImage;
+    ImgStandbySB1: TImage;
+    ImgStartSB1: TImage;
+    ImgStandbySB2: TImage;
+    ImgStartSB2: TImage;
+    ImgStandbySB3: TImage;
+    ImgStartSB3: TImage;
+    ImgRP1: TImage;
+    ImgRP2: TImage;
+    ImgRP3: TImage;
+    ImgRP4: TImage;
+    ImgSTOP1: TImage;
+    ImgSTOP2: TImage;
+    ImgASP1: TImage;
+    ImgASP2: TImage;
+    ImgSTOP3: TImage;
+    ImgSTOP4: TImage;
+    ImgASP3: TImage;
+    ImgASP4: TImage;
     procedure FormCreate(Sender: TObject);
 
   private
@@ -154,6 +152,9 @@ type
     FSbPump3 : array[1..3] of Boolean;
 
     procedure SetAlarmIndicator;
+    procedure SetHidroulicPump;
+    procedure SetPumpIndicator;
+    procedure SetTelegrap;
   end;
 
 var
@@ -208,21 +209,61 @@ begin
 end;
 
 procedure TMainForm.SetAlarmIndicator;
-var
-  i : Integer;
-
 begin
-    RzBmpOP1.Visible := not FAlarmIndicator[0];
+    imgOP1.Visible        := not FAlarmIndicator[0];
+    ImgPFP1.Visible       := not FAlarmIndicator[1];
+    ImgPFS.Visible        := not FAlarmIndicator[2];
+    ImgLOLP1.Visible      := not FAlarmIndicator[3];
+    ImgLOLP2.Visible      := not FAlarmIndicator[4];
+    ImgST.Visible         := not FAlarmIndicator[5];
+    imgOP2.Visible        := not FAlarmIndicator[6];
+    ImgPFP2.Visible       := not FAlarmIndicator[7];
+    ImgPFC1.Visible       := not FAlarmIndicator[8];
+    ImgHLP1.Visible       := not FAlarmIndicator[9];
+    ImgHLP2.Visible       := not FAlarmIndicator[10];
+    ImgPFC2.Visible       := not FAlarmIndicator[11];
+    ImgCFP1.Visible       := not FAlarmIndicator[12];
+    ImgPowerFP1.Visible   := not FAlarmIndicator[13];
+    ImgAuxdible.Visible   := not FAlarmIndicator[14];
+    ImgCFP2.Visible       := not FAlarmIndicator[15];
+    ImgPowerFP2.Visible   := not FAlarmIndicator[16];
+end;
 
+procedure TMainForm.SetHidroulicPump;
+begin
+    ImgStandbyPS1.Visible := not FAlarmIndicator[0];
+    ImgStandbyPS2.Visible := not FAlarmIndicator[1];
+    ImgStandbyPS3.Visible := not FAlarmIndicator[2];
+    ImgStartPS1.Visible   := not FAlarmIndicator[3];
+    ImgStartPS2.Visible   := not FAlarmIndicator[4];
+    ImgStartPS3.Visible   := not FAlarmIndicator[5];
+    ImgStandbySB1.Visible := not FAlarmIndicator[6];
+    ImgStandbySB2.Visible := not FAlarmIndicator[7];
+    ImgStandbySB3.Visible := not FAlarmIndicator[8];
+    ImgStartSB1.Visible   := not FAlarmIndicator[9];
+    ImgStartSB2.Visible   := not FAlarmIndicator[10];
+    ImgStartSB3.Visible   := not FAlarmIndicator[11];
+end;
 
-//  for j := 1 to 11 do
-//        begin
-//          if FTelegrm[j] then
-//            tempOut := j;
-//
-//          FTelegrm[j] := False;
-//          FTempTelegrm[j] := False;
-//        end;
+procedure TMainForm.SetPumpIndicator;
+begin
+    ImgRP1.Visible    := not FAlarmIndicator[0];
+    ImgSTOP1.Visible  := not FAlarmIndicator[1];
+    ImgASP1.Visible   := not FAlarmIndicator[2];
+    ImgRP2.Visible    := not FAlarmIndicator[3];
+    ImgSTOP2.Visible  := not FAlarmIndicator[4];
+    ImgASP2.Visible   := not FAlarmIndicator[5];
+    ImgRP3.Visible    := not FAlarmIndicator[6];
+    ImgSTOP3.Visible  := not FAlarmIndicator[7];
+    ImgASP3.Visible   := not FAlarmIndicator[8];
+    ImgRP4.Visible    := not FAlarmIndicator[9];
+    ImgSTOP4.Visible  := not FAlarmIndicator[10];
+    ImgASP4.Visible   := not FAlarmIndicator[11];
+end;
+
+procedure TMainForm.SetTelegrap;
+begin
+  //
 end;
 
 procedure TMainForm.MCRMachineLeftSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);
