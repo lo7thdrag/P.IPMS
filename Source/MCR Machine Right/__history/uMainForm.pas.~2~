@@ -8,7 +8,7 @@ uses
   VrAngularMeter, Vcl.ExtCtrls;
 
 type
-  TfrmMachineRight = class(TForm)
+  TMainForm = class(TForm)
     Panel1: TPanel;
     imgpsimgtelegrapps: TImage;
     PanelSpedometer: TPanel;
@@ -68,7 +68,7 @@ type
   end;
 
 var
-  frmMachineRight: TfrmMachineRight;
+  MainForm: TMainForm;
 
 implementation
 

@@ -2,13 +2,13 @@ program MCRMachineRight;
 
 uses
   Vcl.Forms,
-  uMainForm in 'uMainForm.pas' {frmMachineRight};
+  uMainForm in 'uMainForm.pas' {MainForm};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfrmMachineRight, frmMachineRight);
+  Application.CreateForm(TMainForm, MainForm);
   Application.Run;
 end.

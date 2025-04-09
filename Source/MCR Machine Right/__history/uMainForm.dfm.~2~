@@ -1,4 +1,4 @@
-object frmMachineRight: TfrmMachineRight
+object MainForm: TMainForm
   Left = 0
   Top = 0
   BorderStyle = bsNone
