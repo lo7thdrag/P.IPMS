@@ -2,7 +2,10 @@
   DieselGenerator Network class to manage connection for DieselGenerator system.
   Act as client to VREngine system and Controller System.
 
-  @author  Prince
+  @author  ryu
+  @version 2013/09/19 1.0 Initial revision.
+  @todo
+  @comment
 -------------------------------------------------------------------------------}
 unit uDieselGeneratorNetwork;
 

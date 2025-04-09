@@ -1,22 +1,23 @@
 {*------------------------------------------------------------------------------
-  DieselGenerator Network class to manage connection for DieselGenerator system.
+  MCRMachineLeft Network class to manage connection for MCRMachineLeft system.
   Act as client to VREngine system and Controller System.
 
   @author  Prince
 -------------------------------------------------------------------------------}
-unit uDieselGeneratorNetwork;
+unit uMCRMachineLeftNetwork;
 
 interface
 
 uses uNetworkManager, uTCPClient, ExtCtrls, uDataType;
 
 type
-  TDieselGeneratorNetwork = class (TNetworkManager)
+  TMCRMachineLeftNetwork = class (TNetworkManager)
 
   private
 
-    FVREngineSocket   : TTCPClient;
-    FDieselGeneratorControllerSocket: TTCPClient;
+    FVREngineSocket : TTCPClient;
+    FMCRMachineLeftControllerSocket : TTCPClient;
+    FMCRMachineLeftAlarmSocket : TTCPClient;
 
   public
     constructor Create; override;
@@ -32,7 +33,8 @@ type
     procedure OnDisconnected(Sender : TObject);override;
 
     property VREngineSocket : TTCPClient read FVREngineSocket;
-    property DieselGeneratorControllerSocket : TTCPClient read FDieselGeneratorControllerSocket;
+    property MCRMachineLeftControllerSocket : TTCPClient read FMCRMachineLeftControllerSocket;
+    property MCRMachineLeftAlarmSocket : TTCPClient read FMCRMachineLeftAlarmSocket;
 
   end;
 
@@ -42,7 +44,7 @@ uses uSetting;
 
 { TPCSNetwork }
 
-constructor TDieselGeneratorNetwork.Create;
+constructor TMCRMachineLeftNetwork.Create;
 begin
   inherited;
 
@@ -68,47 +70,52 @@ begin
     AutoReconnect := True;
   end;
 
-  FDieselGeneratorControllerSocket := AsClients.Get('AsControllerClient');
+  FMCRMachineLeftControllerSocket := AsClients.Get('AsControllerClient');
+  FMCRMachineLeftAlarmSocket := AsClients.Get('AsInstructorClient');
 end;
 
-destructor TDieselGeneratorNetwork.Destroy;
+destructor TMCRMachineLeftNetwork.Destroy;
 begin
 
   inherited;
 end;
 
-procedure TDieselGeneratorNetwork.OnConnected(Sender: TObject);
+procedure TMCRMachineLeftNetwork.OnConnected(Sender: TObject);
 begin
   inherited;
 
-  Listeners.TriggerEvents(Self, epNetworkDebugInfo, 'Diesel Generator connected to ' +  (Sender as TTCPClient).ServerAddress);
+  Listeners.TriggerEvents(Self, epNetworkDebugInfo, 'MCR Machine Left connected to ' +  (Sender as TTCPClient).ServerAddress);
 
 end;
 
-procedure TDieselGeneratorNetwork.OnDisconnected(Sender: TObject);
+procedure TMCRMachineLeftNetwork.OnDisconnected(Sender: TObject);
 begin
   inherited;
 
-  Listeners.TriggerEvents(Self, epNetworkDebugInfo, 'Diesel Generator disconnected from ' +  (Sender as TTCPClient).ServerAddress);
+  Listeners.TriggerEvents(Self, epNetworkDebugInfo, 'MCR Machine Left disconnected from ' +  (Sender as TTCPClient).ServerAddress);
 end;
 
-procedure TDieselGeneratorNetwork.StartNetwork;
+procedure TMCRMachineLeftNetwork.StartNetwork;
 begin
   inherited;
 
   FVREngineSocket.AutoReconnect := True;
-  FDieselGeneratorControllerSocket.AutoReconnect := True;
+  FMCRMachineLeftControllerSocket.AutoReconnect := True;
+  FMCRMachineLeftAlarmSocket.AutoReconnect := True;
 end;
 
-procedure TDieselGeneratorNetwork.StopNetwork;
+procedure TMCRMachineLeftNetwork.StopNetwork;
 begin
   inherited;
 
   FVREngineSocket.Disconnect;
   FVREngineSocket.AutoReconnect := false;
 
-  FDieselGeneratorControllerSocket.Disconnect;
-  FDieselGeneratorControllerSocket.AutoReconnect := false;
+  FMCRMachineLeftControllerSocket.Disconnect;
+  FMCRMachineLeftControllerSocket.AutoReconnect := false;
+
+  FMCRMachineLeftAlarmSocket.Disconnect;
+  FMCRMachineLeftAlarmSocket.AutoReconnect := false;
 
 end;
 
