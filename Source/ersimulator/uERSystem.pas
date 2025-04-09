@@ -599,13 +599,13 @@ begin
     epPMSGeneratorEngineRun:
     begin
       {hanya bisa nyala jk state 'waiting', tdk shutdown, tdk emergency stop}
-      if (generator.GeneratorState = 1) and (not generator.ShutDown) and (not generator.EmergencyStop) then
+      if (generator.GeneratorState = Ord(gsWaiting){1}) and (not generator.ShutDown) and (not generator.EmergencyStop) then
         generator.EngineRun := recER.ValueBool;
     end;
     epPMSGeneratorStop:
     begin
       {hanya bisa mati jk state 'Gen Ready'}
-      if generator.GeneratorState = 5 then
+      if generator.GeneratorState = Ord(gsGenReady){5} then
         generator.GeneratorState := Ord(gsCoolDown);//6;
     end;
     epPMSGeneratorCBClosed:
@@ -630,7 +630,7 @@ begin
           generator.Preference  := False
       else
       begin
-        if (generator.GeneratorMode = 3) and (generator.GeneratorState = 1) then
+        if (generator.GeneratorMode = 3) and (generator.GeneratorState = Ord(gsWaiting){1}) then
         begin
           if (generator.EmergencyStop) or (generator.ShutDown) then
             Exit

@@ -90,7 +90,7 @@ begin
           flag1 := getFuelOilSystem.GetTank(C_TankIdentifier[15]).Content;
 
           if ( flag1 < 0.5) and (not Gen[i].FuelRunsOut) and
-            (Gen[i].GeneratorState = 5) then
+            (Gen[i].GeneratorState = Ord(gsGenReady){5}) then
           begin
             Gen[i].GeneratorState := Ord(gsCoolDown);//6;
             Gen[i].FuelRunsOut := True;
@@ -108,7 +108,7 @@ begin
           flag2 := getFuelOilSystem.GetTank(C_TankIdentifier[14]).Content;
 
           if (flag2 < 0.5) and (not Gen[i].FuelRunsOut) and
-            (Gen[i].GeneratorState = 5) then
+            (Gen[i].GeneratorState = Ord(gsGenReady){5}) then
           begin
             Gen[i].GeneratorState := Ord(gsCoolDown);//6;
             Gen[i].FuelRunsOut := True;

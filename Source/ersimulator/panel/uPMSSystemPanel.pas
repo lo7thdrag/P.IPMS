@@ -545,7 +545,7 @@ begin
         if (generator.GeneratorMode = 3) then
           exit;
 
-        if generator.GeneratorState = 1 then
+        if generator.GeneratorState = Ord(gsWaiting){1} then
           generator.EngineRun := value;
 
       end;
@@ -583,7 +583,7 @@ begin
           generator.Preference  := False
         else
         begin
-          if (generator.GeneratorState = 1) or (generator.GeneratorState = 5) then
+          if (generator.GeneratorState = Ord(gsWaiting){1}) or (generator.GeneratorState = Ord(gsGenReady){5}) then
           begin
             if (generator.GeneratorMode = 3) then
               generator.EngineRun := True;

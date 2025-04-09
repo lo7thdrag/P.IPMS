@@ -243,7 +243,7 @@ begin
     {Syarat DG Om dset standby, emergency stop normal, dlm mode auto, belum menyala/ load skenario awal, tdk failure}
     if (not Gen[i].NotStandby) and (not Gen[i].EmergencyStop) and (Gen[i].GeneratorMode = 3) and (not Gen[i].EngineAlarm) and
        (not Gen[i].CanBusFailure) and (not Gen[i].MeasPowFailure) and (not Gen[i].DCPowFailure) and (not Gen[i].ShutDown) and
-       (not Gen[i].FuelRunsOut) and ((Gen[i].GeneratorState = 1) or (Gen[i].GeneratorState = 9)) then
+       (not Gen[i].FuelRunsOut) and ((Gen[i].GeneratorState = Ord(gsWaiting){1}) or (Gen[i].GeneratorState = 9)) then
     begin
       Gen[i].EmergencyStart := True;
       Gen[i].EngineRun := True;
@@ -261,7 +261,7 @@ begin
 
   for i := DGLowLimit to DGUpLimit do
   begin
-    if (Gen[i].GeneratorState = 5) and (Gen[i].CBClosed) then
+    if (Gen[i].GeneratorState = Ord(gsWaiting){5}) and (Gen[i].CBClosed) then
       incDG := incDG + 1;
   end;
 
@@ -635,7 +635,7 @@ begin
     CekBusKoplerHandle(2, 4);
 
     {jk generator msh dlm keadaan mati, nyalakan}
-    if Gen[4].GeneratorState = 1 then
+    if Gen[4].GeneratorState = Ord(gsWaiting){1} then
     begin
       Gen[4].EmergencyStart := True;
       Gen[4].EngineRun := True;
@@ -683,7 +683,7 @@ begin
     {Syarat pre alarm active: dset standby, emergency stop normal, dlm mode auto, belum menyala/ load skenario awal, tdk failure}
     if (not Gen[k].NotStandby) and (not Gen[k].EmergencyStop) and (Gen[k].GeneratorMode = 3) and (not Gen[k].EngineAlarm) and
        (not Gen[k].CanBusFailure) and (not Gen[k].MeasPowFailure) and (not Gen[k].DCPowFailure) and (not Gen[k].ShutDown) and
-       (not Gen[k].FuelRunsOut) and ((Gen[k].GeneratorState = 1) or (Gen[k].GeneratorState = 9)) then
+       (not Gen[k].FuelRunsOut) and ((Gen[k].GeneratorState = Ord(gsWaiting){1}) or (Gen[k].GeneratorState = 9)) then
     begin
       FPreAlarm[b]:= k;
       b:= b+1;
@@ -782,7 +782,7 @@ begin
   for i := DGUpLimit downto DGLowLimit do
   begin
     {Syarat pre alarm stop: dset standby, dlm mode auto, menyala, tdk preference, tdk failure}
-    if (not Gen[i].NotStandby) and (Gen[i].GeneratorMode = 3) and (Gen[i].GeneratorState = 5) and (not Gen[i].Preference) and
+    if (not Gen[i].NotStandby) and (Gen[i].GeneratorMode = 3) and (Gen[i].GeneratorState = Ord(gsGenReady){5}) and (not Gen[i].Preference) and
        (not Gen[i].CanBusFailure) then
     begin
       IdGenStop := i;

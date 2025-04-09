@@ -405,11 +405,11 @@ begin
         Preference := False;
       end;
 
-      if (GeneratorState = 6) or (GeneratorState = 7) then {cool down}
+      if (GeneratorState = Ord(gsCoolDown){6}) or (GeneratorState = Ord(gsStop){7}) then {cool down}
       begin
         StopGenerator(aDt);
       end
-      else if GeneratorState = 5 then
+      else if GeneratorState = Ord(gsWaiting){5} then
       begin
         StateOnGenerator(aDt);
       end;
