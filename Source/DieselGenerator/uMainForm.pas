@@ -47,6 +47,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure btnLampTestMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure FormShow(Sender: TObject);
 
   private
     FListener : TListeners;
@@ -75,6 +76,21 @@ begin
     begin
       imgSupplyVoltageLow.Visible := Value;
     end;
+    epPMSEngineAlarm:
+    begin
+      imgAutomaticStartFailed.Visible := Value;
+//       imgLubOilTempHigh.Visible := Value;
+//       imgCoolingWaterTempHigh.Visible := Value;
+//       imgCoolongWaterLevelLow.Visible := Value;
+//       imgFuelOilLeakage.Visible := Value;
+//       imgSpare.Visible := Value;
+    end;
+    epPMSShutdown:
+    begin
+      imgSpeedSensorFailure.Visible := Value;
+//      imgLubOilPressLow.Visible := Value;
+    end;
+
   end;
 end;
 
@@ -178,6 +194,19 @@ end;
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
   FListener.Free;
+end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+  if Screen.MonitorCount > 1 then
+  begin
+    DefaultMonitor := dmDesktop;
+
+    Width := Screen.Monitors[1].Width;
+    Height := Screen.Monitors[1].Height;
+    Left := Screen.Monitors[1].Left;
+    Top := Screen.Monitors[1].Top;
+  end;
 end;
 
 end.

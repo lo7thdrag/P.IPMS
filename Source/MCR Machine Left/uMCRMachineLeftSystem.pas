@@ -209,7 +209,7 @@ begin
 //  if FIdFormDieselGenerator <> rec.GenSwitchID then
 //    Exit;
 
-  case rec.CommandID of
+  case rec.CommandPropsID of
     epPMSMeasPowFailure:
     begin
       FLIstener.TriggerEvents(Self,epPMSMeasPowFailure,rec.ValueBool)

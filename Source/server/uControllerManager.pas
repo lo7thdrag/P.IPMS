@@ -431,10 +431,10 @@ var
 begin
   NetEvent_PMSElmtCommonCmd(rCmd);
 
-  if rCmd.CommandID = epPMSGeneratorEmergencyStop then
+  if rCmd.CommandPropsID = epPMSGeneratorEmergencyStop then
   begin
     rec.GenId := rCmd.GenSwitchID;
-    rec.CommandID := rCmd.CommandID;
+    rec.CommandID := rCmd.CommandPropsID;
     rec.ValueBool := rCmd.ValueBool;
     CtrlSystem.Network.AsServer.SendData(C_PMS_COMMAND,@rec);
   end;
@@ -1493,7 +1493,7 @@ var
   rec       : R_Common_PMS_Command;
 begin
   rec.GenSwitchID := rCmd.GenSwitchID;
-  rec.CommandID := rCmd.CommandID;
+  rec.CommandPropsID := rCmd.CommandPropsID;
   rec.ValueDob := rCmd.ValueDob;
   rec.ValueInt := rCmd.ValueInt;
   rec.ValueBool := rCmd.ValueBool;
@@ -1501,7 +1501,7 @@ begin
 
   if rec.ValueKind = 'boolean' then
   begin
-    case rec.CommandID of
+    case rec.CommandPropsID of
       epPMSGeneratorRunHour :
         setPMSRHEElementID(rec.GenSwitchID, rec.ValueBool, C_IND_ENGINERUNNING);
 
@@ -1565,14 +1565,14 @@ begin
   end
   else if rec.ValueKind = 'integer' then
   begin
-    case rec.CommandID of
+    case rec.CommandPropsID of
       epPMSGeneratorMode      : setPMSGenMode(rec.GenSwitchID, rec.ValueInt, C_IND_MANSEMAUT);
       epPMSGeneratorState     : setPMSSWEElementIDInt(rec.GenSwitchID, rec.ValueInt, C_IND_GENSUP);
     end;
   end
   else if rec.ValueKind = 'double' then
   begin
-    case rec.CommandID of
+    case rec.CommandPropsID of
       epPMSPower      : setPMSAAEElementID(rec.GenSwitchID, rec.ValueDob, C_POW_GEN);
       epPMSFrequency  : setPMSAAEElementID(rec.GenSwitchID, rec.ValueDob, C_FREQ_GEN);
       epPMSCurrent    : setPMSAAEElementID(rec.GenSwitchID, rec.ValueDob, C_CUR_GEN);

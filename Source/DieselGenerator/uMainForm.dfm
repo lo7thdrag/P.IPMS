@@ -1,5 +1,5 @@
 object MainForm: TMainForm
-  Left = 1920
+  Left = 0
   Top = 0
   BorderIcons = []
   BorderStyle = bsNone
@@ -16,6 +16,7 @@ object MainForm: TMainForm
   Position = poDesigned
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object imgBackground: TImage
@@ -6214,7 +6215,7 @@ object MainForm: TMainForm
   end
   object imgSpare: TImage
     Left = 84
-    Top = 882
+    Top = 886
     Width = 25
     Height = 26
     Picture.Data = {
@@ -6442,6 +6443,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgShutdownLOPressLow: TImage
     Left = 362
@@ -6557,6 +6559,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgShutdownCWTempHigh: TImage
     Left = 362
@@ -6672,6 +6675,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgShutDownSpare: TImage
     Left = 362
@@ -6787,6 +6791,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgRunning: TImage
     Left = 363
@@ -6906,6 +6911,7 @@ object MainForm: TMainForm
       69800F8A5333134F88337644099189BB0D3C2ACFFF00F70EE9D57C20F1960000
       000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgStartDisable: TImage
     Left = 363
@@ -7025,6 +7031,7 @@ object MainForm: TMainForm
       69800F8A5333134F88337644099189BB0D3C2ACFFF00F70EE9D57C20F1960000
       000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgReset: TImage
     Left = 641
@@ -7144,6 +7151,7 @@ object MainForm: TMainForm
       69800F8A5333134F88337644099189BB0D3C2ACFFF00F70EE9D57C20F1960000
       000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgManual: TImage
     Left = 641
@@ -7263,6 +7271,7 @@ object MainForm: TMainForm
       69800F8A5333134F88337644099189BB0D3C2ACFFF00F70EE9D57C20F1960000
       000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgStandby: TImage
     Left = 641
@@ -7382,6 +7391,7 @@ object MainForm: TMainForm
       69800F8A5333134F88337644099189BB0D3C2ACFFF00F70EE9D57C20F1960000
       000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgStop: TImage
     Left = 641
@@ -7497,6 +7507,7 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object imgStart: TImage
     Left = 640
@@ -7616,6 +7627,7 @@ object MainForm: TMainForm
       69800F8A5333134F88337644099189BB0D3C2ACFFF00F70EE9D57C20F1960000
       000049454E44AE426082}
     Stretch = True
+    Visible = False
   end
   object btnStart: TImage
     Left = 770

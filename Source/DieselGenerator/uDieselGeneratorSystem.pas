@@ -146,15 +146,18 @@ begin
   if FIdFormDieselGenerator <> rec.GenSwitchID then
     Exit;
 
-  case rec.CommandID of
+  case rec.CommandPropsID of
     epPMSMeasPowFailure:
     begin
       FLIstener.TriggerEvents(Self,epPMSMeasPowFailure,rec.ValueBool)
-//      if rec.GenSwitchID = C_PCS_ME_PORTS then
-//
-//      else
-//      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-//        FLIstener.TriggerEvents(Self,epPCSMEActualSpeedSB,rec.ValueDouble);
+    end;
+    epPMSEngineAlarm:
+    begin
+      FLIstener.TriggerEvents(Self,epPMSEngineAlarm,rec.ValueBool)
+    end;
+    epPMSShutdown:
+    begin
+      FLIstener.TriggerEvents(Self,epPMSShutdown,rec.ValueBool)
     end;
   end;
 end;
@@ -180,8 +183,6 @@ begin
     with  client do
     begin
       RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
-//      //yoga
-//      RegisterProcedure(C_Servo_COMMAND, nil, SizeOf(R_ServoAndLamp_Command));
     end;
   end;
 

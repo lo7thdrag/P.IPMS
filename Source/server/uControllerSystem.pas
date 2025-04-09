@@ -649,7 +649,7 @@ begin
   recCmd := @apRec^;
 
   recER.GenSwitchID := recCmd.GenId;
-  recER.CommandID := epPMSGeneratorEmergencyStop;
+  recER.CommandPropsID := epPMSGeneratorEmergencyStop;
   recER.ValueBool := recCmd.ValueBool;
 
   Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
@@ -788,7 +788,7 @@ begin
             epPMSGeneratorMode      : recER.ValueInt  := val3;
           end;
           recER.GenSwitchID := val1;
-          recER.CommandID   := val2;
+          recER.CommandPropsID   := val2;
           Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
         end
       end
@@ -804,7 +804,7 @@ begin
           epPMSEsbIntrMode : recER.ValueInt  := val3;
         end;
         recER.GenSwitchID := val1;
-        recER.CommandID   := val2;
+        recER.CommandPropsID   := val2;
         Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
       end;
     end;
@@ -819,7 +819,7 @@ begin
           epPMSEsbIntrMode : recER.ValueInt  := val3;
         end;
         recER.GenSwitchID := val1;
-        recER.CommandID   := val2;
+        recER.CommandPropsID   := val2;
         Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
       end;
     end;
@@ -1015,7 +1015,7 @@ begin
           epPMSGeneratorMode : recER.ValueInt  := 2;
         end;
         recER.GenSwitchID := val1;
-        recER.CommandID   := val2;
+        recER.CommandPropsID   := val2;
         Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
       end;
     end;
@@ -1028,7 +1028,7 @@ begin
           epPMSGeneratorMode : recER.ValueInt  := 4;
         end;
         recER.GenSwitchID := val1;
-        recER.CommandID   := val2;
+        recER.CommandPropsID   := val2;
         Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
       end;
     end;

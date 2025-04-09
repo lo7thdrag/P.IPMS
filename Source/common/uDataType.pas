@@ -783,7 +783,7 @@ type
   R_Common_PMS_Command = record
     pid         : TPacketID;
     GenSwitchID : string[25];
-    CommandID   : E_PropsID;
+    CommandPropsID : E_PropsID;
     ValueDob    : Double;
     ValueInt    : Integer;
     ValueBool   : boolean;

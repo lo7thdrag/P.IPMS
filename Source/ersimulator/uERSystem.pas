@@ -130,7 +130,7 @@ begin
       else if Sender is TSwitchboard then
         rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
 
-      rPmsCmd.CommandID   := PropsID;
+      rPmsCmd.CommandPropsID   := PropsID;
       rPmsCmd.ValueBool   := Value;
       rPmsCmd.ValueKind   := 'boolean';
 
@@ -143,7 +143,7 @@ begin
     {epPMSGeneratorCBClosedE}epPMSEsbCBIntr :
     begin
       rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
-      rPmsCmd.CommandID   := PropsID;
+      rPmsCmd.CommandPropsID   := PropsID;
       rPmsCmd.ValueInt    := TSwitchboard(Sender).ESBIntrMode;
       rPmsCmd.ValueBool   := Value;
       rPmsCmd.ValueKind   := 'boolean';
@@ -321,7 +321,7 @@ begin
       else if Sender is TSwitchboard then
         rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
 
-      rPmsCmd.CommandID   := PropsID;
+      rPmsCmd.CommandPropsID   := PropsID;
       rPmsCmd.ValueInt    := Value;
       rPmsCmd.ValueKind   := 'integer';
       Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
@@ -332,7 +332,7 @@ begin
     epPMSPowerConsmr:
     begin
       rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier;
-      rPmsCmd.CommandID   := PropsID;
+      rPmsCmd.CommandPropsID   := PropsID;
       rPmsCmd.ValueInt    := Value;
       rPmsCmd.ValueKind   := 'integer';
       Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
@@ -457,7 +457,7 @@ begin
       else if Sender is TSwitchboard then
         rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
 
-      rPmsCmd.CommandID   := PropsID;
+      rPmsCmd.CommandPropsID   := PropsID;
       rPmsCmd.ValueDob    := Value;
       rPmsCmd.ValueKind   := 'double';
 //      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
@@ -571,7 +571,7 @@ begin
   recER := @apRec^;
   recERPCS := @apRec^;
 
-  case recER.CommandID of
+  case recER.CommandPropsID of
     epPMSGeneratorEmergencyStop, epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorCBClosed,
     epPMSGeneratorPreference, epPMSGeneratorMode  :
     begin
@@ -585,7 +585,7 @@ begin
     end;
   end;
 
-  case recER.CommandID of
+  case recER.CommandPropsID of
     epPMSGeneratorEmergencyStop :
     begin
       generator.EmergencyStop := recER.ValueBool;
