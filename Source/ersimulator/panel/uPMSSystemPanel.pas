@@ -551,7 +551,7 @@ begin
       end;
       epPMSGeneratorStop:
       begin
-        if (generator.GeneratorMode = 3) or (generator.Preference) or (generator.GeneratorState <> 5) then
+        if (generator.GeneratorMode = 3) or (generator.Preference) or (generator.GeneratorState <> ord(gsGenReady){5}) then
           exit;
 
         if (generator.GeneratorMode = 2) then

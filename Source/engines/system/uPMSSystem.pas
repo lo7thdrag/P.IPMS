@@ -261,7 +261,7 @@ begin
 
   for i := DGLowLimit to DGUpLimit do
   begin
-    if (Gen[i].GeneratorState = Ord(gsWaiting){5}) and (Gen[i].CBClosed) then
+    if (Gen[i].GeneratorState = Ord(gsGenReady){5}) and (Gen[i].CBClosed) then
       incDG := incDG + 1;
   end;
 
@@ -387,7 +387,7 @@ begin
     {Power EG menyesuaikan jk persentase beban didalam range stabil}
     else if (Pemakaian <= 85) then
     begin
-      if Gen[4].GeneratorState <> 5 then
+      if Gen[4].GeneratorState <> ord(gsGenReady){5} then
         setBlackOut(IdMode, DGUpLimit, DGLowLimit, MSBUpLimit, MSBLowLimit)
       else
         Gen[4].PowerState := FBebanTotal

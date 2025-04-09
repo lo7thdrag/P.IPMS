@@ -409,7 +409,7 @@ begin
       begin
         StopGenerator(aDt);
       end
-      else if GeneratorState = Ord(gsWaiting){5} then
+      else if GeneratorState = Ord(gsGenReady){5} then
       begin
         StateOnGenerator(aDt);
       end;
@@ -806,7 +806,7 @@ var
   dt : Integer;
   flag : Double;
 begin
-  if ((GeneratorMode = 3) or (GeneratorMode = 4)) and (GeneratorState <> 6) and (not FailureCBClosed)then
+  if ((GeneratorMode = 3) or (GeneratorMode = 4)) and (GeneratorState <> ord(gsCoolDown){6}) and (not FailureCBClosed)then
       CBClosed := True;
 
   if (GeneratorMode <> 3) and (not CBClosed) then
