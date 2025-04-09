@@ -38796,12 +38796,14 @@ object frmMachineRight: TfrmMachineRight
         ShowHint = False
         Stretch = True
         Transparent = True
-        ExplicitLeft = 7
-        ExplicitTop = 1
+        ExplicitLeft = -23
+        ExplicitTop = 105
+        ExplicitWidth = 218
+        ExplicitHeight = 218
       end
       object VrAngularMeter4: TVrAngularMeter
-        Left = 0
-        Top = 1
+        Left = 7
+        Top = 8
         Width = 220
         Height = 220
         MaxValue = 100.000000000000000000
