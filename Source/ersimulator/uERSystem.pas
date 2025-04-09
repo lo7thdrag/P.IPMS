@@ -119,8 +119,11 @@ var
 begin
   case PropsID of
     epPMSGeneratorEngineRun, epPMSGeneratorSupplied, epPMSGeneratorStop, epPMSGeneratorCBClosed,
-    epPMSGeneratorPreference, epPMSNotStandby, epPMSCanBusFailure, epPMSMeasPowFailure, epPMSDCPowFailure,
+    epPMSGeneratorPreference, epPMSNotStandby, epPMSCanBusFailure, epPMSDCPowFailure,
     epPMSEngineAlarm, epPMSShutdown, epPMSFaultPageLed, epPMSGeneratorFuelRunsOut, epPMSFailureCBClosed,
+
+    epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm,
+    epPMSLubOilTempHigh, epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage,
 
     epPMSMsbCBShore, epPMSMsbCBIntr, epPMSMsbCBNavNaut, epPMSGeneratorRunHour,epPMSGeneratorEmergencyStop,
     epPMSMsbTripReduct, epPMSSycnFail :

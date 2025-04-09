@@ -11,6 +11,10 @@ type
     FFlagStart,
     FIdleState : Integer;
 
+    FDelaySpeedSensorFailureAlrm,
+    FDelayLubOilPressLowAlrm,
+    FDelayCoolWaterTempHighAlrm : Integer;
+
     FFlagOff, FStopDelay,
     FStateOnDelay, FStartDelay,
     FEmergencyStartState : Double;
@@ -56,6 +60,12 @@ type
     FIsSpeedSensorFailureShutdown,
     FIsLubOilPressLowShutdown,
     FIsCoolWaterTempHighShutdown : Boolean;
+
+    function CekSpeedSensorFailure : Boolean;
+    function CekLubOilPressLow : Boolean;
+    function CekCoolWaterTempHigh : Boolean;
+
+    procedure SetAlarm;
 
     procedure SetPower(const Value: Double);
     procedure SetFrequency(const Value: Double);
@@ -200,6 +210,72 @@ implementation
 uses uDataType, math;
 
 { TDieselGenerator }
+
+function TGenerator.CekCoolWaterTempHigh: Boolean;
+begin
+  if FIsCoolWaterTempHighAlrm then
+  begin
+    EngineAlarm := True;
+
+    if FDelayCoolWaterTempHighAlrm > 10 then
+    begin
+      CoolWaterTempHighShutdown:= True;
+      ShutDown := True;
+
+      FDelayCoolWaterTempHighAlrm := 0
+    end;
+
+    FDelayCoolWaterTempHighAlrm := FDelayCoolWaterTempHighAlrm + 1;
+  end
+  else
+  begin
+    FDelayCoolWaterTempHighAlrm := 0;
+  end;
+end;
+
+function TGenerator.CekLubOilPressLow: Boolean;
+begin
+  if FIsLubOilPressLowAlrm then
+  begin
+    EngineAlarm := True;
+
+    if FDelayLubOilPressLowAlrm > 10 then
+    begin
+      LubOilPressLowShutdown := True;
+      ShutDown := True;
+
+      FDelayLubOilPressLowAlrm := 0
+    end;
+
+    FDelayLubOilPressLowAlrm := FDelayLubOilPressLowAlrm + 1;
+  end
+  else
+  begin
+    FDelayLubOilPressLowAlrm := 0;
+  end;
+end;
+
+function TGenerator.CekSpeedSensorFailure: Boolean;
+begin
+  if FIsSpeedSensorFailureAlrm then
+  begin
+    EngineAlarm := True;
+
+    if FDelaySpeedSensorFailureAlrm > 500 then
+    begin
+      SpeedSensorFailureShutdown := True;
+      ShutDown := True;
+
+      FDelaySpeedSensorFailureAlrm := 0
+    end;
+
+    FDelaySpeedSensorFailureAlrm := FDelaySpeedSensorFailureAlrm + 1;
+  end
+  else
+  begin
+    FDelaySpeedSensorFailureAlrm := 0;
+  end;
+end;
 
 constructor TGenerator.Create;
 begin
@@ -380,6 +456,9 @@ end;
 procedure TGenerator.Run(const aDt: Double);
 begin
   inherited;
+
+  SetAlarm;
+
   if EmergencyStop or DCPowFailure then
   begin
     EmergencyStopGenerator(aDt);
@@ -398,6 +477,7 @@ begin
     end
     else
     begin
+
       if (ShutDown) then
       begin
         EngineAlarm := False;
@@ -411,6 +491,10 @@ begin
       end
       else if GeneratorState = Ord(gsGenReady){5} then
       begin
+//        CekSpeedSensorFailure;
+//        CekLubOilPressLow;
+//        CekCoolWaterTempHigh;
+
         StateOnGenerator(aDt);
       end;
     end;
@@ -489,6 +573,16 @@ begin
       SetUVW(71, 73, 70);
     end;
   end
+end;
+
+procedure TGenerator.SetAlarm;
+begin
+  if FIsAutStartFailure or FIsSpeedSensorFailureAlrm or FIsLubOilPressLowAlrm or FIsLubOilTempHigh
+     or FIsCoolWaterTempHighAlrm or FIsCoolWaterLevelLow or FIsFuelOilLeakage then
+     EngineAlarm := True
+  else
+    EngineAlarm := False;
+
 end;
 
 procedure TGenerator.SetAutStartFailure(const Value: Boolean);

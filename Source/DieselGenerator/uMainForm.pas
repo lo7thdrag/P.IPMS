@@ -19,7 +19,7 @@ type
     imgLubOilPressLow: TImage;
     imgLubOilTempHigh: TImage;
     imgCoolingWaterTempHigh: TImage;
-    imgCoolongWaterLevelLow: TImage;
+    imgCoolingWaterLevelLow: TImage;
     imgFuelOilLeakage: TImage;
     imgSpare: TImage;
     imgShutdownOverSpeed: TImage;
@@ -72,13 +72,18 @@ uses
 procedure TMainForm.DieselGeneratorSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
   case PropsID of
-    epPMSMeasPowFailure:
-    begin
-      imgSupplyVoltageLow.Visible := Value;
-    end;
+    epPMSMeasPowFailure: imgSupplyVoltageLow.Visible := Value;
+    epPMSAutStartFailure : imgAutomaticStartFailed.Visible := Value;
+    epPMSSpeedSensorFailureAlrm : imgSpeedSensorFailure.Visible := Value;
+    epPMSLubOilPressLowAlrm : imgLubOilPressLow.Visible := Value;
+    epPMSLubOilTempHigh : imgLubOilTempHigh.Visible := Value;
+    epPMSCoolWaterTempHighAlrm : imgCoolingWaterTempHigh.Visible := Value;
+    epPMSCoolWaterLevelLow : imgCoolingWaterLevelLow.Visible := Value;
+    epPMSFuelOilLeakage : imgFuelOilLeakage.Visible := Value;
+
     epPMSEngineAlarm:
     begin
-      imgAutomaticStartFailed.Visible := Value;
+//      imgAutomaticStartFailed.Visible := Value;
 //       imgLubOilTempHigh.Visible := Value;
 //       imgCoolingWaterTempHigh.Visible := Value;
 //       imgCoolongWaterLevelLow.Visible := Value;
@@ -103,7 +108,7 @@ begin
   imgLubOilPressLow.Visible := True;
   imgLubOilTempHigh.Visible := True;
   imgCoolingWaterTempHigh.Visible := True;
-  imgCoolongWaterLevelLow.Visible := True;
+  imgCoolingWaterLevelLow.Visible := True;
   imgFuelOilLeakage.Visible := True;
   imgSpare.Visible := True;
 
@@ -131,7 +136,7 @@ begin
   imgLubOilPressLow.Visible := False;
   imgLubOilTempHigh.Visible := False;
   imgCoolingWaterTempHigh.Visible := False;
-  imgCoolongWaterLevelLow.Visible := False;
+  imgCoolingWaterLevelLow.Visible := False;
   imgFuelOilLeakage.Visible := False;
   imgSpare.Visible := False;
 

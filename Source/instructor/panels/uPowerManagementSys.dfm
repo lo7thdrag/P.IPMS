@@ -163,7 +163,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object Label24: TLabel
         Left = 43
-        Top = 95
+        Top = 94
         Width = 121
         Height = 14
         Caption = 'Automatic Start Failed'
@@ -202,7 +202,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object Label31: TLabel
         Left = 43
-        Top = 158
+        Top = 159
         Width = 101
         Height = 14
         Caption = 'Lub Oil Temp High'
@@ -241,7 +241,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object Label34: TLabel
         Left = 43
-        Top = 221
+        Top = 220
         Width = 88
         Height = 14
         Caption = 'Fuel Oil Leakage'
@@ -361,7 +361,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        OnClick = EngineAlarmMode
+        OnClick = AutomaticStartFailed
       end
       object chkCoolingWaterLevelLow01: TCheckBox
         Left = 27
@@ -375,7 +375,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 7
-        OnClick = EngineAlarmMode
+        OnClick = CoolingWaterLevelLow
       end
       object chkCoolingWaterTempHigh01: TCheckBox
         Left = 27
@@ -389,7 +389,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 6
-        OnClick = EngineAlarmMode
+        OnClick = CoolingWaterTempHigh
       end
       object chkFuelOilLeakage01: TCheckBox
         Left = 27
@@ -403,7 +403,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 8
-        OnClick = EngineAlarmMode
+        OnClick = FuelOilLeakage
       end
       object chkFUWASeparator01: TCheckBox
         Left = 27
@@ -431,7 +431,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 4
-        OnClick = ShutdownMode
+        OnClick = LubOilPressLow
       end
       object chkLubOilTempHigh01: TCheckBox
         Left = 27
@@ -445,7 +445,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 5
-        OnClick = EngineAlarmMode
+        OnClick = LubOilTempHigh
       end
       object chkSpeedSensorFailure01: TCheckBox
         Left = 27
@@ -459,7 +459,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 3
-        OnClick = ShutdownMode
+        OnClick = SpeedSensorFailure
       end
       object chkSupplyVoltageLow01: TCheckBox
         Left = 27

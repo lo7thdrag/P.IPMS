@@ -241,18 +241,25 @@ type
     procedure AlarmOn1Click(Sender: TObject);
 
     procedure NotStandbyMode(Sender: TObject);
-    procedure MeasVoltMode(Sender: TObject);
     procedure DCPowMode(Sender: TObject);
     procedure CanBusMode(Sender: TObject);
     procedure EngineAlarmMode(Sender: TObject);
     procedure ShutdownMode(Sender: TObject);
 
+    procedure MeasVoltMode(Sender: TObject);
     procedure AutomaticStartFailed(Sender: TObject);
+    procedure SpeedSensorFailure(Sender: TObject);
+    procedure LubOilPressLow(Sender: TObject);
+    procedure LubOilTempHigh(Sender: TObject);
+    procedure CoolingWaterTempHigh(Sender: TObject);
+    procedure CoolingWaterLevelLow(Sender: TObject);
+    procedure FuelOilLeakage(Sender: TObject);
 
     procedure tmrDCU01Timer(Sender: TObject);
     procedure CekShutdownDCU(IdDcu : Integer);
     procedure btnResetClick(Sender: TObject);
     procedure OnPmsConditionMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+
   private
     { Private declarations }
     SwitchBoardId : string;
@@ -334,12 +341,29 @@ end;
 procedure TfrmPowerManagementSyst.AutomaticStartFailed(Sender: TObject);
 begin
   SetMimic(mtPowerMan);
-  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSAutStartFailure);
+  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSAutStartFailure)
 
-  if SetEngineAlarmCheck(TCheckBox(Sender).Tag) then
-    SetValueBool(TCheckBox(Sender).Tag, True, epPMSEngineAlarm)
+//  if TCheckBox(Sender).Checked then
+//    SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSAutStartFailure)
+//  else
+//    SetCheckBox(Sender, False, epPMSAutStartFailure);
+
+end;
+
+procedure TfrmPowerManagementSyst.LubOilPressLow(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSLubOilPressLowAlrm)
+end;
+
+procedure TfrmPowerManagementSyst.LubOilTempHigh(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+
+  if TCheckBox(Sender).Checked then
+    SetCheckBox(Sender, True, epPMSLubOilTempHigh)
   else
-    SetValueBool(TCheckBox(Sender).Tag, False, epPMSEngineAlarm)
+    SetCheckBox(Sender, False, epPMSLubOilTempHigh);
 end;
 
 procedure TfrmPowerManagementSyst.btnResetClick(Sender: TObject);
@@ -474,13 +498,23 @@ begin
   ERSystem.ERManager.EngineRoom.getPMSSystem.addEntityListener('PMS Condition',EnginePropertyBoolChange);
 end;
 
+
+
+procedure TfrmPowerManagementSyst.FuelOilLeakage(Sender: TObject);
+begin
+   SetMimic(mtPowerMan);
+  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSFuelOilLeakage)
+end;
+
 procedure TfrmPowerManagementSyst.MeasVoltMode(Sender: TObject);
 begin
   SetMimic(mtPowerMan);
-  if TCheckBox(Sender).Checked then
-    SetCheckBox(Sender, True, epPMSMeasPowFailure)
-  else
-    SetCheckBox(Sender, False, epPMSMeasPowFailure);
+  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSMeasPowFailure)
+
+//  if TCheckBox(Sender).Checked then
+//    SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSMeasPowFailure)
+//  else
+//    SetCheckBox(Sender, False, epPMSMeasPowFailure);
 end;
 
 procedure TfrmPowerManagementSyst.NotStandbyMode(Sender: TObject);
@@ -745,14 +779,13 @@ procedure TfrmPowerManagementSyst.SetCheckBox(Sender: TObject; value : Boolean; 
 var
   i : Integer;
 begin
-  if value then
-    TCheckBox(Sender).Font.Color := clRed
-  else
-    TCheckBox(Sender).Font.Color := clBlack;
+//  if value then
+//    TCheckBox(Sender).Font.Color := clRed
+//  else
+//    TCheckBox(Sender).Font.Color := clBlack;
 
   case modeAlarm of
     epPMSNotStandby : SetValueBool(TCheckBox(Sender).Tag, value, epPMSNotStandby);
-    epPMSMeasPowFailure : SetValueBool(TCheckBox(Sender).Tag, value, epPMSMeasPowFailure);
     epPMSDCPowFailure : SetValueBool(TCheckBox(Sender).Tag, value, epPMSDCPowFailure);
     epPMSCanBusFailure :
     begin
@@ -780,20 +813,25 @@ begin
         SetValueBool(i, value, epPMSCanBusFailure);
 
     end;
-    epPMSEngineAlarm :
+//    epPMSEngineAlarm :
+//    begin
+//      if SetEngineAlarmCheck(TCheckBox(Sender).Tag) then
+//        SetValueBool(TCheckBox(Sender).Tag, True, epPMSEngineAlarm)
+//      else
+//        SetValueBool(TCheckBox(Sender).Tag, False, epPMSEngineAlarm)
+//
+//    end;
+//    epPMSShutdown :
+//    begin
+//      if SetShutdownAlarmCheck(TCheckBox(Sender).Tag) then
+//        SetValueBool(TCheckBox(Sender).Tag, True, epPMSShutdown)
+//      else
+//        SetValueBool(TCheckBox(Sender).Tag, False, epPMSShutdown)
+//    end;
+    epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm, epPMSLubOilTempHigh,
+    epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage:
     begin
-      if SetEngineAlarmCheck(TCheckBox(Sender).Tag) then
-        SetValueBool(TCheckBox(Sender).Tag, True, epPMSEngineAlarm)
-      else
-        SetValueBool(TCheckBox(Sender).Tag, False, epPMSEngineAlarm)
-
-    end;
-    epPMSShutdown :
-    begin
-      if SetShutdownAlarmCheck(TCheckBox(Sender).Tag) then
-        SetValueBool(TCheckBox(Sender).Tag, True, epPMSShutdown)
-      else
-        SetValueBool(TCheckBox(Sender).Tag, False, epPMSShutdown)
+      SetValueBool(TCheckBox(Sender).Tag, value, modeAlarm)
     end;
   end;
 
@@ -823,7 +861,6 @@ begin
   case modeAlarm of
     {Generator}
     epPMSNotStandby : generator.NotStandby := value;
-    epPMSMeasPowFailure : generator.MeasPowFailure := value;
     epPMSDCPowFailure : generator.DCPowFailure := value;
     epPMSCanBusFailure : generator.CanBusFailure := value;
     epPMSEngineAlarm : generator.EngineAlarm := value;
@@ -831,7 +868,14 @@ begin
     epPMSFailureCBClosed : generator.FailureCBClosed := value;
 //    epPMSGeneratorCBClosed : generator.CbClosed := value;
 
-    epPMSAutStartFailure : generator.MeasPowFailure := value;
+    epPMSMeasPowFailure : generator.MeasPowFailure := value;
+    epPMSAutStartFailure : generator.AutStartFailure := value;
+    epPMSSpeedSensorFailureAlrm : generator.SpeedSensorFailureAlrm := value;
+    epPMSLubOilPressLowAlrm : generator.LubOilPressLowAlrm := value;
+    epPMSLubOilTempHigh : generator.LubOilTempHigh := value;
+    epPMSCoolWaterTempHighAlrm : generator.CoolWaterTempHighAlrm := value;
+    epPMSCoolWaterLevelLow : generator.CoolWaterLevelLow := value;
+    epPMSFuelOilLeakage : generator.FuelOilLeakage := value;
 
     {Switchboard}
     epPMSMsbTripReduct : switchboard.TripReduct := value;
@@ -850,6 +894,12 @@ begin
 
   {Set warna label}
   SetLblColor(TCheckBox(Sender).Name, TCheckBox(Sender).Checked);
+end;
+
+procedure TfrmPowerManagementSyst.SpeedSensorFailure(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSSpeedSensorFailureAlrm);
 end;
 
 procedure TfrmPowerManagementSyst.tmrDCU01Timer(Sender: TObject);
@@ -1010,6 +1060,18 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TfrmPowerManagementSyst.CoolingWaterLevelLow(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSCoolWaterLevelLow)
+end;
+
+procedure TfrmPowerManagementSyst.CoolingWaterTempHigh(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSCoolWaterTempHighAlrm)
 end;
 
 function TfrmPowerManagementSyst.toWarna(val: boolean): Integer;

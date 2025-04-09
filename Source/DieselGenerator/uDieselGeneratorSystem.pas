@@ -147,18 +147,23 @@ begin
     Exit;
 
   case rec.CommandPropsID of
-    epPMSMeasPowFailure:
+    epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm, epPMSLubOilTempHigh,
+    epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage:
     begin
-      FLIstener.TriggerEvents(Self,epPMSMeasPowFailure,rec.ValueBool)
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
-    epPMSEngineAlarm:
-    begin
-      FLIstener.TriggerEvents(Self,epPMSEngineAlarm,rec.ValueBool)
-    end;
-    epPMSShutdown:
-    begin
-      FLIstener.TriggerEvents(Self,epPMSShutdown,rec.ValueBool)
-    end;
+//    epPMSAutStartFailure,epPMSLubOilTempHigh :
+//    begin
+//      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+//    end;
+//    epPMSEngineAlarm:
+//    begin
+//      FLIstener.TriggerEvents(Self,epPMSEngineAlarm,rec.ValueBool)
+//    end;
+//    epPMSShutdown:
+//    begin
+//      FLIstener.TriggerEvents(Self,epPMSShutdown,rec.ValueBool)
+//    end;
   end;
 end;
 

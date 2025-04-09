@@ -5981,7 +5981,7 @@ object MainForm: TMainForm
     Stretch = True
     Visible = False
   end
-  object imgCoolongWaterLevelLow: TImage
+  object imgCoolingWaterLevelLow: TImage
     Left = 84
     Top = 691
     Width = 25
