@@ -247,11 +247,12 @@ type
     procedure EngineAlarmMode(Sender: TObject);
     procedure ShutdownMode(Sender: TObject);
 
+    procedure AutomaticStartFailed(Sender: TObject);
+
     procedure tmrDCU01Timer(Sender: TObject);
     procedure CekShutdownDCU(IdDcu : Integer);
     procedure btnResetClick(Sender: TObject);
-    procedure OnPmsConditionMouseDown(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure OnPmsConditionMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     SwitchBoardId : string;
@@ -328,6 +329,17 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TfrmPowerManagementSyst.AutomaticStartFailed(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSAutStartFailure);
+
+  if SetEngineAlarmCheck(TCheckBox(Sender).Tag) then
+    SetValueBool(TCheckBox(Sender).Tag, True, epPMSEngineAlarm)
+  else
+    SetValueBool(TCheckBox(Sender).Tag, False, epPMSEngineAlarm)
 end;
 
 procedure TfrmPowerManagementSyst.btnResetClick(Sender: TObject);
@@ -818,6 +830,8 @@ begin
     epPMSShutdown : generator.ShutDown := value;
     epPMSFailureCBClosed : generator.FailureCBClosed := value;
 //    epPMSGeneratorCBClosed : generator.CbClosed := value;
+
+    epPMSAutStartFailure : generator.MeasPowFailure := value;
 
     {Switchboard}
     epPMSMsbTripReduct : switchboard.TripReduct := value;

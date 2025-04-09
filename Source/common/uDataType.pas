@@ -533,8 +533,17 @@ type
       epPMSPowerMode, epPMSPowerConsmr, epPMSPower, epPMSFrequency, epPMSSwitchFrequency,epPMSCurrent, epPMSCosPhi, epPMSVoltage, epPMSU, epPMSV, epPMSW,
       epPMSGeneratorEmergencyStop, epPMSGeneratorMode, epPMSGeneratorFuelRunsOut, epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorSupplied,
       epPMSGeneratorState, epPMSGeneratorCBClosed, {epPMSGeneratorCBClosedE,} epPMSGeneratorPreference, epPMSGeneratorBusbar,
-      epPMSGeneratorRunHour, epPMSNotStandby, epPMSCanBusFailure, epPMSMeasPowFailure, epPMSDCPowFailure, epPMSEngineAlarm,
-      epPMSShutdown, epPMSFaultPageLed, epPMSFailureCBClosed,
+      epPMSGeneratorRunHour, epPMSNotStandby, epPMSShutdown,
+
+      {Generator PMS System Alarm}
+      epPMSEngineAlarm, epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm, epPMSLubOilTempHigh,
+      epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage,
+
+      {Generator PMS System Shutdown}
+      epPMSSpeedSensorFailureShutdown, epPMSLubOilPressLowShutdown, epPMSCoolWaterTempHighShutdown,
+
+      {Gensys PMS System Alarm}
+      epPMSCanBusFailure, epPMSDCPowFailure, epPMSFaultPageLed, epPMSFailureCBClosed,
 
       epPMSMsbIntrMode, epPMSEsbIntrMode, epPMSMsbShoreMode, epPMSMsbCBShore, epPMSMsbCBIntr, epPMSEsbCBIntr, epPMSMsbCBNavNaut,
       epPMSEmergencyCon, epPMSMsbBusbar, epPMSMsbTripReduct, epPMSSycnFail, epPMSTrafo115Volt, epPMSTrafo230Volt,
@@ -555,6 +564,8 @@ type
       epFaultStatus
     );
 
+  E_GeneratorState = (gsWaiting = 1, gsWarmUp, gsNormalSpeed, gsEngineReady, gsGenReady,
+                      gsCoolDown, gsStop, gsIdle);
 
   E_AlarmGroupType = (agtDG,   agtDISTR, agtPROP,  agtAUX, agtFUEL,
                       agtDMST, agtHVAC,  agtFFDC,  agtNAV, agtBALL,

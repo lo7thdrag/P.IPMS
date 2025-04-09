@@ -38,12 +38,24 @@ type
 
     FIsNotStandby,
     FIsCanBusFailure,
-    FIsMeasPowFailure,
     FIsDCPowFailure,
     FIsEngineAlarm,
     FIsShutDown,
     FFaultPageLed,
-    FIsFailureCBClosed : Boolean;
+    FIsFailureCBClosed,
+
+    FIsMeasPowFailure,
+    FIsAutStartFailure,
+    FIsSpeedSensorFailureAlrm,
+    FIsLubOilPressLowAlrm,
+    FIsLubOilTempHigh,
+    FIsCoolWaterTempHighAlrm,
+    FIsCoolWaterLevelLow,
+    FIsFuelOilLeakage,
+
+    FIsSpeedSensorFailureShutdown,
+    FIsLubOilPressLowShutdown,
+    FIsCoolWaterTempHighShutdown : Boolean;
 
     procedure SetPower(const Value: Double);
     procedure SetFrequency(const Value: Double);
@@ -69,7 +81,6 @@ type
 
     procedure SetNotStandby(const Value : Boolean);
     procedure SetCanBusFailure(const Value : Boolean);
-    procedure SetMeasPowFailure(const Value : Boolean);
     procedure SetDCPowFailure(const Value : Boolean);
     procedure SetEngineAlarm(const Value : Boolean);
     procedure SetShutDown(const Value : Boolean);
@@ -77,6 +88,18 @@ type
     procedure SetFailureCBClosed(const Value : Boolean);
 
     procedure SetUVW(const ValU, ValV, ValW: Double);
+
+    procedure SetMeasPowFailure(const Value : Boolean);
+    procedure SetAutStartFailure(const Value : Boolean);
+    procedure SetSpeedSensorFailureAlrm(const Value : Boolean);
+    procedure SetLubOilPressLowAlrm(const Value : Boolean);
+    procedure SetLubOilTempHigh(const Value : Boolean);
+    procedure SetCoolWaterTempHighAlrm(const Value : Boolean);
+    procedure SetCoolWaterLevelLow(const Value : Boolean);
+    procedure SetFuelOilLeakage(const Value : Boolean);
+    procedure SetSpeedSensorFailureShutdown(const Value : Boolean);
+    procedure SetLubOilPressLowShutdown(const Value : Boolean);
+    procedure SetCoolWaterTempHighShutdown(const Value : Boolean);
 
   public
     IsConnectToMsb : Boolean;
@@ -86,7 +109,6 @@ type
     PowerMax : Double;    {batas atas ketika awal DG dinyalakan}
     CurrentMax: Double;
     VoltageMax : Double;
-
 
     constructor Create;override;
     destructor Destroy;override;
@@ -130,12 +152,27 @@ type
     {Generator Alarm}
     property NotStandby : Boolean read FIsNotStandby write SetNotStandby;
     property CanBusFailure : Boolean read FIsCanBusFailure write SetCanBusFailure;
-    property MeasPowFailure : Boolean read FIsMeasPowFailure write SetMeasPowFailure;
     property DCPowFailure : Boolean read FIsDCPowFailure write SetDCPowFailure;
     property EngineAlarm : Boolean read FIsEngineAlarm write SetEngineAlarm;
     property ShutDown : Boolean read FIsShutDown write SetShutDown;
     property FaultPageLed : Boolean read FFaultPageLed write SetFaultPageLed;
     property FailureCBClosed : Boolean read FIsFailureCBClosed write SetFailureCBClosed;
+
+    {Generator Alarm}
+    property MeasPowFailure : Boolean read FIsMeasPowFailure write SetMeasPowFailure;
+    property AutStartFailure : Boolean read FIsAutStartFailure write SetAutStartFailure;
+    property SpeedSensorFailureAlrm : Boolean read FIsSpeedSensorFailureAlrm write SetSpeedSensorFailureAlrm;
+    property LubOilPressLowAlrm : Boolean read FIsLubOilPressLowAlrm write SetLubOilPressLowAlrm;
+    property LubOilTempHigh : Boolean read FIsLubOilTempHigh write SetLubOilTempHigh;
+    property CoolWaterTempHighAlrm : Boolean read FIsCoolWaterTempHighAlrm write SetCoolWaterTempHighAlrm;
+    property CoolWaterLevelLow : Boolean read FIsCoolWaterLevelLow write SetCoolWaterLevelLow;
+    property FuelOilLeakage : Boolean read FIsFuelOilLeakage write SetFuelOilLeakage;
+
+    {Generator Shutdown}
+    property SpeedSensorFailureShutdown : Boolean read FIsSpeedSensorFailureShutdown write SetSpeedSensorFailureShutdown;
+    property LubOilPressLowShutdown : Boolean read FIsLubOilPressLowShutdown write SetLubOilPressLowShutdown;
+    property CoolWaterTempHighShutdown : Boolean read FIsCoolWaterTempHighShutdown write SetCoolWaterTempHighShutdown;
+
   end;
 
   TPower = class(TEntity)
@@ -225,7 +262,7 @@ begin
   else if FEmergencyStartState > 40 then
   begin
     {detik ke 3}
-    GeneratorState := 5;{Gen Ready}
+    GeneratorState := ord(gsGenReady);//5;{Gen Ready}
     GeneratorSupplied := True;
 
     if (GeneratorMode = 3) and (not FailureCBClosed) then
@@ -257,7 +294,7 @@ begin
   Preference := False;
   CBClosed := False;
   FailureCBClosed := False;
-  GeneratorState := 1;
+  GeneratorState := Ord(gsWaiting);//1;
 //  Busbar := False;
   Power := 0;
   Voltage := 0;
@@ -299,7 +336,7 @@ begin
       end
       else
       begin
-        GeneratorState := 7;{Stop}
+        GeneratorState := Ord(gsStop);//7;{Stop}
         Power := 0;
         Current := 0;
         CosPhi :=0;
@@ -320,16 +357,16 @@ begin
     end
     else
     begin
-      if GeneratorState = 7 then
+      if GeneratorState = Ord(gsStop){7} then
       begin
-        GeneratorState := 8;{Idle}
+        GeneratorState := Ord(gsIdle);//8;{Idle}
       end
-      else if GeneratorState = 8 then
+      else if GeneratorState = Ord(gsIdle){ 8} then
       begin
         FIdleState := FIdleState + 1;
         if FIdleState = 3 then
         begin
-          GeneratorState := 1;{Waiting}
+          GeneratorState := Ord(gsWaiting);{Waiting}
           GeneratorSupplied := False;
           SetUVW(53, 55, 56);
           FIdleState := 0;
@@ -364,7 +401,7 @@ begin
       if (ShutDown) then
       begin
         EngineAlarm := False;
-        GeneratorState := 6;
+        GeneratorState := Ord(gsCoolDown);//6;
         Preference := False;
       end;
 
@@ -410,7 +447,7 @@ begin
     begin
       if Voltage < 247 then
       begin
-        GeneratorState := 2;{Warm Up}
+        GeneratorState := Ord(gsWarmUp);//2;{Warm Up}
         CosPhi := 0;
         Frequency := 5815;
         Voltage := (random(10)+ 247);
@@ -439,7 +476,7 @@ begin
     end
     else
     begin
-      GeneratorState := 5; {Gen Ready}
+      GeneratorState := Ord(gsGenReady);//5; {Gen Ready}
       GeneratorSupplied := True;
 
       Voltage := VoltageMax + random(2);
@@ -452,6 +489,15 @@ begin
       SetUVW(71, 73, 70);
     end;
   end
+end;
+
+procedure TGenerator.SetAutStartFailure(const Value: Boolean);
+begin
+  if FIsAutStartFailure = Value then
+    exit;
+
+  FIsAutStartFailure := Value;
+  Listener.TriggerEvents(Self,epPMSAutStartFailure,Value);
 end;
 
 procedure TGenerator.SetBusbar(const Value: Boolean);
@@ -476,6 +522,30 @@ begin
     exit;
   FIsCBClosed := Value;
   Listener.TriggerEvents(Self,epPMSGeneratorCBClosed,Value);
+end;
+
+procedure TGenerator.SetCoolWaterLevelLow(const Value: Boolean);
+begin
+  if FIsCoolWaterLevelLow = Value then
+    exit;
+  FIsCoolWaterLevelLow := Value;
+  Listener.TriggerEvents(Self,epPMSCoolWaterLevelLow,Value);
+end;
+
+procedure TGenerator.SetCoolWaterTempHighAlrm(const Value: Boolean);
+begin
+  if FIsCoolWaterTempHighAlrm = Value then
+    exit;
+  FIsCoolWaterTempHighAlrm := Value;
+  Listener.TriggerEvents(Self,epPMSCoolWaterTempHighAlrm,Value);
+end;
+
+procedure TGenerator.SetCoolWaterTempHighShutdown(const Value: Boolean);
+begin
+  if FIsCoolWaterTempHighShutdown = Value then
+    exit;
+  FIsCoolWaterTempHighShutdown := Value;
+  Listener.TriggerEvents(Self,epPMSCoolWaterTempHighShutdown,Value);
 end;
 
 procedure TGenerator.SetCosPhi(const Value: Double);
@@ -554,6 +624,14 @@ begin
   Listener.TriggerEvents(Self,epPMSFrequency,Value);
 end;
 
+procedure TGenerator.SetFuelOilLeakage(const Value: Boolean);
+begin
+  if FIsFuelOilLeakage = Value then
+    exit;
+  FIsFuelOilLeakage := Value;
+  Listener.TriggerEvents(Self,epPMSFuelOilLeakage,Value);
+end;
+
 procedure TGenerator.SetFuelRunsOut(const Value: Boolean);
 begin
   if FIsFuelRunsOut = Value then
@@ -586,6 +664,30 @@ begin
 
   FIsGeneratorSupplied := Value;
   Listener.TriggerEvents(Self,epPMSGeneratorSupplied, Value);
+end;
+
+procedure TGenerator.SetLubOilPressLowAlrm(const Value: Boolean);
+begin
+  if FIsLubOilPressLowAlrm = Value then
+    exit;
+  FIsLubOilPressLowAlrm := Value;
+  Listener.TriggerEvents(Self,epPMSLubOilPressLowAlrm,Value);
+end;
+
+procedure TGenerator.SetLubOilPressLowShutdown(const Value: Boolean);
+begin
+  if FIsLubOilPressLowShutdown = Value then
+    exit;
+  FIsLubOilPressLowShutdown := Value;
+  Listener.TriggerEvents(Self,epPMSLubOilPressLowShutdown,Value);
+end;
+
+procedure TGenerator.SetLubOilTempHigh(const Value: Boolean);
+begin
+  if FIsLubOilTempHigh = Value then
+    exit;
+  FIsLubOilTempHigh := Value;
+  Listener.TriggerEvents(Self,epPMSLubOilTempHigh,Value);
 end;
 
 procedure TGenerator.SetMeasPowFailure(const Value: Boolean);
@@ -626,6 +728,22 @@ begin
     exit;
   FIsShutDown := Value;
   Listener.TriggerEvents(Self,epPMSShutDown,Value);
+end;
+
+procedure TGenerator.SetSpeedSensorFailureAlrm(const Value: Boolean);
+begin
+  if FIsSpeedSensorFailureAlrm = Value then
+    exit;
+  FIsSpeedSensorFailureAlrm := Value;
+  Listener.TriggerEvents(Self,epPMSSpeedSensorFailureAlrm,Value);
+end;
+
+procedure TGenerator.SetSpeedSensorFailureShutdown(const Value: Boolean);
+begin
+  if FIsSpeedSensorFailureShutdown = Value then
+    exit;
+  FIsSpeedSensorFailureShutdown := Value;
+  Listener.TriggerEvents(Self,epPMSSpeedSensorFailureShutdown,Value);
 end;
 
 procedure TGenerator.SetSwitchFrequency(const Value: Double);

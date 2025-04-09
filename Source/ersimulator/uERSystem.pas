@@ -606,7 +606,7 @@ begin
     begin
       {hanya bisa mati jk state 'Gen Ready'}
       if generator.GeneratorState = 5 then
-        generator.GeneratorState := 6;
+        generator.GeneratorState := Ord(gsCoolDown);//6;
     end;
     epPMSGeneratorCBClosed:
     begin

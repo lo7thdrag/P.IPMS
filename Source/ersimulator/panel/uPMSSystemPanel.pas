@@ -558,7 +558,7 @@ begin
           generator.CBClosed := False;
 
         {utk mematikan generator state dirubah ke cool down dulu}
-        generator.GeneratorState := 6;
+        generator.GeneratorState := Ord(gsCoolDown);//6;
 
       end;
       epPMSGeneratorCBClosed:
@@ -644,7 +644,7 @@ begin
         generator.GeneratorMode := value;
         if not generator.EngineRun then
         begin
-          generator.GeneratorState := 1;{waiting}
+          generator.GeneratorState := Ord(gsWaiting);{waiting}
         end;
       end;
     end;

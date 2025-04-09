@@ -378,7 +378,7 @@ begin
     {EG mati jk persentase pemakaian diatas 85% kemampuan}
     if (Pemakaian > 85) then
     begin
-      Gen[4].GeneratorState := 6;
+      Gen[4].GeneratorState := Ord(gsCoolDown);//6;
 
       {state diubah k normal}
       SetStateRun(IdMode, 3);
@@ -396,7 +396,7 @@ begin
   else
   begin
     {EG mati jk DG sdh menyala normal}
-    Gen[4].GeneratorState := 6;
+    Gen[4].GeneratorState := Ord(gsCoolDown);//6;
 
     {state diubah k normal}
     Msb[2].EmergencyCon := False;
@@ -511,7 +511,7 @@ begin
       end;
 
       if Gen[FGenOn[0]].Power >= (FBebanTotal/2) then
-        Gen[IdGenStop].GeneratorState := 6
+        Gen[IdGenStop].GeneratorState := Ord(gsCoolDown);//6
     end;
   end
   else if (SumDGOn = 3) and (Pemakaian < 50) and (GetPreAlarmStop(IdGenStop, DGUpLimit, DGLowLimit)) then
@@ -530,7 +530,7 @@ begin
       end;
 
       if Gen[FGenOn[0]].Power >= (FBebanTotal/2) then
-        Gen[IdGenStop].GeneratorState := 6
+        Gen[IdGenStop].GeneratorState := Ord(gsCoolDown);//6
     end;
   end
   else if (SumDGOn = 4) and (Pemakaian < 56) and (GetPreAlarmStop(IdGenStop, DGUpLimit, DGLowLimit)) then
@@ -549,7 +549,7 @@ begin
       end;
 
       if Gen[FGenOn[0]].Power >= (FBebanTotal/3) then
-        Gen[IdGenStop].GeneratorState := 6
+        Gen[IdGenStop].GeneratorState := Ord(gsCoolDown);//6
     end;
   end
 
@@ -1060,7 +1060,7 @@ begin
     Gen[IdGen].CBClosed := False;
     Gen[IdGen].GeneratorSupplied := False;
     Gen[IdGen].Preference := False;
-    Gen[IdGen].GeneratorState := 1;
+    Gen[IdGen].GeneratorState := Ord(gsWaiting);//1;
     Gen[IdGen].Busbar := False;
     Gen[IdGen].Power := 0;
     Gen[IdGen].Voltage := 0;

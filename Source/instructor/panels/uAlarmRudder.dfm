@@ -25616,8 +25616,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object pnlRudderAlarm: TPanel
-    Left = 573
-    Top = 8
+    Left = 554
+    Top = 106
     Width = 785
     Height = 651
     TabOrder = 0
@@ -26202,8 +26202,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Visible = False
   end
   object pnlRudderMainPos: TPanel
-    Left = 702
-    Top = 300
+    Left = 382
+    Top = 460
     Width = 1096
     Height = 349
     TabOrder = 6

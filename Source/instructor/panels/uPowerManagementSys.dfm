@@ -79,7 +79,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object lbl19: TLabel
         Left = 45
-        Top = 353
+        Top = 331
         Width = 141
         Height = 14
         Caption = 'Cooling Water Temp High'
@@ -94,7 +94,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object lbl20: TLabel
         Left = 45
-        Top = 331
+        Top = 353
         Width = 91
         Height = 14
         Caption = 'Emergency Stop'
@@ -119,70 +119,6 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampCWTH01: TLabel
-        Left = 27
-        Top = 350
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampES01: TLabel
-        Left = 27
-        Top = 328
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampLOPL01: TLabel
-        Left = 27
-        Top = 306
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampOS01: TLabel
-        Left = 27
-        Top = 284
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
       end
@@ -327,6 +263,74 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
+        ParentFont = False
+      end
+      object lblLampOS01: TLabel
+        Left = 27
+        Top = 284
+        Width = 12
+        Height = 18
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '   '
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Georgia'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object lblLampLOPL01: TLabel
+        Left = 27
+        Top = 310
+        Width = 12
+        Height = 18
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '   '
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Georgia'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object lblLampCWTH01: TLabel
+        Left = 27
+        Top = 336
+        Width = 12
+        Height = 18
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '   '
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Georgia'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object lblLampES01: TLabel
+        Left = 27
+        Top = 362
+        Width = 12
+        Height = 18
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '   '
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Georgia'
+        Font.Style = [fsBold]
+        ParentColor = False
         ParentFont = False
       end
       object rbStandby01: TRadioButton

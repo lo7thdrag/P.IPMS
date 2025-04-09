@@ -350,7 +350,7 @@ begin
 
         {dr pd ngerubah dbase sama PMS Editor mending diset disini aja}
         if data.PMS_GenState = 0  then
-          gen.GeneratorState := 1
+          gen.GeneratorState := Ord(gsWaiting)//1
         else
           gen.GeneratorState := data.PMS_GenState;
 
