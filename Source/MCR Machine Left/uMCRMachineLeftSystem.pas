@@ -140,17 +140,20 @@ begin
   case E_PropsID(rec^.aProps) of
     epBoardAlarmLamp:
     begin
-      {setAlarmLamp}
+      {$REGION ' Set Alarm Indicator '}
 
       for I := 0 to  Length(MainForm.FAlarmIndicator)- 1 do
       begin
         if rec.ID = (i+1) then  //penyesuaian arraynya>> mulai dari 0 sedangkan ID mulai dari 1
         begin
           MainForm.FAlarmIndicator[i] := rec.Value;
+          MainForm.SetAlarmIndicator;
 //          if rec.Value then
 //           MainForm.AlarmStop := false;
         end;
       end;
+
+      {$ENDREGION}
 
     end;
 

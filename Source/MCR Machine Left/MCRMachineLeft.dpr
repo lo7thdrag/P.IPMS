@@ -29,6 +29,10 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+
+  Setting := TSetting.Create;
+  MCRMachineLeftSystem := TMCRMachineLeftSystem.Create;
+
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TfrmFreeze, frmFreeze);
   Application.Run;
