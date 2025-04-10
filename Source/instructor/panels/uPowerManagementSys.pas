@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, uGenerator, uSwitchboard, Menus, uSwitchElement,
-  Buttons, VrControls, VrButtons, uDataType;
+  Buttons, VrControls, VrButtons, uDataType ;
 
 type
   TfrmPowerManagementSyst = class(TForm)
@@ -13,7 +13,6 @@ type
     AlarmOn1: TMenuItem;
     AlarmOff1: TMenuItem;
     GroupBox1: TGroupBox;
-    tmrDCU01: TTimer;
     pnlDCU1: TPanel;
     chkAutomaticStartFailed01: TCheckBox;
     chkCoolingWaterLevelLow01: TCheckBox;
@@ -260,14 +259,12 @@ type
     lblLampCWTH05: TPanel;
 
     procedure FormCreate(Sender: TObject);
-//    procedure BtnAlarmOn1Click(Sender: TObject);
+
     procedure AlarmOn1Click(Sender: TObject);
 
+    {$REGION ' Alarm Condition Procedure '}
+
     procedure NotStandbyMode(Sender: TObject);
-    procedure DCPowMode(Sender: TObject);
-    procedure CanBusMode(Sender: TObject);
-    procedure EngineAlarmMode(Sender: TObject);
-    procedure ShutdownMode(Sender: TObject);
 
     procedure MeasVoltMode(Sender: TObject);
     procedure AutomaticStartFailed(Sender: TObject);
@@ -278,8 +275,10 @@ type
     procedure CoolingWaterLevelLow(Sender: TObject);
     procedure FuelOilLeakage(Sender: TObject);
 
-    procedure tmrDCU01Timer(Sender: TObject);
-    procedure CekShutdownDCU(IdDcu : Integer);
+    procedure DCPowMode(Sender: TObject);
+    procedure CanBusMode(Sender: TObject);
+    {$ENDREGION}
+
     procedure btnResetClick(Sender: TObject);
     procedure OnPmsConditionMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 
@@ -290,20 +289,13 @@ type
     isElementOrSwitchboard : Byte;
     CWTFailure01, CWTFailure02, CWTFailure03, CWTFailure04, CWTFailure05 : Integer;
 
+    function toWarna(val : boolean): Integer;
+
     procedure EnginePropertyBoolChange(Sender : TObject; PropsID : E_PropsID;Value : Boolean);overload;
 
     procedure SetBtnColor(Id : string; valbool: Boolean);
-    procedure SetLblColor(Id : string; valbool: Boolean);
-    procedure SetCheckBox(Sender: TObject; value : Boolean; modeAlarm : E_PropsID);
     procedure SetValueBool(IdGen : Integer; value : Boolean; modeAlarm : E_PropsID);
     procedure SetMimic(PageMimic : E_MimicType);
-
-    function toWarna(val : boolean): Integer;
-    function toWarnaLbl(val : boolean): Integer;
-
-    function SetEngineAlarmCheck(IdGen : Integer) : Boolean;
-    function SetShutdownAlarmCheck(IdGen : Integer) : Boolean;
-
 
   public
     { Public declarations }
@@ -316,156 +308,15 @@ var
   switchboard : TSwitchboard;
 
 implementation
-uses uMimicsSystem, uERSystem, uSWEInput, uSWE, uControllerSystem;
+
+uses
+  uMimicsSystem, uERSystem, uSWEInput, uSWE, uControllerSystem;
 {$R *.dfm}
 
-procedure TfrmPowerManagementSyst.AlarmOn1Click(Sender: TObject);
+
+procedure TfrmPowerManagementSyst.FormCreate(Sender: TObject);
 begin
-  case isElementOrSwitchboard of
-    0 :
-    begin
-      switchboard := ERSystem.ERManager.EngineRoom.getPMSSystem.getSwitchboard(SwitchBoardId);
-
-      if TPopupMenu(Sender).Tag = 1 then
-      begin
-        SetBtnColor(SwitchBoardId, True);
-        switchboard.TripReduct := True
-      end
-      else
-      begin
-        SetBtnColor(SwitchBoardId, False);
-        switchboard.TripReduct := False;
-      end;
-
-    end;
-    1:
-    begin
-      TSWEElement(CtrlSystem.Controller.getElement(elementID)).Parameters.GetParameter(epTDELAY).ParamDoubleValue := 0;
-
-      if TPopupMenu(Sender).Tag = 1 then
-      begin
-        SetBtnColor(elementID, True);
-
-        TSWEElement(CtrlSystem.Controller.getElement(elementID)).Mode := 0;
-        TSWEElement(CtrlSystem.Controller.getElement(elementID)).NONC := 1;
-        TSWEElement(CtrlSystem.Controller.getElement(elementID)).StateAlarmInhibited := siNotInhibited;
-        TSWEElement(CtrlSystem.Controller.getElement(elementID)).StateElementDisabled := sdEnabled;
-      end
-      else
-      begin
-        SetBtnColor(elementID, False);
-
-        TSWEElement(CtrlSystem.Controller.getElement(elementID)).StateElementDisabled := sdUnavailable;
-      end;
-    end;
-  end;
-end;
-
-procedure TfrmPowerManagementSyst.AutomaticStartFailed(Sender: TObject);
-begin
-  SetMimic(mtPowerMan);
-  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSAutStartFailure)
-
-//  if TCheckBox(Sender).Checked then
-//    SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSAutStartFailure)
-//  else
-//    SetCheckBox(Sender, False, epPMSAutStartFailure);
-
-end;
-
-procedure TfrmPowerManagementSyst.LubOilPressLow(Sender: TObject);
-begin
-  SetMimic(mtPowerMan);
-  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSLubOilPressLowAlrm)
-end;
-
-procedure TfrmPowerManagementSyst.LubOilTempHigh(Sender: TObject);
-begin
-  SetMimic(mtPowerMan);
-
-  if TCheckBox(Sender).Checked then
-    SetCheckBox(Sender, True, epPMSLubOilTempHigh)
-  else
-    SetCheckBox(Sender, False, epPMSLubOilTempHigh);
-end;
-
-procedure TfrmPowerManagementSyst.btnResetClick(Sender: TObject);
-begin
-
-  if TButton(Sender).Tag < 4 then
-    {untuk reset circuit breaker}
-    SetValueBool(TButton(Sender).Tag, False, epPMSFailureCBClosed)
-  else if TButton(Sender).Tag = 4 then
-  begin
-    SetValueBool(TButton(Sender).Tag, False, epPMSFailureCBClosed);
-  end
-  else
-    {untuk reset Non Essential Trip/ Reduct}
-    SetValueBool(TButton(Sender).Tag, False, epPMSMsbTripReduct);
-end;
-
-procedure TfrmPowerManagementSyst.OnPmsConditionMouseDown(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-var
-  pnt : TPoint;
-begin
-  if Button = mbRight then
-  begin
-    if TButton(Sender).Tag = 1 then
-    begin
-      SetMimic(mtPowerMan);
-      SwitchBoardId := TButton(Sender).Hint;
-      isElementOrSwitchboard := 0;
-
-    end
-    else if TButton(Sender).Tag = 2 then
-    begin
-      SetMimic(mt230VPower);
-      elementID := TButton(Sender).Hint;
-      isElementOrSwitchboard := 1;
-    end
-    else if TButton(Sender).Tag = 3 then
-    begin
-      SetMimic(mt24VPower);
-      elementID := TButton(Sender).Hint;
-      isElementOrSwitchboard := 1;
-    end
-    else if TButton(Sender).Tag = 4 then
-    begin
-      SetMimic(mtUPSPower);
-      elementID := TButton(Sender).Hint;
-      isElementOrSwitchboard := 1;
-    end;
-
-    if GetCursorPos(pnt) then
-      pm1.Popup(pnt.X, pnt.y);
-  end;
-end;
-procedure TfrmPowerManagementSyst.CanBusMode(Sender: TObject);
-begin
-  SetMimic(mtPowerMan);
-  if TCheckBox(Sender).Checked then
-    SetCheckBox(Sender, True, epPMSCanBusFailure)
-  else
-    SetCheckBox(Sender, False, epPMSCanBusFailure);
-end;
-
-procedure TfrmPowerManagementSyst.DCPowMode(Sender: TObject);
-begin
-  SetMimic(mtPowerMan);
-  if TCheckBox(Sender).Checked then
-    SetCheckBox(Sender, True, epPMSDCPowFailure)
-  else
-    SetCheckBox(Sender, False, epPMSDCPowFailure);
-end;
-
-procedure TfrmPowerManagementSyst.EngineAlarmMode(Sender: TObject);
-begin
-  SetMimic(mtPowerMan);
-  if TCheckBox(Sender).Checked then
-    SetCheckBox(Sender, True, epPMSEngineAlarm)
-  else
-    SetCheckBox(Sender, False, epPMSEngineAlarm);
+  ERSystem.ERManager.EngineRoom.getPMSSystem.addEntityListener('PMS Condition',EnginePropertyBoolChange)
 end;
 
 procedure TfrmPowerManagementSyst.EnginePropertyBoolChange(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
@@ -473,17 +324,6 @@ begin
   if Sender is TGenerator then
   begin
     case PropsID of
-      epPMSGeneratorEmergencyStop:
-      begin
-        if TGenerator(Sender).Identifier = C_GENERATOR_ID[0] then
-          lblLampES01.Color := toWarnaLbl(Value)
-        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[1] then
-          lblLampES02.Color := toWarnaLbl(Value)
-        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[2] then
-          lblLampES03.Color := toWarnaLbl(Value)
-        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[3] then
-          lblLampES04.Color := toWarnaLbl(Value)
-      end;
       epPMSFailureCBClosed:
       begin
         if TGenerator(Sender).Identifier = C_GENERATOR_ID[0] then
@@ -496,6 +336,34 @@ begin
           btnCbReset04.Color := toWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[4] then
           btnCbReset05.Color := toWarna(Value)
+      end;
+      epPMSSpeedSensorFailureShutdown:
+      begin
+        {$REGION ' Speed Sensor Failure Shutdown '}
+        if TGenerator(Sender).Identifier = C_GENERATOR_ID[0] then
+          lblLampOS01.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[1] then
+          lblLampOS01.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[2] then
+          lblLampOS01.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[3] then
+          lblLampOS01.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[4] then
+          lblLampOS01.Color := toWarna(Value)
+        {$ENDREGION}
+      end;
+      epPMSGeneratorEmergencyStop:
+      begin
+        {$REGION ' Emergency Stop '}
+        if TGenerator(Sender).Identifier = C_GENERATOR_ID[0] then
+          lblLampES01.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[1] then
+          lblLampES02.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[2] then
+          lblLampES03.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[3] then
+          lblLampES04.Color := toWarna(Value);
+        {$ENDREGION}
       end;
     end;
   end
@@ -515,27 +383,7 @@ begin
   end;
 end;
 
-procedure TfrmPowerManagementSyst.FormCreate(Sender: TObject);
-begin
-  ERSystem.ERManager.EngineRoom.getPMSSystem.addEntityListener('PMS Condition',EnginePropertyBoolChange);
-end;
-
-procedure TfrmPowerManagementSyst.FuelOilLeakage(Sender: TObject);
-begin
-   SetMimic(mtPowerMan);
-  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSFuelOilLeakage)
-end;
-
-procedure TfrmPowerManagementSyst.MeasVoltMode(Sender: TObject);
-begin
-  SetMimic(mtPowerMan);
-  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSMeasPowFailure)
-
-//  if TCheckBox(Sender).Checked then
-//    SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSMeasPowFailure)
-//  else
-//    SetCheckBox(Sender, False, epPMSMeasPowFailure);
-end;
+{$REGION ' Alarm Condition Procedure '}
 
 procedure TfrmPowerManagementSyst.NotStandbyMode(Sender: TObject);
 begin
@@ -598,163 +446,142 @@ begin
   end;
 end;
 
-function TfrmPowerManagementSyst.SetEngineAlarmCheck(IdGen: Integer): Boolean;
+procedure TfrmPowerManagementSyst.MeasVoltMode(Sender: TObject);
 begin
-  Result := False;
-  case IdGen of
-    0:
+  SetMimic(mtPowerMan);
+  SetValueBool(TCheckBox(Sender).Tag, TCheckBox(Sender).Checked, epPMSMeasPowFailure)
+  //  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSMeasPowFailure);
+end;
+
+procedure TfrmPowerManagementSyst.AutomaticStartFailed(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetValueBool(TCheckBox(Sender).Tag, TCheckBox(Sender).Checked, epPMSAutStartFailure);
+//  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSAutStartFailure)
+end;
+
+procedure TfrmPowerManagementSyst.SpeedSensorFailure(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetValueBool(TCheckBox(Sender).Tag, TCheckBox(Sender).Checked, epPMSSpeedSensorFailureAlrm);
+  //  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSSpeedSensorFailureAlrm);
+end;
+
+procedure TfrmPowerManagementSyst.LubOilPressLow(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetValueBool(TCheckBox(Sender).Tag, TCheckBox(Sender).Checked, epPMSLubOilPressLowAlrm);
+  //  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSLubOilPressLowAlrm)
+end;
+
+procedure TfrmPowerManagementSyst.LubOilTempHigh(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetValueBool(TCheckBox(Sender).Tag, TCheckBox(Sender).Checked, epPMSLubOilTempHigh);
+  //  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSLubOilTempHigh)
+end;
+
+procedure TfrmPowerManagementSyst.CoolingWaterTempHigh(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetValueBool(TCheckBox(Sender).Tag, TCheckBox(Sender).Checked, epPMSCoolWaterTempHighAlrm);
+  //  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSCoolWaterTempHighAlrm)
+end;
+
+procedure TfrmPowerManagementSyst.CoolingWaterLevelLow(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetValueBool(TCheckBox(Sender).Tag, TCheckBox(Sender).Checked, epPMSCoolWaterLevelLow);
+  //  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSCoolWaterLevelLow)
+end;
+
+procedure TfrmPowerManagementSyst.FuelOilLeakage(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetValueBool(TCheckBox(Sender).Tag, TCheckBox(Sender).Checked, epPMSFuelOilLeakage);
+  //  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSFuelOilLeakage)
+end;
+
+procedure TfrmPowerManagementSyst.CanBusMode(Sender: TObject);
+var
+  i : Integer;
+
+begin
+  SetMimic(mtPowerMan);
+
+  for i := 0 to 3 do
+    SetValueBool(i, TCheckBox(Sender).Checked, epPMSCanBusFailure);
+end;
+
+procedure TfrmPowerManagementSyst.DCPowMode(Sender: TObject);
+begin
+  SetMimic(mtPowerMan);
+  SetValueBool(TCheckBox(Sender).Tag, TCheckBox(Sender).Checked, epPMSDCPowFailure);
+end;
+
+{$ENDREGION}
+
+procedure TfrmPowerManagementSyst.AlarmOn1Click(Sender: TObject);
+begin
+  case isElementOrSwitchboard of
+    0 :
     begin
-      if (chkSpeedSensorFailure01.Checked) or (chkLubOilPressLow01.Checked) or (chkLubOilTempHigh01.Checked) or
-         (chkCoolingWaterTempHigh01.Checked) or (chkCoolingWaterLevelLow01.Checked) or (chkFuelOilLeakage01.Checked) or
-         (chkFUWASeparator01.Checked) or (chkAutomaticStartFailed01.Checked)then
-        Result := True
-      else if (not chkSpeedSensorFailure01.Checked) and (not chkLubOilPressLow01.Checked) and (not chkLubOilTempHigh01.Checked) and
-         (not chkCoolingWaterTempHigh01.Checked) and (not chkCoolingWaterLevelLow01.Checked) and (not chkFuelOilLeakage01.Checked) and
-         (not chkFUWASeparator01.Checked) and (not chkAutomaticStartFailed01.Checked) then
-        Result := False
+      switchboard := ERSystem.ERManager.EngineRoom.getPMSSystem.getSwitchboard(SwitchBoardId);
+
+      if TPopupMenu(Sender).Tag = 1 then
+      begin
+        SetBtnColor(SwitchBoardId, True);
+        switchboard.TripReduct := True
+      end
+      else
+      begin
+        SetBtnColor(SwitchBoardId, False);
+        switchboard.TripReduct := False;
+      end;
+
     end;
     1:
     begin
-      if (chkSpeedSensorFailure02.Checked) or (chkLubOilPressLow02.Checked) or (chkLubOilTempHigh02.Checked) or
-         (chkCoolingWaterTempHigh02.Checked) or (chkCoolingWaterLevelLow02.Checked) or (chkFuelOilLeakage02.Checked) or
-         (chkFUWASeparator02.Checked) or (chkAutomaticStartFailed02.Checked)then
-        Result := True
-      else if (not chkSpeedSensorFailure02.Checked) and (not chkLubOilPressLow02.Checked) and (not chkLubOilTempHigh02.Checked) and
-         (not chkCoolingWaterTempHigh02.Checked) and (not chkCoolingWaterLevelLow02.Checked) and (not chkFuelOilLeakage02.Checked) and
-         (not chkFUWASeparator02.Checked) and (not chkAutomaticStartFailed02.Checked)then
-        Result := False
-    end;
-    2:
-    begin
-      if (chkSpeedSensorFailure03.Checked) or (chkLubOilPressLow03.Checked) or (chkLubOilTempHigh03.Checked) or
-         (chkCoolingWaterTempHigh03.Checked) or (chkCoolingWaterLevelLow03.Checked) or (chkFuelOilLeakage03.Checked) or
-         (chkFUWASeparator03.Checked) or (chkAutomaticStartFailed03.Checked)then
-        Result := True
-      else if (not chkSpeedSensorFailure03.Checked) and (not chkLubOilPressLow03.Checked) and (not chkLubOilTempHigh03.Checked) and
-         (not chkCoolingWaterTempHigh03.Checked) and (not chkCoolingWaterLevelLow03.Checked) and (not chkFuelOilLeakage03.Checked) and
-         (not chkFUWASeparator03.Checked) and (not chkAutomaticStartFailed03.Checked)then
-        Result := False
-    end;
-    3:
-    begin
-      if (chkSpeedSensorFailure04.Checked) or (chkLubOilPressLow04.Checked) or (chkLubOilTempHigh04.Checked) or
-         (chkCoolingWaterTempHigh04.Checked) or (chkCoolingWaterLevelLow04.Checked) or (chkFuelOilLeakage04.Checked) or
-         (chkFUWASeparator04.Checked) or (chkAutomaticStartFailed04.Checked)then
-        Result := True
-      else if (not chkSpeedSensorFailure04.Checked) and (not chkLubOilPressLow04.Checked) and (not chkLubOilTempHigh04.Checked) and
-         (not chkCoolingWaterTempHigh04.Checked) and (not chkCoolingWaterLevelLow04.Checked) and (not chkFuelOilLeakage04.Checked) and
-         (not chkFUWASeparator04.Checked) and (not chkAutomaticStartFailed04.Checked)then
-        Result := False
-    end;
-    4:
-    begin
-      if (chkSpeedSensorFailure05.Checked) or (chkLubOilPressLow05.Checked) or (chkLubOilTempHigh05.Checked) or
-         (chkCoolingWaterTempHigh05.Checked) or (chkCoolingWaterLevelLow05.Checked) or (chkFuelOilLeakage05.Checked) or
-         (chkFUWASeparator05.Checked) or (chkAutomaticStartFailed05.Checked)then
-        Result := True
-      else if (not chkSpeedSensorFailure05.Checked) and (not chkLubOilPressLow05.Checked) and (not chkLubOilTempHigh05.Checked) and
-         (not chkCoolingWaterTempHigh05.Checked) and (not chkCoolingWaterLevelLow05.Checked) and (not chkFuelOilLeakage05.Checked) and
-         (not chkFUWASeparator05.Checked) and (not chkAutomaticStartFailed05.Checked)then
-        Result := False
+      TSWEElement(CtrlSystem.Controller.getElement(elementID)).Parameters.GetParameter(epTDELAY).ParamDoubleValue := 0;
+
+      if TPopupMenu(Sender).Tag = 1 then
+      begin
+        SetBtnColor(elementID, True);
+
+        TSWEElement(CtrlSystem.Controller.getElement(elementID)).Mode := 0;
+        TSWEElement(CtrlSystem.Controller.getElement(elementID)).NONC := 1;
+        TSWEElement(CtrlSystem.Controller.getElement(elementID)).StateAlarmInhibited := siNotInhibited;
+        TSWEElement(CtrlSystem.Controller.getElement(elementID)).StateElementDisabled := sdEnabled;
+      end
+      else
+      begin
+        SetBtnColor(elementID, False);
+
+        TSWEElement(CtrlSystem.Controller.getElement(elementID)).StateElementDisabled := sdUnavailable;
+      end;
     end;
   end;
 end;
 
-procedure TfrmPowerManagementSyst.SetLblColor(Id: string; valbool: Boolean);
+procedure TfrmPowerManagementSyst.btnResetClick(Sender: TObject);
 begin
-  {Label Over Speed}
-  if Id = 'chkSpeedSensorFailure01' then
-    lblLampOS01.Color := toWarnaLbl (valbool)
-  else if Id = 'chkSpeedSensorFailure02' then
-    lblLampOS02.Color := toWarnaLbl (valbool)
-  else if Id = 'chkSpeedSensorFailure03' then
-    lblLampOS03.Color := toWarnaLbl (valbool)
-  else if Id = 'chkSpeedSensorFailure04' then
-    lblLampOS04.Color := toWarnaLbl (valbool)
-  else if Id = 'chkSpeedSensorFailure05' then
-    lblLampOS05.Color := toWarnaLbl (valbool)
 
-  {Label Lub Oil Press Low}
-  else if Id = 'chkLubOilPressLow01' then
-    lblLampLOPL01.Color := toWarnaLbl (valbool)
-  else if Id = 'chkLubOilPressLow02' then
-    lblLampLOPL02.Color := toWarnaLbl (valbool)
-  else if Id = 'chkLubOilPressLow03' then
-    lblLampLOPL03.Color := toWarnaLbl (valbool)
-  else if Id = 'chkLubOilPressLow04' then
-    lblLampLOPL04.Color := toWarnaLbl (valbool)
-  else if Id = 'chkLubOilPressLow05' then
-    lblLampLOPL05.Color := toWarnaLbl (valbool)
-
-  {Label Cooling Water Temp High}
-  else if Id = 'chkCoolingWaterTempHigh01' then
-    lblLampCWTH01.Color := toWarnaLbl (valbool)
-  else if Id = 'chkCoolingWaterTempHigh02' then
-    lblLampCWTH02.Color := toWarnaLbl (valbool)
-  else if Id = 'chkCoolingWaterTempHigh03' then
-    lblLampCWTH03.Color := toWarnaLbl (valbool)
-  else if Id = 'chkCoolingWaterTempHigh04' then
-    lblLampCWTH04.Color := toWarnaLbl (valbool)
-  else if Id = 'chkCoolingWaterTempHigh05' then
-    lblLampCWTH05.Color := toWarnaLbl (valbool)
+  if TButton(Sender).Tag < 4 then
+    {untuk reset circuit breaker}
+    SetValueBool(TButton(Sender).Tag, False, epPMSFailureCBClosed)
+  else if TButton(Sender).Tag = 4 then
+  begin
+    SetValueBool(TButton(Sender).Tag, False, epPMSFailureCBClosed);
+  end
+  else
+    {untuk reset Non Essential Trip/ Reduct}
+    SetValueBool(TButton(Sender).Tag, False, epPMSMsbTripReduct);
 end;
 
 procedure TfrmPowerManagementSyst.SetMimic(PageMimic: E_MimicType);
 begin
   SysMimics.Mimic.ShowMimic(PageMimic);
   SysMimics.Mimic.AddMimicHistory(Ord(PageMimic));
-end;
-
-function TfrmPowerManagementSyst.SetShutdownAlarmCheck(IdGen: Integer): Boolean;
-begin
-  Result := False;
-  case IdGen of
-    0:
-    begin
-      if (chkSpeedSensorFailure01.Checked) or (chkLubOilPressLow01.Checked) or (lblLampES01.Color = clRed) or
-         (chkCoolingWaterTempHigh01.Checked) then
-        Result := True
-      else if (not chkSpeedSensorFailure01.Checked) and ( not chkLubOilPressLow01.Checked) and (lblLampES01.Color <> clRed) and
-        (not chkCoolingWaterTempHigh01.Checked) then
-        Result := False
-    end;
-    1:
-    begin
-      if (chkSpeedSensorFailure02.Checked) or (chkLubOilPressLow02.Checked) or (lblLampES02.Color = clRed) or
-         (chkCoolingWaterTempHigh02.Checked) then
-        Result := True
-      else if (not chkSpeedSensorFailure02.Checked) and ( not chkLubOilPressLow02.Checked) and (lblLampES02.Color <> clRed) and
-        (not chkCoolingWaterTempHigh02.Checked) then
-        Result := False
-    end;
-    2:
-    begin
-      if (chkSpeedSensorFailure03.Checked) or (chkLubOilPressLow03.Checked) or (lblLampES03.Color = clRed) or
-         (chkCoolingWaterTempHigh03.Checked) then
-        Result := True
-      else if (not chkSpeedSensorFailure03.Checked) and ( not chkLubOilPressLow03.Checked) and (lblLampES03.Color <> clRed) and
-        (not chkCoolingWaterTempHigh03.Checked) then
-        Result := False
-    end;
-    3:
-    begin
-      if (chkSpeedSensorFailure04.Checked) or (chkLubOilPressLow04.Checked) or (lblLampES04.Color = clRed) or
-         (chkCoolingWaterTempHigh04.Checked) then
-        Result := True
-      else if (not chkSpeedSensorFailure04.Checked) and ( not chkLubOilPressLow04.Checked) and (lblLampES04.Color <> clRed) and
-        (not chkCoolingWaterTempHigh04.Checked) then
-        Result := False
-    end;
-    4:
-    begin
-      if (chkSpeedSensorFailure05.Checked) or (chkLubOilPressLow05.Checked) or
-         (chkCoolingWaterTempHigh05.Checked)then
-        Result := True
-      else if (not chkSpeedSensorFailure05.Checked) and ( not chkLubOilPressLow05.Checked) and
-        (not chkCoolingWaterTempHigh05.Checked) then
-        Result := False
-    end;
-  end;
 end;
 
 procedure TfrmPowerManagementSyst.SetBtnColor(Id: string; valbool: Boolean);
@@ -795,68 +622,6 @@ begin
 
 end;
 
-procedure TfrmPowerManagementSyst.SetCheckBox(Sender: TObject; value : Boolean; modeAlarm : E_PropsID);
-var
-  i : Integer;
-begin
-//  if value then
-//    TCheckBox(Sender).Font.Color := clRed
-//  else
-//    TCheckBox(Sender).Font.Color := clBlack;
-
-  case modeAlarm of
-    epPMSNotStandby : SetValueBool(TCheckBox(Sender).Tag, value, epPMSNotStandby);
-    epPMSDCPowFailure : SetValueBool(TCheckBox(Sender).Tag, value, epPMSDCPowFailure);
-    epPMSCanBusFailure :
-    begin
-      if value then
-      begin
-        chkCanBusFailure01.Font.Color := clRed;
-        chkCanBusFailure02.Font.Color := clRed;
-        chkCanBusFailure03.Font.Color := clRed;
-        chkCanBusFailure04.Font.Color := clRed;
-      end
-      else
-      begin
-        chkCanBusFailure01.Font.Color := clBlack;
-        chkCanBusFailure02.Font.Color := clBlack;
-        chkCanBusFailure03.Font.Color := clBlack;
-        chkCanBusFailure04.Font.Color := clBlack;
-      end;
-
-      chkCanBusFailure01.Checked := value;
-      chkCanBusFailure02.Checked := value;
-      chkCanBusFailure03.Checked := value;
-      chkCanBusFailure04.Checked := value;
-
-      for i := 0 to 3 do
-        SetValueBool(i, value, epPMSCanBusFailure);
-
-    end;
-//    epPMSEngineAlarm :
-//    begin
-//      if SetEngineAlarmCheck(TCheckBox(Sender).Tag) then
-//        SetValueBool(TCheckBox(Sender).Tag, True, epPMSEngineAlarm)
-//      else
-//        SetValueBool(TCheckBox(Sender).Tag, False, epPMSEngineAlarm)
-//
-//    end;
-//    epPMSShutdown :
-//    begin
-//      if SetShutdownAlarmCheck(TCheckBox(Sender).Tag) then
-//        SetValueBool(TCheckBox(Sender).Tag, True, epPMSShutdown)
-//      else
-//        SetValueBool(TCheckBox(Sender).Tag, False, epPMSShutdown)
-//    end;
-    epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm, epPMSLubOilTempHigh,
-    epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage:
-    begin
-      SetValueBool(TCheckBox(Sender).Tag, value, modeAlarm)
-    end;
-  end;
-
-end;
-
 procedure TfrmPowerManagementSyst.SetValueBool(IdGen: Integer; value: Boolean; modeAlarm: E_PropsID);
   var
   IdSwitchboard : Integer;
@@ -873,20 +638,13 @@ begin
   else
   begin
     generator := ERSystem.ERManager.EngineRoom.getPMSSystem.getGenerator((C_GENERATOR_ID[IdGen]));
-    if (generator.ShutDown) and (modeAlarm = epPMSEngineAlarm) then
-      Exit;
+//    if (generator.ShutDown) and (modeAlarm = epPMSEngineAlarm) then
+//      Exit;
   end;
 
   case modeAlarm of
     {Generator}
     epPMSNotStandby : generator.NotStandby := value;
-    epPMSDCPowFailure : generator.DCPowFailure := value;
-    epPMSCanBusFailure : generator.CanBusFailure := value;
-    epPMSEngineAlarm : generator.EngineAlarm := value;
-    epPMSShutdown : generator.ShutDown := value;
-    epPMSFailureCBClosed : generator.FailureCBClosed := value;
-//    epPMSGeneratorCBClosed : generator.CbClosed := value;
-
     epPMSMeasPowFailure : generator.MeasPowFailure := value;
     epPMSAutStartFailure : generator.AutStartFailure := value;
     epPMSSpeedSensorFailureAlrm : generator.SpeedSensorFailureAlrm := value;
@@ -896,201 +654,17 @@ begin
     epPMSCoolWaterLevelLow : generator.CoolWaterLevelLow := value;
     epPMSFuelOilLeakage : generator.FuelOilLeakage := value;
 
+    epPMSDCPowFailure : generator.DCPowFailure := value;
+    epPMSCanBusFailure : generator.CanBusFailure := value;
+    epPMSFailureCBClosed : generator.FailureCBClosed := value;
+
+//    epPMSGeneratorCBClosed : generator.CbClosed := value;
+//    epPMSEngineAlarm : generator.EngineAlarm := value;
+//    epPMSShutdown : generator.ShutDown := value;
+
     {Switchboard}
     epPMSMsbTripReduct : switchboard.TripReduct := value;
   end;
-end;
-
-procedure TfrmPowerManagementSyst.ShutdownMode(Sender: TObject);
-begin
-  SysMimics.Mimic.ShowMimic(mtPowerMan);
-  SysMimics.Mimic.AddMimicHistory(Ord(mtPowerMan));
-
-  if TCheckBox(Sender).Checked then
-    SetCheckBox(Sender, True, epPMSShutdown)
-  else
-    SetCheckBox(Sender, False, epPMSShutdown);
-
-  {Set warna label}
-  SetLblColor(TCheckBox(Sender).Name, TCheckBox(Sender).Checked);
-end;
-
-procedure TfrmPowerManagementSyst.SpeedSensorFailure(Sender: TObject);
-begin
-  SetMimic(mtPowerMan);
-  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSSpeedSensorFailureAlrm);
-end;
-
-procedure TfrmPowerManagementSyst.tmrDCU01Timer(Sender: TObject);
-//var
-//  i : Integer;
-begin
-//  for i := 0 to 4 do
-//    CekShutdownDCU(i)
-end;
-
-procedure TfrmPowerManagementSyst.CekShutdownDCU(IdDcu: Integer);
-begin
-  case IdDcu of
-    0:
-    begin
-      {Cooling Water Temp}
-      if chkCoolingWaterTempHigh01.Checked then
-      begin
-        CWTFailure01 := CWTFailure01 + 1;
-
-        if CWTFailure01 > 10 then
-        begin
-          SetLblColor('chkCoolingWaterTempHigh01', True);
-          SetValueBool(0, True, epPMSShutdown);
-        end;
-      end
-      else
-      begin
-        CWTFailure01 := 0;
-        SetLblColor('chkCoolingWaterTempHigh01', False);
-
-        if (lblLampOS01.Color <> clRed) and (lblLampLOPL01.Color <> clRed) and (lblLampES01.Color <> clRed) then
-          SetValueBool(0, False, epPMSShutdown);
-      end;
-
-      {Emergency Stop}
-      if lblLampES01.Color = clRed then
-        SetValueBool(0, True, epPMSShutdown)
-      else
-      begin
-        if (lblLampOS01.Color <> clRed) and (lblLampLOPL01.Color <> clRed) and (lblLampCWTH01.Color <> clRed) then
-          SetValueBool(0, False, epPMSShutdown);
-      end;
-    end;
-    1:
-    begin
-      {Cooling Water Temp}
-      if chkCoolingWaterTempHigh02.Checked then
-      begin
-        CWTFailure02 := CWTFailure02 + 1;
-
-        if CWTFailure02 > 10 then
-        begin
-          SetLblColor('chkCoolingWaterTempHigh02', True);
-          SetValueBool(1, True, epPMSShutdown);
-        end;
-      end
-      else
-      begin
-        CWTFailure02 := 0;
-        SetLblColor('chkCoolingWaterTempHigh02', False);
-
-        if (lblLampOS02.Color <> clRed) and (lblLampLOPL02.Color <> clRed) and (lblLampES02.Color <> clRed) then
-          SetValueBool(1, False, epPMSShutdown);
-      end;
-
-      {Emergency Stop}
-      if lblLampES02.Color = clRed then
-        SetValueBool(1, True, epPMSShutdown)
-      else
-      begin
-        if (lblLampOS02.Color <> clRed) and (lblLampLOPL02.Color <> clRed) and (lblLampCWTH02.Color <> clRed) then
-          SetValueBool(1, False, epPMSShutdown);
-      end;
-    end;
-    2:
-    begin
-      {Cooling Water Temp}
-      if chkCoolingWaterTempHigh03.Checked then
-      begin
-        CWTFailure03 := CWTFailure03 + 1;
-
-        if CWTFailure03 > 10 then
-        begin
-          SetLblColor('chkCoolingWaterTempHigh03', True);
-          SetValueBool(2, True, epPMSShutdown);
-        end;
-      end
-      else
-      begin
-        CWTFailure03 := 0;
-        SetLblColor('chkCoolingWaterTempHigh03', False);
-
-        if (lblLampOS03.Color <> clRed) and (lblLampLOPL03.Color <> clRed) and (lblLampES03.Color <> clRed) then
-          SetValueBool(2, False, epPMSShutdown);
-      end;
-
-      {Emergency Stop}
-      if lblLampES03.Color = clRed then
-        SetValueBool(2, True, epPMSShutdown)
-      else
-      begin
-        if (lblLampOS03.Color <> clRed) and (lblLampLOPL03.Color <> clRed) and (lblLampCWTH03.Color <> clRed) then
-          SetValueBool(2, False, epPMSShutdown);
-      end;
-    end;
-    3:
-    begin
-      {Cooling Water Temp}
-      if chkCoolingWaterTempHigh04.Checked then
-      begin
-        CWTFailure04 := CWTFailure04 + 1;
-
-        if CWTFailure04 > 10 then
-        begin
-          SetLblColor('chkCoolingWaterTempHigh04', True);
-          SetValueBool(3, True, epPMSShutdown);
-        end;
-      end
-      else
-      begin
-        CWTFailure04 := 0;
-        SetLblColor('chkCoolingWaterTempHigh04', False);
-
-        if (lblLampOS04.Color <> clRed) and (lblLampLOPL04.Color <> clRed) and (lblLampES04.Color <> clRed) then
-          SetValueBool(3, False, epPMSShutdown);
-      end;
-
-      {Emergency Stop}
-      if lblLampES04.Color = clRed then
-        SetValueBool(3, True, epPMSShutdown)
-      else
-      begin
-        if (lblLampOS04.Color <> clRed) and (lblLampLOPL04.Color <> clRed) and (lblLampCWTH04.Color <> clRed) then
-          SetValueBool(3, False, epPMSShutdown);
-      end;
-    end;
-    4:
-    begin
-      {Cooling Water Temp}
-      if chkCoolingWaterTempHigh05.Checked then
-      begin
-        CWTFailure05 := CWTFailure05 + 1;
-
-        if CWTFailure05 > 10 then
-        begin
-          SetLblColor('chkCoolingWaterTempHigh05', True);
-          SetValueBool(4, True, epPMSShutdown);
-        end;
-      end
-      else
-      begin
-        CWTFailure05 := 0;
-        SetLblColor('chkCoolingWaterTempHigh05', False);
-
-        if (lblLampOS05.Color <> clRed) and (lblLampLOPL05.Color <> clRed) then
-          SetValueBool(4, False, epPMSShutdown);
-      end;
-    end;
-  end;
-end;
-
-procedure TfrmPowerManagementSyst.CoolingWaterLevelLow(Sender: TObject);
-begin
-  SetMimic(mtPowerMan);
-  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSCoolWaterLevelLow)
-end;
-
-procedure TfrmPowerManagementSyst.CoolingWaterTempHigh(Sender: TObject);
-begin
-  SetMimic(mtPowerMan);
-  SetCheckBox(Sender, TCheckBox(Sender).Checked, epPMSCoolWaterTempHighAlrm)
 end;
 
 function TfrmPowerManagementSyst.toWarna(val: boolean): Integer;
@@ -1098,15 +672,44 @@ begin
   if val then
     result := clRed
   else
-    result := clBtnFace;
+    result := clMedGray;
 end;
 
-function TfrmPowerManagementSyst.toWarnaLbl(val: boolean): Integer;
+procedure TfrmPowerManagementSyst.OnPmsConditionMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var
+  pnt : TPoint;
 begin
-  if val then
-    result := clRed
-  else
-    result := clBlack;
+  if Button = mbRight then
+  begin
+    if TButton(Sender).Tag = 1 then
+    begin
+      SetMimic(mtPowerMan);
+      SwitchBoardId := TButton(Sender).Hint;
+      isElementOrSwitchboard := 0;
+
+    end
+    else if TButton(Sender).Tag = 2 then
+    begin
+      SetMimic(mt230VPower);
+      elementID := TButton(Sender).Hint;
+      isElementOrSwitchboard := 1;
+    end
+    else if TButton(Sender).Tag = 3 then
+    begin
+      SetMimic(mt24VPower);
+      elementID := TButton(Sender).Hint;
+      isElementOrSwitchboard := 1;
+    end
+    else if TButton(Sender).Tag = 4 then
+    begin
+      SetMimic(mtUPSPower);
+      elementID := TButton(Sender).Hint;
+      isElementOrSwitchboard := 1;
+    end;
+
+    if GetCursorPos(pnt) then
+      pm1.Popup(pnt.X, pnt.y);
+  end;
 end;
 
 end.

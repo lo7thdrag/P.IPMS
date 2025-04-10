@@ -351,7 +351,6 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
         TabOrder = 9
         Visible = False
-        OnClick = EngineAlarmMode
       end
       object chkLubOilPressLow01: TCheckBox
         Left = 33
@@ -804,7 +803,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 5
-        OnClick = EngineAlarmMode
+        OnClick = LubOilTempHigh
       end
       object chkCoolingWaterTempHigh02: TCheckBox
         Tag = 1
@@ -869,7 +868,6 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
         TabOrder = 9
         Visible = False
-        OnClick = EngineAlarmMode
       end
       object Panel9: TPanel
         Left = 23
@@ -1280,7 +1278,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 5
-        OnClick = EngineAlarmMode
+        OnClick = LubOilTempHigh
       end
       object chkCoolingWaterTempHigh03: TCheckBox
         Tag = 2
@@ -1345,7 +1343,6 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
         TabOrder = 9
         Visible = False
-        OnClick = EngineAlarmMode
       end
       object Panel10: TPanel
         Left = 23
@@ -1665,7 +1662,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       object rbManual04: TRadioButton
         Tag = 3
         Left = 139
-        Top = 24
+        Top = 25
         Width = 14
         Height = 17
         Caption = 'Manual'
@@ -1756,7 +1753,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 5
-        OnClick = EngineAlarmMode
+        OnClick = LubOilTempHigh
       end
       object chkCoolingWaterTempHigh04: TCheckBox
         Tag = 3
@@ -1805,7 +1802,6 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
         TabOrder = 9
         Visible = False
-        OnClick = EngineAlarmMode
       end
       object chkFUWASeparator04: TCheckBox
         Tag = 3
@@ -2217,7 +2213,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 5
-        OnClick = EngineAlarmMode
+        OnClick = LubOilTempHigh
       end
       object chkCoolingWaterTempHigh05: TCheckBox
         Tag = 4
@@ -2282,7 +2278,6 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
         TabOrder = 9
         Visible = False
-        OnClick = EngineAlarmMode
       end
       object Panel12: TPanel
         Left = 23
@@ -3459,10 +3454,5 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       Caption = 'Alarm Off'
       OnClick = AlarmOn1Click
     end
-  end
-  object tmrDCU01: TTimer
-    OnTimer = tmrDCU01Timer
-    Left = 1320
-    Top = 522
   end
 end

@@ -713,13 +713,13 @@ begin
     EngineAlarm := False;
 
     if not FIsSpeedSensorFailureAlrm then
-      FIsSpeedSensorFailureShutdown := False;
+      SpeedSensorFailureShutdown := False;
 
-    if FIsLubOilPressLowAlrm then
-      FIsLubOilPressLowShutdown := False;
+    if not FIsLubOilPressLowAlrm then
+      LubOilPressLowShutdown := False;
 
-    if FIsCoolWaterTempHighAlrm then
-      FIsCoolWaterTempHighShutdown := False;
+    if not FIsCoolWaterTempHighAlrm then
+      CoolWaterTempHighShutdown := False;
   end;
 end;
 
