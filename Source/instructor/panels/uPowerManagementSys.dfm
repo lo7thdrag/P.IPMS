@@ -1860,8 +1860,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         TabOrder = 14
       end
       object lblLampCWTH04: TPanel
-        Left = 34
-        Top = 342
+        Left = 37
+        Top = 344
         Width = 12
         Height = 14
         BevelOuter = bvNone

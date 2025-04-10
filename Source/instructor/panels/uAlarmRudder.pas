@@ -81,6 +81,9 @@ type
     btnLampKiri11: TSpeedButtonImage;
     btnLampKiri4: TSpeedButtonImage;
     btnLampKiri5: TSpeedButtonImage;
+    SpeedButtonImage1: TSpeedButtonImage;
+    SpeedButtonImage2: TSpeedButtonImage;
+    SpeedButtonImage3: TSpeedButtonImage;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnInpRudderLeftClick(Sender: TObject);

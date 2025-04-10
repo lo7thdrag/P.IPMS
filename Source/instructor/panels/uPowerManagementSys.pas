@@ -352,6 +352,36 @@ begin
           lblLampOS01.Color := toWarna(Value)
         {$ENDREGION}
       end;
+      epPMSLubOilPressLowShutdown:
+      begin
+        {$REGION ' Lub Oil Press Low Shutdown '}
+        if TGenerator(Sender).Identifier = C_GENERATOR_ID[0] then
+          lblLampLOPL01.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[1] then
+          lblLampLOPL02.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[2] then
+          lblLampLOPL03.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[3] then
+          lblLampLOPL04.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[4] then
+          lblLampLOPL05.Color := toWarna(Value)
+        {$ENDREGION}
+      end;
+      epPMSCoolWaterTempHighShutdown :
+      begin
+        {$REGION ' Cool Water Temp High Shutdown '}
+        if TGenerator(Sender).Identifier = C_GENERATOR_ID[0] then
+          lblLampCWTH01.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[1] then
+          lblLampCWTH02.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[2] then
+          lblLampCWTH03.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[3] then
+          lblLampCWTH04.Color := toWarna(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[4] then
+          lblLampCWTH05.Color := toWarna(Value)
+        {$ENDREGION}
+      end;
       epPMSGeneratorEmergencyStop:
       begin
         {$REGION ' Emergency Stop '}

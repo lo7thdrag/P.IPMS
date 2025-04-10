@@ -1,10 +1,11 @@
 object frmAlarmRudder: TfrmAlarmRudder
   Left = -1494
   Top = -12
+  BorderStyle = bsNone
   Caption = 'Alarm Rudder'
-  ClientHeight = 725
-  ClientWidth = 1259
-  Color = clBtnFace
+  ClientHeight = 856
+  ClientWidth = 1687
+  Color = 3552822
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -16,10 +17,10 @@ object frmAlarmRudder: TfrmAlarmRudder
   PixelsPerInch = 96
   TextHeight = 13
   object Image1: TImage
-    Left = 8
+    Left = 40
     Top = 8
-    Width = 520
-    Height = 520
+    Width = 484
+    Height = 481
     Picture.Data = {
       07544269746D6170F6600C00424DF6600C000000000036000000280000000802
       0000080200000100180000000000C0600C000000000000000000000000000000
@@ -25376,8 +25377,8 @@ object frmAlarmRudder: TfrmAlarmRudder
       8080}
   end
   object btnLampKiri1: TSpeedButtonImage
-    Left = 116
-    Top = 122
+    Left = 148
+    Top = 121
     Width = 57
     Height = 38
     Caption = ''
@@ -25392,8 +25393,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri6: TSpeedButtonImage
-    Left = 178
-    Top = 122
+    Left = 210
+    Top = 121
     Width = 57
     Height = 38
     Caption = ''
@@ -25408,8 +25409,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri9: TSpeedButtonImage
-    Left = 240
-    Top = 122
+    Left = 272
+    Top = 121
     Width = 57
     Height = 38
     Caption = ''
@@ -25424,8 +25425,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri12: TSpeedButtonImage
-    Left = 302
-    Top = 122
+    Left = 334
+    Top = 121
     Width = 57
     Height = 38
     Caption = ''
@@ -25440,8 +25441,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri14: TSpeedButtonImage
-    Left = 364
-    Top = 122
+    Left = 396
+    Top = 121
     Width = 57
     Height = 38
     Caption = ''
@@ -25456,8 +25457,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri2: TSpeedButtonImage
-    Left = 116
-    Top = 165
+    Left = 148
+    Top = 164
     Width = 57
     Height = 38
     Caption = ''
@@ -25472,8 +25473,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri7: TSpeedButtonImage
-    Left = 178
-    Top = 165
+    Left = 210
+    Top = 164
     Width = 57
     Height = 38
     Caption = ''
@@ -25488,8 +25489,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri10: TSpeedButtonImage
-    Left = 240
-    Top = 165
+    Left = 272
+    Top = 164
     Width = 57
     Height = 38
     Caption = ''
@@ -25504,8 +25505,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri13: TSpeedButtonImage
-    Left = 302
-    Top = 165
+    Left = 334
+    Top = 164
     Width = 57
     Height = 38
     Caption = ''
@@ -25520,8 +25521,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri15: TSpeedButtonImage
-    Left = 364
-    Top = 165
+    Left = 396
+    Top = 164
     Width = 57
     Height = 38
     Caption = ''
@@ -25536,8 +25537,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri3: TSpeedButtonImage
-    Left = 116
-    Top = 208
+    Left = 148
+    Top = 207
     Width = 57
     Height = 38
     Caption = ''
@@ -25552,8 +25553,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri8: TSpeedButtonImage
-    Left = 178
-    Top = 208
+    Left = 210
+    Top = 207
     Width = 57
     Height = 38
     Caption = ''
@@ -25568,8 +25569,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri11: TSpeedButtonImage
-    Left = 240
-    Top = 208
+    Left = 272
+    Top = 207
     Width = 57
     Height = 38
     Caption = ''
@@ -25584,8 +25585,8 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri4: TSpeedButtonImage
-    Left = 116
-    Top = 251
+    Left = 148
+    Top = 250
     Width = 57
     Height = 38
     Caption = ''
@@ -25600,8 +25601,56 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object btnLampKiri5: TSpeedButtonImage
-    Left = 116
-    Top = 294
+    Left = 148
+    Top = 293
+    Width = 57
+    Height = 38
+    Caption = ''
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -7
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    OnClick = btnLampKiri1Click
+    Color = clGray
+  end
+  object SpeedButtonImage1: TSpeedButtonImage
+    Left = 334
+    Top = 381
+    Width = 57
+    Height = 38
+    Caption = ''
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -7
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    OnClick = btnLampKiri1Click
+    Color = clGray
+  end
+  object SpeedButtonImage2: TSpeedButtonImage
+    Left = 148
+    Top = 381
+    Width = 57
+    Height = 38
+    Caption = ''
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -7
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    OnClick = btnLampKiri1Click
+    Color = clGray
+  end
+  object SpeedButtonImage3: TSpeedButtonImage
+    Left = 397
+    Top = 381
     Width = 57
     Height = 38
     Caption = ''
@@ -25616,60 +25665,62 @@ object frmAlarmRudder: TfrmAlarmRudder
     Color = clGray
   end
   object pnlRudderAlarm: TPanel
-    Left = 554
-    Top = 106
-    Width = 785
-    Height = 651
+    Left = 546
+    Top = 23
+    Width = 698
+    Height = 345
+    Color = 4539717
+    ParentBackground = False
     TabOrder = 0
     object lbl3: TLabel
-      Left = 299
-      Top = 1
-      Width = 68
+      Left = 317
+      Top = 19
+      Width = 64
       Height = 23
       Caption = 'ALARM'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
       Font.Height = -19
-      Font.Name = 'Tahoma'
+      Font.Name = 'Berlin Sans FB Demi'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object pnlRudderAlarmPort: TPanel
-      Left = 25
-      Top = 30
-      Width = 286
-      Height = 265
+      Left = 40
+      Top = 64
+      Width = 288
+      Height = 264
       TabOrder = 0
       object lbl1: TLabel
-        Left = 119
-        Top = 3
-        Width = 41
-        Height = 19
+        Left = 124
+        Top = 5
+        Width = 40
+        Height = 18
         Caption = 'PORT'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
         Font.Height = -16
-        Font.Name = 'Tahoma'
+        Font.Name = 'Berlin Sans FB'
         Font.Style = []
         ParentFont = False
       end
     end
     object pnl16: TPanel
-      Left = 338
-      Top = 30
-      Width = 329
-      Height = 265
+      Left = 368
+      Top = 64
+      Width = 288
+      Height = 264
       TabOrder = 1
       object lbl2: TLabel
-        Left = 114
-        Top = 3
-        Width = 93
-        Height = 19
+        Left = 98
+        Top = 5
+        Width = 90
+        Height = 18
         Caption = 'STARBOARD'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
         Font.Height = -16
-        Font.Name = 'Tahoma'
+        Font.Name = 'Berlin Sans FB'
         Font.Style = []
         ParentFont = False
       end
@@ -25916,46 +25967,46 @@ object frmAlarmRudder: TfrmAlarmRudder
     end
   end
   object pnlRudderIndicator: TPanel
-    Left = 855
-    Top = 0
-    Width = 377
-    Height = 305
+    Left = 1277
+    Top = 23
+    Width = 370
+    Height = 345
     TabOrder = 1
     object lbl5: TLabel
-      Left = 161
-      Top = 0
-      Width = 55
+      Left = 159
+      Top = 19
+      Width = 53
       Height = 23
       Caption = 'PUMP'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
       Font.Height = -19
-      Font.Name = 'Tahoma'
+      Font.Name = 'Berlin Sans FB Demi'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object pnlRudderIndPort: TPanel
       Left = 13
-      Top = 29
+      Top = 63
       Width = 165
       Height = 265
       TabOrder = 0
       object lbl4: TLabel
-        Left = 68
+        Left = 76
         Top = 6
-        Width = 41
-        Height = 19
+        Width = 40
+        Height = 18
         Caption = 'PORT'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
         Font.Height = -16
-        Font.Name = 'Tahoma'
+        Font.Name = 'Berlin Sans FB'
         Font.Style = []
         ParentFont = False
       end
       object btnPumpKiri1: TSpeedButtonImage
         Left = 42
-        Top = 31
+        Top = 32
         Width = 40
         Height = 40
         Caption = ''
@@ -26003,7 +26054,7 @@ object frmAlarmRudder: TfrmAlarmRudder
       end
       object btnPumpKiri4: TSpeedButtonImage
         Left = 88
-        Top = 31
+        Top = 32
         Width = 40
         Height = 40
         Caption = ''
@@ -26052,26 +26103,26 @@ object frmAlarmRudder: TfrmAlarmRudder
     end
     object pnl17: TPanel
       Left = 196
-      Top = 29
+      Top = 63
       Width = 166
       Height = 265
       TabOrder = 1
       object lbl6: TLabel
         Left = 38
         Top = 6
-        Width = 93
-        Height = 19
+        Width = 90
+        Height = 18
         Caption = 'STARBOARD'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
         Font.Height = -16
-        Font.Name = 'Tahoma'
+        Font.Name = 'Berlin Sans FB'
         Font.Style = []
         ParentFont = False
       end
       object btnPumpKanan1: TSpeedButtonImage
         Left = 40
-        Top = 31
+        Top = 32
         Width = 40
         Height = 40
         Caption = ''
@@ -26119,7 +26170,7 @@ object frmAlarmRudder: TfrmAlarmRudder
       end
       object btnPumpKanan4: TSpeedButtonImage
         Left = 86
-        Top = 31
+        Top = 32
         Width = 40
         Height = 40
         Caption = ''
@@ -26168,55 +26219,57 @@ object frmAlarmRudder: TfrmAlarmRudder
     end
   end
   object btnInpRudderLeft: TButton
-    Left = 1345
-    Top = 104
-    Width = 57
-    Height = 25
+    Left = 268
+    Top = 645
+    Width = 69
+    Height = 21
     Caption = 'Input'
     TabOrder = 2
     Visible = False
     OnClick = btnInpRudderLeftClick
   end
   object edtRudderLeftInp: TEdit
-    Left = 1345
-    Top = 50
-    Width = 121
+    Left = 236
+    Top = 604
+    Width = 133
     Height = 21
     TabOrder = 3
     Visible = False
   end
   object edtRudderLeft: TEdit
-    Left = 1345
-    Top = 77
-    Width = 121
+    Left = 236
+    Top = 563
+    Width = 133
     Height = 21
     TabOrder = 4
     Visible = False
   end
   object edtRudderValue: TEdit
-    Left = 1345
-    Top = 23
-    Width = 121
+    Left = 236
+    Top = 522
+    Width = 133
     Height = 21
     TabOrder = 5
     Visible = False
   end
   object pnlRudderMainPos: TPanel
-    Left = 382
-    Top = 460
-    Width = 1096
-    Height = 349
+    Left = 546
+    Top = 398
+    Width = 1101
+    Height = 355
+    Color = 3552822
+    ParentBackground = False
     TabOrder = 6
     object lbl9: TLabel
-      Left = 452
+      Left = 463
       Top = 2
-      Width = 187
+      Width = 175
       Height = 23
       Caption = 'RUDDER POSITION'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
       Font.Height = -19
-      Font.Name = 'Tahoma'
+      Font.Name = 'Berlin Sans FB'
       Font.Style = [fsBold]
       ParentFont = False
     end
@@ -32316,15 +32369,15 @@ object frmAlarmRudder: TfrmAlarmRudder
         OnMouseMove = vrwhlRudderPanelRightMouseMove
       end
       object lbl8: TLabel
-        Left = 96
+        Left = 98
         Top = 2
-        Width = 93
-        Height = 19
+        Width = 90
+        Height = 18
         Caption = 'STARBOARD'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
         Font.Height = -16
-        Font.Name = 'Tahoma'
+        Font.Name = 'Berlin Sans FB'
         Font.Style = []
         ParentFont = False
       end
@@ -32348,7 +32401,7 @@ object frmAlarmRudder: TfrmAlarmRudder
     end
     object pnlRudderPosition: TPanel
       Left = 160
-      Top = 29
+      Top = 31
       Width = 286
       Height = 300
       TabOrder = 1
@@ -38443,14 +38496,14 @@ object frmAlarmRudder: TfrmAlarmRudder
       end
       object lbl7: TLabel
         Left = 123
-        Top = 2
-        Width = 41
-        Height = 19
+        Top = 4
+        Width = 40
+        Height = 18
         Caption = 'PORT'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
         Font.Height = -16
-        Font.Name = 'Tahoma'
+        Font.Name = 'Berlin Sans FB'
         Font.Style = []
         ParentFont = False
       end
@@ -38475,7 +38528,7 @@ object frmAlarmRudder: TfrmAlarmRudder
   end
   object tmr1: TTimer
     OnTimer = tmr1Timer
-    Left = 1408
-    Top = 224
+    Left = 334
+    Top = 675
   end
 end
