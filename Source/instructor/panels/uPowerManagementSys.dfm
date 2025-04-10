@@ -40,11 +40,11 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       ParentBackground = False
       TabOrder = 1
       object Label1: TLabel
-        Left = 89
-        Top = 4
-        Width = 60
+        Left = 45
+        Top = 6
+        Width = 153
         Height = 19
-        Caption = 'DCU 01'
+        Caption = 'Diesel Generator 1'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
         Font.Height = -16
@@ -55,7 +55,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
     end
     object pnlDCU1: TPanel
       Left = 30
-      Top = 75
+      Top = 68
       Width = 243
       Height = 405
       BevelOuter = bvNone
@@ -63,8 +63,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       ParentBackground = False
       TabOrder = 0
       object lbl17: TLabel
-        Left = 45
-        Top = 309
+        Left = 55
+        Top = 320
         Width = 96
         Height = 14
         Caption = 'Lub Oil Press Low'
@@ -78,8 +78,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object lbl19: TLabel
-        Left = 45
-        Top = 331
+        Left = 55
+        Top = 342
         Width = 141
         Height = 14
         Caption = 'Cooling Water Temp High'
@@ -93,8 +93,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object lbl20: TLabel
-        Left = 45
-        Top = 353
+        Left = 55
+        Top = 364
         Width = 91
         Height = 14
         Caption = 'Emergency Stop'
@@ -108,8 +108,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object lbl30: TLabel
-        Left = 45
-        Top = 287
+        Left = 55
+        Top = 298
         Width = 65
         Height = 14
         Caption = 'Over Speed'
@@ -123,8 +123,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label2: TLabel
-        Left = 41
-        Top = 32
+        Left = 66
+        Top = 25
         Width = 45
         Height = 14
         Caption = 'Standby'
@@ -136,8 +136,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label10: TLabel
-        Left = 130
-        Top = 32
+        Left = 155
+        Top = 25
         Width = 37
         Height = 14
         Caption = 'Manual'
@@ -149,7 +149,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label13: TLabel
-        Left = 43
+        Left = 55
         Top = 74
         Width = 109
         Height = 14
@@ -162,8 +162,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label24: TLabel
-        Left = 43
-        Top = 94
+        Left = 55
+        Top = 96
         Width = 121
         Height = 14
         Caption = 'Automatic Start Failed'
@@ -175,8 +175,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label26: TLabel
-        Left = 43
-        Top = 116
+        Left = 55
+        Top = 118
         Width = 114
         Height = 14
         Caption = 'Speed Sensor Failure'
@@ -188,8 +188,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label27: TLabel
-        Left = 43
-        Top = 139
+        Left = 55
+        Top = 140
         Width = 96
         Height = 14
         Caption = 'Lub Oil Press Low'
@@ -201,8 +201,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label31: TLabel
-        Left = 43
-        Top = 159
+        Left = 55
+        Top = 162
         Width = 101
         Height = 14
         Caption = 'Lub Oil Temp High'
@@ -214,8 +214,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label32: TLabel
-        Left = 43
-        Top = 179
+        Left = 55
+        Top = 184
         Width = 141
         Height = 14
         Caption = 'Cooling Water Temp High'
@@ -227,8 +227,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label33: TLabel
-        Left = 43
-        Top = 200
+        Left = 55
+        Top = 206
         Width = 136
         Height = 14
         Caption = 'Cooling Water Level Low'
@@ -240,8 +240,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label34: TLabel
-        Left = 43
-        Top = 220
+        Left = 55
+        Top = 228
         Width = 88
         Height = 14
         Caption = 'Fuel Oil Leakage'
@@ -253,8 +253,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label35: TLabel
-        Left = 43
-        Top = 242
+        Left = 55
+        Top = 250
         Width = 100
         Height = 14
         Caption = 'FU/ WA Separator'
@@ -264,78 +264,11 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-      end
-      object lblLampOS01: TLabel
-        Left = 27
-        Top = 284
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        AutoSize = False
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampLOPL01: TLabel
-        Left = 27
-        Top = 310
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        AutoSize = False
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampCWTH01: TLabel
-        Left = 27
-        Top = 336
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        AutoSize = False
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampES01: TLabel
-        Left = 27
-        Top = 362
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        AutoSize = False
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
+        Visible = False
       end
       object rbStandby01: TRadioButton
-        Left = 27
-        Top = 32
+        Left = 50
+        Top = 24
         Width = 12
         Height = 17
         Checked = True
@@ -350,8 +283,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         OnClick = NotStandbyMode
       end
       object chkAutomaticStartFailed01: TCheckBox
-        Left = 27
-        Top = 93
+        Left = 33
+        Top = 94
         Width = 14
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -364,8 +297,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         OnClick = AutomaticStartFailed
       end
       object chkCoolingWaterLevelLow01: TCheckBox
-        Left = 27
-        Top = 198
+        Left = 33
+        Top = 204
         Width = 14
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -378,8 +311,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         OnClick = CoolingWaterLevelLow
       end
       object chkCoolingWaterTempHigh01: TCheckBox
-        Left = 27
-        Top = 177
+        Left = 33
+        Top = 182
         Width = 14
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -392,8 +325,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         OnClick = CoolingWaterTempHigh
       end
       object chkFuelOilLeakage01: TCheckBox
-        Left = 27
-        Top = 219
+        Left = 33
+        Top = 226
         Width = 14
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -406,8 +339,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         OnClick = FuelOilLeakage
       end
       object chkFUWASeparator01: TCheckBox
-        Left = 27
-        Top = 242
+        Left = 33
+        Top = 248
         Width = 14
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -417,11 +350,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 9
+        Visible = False
         OnClick = EngineAlarmMode
       end
       object chkLubOilPressLow01: TCheckBox
-        Left = 27
-        Top = 137
+        Left = 33
+        Top = 138
         Width = 14
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -434,8 +368,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         OnClick = LubOilPressLow
       end
       object chkLubOilTempHigh01: TCheckBox
-        Left = 27
-        Top = 156
+        Left = 33
+        Top = 160
         Width = 14
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -448,8 +382,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         OnClick = LubOilTempHigh
       end
       object chkSpeedSensorFailure01: TCheckBox
-        Left = 27
-        Top = 114
+        Left = 33
+        Top = 116
         Width = 14
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -462,7 +396,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         OnClick = SpeedSensorFailure
       end
       object chkSupplyVoltageLow01: TCheckBox
-        Left = 27
+        Left = 33
         Top = 72
         Width = 14
         Height = 17
@@ -476,8 +410,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         OnClick = MeasVoltMode
       end
       object rbManual01: TRadioButton
-        Left = 116
-        Top = 32
+        Left = 139
+        Top = 24
         Width = 12
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -489,10 +423,70 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         TabOrder = 10
         OnClick = NotStandbyMode
       end
+      object Panel8: TPanel
+        Left = 22
+        Top = 53
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 11
+      end
+      object Panel13: TPanel
+        Left = 22
+        Top = 281
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 12
+      end
+      object lblLampOS01: TPanel
+        Left = 34
+        Top = 298
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 13
+      end
+      object lblLampLOPL01: TPanel
+        Left = 34
+        Top = 320
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 14
+      end
+      object lblLampCWTH01: TPanel
+        Left = 34
+        Top = 342
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 15
+      end
+      object lblLampES01: TPanel
+        Left = 34
+        Top = 364
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 16
+      end
     end
     object pnlDCU2: TPanel
       Left = 292
-      Top = 75
+      Top = 68
       Width = 243
       Height = 405
       BevelOuter = bvNone
@@ -500,8 +494,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       ParentBackground = False
       TabOrder = 2
       object Label3: TLabel
-        Left = 45
-        Top = 287
+        Left = 55
+        Top = 298
         Width = 65
         Height = 14
         Caption = 'Over Speed'
@@ -515,8 +509,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label6: TLabel
-        Left = 45
-        Top = 309
+        Left = 55
+        Top = 320
         Width = 96
         Height = 14
         Caption = 'Lub Oil Press Low'
@@ -530,8 +524,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label8: TLabel
-        Left = 45
-        Top = 331
+        Left = 55
+        Top = 364
         Width = 91
         Height = 14
         Caption = 'Emergency Stop'
@@ -545,8 +539,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label7: TLabel
-        Left = 45
-        Top = 353
+        Left = 55
+        Top = 342
         Width = 141
         Height = 14
         Caption = 'Cooling Water Temp High'
@@ -559,73 +553,9 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentColor = False
         ParentFont = False
       end
-      object lblLampCWTH02: TLabel
-        Left = 27
-        Top = 350
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampES02: TLabel
-        Left = 27
-        Top = 328
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampLOPL02: TLabel
-        Left = 27
-        Top = 306
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampOS02: TLabel
-        Left = 27
-        Top = 284
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
       object Label37: TLabel
-        Left = 43
-        Top = 32
+        Left = 67
+        Top = 26
         Width = 45
         Height = 14
         Caption = 'Standby'
@@ -637,8 +567,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label38: TLabel
-        Left = 131
-        Top = 32
+        Left = 155
+        Top = 26
         Width = 37
         Height = 14
         Caption = 'Manual'
@@ -650,7 +580,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label41: TLabel
-        Left = 43
+        Left = 55
         Top = 74
         Width = 109
         Height = 14
@@ -663,8 +593,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label42: TLabel
-        Left = 43
-        Top = 95
+        Left = 55
+        Top = 96
         Width = 121
         Height = 14
         Caption = 'Automatic Start Failed'
@@ -676,8 +606,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label43: TLabel
-        Left = 43
-        Top = 116
+        Left = 55
+        Top = 118
         Width = 114
         Height = 14
         Caption = 'Speed Sensor Failure'
@@ -689,8 +619,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label44: TLabel
-        Left = 43
-        Top = 137
+        Left = 55
+        Top = 140
         Width = 96
         Height = 14
         Caption = 'Lub Oil Press Low'
@@ -702,8 +632,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label45: TLabel
-        Left = 43
-        Top = 158
+        Left = 55
+        Top = 162
         Width = 101
         Height = 14
         Caption = 'Lub Oil Temp High'
@@ -715,8 +645,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label46: TLabel
-        Left = 43
-        Top = 179
+        Left = 55
+        Top = 184
         Width = 141
         Height = 14
         Caption = 'Cooling Water Temp High'
@@ -728,8 +658,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label47: TLabel
-        Left = 43
-        Top = 200
+        Left = 55
+        Top = 206
         Width = 136
         Height = 14
         Caption = 'Cooling Water Level Low'
@@ -741,8 +671,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label48: TLabel
-        Left = 43
-        Top = 221
+        Left = 55
+        Top = 228
         Width = 88
         Height = 14
         Caption = 'Fuel Oil Leakage'
@@ -754,8 +684,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label49: TLabel
-        Left = 43
-        Top = 242
+        Left = 55
+        Top = 250
         Width = 100
         Height = 14
         Caption = 'FU/ WA Separator'
@@ -765,11 +695,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       object rbStandby02: TRadioButton
         Tag = 1
-        Left = 27
-        Top = 32
+        Left = 51
+        Top = 24
         Width = 14
         Height = 17
         Checked = True
@@ -785,8 +716,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object rbManual02: TRadioButton
         Tag = 1
-        Left = 116
-        Top = 32
+        Left = 140
+        Top = 24
         Width = 14
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -800,7 +731,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object chkSupplyVoltageLow02: TCheckBox
         Tag = 1
-        Left = 27
+        Left = 33
         Top = 72
         Width = 14
         Height = 17
@@ -815,8 +746,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object chkAutomaticStartFailed02: TCheckBox
         Tag = 1
-        Left = 27
-        Top = 93
+        Left = 33
+        Top = 94
         Width = 14
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -826,12 +757,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        OnClick = EngineAlarmMode
+        OnClick = AutomaticStartFailed
       end
       object chkSpeedSensorFailure02: TCheckBox
         Tag = 1
-        Left = 27
-        Top = 115
+        Left = 33
+        Top = 116
         Width = 14
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -841,12 +772,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 3
-        OnClick = ShutdownMode
+        OnClick = SpeedSensorFailure
       end
       object chkLubOilPressLow02: TCheckBox
         Tag = 1
-        Left = 27
-        Top = 136
+        Left = 33
+        Top = 138
         Width = 14
         Height = 17
         Caption = 'Lub Oil Press Low'
@@ -857,12 +788,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 4
-        OnClick = ShutdownMode
+        OnClick = LubOilPressLow
       end
       object chkLubOilTempHigh02: TCheckBox
         Tag = 1
-        Left = 27
-        Top = 157
+        Left = 33
+        Top = 160
         Width = 14
         Height = 17
         Caption = 'Lub Oil Temp High'
@@ -877,8 +808,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object chkCoolingWaterTempHigh02: TCheckBox
         Tag = 1
-        Left = 27
-        Top = 178
+        Left = 33
+        Top = 182
         Width = 14
         Height = 17
         Caption = 'Cooling Water Temp High'
@@ -889,12 +820,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 6
-        OnClick = EngineAlarmMode
+        OnClick = CoolingWaterTempHigh
       end
       object chkCoolingWaterLevelLow02: TCheckBox
         Tag = 1
-        Left = 27
-        Top = 199
+        Left = 33
+        Top = 204
         Width = 14
         Height = 17
         Caption = 'Cooling Water Level Low'
@@ -905,12 +836,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 7
-        OnClick = EngineAlarmMode
+        OnClick = CoolingWaterLevelLow
       end
       object chkFuelOilLeakage02: TCheckBox
         Tag = 1
-        Left = 27
-        Top = 221
+        Left = 33
+        Top = 226
         Width = 14
         Height = 17
         Caption = 'Fuel Oil Leakage'
@@ -921,12 +852,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 8
-        OnClick = EngineAlarmMode
+        OnClick = FuelOilLeakage
       end
       object chkFUWASeparator02: TCheckBox
         Tag = 1
-        Left = 27
-        Top = 242
+        Left = 33
+        Top = 248
         Width = 14
         Height = 17
         Caption = 'FU/ WA Separator'
@@ -937,7 +868,68 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 9
+        Visible = False
         OnClick = EngineAlarmMode
+      end
+      object Panel9: TPanel
+        Left = 23
+        Top = 53
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 11
+      end
+      object Panel14: TPanel
+        Left = 23
+        Top = 281
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 12
+      end
+      object lblLampOS02: TPanel
+        Left = 34
+        Top = 298
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 13
+      end
+      object lblLampLOPL02: TPanel
+        Left = 34
+        Top = 320
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 14
+      end
+      object lblLampCWTH02: TPanel
+        Left = 34
+        Top = 342
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 15
+      end
+      object lblLampES02: TPanel
+        Left = 34
+        Top = 364
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 16
       end
     end
     object Panel2: TPanel
@@ -950,11 +942,11 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       ParentBackground = False
       TabOrder = 3
       object Label4: TLabel
-        Left = 89
-        Top = 4
-        Width = 60
+        Left = 45
+        Top = 6
+        Width = 153
         Height = 19
-        Caption = 'DCU 02'
+        Caption = 'Diesel Generator 2'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
         Font.Height = -16
@@ -965,7 +957,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
     end
     object pnlDCU3: TPanel
       Left = 554
-      Top = 75
+      Top = 68
       Width = 243
       Height = 405
       BevelOuter = bvNone
@@ -973,8 +965,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       ParentBackground = False
       TabOrder = 4
       object Label14: TLabel
-        Left = 46
-        Top = 287
+        Left = 55
+        Top = 298
         Width = 65
         Height = 14
         Caption = 'Over Speed'
@@ -988,8 +980,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label17: TLabel
-        Left = 46
-        Top = 309
+        Left = 55
+        Top = 320
         Width = 96
         Height = 14
         Caption = 'Lub Oil Press Low'
@@ -1003,8 +995,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label19: TLabel
-        Left = 46
-        Top = 331
+        Left = 55
+        Top = 364
         Width = 91
         Height = 14
         Caption = 'Emergency Stop'
@@ -1018,8 +1010,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label18: TLabel
-        Left = 46
-        Top = 353
+        Left = 55
+        Top = 342
         Width = 141
         Height = 14
         Caption = 'Cooling Water Temp High'
@@ -1032,72 +1024,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentColor = False
         ParentFont = False
       end
-      object lblLampCWTH03: TLabel
-        Left = 28
-        Top = 350
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampES03: TLabel
-        Left = 28
-        Top = 328
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampLOPL03: TLabel
-        Left = 28
-        Top = 306
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampOS03: TLabel
-        Left = 28
-        Top = 284
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
       object Label50: TLabel
-        Left = 44
+        Left = 55
         Top = 74
         Width = 109
         Height = 14
@@ -1110,8 +1038,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label51: TLabel
-        Left = 44
-        Top = 95
+        Left = 55
+        Top = 96
         Width = 121
         Height = 14
         Caption = 'Automatic Start Failed'
@@ -1123,8 +1051,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label52: TLabel
-        Left = 44
-        Top = 116
+        Left = 55
+        Top = 118
         Width = 114
         Height = 14
         Caption = 'Speed Sensor Failure'
@@ -1136,8 +1064,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label53: TLabel
-        Left = 44
-        Top = 137
+        Left = 55
+        Top = 140
         Width = 96
         Height = 14
         Caption = 'Lub Oil Press Low'
@@ -1149,8 +1077,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label54: TLabel
-        Left = 44
-        Top = 158
+        Left = 55
+        Top = 162
         Width = 101
         Height = 14
         Caption = 'Lub Oil Temp High'
@@ -1162,8 +1090,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label55: TLabel
-        Left = 44
-        Top = 179
+        Left = 55
+        Top = 184
         Width = 141
         Height = 14
         Caption = 'Cooling Water Temp High'
@@ -1175,8 +1103,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label56: TLabel
-        Left = 44
-        Top = 200
+        Left = 55
+        Top = 206
         Width = 136
         Height = 14
         Caption = 'Cooling Water Level Low'
@@ -1188,8 +1116,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label57: TLabel
-        Left = 44
-        Top = 221
+        Left = 55
+        Top = 228
         Width = 88
         Height = 14
         Caption = 'Fuel Oil Leakage'
@@ -1201,8 +1129,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label58: TLabel
-        Left = 44
-        Top = 242
+        Left = 55
+        Top = 250
         Width = 100
         Height = 14
         Caption = 'FU/ WA Separator'
@@ -1212,10 +1140,11 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       object Label79: TLabel
-        Left = 44
-        Top = 32
+        Left = 66
+        Top = 26
         Width = 45
         Height = 14
         Caption = 'Standby'
@@ -1227,8 +1156,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label80: TLabel
-        Left = 133
-        Top = 32
+        Left = 155
+        Top = 26
         Width = 37
         Height = 14
         Caption = 'Manual'
@@ -1241,8 +1170,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object rbStandby03: TRadioButton
         Tag = 2
-        Left = 28
-        Top = 32
+        Left = 50
+        Top = 24
         Width = 14
         Height = 17
         Caption = 'Standby'
@@ -1259,8 +1188,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object rbManual03: TRadioButton
         Tag = 2
-        Left = 117
-        Top = 32
+        Left = 139
+        Top = 24
         Width = 14
         Height = 17
         Caption = 'Manual'
@@ -1275,7 +1204,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object chkSupplyVoltageLow03: TCheckBox
         Tag = 2
-        Left = 28
+        Left = 33
         Top = 72
         Width = 14
         Height = 17
@@ -1291,8 +1220,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object chkAutomaticStartFailed03: TCheckBox
         Tag = 2
-        Left = 28
-        Top = 93
+        Left = 33
+        Top = 94
         Width = 14
         Height = 17
         Caption = 'Automatic Start Failed'
@@ -1303,12 +1232,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        OnClick = EngineAlarmMode
+        OnClick = AutomaticStartFailed
       end
       object chkSpeedSensorFailure03: TCheckBox
         Tag = 2
-        Left = 28
-        Top = 115
+        Left = 33
+        Top = 116
         Width = 14
         Height = 17
         Caption = 'Speed Sensor Failure'
@@ -1319,12 +1248,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 3
-        OnClick = ShutdownMode
+        OnClick = SpeedSensorFailure
       end
       object chkLubOilPressLow03: TCheckBox
         Tag = 2
-        Left = 28
-        Top = 136
+        Left = 33
+        Top = 138
         Width = 14
         Height = 17
         Caption = 'Lub Oil Press Low'
@@ -1335,12 +1264,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 4
-        OnClick = ShutdownMode
+        OnClick = LubOilPressLow
       end
       object chkLubOilTempHigh03: TCheckBox
         Tag = 2
-        Left = 28
-        Top = 157
+        Left = 33
+        Top = 160
         Width = 14
         Height = 17
         Caption = 'Lub Oil Temp High'
@@ -1355,8 +1284,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object chkCoolingWaterTempHigh03: TCheckBox
         Tag = 2
-        Left = 28
-        Top = 178
+        Left = 33
+        Top = 182
         Width = 14
         Height = 17
         Caption = 'Cooling Water Temp High'
@@ -1367,12 +1296,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 6
-        OnClick = EngineAlarmMode
+        OnClick = CoolingWaterTempHigh
       end
       object chkCoolingWaterLevelLow03: TCheckBox
         Tag = 2
-        Left = 28
-        Top = 199
+        Left = 33
+        Top = 204
         Width = 14
         Height = 17
         Caption = 'Cooling Water Level Low'
@@ -1383,12 +1312,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 7
-        OnClick = EngineAlarmMode
+        OnClick = CoolingWaterLevelLow
       end
       object chkFuelOilLeakage03: TCheckBox
         Tag = 2
-        Left = 28
-        Top = 221
+        Left = 33
+        Top = 226
         Width = 14
         Height = 17
         Caption = 'Fuel Oil Leakage'
@@ -1399,12 +1328,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 8
-        OnClick = EngineAlarmMode
+        OnClick = FuelOilLeakage
       end
       object chkFUWASeparator03: TCheckBox
         Tag = 2
-        Left = 28
-        Top = 242
+        Left = 33
+        Top = 248
         Width = 14
         Height = 17
         Caption = 'FU/ WA Separator'
@@ -1415,7 +1344,68 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 9
+        Visible = False
         OnClick = EngineAlarmMode
+      end
+      object Panel10: TPanel
+        Left = 23
+        Top = 53
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 11
+      end
+      object Panel15: TPanel
+        Left = 23
+        Top = 281
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 12
+      end
+      object lblLampOS03: TPanel
+        Left = 34
+        Top = 298
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 13
+      end
+      object lblLampLOPL03: TPanel
+        Left = 34
+        Top = 320
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 14
+      end
+      object lblLampCWTH03: TPanel
+        Left = 34
+        Top = 342
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 15
+      end
+      object lblLampES03: TPanel
+        Left = 34
+        Top = 364
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 16
       end
     end
     object Panel3: TPanel
@@ -1428,11 +1418,11 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       ParentBackground = False
       TabOrder = 5
       object Label5: TLabel
-        Left = 89
-        Top = 4
-        Width = 60
+        Left = 45
+        Top = 6
+        Width = 153
         Height = 19
-        Caption = 'DCU 03'
+        Caption = 'Diesel Generator 3'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
         Font.Height = -16
@@ -1443,80 +1433,16 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
     end
     object pnlDCU4: TPanel
       Left = 815
-      Top = 75
+      Top = 68
       Width = 243
       Height = 405
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
       TabOrder = 6
-      object lblLampOS04: TLabel
-        Left = 26
-        Top = 284
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampLOPL04: TLabel
-        Left = 26
-        Top = 306
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampES04: TLabel
-        Left = 26
-        Top = 328
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampCWTH04: TLabel
-        Left = 26
-        Top = 350
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
       object Label30: TLabel
-        Left = 44
-        Top = 331
+        Left = 55
+        Top = 364
         Width = 91
         Height = 14
         Caption = 'Emergency Stop'
@@ -1530,8 +1456,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label29: TLabel
-        Left = 44
-        Top = 353
+        Left = 55
+        Top = 342
         Width = 141
         Height = 14
         Caption = 'Cooling Water Temp High'
@@ -1545,8 +1471,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label28: TLabel
-        Left = 44
-        Top = 309
+        Left = 55
+        Top = 320
         Width = 96
         Height = 14
         Caption = 'Lub Oil Press Low'
@@ -1560,8 +1486,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label25: TLabel
-        Left = 44
-        Top = 287
+        Left = 55
+        Top = 298
         Width = 65
         Height = 14
         Caption = 'Over Speed'
@@ -1575,7 +1501,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label59: TLabel
-        Left = 42
+        Left = 55
         Top = 74
         Width = 109
         Height = 14
@@ -1588,8 +1514,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label60: TLabel
-        Left = 42
-        Top = 95
+        Left = 55
+        Top = 96
         Width = 121
         Height = 14
         Caption = 'Automatic Start Failed'
@@ -1601,8 +1527,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label61: TLabel
-        Left = 42
-        Top = 116
+        Left = 55
+        Top = 118
         Width = 114
         Height = 14
         Caption = 'Speed Sensor Failure'
@@ -1614,8 +1540,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label62: TLabel
-        Left = 42
-        Top = 137
+        Left = 55
+        Top = 140
         Width = 96
         Height = 14
         Caption = 'Lub Oil Press Low'
@@ -1627,8 +1553,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label63: TLabel
-        Left = 42
-        Top = 158
+        Left = 55
+        Top = 162
         Width = 101
         Height = 14
         Caption = 'Lub Oil Temp High'
@@ -1640,8 +1566,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label64: TLabel
-        Left = 42
-        Top = 179
+        Left = 55
+        Top = 184
         Width = 141
         Height = 14
         Caption = 'Cooling Water Temp High'
@@ -1653,8 +1579,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label65: TLabel
-        Left = 42
-        Top = 200
+        Left = 55
+        Top = 206
         Width = 136
         Height = 14
         Caption = 'Cooling Water Level Low'
@@ -1666,8 +1592,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label66: TLabel
-        Left = 42
-        Top = 221
+        Left = 55
+        Top = 228
         Width = 88
         Height = 14
         Caption = 'Fuel Oil Leakage'
@@ -1679,8 +1605,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label67: TLabel
-        Left = 42
-        Top = 242
+        Left = 55
+        Top = 250
         Width = 100
         Height = 14
         Caption = 'FU/ WA Separator'
@@ -1690,10 +1616,11 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       object Label81: TLabel
-        Left = 42
-        Top = 32
+        Left = 66
+        Top = 26
         Width = 45
         Height = 14
         Caption = 'Standby'
@@ -1705,8 +1632,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label82: TLabel
-        Left = 131
-        Top = 32
+        Left = 155
+        Top = 26
         Width = 37
         Height = 14
         Caption = 'Manual'
@@ -1719,8 +1646,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object rbStandby04: TRadioButton
         Tag = 3
-        Left = 26
-        Top = 32
+        Left = 50
+        Top = 24
         Width = 14
         Height = 17
         Caption = 'Standby'
@@ -1737,8 +1664,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object rbManual04: TRadioButton
         Tag = 3
-        Left = 115
-        Top = 32
+        Left = 139
+        Top = 24
         Width = 14
         Height = 17
         Caption = 'Manual'
@@ -1753,7 +1680,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object chkSupplyVoltageLow04: TCheckBox
         Tag = 3
-        Left = 26
+        Left = 33
         Top = 72
         Width = 14
         Height = 17
@@ -1769,8 +1696,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object chkAutomaticStartFailed04: TCheckBox
         Tag = 3
-        Left = 26
-        Top = 93
+        Left = 33
+        Top = 94
         Width = 14
         Height = 17
         Caption = 'Automatic Start Failed'
@@ -1781,12 +1708,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        OnClick = EngineAlarmMode
+        OnClick = AutomaticStartFailed
       end
       object chkSpeedSensorFailure04: TCheckBox
         Tag = 3
-        Left = 26
-        Top = 115
+        Left = 33
+        Top = 116
         Width = 14
         Height = 17
         Caption = 'Speed Sensor Failure'
@@ -1797,12 +1724,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 3
-        OnClick = ShutdownMode
+        OnClick = SpeedSensorFailure
       end
       object chkLubOilPressLow04: TCheckBox
         Tag = 3
-        Left = 26
-        Top = 136
+        Left = 33
+        Top = 138
         Width = 14
         Height = 17
         Caption = 'Lub Oil Press Low'
@@ -1813,12 +1740,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 4
-        OnClick = ShutdownMode
+        OnClick = LubOilPressLow
       end
       object chkLubOilTempHigh04: TCheckBox
         Tag = 3
-        Left = 26
-        Top = 157
+        Left = 33
+        Top = 160
         Width = 14
         Height = 17
         Caption = 'Lub Oil Temp High'
@@ -1833,8 +1760,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object chkCoolingWaterTempHigh04: TCheckBox
         Tag = 3
-        Left = 26
-        Top = 178
+        Left = 33
+        Top = 182
         Width = 14
         Height = 17
         Caption = 'Cooling Water Temp High'
@@ -1845,12 +1772,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 6
-        OnClick = EngineAlarmMode
+        OnClick = CoolingWaterTempHigh
       end
       object chkCoolingWaterLevelLow04: TCheckBox
         Tag = 3
-        Left = 26
-        Top = 199
+        Left = 33
+        Top = 204
         Width = 14
         Height = 17
         Caption = 'Cooling Water Level Low'
@@ -1861,12 +1788,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 7
-        OnClick = EngineAlarmMode
+        OnClick = CoolingWaterLevelLow
       end
       object chkFuelOilLeakage04: TCheckBox
         Tag = 3
-        Left = 26
-        Top = 242
+        Left = 33
+        Top = 248
         Width = 14
         Height = 17
         Caption = 'Fuel Oil Leakage'
@@ -1877,12 +1804,13 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 9
+        Visible = False
         OnClick = EngineAlarmMode
       end
       object chkFUWASeparator04: TCheckBox
         Tag = 3
-        Left = 26
-        Top = 221
+        Left = 33
+        Top = 226
         Width = 14
         Height = 17
         Caption = 'FU/ WA Separator'
@@ -1893,7 +1821,67 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 8
-        OnClick = EngineAlarmMode
+        OnClick = FuelOilLeakage
+      end
+      object Panel11: TPanel
+        Left = 23
+        Top = 53
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 11
+      end
+      object Panel16: TPanel
+        Left = 23
+        Top = 281
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 12
+      end
+      object lblLampOS04: TPanel
+        Left = 34
+        Top = 298
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 13
+      end
+      object lblLampLOPL04: TPanel
+        Left = 34
+        Top = 320
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 14
+      end
+      object lblLampCWTH04: TPanel
+        Left = 34
+        Top = 342
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 15
+      end
+      object lblLampES04: TPanel
+        Left = 34
+        Top = 364
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 16
       end
     end
     object Panel4: TPanel
@@ -1906,11 +1894,11 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       ParentBackground = False
       TabOrder = 7
       object Label9: TLabel
-        Left = 89
-        Top = 4
-        Width = 60
+        Left = 45
+        Top = 6
+        Width = 153
         Height = 19
-        Caption = 'DCU 04'
+        Caption = 'Diesel Generator 4'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
         Font.Height = -16
@@ -1921,7 +1909,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
     end
     object pnlEMERGENCY: TPanel
       Left = 1077
-      Top = 75
+      Top = 68
       Width = 243
       Height = 405
       BevelOuter = bvNone
@@ -1929,8 +1917,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       ParentBackground = False
       TabOrder = 8
       object Label36: TLabel
-        Left = 44
-        Top = 309
+        Left = 55
+        Top = 298
         Width = 65
         Height = 14
         Caption = 'Over Speed'
@@ -1944,8 +1932,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label39: TLabel
-        Left = 44
-        Top = 329
+        Left = 55
+        Top = 320
         Width = 96
         Height = 14
         Caption = 'Lub Oil Press Low'
@@ -1959,8 +1947,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label40: TLabel
-        Left = 44
-        Top = 349
+        Left = 55
+        Top = 342
         Width = 141
         Height = 14
         Caption = 'Cooling Water Temp High'
@@ -1973,56 +1961,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentColor = False
         ParentFont = False
       end
-      object lblLampCWTH05: TLabel
-        Left = 26
-        Top = 346
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampLOPL05: TLabel
-        Left = 26
-        Top = 306
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblLampOS05: TLabel
-        Left = 26
-        Top = 326
-        Width = 12
-        Height = 18
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Georgia'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
       object Label68: TLabel
-        Left = 42
+        Left = 55
         Top = 74
         Width = 109
         Height = 14
@@ -2035,8 +1975,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label69: TLabel
-        Left = 42
-        Top = 95
+        Left = 55
+        Top = 96
         Width = 121
         Height = 14
         Caption = 'Automatic Start Failed'
@@ -2048,8 +1988,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label70: TLabel
-        Left = 42
-        Top = 116
+        Left = 55
+        Top = 118
         Width = 114
         Height = 14
         Caption = 'Speed Sensor Failure'
@@ -2061,8 +2001,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label71: TLabel
-        Left = 42
-        Top = 137
+        Left = 55
+        Top = 140
         Width = 96
         Height = 14
         Caption = 'Lub Oil Press Low'
@@ -2074,8 +2014,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label72: TLabel
-        Left = 42
-        Top = 158
+        Left = 55
+        Top = 162
         Width = 101
         Height = 14
         Caption = 'Lub Oil Temp High'
@@ -2087,8 +2027,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label73: TLabel
-        Left = 42
-        Top = 179
+        Left = 55
+        Top = 184
         Width = 141
         Height = 14
         Caption = 'Cooling Water Temp High'
@@ -2100,8 +2040,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label74: TLabel
-        Left = 42
-        Top = 200
+        Left = 55
+        Top = 206
         Width = 136
         Height = 14
         Caption = 'Cooling Water Level Low'
@@ -2113,8 +2053,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label75: TLabel
-        Left = 42
-        Top = 221
+        Left = 55
+        Top = 228
         Width = 88
         Height = 14
         Caption = 'Fuel Oil Leakage'
@@ -2126,8 +2066,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label76: TLabel
-        Left = 42
-        Top = 242
+        Left = 55
+        Top = 250
         Width = 100
         Height = 14
         Caption = 'FU/ WA Separator'
@@ -2137,36 +2077,11 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-      end
-      object Label77: TLabel
-        Left = 42
-        Top = 262
-        Width = 81
-        Height = 14
-        Caption = 'Fault Page Led'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label78: TLabel
-        Left = 42
-        Top = 281
-        Width = 152
-        Height = 14
-        Caption = '24V DC Int Pow Sup Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
+        Visible = False
       end
       object Label83: TLabel
-        Left = 42
-        Top = 32
+        Left = 66
+        Top = 26
         Width = 45
         Height = 14
         Caption = 'Standby'
@@ -2178,8 +2093,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label84: TLabel
-        Left = 131
-        Top = 32
+        Left = 155
+        Top = 26
         Width = 37
         Height = 14
         Caption = 'Manual'
@@ -2192,8 +2107,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object rbStandby05: TRadioButton
         Tag = 4
-        Left = 26
-        Top = 32
+        Left = 50
+        Top = 25
         Width = 14
         Height = 17
         Caption = 'Standby'
@@ -2210,8 +2125,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object rbManual05: TRadioButton
         Tag = 4
-        Left = 115
-        Top = 32
+        Left = 139
+        Top = 25
         Width = 14
         Height = 17
         Caption = 'Manual'
@@ -2221,12 +2136,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 12
+        TabOrder = 10
         OnClick = NotStandbyMode
       end
       object chkSupplyVoltageLow05: TCheckBox
         Tag = 4
-        Left = 26
+        Left = 33
         Top = 72
         Width = 14
         Height = 17
@@ -2242,8 +2157,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object chkAutomaticStartFailed05: TCheckBox
         Tag = 4
-        Left = 26
-        Top = 93
+        Left = 33
+        Top = 94
         Width = 14
         Height = 17
         Caption = 'Automatic Start Failed'
@@ -2254,12 +2169,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        OnClick = DCPowMode
+        OnClick = AutomaticStartFailed
       end
       object chkSpeedSensorFailure05: TCheckBox
         Tag = 4
-        Left = 26
-        Top = 115
+        Left = 33
+        Top = 116
         Width = 14
         Height = 17
         Caption = 'Speed Sensor Failure'
@@ -2270,12 +2185,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 3
-        OnClick = ShutdownMode
+        OnClick = SpeedSensorFailure
       end
       object chkLubOilPressLow05: TCheckBox
         Tag = 4
-        Left = 26
-        Top = 136
+        Left = 33
+        Top = 138
         Width = 14
         Height = 17
         Caption = 'Lub Oil Press Low'
@@ -2286,12 +2201,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 4
-        OnClick = ShutdownMode
+        OnClick = LubOilPressLow
       end
       object chkLubOilTempHigh05: TCheckBox
         Tag = 4
-        Left = 26
-        Top = 157
+        Left = 33
+        Top = 160
         Width = 14
         Height = 17
         Caption = 'Lub Oil Temp High'
@@ -2306,8 +2221,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       end
       object chkCoolingWaterTempHigh05: TCheckBox
         Tag = 4
-        Left = 26
-        Top = 178
+        Left = 33
+        Top = 182
         Width = 14
         Height = 17
         Caption = 'Cooling Water Temp High'
@@ -2318,12 +2233,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 6
-        OnClick = EngineAlarmMode
+        OnClick = CoolingWaterTempHigh
       end
       object chkCoolingWaterLevelLow05: TCheckBox
         Tag = 4
-        Left = 26
-        Top = 199
+        Left = 33
+        Top = 204
         Width = 14
         Height = 17
         Caption = 'Cooling Water Level Low'
@@ -2334,12 +2249,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 7
-        OnClick = EngineAlarmMode
+        OnClick = CoolingWaterLevelLow
       end
       object chkFuelOilLeakage05: TCheckBox
         Tag = 4
-        Left = 26
-        Top = 221
+        Left = 33
+        Top = 226
         Width = 14
         Height = 17
         Caption = 'Fuel Oil Leakage'
@@ -2350,12 +2265,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 8
-        OnClick = EngineAlarmMode
+        OnClick = FuelOilLeakage
       end
       object chkFUWASeparator05: TCheckBox
         Tag = 4
-        Left = 26
-        Top = 242
+        Left = 33
+        Top = 248
         Width = 14
         Height = 17
         Caption = 'FU/ WA Separator'
@@ -2366,37 +2281,58 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         Font.Style = []
         ParentFont = False
         TabOrder = 9
+        Visible = False
         OnClick = EngineAlarmMode
       end
-      object CheckBox11: TCheckBox
-        Tag = 3
-        Left = 26
-        Top = 260
-        Width = 14
-        Height = 17
-        Caption = 'Fault Page Led'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 10
-      end
-      object CheckBox10: TCheckBox
-        Left = 26
-        Top = 279
-        Width = 14
-        Height = 17
-        Caption = '24V DC Int Pow Sup Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
+      object Panel12: TPanel
+        Left = 23
+        Top = 53
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
         TabOrder = 11
-        OnClick = DCPowMode
+      end
+      object Panel17: TPanel
+        Left = 23
+        Top = 281
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 12
+      end
+      object lblLampOS05: TPanel
+        Left = 34
+        Top = 298
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 13
+      end
+      object lblLampLOPL05: TPanel
+        Left = 34
+        Top = 320
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 14
+      end
+      object lblLampCWTH05: TPanel
+        Left = 34
+        Top = 342
+        Width = 12
+        Height = 14
+        BevelOuter = bvNone
+        Color = clMedGray
+        ParentBackground = False
+        TabOrder = 15
       end
     end
     object Panel5: TPanel
@@ -2409,11 +2345,11 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       ParentBackground = False
       TabOrder = 9
       object Label11: TLabel
-        Left = 68
-        Top = 4
-        Width = 102
+        Left = 6
+        Top = 6
+        Width = 232
         Height = 19
-        Caption = 'EMERGENCY'
+        Caption = 'Diesel Generator Emergency'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
         Font.Height = -16
@@ -2806,28 +2742,15 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
     object pnlGENSYS1: TPanel
       Left = 30
       Top = 563
-      Width = 259
-      Height = 124
+      Width = 243
+      Height = 153
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
       TabOrder = 13
-      object Label20: TLabel
-        Left = 82
-        Top = 11
-        Width = 90
-        Height = 19
-        Caption = 'GENSYS 01'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
       object Label85: TLabel
-        Left = 50
-        Top = 50
+        Left = 49
+        Top = 23
         Width = 81
         Height = 14
         Caption = 'Can Bus Failure'
@@ -2839,8 +2762,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object Label86: TLabel
-        Left = 50
-        Top = 82
+        Left = 49
+        Top = 45
         Width = 167
         Height = 14
         Caption = '24V DC Int Pow Supply Failure'
@@ -2852,8 +2775,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         ParentFont = False
       end
       object chkCanBusFailure01: TCheckBox
-        Left = 34
-        Top = 48
+        Left = 27
+        Top = 23
         Width = 14
         Height = 17
         Caption = 'Can Bus Failure'
@@ -2867,8 +2790,8 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         OnClick = CanBusMode
       end
       object CheckBox2: TCheckBox
-        Left = 34
-        Top = 80
+        Left = 27
+        Top = 44
         Width = 14
         Height = 17
         Font.Charset = ANSI_CHARSET
@@ -2880,309 +2803,12 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         TabOrder = 1
         OnClick = DCPowMode
       end
-    end
-    object pnlGENSYS2: TPanel
-      Left = 292
-      Top = 563
-      Width = 259
-      Height = 124
-      BevelOuter = bvNone
-      Color = 3749426
-      ParentBackground = False
-      TabOrder = 14
-      object Label21: TLabel
-        Left = 82
-        Top = 11
-        Width = 90
-        Height = 19
-        Caption = 'GENSYS 02'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label87: TLabel
-        Left = 50
-        Top = 50
-        Width = 81
-        Height = 14
-        Caption = 'Can Bus Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label88: TLabel
-        Left = 50
-        Top = 82
-        Width = 167
-        Height = 14
-        Caption = '24V DC Int Pow Supply Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object chkCanBusFailure02: TCheckBox
-        Tag = 1
-        Left = 34
-        Top = 48
-        Width = 14
-        Height = 17
-        Caption = 'Can Bus Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        OnClick = CanBusMode
-      end
-      object CheckBox4: TCheckBox
-        Tag = 1
-        Left = 34
-        Top = 80
-        Width = 14
-        Height = 17
-        Caption = '24V DC Int Pow Supply Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-        OnClick = DCPowMode
-      end
-    end
-    object pnlGENSYS3: TPanel
-      Left = 30
-      Top = 689
-      Width = 259
-      Height = 124
-      BevelOuter = bvNone
-      Color = 3749426
-      ParentBackground = False
-      TabOrder = 15
-      object Label22: TLabel
-        Left = 66
-        Top = 11
-        Width = 90
-        Height = 19
-        Caption = 'GENSYS 03'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label89: TLabel
-        Left = 50
-        Top = 50
-        Width = 81
-        Height = 14
-        Caption = 'Can Bus Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label90: TLabel
-        Left = 50
-        Top = 82
-        Width = 167
-        Height = 14
-        Caption = '24V DC Int Pow Supply Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object chkCanBusFailure03: TCheckBox
-        Tag = 2
-        Left = 34
-        Top = 48
-        Width = 14
-        Height = 17
-        Caption = 'Can Bus Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        OnClick = CanBusMode
-      end
-      object CheckBox6: TCheckBox
-        Tag = 2
-        Left = 34
-        Top = 80
-        Width = 14
-        Height = 17
-        Caption = '24V DC Int Pow Supply Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-        OnClick = DCPowMode
-      end
-    end
-    object pnlGENSYS4: TPanel
-      Left = 292
-      Top = 689
-      Width = 259
-      Height = 124
-      BevelOuter = bvNone
-      Color = 3749426
-      ParentBackground = False
-      TabOrder = 16
-      object Label23: TLabel
-        Left = 82
-        Top = 11
-        Width = 90
-        Height = 19
-        Caption = 'GENSYS 04'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label91: TLabel
-        Left = 50
-        Top = 50
-        Width = 81
-        Height = 14
-        Caption = 'Can Bus Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label92: TLabel
-        Left = 50
-        Top = 82
-        Width = 167
-        Height = 14
-        Caption = '24V DC Int Pow Supply Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object chkCanBusFailure04: TCheckBox
-        Tag = 3
-        Left = 34
-        Top = 48
-        Width = 14
-        Height = 17
-        Caption = 'Can Bus Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        OnClick = CanBusMode
-      end
-      object CheckBox8: TCheckBox
-        Tag = 3
-        Left = 34
-        Top = 80
-        Width = 14
-        Height = 17
-        Caption = '24V DC Int Pow Supply Failure'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-        OnClick = DCPowMode
-      end
-    end
-    object Panel6: TPanel
-      Left = 625
-      Top = 563
-      Width = 300
-      Height = 250
-      BevelOuter = bvNone
-      Color = 3749426
-      ParentBackground = False
-      TabOrder = 17
       object btnCbReset01: TVrDemoButton
-        Left = 38
-        Top = 22
-        Width = 219
+        Left = 22
+        Top = 102
+        Width = 198
         Height = 34
         Hint = 'Circuit Breaker Reset Gensys 1'
-        FontEnter.Charset = ANSI_CHARSET
-        FontEnter.Color = clBlack
-        FontEnter.Height = -13
-        FontEnter.Name = 'Arial'
-        FontEnter.Style = [fsBold]
-        FontLeave.Charset = ANSI_CHARSET
-        FontLeave.Color = clBlack
-        FontLeave.Height = -11
-        FontLeave.Name = 'Arial'
-        FontLeave.Style = [fsBold]
-        Font3D.ShadowColor = clGray
-        Caption = 'Circuit Breaker Reset'
-        TabOrder = 0
-        OnClick = btnResetClick
-      end
-      object btnCbReset02: TVrDemoButton
-        Tag = 1
-        Left = 38
-        Top = 64
-        Width = 219
-        Height = 34
-        Hint = 'Circuit Breaker Reset Gensys 2'
-        FontEnter.Charset = ANSI_CHARSET
-        FontEnter.Color = clBlack
-        FontEnter.Height = -13
-        FontEnter.Name = 'Arial'
-        FontEnter.Style = [fsBold]
-        FontLeave.Charset = ANSI_CHARSET
-        FontLeave.Color = clBlack
-        FontLeave.Height = -11
-        FontLeave.Name = 'Arial'
-        FontLeave.Style = [fsBold]
-        Font3D.ShadowColor = clGray
-        Caption = 'Circuit Breaker Reset'
-        TabOrder = 1
-        OnClick = btnResetClick
-      end
-      object btnCbReset03: TVrDemoButton
-        Tag = 2
-        Left = 38
-        Top = 148
-        Width = 219
-        Height = 34
-        Hint = 'Circuit Breaker Reset Gensys 3'
         FontEnter.Charset = ANSI_CHARSET
         FontEnter.Color = clBlack
         FontEnter.Height = -13
@@ -3198,11 +2824,199 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         TabOrder = 2
         OnClick = btnResetClick
       end
+      object Panel19: TPanel
+        Left = 22
+        Top = 80
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 3
+      end
+    end
+    object pnlGENSYS2: TPanel
+      Left = 292
+      Top = 563
+      Width = 243
+      Height = 153
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 14
+      object Label87: TLabel
+        Left = 49
+        Top = 23
+        Width = 81
+        Height = 14
+        Caption = 'Can Bus Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label88: TLabel
+        Left = 49
+        Top = 45
+        Width = 167
+        Height = 14
+        Caption = '24V DC Int Pow Supply Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object chkCanBusFailure02: TCheckBox
+        Tag = 1
+        Left = 27
+        Top = 22
+        Width = 14
+        Height = 17
+        Caption = 'Can Bus Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = CanBusMode
+      end
+      object CheckBox4: TCheckBox
+        Tag = 1
+        Left = 27
+        Top = 44
+        Width = 14
+        Height = 17
+        Caption = '24V DC Int Pow Supply Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = DCPowMode
+      end
+      object Panel23: TPanel
+        Left = 23
+        Top = 80
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 2
+      end
+      object btnCbReset02: TVrDemoButton
+        Tag = 1
+        Left = 23
+        Top = 102
+        Width = 198
+        Height = 34
+        Hint = 'Circuit Breaker Reset Gensys 2'
+        FontEnter.Charset = ANSI_CHARSET
+        FontEnter.Color = clBlack
+        FontEnter.Height = -13
+        FontEnter.Name = 'Arial'
+        FontEnter.Style = [fsBold]
+        FontLeave.Charset = ANSI_CHARSET
+        FontLeave.Color = clBlack
+        FontLeave.Height = -11
+        FontLeave.Name = 'Arial'
+        FontLeave.Style = [fsBold]
+        Font3D.ShadowColor = clGray
+        Caption = 'Circuit Breaker Reset'
+        TabOrder = 3
+        OnClick = btnResetClick
+      end
+    end
+    object pnlGENSYS3: TPanel
+      Left = 554
+      Top = 563
+      Width = 243
+      Height = 153
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 15
+      object Label89: TLabel
+        Left = 49
+        Top = 23
+        Width = 81
+        Height = 14
+        Caption = 'Can Bus Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label90: TLabel
+        Left = 49
+        Top = 45
+        Width = 167
+        Height = 14
+        Caption = '24V DC Int Pow Supply Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object chkCanBusFailure03: TCheckBox
+        Tag = 2
+        Left = 27
+        Top = 22
+        Width = 14
+        Height = 17
+        Caption = 'Can Bus Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = CanBusMode
+      end
+      object CheckBox6: TCheckBox
+        Tag = 2
+        Left = 27
+        Top = 44
+        Width = 14
+        Height = 17
+        Caption = '24V DC Int Pow Supply Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = DCPowMode
+      end
+      object Panel24: TPanel
+        Left = 23
+        Top = 80
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 2
+      end
       object btnCbReset04: TVrDemoButton
         Tag = 3
-        Left = 38
-        Top = 106
-        Width = 219
+        Left = 23
+        Top = 102
+        Width = 198
         Height = 34
         Hint = 'Circuit Breaker Reset Gensys 4'
         FontEnter.Charset = ANSI_CHARSET
@@ -3220,11 +3034,147 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         TabOrder = 3
         OnClick = btnResetClick
       end
+    end
+    object pnlGENSYS4: TPanel
+      Left = 815
+      Top = 563
+      Width = 243
+      Height = 153
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 16
+      object Label91: TLabel
+        Left = 49
+        Top = 23
+        Width = 81
+        Height = 14
+        Caption = 'Can Bus Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label92: TLabel
+        Left = 49
+        Top = 45
+        Width = 167
+        Height = 14
+        Caption = '24V DC Int Pow Supply Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object chkCanBusFailure04: TCheckBox
+        Tag = 3
+        Left = 27
+        Top = 22
+        Width = 14
+        Height = 17
+        Caption = 'Can Bus Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = CanBusMode
+      end
+      object CheckBox8: TCheckBox
+        Tag = 3
+        Left = 27
+        Top = 44
+        Width = 14
+        Height = 17
+        Caption = '24V DC Int Pow Supply Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = DCPowMode
+      end
+      object Panel25: TPanel
+        Left = 23
+        Top = 80
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 2
+      end
+      object btnCbReset03: TVrDemoButton
+        Tag = 2
+        Left = 23
+        Top = 102
+        Width = 198
+        Height = 34
+        Hint = 'Circuit Breaker Reset Gensys 3'
+        FontEnter.Charset = ANSI_CHARSET
+        FontEnter.Color = clBlack
+        FontEnter.Height = -13
+        FontEnter.Name = 'Arial'
+        FontEnter.Style = [fsBold]
+        FontLeave.Charset = ANSI_CHARSET
+        FontLeave.Color = clBlack
+        FontLeave.Height = -11
+        FontLeave.Name = 'Arial'
+        FontLeave.Style = [fsBold]
+        Font3D.ShadowColor = clGray
+        Caption = 'Circuit Breaker Reset'
+        TabOrder = 3
+        OnClick = btnResetClick
+      end
+    end
+    object Panel6: TPanel
+      Left = 1077
+      Top = 563
+      Width = 243
+      Height = 153
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 17
+      object Label77: TLabel
+        Left = 49
+        Top = 23
+        Width = 81
+        Height = 14
+        Caption = 'Fault Page Led'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label78: TLabel
+        Left = 49
+        Top = 45
+        Width = 152
+        Height = 14
+        Caption = '24V DC Int Pow Sup Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
       object btnCbReset05: TVrDemoButton
         Tag = 4
-        Left = 38
-        Top = 190
-        Width = 219
+        Left = 23
+        Top = 102
+        Width = 198
         Height = 34
         Hint = 'Circuit Breaker Reset Gensys 4'
         FontEnter.Charset = ANSI_CHARSET
@@ -3239,24 +3189,64 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         FontLeave.Style = [fsBold]
         Font3D.ShadowColor = clGray
         Caption = 'Circuit Breaker Reset'
-        TabOrder = 4
+        TabOrder = 0
         OnClick = btnResetClick
+      end
+      object CheckBox10: TCheckBox
+        Left = 27
+        Top = 21
+        Width = 14
+        Height = 17
+        Caption = '24V DC Int Pow Sup Failure'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = DCPowMode
+      end
+      object CheckBox11: TCheckBox
+        Tag = 3
+        Left = 27
+        Top = 43
+        Width = 14
+        Height = 17
+        Caption = 'Fault Page Led'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+      end
+      object Panel29: TPanel
+        Left = 23
+        Top = 80
+        Width = 198
+        Height = 2
+        BevelOuter = bvNone
+        Color = clGray
+        ParentBackground = False
+        TabOrder = 3
       end
     end
     object Panel7: TPanel
-      Left = 928
-      Top = 564
-      Width = 392
-      Height = 249
+      Left = 30
+      Top = 749
+      Width = 504
+      Height = 64
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
       TabOrder = 18
       object btnforwardNonEssent: TVrDemoButton
         Tag = 5
-        Left = 30
-        Top = 53
-        Width = 329
+        Left = 15
+        Top = 12
+        Width = 474
         Height = 40
         Hint = 'Switchboard FWD'
         FontEnter.Charset = ANSI_CHARSET
@@ -3274,33 +3264,113 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         TabOrder = 0
         OnClick = btnResetClick
       end
-      object btnEmergencyNonEssent: TVrDemoButton
-        Tag = 7
-        Left = 30
-        Top = 153
-        Width = 329
-        Height = 40
-        Hint = 'Switchboard Emergency'
-        FontEnter.Charset = ANSI_CHARSET
-        FontEnter.Color = clBlack
-        FontEnter.Height = -13
-        FontEnter.Name = 'Arial'
-        FontEnter.Style = [fsBold]
-        FontLeave.Charset = ANSI_CHARSET
-        FontLeave.Color = clBlack
-        FontLeave.Height = -11
-        FontLeave.Name = 'Arial'
-        FontLeave.Style = [fsBold]
-        Font3D.ShadowColor = clGray
-        Caption = 'NON ESSENT LOAD TRIP/REDUCT EMERGENCY'
-        TabOrder = 1
-        OnClick = btnResetClick
+    end
+    object Panel18: TPanel
+      Left = 30
+      Top = 525
+      Width = 243
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 19
+      object Label93: TLabel
+        Left = 81
+        Top = 6
+        Width = 80
+        Height = 19
+        Caption = 'GENSYS 1'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
+    end
+    object Panel20: TPanel
+      Left = 292
+      Top = 525
+      Width = 243
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 20
+      object Label20: TLabel
+        Left = 81
+        Top = 6
+        Width = 80
+        Height = 19
+        Caption = 'GENSYS 2'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
+    object Panel21: TPanel
+      Left = 554
+      Top = 525
+      Width = 243
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 21
+      object Label21: TLabel
+        Left = 81
+        Top = 6
+        Width = 80
+        Height = 19
+        Caption = 'GENSYS 3'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
+    object Panel22: TPanel
+      Left = 815
+      Top = 526
+      Width = 243
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 22
+      object Label22: TLabel
+        Left = 81
+        Top = 6
+        Width = 80
+        Height = 19
+        Caption = 'GENSYS 4'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
+    object Panel26: TPanel
+      Left = 554
+      Top = 749
+      Width = 504
+      Height = 64
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 23
       object btnAfterNonEssent: TVrDemoButton
         Tag = 6
-        Left = 30
-        Top = 103
-        Width = 329
+        Left = 15
+        Top = 12
+        Width = 474
         Height = 40
         Hint = 'Switchboard AFT'
         FontEnter.Charset = ANSI_CHARSET
@@ -3315,15 +3385,70 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
         FontLeave.Style = [fsBold]
         Font3D.ShadowColor = clGray
         Caption = 'NON ESSENT LOAD TRIP/REDUCT AFTER RESET'
-        TabOrder = 2
+        TabOrder = 0
         OnClick = btnResetClick
+      end
+    end
+    object Panel27: TPanel
+      Left = 1077
+      Top = 749
+      Width = 243
+      Height = 64
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 24
+      object btnEmergencyNonEssent: TVrDemoButton
+        Tag = 7
+        Left = 16
+        Top = 12
+        Width = 212
+        Height = 40
+        Hint = 'Switchboard Emergency'
+        FontEnter.Charset = ANSI_CHARSET
+        FontEnter.Color = clBlack
+        FontEnter.Height = -13
+        FontEnter.Name = 'Arial'
+        FontEnter.Style = [fsBold]
+        FontLeave.Charset = ANSI_CHARSET
+        FontLeave.Color = clBlack
+        FontLeave.Height = -11
+        FontLeave.Name = 'Arial'
+        FontLeave.Style = [fsBold]
+        Font3D.ShadowColor = clGray
+        Caption = 'NSL TRIP/REDUCT EMERGENCY'
+        TabOrder = 0
+        OnClick = btnResetClick
+      end
+    end
+    object Panel28: TPanel
+      Left = 1077
+      Top = 526
+      Width = 243
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 25
+      object Label23: TLabel
+        Left = 71
+        Top = 6
+        Width = 102
+        Height = 19
+        Caption = 'EMERGENCY'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
     end
   end
   object pm1: TPopupMenu
     TrackButton = tbLeftButton
-    Left = 1401
-    Top = 819
+    Left = 1337
+    Top = 435
     object AlarmOn1: TMenuItem
       Tag = 1
       Caption = 'Alarm On'
@@ -3337,7 +3462,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
   end
   object tmrDCU01: TTimer
     OnTimer = tmrDCU01Timer
-    Left = 1440
-    Top = 818
+    Left = 1320
+    Top = 522
   end
 end

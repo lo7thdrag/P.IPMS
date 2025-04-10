@@ -65,7 +65,8 @@ type
     function CekLubOilPressLow : Boolean;
     function CekCoolWaterTempHigh : Boolean;
 
-    procedure SetAlarm;
+    procedure CekEngineAlarm;
+    procedure CekShutdownAlarm;
 
     procedure SetPower(const Value: Double);
     procedure SetFrequency(const Value: Double);
@@ -89,15 +90,17 @@ type
     procedure SetEmergencyStop(const Value : Boolean);
     procedure SetEmergencyStart(const Value : Boolean);
 
-    procedure SetNotStandby(const Value : Boolean);
     procedure SetCanBusFailure(const Value : Boolean);
     procedure SetDCPowFailure(const Value : Boolean);
-    procedure SetEngineAlarm(const Value : Boolean);
-    procedure SetShutDown(const Value : Boolean);
     procedure SetFaultPageLed(const Value : Boolean);
     procedure SetFailureCBClosed(const Value : Boolean);
 
     procedure SetUVW(const ValU, ValV, ValW: Double);
+
+    {$REGION ' Set Property Generator '}
+    procedure SetNotStandby(const Value : Boolean);
+    procedure SetEngineAlarm(const Value : Boolean);
+    procedure SetShutDown(const Value : Boolean);
 
     procedure SetMeasPowFailure(const Value : Boolean);
     procedure SetAutStartFailure(const Value : Boolean);
@@ -107,9 +110,11 @@ type
     procedure SetCoolWaterTempHighAlrm(const Value : Boolean);
     procedure SetCoolWaterLevelLow(const Value : Boolean);
     procedure SetFuelOilLeakage(const Value : Boolean);
+
     procedure SetSpeedSensorFailureShutdown(const Value : Boolean);
     procedure SetLubOilPressLowShutdown(const Value : Boolean);
     procedure SetCoolWaterTempHighShutdown(const Value : Boolean);
+    {$ENDREGION}
 
   public
     IsConnectToMsb : Boolean;
@@ -215,8 +220,6 @@ function TGenerator.CekCoolWaterTempHigh: Boolean;
 begin
   if FIsCoolWaterTempHighAlrm then
   begin
-    EngineAlarm := True;
-
     if FDelayCoolWaterTempHighAlrm > 10 then
     begin
       CoolWaterTempHighShutdown:= True;
@@ -237,8 +240,6 @@ function TGenerator.CekLubOilPressLow: Boolean;
 begin
   if FIsLubOilPressLowAlrm then
   begin
-    EngineAlarm := True;
-
     if FDelayLubOilPressLowAlrm > 10 then
     begin
       LubOilPressLowShutdown := True;
@@ -259,8 +260,6 @@ function TGenerator.CekSpeedSensorFailure: Boolean;
 begin
   if FIsSpeedSensorFailureAlrm then
   begin
-    EngineAlarm := True;
-
     if FDelaySpeedSensorFailureAlrm > 500 then
     begin
       SpeedSensorFailureShutdown := True;
@@ -386,6 +385,251 @@ begin
 
 end;
 
+procedure TGenerator.NormalStartGenerator(const aDt : Double);
+var
+  tempVolt : Double;
+begin
+  {Ryu : setiap 1 detik}
+  FStartDelay := FStartDelay + aDt;
+  if FStartDelay > 1 then
+  begin
+    FStartDelay := 0;
+
+    if Voltage < VoltageMax then
+    begin
+      if Voltage < 247 then
+      begin
+        GeneratorState := Ord(gsWarmUp);//2;{Warm Up}
+        CosPhi := 0;
+        Frequency := 5815;
+        Voltage := (random(10)+ 247);
+
+        SetUVW(32, 31, 32);
+      end
+      else
+      begin
+        {set naik nilai Voltage}
+        tempVolt := Voltage + (random(10)+ 50);
+
+        if tempVolt < VoltageMax  then
+        begin
+          Voltage := tempVolt;
+          Frequency := 5845;
+        end
+        else
+        begin
+          GeneratorState := 4;{Engine Ready}
+          Frequency := 5965;
+          Voltage := VoltageMax;
+          if (CosPhi + (random(4)+ 10)) < 81 then
+            CosPhi  := CosPhi + (random(4)+ 10);
+        end;
+      end;
+    end
+    else
+    begin
+      GeneratorState := Ord(gsGenReady);//5; {Gen Ready}
+      GeneratorSupplied := True;
+
+      Voltage := VoltageMax + random(2);
+
+      FrequencyState  := Frequency;
+      VoltageState    := Voltage;
+      CosPhiState     := CosPhi;
+      PowerState      := 0;
+
+      SetUVW(71, 73, 70);
+    end;
+  end
+end;
+
+{$REGION ' Set Property Generator '}
+
+procedure TGenerator.SetNotStandby(const Value: Boolean);
+begin
+  if FIsNotStandby = Value then
+    exit;
+  FIsNotStandby := Value;
+  Listener.TriggerEvents(Self,epPMSNotStandby,Value);
+end;
+
+procedure TGenerator.SetEngineAlarm(const Value: Boolean);
+begin
+  if FIsEngineAlarm = Value then
+    exit;
+  FIsEngineAlarm := Value;
+  Listener.TriggerEvents(Self,epPMSEngineAlarm,Value);
+end;
+
+procedure TGenerator.SetShutDown(const Value: Boolean);
+begin
+  if FIsShutDown = Value then
+    exit;
+  FIsShutDown := Value;
+  Listener.TriggerEvents(Self,epPMSShutDown,Value);
+end;
+
+procedure TGenerator.SetMeasPowFailure(const Value: Boolean);
+begin
+  if FIsMeasPowFailure = Value then
+    exit;
+  FIsMeasPowFailure := Value;
+  Listener.TriggerEvents(Self,epPMSMeasPowFailure,Value);
+end;
+
+procedure TGenerator.SetAutStartFailure(const Value: Boolean);
+begin
+  if FIsAutStartFailure = Value then
+    exit;
+
+  FIsAutStartFailure := Value;
+  Listener.TriggerEvents(Self,epPMSAutStartFailure,Value);
+end;
+
+procedure TGenerator.SetSpeedSensorFailureAlrm(const Value: Boolean);
+begin
+  if FIsSpeedSensorFailureAlrm = Value then
+    exit;
+  FIsSpeedSensorFailureAlrm := Value;
+  Listener.TriggerEvents(Self,epPMSSpeedSensorFailureAlrm,Value);
+end;
+
+procedure TGenerator.SetLubOilPressLowAlrm(const Value: Boolean);
+begin
+  if FIsLubOilPressLowAlrm = Value then
+    exit;
+  FIsLubOilPressLowAlrm := Value;
+  Listener.TriggerEvents(Self,epPMSLubOilPressLowAlrm,Value);
+end;
+
+procedure TGenerator.SetLubOilTempHigh(const Value: Boolean);
+begin
+  if FIsLubOilTempHigh = Value then
+    exit;
+  FIsLubOilTempHigh := Value;
+  Listener.TriggerEvents(Self,epPMSLubOilTempHigh,Value);
+end;
+
+procedure TGenerator.SetCoolWaterTempHighAlrm(const Value: Boolean);
+begin
+  if FIsCoolWaterTempHighAlrm = Value then
+    exit;
+  FIsCoolWaterTempHighAlrm := Value;
+  Listener.TriggerEvents(Self,epPMSCoolWaterTempHighAlrm,Value);
+end;
+
+procedure TGenerator.SetCoolWaterLevelLow(const Value: Boolean);
+begin
+  if FIsCoolWaterLevelLow = Value then
+    exit;
+  FIsCoolWaterLevelLow := Value;
+  Listener.TriggerEvents(Self,epPMSCoolWaterLevelLow,Value);
+end;
+
+procedure TGenerator.SetFuelOilLeakage(const Value: Boolean);
+begin
+  if FIsFuelOilLeakage = Value then
+    exit;
+  FIsFuelOilLeakage := Value;
+  Listener.TriggerEvents(Self,epPMSFuelOilLeakage,Value);
+end;
+
+procedure TGenerator.SetSpeedSensorFailureShutdown(const Value: Boolean);
+begin
+  if FIsSpeedSensorFailureShutdown = Value then
+    exit;
+  FIsSpeedSensorFailureShutdown := Value;
+  Listener.TriggerEvents(Self,epPMSSpeedSensorFailureShutdown,Value);
+end;
+
+procedure TGenerator.SetLubOilPressLowShutdown(const Value: Boolean);
+begin
+  if FIsLubOilPressLowShutdown = Value then
+    exit;
+  FIsLubOilPressLowShutdown := Value;
+  Listener.TriggerEvents(Self,epPMSLubOilPressLowShutdown,Value);
+end;
+
+procedure TGenerator.SetCoolWaterTempHighShutdown(const Value: Boolean);
+begin
+  if FIsCoolWaterTempHighShutdown = Value then
+    exit;
+  FIsCoolWaterTempHighShutdown := Value;
+  Listener.TriggerEvents(Self,epPMSCoolWaterTempHighShutdown,Value);
+end;
+
+{$ENDREGION}
+
+{$REGION ' Generator Procedure '}
+
+procedure TGenerator.Run(const aDt: Double);
+begin
+  inherited;
+
+  if EmergencyStop or DCPowFailure then
+  begin
+    EmergencyStopGenerator(aDt);
+    exit;
+  end;
+
+  CekEngineAlarm;
+  CekShutdownAlarm;
+
+  if EngineRun then
+  begin
+    RunHourState := True;
+    if (not GeneratorSupplied) then
+    begin
+      if EmergencyStart then
+        EmergencyStartGenerator(aDt) {start berdasarkan pre alarm active}
+      else
+        NormalStartGenerator(aDt)    {start normal}
+    end
+    else
+    begin
+
+      if (ShutDown) then
+      begin
+        GeneratorState := Ord(gsCoolDown);//6;
+        Preference := False;
+      end;
+
+      if (GeneratorState = Ord(gsCoolDown){6}) or (GeneratorState = Ord(gsStop){7}) then {cool down}
+      begin
+        StopGenerator(aDt);
+      end
+      else if GeneratorState = Ord(gsGenReady){5} then
+      begin
+        CekSpeedSensorFailure;
+        CekLubOilPressLow;
+        CekCoolWaterTempHigh;
+
+        StateOnGenerator(aDt);
+      end;
+    end;
+  end
+  else
+  begin
+    RunHourState := False;
+    if GeneratorSupplied then
+    begin
+      StopGenerator(aDt);
+    end
+    else
+    begin
+      StateOffGenerator(aDt);
+    end;
+  end;
+end;
+
+procedure TGenerator.SetEngineRun(const Value: Boolean);
+begin
+  if FIsEngineRun = Value then
+    exit;
+  FIsEngineRun := Value;
+  Listener.TriggerEvents(Self,epPMSGeneratorEngineRun,Value);
+end;
+
 procedure TGenerator.StopGenerator(const aDt : Double);
 begin
   { Ryu : diganti setiap +-1 detik }
@@ -453,146 +697,33 @@ begin
   end;
 end;
 
-procedure TGenerator.Run(const aDt: Double);
+procedure TGenerator.CekShutdownAlarm;
 begin
-  inherited;
-
-  if EmergencyStop or DCPowFailure then
-  begin
-    EmergencyStopGenerator(aDt);
-    exit;
-  end;
-
-  SetAlarm;
-
-  if EngineRun then
-  begin
-    RunHourState := True;
-    if (not GeneratorSupplied) then
-    begin
-      if EmergencyStart then
-        EmergencyStartGenerator(aDt) {start berdasarkan pre alarm active}
-      else
-        NormalStartGenerator(aDt)    {start normal}
-    end
-    else
-    begin
-
-      if (ShutDown) then
-      begin
-        EngineAlarm := False;
-        GeneratorState := Ord(gsCoolDown);//6;
-        Preference := False;
-      end;
-
-      if (GeneratorState = Ord(gsCoolDown){6}) or (GeneratorState = Ord(gsStop){7}) then {cool down}
-      begin
-        StopGenerator(aDt);
-      end
-      else if GeneratorState = Ord(gsGenReady){5} then
-      begin
-        CekSpeedSensorFailure;
-        CekLubOilPressLow;
-        CekCoolWaterTempHigh;
-
-        StateOnGenerator(aDt);
-      end;
-    end;
-  end
-  else
-  begin
-    RunHourState := False;
-    if GeneratorSupplied then
-    begin
-      StopGenerator(aDt);
-    end
-    else
-    begin
-      StateOffGenerator(aDt);
-
-      if (ShutDown) then
-        EngineAlarm := False;
-    end;
-
-  end;
+  if not FIsSpeedSensorFailureShutdown and not FIsLubOilPressLowShutdown and not FIsCoolWaterTempHighShutdown then
+     ShutDown := False;
 end;
 
-procedure TGenerator.NormalStartGenerator(const aDt : Double);
-var
-  tempVolt : Double;
-begin
-  {Ryu : setiap 1 detik}
-  FStartDelay := FStartDelay + aDt;
-  if FStartDelay > 1 then
-  begin
-    FStartDelay := 0;
-
-    if Voltage < VoltageMax then
-    begin
-      if Voltage < 247 then
-      begin
-        GeneratorState := Ord(gsWarmUp);//2;{Warm Up}
-        CosPhi := 0;
-        Frequency := 5815;
-        Voltage := (random(10)+ 247);
-
-        SetUVW(32, 31, 32);
-      end
-      else
-      begin
-        {set naik nilai Voltage}
-        tempVolt := Voltage + (random(10)+ 50);
-
-        if tempVolt < VoltageMax  then
-        begin
-          Voltage := tempVolt;
-          Frequency := 5845;
-        end
-        else
-        begin
-          GeneratorState := 4;{Engine Ready}
-          Frequency := 5965;
-          Voltage := VoltageMax;
-          if (CosPhi + (random(4)+ 10)) < 81 then
-            CosPhi  := CosPhi + (random(4)+ 10);
-        end;
-      end;
-    end
-    else
-    begin
-      GeneratorState := Ord(gsGenReady);//5; {Gen Ready}
-      GeneratorSupplied := True;
-
-      Voltage := VoltageMax + random(2);
-
-      FrequencyState  := Frequency;
-      VoltageState    := Voltage;
-      CosPhiState     := CosPhi;
-      PowerState      := 0;
-
-      SetUVW(71, 73, 70);
-    end;
-  end
-end;
-
-procedure TGenerator.SetAlarm;
+procedure TGenerator.CekEngineAlarm;
 begin
   if FIsAutStartFailure or FIsSpeedSensorFailureAlrm or FIsLubOilPressLowAlrm or FIsLubOilTempHigh
      or FIsCoolWaterTempHighAlrm or FIsCoolWaterLevelLow or FIsFuelOilLeakage then
      EngineAlarm := True
   else
+  begin
     EngineAlarm := False;
 
+    if not FIsSpeedSensorFailureAlrm then
+      FIsSpeedSensorFailureShutdown := False;
+
+    if FIsLubOilPressLowAlrm then
+      FIsLubOilPressLowShutdown := False;
+
+    if FIsCoolWaterTempHighAlrm then
+      FIsCoolWaterTempHighShutdown := False;
+  end;
 end;
 
-procedure TGenerator.SetAutStartFailure(const Value: Boolean);
-begin
-  if FIsAutStartFailure = Value then
-    exit;
-
-  FIsAutStartFailure := Value;
-  Listener.TriggerEvents(Self,epPMSAutStartFailure,Value);
-end;
+{$ENDREGION}
 
 procedure TGenerator.SetBusbar(const Value: Boolean);
 begin
@@ -616,30 +747,6 @@ begin
     exit;
   FIsCBClosed := Value;
   Listener.TriggerEvents(Self,epPMSGeneratorCBClosed,Value);
-end;
-
-procedure TGenerator.SetCoolWaterLevelLow(const Value: Boolean);
-begin
-  if FIsCoolWaterLevelLow = Value then
-    exit;
-  FIsCoolWaterLevelLow := Value;
-  Listener.TriggerEvents(Self,epPMSCoolWaterLevelLow,Value);
-end;
-
-procedure TGenerator.SetCoolWaterTempHighAlrm(const Value: Boolean);
-begin
-  if FIsCoolWaterTempHighAlrm = Value then
-    exit;
-  FIsCoolWaterTempHighAlrm := Value;
-  Listener.TriggerEvents(Self,epPMSCoolWaterTempHighAlrm,Value);
-end;
-
-procedure TGenerator.SetCoolWaterTempHighShutdown(const Value: Boolean);
-begin
-  if FIsCoolWaterTempHighShutdown = Value then
-    exit;
-  FIsCoolWaterTempHighShutdown := Value;
-  Listener.TriggerEvents(Self,epPMSCoolWaterTempHighShutdown,Value);
 end;
 
 procedure TGenerator.SetCosPhi(const Value: Double);
@@ -673,25 +780,11 @@ end;
 
 procedure TGenerator.SetEmergencyStop(const Value: Boolean);
 begin
+  if FEmergencyStop = Value then
+    exit;
+
   FEmergencyStop := Value;
   Listener.TriggerEvents(Self,epPMSGeneratorEmergencyStop,Value);
-end;
-
-procedure TGenerator.SetEngineAlarm(const Value: Boolean);
-begin
-  if FIsEngineAlarm = Value then
-    exit;
-  FIsEngineAlarm := Value;
-  Listener.TriggerEvents(Self,epPMSEngineAlarm,Value);
-end;
-
-procedure TGenerator.SetEngineRun(const Value: Boolean);
-begin
-  if FIsEngineRun = Value then
-    exit;
-  FIsEngineRun := Value;
-  Listener.TriggerEvents(Self,epPMSGeneratorEngineRun,Value);
-
 end;
 
 procedure TGenerator.SetFailureCBClosed(const Value: Boolean);
@@ -716,14 +809,6 @@ begin
     exit;
   FFrequency := Value;
   Listener.TriggerEvents(Self,epPMSFrequency,Value);
-end;
-
-procedure TGenerator.SetFuelOilLeakage(const Value: Boolean);
-begin
-  if FIsFuelOilLeakage = Value then
-    exit;
-  FIsFuelOilLeakage := Value;
-  Listener.TriggerEvents(Self,epPMSFuelOilLeakage,Value);
 end;
 
 procedure TGenerator.SetFuelRunsOut(const Value: Boolean);
@@ -760,38 +845,6 @@ begin
   Listener.TriggerEvents(Self,epPMSGeneratorSupplied, Value);
 end;
 
-procedure TGenerator.SetLubOilPressLowAlrm(const Value: Boolean);
-begin
-  if FIsLubOilPressLowAlrm = Value then
-    exit;
-  FIsLubOilPressLowAlrm := Value;
-  Listener.TriggerEvents(Self,epPMSLubOilPressLowAlrm,Value);
-end;
-
-procedure TGenerator.SetLubOilPressLowShutdown(const Value: Boolean);
-begin
-  if FIsLubOilPressLowShutdown = Value then
-    exit;
-  FIsLubOilPressLowShutdown := Value;
-  Listener.TriggerEvents(Self,epPMSLubOilPressLowShutdown,Value);
-end;
-
-procedure TGenerator.SetLubOilTempHigh(const Value: Boolean);
-begin
-  if FIsLubOilTempHigh = Value then
-    exit;
-  FIsLubOilTempHigh := Value;
-  Listener.TriggerEvents(Self,epPMSLubOilTempHigh,Value);
-end;
-
-procedure TGenerator.SetMeasPowFailure(const Value: Boolean);
-begin
-  if FIsMeasPowFailure = Value then
-    exit;
-  FIsMeasPowFailure := Value;
-  Listener.TriggerEvents(Self,epPMSMeasPowFailure,Value);
-end;
-
 procedure TGenerator.SetPower(const Value: Double);
 begin
   if FPower = Value then
@@ -814,30 +867,6 @@ begin
     exit;
   FRunHourState := Value;
   Listener.TriggerEvents(Self,epPMSGeneratorRunHour,Value);
-end;
-
-procedure TGenerator.SetShutDown(const Value: Boolean);
-begin
-  if FIsShutDown = Value then
-    exit;
-  FIsShutDown := Value;
-  Listener.TriggerEvents(Self,epPMSShutDown,Value);
-end;
-
-procedure TGenerator.SetSpeedSensorFailureAlrm(const Value: Boolean);
-begin
-  if FIsSpeedSensorFailureAlrm = Value then
-    exit;
-  FIsSpeedSensorFailureAlrm := Value;
-  Listener.TriggerEvents(Self,epPMSSpeedSensorFailureAlrm,Value);
-end;
-
-procedure TGenerator.SetSpeedSensorFailureShutdown(const Value: Boolean);
-begin
-  if FIsSpeedSensorFailureShutdown = Value then
-    exit;
-  FIsSpeedSensorFailureShutdown := Value;
-  Listener.TriggerEvents(Self,epPMSSpeedSensorFailureShutdown,Value);
 end;
 
 procedure TGenerator.SetSwitchFrequency(const Value: Double);
@@ -975,14 +1004,6 @@ begin
     exit;
   FVoltage := Value;
   Listener.TriggerEvents(Self,epPMSVoltage,Value);
-end;
-
-procedure TGenerator.SetNotStandby(const Value: Boolean);
-begin
-  if FIsNotStandby = Value then
-    exit;
-  FIsNotStandby := Value;
-  Listener.TriggerEvents(Self,epPMSNotStandby,Value);
 end;
 
 { TBeban }

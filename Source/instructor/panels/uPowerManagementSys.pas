@@ -28,10 +28,6 @@ type
     lbl19: TLabel;
     lbl20: TLabel;
     lbl30: TLabel;
-    lblLampCWTH01: TLabel;
-    lblLampES01: TLabel;
-    lblLampLOPL01: TLabel;
-    lblLampOS01: TLabel;
     rbManual01: TRadioButton;
     rbStandby01: TRadioButton;
     Panel1: TPanel;
@@ -54,10 +50,6 @@ type
     Label6: TLabel;
     Label8: TLabel;
     Label7: TLabel;
-    lblLampCWTH02: TLabel;
-    lblLampES02: TLabel;
-    lblLampLOPL02: TLabel;
-    lblLampOS02: TLabel;
     pnlDCU3: TPanel;
     Panel3: TPanel;
     Label5: TLabel;
@@ -76,10 +68,6 @@ type
     Label17: TLabel;
     Label19: TLabel;
     Label18: TLabel;
-    lblLampCWTH03: TLabel;
-    lblLampES03: TLabel;
-    lblLampLOPL03: TLabel;
-    lblLampOS03: TLabel;
     pnlDCU4: TPanel;
     Panel4: TPanel;
     Label9: TLabel;
@@ -94,10 +82,6 @@ type
     chkCoolingWaterLevelLow04: TCheckBox;
     chkFuelOilLeakage04: TCheckBox;
     chkFUWASeparator04: TCheckBox;
-    lblLampOS04: TLabel;
-    lblLampLOPL04: TLabel;
-    lblLampES04: TLabel;
-    lblLampCWTH04: TLabel;
     Label30: TLabel;
     Label29: TLabel;
     Label28: TLabel;
@@ -114,14 +98,9 @@ type
     chkCoolingWaterLevelLow05: TCheckBox;
     chkFuelOilLeakage05: TCheckBox;
     chkFUWASeparator05: TCheckBox;
-    CheckBox11: TCheckBox;
-    CheckBox10: TCheckBox;
     Label36: TLabel;
     Label39: TLabel;
     Label40: TLabel;
-    lblLampCWTH05: TLabel;
-    lblLampLOPL05: TLabel;
-    lblLampOS05: TLabel;
     Panel5: TPanel;
     Label11: TLabel;
     pnl24V: TPanel;
@@ -145,15 +124,11 @@ type
     btn3133E5011A: TVrDemoButton;
     btn3133E5021A: TVrDemoButton;
     pnlGENSYS1: TPanel;
-    Label20: TLabel;
     chkCanBusFailure01: TCheckBox;
     CheckBox2: TCheckBox;
     pnlGENSYS2: TPanel;
-    Label21: TLabel;
     pnlGENSYS3: TPanel;
-    Label22: TLabel;
     pnlGENSYS4: TPanel;
-    Label23: TLabel;
     chkCanBusFailure02: TCheckBox;
     CheckBox4: TCheckBox;
     chkCanBusFailure03: TCheckBox;
@@ -161,15 +136,9 @@ type
     chkCanBusFailure04: TCheckBox;
     CheckBox8: TCheckBox;
     Panel6: TPanel;
-    btnCbReset01: TVrDemoButton;
-    btnCbReset02: TVrDemoButton;
-    btnCbReset03: TVrDemoButton;
-    btnCbReset04: TVrDemoButton;
     btnCbReset05: TVrDemoButton;
     Panel7: TPanel;
     btnforwardNonEssent: TVrDemoButton;
-    btnEmergencyNonEssent: TVrDemoButton;
-    btnAfterNonEssent: TVrDemoButton;
     Label2: TLabel;
     Label10: TLabel;
     Label13: TLabel;
@@ -219,8 +188,6 @@ type
     Label74: TLabel;
     Label75: TLabel;
     Label76: TLabel;
-    Label77: TLabel;
-    Label78: TLabel;
     Label79: TLabel;
     Label80: TLabel;
     Label81: TLabel;
@@ -235,6 +202,62 @@ type
     Label90: TLabel;
     Label91: TLabel;
     Label92: TLabel;
+    Panel8: TPanel;
+    Panel9: TPanel;
+    Panel10: TPanel;
+    Panel11: TPanel;
+    Panel12: TPanel;
+    Panel13: TPanel;
+    Panel14: TPanel;
+    Panel15: TPanel;
+    Panel16: TPanel;
+    Panel17: TPanel;
+    Panel18: TPanel;
+    Label93: TLabel;
+    Panel20: TPanel;
+    Label20: TLabel;
+    Panel21: TPanel;
+    Label21: TLabel;
+    Panel22: TPanel;
+    Label22: TLabel;
+    btnCbReset01: TVrDemoButton;
+    Panel19: TPanel;
+    Panel23: TPanel;
+    Panel24: TPanel;
+    Panel25: TPanel;
+    btnCbReset02: TVrDemoButton;
+    btnCbReset04: TVrDemoButton;
+    btnCbReset03: TVrDemoButton;
+    Panel26: TPanel;
+    Panel27: TPanel;
+    btnAfterNonEssent: TVrDemoButton;
+    btnEmergencyNonEssent: TVrDemoButton;
+    Panel28: TPanel;
+    Label23: TLabel;
+    CheckBox10: TCheckBox;
+    CheckBox11: TCheckBox;
+    Label77: TLabel;
+    Label78: TLabel;
+    Panel29: TPanel;
+    lblLampOS01: TPanel;
+    lblLampLOPL01: TPanel;
+    lblLampCWTH01: TPanel;
+    lblLampES01: TPanel;
+    lblLampOS02: TPanel;
+    lblLampLOPL02: TPanel;
+    lblLampCWTH02: TPanel;
+    lblLampES02: TPanel;
+    lblLampOS03: TPanel;
+    lblLampLOPL03: TPanel;
+    lblLampCWTH03: TPanel;
+    lblLampES03: TPanel;
+    lblLampOS04: TPanel;
+    lblLampLOPL04: TPanel;
+    lblLampCWTH04: TPanel;
+    lblLampES04: TPanel;
+    lblLampOS05: TPanel;
+    lblLampLOPL05: TPanel;
+    lblLampCWTH05: TPanel;
 
     procedure FormCreate(Sender: TObject);
 //    procedure BtnAlarmOn1Click(Sender: TObject);
@@ -445,8 +468,7 @@ begin
     SetCheckBox(Sender, False, epPMSEngineAlarm);
 end;
 
-procedure TfrmPowerManagementSyst.EnginePropertyBoolChange(Sender: TObject;
-  PropsID: E_PropsID; Value: Boolean);
+procedure TfrmPowerManagementSyst.EnginePropertyBoolChange(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
   if Sender is TGenerator then
   begin
@@ -497,8 +519,6 @@ procedure TfrmPowerManagementSyst.FormCreate(Sender: TObject);
 begin
   ERSystem.ERManager.EngineRoom.getPMSSystem.addEntityListener('PMS Condition',EnginePropertyBoolChange);
 end;
-
-
 
 procedure TfrmPowerManagementSyst.FuelOilLeakage(Sender: TObject);
 begin
@@ -837,8 +857,7 @@ begin
 
 end;
 
-procedure TfrmPowerManagementSyst.SetValueBool(IdGen: Integer; value: Boolean;
-  modeAlarm: E_PropsID);
+procedure TfrmPowerManagementSyst.SetValueBool(IdGen: Integer; value: Boolean; modeAlarm: E_PropsID);
   var
   IdSwitchboard : Integer;
 begin
@@ -903,11 +922,11 @@ begin
 end;
 
 procedure TfrmPowerManagementSyst.tmrDCU01Timer(Sender: TObject);
-var
-  i : Integer;
+//var
+//  i : Integer;
 begin
-  for i := 0 to 4 do
-    CekShutdownDCU(i)
+//  for i := 0 to 4 do
+//    CekShutdownDCU(i)
 end;
 
 procedure TfrmPowerManagementSyst.CekShutdownDCU(IdDcu: Integer);

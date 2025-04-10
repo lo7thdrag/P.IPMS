@@ -1547,7 +1547,7 @@ begin
       epPMSDCPowFailure :
         setPMSSWEElementID(rec.GenSwitchID, rec.ValueBool, C_ALRM_POWSUP);
 
-      epPMSEngineAlarm{, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilTempHigh} :
+      epPMSEngineAlarm :
         setPMSSWEElementID(rec.GenSwitchID, rec.ValueBool, C_ALRM_ENGINE);
 
       epPMSShutdown :
