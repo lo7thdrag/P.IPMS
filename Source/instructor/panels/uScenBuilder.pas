@@ -636,14 +636,14 @@ begin
       Exit;
 
     mmo1.Lines.Clear;
-    edt1.Text := '';
+//    edt1.Text := '';
 
     scenData := InstructorSys.Scenario.getSession(frmAvailScenario.ScenarioName);
 
     if not Assigned(scenData) then
       Exit;
 
-    edt1.Text := scenData.SessionName;
+//    edt1.Text := scenData.SessionName;
 
     mmo1.Lines.Add('Session ' + IntToStr(scenData.SessionID) + ' from ' + scenData.OriginalScenario +
         ' scenario');
@@ -663,7 +663,7 @@ begin
 
     lblSessionID.Caption := '0';
     mmo1.Lines.Clear;
-    edt1.Text := '';
+//    edt1.Text := '';
 
     Screen.Cursor := crDefault;
   end;
@@ -673,10 +673,10 @@ procedure TfrmScenBuilder.actDeleteRSExecute(Sender: TObject);
 var
   conname : string;
 begin
-  if edt1.Text = '' then
-    Exit;
+//  if edt1.Text = '' then
+//    Exit;
 
-  conname := edt1.Text;
+//  conname := edt1.Text;
 
   if MessageDlg('Are You Sure To Delete "' + conname + '" ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   begin
@@ -687,7 +687,7 @@ begin
 
       lblSessionID.Caption := '0';
       mmo1.Lines.Clear;
-      edt1.Text := '';
+//      edt1.Text := '';
 
       MessageDlg('Delete "' + conname + '" Success', mtInformation, [mbOK], 0);
       Screen.Cursor := crDefault;

@@ -457,13 +457,13 @@ procedure TGenerator.Run(const aDt: Double);
 begin
   inherited;
 
-  SetAlarm;
-
   if EmergencyStop or DCPowFailure then
   begin
     EmergencyStopGenerator(aDt);
     exit;
   end;
+
+  SetAlarm;
 
   if EngineRun then
   begin
@@ -491,9 +491,9 @@ begin
       end
       else if GeneratorState = Ord(gsGenReady){5} then
       begin
-//        CekSpeedSensorFailure;
-//        CekLubOilPressLow;
-//        CekCoolWaterTempHigh;
+        CekSpeedSensorFailure;
+        CekLubOilPressLow;
+        CekCoolWaterTempHigh;
 
         StateOnGenerator(aDt);
       end;

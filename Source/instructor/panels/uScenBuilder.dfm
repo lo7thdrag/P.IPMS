@@ -16419,6 +16419,10 @@ object frmScenBuilder: TfrmScenBuilder
       object tsPCS: TTabSheet
         Caption = 'PCS'
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pnlPCSBackgraound: TPanel
           Left = 0
           Top = 0
@@ -16512,6 +16516,10 @@ object frmScenBuilder: TfrmScenBuilder
         Caption = 'Element Data'
         ImageIndex = 2
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object lbl1: TLabel
           Left = 3
           Top = 22
@@ -16552,6 +16560,10 @@ object frmScenBuilder: TfrmScenBuilder
       object tsTANK: TTabSheet
         Caption = 'TANK'
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pnlTANkBackgraound: TPanel
           Left = 0
           Top = 0
@@ -16637,6 +16649,10 @@ object frmScenBuilder: TfrmScenBuilder
       object tsFA: TTabSheet
         Caption = 'FA'
         ImageIndex = 3
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pnlFABackgraound: TPanel
           Left = 0
           Top = 0
