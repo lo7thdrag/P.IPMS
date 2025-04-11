@@ -168,6 +168,7 @@ begin
 end;
 
 procedure TDieselGeneratorSystem.NetworkEventAssignment;
+
 var
   client : TTCPClient;
 begin
