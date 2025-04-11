@@ -328,7 +328,8 @@ type
     PMS_SWB_ESBIntrMode : Integer;
     PMS_SWB_ShoreIntrMode : Integer;
     PMS_SWB_MsbCBIntr : Integer;
-    PMS_SWB_EsbCBIntr : Integer;
+    PMS_SWB_EsbAftCBIntr : Integer;
+    PMS_SWB_EsbFwdCBIntr : Integer;
     PMS_SWB_MsbCBShore : Integer;
     PMS_SWB_MsbCBNavNaut : Integer;
     PMS_SWB_Busbar : Integer;

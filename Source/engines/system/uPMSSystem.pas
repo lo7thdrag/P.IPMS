@@ -99,7 +99,8 @@ begin
     2: {kiriman dari Emergency n blackout}
     begin
       {di false kan dulu semua}
-      Msb[2].EsbCBIntr  := False;
+      Msb[2].EsbAftCBIntr  := False;
+      Msb[2].EsbFwdCBIntr  := False;
 
       {mode 4 : smua EsbCB tertutup}
       if IdIntrMode = 0 then
@@ -109,11 +110,12 @@ begin
       else
         Msb[2].ESBIntrMode := 3;
 
-      Msb[2].EsbCBIntr := True;
+      Msb[2].EsbAftCBIntr := True;
+      Msb[2].EsbFwdCBIntr := True;
     end;
     3: {U/ mengecek koneksi MSB dgn ESB}
     begin
-      if (Msb[2].EsbCBIntr) and (Msb[2].ESBIntrMode = IdIntrMode) then
+      if (Msb[2].EsbAftCBIntr) and (Msb[2].ESBIntrMode = IdIntrMode) then
         Result := True
     end;
   end;

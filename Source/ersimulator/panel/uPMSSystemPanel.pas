@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, uDataType, uGenerator, uSwitchboard, ComCtrls,
+  Dialogs, Vcl.StdCtrls, ExtCtrls, uDataType, uGenerator, uSwitchboard, ComCtrls,
   VrControls, VrButtons;
 
 type
@@ -13,8 +13,6 @@ type
     Panel1: TPanel;
     Label2: TLabel;
     pnlGensys1: TPanel;
-    Label41: TLabel;
-    lblEmergencyStop1: TLabel;
     lblGeneratorSuppliedGen1: TLabel;
     rbManGen1: TRadioButton;
     rbSemGen1: TRadioButton;
@@ -32,7 +30,6 @@ type
     Label19: TLabel;
     Label42: TLabel;
     pnlGensys2: TPanel;
-    lblEmergencyStop2: TLabel;
     lblGeneratorSuppliedGen2: TLabel;
     rbManGen2: TRadioButton;
     rbSemGen2: TRadioButton;
@@ -66,7 +63,6 @@ type
     pnlGengsys3: TPanel;
     pnlGengsys4: TPanel;
     lblGeneratorSuppliedGen3: TLabel;
-    lblEmergencyStop3: TLabel;
     rbManGen3: TRadioButton;
     rbSemGen3: TRadioButton;
     rbAutGen3: TRadioButton;
@@ -82,7 +78,6 @@ type
     Label14: TLabel;
     Label33: TLabel;
     Label34: TLabel;
-    lblEmergencyStop4: TLabel;
     lblGeneratorSuppliedGen4: TLabel;
     rbManGen4: TRadioButton;
     rbSemGen4: TRadioButton;
@@ -162,12 +157,10 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Panel24: TPanel;
-    btnCBOpenClosedEmergency: TButton;
+    btnFwdCBOpenEmergency: TButton;
     lblCBOpenClosedE: TLabel;
-    Panel25: TPanel;
     Panel26: TPanel;
     rbSemGenE: TRadioButton;
-    lblEmergencyStop5: TLabel;
     rbManGenE: TRadioButton;
     rbAutGenE: TRadioButton;
     Label8: TLabel;
@@ -180,16 +173,26 @@ type
     lbl66: TLabel;
     btnStartGenE: TButton;
     btnStopGenE: TButton;
-    Button1: TButton;
-    Edit1: TEdit;
-    btnabc: TButton;
     pnl2: TPanel;
     Panel5: TPanel;
     Label27: TLabel;
     Panel21: TPanel;
     Label13: TLabel;
+    lbl1: TPanel;
     btnCBClosedGenE: TVrDemoButton;
     lblGeneratorSuppliedGene: TLabel;
+    lbl2: TPanel;
+    grp1: TGroupBox;
+    btn1: TButton;
+    edt1: TEdit;
+    btnabc: TButton;
+    lbl4: TPanel;
+    lbl9: TPanel;
+    btnAftCBCloseEmergency: TButton;
+    btnFwdCBCloseEmergency: TButton;
+    btnAftCBOpenEmergency: TButton;
+    lbl5: TLabel;
+    lbl6: TLabel;
 
     procedure Gen1ModeClick(Sender: TObject);
     procedure Gen2ModeClick(Sender: TObject);
@@ -229,7 +232,9 @@ type
     procedure SetPowerConnection(val1, val2 : Integer);
 
     function tovalidatebtn(val : string): Boolean;
+    function toLblWarnaEngine(val : boolean): Integer;
     function toLblWarna(val : boolean): Integer;
+    function toFontWarna(val : boolean): Integer;
     function toBtnWarna(val : boolean): Integer;
     function toCheck(val1, val2 : Integer): boolean;
     function toCheckCB(IdGen, IdMsb : Integer): boolean;
@@ -397,7 +402,7 @@ end;
 
 procedure TfrmPMSSystemPanel.emergency(Sender: TObject);
 begin
-  generator := ERSystem.ERManager.EngineRoom.getPMSSystem.getGenerator(C_GENERATOR_ID[StrToInt(Edit1.Text)]);
+  generator := ERSystem.ERManager.EngineRoom.getPMSSystem.getGenerator(C_GENERATOR_ID[StrToInt(Edt1.Text)]);
 
   if TButton(Sender).Caption = 'True' then
     generator.EmergencyStop := True
@@ -492,12 +497,12 @@ begin
   if Sender is TRadioButton then
   begin
     {C_SWITCHBOARD: Objk Switchboard; 2:Esb; value: Mode Switchboard; epPMSEsbIntrMode: ProsID}
-    if TRadioButton(Sender).Name = 'rbAftDistrE' then
-      SetValueInt(C_SWITCHBOARD, 2, 1, epPMSEsbIntrMode)
-    else if TRadioButton(Sender).Name = 'rbOffDistrE' then
-      SetValueInt(C_SWITCHBOARD, 2, 2, epPMSEsbIntrMode)
-    else if TRadioButton(Sender).Name = 'rbFwdDistrE' then
-      SetValueInt(C_SWITCHBOARD, 2, 3, epPMSEsbIntrMode)
+//    if TRadioButton(Sender).Name = 'rbAftDistrE' then
+//      SetValueInt(C_SWITCHBOARD, 2, 1, epPMSEsbIntrMode)
+//    else if TRadioButton(Sender).Name = 'rbOffDistrE' then
+//      SetValueInt(C_SWITCHBOARD, 2, 2, epPMSEsbIntrMode)
+//    else if TRadioButton(Sender).Name = 'rbFwdDistrE' then
+//      SetValueInt(C_SWITCHBOARD, 2, 3, epPMSEsbIntrMode)
   end;
 end;
 
@@ -513,15 +518,20 @@ begin
       SetValueBool(C_SWITCHBOARD, 0, True, epPMSMsbCBIntr)
     else if TButton(Sender).Name = 'btnCBOpenInn2' then
       SetValueBool(C_SWITCHBOARD, 1, False, epPMSMsbCBIntr)
-
     else if TButton(Sender).Name = 'btnCBCloseInn2' then
       SetValueBool(C_SWITCHBOARD, 1, True, epPMSMsbCBIntr)
     else if TButton(Sender).Name = 'btnCBOpenShore' then
       SetValueBool(C_SWITCHBOARD, 1, False, epPMSMsbCBShore)
     else if TButton(Sender).Name = 'btnCBCloseShore' then
       SetValueBool(C_SWITCHBOARD, 1, True, epPMSMsbCBShore)
-    else if TButton(Sender).Name = 'btnCBOpenClosedEmergency' then
-      SetValueBool(C_SWITCHBOARD, 2, False, epPMSEsbCBIntr)
+    else if TButton(Sender).Name = 'btnAftCBOpenEmergency' then
+      SetValueBool(C_SWITCHBOARD, 2, False, epPMSEsbAftCBIntr)
+    else if TButton(Sender).Name = 'btnAftCBCloseEmergency' then
+      SetValueBool(C_SWITCHBOARD, 2, True, epPMSEsbAftCBIntr)
+    else if TButton(Sender).Name = 'btnFwdCBOpenEmergency' then
+      SetValueBool(C_SWITCHBOARD, 2, False, epPMSEsbFwdCBIntr)
+    else if TButton(Sender).Name = 'btnFwdCBCloseEmergency' then
+      SetValueBool(C_SWITCHBOARD, 2, True, epPMSEsbFwdCBIntr)
   end;
 end;
 
@@ -621,34 +631,93 @@ begin
     case PropsID of
       epPMSMsbCBShore: switchboard.MsbCBShore  := value;
       epPMSMsbCBIntr: switchboard.MsbCBIntr  := value;
+      epPMSEsbAftCBIntr: switchboard.EsbAftCBIntr := value;
+      epPMSEsbFwdCBIntr: switchboard.EsbFwdCBIntr := value;
+
 //      begin
-////        switchboard.Busbar := value;
+//        if (rbFwdDistrE.Checked)then
+//        begin
+//          {1:Aft; 2:Off; 3:Fwd; 4:Dbl}
+//          if value then
+//          begin
+//            if switchboard.EsbAftCBIntr then
+//            begin
+//              if switchboard.ESBIntrMode = 1 then
+//              begin
+//                switchboard.ESBIntrMode := 4;
+//              end
+//              else
+//                switchboard.ESBIntrMode := 3;
+//            end
+//            else
+//            begin
+//              switchboard.EsbAftCBIntr  := True;
+//              switchboard.ESBIntrMode := 3;
+//
+//            end;
+//          end
+//          else
+//          begin
+//            if switchboard.ESBIntrMode = 4 then
+//            begin
+//              switchboard.ESBIntrMode := 1;
+//            end
+//            else
+//            begin
+//              switchboard.EsbAftCBIntr  := False;
+//            end;
+//          end;
+//
+////          if switchboard.EsbCBIntr and (switchboard.ESBIntrMode = 1) then
+////            switchboard.EsbCBIntr  := value
+////          else
+////          begin
+//////            switchboard.EsbCBIntr  := False;
+//////            switchboard.ESBIntrMode := 3;
+//////            switchboard.EsbCBIntr   := True;
+////          end;
+//        end
+//        else if (rbAftDistrE.Checked)then
+//        begin
+//          {1:Aft; 2:Off; 3:Fwd; 4:Dbl}
+//          if value then
+//          begin
+//            if switchboard.EsbAftCBIntr then
+//            begin
+//              if switchboard.ESBIntrMode = 3 then
+//              begin
+//                switchboard.ESBIntrMode := 4;
+//              end
+//              else
+//                switchboard.ESBIntrMode := 1;
+//            end
+//            else
+//            begin
+//              switchboard.EsbAftCBIntr  := True;
+//              switchboard.ESBIntrMode := 1;
+//            end;
+//          end
+//          else
+//          begin
+//            if switchboard.ESBIntrMode = 4 then
+//            begin
+//              switchboard.ESBIntrMode := 3;
+//            end
+//            else
+//            begin
+//              switchboard.EsbAftCBIntr  := False;
+//            end;
+//          end;
+////          if switchboard.EsbCBIntr and (switchboard.ESBIntrMode = 3) then
+////            switchboard.EsbCBIntr  := False
+////          else
+////          begin
+////            switchboard.EsbCBIntr  := False;
+////            switchboard.ESBIntrMode := 1;
+////            switchboard.EsbCBIntr   := True;
+////          end;
+//        end
 //      end;
-      epPMSEsbCBIntr:
-      begin
-        if (rbFwdDistrE.Checked)then
-        begin
-          if switchboard.EsbCBIntr and (switchboard.ESBIntrMode = 1) then
-            switchboard.EsbCBIntr  := False
-          else
-          begin
-            switchboard.EsbCBIntr  := False;
-            switchboard.ESBIntrMode := 3;
-            switchboard.EsbCBIntr   := True;
-          end;
-        end
-        else if (rbAftDistrE.Checked)then
-        begin
-          if switchboard.EsbCBIntr and (switchboard.ESBIntrMode = 3) then
-            switchboard.EsbCBIntr  := False
-          else
-          begin
-            switchboard.EsbCBIntr  := False;
-            switchboard.ESBIntrMode := 1;
-            switchboard.EsbCBIntr   := True;
-          end;
-        end
-      end;
     end;
   end;
 end;
@@ -687,7 +756,7 @@ begin
       begin
         if (rbOffDistrE.Checked)then
         begin
-          switchboard.EsbCBIntr  := False;
+          switchboard.EsbAftCBIntr  := False;
           switchboard.ESBIntrMode := 2;
         end
       end;
@@ -794,8 +863,7 @@ begin
   end
 end;
 
-procedure TfrmPMSSystemPanel.EnginePropertyBoolChange(Sender: TObject;
-  PropsID: E_PropsID; Value: Boolean);
+procedure TfrmPMSSystemPanel.EnginePropertyBoolChange(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
   if Sender is TGenerator then
   begin
@@ -803,29 +871,29 @@ begin
       epPMSGeneratorEngineRun:
       begin
         if TGenerator(Sender).Identifier = C_GENERATOR_ID[0] then
-          lblEngineRunGen1.Color := toLblWarna(Value)
+          lblEngineRunGen1.Color := toLblWarnaEngine(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[1] then
-          lblEngineRunGen2.Color := toLblWarna(Value)
+          lblEngineRunGen2.Color := toLblWarnaEngine(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[2] then
-          lblEngineRunGen3.Color := toLblWarna(Value)
+          lblEngineRunGen3.Color := toLblWarnaEngine(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[3] then
-          lblEngineRunGen4.Color := toLblWarna(Value)
+          lblEngineRunGen4.Color := toLblWarnaEngine(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[4] then
-          lblEngineRunGene.Color := toLblWarna(Value);
+          lblEngineRunGene.Color := toLblWarnaEngine(Value);
       end;
 
       epPMSGeneratorSupplied :
       begin
         if TGenerator(Sender).Identifier = C_GENERATOR_ID[0] then
-          lblGeneratorSuppliedGen1.Color := toLblWarna(Value)
+          lblGeneratorSuppliedGen1.Font.Color := toFontWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[1] then
-          lblGeneratorSuppliedGen2.Color := toLblWarna(Value)
+          lblGeneratorSuppliedGen2.Font.Color := toFontWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[2] then
-          lblGeneratorSuppliedGen3.Color := toLblWarna(Value)
+          lblGeneratorSuppliedGen3.Font.Color := toFontWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[3] then
-          lblGeneratorSuppliedGen4.Color := toLblWarna(Value)
+          lblGeneratorSuppliedGen4.Font.Color := toFontWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[4] then
-          lblGeneratorSuppliedGene.Color := toLblWarna(Value);
+          lblGeneratorSuppliedGene.Font.Color := toFontWarna(Value);
       end;
 
       epPMSGeneratorCBClosed :
@@ -871,15 +939,15 @@ begin
       epPMSShutdown :
       begin
         if TGenerator(Sender).Identifier = C_GENERATOR_ID[0] then
-          lblEmergencyStop1.Visible := Value
+          lblEngineRunGen1.Color := toLblWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[1] then
-          lblEmergencyStop2.Visible := Value
+          lblEngineRunGen2.Color := toLblWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[2] then
-          lblEmergencyStop3.Visible := Value
+          lblEngineRunGen3.Color := toLblWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[3] then
-          lblEmergencyStop4.Visible := Value
+          lblEngineRunGen4.Color := toLblWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[4] then
-          lblEmergencyStop5.Visible := Value;
+          lblEngineRunGene.Color := toLblWarna(Value);
       end;
     end;
   end
@@ -909,7 +977,7 @@ begin
         SetPowerConnection(lblCBCloseInn1.Color, lblCBCloseInn2.Color)
 
       end;
-      epPMSEsbCBIntr :
+      epPMSEsbAftCBIntr, epPMSEsbFwdCBIntr :
       begin
         if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[2] then
           lblCBOpenClosedE.Color := toLblWarna(Value);
@@ -1015,6 +1083,22 @@ begin
     result := clLime
   else
     result := clBlack;
+end;
+
+function TfrmPMSSystemPanel.toLblWarnaEngine(val: boolean): Integer;
+begin
+  if val then
+    result := clLime
+  else
+    result := clRed;
+end;
+
+function TfrmPMSSystemPanel.toFontWarna(val: boolean): Integer;
+begin
+  if val then
+    result := clLime
+  else
+    result := clWhite;
 end;
 
 procedure TfrmPMSSystemPanel.trckbrBebanChange(Sender: TObject);

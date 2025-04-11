@@ -25,7 +25,8 @@ type
 
     FIsBusbar  : boolean;
     FIsMsbCBIntr : boolean;
-    FIsEsbCBIntr : boolean;
+    FIsEsbAftCBIntr : boolean;
+    FIsEsbFwdCBIntr : boolean;
     FIsMsbCBShore : boolean;
     FIsMsbCBNavNaut : boolean;
 
@@ -40,7 +41,8 @@ type
     procedure SetShoreIntrMode(const Value : Integer);
 
     procedure SetMsbCBIntr(const Value : Boolean);
-    procedure SetEsbCBIntr(const Value : Boolean);
+    procedure SetEsbAftCBIntr(const Value : Boolean);
+    procedure SetEsbFwdCBIntr(const Value : Boolean);
     procedure SetMsbCBShore(const Value : Boolean);
     procedure SetMsbCBNavNaut(const Value : Boolean);
     procedure SetTripReduct(const Value : Boolean);
@@ -61,7 +63,8 @@ type
     property ShoreIntrMode : Integer read FShoreIntrMode write SetShoreIntrMode;
 
     property MsbCBIntr : Boolean read FIsMsbCBIntr write SetMsbCBIntr;
-    property EsbCBIntr : Boolean read FIsEsbCBIntr write SetEsbCBIntr;
+    property EsbAftCBIntr : Boolean read FIsEsbAftCBIntr write SetEsbAftCBIntr;
+    property EsbFwdCBIntr : Boolean read FIsEsbFwdCBIntr write SetEsbFwdCBIntr;
     property MsbCBShore : Boolean read FIsMsbCBShore write SetMsbCBShore;
     property MsbCBNavNaut : Boolean read FIsMsbCBNavNaut write SetMsbCBNavNaut;
     property Busbar : Boolean read FIsBusbar write SetBusbar;
@@ -98,7 +101,8 @@ begin
 
   MsbCBShore := False;
   MsbCBIntr := False;
-  EsbCBIntr := False;
+  EsbAftCBIntr := False;
+  EsbFwdCBIntr := False;
 end;
 
 destructor TSwitchboard.Destroy;
@@ -181,12 +185,20 @@ begin
   Listener.TriggerEvents(Self,epPMSEmergencyCon,Value);
 end;
 
-procedure TSwitchboard.SetEsbCBIntr(const Value: Boolean);
+procedure TSwitchboard.SetEsbAftCBIntr(const Value: Boolean);
 begin
-  if FIsEsbCBIntr = Value then
+  if FIsEsbAftCBIntr = Value then
     exit;
-  FIsEsbCBIntr := Value;
-  Listener.TriggerEvents(Self,epPMSEsbCBIntr,Value);
+  FIsEsbAftCBIntr := Value;
+  Listener.TriggerEvents(Self,epPMSEsbAftCBIntr,Value);
+end;
+
+procedure TSwitchboard.SetEsbFwdCBIntr(const Value: Boolean);
+begin
+  if FIsEsbFwdCBIntr = Value then
+    exit;
+  FIsEsbFwdCBIntr := Value;
+  Listener.TriggerEvents(Self,epPMSEsbFwdCBIntr,Value);
 end;
 
 procedure TSwitchboard.SetESBIntrMode(const Value: Integer);
