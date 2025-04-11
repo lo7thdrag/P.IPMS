@@ -1,9 +1,10 @@
 object frmPMSSystemPanel: TfrmPMSSystemPanel
   Left = -485
   Top = 237
+  BorderStyle = bsNone
   Caption = 'PMS System'
-  ClientHeight = 693
-  ClientWidth = 1354
+  ClientHeight = 856
+  ClientWidth = 1687
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,231 +15,1064 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object GroupBox1: TGroupBox
+  object pnlPMSSystem: TPanel
     Left = 0
-    Top = -5
-    Width = 1342
-    Height = 695
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
+    Top = 0
+    Width = 1687
+    Height = 856
+    Align = alClient
+    Color = clGray
     ParentBackground = False
-    ParentColor = False
-    ParentFont = False
-    TabOrder = 3
-    object Label7: TLabel
-      Left = 60
-      Top = 56
-      Width = 423
-      Height = 20
-      Align = alCustom
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'AFTER MAIN SWITCHBOARD'
-      Color = clBlack
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
+    TabOrder = 0
+    ExplicitLeft = 1
+    object Panel26: TPanel
+      Left = 869
+      Top = 655
+      Width = 634
+      Height = 162
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 19
+      object Label8: TLabel
+        Left = 47
+        Top = 33
+        Width = 41
+        Height = 16
+        Caption = 'Manual'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label12: TLabel
+        Left = 134
+        Top = 33
+        Width = 59
+        Height = 16
+        Caption = 'Semi Auto'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label16: TLabel
+        Left = 231
+        Top = 33
+        Width = 26
+        Height = 16
+        Caption = 'Auto'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblEngineRunGenE: TLabel
+        Left = 350
+        Top = 33
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
+      end
+      object lbl10: TLabel
+        Left = 363
+        Top = 33
+        Width = 88
+        Height = 16
+        Alignment = taCenter
+        Caption = 'Engine Running'
+        Color = clInactiveBorder
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object lblBusbarGenE: TLabel
+        Left = 494
+        Top = 33
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
+      end
+      object lbl66: TLabel
+        Left = 507
+        Top = 33
+        Width = 81
+        Height = 16
+        Caption = 'Busbar Supply'
+        Color = clInactiveBorder
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object rbSemGenE: TRadioButton
+        Left = 115
+        Top = 33
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = GenEModeClick
+      end
+      object rbManGenE: TRadioButton
+        Left = 28
+        Top = 33
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = GenEModeClick
+      end
+      object rbAutGenE: TRadioButton
+        Left = 212
+        Top = 33
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = GenEModeClick
+      end
+      object Panel27: TPanel
+        Left = 30
+        Top = 78
+        Width = 573
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 3
+      end
+      object btnStartGenE: TButton
+        Tag = 10
+        Left = 394
+        Top = 101
+        Width = 95
+        Height = 31
+        Caption = 'Start'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 4
+        OnClick = btnStartClick
+      end
+      object btnStopGenE: TButton
+        Tag = 10
+        Left = 514
+        Top = 101
+        Width = 95
+        Height = 31
+        Caption = 'Stop'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 5
+        OnClick = btnStopClick
+      end
+      object btnCBClosedGenE: TVrDemoButton
+        Tag = 2
+        Left = 28
+        Top = 101
+        Width = 291
+        Height = 33
+        Hint = 'Circuit Breaker Reset Gensys 3'
+        FontEnter.Charset = ANSI_CHARSET
+        FontEnter.Color = clBlack
+        FontEnter.Height = -13
+        FontEnter.Name = 'Arial'
+        FontEnter.Style = [fsBold]
+        FontLeave.Charset = ANSI_CHARSET
+        FontLeave.Color = clBlack
+        FontLeave.Height = -11
+        FontLeave.Name = 'Arial'
+        FontLeave.Style = [fsBold]
+        Font3D.ShadowColor = clGray
+        Caption = 'Circuit Breaker'
+        TabOrder = 6
+        OnClick = btnCBClosedClick
+      end
     end
-    object Label2: TLabel
-      Left = 861
-      Top = 56
-      Width = 423
-      Height = 20
-      Align = alCustom
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'FORWARD MAIN SWITCHBOARD'
-      Color = clBlack
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object Label30: TLabel
-      Left = 511
-      Top = 56
-      Width = 323
-      Height = 589
-      Align = alCustom
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'SIMULASI BEBAN'
-      Color = clBlack
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object Label31: TLabel
-      Left = 513
-      Top = 78
-      Width = 319
-      Height = 565
-      Align = alCustom
-      Alignment = taCenter
-      AutoSize = False
-      Color = clBtnFace
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object lblBesarbeban: TLabel
-      Left = 614
-      Top = 477
-      Width = 116
-      Height = 77
-      Alignment = taCenter
-      AutoSize = False
-      Caption = '0'
-      Color = clBtnFace
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -64
-      Font.Name = 'Agency FB'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Visible = False
-    end
-    object lblBesarbebann: TLabel
-      Left = 623
-      Top = 558
-      Width = 99
-      Height = 13
-      Caption = 'Besar Beban (Kw)'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Visible = False
-    end
-    object lblBeban2: TLabel
-      Left = 592
-      Top = 109
-      Width = 81
-      Height = 44
-      Alignment = taCenter
-      AutoSize = False
-      Caption = '45'
-      Color = clBtnFace
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -32
-      Font.Name = 'Agency FB'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object lblBeban2n: TLabel
-      Left = 600
-      Top = 159
-      Width = 64
-      Height = 13
-      Caption = 'Beban (Kw)'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object lblBeban1: TLabel
-      Left = 673
-      Top = 109
-      Width = 81
-      Height = 44
-      Alignment = taCenter
-      AutoSize = False
-      Caption = '45'
-      Color = clBtnFace
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -32
-      Font.Name = 'Agency FB'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object lblBeban1n: TLabel
-      Left = 682
-      Top = 159
-      Width = 64
-      Height = 13
-      Caption = 'Beban (Kw)'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object grp3: TGroupBox
-      Left = 60
-      Top = 76
-      Width = 198
-      Height = 165
+    object Panel1: TPanel
+      Left = 30
+      Top = 30
+      Width = 634
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
       TabOrder = 0
-      object Label26: TLabel
-        Left = -1
-        Top = 4
-        Width = 200
-        Height = 160
+      object Label2: TLabel
+        Left = 184
+        Top = 6
+        Width = 266
+        Height = 19
         Align = alCustom
         Alignment = taCenter
-        AutoSize = False
+        Caption = 'FORWARD MAIN SWITCHBOARD'
         Color = clBlack
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
       end
-      object Label32: TLabel
-        Left = 2
-        Top = 28
-        Width = 194
-        Height = 134
+    end
+    object pnlGensys1: TPanel
+      Left = 30
+      Top = 69
+      Width = 307
+      Height = 278
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 1
+      object Label41: TLabel
+        Left = 108
+        Top = 21
+        Width = 90
+        Height = 19
+        Alignment = taCenter
+        Caption = 'GENSYS 01'
+        Color = clRed
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Visible = False
+        WordWrap = True
+      end
+      object lblEmergencyStop1: TLabel
+        Left = 108
+        Top = 21
+        Width = 90
+        Height = 19
+        Alignment = taCenter
+        Caption = 'GENSYS 01'
+        Color = clRed
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Visible = False
+        WordWrap = True
+      end
+      object lblGeneratorSuppliedGen1: TLabel
+        Left = 108
+        Top = 21
+        Width = 90
+        Height = 19
+        Alignment = taCenter
+        Caption = 'GENSYS 01'
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object lblEngineRunGen1: TLabel
+        Left = 28
+        Top = 114
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
+      end
+      object lbl34: TLabel
+        Left = 47
+        Top = 112
+        Width = 88
+        Height = 16
+        Caption = 'Engine Running'
+        Color = clInactiveBorder
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object lblPrefGen1: TLabel
+        Left = 28
+        Top = 142
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
+      end
+      object lbl37: TLabel
+        Left = 47
+        Top = 140
+        Width = 62
+        Height = 16
+        Alignment = taCenter
+        Caption = 'Preference'
+        Color = clInactiveBorder
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object lblBusbarGen1: TLabel
+        Left = 28
+        Top = 170
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
+      end
+      object lbl38: TLabel
+        Left = 46
+        Top = 168
+        Width = 81
+        Height = 16
+        Alignment = taCenter
+        Caption = 'Busbar Supply'
+        Color = clInactiveBorder
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label15: TLabel
+        Left = 45
+        Top = 64
+        Width = 41
+        Height = 16
+        Caption = 'Manual'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label19: TLabel
+        Left = 133
+        Top = 64
+        Width = 59
+        Height = 16
+        Caption = 'Semi Auto'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label42: TLabel
+        Left = 231
+        Top = 64
+        Width = 26
+        Height = 16
+        Caption = 'Auto'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object rbManGen1: TRadioButton
+        Left = 26
+        Top = 64
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = Gen1ModeClick
+      end
+      object rbSemGen1: TRadioButton
+        Left = 114
+        Top = 64
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = Gen1ModeClick
+      end
+      object rbAutGen1: TRadioButton
+        Left = 212
+        Top = 64
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = Gen1ModeClick
+      end
+      object btnStartGen1: TButton
+        Tag = 10
+        Left = 26
+        Top = 221
+        Width = 67
+        Height = 31
+        Caption = 'Start'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 3
+        OnClick = btnStartClick
+      end
+      object btnStopGen1: TButton
+        Tag = 10
+        Left = 120
+        Top = 221
+        Width = 67
+        Height = 31
+        Caption = 'Stop'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 4
+        OnClick = btnStopClick
+      end
+      object btnPrefGen1: TButton
+        Tag = 10
+        Left = 212
+        Top = 221
+        Width = 67
+        Height = 31
+        Caption = 'Pref'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 5
+        OnClick = btnPrefClick
+      end
+      object Panel6: TPanel
+        Left = 26
+        Top = 200
+        Width = 254
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 6
+      end
+      object Panel7: TPanel
+        Left = 26
+        Top = 97
+        Width = 254
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 7
+      end
+    end
+    object pnlGensys2: TPanel
+      Left = 357
+      Top = 69
+      Width = 307
+      Height = 278
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 2
+      object lblEmergencyStop2: TLabel
+        Left = 108
+        Top = 21
+        Width = 90
+        Height = 19
+        Alignment = taCenter
+        Caption = 'GENSYS 02'
+        Color = clRed
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Visible = False
+        WordWrap = True
+      end
+      object lblGeneratorSuppliedGen2: TLabel
+        Left = 108
+        Top = 21
+        Width = 90
+        Height = 19
+        Alignment = taCenter
+        Caption = 'GENSYS 02'
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 47
+        Top = 64
+        Width = 41
+        Height = 16
+        Caption = 'Manual'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label11: TLabel
+        Left = 134
+        Top = 64
+        Width = 59
+        Height = 16
+        Caption = 'Semi Auto'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label31: TLabel
+        Left = 231
+        Top = 64
+        Width = 26
+        Height = 16
+        Caption = 'Auto'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblEngineRunGen2: TLabel
+        Left = 28
+        Top = 114
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
+      end
+      object lbl44: TLabel
+        Left = 47
+        Top = 112
+        Width = 88
+        Height = 16
+        Caption = 'Engine Running'
+        Color = clInactiveBorder
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object lblPrefGen2: TLabel
+        Left = 28
+        Top = 142
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
+      end
+      object lbl47: TLabel
+        Left = 47
+        Top = 140
+        Width = 62
+        Height = 16
+        Alignment = taCenter
+        Caption = 'Preference'
+        Color = clInactiveBorder
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object lblBusbarGen2: TLabel
+        Left = 28
+        Top = 170
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
+      end
+      object lbl48: TLabel
+        Left = 47
+        Top = 168
+        Width = 81
+        Height = 16
+        Alignment = taCenter
+        Caption = 'Busbar Supply'
+        Color = clInactiveBorder
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object rbManGen2: TRadioButton
+        Left = 28
+        Top = 64
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = Gen2ModeClick
+      end
+      object rbSemGen2: TRadioButton
+        Left = 115
+        Top = 64
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = Gen2ModeClick
+      end
+      object rbAutGen2: TRadioButton
+        Left = 212
+        Top = 64
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = Gen2ModeClick
+      end
+      object btnStartGen2: TButton
+        Tag = 10
+        Left = 28
+        Top = 221
+        Width = 67
+        Height = 31
+        Caption = 'Start'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 3
+        OnClick = btnStartClick
+      end
+      object btnStopGen2: TButton
+        Tag = 10
+        Left = 120
+        Top = 221
+        Width = 67
+        Height = 31
+        Caption = 'Stop'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 4
+        OnClick = btnStopClick
+      end
+      object btnPrefGen2: TButton
+        Tag = 10
+        Left = 212
+        Top = 221
+        Width = 67
+        Height = 31
+        Caption = 'Pref'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 5
+        OnClick = btnPrefClick
+      end
+      object Panel12: TPanel
+        Left = 28
+        Top = 97
+        Width = 254
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 6
+      end
+      object Panel13: TPanel
+        Left = 28
+        Top = 200
+        Width = 254
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 7
+      end
+    end
+    object Panel2: TPanel
+      Left = 694
+      Top = 30
+      Width = 300
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 3
+      object Label30: TLabel
+        Left = 79
+        Top = 7
+        Width = 142
+        Height = 19
         Align = alCustom
         Alignment = taCenter
+        Caption = 'SIMULASI BEBAN'
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+    end
+    object pnlSimulasiBeban: TPanel
+      Left = 688
+      Top = 69
+      Width = 300
+      Height = 512
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 4
+      object lblBeban2: TLabel
+        Left = 60
+        Top = 21
+        Width = 81
+        Height = 44
+        Alignment = taCenter
         AutoSize = False
+        Caption = '45'
         Color = clBtnFace
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -19
+        Font.Height = -32
+        Font.Name = 'Agency FB'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object lblBeban1: TLabel
+        Left = 160
+        Top = 21
+        Width = 81
+        Height = 44
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '45'
+        Color = clBtnFace
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -32
+        Font.Name = 'Agency FB'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object lblBeban2n: TLabel
+        Left = 69
+        Top = 64
+        Width = 64
+        Height = 13
+        Caption = 'Beban (Kw)'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblBeban1n: TLabel
+        Left = 169
+        Top = 64
+        Width = 64
+        Height = 13
+        Caption = 'Beban (Kw)'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblBesarbeban: TLabel
+        Left = 92
+        Top = 365
+        Width = 116
+        Height = 77
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '0'
+        Color = clBtnFace
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -64
+        Font.Name = 'Agency FB'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Visible = False
+      end
+      object lblBesarbebann: TLabel
+        Left = 100
+        Top = 439
+        Width = 99
+        Height = 13
+        Caption = 'Besar Beban (Kw)'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Visible = False
+      end
+      object TGroupBox
+        Left = 10
+        Top = 21
+        Width = 45
+        Height = 482
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 1
+        object trckbrBebanAft: TTrackBar
+          Left = 2
+          Top = 2
+          Width = 41
+          Height = 478
+          Max = 0
+          Min = -450
+          Orientation = trVertical
+          Frequency = 45
+          Position = -72
+          TabOrder = 0
+          ThumbLength = 15
+          TickMarks = tmBoth
+          OnChange = trckbrBebanChange
+        end
+      end
+      object TGroupBox
+        Left = 246
+        Top = 21
+        Width = 45
+        Height = 482
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 0
+        object trckbrBebanFwd: TTrackBar
+          Left = 2
+          Top = 2
+          Width = 41
+          Height = 478
+          Max = 0
+          Min = -450
+          Orientation = trVertical
+          Frequency = 45
+          Position = -45
+          TabOrder = 0
+          ThumbLength = 15
+          TickMarks = tmBoth
+          OnChange = trckbrBebanChange
+        end
+      end
+      object btnApply: TButton
+        Tag = 10
+        Left = 79
+        Top = 475
+        Width = 141
+        Height = 25
+        Caption = 'Apply'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+        OnClick = btnApplyClick
+      end
+    end
+    object Panel3: TPanel
+      Left = 1023
+      Top = 30
+      Width = 634
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 5
+      object Label10: TLabel
+        Left = 199
+        Top = 6
+        Width = 235
+        Height = 19
+        Align = alCustom
+        Alignment = taCenter
+        Caption = 'AFTER MAIN SWITCHBOARD'
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
       end
+    end
+    object pnlGengsys3: TPanel
+      Left = 1023
+      Top = 69
+      Width = 307
+      Height = 278
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 6
       object lblGeneratorSuppliedGen3: TLabel
-        Left = 2
-        Top = 6
-        Width = 194
-        Height = 20
+        Left = 108
+        Top = 18
+        Width = 90
+        Height = 19
         Alignment = taCenter
-        AutoSize = False
         Caption = 'GENSYS 03'
         Color = clBlack
         Font.Charset = ANSI_CHARSET
@@ -250,12 +1084,11 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentFont = False
       end
       object lblEmergencyStop3: TLabel
-        Left = 2
-        Top = 6
-        Width = 194
-        Height = 20
+        Left = 108
+        Top = 18
+        Width = 90
+        Height = 19
         Alignment = taCenter
-        AutoSize = False
         Caption = 'GENSYS 03'
         Color = clRed
         Font.Charset = ANSI_CHARSET
@@ -268,123 +1101,446 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Visible = False
         WordWrap = True
       end
-      object lbl26: TLabel
-        Left = 35
-        Top = 61
-        Width = 74
+      object lblEngineRunGen3: TLabel
+        Left = 28
+        Top = 111
+        Width = 9
         Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
+      end
+      object lbl26: TLabel
+        Left = 47
+        Top = 109
+        Width = 88
+        Height = 16
         Caption = 'Engine Running'
         Color = clInactiveBorder
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
+        Font.Color = clWhite
+        Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
         ParentFont = False
       end
-      object lbl3: TLabel
-        Left = 35
-        Top = 78
-        Width = 53
+      object lblPrefGen3: TLabel
+        Left = 28
+        Top = 139
+        Width = 9
         Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
+      end
+      object lbl3: TLabel
+        Left = 47
+        Top = 137
+        Width = 62
+        Height = 16
         Alignment = taCenter
         Caption = 'Preference'
         Color = clInactiveBorder
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
+        Font.Color = clWhite
+        Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
         ParentFont = False
       end
-      object lblEngineRunGen3: TLabel
-        Left = 11
-        Top = 60
-        Width = 12
-        Height = 14
+      object lblBusbarGen3: TLabel
+        Left = 28
+        Top = 167
+        Width = 9
+        Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clBlack
+        Color = clWhite
         ParentColor = False
+        Transparent = False
       end
-      object lblPrefGen3: TLabel
-        Left = 11
-        Top = 78
-        Width = 12
-        Height = 14
+      object Label3: TLabel
+        Left = 47
+        Top = 165
+        Width = 81
+        Height = 16
         Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
+        Caption = 'Busbar Supply'
+        Color = clInactiveBorder
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
         ParentColor = False
+        ParentFont = False
       end
-      object lbl13: TLabel
-        Left = -1
-        Top = 52
-        Width = 200
-        Height = 2
-        Align = alCustom
+      object Label14: TLabel
+        Left = 47
+        Top = 64
+        Width = 41
+        Height = 16
+        Caption = 'Manual'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label33: TLabel
+        Left = 134
+        Top = 64
+        Width = 59
+        Height = 16
+        Caption = 'Semi Auto'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label34: TLabel
+        Left = 231
+        Top = 64
+        Width = 26
+        Height = 16
+        Caption = 'Auto'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object rbManGen3: TRadioButton
+        Left = 28
+        Top = 64
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = Gen3ModeClick
+      end
+      object rbSemGen3: TRadioButton
+        Left = 115
+        Top = 64
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = Gen3ModeClick
+      end
+      object rbAutGen3: TRadioButton
+        Left = 212
+        Top = 64
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = Gen3ModeClick
+      end
+      object btnStartGen3: TButton
+        Tag = 3
+        Left = 28
+        Top = 221
+        Width = 67
+        Height = 31
+        Caption = 'Start'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 3
+        OnClick = btnStartClick
+      end
+      object btnStopGen3: TButton
+        Tag = 10
+        Left = 120
+        Top = 221
+        Width = 67
+        Height = 31
+        Caption = 'Stop'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 4
+        OnClick = btnStopClick
+      end
+      object btnPrefGen3: TButton
+        Tag = 10
+        Left = 212
+        Top = 221
+        Width = 67
+        Height = 31
+        Caption = 'Pref'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 5
+        OnClick = btnPrefClick
+      end
+      object Panel14: TPanel
+        Left = 28
+        Top = 94
+        Width = 254
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 6
+      end
+      object Panel15: TPanel
+        Left = 28
+        Top = 197
+        Width = 254
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 7
+      end
+    end
+    object pnlGengsys4: TPanel
+      Left = 1350
+      Top = 69
+      Width = 307
+      Height = 278
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 7
+      object lblEmergencyStop4: TLabel
+        Left = 108
+        Top = 18
+        Width = 90
+        Height = 19
         Alignment = taCenter
-        AutoSize = False
+        Caption = 'GENSYS 04'
+        Color = clRed
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Visible = False
+        WordWrap = True
+      end
+      object lblGeneratorSuppliedGen4: TLabel
+        Left = 108
+        Top = 18
+        Width = 90
+        Height = 19
+        Alignment = taCenter
+        Caption = 'GENSYS 04'
         Color = clBlack
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
       end
       object Label1: TLabel
-        Left = -1
-        Top = 131
-        Width = 200
-        Height = 2
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
+        Left = 47
+        Top = 64
+        Width = 41
+        Height = 16
+        Caption = 'Manual'
+        Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
-        Font.Height = -19
+        Font.Height = -13
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
+        Font.Style = []
         ParentFont = False
       end
-      object lblBusbarGen3: TLabel
-        Left = 11
-        Top = 96
-        Width = 12
-        Height = 14
+      object Label7: TLabel
+        Left = 134
+        Top = 64
+        Width = 59
+        Height = 16
+        Caption = 'Semi Auto'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label26: TLabel
+        Left = 231
+        Top = 64
+        Width = 26
+        Height = 16
+        Caption = 'Auto'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblEngineRunGen4: TLabel
+        Left = 28
+        Top = 111
+        Width = 9
+        Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clBlack
+        Color = clWhite
         ParentColor = False
+        Transparent = False
       end
-      object Label3: TLabel
-        Left = 35
-        Top = 96
-        Width = 68
+      object lblPrefGen4: TLabel
+        Left = 28
+        Top = 139
+        Width = 9
         Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
+      end
+      object lblBusbarGen4: TLabel
+        Left = 28
+        Top = 167
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
+      end
+      object lbl19: TLabel
+        Left = 47
+        Top = 165
+        Width = 81
+        Height = 16
         Alignment = taCenter
         Caption = 'Busbar Supply'
         Color = clInactiveBorder
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
+        Font.Color = clWhite
+        Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentColor = False
         ParentFont = False
       end
-      object btnStartGen3: TButton
-        Tag = 3
-        Left = 33
-        Top = 138
-        Width = 40
-        Height = 20
+      object lbl18: TLabel
+        Left = 47
+        Top = 137
+        Width = 62
+        Height = 16
+        Alignment = taCenter
+        Caption = 'Preference'
+        Color = clInactiveBorder
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object lbl15: TLabel
+        Left = 47
+        Top = 109
+        Width = 88
+        Height = 16
+        Caption = 'Engine Running'
+        Color = clInactiveBorder
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object rbManGen4: TRadioButton
+        Left = 28
+        Top = 64
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = Gen4ModeClick
+      end
+      object rbSemGen4: TRadioButton
+        Left = 115
+        Top = 64
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = Gen4ModeClick
+      end
+      object rbAutGen4: TRadioButton
+        Left = 212
+        Top = 64
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = Gen4ModeClick
+      end
+      object btnStartGen4: TButton
+        Tag = 4
+        Left = 28
+        Top = 221
+        Width = 67
+        Height = 31
         Caption = 'Start'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -392,15 +1548,15 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 3
         OnClick = btnStartClick
       end
-      object btnStopGen3: TButton
+      object btnStopGen4: TButton
         Tag = 10
-        Left = 78
-        Top = 138
-        Width = 40
-        Height = 20
+        Left = 120
+        Top = 221
+        Width = 67
+        Height = 31
         Caption = 'Stop'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -408,15 +1564,15 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 4
         OnClick = btnStopClick
       end
-      object btnPrefGen3: TButton
+      object btnPrefGen4: TButton
         Tag = 10
-        Left = 124
-        Top = 138
-        Width = 40
-        Height = 20
+        Left = 212
+        Top = 221
+        Width = 67
+        Height = 31
         Caption = 'Pref'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -424,219 +1580,117 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 5
         OnClick = btnPrefClick
       end
-      object rbManGen3: TRadioButton
-        Left = 10
-        Top = 32
-        Width = 85
-        Height = 17
-        Caption = 'Man'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 3
-        OnClick = Gen3ModeClick
+      object Panel16: TPanel
+        Left = 28
+        Top = 94
+        Width = 254
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 6
       end
-      object rbSemGen3: TRadioButton
-        Left = 59
-        Top = 32
-        Width = 78
-        Height = 17
-        Caption = 'Semi Auto'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 4
-        OnClick = Gen3ModeClick
-      end
-      object rbAutGen3: TRadioButton
-        Left = 140
-        Top = 32
-        Width = 49
-        Height = 17
-        Caption = 'Auto'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 5
-        OnClick = Gen3ModeClick
+      object Panel17: TPanel
+        Left = 28
+        Top = 197
+        Width = 254
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 7
       end
     end
-    object grp9: TGroupBox
-      Left = 285
-      Top = 283
-      Width = 198
-      Height = 101
-      TabOrder = 1
-      object Label8: TLabel
-        Left = -2
-        Top = -59
-        Width = 200
-        Height = 160
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label21: TLabel
-        Left = 2
-        Top = 28
-        Width = 194
-        Height = 71
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBtnFace
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblCBOpenInn2: TLabel
-        Left = 67
-        Top = 124
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clWindow
-        ParentColor = False
-      end
-      object lblCBCloseInn2: TLabel
-        Left = 106
-        Top = 124
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clWindow
-        ParentColor = False
-      end
-      object Label23: TLabel
-        Left = -1
-        Top = 4
-        Width = 200
-        Height = 40
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'AFTER'#13#10'INTERCONNECTION'
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label24: TLabel
-        Left = -2
-        Top = 69
-        Width = 200
-        Height = 2
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'AFTER'#13#10'INTERCONNECTION'
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object btnCBOpenInn2: TButton
-        Tag = 10
-        Left = 38
-        Top = 75
-        Width = 56
-        Height = 20
-        Caption = 'Open'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-        OnClick = btnInnCBCloseOpenClick
-      end
-      object btnCBCloseInn2: TButton
-        Tag = 10
-        Left = 104
-        Top = 75
-        Width = 56
-        Height = 20
-        Caption = 'Close'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 1
-        OnClick = btnInnCBCloseOpenClick
-      end
-      object rbManInn2: TRadioButton
-        Left = 5
-        Top = 50
+    object pnlShoreInter: TPanel
+      Left = 184
+      Top = 655
+      Width = 307
+      Height = 162
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 8
+      object Label32: TLabel
+        Left = 46
+        Top = 33
         Width = 41
-        Height = 17
-        Caption = 'Man'
+        Height = 16
+        Caption = 'Manual'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
+        Font.Color = clWhite
+        Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
-        OnClick = InterCon2ModeClick
       end
-      object rbOffInn2: TRadioButton
-        Left = 60
-        Top = 50
-        Width = 35
-        Height = 17
+      object Label39: TLabel
+        Left = 132
+        Top = 33
+        Width = 17
+        Height = 16
         Caption = 'Off'
         Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label40: TLabel
+        Left = 190
+        Top = 33
+        Width = 89
+        Height = 16
+        Caption = 'Auto Take Over'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblCBCloseShore: TLabel
+        Left = 246
+        Top = -7
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWindow
+        ParentColor = False
+      end
+      object lblCBOpenShore: TLabel
+        Left = 117
+        Top = 5
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWindow
+        ParentColor = False
+      end
+      object rbManShore: TRadioButton
+        Left = 28
+        Top = 33
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
-        OnClick = InterCon2ModeClick
+        TabOrder = 0
+        OnClick = InterShoreModeClick
       end
-      object rbAutInn2: TRadioButton
-        Left = 109
-        Top = 50
-        Width = 79
+      object rbOffShore: TRadioButton
+        Left = 113
+        Top = 33
+        Width = 15
         Height = 17
-        Caption = 'Auto Close'
         Checked = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -644,113 +1698,30 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 1
         TabStop = True
-        OnClick = InterCon2ModeClick
+        OnClick = InterShoreModeClick
       end
-    end
-    object grp1: TGroupBox
-      Left = 285
-      Top = 544
-      Width = 198
-      Height = 101
-      TabOrder = 2
-      object Label39: TLabel
-        Left = -2
-        Top = -59
-        Width = 200
-        Height = 160
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
+      object rbAutShore: TRadioButton
+        Left = 171
+        Top = 33
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
+        Font.Style = []
         ParentFont = False
-      end
-      object Label40: TLabel
-        Left = 2
-        Top = 28
-        Width = 194
-        Height = 71
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBtnFace
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblCBOpenShore: TLabel
-        Left = 76
-        Top = 130
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clWindow
-        ParentColor = False
-      end
-      object lblCBCloseShore: TLabel
-        Left = 141
-        Top = 128
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clWindow
-        ParentColor = False
-      end
-      object Label27: TLabel
-        Left = 0
-        Top = 4
-        Width = 200
-        Height = 40
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'SHORE'#13#10'INTERCONNECTION'
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label28: TLabel
-        Left = 0
-        Top = 69
-        Width = 225
-        Height = 2
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'object Label24: TLabel'
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
+        TabOrder = 2
+        OnClick = InterShoreModeClick
       end
       object btnCBOpenShore: TButton
         Tag = 10
-        Left = 41
-        Top = 75
-        Width = 56
-        Height = 20
+        Left = 28
+        Top = 101
+        Width = 95
+        Height = 31
         Caption = 'Open'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -758,15 +1729,15 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 3
         OnClick = btnInnCBCloseOpenClick
       end
       object btnCBCloseShore: TButton
         Tag = 10
-        Left = 107
-        Top = 75
-        Width = 56
-        Height = 20
+        Left = 184
+        Top = 101
+        Width = 95
+        Height = 31
         Caption = 'Close'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -774,720 +1745,221 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 4
         OnClick = btnInnCBCloseOpenClick
       end
-      object rbAutShore: TRadioButton
-        Left = 94
-        Top = 50
-        Width = 101
-        Height = 17
-        Caption = 'Auto TakeOver'
+      object Panel18: TPanel
+        Left = 28
+        Top = 78
+        Width = 254
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 5
+      end
+    end
+    object Panel8: TPanel
+      Left = 30
+      Top = 354
+      Width = 307
+      Height = 50
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 9
+      object btnCBClosedGen1: TVrDemoButton
+        Tag = 2
+        Left = 8
+        Top = 9
+        Width = 291
+        Height = 33
+        Hint = 'Circuit Breaker Reset Gensys 3'
+        FontEnter.Charset = ANSI_CHARSET
+        FontEnter.Color = clBlack
+        FontEnter.Height = -13
+        FontEnter.Name = 'Arial'
+        FontEnter.Style = [fsBold]
+        FontLeave.Charset = ANSI_CHARSET
+        FontLeave.Color = clBlack
+        FontLeave.Height = -11
+        FontLeave.Name = 'Arial'
+        FontLeave.Style = [fsBold]
+        Font3D.ShadowColor = clGray
+        Caption = 'Circuit Breaker'
+        TabOrder = 0
+        OnClick = btnCBClosedClick
+      end
+    end
+    object Panel9: TPanel
+      Left = 357
+      Top = 354
+      Width = 307
+      Height = 50
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 10
+      object btnCBClosedGen2: TVrDemoButton
+        Tag = 2
+        Left = 8
+        Top = 9
+        Width = 291
+        Height = 33
+        Hint = 'Circuit Breaker Reset Gensys 3'
+        FontEnter.Charset = ANSI_CHARSET
+        FontEnter.Color = clBlack
+        FontEnter.Height = -13
+        FontEnter.Name = 'Arial'
+        FontEnter.Style = [fsBold]
+        FontLeave.Charset = ANSI_CHARSET
+        FontLeave.Color = clBlack
+        FontLeave.Height = -11
+        FontLeave.Name = 'Arial'
+        FontLeave.Style = [fsBold]
+        Font3D.ShadowColor = clGray
+        Caption = 'Circuit Breaker'
+        TabOrder = 0
+        OnClick = btnCBClosedClick
+      end
+    end
+    object Panel10: TPanel
+      Left = 1350
+      Top = 354
+      Width = 307
+      Height = 50
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 11
+      object btnCBClosedGen4: TVrDemoButton
+        Tag = 2
+        Left = 8
+        Top = 9
+        Width = 291
+        Height = 33
+        Hint = 'Circuit Breaker Reset Gensys 3'
+        FontEnter.Charset = ANSI_CHARSET
+        FontEnter.Color = clBlack
+        FontEnter.Height = -13
+        FontEnter.Name = 'Arial'
+        FontEnter.Style = [fsBold]
+        FontLeave.Charset = ANSI_CHARSET
+        FontLeave.Color = clBlack
+        FontLeave.Height = -11
+        FontLeave.Name = 'Arial'
+        FontLeave.Style = [fsBold]
+        Font3D.ShadowColor = clGray
+        Caption = 'Circuit Breaker'
+        TabOrder = 0
+        OnClick = btnCBClosedClick
+      end
+    end
+    object Panel11: TPanel
+      Left = 1023
+      Top = 354
+      Width = 307
+      Height = 50
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 12
+      object btnCBClosedGen3: TVrDemoButton
+        Tag = 2
+        Left = 8
+        Top = 9
+        Width = 291
+        Height = 33
+        Hint = 'Circuit Breaker Reset Gensys 3'
+        FontEnter.Charset = ANSI_CHARSET
+        FontEnter.Color = clBlack
+        FontEnter.Height = -13
+        FontEnter.Name = 'Arial'
+        FontEnter.Style = [fsBold]
+        FontLeave.Charset = ANSI_CHARSET
+        FontLeave.Color = clBlack
+        FontLeave.Height = -11
+        FontLeave.Name = 'Arial'
+        FontLeave.Style = [fsBold]
+        Font3D.ShadowColor = clGray
+        Caption = 'Circuit Breaker'
+        TabOrder = 0
+        OnClick = btnCBClosedClick
+      end
+    end
+    object pnlForwardInter: TPanel
+      Left = 30
+      Top = 476
+      Width = 634
+      Height = 105
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 13
+      object Label28: TLabel
+        Left = 46
+        Top = 29
+        Width = 41
+        Height = 16
+        Caption = 'Manual'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
+        Font.Color = clWhite
+        Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
-        OnClick = InterShoreModeClick
       end
-      object rbOffShore: TRadioButton
-        Left = 51
-        Top = 50
-        Width = 40
-        Height = 17
+      object Label43: TLabel
+        Left = 170
+        Top = 29
+        Width = 17
+        Height = 16
         Caption = 'Off'
-        Checked = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
+        Font.Color = clWhite
+        Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
-        TabStop = True
-        OnClick = InterShoreModeClick
       end
-      object rbManShore: TRadioButton
-        Left = 5
-        Top = 50
-        Width = 46
-        Height = 17
-        Caption = 'Man'
+      object Label44: TLabel
+        Left = 275
+        Top = 29
+        Width = 89
+        Height = 16
+        Caption = 'Auto Take Over'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
+        Font.Color = clWhite
+        Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 4
-        OnClick = InterShoreModeClick
-      end
-    end
-    object grp2: TGroupBox
-      Left = 862
-      Top = 76
-      Width = 198
-      Height = 165
-      TabOrder = 3
-      object Label15: TLabel
-        Left = -2
-        Top = 4
-        Width = 200
-        Height = 160
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label19: TLabel
-        Left = 2
-        Top = 28
-        Width = 194
-        Height = 134
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBtnFace
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lbl34: TLabel
-        Left = 35
-        Top = 61
-        Width = 74
-        Height = 13
-        Caption = 'Engine Running'
-        Color = clInactiveBorder
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
-      object lbl37: TLabel
-        Left = 35
-        Top = 79
-        Width = 53
-        Height = 13
-        Alignment = taCenter
-        Caption = 'Preference'
-        Color = clInactiveBorder
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
-      object lbl38: TLabel
-        Left = 35
-        Top = 97
-        Width = 68
-        Height = 13
-        Alignment = taCenter
-        Caption = 'Busbar Supply'
-        Color = clInactiveBorder
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblEngineRunGen1: TLabel
-        Left = 11
-        Top = 60
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        ParentColor = False
-      end
-      object lblGeneratorSuppliedGen1: TLabel
-        Left = 2
-        Top = 6
-        Width = 194
-        Height = 20
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'GENSYS 01'
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblPrefGen1: TLabel
-        Left = 11
-        Top = 78
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        ParentColor = False
-      end
-      object lblBusbarGen1: TLabel
-        Left = 11
-        Top = 96
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        ParentColor = False
-      end
-      object Label9: TLabel
-        Left = -2
-        Top = 52
-        Width = 200
-        Height = 2
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label11: TLabel
-        Left = -2
-        Top = 131
-        Width = 200
-        Height = 2
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblEmergencyStop1: TLabel
-        Left = 2
-        Top = 6
-        Width = 194
-        Height = 20
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'GENSYS 01'
-        Color = clRed
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Visible = False
-        WordWrap = True
-      end
-      object btnStartGen1: TButton
-        Tag = 10
-        Left = 33
-        Top = 138
-        Width = 40
-        Height = 20
-        Caption = 'Start'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-        OnClick = btnStartClick
-      end
-      object btnStopGen1: TButton
-        Tag = 10
-        Left = 78
-        Top = 138
-        Width = 40
-        Height = 20
-        Caption = 'Stop'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 1
-        OnClick = btnStopClick
-      end
-      object btnPrefGen1: TButton
-        Tag = 10
-        Left = 124
-        Top = 138
-        Width = 40
-        Height = 20
-        Caption = 'Pref'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 2
-        OnClick = btnPrefClick
-      end
-      object rbManGen1: TRadioButton
-        Left = 10
-        Top = 32
-        Width = 55
-        Height = 17
-        Caption = 'Man'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 3
-        OnClick = Gen1ModeClick
-      end
-      object rbSemGen1: TRadioButton
-        Left = 59
-        Top = 32
-        Width = 78
-        Height = 17
-        Caption = 'Semi Auto'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 4
-        OnClick = Gen1ModeClick
-      end
-      object rbAutGen1: TRadioButton
-        Left = 140
-        Top = 32
-        Width = 50
-        Height = 17
-        Caption = 'Auto'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 5
-        OnClick = Gen1ModeClick
-      end
-    end
-    object grp13: TGroupBox
-      Left = 1087
-      Top = 76
-      Width = 198
-      Height = 165
-      TabOrder = 4
-      object Label33: TLabel
-        Left = -2
-        Top = 4
-        Width = 200
-        Height = 160
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label34: TLabel
-        Left = 2
-        Top = 28
-        Width = 194
-        Height = 134
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBtnFace
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lbl44: TLabel
-        Left = 35
-        Top = 61
-        Width = 74
-        Height = 13
-        Caption = 'Engine Running'
-        Color = clInactiveBorder
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
-      object lbl47: TLabel
-        Left = 35
-        Top = 79
-        Width = 53
-        Height = 13
-        Alignment = taCenter
-        Caption = 'Preference'
-        Color = clInactiveBorder
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
-      object lbl48: TLabel
-        Left = 35
-        Top = 97
-        Width = 68
-        Height = 13
-        Alignment = taCenter
-        Caption = 'Busbar Supply'
-        Color = clInactiveBorder
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblEngineRunGen2: TLabel
-        Left = 11
-        Top = 60
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        ParentColor = False
-      end
-      object lblGeneratorSuppliedGen2: TLabel
-        Left = 2
-        Top = 6
-        Width = 194
-        Height = 20
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'GENSYS 02'
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblPrefGen2: TLabel
-        Left = 11
-        Top = 78
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        ParentColor = False
-      end
-      object lblBusbarGen2: TLabel
-        Left = 11
-        Top = 96
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        ParentColor = False
-      end
-      object Label10: TLabel
-        Left = -2
-        Top = 52
-        Width = 200
-        Height = 2
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label14: TLabel
-        Left = -2
-        Top = 131
-        Width = 200
-        Height = 2
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblEmergencyStop2: TLabel
-        Left = 2
-        Top = 6
-        Width = 194
-        Height = 20
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'GENSYS 02'
-        Color = clRed
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Visible = False
-        WordWrap = True
-      end
-      object btnStartGen2: TButton
-        Tag = 10
-        Left = 33
-        Top = 138
-        Width = 40
-        Height = 20
-        Caption = 'Start'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-        OnClick = btnStartClick
-      end
-      object btnStopGen2: TButton
-        Tag = 10
-        Left = 78
-        Top = 138
-        Width = 40
-        Height = 20
-        Caption = 'Stop'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 1
-        OnClick = btnStopClick
-      end
-      object btnPrefGen2: TButton
-        Tag = 10
-        Left = 124
-        Top = 138
-        Width = 40
-        Height = 20
-        Caption = 'Pref'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 2
-        OnClick = btnPrefClick
-      end
-      object rbManGen2: TRadioButton
-        Left = 10
-        Top = 32
-        Width = 66
-        Height = 17
-        Caption = 'Man'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 3
-        OnClick = Gen2ModeClick
-      end
-      object rbSemGen2: TRadioButton
-        Left = 59
-        Top = 32
-        Width = 78
-        Height = 17
-        Caption = 'Semi Auto'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 4
-        OnClick = Gen2ModeClick
-      end
-      object rbAutGen2: TRadioButton
-        Left = 140
-        Top = 32
-        Width = 50
-        Height = 17
-        Caption = 'Auto'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 5
-        OnClick = Gen2ModeClick
-      end
-    end
-    object grp17: TGroupBox
-      Left = 862
-      Top = 283
-      Width = 198
-      Height = 101
-      TabOrder = 5
-      object Label29: TLabel
-        Left = -2
-        Top = -59
-        Width = 200
-        Height = 160
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label25: TLabel
-        Left = 2
-        Top = 28
-        Width = 194
-        Height = 71
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBtnFace
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblCBOpenInn1: TLabel
-        Left = 57
-        Top = 125
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clWindow
-        ParentColor = False
       end
       object lblCBCloseInn1: TLabel
-        Left = 129
+        Left = 185
         Top = 125
-        Width = 12
-        Height = 14
+        Width = 9
+        Height = 13
         Alignment = taCenter
         Caption = '   '
         Color = clWindow
         ParentColor = False
       end
-      object Label20: TLabel
-        Left = -1
-        Top = 4
-        Width = 200
-        Height = 40
-        Align = alCustom
+      object lblCBOpenInn1: TLabel
+        Left = 113
+        Top = 125
+        Width = 9
+        Height = 13
         Alignment = taCenter
-        AutoSize = False
-        Caption = 'FORWARD'#13#10'INTERCONNECTION'
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Caption = '   '
+        Color = clWindow
         ParentColor = False
-        ParentFont = False
-      end
-      object Label22: TLabel
-        Left = -2
-        Top = 69
-        Width = 200
-        Height = 2
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
       end
       object rbManInn1: TRadioButton
-        Left = 7
-        Top = 50
-        Width = 43
+        Left = 28
+        Top = 29
+        Width = 15
         Height = 17
-        Caption = 'Man'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -1498,11 +1970,10 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = InterCon1ModeClick
       end
       object rbOffInn1: TRadioButton
-        Left = 62
-        Top = 50
-        Width = 35
+        Left = 149
+        Top = 29
+        Width = 15
         Height = 17
-        Caption = 'Off'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -1513,11 +1984,10 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = InterCon1ModeClick
       end
       object rbAutInn1: TRadioButton
-        Left = 111
-        Top = 50
-        Width = 79
+        Left = 254
+        Top = 29
+        Width = 15
         Height = 17
-        Caption = 'Auto Close'
         Checked = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1529,12 +1999,167 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         TabStop = True
         OnClick = InterCon1ModeClick
       end
+      object btnCBCloseInn1: TButton
+        Tag = 10
+        Left = 394
+        Top = 55
+        Width = 95
+        Height = 31
+        Caption = 'Close'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 3
+        OnClick = btnInnCBCloseOpenClick
+      end
       object btnCBOpenInn1: TButton
         Tag = 10
-        Left = 104
-        Top = 75
-        Width = 56
-        Height = 20
+        Left = 514
+        Top = 55
+        Width = 95
+        Height = 31
+        Caption = 'Open'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 4
+        OnClick = btnInnCBCloseOpenClick
+      end
+      object pnl2: TPanel
+        Left = 26
+        Top = 70
+        Width = 338
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 5
+      end
+    end
+    object Panel19: TPanel
+      Left = 1023
+      Top = 476
+      Width = 634
+      Height = 105
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 14
+      object Label22: TLabel
+        Left = 47
+        Top = 29
+        Width = 41
+        Height = 16
+        Caption = 'Manual'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label25: TLabel
+        Left = 168
+        Top = 29
+        Width = 17
+        Height = 16
+        Caption = 'Off'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label29: TLabel
+        Left = 273
+        Top = 29
+        Width = 89
+        Height = 16
+        Caption = 'Auto Take Over'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblCBCloseInn2: TLabel
+        Left = 168
+        Top = 124
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWindow
+        ParentColor = False
+      end
+      object lblCBOpenInn2: TLabel
+        Left = 129
+        Top = 124
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWindow
+        ParentColor = False
+      end
+      object rbManInn2: TRadioButton
+        Left = 28
+        Top = 29
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = InterCon2ModeClick
+      end
+      object rbOffInn2: TRadioButton
+        Left = 149
+        Top = 29
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = InterCon2ModeClick
+      end
+      object rbAutInn2: TRadioButton
+        Left = 254
+        Top = 29
+        Width = 15
+        Height = 17
+        Checked = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        TabStop = True
+        OnClick = InterCon2ModeClick
+      end
+      object btnCBOpenInn2: TButton
+        Tag = 10
+        Left = 514
+        Top = 55
+        Width = 95
+        Height = 31
         Caption = 'Open'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1545,12 +2170,12 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         TabOrder = 3
         OnClick = btnInnCBCloseOpenClick
       end
-      object btnCBCloseInn1: TButton
+      object btnCBCloseInn2: TButton
         Tag = 10
-        Left = 38
-        Top = 75
-        Width = 56
-        Height = 20
+        Left = 394
+        Top = 55
+        Width = 95
+        Height = 31
         Caption = 'Close'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1561,112 +2186,34 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         TabOrder = 4
         OnClick = btnInnCBCloseOpenClick
       end
+      object pnl1: TPanel
+        Left = 27
+        Top = 70
+        Width = 338
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 5
+      end
     end
-    object grp7: TGroupBox
-      Left = 285
-      Top = 76
-      Width = 198
-      Height = 165
-      TabOrder = 6
-      object Label6: TLabel
-        Left = -2
-        Top = 4
-        Width = 200
-        Height = 160
+    object Panel20: TPanel
+      Left = 30
+      Top = 439
+      Width = 634
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 15
+      object Label20: TLabel
+        Left = 191
+        Top = 7
+        Width = 252
+        Height = 19
         Align = alCustom
         Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label12: TLabel
-        Left = 2
-        Top = 28
-        Width = 194
-        Height = 134
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBtnFace
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lbl15: TLabel
-        Left = 35
-        Top = 61
-        Width = 74
-        Height = 13
-        Caption = 'Engine Running'
-        Color = clInactiveBorder
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
-      object lbl18: TLabel
-        Left = 35
-        Top = 79
-        Width = 53
-        Height = 13
-        Alignment = taCenter
-        Caption = 'Preference'
-        Color = clInactiveBorder
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
-      object lbl19: TLabel
-        Left = 35
-        Top = 97
-        Width = 68
-        Height = 13
-        Alignment = taCenter
-        Caption = 'Busbar Supply'
-        Color = clInactiveBorder
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblEngineRunGen4: TLabel
-        Left = 11
-        Top = 60
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        ParentColor = False
-      end
-      object lblGeneratorSuppliedGen4: TLabel
-        Left = 2
-        Top = 6
-        Width = 194
-        Height = 20
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'GENSYS 04'
+        Caption = 'FORWARD INTERCONNECTION'
         Color = clBlack
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
@@ -1676,286 +2223,84 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentColor = False
         ParentFont = False
       end
-      object lblPrefGen4: TLabel
-        Left = 11
-        Top = 78
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        ParentColor = False
-      end
-      object lblBusbarGen4: TLabel
-        Left = 11
-        Top = 96
-        Width = 12
-        Height = 14
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        ParentColor = False
-      end
-      object Label4: TLabel
-        Left = -2
-        Top = 52
-        Width = 200
-        Height = 2
+    end
+    object Panel22: TPanel
+      Left = 1023
+      Top = 439
+      Width = 634
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 16
+      object Label23: TLabel
+        Left = 206
+        Top = 6
+        Width = 221
+        Height = 19
         Align = alCustom
         Alignment = taCenter
-        AutoSize = False
+        Caption = 'AFTER INTERCONNECTION'
         Color = clBlack
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentColor = False
+        ParentFont = False
+      end
+    end
+    object Panel23: TPanel
+      Left = 546
+      Top = 655
+      Width = 307
+      Height = 162
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 17
+      object Label4: TLabel
+        Left = 44
+        Top = 33
+        Width = 28
+        Height = 16
+        Caption = 'After'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
         ParentFont = False
       end
       object Label5: TLabel
-        Left = -2
-        Top = 131
-        Width = 200
-        Height = 2
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
+        Left = 139
+        Top = 33
+        Width = 17
+        Height = 16
+        Caption = 'Off'
+        Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblEmergencyStop4: TLabel
-        Left = 2
-        Top = 6
-        Width = 194
-        Height = 20
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'GENSYS 04'
-        Color = clRed
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Visible = False
-        WordWrap = True
-      end
-      object btnStartGen4: TButton
-        Tag = 4
-        Left = 33
-        Top = 138
-        Width = 40
-        Height = 20
-        Caption = 'Start'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-        OnClick = btnStartClick
-      end
-      object btnStopGen4: TButton
-        Tag = 10
-        Left = 78
-        Top = 138
-        Width = 40
-        Height = 20
-        Caption = 'Stop'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 1
-        OnClick = btnStopClick
-      end
-      object btnPrefGen4: TButton
-        Tag = 10
-        Left = 124
-        Top = 138
-        Width = 40
-        Height = 20
-        Caption = 'Pref'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 2
-        OnClick = btnPrefClick
-      end
-      object rbManGen4: TRadioButton
-        Left = 10
-        Top = 32
-        Width = 55
-        Height = 17
-        Caption = 'Man'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
+        Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
-        OnClick = Gen4ModeClick
       end
-      object rbSemGen4: TRadioButton
-        Left = 59
-        Top = 32
-        Width = 78
-        Height = 17
-        Caption = 'Semi Auto'
+      object Label6: TLabel
+        Left = 234
+        Top = 33
+        Width = 48
+        Height = 16
+        Caption = 'Forward'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
+        Font.Color = clWhite
+        Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = []
-        ParentFont = False
-        TabOrder = 4
-        OnClick = Gen4ModeClick
-      end
-      object rbAutGen4: TRadioButton
-        Left = 140
-        Top = 32
-        Width = 50
-        Height = 17
-        Caption = 'Auto'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 5
-        OnClick = Gen4ModeClick
-      end
-    end
-    object TGroupBox
-      Left = 547
-      Top = 102
-      Width = 45
-      Height = 513
-      Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentBackground = False
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 7
-      object trckbrBebanAft: TTrackBar
-        Left = 2
-        Top = 9
-        Width = 41
-        Height = 478
-        Max = 0
-        Min = -450
-        Orientation = trVertical
-        Frequency = 45
-        Position = -45
-        TabOrder = 0
-        ThumbLength = 15
-        TickMarks = tmBoth
-        OnChange = trckbrBebanChange
-      end
-    end
-    object TGroupBox
-      Left = 753
-      Top = 102
-      Width = 45
-      Height = 513
-      Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentBackground = False
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 8
-      object trckbrBebanFwd: TTrackBar
-        Left = 2
-        Top = 15
-        Width = 41
-        Height = 478
-        Max = 0
-        Min = -450
-        Orientation = trVertical
-        Frequency = 45
-        Position = -45
-        TabOrder = 0
-        ThumbLength = 15
-        TickMarks = tmBoth
-        OnChange = trckbrBebanChange
-      end
-    end
-    object grp19: TGroupBox
-      Left = 862
-      Top = 544
-      Width = 198
-      Height = 101
-      Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentBackground = False
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 10
-      object Label38: TLabel
-        Left = -2
-        Top = -46
-        Width = 200
-        Height = 160
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label37: TLabel
-        Left = 2
-        Top = 28
-        Width = 194
-        Height = 71
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBtnFace
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
         ParentFont = False
       end
       object lblCBOpenClosedE: TLabel
-        Left = 78
+        Left = 149
         Top = 80
         Width = 9
         Height = 13
@@ -1964,62 +2309,11 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Color = clWindow
         ParentColor = False
       end
-      object Label13: TLabel
-        Left = -2
-        Top = 4
-        Width = 200
-        Height = 40
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'EMERGENCY'#13#10'INTERCONNECTION'
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label16: TLabel
-        Left = -1
-        Top = 69
-        Width = 200
-        Height = 2
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object rbFwdDistrE: TRadioButton
-        Left = 129
-        Top = 50
-        Width = 44
-        Height = 17
-        Caption = 'Fwd'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 2
-        OnClick = InterEmergencyModeClick
-      end
       object rbAftDistrE: TRadioButton
         Left = 25
-        Top = 50
-        Width = 34
+        Top = 33
+        Width = 15
         Height = 17
-        Caption = 'Aft'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -2030,11 +2324,10 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = InterEmergencyModeClick
       end
       object rbOffDistrE: TRadioButton
-        Left = 74
-        Top = 50
-        Width = 40
+        Left = 120
+        Top = 33
+        Width = 15
         Height = 17
-        Caption = 'Off'
         Checked = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -2046,12 +2339,36 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         TabStop = True
         OnClick = InterEmergencyModeClick
       end
+      object rbFwdDistrE: TRadioButton
+        Left = 215
+        Top = 33
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = InterEmergencyModeClick
+      end
+      object Panel24: TPanel
+        Left = 27
+        Top = 78
+        Width = 254
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 3
+      end
       object btnCBOpenClosedEmergency: TButton
         Tag = 10
-        Left = 49
-        Top = 75
-        Width = 100
-        Height = 20
+        Left = 73
+        Top = 99
+        Width = 160
+        Height = 38
         Caption = 'Open/ Close'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -2059,190 +2376,25 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 4
         OnClick = btnInnCBCloseOpenClick
       end
     end
-    object btnCBClosedGen1: TVrDemoButton
-      Tag = 2
-      Left = 862
-      Top = 243
-      Width = 198
-      Height = 25
-      Hint = 'Circuit Breaker Reset Gensys 3'
-      FontEnter.Charset = ANSI_CHARSET
-      FontEnter.Color = clBlack
-      FontEnter.Height = -13
-      FontEnter.Name = 'Arial'
-      FontEnter.Style = [fsBold]
-      FontLeave.Charset = ANSI_CHARSET
-      FontLeave.Color = clBlack
-      FontLeave.Height = -11
-      FontLeave.Name = 'Arial'
-      FontLeave.Style = [fsBold]
-      Font3D.ShadowColor = clGray
-      Caption = 'Circuit Breaker'
-      TabOrder = 11
-      OnClick = btnCBClosedClick
-    end
-    object TGroupBox
-      Left = 1087
-      Top = 453
-      Width = 198
-      Height = 165
-      Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
+    object Panel25: TPanel
+      Left = 869
+      Top = 616
+      Width = 634
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
       ParentBackground = False
-      ParentColor = False
-      ParentFont = False
-      TabOrder = 9
-      object Label35: TLabel
-        Left = -2
-        Top = 4
-        Width = 200
-        Height = 160
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label36: TLabel
-        Left = 2
-        Top = 28
-        Width = 194
-        Height = 134
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBtnFace
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblEngineRunGenE: TLabel
-        Left = 11
-        Top = 60
-        Width = 9
-        Height = 13
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        ParentColor = False
-      end
-      object lbl10: TLabel
-        Left = 35
-        Top = 61
-        Width = 74
-        Height = 13
-        Alignment = taCenter
-        Caption = 'Engine Running'
-        Color = clInactiveBorder
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblGeneratorSuppliedGenE: TLabel
-        Left = 2
-        Top = 6
-        Width = 194
-        Height = 20
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'EMERGENCY'
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lblBusbarGenE: TLabel
-        Left = 11
-        Top = 78
-        Width = 9
-        Height = 13
-        Alignment = taCenter
-        Caption = '   '
-        Color = clBlack
-        ParentColor = False
-      end
-      object lbl66: TLabel
-        Left = 35
-        Top = 79
-        Width = 68
-        Height = 13
-        Caption = 'Busbar Supply'
-        Color = clInactiveBorder
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label17: TLabel
-        Left = -2
-        Top = 52
-        Width = 200
-        Height = 2
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label18: TLabel
-        Left = -1
-        Top = 131
-        Width = 200
-        Height = 2
-        Align = alCustom
-        Alignment = taCenter
-        AutoSize = False
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
+      TabOrder = 18
       object lblEmergencyStop5: TLabel
-        Left = 2
-        Top = 6
-        Width = 194
-        Height = 20
+        Left = 266
+        Top = 7
+        Width = 102
+        Height = 19
         Alignment = taCenter
-        AutoSize = False
         Caption = 'EMERGENCY'
         Color = clRed
         Font.Charset = ANSI_CHARSET
@@ -2255,229 +2407,120 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Visible = False
         WordWrap = True
       end
-      object rbManGenE: TRadioButton
-        Left = 10
-        Top = 32
-        Width = 66
-        Height = 17
-        Caption = 'Man'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        OnClick = GenEModeClick
-      end
-      object rbSemGenE: TRadioButton
-        Left = 59
-        Top = 32
-        Width = 78
-        Height = 17
-        Caption = 'Semi Auto'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-        OnClick = GenEModeClick
-      end
-      object rbAutGenE: TRadioButton
-        Left = 140
-        Top = 32
-        Width = 50
-        Height = 17
-        Caption = 'Auto'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 2
-        OnClick = GenEModeClick
-      end
-      object btnStartGenE: TButton
-        Tag = 10
-        Left = 56
-        Top = 138
-        Width = 40
-        Height = 20
-        Caption = 'Start'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
+      object lblGeneratorSuppliedGene: TLabel
+        Left = 266
+        Top = 6
+        Width = 102
+        Height = 19
+        Alignment = taCenter
+        Caption = 'EMERGENCY'
+        Color = clRed
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
+        ParentColor = False
         ParentFont = False
-        TabOrder = 3
-        OnClick = btnStartClick
-      end
-      object btnStopGenE: TButton
-        Tag = 10
-        Left = 102
-        Top = 138
-        Width = 40
-        Height = 20
-        Caption = 'Stop'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 4
-        OnClick = btnStopClick
+        Visible = False
+        WordWrap = True
       end
     end
-    object btnCBClosedGen2: TVrDemoButton
-      Tag = 2
-      Left = 1087
-      Top = 243
-      Width = 198
-      Height = 25
-      Hint = 'Circuit Breaker Reset Gensys 3'
-      FontEnter.Charset = ANSI_CHARSET
-      FontEnter.Color = clBlack
-      FontEnter.Height = -13
-      FontEnter.Name = 'Arial'
-      FontEnter.Style = [fsBold]
-      FontLeave.Charset = ANSI_CHARSET
-      FontLeave.Color = clBlack
-      FontLeave.Height = -11
-      FontLeave.Name = 'Arial'
-      FontLeave.Style = [fsBold]
-      Font3D.ShadowColor = clGray
-      Caption = 'Circuit Breaker'
-      TabOrder = 12
-      OnClick = btnCBClosedClick
-    end
-    object btnCBClosedGenE: TVrDemoButton
-      Tag = 2
-      Left = 1087
-      Top = 620
-      Width = 198
-      Height = 25
-      Hint = 'Circuit Breaker Reset Gensys 3'
-      FontEnter.Charset = ANSI_CHARSET
-      FontEnter.Color = clBlack
-      FontEnter.Height = -13
-      FontEnter.Name = 'Arial'
-      FontEnter.Style = [fsBold]
-      FontLeave.Charset = ANSI_CHARSET
-      FontLeave.Color = clBlack
-      FontLeave.Height = -11
-      FontLeave.Name = 'Arial'
-      FontLeave.Style = [fsBold]
-      Font3D.ShadowColor = clGray
-      Caption = 'Circuit Breaker'
-      TabOrder = 13
-      OnClick = btnCBClosedClick
-    end
-    object btnCBClosedGen3: TVrDemoButton
-      Tag = 2
-      Left = 60
-      Top = 243
-      Width = 198
-      Height = 25
-      Hint = 'Circuit Breaker Reset Gensys 3'
-      FontEnter.Charset = ANSI_CHARSET
-      FontEnter.Color = clBlack
-      FontEnter.Height = -13
-      FontEnter.Name = 'Arial'
-      FontEnter.Style = [fsBold]
-      FontLeave.Charset = ANSI_CHARSET
-      FontLeave.Color = clBlack
-      FontLeave.Height = -11
-      FontLeave.Name = 'Arial'
-      FontLeave.Style = [fsBold]
-      Font3D.ShadowColor = clGray
-      Caption = 'Circuit Breaker'
-      TabOrder = 14
-      OnClick = btnCBClosedClick
-    end
-    object btnCBClosedGen4: TVrDemoButton
-      Tag = 2
-      Left = 285
-      Top = 243
-      Width = 198
-      Height = 25
-      Hint = 'Circuit Breaker Reset Gensys 3'
-      FontEnter.Charset = ANSI_CHARSET
-      FontEnter.Color = clBlack
-      FontEnter.Height = -13
-      FontEnter.Name = 'Arial'
-      FontEnter.Style = [fsBold]
-      FontLeave.Charset = ANSI_CHARSET
-      FontLeave.Color = clBlack
-      FontLeave.Height = -11
-      FontLeave.Name = 'Arial'
-      FontLeave.Style = [fsBold]
-      Font3D.ShadowColor = clGray
-      Caption = 'Circuit Breaker'
-      TabOrder = 15
-      OnClick = btnCBClosedClick
-    end
-    object btnApply: TButton
+    object Button1: TButton
       Tag = 10
-      Left = 600
-      Top = 590
-      Width = 145
-      Height = 25
-      Caption = 'Apply'
+      Left = 792
+      Top = 838
+      Width = 95
+      Height = 31
+      Caption = 'False'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 16
-      OnClick = btnApplyClick
+      TabOrder = 20
+      Visible = False
+      OnClick = emergency
     end
-  end
-  object btnabc: TButton
-    Tag = 10
-    Left = 1189
-    Top = 674
-    Width = 40
-    Height = 20
-    Caption = 'True'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 0
-    Visible = False
-    OnClick = emergency
-  end
-  object Edit1: TEdit
-    Left = 1235
-    Top = 673
-    Width = 30
-    Height = 21
-    TabOrder = 1
-    Visible = False
-  end
-  object Button1: TButton
-    Tag = 10
-    Left = 1271
-    Top = 674
-    Width = 40
-    Height = 20
-    Caption = 'False'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 2
-    Visible = False
-    OnClick = emergency
+    object Edit1: TEdit
+      Left = 898
+      Top = 838
+      Width = 95
+      Height = 31
+      TabOrder = 21
+      Visible = False
+    end
+    object btnabc: TButton
+      Tag = 10
+      Left = 1004
+      Top = 838
+      Width = 95
+      Height = 31
+      Caption = 'True'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 22
+      Visible = False
+      OnClick = emergency
+    end
+    object Panel5: TPanel
+      Left = 184
+      Top = 616
+      Width = 307
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 23
+      object Label27: TLabel
+        Left = 42
+        Top = 7
+        Width = 223
+        Height = 19
+        Align = alCustom
+        Alignment = taCenter
+        Caption = 'SHORE INTERCONNECTION'
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+    end
+    object Panel21: TPanel
+      Left = 546
+      Top = 616
+      Width = 307
+      Height = 32
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 24
+      object Label13: TLabel
+        Left = 19
+        Top = 7
+        Width = 269
+        Height = 19
+        Align = alCustom
+        Alignment = taCenter
+        Caption = 'EMERGENCY INTERCONNECTION'
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+    end
   end
 end
