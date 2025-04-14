@@ -227,7 +227,7 @@ type
   TPMSCond_Data = class
     PMS_ID : Integer;
     PMS_Name : string;
-    PMS_Type : Integer;
+    PMS_Type : Integer; {1: Generator, 2: Switchboard}
 
     {Gen}
     PMS_Mode : Integer;      {-----> Mode Genarator : 1:Man; 2:SemiMan; 3:Aut; 4:SemiAut}

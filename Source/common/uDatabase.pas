@@ -3061,10 +3061,7 @@ begin
     Connection := FConnection;
     SQL.Clear;
 
-    query := 'SELECT * ' +
-             'FROM PMS_Condition ' +
-             'WHERE Condition_ID = ' + IntToStr(aID) +
-             ' ORDER BY PMS_ID';
+    query := 'SELECT * FROM PMS_Condition WHERE Condition_ID = ' + IntToStr(aID) + ' ORDER BY PMS_ID';
     SQL.Add(query);
     Open;
 

@@ -255,14 +255,11 @@ const
   C_WB_TK_SB = 'WB TK SB';
   C_WB_TK_FWD = 'WB TK FWD';
   C_WB_PUMP = 'Ballast Pump';
-  C_MAINENGINE_ID : array [0..1] of string = ('Main Engine PS',
-    'Main Engine SB');
+  C_MAINENGINE_ID : array [0..1] of string = ('Main Engine PS', 'Main Engine SB');
   C_GEARBOX_ID : array [0..1] of string = ('GearBox PS', 'GearBox SB');
   C_CPP_ID : array [0..1] of string = ('CPP PS', 'CPP SB');
-  C_GENERATOR_ID : array [0..4] of string = ('Generator 1', 'Generator 2',
-    'Generator 3', 'Generator 4', 'Emergency Generator');
-  C_SWITCHBOARD_ID : array [0..2] of string = ('Switchboard FWD',
-    'Switchboard AFT', 'Switchboard Emergency');
+  C_GENERATOR_ID : array [0..4] of string = ('Generator 1', 'Generator 2', 'Generator 3', 'Generator 4', 'Emergency Generator');
+  C_SWITCHBOARD_ID : array [0..3] of string = ('Switchboard FWD', 'Switchboard AFT', 'Switchboard Emergency FWD', 'Switchboard Emergency AFT');
   C_POWER_ID : array [0..1] of string = ('Power FWD', 'Power AFT');
 
   A_MimicType : array [0..31] of Integer = (0, 1, 2, 4, 5,

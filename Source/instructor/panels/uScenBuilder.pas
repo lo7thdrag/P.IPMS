@@ -214,47 +214,34 @@ type
     chkG2Pref: TCheckBox;
     grpForward: TGroupBox;
     Label40: TLabel;
-    lblCBOpenInn1: TLabel;
-    lblCBCloseInn1: TLabel;
-    Label41: TLabel;
     grpAfter: TGroupBox;
-    lblCBOpenInn2: TLabel;
-    lblCBCloseInn2: TLabel;
-    Label42: TLabel;
-    rbManInn2: TRadioButton;
-    rbAutInn2: TRadioButton;
     btnNewPMS: TRzBmpButton;
     btnEditPMS: TRzBmpButton;
     btnDeletePMS: TRzBmpButton;
-    ComboBox1: TComboBox;
-    ComboBox2: TComboBox;
+    cbbModeGen3: TComboBox;
+    cbbModeGen1: TComboBox;
     Label53: TLabel;
     Label54: TLabel;
-    ComboBox3: TComboBox;
+    cbbModeGen2: TComboBox;
     Label55: TLabel;
-    ComboBox4: TComboBox;
+    cbbModeGen4: TComboBox;
     Label56: TLabel;
-    ComboBox5: TComboBox;
+    cbbCircuitBreaker1: TComboBox;
     Label57: TLabel;
     Label58: TLabel;
-    ComboBox6: TComboBox;
+    cbbCircuitBreaker2: TComboBox;
     Label59: TLabel;
-    ComboBox7: TComboBox;
+    cbbCircuitBreaker3: TComboBox;
     Label60: TLabel;
-    ComboBox8: TComboBox;
-    ComboBox9: TComboBox;
-    RadioButton1: TRadioButton;
-    RadioButton2: TRadioButton;
+    cbbCircuitBreaker4: TComboBox;
+    cbbCircuitBreakerFwd: TComboBox;
     GroupBox5: TGroupBox;
     Label61: TLabel;
     Label62: TLabel;
     Label63: TLabel;
-    RadioButton3: TRadioButton;
-    RadioButton4: TRadioButton;
     Label43: TLabel;
-    ComboBox10: TComboBox;
-    ComboBox11: TComboBox;
-    Label64: TLabel;
+    cbbCircuitBreakerAft: TComboBox;
+    cbbCircuitBreakerEmFwd: TComboBox;
     GroupBox6: TGroupBox;
     Label44: TLabel;
     Label46: TLabel;
@@ -267,17 +254,14 @@ type
     Label49: TLabel;
     Label50: TLabel;
     Label51: TLabel;
-    CheckBox49: TCheckBox;
-    ComboBox13: TComboBox;
-    ComboBox14: TComboBox;
+    chkEngineE: TCheckBox;
+    cbbModeGenE: TComboBox;
+    cbbCircuitBreakerE: TComboBox;
     GroupBox8: TGroupBox;
-    Label67: TLabel;
     Label68: TLabel;
     Label69: TLabel;
     Label70: TLabel;
-    ComboBox16: TComboBox;
-    RadioButton7: TRadioButton;
-    RadioButton8: TRadioButton;
+    cbbCircuitBreakerEmAft: TComboBox;
     Panel5: TPanel;
     Label52: TLabel;
     Panel6: TPanel;
@@ -388,6 +372,20 @@ type
     lbl6: TLabel;
     lbl8: TLabel;
     lbl9: TLabel;
+    cbbModeInnAft: TComboBox;
+    cbbModeInnFwd: TComboBox;
+    lbl39: TLabel;
+    lbl40: TLabel;
+    lbl43: TLabel;
+    lbl44: TLabel;
+    cbbModeInnEmAft: TComboBox;
+    lbl45: TLabel;
+    cbbModeInnEmFwd: TComboBox;
+    lbl46: TLabel;
+    lbl41: TPanel;
+    lbl42: TLabel;
+    lbl47: TPanel;
+    lbl48: TLabel;
 
     {$REGION ' Scenario Section '}
     procedure btnRefreshScenarioClick(Sender: TObject);
@@ -467,6 +465,8 @@ type
     procedure edtMELOTKKeyPress(Sender: TObject; var Key: Char);
     procedure edtGBXLOTKKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
+    procedure lstPMSClick(Sender: TObject);
+    procedure grpForwardClick(Sender: TObject);
 
   private
     FScenarioID : Integer;
@@ -477,12 +477,26 @@ type
     FFAConditionID : Integer;
     FSelectedConditionID : integer;
 
+    FPMSConditionName : string;
+    PMSNameBuffer : string;
+
+    FPCSConditionName : string;
+    PCSNameBuffer : string;
+
+    FPmsIDBuffer : array [0..8] of Integer;
+
     procedure ClearTabPickScen(value : Integer);
+
+    {$REGION ' PMS Section '}
+    function CekPMSInput: Boolean;
+
+    procedure UpdatePMSList;
+    {$ENDREGION}
 
   public
     procedure UpdateScenarioList;
     procedure UpdateSessionList;
-    procedure UpdatePMSList;
+
     procedure UpdatePCSList;
     procedure UpdateTankList;
     procedure UpdateFAList;
@@ -494,9 +508,8 @@ var
 
 implementation
 
-uses uAvailableScenario, uAvailablePMSCondition, uInstructorSystem,
-  uAvailablePCSCondition, uAvailableFACondition, uAvailableTanksCondition,
-  uFunction;
+uses
+  uDataType, uInstructorSystem, uFunction;
 
 {$R *.dfm}
 
@@ -620,37 +633,37 @@ var
 //  i : integer;
 //  l : TStrings;
 begin
-  if not (Assigned(frmAvailScenario)) then
-    frmAvailScenario := TfrmAvailScenario.Create(Self);
+//  if not (Assigned(frmAvailScenario)) then
+//    frmAvailScenario := TfrmAvailScenario.Create(Self);
+//
+//  scenarios := nil;
+//  InstructorSys.Scenario.getSessions(scenarios);
+//  frmAvailScenario.SetAvailableScenario(scenarios);
+//  scenarios.Free;
+//  lblSessionID.Caption := '0';
 
-  scenarios := nil;
-  InstructorSys.Scenario.getSessions(scenarios);
-  frmAvailScenario.SetAvailableScenario(scenarios);
-  scenarios.Free;
-  lblSessionID.Caption := '0';
-
-  if frmAvailScenario.ShowModal = mrOk then
-  begin
-
-    if (frmAvailScenario.ScenarioName = '') then
-      Exit;
-
-    mmo1.Lines.Clear;
-//    edt1.Text := '';
-
-    scenData := InstructorSys.Scenario.getSession(frmAvailScenario.ScenarioName);
-
-    if not Assigned(scenData) then
-      Exit;
-
-//    edt1.Text := scenData.SessionName;
-
-    mmo1.Lines.Add('Session ' + IntToStr(scenData.SessionID) + ' from ' + scenData.OriginalScenario +
-        ' scenario');
-    mmo1.Lines.Add('Started at ' + DateTimeToStr(scenData.SessionStart));
-    mmo1.Lines.Add('Stopped at ' + DateTimeToStr(scenData.SessionStop));
-    lblSessionID.Caption := IntToStr(scenData.SessionID);
-  end;
+//  if frmAvailScenario.ShowModal = mrOk then
+//  begin
+//
+//    if (frmAvailScenario.ScenarioName = '') then
+//      Exit;
+//
+//    mmo1.Lines.Clear;
+////    edt1.Text := '';
+//
+//    scenData := InstructorSys.Scenario.getSession(frmAvailScenario.ScenarioName);
+//
+//    if not Assigned(scenData) then
+//      Exit;
+//
+////    edt1.Text := scenData.SessionName;
+//
+//    mmo1.Lines.Add('Session ' + IntToStr(scenData.SessionID) + ' from ' + scenData.OriginalScenario +
+//        ' scenario');
+//    mmo1.Lines.Add('Started at ' + DateTimeToStr(scenData.SessionStart));
+//    mmo1.Lines.Add('Stopped at ' + DateTimeToStr(scenData.SessionStop));
+//    lblSessionID.Caption := IntToStr(scenData.SessionID);
+//  end;
 end;
 
 procedure TfrmScenBuilder.actDeleteAllExecute(Sender: TObject);
@@ -716,89 +729,89 @@ var
   i : integer;
   l : TStrings;
 begin
-  if not (Assigned(frmAvailScenario)) then
-    frmAvailScenario := TfrmAvailScenario.Create(Self);
+//  if not (Assigned(frmAvailScenario)) then
+//    frmAvailScenario := TfrmAvailScenario.Create(Self);
+//
+//  scenarios := nil;
+//  InstructorSys.Scenario.getScenarios(scenarios);
+//  frmAvailScenario.SetAvailableScenario(scenarios);
+//  scenarios.Free;
 
-  scenarios := nil;
-  InstructorSys.Scenario.getScenarios(scenarios);
-  frmAvailScenario.SetAvailableScenario(scenarios);
-  scenarios.Free;
-
-  if frmAvailScenario.ShowModal = mrOk then
-  begin
-    if (frmAvailScenario.ScenarioName = '') then
-      Exit;
-
-    scenData := InstructorSys.Scenario.getScenario(frmAvailScenario.ScenarioName);
-
-    if not Assigned(scenData) then
-      Exit;
-
-    FScenarioID := scenData.ID;
-    edtScenarioName.Text := scenData.Name;
-
-    mmoScenarioDescription.Lines.Clear;
-    mmoScenarioDescription.Lines.Add(scenData.Description);
-
-    FPMSConditionID := 0;
-    edtPMSName.Text := '<None>';
-    FPCSConditionID := 0;
-    edtPCSName.Text := '<None>';
-    FElementConditionID := 0;
-    edtElementName.Text := '<None>';
-    FTANKConditionID := 0;
-    edtTANKName.Text := '<None>';
-    FFAConditionID := 0;
-    edtFAName.Text := '<None>';
-
-    mmoPMSInfo.Lines.Clear;
-    mmoPCSInfo.Lines.Clear;
-    mmoTANKInfo.Lines.Clear;
-    mmoFAInfo.Lines.Clear;
-
-    for i := 0 to Length(scenData.ArrConditionID) - 1 do
-    begin
-      if scenData.ArrConditionType[i] = 'PMS' then
-      begin
-        FPMSConditionID := scenData.ArrConditionID[i];
-        edtPMSName.Text := scenData.ArrConditionName[i];
-
-        l := InstructorSys.Database.GetScenarioConditions(scenData.Name,'PMS');
-        mmoPMSInfo.Lines.AddStrings(l);
-        l.Free;
-      end;
-
-      if scenData.ArrConditionType[i] = 'PCS' then
-      begin
-        FPCSConditionID := scenData.ArrConditionID[i];
-        edtPCSName.Text := scenData.ArrConditionName[i];
-
-        l := InstructorSys.Database.GetScenarioConditions(scenData.Name,'PCS');
-        mmoPCSInfo.Lines.AddStrings(l);
-        l.Free;
-      end;
-
-      if scenData.ArrConditionType[i] = 'ELEMENT' then
-      begin
-        FElementConditionID := scenData.ArrConditionID[i];
-        edtElementName.Text := scenData.ArrConditionName[i];
-      end;
-
-      if scenData.ArrConditionType[i] = 'TANK' then
-      begin
-        FTANKConditionID := scenData.ArrConditionID[i];
-        edtTANKName.Text := scenData.ArrConditionName[i];
-      end;
-
-      if scenData.ArrConditionType[i] = 'FA' then
-      begin
-        FFAConditionID := scenData.ArrConditionID[i];
-        edtFAName.Text := scenData.ArrConditionName[i];
-      end;
-    end;
-
-    scenData.Free;
-  end;
+//  if frmAvailScenario.ShowModal = mrOk then
+//  begin
+//    if (frmAvailScenario.ScenarioName = '') then
+//      Exit;
+//
+//    scenData := InstructorSys.Scenario.getScenario(frmAvailScenario.ScenarioName);
+//
+//    if not Assigned(scenData) then
+//      Exit;
+//
+//    FScenarioID := scenData.ID;
+//    edtScenarioName.Text := scenData.Name;
+//
+//    mmoScenarioDescription.Lines.Clear;
+//    mmoScenarioDescription.Lines.Add(scenData.Description);
+//
+//    FPMSConditionID := 0;
+//    edtPMSName.Text := '<None>';
+//    FPCSConditionID := 0;
+//    edtPCSName.Text := '<None>';
+//    FElementConditionID := 0;
+//    edtElementName.Text := '<None>';
+//    FTANKConditionID := 0;
+//    edtTANKName.Text := '<None>';
+//    FFAConditionID := 0;
+//    edtFAName.Text := '<None>';
+//
+//    mmoPMSInfo.Lines.Clear;
+//    mmoPCSInfo.Lines.Clear;
+//    mmoTANKInfo.Lines.Clear;
+//    mmoFAInfo.Lines.Clear;
+//
+//    for i := 0 to Length(scenData.ArrConditionID) - 1 do
+//    begin
+//      if scenData.ArrConditionType[i] = 'PMS' then
+//      begin
+//        FPMSConditionID := scenData.ArrConditionID[i];
+//        edtPMSName.Text := scenData.ArrConditionName[i];
+//
+//        l := InstructorSys.Database.GetScenarioConditions(scenData.Name,'PMS');
+//        mmoPMSInfo.Lines.AddStrings(l);
+//        l.Free;
+//      end;
+//
+//      if scenData.ArrConditionType[i] = 'PCS' then
+//      begin
+//        FPCSConditionID := scenData.ArrConditionID[i];
+//        edtPCSName.Text := scenData.ArrConditionName[i];
+//
+//        l := InstructorSys.Database.GetScenarioConditions(scenData.Name,'PCS');
+//        mmoPCSInfo.Lines.AddStrings(l);
+//        l.Free;
+//      end;
+//
+//      if scenData.ArrConditionType[i] = 'ELEMENT' then
+//      begin
+//        FElementConditionID := scenData.ArrConditionID[i];
+//        edtElementName.Text := scenData.ArrConditionName[i];
+//      end;
+//
+//      if scenData.ArrConditionType[i] = 'TANK' then
+//      begin
+//        FTANKConditionID := scenData.ArrConditionID[i];
+//        edtTANKName.Text := scenData.ArrConditionName[i];
+//      end;
+//
+//      if scenData.ArrConditionType[i] = 'FA' then
+//      begin
+//        FFAConditionID := scenData.ArrConditionID[i];
+//        edtFAName.Text := scenData.ArrConditionName[i];
+//      end;
+//    end;
+//
+//    scenData.Free;
+//  end;
 
 end;
 
@@ -908,6 +921,11 @@ begin
   UpdateScenarioList;
 end;
 
+procedure TfrmScenBuilder.grpForwardClick(Sender: TObject);
+begin
+
+end;
+
 {$REGION ' Scenario Section '}
 
 procedure TfrmScenBuilder.btnRefreshScenarioClick(Sender: TObject);
@@ -953,26 +971,26 @@ var
   pmsList : TList;
   i : Integer;
 begin
-  if not Assigned(frmAvailPMSCondition)  then
-    frmAvailPMSCondition := TfrmAvailPMSCondition.Create(Self);
+//  if not Assigned(frmAvailPMSCondition)  then
+//    frmAvailPMSCondition := TfrmAvailPMSCondition.Create(Self);
+//
+//  pmsList := nil;
+//  pmsNames := nil;
+//  InstructorSys.Scenario.GetPMSConditions(pmsNames);
+//  frmAvailPMSCondition.SetAvailableCondition(pmsNames);
+//  pmsNames.Free;
 
-  pmsList := nil;
-  pmsNames := nil;
-  InstructorSys.Scenario.GetPMSConditions(pmsNames);
-  frmAvailPMSCondition.SetAvailableCondition(pmsNames);
-  pmsNames.Free;
-
-  if frmAvailPMSCondition.ShowModal = mrOk then
-  begin
-    if frmAvailPMSCondition.PMSCondName = '' then
-      Exit;
+//  if frmAvailPMSCondition.ShowModal = mrOk then
+//  begin
+//    if frmAvailPMSCondition.PMSCondName = '' then
+//      Exit;
 
 //    FCondition_ID := InstructorSys.Scenario.GetConditionID(frmAvailPMSCondition.PMSCondName);
 
 //    InstructorSys.Scenario.GetPMSCondition(FCondition_ID, pmsList);
 
-    if pmsList.Count = 0 then
-      Exit;
+//    if pmsList.Count = 0 then
+//      Exit;
 
 //    edtCondName.Text := frmAvailPMSCondition.PMSCondName;
 
@@ -1034,7 +1052,7 @@ begin
 //          SetCB(8, pmsData.PMS_SWB_EsbCBIntr);
 //        end;
 //      end;
-    end;
+//    end;
 
 //    pmsList.Free;
 //  end;
@@ -1385,7 +1403,7 @@ begin
   chkG4Pref.Checked := False;
 
 //  rbAutInn1.Checked := True;
-  rbAutInn2.Checked := True;
+//  rbAutInn2.Checked := True;
 end;
 
 procedure TfrmScenBuilder.btnEditSessionClick(Sender: TObject);
@@ -1632,6 +1650,31 @@ end;
 
 {$REGION ' PMS Section '}
 
+procedure TfrmScenBuilder.lstPMSClick(Sender: TObject);
+var
+  i : Integer;
+
+begin
+  if lstPMS.ItemIndex = -1 then
+  begin
+    btnNewPMSClick(nil);
+    Exit;
+  end;
+
+  with lstPMS do
+  begin
+    for i := Items.Count - 1 downto 0 do
+    begin
+      if Selected[i] then
+      begin
+        FPMSConditionName := Items[i];
+        FPMSConditionID := InstructorSys.Scenario.GetConditionID(FPMSConditionName);
+        Break;
+      end;
+    end;
+  end;
+end;
+
 procedure TfrmScenBuilder.btnRefreshPMSClick(Sender: TObject);
 begin
   UpdatePMSList;
@@ -1639,610 +1682,419 @@ end;
 
 procedure TfrmScenBuilder.btnNewPMSClick(Sender: TObject);
 begin
-//  FCondition_ID := 0;
-//
-//  edtCondName.Text := '';
-//  rbAutGen1.Checked := True;
-//  rbAutGen2.Checked := True;
-//  rbAutGen3.Checked := True;
-//  rbAutGen4.Checked := True;
-//
-//  chkEngine1.Checked := True;
-//  chkEngine2.Checked := False;
-//  chkEngine3.Checked := False;
-//  chkEngine4.Checked := False;
-//
-//  chkG1Pref.Checked := False;
-//  chkG2Pref.Checked := False;
-//  chkG3Pref.Checked := False;
-//  chkG4Pref.Checked := False;
-//
-//  rbAutInn1.Checked := True;
-//  rbAutInn2.Checked := True;
+  FPMSConditionID := 0;
+  FPMSConditionName := '';
+  PMSNameBuffer := '';
+  edtPMSConditionName.Text := '';
+
+  {$REGION ' Generator 1 '}
+  cbbModeGen1.ItemIndex := 2;
+  chkEngine1.Checked := False;
+  chkG1Pref.Checked := False;
+  cbbCircuitBreaker1.ItemIndex := 0;
+  {$ENDREGION}
+
+  {$REGION ' Generator 2 '}
+  cbbModeGen2.ItemIndex := 2;
+  chkEngine2.Checked := False;
+  chkG2Pref.Checked := False;
+  cbbCircuitBreaker2.ItemIndex := 0;
+  {$ENDREGION}
+
+  {$REGION ' Generator 3 '}
+  cbbModeGen3.ItemIndex := 2;
+  chkEngine3.Checked := False;
+  chkG3Pref.Checked := False;
+  cbbCircuitBreaker3.ItemIndex := 0;
+  {$ENDREGION}
+
+  {$REGION ' Generator 4 '}
+  cbbModeGen4.ItemIndex := 2;
+  chkEngine4.Checked := False;
+  chkG4Pref.Checked := False;
+  cbbCircuitBreaker4.ItemIndex := 0;
+  {$ENDREGION}
+
+  {$REGION ' Generator Emergency '}
+  cbbModeGenE.ItemIndex := 2;
+  chkEngineE.Checked := False;
+  cbbCircuitBreakerE.ItemIndex := 0;
+  {$ENDREGION}
+
+  {$REGION ' Switchboard Forward '}
+  cbbModeInnFwd.ItemIndex := 0;
+  cbbCircuitBreakerFwd.ItemIndex := 0;
+  {$ENDREGION}
+
+  {$REGION ' Switchboard After '}
+  cbbModeInnAft.ItemIndex := 0;
+  cbbCircuitBreakerAft.ItemIndex := 0;
+  {$ENDREGION}
+
+  {$REGION ' Switchboard Emergency FWD '}
+  cbbModeInnEmFwd.ItemIndex := 0;
+  cbbCircuitBreakerEmFwd.ItemIndex := 0;
+  {$ENDREGION}
+
+  {$REGION ' Switchboard Emergency AFT '}
+  cbbModeInnEmAft.ItemIndex := 0;
+  cbbCircuitBreakerEmAft.ItemIndex := 0;
+  {$ENDREGION}
+
 end;
 
 procedure TfrmScenBuilder.btnEditPMSClick(Sender: TObject);
 var
-  pmsNames : TStrings;
   pmsData : TPMSCond_Data;
   pmsList : TList;
   i : Integer;
 begin
-//  if not Assigned(frmAvailPMSCondition)  then
-//    frmAvailPMSCondition := TfrmAvailPMSCondition.Create(Self);
-//
-//  pmsList := nil;
-//  pmsNames := nil;
-//  InstructorSys.Scenario.GetPMSConditions(pmsNames);
-//  frmAvailPMSCondition.SetAvailableCondition(pmsNames);
-//  pmsNames.Free;
-//
-//  if frmAvailPMSCondition.ShowModal = mrOk then
-//  begin
-//    if frmAvailPMSCondition.PMSCondName = '' then
-//      Exit;
-//
-//    FCondition_ID := InstructorSys.Scenario.GetConditionID(frmAvailPMSCondition.PMSCondName);
-//
-//    InstructorSys.Scenario.GetPMSCondition(FCondition_ID, pmsList);
-//
-//    if pmsList.Count = 0 then
-//      Exit;
-//
-//    edtCondName.Text := frmAvailPMSCondition.PMSCondName;
-//
-//    {untuk flag ketika update dengan nama yang berbeda}
-//    CondNameBuffer := frmAvailPMSCondition.PMSCondName;
-//
-//    for i := 0 to pmsList.Count - 1 do
-//    begin
-//      pmsData := TPMSCond_Data(pmsList.Items[i]);
-//
-//      case i of
-//        0:
-//        begin
-//          SetMode(1, pmsData.PMS_Mode);
-//          chkEngine1.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG1Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(1, pmsData.PMS_CB);
-//        end;
-//        1:
-//        begin
-//          SetMode(2, pmsData.PMS_Mode);
-//          chkEngine2.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG2Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(2, pmsData.PMS_CB);
-//        end;
-//        2:
-//        begin
-//          SetMode(3, pmsData.PMS_Mode);
-//          chkEngine3.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG3Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(3, pmsData.PMS_CB);
-//        end;
-//        3:
-//        begin
-//          SetMode(4, pmsData.PMS_Mode);
-//          chkEngine4.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG4Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(4, pmsData.PMS_CB);
-//        end;
-//        4:
-//        begin
-//          SetMode(5, pmsData.PMS_Mode);
-//          chkEngine5.Checked := (pmsData.PMS_OnOff = 1);
-//          SetCB(5, pmsData.PMS_CB);
-//        end;
-//        5:
-//        begin
-//          SetMode(6, pmsData.PMS_SWB_MSBIntrMode);
-//          SetCB(6, pmsData.PMS_SWB_MsbCBIntr);
-//        end;
-//        6:
-//        begin
-//          SetMode(7, pmsData.PMS_SWB_MSBIntrMode);
-//          SetCB(7, pmsData.PMS_SWB_MsbCBIntr);
-//        end;
-//        7:
-//        begin
-//          SetMode(8, pmsData.PMS_SWB_ESBIntrMode);
-//          SetCB(8, pmsData.PMS_SWB_EsbCBIntr);
-//        end;
-//      end;
-//    end;
-//
-//    pmsList.Free;
-//  end;
+
+  if FPMSConditionID = 0 then
+    Exit;
+
+  pmsList := nil;
+  InstructorSys.Scenario.GetPMSCondition(FPMSConditionID, pmsList);
+
+  if pmsList.Count = 0 then
+    Exit;
+
+  edtPMSConditionName.Text := FPMSConditionName;
+
+  {untuk flag ketika update dengan nama yang berbeda}
+  PMSNameBuffer := FPMSConditionName;
+
+  for i := 0 to pmsList.Count - 1 do
+  begin
+    pmsData := TPMSCond_Data(pmsList.Items[i]);
+    FPmsIDBuffer[i] := pmsData.PMS_ID;
+
+    if pmsData.PMS_Name = C_GENERATOR_ID[0] then
+    begin
+      {$REGION ' Generator 1 '}
+      cbbModeGen1.ItemIndex := pmsData.PMS_Mode;
+      chkEngine1.Checked := (pmsData.PMS_OnOff = 1);
+      chkG1Pref.Checked := (pmsData.PMS_Pref = 1);
+      cbbCircuitBreaker1.ItemIndex := pmsData.PMS_CB;
+      {$ENDREGION}
+    end
+    else if pmsData.PMS_Name = C_GENERATOR_ID[1] then
+    begin
+      {$REGION ' Generator 2 '}
+      cbbModeGen2.ItemIndex := pmsData.PMS_Mode;
+      chkEngine2.Checked := (pmsData.PMS_OnOff = 1);
+      chkG2Pref.Checked := (pmsData.PMS_Pref = 1);
+      cbbCircuitBreaker2.ItemIndex := pmsData.PMS_CB;
+      {$ENDREGION}
+    end
+    else if pmsData.PMS_Name = C_GENERATOR_ID[2] then
+    begin
+      {$REGION ' Generator 3 '}
+      cbbModeGen3.ItemIndex := pmsData.PMS_Mode;
+      chkEngine3.Checked := (pmsData.PMS_OnOff = 1);
+      chkG3Pref.Checked := (pmsData.PMS_Pref = 1);
+      cbbCircuitBreaker3.ItemIndex := pmsData.PMS_CB;
+      {$ENDREGION}
+    end
+    else if pmsData.PMS_Name = C_GENERATOR_ID[3] then
+    begin
+      {$REGION ' Generator 4 '}
+      cbbModeGen4.ItemIndex := pmsData.PMS_Mode;
+      chkEngine4.Checked := (pmsData.PMS_OnOff = 1);
+      chkG4Pref.Checked := (pmsData.PMS_Pref = 1);
+      cbbCircuitBreaker4.ItemIndex := pmsData.PMS_CB;
+      {$ENDREGION}
+    end
+    else if pmsData.PMS_Name = C_GENERATOR_ID[4] then
+    begin
+      {$REGION ' Generator Emergency '}
+      cbbModeGenE.ItemIndex := pmsData.PMS_Mode;
+      chkEngineE.Checked := (pmsData.PMS_OnOff = 1);
+      cbbCircuitBreakerE.ItemIndex := pmsData.PMS_CB;
+      {$ENDREGION}
+    end
+    else if pmsData.PMS_Name = C_SWITCHBOARD_ID[0] then
+    begin
+      {$REGION ' Switchboard FWD '}
+      cbbModeInnFwd.ItemIndex := pmsData.PMS_SWB_MSBIntrMode;
+      cbbCircuitBreakerFwd.ItemIndex := pmsData.PMS_SWB_MsbCBIntr;
+      {$ENDREGION}
+    end
+    else if pmsData.PMS_Name = C_SWITCHBOARD_ID[1] then
+    begin
+      {$REGION ' Switchboard AFT '}
+      cbbModeInnAft.ItemIndex := pmsData.PMS_SWB_MSBIntrMode;
+      cbbCircuitBreakerAft.ItemIndex := pmsData.PMS_SWB_MsbCBIntr;
+      {$ENDREGION}
+    end
+    else if pmsData.PMS_Name = C_SWITCHBOARD_ID[2] then
+    begin
+      {$REGION ' Switchboard Emergency FWD '}
+      cbbModeInnEmFwd.ItemIndex := pmsData.PMS_SWB_MSBIntrMode;
+      cbbCircuitBreakerEmFwd.ItemIndex := pmsData.PMS_SWB_MsbCBIntr;
+      {$ENDREGION}
+    end
+    else if pmsData.PMS_Name = C_SWITCHBOARD_ID[3] then
+    begin
+      {$REGION ' Switchboard Emergency AFT '}
+      cbbModeInnEmAft.ItemIndex := pmsData.PMS_SWB_MSBIntrMode;
+      cbbCircuitBreakerEmAft.ItemIndex := pmsData.PMS_SWB_MsbCBIntr;
+      {$ENDREGION}
+    end;
+  end;
+
+  pmsList.Free;
 end;
 
 procedure TfrmScenBuilder.btnDeletePMSClick(Sender: TObject);
 var
   conname : string;
 begin
-//  if FCondition_ID = 0 then
-//    Exit;
-//
-//  conname := edtCondName.Text;
-//
-//  if (MessageDlg('Are You Sure To Delete "' + edtCondName.Text + '" Condition ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
-//  begin
-//    if InstructorSys.Scenario.DeletePMSCondition(FCondition_ID) then
-//    begin
-//      actNewExecute(nil);
-//      MessageDlg('Delete "' + conname + '" Condition Success', mtInformation, [mbOK], 0)
-//    end
-//    else
-//      MessageDlg('Delete "' + conname + '" Condition Failed', mtError, [mbOK], 0);
-//  end;
+  if FPMSConditionID = 0 then
+    Exit;
+
+  conname := FPMSConditionName;
+
+  if (MessageDlg('Are You Sure To Delete "' + FPMSConditionName + '" Condition ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
+  begin
+    if InstructorSys.Scenario.DeletePMSCondition(FPMSConditionID) then
+    begin
+      MessageDlg('Delete "' + FPMSConditionName + '" Condition Success', mtInformation, [mbOK], 0);
+      UpdatePMSList;
+      btnNewPMSClick(nil);
+    end
+    else
+      MessageDlg('Delete "' + FPMSConditionName + '" Condition Failed', mtError, [mbOK], 0);
+  end;
+
 
 end;
 
 procedure TfrmScenBuilder.btnSavePMSClick(Sender: TObject);
 var
   pmsData : TPMSCond_Data;
-  i, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB,
-  StateRunFull, StateRunFwd, StateRunAft : Integer;
-  pmsName : string;
   PMSList : TList;
-  ConditionID : Integer;
 begin
-//  if Trim(edtCondName.Text) = '' then
-//  begin
-//    lblWarning2.Caption := '* Condition Name Is Empty, Please Insert Condition Name';
-//    lblWarning2.Visible := True;
-//    Exit;
-//  end;
-//
-//  if FCondition_ID = 0 then
-//  begin
-//    if InstructorSys.Scenario.GetConditionID(edtCondName.Text) > 0 then
-//    begin
-//      lblWarning2.Caption := '* Condition Name Is Already In Use, Please Use Another Condition Name';
-//      lblWarning2.Visible := True;
-//      Exit;
-//    end;
-//
-//    PMSList := TList.Create;
-//
-//    for i := 1 to 9 do
-//    begin
-//      GetPMSInfo(i, pmsName, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB);
-//      GetPMSVarInfo(i, StateRunFull, StateRunFwd, StateRunAft);
-//
-//      pmsData := TPMSCond_Data.Create;
-//      pmsData.PMS_Name := pmsName;
-//      pmsData.PMS_Type := pmsType;
-//
-//      if i <= 5 then {generator}
-//      begin
-//        pmsData.PMS_Mode := pmsMode;
-//        pmsData.PMS_State := 1;
-//        pmsData.PMS_OnOff := pmsEngine;
-//        pmsData.PMS_Pref := pmsPref;
-//        pmsData.PMS_CB := pmsCB;
-//      end
-//      else if i = 8 then {Switchboard Emergency}
-//      begin
-//        pmsData.PMS_SWB_ESBIntrMode := pmsMode;
-//        pmsData.PMS_SWB_EsbCBIntr := pmsCB;
-//      end
-//      else if i = 9 then {Variable}
-//      begin
-//        pmsData.PMS_FirstLoad := 1;
-//        pmsData.PMS_StateRunFull := StateRunFull;
-//        pmsData.PMS_StateRunFwd := StateRunFwd;
-//        pmsData.PMS_StateRunAft := StateRunAft;
-//      end
-//      else {Switchboard}
-//      begin
-//        pmsData.PMS_SWB_MSBIntrMode := pmsMode;
-//        pmsData.PMS_SWB_MsbCBIntr := pmsCB;
-//      end;
-//
-//      PMSList.Add(pmsData);
-//    end;
-//    InstructorSys.Scenario.SavePMSCondition(True, edtCondName.Text, PMSList, ConditionID);
-//    MessageDlg('"' + edtCondName.Text + '" Condition Has Been Saved', mtInformation, [mbOK], 0);
-//    actNewExecute(nil);
-//  end
-//  else if FCondition_ID > 0 then
-//  begin
-//    if CondNameBuffer <> edtCondName.Text then
-//    begin
-//      ShowMessage('Can Not Update PMS Condition With a Different Name');
-//      Exit;
-//    end;
-//
-//    PMSList := TList.Create;
-//
-//    for i := 1 to 9 do
-//    begin
-//      GetPMSInfo(i, pmsName, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB);
-//
-//      pmsData := TPMSCond_Data.Create;
-//      pmsData.PMS_ID := InstructorSys.Scenario.GetPMSCondID(FCondition_ID, i);
-//      pmsData.PMS_Name := pmsName;
-//      pmsData.PMS_Type := pmsType;
-//
-//      if i <= 5 then {generator}
-//      begin
-//        pmsData.PMS_Mode := pmsMode;
-//        pmsData.PMS_State := 1;
-//        pmsData.PMS_OnOff := pmsEngine;
-//        pmsData.PMS_Pref := pmsPref;
-//        pmsData.PMS_CB := pmsCB;
-//      end
-//      else if i >= 8 then {Switchboard Emergency}
-//      begin
-//        pmsData.PMS_SWB_ESBIntrMode := pmsMode;
-//        pmsData.PMS_SWB_EsbCBIntr := pmsCB;
-//      end
-//      else if i = 9 then {Variable}
-//      begin
-//        pmsData.PMS_FirstLoad := 1;
-//        pmsData.PMS_StateRunFull := StateRunFull;
-//        pmsData.PMS_StateRunFwd := StateRunFwd;
-//        pmsData.PMS_StateRunAft := StateRunAft;
-//      end
-//      else {Switchboard}
-//      begin
-//        pmsData.PMS_SWB_MSBIntrMode := pmsMode;
-//        pmsData.PMS_SWB_MsbCBIntr := pmsCB;
-//      end;
-//
-//      pmsData.Condition_ID := FCondition_ID;
-//
-//      PMSList.Add(pmsData);
-//    end;
-//
-//    InstructorSys.Scenario.SavePMSCondition(False, edtCondName.Text, PMSList, ConditionID);
-//    MessageDlg('"' + edtCondName.Text + '" Condition Has Been Updated', mtInformation, [mbOK], 0);
-//    actNewExecute(nil);
-//  end;
-end;
 
-{$ENDREGION}
-
-{$REGION ' TANK Section '}
-
-procedure TfrmScenBuilder.btnRefreshTANKClick(Sender: TObject);
-begin
-  UpdatePMSList;
-end;
-
-procedure TfrmScenBuilder.btnNewTANKClick(Sender: TObject);
-begin
-//  FCondition_ID := 0;
-//
-//  edtCondName.Text := '';
-//  rbAutGen1.Checked := True;
-//  rbAutGen2.Checked := True;
-//  rbAutGen3.Checked := True;
-//  rbAutGen4.Checked := True;
-//
-//  chkEngine1.Checked := True;
-//  chkEngine2.Checked := False;
-//  chkEngine3.Checked := False;
-//  chkEngine4.Checked := False;
-//
-//  chkG1Pref.Checked := False;
-//  chkG2Pref.Checked := False;
-//  chkG3Pref.Checked := False;
-//  chkG4Pref.Checked := False;
-//
-//  rbAutInn1.Checked := True;
-//  rbAutInn2.Checked := True;
-end;
-
-procedure TfrmScenBuilder.btnEditTANKClick(Sender: TObject);
-var
-  pmsNames : TStrings;
-  pmsData : TPMSCond_Data;
-  pmsList : TList;
-  i : Integer;
-begin
-//  if not Assigned(frmAvailPMSCondition)  then
-//    frmAvailPMSCondition := TfrmAvailPMSCondition.Create(Self);
-//
-//  pmsList := nil;
-//  pmsNames := nil;
-//  InstructorSys.Scenario.GetPMSConditions(pmsNames);
-//  frmAvailPMSCondition.SetAvailableCondition(pmsNames);
-//  pmsNames.Free;
-//
-//  if frmAvailPMSCondition.ShowModal = mrOk then
-//  begin
-//    if frmAvailPMSCondition.PMSCondName = '' then
-//      Exit;
-//
-//    FCondition_ID := InstructorSys.Scenario.GetConditionID(frmAvailPMSCondition.PMSCondName);
-//
-//    InstructorSys.Scenario.GetPMSCondition(FCondition_ID, pmsList);
-//
-//    if pmsList.Count = 0 then
-//      Exit;
-//
-//    edtCondName.Text := frmAvailPMSCondition.PMSCondName;
-//
-//    {untuk flag ketika update dengan nama yang berbeda}
-//    CondNameBuffer := frmAvailPMSCondition.PMSCondName;
-//
-//    for i := 0 to pmsList.Count - 1 do
-//    begin
-//      pmsData := TPMSCond_Data(pmsList.Items[i]);
-//
-//      case i of
-//        0:
-//        begin
-//          SetMode(1, pmsData.PMS_Mode);
-//          chkEngine1.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG1Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(1, pmsData.PMS_CB);
-//        end;
-//        1:
-//        begin
-//          SetMode(2, pmsData.PMS_Mode);
-//          chkEngine2.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG2Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(2, pmsData.PMS_CB);
-//        end;
-//        2:
-//        begin
-//          SetMode(3, pmsData.PMS_Mode);
-//          chkEngine3.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG3Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(3, pmsData.PMS_CB);
-//        end;
-//        3:
-//        begin
-//          SetMode(4, pmsData.PMS_Mode);
-//          chkEngine4.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG4Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(4, pmsData.PMS_CB);
-//        end;
-//        4:
-//        begin
-//          SetMode(5, pmsData.PMS_Mode);
-//          chkEngine5.Checked := (pmsData.PMS_OnOff = 1);
-//          SetCB(5, pmsData.PMS_CB);
-//        end;
-//        5:
-//        begin
-//          SetMode(6, pmsData.PMS_SWB_MSBIntrMode);
-//          SetCB(6, pmsData.PMS_SWB_MsbCBIntr);
-//        end;
-//        6:
-//        begin
-//          SetMode(7, pmsData.PMS_SWB_MSBIntrMode);
-//          SetCB(7, pmsData.PMS_SWB_MsbCBIntr);
-//        end;
-//        7:
-//        begin
-//          SetMode(8, pmsData.PMS_SWB_ESBIntrMode);
-//          SetCB(8, pmsData.PMS_SWB_EsbCBIntr);
-//        end;
-//      end;
-//    end;
-//
-//    pmsList.Free;
-//  end;
-end;
-
-procedure TfrmScenBuilder.btnDeleteTANKClick(Sender: TObject);
-var
-  conname : string;
-begin
-//  if FCondition_ID = 0 then
-//    Exit;
-//
-//  conname := edtCondName.Text;
-//
-//  if (MessageDlg('Are You Sure To Delete "' + edtCondName.Text + '" Condition ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
-//  begin
-//    if InstructorSys.Scenario.DeletePMSCondition(FCondition_ID) then
-//    begin
-//      actNewExecute(nil);
-//      MessageDlg('Delete "' + conname + '" Condition Success', mtInformation, [mbOK], 0)
-//    end
-//    else
-//      MessageDlg('Delete "' + conname + '" Condition Failed', mtError, [mbOK], 0);
-//  end;
-
-end;
-
-procedure TfrmScenBuilder.btnSaveTANKClick(Sender: TObject);
-var
-  pmsData : TPMSCond_Data;
-  i, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB,
-  StateRunFull, StateRunFwd, StateRunAft : Integer;
-  pmsName : string;
-  PMSList : TList;
-  ConditionID : Integer;
-begin
-//  if Trim(edtCondName.Text) = '' then
-//  begin
-//    lblWarning2.Caption := '* Condition Name Is Empty, Please Insert Condition Name';
-//    lblWarning2.Visible := True;
-//    Exit;
-//  end;
-//
-//  if FCondition_ID = 0 then
-//  begin
-//    if InstructorSys.Scenario.GetConditionID(edtCondName.Text) > 0 then
-//    begin
-//      lblWarning2.Caption := '* Condition Name Is Already In Use, Please Use Another Condition Name';
-//      lblWarning2.Visible := True;
-//      Exit;
-//    end;
-//
-//    PMSList := TList.Create;
-//
-//    for i := 1 to 9 do
-//    begin
-//      GetPMSInfo(i, pmsName, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB);
-//      GetPMSVarInfo(i, StateRunFull, StateRunFwd, StateRunAft);
-//
-//      pmsData := TPMSCond_Data.Create;
-//      pmsData.PMS_Name := pmsName;
-//      pmsData.PMS_Type := pmsType;
-//
-//      if i <= 5 then {generator}
-//      begin
-//        pmsData.PMS_Mode := pmsMode;
-//        pmsData.PMS_State := 1;
-//        pmsData.PMS_OnOff := pmsEngine;
-//        pmsData.PMS_Pref := pmsPref;
-//        pmsData.PMS_CB := pmsCB;
-//      end
-//      else if i = 8 then {Switchboard Emergency}
-//      begin
-//        pmsData.PMS_SWB_ESBIntrMode := pmsMode;
-//        pmsData.PMS_SWB_EsbCBIntr := pmsCB;
-//      end
-//      else if i = 9 then {Variable}
-//      begin
-//        pmsData.PMS_FirstLoad := 1;
-//        pmsData.PMS_StateRunFull := StateRunFull;
-//        pmsData.PMS_StateRunFwd := StateRunFwd;
-//        pmsData.PMS_StateRunAft := StateRunAft;
-//      end
-//      else {Switchboard}
-//      begin
-//        pmsData.PMS_SWB_MSBIntrMode := pmsMode;
-//        pmsData.PMS_SWB_MsbCBIntr := pmsCB;
-//      end;
-//
-//      PMSList.Add(pmsData);
-//    end;
-//    InstructorSys.Scenario.SavePMSCondition(True, edtCondName.Text, PMSList, ConditionID);
-//    MessageDlg('"' + edtCondName.Text + '" Condition Has Been Saved', mtInformation, [mbOK], 0);
-//    actNewExecute(nil);
-//  end
-//  else if FCondition_ID > 0 then
-//  begin
-//    if CondNameBuffer <> edtCondName.Text then
-//    begin
-//      ShowMessage('Can Not Update PMS Condition With a Different Name');
-//      Exit;
-//    end;
-//
-//    PMSList := TList.Create;
-//
-//    for i := 1 to 9 do
-//    begin
-//      GetPMSInfo(i, pmsName, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB);
-//
-//      pmsData := TPMSCond_Data.Create;
-//      pmsData.PMS_ID := InstructorSys.Scenario.GetPMSCondID(FCondition_ID, i);
-//      pmsData.PMS_Name := pmsName;
-//      pmsData.PMS_Type := pmsType;
-//
-//      if i <= 5 then {generator}
-//      begin
-//        pmsData.PMS_Mode := pmsMode;
-//        pmsData.PMS_State := 1;
-//        pmsData.PMS_OnOff := pmsEngine;
-//        pmsData.PMS_Pref := pmsPref;
-//        pmsData.PMS_CB := pmsCB;
-//      end
-//      else if i >= 8 then {Switchboard Emergency}
-//      begin
-//        pmsData.PMS_SWB_ESBIntrMode := pmsMode;
-//        pmsData.PMS_SWB_EsbCBIntr := pmsCB;
-//      end
-//      else if i = 9 then {Variable}
-//      begin
-//        pmsData.PMS_FirstLoad := 1;
-//        pmsData.PMS_StateRunFull := StateRunFull;
-//        pmsData.PMS_StateRunFwd := StateRunFwd;
-//        pmsData.PMS_StateRunAft := StateRunAft;
-//      end
-//      else {Switchboard}
-//      begin
-//        pmsData.PMS_SWB_MSBIntrMode := pmsMode;
-//        pmsData.PMS_SWB_MsbCBIntr := pmsCB;
-//      end;
-//
-//      pmsData.Condition_ID := FCondition_ID;
-//
-//      PMSList.Add(pmsData);
-//    end;
-//
-//    InstructorSys.Scenario.SavePMSCondition(False, edtCondName.Text, PMSList, ConditionID);
-//    MessageDlg('"' + edtCondName.Text + '" Condition Has Been Updated', mtInformation, [mbOK], 0);
-//    actNewExecute(nil);
-//  end;
-end;
-
-procedure TfrmScenBuilder.btnFullAllClick(Sender: TObject);
-var
-  i, j : integer;
-begin
-  if cbbSetValue.Text = '' then
+  if not CekPMSInput then
   begin
-    MessageDlg('Select the tank to be filled..!!', mtInformation, [mbOK], 0);
     Exit;
   end;
 
-  if strtofloat(edtPersen.Text) > 100 then
-    edtPersen.Text := '100'
-  else if strtofloat(edtPersen.Text) < 0 then
-    edtPersen.Text := '0';
+  PMSList := TList.Create;
 
-  if cbbSetValue.ItemIndex = 0 then
+  {$REGION ' Generator 1 '}
+  pmsData := TPMSCond_Data.Create;
+  pmsData.PMS_Name := C_GENERATOR_ID[0];
+  pmsData.PMS_Type := 1;
+  pmsData.PMS_ID := FPmsIDBuffer[0];
+  pmsData.Condition_ID := FPMSConditionID;
+
+  pmsData.PMS_Mode := cbbModeGen1.ItemIndex;
+  pmsData.PMS_State := 1;
+  pmsData.PMS_OnOff := Ord(chkEngine1.Checked);
+  pmsData.PMS_Pref := Ord(chkG1Pref.Checked);
+  pmsData.PMS_CB := cbbCircuitBreaker1.ItemIndex;
+
+  PMSList.Add(pmsData);
+  {$ENDREGION}
+
+  {$REGION ' Generator 2 '}
+  pmsData := TPMSCond_Data.Create;
+  pmsData.PMS_Name := C_GENERATOR_ID[1];
+  pmsData.PMS_Type := 1;
+  pmsData.PMS_ID := FPmsIDBuffer[1];
+  pmsData.Condition_ID := FPMSConditionID;
+
+  pmsData.PMS_Mode := cbbModeGen2.ItemIndex;
+  pmsData.PMS_State := 1;
+  pmsData.PMS_OnOff := Ord(chkEngine2.Checked);
+  pmsData.PMS_Pref := Ord(chkG2Pref.Checked);
+  pmsData.PMS_CB := cbbCircuitBreaker2.ItemIndex;
+
+  PMSList.Add(pmsData);
+  {$ENDREGION}
+
+  {$REGION ' Generator 3 '}
+  pmsData := TPMSCond_Data.Create;
+  pmsData.PMS_Name := C_GENERATOR_ID[2];
+  pmsData.PMS_Type := 1;
+  pmsData.PMS_ID := FPmsIDBuffer[2];
+  pmsData.Condition_ID := FPMSConditionID;
+
+  pmsData.PMS_Mode := cbbModeGen3.ItemIndex;
+  pmsData.PMS_State := 1;
+  pmsData.PMS_OnOff := Ord(chkEngine3.Checked);
+  pmsData.PMS_Pref := Ord(chkG3Pref.Checked);
+  pmsData.PMS_CB := cbbCircuitBreaker3.ItemIndex;
+
+  PMSList.Add(pmsData);
+  {$ENDREGION}
+
+  {$REGION ' Generator 4 '}
+  pmsData := TPMSCond_Data.Create;
+  pmsData.PMS_Name := C_GENERATOR_ID[3];
+  pmsData.PMS_Type := 1;
+  pmsData.PMS_ID := FPmsIDBuffer[3];
+  pmsData.Condition_ID := FPMSConditionID;
+
+  pmsData.PMS_Mode := cbbModeGen4.ItemIndex;
+  pmsData.PMS_State := 1;
+  pmsData.PMS_OnOff := Ord(chkEngine4.Checked);
+  pmsData.PMS_Pref := Ord(chkG4Pref.Checked);
+  pmsData.PMS_CB := cbbCircuitBreaker4.ItemIndex;
+
+  PMSList.Add(pmsData);
+  {$ENDREGION}
+
+  {$REGION ' Generator Emergency '}
+  pmsData := TPMSCond_Data.Create;
+  pmsData.PMS_Name := C_GENERATOR_ID[4];
+  pmsData.PMS_Type := 1;
+  pmsData.PMS_ID := FPmsIDBuffer[4];
+  pmsData.Condition_ID := FPMSConditionID;
+
+  pmsData.PMS_Mode := cbbModeGenE.ItemIndex;
+  pmsData.PMS_State := 1;
+  pmsData.PMS_OnOff := Ord(chkEngineE.Checked);
+  pmsData.PMS_CB := cbbCircuitBreakerE.ItemIndex;
+
+  PMSList.Add(pmsData);
+  {$ENDREGION}
+
+  {$REGION ' Switchboard Forward '}
+  pmsData := TPMSCond_Data.Create;
+  pmsData.PMS_Name := C_SWITCHBOARD_ID[0];
+  pmsData.PMS_Type := 2;
+  pmsData.PMS_ID := FPmsIDBuffer[5];
+  pmsData.Condition_ID := FPMSConditionID;
+
+  case cbbModeInnFwd.ItemIndex of
+    0 : pmsData.PMS_SWB_MSBIntrMode := 1;
+    1: pmsData.PMS_SWB_MSBIntrMode := 3;
+  end;
+
+  pmsData.PMS_SWB_MsbCBIntr := cbbCircuitBreakerFwd.ItemIndex;
+
+  PMSList.Add(pmsData);
+  {$ENDREGION}
+
+  {$REGION ' Switchboard After '}
+  pmsData := TPMSCond_Data.Create;
+  pmsData.PMS_Name := C_SWITCHBOARD_ID[1];
+  pmsData.PMS_Type := 2;
+  pmsData.PMS_ID := FPmsIDBuffer[6];
+  pmsData.Condition_ID := FPMSConditionID;
+
+  case cbbModeInnAft.ItemIndex of
+    0 : pmsData.PMS_SWB_MSBIntrMode := 1;
+    1: pmsData.PMS_SWB_MSBIntrMode := 3;
+  end;
+
+  pmsData.PMS_SWB_MsbCBIntr := cbbCircuitBreakerAft.ItemIndex;
+
+  PMSList.Add(pmsData);
+  {$ENDREGION}
+
+  {$REGION ' Switchboard Emergency FWD '}
+  pmsData := TPMSCond_Data.Create;
+  pmsData.PMS_Name := C_SWITCHBOARD_ID[2];
+  pmsData.PMS_Type := 2;
+  pmsData.PMS_ID := FPmsIDBuffer[7];
+  pmsData.Condition_ID := FPMSConditionID;
+
+  case cbbModeInnEmFwd.ItemIndex of
+    0 : pmsData.PMS_SWB_MSBIntrMode := 1;
+    1: pmsData.PMS_SWB_MSBIntrMode := 3;
+  end;
+
+  pmsData.PMS_SWB_MsbCBIntr := cbbCircuitBreakerEmFwd.ItemIndex;
+
+  PMSList.Add(pmsData);
+  {$ENDREGION}
+
+  {$REGION ' Switchboard Emergency AFT '}
+  pmsData := TPMSCond_Data.Create;
+  pmsData.PMS_Name := C_SWITCHBOARD_ID[3];
+  pmsData.PMS_Type := 2;
+  pmsData.PMS_ID := FPmsIDBuffer[8];
+  pmsData.Condition_ID := FPMSConditionID;
+
+  case cbbModeInnEmAft.ItemIndex of
+    0 : pmsData.PMS_SWB_MSBIntrMode := 1;
+    1: pmsData.PMS_SWB_MSBIntrMode := 3;
+  end;
+
+  pmsData.PMS_SWB_MsbCBIntr := cbbCircuitBreakerEmAft.ItemIndex;
+
+  PMSList.Add(pmsData);
+  {$ENDREGION}
+
+  if FPMSConditionID = 0 then
   begin
-
-    for I := 1 to 18 do
-    begin
-      for j := 0 to ComponentCount - 1 do
-      begin
-        if Components[j] is TEdit then
-        begin
-          if TEdit(Components[j]).Tag = i then
-          begin
-            TEdit(Components[j]).Text := floattostr(InstructorSys.Scenario.getMaxTankValue(TEdit(Components[j]).Hint)*
-                                                    (strtofloat(edtPersen.Text)/100));
-            break;
-          end;
-        end;
-      end;
-    end;
+    InstructorSys.Scenario.SavePMSCondition(True, edtPMSConditionName.Text, PMSList, FPMSConditionID);
+    MessageDlg('"' + edtPMSConditionName.Text + '" Condition Has Been Saved', mtInformation, [mbOK], 0);
+    btnNewPMSClick(nil);
+    UpdatePMSList;
   end
   else
   begin
-    for j := 0 to ComponentCount - 1 do
+    InstructorSys.Scenario.SavePMSCondition(False, edtPMSConditionName.Text, PMSList, FPMSConditionID);
+    MessageDlg('"' + edtPMSConditionName.Text + '" Condition Has Been Updated', mtInformation, [mbOK], 0);
+    btnNewPMSClick(nil);
+    UpdatePMSList;
+  end;
+end;
+
+procedure TfrmScenBuilder.UpdatePMSList;
+var
+  i : Integer;
+  tempList : TStrings;
+
+begin
+  tempList := nil;
+  InstructorSys.Scenario.GetPMSConditions(tempList);
+
+  if not Assigned(tempList) then
+    Exit;
+
+  if lstPMS.Count > 0 then
+  lstPMS.Clear;
+
+  for i := 0 to tempList.Count - 1 do
+  begin
+    lstPMS.Items.Add(tempList[i]);
+  end;
+
+  tempList.Free;
+end;
+
+function TfrmScenBuilder.CekPMSInput: Boolean;
+begin
+  Result := False;
+
+  if Trim(edtPMSConditionName.Text) = '' then
+  begin
+    ShowMessage('Condition Name Is Empty, Please Insert Condition Name');
+    Exit;
+  end;
+
+  if InstructorSys.Scenario.GetConditionID(edtPMSConditionName.Text) > 0 then
+  begin
+    {Jika inputan baru}
+    if FPMSConditionID = 0 then
     begin
-      if Components[j] is TEdit then
-      begin
-        if TEdit(Components[j]).Tag = (cbbSetValue.ItemIndex) then
-        begin
-          TEdit(Components[j]).Text := floattostr(InstructorSys.Scenario.getMaxTankValue(TEdit(Components[j]).Hint)*
-                                                  (strtofloat(edtPersen.Text)/100));
-          break;
-        end;
-      end;
+      ShowMessage('Condition Name Is Already In Use, Please Use Another Condition Name');
+      Exit;
+    end
+    else if PMSNameBuffer <> edtPMSConditionName.Text then
+    begin
+      ShowMessage('Condition Name Is Already In Use, Please Use Another Condition Name');
+      Exit;
     end;
   end;
 
-
-end;
-
-procedure TfrmScenBuilder.edtGBXLOTKKeyPress(Sender: TObject; var Key: Char);
-begin
-  if not (key in ['0'..'9', #8, #13, #46]) then
-    key := #0;
-end;
-
-procedure TfrmScenBuilder.edtMELOTKKeyPress(Sender: TObject; var Key: Char);
-begin
-  if not (key in ['0'..'9', #8, #13, #46]) then
-    key := #0;
-end;
-
-procedure TfrmScenBuilder.edtWBPSKeyPress(Sender: TObject; var Key: Char);
-begin
-  if not (key in ['0'..'9', #8, #13, #46]) then
-    key := #0;
+  Result := True;
 end;
 
 {$ENDREGION}
@@ -2251,31 +2103,15 @@ end;
 
 procedure TfrmScenBuilder.btnRefreshPCSClick(Sender: TObject);
 begin
-  UpdatePMSList;
+  UpdatePCSList;
 end;
 
 procedure TfrmScenBuilder.btnNewPCSClick(Sender: TObject);
 begin
-//  FCondition_ID := 0;
-//
-//  edtCondName.Text := '';
-//  rbAutGen1.Checked := True;
-//  rbAutGen2.Checked := True;
-//  rbAutGen3.Checked := True;
-//  rbAutGen4.Checked := True;
-//
-//  chkEngine1.Checked := True;
-//  chkEngine2.Checked := False;
-//  chkEngine3.Checked := False;
-//  chkEngine4.Checked := False;
-//
-//  chkG1Pref.Checked := False;
-//  chkG2Pref.Checked := False;
-//  chkG3Pref.Checked := False;
-//  chkG4Pref.Checked := False;
-//
-//  rbAutInn1.Checked := True;
-//  rbAutInn2.Checked := True;
+  FPCSConditionID := 0;
+  FPCSConditionName := '';
+  PCSNameBuffer := '';
+  edtPCSConditionName.Text := '';
 end;
 
 procedure TfrmScenBuilder.btnEditPCSClick(Sender: TObject);
@@ -2906,6 +2742,350 @@ end;
 
 {$ENDREGION}
 
+{$REGION ' TANK Section '}
+
+procedure TfrmScenBuilder.btnRefreshTANKClick(Sender: TObject);
+begin
+  UpdatePMSList;
+end;
+
+procedure TfrmScenBuilder.btnNewTANKClick(Sender: TObject);
+begin
+//  FCondition_ID := 0;
+//
+//  edtCondName.Text := '';
+//  rbAutGen1.Checked := True;
+//  rbAutGen2.Checked := True;
+//  rbAutGen3.Checked := True;
+//  rbAutGen4.Checked := True;
+//
+//  chkEngine1.Checked := True;
+//  chkEngine2.Checked := False;
+//  chkEngine3.Checked := False;
+//  chkEngine4.Checked := False;
+//
+//  chkG1Pref.Checked := False;
+//  chkG2Pref.Checked := False;
+//  chkG3Pref.Checked := False;
+//  chkG4Pref.Checked := False;
+//
+//  rbAutInn1.Checked := True;
+//  rbAutInn2.Checked := True;
+end;
+
+procedure TfrmScenBuilder.btnEditTANKClick(Sender: TObject);
+var
+  pmsNames : TStrings;
+  pmsData : TPMSCond_Data;
+  pmsList : TList;
+  i : Integer;
+begin
+//  if not Assigned(frmAvailPMSCondition)  then
+//    frmAvailPMSCondition := TfrmAvailPMSCondition.Create(Self);
+//
+//  pmsList := nil;
+//  pmsNames := nil;
+//  InstructorSys.Scenario.GetPMSConditions(pmsNames);
+//  frmAvailPMSCondition.SetAvailableCondition(pmsNames);
+//  pmsNames.Free;
+//
+//  if frmAvailPMSCondition.ShowModal = mrOk then
+//  begin
+//    if frmAvailPMSCondition.PMSCondName = '' then
+//      Exit;
+//
+//    FCondition_ID := InstructorSys.Scenario.GetConditionID(frmAvailPMSCondition.PMSCondName);
+//
+//    InstructorSys.Scenario.GetPMSCondition(FCondition_ID, pmsList);
+//
+//    if pmsList.Count = 0 then
+//      Exit;
+//
+//    edtCondName.Text := frmAvailPMSCondition.PMSCondName;
+//
+//    {untuk flag ketika update dengan nama yang berbeda}
+//    CondNameBuffer := frmAvailPMSCondition.PMSCondName;
+//
+//    for i := 0 to pmsList.Count - 1 do
+//    begin
+//      pmsData := TPMSCond_Data(pmsList.Items[i]);
+//
+//      case i of
+//        0:
+//        begin
+//          SetMode(1, pmsData.PMS_Mode);
+//          chkEngine1.Checked := (pmsData.PMS_OnOff = 1);
+//          chkG1Pref.Checked := (pmsData.PMS_Pref = 1);
+//          SetCB(1, pmsData.PMS_CB);
+//        end;
+//        1:
+//        begin
+//          SetMode(2, pmsData.PMS_Mode);
+//          chkEngine2.Checked := (pmsData.PMS_OnOff = 1);
+//          chkG2Pref.Checked := (pmsData.PMS_Pref = 1);
+//          SetCB(2, pmsData.PMS_CB);
+//        end;
+//        2:
+//        begin
+//          SetMode(3, pmsData.PMS_Mode);
+//          chkEngine3.Checked := (pmsData.PMS_OnOff = 1);
+//          chkG3Pref.Checked := (pmsData.PMS_Pref = 1);
+//          SetCB(3, pmsData.PMS_CB);
+//        end;
+//        3:
+//        begin
+//          SetMode(4, pmsData.PMS_Mode);
+//          chkEngine4.Checked := (pmsData.PMS_OnOff = 1);
+//          chkG4Pref.Checked := (pmsData.PMS_Pref = 1);
+//          SetCB(4, pmsData.PMS_CB);
+//        end;
+//        4:
+//        begin
+//          SetMode(5, pmsData.PMS_Mode);
+//          chkEngine5.Checked := (pmsData.PMS_OnOff = 1);
+//          SetCB(5, pmsData.PMS_CB);
+//        end;
+//        5:
+//        begin
+//          SetMode(6, pmsData.PMS_SWB_MSBIntrMode);
+//          SetCB(6, pmsData.PMS_SWB_MsbCBIntr);
+//        end;
+//        6:
+//        begin
+//          SetMode(7, pmsData.PMS_SWB_MSBIntrMode);
+//          SetCB(7, pmsData.PMS_SWB_MsbCBIntr);
+//        end;
+//        7:
+//        begin
+//          SetMode(8, pmsData.PMS_SWB_ESBIntrMode);
+//          SetCB(8, pmsData.PMS_SWB_EsbCBIntr);
+//        end;
+//      end;
+//    end;
+//
+//    pmsList.Free;
+//  end;
+end;
+
+procedure TfrmScenBuilder.btnDeleteTANKClick(Sender: TObject);
+var
+  conname : string;
+begin
+//  if FCondition_ID = 0 then
+//    Exit;
+//
+//  conname := edtCondName.Text;
+//
+//  if (MessageDlg('Are You Sure To Delete "' + edtCondName.Text + '" Condition ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
+//  begin
+//    if InstructorSys.Scenario.DeletePMSCondition(FCondition_ID) then
+//    begin
+//      actNewExecute(nil);
+//      MessageDlg('Delete "' + conname + '" Condition Success', mtInformation, [mbOK], 0)
+//    end
+//    else
+//      MessageDlg('Delete "' + conname + '" Condition Failed', mtError, [mbOK], 0);
+//  end;
+
+end;
+
+procedure TfrmScenBuilder.btnSaveTANKClick(Sender: TObject);
+var
+  pmsData : TPMSCond_Data;
+  i, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB,
+  StateRunFull, StateRunFwd, StateRunAft : Integer;
+  pmsName : string;
+  PMSList : TList;
+  ConditionID : Integer;
+begin
+//  if Trim(edtCondName.Text) = '' then
+//  begin
+//    lblWarning2.Caption := '* Condition Name Is Empty, Please Insert Condition Name';
+//    lblWarning2.Visible := True;
+//    Exit;
+//  end;
+//
+//  if FCondition_ID = 0 then
+//  begin
+//    if InstructorSys.Scenario.GetConditionID(edtCondName.Text) > 0 then
+//    begin
+//      lblWarning2.Caption := '* Condition Name Is Already In Use, Please Use Another Condition Name';
+//      lblWarning2.Visible := True;
+//      Exit;
+//    end;
+//
+//    PMSList := TList.Create;
+//
+//    for i := 1 to 9 do
+//    begin
+//      GetPMSInfo(i, pmsName, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB);
+//      GetPMSVarInfo(i, StateRunFull, StateRunFwd, StateRunAft);
+//
+//      pmsData := TPMSCond_Data.Create;
+//      pmsData.PMS_Name := pmsName;
+//      pmsData.PMS_Type := pmsType;
+//
+//      if i <= 5 then {generator}
+//      begin
+//        pmsData.PMS_Mode := pmsMode;
+//        pmsData.PMS_State := 1;
+//        pmsData.PMS_OnOff := pmsEngine;
+//        pmsData.PMS_Pref := pmsPref;
+//        pmsData.PMS_CB := pmsCB;
+//      end
+//      else if i = 8 then {Switchboard Emergency}
+//      begin
+//        pmsData.PMS_SWB_ESBIntrMode := pmsMode;
+//        pmsData.PMS_SWB_EsbCBIntr := pmsCB;
+//      end
+//      else if i = 9 then {Variable}
+//      begin
+//        pmsData.PMS_FirstLoad := 1;
+//        pmsData.PMS_StateRunFull := StateRunFull;
+//        pmsData.PMS_StateRunFwd := StateRunFwd;
+//        pmsData.PMS_StateRunAft := StateRunAft;
+//      end
+//      else {Switchboard}
+//      begin
+//        pmsData.PMS_SWB_MSBIntrMode := pmsMode;
+//        pmsData.PMS_SWB_MsbCBIntr := pmsCB;
+//      end;
+//
+//      PMSList.Add(pmsData);
+//    end;
+//    InstructorSys.Scenario.SavePMSCondition(True, edtCondName.Text, PMSList, ConditionID);
+//    MessageDlg('"' + edtCondName.Text + '" Condition Has Been Saved', mtInformation, [mbOK], 0);
+//    actNewExecute(nil);
+//  end
+//  else if FCondition_ID > 0 then
+//  begin
+//    if CondNameBuffer <> edtCondName.Text then
+//    begin
+//      ShowMessage('Can Not Update PMS Condition With a Different Name');
+//      Exit;
+//    end;
+//
+//    PMSList := TList.Create;
+//
+//    for i := 1 to 9 do
+//    begin
+//      GetPMSInfo(i, pmsName, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB);
+//
+//      pmsData := TPMSCond_Data.Create;
+//      pmsData.PMS_ID := InstructorSys.Scenario.GetPMSCondID(FCondition_ID, i);
+//      pmsData.PMS_Name := pmsName;
+//      pmsData.PMS_Type := pmsType;
+//
+//      if i <= 5 then {generator}
+//      begin
+//        pmsData.PMS_Mode := pmsMode;
+//        pmsData.PMS_State := 1;
+//        pmsData.PMS_OnOff := pmsEngine;
+//        pmsData.PMS_Pref := pmsPref;
+//        pmsData.PMS_CB := pmsCB;
+//      end
+//      else if i >= 8 then {Switchboard Emergency}
+//      begin
+//        pmsData.PMS_SWB_ESBIntrMode := pmsMode;
+//        pmsData.PMS_SWB_EsbCBIntr := pmsCB;
+//      end
+//      else if i = 9 then {Variable}
+//      begin
+//        pmsData.PMS_FirstLoad := 1;
+//        pmsData.PMS_StateRunFull := StateRunFull;
+//        pmsData.PMS_StateRunFwd := StateRunFwd;
+//        pmsData.PMS_StateRunAft := StateRunAft;
+//      end
+//      else {Switchboard}
+//      begin
+//        pmsData.PMS_SWB_MSBIntrMode := pmsMode;
+//        pmsData.PMS_SWB_MsbCBIntr := pmsCB;
+//      end;
+//
+//      pmsData.Condition_ID := FCondition_ID;
+//
+//      PMSList.Add(pmsData);
+//    end;
+//
+//    InstructorSys.Scenario.SavePMSCondition(False, edtCondName.Text, PMSList, ConditionID);
+//    MessageDlg('"' + edtCondName.Text + '" Condition Has Been Updated', mtInformation, [mbOK], 0);
+//    actNewExecute(nil);
+//  end;
+end;
+
+procedure TfrmScenBuilder.btnFullAllClick(Sender: TObject);
+var
+  i, j : integer;
+begin
+  if cbbSetValue.Text = '' then
+  begin
+    MessageDlg('Select the tank to be filled..!!', mtInformation, [mbOK], 0);
+    Exit;
+  end;
+
+  if strtofloat(edtPersen.Text) > 100 then
+    edtPersen.Text := '100'
+  else if strtofloat(edtPersen.Text) < 0 then
+    edtPersen.Text := '0';
+
+  if cbbSetValue.ItemIndex = 0 then
+  begin
+
+    for I := 1 to 18 do
+    begin
+      for j := 0 to ComponentCount - 1 do
+      begin
+        if Components[j] is TEdit then
+        begin
+          if TEdit(Components[j]).Tag = i then
+          begin
+            TEdit(Components[j]).Text := floattostr(InstructorSys.Scenario.getMaxTankValue(TEdit(Components[j]).Hint)*
+                                                    (strtofloat(edtPersen.Text)/100));
+            break;
+          end;
+        end;
+      end;
+    end;
+  end
+  else
+  begin
+    for j := 0 to ComponentCount - 1 do
+    begin
+      if Components[j] is TEdit then
+      begin
+        if TEdit(Components[j]).Tag = (cbbSetValue.ItemIndex) then
+        begin
+          TEdit(Components[j]).Text := floattostr(InstructorSys.Scenario.getMaxTankValue(TEdit(Components[j]).Hint)*
+                                                  (strtofloat(edtPersen.Text)/100));
+          break;
+        end;
+      end;
+    end;
+  end;
+
+
+end;
+
+procedure TfrmScenBuilder.edtGBXLOTKKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (key in ['0'..'9', #8, #13, #46]) then
+    key := #0;
+end;
+
+procedure TfrmScenBuilder.edtMELOTKKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (key in ['0'..'9', #8, #13, #46]) then
+    key := #0;
+end;
+
+procedure TfrmScenBuilder.edtWBPSKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (key in ['0'..'9', #8, #13, #46]) then
+    key := #0;
+end;
+
+{$ENDREGION}
+
 {$REGION ' FA Section '}
 
 procedure TfrmScenBuilder.btnRefreshFAClick(Sender: TObject);
@@ -2944,14 +3124,14 @@ var
   pmsList : TList;
   i : Integer;
 begin
-  if not Assigned(frmAvailPMSCondition)  then
-    frmAvailPMSCondition := TfrmAvailPMSCondition.Create(Self);
-
-  pmsList := nil;
-  pmsNames := nil;
-  InstructorSys.Scenario.GetPMSConditions(pmsNames);
-  frmAvailPMSCondition.SetAvailableCondition(pmsNames);
-  pmsNames.Free;
+//  if not Assigned(frmAvailPMSCondition)  then
+//    frmAvailPMSCondition := TfrmAvailPMSCondition.Create(Self);
+//
+//  pmsList := nil;
+//  pmsNames := nil;
+//  InstructorSys.Scenario.GetPMSConditions(pmsNames);
+//  frmAvailPMSCondition.SetAvailableCondition(pmsNames);
+//  pmsNames.Free;
 
 //  if frmAvailPMSCondition.ShowModal = mrOk then
 //  begin
@@ -3295,29 +3475,6 @@ begin
 
   if lstPMS.Count > 0 then
 //  lstAvail.Clear;
-
-  for i := 0 to tempList.Count - 1 do
-  begin
-    lstPMS.Items.Add(tempList[i]);
-  end;
-
-  tempList.Free;
-end;
-
-procedure TfrmScenBuilder.UpdatePMSList;
-var
-  i : Integer;
-  tempList : TStrings;
-
-begin
-  tempList := nil;
-  InstructorSys.Scenario.GetPMSConditions(tempList);
-
-  if not Assigned(tempList) then
-    Exit;
-
-  if lstPMS.Count > 0 then
-  lstPMS.Clear;
 
   for i := 0 to tempList.Count - 1 do
   begin
