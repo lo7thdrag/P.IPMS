@@ -49,6 +49,212 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
         Color = clGray
         ParentBackground = False
         TabOrder = 0
+        object Panel6: TPanel
+          Left = 1294
+          Top = 505
+          Width = 124
+          Height = 260
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
+          TabOrder = 13
+          object Label1: TLabel
+            Left = 18
+            Top = 25
+            Width = 88
+            Height = 16
+            Caption = 'CPP Hydraulic'
+            Color = clGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label2: TLabel
+            Left = 38
+            Top = 47
+            Width = 47
+            Height = 16
+            Caption = 'PUMP 3'
+            Color = clGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object btnPS_Auto3: TVrDemoButton
+            Tag = 1
+            Left = 13
+            Top = 89
+            Width = 97
+            Height = 39
+            Hint = 'Pump 3'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Auto'
+            TabOrder = 0
+            OnClick = btnCPPClick
+          end
+          object btnPS_Stop3: TVrDemoButton
+            Tag = 1
+            Left = 13
+            Top = 143
+            Width = 97
+            Height = 39
+            Hint = 'Pump 3'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Stop'
+            TabOrder = 1
+            OnClick = btnCPPClick
+          end
+          object btnPS_Start3: TVrDemoButton
+            Tag = 1
+            Left = 13
+            Top = 197
+            Width = 97
+            Height = 39
+            Hint = 'Pump 3'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Start'
+            TabOrder = 2
+            OnClick = btnCPPClick
+          end
+        end
+        object Panel5: TPanel
+          Left = 1160
+          Top = 505
+          Width = 124
+          Height = 260
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
+          TabOrder = 12
+          object Label10: TLabel
+            Left = 18
+            Top = 25
+            Width = 88
+            Height = 16
+            Caption = 'CPP Hydraulic'
+            Color = clGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label11: TLabel
+            Left = 38
+            Top = 47
+            Width = 47
+            Height = 16
+            Caption = 'PUMP 2'
+            Color = clGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object btnPS_Standby2: TVrDemoButton
+            Tag = 1
+            Left = 14
+            Top = 89
+            Width = 97
+            Height = 39
+            Hint = 'Pump 2'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Standby'
+            TabOrder = 0
+            OnClick = btnCPPClick
+          end
+          object btnPS_Stop2: TVrDemoButton
+            Tag = 1
+            Left = 14
+            Top = 143
+            Width = 97
+            Height = 39
+            Hint = 'Pump 2'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Stop'
+            TabOrder = 1
+            OnClick = btnCPPClick
+          end
+          object btnPS_Start2: TVrDemoButton
+            Tag = 1
+            Left = 14
+            Top = 197
+            Width = 97
+            Height = 39
+            Hint = 'Pump 2'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Start'
+            TabOrder = 2
+            OnClick = btnCPPClick
+          end
+        end
         object pnlControl: TPanel
           Left = 636
           Top = 505
@@ -4090,7 +4296,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Color = 3749426
           end
         end
         object pnlIndicator: TPanel
@@ -11365,7 +11570,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl6: TLabel
-            Left = 36
+            Left = 35
             Top = 120
             Width = 43
             Height = 20
@@ -11381,7 +11586,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl13: TLabel
-            Left = 38
+            Left = 37
             Top = 190
             Width = 39
             Height = 20
@@ -11413,7 +11618,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl16: TLabel
-            Left = 118
+            Left = 117
             Top = 120
             Width = 43
             Height = 20
@@ -11429,7 +11634,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl17: TLabel
-            Left = 120
+            Left = 119
             Top = 190
             Width = 39
             Height = 20
@@ -11461,7 +11666,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl19: TLabel
-            Left = 202
+            Left = 201
             Top = 115
             Width = 39
             Height = 30
@@ -11525,7 +11730,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl23: TLabel
-            Left = 282
+            Left = 281
             Top = 185
             Width = 43
             Height = 30
@@ -12352,7 +12557,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Color = 3749426
           end
         end
         object pnlHTPREHEATINGELECTRICPUMP1: TPanel
@@ -13086,7 +13290,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Color = 3749426
           end
         end
         object pnlSTANDBYPUMPGEARBOXPS: TPanel
@@ -13815,224 +14018,17 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Color = 3749426
-          end
-        end
-        object grpPS_CPP2: TGroupBox
-          Left = 1160
-          Top = 505
-          Width = 124
-          Height = 260
-          Color = 3749426
-          ParentBackground = False
-          ParentColor = False
-          TabOrder = 6
-          object Label1: TLabel
-            Left = 18
-            Top = 24
-            Width = 88
-            Height = 16
-            Caption = 'CPP Hydraulic'
-            Color = clGray
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label2: TLabel
-            Left = 38
-            Top = 46
-            Width = 47
-            Height = 16
-            Caption = 'PUMP 2'
-            Color = clGray
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object btnPS_Start2: TVrDemoButton
-            Tag = 1
-            Left = 13
-            Top = 196
-            Width = 97
-            Height = 39
-            Hint = 'Pump 2'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Start'
-            TabOrder = 0
-            OnClick = btnCPPClick
-          end
-          object btnPS_Standby2: TVrDemoButton
-            Tag = 1
-            Left = 13
-            Top = 88
-            Width = 97
-            Height = 39
-            Hint = 'Pump 2'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Standby'
-            TabOrder = 1
-            OnClick = btnCPPClick
-          end
-          object btnPS_Stop2: TVrDemoButton
-            Tag = 1
-            Left = 13
-            Top = 142
-            Width = 97
-            Height = 39
-            Hint = 'Pump 2'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Stop'
-            TabOrder = 2
-            OnClick = btnCPPClick
-          end
-        end
-        object grpPS_CPP3: TGroupBox
-          Left = 1294
-          Top = 505
-          Width = 124
-          Height = 260
-          Color = 3749426
-          ParentBackground = False
-          ParentColor = False
-          TabOrder = 7
-          object Label3: TLabel
-            Left = 18
-            Top = 24
-            Width = 88
-            Height = 16
-            Caption = 'CPP Hydraulic'
-            Color = clGray
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label12: TLabel
-            Left = 38
-            Top = 46
-            Width = 47
-            Height = 16
-            Caption = 'PUMP 3'
-            Color = clGray
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object btnPS_Start3: TVrDemoButton
-            Tag = 1
-            Left = 13
-            Top = 196
-            Width = 97
-            Height = 39
-            Hint = 'Pump 3'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Start'
-            TabOrder = 0
-            OnClick = btnCPPClick
-          end
-          object btnPS_Auto3: TVrDemoButton
-            Tag = 1
-            Left = 13
-            Top = 88
-            Width = 97
-            Height = 39
-            Hint = 'Pump 3'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Auto'
-            TabOrder = 1
-            OnClick = btnCPPClick
-          end
-          object btnPS_Stop3: TVrDemoButton
-            Tag = 1
-            Left = 13
-            Top = 142
-            Width = 97
-            Height = 39
-            Hint = 'Pump 3'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Stop'
-            TabOrder = 2
-            OnClick = btnCPPClick
           end
         end
         object pnl4ControlLCPPORTSIDE: TPanel
-          Left = 1443
+          Left = 1462
           Top = 24
           Width = 193
           Height = 741
           BevelOuter = bvNone
           Color = 3749426
           ParentBackground = False
-          TabOrder = 8
+          TabOrder = 6
           object grpRemote: TGroupBox
             Left = 17
             Top = 18
@@ -14229,7 +14225,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           BevelOuter = bvNone
           Color = 3749426
           ParentBackground = False
-          TabOrder = 9
+          TabOrder = 7
           object lblPrelube: TLabel
             Left = 89
             Top = 12
@@ -14253,7 +14249,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           BevelOuter = bvNone
           Color = 3749426
           ParentBackground = False
-          TabOrder = 10
+          TabOrder = 8
           object lbl4: TLabel
             Left = 30
             Top = 12
@@ -14277,7 +14273,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           BevelOuter = bvNone
           Color = 3749426
           ParentBackground = False
-          TabOrder = 11
+          TabOrder = 9
           object lblHeater: TLabel
             Left = 36
             Top = 12
@@ -14301,7 +14297,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           BevelOuter = bvNone
           Color = 3749426
           ParentBackground = False
-          TabOrder = 12
+          TabOrder = 10
           object lblStandByPumpGB: TLabel
             Left = 56
             Top = 12
@@ -14325,7 +14321,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           BevelOuter = bvNone
           Color = 3749426
           ParentBackground = False
-          TabOrder = 13
+          TabOrder = 11
           object lbl9: TLabel
             Left = 18
             Top = 25
@@ -14435,15 +14431,327 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
         Color = clGray
         ParentBackground = False
         TabOrder = 0
+        object Panel7: TPanel
+          Left = 1026
+          Top = 505
+          Width = 124
+          Height = 260
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
+          TabOrder = 11
+          object Label3: TLabel
+            Left = 18
+            Top = 25
+            Width = 88
+            Height = 16
+            Caption = 'CPP Hydraulic'
+            Color = clGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label12: TLabel
+            Left = 38
+            Top = 47
+            Width = 47
+            Height = 16
+            Caption = 'PUMP 1'
+            Color = clGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object btnSB_Standby1: TVrDemoButton
+            Tag = 2
+            Left = 14
+            Top = 89
+            Width = 97
+            Height = 39
+            Hint = 'Pump 1'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Standby'
+            TabOrder = 0
+            OnClick = btnCPPClick
+          end
+          object btnSB_Stop1: TVrDemoButton
+            Tag = 2
+            Left = 14
+            Top = 143
+            Width = 97
+            Height = 39
+            Hint = 'Pump 1'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Stop'
+            TabOrder = 1
+            OnClick = btnCPPClick
+          end
+          object btnSB_Start1: TVrDemoButton
+            Tag = 2
+            Left = 14
+            Top = 197
+            Width = 97
+            Height = 39
+            Hint = 'Pump 1'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Start'
+            TabOrder = 2
+            OnClick = btnCPPClick
+          end
+        end
+        object Panel8: TPanel
+          Left = 1160
+          Top = 505
+          Width = 124
+          Height = 260
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
+          TabOrder = 12
+          object Label13: TLabel
+            Left = 18
+            Top = 25
+            Width = 88
+            Height = 16
+            Caption = 'CPP Hydraulic'
+            Color = clGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label14: TLabel
+            Left = 38
+            Top = 47
+            Width = 47
+            Height = 16
+            Caption = 'PUMP 2'
+            Color = clGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object btnSB_Standby2: TVrDemoButton
+            Tag = 2
+            Left = 14
+            Top = 89
+            Width = 97
+            Height = 39
+            Hint = 'Pump 2'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Standby'
+            TabOrder = 0
+            OnClick = btnCPPClick
+          end
+          object btnSB_Stop2: TVrDemoButton
+            Tag = 2
+            Left = 14
+            Top = 143
+            Width = 97
+            Height = 39
+            Hint = 'Pump 2'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Stop'
+            TabOrder = 1
+            OnClick = btnCPPClick
+          end
+          object btnSB_Start2: TVrDemoButton
+            Tag = 2
+            Left = 14
+            Top = 197
+            Width = 97
+            Height = 39
+            Hint = 'Pump 2'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Start'
+            TabOrder = 2
+            OnClick = btnCPPClick
+          end
+        end
+        object Panel9: TPanel
+          Left = 1294
+          Top = 505
+          Width = 124
+          Height = 260
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
+          TabOrder = 13
+          object Label15: TLabel
+            Left = 18
+            Top = 25
+            Width = 88
+            Height = 16
+            Caption = 'CPP Hydraulic'
+            Color = clGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label16: TLabel
+            Left = 38
+            Top = 47
+            Width = 47
+            Height = 16
+            Caption = 'PUMP 3'
+            Color = clGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object btnSB_Auto3: TVrDemoButton
+            Tag = 2
+            Left = 13
+            Top = 89
+            Width = 97
+            Height = 39
+            Hint = 'Pump 3'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Auto'
+            TabOrder = 0
+            OnClick = btnCPPClick
+          end
+          object btnSB_Stop3: TVrDemoButton
+            Tag = 2
+            Left = 13
+            Top = 143
+            Width = 97
+            Height = 39
+            Hint = 'Pump 3'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Stop'
+            TabOrder = 1
+            OnClick = btnCPPClick
+          end
+          object btnSB_Start3: TVrDemoButton
+            Tag = 2
+            Left = 13
+            Top = 197
+            Width = 97
+            Height = 39
+            Hint = 'Pump 3'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Start'
+            TabOrder = 2
+            OnClick = btnCPPClick
+          end
+        end
         object pnlAlarm: TPanel
           Left = 636
           Top = 505
-          Width = 358
+          Width = 371
           Height = 260
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 0
           object Image10: TImage
             Tag = 1
-            Left = 13
+            Left = 18
             Top = 170
             Width = 80
             Height = 60
@@ -14786,7 +15094,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object Image11: TImage
             Tag = 1
-            Left = 98
+            Left = 103
             Top = 170
             Width = 80
             Height = 60
@@ -15815,7 +16123,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object Image9: TImage
             Tag = 1
-            Left = 268
+            Left = 273
             Top = 100
             Width = 80
             Height = 60
@@ -16158,7 +16466,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object Image2: TImage
             Tag = 1
-            Left = 183
+            Left = 188
             Top = 100
             Width = 80
             Height = 60
@@ -16501,7 +16809,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object Image3: TImage
             Tag = 1
-            Left = 98
+            Left = 103
             Top = 100
             Width = 80
             Height = 60
@@ -16844,7 +17152,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object Image4: TImage
             Tag = 1
-            Left = 13
+            Left = 18
             Top = 100
             Width = 80
             Height = 60
@@ -17187,7 +17495,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object Image5: TImage
             Tag = 1
-            Left = 183
+            Left = 188
             Top = 30
             Width = 80
             Height = 60
@@ -17530,7 +17838,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object Image6: TImage
             Tag = 1
-            Left = 98
+            Left = 103
             Top = 30
             Width = 80
             Height = 60
@@ -17873,7 +18181,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object Image1: TImage
             Tag = 1
-            Left = 13
+            Left = 18
             Top = 30
             Width = 80
             Height = 60
@@ -18216,7 +18524,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object btnStopSB: TSpeedButtonImage
             Tag = 1
-            Left = 20
+            Left = 25
             Top = 35
             Width = 66
             Height = 49
@@ -18227,7 +18535,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object btnStartSB: TSpeedButtonImage
             Tag = 1
-            Left = 105
+            Left = 110
             Top = 35
             Width = 66
             Height = 49
@@ -18238,7 +18546,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object btnAlarm_Accept3: TSpeedButtonImage
             Tag = 1
-            Left = 190
+            Left = 195
             Top = 35
             Width = 66
             Height = 49
@@ -18248,7 +18556,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object btnClutchSB: TSpeedButtonImage
             Tag = 1
-            Left = 20
+            Left = 25
             Top = 105
             Width = 66
             Height = 49
@@ -18260,7 +18568,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object btnDeclutchSB: TSpeedButtonImage
             Tag = 1
-            Left = 105
+            Left = 110
             Top = 105
             Width = 66
             Height = 49
@@ -18272,7 +18580,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object btnSafetiesStopSB: TSpeedButtonImage
             Tag = 1
-            Left = 190
+            Left = 195
             Top = 105
             Width = 66
             Height = 49
@@ -18283,7 +18591,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object btnEmergencStopSB: TSpeedButtonImage
             Tag = 1
-            Left = 275
+            Left = 280
             Top = 105
             Width = 66
             Height = 49
@@ -18294,7 +18602,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object btnAlarm_Accept8: TSpeedButtonImage
             Tag = 1
-            Left = 20
+            Left = 25
             Top = 176
             Width = 66
             Height = 49
@@ -18304,7 +18612,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object btnAlarm_Accept9: TSpeedButtonImage
             Tag = 1
-            Left = 105
+            Left = 110
             Top = 176
             Width = 66
             Height = 49
@@ -18314,7 +18622,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object lbl53: TLabel
             Tag = 1
-            Left = 119
+            Left = 124
             Top = 53
             Width = 37
             Height = 13
@@ -18330,7 +18638,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object lbl54: TLabel
             Tag = 1
-            Left = 109
+            Left = 114
             Top = 123
             Width = 57
             Height = 13
@@ -18346,7 +18654,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object lbl55: TLabel
             Tag = 1
-            Left = 37
+            Left = 42
             Top = 53
             Width = 32
             Height = 13
@@ -18362,7 +18670,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object lbl56: TLabel
             Tag = 1
-            Left = 28
+            Left = 33
             Top = 123
             Width = 46
             Height = 13
@@ -18379,7 +18687,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object lbl57: TLabel
             Tag = 1
-            Left = 197
+            Left = 202
             Top = 116
             Width = 52
             Height = 26
@@ -18396,7 +18704,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object lbl58: TLabel
             Tag = 1
-            Left = 276
+            Left = 281
             Top = 117
             Width = 65
             Height = 26
@@ -18413,7 +18721,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object lbl59: TLabel
             Tag = 1
-            Left = 197
+            Left = 202
             Top = 40
             Width = 52
             Height = 39
@@ -18429,7 +18737,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object btn19: TVrDemoButton
             Tag = 1
-            Left = 275
+            Left = 276
             Top = 30
             Width = 73
             Height = 25
@@ -18451,14 +18759,17 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object pnlIndicatorLCPSS: TPanel
-          Left = 35
+          Left = 16
           Top = 505
-          Width = 591
+          Width = 607
           Height = 260
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 1
           object img28: TImage
             Tag = 1
-            Left = 419
+            Left = 427
             Top = 100
             Width = 80
             Height = 60
@@ -18801,7 +19112,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img29: TImage
             Tag = 1
-            Left = 501
+            Left = 509
             Top = 100
             Width = 80
             Height = 60
@@ -19144,7 +19455,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img30: TImage
             Tag = 1
-            Left = 419
+            Left = 427
             Top = 170
             Width = 80
             Height = 60
@@ -19487,7 +19798,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img31: TImage
             Tag = 1
-            Left = 501
+            Left = 509
             Top = 170
             Width = 80
             Height = 60
@@ -19829,7 +20140,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object lbl60: TLabel
-            Left = 438
+            Left = 446
             Top = 190
             Width = 42
             Height = 20
@@ -19845,7 +20156,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl61: TLabel
-            Left = 520
+            Left = 528
             Top = 190
             Width = 42
             Height = 20
@@ -19861,7 +20172,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl62: TLabel
-            Left = 520
+            Left = 528
             Top = 120
             Width = 43
             Height = 20
@@ -19877,7 +20188,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl63: TLabel
-            Left = 438
+            Left = 446
             Top = 120
             Width = 43
             Height = 20
@@ -19894,7 +20205,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img32: TImage
             Tag = 1
-            Left = 9
+            Left = 17
             Top = 30
             Width = 80
             Height = 60
@@ -20237,7 +20548,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img33: TImage
             Tag = 1
-            Left = 9
+            Left = 17
             Top = 100
             Width = 80
             Height = 60
@@ -20580,7 +20891,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img34: TImage
             Tag = 1
-            Left = 9
+            Left = 17
             Top = 170
             Width = 80
             Height = 60
@@ -20923,7 +21234,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img35: TImage
             Tag = 1
-            Left = 91
+            Left = 99
             Top = 30
             Width = 80
             Height = 60
@@ -21266,7 +21577,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img36: TImage
             Tag = 1
-            Left = 91
+            Left = 99
             Top = 100
             Width = 80
             Height = 60
@@ -21609,7 +21920,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img37: TImage
             Tag = 1
-            Left = 91
+            Left = 99
             Top = 170
             Width = 80
             Height = 60
@@ -21952,7 +22263,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img38: TImage
             Tag = 1
-            Left = 173
+            Left = 181
             Top = 30
             Width = 80
             Height = 60
@@ -22295,7 +22606,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img39: TImage
             Tag = 1
-            Left = 173
+            Left = 181
             Top = 100
             Width = 80
             Height = 60
@@ -22638,7 +22949,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img40: TImage
             Tag = 1
-            Left = 173
+            Left = 181
             Top = 170
             Width = 80
             Height = 60
@@ -22981,7 +23292,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img41: TImage
             Tag = 1
-            Left = 255
+            Left = 263
             Top = 30
             Width = 80
             Height = 60
@@ -23324,7 +23635,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img42: TImage
             Tag = 1
-            Left = 255
+            Left = 263
             Top = 100
             Width = 80
             Height = 60
@@ -23667,7 +23978,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img43: TImage
             Tag = 1
-            Left = 255
+            Left = 263
             Top = 170
             Width = 80
             Height = 60
@@ -24010,7 +24321,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img44: TImage
             Tag = 1
-            Left = 337
+            Left = 345
             Top = 30
             Width = 80
             Height = 60
@@ -24353,7 +24664,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img45: TImage
             Tag = 1
-            Left = 337
+            Left = 345
             Top = 100
             Width = 80
             Height = 60
@@ -24696,7 +25007,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img46: TImage
             Tag = 1
-            Left = 337
+            Left = 345
             Top = 170
             Width = 80
             Height = 60
@@ -25039,7 +25350,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img47: TImage
             Tag = 1
-            Left = 419
+            Left = 427
             Top = 30
             Width = 80
             Height = 60
@@ -25382,7 +25693,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img48: TImage
             Tag = 1
-            Left = 501
+            Left = 509
             Top = 30
             Width = 80
             Height = 60
@@ -25724,7 +26035,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object lbl64: TLabel
-            Left = 28
+            Left = 36
             Top = 50
             Width = 42
             Height = 20
@@ -25740,7 +26051,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl65: TLabel
-            Left = 27
+            Left = 35
             Top = 120
             Width = 43
             Height = 20
@@ -25756,7 +26067,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl66: TLabel
-            Left = 29
+            Left = 37
             Top = 190
             Width = 39
             Height = 20
@@ -25772,7 +26083,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl67: TLabel
-            Left = 110
+            Left = 118
             Top = 50
             Width = 42
             Height = 20
@@ -25788,7 +26099,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl68: TLabel
-            Left = 109
+            Left = 117
             Top = 120
             Width = 43
             Height = 20
@@ -25804,7 +26115,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl69: TLabel
-            Left = 111
+            Left = 119
             Top = 190
             Width = 39
             Height = 20
@@ -25820,7 +26131,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl70: TLabel
-            Left = 189
+            Left = 198
             Top = 45
             Width = 47
             Height = 30
@@ -25836,7 +26147,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl71: TLabel
-            Left = 193
+            Left = 201
             Top = 115
             Width = 39
             Height = 30
@@ -25852,7 +26163,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl72: TLabel
-            Left = 195
+            Left = 203
             Top = 185
             Width = 36
             Height = 30
@@ -25868,7 +26179,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl73: TLabel
-            Left = 280
+            Left = 288
             Top = 50
             Width = 30
             Height = 20
@@ -25884,7 +26195,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl74: TLabel
-            Left = 271
+            Left = 279
             Top = 115
             Width = 48
             Height = 30
@@ -25900,7 +26211,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl75: TLabel
-            Left = 274
+            Left = 281
             Top = 185
             Width = 43
             Height = 30
@@ -25916,7 +26227,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl76: TLabel
-            Left = 356
+            Left = 364
             Top = 45
             Width = 43
             Height = 30
@@ -25932,7 +26243,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl77: TLabel
-            Left = 355
+            Left = 363
             Top = 115
             Width = 45
             Height = 30
@@ -25948,7 +26259,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl78: TLabel
-            Left = 364
+            Left = 372
             Top = 195
             Width = 26
             Height = 10
@@ -25964,7 +26275,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl79: TLabel
-            Left = 445
+            Left = 453
             Top = 50
             Width = 29
             Height = 20
@@ -25980,7 +26291,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl80: TLabel
-            Left = 513
+            Left = 521
             Top = 50
             Width = 56
             Height = 20
@@ -25997,17 +26308,18 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object pnlHTELECTRICPUMPSB: TPanel
-          Left = 750
-          Top = 24
-          Width = 310
-          Height = 441
-          BevelKind = bkFlat
+          Left = 727
+          Top = 72
+          Width = 335
+          Height = 393
           BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 2
           object imgHeaterON_SB: TImage
             Tag = 1
-            Left = 56
-            Top = 114
+            Left = 70
+            Top = 70
             Width = 80
             Height = 80
             Hint = 'Heater'
@@ -26357,8 +26669,8 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object imgHeaterOff_SB: TImage
             Tag = 1
-            Left = 171
-            Top = 114
+            Left = 185
+            Top = 70
             Width = 80
             Height = 80
             Hint = 'Heater'
@@ -26706,24 +27018,10 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
             OnClick = btnOFFClick
           end
-          object lbl81: TLabel
-            Left = 22
-            Top = 40
-            Width = 262
-            Height = 18
-            Alignment = taCenter
-            Caption = 'HT ELECTRICAL WATER HEATER SB'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
           object vrtryswtchHeaterSB: TVrRotarySwitch
             Tag = 1
-            Left = 31
-            Top = 242
+            Left = 45
+            Top = 198
             Width = 244
             Height = 144
             Hint = 'Heater'
@@ -26743,35 +27041,21 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Color = clGray
           end
         end
         object pnlLOPRELUBPUMPSB: TPanel
-          Left = 35
-          Top = 24
-          Width = 310
-          Height = 441
-          BevelKind = bkFlat
+          Left = 16
+          Top = 72
+          Width = 335
+          Height = 393
           BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 3
-          object lbl50: TLabel
-            Left = 75
-            Top = 40
-            Width = 157
-            Height = 18
-            Alignment = taCenter
-            Caption = 'LO PRELUB PUMP SB'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
           object imgPrelubeON_SB: TImage
             Tag = 1
-            Left = 56
-            Top = 114
+            Left = 70
+            Top = 70
             Width = 80
             Height = 80
             Hint = 'Prelub'
@@ -27121,8 +27405,8 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object imgPrelubeOFF_SB: TImage
             Tag = 1
-            Left = 171
-            Top = 114
+            Left = 185
+            Top = 70
             Width = 80
             Height = 80
             Hint = 'Prelub'
@@ -27472,8 +27756,8 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object vrtryswtchPrelubeSB: TVrRotarySwitch
             Tag = 1
-            Left = 31
-            Top = 242
+            Left = 45
+            Top = 198
             Width = 244
             Height = 144
             Hint = 'Prelub'
@@ -27493,21 +27777,21 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Color = clGray
           end
         end
         object pnlSTANDBYPUMPGEARBOXSB: TPanel
-          Left = 1108
-          Top = 24
-          Width = 310
-          Height = 441
-          BevelKind = bkFlat
+          Left = 1083
+          Top = 72
+          Width = 335
+          Height = 393
           BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 4
           object imgStandByPumpGBON_SB: TImage
             Tag = 1
-            Left = 56
-            Top = 114
+            Left = 70
+            Top = 70
             Width = 80
             Height = 80
             Picture.Data = {
@@ -27855,8 +28139,8 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object img25: TImage
             Tag = 1
-            Left = 171
-            Top = 114
+            Left = 185
+            Top = 70
             Width = 80
             Height = 80
             Picture.Data = {
@@ -28202,24 +28486,10 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               3F3F3F3F3F3F3E3E3E3F3F3F414141404040}
             Stretch = True
           end
-          object lbl51: TLabel
-            Left = 42
-            Top = 40
-            Width = 222
-            Height = 18
-            Alignment = taCenter
-            Caption = 'STANDBY PUMP GEARBOX SB'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
           object vrtryswtchStandByPumpGBSB: TVrRotarySwitch
             Tag = 1
-            Left = 31
-            Top = 242
+            Left = 45
+            Top = 198
             Width = 244
             Height = 144
             Hint = 'Standby Pump GB'
@@ -28238,21 +28508,21 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Color = clGray
           end
         end
         object pnlHTPREHEATINGELECTRICPUMPSB: TPanel
-          Left = 393
-          Top = 24
-          Width = 310
-          Height = 441
-          BevelKind = bkFlat
+          Left = 372
+          Top = 72
+          Width = 335
+          Height = 393
           BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 5
           object imgPreheatingPumpOn_SB: TImage
             Tag = 1
-            Left = 56
-            Top = 114
+            Left = 70
+            Top = 70
             Width = 80
             Height = 80
             Hint = 'Preheating Pump'
@@ -28602,8 +28872,8 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object imgPreheatingPumpOff_SB: TImage
             Tag = 1
-            Left = 171
-            Top = 114
+            Left = 185
+            Top = 70
             Width = 80
             Height = 80
             Hint = 'Preheating Pump'
@@ -28951,24 +29221,10 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
             OnClick = btnOFFClick
           end
-          object lbl52: TLabel
-            Left = 13
-            Top = 40
-            Width = 280
-            Height = 18
-            Alignment = taCenter
-            Caption = 'HT PREHEATING ELECTIRIC PUMP SB'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
           object vrtryswtchPumpHeaterSB: TVrRotarySwitch
             Tag = 1
-            Left = 31
-            Top = 242
+            Left = 45
+            Top = 198
             Width = 244
             Height = 144
             Hint = 'Preheating Pump'
@@ -28988,14 +29244,16 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Color = clGray
           end
         end
         object pnl4ControlLCPSTARTBOARDSIDE: TPanel
-          Left = 1443
+          Left = 1462
           Top = 24
           Width = 193
           Height = 741
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 6
           object grp1: TGroupBox
             Left = 17
@@ -29193,304 +29451,100 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             end
           end
         end
-        object grpCPPPUMP1: TGroupBox
-          Left = 1026
-          Top = 505
-          Width = 124
-          Height = 260
+        object Panel1: TPanel
+          Left = 16
+          Top = 24
+          Width = 335
+          Height = 41
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 7
-          object Label4: TLabel
-            Left = 18
-            Top = 24
-            Width = 88
-            Height = 16
-            Caption = 'CPP Hydraulic'
-            Color = clGray
+          object lbl50: TLabel
+            Left = 89
+            Top = 12
+            Width = 157
+            Height = 18
+            Alignment = taCenter
+            Caption = 'LO PRELUB PUMP SB'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
-            Font.Height = -13
+            Font.Height = -15
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
-            ParentColor = False
             ParentFont = False
-          end
-          object Label7: TLabel
-            Left = 38
-            Top = 46
-            Width = 47
-            Height = 16
-            Caption = 'PUMP 1'
-            Color = clGray
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object btnSB_Start1: TVrDemoButton
-            Tag = 2
-            Left = 13
-            Top = 196
-            Width = 97
-            Height = 39
-            Hint = 'Pump 1'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Start'
-            TabOrder = 0
-            OnClick = btnCPPClick
-          end
-          object btnSB_Standby1: TVrDemoButton
-            Tag = 2
-            Left = 13
-            Top = 88
-            Width = 97
-            Height = 39
-            Hint = 'Pump 1'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Standby'
-            TabOrder = 1
-            OnClick = btnCPPClick
-          end
-          object btnSB_Stop1: TVrDemoButton
-            Tag = 2
-            Left = 13
-            Top = 142
-            Width = 97
-            Height = 39
-            Hint = 'Pump 1'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Stop'
-            TabOrder = 2
-            OnClick = btnCPPClick
           end
         end
-        object grpCPPPUMP2: TGroupBox
-          Left = 1160
-          Top = 505
-          Width = 124
-          Height = 260
+        object Panel2: TPanel
+          Left = 372
+          Top = 24
+          Width = 335
+          Height = 41
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 8
-          object Label5: TLabel
-            Left = 18
-            Top = 24
-            Width = 88
-            Height = 16
-            Caption = 'CPP Hydraulic'
-            Color = clGray
+          object lbl52: TLabel
+            Left = 27
+            Top = 12
+            Width = 280
+            Height = 18
+            Alignment = taCenter
+            Caption = 'HT PREHEATING ELECTIRIC PUMP SB'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
-            Font.Height = -13
+            Font.Height = -15
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
-            ParentColor = False
             ParentFont = False
-          end
-          object Label6: TLabel
-            Left = 38
-            Top = 46
-            Width = 47
-            Height = 16
-            Caption = 'PUMP 2'
-            Color = clGray
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object btnSB_Start2: TVrDemoButton
-            Tag = 2
-            Left = 13
-            Top = 196
-            Width = 97
-            Height = 39
-            Hint = 'Pump 2'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Start'
-            TabOrder = 0
-            OnClick = btnCPPClick
-          end
-          object btnSB_Standby2: TVrDemoButton
-            Tag = 2
-            Left = 13
-            Top = 88
-            Width = 97
-            Height = 39
-            Hint = 'Pump 2'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Standby'
-            TabOrder = 1
-            OnClick = btnCPPClick
-          end
-          object btnSB_Stop2: TVrDemoButton
-            Tag = 2
-            Left = 13
-            Top = 142
-            Width = 97
-            Height = 39
-            Hint = 'Pump 2'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Stop'
-            TabOrder = 2
-            OnClick = btnCPPClick
           end
         end
-        object grpCPPPUMP3: TGroupBox
-          Left = 1294
-          Top = 505
-          Width = 124
-          Height = 260
+        object Panel3: TPanel
+          Left = 727
+          Top = 24
+          Width = 335
+          Height = 41
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 9
-          object Label8: TLabel
-            Left = 18
-            Top = 24
-            Width = 88
-            Height = 16
-            Caption = 'CPP Hydraulic'
-            Color = clGray
+          object lbl81: TLabel
+            Left = 36
+            Top = 12
+            Width = 262
+            Height = 18
+            Alignment = taCenter
+            Caption = 'HT ELECTRICAL WATER HEATER SB'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
-            Font.Height = -13
+            Font.Height = -15
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
-            ParentColor = False
             ParentFont = False
           end
-          object Label9: TLabel
-            Left = 38
-            Top = 46
-            Width = 47
-            Height = 16
-            Caption = 'PUMP 3'
-            Color = clGray
+        end
+        object Panel4: TPanel
+          Left = 1083
+          Top = 24
+          Width = 335
+          Height = 41
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
+          TabOrder = 10
+          object lbl51: TLabel
+            Left = 56
+            Top = 12
+            Width = 222
+            Height = 18
+            Alignment = taCenter
+            Caption = 'STANDBY PUMP GEARBOX SB'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
-            Font.Height = -13
+            Font.Height = -15
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
-            ParentColor = False
             ParentFont = False
-          end
-          object btnSB_Start3: TVrDemoButton
-            Tag = 2
-            Left = 13
-            Top = 196
-            Width = 97
-            Height = 39
-            Hint = 'Pump 3'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Start'
-            TabOrder = 0
-            OnClick = btnCPPClick
-          end
-          object btnSB_Auto3: TVrDemoButton
-            Tag = 2
-            Left = 13
-            Top = 88
-            Width = 97
-            Height = 39
-            Hint = 'Pump 3'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Auto'
-            TabOrder = 1
-            OnClick = btnCPPClick
-          end
-          object btnSB_Stop3: TVrDemoButton
-            Tag = 2
-            Left = 13
-            Top = 142
-            Width = 97
-            Height = 39
-            Hint = 'Pump 3'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Stop'
-            TabOrder = 2
-            OnClick = btnCPPClick
           end
         end
       end
