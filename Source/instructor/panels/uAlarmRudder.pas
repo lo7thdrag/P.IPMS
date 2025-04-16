@@ -20,8 +20,8 @@ type
     Label3: TLabel;
     Panel4: TPanel;
     Label5: TLabel;
-    Panel5: TPanel;
-    Panel1: TPanel;
+    pnlPort: TPanel;
+    pnlAlarmPort: TPanel;
     btnLampKiri1: TSpeedButtonImage;
     btnLampKiri2: TSpeedButtonImage;
     btnLampKiri3: TSpeedButtonImage;
@@ -37,7 +37,7 @@ type
     btnLampKiri13: TSpeedButtonImage;
     btnLampKiri14: TSpeedButtonImage;
     btnLampKiri15: TSpeedButtonImage;
-    Panel2: TPanel;
+    pnlPumpPort: TPanel;
     btnPumpKiri1: TSpeedButtonImage;
     btnPumpKiri2: TSpeedButtonImage;
     btnPumpKiri3: TSpeedButtonImage;
@@ -52,10 +52,10 @@ type
     Label2: TLabel;
     vrwhlRudderLeft: TVrWheel;
     lblPortValue: TLabel;
-    Panel11: TPanel;
+    pnlStartboard: TPanel;
     lblStarBoardValue: TLabel;
     vrwhlRudderPanelRight: TVrWheel;
-    Panel7: TPanel;
+    pnlAlarmStartboard: TPanel;
     btnLampKanan1: TSpeedButtonImage;
     btnLampKanan6: TSpeedButtonImage;
     btnLampKanan9: TSpeedButtonImage;
@@ -75,7 +75,7 @@ type
     Label8: TLabel;
     Panel3: TPanel;
     Label4: TLabel;
-    Panel6: TPanel;
+    pnlPumpStartboard: TPanel;
     btnPumpKanan1: TSpeedButtonImage;
     btnPumpKanan4: TSpeedButtonImage;
     btnPumpKanan2: TSpeedButtonImage;

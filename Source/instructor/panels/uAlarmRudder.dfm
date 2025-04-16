@@ -16,7 +16,7 @@ object frmAlarmRudder: TfrmAlarmRudder
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel11: TPanel
+  object pnlStartboard: TPanel
     Left = 875
     Top = 46
     Width = 777
@@ -6115,9 +6115,9 @@ object frmAlarmRudder: TfrmAlarmRudder
       OnMouseMove = vrwhlRudderPanelRightMouseMove
     end
     object lblStarBoardValue: TLabel
-      Left = 549
-      Top = 497
-      Width = 8
+      Left = 235
+      Top = 498
+      Width = 30
       Height = 18
       Caption = '0'
       Color = cl3DDkShadow
@@ -6131,7 +6131,7 @@ object frmAlarmRudder: TfrmAlarmRudder
       Transparent = True
       Visible = False
     end
-    object Panel7: TPanel
+    object pnlAlarmStartboard: TPanel
       Left = 47
       Top = 77
       Width = 684
@@ -6427,7 +6427,7 @@ object frmAlarmRudder: TfrmAlarmRudder
         ParentFont = False
       end
     end
-    object Panel6: TPanel
+    object pnlPumpStartboard: TPanel
       Left = 418
       Top = 474
       Width = 241
@@ -6637,7 +6637,7 @@ object frmAlarmRudder: TfrmAlarmRudder
       ParentFont = False
     end
   end
-  object Panel5: TPanel
+  object pnlPort: TPanel
     Left = 16
     Top = 46
     Width = 777
@@ -12752,7 +12752,7 @@ object frmAlarmRudder: TfrmAlarmRudder
       Transparent = True
       Visible = False
     end
-    object Panel1: TPanel
+    object pnlAlarmPort: TPanel
       Left = 47
       Top = 77
       Width = 684
@@ -13002,7 +13002,7 @@ object frmAlarmRudder: TfrmAlarmRudder
         Color = 3749426
       end
     end
-    object Panel2: TPanel
+    object pnlPumpPort: TPanel
       Left = 105
       Top = 474
       Width = 241
