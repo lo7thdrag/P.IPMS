@@ -81,7 +81,7 @@ type
 
     function GetFreeConditionID: Integer;
     function GetFreeConditionScenarioID: Integer;
-    function GetFreePMSCondID: Integer;
+
     function GetConditionID(aName: string): Integer;
 
     function SaveElementCondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer): Boolean;
@@ -90,7 +90,9 @@ type
     function GetConditionInfo(aID: Integer): string;
 
     {$REGION ' PMS Section '}
-    function GetPMSCondID(aID, aIndex: Integer): Integer;
+    function GetPMSCondID(aID, aIndex: Integer): Integer; {Gak Kepake}
+
+    function GetFreePMSCondID: Integer;
     function DeletePMSCondition(aID: Integer): Boolean;
     function SavePMSCondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer): Boolean;
 
@@ -99,8 +101,8 @@ type
     {$ENDREGION}
 
     {$REGION ' PCS Section '}
-    function DeletePCSCondition(aID: Integer): Boolean;
     function GetFreePCSCondID: Integer;
+    function DeletePCSCondition(aID: Integer): Boolean;
     function SavePCSCondition(aIsNew: Boolean; aName: string; var aList: TList; var ConditionID: Integer): Boolean;
 
     procedure GetPCSCondByID(aID: Integer; var aList: TList);
@@ -108,48 +110,55 @@ type
     {$ENDREGION}
 
     {$REGION ' TANK Section '}
+    function getMaxTankValue(aElementID: string): Double;
+    function cekValidateTankName(aIsNew: Boolean; aType, aName, aOldName: string): Boolean;
+    function cekValidateTankValue(aID: string; aValue: Double): Boolean;
+
+    function GetFreeTanksCondID: Integer;
+    function DeleteTanksCondition(aID: Integer): Boolean;
     function SaveTanksCondition(aIsNew: Boolean; aName : string; var aList: TList; var ConditionID: Integer): Boolean;
 
     procedure GetTanksCondByID(aID: Integer; var aList: TList);
     {$ENDREGION}
 
+    {$REGION ' FA Section '}
+    function GetFreeFACondID: Integer;
     function DeleteFACondition(aID: Integer): Boolean;
-    function GetFACondID(aID, aIndex: Integer): Integer;
+
+    function SaveFACondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer): Boolean;
     procedure GetFACondByID(aID: Integer; var aList: TList);
+    {$ENDREGION}
+
+
+    function GetFACondID(aID, aIndex: Integer): Integer;
+
     procedure GetFACondition(aScenarioName: string; var aList: TList);
     procedure GetRS_FACondition(aSessionID: Integer; var aList: TList);
-    function GetFreeFACondID: Integer;
-    function SaveFACondition(aIsNew: Boolean; aName: string; aList: TList;
-      var ConditionID: Integer): Boolean;
+
+
     procedure SaveRS_FACondition(aSessionID: Integer; aList: TList);
 
 
-    function GetFreeTanksCondID: Integer;
+
     function GetTanksCondID(aID, aIndex: Integer): Integer;
-    function DeleteTanksCondition(aID: Integer): Boolean;
-    function cekValidateTankValue(aID: string; aValue: Double): Boolean;
-    function cekValidateTankName(aIsNew: Boolean; aType, aName,
-      aOldName: string): Boolean;
-    function getMaxTankValue(aElementID: string): Double;
+
+
+
+
     function getMaxLengthTankValue(aElementID: string): Double;
 
     procedure GetTanksCondition(aScenarioName: string; var aList: TList);
     procedure GetRS_TanksCondition(aSessionID: Integer; var aList: TList);
 
     procedure UpdateStoppedTimeRS(aTime: TDateTime; aRSID: Integer);
-    function PrepareRunningScenario(aScenarioID: Integer;
-      aDateTimeStart: TDateTime): Integer;
-    function SaveMimics(FPairedList: TComponentElement; FTableName: string;
-      FScenarioID: Integer): Boolean;
-    function LoadMimics(FPairedList: TComponentElement; FTableName: string;
-      FScenarioID: Integer): Boolean;
-    function SaveElements(elementList: TList; aScenarioID: Integer;
-      asRunningScenario: Boolean = True): Boolean;
+    function PrepareRunningScenario(aScenarioID: Integer; aDateTimeStart: TDateTime): Integer;
+    function SaveMimics(FPairedList: TComponentElement; FTableName: string; FScenarioID: Integer): Boolean;
+    function LoadMimics(FPairedList: TComponentElement; FTableName: string; FScenarioID: Integer): Boolean;
+    function SaveElements(elementList: TList; aScenarioID: Integer; asRunningScenario: Boolean = True): Boolean;
     { end }
 
     { logger }
-    function Logger(SessionID: Integer; LogTime: TDateTime; Identifier: string;
-      Value, Category: string): Boolean;
+    function Logger(SessionID: Integer; LogTime: TDateTime; Identifier: string; Value, Category: string): Boolean;
 
     { alarm history }
     procedure GetMaxSeqNumber(var aSeqNumber: Integer);overload;
@@ -202,38 +211,6 @@ uses uSetting, Dialogs, uFunction,
   uVerticalBar, Forms, uTrendData;
 
 { TIPMSDatabase }
-
-function TIPMSDatabase.getMaxTankValue(aElementID: string): Double;
-var
-  FQuery : TZQuery;
-  query : string;
-begin
-  Result := 0;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-
-    SQL.Clear;
-    query := 'SELECT Trim0m FROM TankTables ' +
-             'WHERE ElementID = ' + QuotedStr(aElementID) +
-             ' Order By SoundLength DESC';
-    SQL.Add(query);
-    Open;
-
-    First;
-    Result := FieldByName('Trim0m').AsFloat;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
 
 function TIPMSDatabase.getMaxLengthTankValue(aElementID: string): Double;
 var
@@ -362,106 +339,6 @@ begin
   end;
 end;
 
-function TIPMSDatabase.cekValidateTankName(aIsNew: Boolean; aType, aName,
-  aOldName: string): Boolean;
-var
-  FQuery : TZQuery;
-  query : string;
-  aNameCek : String;
-begin
-  Result := False;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    if aIsNew then
-      query := 'SELECT Condition_Name ' +
-               'FROM Condition ' +
-               'WHERE Condition_Type = ' + QuotedStr(aType)
-    else
-      query := 'SELECT Condition_Name ' +
-               'FROM Condition ' +
-               'WHERE Condition_Type = ' + QuotedStr(aType) +
-               ' AND NOT Condition_Name = ' + QuotedStr(aOldName);
-
-    SQL.Add(query);
-    Open;
-
-    if RecordCount > 0 then
-    begin
-      First;
-
-      while not Eof do
-      begin
-        aNameCek := FieldByName('Condition_Name').AsString;
-
-        if aNameCek = aName then
-        begin
-          Result := False;
-          Exit;
-        end
-        else
-          Result := True;
-
-        Next;
-      end;
-    end
-    else
-      Result := True;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-function TIPMSDatabase.cekValidateTankValue(aID: string;
-  aValue: Double): Boolean;
-var
-  FQuery : TZQuery;
-  query : string;
-  ValueCek : Double;
-begin
-  Result := False;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT Trim0m ' +
-             'FROM TankTables ' +
-             'WHERE ElementID = ' + QuotedStr(aID) +
-             ' ORDER BY SoundLength DESC';
-    SQL.Add(query);
-    Open;
-
-    First;
-    ValueCek := FieldByName('Trim0m').AsFloat;
-
-    if aValue > ValueCek then
-      Result := False
-    else
-      Result := True;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
 function TIPMSDatabase.ConnectDB: Boolean;
 begin
   FConnection.HostName := Setting.Database;
@@ -487,15 +364,14 @@ begin
   FListeners := TListeners.Create;
 
   ConnectDB;
-
 end;
 
-function TIPMSDatabase.DeleteFACondition(aID: Integer): Boolean;
+function TIPMSDatabase.GetConditionID(aName: string): Integer;
 var
   FQuery : TZQuery;
   query : string;
 begin
-  Result := False;
+  Result := 0;
 
   if not FConnection.Connected then
     Exit;
@@ -507,21 +383,24 @@ begin
     Connection := FConnection;
     SQL.Clear;
 
-    query := 'DELETE FROM FA_Condition ' +
-             'WHERE Condition_ID = ' + IntToStr(aID);
-    SQL.Add(query);
+    query := 'SELECT * ' +
+             'FROM Condition ' +
+             'WHERE Condition_Name = ' + QuotedStr(aName);
 
-    query := 'DELETE FROM Condition ' +
-             'WHERE Condition_ID = ' + IntToStr(aID);
     SQL.Add(query);
-    ExecSQL;
+    Open;
+
+    if RecordCount > 0 then
+    begin
+      First;
+
+      Result := FieldByName('Condition_ID').AsInteger;
+    end;
 
     Close;
     Connection := nil;
     Free;
   end;
-
-  Result := True;
 end;
 
 {$REGION ' PMS Section '}
@@ -555,6 +434,51 @@ begin
     begin
       First;
       Result := FieldByName('PMS_ID').AsInteger;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.GetFreePMSCondID: Integer;
+var
+  FQuery : TZQuery;
+  query : string;
+  id : Integer;
+begin
+  Result := 0;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM PMS_Condition ORDER BY PMS_ID';
+    SQL.Add(query);
+    Open;
+
+    Result := 1;
+
+    if RecordCount > 0 then
+    begin
+      First;
+
+      while not Eof do
+      begin
+        id := FieldByName('PMS_ID').AsInteger;
+
+        if Result = id then
+          Inc(Result);
+
+        Next;
+      end;
     end;
 
     Close;
@@ -1147,6 +1071,214 @@ end;
 
 {$REGION ' TANK Section '}
 
+function TIPMSDatabase.getMaxTankValue(aElementID: string): Double;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := 0;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+
+    SQL.Clear;
+    query := 'SELECT Trim0m FROM TankTables ' +
+             'WHERE ElementID = ' + QuotedStr(aElementID) +
+             ' Order By SoundLength DESC';
+    SQL.Add(query);
+    Open;
+
+    First;
+    Result := FieldByName('Trim0m').AsFloat;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.cekValidateTankName(aIsNew: Boolean; aType, aName, aOldName: string): Boolean;
+var
+  FQuery : TZQuery;
+  query : string;
+  aNameCek : String;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    if aIsNew then
+      query := 'SELECT Condition_Name ' +
+               'FROM Condition ' +
+               'WHERE Condition_Type = ' + QuotedStr(aType)
+    else
+      query := 'SELECT Condition_Name ' +
+               'FROM Condition ' +
+               'WHERE Condition_Type = ' + QuotedStr(aType) +
+               ' AND NOT Condition_Name = ' + QuotedStr(aOldName);
+
+    SQL.Add(query);
+    Open;
+
+    if RecordCount > 0 then
+    begin
+      First;
+
+      while not Eof do
+      begin
+        aNameCek := FieldByName('Condition_Name').AsString;
+
+        if aNameCek = aName then
+        begin
+          Result := False;
+          Exit;
+        end
+        else
+          Result := True;
+
+        Next;
+      end;
+    end
+    else
+      Result := True;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.cekValidateTankValue(aID: string; aValue: Double): Boolean;
+var
+  FQuery : TZQuery;
+  query : string;
+  ValueCek : Double;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT Trim0m FROM TankTables ' +
+             'WHERE ElementID = ' + QuotedStr(aID) +
+             ' ORDER BY SoundLength DESC';
+    SQL.Add(query);
+    Open;
+
+    First;
+    ValueCek := FieldByName('Trim0m').AsFloat;
+
+    if aValue > ValueCek then
+      Result := False
+    else
+      Result := True;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.GetFreeTanksCondID: Integer;
+var
+  FQuery : TZQuery;
+  query : string;
+  id : Integer;
+begin
+  Result := 0;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM Tanks_Condition ORDER BY Tanks_ID';
+    SQL.Add(query);
+    Open;
+
+    Result := 1;
+
+    if RecordCount > 0 then
+    begin
+      First;
+
+      while not Eof do
+      begin
+        id := FieldByName('Tanks_ID').AsInteger;
+
+        if Result = id then
+          Inc(Result);
+
+        Next;
+      end;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.DeleteTanksCondition(aID: Integer): Boolean;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+
+    SQL.Clear;
+    query := 'DELETE FROM Tanks_Condition ' +
+             'WHERE Condition_ID = ' + IntToStr(aID);
+    SQL.Add(query);
+
+    query := 'DELETE FROM Condition ' +
+             'WHERE Condition_ID = ' + IntToStr(aID);
+    SQL.Add(query);
+    ExecSQL;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+
+  Result := True;
+end;
+
 function TIPMSDatabase.SaveTanksCondition(aIsNew: Boolean; aName: string; var aList: TList; var ConditionID: Integer): Boolean;
 var
   FQuery : TZQuery;
@@ -1284,7 +1416,54 @@ end;
 
 {$ENDREGION}
 
-function TIPMSDatabase.DeleteTanksCondition(aID: Integer): Boolean;
+{$REGION ' FA Section '}
+
+function TIPMSDatabase.GetFreeFACondID: Integer;
+var
+  FQuery : TZQuery;
+  query : string;
+  id : Integer;
+begin
+  Result := 0;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM FA_Condition ORDER BY FA_ID';
+    SQL.Add(query);
+    Open;
+
+    Result := 1;
+
+    if RecordCount > 0 then
+    begin
+      First;
+
+      while not Eof do
+      begin
+        id := FieldByName('FA_ID').AsInteger;
+
+        if Result = id then
+          Inc(Result);
+
+        Next;
+      end;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.DeleteFACondition(aID: Integer): Boolean;
 var
   FQuery : TZQuery;
   query : string;
@@ -1299,9 +1478,9 @@ begin
   with FQuery do
   begin
     Connection := FConnection;
-
     SQL.Clear;
-    query := 'DELETE FROM Tanks_Condition ' +
+
+    query := 'DELETE FROM FA_Condition ' +
              'WHERE Condition_ID = ' + IntToStr(aID);
     SQL.Add(query);
 
@@ -1317,6 +1496,172 @@ begin
 
   Result := True;
 end;
+
+function TIPMSDatabase.SaveFACondition(aIsNew: Boolean; aName: string;   aList: TList; var ConditionID: Integer): Boolean;
+var
+  FQuery : TZQuery;
+  condID, i : Integer;
+  query : string;
+  faData : TFACond_Data;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    if aIsNew then
+    begin
+      condID := GetFreeConditionID;
+      ConditionID := condID;
+
+      query := 'INSERT INTO Condition(Condition_ID, Condition_Name, Condition_Type) ' +
+               'VALUES(' + IntToStr(condID) + ', '
+                         + QuotedStr(aName) + ', '
+                         + QuotedStr('FA') + ')';
+      SQL.Add(query);
+      ExecSQL;
+
+      for i := 0 to aList.Count - 1 do
+      begin
+        SQL.Clear;
+
+        faData := TFACond_Data(aList.Items[i]);
+
+        query := 'INSERT INTO FA_Condition(FA_ID, Role, FA_DGSETS_State, ' +
+                 'FA_Distribution_State, FA_Propultion_State, ' +
+                 'FA_Auxiliary_State, FA_Fuel_State, FA_Domest_State, ' +
+                 'FA_HVAC_State, FA_FFDC_State, FA_Navigation_State, ' +
+                 'FA_Ballast_State, FA_IPMS_State, FA_IAS_State, ' +
+                 'Condition_ID) ' +
+                 'VALUES(' + IntToStr(GetFreeFACondID) +
+                 ', ' + QuotedStr(faData.Role) +
+                 ', ' + IntToStr(faData.FA_DGSETS_State) +
+                 ', ' + IntToStr(faData.FA_Distribution_State) +
+                 ', ' + IntToStr(faData.FA_Propultion_State) +
+                 ', ' + IntToStr(faData.FA_Auxiliary_State) +
+                 ', ' + IntToStr(faData.FA_Fuel_State) +
+                 ', ' + IntToStr(faData.FA_Domest_State) +
+                 ', ' + IntToStr(faData.FA_HVAC_State) +
+                 ', ' + IntToStr(faData.FA_FFDC_State) +
+                 ', ' + IntToStr(faData.FA_Navigation_State) +
+                 ', ' + IntToStr(faData.FA_Ballast_State) +
+                 ', ' + IntToStr(faData.FA_IPMS_State) +
+                 ', ' + IntToStr(faData.FA_IAS_State) +
+                 ', ' + IntToStr(condID) + ')';
+
+        SQL.Add(query);
+        ExecSQL;
+      end;
+    end
+    else
+    begin
+      query := 'UPDATE Condition SET Condition_Name = ' + QuotedStr(aName) +
+               ' WHERE Condition_ID = ' + IntToStr(ConditionID);
+      SQL.Add(query);
+      ExecSQL;
+
+      for i := 0 to aList.Count - 1 do
+      begin
+        SQL.Clear;
+
+        faData := TFACond_Data(aList.Items[i]);
+
+        query := 'UPDATE FA_Condition ' +
+                 'SET Role = ' + QuotedStr(faData.Role) +
+                 ', FA_DGSETS_State = ' + IntToStr(faData.FA_DGSETS_State) +
+                 ', FA_Distribution_State = ' + IntToStr(faData.FA_Distribution_State) +
+                 ', FA_Propultion_State = ' + IntToStr(faData.FA_Propultion_State) +
+                 ', FA_Auxiliary_State = ' + IntToStr(faData.FA_Auxiliary_State) +
+                 ', FA_Fuel_State = ' + IntToStr(faData.FA_Fuel_State) +
+                 ', FA_Domest_State = ' + IntToStr(faData.FA_Domest_State) +
+                 ', FA_HVAC_State = ' + IntToStr(faData.FA_HVAC_State) +
+                 ', FA_FFDC_State = ' + IntToStr(faData.FA_FFDC_State) +
+                 ', FA_Navigation_State = ' + IntToStr(faData.FA_Navigation_State) +
+                 ', FA_Ballast_State = ' + IntToStr(faData.FA_Ballast_State) +
+                 ', FA_IPMS_State = ' + IntToStr(faData.FA_IPMS_State) +
+                 ', FA_IAS_State = ' + IntToStr(faData.FA_IAS_State) +
+                 ' WHERE Condition_ID = ' + IntToStr(faData.Condition_ID) +
+                 ' AND FA_ID = ' + IntToStr(faData.FA_ID);
+
+        SQL.Add(query);
+        ExecSQL;
+      end;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+procedure TIPMSDatabase.GetFACondByID(aID: Integer; var aList: TList);
+var
+  FQuery : TZQuery;
+  query : string;
+  faData : TFACond_Data;
+begin
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM FA_Condition WHERE Condition_ID = ' + IntToStr(aID) +
+             ' ORDER BY FA_ID';
+    SQL.Add(query);
+    Open;
+
+    if RecordCount > 0 then
+    begin
+      First;
+
+      if not Assigned(aList) then
+        aList := TList.Create
+      else
+        aList.Clear;
+
+      while not Eof do
+      begin
+        faData := TFACond_Data.Create;
+        faData.FA_ID := FieldByName('FA_ID').AsInteger;
+        faData.Role := FieldByName('Role').AsString;
+        faData.FA_DGSETS_State := FieldByName('FA_DGSETS_State').AsInteger;
+        faData.FA_Distribution_State := FieldByName('FA_Distribution_State').AsInteger;
+        faData.FA_Propultion_State := FieldByName('FA_Propultion_State').AsInteger;
+        faData.FA_Auxiliary_State := FieldByName('FA_Auxiliary_State').AsInteger;
+        faData.FA_Fuel_State := FieldByName('FA_Fuel_State').AsInteger;
+        faData.FA_Domest_State := FieldByName('FA_Domest_State').AsInteger;
+        faData.FA_HVAC_State := FieldByName('FA_HVAC_State').AsInteger;
+        faData.FA_FFDC_State := FieldByName('FA_FFDC_State').AsInteger;
+        faData.FA_Navigation_State := FieldByName('FA_Navigation_State').AsInteger;
+        faData.FA_Ballast_State := FieldByName('FA_Ballast_State').AsInteger;
+        faData.FA_IPMS_State := FieldByName('FA_IPMS_State').AsInteger;
+        faData.FA_IAS_State := FieldByName('FA_IAS_State').AsInteger;
+        faData.Condition_ID := FieldByName('Condition_ID').AsInteger;
+
+        aList.Add(faData);
+        Next;
+      end;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+{$ENDREGION}
 
 function TIPMSDatabase.DeleteScenario(aID: Integer): Boolean;
 var
@@ -2383,43 +2728,6 @@ begin
   end;
 end;
 
-function TIPMSDatabase.GetConditionID(aName: string): Integer;
-var
-  FQuery : TZQuery;
-  query : string;
-begin
-  Result := 0;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT * ' +
-             'FROM Condition ' +
-             'WHERE Condition_Name = ' + QuotedStr(aName);
-
-    SQL.Add(query);
-    Open;
-
-    if RecordCount > 0 then
-    begin
-      First;
-
-      Result := FieldByName('Condition_ID').AsInteger;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
 function TIPMSDatabase.GetConditionInfo(aID: Integer): string;
 var
   FQuery : TZQuery;
@@ -2704,67 +3012,6 @@ begin
     begin
       First;
       Result := FieldByName('FTableName').AsString;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-procedure TIPMSDatabase.GetFACondByID(aID: Integer; var aList: TList);
-var
-  FQuery : TZQuery;
-  query : string;
-  faData : TFACond_Data;
-begin
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT * FROM FA_Condition ' +
-             'WHERE Condition_ID = ' + IntToStr(aID) +
-             ' ORDER BY FA_ID';
-    SQL.Add(query);
-    Open;
-
-    if RecordCount > 0 then
-    begin
-      First;
-
-      if not Assigned(aList) then
-        aList := TList.Create
-      else
-        aList.Clear;
-
-      while not Eof do
-      begin
-        faData := TFACond_Data.Create;
-        faData.FA_ID := FieldByName('FA_ID').AsInteger;
-        faData.Role := FieldByName('Role').AsString;
-        faData.FA_DGSETS_State := FieldByName('FA_DGSETS_State').AsInteger;
-        faData.FA_Distribution_State := FieldByName('FA_Distribution_State').AsInteger;
-        faData.FA_Propultion_State := FieldByName('FA_Propultion_State').AsInteger;
-        faData.FA_Auxiliary_State := FieldByName('FA_Auxiliary_State').AsInteger;
-        faData.FA_Fuel_State := FieldByName('FA_Fuel_State').AsInteger;
-        faData.FA_Domest_State := FieldByName('FA_Domest_State').AsInteger;
-        faData.FA_HVAC_State := FieldByName('FA_HVAC_State').AsInteger;
-        faData.FA_FFDC_State := FieldByName('FA_FFDC_State').AsInteger;
-        faData.FA_Navigation_State := FieldByName('FA_Navigation_State').AsInteger;
-        faData.FA_Ballast_State := FieldByName('FA_Ballast_State').AsInteger;
-        faData.FA_IPMS_State := FieldByName('FA_IPMS_State').AsInteger;
-        faData.FA_IAS_State := FieldByName('FA_IAS_State').AsInteger;
-        faData.Condition_ID := FieldByName('Condition_ID').AsInteger;
-
-        aList.Add(faData);
-        Next;
-      end;
     end;
 
     Close;
@@ -3269,96 +3516,6 @@ begin
   end;
 end;
 
-function TIPMSDatabase.GetFreeFACondID: Integer;
-var
-  FQuery : TZQuery;
-  query : string;
-  id : Integer;
-begin
-  Result := 0;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT * FROM FA_Condition ORDER BY FA_ID';
-    SQL.Add(query);
-    Open;
-
-    Result := 1;
-
-    if RecordCount > 0 then
-    begin
-      First;
-
-      while not Eof do
-      begin
-        id := FieldByName('FA_ID').AsInteger;
-
-        if Result = id then
-          Inc(Result);
-
-        Next;
-      end;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-function TIPMSDatabase.GetFreeTanksCondID: Integer;
-var
-  FQuery : TZQuery;
-  query : string;
-  id : Integer;
-begin
-  Result := 0;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT * FROM Tanks_Condition ORDER BY Tanks_ID';
-    SQL.Add(query);
-    Open;
-
-    Result := 1;
-
-    if RecordCount > 0 then
-    begin
-      First;
-
-      while not Eof do
-      begin
-        id := FieldByName('Tanks_ID').AsInteger;
-
-        if Result = id then
-          Inc(Result);
-
-        Next;
-      end;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
 procedure TIPMSDatabase.GetGenerateTime(aRunningID: Integer; aElementID: string;
   var aGenerateTime: TDateTime);
 var
@@ -3538,51 +3695,6 @@ begin
       while not Eof do
       begin
         id := FieldByName('PCS_ID').AsInteger;
-
-        if Result = id then
-          Inc(Result);
-
-        Next;
-      end;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-function TIPMSDatabase.GetFreePMSCondID: Integer;
-var
-  FQuery : TZQuery;
-  query : string;
-  id : Integer;
-begin
-  Result := 0;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT * FROM PMS_Condition ORDER BY PMS_ID';
-    SQL.Add(query);
-    Open;
-
-    Result := 1;
-
-    if RecordCount > 0 then
-    begin
-      First;
-
-      while not Eof do
-      begin
-        id := FieldByName('PMS_ID').AsInteger;
 
         if Result = id then
           Inc(Result);
@@ -5349,112 +5461,6 @@ begin
                       IntToStr(SetPoint) + ',' +
                       IntToStr(ValueValve) +
                    ');';
-
-        SQL.Add(query);
-        ExecSQL;
-      end;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-function TIPMSDatabase.SaveFACondition(aIsNew: Boolean; aName: string;
-  aList: TList; var ConditionID: Integer): Boolean;
-var
-  FQuery : TZQuery;
-  condID, i : Integer;
-  query : string;
-  faData : TFACond_Data;
-begin
-  Result := False;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    if aIsNew then
-    begin
-      condID := GetFreeConditionID;
-      ConditionID := condID;
-
-      query := 'INSERT INTO Condition(Condition_ID, Condition_Name, Condition_Type) ' +
-               'VALUES(' + IntToStr(condID) + ', '
-                         + QuotedStr(aName) + ', '
-                         + QuotedStr('FA') + ')';
-      SQL.Add(query);
-      ExecSQL;
-
-      for i := 0 to aList.Count - 1 do
-      begin
-        SQL.Clear;
-
-        faData := TFACond_Data(aList.Items[i]);
-
-        query := 'INSERT INTO FA_Condition(FA_ID, Role, FA_DGSETS_State, ' +
-                 'FA_Distribution_State, FA_Propultion_State, ' +
-                 'FA_Auxiliary_State, FA_Fuel_State, FA_Domest_State, ' +
-                 'FA_HVAC_State, FA_FFDC_State, FA_Navigation_State, ' +
-                 'FA_Ballast_State, FA_IPMS_State, FA_IAS_State, ' +
-                 'Condition_ID) ' +
-                 'VALUES(' + IntToStr(GetFreeFACondID) +
-                 ', ' + QuotedStr(faData.Role) +
-                 ', ' + IntToStr(faData.FA_DGSETS_State) +
-                 ', ' + IntToStr(faData.FA_Distribution_State) +
-                 ', ' + IntToStr(faData.FA_Propultion_State) +
-                 ', ' + IntToStr(faData.FA_Auxiliary_State) +
-                 ', ' + IntToStr(faData.FA_Fuel_State) +
-                 ', ' + IntToStr(faData.FA_Domest_State) +
-                 ', ' + IntToStr(faData.FA_HVAC_State) +
-                 ', ' + IntToStr(faData.FA_FFDC_State) +
-                 ', ' + IntToStr(faData.FA_Navigation_State) +
-                 ', ' + IntToStr(faData.FA_Ballast_State) +
-                 ', ' + IntToStr(faData.FA_IPMS_State) +
-                 ', ' + IntToStr(faData.FA_IAS_State) +
-                 ', ' + IntToStr(condID) + ')';
-
-        SQL.Add(query);
-        ExecSQL;
-      end;
-    end
-    else
-    begin
-      query := 'UPDATE Condition ' +
-               'SET Condition_Name = ' + QuotedStr(aName) +
-               ' WHERE Condition_Name = ' + QuotedStr(aName);
-      SQL.Add(query);
-      ExecSQL;
-
-      for i := 0 to aList.Count - 1 do
-      begin
-        SQL.Clear;
-
-        faData := TFACond_Data(aList.Items[i]);
-
-        query := 'UPDATE FA_Condition ' +
-                 'SET Role = ' + QuotedStr(faData.Role) +
-                 ', FA_DGSETS_State = ' + IntToStr(faData.FA_DGSETS_State) +
-                 ', FA_Distribution_State = ' + IntToStr(faData.FA_Distribution_State) +
-                 ', FA_Propultion_State = ' + IntToStr(faData.FA_Propultion_State) +
-                 ', FA_Auxiliary_State = ' + IntToStr(faData.FA_Auxiliary_State) +
-                 ', FA_Fuel_State = ' + IntToStr(faData.FA_Fuel_State) +
-                 ', FA_Domest_State = ' + IntToStr(faData.FA_Domest_State) +
-                 ', FA_HVAC_State = ' + IntToStr(faData.FA_HVAC_State) +
-                 ', FA_FFDC_State = ' + IntToStr(faData.FA_FFDC_State) +
-                 ', FA_Navigation_State = ' + IntToStr(faData.FA_Navigation_State) +
-                 ', FA_Ballast_State = ' + IntToStr(faData.FA_Ballast_State) +
-                 ', FA_IPMS_State = ' + IntToStr(faData.FA_IPMS_State) +
-                 ', FA_IAS_State = ' + IntToStr(faData.FA_IAS_State) +
-                 ' WHERE Condition_ID = ' + IntToStr(faData.Condition_ID) +
-                 ' AND FA_ID = ' + IntToStr(faData.FA_ID);
 
         SQL.Add(query);
         ExecSQL;

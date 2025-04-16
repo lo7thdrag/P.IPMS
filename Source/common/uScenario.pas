@@ -122,17 +122,6 @@ begin
   aList.Free;
 end;
 
-function TScenario.cekValidateTankName(aIsNew: Boolean; aType, aName,
-  aOldName: string): Boolean;
-begin
-  Result := FDatabase.cekValidateTankName(aIsNew, aType, aName, aOldName);
-end;
-
-function TScenario.cekValidateTankValue(aID: string; aValue : Double): boolean;
-begin
-  Result := FDatabase.cekValidateTankValue(aID, aValue);
-end;
-
 constructor TScenario.Create;
 begin
   FDatabase := aDatabase;
@@ -141,11 +130,6 @@ begin
   FListener := TListeners.Create;
 
   FPMSCondList := TList.Create;
-end;
-
-function TScenario.DeleteFACondition(aID: Integer): Boolean;
-begin
-  Result := FDatabase.DeleteFACondition(aID);
 end;
 
 function TScenario.deleteScenario(aID: Integer): Boolean;
@@ -190,11 +174,6 @@ end;
 procedure TScenario.GetFAConditions(var aList: TStrings);
 begin
   FDatabase.GetAllCondition('FA', aList);
-end;
-
-function TScenario.getMaxTankValue(aElementID: string): Double;
-begin
-  Result := FDatabase.getMaxTankValue(aElementID);
 end;
 
 {$REGION ' PMS Section '}
@@ -357,6 +336,7 @@ begin
   Result := FDatabase.DeletePMSCondition(aID);
 end;
 
+{Gak Kepake}
 function TScenario.GetPMSCondID(aID, aIndex: Integer): Integer;
 begin
   Result := FDatabase.GetPMSCondID(aID, aIndex);
@@ -520,6 +500,21 @@ end;
 
 {$REGION ' TANK Section '}
 
+function TScenario.getMaxTankValue(aElementID: string): Double;
+begin
+  Result := FDatabase.getMaxTankValue(aElementID);
+end;
+
+function TScenario.cekValidateTankName(aIsNew: Boolean; aType, aName, aOldName: string): Boolean;
+begin
+  Result := FDatabase.cekValidateTankName(aIsNew, aType, aName, aOldName);
+end;
+
+function TScenario.cekValidateTankValue(aID: string; aValue : Double): boolean;
+begin
+  Result := FDatabase.cekValidateTankValue(aID, aValue);
+end;
+
 function TScenario.DeleteTanksCondition(aID: Integer): Boolean;
 begin
   Result := FDatabase.DeleteTanksCondition(aID);
@@ -538,6 +533,20 @@ end;
 procedure TScenario.SaveTanksCondition(aIsNew: Boolean; aName: string; var aList: TList; var ConditionID: Integer);
 begin
   FDatabase.SaveTanksCondition(aIsNew, aName, aList, ConditionID);
+end;
+
+{$ENDREGION}
+
+{$REGION ' FA Section '}
+
+function TScenario.DeleteFACondition(aID: Integer): Boolean;
+begin
+  Result := FDatabase.DeleteFACondition(aID);
+end;
+
+procedure TScenario.SaveFACondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer);
+begin
+  FDatabase.SaveFACondition(aIsNew, aName, aList, ConditionID);
 end;
 
 {$ENDREGION}
@@ -1198,12 +1207,6 @@ procedure TScenario.SaveElementCondition(aName: string; aList: TList;
   var ConditionID: Integer);
 begin
   FDatabase.SaveElementCondition(True, aName, aList, ConditionID);
-end;
-
-procedure TScenario.SaveFACondition(aIsNew: Boolean; aName: string;
-  aList: TList; var ConditionID: Integer);
-begin
-  FDatabase.SaveFACondition(aIsNew, aName, aList, ConditionID);
 end;
 
 function TScenario.setBooltoInt(valbool: Boolean): Integer;

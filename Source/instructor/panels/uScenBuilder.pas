@@ -466,6 +466,7 @@ type
     procedure act2Execute(Sender: TObject);
     procedure act4Execute(Sender: TObject);
     procedure btnMenuClick(Sender: TObject);
+    procedure lstFAClick(Sender: TObject);
 
   private
     FScenarioID : Integer;
@@ -485,7 +486,11 @@ type
     FTANKConditionName : string;
     TANKNameBuffer : string;
 
+    FFAConditionName : string;
+    FANameBuffer : string;
+
     FPmsIDBuffer : array [0..8] of Integer;
+    FFaIDBuffer : array [1..4] of Integer;
 
     procedure ClearTabPickScen(value : Integer);
 
@@ -959,12 +964,14 @@ begin
       pnlTank.BringToFront;
       lblHeader.Caption := 'TANK EDITOR';
       UpdateTankList;
+      btnNewTankClick(nil);
     end;
     5:
     begin
       pnlFA.BringToFront;
       lblHeader.Caption := 'FUNCTION ALLOCATION EDITOR';
       UpdateFAList;
+      btnNewFAClick(nil);
     end;
   end;
 end;
@@ -2323,11 +2330,6 @@ begin
   tempList.Free;
 end;
 
-function TfrmScenBuilder.CekFAInput: Boolean;
-begin
- //
-end;
-
 function TfrmScenBuilder.CekPCSInput: Boolean;
 begin
   Result := False;
@@ -2751,6 +2753,29 @@ begin
   end;
 end;
 
+procedure TfrmScenBuilder.UpdateTankList;
+var
+  i : Integer;
+  tempList : TStrings;
+
+begin
+  tempList := nil;
+  InstructorSys.Scenario.GetAllTanksConditions(tempList);
+
+  if not Assigned(tempList) then
+    Exit;
+
+  if lstTank.Count > 0 then
+  lstTank.Clear;
+
+  for i := 0 to tempList.Count - 1 do
+  begin
+    lstTank.Items.Add(tempList[i]);
+  end;
+
+  tempList.Free;
+end;
+
 function TfrmScenBuilder.CekTANKInput: Boolean;
 begin
   Result := False;
@@ -2981,351 +3006,337 @@ end;
 
 {$REGION ' FA Section '}
 
+procedure TfrmScenBuilder.lstFAClick(Sender: TObject);
+var
+  i : Integer;
+
+begin
+  if lstFA.ItemIndex = -1 then
+  begin
+    btnNewFAClick(nil);
+    Exit;
+  end;
+
+  with lstFA do
+  begin
+    for i := Items.Count - 1 downto 0 do
+    begin
+      if Selected[i] then
+      begin
+        FFAConditionName := Items[i];
+        FFAConditionID := InstructorSys.Scenario.GetConditionID(FFAConditionName);
+        Break;
+      end;
+    end;
+  end;
+end;
+
 procedure TfrmScenBuilder.btnRefreshFAClick(Sender: TObject);
 begin
   UpdateFAList
 end;
 
 procedure TfrmScenBuilder.btnNewFAClick(Sender: TObject);
+var
+  i: Integer;
+
 begin
-//  FCondition_ID := 0;
-//
-//  edtCondName.Text := '';
-//  rbAutGen1.Checked := True;
-//  rbAutGen2.Checked := True;
-//  rbAutGen3.Checked := True;
-//  rbAutGen4.Checked := True;
-//
-//  chkEngine1.Checked := True;
-//  chkEngine2.Checked := False;
-//  chkEngine3.Checked := False;
-//  chkEngine4.Checked := False;
-//
-//  chkG1Pref.Checked := False;
-//  chkG2Pref.Checked := False;
-//  chkG3Pref.Checked := False;
-//  chkG4Pref.Checked := False;
-//
-//  rbAutInn1.Checked := True;
-//  rbAutInn2.Checked := True;
+  FFAConditionID := 0;
+  FFAConditionName := '';
+  FANameBuffer := '';
+  edtFAConditionName.Text := '';
+
+  for i := 0 to ComponentCount - 1 do
+  begin
+    if Components[i] is TCheckBox then
+    begin
+      if TCheckBox(Components[i]).Hint <> 'FA' then
+        Continue;
+
+      if TCheckBox(Components[i]).Tag = 12 then
+        TCheckBox(Components[i]).Checked := True
+      else
+        TCheckBox(Components[i]).Checked := False;
+    end;
+  end;
 end;
 
 procedure TfrmScenBuilder.btnEditFAClick(Sender: TObject);
 var
-  pmsNames : TStrings;
-  pmsData : TPMSCond_Data;
-  pmsList : TList;
+  faDataTemp : TFACond_Data;
+  faListTemp : TList;
   i : Integer;
-begin
-//  if not Assigned(frmAvailPMSCondition)  then
-//    frmAvailPMSCondition := TfrmAvailPMSCondition.Create(Self);
-//
-//  pmsList := nil;
-//  pmsNames := nil;
-//  InstructorSys.Scenario.GetPMSConditions(pmsNames);
-//  frmAvailPMSCondition.SetAvailableCondition(pmsNames);
-//  pmsNames.Free;
 
-//  if frmAvailPMSCondition.ShowModal = mrOk then
-//  begin
-//    if frmAvailPMSCondition.PMSCondName = '' then
-//      Exit;
-//
-//    FCondition_ID := InstructorSys.Scenario.GetConditionID(frmAvailPMSCondition.PMSCondName);
-//
-//    InstructorSys.Scenario.GetPMSCondition(FCondition_ID, pmsList);
-//
-//    if pmsList.Count = 0 then
-//      Exit;
-//
-//    edtCondName.Text := frmAvailPMSCondition.PMSCondName;
-//
-//    {untuk flag ketika update dengan nama yang berbeda}
-//    CondNameBuffer := frmAvailPMSCondition.PMSCondName;
-//
-//    for i := 0 to pmsList.Count - 1 do
-//    begin
-//      pmsData := TPMSCond_Data(pmsList.Items[i]);
-//
-//      case i of
-//        0:
-//        begin
-//          SetMode(1, pmsData.PMS_Mode);
-//          chkEngine1.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG1Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(1, pmsData.PMS_CB);
-//        end;
-//        1:
-//        begin
-//          SetMode(2, pmsData.PMS_Mode);
-//          chkEngine2.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG2Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(2, pmsData.PMS_CB);
-//        end;
-//        2:
-//        begin
-//          SetMode(3, pmsData.PMS_Mode);
-//          chkEngine3.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG3Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(3, pmsData.PMS_CB);
-//        end;
-//        3:
-//        begin
-//          SetMode(4, pmsData.PMS_Mode);
-//          chkEngine4.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG4Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(4, pmsData.PMS_CB);
-//        end;
-//        4:
-//        begin
-//          SetMode(5, pmsData.PMS_Mode);
-//          chkEngine5.Checked := (pmsData.PMS_OnOff = 1);
-//          SetCB(5, pmsData.PMS_CB);
-//        end;
-//        5:
-//        begin
-//          SetMode(6, pmsData.PMS_SWB_MSBIntrMode);
-//          SetCB(6, pmsData.PMS_SWB_MsbCBIntr);
-//        end;
-//        6:
-//        begin
-//          SetMode(7, pmsData.PMS_SWB_MSBIntrMode);
-//          SetCB(7, pmsData.PMS_SWB_MsbCBIntr);
-//        end;
-//        7:
-//        begin
-//          SetMode(8, pmsData.PMS_SWB_ESBIntrMode);
-//          SetCB(8, pmsData.PMS_SWB_EsbCBIntr);
-//        end;
-//      end;
-//    end;
-//
-//    pmsList.Free;
-//  end;
+begin
+  if FFAConditionID = 0 then
+    Exit;
+
+  faListTemp := nil;
+  InstructorSys.Scenario.GetFACondition(FFAConditionID, faListTemp);
+
+  if faListTemp.Count = 0 then
+    Exit;
+
+  edtFAConditionName.Text := FFAConditionName;
+
+  {untuk flag ketika update dengan nama yang berbeda}
+  FANameBuffer := FFAConditionName;
+
+  for i := 0 to faListTemp.Count - 1 do
+  begin
+    faDataTemp := TFACond_Data(faListTemp.Items[i]);
+    FFaIDBuffer[i+1] := faDataTemp.FA_ID;
+
+    case i of
+      0:
+      begin
+        CheckBox1.Checked := (faDataTemp.FA_DGSETS_State = 1);
+        CheckBox2.Checked := (faDataTemp.FA_Distribution_State = 1);
+        CheckBox3.Checked := (faDataTemp.FA_Propultion_State = 1);
+        CheckBox4.Checked := (faDataTemp.FA_Auxiliary_State = 1);
+        CheckBox5.Checked := (faDataTemp.FA_Fuel_State = 1);
+        CheckBox6.Checked := (faDataTemp.FA_Domest_State = 1);
+        CheckBox7.Checked := (faDataTemp.FA_HVAC_State = 1);
+        CheckBox8.Checked := (faDataTemp.FA_FFDC_State = 1);
+        CheckBox9.Checked := (faDataTemp.FA_Navigation_State = 1);
+        CheckBox10.Checked := (faDataTemp.FA_Ballast_State = 1);
+        CheckBox11.Checked := (faDataTemp.FA_IPMS_State = 1);
+        CheckBox12.Checked := (faDataTemp.FA_IAS_State = 1);
+      end;
+      1:
+      begin
+        CheckBox13.Checked := (faDataTemp.FA_DGSETS_State = 1);
+        CheckBox14.Checked := (faDataTemp.FA_Distribution_State = 1);
+        CheckBox15.Checked := (faDataTemp.FA_Propultion_State = 1);
+        CheckBox16.Checked := (faDataTemp.FA_Auxiliary_State = 1);
+        CheckBox17.Checked := (faDataTemp.FA_Fuel_State = 1);
+        CheckBox18.Checked := (faDataTemp.FA_Domest_State = 1);
+        CheckBox19.Checked := (faDataTemp.FA_HVAC_State = 1);
+        CheckBox20.Checked := (faDataTemp.FA_FFDC_State = 1);
+        CheckBox21.Checked := (faDataTemp.FA_Navigation_State = 1);
+        CheckBox22.Checked := (faDataTemp.FA_Ballast_State = 1);
+        CheckBox23.Checked := (faDataTemp.FA_IPMS_State = 1);
+        CheckBox24.Checked := (faDataTemp.FA_IAS_State = 1);
+      end;
+      2:
+      begin
+        CheckBox25.Checked := (faDataTemp.FA_DGSETS_State = 1);
+        CheckBox26.Checked := (faDataTemp.FA_Distribution_State = 1);
+        CheckBox27.Checked := (faDataTemp.FA_Propultion_State = 1);
+        CheckBox28.Checked := (faDataTemp.FA_Auxiliary_State = 1);
+        CheckBox29.Checked := (faDataTemp.FA_Fuel_State = 1);
+        CheckBox30.Checked := (faDataTemp.FA_Domest_State = 1);
+        CheckBox31.Checked := (faDataTemp.FA_HVAC_State = 1);
+        CheckBox32.Checked := (faDataTemp.FA_FFDC_State = 1);
+        CheckBox33.Checked := (faDataTemp.FA_Navigation_State = 1);
+        CheckBox34.Checked := (faDataTemp.FA_Ballast_State = 1);
+        CheckBox35.Checked := (faDataTemp.FA_IPMS_State = 1);
+        CheckBox36.Checked := (faDataTemp.FA_IAS_State = 1);
+      end;
+      3:
+      begin
+        CheckBox37.Checked := (faDataTemp.FA_DGSETS_State = 1);
+        CheckBox38.Checked := (faDataTemp.FA_Distribution_State = 1);
+        CheckBox39.Checked := (faDataTemp.FA_Propultion_State = 1);
+        CheckBox40.Checked := (faDataTemp.FA_Auxiliary_State = 1);
+        CheckBox41.Checked := (faDataTemp.FA_Fuel_State = 1);
+        CheckBox42.Checked := (faDataTemp.FA_Domest_State = 1);
+        CheckBox43.Checked := (faDataTemp.FA_HVAC_State = 1);
+        CheckBox44.Checked := (faDataTemp.FA_FFDC_State = 1);
+        CheckBox45.Checked := (faDataTemp.FA_Navigation_State = 1);
+        CheckBox46.Checked := (faDataTemp.FA_Ballast_State = 1);
+        CheckBox47.Checked := (faDataTemp.FA_IPMS_State = 1);
+        CheckBox48.Checked := (faDataTemp.FA_IAS_State = 1);
+      end;
+    end;
+  end;
+
+  faListTemp.Free;
 end;
 
 procedure TfrmScenBuilder.btnDeleteFAClick(Sender: TObject);
-var
-  conname : string;
 begin
-//  if FCondition_ID = 0 then
-//    Exit;
-//
-//  conname := edtCondName.Text;
-//
-//  if (MessageDlg('Are You Sure To Delete "' + edtCondName.Text + '" Condition ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
-//  begin
-//    if InstructorSys.Scenario.DeletePMSCondition(FCondition_ID) then
-//    begin
-//      actNewExecute(nil);
-//      MessageDlg('Delete "' + conname + '" Condition Success', mtInformation, [mbOK], 0)
-//    end
-//    else
-//      MessageDlg('Delete "' + conname + '" Condition Failed', mtError, [mbOK], 0);
-//  end;
+  if FFAConditionID = 0 then
+    Exit;
 
+  if (MessageDlg('Are You Sure To Delete "' + FFAConditionName + '" Condition ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
+  begin
+    if InstructorSys.Scenario.DeleteFACondition(FFAConditionID) then
+    begin
+      MessageDlg('Delete "' + FFAConditionName + '" Condition Success', mtInformation, [mbOK], 0);
+      UpdateFAList;
+      btnNewFAClick(nil);
+    end
+    else
+      MessageDlg('Delete "' + FFAConditionName + '" Condition Failed', mtError, [mbOK], 0);
+  end;
 end;
 
 procedure TfrmScenBuilder.btnSaveFAClick(Sender: TObject);
-//var
-//  i, ConditionID : Integer;
-//  faData : TFACond_Data;
-//  faList : TList;
+var
+  faDataTemp : TFACond_Data;
+  faListTemp : TList;
+  i : Integer;
+
 begin
-  if edtFAConditionName.Text = '' then
+  if not CekFAInput then
+  begin
+    Exit;
+  end;
+
+  faListTemp := TList.Create;
+
+  for i := 1 to 4 do
+  begin
+
+    faDataTemp := TFACond_Data.Create;
+    faDataTemp.FA_ID := FFaIDBuffer[i];
+    faDataTemp.Condition_ID := FFAConditionID;
+
+    case i of
+      1:
+      begin
+        {$REGION ' IPMS Role '}
+        faDataTemp.Role := 'MCR_IPMS';
+        faDataTemp.FA_DGSETS_State := Ord(CheckBox1.Checked);
+        faDataTemp.FA_Distribution_State := Ord(CheckBox2.Checked);
+        faDataTemp.FA_Propultion_State := Ord(CheckBox3.Checked);
+        faDataTemp.FA_Auxiliary_State := Ord(CheckBox4.Checked);
+        faDataTemp.FA_Fuel_State := Ord(CheckBox5.Checked);
+        faDataTemp.FA_Domest_State := Ord(CheckBox6.Checked);
+        faDataTemp.FA_HVAC_State := Ord(CheckBox7.Checked);
+        faDataTemp.FA_FFDC_State := Ord(CheckBox8.Checked);
+        faDataTemp.FA_Navigation_State := Ord(CheckBox9.Checked);
+        faDataTemp.FA_Ballast_State := Ord(CheckBox10.Checked);
+        faDataTemp.FA_IPMS_State := Ord(CheckBox11.Checked);
+        faDataTemp.FA_IAS_State := Ord(CheckBox12.Checked);
+        {$ENDREGION}
+      end;
+      2:
+      begin
+        {$REGION ' AUX Role '}
+        faDataTemp.Role := 'MCR_AUX';
+        faDataTemp.FA_DGSETS_State := Ord(CheckBox13.Checked);
+        faDataTemp.FA_Distribution_State := Ord(CheckBox14.Checked);
+        faDataTemp.FA_Propultion_State := Ord(CheckBox15.Checked);
+        faDataTemp.FA_Auxiliary_State := Ord(CheckBox16.Checked);
+        faDataTemp.FA_Fuel_State := Ord(CheckBox17.Checked);
+        faDataTemp.FA_Domest_State := Ord(CheckBox18.Checked);
+        faDataTemp.FA_HVAC_State := Ord(CheckBox19.Checked);
+        faDataTemp.FA_FFDC_State := Ord(CheckBox20.Checked);
+        faDataTemp.FA_Navigation_State := Ord(CheckBox21.Checked);
+        faDataTemp.FA_Ballast_State := Ord(CheckBox22.Checked);
+        faDataTemp.FA_IPMS_State := Ord(CheckBox23.Checked);
+        faDataTemp.FA_IAS_State := Ord(CheckBox24.Checked);
+        {$ENDREGION}
+      end;
+      3:
+      begin
+        {$REGION ' PCS Role '}
+        faDataTemp.Role := 'MCR_PCS';
+        faDataTemp.FA_DGSETS_State := Ord(CheckBox25.Checked);
+        faDataTemp.FA_Distribution_State := Ord(CheckBox26.Checked);
+        faDataTemp.FA_Propultion_State := Ord(CheckBox27.Checked);
+        faDataTemp.FA_Auxiliary_State := Ord(CheckBox28.Checked);
+        faDataTemp.FA_Fuel_State := Ord(CheckBox29.Checked);
+        faDataTemp.FA_Domest_State := Ord(CheckBox30.Checked);
+        faDataTemp.FA_HVAC_State := Ord(CheckBox31.Checked);
+        faDataTemp.FA_FFDC_State := Ord(CheckBox32.Checked);
+        faDataTemp.FA_Navigation_State := Ord(CheckBox33.Checked);
+        faDataTemp.FA_Ballast_State := Ord(CheckBox34.Checked);
+        faDataTemp.FA_IPMS_State := Ord(CheckBox35.Checked);
+        faDataTemp.FA_IAS_State := Ord(CheckBox36.Checked);
+        {$ENDREGION}
+      end;
+      4:
+      begin
+        {$REGION ' E Role '}
+        faDataTemp.Role := 'MCR_E';
+        faDataTemp.FA_DGSETS_State := Ord(CheckBox37.Checked);
+        faDataTemp.FA_Distribution_State := Ord(CheckBox38.Checked);
+        faDataTemp.FA_Propultion_State := Ord(CheckBox39.Checked);
+        faDataTemp.FA_Auxiliary_State := Ord(CheckBox40.Checked);
+        faDataTemp.FA_Fuel_State := Ord(CheckBox41.Checked);
+        faDataTemp.FA_Domest_State := Ord(CheckBox42.Checked);
+        faDataTemp.FA_HVAC_State := Ord(CheckBox43.Checked);
+        faDataTemp.FA_FFDC_State := Ord(CheckBox44.Checked);
+        faDataTemp.FA_Navigation_State := Ord(CheckBox45.Checked);
+        faDataTemp.FA_Ballast_State := Ord(CheckBox46.Checked);
+        faDataTemp.FA_IPMS_State := Ord(CheckBox47.Checked);
+        faDataTemp.FA_IAS_State := Ord(CheckBox48.Checked);
+        {$ENDREGION}
+      end;
+    end;
+
+    faListTemp.Add(faDataTemp);
+  end;
+
+  if FFAConditionID = 0 then
+  begin
+    InstructorSys.Scenario.SaveFACondition(True, edtFAConditionName.Text, faListTemp, FFAConditionID);
+    MessageDlg('"' + edtFAConditionName.Text + '" Condition Has Been Saved', mtInformation, [mbOK], 0);
+  end
+  else
+  begin
+    InstructorSys.Scenario.SaveFACondition(False, edtFAConditionName.Text, faListTemp, FFAConditionID);
+    MessageDlg('"' + edtFAConditionName.Text + '" Condition Has Been Updated', mtInformation, [mbOK], 0);
+  end;
+
+  btnNewFAClick(nil);
+  UpdateFAList;
+  faListTemp.Free;
+
+end;
+
+procedure TfrmScenBuilder.UpdateFAList;
+var
+  i : Integer;
+  tempList : TStrings;
+
+begin
+  tempList := nil;
+  InstructorSys.Scenario.GetFAConditions(tempList);
+
+  if not Assigned(tempList) then
+    Exit;
+
+  if lstFA.Count > 0 then
+  lstFA.Clear;
+
+  for i := 0 to tempList.Count - 1 do
+  begin
+    lstFA.Items.Add(tempList[i]);
+  end;
+
+  tempList.Free;
+end;
+
+function TfrmScenBuilder.CekFAInput: Boolean;
+begin
+  Result := False;
+
+  if Trim(edtFAConditionName.Text) = '' then
   begin
     ShowMessage('Condition Name Is Empty, Please Insert Condition Name');
     Exit;
   end;
 
-//  faList := nil;
-//  faData := nil;
+  if InstructorSys.Scenario.GetConditionID(edtFAConditionName.Text) > 0 then
+  begin
+    {Jika inputan baru}
+    if FFAConditionID = 0 then
+    begin
+      ShowMessage('Condition Name Is Already In Use, Please Use Another Condition Name');
+      Exit;
+    end
+    else if FANameBuffer <> edtFAConditionName.Text then
+    begin
+      ShowMessage('Condition Name Is Already In Use, Please Use Another Condition Name');
+      Exit;
+    end;
+  end;
 
-//  if FCondition_ID = 0 then
-//  begin
-//    faList := TList.Create;
-//
-//    for i := 1 to 4 do
-//    begin
-//      if InstructorSys.Scenario.GetConditionID(edtName.Text) > 0 then
-//      begin
-//        lblWarning2.Caption := '* Condition Name Is Already In Use, Please Use Another Condition Name';
-//        lblWarning2.Visible := True;
-//        Exit;
-//      end;
-//
-//      faData := TFACond_Data.Create;
-//
-//      case i of
-//        1:
-//        begin
-//          faData.Role := 'MCR_IPMS';
-//          faData.FA_DGSETS_State := Ord(CheckBox1.Checked);
-//          faData.FA_Distribution_State := Ord(CheckBox2.Checked);
-//          faData.FA_Propultion_State := Ord(CheckBox3.Checked);
-//          faData.FA_Auxiliary_State := Ord(CheckBox4.Checked);
-//          faData.FA_Fuel_State := Ord(CheckBox5.Checked);
-//          faData.FA_Domest_State := Ord(CheckBox6.Checked);
-//          faData.FA_HVAC_State := Ord(CheckBox7.Checked);
-//          faData.FA_FFDC_State := Ord(CheckBox8.Checked);
-//          faData.FA_Navigation_State := Ord(CheckBox9.Checked);
-//          faData.FA_Ballast_State := Ord(CheckBox10.Checked);
-//          faData.FA_IPMS_State := Ord(CheckBox11.Checked);
-//          faData.FA_IAS_State := Ord(CheckBox12.Checked);
-//        end;
-//        2:
-//        begin
-//          faData.Role := 'MCR_AUX';
-//          faData.FA_DGSETS_State := Ord(CheckBox13.Checked);
-//          faData.FA_Distribution_State := Ord(CheckBox14.Checked);
-//          faData.FA_Propultion_State := Ord(CheckBox15.Checked);
-//          faData.FA_Auxiliary_State := Ord(CheckBox16.Checked);
-//          faData.FA_Fuel_State := Ord(CheckBox17.Checked);
-//          faData.FA_Domest_State := Ord(CheckBox18.Checked);
-//          faData.FA_HVAC_State := Ord(CheckBox19.Checked);
-//          faData.FA_FFDC_State := Ord(CheckBox20.Checked);
-//          faData.FA_Navigation_State := Ord(CheckBox21.Checked);
-//          faData.FA_Ballast_State := Ord(CheckBox22.Checked);
-//          faData.FA_IPMS_State := Ord(CheckBox23.Checked);
-//          faData.FA_IAS_State := Ord(CheckBox24.Checked);
-//        end;
-//        3:
-//        begin
-//          faData.Role := 'MCR_PCS';
-//          faData.FA_DGSETS_State := Ord(CheckBox25.Checked);
-//          faData.FA_Distribution_State := Ord(CheckBox26.Checked);
-//          faData.FA_Propultion_State := Ord(CheckBox27.Checked);
-//          faData.FA_Auxiliary_State := Ord(CheckBox28.Checked);
-//          faData.FA_Fuel_State := Ord(CheckBox29.Checked);
-//          faData.FA_Domest_State := Ord(CheckBox30.Checked);
-//          faData.FA_HVAC_State := Ord(CheckBox31.Checked);
-//          faData.FA_FFDC_State := Ord(CheckBox32.Checked);
-//          faData.FA_Navigation_State := Ord(CheckBox33.Checked);
-//          faData.FA_Ballast_State := Ord(CheckBox34.Checked);
-//          faData.FA_IPMS_State := Ord(CheckBox35.Checked);
-//          faData.FA_IAS_State := Ord(CheckBox36.Checked);
-//        end;
-//        4:
-//        begin
-//          faData.Role := 'MCR_E';
-//          faData.FA_DGSETS_State := Ord(CheckBox37.Checked);
-//          faData.FA_Distribution_State := Ord(CheckBox38.Checked);
-//          faData.FA_Propultion_State := Ord(CheckBox39.Checked);
-//          faData.FA_Auxiliary_State := Ord(CheckBox40.Checked);
-//          faData.FA_Fuel_State := Ord(CheckBox41.Checked);
-//          faData.FA_Domest_State := Ord(CheckBox42.Checked);
-//          faData.FA_HVAC_State := Ord(CheckBox43.Checked);
-//          faData.FA_FFDC_State := Ord(CheckBox44.Checked);
-//          faData.FA_Navigation_State := Ord(CheckBox45.Checked);
-//          faData.FA_Ballast_State := Ord(CheckBox46.Checked);
-//          faData.FA_IPMS_State := Ord(CheckBox47.Checked);
-//          faData.FA_IAS_State := Ord(CheckBox48.Checked);
-//        end;
-//      end;
-//
-//      faList.Add(faData);
-//    end;
-//
-//    InstructorSys.Scenario.SaveFACondition(True, edtName.Text, faList, ConditionID);
-//    MessageDlg('"' + edtName.Text + '" Condition Has Been Saved', mtInformation, [mbOK], 0);
-//    actNewExecute(nil);
-//  end
-//  else if FCondition_ID > 0 then
-//  begin
-//    if CondNameBuffer <> edtName.Text then
-//    begin
-//      ShowMessage('Can Not Update FA Condition With a Different Name');
-//      Exit;
-//    end;
-//
-//    faList := TList.Create;
-//
-//    for i := 1 to 4 do
-//    begin
-//      faData := TFACond_Data.Create;
-//      faData.FA_ID := InstructorSys.Scenario.GetFACondID(FCondition_ID, i);
-//
-//      case i of
-//        1:
-//        begin
-//          faData.Role := 'MCR_IPMS';
-//          faData.FA_DGSETS_State := Ord(CheckBox1.Checked);
-//          faData.FA_Distribution_State := Ord(CheckBox2.Checked);
-//          faData.FA_Propultion_State := Ord(CheckBox3.Checked);
-//          faData.FA_Auxiliary_State := Ord(CheckBox4.Checked);
-//          faData.FA_Fuel_State := Ord(CheckBox5.Checked);
-//          faData.FA_Domest_State := Ord(CheckBox6.Checked);
-//          faData.FA_HVAC_State := Ord(CheckBox7.Checked);
-//          faData.FA_FFDC_State := Ord(CheckBox8.Checked);
-//          faData.FA_Navigation_State := Ord(CheckBox9.Checked);
-//          faData.FA_Ballast_State := Ord(CheckBox10.Checked);
-//          faData.FA_IPMS_State := Ord(CheckBox11.Checked);
-//          faData.FA_IAS_State := Ord(CheckBox12.Checked);
-//        end;
-//        2:
-//        begin
-//          faData.Role := 'MCR_AUX';
-//          faData.FA_DGSETS_State := Ord(CheckBox13.Checked);
-//          faData.FA_Distribution_State := Ord(CheckBox14.Checked);
-//          faData.FA_Propultion_State := Ord(CheckBox15.Checked);
-//          faData.FA_Auxiliary_State := Ord(CheckBox16.Checked);
-//          faData.FA_Fuel_State := Ord(CheckBox17.Checked);
-//          faData.FA_Domest_State := Ord(CheckBox18.Checked);
-//          faData.FA_HVAC_State := Ord(CheckBox19.Checked);
-//          faData.FA_FFDC_State := Ord(CheckBox20.Checked);
-//          faData.FA_Navigation_State := Ord(CheckBox21.Checked);
-//          faData.FA_Ballast_State := Ord(CheckBox22.Checked);
-//          faData.FA_IPMS_State := Ord(CheckBox23.Checked);
-//          faData.FA_IAS_State := Ord(CheckBox24.Checked);
-//        end;
-//        3:
-//        begin
-//          faData.Role := 'MCR_PCS';
-//          faData.FA_DGSETS_State := Ord(CheckBox25.Checked);
-//          faData.FA_Distribution_State := Ord(CheckBox26.Checked);
-//          faData.FA_Propultion_State := Ord(CheckBox27.Checked);
-//          faData.FA_Auxiliary_State := Ord(CheckBox28.Checked);
-//          faData.FA_Fuel_State := Ord(CheckBox29.Checked);
-//          faData.FA_Domest_State := Ord(CheckBox30.Checked);
-//          faData.FA_HVAC_State := Ord(CheckBox31.Checked);
-//          faData.FA_FFDC_State := Ord(CheckBox32.Checked);
-//          faData.FA_Navigation_State := Ord(CheckBox33.Checked);
-//          faData.FA_Ballast_State := Ord(CheckBox34.Checked);
-//          faData.FA_IPMS_State := Ord(CheckBox35.Checked);
-//          faData.FA_IAS_State := Ord(CheckBox36.Checked);
-//        end;
-//        4:
-//        begin
-//          faData.Role := 'MCR_E';
-//          faData.FA_DGSETS_State := Ord(CheckBox37.Checked);
-//          faData.FA_Distribution_State := Ord(CheckBox38.Checked);
-//          faData.FA_Propultion_State := Ord(CheckBox39.Checked);
-//          faData.FA_Auxiliary_State := Ord(CheckBox40.Checked);
-//          faData.FA_Fuel_State := Ord(CheckBox41.Checked);
-//          faData.FA_Domest_State := Ord(CheckBox42.Checked);
-//          faData.FA_HVAC_State := Ord(CheckBox43.Checked);
-//          faData.FA_FFDC_State := Ord(CheckBox44.Checked);
-//          faData.FA_Navigation_State := Ord(CheckBox45.Checked);
-//          faData.FA_Ballast_State := Ord(CheckBox46.Checked);
-//          faData.FA_IPMS_State := Ord(CheckBox47.Checked);
-//          faData.FA_IAS_State := Ord(CheckBox48.Checked);
-//        end;
-//      end;
-//
-//      faData.Condition_ID := FCondition_ID;
-//      faList.Add(faData);
-//    end;
-//
-//    InstructorSys.Scenario.SaveFACondition(False, edtName.Text, faList, ConditionID);
-//    MessageDlg('"' + edtName.Text + '" Condition Has Been Updated', mtInformation, [mbOK], 0);
-//    actNewExecute(nil);
-//  end;
-//
-//  if Assigned(faData) then
-//    faData.Free;
-//
-//  if Assigned(faList) then
-//    faList.Free;
+  Result := True;
 end;
 
 {$ENDREGION}
@@ -3389,52 +3400,6 @@ begin
   for i := 0 to tempList.Count - 1 do
   begin
     lstPMS.Items.Add(tempList[i]);
-  end;
-
-  tempList.Free;
-end;
-
-procedure TfrmScenBuilder.UpdateTankList;
-var
-  i : Integer;
-  tempList : TStrings;
-
-begin
-  tempList := nil;
-  InstructorSys.Scenario.GetAllTanksConditions(tempList);
-
-  if not Assigned(tempList) then
-    Exit;
-
-  if lstTank.Count > 0 then
-  lstTank.Clear;
-
-  for i := 0 to tempList.Count - 1 do
-  begin
-    lstTank.Items.Add(tempList[i]);
-  end;
-
-  tempList.Free;
-end;
-
-procedure TfrmScenBuilder.UpdateFAList;
-var
-  i : Integer;
-  tempList : TStrings;
-
-begin
-  tempList := nil;
-  InstructorSys.Scenario.GetFAConditions(tempList);
-
-  if not Assigned(tempList) then
-    Exit;
-
-  if lstFA.Count > 0 then
-  lstFA.Clear;
-
-  for i := 0 to tempList.Count - 1 do
-  begin
-    lstFA.Items.Add(tempList[i]);
   end;
 
   tempList.Free;
