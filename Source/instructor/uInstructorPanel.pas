@@ -101,6 +101,7 @@ type
     procedure scrlbxContentClick(Sender: TObject);
     procedure mniManualIPMS1Click(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     FDockedForm : TForm;
@@ -230,6 +231,11 @@ begin
   Action := caHide;
 end;
 
+
+procedure TfrmInstructorPanel.FormShow(Sender: TObject);
+begin
+  VrClock1.StartClock;
+end;
 
 procedure TfrmInstructorPanel.mniManualIPMS1Click(Sender: TObject);
 var
