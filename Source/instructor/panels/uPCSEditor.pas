@@ -156,7 +156,7 @@ begin
   pcsNames := nil;
   pcsList := nil;
 
-  InstructorSys.Scenario.GetPCSConditions(pcsNames);
+  InstructorSys.Scenario.GetAllPCSConditions(pcsNames);
   frmAvailPCSCondition.SetAvailableCondition(pcsNames);
   pcsNames.Free;
 
@@ -299,7 +299,7 @@ begin
       end;
       pcsList.Add(pcsData);
     end;
-    InstructorSys.Scenario.SavePCSCondition(True, edtName.Text, pcsList);
+    InstructorSys.Scenario.SavePCSCondition(True, edtName.Text, pcsList, FCondition_ID);
     MessageDlg('"' + edtName.Text + '" Condition Has Been Saved', mtInformation, [mbOK], 0);
     actNewExecute(nil);
 
@@ -352,7 +352,7 @@ begin
       end;
       pcsList.Add(pcsData);
     end;
-    InstructorSys.Scenario.SavePCSCondition(False, edtName.Text, pcsList);
+    InstructorSys.Scenario.SavePCSCondition(False, edtName.Text, pcsList, FCondition_ID);
     MessageDlg('"' + edtName.Text + '" Condition Has Been Updated', mtInformation, [mbOK], 0);
     actNewExecute(nil);
     for j := 0 to ComponentCount - 1 do

@@ -319,7 +319,7 @@ begin
 
   pmsList := nil;
   pmsNames := nil;
-  InstructorSys.Scenario.GetPMSConditions(pmsNames);
+  InstructorSys.Scenario.GetAllPMSConditions(pmsNames);
   frmAvailPMSCondition.SetAvailableCondition(pmsNames);
   pmsNames.Free;
 
@@ -674,7 +674,7 @@ begin
       GetPMSInfo(i, pmsName, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB);
 
       pmsData := TPMSCond_Data.Create;
-      pmsData.PMS_ID := InstructorSys.Scenario.GetPMSCondID(FCondition_ID, i);
+//      pmsData.PMS_ID := InstructorSys.Scenario.GetPMSCondID(FCondition_ID, i);
       pmsData.PMS_Name := pmsName;
       pmsData.PMS_Type := pmsType;
 

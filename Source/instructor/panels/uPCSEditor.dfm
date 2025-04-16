@@ -90,8 +90,8 @@ object frmPCSEditor: TfrmPCSEditor
   object lbl7: TLabel
     Left = 40
     Top = 274
-    Width = 192
-    Height = 19
+    Width = 183
+    Height = 17
     Caption = 'Gear Box Starboard Engaged'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -104,7 +104,7 @@ object frmPCSEditor: TfrmPCSEditor
     Left = 40
     Top = 303
     Width = 112
-    Height = 16
+    Height = 34
     Caption = 'Mode Engine Port'#13#10
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -199,7 +199,7 @@ object frmPCSEditor: TfrmPCSEditor
     Left = 40
     Top = 164
     Width = 119
-    Height = 19
+    Height = 34
     Caption = 'Remote Starboard '#13#10
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -227,8 +227,8 @@ object frmPCSEditor: TfrmPCSEditor
   object Label3: TLabel
     Left = 230
     Top = 107
-    Width = 7
-    Height = 23
+    Width = 4
+    Height = 17
     Caption = ':'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -240,8 +240,8 @@ object frmPCSEditor: TfrmPCSEditor
   object Label4: TLabel
     Left = 230
     Top = 136
-    Width = 5
-    Height = 19
+    Width = 4
+    Height = 17
     Caption = ':'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -253,8 +253,8 @@ object frmPCSEditor: TfrmPCSEditor
   object Label5: TLabel
     Left = 230
     Top = 192
-    Width = 7
-    Height = 19
+    Width = 4
+    Height = 17
     Caption = ':'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -266,8 +266,8 @@ object frmPCSEditor: TfrmPCSEditor
   object Label6: TLabel
     Left = 230
     Top = 163
-    Width = 5
-    Height = 21
+    Width = 4
+    Height = 17
     Caption = ':'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -279,8 +279,8 @@ object frmPCSEditor: TfrmPCSEditor
   object Label7: TLabel
     Left = 230
     Top = 218
-    Width = 7
-    Height = 21
+    Width = 4
+    Height = 17
     Caption = ':'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -292,8 +292,8 @@ object frmPCSEditor: TfrmPCSEditor
   object Label8: TLabel
     Left = 230
     Top = 244
-    Width = 5
-    Height = 23
+    Width = 4
+    Height = 17
     Caption = ':'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -305,8 +305,8 @@ object frmPCSEditor: TfrmPCSEditor
   object Label9: TLabel
     Left = 230
     Top = 274
-    Width = 5
-    Height = 19
+    Width = 4
+    Height = 17
     Caption = ':'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -318,8 +318,8 @@ object frmPCSEditor: TfrmPCSEditor
   object Label10: TLabel
     Left = 230
     Top = 301
-    Width = 5
-    Height = 19
+    Width = 4
+    Height = 17
     Caption = ':'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -331,8 +331,8 @@ object frmPCSEditor: TfrmPCSEditor
   object Label11: TLabel
     Left = 230
     Top = 328
-    Width = 5
-    Height = 18
+    Width = 4
+    Height = 17
     Caption = ':'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -360,7 +360,6 @@ object frmPCSEditor: TfrmPCSEditor
     Font.Style = []
     ParentFont = False
     Spacing = 0
-    ExplicitWidth = 1284
   end
   object edtName: TEdit
     Left = 142

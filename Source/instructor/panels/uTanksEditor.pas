@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, ToolWin,
-  ActnCtrls, uDatabase;
+  ActnCtrls, uDatabase, System.Actions;
 
 type
   TfrmTanksEditor = class(TForm)
@@ -222,7 +222,7 @@ begin
 
   TanksList := nil;
   TanksNames := nil;
-  InstructorSys.Scenario.GetTanksConditions(TanksNames);
+  InstructorSys.Scenario.GetAllTanksConditions(TanksNames);
   frmTanksCondition.SetAvailableCondition(TanksNames);
   TanksNames.Free;
 

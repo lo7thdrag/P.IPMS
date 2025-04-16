@@ -83,25 +83,33 @@ type
     function GetFreeConditionScenarioID: Integer;
     function GetFreePMSCondID: Integer;
     function GetConditionID(aName: string): Integer;
-    procedure GetPMSCondByID(aID: Integer; var aList: TList);
-    function SavePMSCondition(aIsNew: Boolean; aName: string; aList: TList;
-      var ConditionID: Integer): Boolean;
-    procedure SaveRS_PMSCondition(aList: TList; aSessionID: Integer);
-    function GetPMSCondID(aID, aIndex: Integer): Integer;
-    function SaveElementCondition(aIsNew: Boolean; aName: string; aList: TList;
-      var ConditionID: Integer): Boolean;
+
+    function SaveElementCondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer): Boolean;
     procedure GetAllCondition(aType: string; var aPMSCond: TStrings); overload;
     procedure GetAllCondition(var aList: TList); overload;
     function GetConditionInfo(aID: Integer): string;
-    function DeletePMSCondition(aID: Integer): Boolean;
-//    procedure DeleteCondition(a
 
+    {$REGION ' PMS Section '}
+    function GetPMSCondID(aID, aIndex: Integer): Integer;
+    function DeletePMSCondition(aID: Integer): Boolean;
+    function SavePMSCondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer): Boolean;
+
+    procedure GetPMSCondByID(aID: Integer; var aList: TList);
+    procedure SaveRS_PMSCondition(aList: TList; aSessionID: Integer);
+    {$ENDREGION}
+
+    {$REGION ' PCS Section '}
     function DeletePCSCondition(aID: Integer): Boolean;
     function GetFreePCSCondID: Integer;
+    function SavePCSCondition(aIsNew: Boolean; aName: string; var aList: TList; var ConditionID: Integer): Boolean;
+
     procedure GetPCSCondByID(aID: Integer; var aList: TList);
-    function SavePCSCondition(aIsNew: Boolean; aName: string;
-      var aList: TList): Boolean;
     procedure SaveRS_PCSCondition(aList: TList; aSessionID: Integer);
+    {$ENDREGION}
+
+    {$REGION ' TANK Section '}
+    procedure GetTanksCondByID(aID: Integer; var aList: TList);
+    {$ENDREGION}
 
     function DeleteFACondition(aID: Integer): Boolean;
     function GetFACondID(aID, aIndex: Integer): Integer;
@@ -123,7 +131,7 @@ type
       aOldName: string): Boolean;
     function getMaxTankValue(aElementID: string): Double;
     function getMaxLengthTankValue(aElementID: string): Double;
-    procedure GetTanksCondByID(aID: Integer; var aList: TList);
+
     procedure GetTanksCondition(aScenarioName: string; var aList: TList);
     procedure GetRS_TanksCondition(aSessionID: Integer; var aList: TList);
 
@@ -515,6 +523,367 @@ begin
   Result := True;
 end;
 
+{$REGION ' PMS Section '}
+
+function TIPMSDatabase.GetPMSCondID(aID, aIndex: Integer): Integer;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := 0;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM (' +
+               'SELECT ROW_NUMBER() OVER (ORDER BY PMS_ID ASC) AS RowNumber, * ' +
+               'FROM PMS_Condition ' +
+               'WHERE Condition_ID = ' + IntToStr(aID) + ') AS NewTable ' +
+             'WHERE NewTable.RowNumber = ' + IntToStr(aIndex);
+    SQL.Add(query);
+    Open;
+
+    if RecordCount > 0 then
+    begin
+      First;
+      Result := FieldByName('PMS_ID').AsInteger;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.DeletePMSCondition(aID: Integer): Boolean;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'DELETE FROM PMS_Condition ' +
+             'WHERE Condition_ID = ' + IntToStr(aID);
+    SQL.Add(query);
+
+    query := 'DELETE FROM Condition ' +
+             'WHERE Condition_ID = ' + IntToStr(aID);
+    SQL.Add(query);
+    ExecSQL;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+
+  Result := True;
+end;
+
+function TIPMSDatabase.SavePMSCondition(aIsNew: Boolean; aName: string; aList: TList;var ConditionID : integer): Boolean;
+var
+  i, condID : Integer;
+  pmsData : TPMSCond_Data;
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    if aIsNew then
+    begin
+      condID := GetFreeConditionID;
+      ConditionID := condID;
+
+      query := 'INSERT INTO Condition(Condition_ID, Condition_Name, Condition_Type) ' +
+               'VALUES(' + IntToStr(condID) + ', '
+                         + QuotedStr(aName) + ', '
+                         + QuotedStr('PMS') + ')';
+      SQL.Add(query);
+      ExecSQL;
+
+      for i := 0 to aList.Count - 1 do
+      begin
+        SQL.Clear;
+
+        pmsData := TPMSCond_Data(aList.Items[i]);
+
+        query := 'INSERT INTO PMS_Condition(PMS_ID, PMS_Name, PMS_Type, PMS_Mode, ' +
+                 'PMS_State, PMS_OnOff, PMS_Pref, PMS_CB, PMS_SWB_MSBIntrMode, ' +
+                 'PMS_SWB_ESBIntrMode, PMS_SWB_ShoreIntrMode, PMS_SWB_MsbCBIntr, ' +
+                 'PMS_SWB_EsbCBIntr, PMS_SWB_MsbCBShore, PMS_FirstLoad, PMS_StateRunFull, '+
+                 'PMS_StateRunFwd, PMS_StateRunAft, Condition_ID) ' +
+                 'VALUES(' + IntToStr(GetFreePMSCondID) +
+                 ', ' + QuotedStr(pmsData.PMS_Name) +
+                 ', ' + IntToStr(pmsData.PMS_Type) +
+                 ', ' + IntToStr(pmsData.PMS_Mode) +
+                 ', ' + IntToStr(pmsData.PMS_State) +
+                 ', ' + IntToStr(pmsData.PMS_OnOff) +
+                 ', ' + IntToStr(pmsData.PMS_Pref) +
+                 ', ' + IntToStr(pmsData.PMS_CB) +
+                 ', ' + IntToStr(pmsData.PMS_SWB_MSBIntrMode) +
+                 ', ' + IntToStr(pmsData.PMS_SWB_ESBIntrMode) +
+                 ', ' + IntToStr(pmsData.PMS_SWB_ShoreIntrMode) +
+                 ', ' + IntToStr(pmsData.PMS_SWB_MsbCBIntr) +
+                 ', ' + IntToStr(pmsData.PMS_SWB_EsbCBIntr) +
+                 ', ' + IntToStr(pmsData.PMS_SWB_MsbCBShore) +
+                 ', ' + IntToStr(pmsData.PMS_FirstLoad) +
+                 ', ' + IntToStr(pmsData.PMS_StateRunFull) +
+                 ', ' + IntToStr(pmsData.PMS_StateRunFwd) +
+                 ', ' + IntToStr(pmsData.PMS_StateRunAft) +
+                 ', ' + IntToStr(condID) + ')';
+
+        SQL.Add(query);
+        ExecSQL;
+      end;
+    end
+    else
+    begin
+      query := 'UPDATE Condition SET Condition_Name = ' + QuotedStr(aName) +
+               ' WHERE Condition_ID = ' + IntToStr(ConditionID);
+      SQL.Add(query);
+      ExecSQL;
+
+      for i := 0 to aList.Count - 1 do
+      begin
+        SQL.Clear;
+
+        pmsData := TPMSCond_Data(aList.Items[i]);
+
+        query := 'UPDATE PMS_Condition ' +
+                 'SET PMS_Mode = ' + IntToStr(pmsData.PMS_Mode) +
+                 ', PMS_State = ' + IntToStr(pmsData.PMS_State) +
+                 ', PMS_OnOff = ' + IntToStr(pmsData.PMS_OnOff) +
+                 ', PMS_Pref = ' + IntToStr(pmsData.PMS_Pref) +
+                 ', PMS_CB = ' + IntToStr(pmsData.PMS_CB) +
+                 ', PMS_SWB_MSBIntrMode = ' + IntToStr(pmsData.PMS_SWB_MSBIntrMode) +
+                 ', PMS_SWB_ESBIntrMode = ' + IntToStr(pmsData.PMS_SWB_ESBIntrMode) +
+                 ', PMS_SWB_ShoreIntrMode = ' + IntToStr(pmsData.PMS_SWB_ShoreIntrMode) +
+                 ', PMS_SWB_MsbCBIntr = ' + IntToStr(pmsData.PMS_SWB_MsbCBIntr) +
+                 ', PMS_SWB_EsbCBIntr = ' + IntToStr(pmsData.PMS_SWB_EsbCBIntr) +
+                 ', PMS_SWB_MsbCBShore = ' + IntToStr(pmsData.PMS_SWB_MsbCBShore) +
+                 ', PMS_FirstLoad = ' + IntToStr(pmsData.PMS_FirstLoad) +
+                 ', PMS_StateRunFull = ' + IntToStr(pmsData.PMS_StateRunFull) +
+                 ', PMS_StateRunFwd = ' + IntToStr(pmsData.PMS_StateRunFwd) +
+                 ', PMS_StateRunAft = ' + IntToStr(pmsData.PMS_StateRunAft) +
+                 ' WHERE Condition_ID = ' + IntToStr(pmsData.Condition_ID) +
+                 ' AND PMS_ID = ' + IntToStr(pmsData.PMS_ID);
+
+        SQL.Add(query);
+        ExecSQL;
+      end;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+procedure TIPMSDatabase.GetPMSCondByID(aID: Integer; var aList: TList);
+var
+  FQuery : TZQuery;
+  query : string;
+  pmsData : TPMSCond_Data;
+begin
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM PMS_Condition WHERE Condition_ID = ' + IntToStr(aID) + ' ORDER BY PMS_ID';
+    SQL.Add(query);
+    Open;
+
+    if RecordCount > 0 then
+    begin
+      First;
+
+      if not Assigned(aList) then
+        aList := TList.Create
+      else
+        aList.Clear;
+
+      while not Eof do
+      begin
+        pmsData := TPMSCond_Data.Create;
+        pmsData.PMS_ID := FieldByName('PMS_ID').AsInteger;
+        pmsData.PMS_Name := FieldByName('PMS_Name').AsString;
+        pmsData.PMS_Type := FieldByName('PMS_Type').AsInteger;
+        pmsData.PMS_Mode := FieldByName('PMS_Mode').AsInteger;
+        pmsData.PMS_State := FieldByName('PMS_State').AsInteger;
+        pmsData.PMS_OnOff := FieldByName('PMS_OnOff').AsInteger;
+        pmsData.PMS_Pref := FieldByName('PMS_Pref').AsInteger;
+        pmsData.PMS_CB := FieldByName('PMS_CB').AsInteger;
+        pmsData.PMS_SWB_MSBIntrMode := FieldByName('PMS_SWB_MSBIntrMode').AsInteger;
+        pmsData.PMS_SWB_ESBIntrMode := FieldByName('PMS_SWB_ESBIntrMode').AsInteger;
+        pmsData.PMS_SWB_ShoreIntrMode := FieldByName('PMS_SWB_ShoreIntrMode').AsInteger;
+        pmsData.PMS_SWB_MsbCBIntr := FieldByName('PMS_SWB_MsbCBIntr').AsInteger;
+        pmsData.PMS_SWB_EsbCBIntr := FieldByName('PMS_SWB_EsbCBIntr').AsInteger;
+        pmsData.PMS_SWB_MsbCBShore := FieldByName('PMS_SWB_MsbCBShore').AsInteger;
+        pmsData.Condition_ID := FieldByName('Condition_ID').AsInteger;
+
+        aList.Add(pmsData);
+        Next;
+      end;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+procedure TIPMSDatabase.SaveRS_PMSCondition(aList: TList; aSessionID: integer);
+var
+  FQuery : TZQuery;
+  query : string;
+//  pmsData : TPMSCond_Data;
+  pmsData : TScenarioPMSCondition;
+  i : Integer;
+begin
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'DELETE FROM RS_PMS_CONDITION WHERE RUNNING_ID = ' +IntToStr(aSessionID) + ';';
+    SQL.Add(query);
+    ExecSQL;
+
+    for i := 0 to aList.Count - 1 do
+    begin
+      pmsData := TScenarioPMSCondition(aList.Items[i]);
+      SQL.Clear;
+      query := 'INSERT INTO RS_PMS_Condition(PMS_Name, PMS_Type, PMS_Mode, ' +
+               'PMS_OnOff, PMS_GenSupplied, PMS_GenState, PMS_CBClosed, ' +
+               'PMS_Preference, PMS_Busbar, PMS_RunHours, PMS_EmergencyStop, ' +
+
+               'PMS_NotStandby, PMS_CanBusFailure, PMS_MeasPowFailure, ' +
+               'PMS_DCPowFailure, PMS_EngineAlarm, PMS_ShutDown, ' +
+               'PMS_FaultPageLed, PMS_FailureCBClosed, PMS_Power, ' +
+               'PMS_Power_State, PMS_Frequency, PMS_Frequency_State, ' +
+               'PMS_SwitchFrequency, PMS_Current, PMS_Voltage, ' +
+               'PMS_Voltage_State, PMS_CosPhi, PMS_U, ' +
+               'PMS_V, PMS_W, PMS_SWB_MSBIntrMode, ' +
+               'PMS_SWB_ESBIntrMode, PMS_SWB_ShoreIntrMode, ' +
+
+               'PMS_SWB_MsbCBIntr, PMS_SWB_EsbCBIntr, ' +
+               'PMS_SWB_MsbCBShore, PMS_SWB_MsbCBNavNaut, PMS_SWB_Busbar, ' +
+               'PMS_SWB_TripReduct, PMS_SWB_EmergencyCon, PMS_SWB_Frequency, ' +
+               'PMS_SWB_Voltage, PMS_SWB_Power, PMS_SWB_Trafo230Volt, ' +
+               'PMS_SWB_Trafo115Volt, PMS_PowerMode, PMS_PowerConsmr, ' +
+               'PMS_FirstLoad, PMS_StateRunFull, PMS_StateRunFwd, PMS_StateRunAft, Running_ID) ' +
+
+               'VALUES(' + QuotedStr(pmsData.PMS_Name) +
+               ', ' + IntToStr(pmsData.PMS_Type) +
+               ', ' + IntToStr(pmsData.PMS_Mode) +
+               ', ' + IntToStr(pmsData.PMS_OnOff) +
+               ', ' + IntToStr(pmsData.PMS_GenSupplied) +
+               ', ' + IntToStr(pmsData.PMS_GenState) +
+               ', ' + IntToStr(pmsData.PMS_CBClosed) +
+               ', ' + IntToStr(pmsData.PMS_Preference) +
+               ', ' + IntToStr(pmsData.PMS_Busbar) +
+               ', ' + IntToStr(pmsData.PMS_RunHours) +
+               ', ' + IntToStr(pmsData.PMS_EmergencyStop) +
+
+               ', ' + IntToStr(pmsData.PMS_NotStandby) +
+               ', ' + IntToStr(pmsData.PMS_CanBusFailure) +
+               ', ' + IntToStr(pmsData.PMS_MeasPowFailure) +
+               ', ' + IntToStr(pmsData.PMS_DCPowFailure) +
+               ', ' + IntToStr(pmsData.PMS_EngineAlarm) +
+               ', ' + IntToStr(pmsData.PMS_ShutDown) +
+               ', ' + IntToStr(pmsData.PMS_FaultPageLed) +
+               ', ' + IntToStr(pmsData.PMS_FailureCBClosed) +
+               ', ' + FloatToStr(pmsData.PMS_Power) +
+               ', ' + FloatToStr(pmsData.PMS_Power_State) +
+               ', ' + FloatToStr(pmsData.PMS_Frequency) +
+               ', ' + FloatToStr(pmsData.PMS_Frequency_State) +
+               ', ' + FloatToStr(pmsData.PMS_SwitchFrequency) +
+               ', ' + FloatToStr(pmsData.PMS_Current) +
+               ', ' + FloatToStr(pmsData.PMS_Voltage) +
+               ', ' + FloatToStr(pmsData.PMS_Voltage_State) +
+               ', ' + FloatToStr(pmsData.PMS_CosPhi) +
+               ', ' + FloatToStr(pmsData.PMS_U) +
+               ', ' + FloatToStr(pmsData.PMS_V) +
+               ', ' + FloatToStr(pmsData.PMS_W) +
+               ', ' + IntToStr(pmsData.PMS_SWB_MSBIntrMode) +
+               ', ' + IntToStr(pmsData.PMS_SWB_ESBIntrMode) +
+               ', ' + IntToStr(pmsData.PMS_SWB_ShoreIntrMode) +
+
+               ', ' + IntToStr(pmsData.PMS_SWB_MsbCBIntr) +
+               ', ' + IntToStr(pmsData.PMS_SWB_EsbAftCBIntr) +
+               ', ' + IntToStr(pmsData.PMS_SWB_MsbCBShore) +
+               ', ' + IntToStr(pmsData.PMS_SWB_MsbCBNavNaut) +
+               ', ' + IntToStr(pmsData.PMS_SWB_Busbar) +
+               ', ' + IntToStr(pmsData.PMS_SWB_TripReduct) +
+               ', ' + IntToStr(pmsData.PMS_SWB_EmergencyCon) +
+               ', ' + FloatToStr(pmsData.PMS_SWB_Frequency) +
+               ', ' + FloatToStr(pmsData.PMS_SWB_Voltage) +
+               ', ' + FloatToStr(pmsData.PMS_SWB_Power) +
+               ', ' + FloatToStr(pmsData.PMS_SWB_Trafo230Volt) +
+               ', ' + FloatToStr(pmsData.PMS_SWB_Trafo115Volt) +
+               ', ' + IntToStr(pmsData.PMS_PowerMode) +
+               ', ' + FloatToStr(pmsData.PMS_PowerConsmr) +
+               ', ' + IntToStr(pmsData.PMS_FirstLoad) +
+               ', ' + IntToStr(pmsData.PMS_StateRunFull) +
+               ', ' + IntToStr(pmsData.PMS_StateRunFwd) +
+               ', ' + IntToStr(pmsData.PMS_StateRunAft) +
+               ', ' + IntToStr(aSessionID) + ');';
+
+      SQL.Add(query);
+      try
+        ExecSQL;
+      finally
+
+      end;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION ' PCS Section '}
+
 function TIPMSDatabase.DeletePCSCondition(aID: Integer): Boolean;
 var
   FQuery : TZQuery;
@@ -549,6 +918,277 @@ begin
   Result := True;
 end;
 
+function TIPMSDatabase.SavePCSCondition(aIsNew: Boolean; aName: string; var aList: TList; var ConditionID: Integer): Boolean;
+var
+  FQuery : TZQuery;
+  condID : Integer;
+  query : string;
+  i : Integer;
+  pcsData : TPCSCond_Data;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    if aIsNew then
+    begin
+      condID := GetFreeConditionID;
+
+      query := 'INSERT INTO Condition(Condition_ID, Condition_Name, Condition_Type) ' +
+               'VALUES(' + IntToStr(condID) + ', '
+                         + QuotedStr(aName) + ', '
+                         + QuotedStr('PCS') + ')';
+      SQL.Add(query);
+      ExecSQL;
+
+      for i := 0 to aList.Count - 1 do
+      begin
+        pcsData := TPCSCond_Data(aList.Items[i]);
+        SQL.Clear;
+
+        query := 'INSERT INTO PCS_Condition(PCS_ID, PCS_Name, PCS_State, ' +
+                 'Condition_ID, ' + 'Value)' +
+                 'VALUES(' + IntToStr(GetFreePCSCondID) +
+                 ', ' + QuotedStr(pcsData.PCS_Name) +
+                 ', ' + IntToStr(pcsData.PCS_State) +
+                 ', ' + IntToStr(condID) +
+                 ', ' + IntToStr(pcsData.Value) + ')';
+        SQL.Add(query);
+        ExecSQL;
+      end;
+    end
+    else
+    begin
+      query := 'UPDATE Condition SET Condition_Name = ' + QuotedStr(aName) +
+               ' WHERE Condition_ID = ' + IntToStr(ConditionID);
+      SQL.Add(query);
+      ExecSQL;
+
+      for i := 0 to aList.Count - 1 do
+      begin
+        pcsData := TPCSCond_Data(aList.Items[i]);
+        SQL.Clear;
+
+        query := 'UPDATE PCS_Condition ' +
+                 'SET PCS_State = ' + IntToStr(pcsData.PCS_State) +
+                 ', Value = ' + IntToStr(pcsData.Value) +
+                 ' WHERE Condition_ID = ' + IntToStr(pcsData.Condition_ID) +
+                 'and PCS_Name = ' + QuotedStr(pcsData.PCS_Name);
+        SQL.Add(query);
+        ExecSQL;
+      end;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+procedure TIPMSDatabase.GetPCSCondByID(aID: Integer;var aList : TList);
+var
+  FQuery : TZQuery;
+  query : string;
+  aData : TPCSCond_Data;
+begin
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM PCS_Condition ' +
+             'WHERE Condition_ID = ' + IntToStr(aID) +
+             ' ORDER BY PCS_ID';
+    SQL.Add(query);
+    Open;
+
+    if RecordCount > 0 then
+    begin
+      First;
+
+      if not Assigned(aList) then
+        aList := TList.Create
+      else
+        aList.Clear;
+
+      while not Eof do
+      begin
+        aData := TPCSCond_Data.Create;
+        aData.PCS_ID := FieldByName('PCS_ID').AsInteger;
+        aData.PCS_Name := FieldByName('PCS_Name').AsString;
+        aData.PCS_State := FieldByName('PCS_State').AsInteger;
+        aData.Condition_ID := FieldByName('Condition_ID').AsInteger;
+        aData.Value := FieldByName('Value').AsInteger;
+
+        aList.Add(aData);
+        Next;
+      end;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+procedure TIPMSDatabase.SaveRS_PCSCondition(aList: TList; aSessionID: Integer);
+var
+  FQuery : TZQuery;
+  query : string;
+  pcsData : TScenarioPCSCondition;
+  i : Integer;
+begin
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'DELETE FROM RS_PCS_CONDITION ' +
+             'WHERE RUNNING_ID = ' +IntToStr(aSessionID) + ';';
+    SQL.Add(query);
+    ExecSQL;
+
+    for i := 0 to aList.Count - 1 do
+    begin
+      SQL.Clear;
+      pcsData := TScenarioPCSCondition(aList.Items[i]);
+
+      query := 'INSERT INTO RS_PCS_Condition(PCS_Name, PCS_State, ' +
+               'PCS_ME_Control, PCS_ME_Mode, PCS_ME_EngineRun, ' +
+               'PCS_ME_ReadyForUse, PCS_ME_SetpointSpeed, PCS_ME_RemoteAuto, ' +
+               'PCS_ME_RemoteManual, PCS_ME_LeverControl, PCS_ME_Alarm, PCS_ME_Failure, ' +
+               'PCS_GB_ClutchAllowed, PCS_GB_ClutchEngaged, PCS_GB_ReadyForUse, ' +
+               'PCS_GB_RemoteAuto, PCS_GB_RemoteManual, PCS_GB_Failure, ' +
+               'PCS_GB_ShaftLocked, PCS_GB_ShaftPowerLimited, PCS_CPP_ReadyForUse, ' +
+               'PCS_CPP_SetpointPitch, PCS_CPP_RemoteAuto, PCS_CPP_RemoteManual, PCS_CPP_Failure, ' +
+               'PCS_CPP_PumpStandby, PCS_CPP_PumpStart, PCS_CPP_PumpAuto, ' +
+               'PCS_PC_StartingInterlocks, PCS_PC_Alarms,  ' +
+               'PCS_PC_SafetiesStop, PCS_PC_ClutchInterlocks, PCS_PC_CPPFailure, ' +
+               'Running_ID) ' +
+               'VALUES(' + QuotedStr(pcsData.PCS_Name) +
+               ', ' + IntToStr(pcsData.PCS_State) +
+               ', ' + IntToStr(pcsData.PCS_ME_Control) +
+               ', ' + IntToStr(pcsData.PCS_ME_Mode) +
+               ', ' + IntToStr(pcsData.PCS_ME_EngineRun) +
+               ', ' + IntToStr(pcsData.PCS_ME_ReadyForUse) +
+               ', ' + FloatToStr(pcsData.PCS_ME_SetpointSpeed) +
+               ', ' + IntToStr(pcsData.PCS_ME_RemoteAuto) +
+               ', ' + IntToStr(pcsData.PCS_ME_RemoteManual) +
+               ', ' + IntToStr(pcsData.PCS_ME_LeverControl) +
+               ', ' + IntToStr(pcsData.PCS_ME_Alarm) +
+               ', ' + IntToStr(pcsData.PCS_ME_Failure) +
+               ', ' + IntToStr(pcsData.PCS_GB_ClutchAllowed) +
+               ', ' + IntToStr(pcsData.PCS_GB_ClutchEngaged) +
+               ', ' + IntToStr(pcsData.PCS_GB_ReadyForUse) +
+               ', ' + IntToStr(pcsData.PCS_GB_RemoteAuto) +
+               ', ' + IntToStr(pcsData.PCS_GB_RemoteManual) +
+               ', ' + IntToStr(pcsData.PCS_GB_Failure) +
+               ', ' + IntToStr(pcsData.PCS_GB_ShaftLocked) +
+               ', ' + IntToStr(pcsData.PCS_GB_ShaftPowerLimited) +
+               ', ' + IntToStr(pcsData.PCS_CPP_ReadyForUse) +
+               ', ' + FloatToStr(pcsData.PCS_CPP_SetpointPitch) +
+               ', ' + IntToStr(pcsData.PCS_CPP_RemoteAuto) +
+               ', ' + IntToStr(pcsData.PCS_CPP_RemoteManual) +
+               ', ' + IntToStr(pcsData.PCS_CPP_Failure) +
+               ', ' + QuotedStr(pcsData.PCS_CPP_PumpStandby) +
+               ', ' + QuotedStr(pcsData.PCS_CPP_PumpStart) +
+               ', ' + IntToStr(pcsData.PCS_CPP_PumpAuto) +
+               ', ' + QuotedStr(pcsData.PCS_PC_StartingInterlocks) +
+               ', ' + QuotedStr(pcsData.PCS_PC_Alarms) +
+               ', ' + QuotedStr(pcsData.PCS_PC_SafetiesStop) +
+               ', ' + QuotedStr(pcsData.PCS_PC_ClutchInterlocks) +
+               ', ' + QuotedStr(pcsData.PCS_PC_CPPFailure) +
+               ', ' + IntToStr(aSessionID) + ');';
+
+      SQL.Add(query);
+      try
+        ExecSQL;
+      finally
+
+      end;
+    end;
+
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION ' TANK Section '}
+
+procedure TIPMSDatabase.GetTanksCondByID(aID: Integer; var aList: TList);
+var
+  FQuery : TZQuery;
+  query : string;
+  TanksData : TTanksCond_Data;
+begin
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM Tanks_Condition ' +
+             'WHERE Condition_ID = ' + IntToStr(aID) +
+             ' ORDER BY Tanks_ID';
+    SQL.Add(query);
+    Open;
+
+    if RecordCount > 0 then
+    begin
+      First;
+
+      if not Assigned(aList) then
+        aList := TList.Create
+      else
+        aList.Clear;
+
+      while not Eof do
+      begin
+        TanksData := TTanksCond_Data.Create;
+        TanksData.Tanks_ID := FieldByName('Tanks_ID').AsInteger;
+        TanksData.Tanks_ElementID := FieldByName('Tanks_ElementID').AsString;
+        TanksData.Tanks_Value := FieldByName('Tanks_Value').AsFloat;
+        TanksData.Condition_ID := FieldByName('Condition_ID').AsInteger;
+
+        aList.Add(TanksData);
+        Next;
+      end;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+{$ENDREGION}
+
 function TIPMSDatabase.DeleteTanksCondition(aID: Integer): Boolean;
 var
   FQuery : TZQuery;
@@ -567,41 +1207,6 @@ begin
 
     SQL.Clear;
     query := 'DELETE FROM Tanks_Condition ' +
-             'WHERE Condition_ID = ' + IntToStr(aID);
-    SQL.Add(query);
-
-    query := 'DELETE FROM Condition ' +
-             'WHERE Condition_ID = ' + IntToStr(aID);
-    SQL.Add(query);
-    ExecSQL;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-
-  Result := True;
-end;
-
-
-function TIPMSDatabase.DeletePMSCondition(aID: Integer): Boolean;
-var
-  FQuery : TZQuery;
-  query : string;
-begin
-  Result := False;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'DELETE FROM PMS_Condition ' +
              'WHERE Condition_ID = ' + IntToStr(aID);
     SQL.Add(query);
 
@@ -1070,8 +1675,7 @@ begin
     SQL.Clear;
 
     query := 'SELECT * ' +
-             'FROM Condition ' +
-             'WHERE Condition_Type = ' + QuotedStr(aType) +
+             'FROM Condition WHERE Condition_Type = ' + QuotedStr(aType) +
              ' ORDER BY Condition_Name';
 
     SQL.Add(query);
@@ -2074,57 +2678,6 @@ begin
   end;
 end;
 
-procedure TIPMSDatabase.GetTanksCondByID(aID: Integer; var aList: TList);
-var
-  FQuery : TZQuery;
-  query : string;
-  TanksData : TTanksCond_Data;
-begin
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT * ' +
-             'FROM Tanks_Condition ' +
-             'WHERE Condition_ID = ' + IntToStr(aID) +
-             ' ORDER BY Tanks_ID';
-    SQL.Add(query);
-    Open;
-
-    if RecordCount > 0 then
-    begin
-      First;
-
-      if not Assigned(aList) then
-        aList := TList.Create
-      else
-        aList.Clear;
-
-      while not Eof do
-      begin
-        TanksData := TTanksCond_Data.Create;
-        TanksData.Tanks_ID := FieldByName('Tanks_ID').AsInteger;
-        TanksData.Tanks_ElementID := FieldByName('Tanks_ElementID').AsString;
-        TanksData.Tanks_Value := FieldByName('Tanks_Value').AsFloat;
-        TanksData.Condition_ID := FieldByName('Condition_ID').AsInteger;
-
-        aList.Add(TanksData);
-        Next;
-      end;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
 function TIPMSDatabase.GetFACondID(aID, aIndex: Integer): Integer;
 var
   FQuery : TZQuery;
@@ -2949,57 +3502,6 @@ begin
   end;
 end;
 
-procedure TIPMSDatabase.GetPCSCondByID(aID: Integer;var aList : TList);
-var
-  FQuery : TZQuery;
-  query : string;
-  aData : TPCSCond_Data;
-begin
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT * FROM PCS_Condition ' +
-             'WHERE Condition_ID = ' + IntToStr(aID) +
-             ' ORDER BY PCS_ID';
-    SQL.Add(query);
-    Open;
-
-    if RecordCount > 0 then
-    begin
-      First;
-
-      if not Assigned(aList) then
-        aList := TList.Create
-      else
-        aList.Clear;
-
-      while not Eof do
-      begin
-        aData := TPCSCond_Data.Create;
-        aData.PCS_ID := FieldByName('PCS_ID').AsInteger;
-        aData.PCS_Name := FieldByName('PCS_Name').AsString;
-        aData.PCS_State := FieldByName('PCS_State').AsInteger;
-        aData.Condition_ID := FieldByName('Condition_ID').AsInteger;
-        aData.Value := FieldByName('Value').AsInteger;
-
-        aList.Add(aData);
-        Next;
-      end;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
 procedure TIPMSDatabase.GetPCSCondition(aName: string; var l: TList);
 var
   FQuery : TZQuery;
@@ -3037,102 +3539,6 @@ begin
 
       l.Add(FData);
       Next;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-procedure TIPMSDatabase.GetPMSCondByID(aID: Integer; var aList: TList);
-var
-  FQuery : TZQuery;
-  query : string;
-  pmsData : TPMSCond_Data;
-begin
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT * FROM PMS_Condition WHERE Condition_ID = ' + IntToStr(aID) + ' ORDER BY PMS_ID';
-    SQL.Add(query);
-    Open;
-
-    if RecordCount > 0 then
-    begin
-      First;
-
-      if not Assigned(aList) then
-        aList := TList.Create
-      else
-        aList.Clear;
-
-      while not Eof do
-      begin
-        pmsData := TPMSCond_Data.Create;
-        pmsData.PMS_ID := FieldByName('PMS_ID').AsInteger;
-        pmsData.PMS_Name := FieldByName('PMS_Name').AsString;
-        pmsData.PMS_Type := FieldByName('PMS_Type').AsInteger;
-        pmsData.PMS_Mode := FieldByName('PMS_Mode').AsInteger;
-        pmsData.PMS_State := FieldByName('PMS_State').AsInteger;
-        pmsData.PMS_OnOff := FieldByName('PMS_OnOff').AsInteger;
-        pmsData.PMS_Pref := FieldByName('PMS_Pref').AsInteger;
-        pmsData.PMS_CB := FieldByName('PMS_CB').AsInteger;
-        pmsData.PMS_SWB_MSBIntrMode := FieldByName('PMS_SWB_MSBIntrMode').AsInteger;
-        pmsData.PMS_SWB_ESBIntrMode := FieldByName('PMS_SWB_ESBIntrMode').AsInteger;
-        pmsData.PMS_SWB_ShoreIntrMode := FieldByName('PMS_SWB_ShoreIntrMode').AsInteger;
-        pmsData.PMS_SWB_MsbCBIntr := FieldByName('PMS_SWB_MsbCBIntr').AsInteger;
-        pmsData.PMS_SWB_EsbCBIntr := FieldByName('PMS_SWB_EsbCBIntr').AsInteger;
-        pmsData.PMS_SWB_MsbCBShore := FieldByName('PMS_SWB_MsbCBShore').AsInteger;
-        pmsData.Condition_ID := FieldByName('Condition_ID').AsInteger;
-
-        aList.Add(pmsData);
-        Next;
-      end;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-function TIPMSDatabase.GetPMSCondID(aID, aIndex: Integer): Integer;
-var
-  FQuery : TZQuery;
-  query : string;
-begin
-  Result := 0;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT * FROM (' +
-               'SELECT ROW_NUMBER() OVER (ORDER BY PMS_ID ASC) AS RowNumber, * ' +
-               'FROM PMS_Condition ' +
-               'WHERE Condition_ID = ' + IntToStr(aID) + ') AS NewTable ' +
-             'WHERE NewTable.RowNumber = ' + IntToStr(aIndex);
-    SQL.Add(query);
-    Open;
-
-    if RecordCount > 0 then
-    begin
-      First;
-      Result := FieldByName('PMS_ID').AsInteger;
     end;
 
     Close;
@@ -5419,194 +5825,6 @@ begin
   end;
 end;
 
-function TIPMSDatabase.SavePCSCondition(aIsNew: Boolean; aName: string;
-  var aList: TList): Boolean;
-var
-  FQuery : TZQuery;
-  condID : Integer;
-  query : string;
-  i : Integer;
-  pcsData : TPCSCond_Data;
-begin
-  Result := False;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    if aIsNew then
-    begin
-      condID := GetFreeConditionID;
-
-      query := 'INSERT INTO Condition(Condition_ID, Condition_Name, Condition_Type) ' +
-               'VALUES(' + IntToStr(condID) + ', '
-                         + QuotedStr(aName) + ', '
-                         + QuotedStr('PCS') + ')';
-      SQL.Add(query);
-      ExecSQL;
-
-      for i := 0 to aList.Count - 1 do
-      begin
-        pcsData := TPCSCond_Data(aList.Items[i]);
-        SQL.Clear;
-
-        query := 'INSERT INTO PCS_Condition(PCS_ID, PCS_Name, PCS_State, ' +
-                 'Condition_ID, ' + 'Value)' +
-                 'VALUES(' + IntToStr(GetFreePCSCondID) +
-                 ', ' + QuotedStr(pcsData.PCS_Name) +
-                 ', ' + IntToStr(pcsData.PCS_State) +
-                 ', ' + IntToStr(condID) +
-                 ', ' + IntToStr(pcsData.Value) + ')';
-        SQL.Add(query);
-        ExecSQL;
-      end;
-    end
-    else
-    begin
-      query := 'UPDATE Condition ' +
-               'SET Condition_Name = ' + QuotedStr(aName) +
-               ' WHERE Condition_Name = ' + QuotedStr(aName);
-      SQL.Add(query);
-      ExecSQL;
-
-      for i := 0 to aList.Count - 1 do
-      begin
-        pcsData := TPCSCond_Data(aList.Items[i]);
-        SQL.Clear;
-
-        query := 'UPDATE PCS_Condition ' +
-                 'SET PCS_State = ' + IntToStr(pcsData.PCS_State) +
-                 ', Value = ' + IntToStr(pcsData.Value) +
-                 ' WHERE Condition_ID = ' + IntToStr(pcsData.Condition_ID) +
-                 'and PCS_Name = ' + QuotedStr(pcsData.PCS_Name);
-        SQL.Add(query);
-        ExecSQL;
-      end;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-function TIPMSDatabase.SavePMSCondition(aIsNew: Boolean; aName: string;
-  aList: TList;var ConditionID : integer): Boolean;
-var
-  i, condID : Integer;
-  pmsData : TPMSCond_Data;
-  FQuery : TZQuery;
-  query : string;
-begin
-  Result := False;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    if aIsNew then
-    begin
-      condID := GetFreeConditionID;
-      ConditionID := condID;
-
-      query := 'INSERT INTO Condition(Condition_ID, Condition_Name, Condition_Type) ' +
-               'VALUES(' + IntToStr(condID) + ', '
-                         + QuotedStr(aName) + ', '
-                         + QuotedStr('PMS') + ')';
-      SQL.Add(query);
-      ExecSQL;
-
-      for i := 0 to aList.Count - 1 do
-      begin
-        SQL.Clear;
-
-        pmsData := TPMSCond_Data(aList.Items[i]);
-
-        query := 'INSERT INTO PMS_Condition(PMS_ID, PMS_Name, PMS_Type, PMS_Mode, ' +
-                 'PMS_State, PMS_OnOff, PMS_Pref, PMS_CB, PMS_SWB_MSBIntrMode, ' +
-                 'PMS_SWB_ESBIntrMode, PMS_SWB_ShoreIntrMode, PMS_SWB_MsbCBIntr, ' +
-                 'PMS_SWB_EsbCBIntr, PMS_SWB_MsbCBShore, PMS_FirstLoad, PMS_StateRunFull, '+
-                 'PMS_StateRunFwd, PMS_StateRunAft, Condition_ID) ' +
-                 'VALUES(' + IntToStr(GetFreePMSCondID) +
-                 ', ' + QuotedStr(pmsData.PMS_Name) +
-                 ', ' + IntToStr(pmsData.PMS_Type) +
-                 ', ' + IntToStr(pmsData.PMS_Mode) +
-                 ', ' + IntToStr(pmsData.PMS_State) +
-                 ', ' + IntToStr(pmsData.PMS_OnOff) +
-                 ', ' + IntToStr(pmsData.PMS_Pref) +
-                 ', ' + IntToStr(pmsData.PMS_CB) +
-                 ', ' + IntToStr(pmsData.PMS_SWB_MSBIntrMode) +
-                 ', ' + IntToStr(pmsData.PMS_SWB_ESBIntrMode) +
-                 ', ' + IntToStr(pmsData.PMS_SWB_ShoreIntrMode) +
-                 ', ' + IntToStr(pmsData.PMS_SWB_MsbCBIntr) +
-                 ', ' + IntToStr(pmsData.PMS_SWB_EsbCBIntr) +
-                 ', ' + IntToStr(pmsData.PMS_SWB_MsbCBShore) +
-                 ', ' + IntToStr(pmsData.PMS_FirstLoad) +
-                 ', ' + IntToStr(pmsData.PMS_StateRunFull) +
-                 ', ' + IntToStr(pmsData.PMS_StateRunFwd) +
-                 ', ' + IntToStr(pmsData.PMS_StateRunAft) +
-                 ', ' + IntToStr(condID) + ')';
-
-        SQL.Add(query);
-        ExecSQL;
-      end;
-    end
-    else
-    begin
-      query := 'UPDATE Condition ' +
-               'SET Condition_Name = ' + QuotedStr(aName) +
-               ' WHERE Condition_Name = ' + QuotedStr(aName);
-      SQL.Add(query);
-      ExecSQL;
-
-      for i := 0 to aList.Count - 1 do
-      begin
-        SQL.Clear;
-
-        pmsData := TPMSCond_Data(aList.Items[i]);
-
-        query := 'UPDATE PMS_Condition ' +
-                 'SET PMS_Mode = ' + IntToStr(pmsData.PMS_Mode) +
-                 ', PMS_State = ' + IntToStr(pmsData.PMS_State) +
-                 ', PMS_OnOff = ' + IntToStr(pmsData.PMS_OnOff) +
-                 ', PMS_Pref = ' + IntToStr(pmsData.PMS_Pref) +
-                 ', PMS_CB = ' + IntToStr(pmsData.PMS_CB) +
-                 ', PMS_SWB_MSBIntrMode = ' + IntToStr(pmsData.PMS_SWB_MSBIntrMode) +
-                 ', PMS_SWB_ESBIntrMode = ' + IntToStr(pmsData.PMS_SWB_ESBIntrMode) +
-                 ', PMS_SWB_ShoreIntrMode = ' + IntToStr(pmsData.PMS_SWB_ShoreIntrMode) +
-                 ', PMS_SWB_MsbCBIntr = ' + IntToStr(pmsData.PMS_SWB_MsbCBIntr) +
-                 ', PMS_SWB_EsbCBIntr = ' + IntToStr(pmsData.PMS_SWB_EsbCBIntr) +
-                 ', PMS_SWB_MsbCBShore = ' + IntToStr(pmsData.PMS_SWB_MsbCBShore) +
-                 ', PMS_FirstLoad = ' + IntToStr(pmsData.PMS_FirstLoad) +
-                 ', PMS_StateRunFull = ' + IntToStr(pmsData.PMS_StateRunFull) +
-                 ', PMS_StateRunFwd = ' + IntToStr(pmsData.PMS_StateRunFwd) +
-                 ', PMS_StateRunAft = ' + IntToStr(pmsData.PMS_StateRunAft) +
-                 ' WHERE Condition_ID = ' + IntToStr(pmsData.Condition_ID) +
-                 ' AND PMS_ID = ' + IntToStr(pmsData.PMS_ID);
-
-        SQL.Add(query);
-        ExecSQL;
-      end;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
 procedure TIPMSDatabase.SaveRS_FACondition(aSessionID: integer; aList: TList);
 var
   FQuery : TZQuery;
@@ -5664,211 +5882,6 @@ begin
       end;
     end;
 
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-procedure TIPMSDatabase.SaveRS_PCSCondition(aList: TList; aSessionID: Integer);
-var
-  FQuery : TZQuery;
-  query : string;
-  pcsData : TScenarioPCSCondition;
-  i : Integer;
-begin
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'DELETE FROM RS_PCS_CONDITION ' +
-             'WHERE RUNNING_ID = ' +IntToStr(aSessionID) + ';';
-    SQL.Add(query);
-    ExecSQL;
-
-    for i := 0 to aList.Count - 1 do
-    begin
-      SQL.Clear;
-      pcsData := TScenarioPCSCondition(aList.Items[i]);
-
-      query := 'INSERT INTO RS_PCS_Condition(PCS_Name, PCS_State, ' +
-               'PCS_ME_Control, PCS_ME_Mode, PCS_ME_EngineRun, ' +
-               'PCS_ME_ReadyForUse, PCS_ME_SetpointSpeed, PCS_ME_RemoteAuto, ' +
-               'PCS_ME_RemoteManual, PCS_ME_LeverControl, PCS_ME_Alarm, PCS_ME_Failure, ' +
-               'PCS_GB_ClutchAllowed, PCS_GB_ClutchEngaged, PCS_GB_ReadyForUse, ' +
-               'PCS_GB_RemoteAuto, PCS_GB_RemoteManual, PCS_GB_Failure, ' +
-               'PCS_GB_ShaftLocked, PCS_GB_ShaftPowerLimited, PCS_CPP_ReadyForUse, ' +
-               'PCS_CPP_SetpointPitch, PCS_CPP_RemoteAuto, PCS_CPP_RemoteManual, PCS_CPP_Failure, ' +
-               'PCS_CPP_PumpStandby, PCS_CPP_PumpStart, PCS_CPP_PumpAuto, ' +
-               'PCS_PC_StartingInterlocks, PCS_PC_Alarms,  ' +
-               'PCS_PC_SafetiesStop, PCS_PC_ClutchInterlocks, PCS_PC_CPPFailure, ' +
-               'Running_ID) ' +
-               'VALUES(' + QuotedStr(pcsData.PCS_Name) +
-               ', ' + IntToStr(pcsData.PCS_State) +
-               ', ' + IntToStr(pcsData.PCS_ME_Control) +
-               ', ' + IntToStr(pcsData.PCS_ME_Mode) +
-               ', ' + IntToStr(pcsData.PCS_ME_EngineRun) +
-               ', ' + IntToStr(pcsData.PCS_ME_ReadyForUse) +
-               ', ' + FloatToStr(pcsData.PCS_ME_SetpointSpeed) +
-               ', ' + IntToStr(pcsData.PCS_ME_RemoteAuto) +
-               ', ' + IntToStr(pcsData.PCS_ME_RemoteManual) +
-               ', ' + IntToStr(pcsData.PCS_ME_LeverControl) +
-               ', ' + IntToStr(pcsData.PCS_ME_Alarm) +
-               ', ' + IntToStr(pcsData.PCS_ME_Failure) +
-               ', ' + IntToStr(pcsData.PCS_GB_ClutchAllowed) +
-               ', ' + IntToStr(pcsData.PCS_GB_ClutchEngaged) +
-               ', ' + IntToStr(pcsData.PCS_GB_ReadyForUse) +
-               ', ' + IntToStr(pcsData.PCS_GB_RemoteAuto) +
-               ', ' + IntToStr(pcsData.PCS_GB_RemoteManual) +
-               ', ' + IntToStr(pcsData.PCS_GB_Failure) +
-               ', ' + IntToStr(pcsData.PCS_GB_ShaftLocked) +
-               ', ' + IntToStr(pcsData.PCS_GB_ShaftPowerLimited) +
-               ', ' + IntToStr(pcsData.PCS_CPP_ReadyForUse) +
-               ', ' + FloatToStr(pcsData.PCS_CPP_SetpointPitch) +
-               ', ' + IntToStr(pcsData.PCS_CPP_RemoteAuto) +
-               ', ' + IntToStr(pcsData.PCS_CPP_RemoteManual) +
-               ', ' + IntToStr(pcsData.PCS_CPP_Failure) +
-               ', ' + QuotedStr(pcsData.PCS_CPP_PumpStandby) +
-               ', ' + QuotedStr(pcsData.PCS_CPP_PumpStart) +
-               ', ' + IntToStr(pcsData.PCS_CPP_PumpAuto) +
-               ', ' + QuotedStr(pcsData.PCS_PC_StartingInterlocks) +
-               ', ' + QuotedStr(pcsData.PCS_PC_Alarms) +
-               ', ' + QuotedStr(pcsData.PCS_PC_SafetiesStop) +
-               ', ' + QuotedStr(pcsData.PCS_PC_ClutchInterlocks) +
-               ', ' + QuotedStr(pcsData.PCS_PC_CPPFailure) +
-               ', ' + IntToStr(aSessionID) + ');';
-
-      SQL.Add(query);
-      try
-        ExecSQL;
-      finally
-
-      end;
-    end;
-
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-procedure TIPMSDatabase.SaveRS_PMSCondition(aList: TList; aSessionID: integer);
-var
-  FQuery : TZQuery;
-  query : string;
-//  pmsData : TPMSCond_Data;
-  pmsData : TScenarioPMSCondition;
-  i : Integer;
-begin
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'DELETE FROM RS_PMS_CONDITION WHERE RUNNING_ID = ' +IntToStr(aSessionID) + ';';
-    SQL.Add(query);
-    ExecSQL;
-
-    for i := 0 to aList.Count - 1 do
-    begin
-      pmsData := TScenarioPMSCondition(aList.Items[i]);
-      SQL.Clear;
-      query := 'INSERT INTO RS_PMS_Condition(PMS_Name, PMS_Type, PMS_Mode, ' +
-               'PMS_OnOff, PMS_GenSupplied, PMS_GenState, PMS_CBClosed, ' +
-               'PMS_Preference, PMS_Busbar, PMS_RunHours, PMS_EmergencyStop, ' +
-
-               'PMS_NotStandby, PMS_CanBusFailure, PMS_MeasPowFailure, ' +
-               'PMS_DCPowFailure, PMS_EngineAlarm, PMS_ShutDown, ' +
-               'PMS_FaultPageLed, PMS_FailureCBClosed, PMS_Power, ' +
-               'PMS_Power_State, PMS_Frequency, PMS_Frequency_State, ' +
-               'PMS_SwitchFrequency, PMS_Current, PMS_Voltage, ' +
-               'PMS_Voltage_State, PMS_CosPhi, PMS_U, ' +
-               'PMS_V, PMS_W, PMS_SWB_MSBIntrMode, ' +
-               'PMS_SWB_ESBIntrMode, PMS_SWB_ShoreIntrMode, ' +
-
-               'PMS_SWB_MsbCBIntr, PMS_SWB_EsbCBIntr, ' +
-               'PMS_SWB_MsbCBShore, PMS_SWB_MsbCBNavNaut, PMS_SWB_Busbar, ' +
-               'PMS_SWB_TripReduct, PMS_SWB_EmergencyCon, PMS_SWB_Frequency, ' +
-               'PMS_SWB_Voltage, PMS_SWB_Power, PMS_SWB_Trafo230Volt, ' +
-               'PMS_SWB_Trafo115Volt, PMS_PowerMode, PMS_PowerConsmr, ' +
-               'PMS_FirstLoad, PMS_StateRunFull, PMS_StateRunFwd, PMS_StateRunAft, Running_ID) ' +
-
-               'VALUES(' + QuotedStr(pmsData.PMS_Name) +
-               ', ' + IntToStr(pmsData.PMS_Type) +
-               ', ' + IntToStr(pmsData.PMS_Mode) +
-               ', ' + IntToStr(pmsData.PMS_OnOff) +
-               ', ' + IntToStr(pmsData.PMS_GenSupplied) +
-               ', ' + IntToStr(pmsData.PMS_GenState) +
-               ', ' + IntToStr(pmsData.PMS_CBClosed) +
-               ', ' + IntToStr(pmsData.PMS_Preference) +
-               ', ' + IntToStr(pmsData.PMS_Busbar) +
-               ', ' + IntToStr(pmsData.PMS_RunHours) +
-               ', ' + IntToStr(pmsData.PMS_EmergencyStop) +
-
-               ', ' + IntToStr(pmsData.PMS_NotStandby) +
-               ', ' + IntToStr(pmsData.PMS_CanBusFailure) +
-               ', ' + IntToStr(pmsData.PMS_MeasPowFailure) +
-               ', ' + IntToStr(pmsData.PMS_DCPowFailure) +
-               ', ' + IntToStr(pmsData.PMS_EngineAlarm) +
-               ', ' + IntToStr(pmsData.PMS_ShutDown) +
-               ', ' + IntToStr(pmsData.PMS_FaultPageLed) +
-               ', ' + IntToStr(pmsData.PMS_FailureCBClosed) +
-               ', ' + FloatToStr(pmsData.PMS_Power) +
-               ', ' + FloatToStr(pmsData.PMS_Power_State) +
-               ', ' + FloatToStr(pmsData.PMS_Frequency) +
-               ', ' + FloatToStr(pmsData.PMS_Frequency_State) +
-               ', ' + FloatToStr(pmsData.PMS_SwitchFrequency) +
-               ', ' + FloatToStr(pmsData.PMS_Current) +
-               ', ' + FloatToStr(pmsData.PMS_Voltage) +
-               ', ' + FloatToStr(pmsData.PMS_Voltage_State) +
-               ', ' + FloatToStr(pmsData.PMS_CosPhi) +
-               ', ' + FloatToStr(pmsData.PMS_U) +
-               ', ' + FloatToStr(pmsData.PMS_V) +
-               ', ' + FloatToStr(pmsData.PMS_W) +
-               ', ' + IntToStr(pmsData.PMS_SWB_MSBIntrMode) +
-               ', ' + IntToStr(pmsData.PMS_SWB_ESBIntrMode) +
-               ', ' + IntToStr(pmsData.PMS_SWB_ShoreIntrMode) +
-
-               ', ' + IntToStr(pmsData.PMS_SWB_MsbCBIntr) +
-               ', ' + IntToStr(pmsData.PMS_SWB_EsbAftCBIntr) +
-               ', ' + IntToStr(pmsData.PMS_SWB_MsbCBShore) +
-               ', ' + IntToStr(pmsData.PMS_SWB_MsbCBNavNaut) +
-               ', ' + IntToStr(pmsData.PMS_SWB_Busbar) +
-               ', ' + IntToStr(pmsData.PMS_SWB_TripReduct) +
-               ', ' + IntToStr(pmsData.PMS_SWB_EmergencyCon) +
-               ', ' + FloatToStr(pmsData.PMS_SWB_Frequency) +
-               ', ' + FloatToStr(pmsData.PMS_SWB_Voltage) +
-               ', ' + FloatToStr(pmsData.PMS_SWB_Power) +
-               ', ' + FloatToStr(pmsData.PMS_SWB_Trafo230Volt) +
-               ', ' + FloatToStr(pmsData.PMS_SWB_Trafo115Volt) +
-               ', ' + IntToStr(pmsData.PMS_PowerMode) +
-               ', ' + FloatToStr(pmsData.PMS_PowerConsmr) +
-               ', ' + IntToStr(pmsData.PMS_FirstLoad) +
-               ', ' + IntToStr(pmsData.PMS_StateRunFull) +
-               ', ' + IntToStr(pmsData.PMS_StateRunFwd) +
-               ', ' + IntToStr(pmsData.PMS_StateRunAft) +
-               ', ' + IntToStr(aSessionID) + ');';
-
-      SQL.Add(query);
-      try
-        ExecSQL;
-      finally
-
-      end;
-    end;
 
     Close;
     Connection := nil;

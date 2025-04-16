@@ -49,21 +49,38 @@ type
     procedure GetElementConditions(var aList: TStrings);
     procedure SaveElementCondition(aName: string; aList: TList; var ConditionID: Integer);
 
-    {$REGION ' PMS '}
+    {$REGION ' PMS Section '}
     function GetPMSCondID(aID, aIndex: Integer): Integer;
     function DeletePMSCondition(aID: Integer): Boolean;
-    procedure GetPMSConditions(var aList: TStrings);
+
+    procedure GetAllPMSConditions(var aList: TStrings);
     procedure GetPMSCondition(aID: Integer; var aList: TList);
     procedure SavePMSCondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer);
     procedure SaveRS_PMSCondition(aSessionID: Integer);
     {$ENDREGION}
 
-    {$REGION ' PCS '}
+    {$REGION ' PCS Section '}
     function DeletePCSCondition(aID: Integer): Boolean;
-    procedure GetPCSConditions(var aList: TStrings);
+
+    procedure GetAllPCSConditions(var aList: TStrings);
     procedure GetPCSCondition(aID: Integer; var aList : TList);
-    procedure SavePCSCondition(aIsNew: Boolean; aName: string; var aList: TList);
+    procedure SavePCSCondition(aIsNew: Boolean; aName: string; var aList: TList; var ConditionID: Integer);
     procedure SaveRS_PCSCondition(aSessionID: Integer);
+    {$ENDREGION}
+
+    {$REGION ' TANK Section '}
+    function GetTanksCondID(aID, aIndex: Integer): Integer;
+
+    function cekValidateTankValue(aID: string; aValue: Double): Boolean;
+    function cekValidateTankName(aIsNew: Boolean; aType, aName,aOldName: string): Boolean;
+    function getMaxTankValue(aElementID: string): Double;
+
+    function DeleteTanksCondition(aID: Integer): Boolean;
+
+    procedure GetAllTanksConditions(var aList: TStrings);
+    procedure GetTanksCondition(aID: Integer; var aList: TList);
+
+    procedure SaveTanksCondition(aIsNew: Boolean; aName, aOldName: string; aList: TList; var ConditionID: Integer);
     {$ENDREGION}
 
     {$REGION ' FA '}
@@ -72,17 +89,6 @@ type
     procedure GetFACondition(aID: Integer; var aList: TList);
     procedure GetFAConditions(var aList: TStrings);
     procedure SaveFACondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer);
-    {$ENDREGION}
-
-    {$REGION ' TANK '}
-    function GetTanksCondID(aID, aIndex: Integer): Integer;
-    function DeleteTanksCondition(aID: Integer): Boolean;
-    function cekValidateTankValue(aID: string; aValue: Double): Boolean;
-    function cekValidateTankName(aIsNew: Boolean; aType, aName,aOldName: string): Boolean;
-    function getMaxTankValue(aElementID: string): Double;
-    procedure GetTanksCondition(aID: Integer; var aList: TList);
-    procedure GetTanksConditions(var aList: TStrings);
-    procedure SaveTanksCondition(aIsNew: Boolean; aName, aOldName: string; aList: TList; var ConditionID: Integer);
     {$ENDREGION}
 
     property RunState : E_ScenarioRunState read FRunState write SetRunState;
@@ -142,21 +148,6 @@ begin
   Result := FDatabase.DeleteFACondition(aID);
 end;
 
-function TScenario.DeletePCSCondition(aID: Integer): Boolean;
-begin
-  Result := FDatabase.DeletePCSCondition(aID);
-end;
-
-function TScenario.DeleteTanksCondition(aID: Integer): Boolean;
-begin
-  Result := FDatabase.DeleteTanksCondition(aID);
-end;
-
-function TScenario.DeletePMSCondition(aID: Integer): Boolean;
-begin
-  Result := FDatabase.DeletePMSCondition(aID);
-end;
-
 function TScenario.deleteScenario(aID: Integer): Boolean;
 begin
   Result := FDatabase.DeleteScenario(aID);
@@ -191,16 +182,6 @@ begin
   Result := FDatabase.GetTanksCondID(aID, aIndex);
 end;
 
-procedure TScenario.GetTanksCondition(aID: Integer; var aList: TList);
-begin
-  FDatabase.GetTanksCondByID(aID, aList);
-end;
-
-procedure TScenario.GetTanksConditions(var aList: TStrings);
-begin
-  FDatabase.GetAllCondition('TANK', aList);
-end;
-
 procedure TScenario.GetFACondition(aID: Integer; var aList: TList);
 begin
   FDatabase.GetFACondByID(aID, aList);
@@ -216,19 +197,11 @@ begin
   Result := FDatabase.getMaxTankValue(aElementID);
 end;
 
-procedure TScenario.GetPCSCondition(aID: Integer; var aList: TList);
-begin
-  FDatabase.GetPCSCondByID(aID, aList);
-end;
+{$REGION ' PMS Section '}
 
-procedure TScenario.GetPCSConditions(var aList: TStrings);
+procedure TScenario.GetAllPMSConditions(var aList: TStrings);
 begin
-  FDatabase.GetAllCondition('PCS', aList);
-end;
-
-function TScenario.GetPMSCondID(aID, aIndex: Integer): Integer;
-begin
-  Result := FDatabase.GetPMSCondID(aID, aIndex);
+  FDatabase.GetAllCondition('PMS', aList);
 end;
 
 procedure TScenario.GetPMSCondition(aID: Integer; var aList: TList);
@@ -236,10 +209,338 @@ begin
   FDatabase.GetPMSCondByID(aID, aList);
 end;
 
-procedure TScenario.GetPMSConditions(var aList: TStrings);
+procedure TScenario.SavePMSCondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID : Integer);
 begin
-  FDatabase.GetAllCondition('PMS', aList);
+  FDatabase.SavePMSCondition(aIsNew, aName, aList, ConditionID);
 end;
+
+procedure TScenario.SaveRS_PMSCondition(aSessionID: Integer);
+var
+  gen : TGenerator;
+  swt : TSwitchboard;
+  pwr : TPower;
+  i : Integer;
+  pmsData : TScenarioPMSCondition;
+  PMSList : TList;
+  aFirstLoad : Boolean;
+  aStateRunFull, aStateRunFwd, aStateRunAft : Integer;
+begin
+  PMSList := TList.Create;
+
+  for i := 0 to Length(C_GENERATOR_ID) - 1 do
+  begin
+    gen := ERSystem.ERManager.EngineRoom.getPMSSystem.getGenerator(C_GENERATOR_ID[i]);
+
+    if Assigned(gen) then
+    begin
+      pmsData := TScenarioPMSCondition.Create;
+
+      {Tipe PMS : 1.Generator, 2.Switchboard, 3.Power}
+      pmsData.PMS_Type := 1;
+
+      {Entity Element}
+      pmsData.PMS_Name := C_GENERATOR_ID[i];                            {-----> Nama Genarator}
+      pmsData.PMS_Mode := gen.GeneratorMode;                       {-----> Mode Genarator : 1:Man; 2:SemiMan; 3:Aut; 4:SemiAut}
+      pmsData.PMS_OnOff := setBooltoInt(gen.EngineRun);
+      pmsData.PMS_GenSupplied := setBooltoInt(gen.GeneratorSupplied);
+      pmsData.PMS_GenState := gen.GeneratorState;
+      pmsData.PMS_CBClosed := setBooltoInt(gen.CBClosed);
+      pmsData.PMS_Preference := setBooltoInt(gen.Preference);
+      pmsData.PMS_Busbar := setBooltoInt(gen.Busbar);
+      pmsData.PMS_RunHours := setBooltoInt(gen.RunHourState);
+
+      {Failure Element}
+      pmsData.PMS_EmergencyStop := setBooltoInt(gen.EmergencyStop);
+      pmsData.PMS_NotStandby := setBooltoInt(gen.NotStandby);
+      pmsData.PMS_CanBusFailure := setBooltoInt(gen.CanBusFailure);
+      pmsData.PMS_MeasPowFailure := setBooltoInt(gen.MeasPowFailure);
+      pmsData.PMS_DCPowFailure := setBooltoInt(gen.DCPowFailure);
+      pmsData.PMS_EngineAlarm := setBooltoInt(gen.EngineAlarm);
+      pmsData.PMS_ShutDown := setBooltoInt(gen.ShutDown);
+      pmsData.PMS_FaultPageLed := setBooltoInt(gen.FaultPageLed);
+      pmsData.PMS_FailureCBClosed := setBooltoInt(gen.FailureCBClosed);
+
+      {Value Element}
+      pmsData.PMS_Power := gen.Power;
+      pmsData.PMS_Power_State := gen.PowerState;
+      pmsData.PMS_Frequency := gen.Frequency;
+      pmsData.PMS_Frequency_State := gen.FrequencyState;
+      pmsData.PMS_SwitchFrequency := gen.SwitchFrequency;
+      pmsData.PMS_Current := gen.Current;
+      pmsData.PMS_Voltage := gen.Voltage;
+      pmsData.PMS_Voltage_State := gen.VoltageState;
+      pmsData.PMS_CosPhi := gen.CosPhi;
+      pmsData.PMS_U := gen.U;
+      pmsData.PMS_V := gen.V;
+      pmsData.PMS_W := gen.W;
+
+      PMSList.Add(pmsData);
+    end;
+  end;
+
+  for i := 0 to Length(C_SWITCHBOARD_ID) - 1 do
+  begin
+    swt := ERSystem.ERManager.EngineRoom.getPMSSystem.getSwitchboard(C_SWITCHBOARD_ID[i]);
+
+    if Assigned(swt) then
+    begin
+      pmsData := TScenarioPMSCondition.Create;
+
+      pmsData.PMS_Type := 2;
+
+      {Entity Element}
+      pmsData.PMS_Name := C_SWITCHBOARD_ID[i];
+      pmsData.PMS_SWB_MSBIntrMode := swt.MSBIntrMode;               {-----> 1:Man; 2:Off; 3:Aut}
+      pmsData.PMS_SWB_ESBIntrMode := swt.ESBIntrMode;               {-----> 1:Aft; 2:Off; 3:Fwd; 4:Dbl}
+      pmsData.PMS_SWB_ShoreIntrMode := swt.ShoreIntrMode;           {-----> 1:Man; 2:Off; 3:Aut}
+      pmsData.PMS_SWB_MsbCBIntr := setBooltoInt(swt.MsbCBIntr);
+      pmsData.PMS_SWB_EsbAftCBIntr := setBooltoInt(swt.EsbAftCBIntr);
+      pmsData.PMS_SWB_EsbAftCBIntr := setBooltoInt(swt.EsbAftCBIntr);
+      pmsData.PMS_SWB_MsbCBShore := setBooltoInt(swt.MsbCBShore);
+      pmsData.PMS_SWB_MsbCBNavNaut := setBooltoInt(swt.MsbCBNavNaut);
+      pmsData.PMS_SWB_Busbar := setBooltoInt(swt.Busbar);
+      pmsData.PMS_SWB_TripReduct := setBooltoInt(swt.TripReduct);
+      pmsData.PMS_SWB_EmergencyCon := setBooltoInt(swt.EmergencyCon);
+      pmsData.PMS_SWB_Frequency := swt.Frequency;
+      pmsData.PMS_SWB_Voltage := swt.Voltage;
+      pmsData.PMS_SWB_Power := swt.Power;
+      pmsData.PMS_SWB_Trafo230Volt := swt.Trafo230Volt;
+      pmsData.PMS_SWB_Trafo115Volt := swt.Trafo115Volt;
+
+      PMSList.Add(pmsData);
+    end;
+  end;
+
+  for i := 0 to Length(C_POWER_ID) - 1 do
+  begin
+    pwr := ERSystem.ERManager.EngineRoom.getPMSSystem.GetPower(C_POWER_ID[i]);
+
+    if Assigned(pwr) then
+    begin
+      pmsData := TScenarioPMSCondition.Create;
+
+      pmsData.PMS_Type := 4;
+
+      {Entity Element}
+      pmsData.PMS_Name := C_POWER_ID[i];
+      pmsData.PMS_PowerMode := pwr.PowerMode;
+      pmsData.PMS_PowerConsmr := pwr.PowerConsmr;
+
+      PMSList.Add(pmsData);
+    end;
+  end;
+
+  {Variable}
+  for i := 0 to 0 do
+  begin
+    ERSystem.ERManager.EngineRoom.getPMSSystem.GetVariablePMS(aStateRunFull, aStateRunFwd, aStateRunAft);
+
+    pmsData := TScenarioPMSCondition.Create;
+
+    pmsData.PMS_Type := 3;
+
+    pmsData.PMS_Name := 'Variable';
+    pmsData.PMS_FirstLoad := 1;
+    pmsData.PMS_StateRunFull := aStateRunFull;
+    pmsData.PMS_StateRunFwd := aStateRunFwd;
+    pmsData.PMS_StateRunAft := aStateRunAft;
+
+    PMSList.Add(pmsData);
+  end;
+
+  FDatabase.SaveRS_PMSCondition(PMSList, aSessionID);
+  FreeList(PMSList);
+end;
+
+function TScenario.DeletePMSCondition(aID: Integer): Boolean;
+begin
+  Result := FDatabase.DeletePMSCondition(aID);
+end;
+
+function TScenario.GetPMSCondID(aID, aIndex: Integer): Integer;
+begin
+  Result := FDatabase.GetPMSCondID(aID, aIndex);
+end;
+
+{$ENDREGION}
+
+{$REGION ' PCS Section '}
+
+function TScenario.DeletePCSCondition(aID: Integer): Boolean;
+begin
+  Result := FDatabase.DeletePCSCondition(aID);
+end;
+
+procedure TScenario.GetAllPCSConditions(var aList: TStrings);
+begin
+  FDatabase.GetAllCondition('PCS', aList);
+end;
+
+procedure TScenario.GetPCSCondition(aID: Integer; var aList: TList);
+begin
+  FDatabase.GetPCSCondByID(aID, aList);
+end;
+
+procedure TScenario.SavePCSCondition(aIsNew: Boolean; aName: string; var aList : TList; var ConditionID: Integer);
+begin
+  FDatabase.SavePCSCondition(aIsNew, aName, aList, ConditionID);
+end;
+
+procedure TScenario.SaveRS_PCSCondition(aSessionID: Integer);
+var
+  me : TMainEngine;
+  gb : TGearBox;
+  cpp : TCPP;
+  i, j : Integer;
+  tempstring : string;
+  pcsData : TScenarioPCSCondition;
+  pcsList : TList;
+begin
+  pcsList := TList.Create;
+
+  for i := 0 to Length(C_MAINENGINE_ID) - 1 do
+  begin
+    me := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(C_MAINENGINE_ID[i]);
+
+    if Assigned(me) then
+    begin
+      pcsData := TScenarioPCSCondition.Create;
+
+      pcsData.PCS_Name := C_MAINENGINE_ID[i];
+      pcsData.PCS_ME_Control := Byte(me.LocalControl);
+      pcsData.PCS_ME_EngineRun := Byte(me.EngineRun);
+      pcsData.PCS_ME_ReadyForUse := Byte(me.ReadyForUse);
+      pcsData.PCS_ME_SetpointSpeed := me.SetPointSpeed;
+      pcsData.PCS_ME_RemoteAuto := Byte(me.RemoteAuto);
+      pcsData.PCS_ME_RemoteManual := Byte(me.RemoteManual);
+      pcsData.PCS_ME_LeverControl := me.LeverControl;
+      pcsData.PCS_ME_Alarm := Byte(me.PCSAlarms);
+      pcsData.PCS_ME_Failure := Byte(me.Failure);
+
+      if ERSystem.ERManager.EngineRoom.getPCSSystem.ManouveringMode then
+        pcsData.PCS_ME_Mode := 1
+      else if ERSystem.ERManager.EngineRoom.getPCSSystem.TransitMode then
+        pcsData.PCS_ME_Mode := 2
+      else
+        pcsData.PCS_ME_Mode := 0;
+
+      for j := 0 to 11 do
+      begin
+        tempstring := IntToStr(Byte(me.PC_StartingInterlocks[j]));
+        pcsData.PCS_PC_StartingInterlocks := pcsData.PCS_PC_StartingInterlocks + tempstring;
+      end;
+
+      for j := 0 to 16 do
+      begin
+        tempstring := IntToStr(Byte(me.PC_Alarms[j]));
+        pcsData.PCS_PC_Alarms := pcsData.PCS_PC_Alarms + tempstring;
+      end;
+
+      for j := 0 to 11 do
+      begin
+        tempstring := IntToStr(Byte(me.PC_SafetiesStop[j]));
+        pcsData.PCS_PC_SafetiesStop := pcsData.PCS_PC_SafetiesStop + tempstring;
+      end;
+
+      pcsList.Add(pcsData);
+    end;
+  end;
+
+  for i := 0 to Length(C_GEARBOX_ID) - 1 do
+  begin
+    gb := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(C_GEARBOX_ID[i]);
+
+    if Assigned(gb) then
+    begin
+      pcsData := TScenarioPCSCondition.Create;
+
+      pcsData.PCS_Name := C_GEARBOX_ID[i];
+      pcsData.PCS_GB_ClutchAllowed := Byte(gb.ClutchAllowed);
+      pcsData.PCS_GB_ClutchEngaged := Byte(gb.ClutchEngaged);
+      pcsData.PCS_GB_ReadyForUse := Byte(gb.ReadyForUse);
+      pcsData.PCS_GB_RemoteAuto := Byte(gb.RemoteAuto);
+      pcsData.PCS_GB_RemoteManual := Byte(gb.RemoteManual);
+      pcsData.PCS_GB_Failure := Byte(gb.Failure);
+      pcsData.PCS_GB_ShaftLocked := Byte(gb.ShaftLocked);
+      pcsData.PCS_GB_ShaftPowerLimited := Byte(gb.ShaftPowerLimited);
+
+      for j := 0 to 3 do
+      begin
+        tempstring := IntToStr(Byte(gb.PC_ClutchInterlocks[j]));
+        pcsData.PCS_PC_ClutchInterlocks := pcsData.PCS_PC_ClutchInterlocks + tempstring;
+      end;
+
+      pcsList.Add(pcsData);
+    end;
+  end;
+
+  for i := 0 to Length(C_CPP_ID) - 1 do
+  begin
+    cpp := ERSystem.ERManager.EngineRoom.getPCSSystem.getCPP(C_CPP_ID[i]);
+
+    if Assigned(cpp) then
+    begin
+      pcsData := TScenarioPCSCondition.Create;
+
+      pcsData.PCS_Name := C_CPP_ID[i];
+      pcsData.PCS_CPP_ReadyForUse := Byte(cpp.ReadyForUse);
+      pcsData.PCS_CPP_SetpointPitch := cpp.SetpointPitch;
+      pcsData.PCS_CPP_RemoteAuto := Byte(cpp.Remote);
+      pcsData.PCS_CPP_RemoteManual := Byte(not cpp.Remote);
+      pcsData.PCS_CPP_Failure := Byte(cpp.Failure);
+      pcsData.PCS_CPP_PumpAuto := Byte(cpp.HydraulicPumpAuto3);
+
+      for j := 0 to 1 do
+      begin
+        tempstring := IntToStr(Byte(cpp.PumpStandby[j]));
+        pcsData.PCS_CPP_PumpStandby := pcsData.PCS_CPP_PumpStandby + tempstring;
+      end;
+
+      for j := 0 to 2 do
+      begin
+        tempstring := IntToStr(Byte(cpp.PumpStart[j]));
+        pcsData.PCS_CPP_PumpStart := pcsData.PCS_CPP_PumpStart + tempstring;
+      end;
+
+      for j := 0 to 2 do
+      begin
+        tempstring := IntToStr(Byte(cpp.PC_Failure[j]));
+        pcsData.PCS_PC_CPPFailure := pcsData.PCS_PC_CPPFailure + tempstring;
+      end;
+
+      pcsList.Add(pcsData);
+    end;
+  end;
+
+  FDatabase.SaveRS_PCSCondition(pcsList, aSessionID);
+  FreeList(pcsList);
+end;
+
+{$ENDREGION}
+
+{$REGION ' TANK Section '}
+
+function TScenario.DeleteTanksCondition(aID: Integer): Boolean;
+begin
+  Result := FDatabase.DeleteTanksCondition(aID);
+end;
+
+procedure TScenario.GetTanksCondition(aID: Integer; var aList: TList);
+begin
+  FDatabase.GetTanksCondByID(aID, aList);
+end;
+
+procedure TScenario.GetAllTanksConditions(var aList: TStrings);
+begin
+  FDatabase.GetAllCondition('TANK', aList);
+end;
+
+procedure TScenario.SaveTanksCondition(aIsNew: Boolean; aName, aOldName: string; aList: TList; var ConditionID: Integer);
+begin
+  FDatabase.SaveTanksCondition(aIsNew, aName, aOldName, aList, ConditionID);
+end;
+
+{$ENDREGION}
 
 function TScenario.getScenario(aName: string): TScenario_Data;
 begin
@@ -903,293 +1204,6 @@ procedure TScenario.SaveFACondition(aIsNew: Boolean; aName: string;
   aList: TList; var ConditionID: Integer);
 begin
   FDatabase.SaveFACondition(aIsNew, aName, aList, ConditionID);
-end;
-
-procedure TScenario.SavePCSCondition(aIsNew: Boolean; aName: string;
-  var aList : TList);
-begin
-  FDatabase.SavePCSCondition(aIsNew, aName,  aList);
-end;
-
-procedure TScenario.SavePMSCondition(aIsNew: Boolean; aName: string;
-  aList: TList; var ConditionID : Integer);
-begin
-  FDatabase.SavePMSCondition(aIsNew, aName, aList, ConditionID);
-end;
-
-procedure TScenario.SaveRS_PCSCondition(aSessionID: Integer);
-var
-  me : TMainEngine;
-  gb : TGearBox;
-  cpp : TCPP;
-  i, j : Integer;
-  tempstring : string;
-  pcsData : TScenarioPCSCondition;
-  pcsList : TList;
-begin
-  pcsList := TList.Create;
-
-  for i := 0 to Length(C_MAINENGINE_ID) - 1 do
-  begin
-    me := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(C_MAINENGINE_ID[i]);
-
-    if Assigned(me) then
-    begin
-      pcsData := TScenarioPCSCondition.Create;
-
-      pcsData.PCS_Name := C_MAINENGINE_ID[i];
-      pcsData.PCS_ME_Control := Byte(me.LocalControl);
-      pcsData.PCS_ME_EngineRun := Byte(me.EngineRun);
-      pcsData.PCS_ME_ReadyForUse := Byte(me.ReadyForUse);
-      pcsData.PCS_ME_SetpointSpeed := me.SetPointSpeed;
-      pcsData.PCS_ME_RemoteAuto := Byte(me.RemoteAuto);
-      pcsData.PCS_ME_RemoteManual := Byte(me.RemoteManual);
-      pcsData.PCS_ME_LeverControl := me.LeverControl;
-      pcsData.PCS_ME_Alarm := Byte(me.PCSAlarms);
-      pcsData.PCS_ME_Failure := Byte(me.Failure);
-
-      if ERSystem.ERManager.EngineRoom.getPCSSystem.ManouveringMode then
-        pcsData.PCS_ME_Mode := 1
-      else if ERSystem.ERManager.EngineRoom.getPCSSystem.TransitMode then
-        pcsData.PCS_ME_Mode := 2
-      else
-        pcsData.PCS_ME_Mode := 0;
-
-
-      for j := 0 to 11 do
-      begin
-        tempstring := IntToStr(Byte(me.PC_StartingInterlocks[j]));
-        pcsData.PCS_PC_StartingInterlocks := pcsData.PCS_PC_StartingInterlocks + tempstring;
-      end;
-
-      for j := 0 to 16 do
-      begin
-        tempstring := IntToStr(Byte(me.PC_Alarms[j]));
-        pcsData.PCS_PC_Alarms := pcsData.PCS_PC_Alarms + tempstring;
-      end;
-
-      for j := 0 to 11 do
-      begin
-        tempstring := IntToStr(Byte(me.PC_SafetiesStop[j]));
-        pcsData.PCS_PC_SafetiesStop := pcsData.PCS_PC_SafetiesStop + tempstring;
-      end;
-
-      pcsList.Add(pcsData);
-    end;
-  end;
-
-  for i := 0 to Length(C_GEARBOX_ID) - 1 do
-  begin
-    gb := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(C_GEARBOX_ID[i]);
-
-    if Assigned(gb) then
-    begin
-      pcsData := TScenarioPCSCondition.Create;
-
-      pcsData.PCS_Name := C_GEARBOX_ID[i];
-      pcsData.PCS_GB_ClutchAllowed := Byte(gb.ClutchAllowed);
-      pcsData.PCS_GB_ClutchEngaged := Byte(gb.ClutchEngaged);
-      pcsData.PCS_GB_ReadyForUse := Byte(gb.ReadyForUse);
-      pcsData.PCS_GB_RemoteAuto := Byte(gb.RemoteAuto);
-      pcsData.PCS_GB_RemoteManual := Byte(gb.RemoteManual);
-      pcsData.PCS_GB_Failure := Byte(gb.Failure);
-      pcsData.PCS_GB_ShaftLocked := Byte(gb.ShaftLocked);
-      pcsData.PCS_GB_ShaftPowerLimited := Byte(gb.ShaftPowerLimited);
-
-      for j := 0 to 3 do
-      begin
-        tempstring := IntToStr(Byte(gb.PC_ClutchInterlocks[j]));
-        pcsData.PCS_PC_ClutchInterlocks := pcsData.PCS_PC_ClutchInterlocks + tempstring;
-      end;
-
-      pcsList.Add(pcsData);
-    end;
-  end;
-
-  for i := 0 to Length(C_CPP_ID) - 1 do
-  begin
-    cpp := ERSystem.ERManager.EngineRoom.getPCSSystem.getCPP(C_CPP_ID[i]);
-
-    if Assigned(cpp) then
-    begin
-      pcsData := TScenarioPCSCondition.Create;
-
-      pcsData.PCS_Name := C_CPP_ID[i];
-      pcsData.PCS_CPP_ReadyForUse := Byte(cpp.ReadyForUse);
-      pcsData.PCS_CPP_SetpointPitch := cpp.SetpointPitch;
-      pcsData.PCS_CPP_RemoteAuto := Byte(cpp.Remote);
-      pcsData.PCS_CPP_RemoteManual := Byte(not cpp.Remote);
-      pcsData.PCS_CPP_Failure := Byte(cpp.Failure);
-      pcsData.PCS_CPP_PumpAuto := Byte(cpp.HydraulicPumpAuto3);
-
-      for j := 0 to 1 do
-      begin
-        tempstring := IntToStr(Byte(cpp.PumpStandby[j]));
-        pcsData.PCS_CPP_PumpStandby := pcsData.PCS_CPP_PumpStandby + tempstring;
-      end;
-
-      for j := 0 to 2 do
-      begin
-        tempstring := IntToStr(Byte(cpp.PumpStart[j]));
-        pcsData.PCS_CPP_PumpStart := pcsData.PCS_CPP_PumpStart + tempstring;
-      end;
-
-      for j := 0 to 2 do
-      begin
-        tempstring := IntToStr(Byte(cpp.PC_Failure[j]));
-        pcsData.PCS_PC_CPPFailure := pcsData.PCS_PC_CPPFailure + tempstring;
-      end;
-
-      pcsList.Add(pcsData);
-    end;
-  end;
-
-  FDatabase.SaveRS_PCSCondition(pcsList, aSessionID);
-  FreeList(pcsList);
-end;
-
-procedure TScenario.SaveRS_PMSCondition(aSessionID: Integer);
-var
-  gen : TGenerator;
-  swt : TSwitchboard;
-  pwr : TPower;
-  i : Integer;
-  pmsData : TScenarioPMSCondition;
-  PMSList : TList;
-  aFirstLoad : Boolean;
-  aStateRunFull, aStateRunFwd, aStateRunAft : Integer;
-begin
-  PMSList := TList.Create;
-
-  for i := 0 to Length(C_GENERATOR_ID) - 1 do
-  begin
-    gen := ERSystem.ERManager.EngineRoom.getPMSSystem.getGenerator(C_GENERATOR_ID[i]);
-
-    if Assigned(gen) then
-    begin
-      pmsData := TScenarioPMSCondition.Create;
-
-      {Tipe PMS : 1.Generator, 2.Switchboard, 3.Power}
-      pmsData.PMS_Type := 1;
-
-      {Entity Element}
-      pmsData.PMS_Name := C_GENERATOR_ID[i];                            {-----> Nama Genarator}
-      pmsData.PMS_Mode := gen.GeneratorMode;                       {-----> Mode Genarator : 1:Man; 2:SemiMan; 3:Aut; 4:SemiAut}
-      pmsData.PMS_OnOff := setBooltoInt(gen.EngineRun);
-      pmsData.PMS_GenSupplied := setBooltoInt(gen.GeneratorSupplied);
-      pmsData.PMS_GenState := gen.GeneratorState;
-      pmsData.PMS_CBClosed := setBooltoInt(gen.CBClosed);
-      pmsData.PMS_Preference := setBooltoInt(gen.Preference);
-      pmsData.PMS_Busbar := setBooltoInt(gen.Busbar);
-      pmsData.PMS_RunHours := setBooltoInt(gen.RunHourState);
-
-      {Failure Element}
-      pmsData.PMS_EmergencyStop := setBooltoInt(gen.EmergencyStop);
-      pmsData.PMS_NotStandby := setBooltoInt(gen.NotStandby);
-      pmsData.PMS_CanBusFailure := setBooltoInt(gen.CanBusFailure);
-      pmsData.PMS_MeasPowFailure := setBooltoInt(gen.MeasPowFailure);
-      pmsData.PMS_DCPowFailure := setBooltoInt(gen.DCPowFailure);
-      pmsData.PMS_EngineAlarm := setBooltoInt(gen.EngineAlarm);
-      pmsData.PMS_ShutDown := setBooltoInt(gen.ShutDown);
-      pmsData.PMS_FaultPageLed := setBooltoInt(gen.FaultPageLed);
-      pmsData.PMS_FailureCBClosed := setBooltoInt(gen.FailureCBClosed);
-
-      {Value Element}
-      pmsData.PMS_Power := gen.Power;
-      pmsData.PMS_Power_State := gen.PowerState;
-      pmsData.PMS_Frequency := gen.Frequency;
-      pmsData.PMS_Frequency_State := gen.FrequencyState;
-      pmsData.PMS_SwitchFrequency := gen.SwitchFrequency;
-      pmsData.PMS_Current := gen.Current;
-      pmsData.PMS_Voltage := gen.Voltage;
-      pmsData.PMS_Voltage_State := gen.VoltageState;
-      pmsData.PMS_CosPhi := gen.CosPhi;
-      pmsData.PMS_U := gen.U;
-      pmsData.PMS_V := gen.V;
-      pmsData.PMS_W := gen.W;
-
-      PMSList.Add(pmsData);
-    end;
-  end;
-
-  for i := 0 to Length(C_SWITCHBOARD_ID) - 1 do
-  begin
-    swt := ERSystem.ERManager.EngineRoom.getPMSSystem.getSwitchboard(C_SWITCHBOARD_ID[i]);
-
-    if Assigned(swt) then
-    begin
-      pmsData := TScenarioPMSCondition.Create;
-
-      pmsData.PMS_Type := 2;
-
-      {Entity Element}
-      pmsData.PMS_Name := C_SWITCHBOARD_ID[i];
-      pmsData.PMS_SWB_MSBIntrMode := swt.MSBIntrMode;               {-----> 1:Man; 2:Off; 3:Aut}
-      pmsData.PMS_SWB_ESBIntrMode := swt.ESBIntrMode;               {-----> 1:Aft; 2:Off; 3:Fwd; 4:Dbl}
-      pmsData.PMS_SWB_ShoreIntrMode := swt.ShoreIntrMode;           {-----> 1:Man; 2:Off; 3:Aut}
-      pmsData.PMS_SWB_MsbCBIntr := setBooltoInt(swt.MsbCBIntr);
-      pmsData.PMS_SWB_EsbAftCBIntr := setBooltoInt(swt.EsbAftCBIntr);
-      pmsData.PMS_SWB_EsbAftCBIntr := setBooltoInt(swt.EsbAftCBIntr);
-      pmsData.PMS_SWB_MsbCBShore := setBooltoInt(swt.MsbCBShore);
-      pmsData.PMS_SWB_MsbCBNavNaut := setBooltoInt(swt.MsbCBNavNaut);
-      pmsData.PMS_SWB_Busbar := setBooltoInt(swt.Busbar);
-      pmsData.PMS_SWB_TripReduct := setBooltoInt(swt.TripReduct);
-      pmsData.PMS_SWB_EmergencyCon := setBooltoInt(swt.EmergencyCon);
-      pmsData.PMS_SWB_Frequency := swt.Frequency;
-      pmsData.PMS_SWB_Voltage := swt.Voltage;
-      pmsData.PMS_SWB_Power := swt.Power;
-      pmsData.PMS_SWB_Trafo230Volt := swt.Trafo230Volt;
-      pmsData.PMS_SWB_Trafo115Volt := swt.Trafo115Volt;
-
-      PMSList.Add(pmsData);
-    end;
-  end;
-
-  for i := 0 to Length(C_POWER_ID) - 1 do
-  begin
-    pwr := ERSystem.ERManager.EngineRoom.getPMSSystem.GetPower(C_POWER_ID[i]);
-
-    if Assigned(pwr) then
-    begin
-      pmsData := TScenarioPMSCondition.Create;
-
-      pmsData.PMS_Type := 4;
-
-      {Entity Element}
-      pmsData.PMS_Name := C_POWER_ID[i];
-      pmsData.PMS_PowerMode := pwr.PowerMode;
-      pmsData.PMS_PowerConsmr := pwr.PowerConsmr;
-
-      PMSList.Add(pmsData);
-    end;
-  end;
-
-  {Variable}
-  for i := 0 to 0 do
-  begin
-    ERSystem.ERManager.EngineRoom.getPMSSystem.GetVariablePMS(aStateRunFull, aStateRunFwd, aStateRunAft);
-
-    pmsData := TScenarioPMSCondition.Create;
-
-    pmsData.PMS_Type := 3;
-
-    pmsData.PMS_Name := 'Variable';
-    pmsData.PMS_FirstLoad := 1;
-    pmsData.PMS_StateRunFull := aStateRunFull;
-    pmsData.PMS_StateRunFwd := aStateRunFwd;
-    pmsData.PMS_StateRunAft := aStateRunAft;
-
-    PMSList.Add(pmsData);
-  end;
-
-  FDatabase.SaveRS_PMSCondition(PMSList, aSessionID);
-  FreeList(PMSList);
-end;
-
-procedure TScenario.SaveTanksCondition(aIsNew: Boolean; aName, aOldName: string;
-  aList: TList; var ConditionID: Integer);
-begin
-  FDatabase.SaveTanksCondition(aIsNew, aName, aOldName, aList, ConditionID);
 end;
 
 function TScenario.setBooltoInt(valbool: Boolean): Integer;

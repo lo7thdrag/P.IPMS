@@ -100,6 +100,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure scrlbxContentClick(Sender: TObject);
     procedure mniManualIPMS1Click(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
   private
     { Private declarations }
     FDockedForm : TForm;
@@ -140,6 +141,11 @@ uses
   uTankSystemPanel, uFuelOilPanel, uBallastPanel, uFreshWaterPanel;
 
 {$R *.dfm}
+
+procedure TfrmInstructorPanel.btnCloseClick(Sender: TObject);
+begin
+  Close;
+end;
 
 procedure TfrmInstructorPanel.btnDockedClick(Sender: TObject);
 begin
