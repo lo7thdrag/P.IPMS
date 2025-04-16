@@ -2481,15 +2481,140 @@ begin
   tankListTemp.Add(tankDataTemp);
   {$ENDREGION}
 
-  {$REGION '  '}
+  {$REGION ' WBSB '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtWBSB.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtWBSB.Text);
+  tankListTemp.Add(tankDataTemp);
   {$ENDREGION}
-  {$REGION '  '}
+
+  {$REGION ' WBFWD '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtWBFWD.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtWBFWD.Text);
+  tankListTemp.Add(tankDataTemp);
   {$ENDREGION}
-  {$REGION '  '}
+
+  {$REGION ' FWTKPS '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtFWTKPS.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtFWTKPS.Text);
+  tankListTemp.Add(tankDataTemp);
   {$ENDREGION}
-  {$REGION '  '}
+
+  {$REGION ' FWTKSB '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtFWTKSB.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtFWTKSB.Text);
+  tankListTemp.Add(tankDataTemp);
   {$ENDREGION}
-  {$REGION '  '}
+
+  {$REGION ' FWROLLSTABTK '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtFWROLLSTABTK.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtFWROLLSTABTK.Text);
+  tankListTemp.Add(tankDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' FOTK1 '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtFOTK1.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtFOTK1.Text);
+  tankListTemp.Add(tankDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' FOTK2 '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtFOTK2.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtFOTK2.Text);
+  tankListTemp.Add(tankDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' FOTK3 '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtFOTK3.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtFOTK3.Text);
+  tankListTemp.Add(tankDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' FOTK4 '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtFOTK4.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtFOTK4.Text);
+  tankListTemp.Add(tankDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' FOOVTK '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtFOOVTK.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtFOOVTK.Text);
+  tankListTemp.Add(tankDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' FOLOADTRUNK '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtFOLOADTRUNK.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtFOLOADTRUNK.Text);
+  tankListTemp.Add(tankDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' FODAILYPS '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtFODAILYPS.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtFODAILYPS.Text);
+  tankListTemp.Add(tankDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' FODAILYSB '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtFODAILYSB.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtFODAILYSB.Text);
+  tankListTemp.Add(tankDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' MELOTK '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtMELOTK.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtMELOTK.Text);
+  tankListTemp.Add(tankDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' BILGEWTK '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtBILGEWTK.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtBILGEWTK.Text);
+  tankListTemp.Add(tankDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' SLDIRTYTK '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtSLDIRTYTK.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtSLDIRTYTK.Text);
+  tankListTemp.Add(tankDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' GBXLOTK '}
+  tankDataTemp := TTanksCond_Data.Create;
+  tankDataTemp.Condition_ID := FTANKConditionID;
+  tankDataTemp.Tanks_ElementID := edtGBXLOTK.Hint;
+  tankDataTemp.Tanks_Value := StrToFloat(edtGBXLOTK.Text);
+  tankListTemp.Add(tankDataTemp);
   {$ENDREGION}
 
   if FTANKConditionID = 0 then
@@ -2604,191 +2729,191 @@ begin
     edtWBPS.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input WATER BALLAST TANK SB '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtWBSB.Hint, StrToFloat(edtWBSB.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtWBSB.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtWBSB.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input WATER BALLAST TANK FWD '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtWBFWD.Hint, StrToFloat(edtWBFWD.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtWBFWD.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtWBFWD.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input FRESH WATER TANK PS '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtFWTKPS.Hint, StrToFloat(edtFWTKPS.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtFWTKPS.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtFWTKPS.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input FRESH WATER BALLAST SB '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtFWTKSB.Hint, StrToFloat(edtFWTKSB.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtFWTKSB.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtFWTKSB.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input FRESH WATER ROLL STABLE TANK '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtFWROLLSTABTK.Hint, StrToFloat(edtFWROLLSTABTK.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtFWROLLSTABTK.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtFWROLLSTABTK.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input FUEL OIL TANK 1 '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtFOTK1.Hint, StrToFloat(edtFOTK1.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtFOTK1.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtFOTK1.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input FUEL OIL TANK 2 '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtFOTK2.Hint, StrToFloat(edtFOTK2.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtFOTK2.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtFOTK2.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input FUEL OIL TANK 3 '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtFOTK3.Hint, StrToFloat(edtFOTK3.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtFOTK3.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtFOTK3.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input FUEL OIL TANK 4 '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtFOTK4.Hint, StrToFloat(edtFOTK4.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtFOTK4.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtFOTK4.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input FUEL OVERFLOW TANK '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtFOOVTK.Hint, StrToFloat(edtFOOVTK.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtFOOVTK.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtFOOVTK.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input FUEL OIL LOADING TRUNK '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtFOLOADTRUNK.Hint, StrToFloat(edtFOLOADTRUNK.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtFOLOADTRUNK.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtFOLOADTRUNK.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input FUEL DAILY TANK PS '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtFODAILYPS.Hint, StrToFloat(edtFODAILYPS.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtFODAILYPS.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtFODAILYPS.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input FUEL DAILY TANK SB '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtFODAILYSB.Hint, StrToFloat(edtFODAILYSB.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtFODAILYSB.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtFODAILYSB.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input ME LO TANK '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtMELOTK.Hint, StrToFloat(edtMELOTK.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtMELOTK.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtMELOTK.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input BILGE WATER TANK '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtBILGEWTK.Hint, StrToFloat(edtBILGEWTK.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtBILGEWTK.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtBILGEWTK.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input SLUDGE DIRTY OIL TANK '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtSLDIRTYTK.Hint, StrToFloat(edtSLDIRTYTK.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtSLDIRTYTK.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtSLDIRTYTK.Color := clWindow;
   {$ENDREGION}
 
-  {$REGION ' Cek Input WATER BALLAST TANK PS '}
-  if not InstructorSys.Scenario.cekValidateTankValue(edtWBPS.Hint, StrToFloat(edtWBPS.Text)) then
+  {$REGION ' Cek Input GEARBOX LO TANK '}
+  if not InstructorSys.Scenario.cekValidateTankValue(edtGBXLOTK.Hint, StrToFloat(edtGBXLOTK.Text)) then
   begin
-    edtWBPS.Color := clRed;
+    edtGBXLOTK.Color := clRed;
     ShowMessage('WATER BALLAST TANK PS input out of range');
     Exit;
   end
   else
-    edtWBPS.Color := clWindow;
+    edtGBXLOTK.Color := clWindow;
   {$ENDREGION}
 
   Result := True;
