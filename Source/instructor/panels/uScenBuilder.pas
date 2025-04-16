@@ -2356,22 +2356,19 @@ begin
   edtFWTKPS.Text := '0';
   edtFWTKSB.Text := '0';
   edtFWROLLSTABTK.Text := '0';
+  edtFOTK1.Text := '0';
   edtFOTK2.Text := '0';
   edtFOTK3.Text := '0';
   edtFOTK4.Text := '0';
   edtFOOVTK.Text := '0';
   edtFOLOADTRUNK.Text := '0';
   edtFODAILYPS.Text := '0';
-  edtWBPS.Text := '0';
-  edtWBPS.Text := '0';
-  edtWBPS.Text := '0';
-  edtWBPS.Text := '0';
-  edtWBPS.Text := '0';
-  edtWBPS.Text := '0';
-  edtWBPS.Text := '0';
-  edtWBPS.Text := '0';
-
-end;
+  edtFODAILYSB.Text := '0';
+  edtMELOTK.Text := '0';
+  edtBILGEWTK.Text := '0';
+  edtSLDIRTYTK.Text := '0';
+  edtGBXLOTK.Text := '0';
+ end;
 
 procedure TfrmScenBuilder.btnEditTANKClick(Sender: TObject);
 var
