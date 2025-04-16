@@ -387,6 +387,12 @@ type
     lblModeEngStar: TLabel;
     img1: TImage;
     img2: TImage;
+    img3: TImage;
+
+    {$REGION ' Form Section '}
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    {$ENDREGION}
 
     {$REGION ' Scenario Section '}
     procedure btnRefreshScenarioClick(Sender: TObject);
@@ -407,6 +413,7 @@ type
     {$ENDREGION}
 
     {$REGION ' PMS Section '}
+    procedure lstPMSClick(Sender: TObject);
     procedure btnRefreshPMSClick(Sender: TObject);
     procedure btnNewPMSClick(Sender: TObject);
     procedure btnEditPMSClick(Sender: TObject);
@@ -415,6 +422,7 @@ type
     {$ENDREGION}
 
     {$REGION ' PCS Section '}
+    procedure lstPCSClick(Sender: TObject);
     procedure btnRefreshPCSClick(Sender: TObject);
     procedure btnNewPCSClick(Sender: TObject);
     procedure btnEditPCSClick(Sender: TObject);
@@ -429,12 +437,14 @@ type
     {$ENDREGION}
 
     {$REGION ' TANK Section '}
+    procedure lstTankClick(Sender: TObject);
     procedure btnRefreshTANKClick(Sender: TObject);
     procedure btnNewTANKClick(Sender: TObject);
     procedure btnEditTANKClick(Sender: TObject);
     procedure btnDeleteTANKClick(Sender: TObject);
     procedure btnSaveTANKClick(Sender: TObject);
 
+    procedure btnFullAllClick(Sender: TObject);
     procedure edtOnKeyPress(Sender: TObject; var Key: Char);
     {$ENDREGION}
 
@@ -448,9 +458,7 @@ type
 
     procedure actSaveExecute(Sender: TObject);
     procedure actCancelExecute(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure actPickExecute(Sender: TObject);
-
     procedure actChooseRSExecute(Sender: TObject);
     procedure actDeleteRSExecute(Sender: TObject);
     procedure actDeleteAllExecute(Sender: TObject);
@@ -458,15 +466,6 @@ type
     procedure act2Execute(Sender: TObject);
     procedure act4Execute(Sender: TObject);
     procedure btnMenuClick(Sender: TObject);
-
-    procedure btnFullAllClick(Sender: TObject);
-
-    procedure FormShow(Sender: TObject);
-
-    procedure grpForwardClick(Sender: TObject);
-
-    procedure lstPMSClick(Sender: TObject);
-    procedure lstPCSClick(Sender: TObject);
 
   private
     FScenarioID : Integer;
@@ -514,6 +513,8 @@ type
     procedure UpdateFAList;
     {$ENDREGION}
 
+    //Global
+    function GetNumberOfKoma(s : string): Boolean;
 
   public
     procedure UpdateScenarioList;
@@ -530,6 +531,46 @@ uses
   uDataType, uInstructorSystem, uFunction;
 
 {$R *.dfm}
+
+procedure EnableComposited(WinControl:TWinControl);
+var
+  i:Integer;
+  NewExStyle:DWORD;
+begin
+  NewExStyle := GetWindowLong(WinControl.Handle, GWL_EXSTYLE) or WS_EX_COMPOSITED;
+  SetWindowLong(WinControl.Handle, GWL_EXSTYLE, NewExStyle);
+
+  for I := 0 to WinControl.ControlCount - 1 do
+    if WinControl.Controls[i] is TWinControl then
+      EnableComposited(TWinControl(WinControl.Controls[i]));
+end;
+
+{$REGION ' Form Section '}
+
+procedure TfrmScenBuilder.FormCreate(Sender: TObject);
+begin
+  EnableComposited(pnlFA);
+  EnableComposited(pnlHeader);
+  EnableComposited(pnlMenu);
+  EnableComposited(pnlPCS);
+  EnableComposited(pnlPMS);
+  EnableComposited(pnlScenario);
+  EnableComposited(pnlSession);
+  EnableComposited(pnlTank);
+  EnableComposited(pnlVariasi);
+
+  FScenarioID := 0;
+  FSelectedConditionID := 0;
+end;
+
+procedure TfrmScenBuilder.FormShow(Sender: TObject);
+begin
+  pnlScenario.BringToFront;
+  lblHeader.Caption := 'SCENARIO EDITOR';
+  UpdateScenarioList;
+end;
+
+{$ENDREGION}
 
 procedure TfrmScenBuilder.act2Execute(Sender: TObject);
 var
@@ -928,23 +969,6 @@ begin
   end;
 end;
 
-procedure TfrmScenBuilder.FormCreate(Sender: TObject);
-begin
-  FScenarioID := 0;
-  FSelectedConditionID := 0;
-end;
-
-procedure TfrmScenBuilder.FormShow(Sender: TObject);
-begin
-  pnlScenario.BringToFront;
-  lblHeader.Caption := 'SCENARIO EDITOR';
-  UpdateScenarioList;
-end;
-
-procedure TfrmScenBuilder.grpForwardClick(Sender: TObject);
-begin
-
-end;
 
 {$REGION ' Scenario Section '}
 
@@ -2336,6 +2360,31 @@ end;
 
 {$REGION ' TANK Section '}
 
+procedure TfrmScenBuilder.lstTankClick(Sender: TObject);
+var
+  i : Integer;
+
+begin
+  if lstTank.ItemIndex = -1 then
+  begin
+    btnNewTANKClick(nil);
+    Exit;
+  end;
+
+  with lstTank do
+  begin
+    for i := Items.Count - 1 downto 0 do
+    begin
+      if Selected[i] then
+      begin
+        FTANKConditionName := Items[i];
+        FTANKConditionID := InstructorSys.Scenario.GetConditionID(FTANKConditionName);
+        Break;
+      end;
+    end;
+  end;
+end;
+
 procedure TfrmScenBuilder.btnRefreshTANKClick(Sender: TObject);
 begin
   UpdatePMSList;
@@ -2685,9 +2734,21 @@ begin
 end;
 
 procedure TfrmScenBuilder.edtOnKeyPress(Sender: TObject; var Key: Char);
+var
+  value : Double;
+
 begin
-  if not (key in ['0'..'9', #8, #13, #46]) then
-    key := #0;
+  if not (Key in[#48 .. #57, #8, #13, #46]) then
+  begin
+    Key := #0;
+    Exit;
+  end;
+
+  if GetNumberOfKoma(TEdit(sender).Text) then
+  begin
+    if Key = #46 then
+      Key := #0;
+  end;
 end;
 
 function TfrmScenBuilder.CekTANKInput: Boolean;
@@ -3270,6 +3331,23 @@ end;
 {$ENDREGION}
 
 {$REGION ' Update Procedure Section '}
+
+function TfrmScenBuilder.GetNumberOfKoma(s: string): Boolean;
+var
+  a, i : Integer;
+begin
+  Result := False;
+  a := 0;
+
+  for i := 1 to length(s) do
+  begin
+    if s[i] = '.' then
+      a := a + 1;
+  end;
+
+  if a > 0 then
+    Result := True;
+end;
 
 procedure TfrmScenBuilder.UpdateScenarioList;
 var
