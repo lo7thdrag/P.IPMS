@@ -108,6 +108,8 @@ type
     {$ENDREGION}
 
     {$REGION ' TANK Section '}
+    function SaveTanksCondition(aIsNew: Boolean; aName : string; var aList: TList; var ConditionID: Integer): Boolean;
+
     procedure GetTanksCondByID(aID: Integer; var aList: TList);
     {$ENDREGION}
 
@@ -121,8 +123,7 @@ type
       var ConditionID: Integer): Boolean;
     procedure SaveRS_FACondition(aSessionID: Integer; aList: TList);
 
-    function SaveTanksCondition(aIsNew: Boolean; aName, aOldName: string;
-      aList: TList; var ConditionID: Integer): Boolean;
+
     function GetFreeTanksCondID: Integer;
     function GetTanksCondID(aID, aIndex: Integer): Integer;
     function DeleteTanksCondition(aID: Integer): Boolean;
@@ -625,7 +626,16 @@ begin
                          + QuotedStr(aName) + ', '
                          + QuotedStr('PMS') + ')';
       SQL.Add(query);
-      ExecSQL;
+
+      try
+        ExecSQL;
+      except
+        on E:Exception do
+        begin
+          if Assigned(FOnExceptionMessage) then
+            FOnExceptionMessage(E.Message);
+        end;
+      end;
 
       for i := 0 to aList.Count - 1 do
       begin
@@ -1136,6 +1146,91 @@ end;
 {$ENDREGION}
 
 {$REGION ' TANK Section '}
+
+function TIPMSDatabase.SaveTanksCondition(aIsNew: Boolean; aName: string; var aList: TList; var ConditionID: Integer): Boolean;
+var
+  FQuery : TZQuery;
+  condID, i : Integer;
+  query : string;
+  TanksData : TTanksCond_Data;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    if aIsNew then
+    begin
+      condID := GetFreeConditionID;
+      ConditionID := condID;
+
+      query := 'INSERT INTO Condition(Condition_ID, Condition_Name, Condition_Type) ' +
+               'VALUES(' + IntToStr(condID) + ', '
+                         + QuotedStr(aName) + ', '
+                         + QuotedStr('TANK') + ')';
+      SQL.Add(query);
+
+      try
+        ExecSQL;
+      except
+        on E:Exception do
+        begin
+          if Assigned(FOnExceptionMessage) then
+            FOnExceptionMessage(E.Message);
+        end;
+      end;
+
+      for i := 0 to aList.Count - 1 do
+      begin
+        SQL.Clear;
+
+        TanksData := TTanksCond_Data(aList.Items[i]);
+
+        query := 'INSERT INTO Tanks_Condition(Tanks_ID, Tanks_elementID, Tanks_Value, Condition_ID) ' +
+                 'VALUES(' + IntToStr(GetFreeTanksCondID) +
+                 ', ' + QuotedStr(TanksData.Tanks_ElementID) +
+                 ', ' + floatToStr(TanksData.Tanks_Value) +
+                 ', ' + IntToStr(condID) + ')';
+        SQL.Add(query);
+        ExecSQL;
+      end;
+    end
+    else
+    begin
+      query := 'UPDATE Condition SET Condition_Name = ' + QuotedStr(aName) +
+               ' WHERE Condition_ID = ' + IntToStr(ConditionID);
+      SQL.Add(query);
+      ExecSQL;
+
+      for i := 0 to aList.Count - 1 do
+      begin
+        SQL.Clear;
+
+        TanksData := TTanksCond_Data(aList.Items[i]);
+
+        query := 'UPDATE Tanks_Condition ' +
+                 'SET Tanks_ElementID = ' + QuotedStr(TanksData.Tanks_ElementID) +
+                 ', Tanks_Value = ' + FloatToStr(TanksData.Tanks_Value) +
+                 ' WHERE Condition_ID = ' + IntToStr(TanksData.Condition_ID) +
+                 ' AND Tanks_ID = ' + IntToStr(TanksData.Tanks_ID);
+
+        SQL.Add(query);
+        ExecSQL;
+      end;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
 
 procedure TIPMSDatabase.GetTanksCondByID(aID: Integer; var aList: TList);
 var
@@ -5690,94 +5785,6 @@ begin
       end;
     end;
 
-    Free;
-  end;
-end;
-
-function TIPMSDatabase.SaveTanksCondition(aIsNew: Boolean; aName, aOldName: string;
-  aList: TList; var ConditionID: Integer): Boolean;
-var
-  FQuery : TZQuery;
-  condID, i : Integer;
-  query : string;
-  TanksData : TTanksCond_Data;
-begin
-  Result := False;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    if aIsNew then
-    begin
-      condID := GetFreeConditionID;
-      ConditionID := condID;
-
-      query := 'INSERT INTO Condition(Condition_ID, Condition_Name, Condition_Type) ' +
-               'VALUES(' + IntToStr(condID) + ', '
-                         + QuotedStr(aName) + ', '
-                         + QuotedStr('TANK') + ')';
-      SQL.Add(query);
-
-      try
-        ExecSQL;
-      except
-        on E:Exception do
-        begin
-          if Assigned(FOnExceptionMessage) then
-            FOnExceptionMessage(E.Message);
-        end;
-      end;
-
-      for i := 0 to aList.Count - 1 do
-      begin
-        SQL.Clear;
-
-        TanksData := TTanksCond_Data(aList.Items[i]);
-
-        query := 'INSERT INTO Tanks_Condition(Tanks_ID, Tanks_elementID, Tanks_Value, ' +
-                 'Condition_ID) ' +
-                 'VALUES(' + IntToStr(GetFreeTanksCondID) +
-                 ', ' + QuotedStr(TanksData.Tanks_ElementID) +
-                 ', ' + floatToStr(TanksData.Tanks_Value) +
-                 ', ' + IntToStr(condID) + ')';
-        SQL.Add(query);
-        ExecSQL;
-      end;
-    end
-    else
-    begin
-      query := 'UPDATE Condition ' +
-               'SET Condition_Name = ' + QuotedStr(aName) +
-               ' WHERE Condition_Name = ' + QuotedStr(aOldName);
-      SQL.Add(query);
-      ExecSQL;
-
-      for i := 0 to aList.Count - 1 do
-      begin
-        SQL.Clear;
-
-        TanksData := TTanksCond_Data(aList.Items[i]);
-
-        query := 'UPDATE Tanks_Condition ' +
-                 'SET Tanks_ElementID = ' + QuotedStr(TanksData.Tanks_ElementID) +
-                 ', Tanks_Value = ' + FloatToStr(TanksData.Tanks_Value) +
-                 ' WHERE Condition_ID = ' + IntToStr(TanksData.Condition_ID) +
-                 ' AND Tanks_ID = ' + IntToStr(TanksData.Tanks_ID);
-
-        SQL.Add(query);
-        ExecSQL;
-      end;
-    end;
-
-    Close;
-    Connection := nil;
     Free;
   end;
 end;

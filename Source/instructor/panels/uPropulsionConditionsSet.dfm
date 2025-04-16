@@ -17,30 +17,16 @@ object frmPropulsionConditions: TfrmPropulsionConditions
   TextHeight = 13
   object pnlPS_PropulsionConditions: TPanel
     Left = 11
-    Top = 20
+    Top = 57
     Width = 793
-    Height = 812
+    Height = 765
+    BevelOuter = bvNone
+    Color = 3749426
+    ParentBackground = False
     TabOrder = 0
-    object lbl1: TLabel
-      Left = 156
-      Top = 29
-      Width = 480
-      Height = 25
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'PROPULSION CONDITIONS ME PS'
-      Color = clBlack
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -21
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
     object lbl17: TLabel
       Left = 48
-      Top = 79
+      Top = 30
       Width = 197
       Height = 19
       Alignment = taCenter
@@ -56,7 +42,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object lbl5: TLabel
       Left = 362
-      Top = 79
+      Top = 30
       Width = 69
       Height = 19
       Alignment = taCenter
@@ -72,7 +58,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object lbl4: TLabel
       Left = 582
-      Top = 79
+      Top = 30
       Width = 128
       Height = 19
       Alignment = taCenter
@@ -88,7 +74,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object lbl3: TLabel
       Left = 59
-      Top = 586
+      Top = 537
       Width = 176
       Height = 19
       Alignment = taCenter
@@ -104,7 +90,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object lbl7: TLabel
       Left = 592
-      Top = 622
+      Top = 573
       Width = 109
       Height = 19
       Alignment = taCenter
@@ -120,7 +106,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object pnlPS_StartingInterlocks: TPanel
       Left = 32
-      Top = 111
+      Top = 62
       Width = 229
       Height = 448
       TabOrder = 0
@@ -379,7 +365,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object pnlPS_ClutchInterlocks: TPanel
       Left = 32
-      Top = 618
+      Top = 569
       Width = 229
       Height = 174
       TabOrder = 1
@@ -470,7 +456,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object pnlPS_Alarms: TPanel
       Left = 282
-      Top = 111
+      Top = 62
       Width = 229
       Height = 681
       TabOrder = 2
@@ -834,7 +820,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object pnlPS_SafetiesStop: TPanel
       Left = 532
-      Top = 111
+      Top = 62
       Width = 229
       Height = 487
       TabOrder = 3
@@ -1093,7 +1079,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object pnlPS_CPP: TPanel
       Left = 532
-      Top = 654
+      Top = 605
       Width = 229
       Height = 138
       TabOrder = 4
@@ -1286,30 +1272,16 @@ object frmPropulsionConditions: TfrmPropulsionConditions
   end
   object pnlSB_PropulsionConditions: TPanel
     Left = 869
-    Top = 20
+    Top = 57
     Width = 793
-    Height = 812
+    Height = 765
+    BevelOuter = bvNone
+    Color = 3749426
+    ParentBackground = False
     TabOrder = 1
-    object lbl6: TLabel
-      Left = 156
-      Top = 29
-      Width = 480
-      Height = 25
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'PROPULSION CONDITIONS ME SB'
-      Color = clBlack
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -21
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
     object lbl2: TLabel
       Left = 48
-      Top = 79
+      Top = 30
       Width = 197
       Height = 19
       Alignment = taCenter
@@ -1325,7 +1297,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object lbl8: TLabel
       Left = 362
-      Top = 79
+      Top = 30
       Width = 69
       Height = 19
       Alignment = taCenter
@@ -1341,7 +1313,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object lbl9: TLabel
       Left = 582
-      Top = 79
+      Top = 30
       Width = 128
       Height = 19
       Alignment = taCenter
@@ -1357,7 +1329,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object lbl10: TLabel
       Left = 592
-      Top = 622
+      Top = 573
       Width = 109
       Height = 19
       Alignment = taCenter
@@ -1373,7 +1345,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object lbl11: TLabel
       Left = 58
-      Top = 586
+      Top = 537
       Width = 176
       Height = 19
       Alignment = taCenter
@@ -1389,7 +1361,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object pnlSB_StartingInterlocks: TPanel
       Left = 32
-      Top = 111
+      Top = 62
       Width = 229
       Height = 448
       TabOrder = 0
@@ -1648,7 +1620,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object pnlSB_ClutchInterlocks: TPanel
       Left = 32
-      Top = 618
+      Top = 569
       Width = 229
       Height = 174
       TabOrder = 1
@@ -1739,7 +1711,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object pnlSB_Alarms: TPanel
       Left = 282
-      Top = 111
+      Top = 62
       Width = 229
       Height = 681
       TabOrder = 2
@@ -2103,7 +2075,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object pnlSB_SafetiesStop: TPanel
       Left = 532
-      Top = 111
+      Top = 62
       Width = 229
       Height = 487
       TabOrder = 3
@@ -2362,7 +2334,7 @@ object frmPropulsionConditions: TfrmPropulsionConditions
     end
     object pnlSB_CPP: TPanel
       Left = 532
-      Top = 654
+      Top = 605
       Width = 229
       Height = 138
       TabOrder = 4
@@ -2551,6 +2523,60 @@ object frmPropulsionConditions: TfrmPropulsionConditions
         Caption = 'GB FAILURE'
         TabOrder = 1
       end
+    end
+  end
+  object lbl12: TPanel
+    Left = 11
+    Top = 8
+    Width = 793
+    Height = 41
+    BevelOuter = bvNone
+    Color = 3749426
+    ParentBackground = False
+    TabOrder = 2
+    object lbl1: TLabel
+      Left = 156
+      Top = 8
+      Width = 480
+      Height = 25
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'PROPULSION CONDITIONS ME PS'
+      Color = clBlack
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -21
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+  end
+  object lbl18: TPanel
+    Left = 869
+    Top = 8
+    Width = 793
+    Height = 41
+    BevelOuter = bvNone
+    Color = 3749426
+    ParentBackground = False
+    TabOrder = 3
+    object lbl6: TLabel
+      Left = 156
+      Top = 8
+      Width = 480
+      Height = 25
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'PROPULSION CONDITIONS ME SB'
+      Color = clBlack
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -21
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
   end
   object pmAlarm: TPopupMenu

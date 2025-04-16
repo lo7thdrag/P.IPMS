@@ -41,6 +41,8 @@ type
     btnSession: TRzBmpButton;
     Panel3: TPanel;
     Image1: TImage;
+    img1: TImage;
+    img2: TImage;
     procedure btnRefreshScenClick(Sender: TObject);
     procedure btnLoadClick(Sender: TObject);
     procedure lstScenarioMouseUp(Sender: TObject; Button: TMouseButton;

@@ -347,7 +347,7 @@ begin
 
     end;
 
-    InstructorSys.Scenario.SaveTanksCondition(True, edtName.Text, '', TanksList, ConditionID);
+    InstructorSys.Scenario.SaveTanksCondition(True, edtName.Text, TanksList, ConditionID);
     MessageDlg('"' + edtName.Text + '" Condition Has Been Saved', mtInformation, [mbOK], 0);
     actNewExecute(nil);
   end
@@ -394,7 +394,7 @@ begin
 
     end;
 
-    InstructorSys.Scenario.SaveTanksCondition(false, edtName.Text, frmTanksCondition.TanksCondName, TanksList, ConditionID);
+    InstructorSys.Scenario.SaveTanksCondition(false, edtName.Text, TanksList, ConditionID);
     MessageDlg('"' + edtName.Text + '" Condition Has Been Updated', mtInformation, [mbOK], 0);
     actNewExecute(nil);
   end;

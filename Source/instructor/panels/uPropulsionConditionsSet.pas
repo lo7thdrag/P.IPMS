@@ -22,7 +22,6 @@ type
     btnPS_SI_PrelubeFailure: TVrDemoButton;
     btnPS_SI_PrelubeInProgress: TVrDemoButton;
     pnlPS_PropulsionConditions: TPanel;
-    lbl1: TLabel;
     pnlPS_ClutchInterlocks: TPanel;
     btnPS_CI_PitchNotZero: TVrDemoButton;
     btnPS_CI_ShaftLocked: TVrDemoButton;
@@ -60,7 +59,6 @@ type
     btnPS_Alarms_TrailAlarm: TVrDemoButton;
     btnPS_Alarms_ResetSafetyStopPossible: TVrDemoButton;
     pnlSB_PropulsionConditions: TPanel;
-    lbl6: TLabel;
     pnlSB_StartingInterlocks: TPanel;
     btnSB_SI_RemoteStartInterlock: TVrDemoButton;
     btnSB_SI_TurningGearEngaged: TVrDemoButton;
@@ -148,6 +146,10 @@ type
     lbl11: TLabel;
     lbl3: TLabel;
     lbl7: TLabel;
+    lbl12: TPanel;
+    lbl1: TLabel;
+    lbl18: TPanel;
+    lbl6: TLabel;
     procedure mniAlarmOnClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnPropulsionConditionsMouseDown(Sender: TObject;

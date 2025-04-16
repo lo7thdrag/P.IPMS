@@ -80,7 +80,7 @@ type
     procedure GetAllTanksConditions(var aList: TStrings);
     procedure GetTanksCondition(aID: Integer; var aList: TList);
 
-    procedure SaveTanksCondition(aIsNew: Boolean; aName, aOldName: string; aList: TList; var ConditionID: Integer);
+    procedure SaveTanksCondition(aIsNew: Boolean; aName: string; var aList: TList; var ConditionID: Integer);
     {$ENDREGION}
 
     {$REGION ' FA '}
@@ -535,9 +535,9 @@ begin
   FDatabase.GetAllCondition('TANK', aList);
 end;
 
-procedure TScenario.SaveTanksCondition(aIsNew: Boolean; aName, aOldName: string; aList: TList; var ConditionID: Integer);
+procedure TScenario.SaveTanksCondition(aIsNew: Boolean; aName: string; var aList: TList; var ConditionID: Integer);
 begin
-  FDatabase.SaveTanksCondition(aIsNew, aName, aOldName, aList, ConditionID);
+  FDatabase.SaveTanksCondition(aIsNew, aName, aList, ConditionID);
 end;
 
 {$ENDREGION}
