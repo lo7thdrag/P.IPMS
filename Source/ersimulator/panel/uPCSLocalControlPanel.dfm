@@ -52,11 +52,14 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
         object pnlControl: TPanel
           Left = 636
           Top = 505
-          Width = 358
+          Width = 371
           Height = 260
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 0
           object Image13: TImage
-            Left = 13
+            Left = 18
             Top = 30
             Width = 80
             Height = 60
@@ -398,7 +401,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object Image14: TImage
-            Left = 98
+            Left = 103
             Top = 100
             Width = 80
             Height = 60
@@ -740,7 +743,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object Image15: TImage
-            Left = 183
+            Left = 188
             Top = 30
             Width = 80
             Height = 60
@@ -1082,7 +1085,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object Image16: TImage
-            Left = 13
+            Left = 18
             Top = 100
             Width = 80
             Height = 60
@@ -1424,7 +1427,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object Image17: TImage
-            Left = 98
+            Left = 103
             Top = 30
             Width = 80
             Height = 60
@@ -1766,7 +1769,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object Image18: TImage
-            Left = 183
+            Left = 188
             Top = 100
             Width = 80
             Height = 60
@@ -2108,7 +2111,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object Image19: TImage
-            Left = 268
+            Left = 273
             Top = 100
             Width = 80
             Height = 60
@@ -2450,7 +2453,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object Image20: TImage
-            Left = 13
+            Left = 18
             Top = 170
             Width = 80
             Height = 60
@@ -2792,7 +2795,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object Image21: TImage
-            Left = 98
+            Left = 103
             Top = 170
             Width = 80
             Height = 60
@@ -3134,7 +3137,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object btnStopPS: TSpeedButtonImage
-            Left = 20
+            Left = 25
             Top = 35
             Width = 66
             Height = 49
@@ -3144,7 +3147,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Color = clMaroon
           end
           object btnStartPS: TSpeedButtonImage
-            Left = 105
+            Left = 110
             Top = 35
             Width = 66
             Height = 49
@@ -3154,7 +3157,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Color = clGreen
           end
           object btnSafeties: TSpeedButtonImage
-            Left = 190
+            Left = 195
             Top = 35
             Width = 66
             Height = 49
@@ -3163,7 +3166,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Color = clMaroon
           end
           object btnClutchPS: TSpeedButtonImage
-            Left = 20
+            Left = 25
             Top = 105
             Width = 66
             Height = 49
@@ -3174,7 +3177,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Color = clSilver
           end
           object btnDeclutchPS: TSpeedButtonImage
-            Left = 105
+            Left = 110
             Top = 105
             Width = 66
             Height = 49
@@ -3185,7 +3188,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Color = clSilver
           end
           object btnSafetiesStopPS: TSpeedButtonImage
-            Left = 190
+            Left = 195
             Top = 105
             Width = 66
             Height = 49
@@ -3195,7 +3198,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Color = clGreen
           end
           object btnEmergencStopPS: TSpeedButtonImage
-            Left = 275
+            Left = 280
             Top = 105
             Width = 66
             Height = 49
@@ -3205,7 +3208,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Color = clGreen
           end
           object btnBypassP2P4Open: TSpeedButtonImage
-            Left = 20
+            Left = 25
             Top = 176
             Width = 66
             Height = 49
@@ -3214,7 +3217,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Color = clGreen
           end
           object btnP2P4Closed: TSpeedButtonImage
-            Left = 105
+            Left = 110
             Top = 176
             Width = 66
             Height = 49
@@ -3223,7 +3226,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Color = clSilver
           end
           object lbl31: TLabel
-            Left = 119
+            Left = 124
             Top = 53
             Width = 37
             Height = 13
@@ -3239,7 +3242,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnStartClick
           end
           object lbl32: TLabel
-            Left = 109
+            Left = 114
             Top = 123
             Width = 57
             Height = 13
@@ -3255,7 +3258,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnDeclutchClick
           end
           object lbl44: TLabel
-            Left = 37
+            Left = 42
             Top = 53
             Width = 32
             Height = 13
@@ -3271,7 +3274,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnStopClick
           end
           object lbl45: TLabel
-            Left = 31
+            Left = 36
             Top = 123
             Width = 43
             Height = 13
@@ -3287,7 +3290,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnClutchClick
           end
           object lbl46: TLabel
-            Left = 197
+            Left = 202
             Top = 116
             Width = 52
             Height = 26
@@ -3303,7 +3306,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnSafetiesStopClick
           end
           object lbl47: TLabel
-            Left = 276
+            Left = 281
             Top = 117
             Width = 65
             Height = 26
@@ -3319,7 +3322,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnEmergencStopClick
           end
           object lbl48: TLabel
-            Left = 197
+            Left = 202
             Top = 40
             Width = 52
             Height = 39
@@ -3335,7 +3338,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
           object btnAlarmPropulsion: TVrDemoButton
             Tag = 1
-            Left = 275
+            Left = 276
             Top = 30
             Width = 73
             Height = 25
@@ -3357,16 +3360,17 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object pnlHTELECTRICALWATERHEATERPS: TPanel
-          Left = 750
-          Top = 24
-          Width = 310
-          Height = 441
-          BevelKind = bkFlat
+          Left = 727
+          Top = 72
+          Width = 335
+          Height = 393
           BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 1
           object imgHeaterON_PS: TImage
-            Left = 56
-            Top = 114
+            Left = 70
+            Top = 70
             Width = 80
             Height = 80
             Hint = 'Heater'
@@ -3715,8 +3719,8 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnONClick
           end
           object imgHeaterOff_PS: TImage
-            Left = 171
-            Top = 114
+            Left = 185
+            Top = 70
             Width = 80
             Height = 80
             Hint = 'Heater'
@@ -4064,23 +4068,9 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
             OnClick = btnOFFClick
           end
-          object lblHeater: TLabel
-            Left = 22
-            Top = 40
-            Width = 262
-            Height = 18
-            Alignment = taCenter
-            Caption = 'HT ELECTRICAL WATER HEATER PS'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
           object vrtryswtchHeaterPS: TVrRotarySwitch
-            Left = 31
-            Top = 242
+            Left = 45
+            Top = 198
             Width = 244
             Height = 144
             Hint = 'Heater'
@@ -4100,17 +4090,20 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Color = clGray
+            Color = 3749426
           end
         end
         object pnlIndicator: TPanel
-          Left = 35
+          Left = 16
           Top = 505
-          Width = 591
+          Width = 607
           Height = 260
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 2
           object img17: TImage
-            Left = 419
+            Left = 427
             Top = 100
             Width = 80
             Height = 60
@@ -4452,7 +4445,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img20: TImage
-            Left = 501
+            Left = 509
             Top = 100
             Width = 80
             Height = 60
@@ -4794,7 +4787,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img18: TImage
-            Left = 419
+            Left = 427
             Top = 170
             Width = 80
             Height = 60
@@ -5136,7 +5129,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img21: TImage
-            Left = 501
+            Left = 509
             Top = 170
             Width = 80
             Height = 60
@@ -5478,7 +5471,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object lbl33: TLabel
-            Left = 438
+            Left = 446
             Top = 190
             Width = 42
             Height = 20
@@ -5494,7 +5487,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl34: TLabel
-            Left = 520
+            Left = 528
             Top = 190
             Width = 42
             Height = 20
@@ -5510,7 +5503,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl35: TLabel
-            Left = 520
+            Left = 528
             Top = 120
             Width = 43
             Height = 20
@@ -5526,7 +5519,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl37: TLabel
-            Left = 438
+            Left = 446
             Top = 120
             Width = 43
             Height = 20
@@ -5542,7 +5535,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object img1: TImage
-            Left = 9
+            Left = 17
             Top = 30
             Width = 80
             Height = 60
@@ -5884,7 +5877,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img2: TImage
-            Left = 9
+            Left = 17
             Top = 100
             Width = 80
             Height = 60
@@ -6226,7 +6219,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img3: TImage
-            Left = 9
+            Left = 17
             Top = 170
             Width = 80
             Height = 60
@@ -6568,7 +6561,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img4: TImage
-            Left = 91
+            Left = 99
             Top = 30
             Width = 80
             Height = 60
@@ -6910,7 +6903,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img5: TImage
-            Left = 91
+            Left = 99
             Top = 100
             Width = 80
             Height = 60
@@ -7252,7 +7245,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img6: TImage
-            Left = 91
+            Left = 99
             Top = 170
             Width = 80
             Height = 60
@@ -7594,7 +7587,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img7: TImage
-            Left = 173
+            Left = 181
             Top = 30
             Width = 80
             Height = 60
@@ -7936,7 +7929,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img8: TImage
-            Left = 173
+            Left = 181
             Top = 100
             Width = 80
             Height = 60
@@ -8278,7 +8271,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img9: TImage
-            Left = 173
+            Left = 181
             Top = 170
             Width = 80
             Height = 60
@@ -8620,7 +8613,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img10: TImage
-            Left = 255
+            Left = 263
             Top = 30
             Width = 80
             Height = 60
@@ -8962,7 +8955,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img11: TImage
-            Left = 255
+            Left = 263
             Top = 100
             Width = 80
             Height = 60
@@ -9304,7 +9297,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img12: TImage
-            Left = 255
+            Left = 263
             Top = 170
             Width = 80
             Height = 60
@@ -9646,7 +9639,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img13: TImage
-            Left = 337
+            Left = 345
             Top = 30
             Width = 80
             Height = 60
@@ -9988,7 +9981,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img14: TImage
-            Left = 337
+            Left = 345
             Top = 100
             Width = 80
             Height = 60
@@ -10330,7 +10323,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img15: TImage
-            Left = 337
+            Left = 345
             Top = 170
             Width = 80
             Height = 60
@@ -10672,7 +10665,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img16: TImage
-            Left = 419
+            Left = 427
             Top = 30
             Width = 80
             Height = 60
@@ -11014,7 +11007,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object img19: TImage
-            Left = 501
+            Left = 509
             Top = 30
             Width = 80
             Height = 60
@@ -11356,7 +11349,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object lbl5: TLabel
-            Left = 28
+            Left = 36
             Top = 50
             Width = 42
             Height = 20
@@ -11372,7 +11365,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl6: TLabel
-            Left = 28
+            Left = 36
             Top = 120
             Width = 43
             Height = 20
@@ -11388,7 +11381,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl13: TLabel
-            Left = 30
+            Left = 38
             Top = 190
             Width = 39
             Height = 20
@@ -11404,7 +11397,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl15: TLabel
-            Left = 110
+            Left = 118
             Top = 50
             Width = 42
             Height = 20
@@ -11420,7 +11413,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl16: TLabel
-            Left = 110
+            Left = 118
             Top = 120
             Width = 43
             Height = 20
@@ -11436,7 +11429,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl17: TLabel
-            Left = 112
+            Left = 120
             Top = 190
             Width = 39
             Height = 20
@@ -11452,7 +11445,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl18: TLabel
-            Left = 190
+            Left = 198
             Top = 45
             Width = 47
             Height = 30
@@ -11468,7 +11461,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl19: TLabel
-            Left = 194
+            Left = 202
             Top = 115
             Width = 39
             Height = 30
@@ -11484,7 +11477,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl20: TLabel
-            Left = 195
+            Left = 203
             Top = 185
             Width = 36
             Height = 30
@@ -11500,7 +11493,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl21: TLabel
-            Left = 280
+            Left = 288
             Top = 50
             Width = 30
             Height = 20
@@ -11516,7 +11509,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl22: TLabel
-            Left = 271
+            Left = 279
             Top = 115
             Width = 48
             Height = 30
@@ -11532,7 +11525,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl23: TLabel
-            Left = 274
+            Left = 282
             Top = 185
             Width = 43
             Height = 30
@@ -11548,7 +11541,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl24: TLabel
-            Left = 356
+            Left = 364
             Top = 45
             Width = 43
             Height = 30
@@ -11564,7 +11557,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl25: TLabel
-            Left = 355
+            Left = 363
             Top = 115
             Width = 45
             Height = 30
@@ -11580,7 +11573,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl26: TLabel
-            Left = 364
+            Left = 372
             Top = 195
             Width = 26
             Height = 10
@@ -11596,7 +11589,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl27: TLabel
-            Left = 445
+            Left = 453
             Top = 50
             Width = 29
             Height = 20
@@ -11612,7 +11605,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Transparent = True
           end
           object lbl28: TLabel
-            Left = 513
+            Left = 521
             Top = 50
             Width = 56
             Height = 20
@@ -11629,30 +11622,17 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           end
         end
         object pnlPRELUBPUMPPS: TPanel
-          Left = 35
-          Top = 24
-          Width = 310
-          Height = 441
-          BevelKind = bkFlat
+          Left = 16
+          Top = 72
+          Width = 335
+          Height = 393
           BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 3
-          object lblPrelube: TLabel
-            Left = 75
-            Top = 40
-            Width = 157
-            Height = 18
-            Alignment = taCenter
-            Caption = 'LO PRELUB PUMP PS'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
           object imgPrelubeON_PS: TImage
-            Left = 56
-            Top = 114
+            Left = 70
+            Top = 70
             Width = 80
             Height = 80
             Hint = 'Prelub'
@@ -12001,8 +11981,8 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnONClick
           end
           object imgPrelubeOff_PS: TImage
-            Left = 171
-            Top = 114
+            Left = 185
+            Top = 70
             Width = 80
             Height = 80
             Hint = 'Prelub'
@@ -12351,8 +12331,8 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnOFFClick
           end
           object vrtryswtchPrelubePS: TVrRotarySwitch
-            Left = 31
-            Top = 242
+            Left = 45
+            Top = 198
             Width = 244
             Height = 144
             Hint = 'Prelub'
@@ -12372,20 +12352,21 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Color = clGray
+            Color = 3749426
           end
         end
         object pnlHTPREHEATINGELECTRICPUMP1: TPanel
-          Left = 393
-          Top = 24
-          Width = 310
-          Height = 441
-          BevelKind = bkFlat
+          Left = 372
+          Top = 72
+          Width = 335
+          Height = 393
           BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 4
           object imgPreheatingPumpOn_PS: TImage
-            Left = 56
-            Top = 114
+            Left = 70
+            Top = 70
             Width = 80
             Height = 80
             Hint = 'Preheating Pump'
@@ -12734,8 +12715,8 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnONClick
           end
           object imgPreheatingPumpOff_PS: TImage
-            Left = 171
-            Top = 114
+            Left = 185
+            Top = 70
             Width = 80
             Height = 80
             Hint = 'Preheating Pump'
@@ -13083,23 +13064,9 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
             OnClick = btnOFFClick
           end
-          object lbl4: TLabel
-            Left = 13
-            Top = 40
-            Width = 274
-            Height = 18
-            Alignment = taCenter
-            Caption = 'HT PREHEATING ELECTIRIC PUMP 1 '
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
           object vrtryswtchPumpHeaterPS: TVrRotarySwitch
-            Left = 31
-            Top = 242
+            Left = 45
+            Top = 198
             Width = 244
             Height = 144
             Hint = 'Preheating Pump'
@@ -13119,20 +13086,21 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Color = clGray
+            Color = 3749426
           end
         end
         object pnlSTANDBYPUMPGEARBOXPS: TPanel
-          Left = 1108
-          Top = 24
-          Width = 310
-          Height = 441
-          BevelKind = bkFlat
+          Left = 1083
+          Top = 72
+          Width = 335
+          Height = 393
           BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
           TabOrder = 5
           object imgStandByPumpGBON_PS: TImage
-            Left = 56
-            Top = 114
+            Left = 70
+            Top = 70
             Width = 80
             Height = 80
             Picture.Data = {
@@ -13479,8 +13447,8 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Stretch = True
           end
           object imgStandByPumpGBFault: TImage
-            Left = 171
-            Top = 114
+            Left = 185
+            Top = 70
             Width = 80
             Height = 80
             Picture.Data = {
@@ -13826,23 +13794,9 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               3F3F3F3F3F3F3E3E3E3F3F3F414141404040}
             Stretch = True
           end
-          object lblStandByPumpGB: TLabel
-            Left = 42
-            Top = 40
-            Width = 222
-            Height = 18
-            Alignment = taCenter
-            Caption = 'STANDBY PUMP GEARBOX PS'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
           object vrtryswtchStandByPumpGBPS: TVrRotarySwitch
-            Left = 31
-            Top = 242
+            Left = 45
+            Top = 198
             Width = 244
             Height = 144
             Hint = 'Standby Pump GB'
@@ -13861,107 +13815,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
-            Color = clGray
-          end
-        end
-        object grpPS_CPP1: TGroupBox
-          Left = 1026
-          Top = 505
-          Width = 124
-          Height = 260
-          TabOrder = 6
-          object Label10: TLabel
-            Left = 18
-            Top = 24
-            Width = 88
-            Height = 16
-            Caption = 'CPP Hydraulic'
-            Color = clGray
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label11: TLabel
-            Left = 38
-            Top = 46
-            Width = 47
-            Height = 16
-            Caption = 'PUMP 1'
-            Color = clGray
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object btnPS_Start1: TVrDemoButton
-            Tag = 1
-            Left = 13
-            Top = 196
-            Width = 97
-            Height = 39
-            Hint = 'Pump 1'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Start'
-            TabOrder = 0
-            OnClick = btnCPPClick
-          end
-          object btnPS_Standby1: TVrDemoButton
-            Tag = 1
-            Left = 13
-            Top = 88
-            Width = 97
-            Height = 39
-            Hint = 'Pump 1'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Standby'
-            TabOrder = 1
-            OnClick = btnCPPClick
-          end
-          object btnPS_Stop1: TVrDemoButton
-            Tag = 1
-            Left = 13
-            Top = 142
-            Width = 97
-            Height = 39
-            Hint = 'Pump 1'
-            FontEnter.Charset = DEFAULT_CHARSET
-            FontEnter.Color = clBlack
-            FontEnter.Height = -16
-            FontEnter.Name = 'Arial'
-            FontEnter.Style = [fsBold]
-            FontLeave.Charset = DEFAULT_CHARSET
-            FontLeave.Color = clBlack
-            FontLeave.Height = -13
-            FontLeave.Name = 'Arial'
-            FontLeave.Style = [fsBold]
-            Caption = 'Stop'
-            TabOrder = 2
-            OnClick = btnCPPClick
+            Color = 3749426
           end
         end
         object grpPS_CPP2: TGroupBox
@@ -13969,7 +13823,10 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           Top = 505
           Width = 124
           Height = 260
-          TabOrder = 7
+          Color = 3749426
+          ParentBackground = False
+          ParentColor = False
+          TabOrder = 6
           object Label1: TLabel
             Left = 18
             Top = 24
@@ -14069,7 +13926,10 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           Top = 505
           Width = 124
           Height = 260
-          TabOrder = 8
+          Color = 3749426
+          ParentBackground = False
+          ParentColor = False
+          TabOrder = 7
           object Label3: TLabel
             Left = 18
             Top = 24
@@ -14169,7 +14029,10 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
           Top = 24
           Width = 193
           Height = 741
-          TabOrder = 9
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
+          TabOrder = 8
           object grpRemote: TGroupBox
             Left = 17
             Top = 18
@@ -14356,6 +14219,205 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Font.Name = 'Arial'
               Font.Style = [fsBold]
             end
+          end
+        end
+        object lbl12: TPanel
+          Left = 16
+          Top = 24
+          Width = 335
+          Height = 41
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
+          TabOrder = 9
+          object lblPrelube: TLabel
+            Left = 89
+            Top = 12
+            Width = 157
+            Height = 18
+            Alignment = taCenter
+            Caption = 'LO PRELUB PUMP PS'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
+        object lbl2: TPanel
+          Left = 372
+          Top = 24
+          Width = 335
+          Height = 41
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
+          TabOrder = 10
+          object lbl4: TLabel
+            Left = 30
+            Top = 12
+            Width = 274
+            Height = 18
+            Alignment = taCenter
+            Caption = 'HT PREHEATING ELECTIRIC PUMP 1 '
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
+        object lbl8: TPanel
+          Left = 727
+          Top = 24
+          Width = 335
+          Height = 41
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
+          TabOrder = 11
+          object lblHeater: TLabel
+            Left = 36
+            Top = 12
+            Width = 262
+            Height = 18
+            Alignment = taCenter
+            Caption = 'HT ELECTRICAL WATER HEATER PS'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
+        object lbl14: TPanel
+          Left = 1083
+          Top = 24
+          Width = 335
+          Height = 41
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
+          TabOrder = 12
+          object lblStandByPumpGB: TLabel
+            Left = 56
+            Top = 12
+            Width = 222
+            Height = 18
+            Alignment = taCenter
+            Caption = 'STANDBY PUMP GEARBOX PS'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
+        object lbl3: TPanel
+          Left = 1026
+          Top = 505
+          Width = 124
+          Height = 260
+          BevelOuter = bvNone
+          Color = 3749426
+          ParentBackground = False
+          TabOrder = 13
+          object lbl9: TLabel
+            Left = 18
+            Top = 25
+            Width = 88
+            Height = 16
+            Caption = 'CPP Hydraulic'
+            Color = clGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object lbl30: TLabel
+            Left = 38
+            Top = 47
+            Width = 47
+            Height = 16
+            Caption = 'PUMP 1'
+            Color = clGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object btnPS_Standby1: TVrDemoButton
+            Tag = 1
+            Left = 14
+            Top = 89
+            Width = 97
+            Height = 39
+            Hint = 'Pump 1'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Standby'
+            TabOrder = 0
+            OnClick = btnCPPClick
+          end
+          object btnPS_Stop1: TVrDemoButton
+            Tag = 1
+            Left = 14
+            Top = 143
+            Width = 97
+            Height = 39
+            Hint = 'Pump 1'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Stop'
+            TabOrder = 1
+            OnClick = btnCPPClick
+          end
+          object btnPS_Start1: TVrDemoButton
+            Tag = 1
+            Left = 14
+            Top = 197
+            Width = 97
+            Height = 39
+            Hint = 'Pump 1'
+            FontEnter.Charset = DEFAULT_CHARSET
+            FontEnter.Color = clBlack
+            FontEnter.Height = -16
+            FontEnter.Name = 'Arial'
+            FontEnter.Style = [fsBold]
+            FontLeave.Charset = DEFAULT_CHARSET
+            FontLeave.Color = clBlack
+            FontLeave.Height = -13
+            FontLeave.Name = 'Arial'
+            FontLeave.Style = [fsBold]
+            Caption = 'Start'
+            TabOrder = 2
+            OnClick = btnCPPClick
           end
         end
       end

@@ -34,8 +34,6 @@ type
     imgHeaterON_PS: TImage;
     imgHeaterOff_PS: TImage;
     vrtryswtchHeaterPS: TVrRotarySwitch;
-    lblHeater: TLabel;
-    lblPrelube: TLabel;
     lbl31: TLabel;
     lbl32: TLabel;
     lbl33: TLabel;
@@ -43,7 +41,6 @@ type
     pnlSTANDBYPUMPGEARBOXPS: TPanel;
     imgStandByPumpGBON_PS: TImage;
     imgStandByPumpGBFault: TImage;
-    lblStandByPumpGB: TLabel;
     vrtryswtchStandByPumpGBPS: TVrRotarySwitch;
     tmr1: TTimer;
     lbl35: TLabel;
@@ -56,7 +53,6 @@ type
     pnlHTPREHEATINGELECTRICPUMP1: TPanel;
     imgPreheatingPumpOn_PS: TImage;
     imgPreheatingPumpOff_PS: TImage;
-    lbl4: TLabel;
     vrtryswtchPumpHeaterPS: TVrRotarySwitch;
     btnAlarmPropulsion: TVrDemoButton;
     pgc1: TPageControl;
@@ -177,10 +173,6 @@ type
     lbl81: TLabel;
     vrtryswtchHeaterSB: TVrRotarySwitch;
     pnlLCPPS: TPanel;
-    grpPS_CPP1: TGroupBox;
-    btnPS_Start1: TVrDemoButton;
-    btnPS_Standby1: TVrDemoButton;
-    btnPS_Stop1: TVrDemoButton;
     grpPS_CPP2: TGroupBox;
     btnPS_Start2: TVrDemoButton;
     btnPS_Standby2: TVrDemoButton;
@@ -234,8 +226,6 @@ type
     Label6: TLabel;
     Label8: TLabel;
     Label9: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -261,6 +251,20 @@ type
     Image19: TImage;
     Image20: TImage;
     Image21: TImage;
+    lbl12: TPanel;
+    lblPrelube: TLabel;
+    lbl2: TPanel;
+    lbl8: TPanel;
+    lbl14: TPanel;
+    lbl4: TLabel;
+    lblHeater: TLabel;
+    lblStandByPumpGB: TLabel;
+    lbl3: TPanel;
+    lbl9: TLabel;
+    lbl30: TLabel;
+    btnPS_Standby1: TVrDemoButton;
+    btnPS_Stop1: TVrDemoButton;
+    btnPS_Start1: TVrDemoButton;
     procedure FormCreate(Sender: TObject);
     procedure vrtryswtchChange(Sender: TObject);
     procedure btnONClick(Sender: TObject);
