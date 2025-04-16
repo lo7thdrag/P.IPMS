@@ -56023,7 +56023,7 @@ object frmScenBuilder: TfrmScenBuilder
       object lblAlarm_Fuel: TLabel
         Left = 36
         Top = 185
-        Width = 47
+        Width = 25
         Height = 16
         Caption = 'Fuel'
         Font.Charset = DEFAULT_CHARSET
@@ -56036,7 +56036,7 @@ object frmScenBuilder: TfrmScenBuilder
       object lblAlarm_Domest: TLabel
         Left = 36
         Top = 214
-        Width = 47
+        Width = 49
         Height = 16
         Caption = 'Domest'
         Font.Charset = DEFAULT_CHARSET
@@ -56049,7 +56049,7 @@ object frmScenBuilder: TfrmScenBuilder
       object lblAlarm_HVAC: TLabel
         Left = 36
         Top = 242
-        Width = 47
+        Width = 36
         Height = 16
         Caption = 'HVAC'
         Font.Charset = DEFAULT_CHARSET
@@ -56062,7 +56062,7 @@ object frmScenBuilder: TfrmScenBuilder
       object lblAlarm_FFDC: TLabel
         Left = 36
         Top = 271
-        Width = 47
+        Width = 29
         Height = 16
         Caption = 'FFDC'
         Font.Charset = DEFAULT_CHARSET
@@ -56075,7 +56075,7 @@ object frmScenBuilder: TfrmScenBuilder
       object lblAlarm_Navigation: TLabel
         Left = 36
         Top = 299
-        Width = 47
+        Width = 68
         Height = 16
         Caption = 'Navigation'
         Font.Charset = DEFAULT_CHARSET
@@ -56088,7 +56088,7 @@ object frmScenBuilder: TfrmScenBuilder
       object lblAlarm_Ballast: TLabel
         Left = 36
         Top = 327
-        Width = 47
+        Width = 43
         Height = 16
         Caption = 'Ballast'
         Font.Charset = DEFAULT_CHARSET
@@ -56101,7 +56101,7 @@ object frmScenBuilder: TfrmScenBuilder
       object lblAlarm_IPMS: TLabel
         Left = 36
         Top = 356
-        Width = 47
+        Width = 32
         Height = 16
         Caption = 'IPMS'
         Font.Charset = DEFAULT_CHARSET
@@ -56114,7 +56114,7 @@ object frmScenBuilder: TfrmScenBuilder
       object lblAlarm_IAS: TLabel
         Left = 36
         Top = 384
-        Width = 47
+        Width = 23
         Height = 16
         Caption = 'IAS'
         Font.Charset = DEFAULT_CHARSET
@@ -56125,8 +56125,8 @@ object frmScenBuilder: TfrmScenBuilder
         ParentFont = False
       end
       object lblRole_IPMS: TLabel
-        Left = 216
-        Top = 32
+        Left = 253
+        Top = 41
         Width = 32
         Height = 16
         Caption = 'IPMS'
@@ -56138,8 +56138,8 @@ object frmScenBuilder: TfrmScenBuilder
         ParentFont = False
       end
       object lblRole_AUX: TLabel
-        Left = 365
-        Top = 32
+        Left = 387
+        Top = 41
         Width = 27
         Height = 16
         Caption = 'AUX'
@@ -56151,8 +56151,8 @@ object frmScenBuilder: TfrmScenBuilder
         ParentFont = False
       end
       object lblRole_PCS: TLabel
-        Left = 510
-        Top = 32
+        Left = 514
+        Top = 41
         Width = 24
         Height = 16
         Caption = 'PCS'
@@ -56164,8 +56164,8 @@ object frmScenBuilder: TfrmScenBuilder
         ParentFont = False
       end
       object lblRole_E: TLabel
-        Left = 651
-        Top = 32
+        Left = 652
+        Top = 41
         Width = 7
         Height = 16
         Caption = 'E'
@@ -56178,96 +56178,96 @@ object frmScenBuilder: TfrmScenBuilder
       end
       object CheckBox1: TCheckBox
         Tag = 1
-        Left = 223
-        Top = 64
+        Left = 260
+        Top = 71
         Width = 17
         Height = 17
         TabOrder = 0
       end
       object CheckBox2: TCheckBox
         Tag = 2
-        Left = 223
-        Top = 90
+        Left = 260
+        Top = 99
         Width = 17
         Height = 17
         TabOrder = 1
       end
       object CheckBox3: TCheckBox
         Tag = 3
-        Left = 223
-        Top = 116
+        Left = 260
+        Top = 128
         Width = 17
         Height = 17
         TabOrder = 2
       end
       object CheckBox4: TCheckBox
         Tag = 4
-        Left = 223
-        Top = 142
+        Left = 260
+        Top = 156
         Width = 17
         Height = 17
         TabOrder = 3
       end
       object CheckBox5: TCheckBox
         Tag = 5
-        Left = 223
-        Top = 168
+        Left = 260
+        Top = 184
         Width = 17
         Height = 17
         TabOrder = 4
       end
       object CheckBox6: TCheckBox
         Tag = 6
-        Left = 223
-        Top = 194
+        Left = 260
+        Top = 213
         Width = 17
         Height = 17
         TabOrder = 5
       end
       object CheckBox7: TCheckBox
         Tag = 7
-        Left = 223
-        Top = 220
+        Left = 260
+        Top = 241
         Width = 17
         Height = 17
         TabOrder = 6
       end
       object CheckBox8: TCheckBox
         Tag = 8
-        Left = 223
-        Top = 246
+        Left = 260
+        Top = 270
         Width = 17
         Height = 17
         TabOrder = 7
       end
       object CheckBox9: TCheckBox
         Tag = 9
-        Left = 223
-        Top = 272
+        Left = 260
+        Top = 298
         Width = 17
         Height = 17
         TabOrder = 8
       end
       object CheckBox10: TCheckBox
         Tag = 10
-        Left = 223
-        Top = 298
+        Left = 260
+        Top = 326
         Width = 17
         Height = 17
         TabOrder = 9
       end
       object CheckBox11: TCheckBox
         Tag = 11
-        Left = 223
-        Top = 324
+        Left = 260
+        Top = 355
         Width = 17
         Height = 17
         TabOrder = 10
       end
       object CheckBox12: TCheckBox
         Tag = 12
-        Left = 223
-        Top = 350
+        Left = 260
+        Top = 383
         Width = 17
         Height = 17
         Enabled = False
@@ -56275,96 +56275,96 @@ object frmScenBuilder: TfrmScenBuilder
       end
       object CheckBox13: TCheckBox
         Tag = 1
-        Left = 370
-        Top = 64
+        Left = 392
+        Top = 71
         Width = 17
         Height = 17
         TabOrder = 12
       end
       object CheckBox14: TCheckBox
         Tag = 2
-        Left = 370
-        Top = 89
+        Left = 392
+        Top = 99
         Width = 17
         Height = 17
         TabOrder = 13
       end
       object CheckBox15: TCheckBox
         Tag = 3
-        Left = 370
-        Top = 115
+        Left = 392
+        Top = 128
         Width = 17
         Height = 17
         TabOrder = 14
       end
       object CheckBox16: TCheckBox
         Tag = 4
-        Left = 370
-        Top = 141
+        Left = 392
+        Top = 156
         Width = 17
         Height = 17
         TabOrder = 15
       end
       object CheckBox17: TCheckBox
         Tag = 5
-        Left = 370
-        Top = 167
+        Left = 392
+        Top = 184
         Width = 17
         Height = 17
         TabOrder = 16
       end
       object CheckBox18: TCheckBox
         Tag = 6
-        Left = 370
-        Top = 193
+        Left = 392
+        Top = 213
         Width = 17
         Height = 17
         TabOrder = 17
       end
       object CheckBox19: TCheckBox
         Tag = 7
-        Left = 370
-        Top = 219
+        Left = 392
+        Top = 241
         Width = 17
         Height = 17
         TabOrder = 18
       end
       object CheckBox20: TCheckBox
         Tag = 8
-        Left = 370
-        Top = 245
+        Left = 392
+        Top = 270
         Width = 17
         Height = 17
         TabOrder = 19
       end
       object CheckBox21: TCheckBox
         Tag = 9
-        Left = 370
-        Top = 271
+        Left = 392
+        Top = 298
         Width = 17
         Height = 17
         TabOrder = 20
       end
       object CheckBox22: TCheckBox
         Tag = 10
-        Left = 370
-        Top = 297
+        Left = 392
+        Top = 326
         Width = 17
         Height = 17
         TabOrder = 21
       end
       object CheckBox23: TCheckBox
         Tag = 11
-        Left = 370
-        Top = 323
+        Left = 392
+        Top = 355
         Width = 17
         Height = 17
         TabOrder = 22
       end
       object CheckBox24: TCheckBox
         Tag = 12
-        Left = 370
-        Top = 349
+        Left = 392
+        Top = 383
         Width = 17
         Height = 17
         Enabled = False
@@ -56372,96 +56372,96 @@ object frmScenBuilder: TfrmScenBuilder
       end
       object CheckBox25: TCheckBox
         Tag = 1
-        Left = 514
-        Top = 64
+        Left = 518
+        Top = 71
         Width = 17
         Height = 17
         TabOrder = 24
       end
       object CheckBox26: TCheckBox
         Tag = 2
-        Left = 514
-        Top = 89
+        Left = 518
+        Top = 99
         Width = 17
         Height = 17
         TabOrder = 25
       end
       object CheckBox27: TCheckBox
         Tag = 3
-        Left = 514
-        Top = 115
+        Left = 518
+        Top = 128
         Width = 17
         Height = 17
         TabOrder = 26
       end
       object CheckBox28: TCheckBox
         Tag = 4
-        Left = 514
-        Top = 141
+        Left = 518
+        Top = 156
         Width = 17
         Height = 17
         TabOrder = 27
       end
       object CheckBox29: TCheckBox
         Tag = 5
-        Left = 514
-        Top = 167
+        Left = 518
+        Top = 184
         Width = 17
         Height = 17
         TabOrder = 28
       end
       object CheckBox30: TCheckBox
         Tag = 6
-        Left = 514
-        Top = 193
+        Left = 518
+        Top = 213
         Width = 17
         Height = 17
         TabOrder = 29
       end
       object CheckBox31: TCheckBox
         Tag = 7
-        Left = 514
-        Top = 219
+        Left = 518
+        Top = 241
         Width = 17
         Height = 17
         TabOrder = 30
       end
       object CheckBox32: TCheckBox
         Tag = 8
-        Left = 514
-        Top = 245
+        Left = 518
+        Top = 270
         Width = 17
         Height = 17
         TabOrder = 31
       end
       object CheckBox33: TCheckBox
         Tag = 9
-        Left = 514
-        Top = 271
+        Left = 518
+        Top = 298
         Width = 17
         Height = 17
         TabOrder = 32
       end
       object CheckBox34: TCheckBox
         Tag = 10
-        Left = 514
-        Top = 297
+        Left = 518
+        Top = 326
         Width = 17
         Height = 17
         TabOrder = 33
       end
       object CheckBox35: TCheckBox
         Tag = 11
-        Left = 514
-        Top = 323
+        Left = 518
+        Top = 355
         Width = 17
         Height = 17
         TabOrder = 34
       end
       object CheckBox36: TCheckBox
         Tag = 12
-        Left = 514
-        Top = 349
+        Left = 518
+        Top = 383
         Width = 17
         Height = 17
         Enabled = False
@@ -56469,96 +56469,96 @@ object frmScenBuilder: TfrmScenBuilder
       end
       object CheckBox37: TCheckBox
         Tag = 1
-        Left = 646
-        Top = 64
+        Left = 647
+        Top = 71
         Width = 17
         Height = 17
         TabOrder = 36
       end
       object CheckBox38: TCheckBox
         Tag = 2
-        Left = 646
-        Top = 90
+        Left = 647
+        Top = 99
         Width = 17
         Height = 17
         TabOrder = 37
       end
       object CheckBox39: TCheckBox
         Tag = 3
-        Left = 646
-        Top = 116
+        Left = 647
+        Top = 128
         Width = 17
         Height = 17
         TabOrder = 38
       end
       object CheckBox40: TCheckBox
         Tag = 4
-        Left = 646
-        Top = 142
+        Left = 647
+        Top = 156
         Width = 17
         Height = 17
         TabOrder = 39
       end
       object CheckBox41: TCheckBox
         Tag = 5
-        Left = 646
-        Top = 168
+        Left = 647
+        Top = 184
         Width = 17
         Height = 17
         TabOrder = 40
       end
       object CheckBox42: TCheckBox
         Tag = 6
-        Left = 646
-        Top = 194
+        Left = 647
+        Top = 213
         Width = 17
         Height = 17
         TabOrder = 41
       end
       object CheckBox43: TCheckBox
         Tag = 7
-        Left = 646
-        Top = 220
+        Left = 647
+        Top = 241
         Width = 17
         Height = 17
         TabOrder = 42
       end
       object CheckBox44: TCheckBox
         Tag = 8
-        Left = 646
-        Top = 246
+        Left = 647
+        Top = 270
         Width = 17
         Height = 17
         TabOrder = 43
       end
       object CheckBox45: TCheckBox
         Tag = 9
-        Left = 646
-        Top = 272
+        Left = 647
+        Top = 298
         Width = 17
         Height = 17
         TabOrder = 44
       end
       object CheckBox46: TCheckBox
         Tag = 10
-        Left = 646
-        Top = 298
+        Left = 647
+        Top = 326
         Width = 17
         Height = 17
         TabOrder = 45
       end
       object CheckBox47: TCheckBox
         Tag = 11
-        Left = 646
-        Top = 324
+        Left = 647
+        Top = 355
         Width = 17
         Height = 17
         TabOrder = 46
       end
       object CheckBox48: TCheckBox
         Tag = 12
-        Left = 646
-        Top = 350
+        Left = 647
+        Top = 383
         Width = 17
         Height = 17
         Enabled = False
