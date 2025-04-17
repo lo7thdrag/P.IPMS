@@ -85,7 +85,7 @@ type
     Label3: TLabel;
     lstSession: TListBox;
     edtSessionName: TEdit;
-    mmo1: TMemo;
+    mmoSessionDiscription: TMemo;
     lbl4: TLabel;
     lblSessionID: TLabel;
     pnlPMS: TPanel;
@@ -387,6 +387,7 @@ type
     img2: TImage;
     img3: TImage;
     btnClearSession: TRzBmpButton;
+    btnEditSession: TRzBmpButton;
 
     {$REGION ' Form Section '}
     procedure FormCreate(Sender: TObject);
@@ -404,11 +405,11 @@ type
     {$ENDREGION}
 
     {$REGION ' Session Section '}
+    procedure lstSessionClick(Sender: TObject);
     procedure btnRefreshSessionClick(Sender: TObject);
     procedure btnNewSessionClick(Sender: TObject);
-    procedure btnEditSessionClick(Sender: TObject);
     procedure btnDeleteSessionClick(Sender: TObject);
-    procedure btnSaveSessionClick(Sender: TObject);
+    procedure btnClearSessionClick(Sender: TObject);
     {$ENDREGION}
 
     {$REGION ' PMS Section '}
@@ -448,6 +449,7 @@ type
     {$ENDREGION}
 
     {$REGION ' FA Section '}
+    procedure lstFAClick(Sender: TObject);
     procedure btnRefreshFAClick(Sender: TObject);
     procedure btnNewFAClick(Sender: TObject);
     procedure btnEditFAClick(Sender: TObject);
@@ -465,16 +467,21 @@ type
     procedure act2Execute(Sender: TObject);
     procedure act4Execute(Sender: TObject);
     procedure btnMenuClick(Sender: TObject);
-    procedure lstFAClick(Sender: TObject);
+    procedure btnEditSessionClick(Sender: TObject);
 
   private
     FScenarioID : Integer;
+    FSessionID : Integer;
     FPMSConditionID : Integer;
     FPCSConditionID : Integer;
     FElementConditionID : Integer;
     FTANKConditionID : Integer;
     FFAConditionID : Integer;
+
     FSelectedConditionID : integer;
+
+    FSessionName : string;
+    SessionNameBuffer : string;
 
     FPMSConditionName : string;
     PMSNameBuffer : string;
@@ -491,38 +498,37 @@ type
     FPmsIDBuffer : array [0..8] of Integer;
     FFaIDBuffer : array [1..4] of Integer;
 
+    //Global
+    function GetNumberOfKoma(s : string): Boolean;
+
     procedure ClearTabPickScen(value : Integer);
+
+    {$REGION ' Session Section '}
+    procedure UpdateSessionList;
+    {$ENDREGION}
 
     {$REGION ' PMS Section '}
     function CekPMSInput: Boolean;
-
     procedure UpdatePMSList;
     {$ENDREGION}
 
     {$REGION ' PMS Section '}
     function CekPCSInput: Boolean;
-
     procedure UpdatePCSList;
     {$ENDREGION}
 
     {$REGION ' TANK Section '}
     function CekTANKInput: Boolean;
-
     procedure UpdateTankList;
     {$ENDREGION}
 
     {$REGION ' FA Section '}
     function CekFAInput: Boolean;
-
     procedure UpdateFAList;
     {$ENDREGION}
 
-    //Global
-    function GetNumberOfKoma(s : string): Boolean;
-
   public
     procedure UpdateScenarioList;
-    procedure UpdateSessionList;
 
   end;
 
@@ -738,7 +744,7 @@ begin
     MessageDlg('Delete Success', mtInformation, [mbOK], 0);
 
     lblSessionID.Caption := '0';
-    mmo1.Lines.Clear;
+//    mmo1.Lines.Clear;
 //    edt1.Text := '';
 
     Screen.Cursor := crDefault;
@@ -762,7 +768,7 @@ begin
       InstructorSys.Database.DeleteSession(False,StrToInt(lblSessionID.Caption));
 
       lblSessionID.Caption := '0';
-      mmo1.Lines.Clear;
+//      mmo1.Lines.Clear;
 //      edt1.Text := '';
 
       MessageDlg('Delete "' + conname + '" Success', mtInformation, [mbOK], 0);
@@ -1315,273 +1321,120 @@ end;
 
 {$REGION ' Session Section '}
 
+procedure TfrmScenBuilder.lstSessionClick(Sender: TObject);
+var
+  i : Integer;
+  sessionDataTemp : TSession_Data;
+
+begin
+  if lstSession.ItemIndex = -1 then
+  begin
+    btnNewSessionClick(nil);
+    Exit;
+  end;
+
+  with lstSession do
+  begin
+    for i := Items.Count - 1 downto 0 do
+    begin
+      if Selected[i] then
+      begin
+        FSessionName := Items[i];
+        sessionDataTemp := InstructorSys.Scenario.getSession(FSessionName);
+        FSessionID := sessionDataTemp.SessionID;
+        Break;
+      end;
+    end;
+  end;
+end;
+
 procedure TfrmScenBuilder.btnRefreshSessionClick(Sender: TObject);
 begin
-  UpdatePMSList;
+  UpdateSessionList;
 end;
 
 procedure TfrmScenBuilder.btnNewSessionClick(Sender: TObject);
 begin
-//  FCondition_ID := 0;
-//
-//  edtCondName.Text := '';
-//  rbAutGen1.Checked := True;
-//  rbAutGen2.Checked := True;
-//  rbAutGen3.Checked := True;
-//  rbAutGen4.Checked := True;
-
-  chkEngine1.Checked := True;
-  chkEngine2.Checked := False;
-  chkEngine3.Checked := False;
-  chkEngine4.Checked := False;
-
-  chkG1Pref.Checked := False;
-  chkG2Pref.Checked := False;
-  chkG3Pref.Checked := False;
-  chkG4Pref.Checked := False;
-
-//  rbAutInn1.Checked := True;
-//  rbAutInn2.Checked := True;
+  FSessionID := 0;
+  FSessionName := '';
+  SessionNameBuffer := '';
+  edtSessionName.Text := '';
+  mmoSessionDiscription.Clear;
 end;
 
 procedure TfrmScenBuilder.btnEditSessionClick(Sender: TObject);
 var
-  pmsNames : TStrings;
-  pmsData : TPMSCond_Data;
-  pmsList : TList;
+  sessionDataTemp : TSession_Data;
+  pmsListTemp : TList;
   i : Integer;
 begin
-//  if not Assigned(frmAvailPMSCondition)  then
-//    frmAvailPMSCondition := TfrmAvailPMSCondition.Create(Self);
-//
-//  pmsList := nil;
-//  pmsNames := nil;
-//  InstructorSys.Scenario.GetPMSConditions(pmsNames);
-//  frmAvailPMSCondition.SetAvailableCondition(pmsNames);
-//  pmsNames.Free;
-//
-//  if frmAvailPMSCondition.ShowModal = mrOk then
-//  begin
-//    if frmAvailPMSCondition.PMSCondName = '' then
-//      Exit;
-//
-//    FCondition_ID := InstructorSys.Scenario.GetConditionID(frmAvailPMSCondition.PMSCondName);
-//
-//    InstructorSys.Scenario.GetPMSCondition(FCondition_ID, pmsList);
-//
-//    if pmsList.Count = 0 then
-//      Exit;
-//
-//    edtCondName.Text := frmAvailPMSCondition.PMSCondName;
-//
-//    {untuk flag ketika update dengan nama yang berbeda}
-//    CondNameBuffer := frmAvailPMSCondition.PMSCondName;
-//
-//    for i := 0 to pmsList.Count - 1 do
-//    begin
-//      pmsData := TPMSCond_Data(pmsList.Items[i]);
-//
-//      case i of
-//        0:
-//        begin
-//          SetMode(1, pmsData.PMS_Mode);
-//          chkEngine1.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG1Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(1, pmsData.PMS_CB);
-//        end;
-//        1:
-//        begin
-//          SetMode(2, pmsData.PMS_Mode);
-//          chkEngine2.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG2Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(2, pmsData.PMS_CB);
-//        end;
-//        2:
-//        begin
-//          SetMode(3, pmsData.PMS_Mode);
-//          chkEngine3.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG3Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(3, pmsData.PMS_CB);
-//        end;
-//        3:
-//        begin
-//          SetMode(4, pmsData.PMS_Mode);
-//          chkEngine4.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG4Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(4, pmsData.PMS_CB);
-//        end;
-//        4:
-//        begin
-//          SetMode(5, pmsData.PMS_Mode);
-//          chkEngine5.Checked := (pmsData.PMS_OnOff = 1);
-//          SetCB(5, pmsData.PMS_CB);
-//        end;
-//        5:
-//        begin
-//          SetMode(6, pmsData.PMS_SWB_MSBIntrMode);
-//          SetCB(6, pmsData.PMS_SWB_MsbCBIntr);
-//        end;
-//        6:
-//        begin
-//          SetMode(7, pmsData.PMS_SWB_MSBIntrMode);
-//          SetCB(7, pmsData.PMS_SWB_MsbCBIntr);
-//        end;
-//        7:
-//        begin
-//          SetMode(8, pmsData.PMS_SWB_ESBIntrMode);
-//          SetCB(8, pmsData.PMS_SWB_EsbCBIntr);
-//        end;
-//      end;
-//    end;
-//
-//    pmsList.Free;
-//  end;
+
+  if FSessionID = 0 then
+    Exit;
+
+  sessionDataTemp := InstructorSys.Scenario.getSession(FSessionName);
+
+  if not Assigned(sessionDataTemp) then
+    Exit;
+
+  mmoSessionDiscription.Clear;
+
+  edtSessionName.Text := sessionDataTemp.SessionName;
+
+  mmoSessionDiscription.Lines.Add('Session ' + IntToStr(sessionDataTemp.SessionID) + ' from ' + sessionDataTemp.OriginalScenario + ' scenario');
+  mmoSessionDiscription.Lines.Add('Started at ' + DateTimeToStr(sessionDataTemp.SessionStart));
+  mmoSessionDiscription.Lines.Add('Stopped at ' + DateTimeToStr(sessionDataTemp.SessionStop));
+  lblSessionID.Caption := IntToStr(sessionDataTemp.SessionID);
 end;
 
 procedure TfrmScenBuilder.btnDeleteSessionClick(Sender: TObject);
-var
-  conname : string;
 begin
-//  if FCondition_ID = 0 then
-//    Exit;
-//
-//  conname := edtCondName.Text;
-//
-//  if (MessageDlg('Are You Sure To Delete "' + edtCondName.Text + '" Condition ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
-//  begin
-//    if InstructorSys.Scenario.DeletePMSCondition(FCondition_ID) then
-//    begin
-//      actNewExecute(nil);
-//      MessageDlg('Delete "' + conname + '" Condition Success', mtInformation, [mbOK], 0)
-//    end
-//    else
-//      MessageDlg('Delete "' + conname + '" Condition Failed', mtError, [mbOK], 0);
-//  end;
+  if FSessionID = 0 then
+    Exit;
+
+  if (MessageDlg('Are You Sure To Delete "' + edtSessionName.Text + '" ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
+  begin
+    InstructorSys.Database.DeleteSession(False,FSessionID);
+    btnNewSessionClick(nil);
+    MessageDlg('Delete "' + edtSessionName.Text + '" Condition Success', mtInformation, [mbOK], 0)
+  end;
 
 end;
 
-procedure TfrmScenBuilder.btnSaveSessionClick(Sender: TObject);
-var
-  pmsData : TPMSCond_Data;
-  i, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB,
-  StateRunFull, StateRunFwd, StateRunAft : Integer;
-  pmsName : string;
-  PMSList : TList;
-  ConditionID : Integer;
+procedure TfrmScenBuilder.btnClearSessionClick(Sender: TObject);
 begin
-//  if Trim(edtCondName.Text) = '' then
-//  begin
-//    lblWarning2.Caption := '* Condition Name Is Empty, Please Insert Condition Name';
-//    lblWarning2.Visible := True;
-//    Exit;
-//  end;
-//
-//  if FCondition_ID = 0 then
-//  begin
-//    if InstructorSys.Scenario.GetConditionID(edtCondName.Text) > 0 then
-//    begin
-//      lblWarning2.Caption := '* Condition Name Is Already In Use, Please Use Another Condition Name';
-//      lblWarning2.Visible := True;
-//      Exit;
-//    end;
-//
-//    PMSList := TList.Create;
-//
-//    for i := 1 to 9 do
-//    begin
-//      GetPMSInfo(i, pmsName, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB);
-//      GetPMSVarInfo(i, StateRunFull, StateRunFwd, StateRunAft);
-//
-//      pmsData := TPMSCond_Data.Create;
-//      pmsData.PMS_Name := pmsName;
-//      pmsData.PMS_Type := pmsType;
-//
-//      if i <= 5 then {generator}
-//      begin
-//        pmsData.PMS_Mode := pmsMode;
-//        pmsData.PMS_State := 1;
-//        pmsData.PMS_OnOff := pmsEngine;
-//        pmsData.PMS_Pref := pmsPref;
-//        pmsData.PMS_CB := pmsCB;
-//      end
-//      else if i = 8 then {Switchboard Emergency}
-//      begin
-//        pmsData.PMS_SWB_ESBIntrMode := pmsMode;
-//        pmsData.PMS_SWB_EsbCBIntr := pmsCB;
-//      end
-//      else if i = 9 then {Variable}
-//      begin
-//        pmsData.PMS_FirstLoad := 1;
-//        pmsData.PMS_StateRunFull := StateRunFull;
-//        pmsData.PMS_StateRunFwd := StateRunFwd;
-//        pmsData.PMS_StateRunAft := StateRunAft;
-//      end
-//      else {Switchboard}
-//      begin
-//        pmsData.PMS_SWB_MSBIntrMode := pmsMode;
-//        pmsData.PMS_SWB_MsbCBIntr := pmsCB;
-//      end;
-//
-//      PMSList.Add(pmsData);
-//    end;
-//    InstructorSys.Scenario.SavePMSCondition(True, edtCondName.Text, PMSList, ConditionID);
-//    MessageDlg('"' + edtCondName.Text + '" Condition Has Been Saved', mtInformation, [mbOK], 0);
-//    actNewExecute(nil);
-//  end
-//  else if FCondition_ID > 0 then
-//  begin
-//    if CondNameBuffer <> edtCondName.Text then
-//    begin
-//      ShowMessage('Can Not Update PMS Condition With a Different Name');
-//      Exit;
-//    end;
-//
-//    PMSList := TList.Create;
-//
-//    for i := 1 to 9 do
-//    begin
-//      GetPMSInfo(i, pmsName, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB);
-//
-//      pmsData := TPMSCond_Data.Create;
-//      pmsData.PMS_ID := InstructorSys.Scenario.GetPMSCondID(FCondition_ID, i);
-//      pmsData.PMS_Name := pmsName;
-//      pmsData.PMS_Type := pmsType;
-//
-//      if i <= 5 then {generator}
-//      begin
-//        pmsData.PMS_Mode := pmsMode;
-//        pmsData.PMS_State := 1;
-//        pmsData.PMS_OnOff := pmsEngine;
-//        pmsData.PMS_Pref := pmsPref;
-//        pmsData.PMS_CB := pmsCB;
-//      end
-//      else if i >= 8 then {Switchboard Emergency}
-//      begin
-//        pmsData.PMS_SWB_ESBIntrMode := pmsMode;
-//        pmsData.PMS_SWB_EsbCBIntr := pmsCB;
-//      end
-//      else if i = 9 then {Variable}
-//      begin
-//        pmsData.PMS_FirstLoad := 1;
-//        pmsData.PMS_StateRunFull := StateRunFull;
-//        pmsData.PMS_StateRunFwd := StateRunFwd;
-//        pmsData.PMS_StateRunAft := StateRunAft;
-//      end
-//      else {Switchboard}
-//      begin
-//        pmsData.PMS_SWB_MSBIntrMode := pmsMode;
-//        pmsData.PMS_SWB_MsbCBIntr := pmsCB;
-//      end;
-//
-//      pmsData.Condition_ID := FCondition_ID;
-//
-//      PMSList.Add(pmsData);
-//    end;
-//
-//    InstructorSys.Scenario.SavePMSCondition(False, edtCondName.Text, PMSList, ConditionID);
-//    MessageDlg('"' + edtCondName.Text + '" Condition Has Been Updated', mtInformation, [mbOK], 0);
-//    actNewExecute(nil);
-//  end;
+  if FSessionID = 0 then
+    Exit;
+
+  if (MessageDlg('Are You Sure To Delete "' + edtSessionName.Text + '" ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
+  begin
+    InstructorSys.Database.DeleteSession(True,FSessionID);
+    btnNewSessionClick(nil);
+    MessageDlg('Delete "' + edtSessionName.Text + '" Condition Success', mtInformation, [mbOK], 0)
+  end;
+end;
+
+procedure TfrmScenBuilder.UpdateSessionList;
+var
+  i : Integer;
+  tempList : TStrings;
+
+begin
+  tempList := nil;
+  InstructorSys.Scenario.GetAllSessions(tempList);
+
+  if not Assigned(tempList) then
+    Exit;
+
+  if lstSession.Count > 0 then
+    lstSession.Clear;
+
+  for i := 0 to tempList.Count - 1 do
+  begin
+    lstSession.Items.Add(tempList[i]);
+  end;
+
+  tempList.Free;
 end;
 
 {$ENDREGION}
@@ -3377,29 +3230,6 @@ begin
 //  begin
 //    lstAvail.Items.Add(tempList[i]);
 //  end;
-
-  tempList.Free;
-end;
-
-procedure TfrmScenBuilder.UpdateSessionList;
-var
-  i : Integer;
-  tempList : TStrings;
-
-begin
-  tempList := nil;
-  InstructorSys.Scenario.GetAllPMSConditions(tempList);
-
-  if not Assigned(tempList) then
-    Exit;
-
-  if lstPMS.Count > 0 then
-//  lstAvail.Clear;
-
-  for i := 0 to tempList.Count - 1 do
-  begin
-    lstPMS.Items.Add(tempList[i]);
-  end;
 
   tempList.Free;
 end;

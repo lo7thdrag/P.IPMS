@@ -143,7 +143,7 @@ begin
   lstAvailSession.Clear;
   scenarios := nil;
 
-  InstructorSys.Scenario.getSessions(scenarios);
+  InstructorSys.Scenario.GetAllSessions(scenarios);
   lstAvailSession.Items.AddStrings(scenarios);
 
   scenarios.Free;

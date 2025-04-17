@@ -15,79 +15,17 @@ type
     FListeners : TListeners;
     FOnExceptionMessage : TGetStrProc;
     procedure SetOnExceptionMessage(const Value: TGetStrProc);
+
   public
+
     constructor Create;
     destructor Destroy; override;
 
     function ConnectDB: Boolean;
 
-    procedure PopulateController;
-    procedure PopulateElements(CtrlID: string);
-    function PopulateDefaultElementParameter: TList;
-    procedure PopulateLoggedElement(var elementTable: TElementTables);
-    procedure getValueParameter(const aElementID: string; var aList: Tlist); // instructor
-    procedure getAllElementIDs(var list: TStrings);
-    procedure getFieldsTrend(var list: TList);
-    procedure getValueLogs(TableName, FieldName: string; SessionID: Integer;
-      alist: TList);
-    procedure getRS_Parameters(aSession: Integer; var list: Tlist);
-    procedure getRS_CommandHistory(aSession: Integer; var list: Tlist);
-    function getElementTableName(ElementID: string): string;
-
-    function GetElement(ElementID: string): TElementData;
-    function GetCIP_INFO(aElementType: string): TCIPInfo;
-    procedure GetAll_IPMSLog_Data(aList: TList);
-    function GetCAPData(aElementID: string): TCAP_Data;
-    procedure GetAvailableLogTimeStamp(aTimeType: string; aAvailList: TStrings);
-
-    { ACS Control }
-    procedure GetAllLocation(var locationList: TList);
-    procedure GetAllAlarm(var alarmMsgList: TList);
-    procedure GetAllFault(var faultMsgList: TList);
-
-    function GetLocationDetail(aLocDetail: string): TACSData;
-    function GetLocationByRoomID(aLocByRoom : string): TACSData;
-    function GetAlarmMsgGRM(aAlarmID : Byte): TACSData;
-    function GetFaultMsgGRM(aFaultID : Byte): TACSData;
-    function GetAlarmComment(alarmMsg: string): TACSData;
-    function GetFaultComment(faultMsg: string): TACSData;
-    { end }
-
-    { scenario }
-    procedure GetAllScenario(var aScenarios: TStrings);
+    {$REGION ' Session Section '}
     procedure GetAllSession(var aScenarios: TStrings);
-    function GetSession(sessionName: string): TSession_Data; overload;
-    function GetSession(sessionID: Integer): TSession_Data; overload;
-    procedure DeleteSession(isAll: Boolean; sessionID: Integer = 0);
-    procedure SnapshotScenario(newName: string; sessionID: Integer);
-    function SaveScenario(aID: Integer; aName, aDescription: string;
-      intArr: array of Integer): Integer;
-    function SaveConditionScenario(aScenarioID: Integer): Integer;
-    function DeleteScenario(aID: Integer): Boolean;
-    function GetScenarioByName(aName: string): TScenario_Data;
-    function GetScenarioByID(aID: Integer): TScenario_Data;
-    function GetScenarioDesc(aName: string): string;
-    function GetScenarioConditions(aName: string;
-      aType: string = 'ALL'): TStrings;
-    function GetScenarioIDByName(aName: string;
-      out aScenarioType: Integer): Integer;
-    function GetConditions(aName: string; aType: string = 'ALL'): TStrings;
-    procedure GetPMSCondition(aName: string; var l: TList); // list of TScenarioPMSCondition
-    procedure GetRS_PMSCondition(aSessionID: Integer; var l: TList); // list of TScenarioPMSCondition
-    procedure GetPCSCondition(aName: string; var l: TList); //list of pcs condition
-    procedure GetRS_PCSCondition(aSessionID: Integer; var l: TList); //list of pcs condition
-    procedure GetElementCondition(aName: string; var l: TList); // list of TElementCondition
-    procedure GetRS_ElementCondition(aSession: Integer; var l: TList); // list of TElementCondition
-
-    function GetFreeConditionID: Integer;
-    function GetFreeConditionScenarioID: Integer;
-
-    function GetConditionID(aName: string): Integer;
-
-    function SaveElementCondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer): Boolean;
-    procedure GetAllCondition(aType: string; var aPMSCond: TStrings); overload;
-    procedure GetAllCondition(var aList: TList); overload;
-    function GetConditionInfo(aID: Integer): string;
+    {$ENDREGION}
 
     {$REGION ' PMS Section '}
     function GetPMSCondID(aID, aIndex: Integer): Integer; {Gak Kepake}
@@ -129,21 +67,77 @@ type
     procedure GetFACondByID(aID: Integer; var aList: TList);
     {$ENDREGION}
 
+    procedure PopulateController;
+    procedure PopulateElements(CtrlID: string);
+    function PopulateDefaultElementParameter: TList;
+    procedure PopulateLoggedElement(var elementTable: TElementTables);
+    procedure getValueParameter(const aElementID: string; var aList: Tlist); // instructor
+    procedure getAllElementIDs(var list: TStrings);
+    procedure getFieldsTrend(var list: TList);
+    procedure getValueLogs(TableName, FieldName: string; SessionID: Integer; alist: TList);
+    procedure getRS_Parameters(aSession: Integer; var list: Tlist);
+    procedure getRS_CommandHistory(aSession: Integer; var list: Tlist);
+    function getElementTableName(ElementID: string): string;
+
+    function GetElement(ElementID: string): TElementData;
+    function GetCIP_INFO(aElementType: string): TCIPInfo;
+    procedure GetAll_IPMSLog_Data(aList: TList);
+    function GetCAPData(aElementID: string): TCAP_Data;
+    procedure GetAvailableLogTimeStamp(aTimeType: string; aAvailList: TStrings);
+
+    { ACS Control }
+    procedure GetAllLocation(var locationList: TList);
+    procedure GetAllAlarm(var alarmMsgList: TList);
+    procedure GetAllFault(var faultMsgList: TList);
+
+    function GetLocationDetail(aLocDetail: string): TACSData;
+    function GetLocationByRoomID(aLocByRoom : string): TACSData;
+    function GetAlarmMsgGRM(aAlarmID : Byte): TACSData;
+    function GetFaultMsgGRM(aFaultID : Byte): TACSData;
+    function GetAlarmComment(alarmMsg: string): TACSData;
+    function GetFaultComment(faultMsg: string): TACSData;
+    { end }
+
+    { scenario }
+    procedure GetAllScenario(var aScenarios: TStrings);
+
+    function GetSession(sessionName: string): TSession_Data; overload;
+    function GetSession(sessionID: Integer): TSession_Data; overload;
+    procedure DeleteSession(isAll: Boolean; sessionID: Integer = 0);
+    procedure SnapshotScenario(newName: string; sessionID: Integer);
+    function SaveScenario(aID: Integer; aName, aDescription: string; intArr: array of Integer): Integer;
+    function SaveConditionScenario(aScenarioID: Integer): Integer;
+    function DeleteScenario(aID: Integer): Boolean;
+    function GetScenarioByName(aName: string): TScenario_Data;
+    function GetScenarioByID(aID: Integer): TScenario_Data;
+    function GetScenarioDesc(aName: string): string;
+    function GetScenarioConditions(aName: string; aType: string = 'ALL'): TStrings;
+    function GetScenarioIDByName(aName: string; out aScenarioType: Integer): Integer;
+    function GetConditions(aName: string; aType: string = 'ALL'): TStrings;
+    procedure GetPMSCondition(aName: string; var l: TList); // list of TScenarioPMSCondition
+    procedure GetRS_PMSCondition(aSessionID: Integer; var l: TList); // list of TScenarioPMSCondition
+    procedure GetPCSCondition(aName: string; var l: TList); //list of pcs condition
+    procedure GetRS_PCSCondition(aSessionID: Integer; var l: TList); //list of pcs condition
+    procedure GetElementCondition(aName: string; var l: TList); // list of TElementCondition
+    procedure GetRS_ElementCondition(aSession: Integer; var l: TList); // list of TElementCondition
+
+    function GetFreeConditionID: Integer;
+    function GetFreeConditionScenarioID: Integer;
+
+    function GetConditionID(aName: string): Integer;
+
+    function SaveElementCondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer): Boolean;
+    procedure GetAllCondition(aType: string; var aPMSCond: TStrings); overload;
+    procedure GetAllCondition(var aList: TList); overload;
+    function GetConditionInfo(aID: Integer): string;
 
     function GetFACondID(aID, aIndex: Integer): Integer;
 
     procedure GetFACondition(aScenarioName: string; var aList: TList);
     procedure GetRS_FACondition(aSessionID: Integer; var aList: TList);
-
-
     procedure SaveRS_FACondition(aSessionID: Integer; aList: TList);
 
-
-
     function GetTanksCondID(aID, aIndex: Integer): Integer;
-
-
-
 
     function getMaxLengthTankValue(aElementID: string): Double;
 
@@ -177,28 +171,22 @@ type
           aGeneratTime: TDateTime): Boolean;overload;
     procedure GetAlarmByRunningID(aRunningID: Integer; var alarmList: TList);
     procedure GetAlarmByRunningIDElemnID(aRunningID: Integer; aElmntID : String; var aAlarmData: TAlarmData);
-    procedure GetGenerateTime(aRunningID: Integer; aElementID: string;
-      var aGenerateTime: TDateTime);
+    procedure GetGenerateTime(aRunningID: Integer; aElementID: string; var aGenerateTime: TDateTime);
     function AlarmExist(aRunningID: Integer; elementID : String): Boolean;
     { end }
 
-    function SaveParameterChange(aRunning_ID: Integer; aDateTime: TDateTime;
-      aPointID, aENG, aPREV, aVAL: string): Boolean;
-    function AlterParameterChange(aElemID, aParamVal,
-      aParamName: string): Boolean;
-    function SaveCommands(aRunningID: Integer; aDateTime: TDateTime; aPointID,
-      aVAL: string): Boolean;
+    function SaveParameterChange(aRunning_ID: Integer; aDateTime: TDateTime; aPointID, aENG, aPREV, aVAL: string): Boolean;
+    function AlterParameterChange(aElemID, aParamVal, aParamName: string): Boolean;
+    function SaveCommands(aRunningID: Integer; aDateTime: TDateTime; aPointID, aVAL: string): Boolean;
 
     procedure SaveLog(aQuery: array of String); overload;
     procedure SaveLog(aQuery: String); overload;
 
     procedure GetTankTable(var aList: TList);
-    procedure GetTankTableByElementID(const aElementID: string;
-      var aList: TList);
+    procedure GetTankTableByElementID(const aElementID: string; var aList: TList);
 
     property Listeners : TListeners read FListeners;
-    property OnExceptionMessage : TGetStrProc  read FOnExceptionMessage
-      write SetOnExceptionMessage;
+    property OnExceptionMessage : TGetStrProc  read FOnExceptionMessage write SetOnExceptionMessage;
     property Connection : TZConnection read FConnection;
   end;
 

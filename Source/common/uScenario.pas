@@ -29,7 +29,7 @@ type
     destructor Destroy; override;
 
     procedure getScenarios(var aList: TStrings);
-    procedure getSessions(var aList: TStrings);
+
     function insertScenario(aID: Integer; aName, aDesc: string; intArr: array of Integer): Integer;
     function deleteScenario(aID: Integer): Boolean;
     function getScenario(aName: string): TScenario_Data; overload;
@@ -37,7 +37,7 @@ type
     function getScenarioDesc(aName: string): string;
     function getScenarioConditions(aName: string): TStrings;
     function getSession(aSessionID: Integer): TSession_Data; overload;
-    function getSession(aSessionName: string): TSession_Data; overload;
+
     procedure loadScenario(aSessionID: Integer);
     function PrepareRunningScenario(aName: string; var aDateTimeStart: TDateTime): Boolean;
 
@@ -48,6 +48,12 @@ type
     function GetConditionID(aName: string): Integer;
     procedure GetElementConditions(var aList: TStrings);
     procedure SaveElementCondition(aName: string; aList: TList; var ConditionID: Integer);
+
+    {$REGION ' Session Section '}
+    function getSession(aSessionName: string): TSession_Data; overload;
+
+    procedure GetAllSessions(var aList: TStrings);
+    {$ENDREGION}
 
     {$REGION ' PMS Section '}
     function GetPMSCondID(aID, aIndex: Integer): Integer;
@@ -132,11 +138,6 @@ begin
   FPMSCondList := TList.Create;
 end;
 
-function TScenario.deleteScenario(aID: Integer): Boolean;
-begin
-  Result := FDatabase.DeleteScenario(aID);
-end;
-
 destructor TScenario.Destroy;
 begin
   FList.Free;
@@ -166,15 +167,19 @@ begin
   Result := FDatabase.GetTanksCondID(aID, aIndex);
 end;
 
-procedure TScenario.GetFACondition(aID: Integer; var aList: TList);
-begin
-  FDatabase.GetFACondByID(aID, aList);
-end;
-
 procedure TScenario.GetFAConditions(var aList: TStrings);
 begin
   FDatabase.GetAllCondition('FA', aList);
 end;
+
+{$REGION ' Session Section '}
+
+procedure TScenario.GetAllSessions(var aList: TStrings);
+begin
+  FDatabase.GetAllSession(aList);
+end;
+
+{$ENDREGION}
 
 {$REGION ' PMS Section '}
 
@@ -549,7 +554,17 @@ begin
   FDatabase.SaveFACondition(aIsNew, aName, aList, ConditionID);
 end;
 
+procedure TScenario.GetFACondition(aID: Integer; var aList: TList);
+begin
+  FDatabase.GetFACondByID(aID, aList);
+end;
+
 {$ENDREGION}
+
+function TScenario.deleteScenario(aID: Integer): Boolean;
+begin
+  Result := FDatabase.DeleteScenario(aID);
+end;
 
 function TScenario.getScenario(aName: string): TScenario_Data;
 begin
@@ -584,11 +599,6 @@ end;
 function TScenario.getSession(aSessionName: string): TSession_Data;
 begin
   Result := FDatabase.GetSession(aSessionName);
-end;
-
-procedure TScenario.getSessions(var aList: TStrings);
-begin
-  FDatabase.GetAllSession(aList);
 end;
 
 function TScenario.insertScenario(aID : Integer; aName, aDesc: string;
