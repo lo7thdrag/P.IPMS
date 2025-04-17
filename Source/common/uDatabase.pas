@@ -212,131 +212,26 @@ uses uSetting, Dialogs, uFunction,
 
 { TIPMSDatabase }
 
-function TIPMSDatabase.getMaxLengthTankValue(aElementID: string): Double;
-var
-  FQuery : TZQuery;
-  query : string;
+
+constructor TIPMSDatabase.Create;
 begin
-  Result := 0;
+  if not Assigned(Setting) then
+    Setting := TSetting.Create;
 
-  if not FConnection.Connected then
-    Exit;
+  FConnection := TZConnection.Create(nil);
+  FListeners := TListeners.Create;
 
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-
-    SQL.Clear;
-    query := 'SELECT SoundLength FROM TankTables ' +
-             'WHERE ElementID = ' + QuotedStr(aElementID) +
-             ' Order By SoundLength DESC';
-
-    SQL.Add(query);
-    Open;
-
-    First;
-    Result := FieldByName('SoundLength').AsFloat;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
+  ConnectDB;
 end;
 
-procedure TIPMSDatabase.GetMaxSeqNumber(var aSeqNumber, aRunID: Integer);
-var
-  FQuery: TZQuery;
-  query : string;
+destructor TIPMSDatabase.Destroy;
 begin
-  if not FConnection.Connected then
-    Exit;
+  FListeners.Free;
 
-  FQuery := TZQuery.Create(nil);
+  FConnection.Disconnect;
+  FConnection.Free;
 
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT ISNULL(MAX(sequence_number),0) as lastSequence FROM RS_ALARM_LOG where Running_ID = ' + IntToStr(aRunID);
-    SQL.Add(query);
-    Open;
-
-    aSeqNumber := FieldByName('lastSequence').AsInteger;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-function TIPMSDatabase.AlarmExist(aRunningID: Integer; elementID: String): Boolean;
-var
-  FQuery : TZQuery;
-  query : string;
-begin
-  Result := False;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT * FROM RS_ALARM_LOG ' +
-             ' WHERE alarm_id like ' + QuotedStr(elementID + '%') + ' and ' +
-             ' Running_ID = ' + IntToStr(aRunningID) + ' and final_state = ' + QuotedStr('D');
-
-
-    SQL.Add(query);
-    Open;
-
-    if RecordCount > 0 then
-      Result := True
-    else
-      Result := False;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-function TIPMSDatabase.AlterParameterChange(aElemID, aParamVal,
-  aParamName: string): Boolean;
-var
-  FQuery : TZQuery;
-  query : string;
-begin
-  Result := False;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'UPDATE Parameter SET ParamValue = ' + QuotedStr(aParamVal) +
-             ' WHERE ElementID = ' + QuotedStr(aElemID) +
-             ' AND ParamName = ' + QuotedStr(aParamName);
-
-    SQL.Add(query);
-    ExecSQL;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
+  inherited;
 end;
 
 function TIPMSDatabase.ConnectDB: Boolean;
@@ -353,54 +248,6 @@ begin
 
   if not Result then
     MessageDlg('Failed to connect Database..!', mtError, [mbOK], 0);
-end;
-
-constructor TIPMSDatabase.Create;
-begin
-  if not Assigned(Setting) then
-    Setting := TSetting.Create;
-
-  FConnection := TZConnection.Create(nil);
-  FListeners := TListeners.Create;
-
-  ConnectDB;
-end;
-
-function TIPMSDatabase.GetConditionID(aName: string): Integer;
-var
-  FQuery : TZQuery;
-  query : string;
-begin
-  Result := 0;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT * ' +
-             'FROM Condition ' +
-             'WHERE Condition_Name = ' + QuotedStr(aName);
-
-    SQL.Add(query);
-    Open;
-
-    if RecordCount > 0 then
-    begin
-      First;
-
-      Result := FieldByName('Condition_ID').AsInteger;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
 end;
 
 {$REGION ' PMS Section '}
@@ -1663,6 +1510,169 @@ end;
 
 {$ENDREGION}
 
+function TIPMSDatabase.getMaxLengthTankValue(aElementID: string): Double;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := 0;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+
+    SQL.Clear;
+    query := 'SELECT SoundLength FROM TankTables ' +
+             'WHERE ElementID = ' + QuotedStr(aElementID) +
+             ' Order By SoundLength DESC';
+
+    SQL.Add(query);
+    Open;
+
+    First;
+    Result := FieldByName('SoundLength').AsFloat;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+procedure TIPMSDatabase.GetMaxSeqNumber(var aSeqNumber, aRunID: Integer);
+var
+  FQuery: TZQuery;
+  query : string;
+begin
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT ISNULL(MAX(sequence_number),0) as lastSequence FROM RS_ALARM_LOG where Running_ID = ' + IntToStr(aRunID);
+    SQL.Add(query);
+    Open;
+
+    aSeqNumber := FieldByName('lastSequence').AsInteger;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.AlarmExist(aRunningID: Integer; elementID: String): Boolean;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM RS_ALARM_LOG ' +
+             ' WHERE alarm_id like ' + QuotedStr(elementID + '%') + ' and ' +
+             ' Running_ID = ' + IntToStr(aRunningID) + ' and final_state = ' + QuotedStr('D');
+
+
+    SQL.Add(query);
+    Open;
+
+    if RecordCount > 0 then
+      Result := True
+    else
+      Result := False;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.AlterParameterChange(aElemID, aParamVal, aParamName: string): Boolean;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'UPDATE Parameter SET ParamValue = ' + QuotedStr(aParamVal) +
+             ' WHERE ElementID = ' + QuotedStr(aElemID) +
+             ' AND ParamName = ' + QuotedStr(aParamName);
+
+    SQL.Add(query);
+    ExecSQL;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.GetConditionID(aName: string): Integer;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := 0;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * ' +
+             'FROM Condition ' +
+             'WHERE Condition_Name = ' + QuotedStr(aName);
+
+    SQL.Add(query);
+    Open;
+
+    if RecordCount > 0 then
+    begin
+      First;
+
+      Result := FieldByName('Condition_ID').AsInteger;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
 function TIPMSDatabase.DeleteScenario(aID: Integer): Boolean;
 var
   FQuery : TZQuery;
@@ -1725,16 +1735,6 @@ begin
     Connection := nil;
     Free;
   end;
-end;
-
-destructor TIPMSDatabase.Destroy;
-begin
-  FListeners.Free;
-
-  FConnection.Disconnect;
-  FConnection.Free;
-
-  inherited;
 end;
 
 Procedure TIPMSDatabase.GetAlarmByRunningID(aRunningID: Integer; var alarmList: TList);
@@ -1823,8 +1823,7 @@ begin
   end;
 end;
 
-procedure TIPMSDatabase.GetAlarmByRunningIDElemnID(aRunningID: Integer;
-  aElmntID: String; var aAlarmData: TAlarmData);
+procedure TIPMSDatabase.GetAlarmByRunningIDElemnID(aRunningID: Integer; aElmntID: String; var aAlarmData: TAlarmData);
 var
   FQuery : TZQuery;
   query  : string;
@@ -2001,52 +2000,6 @@ begin
     Free;
   end;
 end;
-
-//procedure TIPMSDatabase.GetAllCommands(timePrev, timeNext: string;
-//  var commandList: TList);
-//var
-//  FQuery: TZQuery;
-//  query: string;
-//  commandData: TCommandsData;
-//begin
-//  if not FConnection.Connected then
-//    Exit;
-
-//  FQuery := TZQuery.Create(nil);
-
-//  with FQuery do
-//  begin
-//    Connection := FConnection;
-//    SQL.Clear;
-
-//    query := 'SELECT * FROM COMMANDS WHERE timestamp >= ' +QuotedStr(timePrev)+
-//             'AND timestamp <= ' +QuotedStr(timeNext)+
-//             'ORDER BY timestamp DESC';
-
-//    SQL.Add(query);
-//    Open;
-
-//    if RecordCount > 0 then
-//    begin
-//      First;
-
-//      commandList := TList.Create;
-
-//      while not Eof do
-//      begin
-//        commandData := TCommandsData.Create;
-//        commandData.timestamp := FieldByName('timestamp').AsDateTime;
-//        commandData.point_id := FieldByName('point_id').AsString;
-//        commandData._VAL := FieldByName('_VAL').AsString;
-
-//        commandList.Add(commandData);
-//        Next;
-//      end;
-//    end;
-//  end;
-
-//  FQuery.Free;
-//end;
 
 procedure TIPMSDatabase.GetAllCondition(var aList: TList);
 var

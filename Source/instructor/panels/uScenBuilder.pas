@@ -117,8 +117,6 @@ type
     btnNewScenario: TRzBmpButton;
     btnEditScenario: TRzBmpButton;
     btnDeleteScenario: TRzBmpButton;
-    btnNewSession: TRzBmpButton;
-    btnEditSession: TRzBmpButton;
     btnDeleteSession: TRzBmpButton;
     btnNewFA: TRzBmpButton;
     btnEditFA: TRzBmpButton;
@@ -388,6 +386,7 @@ type
     img1: TImage;
     img2: TImage;
     img3: TImage;
+    btnClearSession: TRzBmpButton;
 
     {$REGION ' Form Section '}
     procedure FormCreate(Sender: TObject);
