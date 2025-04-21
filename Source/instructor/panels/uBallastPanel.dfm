@@ -1,9 +1,10 @@
 object frmBallastPanel: TfrmBallastPanel
   Left = 0
   Top = 0
+  BorderStyle = bsNone
   Caption = 'frmBallastPanel'
-  ClientHeight = 673
-  ClientWidth = 1363
+  ClientHeight = 842
+  ClientWidth = 1687
   Color = clBlack
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,9 +14,20 @@ object frmBallastPanel: TfrmBallastPanel
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object img2: TImage
+    Left = 0
+    Top = 0
+    Width = 1687
+    Height = 842
+    Align = alClient
+    ExplicitLeft = 40
+    ExplicitTop = 203
+    ExplicitWidth = 105
+    ExplicitHeight = 105
+  end
   object img1: TImage
-    Left = 168
-    Top = -1
+    Left = 333
+    Top = 71
     Width = 1020
     Height = 700
     Picture.Data = {
@@ -1763,8 +1775,8 @@ object frmBallastPanel: TfrmBallastPanel
       A376346EC68DD8D1BB1A376346EC68DD8D1BB1A376346EC68DD8D1BB1FFFD9}
   end
   object btn1: TSpeedButton
-    Left = 238
-    Top = 133
+    Left = 403
+    Top = 205
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -1991,8 +2003,8 @@ object frmBallastPanel: TfrmBallastPanel
     OnMouseUp = btn1MouseUp
   end
   object btn2: TSpeedButton
-    Left = 238
-    Top = 164
+    Left = 403
+    Top = 236
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -2220,8 +2232,8 @@ object frmBallastPanel: TfrmBallastPanel
   end
   object btn3: TSpeedButton
     Tag = 2
-    Left = 1041
-    Top = 286
+    Left = 1206
+    Top = 358
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -2449,8 +2461,8 @@ object frmBallastPanel: TfrmBallastPanel
   end
   object btn4: TSpeedButton
     Tag = 2
-    Left = 1041
-    Top = 317
+    Left = 1206
+    Top = 389
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -2678,8 +2690,8 @@ object frmBallastPanel: TfrmBallastPanel
   end
   object btn6: TSpeedButton
     Tag = 1
-    Left = 238
-    Top = 558
+    Left = 403
+    Top = 630
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -2907,8 +2919,8 @@ object frmBallastPanel: TfrmBallastPanel
   end
   object btn7: TSpeedButton
     Tag = 1
-    Left = 238
-    Top = 589
+    Left = 403
+    Top = 661
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -3135,8 +3147,8 @@ object frmBallastPanel: TfrmBallastPanel
     OnMouseUp = btn2MouseUp
   end
   object lbl1: TLabel
-    Left = 234
-    Top = 108
+    Left = 399
+    Top = 180
     Width = 33
     Height = 14
     Caption = 'WB PS'
@@ -3151,8 +3163,8 @@ object frmBallastPanel: TfrmBallastPanel
   end
   object lbl2: TLabel
     Tag = 1
-    Left = 234
-    Top = 531
+    Left = 399
+    Top = 603
     Width = 34
     Height = 14
     Caption = 'WB SB'
@@ -3167,8 +3179,8 @@ object frmBallastPanel: TfrmBallastPanel
   end
   object lbl3: TLabel
     Tag = 2
-    Left = 1032
-    Top = 262
+    Left = 1197
+    Top = 334
     Width = 43
     Height = 14
     Caption = 'WB FWD'
@@ -3182,8 +3194,8 @@ object frmBallastPanel: TfrmBallastPanel
     ParentFont = False
   end
   object edt1: TEdit
-    Left = 228
-    Top = 203
+    Left = 393
+    Top = 275
     Width = 47
     Height = 21
     BevelEdges = []
@@ -3193,8 +3205,8 @@ object frmBallastPanel: TfrmBallastPanel
   end
   object edt2: TEdit
     Tag = 2
-    Left = 1031
-    Top = 356
+    Left = 1196
+    Top = 428
     Width = 47
     Height = 21
     BevelEdges = []
@@ -3204,8 +3216,8 @@ object frmBallastPanel: TfrmBallastPanel
   end
   object edt3: TEdit
     Tag = 1
-    Left = 228
-    Top = 628
+    Left = 393
+    Top = 700
     Width = 47
     Height = 21
     BevelEdges = []

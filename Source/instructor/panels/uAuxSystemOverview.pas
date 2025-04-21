@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Menus, VrControls, VrButtons, Buttons;
+  Dialogs, StdCtrls, ExtCtrls, Menus, VrControls, VrButtons, Buttons,
+  Vcl.Imaging.pngimage;
 
 type
   TfrmAuxSystemOverview = class(TForm)
@@ -126,6 +127,7 @@ type
     btn1: TSpeedButton;
     btn2: TSpeedButton;
     edt1: TEdit;
+    Image1: TImage;
     procedure btnStartAirComp1TMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure mniAlarm1Click(Sender: TObject);

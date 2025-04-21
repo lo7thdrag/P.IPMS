@@ -1,9 +1,10 @@
 object frmAuxSystemOverview: TfrmAuxSystemOverview
   Left = -1162
   Top = 18
+  BorderStyle = bsNone
   Caption = 'Auxilary System Overview'
-  ClientHeight = 689
-  ClientWidth = 1357
+  ClientHeight = 842
+  ClientWidth = 1687
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,6 +14,31 @@ object frmAuxSystemOverview: TfrmAuxSystemOverview
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object Image1: TImage
+    Left = 0
+    Top = 0
+    Width = 1687
+    Height = 842
+    Align = alClient
+    Picture.Data = {
+      0954506E67496D61676589504E470D0A1A0A0000000D494844520000009B0000
+      00660806000000DC6DE34B000000017352474200AECE1CE90000000467414D41
+      0000B18F0BFC6105000000097048597300000EC300000EC301C76FA864000001
+      0D4944415478DAEDD2310100301003A1BC7FD1AD8B9B4003B7ED0D0237D988C8
+      46463632B291918D8C6C646423231B19D9C8C846463632B291918D8C6C646423
+      231B19D9C8C846463632B291918D8C6C646423231B19D9C8C846463632B29191
+      8D8C6C646423231B19D9C8C846463632B291918D8C6C646423231B19D9C8C846
+      463632B291918D8C6C646423231B19D9C8C846463632B291918D8C6C64642323
+      1B19D9C8C846463632B291918D8C6C646423231B19D9C8C846463632B291918D
+      8C6C646423231B19D9C8C846463632B291918D8C6C646423231B19D9C8C84646
+      3632B291918D8C6C646423231B19D9C8C846463632B291918D8C6C646423231B
+      19D9C8C846463632B291918DCC07ECBE6601909509140000000049454E44AE42
+      6082}
+    Stretch = True
+    ExplicitTop = 639
+    ExplicitWidth = 716
+    ExplicitHeight = 217
+  end
   object pnlFreshSeaWater: TPanel
     Left = 1089
     Top = 351
@@ -572,11 +598,11 @@ object frmAuxSystemOverview: TfrmAuxSystemOverview
     end
   end
   object GroupBox1: TGroupBox
-    Left = 0
-    Top = -16
+    Left = 188
+    Top = 83
     Width = 1311
     Height = 675
-    Color = clBtnFace
+    Color = clBlack
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12

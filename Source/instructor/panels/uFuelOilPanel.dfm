@@ -1,9 +1,10 @@
 object frmFuelOilPanel: TfrmFuelOilPanel
   Left = 0
   Top = 0
+  BorderStyle = bsNone
   Caption = 'frmFuelOilPanel'
-  ClientHeight = 673
-  ClientWidth = 1363
+  ClientHeight = 842
+  ClientWidth = 1687
   Color = clBlack
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,9 +14,20 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object Image1: TImage
+    Left = 0
+    Top = 0
+    Width = 1687
+    Height = 842
+    Align = alClient
+    ExplicitLeft = 1248
+    ExplicitTop = 376
+    ExplicitWidth = 105
+    ExplicitHeight = 105
+  end
   object img1: TImage
-    Left = 166
-    Top = -16
+    Left = 333
+    Top = 71
     Width = 1020
     Height = 700
     Picture.Data = {
@@ -2591,8 +2603,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
       FFD9}
   end
   object btn1: TSpeedButton
-    Left = 345
-    Top = 99
+    Left = 512
+    Top = 186
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -2819,8 +2831,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
     OnMouseUp = btnFillDailyMouseUp
   end
   object btn2: TSpeedButton
-    Left = 171
-    Top = 17
+    Left = 338
+    Top = 104
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -3047,8 +3059,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
     OnMouseUp = btn1MouseUp
   end
   object lbl1: TLabel
-    Left = 272
-    Top = 40
+    Left = 439
+    Top = 127
     Width = 83
     Height = 14
     Caption = 'FO LOAD TRUNK'
@@ -3063,8 +3075,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object lbl2: TLabel
     Tag = 1
-    Left = 206
-    Top = 392
+    Left = 373
+    Top = 479
     Width = 36
     Height = 14
     Caption = 'FO TK4'
@@ -3079,8 +3091,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object lbl3: TLabel
     Tag = 2
-    Left = 314
-    Top = 527
+    Left = 481
+    Top = 614
     Width = 36
     Height = 14
     Caption = 'FO TK3'
@@ -3094,8 +3106,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
     ParentFont = False
   end
   object lbl4: TLabel
-    Left = 455
-    Top = 527
+    Left = 622
+    Top = 614
     Width = 49
     Height = 14
     Caption = 'FO OV TK'
@@ -3126,8 +3138,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object lbl6: TLabel
     Tag = 4
-    Left = 1076
-    Top = 412
+    Left = 1243
+    Top = 499
     Width = 36
     Height = 14
     Caption = 'FO TK1'
@@ -3141,8 +3153,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
     ParentFont = False
   end
   object lbl7: TLabel
-    Left = 732
-    Top = 101
+    Left = 899
+    Top = 188
     Width = 70
     Height = 15
     Caption = 'FO DAILY PS'
@@ -3156,8 +3168,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
     ParentFont = False
   end
   object lbl8: TLabel
-    Left = 854
-    Top = 101
+    Left = 1021
+    Top = 188
     Width = 70
     Height = 15
     Caption = 'FO DAILY SB'
@@ -3171,8 +3183,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
     ParentFont = False
   end
   object lbl9: TLabel
-    Left = 261
-    Top = 234
+    Left = 428
+    Top = 321
     Width = 93
     Height = 14
     Caption = 'FO LEAK TK ME PS'
@@ -3186,8 +3198,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
     ParentFont = False
   end
   object lbl10: TLabel
-    Left = 261
-    Top = 334
+    Left = 428
+    Top = 421
     Width = 94
     Height = 14
     Caption = 'FO LEAK TK ME SB'
@@ -3202,8 +3214,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btnDailyPS: TSpeedButton
     Tag = 15
-    Left = 751
-    Top = 129
+    Left = 918
+    Top = 216
     Width = 28
     Height = 28
     AllowAllUp = True
@@ -3437,8 +3449,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btnDailySB: TSpeedButton
     Tag = 14
-    Left = 873
-    Top = 128
+    Left = 1040
+    Top = 215
     Width = 28
     Height = 28
     AllowAllUp = True
@@ -3666,8 +3678,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btnTrans: TSpeedButton
     Tag = 20
-    Left = 637
-    Top = 296
+    Left = 804
+    Top = 383
     Width = 28
     Height = 28
     AllowAllUp = True
@@ -3895,8 +3907,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btnService: TSpeedButton
     Tag = 21
-    Left = 709
-    Top = 296
+    Left = 876
+    Top = 383
     Width = 28
     Height = 28
     AllowAllUp = True
@@ -4124,8 +4136,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btnKlepTK4: TSpeedButton
     Tag = 12
-    Left = 257
-    Top = 456
+    Left = 424
+    Top = 543
     Width = 28
     Height = 28
     AllowAllUp = True
@@ -4353,8 +4365,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btnKlepTK3: TSpeedButton
     Tag = 11
-    Left = 362
-    Top = 589
+    Left = 529
+    Top = 676
     Width = 28
     Height = 28
     AllowAllUp = True
@@ -4582,8 +4594,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btnKlepTk2: TSpeedButton
     Tag = 10
-    Left = 612
-    Top = 589
+    Left = 779
+    Top = 676
     Width = 28
     Height = 28
     AllowAllUp = True
@@ -4811,8 +4823,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btnKlepTK1: TSpeedButton
     Tag = 9
-    Left = 1039
-    Top = 469
+    Left = 1206
+    Top = 556
     Width = 28
     Height = 28
     AllowAllUp = True
@@ -5040,8 +5052,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btn14: TSpeedButton
     Tag = 4
-    Left = 1009
-    Top = 469
+    Left = 1176
+    Top = 556
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -5269,8 +5281,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btn13: TSpeedButton
     Tag = 3
-    Left = 643
-    Top = 589
+    Left = 810
+    Top = 676
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -5498,8 +5510,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btn12: TSpeedButton
     Tag = 2
-    Left = 393
-    Top = 588
+    Left = 560
+    Top = 675
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -5726,8 +5738,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btnFillOver: TSpeedButton
     Tag = 1
-    Left = 288
-    Top = 456
+    Left = 455
+    Top = 543
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -5955,8 +5967,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btnOvTK: TSpeedButton
     Tag = 16
-    Left = 467
-    Top = 553
+    Left = 634
+    Top = 640
     Width = 28
     Height = 28
     AllowAllUp = True
@@ -6184,8 +6196,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btn11: TSpeedButton
     Tag = 16
-    Left = 467
-    Top = 585
+    Left = 634
+    Top = 672
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -6413,8 +6425,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btn15: TSpeedButton
     Tag = 15
-    Left = 751
-    Top = 160
+    Left = 918
+    Top = 247
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -6642,8 +6654,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object btn16: TSpeedButton
     Tag = 14
-    Left = 873
-    Top = 160
+    Left = 1040
+    Top = 247
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -6870,8 +6882,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
     OnMouseUp = btn2MouseUp
   end
   object btn17: TSpeedButton
-    Left = 171
-    Top = 48
+    Left = 338
+    Top = 135
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -7098,8 +7110,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
     OnMouseUp = btn17MouseUp
   end
   object edt1: TEdit
-    Left = 292
-    Top = 139
+    Left = 459
+    Top = 226
     Width = 47
     Height = 21
     BevelEdges = []
@@ -7109,8 +7121,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object edt2: TEdit
     Tag = 3
-    Left = 558
-    Top = 622
+    Left = 725
+    Top = 709
     Width = 47
     Height = 21
     BevelEdges = []
@@ -7120,8 +7132,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object edt3: TEdit
     Tag = 1
-    Left = 204
-    Top = 490
+    Left = 371
+    Top = 577
     Width = 47
     Height = 21
     BevelEdges = []
@@ -7131,8 +7143,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object edt4: TEdit
     Tag = 4
-    Left = 1070
-    Top = 510
+    Left = 1237
+    Top = 597
     Width = 47
     Height = 21
     BevelEdges = []
@@ -7142,8 +7154,8 @@ object frmFuelOilPanel: TfrmFuelOilPanel
   end
   object edt5: TEdit
     Tag = 2
-    Left = 308
-    Top = 622
+    Left = 475
+    Top = 709
     Width = 47
     Height = 21
     BevelEdges = []
@@ -7152,11 +7164,10 @@ object frmFuelOilPanel: TfrmFuelOilPanel
     TabOrder = 6
   end
   object btnFillDaily: TBitBtn
-    Left = 300
-    Top = 67
+    Left = 467
+    Top = 154
     Width = 28
     Height = 28
-    DoubleBuffered = True
     Glyph.Data = {
       361B0000424D361B000000000000360000002800000060000000180000000100
       180000000000001B0000120B0000120B00000000000000000000C8D0D4C8D0D4
@@ -7377,17 +7388,15 @@ object frmFuelOilPanel: TfrmFuelOilPanel
       D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
       D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4}
     NumGlyphs = 4
-    ParentDoubleBuffered = False
     TabOrder = 0
     OnMouseDown = btnFillDailyMouseDown
     OnMouseUp = btnFillDailyMouseUp
   end
   object btnFillTK: TBitBtn
-    Left = 300
-    Top = 99
+    Left = 467
+    Top = 186
     Width = 28
     Height = 28
-    DoubleBuffered = True
     Glyph.Data = {
       361B0000424D361B000000000000360000002800000060000000180000000100
       180000000000001B0000120B0000120B00000000000000000000C8D0D4C8D0D4
@@ -7608,18 +7617,16 @@ object frmFuelOilPanel: TfrmFuelOilPanel
       D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
       D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4}
     NumGlyphs = 4
-    ParentDoubleBuffered = False
     TabOrder = 1
     OnMouseDown = btnFillTKMouseDown
     OnMouseUp = btnFillDailyMouseUp
   end
   object btn5: TBitBtn
     Tag = 1
-    Left = 212
-    Top = 449
+    Left = 379
+    Top = 536
     Width = 28
     Height = 28
-    DoubleBuffered = True
     Glyph.Data = {
       361B0000424D361B000000000000360000002800000060000000180000000100
       180000000000001B0000120B0000120B00000000000000000000C8D0D4C8D0D4
@@ -7840,18 +7847,16 @@ object frmFuelOilPanel: TfrmFuelOilPanel
       D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
       D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4}
     NumGlyphs = 4
-    ParentDoubleBuffered = False
     TabOrder = 7
     OnMouseDown = btnFillTKMouseDown
     OnMouseUp = btnFillDailyMouseUp
   end
   object btn6: TBitBtn
     Tag = 2
-    Left = 319
-    Top = 586
+    Left = 486
+    Top = 673
     Width = 28
     Height = 28
-    DoubleBuffered = True
     Glyph.Data = {
       361B0000424D361B000000000000360000002800000060000000180000000100
       180000000000001B0000120B0000120B00000000000000000000C8D0D4C8D0D4
@@ -8072,18 +8077,16 @@ object frmFuelOilPanel: TfrmFuelOilPanel
       D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
       D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4}
     NumGlyphs = 4
-    ParentDoubleBuffered = False
     TabOrder = 8
     OnMouseDown = btnFillTKMouseDown
     OnMouseUp = btnFillDailyMouseUp
   end
   object btn3: TBitBtn
     Tag = 3
-    Left = 567
-    Top = 584
+    Left = 734
+    Top = 671
     Width = 28
     Height = 28
-    DoubleBuffered = True
     Glyph.Data = {
       361B0000424D361B000000000000360000002800000060000000180000000100
       180000000000001B0000120B0000120B00000000000000000000C8D0D4C8D0D4
@@ -8304,18 +8307,16 @@ object frmFuelOilPanel: TfrmFuelOilPanel
       D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
       D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4}
     NumGlyphs = 4
-    ParentDoubleBuffered = False
     TabOrder = 9
     OnMouseDown = btnFillTKMouseDown
     OnMouseUp = btnFillDailyMouseUp
   end
   object btn4: TBitBtn
     Tag = 4
-    Left = 1078
-    Top = 471
+    Left = 1245
+    Top = 558
     Width = 28
     Height = 28
-    DoubleBuffered = True
     Glyph.Data = {
       361B0000424D361B000000000000360000002800000060000000180000000100
       180000000000001B0000120B0000120B00000000000000000000C8D0D4C8D0D4
@@ -8536,18 +8537,16 @@ object frmFuelOilPanel: TfrmFuelOilPanel
       D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
       D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4}
     NumGlyphs = 4
-    ParentDoubleBuffered = False
     TabOrder = 10
     OnMouseDown = btnFillTKMouseDown
     OnMouseUp = btnFillDailyMouseUp
   end
   object btn7: TBitBtn
     Tag = 1
-    Left = 212
-    Top = 418
+    Left = 379
+    Top = 505
     Width = 28
     Height = 28
-    DoubleBuffered = True
     Glyph.Data = {
       361B0000424D361B000000000000360000002800000060000000180000000100
       180000000000001B0000120B0000120B00000000000000000000C8D0D4C8D0D4
@@ -8768,18 +8767,16 @@ object frmFuelOilPanel: TfrmFuelOilPanel
       D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
       D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4}
     NumGlyphs = 4
-    ParentDoubleBuffered = False
     TabOrder = 11
     OnMouseDown = btnFillDailyMouseDown
     OnMouseUp = btnFillDailyMouseUp
   end
   object btn8: TBitBtn
     Tag = 2
-    Left = 319
-    Top = 554
+    Left = 486
+    Top = 641
     Width = 28
     Height = 28
-    DoubleBuffered = True
     Glyph.Data = {
       361B0000424D361B000000000000360000002800000060000000180000000100
       180000000000001B0000120B0000120B00000000000000000000C8D0D4C8D0D4
@@ -9000,18 +8997,16 @@ object frmFuelOilPanel: TfrmFuelOilPanel
       D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
       D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4}
     NumGlyphs = 4
-    ParentDoubleBuffered = False
     TabOrder = 12
     OnMouseDown = btnFillDailyMouseDown
     OnMouseUp = btnFillDailyMouseUp
   end
   object btn9: TBitBtn
     Tag = 3
-    Left = 567
-    Top = 553
+    Left = 734
+    Top = 640
     Width = 28
     Height = 28
-    DoubleBuffered = True
     Glyph.Data = {
       361B0000424D361B000000000000360000002800000060000000180000000100
       180000000000001B0000120B0000120B00000000000000000000C8D0D4C8D0D4
@@ -9232,18 +9227,16 @@ object frmFuelOilPanel: TfrmFuelOilPanel
       D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
       D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4}
     NumGlyphs = 4
-    ParentDoubleBuffered = False
     TabOrder = 13
     OnMouseDown = btnFillDailyMouseDown
     OnMouseUp = btnFillDailyMouseUp
   end
   object btn10: TBitBtn
     Tag = 4
-    Left = 1078
-    Top = 438
+    Left = 1245
+    Top = 525
     Width = 28
     Height = 28
-    DoubleBuffered = True
     Glyph.Data = {
       361B0000424D361B000000000000360000002800000060000000180000000100
       180000000000001B0000120B0000120B00000000000000000000C8D0D4C8D0D4
@@ -9464,7 +9457,6 @@ object frmFuelOilPanel: TfrmFuelOilPanel
       D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8
       D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4C8D0D4}
     NumGlyphs = 4
-    ParentDoubleBuffered = False
     TabOrder = 14
     OnMouseDown = btnFillDailyMouseDown
     OnMouseUp = btnFillDailyMouseUp

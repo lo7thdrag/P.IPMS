@@ -1,9 +1,10 @@
 object frmTanksOverview: TfrmTanksOverview
   Left = -1329
   Top = -8
+  BorderStyle = bsNone
   Caption = 'TankOverview'
-  ClientHeight = 676
-  ClientWidth = 1363
+  ClientHeight = 842
+  ClientWidth = 1687
   Color = clBlack
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,9 +14,20 @@ object frmTanksOverview: TfrmTanksOverview
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object Image1: TImage
+    Left = 0
+    Top = 0
+    Width = 1687
+    Height = 842
+    Align = alClient
+    ExplicitLeft = 1280
+    ExplicitTop = 400
+    ExplicitWidth = 105
+    ExplicitHeight = 105
+  end
   object imgTankOverview: TImage
-    Left = 160
-    Top = -14
+    Left = 323
+    Top = 76
     Width = 1041
     Height = 689
     Picture.Data = {

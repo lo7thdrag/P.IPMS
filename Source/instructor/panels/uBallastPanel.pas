@@ -21,6 +21,7 @@ type
     lbl1: TLabel;
     lbl2: TLabel;
     lbl3: TLabel;
+    img2: TImage;
     procedure btn1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btn1MouseUp(Sender: TObject; Button: TMouseButton;

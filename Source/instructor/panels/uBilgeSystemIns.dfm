@@ -1,9 +1,10 @@
 object frmBilgeSystemIns: TfrmBilgeSystemIns
   Left = -1604
   Top = -7
+  BorderStyle = bsNone
   Caption = 'BilgeSystem'
-  ClientHeight = 658
-  ClientWidth = 1363
+  ClientHeight = 842
+  ClientWidth = 1687
   Color = clBlack
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,9 +15,20 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object imgBilgeSystem: TImage
-    Left = 176
+  object Image1: TImage
+    Left = 0
     Top = 0
+    Width = 1687
+    Height = 842
+    Align = alClient
+    ExplicitLeft = 168
+    ExplicitTop = 192
+    ExplicitWidth = 105
+    ExplicitHeight = 105
+  end
+  object imgBilgeSystem: TImage
+    Left = 331
+    Top = 78
     Width = 1025
     Height = 685
     Picture.Data = {
@@ -4414,8 +4426,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
       1FFFD9}
   end
   object SwitchElement1: TSwitchElement
-    Left = 201
-    Top = 239
+    Left = 356
+    Top = 317
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4431,8 +4443,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement10: TSwitchElement
-    Left = 605
-    Top = 238
+    Left = 760
+    Top = 316
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4448,8 +4460,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement11: TSwitchElement
-    Left = 642
-    Top = 284
+    Left = 797
+    Top = 362
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4465,8 +4477,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement12: TSwitchElement
-    Left = 677
-    Top = 238
+    Left = 832
+    Top = 316
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4482,8 +4494,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement13: TSwitchElement
-    Left = 714
-    Top = 284
+    Left = 869
+    Top = 362
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4499,8 +4511,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement14: TSwitchElement
-    Left = 749
-    Top = 238
+    Left = 904
+    Top = 316
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4516,8 +4528,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement15: TSwitchElement
-    Left = 782
-    Top = 284
+    Left = 937
+    Top = 362
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4533,8 +4545,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement16: TSwitchElement
-    Left = 981
-    Top = 189
+    Left = 1136
+    Top = 267
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4550,8 +4562,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement17: TSwitchElement
-    Left = 1017
-    Top = 239
+    Left = 1172
+    Top = 317
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4567,8 +4579,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement18: TSwitchElement
-    Left = 1052
-    Top = 189
+    Left = 1207
+    Top = 267
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4584,8 +4596,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement19: TSwitchElement
-    Left = 1124
-    Top = 189
+    Left = 1279
+    Top = 267
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4601,8 +4613,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement2: TSwitchElement
-    Left = 237
-    Top = 189
+    Left = 392
+    Top = 267
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4618,8 +4630,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement20: TSwitchElement
-    Left = 1089
-    Top = 239
+    Left = 1244
+    Top = 317
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4635,8 +4647,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement21: TSwitchElement
-    Left = 926
-    Top = 359
+    Left = 1081
+    Top = 437
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4652,8 +4664,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement22: TSwitchElement
-    Left = 979
-    Top = 379
+    Left = 1134
+    Top = 457
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4669,8 +4681,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement23: TSwitchElement
-    Left = 1012
-    Top = 370
+    Left = 1167
+    Top = 448
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4686,8 +4698,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement24: TSwitchElement
-    Left = 1080
-    Top = 368
+    Left = 1235
+    Top = 446
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4703,8 +4715,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement25: TSwitchElement
-    Left = 270
-    Top = 446
+    Left = 425
+    Top = 524
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4720,8 +4732,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement26: TSwitchElement
-    Left = 270
-    Top = 474
+    Left = 425
+    Top = 552
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4737,8 +4749,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement27: TSwitchElement
-    Left = 270
-    Top = 539
+    Left = 425
+    Top = 617
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4754,8 +4766,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement28: TSwitchElement
-    Left = 346
-    Top = 474
+    Left = 501
+    Top = 552
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4771,8 +4783,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement29: TSwitchElement
-    Left = 464
-    Top = 458
+    Left = 619
+    Top = 536
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4788,8 +4800,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement3: TSwitchElement
-    Left = 302
-    Top = 189
+    Left = 457
+    Top = 267
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4805,8 +4817,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement30: TSwitchElement
-    Left = 464
-    Top = 514
+    Left = 619
+    Top = 592
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4822,8 +4834,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement31: TSwitchElement
-    Left = 1081
-    Top = 493
+    Left = 1236
+    Top = 571
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4839,8 +4851,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement32: TSwitchElement
-    Left = 424
-    Top = 614
+    Left = 579
+    Top = 692
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4856,8 +4868,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement33: TSwitchElement
-    Left = 642
-    Top = 572
+    Left = 797
+    Top = 650
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4873,8 +4885,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement34: TSwitchElement
-    Left = 714
-    Top = 572
+    Left = 869
+    Top = 650
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4890,8 +4902,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement35: TSwitchElement
-    Left = 768
-    Top = 579
+    Left = 923
+    Top = 657
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4907,8 +4919,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement36: TSwitchElement
-    Left = 642
-    Top = 656
+    Left = 797
+    Top = 734
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4924,8 +4936,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement37: TSwitchElement
-    Left = 714
-    Top = 656
+    Left = 869
+    Top = 734
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4941,8 +4953,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement38: TSwitchElement
-    Left = 768
-    Top = 648
+    Left = 923
+    Top = 726
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4958,8 +4970,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement39: TSwitchElement
-    Left = 848
-    Top = 625
+    Left = 1003
+    Top = 703
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4975,8 +4987,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement4: TSwitchElement
-    Left = 374
-    Top = 189
+    Left = 529
+    Top = 267
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -4992,8 +5004,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement40: TSwitchElement
-    Left = 768
-    Top = 614
+    Left = 923
+    Top = 692
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -5009,8 +5021,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement5: TSwitchElement
-    Left = 270
-    Top = 238
+    Left = 425
+    Top = 316
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -5026,8 +5038,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement6: TSwitchElement
-    Left = 338
-    Top = 239
+    Left = 493
+    Top = 317
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -5043,8 +5055,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement7: TSwitchElement
-    Left = 410
-    Top = 239
+    Left = 565
+    Top = 317
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -5060,8 +5072,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement8: TSwitchElement
-    Left = 486
-    Top = 238
+    Left = 641
+    Top = 316
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -5077,8 +5089,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object SwitchElement9: TSwitchElement
-    Left = 532
-    Top = 284
+    Left = 687
+    Top = 362
     Width = 20
     Height = 16
     Cursor = crUpArrow
@@ -5094,8 +5106,8 @@ object frmBilgeSystemIns: TfrmBilgeSystemIns
     SwitchType = SWtpSWE
   end
   object pm1: TPopupMenu
-    Left = 200
-    Top = 384
+    Left = 336
+    Top = 392
     object mniAlarm1: TMenuItem
       Caption = 'Alarm'
       OnClick = mniAlarm1Click

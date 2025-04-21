@@ -32,7 +32,6 @@ type
     swtchlmnt3: TSwitchElement;
     swtchlmnt4: TSwitchElement;
     swtchlmnt5: TSwitchElement;
-    Image2: TImage;
     procedure FormResize(Sender: TObject);
   private
     { Private declarations }

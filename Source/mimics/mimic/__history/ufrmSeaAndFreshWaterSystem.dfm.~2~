@@ -2487,14 +2487,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
       0CC11B08EE777054AF607AA0FF003E3235CBFF00C6D9D9FF00B3DEFADEA7F245
       FA3DF7AFB3DCC7FFD9}
   end
-  object Image2: TImage
-    Left = 0
-    Top = 0
-    Width = 1687
-    Height = 842
-    Align = alClient
-    ExplicitTop = -8
-  end
   object MotorControlElement1: TMotorControlElement
     Left = 184
     Top = 136
