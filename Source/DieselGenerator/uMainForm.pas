@@ -49,6 +49,8 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
     procedure btnStartClick(Sender: TObject);
+    procedure btnStopClick(Sender: TObject);
+    procedure btnStandbyClick(Sender: TObject);
 
   private
     FListener : TListeners;
@@ -156,9 +158,19 @@ begin
   imgReset.Visible := False;
 end;
 
+procedure TMainForm.btnStandbyClick(Sender: TObject);
+begin
+//
+end;
+
 procedure TMainForm.btnStartClick(Sender: TObject);
 begin
   DieselGeneratorSystem.StartStopEngine(True);
+end;
+
+procedure TMainForm.btnStopClick(Sender: TObject);
+begin
+  DieselGeneratorSystem.StartStopEngine(False);
 end;
 
 procedure TMainForm.DieselGeneratorSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);
