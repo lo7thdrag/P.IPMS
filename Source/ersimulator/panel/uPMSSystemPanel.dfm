@@ -80,7 +80,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clRed
         ParentColor = False
         Transparent = False
       end
@@ -107,7 +107,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clSilver
         ParentColor = False
         Transparent = False
       end
@@ -297,7 +297,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clRed
         ParentColor = False
         Transparent = False
       end
@@ -323,7 +323,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clSilver
         ParentColor = False
         Transparent = False
       end
@@ -350,7 +350,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clSilver
         ParentColor = False
         Transparent = False
       end
@@ -591,7 +591,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clRed
         ParentColor = False
         Transparent = False
       end
@@ -617,7 +617,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clSilver
         ParentColor = False
         Transparent = False
       end
@@ -644,7 +644,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clSilver
         ParentColor = False
         Transparent = False
       end
@@ -933,8 +933,6 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
           ThumbLength = 15
           TickMarks = tmBoth
           OnChange = trckbrBebanChange
-          ExplicitTop = 2
-          ExplicitHeight = 351
         end
       end
       object TGroupBox
@@ -967,7 +965,6 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
           ThumbLength = 15
           TickMarks = tmBoth
           OnChange = trckbrBebanChange
-          ExplicitHeight = 418
         end
       end
       object btnApply: TButton
@@ -1047,7 +1044,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clRed
         ParentColor = False
         Transparent = False
       end
@@ -1073,7 +1070,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clSilver
         ParentColor = False
         Transparent = False
       end
@@ -1100,7 +1097,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clSilver
         ParentColor = False
         Transparent = False
       end
@@ -1341,7 +1338,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clRed
         ParentColor = False
         Transparent = False
       end
@@ -1352,7 +1349,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clSilver
         ParentColor = False
         Transparent = False
       end
@@ -1363,7 +1360,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Height = 13
         Alignment = taCenter
         Caption = '   '
-        Color = clWhite
+        Color = clSilver
         ParentColor = False
         Transparent = False
       end

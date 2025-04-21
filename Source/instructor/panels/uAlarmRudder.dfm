@@ -17,20 +17,20 @@ object frmAlarmRudder: TfrmAlarmRudder
   PixelsPerInch = 96
   TextHeight = 13
   object pnlStartboard: TPanel
-    Left = 875
+    Left = 854
     Top = 46
-    Width = 777
-    Height = 796
+    Width = 809
+    Height = 784
     BevelOuter = bvNone
     Color = 3749426
     ParentBackground = False
     TabOrder = 7
     DesignSize = (
-      777
-      796)
+      809
+      784)
     object vrwhlRudderPanelRight: TVrWheel
-      Left = 104
-      Top = 474
+      Left = 277
+      Top = 504
       Width = 254
       Height = 254
       MaxValue = 200
@@ -6115,9 +6115,9 @@ object frmAlarmRudder: TfrmAlarmRudder
       OnMouseMove = vrwhlRudderPanelRightMouseMove
     end
     object lblStarBoardValue: TLabel
-      Left = 235
-      Top = 498
-      Width = 30
+      Left = 400
+      Top = 530
+      Width = 8
       Height = 18
       Caption = '0'
       Color = cl3DDkShadow
@@ -6132,266 +6132,266 @@ object frmAlarmRudder: TfrmAlarmRudder
       Visible = False
     end
     object pnlAlarmStartboard: TPanel
-      Left = 47
-      Top = 77
-      Width = 684
-      Height = 335
+      Left = 269
+      Top = 66
+      Width = 516
+      Height = 353
       BevelOuter = bvNone
       Color = clGray
       ParentBackground = False
       TabOrder = 0
       object btnLampKanan1: TSpeedButtonImage
-        Left = 60
-        Top = 19
-        Width = 86
-        Height = 50
+        Left = 18
+        Top = 16
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan6: TSpeedButtonImage
-        Left = 179
-        Top = 19
-        Width = 86
-        Height = 50
+        Left = 115
+        Top = 16
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan9: TSpeedButtonImage
-        Left = 299
-        Top = 19
-        Width = 86
-        Height = 50
+        Left = 212
+        Top = 16
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan12: TSpeedButtonImage
-        Left = 419
-        Top = 19
-        Width = 86
-        Height = 50
+        Left = 309
+        Top = 16
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan14: TSpeedButtonImage
-        Left = 538
-        Top = 19
-        Width = 86
-        Height = 50
+        Left = 406
+        Top = 16
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan2: TSpeedButtonImage
-        Left = 60
+        Left = 18
         Top = 81
-        Width = 86
-        Height = 50
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan7: TSpeedButtonImage
-        Left = 180
+        Left = 115
         Top = 81
-        Width = 86
-        Height = 50
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan10: TSpeedButtonImage
-        Left = 299
+        Left = 212
         Top = 81
-        Width = 86
-        Height = 50
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan13: TSpeedButtonImage
-        Left = 418
+        Left = 309
         Top = 81
-        Width = 86
-        Height = 50
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan15: TSpeedButtonImage
-        Left = 538
+        Left = 406
         Top = 81
-        Width = 86
-        Height = 50
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan3: TSpeedButtonImage
-        Left = 60
-        Top = 143
-        Width = 86
-        Height = 50
+        Left = 18
+        Top = 146
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan8: TSpeedButtonImage
-        Left = 180
-        Top = 143
-        Width = 86
-        Height = 50
+        Left = 115
+        Top = 146
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan11: TSpeedButtonImage
-        Left = 299
-        Top = 143
-        Width = 86
-        Height = 50
+        Left = 212
+        Top = 146
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan4: TSpeedButtonImage
-        Left = 60
-        Top = 205
-        Width = 86
-        Height = 50
+        Left = 18
+        Top = 211
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKanan5: TSpeedButtonImage
-        Left = 60
-        Top = 267
-        Width = 86
-        Height = 50
+        Left = 18
+        Top = 276
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
     end
     object Panel12: TPanel
-      Left = 47
-      Top = 39
-      Width = 684
+      Left = 269
+      Top = 28
+      Width = 516
       Height = 32
       BevelOuter = bvNone
       Color = clGray
       ParentBackground = False
       TabOrder = 1
       object Label8: TLabel
-        Left = 333
+        Left = 229
         Top = 7
         Width = 59
         Height = 19
@@ -6405,16 +6405,16 @@ object frmAlarmRudder: TfrmAlarmRudder
       end
     end
     object Panel3: TPanel
-      Left = 418
-      Top = 436
-      Width = 241
+      Left = 24
+      Top = 28
+      Width = 217
       Height = 32
       BevelOuter = bvNone
       Color = clGray
       ParentBackground = False
       TabOrder = 2
       object Label4: TLabel
-        Left = 96
+        Left = 85
         Top = 7
         Width = 48
         Height = 19
@@ -6428,114 +6428,114 @@ object frmAlarmRudder: TfrmAlarmRudder
       end
     end
     object pnlPumpStartboard: TPanel
-      Left = 418
-      Top = 474
-      Width = 241
-      Height = 295
+      Left = 24
+      Top = 66
+      Width = 217
+      Height = 353
       BevelOuter = bvNone
       Color = clGray
       ParentBackground = False
       TabOrder = 3
       object btnPumpKanan1: TSpeedButtonImage
-        Left = 43
-        Top = 32
-        Width = 60
-        Height = 60
+        Left = 22
+        Top = 30
+        Width = 82
+        Height = 82
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -8
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnPumpKiri1Click
-        Color = 3749426
+        Color = clGreen
       end
       object btnPumpKanan4: TSpeedButtonImage
-        Left = 138
-        Top = 32
-        Width = 60
-        Height = 60
+        Left = 113
+        Top = 29
+        Width = 82
+        Height = 82
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -8
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnPumpKiri1Click
-        Color = 3749426
+        Color = clGreen
       end
       object btnPumpKanan2: TSpeedButtonImage
-        Left = 43
-        Top = 117
-        Width = 60
-        Height = 60
+        Left = 22
+        Top = 136
+        Width = 82
+        Height = 82
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -8
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnPumpKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnPumpKanan5: TSpeedButtonImage
-        Left = 138
-        Top = 117
-        Width = 60
-        Height = 60
+        Left = 113
+        Top = 136
+        Width = 82
+        Height = 82
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -8
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnPumpKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnPumpKanan3: TSpeedButtonImage
-        Left = 43
-        Top = 202
-        Width = 60
-        Height = 60
+        Left = 22
+        Top = 242
+        Width = 82
+        Height = 82
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -8
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnPumpKiri1Click
-        Color = 3749426
+        Color = clSilver
       end
       object btnPumpKanan6: TSpeedButtonImage
-        Left = 138
-        Top = 202
-        Width = 60
-        Height = 60
+        Left = 113
+        Top = 242
+        Width = 82
+        Height = 82
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -8
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnPumpKiri1Click
-        Color = 3749426
+        Color = clSilver
       end
     end
     object Panel13: TPanel
-      Left = 104
-      Top = 436
+      Left = 279
+      Top = 467
       Width = 251
       Height = 32
       BevelOuter = bvNone
@@ -6543,7 +6543,7 @@ object frmAlarmRudder: TfrmAlarmRudder
       ParentBackground = False
       TabOrder = 4
       object Label6: TLabel
-        Left = 42
+        Left = 47
         Top = 7
         Width = 157
         Height = 19
@@ -6594,14 +6594,14 @@ object frmAlarmRudder: TfrmAlarmRudder
   object lbl18: TPanel
     Left = 16
     Top = 8
-    Width = 777
+    Width = 809
     Height = 32
     BevelOuter = bvNone
     Color = 3749426
     ParentBackground = False
     TabOrder = 4
     object Label3: TLabel
-      Left = 354
+      Left = 381
       Top = 7
       Width = 46
       Height = 19
@@ -6615,9 +6615,9 @@ object frmAlarmRudder: TfrmAlarmRudder
     end
   end
   object Panel4: TPanel
-    Left = 875
+    Left = 854
     Top = 8
-    Width = 777
+    Width = 809
     Height = 32
     BevelOuter = bvNone
     Color = 3749426
@@ -6640,18 +6640,18 @@ object frmAlarmRudder: TfrmAlarmRudder
   object pnlPort: TPanel
     Left = 16
     Top = 46
-    Width = 777
-    Height = 796
+    Width = 809
+    Height = 784
     BevelOuter = bvNone
     Color = 3749426
     ParentBackground = False
     TabOrder = 6
     DesignSize = (
-      777
-      796)
+      809
+      784)
     object vrwhlRudderLeft: TVrWheel
-      Left = 418
-      Top = 474
+      Left = 277
+      Top = 504
       Width = 254
       Height = 254
       MaxValue = 200
@@ -12736,8 +12736,8 @@ object frmAlarmRudder: TfrmAlarmRudder
       OnMouseMove = vrwhlRudderLeftMouseMove
     end
     object lblPortValue: TLabel
-      Left = 549
-      Top = 498
+      Left = 400
+      Top = 530
       Width = 8
       Height = 18
       Caption = '0'
@@ -12753,372 +12753,372 @@ object frmAlarmRudder: TfrmAlarmRudder
       Visible = False
     end
     object pnlAlarmPort: TPanel
-      Left = 47
-      Top = 77
-      Width = 684
-      Height = 335
+      Left = 24
+      Top = 66
+      Width = 516
+      Height = 353
       BevelOuter = bvNone
       Color = clGray
       ParentBackground = False
       TabOrder = 0
       object btnLampKiri1: TSpeedButtonImage
-        Left = 60
-        Top = 19
-        Width = 86
-        Height = 50
+        Left = 18
+        Top = 16
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri2: TSpeedButtonImage
-        Left = 60
+        Left = 18
         Top = 81
-        Width = 86
-        Height = 50
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri3: TSpeedButtonImage
-        Left = 60
-        Top = 143
-        Width = 86
-        Height = 50
+        Left = 18
+        Top = 146
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri4: TSpeedButtonImage
-        Left = 60
-        Top = 205
-        Width = 86
-        Height = 50
+        Left = 18
+        Top = 211
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri5: TSpeedButtonImage
-        Left = 60
-        Top = 267
-        Width = 86
-        Height = 50
+        Left = 18
+        Top = 276
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri6: TSpeedButtonImage
-        Left = 180
-        Top = 19
-        Width = 86
-        Height = 50
+        Left = 115
+        Top = 16
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri7: TSpeedButtonImage
-        Left = 180
+        Left = 115
         Top = 81
-        Width = 86
-        Height = 50
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri8: TSpeedButtonImage
-        Left = 180
-        Top = 143
-        Width = 86
-        Height = 50
+        Left = 115
+        Top = 146
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri9: TSpeedButtonImage
-        Left = 299
-        Top = 19
-        Width = 86
-        Height = 50
+        Left = 212
+        Top = 16
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri10: TSpeedButtonImage
-        Left = 299
+        Left = 212
         Top = 81
-        Width = 86
-        Height = 50
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri11: TSpeedButtonImage
-        Left = 299
-        Top = 143
-        Width = 86
-        Height = 50
+        Left = 212
+        Top = 146
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri12: TSpeedButtonImage
-        Left = 418
-        Top = 19
-        Width = 86
-        Height = 50
+        Left = 309
+        Top = 16
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri13: TSpeedButtonImage
-        Left = 418
+        Left = 309
         Top = 81
-        Width = 86
-        Height = 50
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri14: TSpeedButtonImage
-        Left = 538
-        Top = 19
-        Width = 86
-        Height = 50
+        Left = 406
+        Top = 16
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnLampKiri15: TSpeedButtonImage
-        Left = 538
+        Left = 406
         Top = 81
-        Width = 86
-        Height = 50
+        Width = 93
+        Height = 61
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -7
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnLampKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
     end
     object pnlPumpPort: TPanel
-      Left = 105
-      Top = 474
-      Width = 241
-      Height = 295
+      Left = 568
+      Top = 66
+      Width = 217
+      Height = 353
       BevelOuter = bvNone
       Color = clGray
       ParentBackground = False
       TabOrder = 1
       object btnPumpKiri1: TSpeedButtonImage
-        Left = 43
-        Top = 32
-        Width = 60
-        Height = 60
+        Left = 22
+        Top = 30
+        Width = 82
+        Height = 82
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -8
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnPumpKiri1Click
-        Color = 3749426
+        Color = clGreen
       end
       object btnPumpKiri2: TSpeedButtonImage
-        Left = 43
-        Top = 117
-        Width = 60
-        Height = 60
+        Left = 22
+        Top = 136
+        Width = 82
+        Height = 82
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -8
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnPumpKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnPumpKiri3: TSpeedButtonImage
-        Left = 43
-        Top = 202
-        Width = 60
-        Height = 60
+        Left = 22
+        Top = 242
+        Width = 82
+        Height = 82
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -8
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnPumpKiri1Click
-        Color = 3749426
+        Color = clSilver
       end
       object btnPumpKiri4: TSpeedButtonImage
-        Left = 138
-        Top = 32
-        Width = 60
-        Height = 60
+        Left = 113
+        Top = 30
+        Width = 82
+        Height = 82
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -8
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnPumpKiri1Click
-        Color = 3749426
+        Color = clGreen
       end
       object btnPumpKiri5: TSpeedButtonImage
-        Left = 138
-        Top = 117
-        Width = 60
-        Height = 60
+        Left = 113
+        Top = 136
+        Width = 82
+        Height = 82
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -8
+        Font.Color = clWhite
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnPumpKiri1Click
-        Color = 3749426
+        Color = clMaroon
       end
       object btnPumpKiri6: TSpeedButtonImage
-        Left = 138
-        Top = 202
-        Width = 60
-        Height = 60
+        Left = 113
+        Top = 242
+        Width = 82
+        Height = 82
         Caption = ''
         Flat = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -8
+        Font.Height = -9
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         OnClick = btnPumpKiri1Click
-        Color = 3749426
+        Color = clSilver
       end
     end
     object Panel8: TPanel
-      Left = 47
-      Top = 39
-      Width = 684
+      Left = 24
+      Top = 28
+      Width = 516
       Height = 32
       BevelOuter = bvNone
       Color = clGray
       ParentBackground = False
       TabOrder = 2
       object Label1: TLabel
-        Left = 333
+        Left = 229
         Top = 7
         Width = 59
         Height = 19
@@ -13132,16 +13132,16 @@ object frmAlarmRudder: TfrmAlarmRudder
       end
     end
     object Panel9: TPanel
-      Left = 105
-      Top = 436
-      Width = 241
+      Left = 568
+      Top = 28
+      Width = 217
       Height = 32
       BevelOuter = bvNone
       Color = clGray
       ParentBackground = False
       TabOrder = 3
       object Label7: TLabel
-        Left = 96
+        Left = 84
         Top = 7
         Width = 48
         Height = 19
@@ -13155,8 +13155,8 @@ object frmAlarmRudder: TfrmAlarmRudder
       end
     end
     object Panel10: TPanel
-      Left = 418
-      Top = 436
+      Left = 279
+      Top = 467
       Width = 251
       Height = 32
       BevelOuter = bvNone

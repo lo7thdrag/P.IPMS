@@ -42,6 +42,10 @@ type
 
     procedure GetAllScenarios(var aList: TStrings);
     procedure SaveScenario(aID: Integer; aName, aDesc: string; intArr: array of Integer);
+
+    {loader}
+    function GetScenarioDesc(aName: string): string;
+    function GetDetailScenarioConditions(aName: string): TStrings;
     {$ENDREGION}
 
     {$REGION ' Session Section '}
@@ -94,8 +98,8 @@ type
 
 
 
-    function getScenarioDesc(aName: string): string;
-    function getScenarioConditions(aName: string): TStrings;
+
+
     function getSession(aSessionID: Integer): TSession_Data; overload;
     function insertScenario(aID: Integer; aName, aDesc: string; intArr: array of Integer): Integer;
     procedure loadScenario(aSessionID: Integer);
@@ -202,6 +206,16 @@ end;
 procedure TScenario.SaveScenario(aID: Integer; aName, aDesc: string; intArr: array of Integer);
 begin
   FDatabase.SaveScenario(aID, aName, aDesc, intArr);
+end;
+
+function TScenario.GetScenarioDesc(aName: string): string;
+begin
+  Result :=  FDatabase.GetScenarioDesc(aName);
+end;
+
+function TScenario.GetDetailScenarioConditions(aName: string): TStrings;
+begin
+  Result := FDatabase.GetDetailScenarioConditions(aName);
 end;
 
 {$ENDREGION}
@@ -624,16 +638,6 @@ end;
 function TScenario.GetTanksCondID(aID, aIndex: Integer): Integer;
 begin
   Result := FDatabase.GetTanksCondID(aID, aIndex);
-end;
-
-function TScenario.getScenarioConditions(aName: string): TStrings;
-begin
-  Result := FDatabase.GetScenarioConditions(aName);
-end;
-
-function TScenario.getScenarioDesc(aName: string): string;
-begin
-  Result :=  FDatabase.GetScenarioDesc(aName);
 end;
 
 function TScenario.getSession(aSessionID: Integer): TSession_Data;

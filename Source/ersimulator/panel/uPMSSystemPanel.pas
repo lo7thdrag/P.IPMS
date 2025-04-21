@@ -1082,7 +1082,7 @@ begin
   if val then
     result := clLime
   else
-    result := clBlack;
+    result := clSilver;
 end;
 
 function TfrmPMSSystemPanel.toLblWarnaEngine(val: boolean): Integer;

@@ -32,6 +32,10 @@ type
     function DeleteScenario(aID: Integer): Boolean;
 
     procedure GetAllScenario(var aScenarios: TStrings);
+
+    {loader}
+    function GetScenarioDesc(aName: string): string;
+    function GetDetailScenarioConditions(aName: string; aType: string = 'ALL'): TStrings;
     {$ENDREGION}
 
     {$REGION ' Session Section '}
@@ -122,8 +126,7 @@ type
 
     function GetScenarioByName(aName: string): TScenario_Data;
     function GetScenarioByID(aID: Integer): TScenario_Data;
-    function GetScenarioDesc(aName: string): string;
-    function GetScenarioConditions(aName: string; aType: string = 'ALL'): TStrings;
+
     function GetScenarioIDByName(aName: string; out aScenarioType: Integer): Integer;
     function GetConditions(aName: string; aType: string = 'ALL'): TStrings;
     procedure GetPMSCondition(aName: string; var l: TList); // list of TScenarioPMSCondition
@@ -4568,7 +4571,7 @@ begin
   end;
 end;
 
-function TIPMSDatabase.GetScenarioConditions(aName: String;aType : string = 'ALL'): TStrings;
+function TIPMSDatabase.GetDetailScenarioConditions(aName: String;aType : string = 'ALL'): TStrings;
 var
   FQuery : TZQuery;
   query : String;

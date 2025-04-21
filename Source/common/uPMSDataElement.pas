@@ -360,13 +360,31 @@ begin
     else
       Result := False;
   end
-  else if GenSwitchID = 'Switchboard Emergency' then
+  else if GenSwitchID = 'Switchboard Emergency FWD' then
   begin
-    if konstanta = C_CBNAVNAUT then
+    if konstanta = C_CBE_ESB then
+      value := '3241E50031H'
+    else if konstanta = C_CBNAVNAUT then
       value := '3243E5005B'
     else
       Result := False;
   end
+  else if GenSwitchID = 'Switchboard Emergency AFT' then
+  begin
+    if konstanta = C_CBE_ESB then
+      value := '3241E50031G'
+    else if konstanta = C_CBNAVNAUT then
+      value := '3243E5005B'
+    else
+      Result := False;
+  end
+//  else if GenSwitchID = 'Switchboard Emergency' then
+//  begin
+//    if konstanta = C_CBNAVNAUT then
+//      value := '3243E5005B'
+//    else
+//      Result := False;
+//  end
   else
     Result := False;
 end;
@@ -375,23 +393,40 @@ function TSearchPMSElementID.getCBEElementIDInt(GenSwitchID: string;
   var value: string; valueint, konstanta: Integer): Boolean;
 begin
   Result := False;
-  if GenSwitchID = 'Switchboard Emergency' then
+  if GenSwitchID = 'Switchboard Emergency FWD' then
   begin
     if konstanta = C_CBE_ESB then
     begin
-      {valueint 1:aft; valueint 2:fwd }
-      if valueint = 1 then
-      begin
-        value := '3241E50031G';
-        Result := True;
-      end
-      else if valueint = 3 then
-      begin
-        value := '3241E50031H';
-        Result := True;
-      end
+      value := '3241E50031H';
+      Result := True;
     end
   end
+  else if GenSwitchID = 'Switchboard Emergency AFT' then
+  begin
+    if konstanta = C_CBE_ESB then
+    begin
+      value := '3241E50031G';
+      Result := True;
+    end
+  end
+
+//  if GenSwitchID = 'Switchboard Emergency' then
+//  begin
+//    if konstanta = C_CBE_ESB then
+//    begin
+//      {valueint 1:aft; valueint 2:fwd }
+//      if valueint = 1 then
+//      begin
+//        value := '3241E50031G';
+//        Result := True;
+//      end
+//      else if valueint = 3 then
+//      begin
+//        value := '3241E50031H';
+//        Result := True;
+//      end
+//    end
+//  end
 end;
 
 function TSearchPMSElementID.getCTRElementID(GenSwitchID: string;

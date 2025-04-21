@@ -55,6 +55,7 @@ type
     procedure btnResumeSessionClick(Sender: TObject);
     procedure btnScenarioClick(Sender: TObject);
     procedure btnSessionClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
 
@@ -83,7 +84,8 @@ begin
     Exit;
   end;
 
-  if lstScenario.ItemIndex >= 0 then begin
+  if lstScenario.ItemIndex >= 0 then
+  begin
 
     if MessageDlg('Are you sure to start new session?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
       Exit;
@@ -99,15 +101,16 @@ begin
       DecodeDate(rzDatePick.Date,y,m,d);
       DecodeTime(rzTimePick.Time,h,n,s,nn);
       dtTime := EncodeDate(y,m,d) + EncodeTime(h,n,s,nn);
-    end else
+    end
+    else
       dtTime := Now;
 
-    if InstructorSys.Scenario.PrepareRunningScenario(lstScenario.
-          Items[lstScenario.ItemIndex],dtTime) then
+    if InstructorSys.Scenario.PrepareRunningScenario(lstScenario.Items[lstScenario.ItemIndex],dtTime) then
     begin
       CtrlSystem.Controller.SetRunningScenario(InstructorSys.Scenario.CurrentRunningScenario);
       InstructorSys.Scenario.loadScenario(InstructorSys.Scenario.CurrentRunningScenario);
-    end else
+    end
+    else
     begin
       CtrlSystem.Controller.SetRunningScenario(0);
     end;
@@ -198,12 +201,14 @@ end;
 
 procedure TfrmScenarioLoader.btnScenarioClick(Sender: TObject);
 begin
+  btnRefreshScenClick(nil);
   pnlScenarioLoader.BringToFront;
   lblHeader.Caption := 'SCENARIO'
 end;
 
 procedure TfrmScenarioLoader.btnSessionClick(Sender: TObject);
 begin
+  btnRefreshSessionClick(nil);
   pnlSessionScenarioLoader.BringToFront;
   lblHeader.Caption := 'SESSION'
 end;
@@ -228,6 +233,11 @@ procedure TfrmScenarioLoader.FormCreate(Sender: TObject);
 begin
   rzDatePick.DateTime := Now;
   rzTimePick.DateTime := Now;
+end;
+
+procedure TfrmScenarioLoader.FormShow(Sender: TObject);
+begin
+  btnScenarioClick(nil);
 end;
 
 procedure TfrmScenarioLoader.lstAvailSessionMouseUp(Sender: TObject;
@@ -259,10 +269,11 @@ begin
   mmoDesc.Lines.Clear;
   mmoInitial.Lines.Clear;
 
-  if lstScenario.ItemIndex >= 0 then begin
-    mmoDesc.Lines.Add(InstructorSys.Scenario.getScenarioDesc(lstScenario.Items[lstScenario.ItemIndex]));
+  if lstScenario.ItemIndex >= 0 then
+  begin
+    mmoDesc.Lines.Add(InstructorSys.Scenario.GetScenarioDesc(lstScenario.Items[lstScenario.ItemIndex]));
 
-    s := InstructorSys.Scenario.getScenarioConditions(lstScenario.Items[lstScenario.ItemIndex]);
+    s := InstructorSys.Scenario.GetDetailScenarioConditions(lstScenario.Items[lstScenario.ItemIndex]);
     mmoInitial.Lines.AddStrings(s);
 
     s.Free;

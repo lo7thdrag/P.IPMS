@@ -708,7 +708,7 @@ begin
       FPMSConditionID := scenarioDataTemp.ArrConditionID[i];
       edtPMSName.Text := scenarioDataTemp.ArrConditionName[i];
 
-      scenariosTemp := InstructorSys.Database.GetScenarioConditions(scenarioDataTemp.Name,'PMS');
+      scenariosTemp := InstructorSys.Database.GetDetailScenarioConditions(scenarioDataTemp.Name,'PMS');
       mmoPMSInfo.Lines.AddStrings(scenariosTemp);
       scenariosTemp.Free;
     end;
@@ -718,7 +718,7 @@ begin
       FPCSConditionID := scenarioDataTemp.ArrConditionID[i];
       edtPCSName.Text := scenarioDataTemp.ArrConditionName[i];
 
-      scenariosTemp := InstructorSys.Database.GetScenarioConditions(scenarioDataTemp.Name,'PCS');
+      scenariosTemp := InstructorSys.Database.GetDetailScenarioConditions(scenarioDataTemp.Name,'PCS');
       mmoPCSInfo.Lines.AddStrings(scenariosTemp);
       scenariosTemp.Free;
     end;

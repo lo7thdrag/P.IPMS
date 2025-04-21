@@ -163,8 +163,8 @@ begin
       end;
       InstructorSys.ClassAlarm.setLamp(Alarm);
 
-      btnPumpKiri2.Color := clGray;
-      btnPumpKiri3.Color := clGray;
+      btnPumpKiri2.Color := clMaroon;
+      btnPumpKiri3.Color := clSilver;
     end
     else if TSpeedButtonImage(Sender).Tag = 2 then
     begin
@@ -184,8 +184,8 @@ begin
       end;
       InstructorSys.ClassAlarm.setLamp(Alarm);
 
-      btnPumpKiri1.Color := clGray;
-      btnPumpKiri3.Color := clGray;
+      btnPumpKiri1.Color := clGreen;
+      btnPumpKiri3.Color := clSilver;
     end
     else if TSpeedButtonImage(Sender).Tag = 3 then
     begin
@@ -205,8 +205,8 @@ begin
       end;
       InstructorSys.ClassAlarm.setLamp(Alarm);
 
-      btnPumpKiri1.Color := clGray;
-      btnPumpKiri2.Color := clGray;
+      btnPumpKiri1.Color := clGreen;
+      btnPumpKiri2.Color := clMaroon;
     end;
   end
   else if (TSpeedButtonImage(Sender).Tag > 3) and
@@ -230,8 +230,8 @@ begin
       end;
       InstructorSys.ClassAlarm.setLamp(Alarm);
 
-      btnPumpKiri5.Color := clGray;
-      btnPumpKiri6.Color := clGray;
+      btnPumpKiri5.Color := clMaroon;
+      btnPumpKiri6.Color := clSilver;
     end
     else if TSpeedButtonImage(Sender).Tag = 5 then
     begin
@@ -251,8 +251,8 @@ begin
       end;
       InstructorSys.ClassAlarm.setLamp(Alarm);
 
-      btnPumpKiri4.Color := clGray;
-      btnPumpKiri6.Color := clGray;
+      btnPumpKiri4.Color := clGreen;
+      btnPumpKiri6.Color := clSilver;
     end
     else if TSpeedButtonImage(Sender).Tag = 6 then
     begin
@@ -272,8 +272,8 @@ begin
       end;
       InstructorSys.ClassAlarm.setLamp(Alarm);
 
-      btnPumpKiri4.Color := clGray;
-      btnPumpKiri5.Color := clGray;
+      btnPumpKiri4.Color := clGreen;
+      btnPumpKiri5.Color := clMaroon;
     end;
   end
   else if (TSpeedButtonImage(Sender).Tag > 6) and
@@ -297,8 +297,8 @@ begin
       end;
       InstructorSys.ClassAlarm.setLamp(Alarm);
 
-      btnPumpKanan2.Color := clGray;
-      btnPumpKanan3.Color := clGray;
+      btnPumpKanan2.Color := clMaroon;
+      btnPumpKanan3.Color := clSilver;
     end
     else if TSpeedButtonImage(Sender).Tag = 8 then
     begin
@@ -318,8 +318,8 @@ begin
       end;
       InstructorSys.ClassAlarm.setLamp(Alarm);
 
-      btnPumpKanan1.Color := clGray;
-      btnPumpKanan3.Color := clGray;
+      btnPumpKanan1.Color := clGreen;
+      btnPumpKanan3.Color := clSilver;
     end
     else if TSpeedButtonImage(Sender).Tag = 9 then
     begin
@@ -339,8 +339,8 @@ begin
       end;
       InstructorSys.ClassAlarm.setLamp(Alarm);
 
-      btnPumpKanan1.Color := clGray;
-      btnPumpKanan2.Color := clGray;
+      btnPumpKanan1.Color := clGreen;
+      btnPumpKanan2.Color := clMaroon;
     end;
   end
   else if (TSpeedButtonImage(Sender).Tag > 9) and
@@ -364,8 +364,8 @@ begin
       end;
       InstructorSys.ClassAlarm.setLamp(Alarm);
 
-      btnPumpKanan5.Color := clGray;
-      btnPumpKanan6.Color := clGray;
+      btnPumpKanan5.Color := clMaroon;
+      btnPumpKanan6.Color := clSilver;
     end
     else if TSpeedButtonImage(Sender).Tag = 11 then
     begin
@@ -385,8 +385,8 @@ begin
       end;
       InstructorSys.ClassAlarm.setLamp(Alarm);
 
-      btnPumpKanan4.Color := clGray;
-      btnPumpKanan6.Color := clGray;
+      btnPumpKanan4.Color := clGreen;
+      btnPumpKanan6.Color := clSilver;
     end
     else if TSpeedButtonImage(Sender).Tag = 12 then
     begin
@@ -406,8 +406,8 @@ begin
       end;
       InstructorSys.ClassAlarm.setLamp(Alarm);
 
-      btnPumpKanan4.Color := clGray;
-      btnPumpKanan5.Color := clGray;
+      btnPumpKanan4.Color := clGreen;
+      btnPumpKanan5.Color := clMaroon;
     end;
   end;
 end;
@@ -429,7 +429,7 @@ procedure TfrmAlarmRudder.btnLampKiri1Click(Sender: TObject);
 begin
   if TSpeedButtonImage(sender).Tag <= 15 then
   begin
-    if TSpeedButtonImage(sender).Color = clGray then
+    if TSpeedButtonImage(sender).Color = clMaroon then
     begin
       with Alarm do
       begin
@@ -451,12 +451,12 @@ begin
       end;
 
       InstructorSys.ClassAlarm.setLamp(Alarm);
-      TSpeedButtonImage(sender).Color := clGray;
+      TSpeedButtonImage(sender).Color := clMaroon;
     end;
   end
   else
   begin
-    if TSpeedButtonImage(sender).Color = clGray then
+    if TSpeedButtonImage(sender).Color = clMaroon then
     begin
       with Alarm do
       begin

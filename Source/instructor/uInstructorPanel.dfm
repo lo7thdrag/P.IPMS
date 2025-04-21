@@ -18968,6 +18968,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Color = 3749426
         Collapsed = True
         TabOrder = 7
+        ExplicitWidth = 213
         ExpandedHeight = 221
         object btnNav_ComSystem: TFlatSpeedButton
           Tag = 22
