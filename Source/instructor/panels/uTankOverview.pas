@@ -29,6 +29,7 @@ type
     img17: TImage;
     img18: TImage;
     img19: TImage;
+    Image1: TImage;
     procedure imgFoLoadTrunkMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
   private

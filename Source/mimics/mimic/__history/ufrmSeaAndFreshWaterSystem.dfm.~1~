@@ -1,10 +1,9 @@
 object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
   Left = -1604
   Top = -132
-  BorderStyle = bsNone
   Caption = 'frmSeaAndFreshWaterSystem'
-  ClientHeight = 842
-  ClientWidth = 1687
+  ClientHeight = 1035
+  ClientWidth = 1600
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -2487,14 +2486,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
       0CC11B08EE777054AF607AA0FF003E3235CBFF00C6D9D9FF00B3DEFADEA7F245
       FA3DF7AFB3DCC7FFD9}
   end
-  object Image2: TImage
-    Left = 0
-    Top = 0
-    Width = 1687
-    Height = 842
-    Align = alClient
-    ExplicitTop = -8
-  end
   object MotorControlElement1: TMotorControlElement
     Left = 184
     Top = 136
@@ -2505,7 +2496,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5210A0008A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Face = MCfcRight
     GenType = MCgtG1
     SensorType = stCentrfgl_pump
@@ -2523,7 +2513,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5210A0003A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Face = MCfcRight
     GenType = MCgtG1
     SensorType = stCentrfgl_pump
@@ -2541,7 +2530,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5210A0002A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Face = MCfcRight
     GenType = MCgtG1
     SensorType = stCentrfgl_pump
@@ -2559,7 +2547,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5210A0001A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Face = MCfcRight
     GenType = MCgtG1
     SensorType = stCentrfgl_pump
@@ -2578,7 +2565,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5321S0003A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Status = TStaValOK
     UpperLimit = 100.000000000000000000
     TankValue = 70.000000000000000000
@@ -2594,7 +2580,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5321S0002A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Status = TStaValOK
     UpperLimit = 100.000000000000000000
     TankValue = 50.000000000000000000
@@ -2610,7 +2595,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5321S0001A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Status = TStaValOK
     UpperLimit = 100.000000000000000000
     TankValue = 23.000000000000000000
@@ -2626,7 +2610,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5321S0003A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpLevel
     SensorValue = 1.820000000000000000
@@ -2645,7 +2628,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5321S0003A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpContents
     SensorValue = 78.880000000000000000
@@ -2664,7 +2646,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5321S0002A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpLevel
     SensorValue = 1.200000000000000000
@@ -2683,7 +2664,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5321S0002A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpContents
     SensorValue = 58.200000000000000000
@@ -2702,7 +2682,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5321S0001A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpLevel
     SensorValue = 0.420000000000000000
@@ -2721,7 +2700,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5321S0001A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpContents
     SensorValue = 32.200000000000000000
@@ -2739,7 +2717,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = 'ABCDEFGH'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Page = 32
   end
   object Shortcut2: TShortcut
@@ -2752,7 +2729,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = 'ABCDEFGH'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Page = 33
   end
   object swtchlmnt14: TSwitchElement
@@ -2765,7 +2741,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5310A0001B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'RUNNING'
     Size = SWszBig
     Status = SWtaFalse
@@ -2781,7 +2756,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5310A0001A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -2797,7 +2771,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5310A0002B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'RUNNING'
     Size = SWszBig
     Status = SWtaFalse
@@ -2813,7 +2786,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5310A0002A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -2829,7 +2801,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5322A0001B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'PUMP 1 PUMP 2'
     Size = SWszBig
     Status = SWtaFalse
@@ -2845,7 +2816,6 @@ object frmSeaAndFreshWaterSystem: TfrmSeaAndFreshWaterSystem
     ElementID = '5322A0001A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'GENERAL FAILURE'
     Size = SWszBig
     Status = SWtaFalse

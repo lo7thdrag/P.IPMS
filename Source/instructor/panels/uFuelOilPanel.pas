@@ -54,6 +54,7 @@ type
     btn15: TSpeedButton;
     btn16: TSpeedButton;
     btn17: TSpeedButton;
+    Image1: TImage;
 
     procedure btn1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);

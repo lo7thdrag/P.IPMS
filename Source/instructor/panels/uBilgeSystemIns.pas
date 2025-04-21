@@ -54,6 +54,7 @@ type
     mniEnable1: TMenuItem;
     mniDisable1: TMenuItem;
     mniFalse1: TMenuItem;
+    Image1: TImage;
     procedure SwitchElement1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure mniAlarm1Click(Sender: TObject);

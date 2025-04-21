@@ -1,10 +1,11 @@
 object frmFFSystem: TfrmFFSystem
   Left = 0
   Top = 0
+  BorderStyle = bsNone
   Caption = 'Fire Fighting System'
-  ClientHeight = 1023
-  ClientWidth = 1672
-  Color = clBtnFace
+  ClientHeight = 842
+  ClientWidth = 1687
+  Color = clBlack
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -14,11 +15,10 @@ object frmFFSystem: TfrmFFSystem
   PixelsPerInch = 96
   TextHeight = 13
   object img1: TImage
-    Left = 0
-    Top = 0
-    Width = 1672
-    Height = 1023
-    Align = alClient
+    Left = 193
+    Top = -16
+    Width = 1301
+    Height = 874
     Picture.Data = {
       0A544A504547496D6167654DE20100FFD8FFE000104A46494600010201006000
       600000FFE10B354578696600004D4D002A000000080007011200030000000100
@@ -3879,12 +3879,10 @@ object frmFFSystem: TfrmFFSystem
       DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8D
       D8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD
       8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD8DD81B369F0EEC7FFFD9}
-    ExplicitLeft = -8
-    ExplicitTop = 8
   end
   object AnalogSensor1: TAnalogSensor
-    Left = 140
-    Top = 386
+    Left = 333
+    Top = 370
     Width = 58
     Height = 52
     Cursor = crUpArrow
@@ -3892,6 +3890,8 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551S0004A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
+    DecimalPlace = 1
     SensorType = StpPressure
     SensorValue = 3.600000000000000000
     ShowHead = True
@@ -3899,8 +3899,8 @@ object frmFFSystem: TfrmFFSystem
     Style = AStyTopToBottom
   end
   object AnalogSensor2: TAnalogSensor
-    Left = 672
-    Top = 386
+    Left = 865
+    Top = 370
     Width = 58
     Height = 52
     Cursor = crUpArrow
@@ -3908,6 +3908,8 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551S0005A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
+    DecimalPlace = 1
     SensorType = StpPressure
     SensorValue = 2.300000000000000000
     ShowHead = True
@@ -3915,8 +3917,8 @@ object frmFFSystem: TfrmFFSystem
     Style = AStyTopToBottom
   end
   object MotorControlElement1: TMotorControlElement
-    Left = 241
-    Top = 656
+    Left = 434
+    Top = 640
     Width = 55
     Height = 55
     Cursor = crUpArrow
@@ -3924,6 +3926,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551A0002A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     Face = MCfcTop
     GenType = MCgtG1
     SensorType = stCentrfgl_pump
@@ -3932,8 +3935,8 @@ object frmFFSystem: TfrmFFSystem
     Status = MCtaStopped
   end
   object MotorControlElement2: TMotorControlElement
-    Left = 473
-    Top = 656
+    Left = 666
+    Top = 640
     Width = 55
     Height = 55
     Cursor = crUpArrow
@@ -3941,6 +3944,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551A0001A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     Face = MCfcTop
     GenType = MCgtG1
     SensorType = stCentrfgl_pump
@@ -3949,8 +3953,8 @@ object frmFFSystem: TfrmFFSystem
     Status = MCtaStopped
   end
   object MotorControlElement3: TMotorControlElement
-    Left = 561
-    Top = 656
+    Left = 754
+    Top = 640
     Width = 55
     Height = 55
     Cursor = crUpArrow
@@ -3958,6 +3962,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551A0004A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     Face = MCfcTop
     GenType = MCgtG1
     SensorType = stCentrfgl_pump
@@ -3966,8 +3971,8 @@ object frmFFSystem: TfrmFFSystem
     Status = MCtaStopped
   end
   object MotorControlElement4: TMotorControlElement
-    Left = 649
-    Top = 655
+    Left = 842
+    Top = 639
     Width = 55
     Height = 55
     Cursor = crUpArrow
@@ -3975,6 +3980,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551A0003A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     Face = MCfcTop
     GenType = MCgtG1
     SensorType = stCentrfgl_pump
@@ -3983,8 +3989,8 @@ object frmFFSystem: TfrmFFSystem
     Status = MCtaStopped
   end
   object Shortcut1: TShortcut
-    Left = 13
-    Top = 355
+    Left = 206
+    Top = 339
     Width = 40
     Height = 24
     Cursor = crUpArrow
@@ -3992,11 +3998,12 @@ object frmFFSystem: TfrmFFSystem
     ElementID = 'ABCDEFGH'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     Page = 61
   end
   object Shortcut2: TShortcut
-    Left = 845
-    Top = 355
+    Left = 1038
+    Top = 339
     Width = 40
     Height = 24
     Cursor = crUpArrow
@@ -4004,11 +4011,12 @@ object frmFFSystem: TfrmFFSystem
     ElementID = 'ABCDEFGH'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     Page = 61
   end
   object Shortcut3: TShortcut
-    Left = 13
-    Top = 530
+    Left = 206
+    Top = 514
     Width = 40
     Height = 24
     Cursor = crUpArrow
@@ -4016,11 +4024,12 @@ object frmFFSystem: TfrmFFSystem
     ElementID = 'ABCDEFGH'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     Page = 61
   end
   object Shortcut4: TShortcut
-    Left = 845
-    Top = 530
+    Left = 1038
+    Top = 514
     Width = 40
     Height = 24
     Cursor = crUpArrow
@@ -4028,11 +4037,12 @@ object frmFFSystem: TfrmFFSystem
     ElementID = 'ABCDEFGH'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     Page = 61
   end
   object Shortcut5: TShortcut
-    Left = 766
-    Top = 721
+    Left = 959
+    Top = 705
     Width = 40
     Height = 24
     Cursor = crUpArrow
@@ -4040,11 +4050,12 @@ object frmFFSystem: TfrmFFSystem
     ElementID = 'ABCDEFGH'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     Page = 61
   end
   object SwitchElement1: TSwitchElement
-    Left = 40
-    Top = 112
+    Left = 233
+    Top = 96
     Width = 137
     Height = 18
     Cursor = crUpArrow
@@ -4052,6 +4063,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5552E0021A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     OnClick = SwitchElement1Click
     Caption = 'DISCHARGE'
     Size = SWszBig
@@ -4059,8 +4071,8 @@ object frmFFSystem: TfrmFFSystem
     SwitchType = SWtpSWB
   end
   object SwitchElement2: TSwitchElement
-    Left = 40
-    Top = 136
+    Left = 233
+    Top = 120
     Width = 137
     Height = 18
     Cursor = crUpArrow
@@ -4068,6 +4080,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5552E0021B'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     OnClick = SwitchElement2Click
     Caption = 'FAULT'
     Size = SWszBig
@@ -4075,8 +4088,8 @@ object frmFFSystem: TfrmFFSystem
     SwitchType = SWtpSWB
   end
   object SwitchElement3: TSwitchElement
-    Left = 452
-    Top = 113
+    Left = 645
+    Top = 97
     Width = 122
     Height = 18
     Cursor = crUpArrow
@@ -4084,6 +4097,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551E0001C'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     OnClick = SwitchElement3Click
     Caption = 'BRIDGE'
     Size = SWszBig
@@ -4091,8 +4105,8 @@ object frmFFSystem: TfrmFFSystem
     SwitchType = SWtpSWB
   end
   object SwitchElement4: TSwitchElement
-    Left = 452
-    Top = 133
+    Left = 645
+    Top = 117
     Width = 122
     Height = 18
     Cursor = crUpArrow
@@ -4100,6 +4114,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551E0001D'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     OnClick = SwitchElement4Click
     Caption = 'MCR'
     Size = SWszBig
@@ -4107,8 +4122,8 @@ object frmFFSystem: TfrmFFSystem
     SwitchType = SWtpSWB
   end
   object SwitchElement5: TSwitchElement
-    Left = 452
-    Top = 184
+    Left = 645
+    Top = 168
     Width = 122
     Height = 18
     Cursor = crUpArrow
@@ -4116,14 +4131,15 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551E0001B'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     Caption = 'RELEASE'
     Size = SWszBig
     Status = SWtaFalse
     SwitchType = SWtpSWB
   end
   object SwitchElement6: TSwitchElement
-    Left = 720
-    Top = 656
+    Left = 913
+    Top = 640
     Width = 129
     Height = 18
     Cursor = crUpArrow
@@ -4131,14 +4147,15 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551A0003B'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     Caption = 'FI-FI MODE'
     Size = SWszBig
     Status = SWtaFalse
     SwitchType = SWtpSWB
   end
   object SwitchElement7: TSwitchElement
-    Left = 720
-    Top = 680
+    Left = 913
+    Top = 664
     Width = 129
     Height = 18
     Cursor = crUpArrow
@@ -4146,21 +4163,23 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551A0003B'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     Caption = 'BILGE MODE'
     Size = SWszBig
     Status = SWtaFalse
     SwitchType = SWtpSWB
   end
   object ValveControl1: TValveControl
-    Left = 74
-    Top = 400
-    Width = 27
+    Left = 267
+    Top = 384
+    Width = 35
     Height = 35
     Cursor = crUpArrow
     Clicked = False
     ElementID = '5551M0032A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4168,15 +4187,16 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl10: TValveControl
-    Left = 913
-    Top = 478
-    Width = 31
+    Left = 1106
+    Top = 462
+    Width = 35
     Height = 35
     Cursor = crUpArrow
     Clicked = False
     ElementID = '5551M0028A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4184,15 +4204,16 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl11: TValveControl
-    Left = 909
-    Top = 400
-    Width = 28
+    Left = 1102
+    Top = 384
+    Width = 35
     Height = 35
     Cursor = crUpArrow
     Clicked = False
     ElementID = '5551M0027A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4200,8 +4221,8 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl12: TValveControl
-    Left = 298
-    Top = 312
+    Left = 491
+    Top = 296
     Width = 35
     Height = 35
     Cursor = crUpArrow
@@ -4209,6 +4230,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551M0089A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4216,8 +4238,8 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl13: TValveControl
-    Left = 660
-    Top = 286
+    Left = 853
+    Top = 270
     Width = 35
     Height = 35
     Cursor = crUpArrow
@@ -4225,6 +4247,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551M0142A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4232,8 +4255,8 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl14: TValveControl
-    Left = 751
-    Top = 286
+    Left = 944
+    Top = 270
     Width = 35
     Height = 35
     Cursor = crUpArrow
@@ -4241,6 +4264,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551M0143A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4248,8 +4272,8 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl15: TValveControl
-    Left = 988
-    Top = 286
+    Left = 1181
+    Top = 270
     Width = 35
     Height = 35
     Cursor = crUpArrow
@@ -4257,6 +4281,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551M0123A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4264,8 +4289,8 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl16: TValveControl
-    Left = 1091
-    Top = 286
+    Left = 1284
+    Top = 270
     Width = 35
     Height = 35
     Cursor = crUpArrow
@@ -4273,6 +4298,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551M0065A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4280,8 +4306,8 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl17: TValveControl
-    Left = 1140
-    Top = 432
+    Left = 1333
+    Top = 416
     Width = 35
     Height = 35
     Cursor = crUpArrow
@@ -4289,6 +4315,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551M0046A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4296,15 +4323,16 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl18: TValveControl
-    Left = 712
-    Top = 716
-    Width = 33
+    Left = 905
+    Top = 700
+    Width = 35
     Height = 35
     Cursor = crUpArrow
     Clicked = False
     ElementID = '5551A0003C'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4312,15 +4340,16 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl19: TValveControl
-    Left = 712
-    Top = 562
-    Width = 33
+    Left = 905
+    Top = 546
+    Width = 35
     Height = 35
     Cursor = crUpArrow
     Clicked = False
     ElementID = '5551A0003D'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4328,15 +4357,16 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl2: TValveControl
-    Left = 74
-    Top = 478
-    Width = 27
+    Left = 267
+    Top = 462
+    Width = 35
     Height = 35
     Cursor = crUpArrow
     Clicked = False
     ElementID = '5551M0099A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4344,15 +4374,16 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl3: TValveControl
-    Left = 252
-    Top = 478
-    Width = 29
+    Left = 445
+    Top = 462
+    Width = 35
     Height = 35
     Cursor = crUpArrow
     Clicked = False
     ElementID = '5551M0060A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4360,8 +4391,8 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl4: TValveControl
-    Left = 348
-    Top = 432
+    Left = 541
+    Top = 416
     Width = 35
     Height = 35
     Cursor = crUpArrow
@@ -4369,6 +4400,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551M0056A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4376,8 +4408,8 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl5: TValveControl
-    Left = 432
-    Top = 432
+    Left = 625
+    Top = 416
     Width = 35
     Height = 35
     Cursor = crUpArrow
@@ -4385,6 +4417,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551M0055A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4392,15 +4425,16 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl6: TValveControl
-    Left = 482
-    Top = 478
-    Width = 29
+    Left = 675
+    Top = 462
+    Width = 35
     Height = 35
     Cursor = crUpArrow
     Clicked = False
     ElementID = '5551M0029A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4408,15 +4442,16 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl7: TValveControl
-    Left = 660
-    Top = 478
-    Width = 30
+    Left = 853
+    Top = 462
+    Width = 35
     Height = 35
     Cursor = crUpArrow
     Clicked = False
     ElementID = '5551M0094A'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaClosed
@@ -4424,8 +4459,8 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl8: TValveControl
-    Left = 720
-    Top = 570
+    Left = 913
+    Top = 554
     Width = 35
     Height = 35
     Cursor = crUpArrow
@@ -4433,6 +4468,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551A0003D'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaOpen
@@ -4440,8 +4476,8 @@ object frmFFSystem: TfrmFFSystem
     ValveType = VCtpStandart
   end
   object ValveControl9: TValveControl
-    Left = 720
-    Top = 724
+    Left = 913
+    Top = 708
     Width = 35
     Height = 35
     Cursor = crUpArrow
@@ -4449,6 +4485,7 @@ object frmFFSystem: TfrmFFSystem
     ElementID = '5551A0003C'
     ElementType = 0
     ElementVisible = False
+    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = VCtaOpen

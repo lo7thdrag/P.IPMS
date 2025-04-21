@@ -1,9 +1,10 @@
 object frmFreshWaterPanel: TfrmFreshWaterPanel
   Left = 0
   Top = 0
+  BorderStyle = bsNone
   Caption = 'frmFreshWaterPanel'
-  ClientHeight = 673
-  ClientWidth = 1363
+  ClientHeight = 842
+  ClientWidth = 1687
   Color = clBlack
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +15,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
   PixelsPerInch = 96
   TextHeight = 13
   object img1: TImage
-    Left = 168
-    Top = 8
+    Left = 333
+    Top = 78
     Width = 1020
     Height = 685
     Picture.Data = {
@@ -1594,8 +1595,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
       87532248D427E9FEACF5A3FFD9}
   end
   object lbl1: TLabel
-    Left = 662
-    Top = 132
+    Left = 827
+    Top = 202
     Width = 92
     Height = 14
     Caption = 'FW ROLL STAB TK'
@@ -1609,8 +1610,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
     ParentFont = False
   end
   object btn1: TSpeedButton
-    Left = 696
-    Top = 157
+    Left = 861
+    Top = 227
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -1837,8 +1838,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
     OnMouseUp = btn1MouseUp
   end
   object btn2: TSpeedButton
-    Left = 696
-    Top = 188
+    Left = 861
+    Top = 258
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -2066,8 +2067,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
   end
   object lbl2: TLabel
     Tag = 1
-    Left = 686
-    Top = 305
+    Left = 851
+    Top = 375
     Width = 48
     Height = 14
     Caption = 'FW TK PS'
@@ -2082,8 +2083,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
   end
   object btn3: TSpeedButton
     Tag = 1
-    Left = 696
-    Top = 330
+    Left = 861
+    Top = 400
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -2311,8 +2312,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
   end
   object btn4: TSpeedButton
     Tag = 1
-    Left = 696
-    Top = 361
+    Left = 861
+    Top = 431
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -2540,8 +2541,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
   end
   object lbl3: TLabel
     Tag = 2
-    Left = 684
-    Top = 451
+    Left = 849
+    Top = 521
     Width = 49
     Height = 14
     Caption = 'FW TK SB'
@@ -2556,8 +2557,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
   end
   object btn6: TSpeedButton
     Tag = 2
-    Left = 696
-    Top = 476
+    Left = 861
+    Top = 546
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -2785,8 +2786,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
   end
   object btn7: TSpeedButton
     Tag = 2
-    Left = 696
-    Top = 507
+    Left = 861
+    Top = 577
     Width = 28
     Height = 28
     Glyph.Data = {
@@ -3013,8 +3014,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
     OnMouseUp = btn2MouseUp
   end
   object edt1: TEdit
-    Left = 686
-    Top = 227
+    Left = 851
+    Top = 297
     Width = 47
     Height = 21
     BevelEdges = []
@@ -3024,8 +3025,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
   end
   object edt2: TEdit
     Tag = 1
-    Left = 686
-    Top = 400
+    Left = 851
+    Top = 470
     Width = 47
     Height = 21
     BevelEdges = []
@@ -3035,8 +3036,8 @@ object frmFreshWaterPanel: TfrmFreshWaterPanel
   end
   object edt3: TEdit
     Tag = 2
-    Left = 686
-    Top = 546
+    Left = 851
+    Top = 616
     Width = 47
     Height = 21
     BevelEdges = []
