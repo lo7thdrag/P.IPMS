@@ -25,6 +25,7 @@ type
 
     function GetConditionIDByName(aName: string): Integer;
     function GetConditionCountByName(aName: string): Integer;
+    function GetConditionIDAtScenarioCondition(Id: Integer): Boolean;
 
     {$REGION ' Scenario Section '}
     function GetScenarioCountByName(aName: string): Integer;
@@ -271,6 +272,37 @@ begin
     Open;
 
     Result := RecordCount;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.GetConditionIDAtScenarioCondition(Id: Integer): Boolean;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM ScenarioCondition ' +
+             'WHERE Condition_ID = ' + IntToStr(Id);
+
+    SQL.Add(query);
+    Open;
+
+    Result := RecordCount > 0;
 
     Close;
     Connection := nil;

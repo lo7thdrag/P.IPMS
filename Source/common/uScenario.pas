@@ -31,6 +31,7 @@ type
 
     function GetConditionIDByName(aName: string): Integer;
     function GetConditionCountByName(aName: string): Integer;
+    function GetConditionIDAtScenarioCondition(Id: Integer): Boolean;
 
     {$REGION ' Scenario Section '}
     function GetScenarioCountByName(aName: string): Integer;
@@ -159,6 +160,11 @@ end;
 function TScenario.GetConditionCountByName(aName: string): Integer;
 begin
   Result := FDatabase.GetConditionCountByName(aName);
+end;
+
+function TScenario.GetConditionIDAtScenarioCondition(Id: Integer): Boolean;
+begin
+  Result := FDatabase.GetConditionIDAtScenarioCondition(Id);
 end;
 
 function TScenario.GetConditionIDByName(aName: string): Integer;

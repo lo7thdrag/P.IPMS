@@ -10,21 +10,6 @@ uses
 
 type
   TfrmScenBuilder = class(TForm)
-    actmgr1: TActionManager;
-    actNew: TAction;
-    actPick: TAction;
-    actSave: TAction;
-    actDelete: TAction;
-    actCancel: TAction;
-    actmgr2: TActionManager;
-    Action1: TAction;
-    actDeleteRS: TAction;
-    actChooseRS: TAction;
-    actDeleteAll: TAction;
-    actmgr3: TActionManager;
-    act2: TAction;
-    act4: TAction;
-    act5: TAction;
     pnlMenu: TPanel;
     btnScenario: TRzBmpButton;
     btnSession: TRzBmpButton;
@@ -459,13 +444,13 @@ type
     procedure btnSaveFAClick(Sender: TObject);
     {$ENDREGION}
 
-    procedure actCancelExecute(Sender: TObject);
-    procedure actChooseRSExecute(Sender: TObject);
-    procedure actDeleteRSExecute(Sender: TObject);
-    procedure actDeleteAllExecute(Sender: TObject);
-    procedure Action1Execute(Sender: TObject);
-    procedure act2Execute(Sender: TObject);
-    procedure act4Execute(Sender: TObject);
+//    procedure actCancelExecute(Sender: TObject);
+//    procedure actChooseRSExecute(Sender: TObject);
+//    procedure actDeleteRSExecute(Sender: TObject);
+//    procedure actDeleteAllExecute(Sender: TObject);
+//    procedure Action1Execute(Sender: TObject);
+//    procedure act2Execute(Sender: TObject);
+//    procedure act4Execute(Sender: TObject);
 
     procedure btnMenuClick(Sender: TObject);
 
@@ -585,215 +570,6 @@ begin
 end;
 
 {$ENDREGION}
-
-procedure TfrmScenBuilder.act2Execute(Sender: TObject);
-var
-  aList : TList;
-  condData : TConditionData;
-  i : integer;
-begin
-//  aList := nil;
-//  InstructorSys.Database.GetAllCondition(aList);
-//  strngrdCondition.RowCount := aList.Count + 1;
-//  for I := 0 to aList.Count - 1 do
-//  begin
-//    condData := aList.Items[i];
-//    strngrdCondition.Cells[0,i + 1] := IntToStr(condData.ConditionID);
-//    strngrdCondition.Cells[1,i + 1] := condData.ConditionName;
-//  end;
-//  FreeList(aList);
-end;
-
-procedure TfrmScenBuilder.act4Execute(Sender: TObject);
-var
-  used : String;
-begin
-//  if FSelectedConditionID > 0 then
-//  begin
-//
-//    used := InstructorSys.Database.GetConditionInfo(FSelectedConditionID);
-//
-//    if used <> 'NONE' then
-//      MessageDlg('Delete failed, selected condition used by other scenario!', mtWarning, [mbOK], 0)
-//    else
-//    begin
-//      if MessageDlg('Are you sure to delete Condition?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-//      begin
-//
-//      end;
-//    end;
-//
-//
-//  end;
-
-end;
-
-procedure TfrmScenBuilder.actCancelExecute(Sender: TObject);
-var
-  scenData : TScenario_Data;
-  i : Integer;
-  l : TStrings;
-begin
-  if FScenarioID = 0 then
-    btnNewScenarioClick(nil)
-  else
-  begin
-    scenData := InstructorSys.Scenario.GetScenario(FScenarioID);
-
-    if not Assigned(scenData) then
-      Exit;
-
-    FScenarioID := scenData.ID;
-    edtScenarioName.Text := scenData.Name;
-
-    mmoScenarioDescription.Lines.Clear;
-    mmoScenarioDescription.Lines.Add(scenData.Description);
-
-    for i := 1 to 4 do
-    begin
-      ClearTabPickScen(i);
-    end;
-
-    for i := 0 to Length(scenData.ArrConditionID) - 1 do
-    begin
-      if scenData.ArrConditionType[i] = 'PMS' then
-      begin
-        FPMSConditionID := scenData.ArrConditionID[i];
-        edtPMSName.Text := scenData.ArrConditionName[i];
-
-        l := InstructorSys.Database.GetScenarioConditions(scenData.Name,'PMS');
-        mmoPMSInfo.Lines.AddStrings(l);
-        l.Free;
-      end;
-
-      if scenData.ArrConditionType[i] = 'PCS' then
-      begin
-        FPCSConditionID := scenData.ArrConditionID[i];
-        edtPCSName.Text := scenData.ArrConditionName[i];
-
-        l := InstructorSys.Database.GetScenarioConditions(scenData.Name,'PCS');
-        mmoPCSInfo.Lines.AddStrings(l);
-        l.Free;
-      end;
-
-      if scenData.ArrConditionType[i] = 'ELEMENT' then
-      begin
-        FElementConditionID := scenData.ArrConditionID[i];
-        edtElementName.Text := scenData.ArrConditionName[i];
-      end;
-
-      if scenData.ArrConditionType[i] = 'TANK' then
-      begin
-        FTANKConditionID := scenData.ArrConditionID[i];
-        edtTANKName.Text := scenData.ArrConditionName[i];
-      end;
-
-      if scenData.ArrConditionType[i] = 'FA' then
-      begin
-        FFAConditionID := scenData.ArrConditionID[i];
-        edtFAName.Text := scenData.ArrConditionName[i];
-      end;
-    end;
-
-    scenData.Free;
-  end;
-end;
-
-procedure TfrmScenBuilder.actChooseRSExecute(Sender: TObject);
-var
-  scenarios : TStrings;
-  scenData : TSession_Data;
-//  i : integer;
-//  l : TStrings;
-begin
-//  if not (Assigned(frmAvailScenario)) then
-//    frmAvailScenario := TfrmAvailScenario.Create(Self);
-//
-//  scenarios := nil;
-//  InstructorSys.Scenario.getSessions(scenarios);
-//  frmAvailScenario.SetAvailableScenario(scenarios);
-//  scenarios.Free;
-//  lblSessionID.Caption := '0';
-
-//  if frmAvailScenario.ShowModal = mrOk then
-//  begin
-//
-//    if (frmAvailScenario.ScenarioName = '') then
-//      Exit;
-//
-//    mmo1.Lines.Clear;
-////    edt1.Text := '';
-//
-//    scenData := InstructorSys.Scenario.getSession(frmAvailScenario.ScenarioName);
-//
-//    if not Assigned(scenData) then
-//      Exit;
-//
-////    edt1.Text := scenData.SessionName;
-//
-//    mmo1.Lines.Add('Session ' + IntToStr(scenData.SessionID) + ' from ' + scenData.OriginalScenario +
-//        ' scenario');
-//    mmo1.Lines.Add('Started at ' + DateTimeToStr(scenData.SessionStart));
-//    mmo1.Lines.Add('Stopped at ' + DateTimeToStr(scenData.SessionStop));
-//    lblSessionID.Caption := IntToStr(scenData.SessionID);
-//  end;
-end;
-
-procedure TfrmScenBuilder.actDeleteAllExecute(Sender: TObject);
-begin
-  if MessageDlg('Are You Sure To Delete All Sessions?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-  begin
-    Screen.Cursor := crHourGlass;
-    InstructorSys.Database.DeleteSession(True);
-    MessageDlg('Delete Success', mtInformation, [mbOK], 0);
-
-    lblSessionID.Caption := '0';
-//    mmo1.Lines.Clear;
-//    edt1.Text := '';
-
-    Screen.Cursor := crDefault;
-  end;
-end;
-
-procedure TfrmScenBuilder.actDeleteRSExecute(Sender: TObject);
-var
-  conname : string;
-begin
-//  if edt1.Text = '' then
-//    Exit;
-
-//  conname := edt1.Text;
-
-  if MessageDlg('Are You Sure To Delete "' + conname + '" ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-  begin
-    if lblSessionID.Caption <> '0' then
-    begin
-      Screen.Cursor := crHourGlass;
-      InstructorSys.Database.DeleteSession(False,StrToInt(lblSessionID.Caption));
-
-      lblSessionID.Caption := '0';
-//      mmo1.Lines.Clear;
-//      edt1.Text := '';
-
-      MessageDlg('Delete "' + conname + '" Success', mtInformation, [mbOK], 0);
-      Screen.Cursor := crDefault;
-    end;
-  end;
-end;
-
-procedure TfrmScenBuilder.Action1Execute(Sender: TObject);
-var
-  newName : string;
-begin
-  if lblSessionID.Caption <> '0' then
-    if InputQuery('New Scenario from Snapshot','Save As..',newName) then begin
-      Screen.Cursor := crHourGlass;
-      Application.ProcessMessages;
-      InstructorSys.Database.SnapshotScenario(newName,StrToInt(lblSessionID.Caption));
-      Screen.Cursor := crDefault;
-    end;
-
-end;
 
 procedure TfrmScenBuilder.btnMenuClick(Sender: TObject);
 begin
@@ -1610,6 +1386,12 @@ begin
 
   if (MessageDlg('Are You Sure To Delete "' + FPMSConditionName + '" Condition ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
   begin
+    if InstructorSys.Scenario.GetConditionIDAtScenarioCondition(FPMSConditionID) then
+    begin
+      MessageDlg('Can not Delete "' + FPMSConditionName + '", This condition is used in the scenario ', mtInformation, [mbOK], 0);
+      Exit;
+    end;
+
     if InstructorSys.Scenario.DeletePMSCondition(FPMSConditionID) then
     begin
       MessageDlg('Delete "' + FPMSConditionName + '" Condition Success', mtInformation, [mbOK], 0);
@@ -1966,6 +1748,12 @@ begin
 
   if (MessageDlg('Are You Sure To Delete "' + FPCSConditionName + '" Condition ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
   begin
+    if InstructorSys.Scenario.GetConditionIDAtScenarioCondition(FPCSConditionID) then
+    begin
+      MessageDlg('Can not Delete "' + FPCSConditionName + '", This condition is used in the scenario ', mtInformation, [mbOK], 0);
+      Exit;
+    end;
+
     if InstructorSys.Scenario.DeletePMSCondition(FPCSConditionID) then
     begin
       MessageDlg('Delete "' + FPCSConditionName + '" Condition Success', mtInformation, [mbOK], 0);
@@ -2310,6 +2098,12 @@ procedure TfrmScenBuilder.btnDeleteTANKClick(Sender: TObject);
 begin
   if FTANKConditionID = 0 then
     Exit;
+
+  if InstructorSys.Scenario.GetConditionIDAtScenarioCondition(FTANKConditionID) then
+  begin
+    MessageDlg('Can not Delete "' + FTANKConditionName + '", This condition is used in the scenario ', mtInformation, [mbOK], 0);
+    Exit;
+  end;
 
   if (MessageDlg('Are You Sure To Delete "' + FTANKConditionName + '" Condition ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
   begin
@@ -2976,6 +2770,12 @@ procedure TfrmScenBuilder.btnDeleteFAClick(Sender: TObject);
 begin
   if FFAConditionID = 0 then
     Exit;
+
+  if InstructorSys.Scenario.GetConditionIDAtScenarioCondition(FFAConditionID) then
+  begin
+    MessageDlg('Can not Delete "' + FFAConditionName + '", This condition is used in the scenario ', mtInformation, [mbOK], 0);
+    Exit;
+  end;
 
   if (MessageDlg('Are You Sure To Delete "' + FFAConditionName + '" Condition ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
   begin
