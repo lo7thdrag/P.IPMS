@@ -530,7 +530,7 @@ type
       epPMSPowerMode, epPMSPowerConsmr, epPMSPower, epPMSFrequency, epPMSSwitchFrequency,epPMSCurrent, epPMSCosPhi, epPMSVoltage, epPMSU, epPMSV, epPMSW,
       epPMSGeneratorEmergencyStop, epPMSGeneratorMode, epPMSGeneratorFuelRunsOut, epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorSupplied,
       epPMSGeneratorState, epPMSGeneratorCBClosed, {epPMSGeneratorCBClosedE,} epPMSGeneratorPreference, epPMSGeneratorBusbar,
-      epPMSGeneratorRunHour, epPMSNotStandby, epPMSShutdown,
+      epPMSGeneratorRunHourState, epPMSGeneratorRunningHours, epPMSNotStandby, epPMSShutdown,
 
       {Generator PMS System Alarm}
       epPMSEngineAlarm, epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm, epPMSLubOilTempHigh,

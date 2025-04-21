@@ -125,7 +125,7 @@ begin
     epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm,
     epPMSLubOilTempHigh, epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage,
 
-    epPMSMsbCBShore, epPMSMsbCBIntr, epPMSMsbCBNavNaut, epPMSGeneratorRunHour,epPMSGeneratorEmergencyStop,
+    epPMSMsbCBShore, epPMSMsbCBIntr, epPMSMsbCBNavNaut, epPMSGeneratorRunHourState,epPMSGeneratorEmergencyStop,
     epPMSMsbTripReduct, epPMSSycnFail :
     begin
       if Sender is TGenerator then
@@ -317,7 +317,7 @@ begin
     end;
 
 
-    epPMSGeneratorMode, epPMSGeneratorState:
+    epPMSGeneratorMode, epPMSGeneratorState, epPMSGeneratorRunningHours:
     begin
       if Sender is TGenerator then
         rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier

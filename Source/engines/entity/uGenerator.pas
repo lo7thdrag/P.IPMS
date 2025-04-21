@@ -61,6 +61,9 @@ type
     FIsLubOilPressLowShutdown,
     FIsCoolWaterTempHighShutdown : Boolean;
 
+    FRunningHourTemp : Integer;
+    FRunningHour : Integer;
+
     function CekSpeedSensorFailure : Boolean;
     function CekLubOilPressLow : Boolean;
     function CekCoolWaterTempHigh : Boolean;
@@ -89,6 +92,7 @@ type
     procedure SetRunHourState(const Value : Boolean);
     procedure SetEmergencyStop(const Value : Boolean);
     procedure SetEmergencyStart(const Value : Boolean);
+    procedure SetRunningHour(const Value : Integer);
 
     procedure SetCanBusFailure(const Value : Boolean);
     procedure SetDCPowFailure(const Value : Boolean);
@@ -163,6 +167,7 @@ type
     property RunHourState : Boolean read FRunHourState write SetRunHourState;
     property EmergencyStop : Boolean read FEmergencyStop write SetEmergencyStop;
     property EmergencyStart : Boolean read FEmergencyStart write SetEmergencyStart;
+    property RunningHour : Integer read FRunningHour write SetRunningHour;
 
     {Generator Alarm}
     property NotStandby : Boolean read FIsNotStandby write SetNotStandby;
@@ -578,6 +583,14 @@ begin
   if EngineRun then
   begin
     RunHourState := True;
+
+    FRunningHourTemp := FRunningHourTemp + 1;
+    if FRunningHourTemp > 25 then
+    begin
+      FRunningHourTemp := 0;
+      RunningHour := RunningHour + 1;
+    end;
+
     if (not GeneratorSupplied) then
     begin
       if EmergencyStart then
@@ -866,7 +879,15 @@ begin
   if FRunHourState = Value then
     exit;
   FRunHourState := Value;
-  Listener.TriggerEvents(Self,epPMSGeneratorRunHour,Value);
+  Listener.TriggerEvents(Self,epPMSGeneratorRunHourState,Value);
+end;
+
+procedure TGenerator.SetRunningHour(const Value: Integer);
+begin
+  if FRunningHour = Value then
+    exit;
+  FRunningHour := Value;
+  Listener.TriggerEvents(Self,epPMSGeneratorRunningHours,Value);
 end;
 
 procedure TGenerator.SetSwitchFrequency(const Value: Double);

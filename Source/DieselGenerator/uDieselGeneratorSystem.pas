@@ -164,6 +164,10 @@ begin
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
+    epPMSGeneratorRunningHours:
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
+    end;
 //    epPMSAutStartFailure,epPMSLubOilTempHigh :
 //    begin
 //      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);

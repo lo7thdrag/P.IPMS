@@ -1502,7 +1502,7 @@ begin
   if rec.ValueKind = 'boolean' then
   begin
     case rec.CommandPropsID of
-      epPMSGeneratorRunHour :
+      epPMSGeneratorRunHourState :
         setPMSRHEElementID(rec.GenSwitchID, rec.ValueBool, C_IND_ENGINERUNNING);
 
       epPMSGeneratorEngineRun :
