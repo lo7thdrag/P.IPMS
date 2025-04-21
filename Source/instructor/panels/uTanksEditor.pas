@@ -231,7 +231,7 @@ begin
     if frmTanksCondition.TanksCondName = '' then
       Exit;
 
-    FCondition_ID := InstructorSys.Scenario.GetConditionID(frmTanksCondition.TanksCondName);
+    FCondition_ID := InstructorSys.Scenario.GetConditionIDByName(frmTanksCondition.TanksCondName);
 
     InstructorSys.Scenario.GetTanksCondition(FCondition_ID, TanksList);
 
@@ -306,7 +306,7 @@ begin
 
   if FCondition_ID = 0 then
   begin
-    if InstructorSys.Scenario.GetConditionID(edtName.Text) > 0 then
+    if InstructorSys.Scenario.GetConditionIDByName(edtName.Text) > 0 then
     begin
       lblWarning2.Caption := '* Condition Name Is Already In Use, Please Use Another Condition Name';
       lblWarning2.Visible := True;

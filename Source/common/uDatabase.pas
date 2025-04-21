@@ -23,8 +23,19 @@ type
 
     function ConnectDB: Boolean;
 
+    function GetConditionIDByName(aName: string): Integer;
+    function GetConditionCountByName(aName: string): Integer;
+
+    {$REGION ' Scenario Section '}
+    function GetScenarioCountByName(aName: string): Integer;
+    function DeleteScenario(aID: Integer): Boolean;
+
+    procedure GetAllScenario(var aScenarios: TStrings);
+    {$ENDREGION}
+
     {$REGION ' Session Section '}
     procedure GetAllSession(var aScenarios: TStrings);
+    procedure DeleteSession(isAll: Boolean; sessionID: Integer = 0);
     {$ENDREGION}
 
     {$REGION ' PMS Section '}
@@ -99,15 +110,15 @@ type
     { end }
 
     { scenario }
-    procedure GetAllScenario(var aScenarios: TStrings);
+
 
     function GetSession(sessionName: string): TSession_Data; overload;
     function GetSession(sessionID: Integer): TSession_Data; overload;
-    procedure DeleteSession(isAll: Boolean; sessionID: Integer = 0);
+
     procedure SnapshotScenario(newName: string; sessionID: Integer);
     function SaveScenario(aID: Integer; aName, aDescription: string; intArr: array of Integer): Integer;
     function SaveConditionScenario(aScenarioID: Integer): Integer;
-    function DeleteScenario(aID: Integer): Boolean;
+
     function GetScenarioByName(aName: string): TScenario_Data;
     function GetScenarioByID(aID: Integer): TScenario_Data;
     function GetScenarioDesc(aName: string): string;
@@ -123,8 +134,6 @@ type
 
     function GetFreeConditionID: Integer;
     function GetFreeConditionScenarioID: Integer;
-
-    function GetConditionID(aName: string): Integer;
 
     function SaveElementCondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer): Boolean;
     procedure GetAllCondition(aType: string; var aPMSCond: TStrings); overload;
@@ -237,6 +246,281 @@ begin
   if not Result then
     MessageDlg('Failed to connect Database..!', mtError, [mbOK], 0);
 end;
+
+function TIPMSDatabase.GetConditionCountByName(aName: string): Integer;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := 0;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM Condition ' +
+             'WHERE Condition_Name = ' + QuotedStr(aName);
+
+    SQL.Add(query);
+    Open;
+
+    Result := RecordCount;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.GetConditionIDByName(aName: string): Integer;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := 0;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM Condition ' +
+             'WHERE Condition_Name = ' + QuotedStr(aName);
+
+    SQL.Add(query);
+    Open;
+
+    if RecordCount > 0 then
+    begin
+      First;
+
+      Result := FieldByName('Condition_ID').AsInteger;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+{$REGION ' Scenario Section '}
+
+function TIPMSDatabase.GetScenarioCountByName(aName: string): Integer;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := 0;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM Scenario ' +
+             'WHERE Scenario_Name = ' + QuotedStr(aName);
+
+    SQL.Add(query);
+    Open;
+
+    Result := RecordCount;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.DeleteScenario(aID: Integer): Boolean;
+var
+  FQuery : TZQuery;
+  query : String;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'DELETE from RunningScenario ' +
+             'WHERE Scenario_ID = ' + IntToStr(aID) + ';';
+    SQL.Add(query);
+
+    query := 'DELETE from Scenario ' +
+             'WHERE Scenario_ID = ' + IntToStr(aID);
+    SQL.Add(query);
+
+    try
+      ExecSQL;
+    finally
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+
+  Result := True;
+end;
+
+procedure TIPMSDatabase.GetAllScenario(var aScenarios: TStrings);
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  if not Assigned(aScenarios) then
+    aScenarios := TStringList.Create;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT SCENARIO_NAME FROM SCENARIO';
+
+    SQL.Add(query);
+    Open;
+
+    while not Eof do
+    begin
+      aScenarios.Add(FieldByName('Scenario_Name').AsString);
+
+      Next;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.SaveScenario(aID: Integer; aName, aDescription: string; intArr: array of Integer): Integer;
+var
+  FQuery  : TZQuery;
+  query : String;
+  success : Boolean;
+  i : integer;
+  scenID : integer;
+begin
+  Result := 0;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'EXEC dbo.sp_savescenario ' + IntToStr(aID) +
+             ', ' + QuotedStr(aName) +
+             ', ' + QuotedStr(aDescription);
+    SQL.Add(query);
+    Open;
+
+    scenID := FieldByName('SCENARIO_ID').AsInteger;
+
+    if FieldByName('SUCCESS').AsInteger = 1 then
+      success := True
+    else
+      success := False;
+
+    Result := scenID;
+
+    Close;
+
+    if success then
+    begin
+      // delete scenario id first
+      query := 'DELETE FROM SCENARIOCONDITION ' +
+               'WHERE SCENARIO_ID = ' + IntToStr(scenID);
+
+      SQL.Clear;
+      SQL.Add(query);
+      ExecSQL;
+
+      Close;
+
+      for i := 0 to Length(intArr) - 1 do
+      begin
+        query := 'INSERT INTO SCENARIOCONDITION VALUES (' + IntToStr(scenID) +
+                 ', ' + IntToStr(intArr[i]) +
+                 ', ' + IntToStr(GetFreeConditionScenarioID) + ')';
+
+        SQL.Clear;
+        SQL.Add(query);
+        ExecSQL;
+
+        Close;
+      end;
+    end;
+
+    if success then
+      ShowMessage('Scenario Has Been Saved');
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION ' Session Section '}
+
+procedure TIPMSDatabase.DeleteSession(isAll: Boolean; sessionID: Integer = 0);
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    if isAll then
+      query := 'EXEC sp_deleteSession 1'
+    else
+      query := 'EXEC sp_deleteSession 0, ' + IntToStr(sessionID);
+
+    SQL.Add(query);
+    ExecSQL;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+{$ENDREGION}
 
 {$REGION ' PMS Section '}
 
@@ -1624,107 +1908,6 @@ begin
   end;
 end;
 
-function TIPMSDatabase.GetConditionID(aName: string): Integer;
-var
-  FQuery : TZQuery;
-  query : string;
-begin
-  Result := 0;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT * ' +
-             'FROM Condition ' +
-             'WHERE Condition_Name = ' + QuotedStr(aName);
-
-    SQL.Add(query);
-    Open;
-
-    if RecordCount > 0 then
-    begin
-      First;
-
-      Result := FieldByName('Condition_ID').AsInteger;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-function TIPMSDatabase.DeleteScenario(aID: Integer): Boolean;
-var
-  FQuery : TZQuery;
-  query : String;
-begin
-  Result := False;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'DELETE from RunningScenario ' +
-             'WHERE Scenario_ID = ' + IntToStr(aID) + ';';
-    SQL.Add(query);
-
-    query := 'DELETE from Scenario ' +
-             'WHERE Scenario_ID = ' + IntToStr(aID);
-    SQL.Add(query);
-
-    try
-      ExecSQL;
-    finally
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-
-  Result := True;
-end;
-
-procedure TIPMSDatabase.DeleteSession(isAll: Boolean; sessionID: Integer = 0);
-var
-  FQuery : TZQuery;
-  query : string;
-begin
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    if isAll then
-      query := 'EXEC sp_deleteSession 1'
-    else
-      query := 'EXEC sp_deleteSession 0, ' + IntToStr(sessionID);
-
-    SQL.Add(query);
-    ExecSQL;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
 Procedure TIPMSDatabase.GetAlarmByRunningID(aRunningID: Integer; var alarmList: TList);
 var
   FQuery : TZQuery;
@@ -2183,39 +2366,6 @@ begin
         locationList.Add(aACSData);
         Next;
       end;
-    end;
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-procedure TIPMSDatabase.GetAllScenario(var aScenarios: TStrings);
-var
-  FQuery : TZQuery;
-  query : string;
-begin
-  if not Assigned(aScenarios) then
-    aScenarios := TStringList.Create;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'SELECT SCENARIO_NAME FROM SCENARIO';
-
-    SQL.Add(query);
-    Open;
-
-    while not Eof do
-    begin
-      aScenarios.Add(FieldByName('Scenario_Name').AsString);
-
-      Next;
     end;
 
     Close;
@@ -5836,79 +5986,6 @@ begin
       end;
     end;
 
-
-    Close;
-    Connection := nil;
-    Free;
-  end;
-end;
-
-function TIPMSDatabase.SaveScenario(aID: Integer; aName, aDescription: string;
-  intArr: array of Integer): Integer;
-var
-  FQuery  : TZQuery;
-  query : String;
-  success : Boolean;
-  i : integer;
-  scenID : integer;
-begin
-  Result := 0;
-
-  if not FConnection.Connected then
-    Exit;
-
-  FQuery := TZQuery.Create(nil);
-
-  with FQuery do
-  begin
-    Connection := FConnection;
-    SQL.Clear;
-
-    query := 'EXEC dbo.sp_savescenario ' + IntToStr(aID) +
-             ', ' + QuotedStr(aName) +
-             ', ' + QuotedStr(aDescription);
-    SQL.Add(query);
-    Open;
-
-    scenID := FieldByName('SCENARIO_ID').AsInteger;
-
-    if FieldByName('SUCCESS').AsInteger = 1 then
-      success := True
-    else
-      success := False;
-
-    Result := scenID;
-
-    Close;
-
-    if success then
-    begin
-      // delete scenario id first
-      query := 'DELETE FROM SCENARIOCONDITION ' +
-               'WHERE SCENARIO_ID = ' + IntToStr(scenID);
-
-      SQL.Clear;
-      SQL.Add(query);
-      ExecSQL;
-
-      Close;
-
-      for i := 0 to Length(intArr) - 1 do
-      begin
-        query := 'INSERT INTO SCENARIOCONDITION VALUES (' + IntToStr(scenID) +
-                 ', ' + IntToStr(intArr[i]) +
-                 ', ' + IntToStr(GetFreeConditionScenarioID) + ')';
-
-        SQL.Clear;
-        SQL.Add(query);
-        ExecSQL;
-
-        Close;
-      end;
-    end;
-
-    if success then
-      ShowMessage('Scenario Has Been Saved');
 
     Close;
     Connection := nil;

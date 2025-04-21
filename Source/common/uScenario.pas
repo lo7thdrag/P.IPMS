@@ -24,34 +24,27 @@ type
     procedure SetRunningScenarioTime(const Value: TDateTime);
     procedure SetRunningScenario(const Value: Integer);
     procedure SetCurrentScenarioStart(const Value: TDateTime);
+
   public
     constructor Create(aDatabase: TIPMSDatabase);
     destructor Destroy; override;
 
-    procedure getScenarios(var aList: TStrings);
+    function GetConditionIDByName(aName: string): Integer;
+    function GetConditionCountByName(aName: string): Integer;
 
-    function insertScenario(aID: Integer; aName, aDesc: string; intArr: array of Integer): Integer;
-    function deleteScenario(aID: Integer): Boolean;
-    function getScenario(aName: string): TScenario_Data; overload;
-    function getScenario(aID: Integer): TScenario_Data; overload;
-    function getScenarioDesc(aName: string): string;
-    function getScenarioConditions(aName: string): TStrings;
-    function getSession(aSessionID: Integer): TSession_Data; overload;
+    {$REGION ' Scenario Section '}
+    function GetScenarioCountByName(aName: string): Integer;
 
-    procedure loadScenario(aSessionID: Integer);
-    function PrepareRunningScenario(aName: string; var aDateTimeStart: TDateTime): Boolean;
+    function GetScenario(aName: string): TScenario_Data; overload;
+    function GetScenario(aID: Integer): TScenario_Data; overload;
+    function DeleteScenario(aID: Integer): Boolean;
 
-    {prince}
-    function setBooltoInt(valbool : Boolean): Integer;
-    function setInttoBool(valint : Integer): Boolean;
-
-    function GetConditionID(aName: string): Integer;
-    procedure GetElementConditions(var aList: TStrings);
-    procedure SaveElementCondition(aName: string; aList: TList; var ConditionID: Integer);
+    procedure GetAllScenarios(var aList: TStrings);
+    procedure SaveScenario(aID: Integer; aName, aDesc: string; intArr: array of Integer);
+    {$ENDREGION}
 
     {$REGION ' Session Section '}
-    function getSession(aSessionName: string): TSession_Data; overload;
-
+    function GetSession(aSessionName: string): TSession_Data; overload;
     procedure GetAllSessions(var aList: TStrings);
     {$ENDREGION}
 
@@ -93,9 +86,26 @@ type
     function DeleteFACondition(aID: Integer): Boolean;
     function GetFACondID(aID, aIndex: Integer): Integer;
     procedure GetFACondition(aID: Integer; var aList: TList);
-    procedure GetFAConditions(var aList: TStrings);
+    procedure GetAllFAConditions(var aList: TStrings);
     procedure SaveFACondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer);
     {$ENDREGION}
+
+
+
+
+    function getScenarioDesc(aName: string): string;
+    function getScenarioConditions(aName: string): TStrings;
+    function getSession(aSessionID: Integer): TSession_Data; overload;
+    function insertScenario(aID: Integer; aName, aDesc: string; intArr: array of Integer): Integer;
+    procedure loadScenario(aSessionID: Integer);
+    function PrepareRunningScenario(aName: string; var aDateTimeStart: TDateTime): Boolean;
+
+    {prince}
+    function setBooltoInt(valbool : Boolean): Integer;
+    function setInttoBool(valint : Integer): Boolean;
+
+    procedure GetElementConditions(var aList: TStrings);
+    procedure SaveElementCondition(aName: string; aList: TList; var ConditionID: Integer);
 
     property RunState : E_ScenarioRunState read FRunState write SetRunState;
     property Listener : TListeners read FListener;
@@ -146,33 +156,56 @@ begin
   inherited;
 end;
 
-function TScenario.GetConditionID(aName: string): Integer;
+function TScenario.GetConditionCountByName(aName: string): Integer;
 begin
-  Result := FDatabase.GetConditionID(aName);
+  Result := FDatabase.GetConditionCountByName(aName);
 end;
 
-procedure TScenario.GetElementConditions(var aList: TStrings);
+function TScenario.GetConditionIDByName(aName: string): Integer;
 begin
-  FDatabase.GetAllCondition('ELEMENT', aList);
+  Result := FDatabase.GetConditionIDByName(aName);
 end;
 
-function TScenario.GetFACondID(aID, aIndex: Integer): Integer;
+{$REGION ' Scenario Section '}
+
+function TScenario.GetScenarioCountByName(aName: string): Integer;
 begin
-  FDatabase.GetFACondID(aID, aIndex);
-  Result := 1;
+  Result := FDatabase.GetScenarioCountByName(aName);
 end;
 
-function TScenario.GetTanksCondID(aID, aIndex: Integer): Integer;
+function TScenario.GetScenario(aName: string): TScenario_Data;
 begin
-  Result := FDatabase.GetTanksCondID(aID, aIndex);
+  Result := FDatabase.GetScenarioByName(aName);
 end;
 
-procedure TScenario.GetFAConditions(var aList: TStrings);
+function TScenario.GetScenario(aID: Integer): TScenario_Data;
 begin
-  FDatabase.GetAllCondition('FA', aList);
+  Result := FDatabase.GetScenarioByID(aID);
 end;
+
+function TScenario.DeleteScenario(aID: Integer): Boolean;
+begin
+  Result := FDatabase.DeleteScenario(aID);
+end;
+
+procedure TScenario.GetAllScenarios(var aList : TStrings) ;
+begin
+  FDatabase.GetAllScenario(aList);
+end;
+
+procedure TScenario.SaveScenario(aID: Integer; aName, aDesc: string; intArr: array of Integer);
+begin
+  FDatabase.SaveScenario(aID, aName, aDesc, intArr);
+end;
+
+{$ENDREGION}
 
 {$REGION ' Session Section '}
+
+function TScenario.GetSession(aSessionName: string): TSession_Data;
+begin
+  Result := FDatabase.GetSession(aSessionName);
+end;
 
 procedure TScenario.GetAllSessions(var aList: TStrings);
 begin
@@ -544,6 +577,11 @@ end;
 
 {$REGION ' FA Section '}
 
+procedure TScenario.GetAllFAConditions(var aList: TStrings);
+begin
+  FDatabase.GetAllCondition('FA', aList);
+end;
+
 function TScenario.DeleteFACondition(aID: Integer): Boolean;
 begin
   Result := FDatabase.DeleteFACondition(aID);
@@ -561,19 +599,25 @@ end;
 
 {$ENDREGION}
 
-function TScenario.deleteScenario(aID: Integer): Boolean;
+function TScenario.insertScenario(aID : Integer; aName, aDesc: string; intArr : array of Integer): Integer;
 begin
-  Result := FDatabase.DeleteScenario(aID);
+  Result := FDatabase.SaveScenario(aID, aName, aDesc, intArr);
 end;
 
-function TScenario.getScenario(aName: string): TScenario_Data;
+procedure TScenario.GetElementConditions(var aList: TStrings);
 begin
-  Result := FDatabase.GetScenarioByName(aName);
+  FDatabase.GetAllCondition('ELEMENT', aList);
 end;
 
-function TScenario.getScenario(aID: Integer): TScenario_Data;
+function TScenario.GetFACondID(aID, aIndex: Integer): Integer;
 begin
-  Result := FDatabase.GetScenarioByID(aID);
+  FDatabase.GetFACondID(aID, aIndex);
+  Result := 1;
+end;
+
+function TScenario.GetTanksCondID(aID, aIndex: Integer): Integer;
+begin
+  Result := FDatabase.GetTanksCondID(aID, aIndex);
 end;
 
 function TScenario.getScenarioConditions(aName: string): TStrings;
@@ -586,25 +630,9 @@ begin
   Result :=  FDatabase.GetScenarioDesc(aName);
 end;
 
-procedure TScenario.getScenarios(var aList : TStrings) ;
-begin
-  FDatabase.GetAllScenario(aList);
-end;
-
 function TScenario.getSession(aSessionID: Integer): TSession_Data;
 begin
   Result := nil;
-end;
-
-function TScenario.getSession(aSessionName: string): TSession_Data;
-begin
-  Result := FDatabase.GetSession(aSessionName);
-end;
-
-function TScenario.insertScenario(aID : Integer; aName, aDesc: string;
-  intArr : array of Integer): Integer;
-begin
-  Result := FDatabase.SaveScenario(aID, aName, aDesc, intArr);
 end;
 
 procedure TScenario.loadScenario(aSessionID: Integer);

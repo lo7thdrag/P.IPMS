@@ -395,12 +395,13 @@ type
     {$ENDREGION}
 
     {$REGION ' Scenario Section '}
+    procedure lstScenarioClick(Sender: TObject);
     procedure btnRefreshScenarioClick(Sender: TObject);
     procedure btnNewScenarioClick(Sender: TObject);
     procedure btnEditScenarioClick(Sender: TObject);
     procedure btnDeleteScenarioClick(Sender: TObject);
     procedure btnSaveScenarioClick(Sender: TObject);
-//    procedure btnPickClick(Sender: TObject);
+    procedure btnPickClick(Sender: TObject);
     procedure btnClearPickClick(Sender: TObject);
     {$ENDREGION}
 
@@ -408,6 +409,7 @@ type
     procedure lstSessionClick(Sender: TObject);
     procedure btnRefreshSessionClick(Sender: TObject);
     procedure btnNewSessionClick(Sender: TObject);
+    procedure btnEditSessionClick(Sender: TObject);
     procedure btnDeleteSessionClick(Sender: TObject);
     procedure btnClearSessionClick(Sender: TObject);
     {$ENDREGION}
@@ -457,17 +459,15 @@ type
     procedure btnSaveFAClick(Sender: TObject);
     {$ENDREGION}
 
-    procedure actSaveExecute(Sender: TObject);
     procedure actCancelExecute(Sender: TObject);
-    procedure actPickExecute(Sender: TObject);
     procedure actChooseRSExecute(Sender: TObject);
     procedure actDeleteRSExecute(Sender: TObject);
     procedure actDeleteAllExecute(Sender: TObject);
     procedure Action1Execute(Sender: TObject);
     procedure act2Execute(Sender: TObject);
     procedure act4Execute(Sender: TObject);
+
     procedure btnMenuClick(Sender: TObject);
-    procedure btnEditSessionClick(Sender: TObject);
 
   private
     FScenarioID : Integer;
@@ -478,7 +478,8 @@ type
     FTANKConditionID : Integer;
     FFAConditionID : Integer;
 
-    FSelectedConditionID : integer;
+    FScenarioName : string;
+    ScenarioNameBuffer : string;
 
     FSessionName : string;
     SessionNameBuffer : string;
@@ -501,7 +502,12 @@ type
     //Global
     function GetNumberOfKoma(s : string): Boolean;
 
+    {$REGION ' Scenario Section '}
+    function CekScenarioInput: Boolean;
+
+    procedure UpdateScenarioList;
     procedure ClearTabPickScen(value : Integer);
+    {$ENDREGION}
 
     {$REGION ' Session Section '}
     procedure UpdateSessionList;
@@ -528,7 +534,7 @@ type
     {$ENDREGION}
 
   public
-    procedure UpdateScenarioList;
+
 
   end;
 
@@ -538,7 +544,8 @@ var
 implementation
 
 uses
-  uDataType, uInstructorSystem, uFunction;
+  uDataType, uInstructorSystem, uFunction, uAvailablePMSCondition, uAvailablePCSCondition,
+  uAvailableFACondition, uAvailableTanksCondition;
 
 {$R *.dfm}
 
@@ -568,9 +575,6 @@ begin
   EnableComposited(pnlSession);
   EnableComposited(pnlTank);
   EnableComposited(pnlVariasi);
-
-  FScenarioID := 0;
-  FSelectedConditionID := 0;
 end;
 
 procedure TfrmScenBuilder.FormShow(Sender: TObject);
@@ -604,23 +608,23 @@ procedure TfrmScenBuilder.act4Execute(Sender: TObject);
 var
   used : String;
 begin
-  if FSelectedConditionID > 0 then
-  begin
-
-    used := InstructorSys.Database.GetConditionInfo(FSelectedConditionID);
-
-    if used <> 'NONE' then
-      MessageDlg('Delete failed, selected condition used by other scenario!', mtWarning, [mbOK], 0)
-    else
-    begin
-      if MessageDlg('Are you sure to delete Condition?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-      begin
-
-      end;
-    end;
-
-
-  end;
+//  if FSelectedConditionID > 0 then
+//  begin
+//
+//    used := InstructorSys.Database.GetConditionInfo(FSelectedConditionID);
+//
+//    if used <> 'NONE' then
+//      MessageDlg('Delete failed, selected condition used by other scenario!', mtWarning, [mbOK], 0)
+//    else
+//    begin
+//      if MessageDlg('Are you sure to delete Condition?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+//      begin
+//
+//      end;
+//    end;
+//
+//
+//  end;
 
 end;
 
@@ -634,7 +638,7 @@ begin
     btnNewScenarioClick(nil)
   else
   begin
-    scenData := InstructorSys.Scenario.getScenario(FScenarioID);
+    scenData := InstructorSys.Scenario.GetScenario(FScenarioID);
 
     if not Assigned(scenData) then
       Exit;
@@ -791,150 +795,6 @@ begin
 
 end;
 
-procedure TfrmScenBuilder.actPickExecute(Sender: TObject);
-var
-  scenarios : TStrings;
-  scenData : TScenario_Data;
-  i : integer;
-  l : TStrings;
-begin
-//  if not (Assigned(frmAvailScenario)) then
-//    frmAvailScenario := TfrmAvailScenario.Create(Self);
-//
-//  scenarios := nil;
-//  InstructorSys.Scenario.getScenarios(scenarios);
-//  frmAvailScenario.SetAvailableScenario(scenarios);
-//  scenarios.Free;
-
-//  if frmAvailScenario.ShowModal = mrOk then
-//  begin
-//    if (frmAvailScenario.ScenarioName = '') then
-//      Exit;
-//
-//    scenData := InstructorSys.Scenario.getScenario(frmAvailScenario.ScenarioName);
-//
-//    if not Assigned(scenData) then
-//      Exit;
-//
-//    FScenarioID := scenData.ID;
-//    edtScenarioName.Text := scenData.Name;
-//
-//    mmoScenarioDescription.Lines.Clear;
-//    mmoScenarioDescription.Lines.Add(scenData.Description);
-//
-//    FPMSConditionID := 0;
-//    edtPMSName.Text := '<None>';
-//    FPCSConditionID := 0;
-//    edtPCSName.Text := '<None>';
-//    FElementConditionID := 0;
-//    edtElementName.Text := '<None>';
-//    FTANKConditionID := 0;
-//    edtTANKName.Text := '<None>';
-//    FFAConditionID := 0;
-//    edtFAName.Text := '<None>';
-//
-//    mmoPMSInfo.Lines.Clear;
-//    mmoPCSInfo.Lines.Clear;
-//    mmoTANKInfo.Lines.Clear;
-//    mmoFAInfo.Lines.Clear;
-//
-//    for i := 0 to Length(scenData.ArrConditionID) - 1 do
-//    begin
-//      if scenData.ArrConditionType[i] = 'PMS' then
-//      begin
-//        FPMSConditionID := scenData.ArrConditionID[i];
-//        edtPMSName.Text := scenData.ArrConditionName[i];
-//
-//        l := InstructorSys.Database.GetScenarioConditions(scenData.Name,'PMS');
-//        mmoPMSInfo.Lines.AddStrings(l);
-//        l.Free;
-//      end;
-//
-//      if scenData.ArrConditionType[i] = 'PCS' then
-//      begin
-//        FPCSConditionID := scenData.ArrConditionID[i];
-//        edtPCSName.Text := scenData.ArrConditionName[i];
-//
-//        l := InstructorSys.Database.GetScenarioConditions(scenData.Name,'PCS');
-//        mmoPCSInfo.Lines.AddStrings(l);
-//        l.Free;
-//      end;
-//
-//      if scenData.ArrConditionType[i] = 'ELEMENT' then
-//      begin
-//        FElementConditionID := scenData.ArrConditionID[i];
-//        edtElementName.Text := scenData.ArrConditionName[i];
-//      end;
-//
-//      if scenData.ArrConditionType[i] = 'TANK' then
-//      begin
-//        FTANKConditionID := scenData.ArrConditionID[i];
-//        edtTANKName.Text := scenData.ArrConditionName[i];
-//      end;
-//
-//      if scenData.ArrConditionType[i] = 'FA' then
-//      begin
-//        FFAConditionID := scenData.ArrConditionID[i];
-//        edtFAName.Text := scenData.ArrConditionName[i];
-//      end;
-//    end;
-//
-//    scenData.Free;
-//  end;
-
-end;
-
-procedure TfrmScenBuilder.actSaveExecute(Sender: TObject);
-var
-  intArr : array of integer;
-  i : integer;
-begin
-  if Trim(edtScenarioName.Text) = '' then
-  begin
-    ShowMessage('Scenario Name Is Empty, Please Insert Scenario Name');
-    Exit;
-  end;
-
-  i := 1;
-  if FPMSConditionID > 0 then
-  begin
-    SetLength(intArr,i);
-    intArr[i-1] := FPMSConditionID;
-    Inc(i);
-  end;
-
-  if FPCSConditionID > 0 then
-  begin
-    SetLength(intArr,i);
-    intArr[i-1] := FPCSConditionID;
-    Inc(i);
-  end;
-
-  if FElementConditionID > 0 then
-  begin
-    SetLength(intArr,i);
-    intArr[i-1] := FElementConditionID;
-    Inc(i);
-  end;
-
-  if FFAConditionID > 0 then
-  begin
-    SetLength(intArr, i);
-    intArr[i-1] := FFAConditionID;
-    Inc(i);
-  end;
-
-  if FTANKConditionID > 0 then
-  begin
-    SetLength(intArr, i);
-    intArr[i-1] := FTANKConditionID;
-  end;
-
-
-  FScenarioID := InstructorSys.Scenario.insertScenario(FScenarioID, edtScenarioName.Text,
-    mmoScenarioDescription.Lines.Text, intArr);
-end;
-
 procedure TfrmScenBuilder.btnMenuClick(Sender: TObject);
 begin
   case TRzBmpButton(Sender).Tag of
@@ -943,12 +803,14 @@ begin
       pnlScenario.BringToFront;
       lblHeader.Caption := 'SCENARIO EDITOR';
       UpdateScenarioList;
+      btnNewScenarioClick(nil);
     end;
     1:
     begin
       pnlSession.BringToFront;
       lblHeader.Caption := 'SESSION EDITOR';
       UpdateSessionList;
+      btnNewSessionClick(nil);
     end;
     2:
     begin
@@ -981,19 +843,81 @@ begin
   end;
 end;
 
-
 {$REGION ' Scenario Section '}
+
+procedure TfrmScenBuilder.lstScenarioClick(Sender: TObject);
+var
+  i : Integer;
+  scenarioDataTemp : TScenario_Data;
+
+begin
+  if lstScenario.ItemIndex = -1 then
+  begin
+    btnNewScenarioClick(nil);
+    Exit;
+  end;
+
+  with lstScenario do
+  begin
+    for i := Items.Count - 1 downto 0 do
+    begin
+      if Selected[i] then
+      begin
+        FScenarioName := Items[i];
+        scenarioDataTemp := InstructorSys.Scenario.GetScenario(FScenarioName);
+
+        if Assigned(scenarioDataTemp) then
+          FScenarioID := scenarioDataTemp.ID;
+
+        Break;
+      end;
+    end;
+  end;
+end;
 
 procedure TfrmScenBuilder.btnRefreshScenarioClick(Sender: TObject);
 begin
-  UpdatePMSList;
+  UpdateScenarioList;
 end;
 
 procedure TfrmScenBuilder.btnNewScenarioClick(Sender: TObject);
 begin
-  edtScenarioName.Text := '';
-  mmoScenarioDescription.Text := '';
   FScenarioID := 0;
+  FScenarioName := '';
+  ScenarioNameBuffer := '';
+  edtScenarioName.Text := '';
+  mmoScenarioDescription.Lines.Clear;
+
+  ClearTabPickScen(1);
+  ClearTabPickScen(2);
+  ClearTabPickScen(3);
+  ClearTabPickScen(4);
+  ClearTabPickScen(5);
+end;
+
+procedure TfrmScenBuilder.btnEditScenarioClick(Sender: TObject);
+var
+  scenarios : TStrings;
+  scenarioDataTemp : TScenario_Data;
+  i : integer;
+  scenariosTemp : TStrings;
+
+  pmsListTemp : TList;
+
+begin
+  if FScenarioID = 0 then
+    Exit;
+
+  scenarioDataTemp := InstructorSys.Scenario.GetScenario(FScenarioID);
+
+  if not Assigned(scenarioDataTemp) then
+    Exit;
+
+  edtScenarioName.Text := FScenarioName;
+  ScenarioNameBuffer := FScenarioName;
+
+  mmoScenarioDescription.Lines.Clear;
+  mmoScenarioDescription.Lines.Add(scenarioDataTemp.Description);
 
   ClearTabPickScen(1);
   ClearTabPickScen(2);
@@ -1001,211 +925,175 @@ begin
   ClearTabPickScen(4);
   ClearTabPickScen(5);
 
-//  edtPMSName.Text := '<None>';
-//  mmoPMSInfo.Clear;
-//  FPMSConditionID := 0;
+  for i := 0 to Length(scenarioDataTemp.ArrConditionID) - 1 do
+  begin
+    if scenarioDataTemp.ArrConditionType[i] = 'PMS' then
+    begin
+      FPMSConditionID := scenarioDataTemp.ArrConditionID[i];
+      edtPMSName.Text := scenarioDataTemp.ArrConditionName[i];
 
-//  edtPCSName.Text := '<None>';
-//  mmoPCSInfo.Clear;
-//  FPCSConditionID := 0;
+      scenariosTemp := InstructorSys.Database.GetScenarioConditions(scenarioDataTemp.Name,'PMS');
+      mmoPMSInfo.Lines.AddStrings(scenariosTemp);
+      scenariosTemp.Free;
+    end;
 
-//  edtElementName.Text := '<None>';
-//  FElementConditionID := 0;
+    if scenarioDataTemp.ArrConditionType[i] = 'PCS' then
+    begin
+      FPCSConditionID := scenarioDataTemp.ArrConditionID[i];
+      edtPCSName.Text := scenarioDataTemp.ArrConditionName[i];
 
-//  edtTANKName.Text := '<None>';
-//  mmoTANKInfo.Clear;
+      scenariosTemp := InstructorSys.Database.GetScenarioConditions(scenarioDataTemp.Name,'PCS');
+      mmoPCSInfo.Lines.AddStrings(scenariosTemp);
+      scenariosTemp.Free;
+    end;
 
-//  edtFAName.Text := '<None>';
-//  mmoFAInfo.Clear;
-//  FFAConditionID := 0;
-end;
+    if scenarioDataTemp.ArrConditionType[i] = 'TANK' then
+    begin
+      FTANKConditionID := scenarioDataTemp.ArrConditionID[i];
+      edtTANKName.Text := scenarioDataTemp.ArrConditionName[i];
+    end;
 
-procedure TfrmScenBuilder.btnEditScenarioClick(Sender: TObject);
-var
-  pmsNames : TStrings;
-  pmsData : TPMSCond_Data;
-  pmsList : TList;
-  i : Integer;
-begin
-//  if not Assigned(frmAvailPMSCondition)  then
-//    frmAvailPMSCondition := TfrmAvailPMSCondition.Create(Self);
-//
-//  pmsList := nil;
-//  pmsNames := nil;
-//  InstructorSys.Scenario.GetPMSConditions(pmsNames);
-//  frmAvailPMSCondition.SetAvailableCondition(pmsNames);
-//  pmsNames.Free;
+    if scenarioDataTemp.ArrConditionType[i] = 'FA' then
+    begin
+      FFAConditionID := scenarioDataTemp.ArrConditionID[i];
+      edtFAName.Text := scenarioDataTemp.ArrConditionName[i];
+    end;
+  end;
 
-//  if frmAvailPMSCondition.ShowModal = mrOk then
-//  begin
-//    if frmAvailPMSCondition.PMSCondName = '' then
-//      Exit;
-
-//    FCondition_ID := InstructorSys.Scenario.GetConditionID(frmAvailPMSCondition.PMSCondName);
-
-//    InstructorSys.Scenario.GetPMSCondition(FCondition_ID, pmsList);
-
-//    if pmsList.Count = 0 then
-//      Exit;
-
-//    edtCondName.Text := frmAvailPMSCondition.PMSCondName;
-
-    {untuk flag ketika update dengan nama yang berbeda}
-//    CondNameBuffer := frmAvailPMSCondition.PMSCondName;
-
-//    for i := 0 to pmsList.Count - 1 do
-//    begin
-//      pmsData := TPMSCond_Data(pmsList.Items[i]);
-//
-//      case i of
-//        0:
-//        begin
-////          SetMode(1, pmsData.PMS_Mode);
-////          chkEngine1.Checked := (pmsData.PMS_OnOff = 1);
-////          chkG1Pref.Checked := (pmsData.PMS_Pref = 1);
-////          SetCB(1, pmsData.PMS_CB);
-//        end;
-//        1:
-//        begin
-////          SetMode(2, pmsData.PMS_Mode);
-//          chkEngine2.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG2Pref.Checked := (pmsData.PMS_Pref = 1);
-////          SetCB(2, pmsData.PMS_CB);
-//        end;
-//        2:
-//        begin
-////          SetMode(3, pmsData.PMS_Mode);
-//          chkEngine3.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG3Pref.Checked := (pmsData.PMS_Pref = 1);
-////          SetCB(3, pmsData.PMS_CB);
-//        end;
-//        3:
-//        begin
-//          SetMode(4, pmsData.PMS_Mode);
-//          chkEngine4.Checked := (pmsData.PMS_OnOff = 1);
-//          chkG4Pref.Checked := (pmsData.PMS_Pref = 1);
-//          SetCB(4, pmsData.PMS_CB);
-//        end;
-//        4:
-//        begin
-//          SetMode(5, pmsData.PMS_Mode);
-//          chkEngine5.Checked := (pmsData.PMS_OnOff = 1);
-//          SetCB(5, pmsData.PMS_CB);
-//        end;
-//        5:
-//        begin
-//          SetMode(6, pmsData.PMS_SWB_MSBIntrMode);
-//          SetCB(6, pmsData.PMS_SWB_MsbCBIntr);
-//        end;
-//        6:
-//        begin
-//          SetMode(7, pmsData.PMS_SWB_MSBIntrMode);
-//          SetCB(7, pmsData.PMS_SWB_MsbCBIntr);
-//        end;
-//        7:
-//        begin
-//          SetMode(8, pmsData.PMS_SWB_ESBIntrMode);
-//          SetCB(8, pmsData.PMS_SWB_EsbCBIntr);
-//        end;
-//      end;
-//    end;
-
-//    pmsList.Free;
-//  end;
+  scenarioDataTemp.Free;
 end;
 
 procedure TfrmScenBuilder.btnDeleteScenarioClick(Sender: TObject);
-var
-  conname : string;
 begin
-  if FScenarioID = 0then
+  if FScenarioID = 0 then
     Exit;
 
-  conname := edtScenarioName.Text;
-
-  if MessageDlg('Are You Sure To Delete "' + edtScenarioName.Text + '" Scenario ? '+#13+#10+
+  if MessageDlg('Are You Sure To Delete "' + FScenarioName + '" Scenario ? '+#13+#10+
       'All Sessions Linked To Scenario Will Be Deleted..!', mtWarning, [mbYes, mbNo], 0) = mrYes then;
   begin
-    InstructorSys.Scenario.deleteScenario(FScenarioID);
-//    btnNewScenario(nil);
-//    MessageDlg('Delete "' + conname + '" Scenario Success', mtInformation, [mbOK], 0)
+    InstructorSys.Scenario.DeleteScenario(FScenarioID);
+    MessageDlg('Delete "' + FScenarioName + '" Scenario Success', mtInformation, [mbOK], 0);
+    btnNewScenarioClick(nil);
+    UpdateScenarioList;
   end;
 end;
 
 procedure TfrmScenBuilder.btnSaveScenarioClick(Sender: TObject);
 var
-  pmsData : TPMSCond_Data;
-  i, pmsType, pmsMode, pmsEngine, pmsPref, pmsCB,
-  StateRunFull, StateRunFwd, StateRunAft : Integer;
-  pmsName : string;
-  PMSList : TList;
-  ConditionID : Integer;
+  intArr : array of integer;
+  i : integer;
 begin
-//
+  if not CekScenarioInput then
+  begin
+    Exit;
+  end;
+
+  i := 1;
+  if FPMSConditionID > 0 then
+  begin
+    SetLength(intArr,i);
+    intArr[i-1] := FPMSConditionID;
+    Inc(i);
+  end;
+
+  if FPCSConditionID > 0 then
+  begin
+    SetLength(intArr,i);
+    intArr[i-1] := FPCSConditionID;
+    Inc(i);
+  end;
+
+  if FFAConditionID > 0 then
+  begin
+    SetLength(intArr, i);
+    intArr[i-1] := FFAConditionID;
+    Inc(i);
+  end;
+
+  if FTANKConditionID > 0 then
+  begin
+    SetLength(intArr, i);
+    intArr[i-1] := FTANKConditionID;
+  end;
+
+  if FScenarioID = 0 then
+  begin
+    InstructorSys.Scenario.SaveScenario(FScenarioID, edtScenarioName.Text, mmoScenarioDescription.Lines.Text, intArr);
+    MessageDlg('"' + edtScenarioName.Text + '" Scenario Has Been Saved', mtInformation, [mbOK], 0);
+  end
+  else
+  begin
+    InstructorSys.Scenario.SaveScenario(FScenarioID, edtScenarioName.Text, mmoScenarioDescription.Lines.Text, intArr);
+    MessageDlg('"' + edtScenarioName.Text + '" Scenario Has Been Updated', mtInformation, [mbOK], 0);
+  end;
+
+  btnNewScenarioClick(nil);
+  UpdateScenarioList;
+
 end;
 
-//procedure TfrmScenBuilder.btnPickClick(Sender: TObject);
-//var
-//  pickList,l : TStrings;
-//begin
-//  pickList := nil;
-//
-//  case TButton(Sender).Tag of
-//    1:
-//    begin
-//      {$REGION ' PMS '}
-//      if not Assigned(frmAvailPMSCondition)  then
-//        frmAvailPMSCondition := TfrmAvailPMSCondition.Create(self);
-//
-//      frmAvailPMSCondition.Caption := 'Available PMS';
-//
-//      InstructorSys.Scenario.GetPMSConditions(pickList);
-//      frmAvailPMSCondition.SetAvailableCondition(pickList);
-//      pickList.Free;
-//
-//      if frmAvailPMSCondition.ShowModal = mrOk then
-//      begin
-//        if frmAvailPMSCondition.PMSCondName = '' then
-//          Exit;
-//
-//        edtPMSName.Text := frmAvailPMSCondition.PMSCondName;
-//        FPMSConditionID := InstructorSys.Database.GetConditionID(edtPMSName.Text);
-//
-//        mmoPMSInfo.Lines.Clear;
-//        l := InstructorSys.Database.GetConditions(edtPMSName.Text,'PMS');
-//        mmoPMSInfo.Lines.AddStrings(l);
-//        l.Free;
-//      end;
-//      {$ENDREGION}
-//    end;
-//    2:
-//    begin
-//      {$REGION ' PCS '}
-//      if not Assigned(frmAvailPCSCondition)  then
-//        frmAvailPCSCondition := TfrmAvailPCSCondition.Create(self);
-//
-//      InstructorSys.Scenario.GetPCSConditions(pickList);
-//      frmAvailPCSCondition.SetAvailableCondition(pickList);
-//      pickList.Free;
-//
-//      if frmAvailPCSCondition.ShowModal = mrOk then
-//      begin
-//        if frmAvailPCSCondition.PCSCondName = '' then
-//          Exit;
-//
-//        edtPCSName.Text := frmAvailPCSCondition.PCSCondName;
-//        FPCSConditionID := InstructorSys.Database.GetConditionID(edtPCSName.Text);
-//
-//        mmoPCSInfo.Lines.Clear;
-//        l := InstructorSys.Database.GetConditions(edtPCSName.Text,'PCS');
-//        mmoPCSInfo.Lines.AddStrings(l);
-//        l.Free;
-//      end;
-//      {$ENDREGION}
-//    end;
-//    3:
-//    begin
-//      {$REGION ' Element Data '}
+procedure TfrmScenBuilder.btnPickClick(Sender: TObject);
+var
+  pickList,l : TStrings;
+begin
+  pickList := nil;
+
+  case TButton(Sender).Tag of
+    1:
+    begin
+      {$REGION ' PMS '}
+      if not Assigned(frmAvailPMSCondition)  then
+        frmAvailPMSCondition := TfrmAvailPMSCondition.Create(self);
+
+      frmAvailPMSCondition.Caption := 'Available PMS';
+
+      InstructorSys.Scenario.GetAllPMSConditions(pickList);
+      frmAvailPMSCondition.SetAvailableCondition(pickList);
+      pickList.Free;
+
+      if frmAvailPMSCondition.ShowModal = mrOk then
+      begin
+        if frmAvailPMSCondition.PMSCondName = '' then
+          Exit;
+
+        edtPMSName.Text := frmAvailPMSCondition.PMSCondName;
+        FPMSConditionID := InstructorSys.Database.GetConditionIDByName(edtPMSName.Text);
+
+        mmoPMSInfo.Lines.Clear;
+        l := InstructorSys.Database.GetConditions(edtPMSName.Text,'PMS');
+        mmoPMSInfo.Lines.AddStrings(l);
+        l.Free;
+      end;
+      {$ENDREGION}
+    end;
+    2:
+    begin
+      {$REGION ' PCS '}
+      if not Assigned(frmAvailPCSCondition)  then
+        frmAvailPCSCondition := TfrmAvailPCSCondition.Create(self);
+
+      InstructorSys.Scenario.GetAllPCSConditions(pickList);
+      frmAvailPCSCondition.SetAvailableCondition(pickList);
+      pickList.Free;
+
+      if frmAvailPCSCondition.ShowModal = mrOk then
+      begin
+        if frmAvailPCSCondition.PCSCondName = '' then
+          Exit;
+
+        edtPCSName.Text := frmAvailPCSCondition.PCSCondName;
+        FPCSConditionID := InstructorSys.Database.GetConditionIDByName(edtPCSName.Text);
+
+        mmoPCSInfo.Lines.Clear;
+        l := InstructorSys.Database.GetConditions(edtPCSName.Text,'PCS');
+        mmoPCSInfo.Lines.AddStrings(l);
+        l.Free;
+      end;
+      {$ENDREGION}
+    end;
+    3:
+    begin
+      {$REGION ' Element Data '}
 //      if not Assigned(frmAvailPMSCondition)  then
 //        frmAvailPMSCondition := TfrmAvailPMSCondition.Create(self);
 //      frmAvailPMSCondition.Caption := 'Available Element Data';
@@ -1222,50 +1110,50 @@ end;
 //        edtElementName.Text := frmAvailPMSCondition.PMSCondName;
 //        FElementConditionID := InstructorSys.Database.GetConditionID(edtElementName.Text);
 //      end;
-//      {$ENDREGION}
-//    end;
-//    4:
-//    begin
-//      {$REGION ' TANK '}
-//      if not Assigned(frmTanksCondition)  then
-//        frmTanksCondition := TfrmTanksCondition.Create(self);
-//
-//      InstructorSys.Scenario.GetTanksConditions(pickList);
-//      frmTanksCondition.SetAvailableCondition(pickList);
-//      pickList.Free;
-//
-//      if frmTanksCondition.ShowModal = mrOk then
-//      begin
-//        if frmTanksCondition.TanksCondName = '' then
-//          Exit;
-//
-//        edtTANKName.Text := frmTanksCondition.TanksCondName;
-//        FTANKConditionID := InstructorSys.Database.GetConditionID(edtTANKName.Text);
-//      end;
-//      {$ENDREGION}
-//    end;
-//    5:
-//    begin
-//      {$REGION ' FA '}
-//      if not Assigned(frmAvailFACondition)  then
-//        frmAvailFACondition := TfrmAvailFACondition.Create(self);
-//
-//      InstructorSys.Scenario.GetFAConditions(pickList);
-//      frmAvailFACondition.SetAvailableCondition(pickList);
-//      pickList.Free;
-//
-//      if frmAvailFACondition.ShowModal = mrOk then
-//      begin
-//        if frmAvailFACondition.FACondName = '' then
-//          Exit;
-//
-//        edtFAName.Text := frmAvailFACondition.FACondName;
-//        FFAConditionID := InstructorSys.Database.GetConditionID(edtFAName.Text);
-//      end;
-//      {$ENDREGION}
-//    end;
-//  end;
-//end;
+      {$ENDREGION}
+    end;
+    4:
+    begin
+      {$REGION ' TANK '}
+      if not Assigned(frmTanksCondition)  then
+        frmTanksCondition := TfrmTanksCondition.Create(self);
+
+      InstructorSys.Scenario.GetAllTanksConditions(pickList);
+      frmTanksCondition.SetAvailableCondition(pickList);
+      pickList.Free;
+
+      if frmTanksCondition.ShowModal = mrOk then
+      begin
+        if frmTanksCondition.TanksCondName = '' then
+          Exit;
+
+        edtTANKName.Text := frmTanksCondition.TanksCondName;
+        FTANKConditionID := InstructorSys.Database.GetConditionIDByName(edtTANKName.Text);
+      end;
+      {$ENDREGION}
+    end;
+    5:
+    begin
+      {$REGION ' FA '}
+      if not Assigned(frmAvailFACondition)  then
+        frmAvailFACondition := TfrmAvailFACondition.Create(self);
+
+      InstructorSys.Scenario.GetAllFAConditions(pickList);
+      frmAvailFACondition.SetAvailableCondition(pickList);
+      pickList.Free;
+
+      if frmAvailFACondition.ShowModal = mrOk then
+      begin
+        if frmAvailFACondition.FACondName = '' then
+          Exit;
+
+        edtFAName.Text := frmAvailFACondition.FACondName;
+        FFAConditionID := InstructorSys.Database.GetConditionIDByName(edtFAName.Text);
+      end;
+      {$ENDREGION}
+    end;
+  end;
+end;
 
 procedure TfrmScenBuilder.btnClearPickClick(Sender: TObject);
 begin
@@ -1317,6 +1205,80 @@ begin
   end;
 end;
 
+procedure TfrmScenBuilder.UpdateScenarioList;
+var
+  i : Integer;
+  tempList : TStrings;
+begin
+  tempList := nil;
+  InstructorSys.Scenario.GetAllScenarios(tempList);
+
+  if not Assigned(tempList) then
+    Exit;
+
+  if lstScenario.Count > 0 then
+    lstScenario.Clear;
+
+  for i := 0 to tempList.Count - 1 do
+  begin
+    lstScenario.Items.Add(tempList[i]);
+  end;
+
+  tempList.Free;
+end;
+
+function TfrmScenBuilder.CekScenarioInput: Boolean;
+begin
+  Result := False;
+
+  if Trim(edtScenarioName.Text) = '' then
+  begin
+    ShowMessage('Scenario Name Is Empty, Please Insert Scenario Name');
+    Exit;
+  end;
+
+  if InstructorSys.Scenario.GetScenarioCountByName(edtScenarioName.Text) > 0 then
+  begin
+    {Jika inputan baru}
+    if FScenarioID = 0 then
+    begin
+      ShowMessage('Scenario Name Is Already In Use, Please Use Another Scenario Name');
+      Exit;
+    end
+    else if PMSNameBuffer <> edtPMSConditionName.Text then
+    begin
+      ShowMessage('Scenario Name Is Already In Use, Please Use Another Scenario Name');
+      Exit;
+    end;
+  end;
+
+  if FPMSConditionID = 0 then
+  begin
+    ShowMessage('PMS Condition not yet selected');
+    Exit;
+  end;
+
+  if FPCSConditionID = 0 then
+  begin
+    ShowMessage('PCS Condition not yet selected');
+    Exit;
+  end;
+
+  if FFAConditionID = 0 then
+  begin
+    ShowMessage('Function Allocation Condition not yet selected');
+    Exit;
+  end;
+
+  if FTANKConditionID = 0 then
+  begin
+    ShowMessage('Tank Condition not yet selected');
+    Exit;
+  end;
+
+  Result := True;
+end;
+
 {$ENDREGION}
 
 {$REGION ' Session Section '}
@@ -1340,8 +1302,11 @@ begin
       if Selected[i] then
       begin
         FSessionName := Items[i];
-        sessionDataTemp := InstructorSys.Scenario.getSession(FSessionName);
-        FSessionID := sessionDataTemp.SessionID;
+        sessionDataTemp := InstructorSys.Scenario.GetSession(FSessionName);
+
+        if Assigned(sessionDataTemp) then
+          FSessionID := sessionDataTemp.SessionID;
+
         Break;
       end;
     end;
@@ -1372,7 +1337,7 @@ begin
   if FSessionID = 0 then
     Exit;
 
-  sessionDataTemp := InstructorSys.Scenario.getSession(FSessionName);
+  sessionDataTemp := InstructorSys.Scenario.GetSession(FSessionName);
 
   if not Assigned(sessionDataTemp) then
     Exit;
@@ -1392,25 +1357,26 @@ begin
   if FSessionID = 0 then
     Exit;
 
-  if (MessageDlg('Are You Sure To Delete "' + edtSessionName.Text + '" ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
+  if (MessageDlg('Are You Sure To Delete "' + FSessionName + '" ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
   begin
     InstructorSys.Database.DeleteSession(False,FSessionID);
+    MessageDlg('Delete "' + FSessionName + '" Success', mtInformation, [mbOK], 0);
+
+    UpdateSessionList;
     btnNewSessionClick(nil);
-    MessageDlg('Delete "' + edtSessionName.Text + '" Condition Success', mtInformation, [mbOK], 0)
   end;
 
 end;
 
 procedure TfrmScenBuilder.btnClearSessionClick(Sender: TObject);
 begin
-  if FSessionID = 0 then
-    Exit;
-
-  if (MessageDlg('Are You Sure To Delete "' + edtSessionName.Text + '" ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
+  if (MessageDlg('Are You Sure To Clear All Session ?', mtWarning, [mbYes, mbNo], 0)) = mrYes then
   begin
     InstructorSys.Database.DeleteSession(True,FSessionID);
+    MessageDlg('Clear Session Success', mtInformation, [mbOK], 0);
+
+    UpdateSessionList;
     btnNewSessionClick(nil);
-    MessageDlg('Delete "' + edtSessionName.Text + '" Condition Success', mtInformation, [mbOK], 0)
   end;
 end;
 
@@ -1459,7 +1425,7 @@ begin
       if Selected[i] then
       begin
         FPMSConditionName := Items[i];
-        FPMSConditionID := InstructorSys.Scenario.GetConditionID(FPMSConditionName);
+        FPMSConditionID := InstructorSys.Scenario.GetConditionIDByName(FPMSConditionName);
         Break;
       end;
     end;
@@ -1866,7 +1832,7 @@ begin
     Exit;
   end;
 
-  if InstructorSys.Scenario.GetConditionID(edtPMSConditionName.Text) > 0 then
+  if InstructorSys.Scenario.GetConditionCountByName(edtPMSConditionName.Text) > 0 then
   begin
     {Jika inputan baru}
     if FPMSConditionID = 0 then
@@ -1906,7 +1872,7 @@ begin
       if Selected[i] then
       begin
         FPCSConditionName := Items[i];
-        FPCSConditionID := InstructorSys.Scenario.GetConditionID(FPCSConditionName);
+        FPCSConditionID := InstructorSys.Scenario.GetConditionIDByName(FPCSConditionName);
         Break;
       end;
     end;
@@ -2192,7 +2158,7 @@ begin
     Exit;
   end;
 
-  if InstructorSys.Scenario.GetConditionID(edtPCSConditionName.Text) > 0 then
+  if InstructorSys.Scenario.GetConditionCountByName(edtPCSConditionName.Text) > 0 then
   begin
     {Jika inputan baru}
     if FPCSConditionID = 0 then
@@ -2232,7 +2198,7 @@ begin
       if Selected[i] then
       begin
         FTANKConditionName := Items[i];
-        FTANKConditionID := InstructorSys.Scenario.GetConditionID(FTANKConditionName);
+        FTANKConditionID := InstructorSys.Scenario.GetConditionIDByName(FTANKConditionName);
         Break;
       end;
     end;
@@ -2638,7 +2604,7 @@ begin
     Exit;
   end;
 
-  if InstructorSys.Scenario.GetConditionID(edtTankConditionName.Text) > 0 then
+  if InstructorSys.Scenario.GetConditionCountByName(edtTankConditionName.Text) > 0 then
   begin
     {Jika inputan baru}
     if FTANKConditionID = 0 then
@@ -2876,7 +2842,7 @@ begin
       if Selected[i] then
       begin
         FFAConditionName := Items[i];
-        FFAConditionID := InstructorSys.Scenario.GetConditionID(FFAConditionName);
+        FFAConditionID := InstructorSys.Scenario.GetConditionIDByName(FFAConditionName);
         Break;
       end;
     end;
@@ -3147,7 +3113,7 @@ var
 
 begin
   tempList := nil;
-  InstructorSys.Scenario.GetFAConditions(tempList);
+  InstructorSys.Scenario.GetAllFAConditions(tempList);
 
   if not Assigned(tempList) then
     Exit;
@@ -3173,7 +3139,7 @@ begin
     Exit;
   end;
 
-  if InstructorSys.Scenario.GetConditionID(edtFAConditionName.Text) > 0 then
+  if InstructorSys.Scenario.GetConditionCountByName(edtFAConditionName.Text) > 0 then
   begin
     {Jika inputan baru}
     if FFAConditionID = 0 then
@@ -3210,28 +3176,6 @@ begin
 
   if a > 0 then
     Result := True;
-end;
-
-procedure TfrmScenBuilder.UpdateScenarioList;
-var
-  i : Integer;
-  tempList : TStrings;
-begin
-  tempList := nil;
-  InstructorSys.Scenario.getScenarios(tempList);
-
-  if not Assigned(tempList) then
-    Exit;
-
-//  if lstAvail.Count > 0 then
-//  lstAvail.Clear;
-//
-//  for i := 0 to tempList.Count - 1 do
-//  begin
-//    lstAvail.Items.Add(tempList[i]);
-//  end;
-
-  tempList.Free;
 end;
 
 {$ENDREGION}

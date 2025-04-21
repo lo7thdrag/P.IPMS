@@ -165,7 +165,7 @@ begin
     if frmAvailPCSCondition.PCSCondName = '' then
       Exit;
 
-    FCondition_ID := InstructorSys.Scenario.GetConditionID(frmAvailPCSCondition.PCSCondName);
+    FCondition_ID := InstructorSys.Scenario.GetConditionIDByName(frmAvailPCSCondition.PCSCondName);
 
     InstructorSys.Scenario.GetPCSCondition(FCondition_ID, pcsList);
 
@@ -266,7 +266,7 @@ begin
 
   if FCondition_ID = 0 then
   begin
-    if InstructorSys.Scenario.GetConditionID(edtName.Text) > 0 then
+    if InstructorSys.Scenario.GetConditionIDByName(edtName.Text) > 0 then
     begin
       lblWarning2.Caption := '* Condition Name Is Already In Use, Please Use Another Condition Name';
       lblWarning2.Visible := True;

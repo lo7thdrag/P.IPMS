@@ -328,7 +328,7 @@ begin
     if frmAvailPMSCondition.PMSCondName = '' then
       Exit;
 
-    FCondition_ID := InstructorSys.Scenario.GetConditionID(frmAvailPMSCondition.PMSCondName);
+    FCondition_ID := InstructorSys.Scenario.GetConditionIDByName(frmAvailPMSCondition.PMSCondName);
 
     InstructorSys.Scenario.GetPMSCondition(FCondition_ID, pmsList);
 
@@ -609,7 +609,7 @@ begin
 
   if FCondition_ID = 0 then
   begin
-    if InstructorSys.Scenario.GetConditionID(edtCondName.Text) > 0 then
+    if InstructorSys.Scenario.GetConditionIDByName(edtCondName.Text) > 0 then
     begin
       lblWarning2.Caption := '* Condition Name Is Already In Use, Please Use Another Condition Name';
       lblWarning2.Visible := True;

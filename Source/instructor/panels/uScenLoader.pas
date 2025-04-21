@@ -128,7 +128,7 @@ begin
   lstScenario.Clear;
   scenarios := nil;
 
-  InstructorSys.Scenario.getScenarios(scenarios);
+  InstructorSys.Scenario.GetAllScenarios(scenarios);
   lstScenario.Items.AddStrings(scenarios);
 
   scenarios.Free;
@@ -161,7 +161,7 @@ begin
   end;
 
   if lstAvailSession.ItemIndex >= 0 then begin
-     scenData := InstructorSys.Scenario.getSession(lstAvailSession.Items[lstAvailSession.ItemIndex]);
+     scenData := InstructorSys.Scenario.GetSession(lstAvailSession.Items[lstAvailSession.ItemIndex]);
 
     if not Assigned(scenData) then
       Exit;
@@ -238,7 +238,7 @@ begin
   mmoSessionDesc.Lines.Clear;
 
   if lstAvailSession.ItemIndex >= 0 then begin
-    scenData := InstructorSys.Scenario.getSession(lstAvailSession.Items[lstAvailSession.ItemIndex]);
+    scenData := InstructorSys.Scenario.GetSession(lstAvailSession.Items[lstAvailSession.ItemIndex]);
 
     if not Assigned(scenData) then
       Exit;

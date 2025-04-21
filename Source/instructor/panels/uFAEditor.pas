@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ToolWin, ActnMan, ActnCtrls, ActnList,
-  PlatformDefaultStyleActnCtrls, ExtCtrls, ComCtrls, uDatabase;
+  PlatformDefaultStyleActnCtrls, ExtCtrls, ComCtrls, uDatabase, System.Actions;
 
 type
   TfrmFAEditor = class(TForm)
@@ -253,7 +253,7 @@ begin
 
   faList := nil;
   faNames := nil;
-  InstructorSys.Scenario.GetFAConditions(faNames);
+  InstructorSys.Scenario.GetAllFAConditions(faNames);
   frmAvailFACondition.SetAvailableCondition(faNames);
   faNames.Free;
 
@@ -262,7 +262,7 @@ begin
     if frmAvailFACondition.FACondName = '' then
       Exit;
 
-    FCondition_ID := InstructorSys.Scenario.GetConditionID(frmAvailFACondition.FACondName);
+    FCondition_ID := InstructorSys.Scenario.GetConditionIDByName(frmAvailFACondition.FACondName);
 
     InstructorSys.Scenario.GetFACondition(FCondition_ID, faList);
 
@@ -365,7 +365,7 @@ begin
 
     for i := 1 to 4 do
     begin
-      if InstructorSys.Scenario.GetConditionID(edtName.Text) > 0 then
+      if InstructorSys.Scenario.GetConditionIDByName(edtName.Text) > 0 then
       begin
         lblWarning2.Caption := '* Condition Name Is Already In Use, Please Use Another Condition Name';
         lblWarning2.Visible := True;
