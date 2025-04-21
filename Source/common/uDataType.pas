@@ -789,13 +789,14 @@ type
   end;
 
   R_Common_PMS_Command = record
-    pid         : TPacketID;
-    GenSwitchID : string[25];
-    CommandPropsID : E_PropsID;
-    ValueDob    : Double;
-    ValueInt    : Integer;
-    ValueBool   : boolean;
-    ValueKind   : string[10];
+    pid             : TPacketID;
+    GenSwitchID     : string[25];
+//    CommandID       : Byte;
+    CommandPropsID  : E_PropsID;
+    ValueDob        : Double;
+    ValueInt        : Integer;
+    ValueBool       : boolean;
+    ValueKind       : string[10];
   end;
 
   R_Common_TANK_Command = record

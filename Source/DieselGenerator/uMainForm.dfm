@@ -8203,6 +8203,7 @@ object MainForm: TMainForm
       48DD625C93589416A559FD5894F3C4A2B428CDEAC7A29C27FF1FADAC362FC4BE
       368C0000000049454E44AE426082}
     Stretch = True
+    OnClick = btnStartClick
   end
   object btnStop: TImage
     Left = 770

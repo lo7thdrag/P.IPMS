@@ -84,6 +84,7 @@ type
     //Prince
     procedure NetEvent_MimicCommonCmd(apRec: PAnsiChar; aSize: Word);
     procedure NetEvent_EmergencyCommonCmd(apRec: PAnsiChar; aSize: Word);
+    procedure NetEvent_GenCommonCmd(apRec: PAnsiChar; aSize: Word);
     procedure NetEvent_PumpCommonCmd(apRec: PAnsiChar; aSize: Word);
 
     procedure NetEvent_VentStatusCmd(apRec: PAnsiChar; aSize: Word);
@@ -640,8 +641,7 @@ begin
   Network.AsServer.SendData(C_PANELTHROTTLE_COMMAND2,@rec^);
 end;
 
-procedure TControllerlSystem.NetEvent_EmergencyCommonCmd(apRec: PAnsiChar;
-  aSize: Word);
+procedure TControllerlSystem.NetEvent_EmergencyCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
   recCmd  : ^R_Common_EmergencyStop_Command;
   recER   : R_Common_PMS_Command;
@@ -655,6 +655,20 @@ begin
   Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
 end;
 
+procedure TControllerlSystem.NetEvent_GenCommonCmd(apRec: PAnsiChar; aSize: Word);
+var
+  recCmd  : ^R_Common_PMS_Command;
+  recER   : R_Common_PMS_Command;
+begin
+  recCmd := @apRec^;
+
+  recER.GenSwitchID := recCmd.GenSwitchID;
+//  recER.CommandID := recCmd.CommandID;
+  recER.CommandPropsID := epPMSGeneratorEngineRun;
+  recER.ValueBool := recCmd.ValueBool;
+
+  Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
+end;
 
 procedure TControllerlSystem.NetEvent_FuncAllocCommand(apRec: PAnsiChar;
   aSize: Word);
@@ -1116,6 +1130,9 @@ begin
 
     {terima paket dari EmergencyStop k controller}
     RegisterProcedure(C_EMERGENCYSTOP_COMMAND,NetEvent_EmergencyCommonCmd,SizeOf(R_Common_EmergencyStop_Command));
+
+    {terima paket dari Diesel Generator k controller}
+    RegisterProcedure(C_PMS_COMMAND,NetEvent_GenCommonCmd,SizeOf(R_Common_PMS_Command));
 
     {terima paket dari ShipAlarm k controller}
     RegisterProcedure(C_PUMP_COMMAND,NetEvent_PumpCommonCmd,SizeOf(R_Common_PumpStatus_Command));

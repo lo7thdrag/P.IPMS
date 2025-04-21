@@ -34,14 +34,15 @@ type
     constructor Create;
     destructor Destroy;override;
 
+    {Prosedur untuk mengirimkan paket data dari inputan PCS Panel Touch Screen ke Engine}
+    procedure StartStopEngine(aValue : Boolean);
+    {--}
+
     property Network : TDieselGeneratorNetwork read FDieselGeneratorNetwork;
     property Listener :TListeners read FListener;
     property Freezed : boolean read FFreezed write SetFreezed;
 
     property IdFormDieselGenerator: String read FIdFormDieselGenerator write FIdFormDieselGenerator;
-
-
-
 
   end;
 
@@ -111,6 +112,17 @@ begin
     setFreezed := 0;
     FLIstener.TriggerEvents(Self,epPMSFreezed,setFreezed);
   end;
+end;
+
+procedure TDieselGeneratorSystem.StartStopEngine(aValue: Boolean);
+var
+  recCmd : R_Common_PMS_Command;
+begin
+  recCmd.GenSwitchID := IdFormDieselGenerator;
+  recCmd.CommandPropsID := epPMSGeneratorEngineRun;
+  recCmd.ValueBool := aValue;
+
+  Network.DieselGeneratorControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
 end;
 
 { fungsi untuk menangani event dari jaringan untuk PCSCommand }
@@ -192,15 +204,16 @@ begin
     end;
   end;
 
-   client := FDieselGeneratorNetwork.AsClients.Get('AsControllerClient');
-   if Assigned(client) then
-   begin
-     with client do
-     begin
-//       RegisterProcedure(C_PANELTHROTTLE_COMMAND, NetEventStatusThrottleCommand, SizeOf(R_Common_PanelThrottle_Command));
-//       RegisterProcedure(C_PANELTHROTTLE_COMMAND2, nil, SizeOf(R_Common_PanelThrottle_Command));
-     end;
-   end;
+  client := FDieselGeneratorNetwork.AsClients.Get('AsControllerClient');
+  if Assigned(client) then
+  begin
+    with client do
+    begin
+      {kirim paket dari Diesel Generator ke controller}
+      client.RegisterProcedure(C_PMS_COMMAND, nil, SizeOf(R_Common_PMS_Command));
+
+    end;
+  end;
 end;
 
 end.
