@@ -259,7 +259,7 @@ const
   C_GEARBOX_ID : array [0..1] of string = ('GearBox PS', 'GearBox SB');
   C_CPP_ID : array [0..1] of string = ('CPP PS', 'CPP SB');
   C_GENERATOR_ID : array [0..4] of string = ('Generator 1', 'Generator 2', 'Generator 3', 'Generator 4', 'Emergency Generator');
-  C_SWITCHBOARD_ID : array [0..3] of string = ('Switchboard FWD', 'Switchboard AFT', 'Switchboard Emergency FWD', 'Switchboard Emergency AFT');
+  C_SWITCHBOARD_ID : array [0..4] of string = ('Switchboard FWD', 'Switchboard AFT', 'Switchboard Emergency FWD', 'Switchboard Emergency AFT', 'Switchboard Shore');
   C_POWER_ID : array [0..1] of string = ('Power FWD', 'Power AFT');
 
   A_MimicType : array [0..31] of Integer = (0, 1, 2, 4, 5,
