@@ -234,6 +234,23 @@ end;
 
 procedure TfrmInstructorPanel.FormShow(Sender: TObject);
 begin
+  DefaultMonitor := dmDesktop;
+
+  if Screen.MonitorCount > 1 then
+  begin
+    Height := Screen.Monitors[Setting.MonitorInstructor-1].Height;
+    Top    := Screen.Monitors[Setting.MonitorInstructor-1].Top;
+    Left   := Screen.Monitors[Setting.MonitorInstructor-1].Left;
+    width  := Screen.Monitors[Setting.MonitorInstructor-1].Width;
+  end
+  else
+  begin
+    Height := Screen.Height;
+    Width := Screen.Width;
+    Left := 0;
+    Top := 0;
+  end;
+
   VrClock1.StartClock;
 end;
 
@@ -675,8 +692,6 @@ begin
 
   { default view }
   FormFactory(ftClientControl,True);
-
-
 
 end;
 

@@ -302,16 +302,16 @@ begin
   BeginSimulation;
   Application.CreateForm(TfrmInstructorPanel, frmInstructorPanel);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TfrmFFSystem, frmFFSystem);
-  Application.CreateForm(TfrmReport, frmReport);
-  Application.CreateForm(TfrmSetpoint, frmSetpoint);
-  Application.CreateForm(TfrmACSControl, frmACSControl);
-  Application.CreateForm(TfrmPropulsionConditions, frmPropulsionConditions);
-  Application.CreateForm(TfrmTankSystemPanel, frmTankSystemPanel);
-  Application.CreateForm(TForm5, Form5);
-  Application.CreateForm(TfrmFuelOilPanel, frmFuelOilPanel);
-  Application.CreateForm(TfrmBallastPanel, frmBallastPanel);
-  Application.CreateForm(TfrmFreshWaterPanel, frmFreshWaterPanel);
+//  Application.CreateForm(TfrmFFSystem, frmFFSystem);
+//  Application.CreateForm(TfrmReport, frmReport);
+//  Application.CreateForm(TfrmSetpoint, frmSetpoint);
+//  Application.CreateForm(TfrmACSControl, frmACSControl);
+//  Application.CreateForm(TfrmPropulsionConditions, frmPropulsionConditions);
+//  Application.CreateForm(TfrmTankSystemPanel, frmTankSystemPanel);
+//  Application.CreateForm(TForm5, Form5);
+//  Application.CreateForm(TfrmFuelOilPanel, frmFuelOilPanel);
+//  Application.CreateForm(TfrmBallastPanel, frmBallastPanel);
+//  Application.CreateForm(TfrmFreshWaterPanel, frmFreshWaterPanel);
   StartNetwork;
 
   Application.Run;

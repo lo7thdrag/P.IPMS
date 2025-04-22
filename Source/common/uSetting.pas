@@ -29,6 +29,7 @@ type
     FExecutedApp2 : string;
     FExecutedApp3 : string;
     FMonitorMimic : Integer;
+    FMonitorInstructor : Integer;
 
     FServerIP : string;
     FInstrukturIP : string;
@@ -110,7 +111,9 @@ type
     function GetExecutedApp2: string;
     function GetExecutedApp3: string;
     function GetMonitorMimic: Integer;
+    function GetMonitorInstructor: Integer;
     procedure SetMonitorMimic(const Value: Integer);
+    procedure SetMonitorInstructor(const Value: Integer);
 
     //yoga setting.ini
     {procedure setServoID(const serIDRPMMEPS : Integer; const serIDRPMMESB : Integer; const serIDRPMSHAFTPS : Integer;
@@ -197,7 +200,9 @@ type
     procedure SetDieselGenerator4IP(const Value: string);
 
 
-    procedure SetServerIP(const Value: string);  public
+    procedure SetServerIP(const Value: string);
+
+  public
     constructor Create;
     destructor Destroy; override;
 
@@ -226,6 +231,7 @@ type
     property ExecutedApp3 : string read GetExecutedApp3 write SetExecutedApp3;
 
     property MonitorMimic : Integer read GetMonitorMimic write SetMonitorMimic;
+    property MonitorInstructor : Integer read GetMonitorInstructor write SetMonitorInstructor;
 
     property ServoID : TStringList read getServoID write setServoID;
     property servoDegree : TStringList read getServoDegree write setServoDegree;
@@ -396,8 +402,6 @@ const
   C_CatalogHardware = 'Catalog Hardware IPMS.pdf';
   C_MaintenanceIPMS = 'Maintenance IPMS.pdf';
 
-
-
 { TSetting }
 
 constructor TSetting.Create;
@@ -504,6 +508,14 @@ end;
 function TSetting.GetModulPCS: string;
 begin
   Result := FIniFile.ReadString(C_Section_Help, 'ModulPCS', 'Modul PCS.pdf');
+end;
+
+function TSetting.GetMonitorInstructor: Integer;
+//var
+//  tes : string;
+begin
+//  tes := FIniFile.ReadString('INSTRUCTORSCREEN', 'SCREEN', '0');
+  Result := FIniFile.ReadInteger('INSTRUCTORSCREEN', 'SCREEN',0);
 end;
 
 function TSetting.GetMonitorMimic: Integer;
@@ -1015,6 +1027,12 @@ procedure TSetting.SetModulPCS(const Value: string);
 begin
   FModulPCS := Value;
   FIniFile.WriteString(C_Section_Help, 'ModulPCS', Value);
+end;
+
+procedure TSetting.SetMonitorInstructor(const Value: Integer);
+begin
+  FMonitorInstructor := Value;
+  FIniFile.WriteInteger(C_Section_Instructor, C_Ident_Mimic, Value);
 end;
 
 procedure TSetting.SetMonitorMimic(const Value: Integer);

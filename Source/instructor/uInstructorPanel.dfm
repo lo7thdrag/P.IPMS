@@ -1,5 +1,5 @@
 object frmInstructorPanel: TfrmInstructorPanel
-  Left = -1398
+  Left = 0
   Top = 329
   BorderStyle = bsNone
   Caption = 'Instructor Panel'
@@ -13,6 +13,7 @@ object frmInstructorPanel: TfrmInstructorPanel
   Font.Style = []
   Menu = mm1
   OldCreateOrder = False
+  Position = poDesigned
   WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate

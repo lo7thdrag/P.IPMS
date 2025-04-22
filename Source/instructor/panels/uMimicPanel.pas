@@ -29,7 +29,7 @@ var
 
 implementation
 
-uses ufrmMain, ufrmLogin, uMimicsSystem, uDataType;
+uses ufrmMain, ufrmLogin, uMimicsSystem, uDataType, uSetting;
 
 {$R *.dfm}
 
@@ -76,20 +76,25 @@ begin
 end;
 
 procedure TfrmMimicPanel.SetFormLayout;
-var
-  i : integer;
 begin
+
   { Set frmMimicsView }
   DefaultMonitor := dmDesktop;
-  if Screen.MonitorCount > 1 then
-   i := 1
-  else
-   i := 0;
 
-  Height := Screen.Monitors[i].Height;
-  Top    := Screen.Monitors[i].Top;
-  Left   := Screen.Monitors[i].Left;
-  width  := Screen.Monitors[i].Width;
+  if Screen.MonitorCount > 1 then
+  begin
+    Height := Screen.Monitors[Setting.MonitorMimic-1].Height;
+    Top    := Screen.Monitors[Setting.MonitorMimic-1].Top;
+    Left   := Screen.Monitors[Setting.MonitorMimic-1].Left;
+    width  := Screen.Monitors[Setting.MonitorMimic-1].Width;
+  end
+  else
+  begin
+    Height := Screen.Height;
+    Width := Screen.Width;
+    Left := 0;
+    Top := 0;
+  end;
 
   Show;
 end;
