@@ -814,7 +814,7 @@ begin
         SearchPMSElementID.getCBEEngineID(recCmd.ElementName, val1, val2, val3, 1);
         case val2 of
           epPMSGeneratorCBClosed : recER.ValueBool := True;
-          epPMSMsbCBIntr : recER.ValueBool  := True;
+          epPMSMsbCircuitBreaker : recER.ValueBool  := True;
           epPMSEsbIntrMode : recER.ValueInt  := val3;
         end;
         recER.GenSwitchID := val1;
@@ -829,7 +829,7 @@ begin
         SearchPMSElementID.getCBEEngineID(recCmd.ElementName, val1, val2, val3, 2);
         case val2 of
           epPMSGeneratorCBClosed : recER.ValueBool := False;
-          epPMSMsbCBIntr : recER.ValueBool  := False;
+          epPMSMsbCircuitBreaker : recER.ValueBool  := False;
           epPMSEsbIntrMode : recER.ValueInt  := val3;
         end;
         recER.GenSwitchID := val1;

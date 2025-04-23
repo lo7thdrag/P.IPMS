@@ -125,7 +125,7 @@ begin
     epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm,
     epPMSLubOilTempHigh, epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage,
 
-    epPMSMsbCBShore, epPMSMsbCBIntr, epPMSMsbCBNavNaut, epPMSGeneratorRunHourState,epPMSGeneratorEmergencyStop,
+    epPMSMsbCBShore, epPMSMsbCircuitBreaker, epPMSMsbCBNavNaut, epPMSGeneratorRunHourState,epPMSGeneratorEmergencyStop,
     epPMSMsbTripReduct, epPMSSycnFail :
     begin
       if Sender is TGenerator then
@@ -582,7 +582,7 @@ begin
       if generator.NotStandby then
         Exit;
     end;
-    epPMSMsbCBShore, epPMSMsbCBIntr :
+    epPMSMsbCBShore, epPMSMsbCircuitBreaker :
     begin
       switchboard := ERManager.EngineRoom.getPMSSystem.getSwitchboard(recER.GenSwitchID);
     end;
@@ -651,10 +651,10 @@ begin
     begin
       switchboard.MsbCBShore  := recER.ValueBool;
     end;
-    epPMSMsbCBIntr:
+    epPMSMsbCircuitBreaker:
     begin
       switchboard := ERManager.EngineRoom.getPMSSystem.getSwitchboard(recER.GenSwitchID);
-      switchboard.MsbCBIntr  := recER.ValueBool;
+      switchboard.MsbCircuitBreaker  := recER.ValueBool;
     end;
   end;
   case recERPCS.CommandID of

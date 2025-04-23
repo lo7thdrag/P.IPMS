@@ -198,7 +198,7 @@ begin
     conditionData.PMS_Name := C_SWITCHBOARD_ID[i];
     conditionData.PMS_Type := 2;
 
-    if getPMSSystem.MSB[i].MsbCBIntr then
+    if getPMSSystem.MSB[i].MsbCircuitBreaker then
       conditionData.PMS_SWB_MsbCBIntr := 1
     else
       conditionData.PMS_SWB_MsbCBIntr:= 0;

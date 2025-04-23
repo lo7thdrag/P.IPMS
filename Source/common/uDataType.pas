@@ -300,6 +300,11 @@ const
     'FW ROLL STAB TK', 'FO TK1', 'FO TK2', 'FO TK3', 'FO TK4', 'FO LOAD TRUNK',
     'FO DAILY SB', 'FO DAILY PS', 'FO OV TK', 'BILGE W TK');
 
+  {Mode}
+  C_ModeManual = 1;
+  C_ModeOff = 2;
+  C_ModeAuto = 3;
+
 type
 
   {
@@ -542,7 +547,7 @@ type
       {Gensys PMS System Alarm}
       epPMSCanBusFailure, epPMSDCPowFailure, epPMSFaultPageLed, epPMSFailureCBClosed,
 
-      epPMSMsbIntrMode, epPMSEsbIntrMode, epPMSMsbShoreMode, epPMSMsbCBShore, epPMSMsbCBIntr, epPMSEsbAftCBIntr, epPMSEsbFwdCBIntr,
+      epPMSMsbIntrMode, epPMSEsbIntrMode, epPMSMsbShoreMode, epPMSMsbCBShore, epPMSMsbCircuitBreaker, epPMSEsbAftCBIntr, epPMSEsbFwdCBIntr,
       epPMSMsbCBNavNaut, epPMSEmergencyCon, epPMSMsbBusbar, epPMSMsbTripReduct, epPMSSycnFail, epPMSTrafo115Volt, epPMSTrafo230Volt,
 
       epPMSFreezed,

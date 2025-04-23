@@ -406,6 +406,8 @@ type
     procedure btnEditPMSClick(Sender: TObject);
     procedure btnDeletePMSClick(Sender: TObject);
     procedure btnSavePMSClick(Sender: TObject);
+
+    procedure cbbModeSWBChange(Sender: TObject);
     {$ENDREGION}
 
     {$REGION ' PCS Section '}
@@ -453,6 +455,7 @@ type
 //    procedure act4Execute(Sender: TObject);
 
     procedure btnMenuClick(Sender: TObject);
+
 
   private
     FScenarioID : Integer;
@@ -1305,7 +1308,7 @@ begin
     if pmsDataTemp.PMS_Name = C_GENERATOR_ID[0] then
     begin
       {$REGION ' Generator 1 '}
-      cbbModeGen1.ItemIndex := pmsDataTemp.PMS_Mode;
+      cbbModeGen1.ItemIndex := pmsDataTemp.PMS_Mode-1;
       chkEngine1.Checked := (pmsDataTemp.PMS_OnOff = 1);
       chkG1Pref.Checked := (pmsDataTemp.PMS_Pref = 1);
       cbbCircuitBreaker1.ItemIndex := pmsDataTemp.PMS_CB;
@@ -1314,7 +1317,7 @@ begin
     else if pmsDataTemp.PMS_Name = C_GENERATOR_ID[1] then
     begin
       {$REGION ' Generator 2 '}
-      cbbModeGen2.ItemIndex := pmsDataTemp.PMS_Mode;
+      cbbModeGen2.ItemIndex := pmsDataTemp.PMS_Mode-1;
       chkEngine2.Checked := (pmsDataTemp.PMS_OnOff = 1);
       chkG2Pref.Checked := (pmsDataTemp.PMS_Pref = 1);
       cbbCircuitBreaker2.ItemIndex := pmsDataTemp.PMS_CB;
@@ -1323,7 +1326,7 @@ begin
     else if pmsDataTemp.PMS_Name = C_GENERATOR_ID[2] then
     begin
       {$REGION ' Generator 3 '}
-      cbbModeGen3.ItemIndex := pmsDataTemp.PMS_Mode;
+      cbbModeGen3.ItemIndex := pmsDataTemp.PMS_Mode-1;
       chkEngine3.Checked := (pmsDataTemp.PMS_OnOff = 1);
       chkG3Pref.Checked := (pmsDataTemp.PMS_Pref = 1);
       cbbCircuitBreaker3.ItemIndex := pmsDataTemp.PMS_CB;
@@ -1332,7 +1335,7 @@ begin
     else if pmsDataTemp.PMS_Name = C_GENERATOR_ID[3] then
     begin
       {$REGION ' Generator 4 '}
-      cbbModeGen4.ItemIndex := pmsDataTemp.PMS_Mode;
+      cbbModeGen4.ItemIndex := pmsDataTemp.PMS_Mode-1;
       chkEngine4.Checked := (pmsDataTemp.PMS_OnOff = 1);
       chkG4Pref.Checked := (pmsDataTemp.PMS_Pref = 1);
       cbbCircuitBreaker4.ItemIndex := pmsDataTemp.PMS_CB;
@@ -1341,7 +1344,7 @@ begin
     else if pmsDataTemp.PMS_Name = C_GENERATOR_ID[4] then
     begin
       {$REGION ' Generator Emergency '}
-      cbbModeGenE.ItemIndex := pmsDataTemp.PMS_Mode;
+      cbbModeGenE.ItemIndex := pmsDataTemp.PMS_Mode-1;
       chkEngineE.Checked := (pmsDataTemp.PMS_OnOff = 1);
       cbbCircuitBreakerE.ItemIndex := pmsDataTemp.PMS_CB;
       {$ENDREGION}
@@ -1349,29 +1352,49 @@ begin
     else if pmsDataTemp.PMS_Name = C_SWITCHBOARD_ID[0] then
     begin
       {$REGION ' Switchboard FWD '}
-      cbbModeInnFwd.ItemIndex := pmsDataTemp.PMS_SWB_MSBIntrMode;
+      case pmsDataTemp.PMS_SWB_MSBIntrMode of
+        1 : cbbModeInnFwd.ItemIndex := 0;
+        3: cbbModeInnFwd.ItemIndex := 1;
+      end;
       cbbCircuitBreakerFwd.ItemIndex := pmsDataTemp.PMS_SWB_MsbCBIntr;
+
+      cbbModeSWBChange(cbbModeInnFwd);
       {$ENDREGION}
     end
     else if pmsDataTemp.PMS_Name = C_SWITCHBOARD_ID[1] then
     begin
       {$REGION ' Switchboard AFT '}
-      cbbModeInnAft.ItemIndex := pmsDataTemp.PMS_SWB_MSBIntrMode;
+      case pmsDataTemp.PMS_SWB_MSBIntrMode of
+        1 : cbbModeInnAft.ItemIndex := 0;
+        3: cbbModeInnAft.ItemIndex := 1;
+      end;
       cbbCircuitBreakerAft.ItemIndex := pmsDataTemp.PMS_SWB_MsbCBIntr;
+
+      cbbModeSWBChange(cbbModeInnAft);
       {$ENDREGION}
     end
     else if pmsDataTemp.PMS_Name = C_SWITCHBOARD_ID[2] then
     begin
       {$REGION ' Switchboard Emergency FWD '}
-      cbbModeInnEmFwd.ItemIndex := pmsDataTemp.PMS_SWB_MSBIntrMode;
+      case pmsDataTemp.PMS_SWB_MSBIntrMode of
+        1 : cbbModeInnEmFwd.ItemIndex := 0;
+        3: cbbModeInnEmFwd.ItemIndex := 1;
+      end;
       cbbCircuitBreakerEmFwd.ItemIndex := pmsDataTemp.PMS_SWB_MsbCBIntr;
+
+      cbbModeSWBChange(cbbModeInnEmFwd);
       {$ENDREGION}
     end
     else if pmsDataTemp.PMS_Name = C_SWITCHBOARD_ID[3] then
     begin
       {$REGION ' Switchboard Emergency AFT '}
-      cbbModeInnEmAft.ItemIndex := pmsDataTemp.PMS_SWB_MSBIntrMode;
+      case pmsDataTemp.PMS_SWB_MSBIntrMode of
+        1 : cbbModeInnEmAft.ItemIndex := 0;
+        3: cbbModeInnEmAft.ItemIndex := 1;
+      end;
       cbbCircuitBreakerEmAft.ItemIndex := pmsDataTemp.PMS_SWB_MsbCBIntr;
+
+      cbbModeSWBChange(cbbModeInnEmAft);
       {$ENDREGION}
     end;
   end;
@@ -1425,11 +1448,11 @@ begin
   pmsDataTemp.PMS_ID := FPmsIDBuffer[0];
   pmsDataTemp.Condition_ID := FPMSConditionID;
 
-  pmsDataTemp.PMS_Mode := cbbModeGen1.ItemIndex;
+  pmsDataTemp.PMS_Mode := cbbModeGen1.ItemIndex+1;
   pmsDataTemp.PMS_State := 1;
   pmsDataTemp.PMS_OnOff := Ord(chkEngine1.Checked);
   pmsDataTemp.PMS_Pref := Ord(chkG1Pref.Checked);
-  pmsDataTemp.PMS_CB := cbbCircuitBreaker1.ItemIndex;
+  pmsDataTemp.PMS_CB := cbbCircuitBreaker1.ItemIndex+1;
 
   pmsListTemp.Add(pmsDataTemp);
   {$ENDREGION}
@@ -1441,7 +1464,7 @@ begin
   pmsDataTemp.PMS_ID := FPmsIDBuffer[1];
   pmsDataTemp.Condition_ID := FPMSConditionID;
 
-  pmsDataTemp.PMS_Mode := cbbModeGen2.ItemIndex;
+  pmsDataTemp.PMS_Mode := cbbModeGen2.ItemIndex+1;
   pmsDataTemp.PMS_State := 1;
   pmsDataTemp.PMS_OnOff := Ord(chkEngine2.Checked);
   pmsDataTemp.PMS_Pref := Ord(chkG2Pref.Checked);
@@ -1457,7 +1480,7 @@ begin
   pmsDataTemp.PMS_ID := FPmsIDBuffer[2];
   pmsDataTemp.Condition_ID := FPMSConditionID;
 
-  pmsDataTemp.PMS_Mode := cbbModeGen3.ItemIndex;
+  pmsDataTemp.PMS_Mode := cbbModeGen3.ItemIndex+1;
   pmsDataTemp.PMS_State := 1;
   pmsDataTemp.PMS_OnOff := Ord(chkEngine3.Checked);
   pmsDataTemp.PMS_Pref := Ord(chkG3Pref.Checked);
@@ -1473,7 +1496,7 @@ begin
   pmsDataTemp.PMS_ID := FPmsIDBuffer[3];
   pmsDataTemp.Condition_ID := FPMSConditionID;
 
-  pmsDataTemp.PMS_Mode := cbbModeGen4.ItemIndex;
+  pmsDataTemp.PMS_Mode := cbbModeGen4.ItemIndex+1;
   pmsDataTemp.PMS_State := 1;
   pmsDataTemp.PMS_OnOff := Ord(chkEngine4.Checked);
   pmsDataTemp.PMS_Pref := Ord(chkG4Pref.Checked);
@@ -1489,7 +1512,7 @@ begin
   pmsDataTemp.PMS_ID := FPmsIDBuffer[4];
   pmsDataTemp.Condition_ID := FPMSConditionID;
 
-  pmsDataTemp.PMS_Mode := cbbModeGenE.ItemIndex;
+  pmsDataTemp.PMS_Mode := cbbModeGenE.ItemIndex+1;
   pmsDataTemp.PMS_State := 1;
   pmsDataTemp.PMS_OnOff := Ord(chkEngineE.Checked);
   pmsDataTemp.PMS_CB := cbbCircuitBreakerE.ItemIndex;
@@ -1630,6 +1653,46 @@ begin
   end;
 
   Result := True;
+end;
+
+procedure TfrmScenBuilder.cbbModeSWBChange(Sender: TObject);
+begin
+  if TComboBox(Sender).Name = 'cbbModeInnFwd' then
+  begin
+    cbbCircuitBreakerFwd.Enabled := not (cbbModeInnFwd.ItemIndex = 1);
+
+    if cbbModeInnFwd.ItemIndex = 1  then
+    begin
+      cbbCircuitBreakerFwd.ItemIndex := 0;
+    end;
+  end
+  else if TComboBox(Sender).Name = 'cbbModeInnAft' then
+  begin
+    cbbCircuitBreakerAft.Enabled := not (cbbModeInnAft.ItemIndex = 1);
+
+    if cbbModeInnAft.ItemIndex = 1  then
+    begin
+      cbbCircuitBreakerAft.ItemIndex := 0;
+    end;
+  end
+  else if TComboBox(Sender).Name = 'cbbModeInnEmFwd' then
+  begin
+    cbbCircuitBreakerEmFwd.Enabled := not (cbbModeInnEmFwd.ItemIndex = 1);
+
+    if cbbModeInnEmFwd.ItemIndex = 1  then
+    begin
+      cbbCircuitBreakerEmFwd.ItemIndex := 0;
+    end;
+  end
+  else if TComboBox(Sender).Name = 'cbbModeInnEmAft' then
+  begin
+    cbbCircuitBreakerEmAft.Enabled := not (cbbModeInnEmAft.ItemIndex = 1);
+
+    if cbbModeInnEmAft.ItemIndex = 1  then
+    begin
+      cbbCircuitBreakerEmAft.ItemIndex := 0;
+    end;
+  end
 end;
 
 {$ENDREGION}

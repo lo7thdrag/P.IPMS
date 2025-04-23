@@ -16,7 +16,7 @@ type
     FTrafo230Volt : Double;
     FTrafo115Volt : Double;
 
-    FMSBIntrMode : Integer;
+    FMsbMode : Integer;
     FESBIntrMode : Integer;
     FShoreIntrMode : Integer;
 
@@ -24,7 +24,7 @@ type
     FIsEmergencyCon : Boolean;
 
     FIsBusbar  : boolean;
-    FIsMsbCBIntr : boolean;
+    FIsMsbCircuitBreaker : boolean;
     FIsEsbAftCBIntr : boolean;
     FIsEsbFwdCBIntr : boolean;
     FIsMsbCBShore : boolean;
@@ -36,11 +36,11 @@ type
     procedure SetTrafo230Volt (const Value : Double);
     procedure SetTrafo115Volt (const Value : Double);
 
-    procedure SetMSBIntrMode(const Value : Integer);
+    procedure SetMsbMode(const Value : Integer);
     procedure SetESBIntrMode(const Value : Integer);
     procedure SetShoreIntrMode(const Value : Integer);
 
-    procedure SetMsbCBIntr(const Value : Boolean);
+    procedure SetMsbCircuitBreaker(const Value : Boolean);
     procedure SetEsbAftCBIntr(const Value : Boolean);
     procedure SetEsbFwdCBIntr(const Value : Boolean);
     procedure SetMsbCBShore(const Value : Boolean);
@@ -56,13 +56,13 @@ type
     procedure Run(const aDt : Double);override;
 
     {1:Man; 2:Off; 3:Aut}
-    property MSBIntrMode : Integer read FMSBIntrMode write SetMSBIntrMode;
+    property MsbMode : Integer read FMsbMode write SetMsbMode;
     {1:Aft; 2:Off; 3:Fwd; 4:Dbl}
     property ESBIntrMode : Integer read FESBIntrMode write SetESBIntrMode;
     {1:Man; 2:Off; 3:Aut}
     property ShoreIntrMode : Integer read FShoreIntrMode write SetShoreIntrMode;
 
-    property MsbCBIntr : Boolean read FIsMsbCBIntr write SetMsbCBIntr;
+    property MsbCircuitBreaker : Boolean read FIsMsbCircuitBreaker write SetMsbCircuitBreaker;
     property EsbAftCBIntr : Boolean read FIsEsbAftCBIntr write SetEsbAftCBIntr;
     property EsbFwdCBIntr : Boolean read FIsEsbFwdCBIntr write SetEsbFwdCBIntr;
     property MsbCBShore : Boolean read FIsMsbCBShore write SetMsbCBShore;
@@ -95,12 +95,12 @@ begin
   FTrafo115Volt := 0;
   FDelay      := 0;
 
-  ShoreIntrMode  := 2;
-  MSBIntrMode := 2;
+  ShoreIntrMode  := C_ModeOff;
+  MsbMode := C_ModeOff;
   ESBIntrMode := 2;
 
   MsbCBShore := False;
-  MsbCBIntr := False;
+  MsbCircuitBreaker := False;
   EsbAftCBIntr := False;
   EsbFwdCBIntr := False;
 end;
@@ -118,27 +118,30 @@ begin
   begin
     MsbCBShore := False;
   end;
-  if MSBIntrMode = 2 then
-  begin
-    MsbCBIntr := False;
-  end;
-  if MSBIntrMode = 3 then
-  begin
-    if Busbar then
+
+  case MsbMode of
+    C_ModeOff:
     begin
-      if not MsbCBIntr then
+      MsbCircuitBreaker := False;
+    end;
+    C_ModeAuto:
+    begin
+      if Busbar then
       begin
-        if FDelay < 60 then
-          FDelay := FDelay +1
-        else
+        if not MsbCircuitBreaker then
         begin
-          MsbCBIntr := True;
-          FDelay := 0;
+          if FDelay < 60 then
+            FDelay := FDelay +1
+          else
+          begin
+            MsbCircuitBreaker := True;
+            FDelay := 0;
+          end;
         end;
-      end;
-    end
-    else
-      MsbCBIntr := False
+      end
+      else
+        MsbCircuitBreaker := False
+    end;
   end;
 
   Trafo230Volt := 63;
@@ -209,20 +212,20 @@ begin
   Listener.TriggerEvents(Self,epPMSEsbIntrMode,Value);
 end;
 
-procedure TSwitchboard.SetMSBIntrMode(const Value: Integer);
+procedure TSwitchboard.SetMsbMode(const Value: Integer);
 begin
-  if FMSBIntrMode = Value then
+  if FMsbMode = Value then
     exit;
-  FMSBIntrMode := Value;
+  FMsbMode := Value;
   Listener.TriggerEvents(Self,epPMSMsbIntrMode,Value);
 end;
 
-procedure TSwitchboard.SetMsbCBIntr(const Value: Boolean);
+procedure TSwitchboard.SetMsbCircuitBreaker(const Value: Boolean);
 begin
-  if FIsMsbCBIntr = Value then
+  if FIsMsbCircuitBreaker = Value then
     exit;
-  FIsMsbCBIntr := Value;
-  Listener.TriggerEvents(Self,epPMSMsbCBIntr,Value);
+  FIsMsbCircuitBreaker := Value;
+  Listener.TriggerEvents(Self,epPMSMsbCircuitBreaker,Value);
 end;
 
 procedure TSwitchboard.SetMsbCBNavNaut(const Value: Boolean);

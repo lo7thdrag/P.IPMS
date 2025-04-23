@@ -2172,15 +2172,15 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
     object Panel23: TPanel
       Left = 1023
       Top = 561
-      Width = 226
+      Width = 244
       Height = 138
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
       TabOrder = 17
       object Label4: TLabel
-        Left = 44
-        Top = 52
+        Left = 36
+        Top = 129
         Width = 28
         Height = 16
         Caption = 'After'
@@ -2190,10 +2190,11 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       object Label5: TLabel
-        Left = 113
-        Top = 52
+        Left = 105
+        Top = 129
         Width = 17
         Height = 16
         Caption = 'Off'
@@ -2203,10 +2204,11 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       object Label6: TLabel
-        Left = 166
-        Top = 52
+        Left = 158
+        Top = 129
         Width = 48
         Height = 16
         Caption = 'Forward'
@@ -2216,6 +2218,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       object lblCBOpenClosedE: TLabel
         Left = 149
@@ -2228,7 +2231,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentColor = False
       end
       object lbl6: TLabel
-        Left = 71
+        Left = 80
         Top = 14
         Width = 85
         Height = 19
@@ -2244,9 +2247,35 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentColor = False
         ParentFont = False
       end
+      object lbl11: TLabel
+        Left = 39
+        Top = 53
+        Width = 41
+        Height = 16
+        Caption = 'Manual'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl12: TLabel
+        Left = 134
+        Top = 53
+        Width = 89
+        Height = 16
+        Caption = 'Auto Take Over'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
       object rbAftDistrE: TRadioButton
-        Left = 25
-        Top = 52
+        Left = 17
+        Top = 129
         Width = 15
         Height = 17
         Font.Charset = DEFAULT_CHARSET
@@ -2256,14 +2285,14 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        Visible = False
         OnClick = InterEmergencyModeClick
       end
       object rbOffDistrE: TRadioButton
-        Left = 94
-        Top = 52
+        Left = 86
+        Top = 129
         Width = 15
         Height = 17
-        Checked = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -2271,12 +2300,12 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Style = []
         ParentFont = False
         TabOrder = 1
-        TabStop = True
+        Visible = False
         OnClick = InterEmergencyModeClick
       end
       object rbFwdDistrE: TRadioButton
-        Left = 147
-        Top = 52
+        Left = 139
+        Top = 129
         Width = 15
         Height = 17
         Font.Charset = DEFAULT_CHARSET
@@ -2286,12 +2315,13 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Style = []
         ParentFont = False
         TabOrder = 2
+        Visible = False
         OnClick = InterEmergencyModeClick
       end
       object Panel24: TPanel
-        Left = 15
+        Left = 23
         Top = 78
-        Width = 196
+        Width = 197
         Height = 1
         BevelOuter = bvNone
         Color = clBtnHighlight
@@ -2300,7 +2330,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
       object btnFwdCBOpenEmergency: TButton
         Tag = 10
-        Left = 116
+        Left = 125
         Top = 92
         Width = 95
         Height = 31
@@ -2316,7 +2346,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
       object btnFwdCBCloseEmergency: TButton
         Tag = 10
-        Left = 15
+        Left = 24
         Top = 92
         Width = 95
         Height = 31
@@ -2329,6 +2359,36 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentFont = False
         TabOrder = 5
         OnClick = btnInnCBCloseOpenClick
+      end
+      object rbAutoEmgFwd: TRadioButton
+        Left = 115
+        Top = 53
+        Width = 15
+        Height = 17
+        Checked = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 6
+        TabStop = True
+        OnClick = InterCon2ModeClick
+      end
+      object rbManEmgFwd: TRadioButton
+        Left = 20
+        Top = 53
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 7
+        OnClick = InterCon2ModeClick
       end
     end
     object Panel5: TPanel
@@ -2359,16 +2419,16 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
     end
     object Panel21: TPanel
-      Left = 438
+      Left = 420
       Top = 524
-      Width = 811
+      Width = 847
       Height = 32
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
       TabOrder = 20
       object Label13: TLabel
-        Left = 271
+        Left = 311
         Top = 7
         Width = 269
         Height = 19
@@ -2469,16 +2529,16 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
     end
     object lbl4: TPanel
-      Left = 438
+      Left = 420
       Top = 561
-      Width = 226
+      Width = 244
       Height = 138
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
       TabOrder = 23
       object lbl5: TLabel
-        Left = 86
+        Left = 95
         Top = 14
         Width = 54
         Height = 19
@@ -2494,10 +2554,36 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentColor = False
         ParentFont = False
       end
+      object lbl7: TLabel
+        Left = 42
+        Top = 53
+        Width = 41
+        Height = 16
+        Caption = 'Manual'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl8: TLabel
+        Left = 132
+        Top = 54
+        Width = 89
+        Height = 16
+        Caption = 'Auto Take Over'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
       object lbl9: TPanel
-        Left = 15
+        Left = 24
         Top = 78
-        Width = 196
+        Width = 197
         Height = 1
         BevelOuter = bvNone
         Color = clBtnHighlight
@@ -2506,7 +2592,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
       object btnAftCBCloseEmergency: TButton
         Tag = 10
-        Left = 15
+        Left = 24
         Top = 92
         Width = 95
         Height = 31
@@ -2522,7 +2608,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
       object btnAftCBOpenEmergency: TButton
         Tag = 10
-        Left = 116
+        Left = 125
         Top = 92
         Width = 95
         Height = 31
@@ -2535,6 +2621,36 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentFont = False
         TabOrder = 2
         OnClick = btnInnCBCloseOpenClick
+      end
+      object rbManEmgAft: TRadioButton
+        Left = 23
+        Top = 53
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 3
+        OnClick = InterCon2ModeClick
+      end
+      object rbAutoEmgAft: TRadioButton
+        Left = 113
+        Top = 53
+        Width = 15
+        Height = 17
+        Checked = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 4
+        TabStop = True
+        OnClick = InterCon2ModeClick
       end
     end
   end

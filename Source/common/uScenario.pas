@@ -327,10 +327,10 @@ begin
 
       {Entity Element}
       pmsData.PMS_Name := C_SWITCHBOARD_ID[i];
-      pmsData.PMS_SWB_MSBIntrMode := swt.MSBIntrMode;               {-----> 1:Man; 2:Off; 3:Aut}
+      pmsData.PMS_SWB_MSBIntrMode := swt.MsbMode;               {-----> 1:Man; 2:Off; 3:Aut}
       pmsData.PMS_SWB_ESBIntrMode := swt.ESBIntrMode;               {-----> 1:Aft; 2:Off; 3:Fwd; 4:Dbl}
       pmsData.PMS_SWB_ShoreIntrMode := swt.ShoreIntrMode;           {-----> 1:Man; 2:Off; 3:Aut}
-      pmsData.PMS_SWB_MsbCBIntr := setBooltoInt(swt.MsbCBIntr);
+      pmsData.PMS_SWB_MsbCBIntr := setBooltoInt(swt.MsbCircuitBreaker);
       pmsData.PMS_SWB_EsbAftCBIntr := setBooltoInt(swt.EsbAftCBIntr);
       pmsData.PMS_SWB_EsbAftCBIntr := setBooltoInt(swt.EsbAftCBIntr);
       pmsData.PMS_SWB_MsbCBShore := setBooltoInt(swt.MsbCBShore);
@@ -667,8 +667,7 @@ var
 begin
 //  FCurrentScenario := aName;
 
-  FListener.TriggerEvents(Self, epScenarioLoad,
-    'Session ' + IntToStr(FCurrentRunningScenario));
+  FListener.TriggerEvents(Self, epScenarioLoad, 'Session ' + IntToStr(FCurrentRunningScenario));
   FListener.TriggerEvents(Self, epScenarioLoad, 1); // start loading
 
 //--- start loading scenario here
@@ -750,10 +749,10 @@ begin
 
       if Assigned(swt) then
       begin
-        swt.MSBIntrMode := data.PMS_SWB_MSBIntrMode;
+        swt.MsbMode := data.PMS_SWB_MSBIntrMode;
         swt.ESBIntrMode := data.PMS_SWB_ESBIntrMode;
         swt.ShoreIntrMode := data.PMS_SWB_ShoreIntrMode;
-        swt.MsbCBIntr := setInttoBool(data.PMS_SWB_MsbCBIntr);
+        swt.MsbCircuitBreaker := setInttoBool(data.PMS_SWB_MsbCBIntr);
         swt.EsbAftCBIntr := setInttoBool(data.PMS_SWB_EsbAftCBIntr);
         swt.EsbFwdCBIntr := setInttoBool(data.PMS_SWB_EsbFwdCBIntr);
         swt.MsbCBShore := setInttoBool(data.PMS_SWB_MsbCBShore);
@@ -1242,8 +1241,7 @@ begin
 
   if ScenID > 0 then
   begin
-    CurrentRunningScenario := FDatabase.PrepareRunningScenario(ScenID,
-      aDateTimeStart);
+    CurrentRunningScenario := FDatabase.PrepareRunningScenario(ScenID, aDateTimeStart);
     CurrentRunningScenarioTime := aDateTimeStart;
     CurrentRunningScenarioStart := aDateTimeStart;
 

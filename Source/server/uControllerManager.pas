@@ -1532,7 +1532,7 @@ begin
       epPMSMsbCBNavNaut:
         setPMSCBEElementID(rec.GenSwitchID, rec.ValueBool, C_CBNAVNAUT);
 
-      epPMSMsbCBIntr:
+      epPMSMsbCircuitBreaker:
         setPMSCBEElementID(rec.GenSwitchID, rec.ValueBool, C_CBE_INT);
 
       epPMSNotStandby :

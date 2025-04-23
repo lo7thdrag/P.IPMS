@@ -362,7 +362,7 @@ begin
   end
   else if GenSwitchID = 'Switchboard Emergency FWD' then
   begin
-    if konstanta = C_CBE_ESB then
+    if konstanta = C_CBE_INT then
       value := '3241E50031H'
     else if konstanta = C_CBNAVNAUT then
       value := '3243E5005B'
@@ -371,7 +371,7 @@ begin
   end
   else if GenSwitchID = 'Switchboard Emergency AFT' then
   begin
-    if konstanta = C_CBE_ESB then
+    if konstanta = C_CBE_INT then
       value := '3241E50031G'
     else if konstanta = C_CBNAVNAUT then
       value := '3243E5005B'
@@ -519,7 +519,7 @@ begin
     else
       Result := False;
   end
-  else if GenSwitchID = 'Switchboard Emergency' then
+  else if (GenSwitchID = 'Switchboard Emergency FWD') or (GenSwitchID = 'Switchboard Emergency AFT') then
   begin
     if konstanta = C_TRAFO230V then
       value := '3243E5031A'
@@ -661,7 +661,7 @@ begin
     else
       Result := False;
   end
-  else if GenSwitchID = 'Switchboard Emergency' then
+  else if (GenSwitchID = 'Switchboard Emergency FWD') or (GenSwitchID = 'Switchboard Emergency AFT') then
   begin
     if konstanta = C_ALRM_TRIP then
       value := '3241E50031W'
@@ -758,23 +758,23 @@ begin
   else if ElementName = 'MSB AFT INTERCON CB' then
   begin
     val1 := 'Switchboard AFT';
-    val2 := epPMSMsbCBIntr
+    val2 := epPMSMsbCircuitBreaker
   end
   else if ElementName = 'MSB FWD INTERCON CB' then
   begin
     val1 := 'Switchboard FWD';
-    val2 := epPMSMsbCBIntr
+    val2 := epPMSMsbCircuitBreaker
   end
   else if ElementName = 'ESB MSB AFT CB' then
   begin
-    val1 := 'Switchboard Emergency';
-    val2 := epPMSEsbIntrMode;
+    val1 := 'Switchboard Emergency AFT';
+    val2 := epPMSMsbCircuitBreaker;//epPMSEsbIntrMode;
     val3 := 1;
   end
   else if ElementName = 'ESB MSB FWD CB' then
   begin
-    val1 := 'Switchboard Emergency';;
-    val2 := epPMSEsbIntrMode;
+    val1 := 'Switchboard Emergency FWD';;
+    val2 := epPMSMsbCircuitBreaker;//epPMSEsbIntrMode;
     val3 := 3;
   end;
 end;

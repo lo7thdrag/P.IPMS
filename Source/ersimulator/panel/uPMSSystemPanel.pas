@@ -193,6 +193,14 @@ type
     btnAftCBOpenEmergency: TButton;
     lbl5: TLabel;
     lbl6: TLabel;
+    rbManEmgAft: TRadioButton;
+    lbl7: TLabel;
+    rbAutoEmgAft: TRadioButton;
+    lbl8: TLabel;
+    lbl11: TLabel;
+    rbAutoEmgFwd: TRadioButton;
+    lbl12: TLabel;
+    rbManEmgFwd: TRadioButton;
 
     procedure Gen1ModeClick(Sender: TObject);
     procedure Gen2ModeClick(Sender: TObject);
@@ -510,20 +518,16 @@ procedure TfrmPMSSystemPanel.btnInnCBCloseOpenClick(Sender: TObject);
 begin
   if Sender is TButton then
   begin
-    {C_SWITCHBOARD: Objk Switchboard; 0/1/2:fwd/aft/Esb; value: Mode Switchboard; epPMSEsbIntrMode: ProsID}
+    {C_SWITCHBOARD: Objk Switchboard; 0/1/2/3/4: fwd/aft/fwdEsb/aftEsb/shore; value: Mode Switchboard; epPMSEsbIntrMode: ProsID}
 
     if TButton(Sender).Name = 'btnCBOpenInn1' then
-      SetValueBool(C_SWITCHBOARD, 0, False, epPMSMsbCBIntr)
+      SetValueBool(C_SWITCHBOARD, 0, False, epPMSMsbCircuitBreaker)
     else if TButton(Sender).Name = 'btnCBCloseInn1' then
-      SetValueBool(C_SWITCHBOARD, 0, True, epPMSMsbCBIntr)
+      SetValueBool(C_SWITCHBOARD, 0, True, epPMSMsbCircuitBreaker)
     else if TButton(Sender).Name = 'btnCBOpenInn2' then
-      SetValueBool(C_SWITCHBOARD, 1, False, epPMSMsbCBIntr)
+      SetValueBool(C_SWITCHBOARD, 1, False, epPMSMsbCircuitBreaker)
     else if TButton(Sender).Name = 'btnCBCloseInn2' then
-      SetValueBool(C_SWITCHBOARD, 1, True, epPMSMsbCBIntr)
-    else if TButton(Sender).Name = 'btnCBOpenShore' then
-      SetValueBool(C_SWITCHBOARD, 1, False, epPMSMsbCBShore)
-    else if TButton(Sender).Name = 'btnCBCloseShore' then
-      SetValueBool(C_SWITCHBOARD, 1, True, epPMSMsbCBShore)
+      SetValueBool(C_SWITCHBOARD, 1, True, epPMSMsbCircuitBreaker)
     else if TButton(Sender).Name = 'btnFwdCBOpenEmergency' then
       SetValueBool(C_SWITCHBOARD, 2, False, epPMSEsbFwdCBIntr)
     else if TButton(Sender).Name = 'btnFwdCBCloseEmergency' then
@@ -532,6 +536,10 @@ begin
       SetValueBool(C_SWITCHBOARD, 3, False, epPMSEsbAftCBIntr)
     else if TButton(Sender).Name = 'btnAftCBCloseEmergency' then
       SetValueBool(C_SWITCHBOARD, 3, True, epPMSEsbAftCBIntr)
+    else if TButton(Sender).Name = 'btnCBOpenShore' then
+      SetValueBool(C_SWITCHBOARD, 4, False, epPMSMsbCBShore)
+    else if TButton(Sender).Name = 'btnCBCloseShore' then
+      SetValueBool(C_SWITCHBOARD, 4, True, epPMSMsbCBShore)
   end;
 end;
 
@@ -629,8 +637,8 @@ begin
   begin
     switchboard := ERSystem.ERManager.EngineRoom.getPMSSystem.getSwitchboard(C_SWITCHBOARD_ID[IdObj]);
     case PropsID of
+      epPMSMsbCircuitBreaker: switchboard.MsbCircuitBreaker := value;
       epPMSMsbCBShore: switchboard.MsbCBShore  := value;
-      epPMSMsbCBIntr: switchboard.MsbCBIntr  := value;
       epPMSEsbAftCBIntr: switchboard.EsbAftCBIntr := value;
       epPMSEsbFwdCBIntr: switchboard.EsbFwdCBIntr := value;
 
@@ -746,7 +754,7 @@ begin
     case PropsID of
       epPMSMsbIntrMode:
       begin
-        switchboard.MSBIntrMode := value;
+        switchboard.MsbMode := value;
       end;
       epPMSMsbShoreMode:
       begin
@@ -777,33 +785,33 @@ begin
 
         if TGenerator(Sender).Identifier = C_GENERATOR_ID[0] then
         begin
-          rbManGen1.Checked := toCheck(1, Value);
-          rbSemGen1.Checked := toCheck(2, Value);
-          rbAutGen1.Checked := toCheck(3, Value);
+          rbManGen1.Checked := Value = 1;// toCheck(1, Value);
+          rbSemGen1.Checked := Value = 2;// toCheck(2, Value);
+          rbAutGen1.Checked := Value = 3;// toCheck(3, Value);
         end
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[1] then
         begin
-          rbManGen2.Checked := toCheck(1, Value);
-          rbSemGen2.Checked := toCheck(2, Value);
-          rbAutGen2.Checked := toCheck(3, Value);
+          rbManGen2.Checked := Value = 1;// toCheck(1, Value);
+          rbSemGen2.Checked := Value = 2;// toCheck(2, Value);
+          rbAutGen2.Checked := Value = 3;// toCheck(3, Value);
         end
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[2] then
         begin
-          rbManGen3.Checked := toCheck(1, Value);
-          rbSemGen3.Checked := toCheck(2, Value);
-          rbAutGen3.Checked := toCheck(3, Value);
+          rbManGen3.Checked := Value = 1;// toCheck(1, Value);
+          rbSemGen3.Checked := Value = 2;// toCheck(2, Value);
+          rbAutGen3.Checked := Value = 3;// toCheck(3, Value);
         end
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[3] then
         begin
-          rbManGen4.Checked := toCheck(1, Value);
-          rbSemGen4.Checked := toCheck(2, Value);
-          rbAutGen4.Checked := toCheck(3, Value);
+          rbManGen4.Checked := Value = 1;// toCheck(1, Value);
+          rbSemGen4.Checked := Value = 2;// toCheck(2, Value);
+          rbAutGen4.Checked := Value = 3;// toCheck(3, Value);
         end
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[4] then
         begin
-          rbManGenE.Checked := toCheck(1, Value);
-          rbSemGenE.Checked := toCheck(2, Value);
-          rbAutGenE.Checked := toCheck(3, Value);
+          rbManGenE.Checked := Value = 1;// toCheck(1, Value);
+          rbSemGenE.Checked := Value = 2;// toCheck(2, Value);
+          rbAutGenE.Checked := Value = 3;// toCheck(3, Value);
         end;
       end;
     end;
@@ -815,25 +823,25 @@ begin
       begin
         if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[0] then
         begin
-          rbManInn1.Checked := toCheck(1, Value);
-          rbOffInn1.Checked := toCheck(2, Value);
-          rbAutInn1.Checked := toCheck(3, Value);
-          if value = 2  then
-          begin
-            lblCBOpenInn1.Color := toLblWarna(False);
-            lblCBCloseInn1.Color := toLblWarna(False)
-          end;
+          rbManInn1.Checked := Value = 1;// toCheck(1, Value);
+          rbOffInn1.Checked := Value = 2;// toCheck(2, Value);
+          rbAutInn1.Checked := Value = 3;// toCheck(3, Value);
         end
         else if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[1] then
         begin
-          rbManInn2.Checked := toCheck(1, Value);
-          rbOffInn2.Checked := toCheck(2, Value);
-          rbAutInn2.Checked := toCheck(3, Value);
-          if value = 2  then
-          begin
-            lblCBOpenInn2.Color := toLblWarna(False);
-            lblCBCloseInn2.Color := toLblWarna(False)
-          end;
+          rbManInn2.Checked := Value = 1;// toCheck(1, Value);
+          rbOffInn2.Checked := Value = 2;// toCheck(2, Value);
+          rbAutInn2.Checked := Value = 3;// toCheck(3, Value);
+        end
+        else if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[2] then
+        begin
+          rbManEmgFwd.Checked := Value = 1;// toCheck(1, Value);
+          rbAutoEmgFwd.Checked := Value = 3;// toCheck(3, Value);
+        end
+        else if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[3] then
+        begin
+          rbManEmgAft.Checked := Value = 1;// toCheck(1, Value);
+          rbAutoEmgAft.Checked := Value = 3;// toCheck(3, Value);
         end;
       end;
       epPMSMsbShoreMode :
@@ -852,12 +860,12 @@ begin
       end;
       epPMSEsbIntrMode :
       begin
-        if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[2] then
-        begin
-          rbAftDistrE.Checked := toCheck(1, Value);
-          rbOffDistrE.Checked := toCheck(2, Value);
-          rbFwdDistrE.Checked := toCheck(3, Value);
-        end;
+//        if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[2] then
+//        begin
+//          rbAftDistrE.Checked := toCheck(1, Value);
+//          rbOffDistrE.Checked := toCheck(2, Value);
+//          rbFwdDistrE.Checked := toCheck(3, Value);
+//        end;
       end;
     end;
   end
@@ -954,11 +962,11 @@ begin
   else if Sender is TSwitchboard then
   begin
     case PropsID of
-      epPMSMsbCBIntr:
+      epPMSMsbCircuitBreaker:
       begin
         if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[0] then
         begin
-          if TSwitchboard(Sender).MSBIntrMode = 2 then
+          if TSwitchboard(Sender).MsbMode = 2 then
             exit;
 
           lblCBCloseInn1.Color := toLblWarna(Value);
@@ -966,7 +974,7 @@ begin
         end
         else if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[1] then
         begin
-          if TSwitchboard(Sender).MSBIntrMode = 2 then
+          if TSwitchboard(Sender).MsbMode = 2 then
             exit;
 
           lblCBCloseInn2.Color := toLblWarna(Value);
