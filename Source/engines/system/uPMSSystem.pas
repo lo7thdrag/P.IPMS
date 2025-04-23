@@ -93,7 +93,7 @@ begin
   case IdBusKopler of
     1: {U/ mengecek koneksi antar MSB}
     begin
-      if (Msb[0].MsbCBIntr and (Msb[1].MsbCBIntr)) or (Msb[0].MSBIntrMode = 3) and (Msb[1].MSBIntrMode = 3) then
+      if (Msb[0].MsbCircuitBreaker and (Msb[1].MsbCircuitBreaker)) or (Msb[0].MsbMode = C_ModeAuto) and (Msb[1].MsbMode = C_ModeAuto) then
         Result := True
     end;
     2: {kiriman dari Emergency n blackout}
@@ -839,7 +839,7 @@ begin
      Pwr[IdMsb].PowerConsmr := 45;
 
   Msb[IdMsb].Power := 0;
-  Msb[IdMsb].MsbCBIntr := False;
+  Msb[IdMsb].MsbCircuitBreaker := False;
   Msb[IdMsb].TripReduct := True;
   Msb[2].TripReduct := True;
 end;
@@ -929,10 +929,10 @@ begin
       begin
         SetFreqVoltValue(0, True, FwdFreq, FwdVolt);
 
-        if (Msb[0].Busbar) and (Msb[0].MsbCBIntr) then
+        if (Msb[0].Busbar) and (Msb[0].MsbCircuitBreaker) then
         begin
           SetDelayConnection(2);
-          if (Msb[1].MsbCBIntr) then
+          if (Msb[1].MsbCircuitBreaker) then
           begin
             SetFreqVoltValue(1, True, FwdFreq, FwdVolt);
           end;
@@ -943,10 +943,10 @@ begin
       begin
         SetFreqVoltValue(1, True, AftFreq, AftVolt);
 
-        if (Msb[1].Busbar) and (Msb[1].MsbCBIntr) then
+        if (Msb[1].Busbar) and (Msb[1].MsbCircuitBreaker) then
         begin
           SetDelayConnection(1);
-          if (Msb[0].MsbCBIntr) then
+          if (Msb[0].MsbCircuitBreaker) then
           begin
             SetFreqVoltValue(0, True, AftFreq, AftVolt);
           end;
@@ -1024,7 +1024,7 @@ begin
       FFwdBusbarDelay := FFwdBusbarDelay +1
     else
     begin
-      Msb[0].MsbCBIntr := True;
+      Msb[0].MsbCircuitBreaker := True;
       FFwdBusbarDelay := 0;
       Result := True;
     end;
@@ -1035,7 +1035,7 @@ begin
         FAftBusbarDelay := FAftBusbarDelay +1
     else
     begin
-      Msb[1].MsbCBIntr := True;
+      Msb[1].MsbCircuitBreaker := True;
       FAftBusbarDelay := 0;
       Result := True;
     end;
@@ -1046,7 +1046,7 @@ begin
         FEsbBusbarDelay := FEsbBusbarDelay +1
     else
     begin
-      Msb[2].MsbCBIntr := True;
+      Msb[2].MsbCircuitBreaker := True;
       FEsbBusbarDelay := 0;
       Result := True;
     end;
