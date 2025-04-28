@@ -664,8 +664,10 @@ begin
 
   recER.GenSwitchID := recCmd.GenSwitchID;
 //  recER.CommandID := recCmd.CommandID;
-  recER.CommandPropsID := epPMSGeneratorEngineRun;
+  recER.CommandPropsID := recCmd.CommandPropsID;
   recER.ValueBool := recCmd.ValueBool;
+  recER.ValueInt := recCmd.ValueInt;
+  recER.ValueDob := recCmd.ValueDob;
 
   Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
 end;

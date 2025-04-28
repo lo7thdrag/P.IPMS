@@ -41,6 +41,8 @@ type
     btnSirenOff: TImage;
     btnLampTest: TImage;
     lblRunningHours: TLabel;
+    imgGenSpaceHeater: TImage;
+    imgJWHeater: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnLampTestMouseDown(Sender: TObject; Button: TMouseButton;
@@ -51,6 +53,8 @@ type
     procedure btnStartClick(Sender: TObject);
     procedure btnStopClick(Sender: TObject);
     procedure btnStandbyClick(Sender: TObject);
+    procedure VrMainSwitchChange(Sender: TObject);
+    procedure btnManualClick(Sender: TObject);
 
   private
     FListener : TListeners;
@@ -75,30 +79,42 @@ uses
 procedure TMainForm.DieselGeneratorSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
   case PropsID of
-    epPMSMeasPowFailure: imgSupplyVoltageLow.Visible := Value;
-    epPMSAutStartFailure : imgAutomaticStartFailed.Visible := Value;
+    epPMSGeneratorEngineRun :
+    begin
+      imgStart.Visible := Value;
+      imgRunning.Visible :=  Value;
+      imgJWHeater.Visible := False;
+      imgGenSpaceHeater.Visible := False;
+    end;
+    epPMSGeneratorStop  : imgStop.Visible := Value;
+    epPMSShutdown : imgStop.visible := Value;
+
+    epPMSMeasPowFailure :
+    begin
+      imgSupplyVoltageLow.Visible := Value;
+
+      imgStartDisable.Visible := Value;
+      imgRunning.Visible := False;
+      btnStart.Enabled := False;
+    end;
+    epPMSAutStartFailure        : imgAutomaticStartFailed.Visible := Value;
     epPMSSpeedSensorFailureAlrm : imgSpeedSensorFailure.Visible := Value;
-    epPMSLubOilPressLowAlrm : imgLubOilPressLow.Visible := Value;
-    epPMSLubOilTempHigh : imgLubOilTempHigh.Visible := Value;
-    epPMSCoolWaterTempHighAlrm : imgCoolingWaterTempHigh.Visible := Value;
-    epPMSCoolWaterLevelLow : imgCoolingWaterLevelLow.Visible := Value;
-    epPMSFuelOilLeakage : imgFuelOilLeakage.Visible := Value;
+    epPMSLubOilPressLowAlrm     : imgLubOilPressLow.Visible := Value;
+    epPMSLubOilTempHigh         : imgLubOilTempHigh.Visible := Value;
+    epPMSCoolWaterTempHighAlrm  : imgCoolingWaterTempHigh.Visible := Value;
+    epPMSCoolWaterLevelLow      : imgCoolingWaterLevelLow.Visible := Value;
+    epPMSFuelOilLeakage         : imgFuelOilLeakage.Visible := Value;
 
-    epPMSEngineAlarm:
-    begin
-//      imgAutomaticStartFailed.Visible := Value;
-//       imgLubOilTempHigh.Visible := Value;
-//       imgCoolingWaterTempHigh.Visible := Value;
-//       imgCoolongWaterLevelLow.Visible := Value;
-//       imgFuelOilLeakage.Visible := Value;
-//       imgSpare.Visible := Value;
-    end;
-    epPMSShutdown:
-    begin
-      imgSpeedSensorFailure.Visible := Value;
-//      imgLubOilPressLow.Visible := Value;
-    end;
+    epPMSSpeedSensorFailureShutdown : imgShutdownOverSpeed.Visible := True;
+    epPMSLubOilPressLowShutdown     : imgShutdownLOPressLow.Visible := True;
+    epPMSCoolWaterTempHighShutdown  : imgShutdownCWTempHigh.Visible := Value;
 
+    epPMSNotStandby             :
+    begin
+      imgManual.Visible := Value;
+      imgStandby.Visible := not Value
+    end;
+    epPMSStartDisable           : imgStartDisable.Visible := Value;
   end;
 end;
 
@@ -158,19 +174,24 @@ begin
   imgReset.Visible := False;
 end;
 
+procedure TMainForm.btnManualClick(Sender: TObject);
+begin
+  DieselGeneratorSystem.EngineMode(True);
+end;
+
 procedure TMainForm.btnStandbyClick(Sender: TObject);
 begin
-//
+  DieselGeneratorSystem.EngineMode(False);
 end;
 
 procedure TMainForm.btnStartClick(Sender: TObject);
 begin
-  DieselGeneratorSystem.StartStopEngine(True);
+  DieselGeneratorSystem.EngineRun(True);
 end;
 
 procedure TMainForm.btnStopClick(Sender: TObject);
 begin
-  DieselGeneratorSystem.StartStopEngine(False);
+  DieselGeneratorSystem.EngineRun(False);
 end;
 
 procedure TMainForm.DieselGeneratorSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);
@@ -233,6 +254,20 @@ begin
     Height := Screen.Monitors[1].Height;
     Left := Screen.Monitors[1].Left;
     Top := Screen.Monitors[1].Top;
+  end;
+end;
+
+procedure TMainForm.VrMainSwitchChange(Sender: TObject);
+begin
+  if VrMainSwitch.SwitchPosition = 0 then
+  begin
+    imgJWHeater.Visible := False;
+    imgGenSpaceHeater.Visible := False;
+  end
+  else
+  begin
+    imgJWHeater.Visible := True;
+    imgGenSpaceHeater.Visible := True;
   end;
 end;
 

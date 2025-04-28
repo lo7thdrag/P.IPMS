@@ -123,7 +123,7 @@ begin
     epPMSEngineAlarm, epPMSShutdown, epPMSFaultPageLed, epPMSGeneratorFuelRunsOut, epPMSFailureCBClosed,
 
     epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm,
-    epPMSLubOilTempHigh, epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage,
+    epPMSLubOilTempHigh, epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage, epPMSStartDisable,
 
     epPMSMsbCBShore, epPMSMsbCircuitBreaker, epPMSMsbCBNavNaut, epPMSGeneratorRunHourState,epPMSGeneratorEmergencyStop,
     epPMSMsbTripReduct, epPMSSycnFail :
@@ -576,7 +576,7 @@ begin
 
   case recER.CommandPropsID of
     epPMSGeneratorEmergencyStop, epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorCBClosed,
-    epPMSGeneratorPreference, epPMSGeneratorMode  :
+    epPMSGeneratorPreference, epPMSGeneratorMode, epPMSNotStandby :
     begin
       generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
       if generator.NotStandby then

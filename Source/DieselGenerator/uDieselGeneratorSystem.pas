@@ -35,7 +35,8 @@ type
     destructor Destroy;override;
 
     {Prosedur untuk mengirimkan paket data dari inputan PCS Panel Touch Screen ke Engine}
-    procedure StartStopEngine(aValue : Boolean);
+    procedure EngineRun(aValue : Boolean);
+    procedure EngineMode(aValue : Boolean);
     {--}
 
     property Network : TDieselGeneratorNetwork read FDieselGeneratorNetwork;
@@ -114,7 +115,18 @@ begin
   end;
 end;
 
-procedure TDieselGeneratorSystem.StartStopEngine(aValue: Boolean);
+procedure TDieselGeneratorSystem.EngineMode(aValue: Boolean);
+var
+  recCmd : R_Common_PMS_Command;
+begin
+  recCmd.GenSwitchID := IdFormDieselGenerator;
+  recCmd.CommandPropsID := epPMSNotStandby;
+  recCmd.ValueBool := aValue;
+
+  Network.DieselGeneratorControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
+end;
+
+procedure TDieselGeneratorSystem.EngineRun(aValue: Boolean);
 var
   recCmd : R_Common_PMS_Command;
 begin
@@ -159,8 +171,9 @@ begin
     Exit;
 
   case rec.CommandPropsID of
-    epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm, epPMSLubOilTempHigh,
-    epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage:
+    epPMSGeneratorEngineRun, epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm, epPMSLubOilTempHigh,
+    epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage, epPMSNotStandby, epPMSStartDisable, epPMSShutdown,
+    epPMSSpeedSensorFailureShutdown, epPMSLubOilPressLowShutdown, epPMSCoolWaterTempHighShutdown:
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
@@ -168,18 +181,7 @@ begin
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
     end;
-//    epPMSAutStartFailure,epPMSLubOilTempHigh :
-//    begin
-//      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
-//    end;
-//    epPMSEngineAlarm:
-//    begin
-//      FLIstener.TriggerEvents(Self,epPMSEngineAlarm,rec.ValueBool)
-//    end;
-//    epPMSShutdown:
-//    begin
-//      FLIstener.TriggerEvents(Self,epPMSShutdown,rec.ValueBool)
-//    end;
+
   end;
 end;
 

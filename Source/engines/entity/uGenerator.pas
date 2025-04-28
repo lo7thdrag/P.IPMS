@@ -41,6 +41,7 @@ type
     FEmergencyStart : Boolean;
 
     FIsNotStandby,
+    FStartDisable,
     FIsCanBusFailure,
     FIsDCPowFailure,
     FIsEngineAlarm,
@@ -105,6 +106,7 @@ type
     procedure SetNotStandby(const Value : Boolean);
     procedure SetEngineAlarm(const Value : Boolean);
     procedure SetShutDown(const Value : Boolean);
+    procedure SetStartDisable(const Value : Boolean);
 
     procedure SetMeasPowFailure(const Value : Boolean);
     procedure SetAutStartFailure(const Value : Boolean);
@@ -225,7 +227,7 @@ function TGenerator.CekCoolWaterTempHigh: Boolean;
 begin
   if FIsCoolWaterTempHighAlrm then
   begin
-    if FDelayCoolWaterTempHighAlrm > 10 then
+    if FDelayCoolWaterTempHighAlrm > 500 then
     begin
       CoolWaterTempHighShutdown:= True;
       ShutDown := True;
@@ -245,7 +247,7 @@ function TGenerator.CekLubOilPressLow: Boolean;
 begin
   if FIsLubOilPressLowAlrm then
   begin
-    if FDelayLubOilPressLowAlrm > 10 then
+    if FDelayLubOilPressLowAlrm > 500 then
     begin
       LubOilPressLowShutdown := True;
       ShutDown := True;
@@ -545,6 +547,14 @@ begin
     exit;
   FIsSpeedSensorFailureShutdown := Value;
   Listener.TriggerEvents(Self,epPMSSpeedSensorFailureShutdown,Value);
+end;
+
+procedure TGenerator.SetStartDisable(const Value: Boolean);
+begin
+  if FStartDisable = Value then
+    exit;
+  FStartDisable := Value;
+  Listener.TriggerEvents(Self,epPMSStartDisable,Value);
 end;
 
 procedure TGenerator.SetLubOilPressLowShutdown(const Value: Boolean);
