@@ -124,6 +124,7 @@ begin
 
     epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm,
     epPMSLubOilTempHigh, epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage, epPMSStartDisable,
+    epPMSSpeedSensorFailureShutdown, epPMSLubOilPressLowShutdown, epPMSCoolWaterTempHighShutdown,
 
     epPMSMsbCBShore, epPMSMsbCircuitBreaker, epPMSMsbCBNavNaut, epPMSGeneratorRunHourState,epPMSGeneratorEmergencyStop,
     epPMSMsbTripReduct, epPMSSycnFail :

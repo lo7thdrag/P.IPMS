@@ -5863,8 +5863,8 @@ object MainForm: TMainForm
     Visible = False
   end
   object imgStart: TImage
-    Left = 480
-    Top = 85
+    Left = 479
+    Top = 86
     Width = 21
     Height = 21
     Picture.Data = {

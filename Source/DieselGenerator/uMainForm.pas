@@ -84,10 +84,10 @@ begin
   case PropsID of
     epPMSGeneratorEngineRun :
     begin
-      imgStart.Visible := Value;
-      imgStop.Visible := not Value;
-      imgRunning.Visible :=  Value;
-      imgJWHeater.Visible := False;
+      imgStart.Visible          := Value;
+      imgStop.Visible           := not Value;
+      imgRunning.Visible        := Value;
+      imgJWHeater.Visible       := False;
       imgGenSpaceHeater.Visible := False;
     end;
 
