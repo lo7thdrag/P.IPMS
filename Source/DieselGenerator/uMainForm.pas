@@ -55,9 +55,12 @@ type
     procedure btnStandbyClick(Sender: TObject);
     procedure VrMainSwitchChange(Sender: TObject);
     procedure btnManualClick(Sender: TObject);
+    procedure DoLampTest(OnOff : Boolean);
 
   private
     FListener : TListeners;
+    Lamps  : array of TImage;
+    LampStatus  : array of Boolean;
 
     procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
@@ -82,12 +85,11 @@ begin
     epPMSGeneratorEngineRun :
     begin
       imgStart.Visible := Value;
+      imgStop.Visible := not Value;
       imgRunning.Visible :=  Value;
       imgJWHeater.Visible := False;
       imgGenSpaceHeater.Visible := False;
     end;
-    epPMSGeneratorStop  : imgStop.Visible := Value;
-    epPMSShutdown : imgStop.visible := Value;
 
     epPMSMeasPowFailure :
     begin
@@ -105,8 +107,8 @@ begin
     epPMSCoolWaterLevelLow      : imgCoolingWaterLevelLow.Visible := Value;
     epPMSFuelOilLeakage         : imgFuelOilLeakage.Visible := Value;
 
-    epPMSSpeedSensorFailureShutdown : imgShutdownOverSpeed.Visible := True;
-    epPMSLubOilPressLowShutdown     : imgShutdownLOPressLow.Visible := True;
+    epPMSSpeedSensorFailureShutdown : imgShutdownOverSpeed.Visible := Value;
+    epPMSLubOilPressLowShutdown     : imgShutdownLOPressLow.Visible := Value;
     epPMSCoolWaterTempHighShutdown  : imgShutdownCWTempHigh.Visible := Value;
 
     epPMSNotStandby             :
@@ -118,60 +120,86 @@ begin
   end;
 end;
 
+procedure TMainForm.DoLampTest(OnOff: Boolean);
+var
+  i : Integer;
+begin
+  if OnOff then
+  begin
+    for i := 0 to High(Lamps) do
+    begin
+      LampStatus[i] := Lamps[i].Visible;
+      Lamps[i].Visible := True;
+    end;
+  end
+  else
+  begin
+     for i := 0 to High(Lamps) do
+    begin
+      Lamps[i].Visible := LampStatus[i];
+    end;
+  end;
+
+end;
+
 procedure TMainForm.btnLampTestMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  imgSupplyVoltageLow.Visible := True;
-  imgAutomaticStartFailed.Visible := True;
-  imgSpeedSensorFailure.Visible := True;
-  imgLubOilPressLow.Visible := True;
-  imgLubOilTempHigh.Visible := True;
-  imgCoolingWaterTempHigh.Visible := True;
-  imgCoolingWaterLevelLow.Visible := True;
-  imgFuelOilLeakage.Visible := True;
-  imgSpare.Visible := True;
+  DoLampTest(True);
 
-  imgShutdownOverSpeed.Visible := True;
-  imgShutdownLOPressLow.Visible := True;
-  imgShutdownCWTempHigh.Visible := True;
-  imgShutDownSpare.Visible := True;
-
-  imgRunning.Visible := True;
-  imgStartDisable.Visible := True;
-
-  imgStart.Visible := True;
-  imgStop.Visible := True;
-  imgStandby.Visible := True;
-  imgManual.Visible := True;
-  imgReset.Visible := True;
+//  imgSupplyVoltageLow.Visible := True;
+//  imgAutomaticStartFailed.Visible := True;
+//  imgSpeedSensorFailure.Visible := True;
+//  imgLubOilPressLow.Visible := True;
+//  imgLubOilTempHigh.Visible := True;
+//  imgCoolingWaterTempHigh.Visible := True;
+//  imgCoolingWaterLevelLow.Visible := True;
+//  imgFuelOilLeakage.Visible := True;
+//  imgSpare.Visible := True;
+//
+//  imgShutdownOverSpeed.Visible := True;
+//  imgShutdownLOPressLow.Visible := True;
+//  imgShutdownCWTempHigh.Visible := True;
+//  imgShutDownSpare.Visible := True;
+//
+//  imgRunning.Visible := True;
+//  imgStartDisable.Visible := True;
+//
+//  imgStart.Visible := True;
+//  imgStop.Visible := True;
+//  imgStandby.Visible := True;
+//  imgManual.Visible := True;
+//  imgReset.Visible := True;
 end;
 
 procedure TMainForm.btnLampTestMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  imgSupplyVoltageLow.Visible := False;
-  imgAutomaticStartFailed.Visible := False;
-  imgSpeedSensorFailure.Visible := False;
-  imgLubOilPressLow.Visible := False;
-  imgLubOilTempHigh.Visible := False;
-  imgCoolingWaterTempHigh.Visible := False;
-  imgCoolingWaterLevelLow.Visible := False;
-  imgFuelOilLeakage.Visible := False;
-  imgSpare.Visible := False;
+  DoLampTest(False);
 
-  imgShutdownOverSpeed.Visible := False;
-  imgShutdownLOPressLow.Visible := False;
-  imgShutdownCWTempHigh.Visible := False;
-  imgShutDownSpare.Visible := False;
-
-  imgRunning.Visible := False;
-  imgStartDisable.Visible := False;
-
-  imgStart.Visible := False;
-  imgStop.Visible := False;
-  imgStandby.Visible := False;
-  imgManual.Visible := False;
-  imgReset.Visible := False;
+//  imgSupplyVoltageLow.Visible := False;
+//  imgAutomaticStartFailed.Visible := False;
+//  imgSpeedSensorFailure.Visible := False;
+//  imgLubOilPressLow.Visible := False;
+//  imgLubOilTempHigh.Visible := False;
+//  imgCoolingWaterTempHigh.Visible := False;
+//  imgCoolingWaterLevelLow.Visible := False;
+//  imgFuelOilLeakage.Visible := False;
+//  imgSpare.Visible := False;
+//
+//  imgShutdownOverSpeed.Visible := False;
+//  imgShutdownLOPressLow.Visible := False;
+//  imgShutdownCWTempHigh.Visible := False;
+//  imgShutDownSpare.Visible := False;
+//
+//  imgRunning.Visible := False;
+//  imgStartDisable.Visible := False;
+//
+//  imgStart.Visible := False;
+//  imgStop.Visible := False;
+//  imgStandby.Visible := False;
+//  imgManual.Visible := False;
+//  imgReset.Visible := False;
 end;
 
 procedure TMainForm.btnManualClick(Sender: TObject);
@@ -237,6 +265,15 @@ begin
     OnPropertyIntChange := DieselGeneratorSystemEvent;
     OnPropertyBoolChange := DieselGeneratorSystemEvent;
   end;
+
+  Lamps := [imgSupplyVoltageLow, imgAutomaticStartFailed, imgSpeedSensorFailure,
+            imgLubOilPressLow, imgLubOilTempHigh, imgCoolingWaterTempHigh,
+            imgCoolingWaterLevelLow, imgFuelOilLeakage, imgSpare,
+            imgShutdownOverSpeed, imgShutdownLOPressLow, imgShutdownCWTempHigh, imgShutDownSpare,
+            imgRunning, imgStartDisable,
+            imgStart, imgStop, imgStandby, imgManual, imgReset ];
+
+  SetLength(LampStatus, Length(Lamps));
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
