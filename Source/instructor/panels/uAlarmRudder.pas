@@ -7,7 +7,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, uAlarmRudderClass, StdCtrls, VrControls, VrWheel, Buttons,
-  SpeedButtonImage;
+  SpeedButtonImage, Vcl.Mask, RzEdit, RzSpnEdt, VrAngularMeter;
 
 type
   TfrmAlarmRudder = class(TForm)
@@ -50,7 +50,6 @@ type
     Label7: TLabel;
     Panel10: TPanel;
     Label2: TLabel;
-    vrwhlRudderLeft: TVrWheel;
     lblPortValue: TLabel;
     pnlStartboard: TPanel;
     lblStarBoardValue: TLabel;
@@ -73,17 +72,23 @@ type
     btnLampKanan5: TSpeedButtonImage;
     Panel12: TPanel;
     Label8: TLabel;
-    Panel3: TPanel;
-    Label4: TLabel;
-    pnlPumpStartboard: TPanel;
+    Panel13: TPanel;
+    Label6: TLabel;
+    vrwhlRudderLeft: TVrWheel;
+    lblSpedometer: TPanel;
+    img1: TImage;
+    vra2: TVrAngularMeter;
+    RzSpinEdit1: TRzSpinEdit;
+    cbb1: TComboBox;
+    lblPumpStartboard: TPanel;
     btnPumpKanan1: TSpeedButtonImage;
     btnPumpKanan4: TSpeedButtonImage;
     btnPumpKanan2: TSpeedButtonImage;
     btnPumpKanan5: TSpeedButtonImage;
     btnPumpKanan3: TSpeedButtonImage;
     btnPumpKanan6: TSpeedButtonImage;
-    Panel13: TPanel;
-    Label6: TLabel;
+    lbl1: TPanel;
+    lbl2: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnInpRudderLeftClick(Sender: TObject);
@@ -94,6 +99,7 @@ type
     procedure btnLampKiri1Click(Sender: TObject);
     procedure btnPumpKiri1Click(Sender: TObject);
     procedure tmr1Timer(Sender: TObject);
+    procedure RzSpinEdit1Change(Sender: TObject);
   private
     { Private declarations }
     Alarm : TAlarmObj;
@@ -592,6 +598,28 @@ begin
   Alarm.Free;
 end;
 
+procedure TfrmAlarmRudder.RzSpinEdit1Change(Sender: TObject);
+var
+  value : Integer;
+
+begin
+  if cbb1.ItemIndex = 0 then
+  begin
+    vra2.Position := RzSpinEdit1.Value + 50;
+    value := Round(RzSpinEdit1.Value + 50);
+  end
+  else
+  begin
+    vra2.Position := Abs(RzSpinEdit1.Value - 50);
+    value := Round(RzSpinEdit1.Value - 50);
+  end;
+
+//  rudderSent_PS := RzSpinEdit1.Value - 50;
+
+  ERSystem.ERManager.EngineRoom.getPCSSystem.SetRudder('Main Engine PS', value);
+
+end;
+
 procedure TfrmAlarmRudder.tmr1Timer(Sender: TObject);
 begin
   {counter := counter + 1;
@@ -639,8 +667,7 @@ begin
 
   rudderSent_PS := rudderValue;
 
-  ERSystem.ERManager.EngineRoom.getPCSSystem.SetRudder('Main Engine PS',
-    rudderSent_PS);
+  ERSystem.ERManager.EngineRoom.getPCSSystem.SetRudder('Main Engine PS', rudderSent_PS);
 end;
 
 procedure TfrmAlarmRudder.vrwhlRudderPanelRightMouseMove(Sender: TObject;

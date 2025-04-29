@@ -198,23 +198,27 @@ begin
       {$ENDREGION}
     end;
 
+
+
   end;
 end;
 
 procedure TMCRMachineLeftSystem.NetEventMCRMachineLeftCommand(apRec: PAnsiChar; aSize: Word);
 var
-  rec: ^R_Common_PMS_Command;
+  rec: ^R_Common_PCS_Command;
 begin
 
   rec := @apRec^;
 
-//  if FIdFormDieselGenerator <> rec.GenSwitchID then
-//    Exit;
-
-  case rec.CommandPropsID of
-    epPMSMeasPowFailure:
+  case rec.CommandID of
+    //Rudder
+    C_ORD_RUDDER:
     begin
-      FLIstener.TriggerEvents(Self,epPMSMeasPowFailure,rec.ValueBool)
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+        FLIstener.TriggerEvents(Self,epRudderValuePS,rec.ValueInt)
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+        FLIstener.TriggerEvents(Self,epRudderValueSB,rec.ValueInt);
     end;
   end;
 end;
