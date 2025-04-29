@@ -140,6 +140,8 @@ type
 
   public
     FAlarmIndicator : array[0..14] of Boolean;
+    FPumpRudderIndicator : array[0..11] of Boolean;
+
     FTelegrapIndicator : array [1..11] of Boolean;
     FTempTelegrap : array [1..11] of Boolean;
     iterasi : array [1..11] of Integer;
@@ -152,8 +154,9 @@ type
     FSbPump3 : array[1..3] of Boolean;
 
     procedure SetAlarmIndicator;
+    procedure SetPumpRudderIndicator;
+
     procedure SetHidroulicPump;
-    procedure SetPumpIndicator;
     procedure SetTelegrap;
   end;
 
@@ -179,10 +182,24 @@ begin
     OnPropertyBoolChange := MCRMachineLeftSystemEvent;
   end;
 
+  {$REGION ' Set Alarm Indicator '}
   for I := 0 to 14 do
   begin
     FAlarmIndicator[i] := false;
   end;
+  SetAlarmIndicator;
+  {$ENDREGION}
+
+  {$REGION ' Set Pump Rudder Indicator '}
+  for I := 0 to 11 do
+  begin
+    if (i = 2) or (i = 5) or (i = 8) or (i = 11) then
+      FPumpRudderIndicator[i] := true
+    else
+      FPumpRudderIndicator[i] := false;
+  end;
+  SetPumpRudderIndicator;
+  {$ENDREGION}
 
   for i := 1 to 11 do
   begin
@@ -210,23 +227,26 @@ end;
 
 procedure TMainForm.SetAlarmIndicator;
 begin
-    imgOP1.Visible        := not FAlarmIndicator[0];
-    ImgPFP1.Visible       := not FAlarmIndicator[1];
-    ImgPFS.Visible        := not FAlarmIndicator[2];
-    ImgLOLP1.Visible      := not FAlarmIndicator[3];
-    ImgLOLP2.Visible      := not FAlarmIndicator[4];
-    ImgST.Visible         := not FAlarmIndicator[5];
-    imgOP2.Visible        := not FAlarmIndicator[6];
-    ImgPFP2.Visible       := not FAlarmIndicator[7];
-    ImgPFC1.Visible       := not FAlarmIndicator[8];
-    ImgHLP1.Visible       := not FAlarmIndicator[9];
-    ImgHLP2.Visible       := not FAlarmIndicator[10];
-    ImgPFC2.Visible       := not FAlarmIndicator[11];
-    ImgCFP1.Visible       := not FAlarmIndicator[12];
-    ImgPowerFP1.Visible   := not FAlarmIndicator[13];
-    ImgAuxdible.Visible   := not FAlarmIndicator[14];
-    ImgCFP2.Visible       := not FAlarmIndicator[15];
-    ImgPowerFP2.Visible   := not FAlarmIndicator[16];
+    imgOP1.Visible        := FAlarmIndicator[0];
+    ImgPFP1.Visible       := FAlarmIndicator[1];
+    ImgPFS.Visible        := FAlarmIndicator[2];
+    ImgLOLP1.Visible      := FAlarmIndicator[3];
+    ImgLOLP2.Visible      := FAlarmIndicator[4];
+
+    imgOP2.Visible        := FAlarmIndicator[5];
+    ImgPFP2.Visible       := FAlarmIndicator[6];
+    ImgPFC1.Visible       := FAlarmIndicator[7];
+
+    ImgHLP1.Visible       := FAlarmIndicator[8];
+    ImgHLP2.Visible       := FAlarmIndicator[9];
+    ImgPFC2.Visible       := FAlarmIndicator[10];
+
+    ImgCFP1.Visible       := FAlarmIndicator[11];
+    ImgPowerFP1.Visible   := FAlarmIndicator[12];
+
+    ImgCFP2.Visible       := FAlarmIndicator[13];
+    ImgPowerFP2.Visible   := FAlarmIndicator[14];
+
 end;
 
 procedure TMainForm.SetHidroulicPump;
@@ -245,20 +265,23 @@ begin
     ImgStartSB3.Visible   := not FAlarmIndicator[11];
 end;
 
-procedure TMainForm.SetPumpIndicator;
+procedure TMainForm.SetPumpRudderIndicator;
 begin
-    ImgRP1.Visible    := not FAlarmIndicator[0];
-    ImgSTOP1.Visible  := not FAlarmIndicator[1];
-    ImgASP1.Visible   := not FAlarmIndicator[2];
-    ImgRP2.Visible    := not FAlarmIndicator[3];
-    ImgSTOP2.Visible  := not FAlarmIndicator[4];
-    ImgASP2.Visible   := not FAlarmIndicator[5];
-    ImgRP3.Visible    := not FAlarmIndicator[6];
-    ImgSTOP3.Visible  := not FAlarmIndicator[7];
-    ImgASP3.Visible   := not FAlarmIndicator[8];
-    ImgRP4.Visible    := not FAlarmIndicator[9];
-    ImgSTOP4.Visible  := not FAlarmIndicator[10];
-    ImgASP4.Visible   := not FAlarmIndicator[11];
+    ImgRP1.Visible    := FPumpRudderIndicator[0];
+    ImgSTOP1.Visible  := FPumpRudderIndicator[1];
+    ImgASP1.Visible   := FPumpRudderIndicator[2];
+
+    ImgRP2.Visible    := FPumpRudderIndicator[3];
+    ImgSTOP2.Visible  := FPumpRudderIndicator[4];
+    ImgASP2.Visible   := FPumpRudderIndicator[5];
+
+    ImgRP3.Visible    := FPumpRudderIndicator[6];
+    ImgSTOP3.Visible  := FPumpRudderIndicator[7];
+    ImgASP3.Visible   := FPumpRudderIndicator[8];
+
+    ImgRP4.Visible    := FPumpRudderIndicator[9];
+    ImgSTOP4.Visible  := FPumpRudderIndicator[10];
+    ImgASP4.Visible   := FPumpRudderIndicator[11];
 end;
 
 procedure TMainForm.SetTelegrap;

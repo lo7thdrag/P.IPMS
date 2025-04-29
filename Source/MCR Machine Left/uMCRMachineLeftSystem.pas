@@ -148,13 +148,10 @@ begin
         begin
           MainForm.FAlarmIndicator[i] := rec.Value;
           MainForm.SetAlarmIndicator;
-//          if rec.Value then
-//           MainForm.AlarmStop := false;
         end;
       end;
 
       {$ENDREGION}
-
     end;
 
     epBoardTelegramKiri :
@@ -186,14 +183,19 @@ begin
 
     epRudderIndicator :
     begin
-//      for I := 0 to  Length(MainForm.FRudderIndicator)- 1 do
-//      begin
-//        if rec.ID = (i+1) then  //penyesuaian arraynya>> mulai dari 0 sedangkan ID mulai dari 1
-//        begin
-//          MainForm.FRudderIndicator[i] := rec.Value;
-//          break;
-//        end;
-//      end;
+      {$REGION ' Set Pump Rudder Indicator '}
+
+      for I := 0 to  Length(MainForm.FPumpRudderIndicator)- 1 do
+      begin
+        if rec.ID = (i+1) then  //penyesuaian arraynya>> mulai dari 0 sedangkan ID mulai dari 1
+        begin
+          MainForm.FPumpRudderIndicator[i] := rec.Value;
+          MainForm.SetPumpRudderIndicator;
+          break;
+        end;
+      end;
+
+      {$ENDREGION}
     end;
 
   end;
