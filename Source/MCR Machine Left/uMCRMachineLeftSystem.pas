@@ -148,13 +148,10 @@ begin
         begin
           MainForm.FAlarmIndicator[i] := rec.Value;
           MainForm.SetAlarmIndicator;
-//          if rec.Value then
-//           MainForm.AlarmStop := false;
         end;
       end;
 
       {$ENDREGION}
-
     end;
 
     epBoardTelegramKiri :
@@ -186,33 +183,42 @@ begin
 
     epRudderIndicator :
     begin
-//      for I := 0 to  Length(MainForm.FRudderIndicator)- 1 do
-//      begin
-//        if rec.ID = (i+1) then  //penyesuaian arraynya>> mulai dari 0 sedangkan ID mulai dari 1
-//        begin
-//          MainForm.FRudderIndicator[i] := rec.Value;
-//          break;
-//        end;
-//      end;
+      {$REGION ' Set Pump Rudder Indicator '}
+
+      for I := 0 to  Length(MainForm.FPumpRudderIndicator)- 1 do
+      begin
+        if rec.ID = (i+1) then  //penyesuaian arraynya>> mulai dari 0 sedangkan ID mulai dari 1
+        begin
+          MainForm.FPumpRudderIndicator[i] := rec.Value;
+          MainForm.SetPumpRudderIndicator;
+          break;
+        end;
+      end;
+
+      {$ENDREGION}
     end;
+
+
 
   end;
 end;
 
 procedure TMCRMachineLeftSystem.NetEventMCRMachineLeftCommand(apRec: PAnsiChar; aSize: Word);
 var
-  rec: ^R_Common_PMS_Command;
+  rec: ^R_Common_PCS_Command;
 begin
 
   rec := @apRec^;
 
-//  if FIdFormDieselGenerator <> rec.GenSwitchID then
-//    Exit;
-
-  case rec.CommandPropsID of
-    epPMSMeasPowFailure:
+  case rec.CommandID of
+    //Rudder
+    C_ORD_RUDDER:
     begin
-      FLIstener.TriggerEvents(Self,epPMSMeasPowFailure,rec.ValueBool)
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+        FLIstener.TriggerEvents(Self,epRudderValuePS,rec.ValueInt)
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+        FLIstener.TriggerEvents(Self,epRudderValueSB,rec.ValueInt);
     end;
   end;
 end;
