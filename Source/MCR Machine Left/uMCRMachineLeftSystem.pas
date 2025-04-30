@@ -28,7 +28,7 @@ type
     procedure SetFreezed(const Value: boolean);
 
   public
-    FFormFreezed : array[0..2] of TfrmFreeze;
+    FFormFreezed : array[0..1] of TfrmFreeze;
 
     constructor Create;
     destructor Destroy;override;
@@ -153,34 +153,6 @@ begin
 
       {$ENDREGION}
     end;
-
-    epBoardTelegramKiri :
-    begin
-
-      for I := 1 to 11 do
-      begin
-        if rec.ID = (i) then
-        begin
-          MainForm.FTelegrapIndicator[i] := rec.Value;
-//          MainForm.tempIn := i;
-//          MainForm.isInput := True;
-//          MainForm.isFirst := False;
-
-//          if rec.ValueByte = 1 then {Terima Pesan, status telegrap hrs membalas}
-//            MainForm.Status  := 2
-//
-//          else if rec.ValueByte = 2 then {Terima Balasan, status telegrap siap mengirim lagi}
-//            MainForm.Status  := 1;
-
-//          MainForm.ProsId := epBoardTelegramKiri;
-//          MainForm.setIndikator(i);
-        end
-        else
-          MainForm.FTelegrapIndicator[i] := False;
-        MainForm.FTempTelegrap[i] := False;
-      end;
-    end;
-
     epRudderIndicator :
     begin
       {$REGION ' Set Pump Rudder Indicator '}
@@ -197,9 +169,25 @@ begin
 
       {$ENDREGION}
     end;
+    epBoardTelegramKiri :
+    begin
+      {$REGION ' Set Telegrap Indicator '}
 
+      if rec.ValueByte = 1 then {Terima Pesan, status telegrap hrs membalas}
+      begin
+        MainForm.IdReceive := rec.ID;
+        MainForm.TelegrapStatus := tsReply;
+        MainForm.SetTelegrap;
+      end
 
+      else if rec.ValueByte = 2 then {Terima Balasan, status telegrap siap mengirim lagi}
+      begin
+        MainForm.TelegrapStatus  := tsReceive;
+        MainForm.SetTelegrap;
+      end;
 
+      {$ENDREGION}
+    end;
   end;
 end;
 
@@ -209,6 +197,62 @@ var
 begin
 
   rec := @apRec^;
+
+  case rec.CommandPropsID of
+    epPCSCPPPumpStandby1:
+    begin
+      if rec.PortStaboardID = C_PCS_CPP_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStandby1PS,rec.ValueBool)
+      else if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStandby1SB,rec.ValueBool);
+    end;
+    epPCSCPPPumpStop1:
+    begin
+      if rec.PortStaboardID = C_PCS_CPP_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStop1PS,rec.ValueBool)
+      else if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStop1SB,rec.ValueBool);
+
+    end;
+    epPCSCPPPumpStart1:
+    begin
+      if rec.PortStaboardID = C_PCS_CPP_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStart1PS,rec.ValueBool)
+      else if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStart1SB,rec.ValueBool);
+    end;
+
+    epPCSCPPPumpStandby2:
+    begin
+      if rec.PortStaboardID = C_PCS_CPP_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStandby2PS,rec.ValueBool)
+    end;
+    epPCSCPPPumpStop2:
+    begin
+      if rec.PortStaboardID = C_PCS_CPP_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStop2PS,rec.ValueBool)
+    end;
+    epPCSCPPPumpStart2:
+    begin
+      if rec.PortStaboardID = C_PCS_CPP_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStart2PS,rec.ValueBool)
+    end;
+    epPCSCPPPumpAuto3:
+    begin
+      if rec.PortStaboardID = C_PCS_CPP_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpAuto3PS,rec.ValueBool)
+    end;
+    epPCSCPPPumpStop3:
+    begin
+      if rec.PortStaboardID = C_PCS_CPP_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStop3PS,rec.ValueBool)
+    end;
+    epPCSCPPPumpStart3:
+    begin
+      if rec.PortStaboardID = C_PCS_CPP_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStart3PS,rec.ValueBool)
+    end;
+  end;
 
   case rec.CommandID of
     //Rudder

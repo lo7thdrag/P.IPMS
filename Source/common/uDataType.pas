@@ -475,10 +475,13 @@ type
       epPCSCPPServoOil, epPCSCPPStaticHub, epPCSCPPHydrOil,
       epPCSCPPHydraulicPumpHour1, epPCSCPPHydraulicPumpHour2, epPCSCPPHydraulicPumpHour3,
       epPCSCPPPumpStandby1, epPCSCPPPumpStandby2, epPCSCPPPumpAuto3,
+      epPCSCPPPumpStop1, epPCSCPPPumpStop2, epPCSCPPPumpStop3,
       epPCSCPPPumpStart1, epPCSCPPPumpStart2, epPCSCPPPumpStart3,
       epPCSCPPPumpStandby1PS, epPCSCPPPumpStandby2PS, epPCSCPPPumpAuto3PS,
+      epPCSCPPPumpStop1PS, epPCSCPPPumpStop2PS, epPCSCPPPumpStop3PS,
       epPCSCPPPumpStart1PS, epPCSCPPPumpStart2PS, epPCSCPPPumpStart3PS,
       epPCSCPPPumpStandby1SB, epPCSCPPPumpStandby2SB, epPCSCPPPumpAuto3SB,
+      epPCSCPPPumpStop1SB, epPCSCPPPumpStop2SB, epPCSCPPPumpStop3SB,
       epPCSCPPPumpStart1SB, epPCSCPPPumpStart2SB, epPCSCPPPumpStart3SB,
       epPCSCPPOilFilterClogged, epPCSCPPPitchNotZero, epPCSCPPCLSControl, epPCSCPPBackupSupplyFail,
       epPCSCPPFollowUpError, epPCSCPPHPPOilLevel, epPCSCPPOilLevel, epPCSCPPLocal,
@@ -728,6 +731,8 @@ type
   E_LogicalMode = (lmNone, lmEquals, lmBetween, lmLessThan, lmGreaterThan,
     lmIsNull);
   E_ShowMode = (smAdd, smModify);
+
+  E_TelegrapState = (tsSend=1, tsReply, tsReceive);
 
   { user type }
   T_OnStateCBAToPMACommand  = procedure (Sender: TObject;

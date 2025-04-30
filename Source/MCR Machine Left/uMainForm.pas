@@ -15,9 +15,7 @@ uses
 type
   TMainForm = class(TForm)
     Panel1: TPanel;
-    Image7: TImage;
-    imgpsimgtelegrapps: TImage;
-    pnlRPMMESPEED: TPanel;
+    pnlRpmMeSpeed: TPanel;
     VrAngularMeter1: TVrAngularMeter;
     Label2: TLabel;
     Label3: TLabel;
@@ -27,7 +25,7 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Label20: TLabel;
-    pnlRPMSHAFTSPEED: TPanel;
+    pnlRpmShaftSpeed: TPanel;
     VrAngularMeter2: TVrAngularMeter;
     Label9: TLabel;
     Label10: TLabel;
@@ -36,7 +34,7 @@ type
     Label12: TLabel;
     Label13: TLabel;
     Label19: TLabel;
-    pnlCPPpersen: TPanel;
+    pnlCppPersen: TPanel;
     VrAngularMeter3: TVrAngularMeter;
     Label15: TLabel;
     Label14: TLabel;
@@ -44,11 +42,9 @@ type
     Label17: TLabel;
     Label18: TLabel;
     Label21: TLabel;
-    PanelSpedometer: TPanel;
-    Image3: TImage;
-    vraRudderServo: TVrAngularMeter;
-    btnEmergency: TButton;
-    pnlCPP: TPanel;
+    pnlRudder: TPanel;
+    imgBackgroundRudder: TImage;
+    pnlCppHidraulicPump: TPanel;
     Image51: TImage;
     Label22: TLabel;
     Label23: TLabel;
@@ -77,17 +73,10 @@ type
     Label49: TLabel;
     Label50: TLabel;
     Label51: TLabel;
-    vrPsPump1: TVrRotarySwitch;
-    vrSbPump1: TVrRotarySwitch;
-    vrPsPump2: TVrRotarySwitch;
-    vrSbPump2: TVrRotarySwitch;
-    vrPsPump3: TVrRotarySwitch;
-    vrSbPump3: TVrRotarySwitch;
-    lblAlarmIndicator: TPanel;
-    imgBackgroundAlarmIndicator: TImage;
-    pnlartboard2: TPanel;
+    pnlAlarmIndicator: TPanel;
+    pnlAlarmPump12: TPanel;
     Image5: TImage;
-    pnlartboard3: TPanel;
+    pnlAlramPump34: TPanel;
     Image1: TImage;
     imgOP1: TImage;
     ImgOP2: TImage;
@@ -105,7 +94,7 @@ type
     ImgLOLP1: TImage;
     ImgLOLP2: TImage;
     ImgST: TImage;
-    ImgAuxdible: TImage;
+    imgAudible: TImage;
     ImgStandbyPS1: TImage;
     ImgStartPS1: TImage;
     ImgStandbyPS2: TImage;
@@ -131,7 +120,11 @@ type
     ImgASP3: TImage;
     ImgASP4: TImage;
     imgSTShadow: TImage;
+    pnlTelegraph: TPanel;
+    imgBackgroungTelegraph: TImage;
     imgps1: TImage;
+    imgps10: TImage;
+    imgps11: TImage;
     imgps2: TImage;
     imgps3: TImage;
     imgps4: TImage;
@@ -140,31 +133,45 @@ type
     imgps7: TImage;
     imgps8: TImage;
     imgps9: TImage;
-    imgps10: TImage;
-    imgps11: TImage;
-    vrRotarySwitchPS: TVrRotarySwitch;
+    vrPsTelegrap: TVrRotarySwitch;
+    vrPsPump1: TVrRotarySwitch;
+    vrPsPump2: TVrRotarySwitch;
+    vrPsPump3: TVrRotarySwitch;
+    vrSbPump1: TVrRotarySwitch;
+    vrSbPump2: TVrRotarySwitch;
+    vrSbPump3: TVrRotarySwitch;
+    vraPsRudderServo: TVrAngularMeter;
+    tmrTelegraph: TTimer;
+    imgAudibleShadow: TImage;
+
     procedure FormCreate(Sender: TObject);
-    procedure imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure imgSTShadowMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+    procedure imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure imgSTShadowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+
     procedure vrPsPumpChange(Sender: TObject);
     procedure vrSbPumpChange(Sender: TObject);
+    procedure vrPsTelegrapChange(Sender: TObject);
+    procedure tmrTelegraphTimer(Sender: TObject);
+    procedure imgAudibleShadowMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgAudibleShadowMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
 
   private
+    FIsBlinkState : Boolean;
+    FIdBlink : Integer;
     FListener : TListeners;
 
     procedure MCRMachineLeftSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure MCRMachineLeftSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
+    procedure MCRMachineLeftSystemEvent(Sender : TObject; PropsID : E_PropsID; Value : Double); overload;
 
   public
+    IdReceive : Integer;
+    TelegrapStatus : E_TelegrapState;
+
     FAlarmIndicator : array[0..14] of Boolean;
     FPumpRudderIndicator : array[0..11] of Boolean;
-
-    FTelegrapIndicator : array [1..11] of Boolean;
-    FTempTelegrap : array [1..11] of Boolean;
-    iterasi : array [1..11] of Integer;
-    isI : array [1..11] of Boolean;
     FPsPump1 : array[0..2] of Boolean;
     FPsPump2 : array[0..2] of Boolean;
     FPsPump3 : array[0..2] of Boolean;
@@ -177,6 +184,8 @@ type
 
     procedure SetHidroulicPump;
     procedure SetTelegrap;
+
+    procedure GetIdBlinkTelegrapLamp(value : Integer);
   end;
 
 var
@@ -189,6 +198,28 @@ uses
 
 {$R *.dfm}
 
+procedure TMainForm.GetIdBlinkTelegrapLamp(value: Integer);
+var
+  i : Integer;
+
+begin
+  for i := 0 to ComponentCount - 1 do
+  begin
+    if Components[i] is TImage then
+    begin
+      if TImage(Components[i]).Hint <> 'Telegrap' then
+        Continue;
+
+      TImage(Components[i]).Visible := False;
+
+      if (TImage(Components[i]).Tag = value ) then
+      begin
+        FIdBlink := i;
+      end;
+    end;
+  end;
+end;
+
 procedure TMainForm.FormCreate(Sender: TObject);
 var
   i : Integer;
@@ -199,6 +230,7 @@ begin
   begin
     OnPropertyIntChange := MCRMachineLeftSystemEvent;
     OnPropertyBoolChange := MCRMachineLeftSystemEvent;
+    OnPropertyDblChange := MCRMachineLeftSystemEvent;
   end;
 
   {$REGION ' Set Alarm Indicator '}
@@ -207,6 +239,18 @@ begin
     FAlarmIndicator[i] := false;
   end;
   SetAlarmIndicator;
+  {$ENDREGION}
+
+  {$REGION ' Set CPP Hidraulic Pump Indicator '}
+  for i := 0 to 2 do
+  begin
+    FPsPump1[i] := false;
+    FPsPump2[i] := false;
+    FPsPump3[i] := false;
+    FSbPump1[i] := false;
+    FSbPump2[i] := false;
+    FSbPump3[i] := false;
+  end;
   {$ENDREGION}
 
   {$REGION ' Set Pump Rudder Indicator '}
@@ -220,27 +264,10 @@ begin
   SetPumpRudderIndicator;
   {$ENDREGION}
 
-  for i := 1 to 11 do
-  begin
-    FTelegrapIndicator[i] := false;
-    FTempTelegrap[i] := false;
-    isI[i] := False;
-    iterasi[i] := 0;
-  end;
-
-  for i := 0 to 2 do
-  begin
-    FPsPump1[i] := false;
-    FPsPump2[i] := false;
-    FPsPump3[i] := false;
-    FSbPump1[i] := false;
-    FSbPump2[i] := false;
-    FSbPump3[i] := false;
-  end;
-end;
-
-procedure TMainForm.MCRMachineLeftSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
-begin
+  {$REGION ' Set Telegrap Indicator '}
+  TelegrapStatus := tsSend;
+  FIsBlinkState := False;
+  {$ENDREGION}
 
 end;
 
@@ -309,33 +336,110 @@ end;
 
 procedure TMainForm.SetTelegrap;
 begin
-  //
+  case TelegrapStatus of
+    tsReceive :
+    begin
+      if (IdReceive <> (vrPsTelegrap.SwitchPosition + 1))then
+        exit;
+
+      GetIdBlinkTelegrapLamp(IdReceive);
+
+      tmrTelegraph.Enabled := False;
+      TImage(Components[FIdBlink]).Visible := True;
+
+      TelegrapStatus := tsSend;
+    end;
+    tsReply :
+    begin
+      GetIdBlinkTelegrapLamp(IdReceive);
+      tmrTelegraph.Enabled := True;
+    end;
+  end;
+end;
+
+procedure TMainForm.tmrTelegraphTimer(Sender: TObject);
+begin
+  if FIsBlinkState then
+  begin
+    TImage(Components[FIdBlink]).Visible := True;
+    FIsBlinkState := False;
+  end
+  else
+  begin
+    TImage(Components[FIdBlink]).Visible := False;
+    FIsBlinkState := True;
+  end;
 end;
 
 procedure TMainForm.vrPsPumpChange(Sender: TObject);
+var
+  i : Integer;
+
 begin
+  for i := 0 to 2 do
+  begin
+    if FPsPump1[i] <> (vrPsPump1.SwitchPosition = i) then
+    begin
+      FPsPump1[i] := vrPsPump1.SwitchPosition = i;
+      MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, i, FPsPump1[i]);
+    end;
+  end;
+
   case TVrRotarySwitch(Sender).Tag of
     1:
     begin
-      FPsPump1[0] := vrPsPump1.SwitchPosition = 0;
-      FPsPump1[1] := vrPsPump1.SwitchPosition = 1;
-      FPsPump1[2] := vrPsPump1.SwitchPosition = 2;
+//      FPsPump1[0] := vrPsPump1.SwitchPosition = 0;
+//      FPsPump1[1] := vrPsPump1.SwitchPosition = 1;
+//      FPsPump1[2] := vrPsPump1.SwitchPosition = 2;
     end;
     2:
     begin
-      FPsPump2[0] := vrPsPump2.SwitchPosition = 0;
-      FPsPump2[1] := vrPsPump2.SwitchPosition = 1;
-      FPsPump2[2] := vrPsPump2.SwitchPosition = 2;
+//      FPsPump2[0] := vrPsPump2.SwitchPosition = 0;
+//      FPsPump2[1] := vrPsPump2.SwitchPosition = 1;
+//      FPsPump2[2] := vrPsPump2.SwitchPosition = 2;
     end;
     3:
     begin
-      FPsPump3[0] := vrPsPump3.SwitchPosition = 0;
-      FPsPump3[1] := vrPsPump3.SwitchPosition = 1;
-      FPsPump3[2] := vrPsPump3.SwitchPosition = 2;
+//      FPsPump3[0] := vrPsPump3.SwitchPosition = 0;
+//      FPsPump3[1] := vrPsPump3.SwitchPosition = 1;
+//      FPsPump3[2] := vrPsPump3.SwitchPosition = 2;
     end;
   end;
 
   SetHidroulicPump;
+end;
+
+procedure TMainForm.vrPsTelegrapChange(Sender: TObject);
+begin
+
+  case TelegrapStatus of
+    tsSend :
+    begin
+      {$REGION ' Pd saat kita mengirim pesan '}
+      GetIdBlinkTelegrapLamp(TVrRotarySwitch(Sender).SwitchPosition + 1);
+      tmrTelegraph.Enabled := True;
+
+      MCRMachineLeftSystem.sendTelegram(epBoardTelegramKiri, TVrRotarySwitch(Sender).SwitchPosition + 1, True, Ord(tsSend));
+      {$ENDREGION}
+    end;
+    tsReply :
+    begin
+      {$REGION ' Pd saat kita membalas pesan '}
+      if (IdReceive <> (vrPsTelegrap.SwitchPosition + 1))then
+        exit;
+
+      GetIdBlinkTelegrapLamp(TVrRotarySwitch(Sender).SwitchPosition + 1);
+      TImage(Components[FIdBlink]).Visible := True;
+
+      tmrTelegraph.Enabled := False;
+
+      MCRMachineLeftSystem.sendTelegram(epBoardTelegramKiri, TVrRotarySwitch(Sender).SwitchPosition + 1, True, Ord(tsReply));
+
+      {mengubah status dari penerima ke siap mengirim lagi}
+      TelegrapStatus := tsSend;
+      {$ENDREGION}
+    end;
+  end;
 end;
 
 procedure TMainForm.vrSbPumpChange(Sender: TObject);
@@ -362,6 +466,16 @@ begin
   end;
 
   SetHidroulicPump;
+end;
+
+procedure TMainForm.imgAudibleShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  imgAudible.Visible := True;
+end;
+
+procedure TMainForm.imgAudibleShadowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  imgAudible.Visible := False;
 end;
 
 procedure TMainForm.imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -394,7 +508,107 @@ begin
   SetAlarmIndicator;
 end;
 
+procedure TMainForm.MCRMachineLeftSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
+begin
+  case PropsID of
+    epPCSCPPPumpStandby1PS :
+    begin
+      {$REGION ' CPP Pump 1 Standby '}
+      FPsPump1[0] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrPsPump1.SwitchPosition := 0;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStop1PS:
+    begin
+      {$REGION ' CPP Pump 1 Stop '}
+      FPsPump1[1] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrPsPump1.SwitchPosition := 1;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStart1PS:
+    begin
+      {$REGION ' CPP Pump 1 Start '}
+      FPsPump1[2] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrPsPump1.SwitchPosition := 2;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStandby2PS:
+    begin
+      {$REGION ' CPP Pump 2 Standby '}
+      FPsPump2[0] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrPsPump2.SwitchPosition := 0;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStop2PS:
+    begin
+      {$REGION ' CPP Pump 2 Stop '}
+      FPsPump2[1] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrPsPump2.SwitchPosition := 1;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStart2PS:
+    begin
+      {$REGION ' CPP Pump 2 Start '}
+      FPsPump2[2] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrPsPump2.SwitchPosition := 2;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpAuto3PS:
+    begin
+      {$REGION ' CPP Pump 3 Auto '}
+      FPsPump3[0] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrPsPump3.SwitchPosition := 0;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStop3PS:
+    begin
+      {$REGION ' CPP Pump 3 Stop '}
+      FPsPump3[1] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrPsPump3.SwitchPosition := 1;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStart3PS:
+    begin
+      {$REGION ' CPP Pump 3 Start '}
+      FPsPump3[2] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrPsPump3.SwitchPosition := 2;
+      {$ENDREGION}
+    end;
+  end;
+end;
+
 procedure TMainForm.MCRMachineLeftSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);
+var
+    koefRate, degRate : Double;
+    outputRudderLeft, outputRudderRight : Integer;
+    tempRudderLeft, TempSpeedMERight, TempSpeedCPPRight, TempSpeedSHAFTRight : Double;
 begin
   case PropsID of
     epPMSFreezed:
@@ -402,8 +616,8 @@ begin
       if Value = 1 then
       begin
         MainForm.Enabled := False;
-        MCRMachineLeftSystem.FFormFreezed[1] := TfrmFreeze.Create(MainForm);
-        with MCRMachineLeftSystem.FFormFreezed[1] do
+        MCRMachineLeftSystem.FFormFreezed[0] := TfrmFreeze.Create(MainForm);
+        with MCRMachineLeftSystem.FFormFreezed[0] do
         begin
           Parent := MainForm;
           Position := poOwnerFormCenter;
@@ -414,25 +628,58 @@ begin
       else if Value = 0 then
       begin
         MainForm.Enabled := True;
-        if Assigned(MCRMachineLeftSystem.FFormFreezed[1]) then
-          FreeAndNil(MCRMachineLeftSystem.FFormFreezed[1]);
+        if Assigned(MCRMachineLeftSystem.FFormFreezed[0]) then
+          FreeAndNil(MCRMachineLeftSystem.FFormFreezed[0]);
       end;
     end;
     epRudderValuePS:
     begin
-      vraRudderServo.Position := abs(Value);
+      vraPsRudderServo.Position := abs(Value);
     end;
+  end;
+end;
 
-    epRudderValueSB:
+procedure TMainForm.MCRMachineLeftSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
+begin
+  case PropsID of
+    epPCSMEActualSpeedPS:
     begin
-
+      ShowMessage('ME');
+//      TempSpeedMELeft := Value;
+//      edtRPMME.Text := FloatToStr(TempSpeedMELeft);
     end;
 
-//    epPCSCtrlBackgroundLamp:
-//      BackgroundLampIndicator(Value);
-//
-//    epPCSCtrlLamptTest:
-//      LampTestIndicator(Value);
+    epPCSGBShaftSpeedPS:
+    begin
+      ShowMessage('Shaftspeed');
+//      TempSpeedSHAFTLeft := Value;
+//      edtRPMSHAFT.Text := FloatToStr(TempSpeedSHAFTLeft);
+    end;
+
+    epPCSCPPActualPitchPS:
+    begin
+      ShowMessage('Actual Speed');
+//      TempSpeedCPPLeft := Value;
+//      edt7.Text := FloatToStr(TempSpeedCPPLeft);
+    end;
+
+    epPCSMEActualSpeedSB :
+    begin
+//      TempSpeedMERight := Value;
+//      edtRPMME.Text := FloatToStr(TempSpeedMERight);
+    end;
+
+    epPCSGBShaftSpeedSB :
+    begin
+//      TempSpeedSHAFTRight := Value;
+//      edtRPMSHAFT.Text := FloatToStr(TempSpeedSHAFTRight);
+    end;
+
+    epPCSCPPActualPitchSB :
+    begin
+//      TempSpeedCPPRight := Value;
+//      edt6.Text := FloatToStr(TempSpeedCPPRight);
+    end;
   end;
 end;
 

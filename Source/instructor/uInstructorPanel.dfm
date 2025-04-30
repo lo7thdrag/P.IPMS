@@ -18298,7 +18298,7 @@ object frmInstructorPanel: TfrmInstructorPanel
       HeaderStyle = hsImage
       TabOrder = 0
       object ctgrypnlExit: TCategoryPanel
-        Top = 374
+        Top = 563
         Height = 32
         Cursor = crHandPoint
         Caption = 'Exit'
@@ -18311,6 +18311,8 @@ object frmInstructorPanel: TfrmInstructorPanel
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        ExplicitTop = 374
+        ExplicitWidth = 230
         ExpandedHeight = 78
         object btnClose: TFlatSpeedButton
           Tag = 20
@@ -18346,7 +18348,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         end
       end
       object ctgrypnlHelp: TCategoryPanel
-        Top = 342
+        Top = 531
         Height = 32
         Cursor = crHandPoint
         Caption = 'Help'
@@ -18359,6 +18361,8 @@ object frmInstructorPanel: TfrmInstructorPanel
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        ExplicitTop = 342
+        ExplicitWidth = 230
         ExpandedHeight = 115
         object btnHardwareCatalogue: TFlatSpeedButton
           Tag = 5
@@ -18427,13 +18431,15 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object ctgrypnlACS: TCategoryPanel
         Tag = 7
-        Top = 310
+        Top = 499
         Height = 32
         Cursor = crHandPoint
         Caption = 'Alarm Control System'
         Color = 3749426
         Collapsed = True
         TabOrder = 2
+        ExplicitTop = 310
+        ExplicitWidth = 230
         ExpandedHeight = 80
         object btnACSControl: TFlatSpeedButton
           Tag = 30
@@ -18470,13 +18476,15 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object ctgrypnlAuxilary: TCategoryPanel
         Tag = 6
-        Top = 278
+        Top = 467
         Height = 32
         Cursor = crHandPoint
         Caption = 'Auxilary'
         Color = 3749426
         Collapsed = True
         TabOrder = 3
+        ExplicitTop = 278
+        ExplicitWidth = 230
         ExpandedHeight = 258
         object btnTanksOverview: TFlatSpeedButton
           Tag = 23
@@ -18673,13 +18681,15 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object ctgrypnlPropCondition: TCategoryPanel
         Tag = 5
-        Top = 246
+        Top = 435
         Height = 32
         Cursor = crHandPoint
         Caption = 'Propulsion'
         Color = 3749426
         Collapsed = True
         TabOrder = 4
+        ExplicitTop = 246
+        ExplicitWidth = 230
         ExpandedHeight = 115
         object btnRudder1: TFlatSpeedButton
           Tag = 31
@@ -18748,13 +18758,15 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object ctgrypnlPCSConditions: TCategoryPanel
         Tag = 4
-        Top = 214
+        Top = 403
         Height = 32
         Cursor = crHandPoint
         Caption = 'Energy'
         Color = 3749426
         Collapsed = True
         TabOrder = 5
+        ExplicitTop = 214
+        ExplicitWidth = 230
         ExpandedHeight = 114
         object btnPCSConditions: TFlatSpeedButton
           Tag = 27
@@ -18823,13 +18835,15 @@ object frmInstructorPanel: TfrmInstructorPanel
       end
       object ctgrypnlSafety: TCategoryPanel
         Tag = 3
-        Top = 182
+        Top = 371
         Height = 32
         Cursor = crHandPoint
         Caption = 'Safety'
         Color = 3749426
         Collapsed = True
         TabOrder = 6
+        ExplicitTop = 182
+        ExplicitWidth = 230
         ExpandedHeight = 185
         object btnFF: TFlatSpeedButton
           Tag = 7
@@ -18963,14 +18977,12 @@ object frmInstructorPanel: TfrmInstructorPanel
       object ctgrypnlGeneral: TCategoryPanel
         Tag = 2
         Top = 150
-        Height = 32
+        Height = 221
         Cursor = crHandPoint
         Caption = 'General'
         Color = 3749426
-        Collapsed = True
         TabOrder = 7
-        ExplicitWidth = 213
-        ExpandedHeight = 221
+        ExplicitWidth = 230
         object btnNav_ComSystem: TFlatSpeedButton
           Tag = 22
           Left = 17
@@ -19145,6 +19157,7 @@ object frmInstructorPanel: TfrmInstructorPanel
         Font.Style = []
         ParentFont = False
         TabOrder = 8
+        ExplicitWidth = 230
         object btnScenBuilder: TFlatSpeedButton
           Tag = 1
           Left = 18

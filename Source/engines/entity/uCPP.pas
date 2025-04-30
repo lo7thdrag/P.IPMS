@@ -29,6 +29,9 @@ type
     FHydraulicPumpStart1,
     FHydraulicPumpStart2,
     FHydraulicPumpStart3,
+    FHydraulicPumpStop1,
+    FHydraulicPumpStop2,
+    FHydraulicPumpStop3,
     FHydraulicPumpStandby1,
     FHydraulicPumpStandby2,
     FhydraulicPumpAuto3,
@@ -43,7 +46,8 @@ type
     FFailure : Boolean;
 
     FPC_Failure : array [0..2] of Boolean;
-    FPumpStandby : array[1..2] of Boolean;
+    FPumpStandby : array[1..3] of Boolean;
+    FPumpStop : array[1..3] of Boolean;
     FPumpStart : array[1..3] of Boolean;
 
     procedure SetSetpointPitch(const Value: Double);
@@ -63,6 +67,9 @@ type
     procedure SetHydraulicPumpStart1(const Value : Boolean);
     procedure SetHydraulicPumpStart2(const Value : Boolean);
     procedure SetHydraulicPumpStart3(const Value : Boolean);
+    procedure SetHydraulicPumpStop1(const Value : Boolean);
+    procedure SetHydraulicPumpStop2(const Value : Boolean);
+    procedure SetHydraulicPumpStop3(const Value : Boolean);
     procedure SetHydraulicPumpStandby1(const Value : Boolean);
     procedure SetHydraulicPumpStandby2(const Value : Boolean);
     procedure SetHydraulicPumpAuto3(const Value : Boolean);
@@ -77,6 +84,7 @@ type
     procedure SetFailure(const Value : Boolean);
     procedure SetPC_Failure(i : Integer; const Value : Boolean);
     procedure SetPumpStandby(i : Integer; const Value : Boolean);
+    procedure SetPumpStop(i : Integer; const Value : Boolean);
     procedure SetPumpStart(i : Integer; const Value : Boolean);
 
     procedure SetPitchInManual(const aValue : Double);
@@ -89,6 +97,7 @@ type
     function CPPFailure: Boolean; {Set kondisi CPP Failure}
     function GetPC_Failure(i : Integer): Boolean;
     function GetPumpStandby(i : Integer): Boolean;
+    function GetPumpStop(i : Integer): Boolean;
     function GetPumpStart(i : Integer): Boolean;
 
   public
@@ -118,6 +127,9 @@ type
     property HydraulicPumpStart1 : Boolean read FHydraulicPumpStart1 write SetHydraulicPumpStart1;
     property HydraulicPumpStart2 : Boolean read FHydraulicPumpStart2 write SetHydraulicPumpStart2;
     property HydraulicPumpStart3 : Boolean read FHydraulicPumpStart3 write SetHydraulicPumpStart3;
+    property HydraulicPumpStop1 : Boolean read FHydraulicPumpStop1 write SetHydraulicPumpStop1;
+    property HydraulicPumpStop2 : Boolean read FHydraulicPumpStop2 write SetHydraulicPumpStop2;
+    property HydraulicPumpStop3 : Boolean read FHydraulicPumpStop3 write SetHydraulicPumpStop3;
     property HydraulicPumpStandby1 : Boolean read FHydraulicPumpStandby1 write SetHydraulicPumpStandby1;
     property HydraulicPumpStandby2 : Boolean read FHydraulicPumpStandby2 write SetHydraulicPumpStandby2;
     property HydraulicPumpAuto3 : Boolean read FhydraulicPumpAuto3 write SetHydraulicPumpAuto3;
@@ -132,6 +144,7 @@ type
     property Failure : Boolean read FFailure write SetFailure;
     property PC_Failure[i : Integer]: Boolean read GetPC_Failure write SetPC_Failure;
     property PumpStandby[i : Integer]: Boolean read GetPumpStandby write SetPumpStandby;
+    property PumpStop[i : Integer]: Boolean read GetPumpStop write SetPumpStop;
     property PumpStart[i : Integer]: Boolean read GetPumpStart write SetPumpStart;
   end;
 
@@ -209,6 +222,11 @@ end;
 function TCPP.GetPumpStart(i: Integer): Boolean;
 begin
   Result := FPumpStart[i];
+end;
+
+function TCPP.GetPumpStop(i: Integer): Boolean;
+begin
+  Result := FPumpStop[i];
 end;
 
 procedure TCPP.Run(const aDt: Double);
@@ -297,16 +315,19 @@ begin
         C_PUMP_CPP_HYDRAULIC_STANDBY:
         begin
           HydraulicPumpStandby1 := aON;
+          HydraulicPumpStop1 := not aON;
           HydraulicPumpStart1 := not aON;
         end;
         C_PUMP_CPP_HYDRAULIC_STOP:
         begin
           HydraulicPumpStandby1 := not aON;
+          HydraulicPumpStop1 := aON;
           HydraulicPumpStart1 := not aON
         end;
         C_PUMP_CPP_HYDRAULIC_START:
         begin
           HydraulicPumpStandby1 := not aON;
+          HydraulicPumpStop1 := not aON;
           HydraulicPumpStart1 := aON;
         end;
       end;
@@ -318,16 +339,19 @@ begin
         C_PUMP_CPP_HYDRAULIC_STANDBY:
         begin
           HydraulicPumpStandby2 := aON;
+          HydraulicPumpStop2 := not aON;
           HydraulicPumpStart2 := not aON;
         end;
         C_PUMP_CPP_HYDRAULIC_STOP:
         begin
           HydraulicPumpStandby2 := not aON;
+          HydraulicPumpStop2 := aON;
           HydraulicPumpStart2 := not aON
         end;
         C_PUMP_CPP_HYDRAULIC_START:
         begin
           HydraulicPumpStandby2 := not aON;
+          HydraulicPumpStop2 := not aON;
           HydraulicPumpStart2 := aON;
         end;
       end;
@@ -339,16 +363,19 @@ begin
         C_PUMP_CPP_HYDRAULIC_STANDBY:
         begin
           HydraulicPumpAuto3 := aON;
+          HydraulicPumpStop3 := not aON;
           HydraulicPumpStart3 := not aON;
         end;
         C_PUMP_CPP_HYDRAULIC_STOP:
         begin
           HydraulicPumpAuto3 := not aON;
+          HydraulicPumpStop3 := aON;
           HydraulicPumpStart3 := not aON
         end;
         C_PUMP_CPP_HYDRAULIC_START:
         begin
           HydraulicPumpAuto3 := not aON;
+          HydraulicPumpStop3 := not aON;
           HydraulicPumpStart3 := aON;
         end;
       end;
@@ -399,6 +426,7 @@ begin
     Exit;
 
   FhydraulicPumpAuto3 := Value;
+  PumpStandby[3] := Value;
   Listener.TriggerEvents(Self,epPCSCPPPumpAuto3,Value);
 end;
 
@@ -453,6 +481,39 @@ begin
   FPumpStart[3] := Value;
   Listener.TriggerEvents(Self,epPCSCPPPumpStart3,Value);
   Listener.TriggerEvents(Self,epPCSCPPHydraulicPumpHour3,Value);
+end;
+
+procedure TCPP.SetHydraulicPumpStop1(const Value: Boolean);
+begin
+  if FHydraulicPumpStop1 = Value then
+    Exit;
+
+  FHydraulicPumpStop1 := Value;
+  PumpStop[1] := Value;
+  Listener.TriggerEvents(Self,epPCSCPPPumpStop1,Value);
+  Listener.TriggerEvents(Self,epPCSCPPHydraulicPumpHour1,False);
+end;
+
+procedure TCPP.SetHydraulicPumpStop2(const Value: Boolean);
+begin
+  if FHydraulicPumpStop2 = Value then
+    Exit;
+
+  FHydraulicPumpStop2 := Value;
+  PumpStop[2] := Value;
+  Listener.TriggerEvents(Self,epPCSCPPPumpStop2,Value);
+  Listener.TriggerEvents(Self,epPCSCPPHydraulicPumpHour2,False);
+end;
+
+procedure TCPP.SetHydraulicPumpStop3(const Value: Boolean);
+begin
+  if FHydraulicPumpStop3 = Value then
+    Exit;
+
+  FHydraulicPumpStop3 := Value;
+  FPumpStop[3] := Value;
+  Listener.TriggerEvents(Self,epPCSCPPPumpStop3,Value);
+  Listener.TriggerEvents(Self,epPCSCPPHydraulicPumpHour3,False);
 end;
 
 procedure TCPP.SetHydrOil(const Value: Double);
@@ -544,6 +605,14 @@ begin
     Exit;
 
   FPumpStart[i] := Value;
+end;
+
+procedure TCPP.SetPumpStop(i: Integer; const Value: Boolean);
+begin
+  if FPumpStop[i] = Value then
+    Exit;
+
+  FPumpStop[i] := Value;
 end;
 
 procedure TCPP.SetReadyForUse(const Value: Boolean);
