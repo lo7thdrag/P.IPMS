@@ -4,11 +4,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls;
+  Dialogs, StdCtrls, Vcl.ExtCtrls;
 
 type
   TfrmSetting = class(TForm)
-    grpDatabase: TGroupBox;
     edtConnection: TEdit;
     lblServer: TLabel;
     lbl1: TLabel;
@@ -17,28 +16,12 @@ type
     edtPassword: TEdit;
     btnOK: TButton;
     btnCancel: TButton;
-    grp1: TGroupBox;
     lblDBName: TLabel;
     edtDBName: TEdit;
-    grpSimEngineSet: TGroupBox;
     lblSimEngineSvr: TLabel;
     lblSimEnginePort: TLabel;
     edtSimEngineSvr: TEdit;
     edtSimEnginePort: TEdit;
-    grpLPUSet: TGroupBox;
-    lblLPUServer: TLabel;
-    lblLPUPort: TLabel;
-    edtLPUServer: TEdit;
-    edtLPUPort: TEdit;
-    grpRole: TGroupBox;
-    Label1: TLabel;
-    cbbRoleName: TComboBox;
-    edtAppName: TEdit;
-    lbl2: TLabel;
-    lbl3: TLabel;
-    lbl4: TLabel;
-    edtInsHost: TEdit;
-    edtInsPort: TEdit;
     Label2: TLabel;
     edtDBProtocol: TEdit;
     grpIDServo: TGroupBox;
@@ -58,35 +41,6 @@ type
     lbl13: TLabel;
     edtIDRUDDERSB: TEdit;
     edtIDCPPPS: TEdit;
-    grpServoDegree: TGroupBox;
-    lbl14: TLabel;
-    lbl15: TLabel;
-    lbl16: TLabel;
-    lbl17: TLabel;
-    lbl18: TLabel;
-    lbl19: TLabel;
-    lbl20: TLabel;
-    lbl21: TLabel;
-    edtDegRPMMEPS: TEdit;
-    edtDegRPMMESB: TEdit;
-    edtDegRPMSHAFTPS: TEdit;
-    edtDegRPMSHAFTSB: TEdit;
-    edtDegCPPSB: TEdit;
-    edtDegRUDDERPS: TEdit;
-    edtDegRUDDERSB: TEdit;
-    edtDegCPPPS: TEdit;
-    grp3: TGroupBox;
-    lbl22: TLabel;
-    grp4: TGroupBox;
-    lbl23: TLabel;
-    lbl24: TLabel;
-    lbl25: TLabel;
-    lbl26: TLabel;
-    edtServoPort: TEdit;
-    edtAlarmPort: TEdit;
-    edtEmergencyPort: TEdit;
-    cbbModeServo: TComboBox;
-    cbbidFormPCS: TComboBox;
     grpConsoleIP: TGroupBox;
     edtInstrukturIP: TEdit;
     edtACSIP: TEdit;
@@ -108,11 +62,6 @@ type
     lbl35: TLabel;
     lbl36: TLabel;
     edtServer: TEdit;
-    GroupBox1: TGroupBox;
-    Label3: TLabel;
-    cbbInstrukturMonitor: TComboBox;
-    Label4: TLabel;
-    cbbMimcMonitor: TComboBox;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
@@ -148,25 +97,79 @@ type
     Edit16: TEdit;
     Edit17: TEdit;
     btnShare: TButton;
-    grpMainEngine: TGroupBox;
+    Panel16: TPanel;
+    ComboBox1: TComboBox;
+    Label28: TLabel;
+    pnlLpuSetting: TPanel;
+    edtLPUPort: TEdit;
+    edtLPUServer: TEdit;
+    lblLPUPort: TLabel;
+    lblLPUServer: TLabel;
+    PnlInstructor: TPanel;
+    edtAppName: TEdit;
+    edtInsHost: TEdit;
+    edtInsPort: TEdit;
+    lbl2: TLabel;
+    lbl3: TLabel;
+    lbl4: TLabel;
+    Panel5: TPanel;
+    cbbModeServo: TComboBox;
+    edtAlarmPort: TEdit;
+    edtEmergencyPort: TEdit;
+    edtServoPort: TEdit;
+    lbl23: TLabel;
+    lbl24: TLabel;
+    lbl25: TLabel;
+    lbl26: TLabel;
+    Panel18: TPanel;
+    Panel19: TPanel;
+    edtDegCPPPS: TEdit;
+    edtDegCPPSB: TEdit;
+    edtDegRPMMEPS: TEdit;
+    edtDegRPMMESB: TEdit;
+    edtDegRPMSHAFTPS: TEdit;
+    edtDegRPMSHAFTSB: TEdit;
+    edtDegRUDDERPS: TEdit;
+    edtDegRUDDERSB: TEdit;
+    lbl14: TLabel;
+    lbl15: TLabel;
+    lbl16: TLabel;
+    lbl17: TLabel;
+    lbl18: TLabel;
+    lbl19: TLabel;
+    lbl20: TLabel;
+    lbl21: TLabel;
+    Panel20: TPanel;
+    cbbInstrukturMonitor: TComboBox;
+    cbbMimcMonitor: TComboBox;
+    Label3: TLabel;
+    Label4: TLabel;
+    cbbRoleName: TComboBox;
+    Label1: TLabel;
+    Panel21: TPanel;
+    Panel23: TPanel;
+    ComboBox2: TComboBox;
+    Label29: TLabel;
+    ComboBox3: TComboBox;
+    Label30: TLabel;
+    Panel22: TPanel;
+    Panel14: TPanel;
+    Panel17: TPanel;
+    Label22: TLabel;
     Label23: TLabel;
     Label24: TLabel;
     Label25: TLabel;
-    Label22: TLabel;
     Label26: TLabel;
-    grpGeneratorConsolSetting: TGroupBox;
-    Label27: TLabel;
-    cbbNameGeneratorConsol: TComboBox;
-    cbbPosisiMainEngine: TComboBox;
     cbbIdMainEngine: TComboBox;
+    cbbPosisiMainEngine: TComboBox;
     cbbScreenGaugesMainEngine: TComboBox;
-    cbbScrPMSMainEngine: TComboBox;
-    ComboBox8: TComboBox;
     cbbScreenSignalingMainEngine: TComboBox;
+    cbbScrPMSMainEngine: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -227,12 +230,12 @@ begin
   listMode.Add(edtAlarmPort.Text);
   listMode.Add(edtEmergencyPort.Text);
 
-  if cbbidFormPCS.Text = 'PCS Kiri' then
-    idFormPCS := 1
-  else if cbbidFormPCS.Text = 'PCS Tengah' then
-    idFormPCS := 2
-  else if cbbidFormPCS.Text = 'PCS Kanan' then
-    idFormPCS := 3;
+//  if cbbidFormPCS.Text = 'PCS Kiri' then
+//    idFormPCS := 1
+//  else if cbbidFormPCS.Text = 'PCS Tengah' then
+//    idFormPCS := 2
+//  else if cbbidFormPCS.Text = 'PCS Kanan' then
+//    idFormPCS := 3;
 
   listFormPCS := TStringList.Create;
   listFormPCS.Add(IntToStr(idFormPCS));
@@ -293,6 +296,18 @@ begin
   ,StrToInt(edtIDRUDDERSB.Text));}
 
   Application.Terminate;
+end;
+
+procedure TfrmSetting.ComboBox1Change(Sender: TObject);
+begin
+  if ComboBox1.Text = 'MAIN ENGINE'  then
+  begin
+    Panel22.Left := 338;
+    Panel22.Top := 101;
+  end;
+
+
+
 end;
 
 procedure TfrmSetting.FormCreate(Sender: TObject);
@@ -363,12 +378,12 @@ begin
   edtAlarmPort.Text := listMode[2];
   edtEmergencyPort.Text := listMode[3];
 
-  if listFormPCS[0] = '1' then
-    cbbidFormPCS.Text := 'PCS Kiri'
-  else if listFormPCS[0] = '2' then
-    cbbidFormPCS.Text := 'PCS Tengah'
-  else if listFormPCS[0] = '3' then
-    cbbidFormPCS.Text := 'PCS Kanan';
+//  if listFormPCS[0] = '1' then
+//    cbbidFormPCS.Text := 'PCS Kiri'
+//  else if listFormPCS[0] = '2' then
+//    cbbidFormPCS.Text := 'PCS Tengah'
+//  else if listFormPCS[0] = '3' then
+//    cbbidFormPCS.Text := 'PCS Kanan';
 
   listServoID.Free;
   listServoDeg.Free;
