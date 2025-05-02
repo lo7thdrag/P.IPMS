@@ -378,11 +378,14 @@ var
 begin
   for i := 0 to 2 do
   begin
-    if FPsPump1[i] <> (vrPsPump1.SwitchPosition = i) then
-    begin
-      FPsPump1[i] := vrPsPump1.SwitchPosition = i;
-      MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, i, FPsPump1[i]);
-    end;
+    FPsPump1[i] := vrPsPump1.SwitchPosition = i;
+    MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, i, FPsPump1[i]);
+
+//    if FPsPump1[i] <> (vrPsPump1.SwitchPosition = i) then
+//    begin
+//      FPsPump1[i] := vrPsPump1.SwitchPosition = i;
+//      MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, i, FPsPump1[i]);
+//    end;
   end;
 
   case TVrRotarySwitch(Sender).Tag of
@@ -599,6 +602,96 @@ begin
 
       if Value then
         vrPsPump3.SwitchPosition := 2;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStandby1SB :
+    begin
+      {$REGION ' CPP Pump 1 Standby '}
+      FSbPump1[0] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrSbPump1.SwitchPosition := 0;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStop1SB:
+    begin
+      {$REGION ' CPP Pump 1 Stop '}
+      FSbPump1[1] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrSbPump1.SwitchPosition := 1;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStart1SB:
+    begin
+      {$REGION ' CPP Pump 1 Start '}
+      FSbPump1[2] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrSbPump1.SwitchPosition := 2;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStandby2SB:
+    begin
+      {$REGION ' CPP Pump 2 Standby '}
+      FSbPump2[0] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrSbPump2.SwitchPosition := 0;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStop2SB:
+    begin
+      {$REGION ' CPP Pump 2 Stop '}
+      FSbPump2[1] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrSbPump2.SwitchPosition := 1;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStart2SB:
+    begin
+      {$REGION ' CPP Pump 2 Start '}
+      FSbPump2[2] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrSbPump2.SwitchPosition := 2;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpAuto3SB:
+    begin
+      {$REGION ' CPP Pump 3 Auto '}
+      FSbPump3[0] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrSbPump3.SwitchPosition := 0;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStop3SB:
+    begin
+      {$REGION ' CPP Pump 3 Stop '}
+      FSbPump3[1] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrSbPump3.SwitchPosition := 1;
+      {$ENDREGION}
+    end;
+    epPCSCPPPumpStart3SB:
+    begin
+      {$REGION ' CPP Pump 3 Start '}
+      FSbPump3[2] := Value;
+      SetHidroulicPump;
+
+      if Value then
+        vrSbPump3.SwitchPosition := 2;
       {$ENDREGION}
     end;
   end;
