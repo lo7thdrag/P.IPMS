@@ -54,6 +54,12 @@
         <Projects Include="Generator Panel\GeneratorPanel.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Main Switch Board\MainSwitchBoard.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Auxilary\Auxilary.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -215,14 +221,32 @@
     <Target Name="GeneratorPanel:Make">
         <MSBuild Projects="Generator Panel\GeneratorPanel.dproj" Targets="Make"/>
     </Target>
+    <Target Name="MainSwitchBoard">
+        <MSBuild Projects="Main Switch Board\MainSwitchBoard.dproj"/>
+    </Target>
+    <Target Name="MainSwitchBoard:Clean">
+        <MSBuild Projects="Main Switch Board\MainSwitchBoard.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MainSwitchBoard:Make">
+        <MSBuild Projects="Main Switch Board\MainSwitchBoard.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Auxilary">
+        <MSBuild Projects="Auxilary\Auxilary.dproj"/>
+    </Target>
+    <Target Name="Auxilary:Clean">
+        <MSBuild Projects="Auxilary\Auxilary.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Auxilary:Make">
+        <MSBuild Projects="Auxilary\Auxilary.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="EmergencyStop;PanelThrottle;AlarmRudder;pcsUI;ACS;IPMSLoader;instructor;ERSimulator;IPMSComponent;controller;setting;Mimics;TrendChart;DieselGenerator;MCRMachineLeft;MCRMachineRight;GeneratorPanel"/>
+        <CallTarget Targets="EmergencyStop;PanelThrottle;AlarmRudder;pcsUI;ACS;IPMSLoader;instructor;ERSimulator;IPMSComponent;controller;setting;Mimics;TrendChart;DieselGenerator;MCRMachineLeft;MCRMachineRight;GeneratorPanel;MainSwitchBoard;Auxilary"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="EmergencyStop:Clean;PanelThrottle:Clean;AlarmRudder:Clean;pcsUI:Clean;ACS:Clean;IPMSLoader:Clean;instructor:Clean;ERSimulator:Clean;IPMSComponent:Clean;controller:Clean;setting:Clean;Mimics:Clean;TrendChart:Clean;DieselGenerator:Clean;MCRMachineLeft:Clean;MCRMachineRight:Clean;GeneratorPanel:Clean"/>
+        <CallTarget Targets="EmergencyStop:Clean;PanelThrottle:Clean;AlarmRudder:Clean;pcsUI:Clean;ACS:Clean;IPMSLoader:Clean;instructor:Clean;ERSimulator:Clean;IPMSComponent:Clean;controller:Clean;setting:Clean;Mimics:Clean;TrendChart:Clean;DieselGenerator:Clean;MCRMachineLeft:Clean;MCRMachineRight:Clean;GeneratorPanel:Clean;MainSwitchBoard:Clean;Auxilary:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="EmergencyStop:Make;PanelThrottle:Make;AlarmRudder:Make;pcsUI:Make;ACS:Make;IPMSLoader:Make;instructor:Make;ERSimulator:Make;IPMSComponent:Make;controller:Make;setting:Make;Mimics:Make;TrendChart:Make;DieselGenerator:Make;MCRMachineLeft:Make;MCRMachineRight:Make;GeneratorPanel:Make"/>
+        <CallTarget Targets="EmergencyStop:Make;PanelThrottle:Make;AlarmRudder:Make;pcsUI:Make;ACS:Make;IPMSLoader:Make;instructor:Make;ERSimulator:Make;IPMSComponent:Make;controller:Make;setting:Make;Mimics:Make;TrendChart:Make;DieselGenerator:Make;MCRMachineLeft:Make;MCRMachineRight:Make;GeneratorPanel:Make;MainSwitchBoard:Make;Auxilary:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

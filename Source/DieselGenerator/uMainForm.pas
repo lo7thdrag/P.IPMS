@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   VrControls, VrRotarySwitch, Vcl.StdCtrls,
 
-  uListener, uFreezeFrom, uDataType;
+  uListener, uFreezeFrom, uDataType, Vcl.MPlayer;
 
 type
   TMainForm = class(TForm)
@@ -43,6 +43,7 @@ type
     lblRunningHours: TLabel;
     imgGenSpaceHeater: TImage;
     imgJWHeater: TImage;
+    mpAlarm: TMediaPlayer;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnLampTestMouseDown(Sender: TObject; Button: TMouseButton;
@@ -56,6 +57,8 @@ type
     procedure VrMainSwitchChange(Sender: TObject);
     procedure btnManualClick(Sender: TObject);
     procedure DoLampTest(OnOff : Boolean);
+    procedure btnSirenOffClick(Sender: TObject);
+    procedure mpAlarmNotify(Sender: TObject);
 
   private
     FListener : TListeners;
@@ -67,6 +70,7 @@ type
 
   public
     { Public declarations }
+    silence : Boolean;
   end;
 
 var
@@ -87,8 +91,8 @@ begin
       imgStart.Visible          := Value;
       imgStop.Visible           := not Value;
       imgRunning.Visible        := Value;
-      imgJWHeater.Visible       := False;
-      imgGenSpaceHeater.Visible := False;
+      imgJWHeater.Visible       := not Value;
+      imgGenSpaceHeater.Visible := not Value;
     end;
 
     epPMSMeasPowFailure :
@@ -96,27 +100,109 @@ begin
       imgSupplyVoltageLow.Visible := Value;
 
       imgStartDisable.Visible := Value;
-      imgRunning.Visible := False;
-      btnStart.Enabled := False;
+      imgRunning.Visible      := not Value;
+      imgStart.Visible        := not Value;
+      btnStart.Enabled        := not Value;
+
+      silence := True;
+      mpAlarm.Open;
+      mpAlarm.Play;
     end;
-    epPMSAutStartFailure        : imgAutomaticStartFailed.Visible := Value;
-    epPMSSpeedSensorFailureAlrm : imgSpeedSensorFailure.Visible := Value;
-    epPMSLubOilPressLowAlrm     : imgLubOilPressLow.Visible := Value;
-    epPMSLubOilTempHigh         : imgLubOilTempHigh.Visible := Value;
-    epPMSCoolWaterTempHighAlrm  : imgCoolingWaterTempHigh.Visible := Value;
-    epPMSCoolWaterLevelLow      : imgCoolingWaterLevelLow.Visible := Value;
-    epPMSFuelOilLeakage         : imgFuelOilLeakage.Visible := Value;
+    epPMSAutStartFailure :
+    begin
+      imgAutomaticStartFailed.Visible := Value;
+
+      imgStartDisable.Visible := Value;
+      imgRunning.Visible      := not Value;
+      imgStart.Visible        := not Value;
+      btnStart.Enabled        := not Value;
+
+      mpAlarm.Open;
+      mpAlarm.Play;
+    end;
+    epPMSSpeedSensorFailureAlrm :
+    begin
+      imgSpeedSensorFailure.Visible := Value;
+
+      imgStartDisable.Visible := Value;
+      imgRunning.Visible      := not Value;
+      imgStart.Visible        := not Value;
+      btnStart.Enabled        := not Value;
+
+      mpAlarm.Open;
+      mpAlarm.Play;
+    end;
+    epPMSLubOilPressLowAlrm     :
+    begin
+      imgLubOilPressLow.Visible := Value;
+
+      imgStartDisable.Visible := Value;
+      imgRunning.Visible      := not Value;
+      imgStart.Visible        := not Value;
+      btnStart.Enabled        := not Value;
+
+      mpAlarm.Open;
+      mpAlarm.Play;
+    end;
+    epPMSLubOilTempHigh         :
+    begin
+      imgLubOilTempHigh.Visible := Value;
+
+      imgStartDisable.Visible := Value;
+      imgRunning.Visible      := not Value;
+      imgStart.Visible        := not Value;
+      btnStart.Enabled        := not Value;
+
+      mpAlarm.Open;
+      mpAlarm.Play;
+    end;
+    epPMSCoolWaterTempHighAlrm  :
+    begin
+      imgCoolingWaterTempHigh.Visible := Value;
+
+      imgStartDisable.Visible := Value;
+      imgRunning.Visible      := not Value;
+      imgStart.Visible        := not Value;
+      btnStart.Enabled        := not Value;
+
+      mpAlarm.Open;
+      mpAlarm.Play;
+    end;
+    epPMSCoolWaterLevelLow :
+    begin
+      imgCoolingWaterLevelLow.Visible := Value;
+
+      imgStartDisable.Visible := Value;
+      imgRunning.Visible      := not Value;
+      imgStart.Visible        := not Value;
+      btnStart.Enabled        := not Value;
+
+      mpAlarm.Open;
+      mpAlarm.Play;
+    end;
+    epPMSFuelOilLeakage :
+    begin
+      imgFuelOilLeakage.Visible := Value;
+
+      imgStartDisable.Visible := Value;
+      imgRunning.Visible      := not Value;
+      imgStart.Visible        := not Value;
+      btnStart.Enabled        := not Value;
+
+      mpAlarm.Open;
+      mpAlarm.Play;
+    end;
 
     epPMSSpeedSensorFailureShutdown : imgShutdownOverSpeed.Visible := Value;
     epPMSLubOilPressLowShutdown     : imgShutdownLOPressLow.Visible := Value;
     epPMSCoolWaterTempHighShutdown  : imgShutdownCWTempHigh.Visible := Value;
 
-    epPMSNotStandby             :
+    epPMSNotStandby :
     begin
       imgManual.Visible := Value;
       imgStandby.Visible := not Value
     end;
-    epPMSStartDisable           : imgStartDisable.Visible := Value;
+    epPMSStartDisable : imgStartDisable.Visible := Value;
   end;
 end;
 
@@ -146,65 +232,23 @@ procedure TMainForm.btnLampTestMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   DoLampTest(True);
-
-//  imgSupplyVoltageLow.Visible := True;
-//  imgAutomaticStartFailed.Visible := True;
-//  imgSpeedSensorFailure.Visible := True;
-//  imgLubOilPressLow.Visible := True;
-//  imgLubOilTempHigh.Visible := True;
-//  imgCoolingWaterTempHigh.Visible := True;
-//  imgCoolingWaterLevelLow.Visible := True;
-//  imgFuelOilLeakage.Visible := True;
-//  imgSpare.Visible := True;
-//
-//  imgShutdownOverSpeed.Visible := True;
-//  imgShutdownLOPressLow.Visible := True;
-//  imgShutdownCWTempHigh.Visible := True;
-//  imgShutDownSpare.Visible := True;
-//
-//  imgRunning.Visible := True;
-//  imgStartDisable.Visible := True;
-//
-//  imgStart.Visible := True;
-//  imgStop.Visible := True;
-//  imgStandby.Visible := True;
-//  imgManual.Visible := True;
-//  imgReset.Visible := True;
 end;
 
 procedure TMainForm.btnLampTestMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   DoLampTest(False);
-
-//  imgSupplyVoltageLow.Visible := False;
-//  imgAutomaticStartFailed.Visible := False;
-//  imgSpeedSensorFailure.Visible := False;
-//  imgLubOilPressLow.Visible := False;
-//  imgLubOilTempHigh.Visible := False;
-//  imgCoolingWaterTempHigh.Visible := False;
-//  imgCoolingWaterLevelLow.Visible := False;
-//  imgFuelOilLeakage.Visible := False;
-//  imgSpare.Visible := False;
-//
-//  imgShutdownOverSpeed.Visible := False;
-//  imgShutdownLOPressLow.Visible := False;
-//  imgShutdownCWTempHigh.Visible := False;
-//  imgShutDownSpare.Visible := False;
-//
-//  imgRunning.Visible := False;
-//  imgStartDisable.Visible := False;
-//
-//  imgStart.Visible := False;
-//  imgStop.Visible := False;
-//  imgStandby.Visible := False;
-//  imgManual.Visible := False;
-//  imgReset.Visible := False;
 end;
 
 procedure TMainForm.btnManualClick(Sender: TObject);
 begin
   DieselGeneratorSystem.EngineMode(True);
+end;
+
+procedure TMainForm.btnSirenOffClick(Sender: TObject);
+begin
+  mpAlarm.Open;
+  mpAlarm.Stop;
 end;
 
 procedure TMainForm.btnStandbyClick(Sender: TObject);
@@ -274,6 +318,15 @@ begin
             imgStart, imgStop, imgStandby, imgManual, imgReset ];
 
   SetLength(LampStatus, Length(Lamps));
+
+  if not FileExists(ExtractFilePath(Application.Exename) + 'IPMS_ALARM.wav') then
+  begin
+    raise Exception.Create('IPMS_ALARM.wav Not found');
+  end
+  else
+    mpAlarm.FileName:= ExtractFilePath(Application.Exename) + 'IPMS_ALARM.wav';
+
+  silence := False;
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
@@ -291,6 +344,15 @@ begin
     Height := Screen.Monitors[1].Height;
     Left := Screen.Monitors[1].Left;
     Top := Screen.Monitors[1].Top;
+  end;
+end;
+
+procedure TMainForm.mpAlarmNotify(Sender: TObject);
+begin
+  if (mpAlarm.NotifyValue = nvSuccessful) and silence then
+  begin
+    mpAlarm.Play;
+    mpAlarm.Notify := True;
   end;
 end;
 

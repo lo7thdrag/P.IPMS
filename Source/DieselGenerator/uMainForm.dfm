@@ -9435,6 +9435,7 @@ object MainForm: TMainForm
       48DD625C93589416A559FD5894F3C4A2B428CDEAC7A29C27FF1FADAC362FC4BE
       368C0000000049454E44AE426082}
     Stretch = True
+    OnClick = btnSirenOffClick
   end
   object btnLampTest: TImage
     Left = 576
@@ -10805,5 +10806,16 @@ object MainForm: TMainForm
     Font.Height = -11
     Font.Name = 'Arial'
     Font.Style = []
+  end
+  object mpAlarm: TMediaPlayer
+    Left = 705
+    Top = 24
+    Width = 253
+    Height = 30
+    DoubleBuffered = True
+    Visible = False
+    ParentDoubleBuffered = False
+    TabOrder = 1
+    OnNotify = mpAlarmNotify
   end
 end
