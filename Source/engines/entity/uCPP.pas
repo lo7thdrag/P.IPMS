@@ -195,12 +195,19 @@ begin
   LeverPitch    := 0;
   ActualPitch   := 0;
   FDelayer      := 0;
-  HydraulicPumpStart1 := False;
-  HydraulicPumpStart2 := False;
-  HydraulicPumpStart3 := False;
+
   HydraulicPumpStandby1 := False;
   HydraulicPumpStandby2 := False;
   HydraulicPumpAuto3 := False;
+
+  HydraulicPumpStop1 := False;
+  HydraulicPumpStop2 := False;
+  HydraulicPumpStop3 := False;
+
+  HydraulicPumpStart1 := False;
+  HydraulicPumpStart2 := False;
+  HydraulicPumpStart3 := False;
+
 end;
 
 destructor TCPP.Destroy;
@@ -440,14 +447,15 @@ begin
   Listener.TriggerEvents(Self,epPCSCPPPumpStandby1,Value);
 end;
 
-procedure TCPP.SetHydraulicPumpStandby2(const Value: Boolean);
+procedure TCPP.SetHydraulicPumpStop1(const Value: Boolean);
 begin
-  if FHydraulicPumpStandby2 = Value then
+  if FHydraulicPumpStop1 = Value then
     Exit;
 
-  FHydraulicPumpStandby2 := Value;
-  PumpStandby[2] := Value;
-  Listener.TriggerEvents(Self,epPCSCPPPumpStandby2,Value);
+  FHydraulicPumpStop1 := Value;
+  PumpStop[1] := Value;
+  Listener.TriggerEvents(Self,epPCSCPPPumpStop1,Value);
+  Listener.TriggerEvents(Self,epPCSCPPHydraulicPumpHour1,False);
 end;
 
 procedure TCPP.SetHydraulicPumpStart1(const Value: Boolean);
@@ -459,6 +467,16 @@ begin
   PumpStart[1] := Value;
   Listener.TriggerEvents(Self,epPCSCPPPumpStart1,Value);
   Listener.TriggerEvents(Self,epPCSCPPHydraulicPumpHour1,Value);
+end;
+
+procedure TCPP.SetHydraulicPumpStandby2(const Value: Boolean);
+begin
+  if FHydraulicPumpStandby2 = Value then
+    Exit;
+
+  FHydraulicPumpStandby2 := Value;
+  PumpStandby[2] := Value;
+  Listener.TriggerEvents(Self,epPCSCPPPumpStandby2,Value);
 end;
 
 procedure TCPP.SetHydraulicPumpStart2(const Value: Boolean);
@@ -481,17 +499,6 @@ begin
   FPumpStart[3] := Value;
   Listener.TriggerEvents(Self,epPCSCPPPumpStart3,Value);
   Listener.TriggerEvents(Self,epPCSCPPHydraulicPumpHour3,Value);
-end;
-
-procedure TCPP.SetHydraulicPumpStop1(const Value: Boolean);
-begin
-  if FHydraulicPumpStop1 = Value then
-    Exit;
-
-  FHydraulicPumpStop1 := Value;
-  PumpStop[1] := Value;
-  Listener.TriggerEvents(Self,epPCSCPPPumpStop1,Value);
-  Listener.TriggerEvents(Self,epPCSCPPHydraulicPumpHour1,False);
 end;
 
 procedure TCPP.SetHydraulicPumpStop2(const Value: Boolean);

@@ -197,6 +197,18 @@ uses
   uMCRMachineLeftSystem;
 
 {$R *.dfm}
+procedure EnableComposited(WinControl:TWinControl);
+var
+  i:Integer;
+  NewExStyle:DWORD;
+begin
+  NewExStyle := GetWindowLong(WinControl.Handle, GWL_EXSTYLE) or WS_EX_COMPOSITED;
+  SetWindowLong(WinControl.Handle, GWL_EXSTYLE, NewExStyle);
+
+  for I := 0 to WinControl.ControlCount - 1 do
+    if WinControl.Controls[i] is TWinControl then
+      EnableComposited(TWinControl(WinControl.Controls[i]));
+end;
 
 procedure TMainForm.GetIdBlinkTelegrapLamp(value: Integer);
 var
@@ -269,6 +281,11 @@ begin
   FIsBlinkState := False;
   {$ENDREGION}
 
+  EnableComposited(pnlAlarmIndicator);
+  EnableComposited(pnlAlarmPump12);
+  EnableComposited(pnlAlramPump34);
+  EnableComposited(pnlCppHidraulicPump);
+  EnableComposited(pnlTelegraph);
 end;
 
 procedure TMainForm.SetAlarmIndicator;
@@ -374,42 +391,105 @@ end;
 procedure TMainForm.vrPsPumpChange(Sender: TObject);
 var
   i : Integer;
+  stateIdTemp : Integer;
 
 begin
-  for i := 0 to 2 do
-  begin
-    FPsPump1[i] := vrPsPump1.SwitchPosition = i;
-    MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, i, FPsPump1[i]);
-
-//    if FPsPump1[i] <> (vrPsPump1.SwitchPosition = i) then
-//    begin
-//      FPsPump1[i] := vrPsPump1.SwitchPosition = i;
-//      MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, i, FPsPump1[i]);
-//    end;
-  end;
-
   case TVrRotarySwitch(Sender).Tag of
     1:
     begin
-//      FPsPump1[0] := vrPsPump1.SwitchPosition = 0;
-//      FPsPump1[1] := vrPsPump1.SwitchPosition = 1;
-//      FPsPump1[2] := vrPsPump1.SwitchPosition = 2;
+      for i := 0 to 2 do
+      begin
+        case i of
+          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
+          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
+          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
+        end;
+
+        if vrPsPump1.SwitchPosition = i then
+          MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrPsPump1.SwitchPosition = i);
+      end;
     end;
     2:
     begin
-//      FPsPump2[0] := vrPsPump2.SwitchPosition = 0;
-//      FPsPump2[1] := vrPsPump2.SwitchPosition = 1;
-//      FPsPump2[2] := vrPsPump2.SwitchPosition = 2;
+      for i := 0 to 2 do
+      begin
+        case i of
+          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
+          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
+          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
+        end;
+
+        if vrPsPump2.SwitchPosition = i then
+          MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrPsPump2.SwitchPosition = i);
+      end;
     end;
     3:
     begin
-//      FPsPump3[0] := vrPsPump3.SwitchPosition = 0;
-//      FPsPump3[1] := vrPsPump3.SwitchPosition = 1;
-//      FPsPump3[2] := vrPsPump3.SwitchPosition = 2;
+      for i := 0 to 2 do
+      begin
+        case i of
+          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
+          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
+          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
+        end;
+
+        if vrPsPump3.SwitchPosition = i then
+          MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrPsPump3.SwitchPosition = i);
+      end;
     end;
   end;
+end;
 
-  SetHidroulicPump;
+procedure TMainForm.vrSbPumpChange(Sender: TObject);
+var
+  i : Integer;
+  stateIdTemp : Integer;
+
+begin
+  case TVrRotarySwitch(Sender).Tag of
+    1:
+    begin
+      for i := 0 to 2 do
+      begin
+        case i of
+          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
+          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
+          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
+        end;
+
+        if vrSbPump1.SwitchPosition = i then
+          MCRMachineLeftSystem.sendPumpStatus(2, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrSbPump1.SwitchPosition = i);
+      end;
+    end;
+    2:
+    begin
+      for i := 0 to 2 do
+      begin
+        case i of
+          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
+          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
+          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
+        end;
+
+        if vrSbPump2.SwitchPosition = i then
+          MCRMachineLeftSystem.sendPumpStatus(2, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrSbPump2.SwitchPosition = i);
+      end;
+    end;
+    3:
+    begin
+      for i := 0 to 2 do
+      begin
+        case i of
+          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
+          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
+          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
+        end;
+
+        if vrSbPump3.SwitchPosition = i then
+          MCRMachineLeftSystem.sendPumpStatus(2, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrSbPump3.SwitchPosition = i);
+      end;
+    end;
+  end;
 end;
 
 procedure TMainForm.vrPsTelegrapChange(Sender: TObject);
@@ -443,32 +523,6 @@ begin
       {$ENDREGION}
     end;
   end;
-end;
-
-procedure TMainForm.vrSbPumpChange(Sender: TObject);
-begin
-  case TVrRotarySwitch(Sender).Tag of
-    1:
-    begin
-      FSbPump1[0] := vrSbPump1.SwitchPosition = 0;
-      FSbPump1[1] := vrSbPump1.SwitchPosition = 1;
-      FSbPump1[2] := vrSbPump1.SwitchPosition = 2;
-    end;
-    2:
-    begin
-      FSbPump2[0] := vrSbPump2.SwitchPosition = 0;
-      FSbPump2[1] := vrSbPump2.SwitchPosition = 1;
-      FSbPump2[2] := vrSbPump2.SwitchPosition = 2;
-    end;
-    3:
-    begin
-      FSbPump3[0] := vrSbPump3.SwitchPosition = 0;
-      FSbPump3[1] := vrSbPump3.SwitchPosition = 1;
-      FSbPump3[2] := vrSbPump3.SwitchPosition = 2;
-    end;
-  end;
-
-  SetHidroulicPump;
 end;
 
 procedure TMainForm.imgAudibleShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
