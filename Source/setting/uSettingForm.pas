@@ -256,7 +256,7 @@ begin
     LPUPort   := edtLPUPort.Text;
 
     Role := cbbRoleName.Text;
-    MonitorMimic := StrToInt(cbbMimicMonitor.Text);
+//    MonitorMimic := StrToInt(cbbMimicMonitor.Text);
     ServoID := listServoID;
     servoDegree := listServoDeg;
     mode := listMode;
@@ -328,7 +328,7 @@ begin
   i := cbbRoleName.Items.IndexOf(Setting.Role);
   cbbRoleName.ItemIndex := i;
 
-  cbbMimicMonitor.Text := IntToStr(Setting.MonitorMimic);
+//  cbbMimicMonitor.Text := IntToStr(Setting.MonitorMimic);
 
   listServoID := Setting.ServoID;
   listServoDeg := Setting.servoDegree;

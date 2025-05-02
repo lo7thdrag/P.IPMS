@@ -8,7 +8,7 @@ uses
   VrRotarySwitch, RzBmpBtn, VrAngularMeter, Vcl.ExtCtrls;
 
 type
-  TfrmGenPSFWD = class(TForm)
+  TfrmGenerator = class(TForm)
     pnlGenPSFwd: TPanel;
     Image2: TImage;
     Image1: TImage;
@@ -77,7 +77,6 @@ type
     VrRotarySwitch1: TVrRotarySwitch;
     VrRotarySwitch2: TVrRotarySwitch;
     Label21: TLabel;
-    Button1: TButton;
   private
     { Private declarations }
   public
@@ -85,7 +84,7 @@ type
   end;
 
 var
-  frmGenPSFWD: TfrmGenPSFWD;
+  frmGenerator: TfrmGenerator;
 
 implementation
 

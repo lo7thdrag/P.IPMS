@@ -1,8 +1,7 @@
-object frmGenPSFWD: TfrmGenPSFWD
+object frmGenerator: TfrmGenerator
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  Caption = 'frmGenPSFWD'
   ClientHeight = 1040
   ClientWidth = 1296
   Color = clBtnFace
@@ -80536,14 +80535,6 @@ object frmGenPSFWD: TfrmGenPSFWD
         Font.Style = [fsBold]
         ParentFont = False
       end
-    end
-    object Button1: TButton
-      Left = 1188
-      Top = 696
-      Width = 75
-      Height = 25
-      Caption = 'Button1'
-      TabOrder = 7
     end
   end
 end

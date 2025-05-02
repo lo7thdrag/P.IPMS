@@ -2,13 +2,13 @@ program MainSwitchBoard;
 
 uses
   Vcl.Forms,
-  uMainForm in 'uMainForm.pas' {Form6};
+  uMainForm in 'uMainForm.pas' {frmGenerator};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm6, Form6);
+  Application.CreateForm(TfrmGenerator, frmGenerator);
   Application.Run;
 end.
