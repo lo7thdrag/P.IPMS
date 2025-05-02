@@ -182,6 +182,7 @@ begin
 
       else if rec.ValueByte = 2 then {Terima Balasan, status telegrap siap mengirim lagi}
       begin
+        MainForm.IdReceive := rec.ID;
         MainForm.TelegrapStatus  := tsReceive;
         MainForm.SetTelegrap;
       end;

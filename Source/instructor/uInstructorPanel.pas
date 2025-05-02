@@ -633,7 +633,7 @@ begin
     end
     else
     begin
-      frmInstructorPanel.btnPropBridge.Color := clBtnFace;
+      frmInstructorPanel.btnPropBridge.Color := $00393632;
       TelegrapTimerFlag := True;
     end;
   end

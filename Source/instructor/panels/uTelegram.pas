@@ -119,7 +119,7 @@ begin
       exit;
 
     {untuk membunuh menu telegraph yg kelap-kelip}
-    frmInstructorPanel.btnPropBridge.Color := clBtnFace;
+    frmInstructorPanel.btnPropBridge.Color := $00393632;
     frmInstructorPanel.tmrTelegrap.Enabled := False;
 
     tmrKiri.Enabled := False;
@@ -156,7 +156,7 @@ begin
       exit;
 
     {untuk membunuh menu telegraph yg kelap-kelip}
-    frmInstructorPanel.btnPropBridge.Color := clBtnFace;
+    frmInstructorPanel.btnPropBridge.Color := $00393632;
     frmInstructorPanel.tmrTelegrap.Enabled := False;
 
     tmrKanan.Enabled := False;

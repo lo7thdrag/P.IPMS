@@ -298,7 +298,7 @@ type
     gearbox    : TGearBox;
     gearbox_PS : TGearBox;
     gearbox_SB : TGearBox;
-    cpp    : TCPP;
+//    cpp    : TCPP;
     cpp_PS : TCPP;
     cpp_SB : TCPP;
 
@@ -311,6 +311,10 @@ type
     procedure FlashingIndicatorStop(SenderOn, SenderOff: TSpeedButtonImage; aOnOff: Boolean);
     procedure FlashingIndicatorClutch(SenderOn, SenderOff: TSpeedButtonImage; aOnOff: Boolean);
     procedure LoadSessionSynchronize;
+
+    procedure EnginePropertyIntChange(Sender : TObject; PropsID : E_PropsID;Value : Integer);overload;
+    procedure EnginePropertyBoolChange(Sender : TObject; PropsID : E_PropsID;Value : Boolean);overload;
+    procedure EnginePropertyDouChange(Sender : TObject; PropsID : E_PropsID;Value : Double);overload;
 
   public
 
@@ -518,36 +522,36 @@ begin
       if cppHydraulicPumpID = 'Pump 1' then
       begin
         ERSystem.ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(cppConditionStatusTag,C_PUMP_CPP_HYDRAULIC_1,C_PUMP_CPP_HYDRAULIC_STANDBY,True);
-        if cppConditionStatusTag = 1 then
-        begin
-          btnPS_Standby1.Color := clLime;
-          btnPS_Stop1.Color := clBtnFace;
-          btnPS_Start1.Color := clBtnFace;
-        end
-        else
-        if cppConditionStatusTag = 2 then
-        begin
-          btnSB_Standby1.Color := clLime;
-          btnSB_Stop1.Color := clBtnFace;
-          btnSB_Start1.Color := clBtnFace;
-        end;
+//        if cppConditionStatusTag = 1 then
+//        begin
+//          btnPS_Standby1.Color := clLime;
+//          btnPS_Stop1.Color := clBtnFace;
+//          btnPS_Start1.Color := clBtnFace;
+//        end
+//        else
+//        if cppConditionStatusTag = 2 then
+//        begin
+//          btnSB_Standby1.Color := clLime;
+//          btnSB_Stop1.Color := clBtnFace;
+//          btnSB_Start1.Color := clBtnFace;
+//        end;
       end
       else if cppHydraulicPumpID = 'Pump 2' then
       begin
         ERSystem.ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(cppConditionStatusTag,C_PUMP_CPP_HYDRAULIC_2,C_PUMP_CPP_HYDRAULIC_STANDBY,True);
-        if cppConditionStatusTag = 1 then
-        begin
-          btnPS_Standby2.Color := clLime;
-          btnPS_Stop2.Color := clBtnFace;
-          btnPS_Start2.Color := clBtnFace;
-        end
-        else
-        if cppConditionStatusTag = 2 then
-        begin
-          btnSB_Standby2.Color := clLime;
-          btnSB_Stop2.Color := clBtnFace;
-          btnSB_Start2.Color := clBtnFace;
-        end;
+//        if cppConditionStatusTag = 1 then
+//        begin
+//          btnPS_Standby2.Color := clLime;
+//          btnPS_Stop2.Color := clBtnFace;
+//          btnPS_Start2.Color := clBtnFace;
+//        end
+//        else
+//        if cppConditionStatusTag = 2 then
+//        begin
+//          btnSB_Standby2.Color := clLime;
+//          btnSB_Stop2.Color := clBtnFace;
+//          btnSB_Start2.Color := clBtnFace;
+//        end;
       end;
     end;
   end
@@ -558,53 +562,53 @@ begin
       if cppHydraulicPumpID = 'Pump 1' then
       begin
         ERSystem.ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(cppConditionStatusTag,C_PUMP_CPP_HYDRAULIC_1,C_PUMP_CPP_HYDRAULIC_STOP,True);
-        if cppConditionStatusTag = 1 then
-        begin
-          btnPS_Standby1.Color := clBtnFace;
-          btnPS_Stop1.Color := clLime;
-          btnPS_Start1.Color := clBtnFace;
-        end
-        else
-        if cppConditionStatusTag = 2 then
-        begin
-          btnSB_Standby1.Color := clBtnFace;
-          btnSB_Stop1.Color := clLime;
-          btnSB_Start1.Color := clBtnFace;
-        end;
+//        if cppConditionStatusTag = 1 then
+//        begin
+//          btnPS_Standby1.Color := clBtnFace;
+//          btnPS_Stop1.Color := clLime;
+//          btnPS_Start1.Color := clBtnFace;
+//        end
+//        else
+//        if cppConditionStatusTag = 2 then
+//        begin
+//          btnSB_Standby1.Color := clBtnFace;
+//          btnSB_Stop1.Color := clLime;
+//          btnSB_Start1.Color := clBtnFace;
+//        end;
       end
       else if cppHydraulicPumpID = 'Pump 2' then
       begin
         ERSystem.ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(cppConditionStatusTag,C_PUMP_CPP_HYDRAULIC_2,C_PUMP_CPP_HYDRAULIC_STOP,True);
-        if cppConditionStatusTag = 1 then
-        begin
-          btnPS_Standby2.Color := clBtnFace;
-          btnPS_Stop2.Color := clLime;
-          btnPS_Start2.Color := clBtnFace;
-        end
-        else
-        if cppConditionStatusTag = 2 then
-        begin
-          btnSB_Standby2.Color := clBtnFace;
-          btnSB_Stop2.Color := clLime;
-          btnSB_Start2.Color := clBtnFace;
-        end;
+//        if cppConditionStatusTag = 1 then
+//        begin
+//          btnPS_Standby2.Color := clBtnFace;
+//          btnPS_Stop2.Color := clLime;
+//          btnPS_Start2.Color := clBtnFace;
+//        end
+//        else
+//        if cppConditionStatusTag = 2 then
+//        begin
+//          btnSB_Standby2.Color := clBtnFace;
+//          btnSB_Stop2.Color := clLime;
+//          btnSB_Start2.Color := clBtnFace;
+//        end;
       end
       else if cppHydraulicPumpID = 'Pump 3' then
       begin
         ERSystem.ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(cppConditionStatusTag,C_PUMP_CPP_HYDRAULIC_3,C_PUMP_CPP_HYDRAULIC_STOP,True);
-        if cppConditionStatusTag = 1 then
-        begin
-          btnPS_Auto3.Color := clBtnFace;
-          btnPS_Stop3.Color := clLime;
-          btnPS_Start3.Color := clBtnFace;
-        end
-        else
-        if cppConditionStatusTag = 2 then
-        begin
-          btnSB_Auto3.Color := clBtnFace;
-          btnSB_Stop3.Color := clLime;
-          btnSB_Start3.Color := clBtnFace;
-        end;
+//        if cppConditionStatusTag = 1 then
+//        begin
+//          btnPS_Auto3.Color := clBtnFace;
+//          btnPS_Stop3.Color := clLime;
+//          btnPS_Start3.Color := clBtnFace;
+//        end
+//        else
+//        if cppConditionStatusTag = 2 then
+//        begin
+//          btnSB_Auto3.Color := clBtnFace;
+//          btnSB_Stop3.Color := clLime;
+//          btnSB_Start3.Color := clBtnFace;
+//        end;
       end;
     end;
   end
@@ -615,53 +619,53 @@ begin
       if cppHydraulicPumpID = 'Pump 1' then
       begin
         ERSystem.ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(cppConditionStatusTag,C_PUMP_CPP_HYDRAULIC_1,C_PUMP_CPP_HYDRAULIC_START,True);
-        if cppConditionStatusTag = 1 then
-        begin
-          btnPS_Standby1.Color := clBtnFace;
-          btnPS_Stop1.Color := clBtnFace;
-          btnPS_Start1.Color := clLime;
-        end
-        else
-        if cppConditionStatusTag = 2 then
-        begin
-          btnSB_Standby1.Color := clBtnFace;
-          btnSB_Stop1.Color := clBtnFace;
-          btnSB_Start1.Color := clLime;
-        end;
+//        if cppConditionStatusTag = 1 then
+//        begin
+//          btnPS_Standby1.Color := clBtnFace;
+//          btnPS_Stop1.Color := clBtnFace;
+//          btnPS_Start1.Color := clLime;
+//        end
+//        else
+//        if cppConditionStatusTag = 2 then
+//        begin
+//          btnSB_Standby1.Color := clBtnFace;
+//          btnSB_Stop1.Color := clBtnFace;
+//          btnSB_Start1.Color := clLime;
+//        end;
       end
       else if cppHydraulicPumpID = 'Pump 2' then
       begin
         ERSystem.ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(cppConditionStatusTag,C_PUMP_CPP_HYDRAULIC_2,C_PUMP_CPP_HYDRAULIC_START,True);
-        if cppConditionStatusTag = 1 then
-        begin
-          btnPS_Standby2.Color := clBtnFace;
-          btnPS_Stop2.Color := clBtnFace;
-          btnPS_Start2.Color := clLime;
-        end
-        else
-        if cppConditionStatusTag = 2 then
-        begin
-          btnSB_Standby2.Color := clBtnFace;
-          btnSB_Stop2.Color := clBtnFace;
-          btnSB_Start2.Color := clLime;
-        end;
+//        if cppConditionStatusTag = 1 then
+//        begin
+//          btnPS_Standby2.Color := clBtnFace;
+//          btnPS_Stop2.Color := clBtnFace;
+//          btnPS_Start2.Color := clLime;
+//        end
+//        else
+//        if cppConditionStatusTag = 2 then
+//        begin
+//          btnSB_Standby2.Color := clBtnFace;
+//          btnSB_Stop2.Color := clBtnFace;
+//          btnSB_Start2.Color := clLime;
+//        end;
       end
       else if cppHydraulicPumpID = 'Pump 3' then
       begin
         ERSystem.ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(cppConditionStatusTag,C_PUMP_CPP_HYDRAULIC_3,C_PUMP_CPP_HYDRAULIC_START,True);
-        if cppConditionStatusTag = 1 then
-        begin
-          btnPS_Auto3.Color := clBtnFace;
-          btnPS_Stop3.Color := clBtnFace;
-          btnPS_Start3.Color := clLime;
-        end
-        else
-        if cppConditionStatusTag = 2 then
-        begin
-          btnSB_Auto3.Color := clBtnFace;
-          btnSB_Stop3.Color := clBtnFace;
-          btnSB_Start3.Color := clLime;
-        end;
+//        if cppConditionStatusTag = 1 then
+//        begin
+//          btnPS_Auto3.Color := clBtnFace;
+//          btnPS_Stop3.Color := clBtnFace;
+//          btnPS_Start3.Color := clLime;
+//        end
+//        else
+//        if cppConditionStatusTag = 2 then
+//        begin
+//          btnSB_Auto3.Color := clBtnFace;
+//          btnSB_Stop3.Color := clBtnFace;
+//          btnSB_Start3.Color := clLime;
+//        end;
       end
     end;
   end
@@ -672,19 +676,19 @@ begin
       if cppHydraulicPumpID = 'Pump 3' then
       begin
         ERSystem.ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(cppConditionStatusTag,C_PUMP_CPP_HYDRAULIC_3,C_PUMP_CPP_HYDRAULIC_STANDBY,True);
-        if cppConditionStatusTag = 1 then
-        begin
-          btnPS_Auto3.Color := clLime;
-          btnPS_Stop3.Color := clBtnFace;
-          btnPS_Start3.Color := clBtnFace;
-        end
-        else
-        if cppConditionStatusTag = 2 then
-        begin
-          btnSB_Auto3.Color := clLime;
-          btnSB_Stop3.Color := clBtnFace;
-          btnSB_Start3.Color := clBtnFace;
-        end;
+//        if cppConditionStatusTag = 1 then
+//        begin
+//          btnPS_Auto3.Color := clLime;
+//          btnPS_Stop3.Color := clBtnFace;
+//          btnPS_Start3.Color := clBtnFace;
+//        end
+//        else
+//        if cppConditionStatusTag = 2 then
+//        begin
+//          btnSB_Auto3.Color := clLime;
+//          btnSB_Stop3.Color := clBtnFace;
+//          btnSB_Start3.Color := clBtnFace;
+//        end;
       end;
     end
   end;
@@ -728,6 +732,196 @@ begin
       FFlashingStopSB := True;
     end;
   end;
+end;
+
+procedure TfrmPCSLocalControlPanel.EnginePropertyBoolChange(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
+begin
+  if Sender is TCPP then
+  begin
+    if TCPP(Sender).Identifier = 'CPP PS' then
+    begin
+      case PropsID of
+        epPCSCPPPumpStandby1:
+        begin
+          if Value then
+          begin
+            btnPS_Standby1.Color := clLime;
+            btnPS_Stop1.Color := clBtnFace;
+            btnPS_Start1.Color := clBtnFace;
+          end;
+        end;
+        epPCSCPPPumpStop1:
+        begin
+          if Value then
+          begin
+            btnPS_Standby1.Color := clBtnFace;
+            btnPS_Stop1.Color := clLime;
+            btnPS_Start1.Color := clBtnFace;
+          end;
+        end;
+        epPCSCPPPumpStart1:
+        begin
+          if Value then
+          begin
+            btnPS_Standby1.Color := clBtnFace;
+            btnPS_Stop1.Color := clBtnFace;
+            btnPS_Start1.Color := clLime;
+          end;
+        end;
+        epPCSCPPPumpStandby2:
+        begin
+          if Value then
+          begin
+            btnPS_Standby2.Color := clLime;
+            btnPS_Stop2.Color := clBtnFace;
+            btnPS_Start2.Color := clBtnFace;
+          end;
+        end;
+        epPCSCPPPumpStop2:
+        begin
+          if Value then
+          begin
+            btnPS_Standby2.Color := clBtnFace;
+            btnPS_Stop2.Color := clLime;
+            btnPS_Start2.Color := clBtnFace;
+          end;
+        end;
+        epPCSCPPPumpStart2:
+        begin
+          if Value then
+          begin
+            btnPS_Standby2.Color := clBtnFace;
+            btnPS_Stop2.Color := clBtnFace;
+            btnPS_Start2.Color := clLime;
+          end;
+        end;
+        epPCSCPPPumpAuto3:
+        begin
+          if Value then
+          begin
+            btnPS_Auto3.Color := clLime;
+            btnPS_Stop3.Color := clBtnFace;
+            btnPS_Start3.Color := clBtnFace;
+          end;
+        end;
+        epPCSCPPPumpStop3:
+        begin
+          if Value then
+          begin
+            btnPS_Auto3.Color := clBtnFace;
+            btnPS_Stop3.Color := clLime;
+            btnPS_Start3.Color := clBtnFace;
+          end;
+        end;
+        epPCSCPPPumpStart3:
+        begin
+          if Value then
+          begin
+            btnPS_Auto3.Color := clBtnFace;
+            btnPS_Stop3.Color := clBtnFace;
+            btnPS_Start3.Color := clLime;
+          end;
+        end;
+      end;
+    end
+    else if TCPP(Sender).Identifier = 'CPP SB' then
+    begin
+      case PropsID of
+        epPCSCPPPumpStandby1:
+        begin
+          if Value then
+          begin
+            btnSB_Standby1.Color := clLime;
+            btnSB_Stop1.Color := clBtnFace;
+            btnSB_Start1.Color := clBtnFace;
+          end;
+        end;
+        epPCSCPPPumpStop1:
+        begin
+          if Value then
+          begin
+            btnSB_Standby1.Color := clBtnFace;
+            btnSB_Stop1.Color := clLime;
+            btnSB_Start1.Color := clBtnFace;
+          end;
+        end;
+        epPCSCPPPumpStart1:
+        begin
+          if Value then
+          begin
+            btnSB_Standby1.Color := clBtnFace;
+            btnSB_Stop1.Color := clBtnFace;
+            btnSB_Start1.Color := clLime;
+          end;
+        end;
+        epPCSCPPPumpStandby2:
+        begin
+          if Value then
+          begin
+            btnSB_Standby2.Color := clLime;
+            btnSB_Stop2.Color := clBtnFace;
+            btnSB_Start2.Color := clBtnFace;
+          end;
+        end;
+        epPCSCPPPumpStop2:
+        begin
+          if Value then
+          begin
+            btnSB_Standby2.Color := clBtnFace;
+            btnSB_Stop2.Color := clLime;
+            btnSB_Start2.Color := clBtnFace;
+          end;
+        end;
+        epPCSCPPPumpStart2:
+        begin
+          if Value then
+          begin
+            btnSB_Standby2.Color := clBtnFace;
+            btnSB_Stop2.Color := clBtnFace;
+            btnSB_Start2.Color := clLime;
+          end;
+        end;
+         epPCSCPPPumpAuto3:
+        begin
+          if Value then
+          begin
+            btnSB_Auto3.Color := clLime;
+            btnSB_Stop3.Color := clBtnFace;
+            btnSB_Start3.Color := clBtnFace;
+          end;
+        end;
+        epPCSCPPPumpStop3:
+        begin
+          if Value then
+          begin
+            btnSB_Auto3.Color := clBtnFace;
+            btnSB_Stop3.Color := clLime;
+            btnSB_Start3.Color := clBtnFace;
+          end;
+        end;
+        epPCSCPPPumpStart3:
+        begin
+          if Value then
+          begin
+            btnSB_Auto3.Color := clBtnFace;
+            btnSB_Stop3.Color := clBtnFace;
+            btnSB_Start3.Color := clLime;
+          end;
+        end;
+      end;
+    end;
+
+  end
+end;
+
+procedure TfrmPCSLocalControlPanel.EnginePropertyDouChange(Sender: TObject; PropsID: E_PropsID; Value: Double);
+begin
+
+end;
+
+procedure TfrmPCSLocalControlPanel.EnginePropertyIntChange(Sender: TObject; PropsID: E_PropsID; Value: Integer);
+begin
+
 end;
 
 procedure TfrmPCSLocalControlPanel.FlashingIndicatorClutch(SenderOn,
@@ -852,6 +1046,10 @@ begin
   fAlarmIndicatorWhiteOff:= picture_Path + 'Bin\Images\Image LCP\ipms_RR 02 button white.bmp';
 
   counter := 0;
+
+  ERSystem.ERManager.EngineRoom.getPCSSystem.addEntityListener('PCS Local Panel',EnginePropertyBoolChange);
+  ERSystem.ERManager.EngineRoom.getPMSSystem.addEntityListener('PCS Local Panel',EnginePropertyIntChange);
+  ERSystem.ERManager.EngineRoom.getPMSSystem.addEntityListener('PCS Local Panel',EnginePropertyDouChange);
 end;
 
 procedure TfrmPCSLocalControlPanel.FormShortcut(var Msg: TWMKey;
