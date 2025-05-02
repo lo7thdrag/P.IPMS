@@ -226,31 +226,43 @@ begin
     begin
       if rec.PortStaboardID = C_PCS_CPP_PORTS then
         FLIstener.TriggerEvents(Self,epPCSCPPPumpStandby2PS,rec.ValueBool)
+      else if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStandby2SB,rec.ValueBool);
     end;
     epPCSCPPPumpStop2:
     begin
       if rec.PortStaboardID = C_PCS_CPP_PORTS then
         FLIstener.TriggerEvents(Self,epPCSCPPPumpStop2PS,rec.ValueBool)
+      else if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStop2SB,rec.ValueBool);
     end;
     epPCSCPPPumpStart2:
     begin
       if rec.PortStaboardID = C_PCS_CPP_PORTS then
         FLIstener.TriggerEvents(Self,epPCSCPPPumpStart2PS,rec.ValueBool)
+      else if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStart2SB,rec.ValueBool);
     end;
     epPCSCPPPumpAuto3:
     begin
       if rec.PortStaboardID = C_PCS_CPP_PORTS then
         FLIstener.TriggerEvents(Self,epPCSCPPPumpAuto3PS,rec.ValueBool)
+      else if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpAuto3SB,rec.ValueBool);
     end;
     epPCSCPPPumpStop3:
     begin
       if rec.PortStaboardID = C_PCS_CPP_PORTS then
         FLIstener.TriggerEvents(Self,epPCSCPPPumpStop3PS,rec.ValueBool)
+      else if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStop3SB,rec.ValueBool);
     end;
     epPCSCPPPumpStart3:
     begin
       if rec.PortStaboardID = C_PCS_CPP_PORTS then
         FLIstener.TriggerEvents(Self,epPCSCPPPumpStart3PS,rec.ValueBool)
+      else if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSCPPPumpStart3SB,rec.ValueBool);
     end;
   end;
 
