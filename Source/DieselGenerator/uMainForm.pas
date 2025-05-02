@@ -105,6 +105,7 @@ begin
       btnStart.Enabled        := not Value;
 
       silence := True;
+      mpAlarm.OnNotify := mpAlarmNotify;
       mpAlarm.Open;
       mpAlarm.Play;
     end;
@@ -117,6 +118,8 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
+      silence := True;
+      mpAlarm.OnNotify := mpAlarmNotify;
       mpAlarm.Open;
       mpAlarm.Play;
     end;
@@ -129,6 +132,8 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
+      silence := True;
+      mpAlarm.OnNotify := mpAlarmNotify;
       mpAlarm.Open;
       mpAlarm.Play;
     end;
@@ -141,6 +146,8 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
+      silence := True;
+      mpAlarm.OnNotify := mpAlarmNotify;
       mpAlarm.Open;
       mpAlarm.Play;
     end;
@@ -153,6 +160,8 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
+      silence := True;
+      mpAlarm.OnNotify := mpAlarmNotify;
       mpAlarm.Open;
       mpAlarm.Play;
     end;
@@ -165,6 +174,8 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
+      silence := True;
+      mpAlarm.OnNotify := mpAlarmNotify;
       mpAlarm.Open;
       mpAlarm.Play;
     end;
@@ -177,6 +188,8 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
+      silence := True;
+      mpAlarm.OnNotify := mpAlarmNotify;
       mpAlarm.Open;
       mpAlarm.Play;
     end;
@@ -189,6 +202,8 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
+      silence := True;
+      mpAlarm.OnNotify := mpAlarmNotify;
       mpAlarm.Open;
       mpAlarm.Play;
     end;
@@ -249,6 +264,7 @@ procedure TMainForm.btnSirenOffClick(Sender: TObject);
 begin
   mpAlarm.Open;
   mpAlarm.Stop;
+  mpAlarm.Notify := False;
 end;
 
 procedure TMainForm.btnStandbyClick(Sender: TObject);
