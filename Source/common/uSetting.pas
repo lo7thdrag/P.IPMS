@@ -63,7 +63,6 @@ type
     FDieselGenerator3IP: string ;
     FDieselGenerator4IP: string ;
 
-
     FManualIPMS : string;
     FOperationalInstruktur : string;
     FOperationalACS : string;
@@ -79,6 +78,65 @@ type
     function GetServer : string;
     function GetPassApp : string;
     function GetUserApp : string;
+
+    {$REGION ' Get & Set Console IP '}
+    function GetServerIP: string;
+    function GetInstrukturIP: string;
+    function GetAcsIP: string;
+    function GetMimicKiriIP: string;
+    function GetPcsKiriIp: string;
+    function GetMimicTengahIP: string;
+    function GetPcsKananIP: string;
+    function GetMimicKananIP: string;
+    function GetEmergencyStopIP: string;
+    function GetCctvIP: string;
+    function GetGenPsFwdIP: string;
+    function GetGenSbFwdIP: string;
+    function GetGenPsAftIP: string;
+    function GetGenSbAftIP: string;
+    function GetGenEmergencyIP: string;
+    function GetShoreIP: string;
+    function GetMainEngine1PsIP: string;
+    function GetMainEngine2PsIP: string;
+    function GetMainEngine1SbIP: string;
+    function GetMainEngine2SbIP: string;
+    function GetAuxiliary1IP: string;
+    function GetAuxiliary2IP: string;
+    function GetAuxiliary3IP: string;
+    function GetDieselGenerator1IP: string;
+    function GetDieselGenerator2IP: string;
+    function GetDieselGenerator3IP: string;
+    function GetDieselGenerator4IP: string;
+
+    procedure SetServerIP(const Value: string);
+    procedure SetInstrukturIP(const Value: string);
+    procedure SetAcsIP(const Value: string);
+    procedure SetMimicKiriIP(const Value: string);
+    procedure SetPcsKiriIP(const Value: string);
+    procedure SetMimicTengahIP(const Value: string);
+    procedure SetPcsKananIP(const Value: string);
+    procedure SetMimicKananIP(const Value: string);
+    procedure SetEmergencyStopIP(const Value: string);
+    procedure SetCctvIP(const Value: string);
+    procedure SetGenPsFwdIP(const Value: string);
+    procedure SetGenSbFwdIP(const Value: string);
+    procedure SetGenPsAftIP(const Value: string);
+    procedure SetGenSbAftIP(const Value: string);
+    procedure SetGenEmergencyIP(const Value: string);
+    procedure SetShoreIP(const Value: string);
+    procedure SetMainEngine1PsIP(const Value: string);
+    procedure SetMainEngine2PsIP(const Value: string);
+    procedure SetMainEngine1SbIP(const Value: string);
+    procedure SetMainEngine2SbIP(const Value: string);
+    procedure SetAuxiliary1IP(const Value: string);
+    procedure SetAuxiliary2IP(const Value: string);
+    procedure SetAuxiliary3IP(const Value: string);
+    procedure SetDieselGenerator1IP(const Value: string);
+    procedure SetDieselGenerator2IP(const Value: string);
+    procedure SetDieselGenerator3IP(const Value: string);
+    procedure SetDieselGenerator4IP(const Value: string);
+
+    {$ENDREGION}
 
     procedure SetDatabase(const Value: string);
     procedure SetPassword(const Value: string);
@@ -115,10 +173,6 @@ type
     procedure SetMonitorMimic(const Value: Integer);
     procedure SetMonitorInstructor(const Value: Integer);
 
-    //yoga setting.ini
-    {procedure setServoID(const serIDRPMMEPS : Integer; const serIDRPMMESB : Integer; const serIDRPMSHAFTPS : Integer;
-              const serIDRPMSHAFTSB : Integer; const serIDCPPPS : Integer; const serIDCPPSB : Integer; const serIDRUDDERPS : Integer;
-              const serIDRUDDERSB : Integer);}
     procedure setServoID(liststring: TStringList);
     function getServoID: TStringList;
 
@@ -130,24 +184,7 @@ type
 
     procedure setFormPCS(liststring: TStringList);
     function getFormPCS: TStringList;
-    function GetInstrukturIP: string;
-    procedure SetInstrukturIP(const Value: string);
-    function GetAcsIP: string;
-    procedure SetAcsIP(const Value: string);
-    function GetMimicKiriIP: string;
-    procedure SetMimicKiriIP(const Value: string);
-    function GetPcsKiriIp: string;
-    procedure SetPcsKiriIP(const Value: string);
-    function GetMimicTengahIP: string;
-    procedure SetMimicTengahIP(const Value: string);
-    function GetPcsKananIP: string;
-    procedure SetPcsKananIP(const Value: string);
-    function GetMimicKananIP: string;
-    procedure SetMimicKananIP(const Value: string);
-    function GetEmergencyStopIP: string;
-    procedure SetEmergencyStopIP(const Value: string);
-    function GetCctvIP: string;
-    procedure SetCctvIP(const Value: string);
+
     function GetManualIPMS: string;
     function GetModulPCS: string;
     function GetOperationalACS: string;
@@ -162,45 +199,6 @@ type
     procedure SetOperationalVoip(const Value: string);
     function GetCatalogHardware: string;
     function GetMaintenanceIPMS: string;
-    function GetServerIP: string;
-
-    function GetGenPsFwdIP: string;
-    procedure SetGenPsFwdIP(const Value: string);
-    function GetGenSbFwdIP: string;
-    procedure SetGenSbFwdIP(const Value: string);
-    function GetGenPsAftIP: string;
-    procedure SetGenPsAftIP(const Value: string);
-    function GetGenSbAftIP: string;
-    procedure SetGenSbAftIP(const Value: string);
-    function GetGenEmergencyIP: string;
-    procedure SetGenEmergencyIP(const Value: string);
-    function GetShoreIP: string;
-    procedure SetShoreIP(const Value: string);
-    function GetMainEngine1PsIP: string;
-    procedure SetMainEngine1PsIP(const Value: string);
-    function GetMainEngine2PsIP: string;
-    procedure SetMainEngine2PsIP(const Value: string);
-    function GetMainEngine1SbIP: string;
-    procedure SetMainEngine1SbIP(const Value: string);
-    function GetMainEngine2SbIP: string;
-    procedure SetMainEngine2SbIP(const Value: string);
-    function GetAuxiliary1IP: string;
-    procedure SetAuxiliary1IP(const Value: string);
-    function GetAuxiliary2IP: string;
-    procedure SetAuxiliary2IP(const Value: string);
-    function GetAuxiliary3IP: string;
-    procedure SetAuxiliary3IP(const Value: string);
-    function GetDieselGenerator1IP: string;
-    procedure SetDieselGenerator1IP(const Value: string);
-    function GetDieselGenerator2IP: string;
-    procedure SetDieselGenerator2IP(const Value: string);
-    function GetDieselGenerator3IP: string;
-    procedure SetDieselGenerator3IP(const Value: string);
-    function GetDieselGenerator4IP: string;
-    procedure SetDieselGenerator4IP(const Value: string);
-
-
-    procedure SetServerIP(const Value: string);
 
   public
     constructor Create;
@@ -238,6 +236,7 @@ type
     property mode : TStringList read getMode write setMode;
     property formPCS : TStringList read getFormPCS write setFormPCS;
 
+    {$REGION ' Console IP '}
     property ServerIP : string read GetServerIP write SetServerIP;
     property InstrukturIP : string read GetInstrukturIP write SetInstrukturIP;
     property AcsIP : string read GetAcsIP write SetAcsIP;
@@ -269,6 +268,7 @@ type
     property DieselGenerator2: string read GetDieselGenerator2IP write SetDieselGenerator2IP;
     property DieselGenerator3: string read GetDieselGenerator3IP write SetDieselGenerator3IP;
     property DieselGenerator4: string read GetDieselGenerator4IP write SetDieselGenerator4IP;
+    {$ENDREGION}
 
     property ManualIPMS : string read GetManualIPMS write SetManualIPMS;
     property OperationalInstruktur : string read GetOperationalInstruktur write SetOperationalInstruktur;
@@ -289,6 +289,8 @@ uses
 
 { default value }
 const
+
+  {$REGION ' Database Section '}
   C_Section_DB      = 'DATABASE';
   C_Ident_DB        = 'Server';
   C_Ident_DBName    = 'DatabaseName';
@@ -301,6 +303,25 @@ const
   C_UserName        = 'sa';
   C_Password        = 'T3server!';
   C_Protocol        = 'mssql';
+  {$ENDREGION}
+
+  {$REGION ' Sim Engine Section '}
+  C_Section_SimEng  = 'SIM ENGINE';
+  C_SimEngine_Svr   = '192.168.1.144';
+  C_SimEngine_Port  = '2990';
+  {$ENDREGION}
+
+  {$REGION ' LPU Section '}
+  C_Section_LPU     = 'LPU';
+  C_LPU_Server      = '192.168.1.144';
+  C_LPU_Port        = '1920';
+  {$ENDREGION}
+
+  {$REGION ' Instructor Section '}
+  C_Section_Instructor = 'INSTRUCTOR';
+  C_Instructor_Host = '192.168.1.144';
+  C_Instructor_Port = '9898';
+  {$ENDREGION}
 
   C_Section_APP     = 'APPLICATION';
   C_Ident_Server    = 'Server';
@@ -314,23 +335,11 @@ const
   C_UserName_App    = 'MCS_E';
   C_Password_App    = 'admin';
 
-  C_Section_LPU     = 'LPU';
-  C_LPU_Server      = '192.168.1.144';
-  C_LPU_Port        = '1920';
-
-  C_Section_SimEng  = 'SIM ENGINE';
-  C_SimEngine_Svr   = '192.168.1.144';
-  C_SimEngine_Port  = '2990';
-
   C_Ident_Port      = 'Port';
 
   C_Section_Role    = 'ROLE';
   C_Ident_Role      = 'Name';
   C_Role_Name       = 'IPMS';
-
-  C_Section_Instructor = 'INSTRUCTOR';
-  C_Instructor_Host = '192.168.1.144';
-  C_Instructor_Port = '9898';
 
   C_Section_Monitor = 'MIMICSCREEN';
   C_Ident_Mimic   = 'SCREEN';
@@ -418,9 +427,107 @@ begin
   inherited;
 end;
 
+
+{$REGION ' Get & Set Console IP Section '}
+
+function TSetting.GetServerIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'server', '192.168.1.2');
+end;
+
+function TSetting.GetInstrukturIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'instruktur', '192.168.1.10');
+end;
+
 function TSetting.GetAcsIP: string;
 begin
   Result := FIniFile.ReadString('CONSOLE', 'acs', '192.168.1.11');
+end;
+
+function TSetting.GetMimicKiriIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'mimickiri', '192.168.1.12');
+end;
+
+function TSetting.GetPcsKiriIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'pcskiri', '192.168.1.13');
+end;
+
+function TSetting.GetMimicTengahIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'mimictengah', '192.168.1.14');
+end;
+
+function TSetting.GetPcsKananIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'pcskanan', '192.168.1.15');
+end;
+
+function TSetting.GetMimicKananIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'mimickanan', '192.168.1.16');
+end;
+
+function TSetting.GetEmergencyStopIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'emergencystop', '192.168.1.17');
+end;
+
+function TSetting.GetCctvIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'cctv', '192.168.1.18');
+end;
+
+function TSetting.GetGenPsFwdIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GenPsFwd', '192.168.1.18');
+end;
+
+function TSetting.GetGenSbFwdIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GenSbFwd', '192.168.1.18');
+end;
+
+function TSetting.GetGenPsAftIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GenPsAft', '192.168.1.18');
+end;
+
+function TSetting.GetGenSbAftIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GenSbAft', '192.168.1.18');
+end;
+
+function TSetting.GetGenEmergencyIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'GenEmergency', '192.168.1.18');
+end;
+
+function TSetting.GetShoreIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'Shore', '192.168.1.18');
+end;
+
+function TSetting.GetMainEngine1PsIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'MainEngine1Ps', '192.168.1.18');
+end;
+
+function TSetting.GetMainEngine2PsIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'MainEngine2Ps', '192.168.1.18');
+end;
+
+function TSetting.GetMainEngine1SbIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'MainEngine1Sb', '192.168.1.18');
+end;
+
+function TSetting.GetMainEngine2SbIP: string;
+begin
+  Result := FIniFile.ReadString('CONSOLE', 'MainEngine2Sb', '192.168.1.18');
 end;
 
 function TSetting.GetAuxiliary1IP: string;
@@ -436,27 +543,6 @@ end;
 function TSetting.GetAuxiliary3IP: string;
 begin
   Result := FIniFile.ReadString('CONSOLE', 'Auxiliary3', '192.168.1.18');
-end;
-
-function TSetting.GetCatalogHardware: string;
-begin
-  Result := FIniFile.ReadString(C_Section_Help, 'CatalogHardware',
-    'Catalog Hardware IPMS.pdf');
-end;
-
-function TSetting.GetCctvIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'cctv', '192.168.1.18');
-end;
-
-function TSetting.GetDatabase: string;
-begin
-  Result := FIniFile.ReadString(C_Section_DB, C_Ident_DB, C_Database_Conn);
-end;
-
-function TSetting.GetDBName: string;
-begin
-  Result := FIniFile.ReadString(C_Section_DB, C_Ident_DBName, C_Database_Name);
 end;
 
 function TSetting.GetDieselGenerator1IP: string;
@@ -479,9 +565,184 @@ begin
   Result := FIniFile.ReadString('CONSOLE', 'DieselGenerator4', '192.168.1.18');
 end;
 
-function TSetting.GetEmergencyStopIP: string;
+procedure TSetting.SetServerIP(const Value: string);
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'emergencystop', '192.168.1.17');
+  FServerIP := Value;
+  FIniFile.WriteString('CONSOLE', 'server', Value);
+end;
+
+procedure TSetting.SetInstrukturIP(const Value: string);
+begin
+  FInstrukturIP := Value;
+  FIniFile.WriteString('CONSOLE', 'instruktur', Value);
+end;
+
+procedure TSetting.SetAcsIP(const Value: string);
+begin
+  FAcsIP := Value;
+  FIniFile.WriteString('CONSOLE', 'acs', Value);
+end;
+
+procedure TSetting.SetMimicKiriIP(const Value: string);
+begin
+  FMimicKiriIP := Value;
+  FIniFile.WriteString('CONSOLE', 'mimickiri', Value);
+end;
+
+procedure TSetting.SetPcsKiriIP(const Value: string);
+begin
+  FPcsKiriIP := Value;
+  FIniFile.WriteString('CONSOLE', 'pcskiri', Value);
+end;
+
+procedure TSetting.SetMimicTengahIP(const Value: string);
+begin
+  FMimicTengahIP := Value;
+  FIniFile.WriteString('CONSOLE', 'mimictengah', Value);
+end;
+
+procedure TSetting.SetPcsKananIP(const Value: string);
+begin
+  FPcsKananIP := Value;
+  FIniFile.WriteString('CONSOLE', 'pcskanan', Value);
+end;
+
+procedure TSetting.SetMimicKananIp(const Value: string);
+begin
+  FMimicKananIP := Value;
+  FIniFile.WriteString('CONSOLE', 'mimickanan', Value);
+end;
+
+procedure TSetting.SetEmergencyStopIP(const Value: string);
+begin
+  FEmergencyStopIP := Value;
+  FIniFile.WriteString('CONSOLE', 'emergencystop', Value);
+end;
+
+procedure TSetting.SetCctvIP(const Value: string);
+begin
+  FCctvIP := Value;
+  FIniFile.WriteString('CONSOLE', 'cctv', Value);
+end;
+
+procedure TSetting.SetGenPsFwdIP(const Value: string);
+begin
+  FGenPsFwdIP := Value;
+  FIniFile.WriteString('CONSOLE', 'GenPsFwd', Value);
+end;
+
+procedure TSetting.SetGenSbFwdIP(const Value: string);
+begin
+  FGenSbFwdIP := Value;
+  FIniFile.WriteString('CONSOLE', 'GenSbFwd', Value);
+end;
+
+procedure TSetting.SetGenPsAftIP(const Value: string);
+begin
+  FGenPsAftIP := Value;
+  FIniFile.WriteString('CONSOLE', 'GenPsAft', Value);
+end;
+
+procedure TSetting.SetGenSbAftIP(const Value: string);
+begin
+  FGenSbAftIP := Value;
+  FIniFile.WriteString('CONSOLE', 'GenSbAft', Value);
+end;
+
+procedure TSetting.SetGenEmergencyIP(const Value: string);
+begin
+  FGenEmergencyIP := Value;
+  FIniFile.WriteString('CONSOLE', 'GenEmergency', Value);
+end;
+
+procedure TSetting.SetShoreIP(const Value: string);
+begin
+  FShoreIP := Value;
+  FIniFile.WriteString('CONSOLE', 'Shore', Value);
+end;
+
+procedure TSetting.SetMainEngine1PsIP(const Value: string);
+begin
+  FMainEngine1PsIP := Value;
+  FIniFile.WriteString('CONSOLE', 'MainEngine1Ps', Value);
+end;
+
+procedure TSetting.SetMainEngine2PsIP(const Value: string);
+begin
+  FMainEngine2PsIP := Value;
+  FIniFile.WriteString('CONSOLE', 'MainEngine2Ps', Value);
+end;
+
+procedure TSetting.SetMainEngine1SbIP(const Value: string);
+begin
+  FMainEngine1SbIP := Value;
+  FIniFile.WriteString('CONSOLE', 'MainEngine1Sb', Value);
+end;
+
+procedure TSetting.SetMainEngine2SbIP(const Value: string);
+begin
+  FMainEngine2SbIP := Value;
+  FIniFile.WriteString('CONSOLE', 'MainEngine2Sb', Value);
+end;
+
+procedure TSetting.SetAuxiliary1IP(const Value: string);
+begin
+  FAuxiliary1IP := Value;
+  FIniFile.WriteString('CONSOLE', 'Auxiliary1', Value);
+end;
+
+procedure TSetting.SetAuxiliary2IP(const Value: string);
+begin
+  FAuxiliary2IP := Value;
+  FIniFile.WriteString('CONSOLE', 'Auxiliary2', Value);
+end;
+
+procedure TSetting.SetAuxiliary3IP(const Value: string);
+begin
+  FAuxiliary3IP := Value;
+  FIniFile.WriteString('CONSOLE', 'Auxiliary3', Value);
+end;
+
+procedure TSetting.SetDieselGenerator1IP(const Value: string);
+begin
+  FDieselGenerator1IP := Value;
+  FIniFile.WriteString('CONSOLE', 'DieselGenerator1', Value);
+end;
+
+procedure TSetting.SetDieselGenerator2IP(const Value: string);
+begin
+  FDieselGenerator2IP := Value;
+  FIniFile.WriteString('CONSOLE', 'DieselGenerator2', Value);
+end;
+
+procedure TSetting.SetDieselGenerator3IP(const Value: string);
+begin
+  FDieselGenerator3IP := Value;
+  FIniFile.WriteString('CONSOLE', 'DieselGenerator3', Value);
+end;
+
+procedure TSetting.SetDieselGenerator4IP(const Value: string);
+begin
+  FDieselGenerator4IP := Value;
+  FIniFile.WriteString('CONSOLE', 'DieselGenerator4', Value);
+end;
+
+{$ENDREGION}
+
+function TSetting.GetCatalogHardware: string;
+begin
+  Result := FIniFile.ReadString(C_Section_Help, 'CatalogHardware',
+    'Catalog Hardware IPMS.pdf');
+end;
+
+function TSetting.GetDatabase: string;
+begin
+  Result := FIniFile.ReadString(C_Section_DB, C_Ident_DB, C_Database_Conn);
+end;
+
+function TSetting.GetDBName: string;
+begin
+  Result := FIniFile.ReadString(C_Section_DB, C_Ident_DBName, C_Database_Name);
 end;
 
 function TSetting.GetExecutedApp: string;
@@ -542,31 +803,6 @@ begin
     'Operational VOIP.pdf');
 end;
 
-function TSetting.GetGenEmergencyIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'GenEmergency', '192.168.1.18');
-end;
-
-function TSetting.GetGenPsAftIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'GenPsAft', '192.168.1.18');
-end;
-
-function TSetting.GetGenPsFwdIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'GenPsFwdIP', '192.168.1.18');
-end;
-
-function TSetting.GetGenSbAftIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'GenSbAft', '192.168.1.18');
-end;
-
-function TSetting.GetGenSbFwdIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'GenSbFwd', '192.168.1.18');
-end;
-
 function TSetting.GetInstructorHost: string;
 begin
   Result := FIniFile.ReadString(C_Section_Instructor, C_Ident_Server,
@@ -579,11 +815,6 @@ begin
     C_Instructor_Port);
 end;
 
-function TSetting.GetInstrukturIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'instruktur', '192.168.1.1');
-end;
-
 function TSetting.GetLPUPort: string;
 begin
   Result := FIniFile.ReadString(C_Section_LPU, C_Ident_Port, C_LPU_Port);
@@ -592,26 +823,6 @@ end;
 function TSetting.GetLPUServer: string;
 begin
   Result := FIniFile.ReadString(C_Section_LPU, C_Ident_Server, C_LPU_Server);
-end;
-
-function TSetting.GetMainEngine1PsIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'MainEngine1Ps', '192.168.1.18');
-end;
-
-function TSetting.GetMainEngine1SbIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'MainEngine1Sb', '192.168.1.18');
-end;
-
-function TSetting.GetMainEngine2PsIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'MainEngine2Ps', '192.168.1.18');
-end;
-
-function TSetting.GetMainEngine2SbIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'MainEngine2Sb', '192.168.1.18');
 end;
 
 function TSetting.GetMaintenanceIPMS: string;
@@ -624,21 +835,6 @@ function TSetting.GetManualIPMS: string;
 begin
   Result := FIniFile.ReadString(C_Section_Help, 'ManualIPMS',
     'Manual IPMS.pdf');
-end;
-
-function TSetting.GetMimicKananIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'mimickanan', '192.168.1.16');
-end;
-
-function TSetting.GetMimicKiriIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'mimickiri', '192.168.1.12');
-end;
-
-function TSetting.GetMimicTengahIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'mimictengah', '192.168.1.14');
 end;
 
 function TSetting.getMode: TStringList;
@@ -675,16 +871,6 @@ begin
     Result := Decode64(pass);
 end;
 
-function TSetting.GetPcsKananIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'pcskanan', '192.168.1.15');
-end;
-
-function TSetting.GetPcsKiriIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'pcskiri', '192.168.1.13');
-end;
-
 function TSetting.GetProtocol: string;
 begin
   Result := FIniFile.ReadString(C_Section_DB, C_Ident_Protocol, C_Protocol);
@@ -698,11 +884,6 @@ end;
 function TSetting.GetServer: string;
 begin
   Result := FIniFile.ReadString(C_Section_APP, C_Ident_Server, C_Server_Conn);
-end;
-
-function TSetting.GetServerIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'server', '192.168.1.2');
 end;
 
 function TSetting.getServoDegree: TStringList;
@@ -747,11 +928,6 @@ begin
     servoIDRUDDERSB));
 end;
 
-function TSetting.GetShoreIP: string;
-begin
-  Result := FIniFile.ReadString('CONSOLE', 'Shore', '192.168.1.18');
-end;
-
 function TSetting.GetSimEnginePort: string;
 begin
   Result := FIniFile.ReadString(C_Section_SimEng, C_Ident_Port,
@@ -788,40 +964,10 @@ begin
     Result := Decode64(user);
 end;
 
-procedure TSetting.SetAcsIP(const Value: string);
-begin
-  FAcsIP := Value;
-  FIniFile.WriteString('CONSOLE', 'acs', Value);
-end;
-
-procedure TSetting.SetAuxiliary1IP(const Value: string);
-begin
-  FAuxiliary1IP := Value;
-  FIniFile.WriteString('CONSOLE', 'Auxiliary1', Value);
-end;
-
-procedure TSetting.SetAuxiliary2IP(const Value: string);
-begin
-  FAuxiliary2IP := Value;
-  FIniFile.WriteString('CONSOLE', 'Auxiliary2', Value);
-end;
-
-procedure TSetting.SetAuxiliary3IP(const Value: string);
-begin
-  FAuxiliary3IP := Value;
-  FIniFile.WriteString('CONSOLE', 'Auxiliary3', Value);
-end;
-
 procedure TSetting.SetCatalogHardware(const Value: string);
 begin
   FCatalogHardware := Value;
   FIniFile.WriteString(C_Section_Help, 'CatalogHardware', Value);
-end;
-
-procedure TSetting.SetCctvIP(const Value: string);
-begin
-  FCctvIP := Value;
-  FIniFile.WriteString('CONSOLE', 'cctv', Value);
 end;
 
 procedure TSetting.SetDatabase(const Value: string);
@@ -834,36 +980,6 @@ procedure TSetting.SetDBName(const Value: string);
 begin
   FDBName := Value;
   FIniFile.WriteString(C_Section_DB, C_Ident_DBName, Value);
-end;
-
-procedure TSetting.SetDieselGenerator1IP(const Value: string);
-begin
-  FDieselGenerator1IP := Value;
-  FIniFile.WriteString('CONSOLE', 'DieselGenerator1', Value);
-end;
-
-procedure TSetting.SetDieselGenerator2IP(const Value: string);
-begin
-  FDieselGenerator2IP := Value;
-  FIniFile.WriteString('CONSOLE', 'DieselGenerator2', Value);
-end;
-
-procedure TSetting.SetDieselGenerator3IP(const Value: string);
-begin
-  FDieselGenerator3IP := Value;
-  FIniFile.WriteString('CONSOLE', 'DieselGenerator3', Value);
-end;
-
-procedure TSetting.SetDieselGenerator4IP(const Value: string);
-begin
-  FDieselGenerator4IP := Value;
-  FIniFile.WriteString('CONSOLE', 'DieselGenerator4', Value);
-end;
-
-procedure TSetting.SetEmergencyStopIP(const Value: string);
-begin
-  FEmergencyStopIP := Value;
-  FIniFile.WriteString('CONSOLE', 'emergencystop', Value);
 end;
 
 procedure TSetting.SetExecutedApp(const Value: string);
@@ -896,36 +1012,6 @@ begin
   FIniFile.WriteString(C_Section_PCS, C_idFormPCS, liststring[0]);
 end;
 
-procedure TSetting.SetGenEmergencyIP(const Value: string);
-begin
-  FGenEmergencyIP := Value;
-  FIniFile.WriteString('CONSOLE', 'GenEmergency', Value);
-end;
-
-procedure TSetting.SetGenPsAftIP(const Value: string);
-begin
-  FGenPsAftIP := Value;
-  FIniFile.WriteString('CONSOLE', 'GenPsAft', Value);
-end;
-
-procedure TSetting.SetGenPsFwdIP(const Value: string);
-begin
-  FGenPsFwdIP := Value;
-  FIniFile.WriteString('CONSOLE', 'GenPsFwd', Value);
-end;
-
-procedure TSetting.SetGenSbAftIP(const Value: string);
-begin
-  FGenSbAftIP := Value;
-  FIniFile.WriteString('CONSOLE', 'GenSbAft', Value);
-end;
-
-procedure TSetting.SetGenSbFwdIP(const Value: string);
-begin
-  FGenSbFwdIP := Value;
-  FIniFile.WriteString('CONSOLE', 'GenSbFwd', Value);
-end;
-
 procedure TSetting.SetInstructorHost(const Value: string);
 begin
   FInstructorHost := Value;
@@ -936,12 +1022,6 @@ procedure TSetting.SetInstructorPort(const Value: string);
 begin
   FInstructorPort := Value;
   FIniFile.WriteString(C_Section_Instructor, C_Ident_Port, Value);
-end;
-
-procedure TSetting.SetInstrukturIP(const Value: string);
-begin
-  FInstrukturIP := Value;
-  FIniFile.WriteString('CONSOLE', 'instruktur', Value);
 end;
 
 procedure TSetting.SetLPUPort(const Value: string);
@@ -956,30 +1036,6 @@ begin
   FIniFile.WriteString(C_Section_LPU, C_Ident_Server, Value);
 end;
 
-procedure TSetting.SetMainEngine1PsIP(const Value: string);
-begin
-  FMainEngine1PsIP := Value;
-  FIniFile.WriteString('CONSOLE', 'MainEngine1Ps', Value);
-end;
-
-procedure TSetting.SetMainEngine1SbIP(const Value: string);
-begin
-  FMainEngine1SbIP := Value;
-  FIniFile.WriteString('CONSOLE', 'MainEngine1Sb', Value);
-end;
-
-procedure TSetting.SetMainEngine2PsIP(const Value: string);
-begin
-  FMainEngine2PsIP := Value;
-  FIniFile.WriteString('CONSOLE', 'MainEngine2Ps', Value);
-end;
-
-procedure TSetting.SetMainEngine2SbIP(const Value: string);
-begin
-  FMainEngine2SbIP := Value;
-  FIniFile.WriteString('CONSOLE', 'MainEngine2Sb', Value);
-end;
-
 procedure TSetting.SetMaintenanceIPMS(const Value: string);
 begin
   FMaintenanceIPMS := Value;
@@ -990,24 +1046,6 @@ procedure TSetting.SetManualIPMS(const Value: string);
 begin
   FManualIPMS := Value;
   FIniFile.WriteString(C_Section_Help, 'ManualIPMS', Value);
-end;
-
-procedure TSetting.SetMimicKananIp(const Value: string);
-begin
-  FMimicKananIP := Value;
-  FIniFile.WriteString('CONSOLE', 'mimickanan', Value);
-end;
-
-procedure TSetting.SetMimicKiriIP(const Value: string);
-begin
-  FMimicKiriIP := Value;
-  FIniFile.WriteString('CONSOLE', 'mimickiri', Value);
-end;
-
-procedure TSetting.SetMimicTengahIP(const Value: string);
-begin
-  FMimicTengahIP := Value;
-  FIniFile.WriteString('CONSOLE', 'mimictengah', Value);
 end;
 
 procedure TSetting.setMode(liststring: TStringList);
@@ -1071,18 +1109,6 @@ begin
   FIniFile.WriteString(C_Section_DB, C_Ident_Pass, Encode64(Value));
 end;
 
-procedure TSetting.SetPcsKananIP(const Value: string);
-begin
-  FPcsKananIP := Value;
-  FIniFile.WriteString('CONSOLE', 'pcskanan', Value);
-end;
-
-procedure TSetting.SetPcsKiriIP(const Value: string);
-begin
-  FPcsKiriIP := Value;
-  FIniFile.WriteString('CONSOLE', 'pcskiri', Value);
-end;
-
 procedure TSetting.SetProtocol(const Value: string);
 begin
   FProtocol := Value;
@@ -1099,12 +1125,6 @@ procedure TSetting.SetServer(const Value: string);
 begin
   FServer := Value;
   FIniFile.WriteString(C_Section_APP, C_Ident_Server, Value);
-end;
-
-procedure TSetting.SetServerIP(const Value: string);
-begin
-  FServerIP := Value;
-  FIniFile.WriteString('CONSOLE', 'server', Value);
 end;
 
 procedure TSetting.setServoDegree(liststring: TStringList);
@@ -1129,27 +1149,6 @@ begin
   FIniFile.WriteString(C_Section_ServoID, C_serID_CPP_SB, liststring[5]);
   FIniFile.WriteString(C_Section_ServoID, C_serID_RUDDER_PS, liststring[6]);
   FIniFile.WriteString(C_Section_ServoID, C_serID_RUDDER_SB, liststring[7]);
-end;
-
-{procedure TSetting.setServoID(const serIDRPMMEPS, serIDRPMMESB, serIDRPMSHAFTPS,
-  serIDRPMSHAFTSB, serIDCPPPS, serIDCPPSB, serIDRUDDERPS,
-  serIDRUDDERSB: Integer);
-begin
-  FIniFile.WriteString(C_Section_ServoID, C_serID_RPMME_PS, IntToStr(serIDRPMMEPS));
-  FIniFile.WriteString(C_Section_ServoID, C_serID_RPMME_SB, IntToStr(serIDRPMMESB));
-  FIniFile.WriteString(C_Section_ServoID, C_serID_RPMSHAFT_PS, IntToStr(serIDRPMSHAFTPS));
-  FIniFile.WriteString(C_Section_ServoID, C_serID_RPMSHAFT_SB, IntToStr(serIDRPMSHAFTSB));
-  FIniFile.WriteString(C_Section_ServoID, C_serID_CPP_PS, IntToStr(serIDCPPPS));
-  FIniFile.WriteString(C_Section_ServoID, C_serID_CPP_SB, IntToStr(serIDCPPSB));
-  FIniFile.WriteString(C_Section_ServoID, C_serID_RUDDER_PS, IntToStr(serIDRUDDERPS));
-  FIniFile.WriteString(C_Section_ServoID, C_serID_RUDDER_SB, IntToStr(serIDRUDDERSB));
-end;
-}
-
-procedure TSetting.SetShoreIP(const Value: string);
-begin
-  FShoreIP := Value;
-  FIniFile.WriteString('CONSOLE', 'Shore', Value);
 end;
 
 procedure TSetting.SetSimEnginePort(const Value: string);
