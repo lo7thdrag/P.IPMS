@@ -1,83 +1,31 @@
+*.dcu
 /Source/instructor/__history
 /Source/instructor/panels/__history
+/Source/instructor/panels/__recovery
 /Source/bin
 /Source/common
-/Source/common
-/Source/bin
 /Source/bin
 /Source/components
-/Source/components
-/Source/components
-/Source/server
 /Source/server
 /Source/components/TrendChart
-/Source/common
-*.dcu
 /Source/ersimulator/panel/__history
-/Source/instructor/panels/__recovery
+/Source/ersimulator/__history
+/Source/ersimulator
 /Source/Emergency Stop/__history
-Source/DieselGenerator/__history/DieselGenerator.dpr.~1~
-Source/DieselGenerator/__history/DieselGenerator.dpr.~2~
-Source/DieselGenerator/__history/uDieselGeneratorSystem.pas.~1~
-Source/DieselGenerator/__history/uDieselGeneratorSystem.pas.~2~
-Source/DieselGenerator/__history/uDieselGeneratorSystem.pas.~3~
-Source/DieselGenerator/__history/uDieselGeneratorSystem.pas.~4~
-Source/DieselGenerator/__history/uDieselGeneratorSystem.pas.~5~
-Source/DieselGenerator/__history/uDieselGeneratorSystem.pas.~6~
-Source/DieselGenerator/__history/uDieselGeneratorSystem.pas.~7~
-Source/DieselGenerator/__history/uDieselGeneratorNetwork.pas.~1~
-Source/DieselGenerator/__history/uMainForm.dfm.~1~
-Source/DieselGenerator/__history/uMainForm.dfm.~2~
-Source/DieselGenerator/__history/uMainForm.dfm.~3~
-Source/DieselGenerator/__history/uMainForm.dfm.~4~
-Source/DieselGenerator/__history/uMainForm.pas.~1~
-Source/DieselGenerator/__history/uMainForm.pas.~2~
-Source/DieselGenerator/__history/uMainForm.pas.~3~
-Source/DieselGenerator/__history/uMainForm.pas.~4~
-Source/DieselGenerator/__history/uPCSNetwork.pas.~1~
-Source/DieselGenerator/__history/uPCSSystem.pas.~1~
-Source/ersimulator/__history/uERSystem.pas.~1~
-Source/ersimulator/__history/uERSystem.pas.~2~
-Source/DieselGenerator/__history/uDieselGeneratorNetwork.pas.~2~
-Source/MCR Machine Left/__history/uMainForm.dfm.~1~
-Source/MCR Machine Left/__history/uMainForm.dfm.~2~
-Source/MCR Machine Left/__history/uMainForm.pas.~1~
-Source/MCR Machine Left/__history/uMainForm.pas.~2~
-Source/MCR Machine Left/__history/uMainForm.pas.~3~
-Source/MCR Machine Left/__history/uMainForm.pas.~4~
-Source/MCR Machine Left/__history/uMainForm.pas.~5~
-Source/MCR Machine Left/__history/MCRMachineLeft.dpr.~1~
-Source/MCR Machine Left/__history/uMCRMachineLeftNetwork.pas.~1~
-Source/MCR Machine Left/__history/uMCRMachineLeftNetwork.pas.~2~
-Source/MCR Machine Left/__history/uMCRMachineLeftSystem.pas.~1~
-Source/MCR Machine Left/__history/uMCRMachineLeftSystem.pas.~2~
-Source/MCR Machine Left/__history/uMCRMachineLeftSystem.pas.~3~
-Source/MCR Machine Left/__history/uMCRMachineLeftSystem.pas.~4~
-Source/MCR Machine Left/__history/uMCRMachineLeftSystem.pas.~5~
-Source/MCR Machine Left/__history/uMCRMachineLeftSystem.pas.~6~
-Source/MCR Machine Left/__history/uMCRMachineLeftSystem.pas.~7~
-Source/MCR Machine Left/__history/uMCRMachineLeftSystem.pas.~8~
-Source/MCR Machine Left/__history/uMCRMachineLeftSystem.pas.~9~
-Source/MCR Machine Left/__history/uMainForm.dfm.~3~
-Source/MCR Machine Left/__history/uMainForm.dfm.~4~
-/Source/MCR Machine Left/__history
+/Source/Emergency Stop
+/Source/Emergency Stop
+Source/DieselGenerator/__history
+/Source/DieselGenerator/__recovery
+/Source/DieselGenerator
+Source/MCR Machine Left/__history
+/Source/MCR Machine Left
 /Source/engines/__history
 /Source/engines/entity/__history
 /Source/engines/system/__history
-/Source/ersimulator/__history
-/Source/DieselGenerator/__history
 /Source/MCR Machine Right/__history
 /Source/Alarm Rudder/__recovery
-/Source/DieselGenerator/__recovery
 /Source/Main Switch Board/__history
 /Source/instructor/panels/__history
-/Source/DieselGenerator
-/Source/Emergency Stop
-/Source/Emergency Stop
-/Source/ersimulator
-/Source/instructor/__history
-/Source/instructor/panels/__history
-/Source/MCR Machine Left
 /Source/MCR Machine Right
 /Source/mimics
 /Source/Panel Throttle
