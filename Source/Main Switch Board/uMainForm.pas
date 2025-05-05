@@ -8,75 +8,8 @@ uses
   VrRotarySwitch, RzBmpBtn, VrAngularMeter, Vcl.ExtCtrls;
 
 type
-  TfrmGenerator = class(TForm)
-    pnlGenPSFwd: TPanel;
-    Image2: TImage;
-    Image1: TImage;
-    Image4: TImage;
-    Image5: TImage;
-    Image3: TImage;
-    Image6: TImage;
-    pnlkW: TPanel;
-    VrAngularMeter1: TVrAngularMeter;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label19: TLabel;
-    Label20: TLabel;
-    pnlHz: TPanel;
-    VrAngularMeter2: TVrAngularMeter;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label13: TLabel;
-    pnlV: TPanel;
-    VrAngularMeter4: TVrAngularMeter;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    Label14: TLabel;
-    pnlA: TPanel;
-    VrAngularMeter3: TVrAngularMeter;
-    Label9: TLabel;
-    Label15: TLabel;
-    Label17: TLabel;
-    Label18: TLabel;
-    Label16: TLabel;
-    VrAngularMeter5: TVrAngularMeter;
-    pnlGensys: TPanel;
-    imgGensys: TImage;
-    RzBmpHornOff: TRzBmpButton;
-    RzBmpFaultPage: TRzBmpButton;
-    RzBmpAlarmPage: TRzBmpButton;
-    RzBmpInfoPage: TRzBmpButton;
-    RzBmpLedTest: TRzBmpButton;
-    RzBmpEsc: TRzBmpButton;
-    RzBmpRaise: TRzBmpButton;
-    RzBmpLower: TRzBmpButton;
-    RzBmpShift: TRzBmpButton;
-    RzBmpEnter: TRzBmpButton;
-    RzBmpF5: TRzBmpButton;
-    RzBmpF1: TRzBmpButton;
-    RzBmpF2: TRzBmpButton;
-    RzBmpF3: TRzBmpButton;
-    RzBmpF4: TRzBmpButton;
-    RzBmpAuto: TRzBmpButton;
-    RzBmpSemiAuto: TRzBmpButton;
-    RzBmpMan: TRzBmpButton;
-    RzBmpStart: TRzBmpButton;
-    RzBmpStop: TRzBmpButton;
-    RzBmp01: TRzBmpButton;
-    RzBmpPref: TRzBmpButton;
-    RzBmpIEngineRunning: TRzBmpButton;
-    RzBmpIGeneratorSupply: TRzBmpButton;
-    RzBmpICBClossed: TRzBmpButton;
-    RzBmpIPreference: TRzBmpButton;
-    RzBmpIBusbarSupply: TRzBmpButton;
-    VrRotarySwitch1: TVrRotarySwitch;
-    VrRotarySwitch2: TVrRotarySwitch;
-    Label21: TLabel;
+  TfrmMainForm = class(TForm)
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -84,10 +17,50 @@ type
   end;
 
 var
-  frmGenerator: TfrmGenerator;
+  frmMainForm: TfrmMainForm;
 
 implementation
 
+uses
+  uMainSwitchBoardSystem, ufrmGeneratorPanel, ufrmEmergencyPanel, ufrmShorePanel;
+
 {$R *.dfm}
+
+procedure TfrmMainForm.FormShow(Sender: TObject);
+begin
+  if (MainSwitchBoardSystem.IdGensys = 'GENSYS 1') or (MainSwitchBoardSystem.IdGensys = 'GENSYS 2') or
+     (MainSwitchBoardSystem.IdGensys = 'GENSYS 3') or (MainSwitchBoardSystem.IdGensys = 'GENSYS 4') then
+  begin
+    if not Assigned(frmGeneratorPanel) then
+    begin
+      frmGeneratorPanel := TfrmGeneratorPanel.Create(Self);
+    end;
+
+    frmGeneratorPanel.Show;
+    ShowCursor(False);
+  end
+  else
+  if MainSwitchBoardSystem.IdGensys = 'EMERGENCY' then
+  begin
+    if not Assigned(frmEmergencyPanel) then
+    begin
+      frmEmergencyPanel := TfrmEmergencyPanel.Create(Self);
+    end;
+
+    frmEmergencyPanel.Show;
+    ShowCursor(False);
+  end
+  else
+  if MainSwitchBoardSystem.IdGensys = 'SHORE' then
+  begin
+    if not Assigned(frmShorePanel) then
+    begin
+      frmShorePanel := TfrmShorePanel.Create(Self);
+    end;
+
+    frmShorePanel.Show;
+    ShowCursor(False);
+  end;
+end;
 
 end.

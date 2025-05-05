@@ -1,9 +1,9 @@
-object frmMainForm: TfrmMainForm
+object frmShorePanel: TfrmShorePanel
   Left = 0
   Top = 0
-  BorderStyle = bsNone
-  ClientHeight = 312
-  ClientWidth = 386
+  Caption = 'frmShorePanel'
+  ClientHeight = 299
+  ClientWidth = 635
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,7 +11,6 @@ object frmMainForm: TfrmMainForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
 end
