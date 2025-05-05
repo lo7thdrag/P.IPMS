@@ -104,7 +104,19 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="uMainForm.pas">
-            <Form>Form7</Form>
+            <Form>frmMainForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ufrmAuxiliary1.pas">
+            <Form>frmAuxiliary1</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ufrmAuxiliary2.pas">
+            <Form>frmAuxiliary2</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ufrmAuxiliary3.pas">
+            <Form>frmAuxiliary3</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
@@ -135,7 +147,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\Auxilary.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\bin\Auxilary.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>Auxilary.exe</RemoteName>
                         <Overwrite>true</Overwrite>
