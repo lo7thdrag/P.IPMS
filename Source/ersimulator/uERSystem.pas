@@ -22,6 +22,9 @@ type
     FFile : TextFile;
     FNum  : Int64;
 
+    FFlashingStartPS : Boolean;
+    FFlashingStartSB : Boolean;
+
     procedure OnNetworkLogger(const Value : string);
     procedure NetworkEventAssignment;
     procedure CreateCommon;
@@ -51,9 +54,12 @@ type
     //Prince
     function toCheckCB(IdGen : string; IdMsb : Integer): boolean;
     procedure NetEvent_MimicCommonCmd(apRec: PAnsiChar; aSize: Word);
+    procedure NetEvent_PCSCommonCmd(apRec: PAnsiChar; aSize: Word);
     procedure SetOnPCSCommand(const Value: T_OnPCSCommand);
     procedure SetOnPMSCommand(const Value: T_OnPMSCommand);
     procedure SetOnTankCommand(const Value: T_OnTankCommand);
+
+
   public
     constructor Create; overload;
     constructor Create(aDatabase : TIPMSDatabase); overload;
@@ -567,6 +573,7 @@ begin
     end;
   end;
 end;
+
 procedure TERSystem.NetEvent_MimicCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
   recER : ^R_Common_PMS_Command;
@@ -668,6 +675,70 @@ begin
   end;
 end;
 
+procedure TERSystem.NetEvent_PCSCommonCmd(apRec: PAnsiChar; aSize: Word);
+var
+  recERPCS : ^R_Common_PCS_Command;
+  main_engine : TMainEngine;
+  main_engine_PS : TMainEngine;
+  main_engine_SB : TMainEngine;
+  gearbox : TGearBox;
+begin
+  recERPCS := @apRec^;
+
+  case recERPCS.CommandPropsID of
+    {Main Engine 1}
+    epPCSMERunning :
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(recERPCS.PortStaboardID);
+      FFlashingStartPS := True;
+      ERSystem.ERManager.EngineRoom.getPCSSystem.StoppedStop(recERPCS.PortStaboardID);
+    end;
+
+    epPCSMEClutched :
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, False);
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, False);
+    end;
+
+   epPCSMELocalEmergencyStop :
+   begin
+     ERSystem.ERManager.EngineRoom.getPCSSystem.EmergencyStop(recERPCS.PortStaboardID);
+   end;
+
+  {Main Engine 2}
+  epPCSMERemoteControl:
+  begin
+   main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+   gearbox     := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
+
+   ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, False);
+  end;
+
+  // Pump Gearbox
+  epPCSMEPrimLOPump :
+  begin
+
+  end;
+
+  epPCSCtrlLocal:
+  begin
+
+  end;
+
+  epPCSMERunningHour :
+  begin
+
+  end;
+  end;
+
+  case recERPCS.CommandID of
+    1,2:
+    begin
+      ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(recERPCS.CommandID, recERPCS.Number, recERPCS.ValueInt, recERPCS.ValueBool);
+    end;
+  end;
+end;
+
 procedure TERSystem.NetworkEventAssignment;
 var
   i : integer;
@@ -720,9 +791,11 @@ begin
 
       {Kirim paket dari ER ke bawahannya}
       RegisterProcedure(C_PMS_COMMAND, nil, SizeOf(R_Common_PMS_Command));
+      RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
 
       {terima paket dari controller ke ER}
       RegisterProcedure(C_MIMICS_COMMAND, NetEvent_MimicCommonCmd, SizeOf(R_Common_PMS_Command));
+      RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PCSCommonCmd, SizeOf(R_Common_PCS_Command));
     end;
   end;
 

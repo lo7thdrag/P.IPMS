@@ -87,6 +87,8 @@ type
     procedure NetEvent_GenCommonCmd(apRec: PAnsiChar; aSize: Word);
     procedure NetEvent_PumpCommonCmd(apRec: PAnsiChar; aSize: Word);
 
+    procedure NetEvent_MECommonCmd(apRec: PAnsiChar; aSize: Word);
+
     procedure NetEvent_VentStatusCmd(apRec: PAnsiChar; aSize: Word);
 
      procedure NetEventStatusThrottleCommand(apRec: PAnsiChar; aSize: Word);
@@ -672,6 +674,23 @@ begin
   Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
 end;
 
+procedure TControllerlSystem.NetEvent_MECommonCmd(apRec: PAnsiChar; aSize: Word);
+var
+  recCmd  : ^R_Common_PCS_Command;
+  recER   : R_Common_PCS_Command;
+begin
+  recCmd := @apRec^;
+
+  recER.PortStaboardID := recCmd.PortStaboardID;
+  recER.CommandID := recCmd.CommandID;
+  recER.CommandPropsID := recCmd.CommandPropsID;
+  recER.ValueBool := recCmd.ValueBool;
+  recER.ValueInt := recCmd.ValueInt;
+  recER.ValueDouble := recCmd.ValueDouble;
+
+  Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
+end;
+
 procedure TControllerlSystem.NetEvent_FuncAllocCommand(apRec: PAnsiChar;
   aSize: Word);
 var
@@ -1136,6 +1155,9 @@ begin
     {terima paket dari Diesel Generator k controller}
     RegisterProcedure(C_PMS_COMMAND,NetEvent_GenCommonCmd,SizeOf(R_Common_PMS_Command));
 
+    {terima paket dari ME k controller}
+    RegisterProcedure(C_PCS_COMMAND,NetEvent_MECommonCmd,SizeOf(R_Common_PCS_Command));
+
     {terima paket dari ShipAlarm k controller}
     RegisterProcedure(C_PUMP_COMMAND,NetEvent_PumpCommonCmd,SizeOf(R_Common_PumpStatus_Command));
 
@@ -1152,6 +1174,7 @@ begin
 
     {Kirim paket dari controller ke ER}
     client.RegisterProcedure(C_MIMICS_COMMAND,nil,SizeOf(R_Common_PMS_Command));
+    client.RegisterProcedure(C_MIMICS_COMMAND,nil,SizeOf(R_Common_PCS_Command));
   end;
 
   client := FControllerNetwork.AsClients.Get('AsInstructorClient');
