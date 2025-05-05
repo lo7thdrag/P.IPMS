@@ -1,4 +1,4 @@
-unit ufrmAuxiliary1;
+unit UFireProv;
 
 interface
 
@@ -8,15 +8,12 @@ uses
   Vcl.Imaging.pngimage, Vcl.ExtCtrls;
 
 type
-  TfrmBallast = class(TForm)
+  TfrmFirePumpProv = class(TForm)
     Panel1: TPanel;
     Image1: TImage;
-    Image2: TImage;
+    Image6: TImage;
     Image3: TImage;
     Image4: TImage;
-    Image5: TImage;
-    Image6: TImage;
-    VrRotarySwitch1: TVrRotarySwitch;
     VrRotarySwitch2: TVrRotarySwitch;
   private
     { Private declarations }
@@ -25,7 +22,7 @@ type
   end;
 
 var
-  frmBallast: TfrmBallast;
+  frmFirePumpProv: TfrmFirePumpProv;
 
 implementation
 

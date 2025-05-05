@@ -2,19 +2,23 @@ program Auxilary;
 
 uses
   Vcl.Forms,
-  uMainForm in 'uMainForm.pas' {frmMainForm},
-  ufrmAuxiliary1 in 'ufrmAuxiliary1.pas' {frmAuxiliary1},
-  ufrmAuxiliary2 in 'ufrmAuxiliary2.pas' {frmAuxiliary2},
-  ufrmAuxiliary3 in 'ufrmAuxiliary3.pas' {frmAuxiliary3};
+  uSludge in 'uSludge.pas' {frmSludge},
+  ufrmAuxiliary1 in 'ufrmAuxiliary1.pas' {frmBallast},
+  ufrmAuxiliary2 in 'ufrmAuxiliary2.pas' {frmSWPumpProvRefrig},
+  ufrmAuxiliary3 in 'ufrmAuxiliary3.pas' {frmSWCoolingPumpChiller1},
+  UFireFighting in 'UFireFighting.pas' {frmFireFightingPump},
+  UFireProv in 'UFireProv.pas' {frmFirePumpProv};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfrmMainForm, frmMainForm);
-  Application.CreateForm(TfrmAuxiliary1, frmAuxiliary1);
-  Application.CreateForm(TfrmAuxiliary2, frmAuxiliary2);
-  Application.CreateForm(TfrmAuxiliary3, frmAuxiliary3);
+  Application.CreateForm(TfrmSludge, frmSludge);
+  Application.CreateForm(TfrmBallast, frmBallast);
+  Application.CreateForm(TfrmSWPumpProvRefrig, frmSWPumpProvRefrig);
+  Application.CreateForm(TfrmSWCoolingPumpChiller1, frmSWCoolingPumpChiller1);
+  Application.CreateForm(TfrmFireFightingPump, frmFireFightingPump);
+  Application.CreateForm(TfrmFirePumpProv, frmFirePumpProv);
   Application.Run;
 end.

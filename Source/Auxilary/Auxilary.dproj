@@ -103,20 +103,28 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="uMainForm.pas">
-            <Form>frmMainForm</Form>
+        <DCCReference Include="uSludge.pas">
+            <Form>frmSludge</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="ufrmAuxiliary1.pas">
-            <Form>frmAuxiliary1</Form>
+            <Form>frmBallast</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="ufrmAuxiliary2.pas">
-            <Form>frmAuxiliary2</Form>
+            <Form>frmSWPumpProvRefrig</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="ufrmAuxiliary3.pas">
-            <Form>frmAuxiliary3</Form>
+            <Form>frmSWCoolingPumpChiller1</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UFireFighting.pas">
+            <Form>frmFireFightingPump</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UFireProv.pas">
+            <Form>frmFirePumpProv</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

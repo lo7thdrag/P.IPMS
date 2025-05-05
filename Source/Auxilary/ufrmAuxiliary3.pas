@@ -4,10 +4,17 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls;
 
 type
-  TfrmAuxiliary3 = class(TForm)
+  TfrmSWCoolingPumpChiller1 = class(TForm)
+    Panel1: TPanel;
+    Image1: TImage;
+    Image6: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    VrRotarySwitch2: TVrRotarySwitch;
   private
     { Private declarations }
   public
@@ -15,7 +22,7 @@ type
   end;
 
 var
-  frmAuxiliary3: TfrmAuxiliary3;
+  frmSWCoolingPumpChiller1: TfrmSWCoolingPumpChiller1;
 
 implementation
 

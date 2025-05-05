@@ -1,4 +1,4 @@
-unit ufrmAuxiliary1;
+unit uSludge;
 
 interface
 
@@ -8,7 +8,7 @@ uses
   Vcl.Imaging.pngimage, Vcl.ExtCtrls;
 
 type
-  TfrmBallast = class(TForm)
+  TfrmSludge = class(TForm)
     Panel1: TPanel;
     Image1: TImage;
     Image2: TImage;
@@ -25,7 +25,7 @@ type
   end;
 
 var
-  frmBallast: TfrmBallast;
+  frmSludge: TfrmSludge;
 
 implementation
 
