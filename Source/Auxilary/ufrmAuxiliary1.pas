@@ -1,4 +1,4 @@
-unit uMainForm;
+unit ufrmAuxiliary1;
 
 interface
 
@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
 
 type
-  TfrmMainForm = class(TForm)
+  TfrmAuxiliary1 = class(TForm)
   private
     { Private declarations }
   public
@@ -15,7 +15,7 @@ type
   end;
 
 var
-  frmMainForm: TfrmMainForm;
+  frmAuxiliary1: TfrmAuxiliary1;
 
 implementation
 
