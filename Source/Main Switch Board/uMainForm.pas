@@ -37,7 +37,7 @@ begin
     end;
 
     frmGeneratorPanel.Show;
-    ShowCursor(False);
+//    ShowCursor(False);
   end
   else
   if MainSwitchBoardSystem.IdGensys = 'EMERGENCY' then
@@ -48,7 +48,7 @@ begin
     end;
 
     frmEmergencyPanel.Show;
-    ShowCursor(False);
+//    ShowCursor(False);
   end
   else
   if MainSwitchBoardSystem.IdGensys = 'SHORE' then
@@ -59,7 +59,7 @@ begin
     end;
 
     frmShorePanel.Show;
-    ShowCursor(False);
+//    ShowCursor(False);
   end;
 end;
 
