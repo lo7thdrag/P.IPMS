@@ -5,7 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch, RzBmpBtn,
-  Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls;
+  Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls,
+
+  uListener, uFreezeFrom, uDataType;
 
 type
   TfrmGeneratorPanel = class(TForm)
@@ -84,8 +86,14 @@ type
     ImgOI: TImage;
     ImgPref: TImage;
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
+    FListener : TListeners;
+
+    procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
+    procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
+
   public
     { Public declarations }
   end;
@@ -114,12 +122,37 @@ end;
 
 procedure TfrmGeneratorPanel.FormCreate(Sender: TObject);
 begin
+  FListener := TListeners.Create;
+  with MainSwitchBoardSystem.Listener.Add('GENERATORPANEL') as TPropertyEventListener do
+  begin
+    OnPropertyBoolChange := GeneratorPanelSystemEvent;
+  end;
+
   EnableComposited(pnlMainBackground);
   EnableComposited(pnlGensys);
   EnableComposited(pnlA);
   EnableComposited(pnlHz);
   EnableComposited(pnlkW);
   EnableComposited(pnlV);
+end;
+
+procedure TfrmGeneratorPanel.FormDestroy(Sender: TObject);
+begin
+ FListener.Free;
+end;
+
+procedure TfrmGeneratorPanel.GeneratorPanelSystemEvent(Sender: TObject;
+  PropsID: E_PropsID; Value: Integer);
+begin
+//
+end;
+
+procedure TfrmGeneratorPanel.GeneratorPanelSystemEvent(Sender: TObject;
+  PropsID: E_PropsID; Value: Boolean);
+begin
+  case PropsID of
+     epPMSGeneratorEngineRun: ImgIndicatorER.Visible := Value;
+  end;
 end;
 
 end.

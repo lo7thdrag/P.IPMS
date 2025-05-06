@@ -15,6 +15,7 @@ type
     FFreezed     : boolean;
 
     FIdGensys : String;
+    FIdGenenerator : String;
 
     procedure NetworkEventAssignment;
 
@@ -38,6 +39,7 @@ type
     property Freezed : boolean read FFreezed write SetFreezed;
 
     property IdGensys: String read FIdGensys write FIdGensys;
+    property IdGenenerator: String read FIdGenenerator write FIdGenenerator;
 
   end;
 
@@ -86,6 +88,7 @@ begin
   inifile.ReadSection('CONSOLE MAINSWITCHBOARD', tempstring);
 
   FIdGensys := inifile.ReadString('FORM GENSYS', tempstring[0],'GENSYS 1');
+  FIdGenenerator := inifile.ReadString('ID GENSYS', tempstring[1],'GENERATOR 1');
 
   inifile.Free;
   tempstring.Free;
@@ -152,10 +155,13 @@ end;
 
 procedure TMainSwitchBoardSystem.NetEventMainSwitchBoardCommand(apRec: PAnsiChar; aSize: Word);
 var
-  rec: ^R_Common_PCS_Command;
+  rec: ^R_Common_PMS_Command;
 begin
 
   rec := @apRec^;
+
+  if FIdGenenerator <> rec.GenSwitchID then
+    Exit;
 
   case rec.CommandPropsID of
     epPCSCPPPumpStandby1:
@@ -165,19 +171,16 @@ begin
 //      else if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
 //        FLIstener.TriggerEvents(Self,epPCSCPPPumpStandby1SB,rec.ValueBool);
     end;
-  end;
-
-  case rec.CommandID of
-    //Rudder
-    C_ORD_RUDDER:
+    epPMSGeneratorMode:
     begin
-//      if rec.PortStaboardID = C_PCS_ME_PORTS then
-//        FLIstener.TriggerEvents(Self,epRudderValuePS,rec.ValueInt)
-//      else
-//      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-//        FLIstener.TriggerEvents(Self,epRudderValueSB,rec.ValueInt);
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
+    end;
+    epPMSGeneratorEngineRun:
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
   end;
+
 end;
 
 procedure TMainSwitchBoardSystem.NetworkEventAssignment;
@@ -190,7 +193,7 @@ begin
   begin
     with  client do
     begin
-//      RegisterProcedure(C_PCS_COMMAND, NetEventMCRMachineLeftCommand, SizeOf(R_Common_PCS_Command));
+      RegisterProcedure(C_PMS_COMMAND, NetEventMainSwitchBoardCommand, SizeOf(R_Common_PMS_Command));
     end;
   end;
 
@@ -200,7 +203,7 @@ begin
   begin
     with  client do
     begin
-//      RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
+      RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
 //      RegisterProcedure(C_TELEGRAM_COMMAND, nil, SizeOf(R_Common_Telegram_Command));
     end;
   end;

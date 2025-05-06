@@ -304,10 +304,10 @@ begin
         if Assigned(DieselGeneratorSystem.FFormFreezed[1]) then
           FreeAndNil(DieselGeneratorSystem.FFormFreezed[1]);
       end;
-      epPMSGeneratorRunningHours:
-      begin
-        lblRunningHours.Caption := IntToStr(Value);
-      end;
+    epPMSGeneratorRunningHours:
+    begin
+      lblRunningHours.Caption := IntToStr(Value);
+    end;
 
 //    epPCSCtrlBackgroundLamp:
 //      BackgroundLampIndicator(Value);
