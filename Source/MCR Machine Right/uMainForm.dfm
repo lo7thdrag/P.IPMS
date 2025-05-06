@@ -33395,8 +33395,9 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0EFFFF}
+        Visible = False
       end
-      object ImgAuxdible: TImage
+      object ImgAudible: TImage
         Left = 255
         Top = 409
         Width = 70
@@ -33709,6 +33710,23 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0EFFFF}
+        Visible = False
+      end
+      object imgSTShadow: TImage
+        Left = 55
+        Top = 409
+        Width = 70
+        Height = 46
+        OnMouseDown = imgSTShadowMouseDown
+        OnMouseUp = imgSTShadowMouseUp
+      end
+      object imgAudibleShadow: TImage
+        Left = 255
+        Top = 409
+        Width = 70
+        Height = 46
+        OnMouseDown = imgAudibleShadowMouseDown
+        OnMouseUp = imgAudibleShadowMouseUp
       end
     end
     object pnlTelegraph: TPanel

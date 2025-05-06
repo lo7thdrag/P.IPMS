@@ -60,7 +60,7 @@ type
     ImgLOLP1: TImage;
     ImgLOLP2: TImage;
     ImgST: TImage;
-    ImgAuxdible: TImage;
+    ImgAudible: TImage;
     tmrTelegraph: TTimer;
     pnlTelegraph: TPanel;
     imgBackgroungTelegraph: TImage;
@@ -76,9 +76,19 @@ type
     imgsb8: TImage;
     imgsb9: TImage;
     vrSbTelegrap: TVrRotarySwitch;
+    imgSTShadow: TImage;
+    imgAudibleShadow: TImage;
     procedure tmrTelegraphTimer(Sender: TObject);
     procedure vrSbTelegrapChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgSTShadowMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgAudibleShadowMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgAudibleShadowMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
 
   private
     FIsBlinkState : Boolean;
@@ -177,6 +187,50 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TMainForm.imgAudibleShadowMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  imgAudible.Visible := True;
+end;
+
+procedure TMainForm.imgAudibleShadowMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  imgAudible.Visible := False;
+end;
+
+procedure TMainForm.imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  ImgST.Visible         := True;
+  imgOP1.Visible        := True;
+  ImgPFP1.Visible       := True;
+  ImgPFS.Visible        := True;
+  ImgLOLP1.Visible      := True;
+  ImgLOLP2.Visible      := True;
+
+  imgOP2.Visible        := True;
+  ImgPFP2.Visible       := True;
+  ImgPFC1.Visible       := True;
+
+  ImgHLP1.Visible       := True;
+  ImgHLP2.Visible       := True;
+  ImgPFC2.Visible       := True;
+
+  ImgCFP1.Visible       := True;
+  ImgPowerFP1.Visible   := True;
+
+  ImgCFP2.Visible       := True;
+  ImgPowerFP2.Visible   := True;
+end;
+
+procedure TMainForm.imgSTShadowMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  ImgST.Visible := False;
+  SetAlarmIndicator;
 end;
 
 procedure TMainForm.MCRMachineRightSystemEvent(Sender: TObject;
