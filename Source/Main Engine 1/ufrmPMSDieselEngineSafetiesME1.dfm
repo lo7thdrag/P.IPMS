@@ -11,6 +11,8 @@ object frmPMSDieselEngineSafetiesME1: TfrmPMSDieselEngineSafetiesME1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -176842,6 +176844,7 @@ object frmPMSDieselEngineSafetiesME1: TfrmPMSDieselEngineSafetiesME1
       Width = 138
       Height = 113
       Radius = 25
+      OnChange = SwitchChannelATPChange
       SwitchPositions.Strings = (
         '9'
         '10'

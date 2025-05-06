@@ -12,7 +12,6 @@ object frmSafetiesStop: TfrmSafetiesStop
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poScreenCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -10956,12 +10955,14 @@ object frmSafetiesStop: TfrmSafetiesStop
         FFFF}
       Color = clBtnFace
       TabOrder = 4
+      OnClick = MenuClick
     end
     object btnMenu: TRzBmpButton
       Left = 1133
       Top = 0
       Width = 145
       Height = 151
+      Cursor = crHandPoint
       Bitmaps.TransparentColor = clOlive
       Bitmaps.Up.Data = {
         5E560100424D5E56010000000000420000002800000091000000970000000100
@@ -13706,6 +13707,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         FFFF}
       Color = clBtnFace
       TabOrder = 5
+      OnClick = MenuClick
     end
     object btnPrevious: TRzBmpButton
       Left = 24

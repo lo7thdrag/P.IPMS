@@ -60,10 +60,12 @@ type
     pnlGrafik9: TPanel;
     pnlGrafik10: TPanel;
     imgGrafik: TImage;
+    Image1: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
     procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure MenuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -76,7 +78,7 @@ var
 implementation
 
 uses
-  ufrmLineAExhaustGasTemperature, ufrmCrankinOilTemperature;
+  ufrmLineAExhaustGasTemperature, ufrmCrankinOilTemperature, ufrmMenu;
 {$R *.dfm}
 
 procedure TfrmPCOTFilteringDeviations.btnNextClick(Sender: TObject);
@@ -112,6 +114,12 @@ end;
 procedure TfrmPCOTFilteringDeviations.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmPCOTFilteringDeviations.MenuClick(Sender: TObject);
+begin
+  frmMenu.Show;
+  Self.Hide;
 end;
 
 end.

@@ -58,9 +58,11 @@ type
     pnlGrafik9: TPanel;
     pnlGrafik10: TPanel;
     imgGrafik: TImage;
+    Image1: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
     procedure btnLineBClick(Sender: TObject);
+    procedure MenuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -73,7 +75,7 @@ var
 implementation
 
 uses
-  ufrmLineBExhaustGasTemperature, ufrmPCOTFilteringDeviations;
+  ufrmLineBExhaustGasTemperature, ufrmPCOTFilteringDeviations, ufrmMenu;
 {$R *.dfm}
 
 procedure TfrmLineAExhaustGasTemperature.btnLineBClick(Sender: TObject);
@@ -91,6 +93,12 @@ end;
 procedure TfrmLineAExhaustGasTemperature.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmLineAExhaustGasTemperature.MenuClick(Sender: TObject);
+begin
+  frmMenu.Show;
+  Self.Hide;
 end;
 
 end.

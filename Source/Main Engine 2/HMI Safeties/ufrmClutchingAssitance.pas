@@ -57,9 +57,11 @@ type
     btnAlarms: TRzBmpButton;
     btnCurves: TRzBmpButton;
     btnMenu: TRzBmpButton;
+    Image9: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
+    procedure MenuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -72,7 +74,7 @@ var
 implementation
 
 uses
-  ufrmPLCNetwork, ufrmGeneralScreen;
+  ufrmPLCNetwork, ufrmGeneralScreen, ufrmMenu;
 
 {$R *.dfm}
 
@@ -91,6 +93,12 @@ end;
 procedure TfrmClutchingAssistance.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmClutchingAssistance.MenuClick(Sender: TObject);
+begin
+  frmMenu.Show;
+  Self.Hide;
 end;
 
 end.

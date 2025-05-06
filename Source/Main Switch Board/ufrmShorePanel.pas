@@ -12,12 +12,8 @@ type
     pnlShoreConnection: TPanel;
     Image2: TImage;
     Image1: TImage;
-    Image3: TImage;
     Image6: TImage;
     Image4: TImage;
-    Image9: TImage;
-    Image7: TImage;
-    Image5: TImage;
     pnlA: TPanel;
     VrAngularMeter3: TVrAngularMeter;
     Label9: TLabel;
@@ -36,9 +32,9 @@ type
     Label4: TLabel;
     VrRotarySwitch2: TVrRotarySwitch;
     VrRotarySwitch3: TVrRotarySwitch;
-    RzBmpButton1: TRzBmpButton;
-    RzBmpButton2: TRzBmpButton;
     Image8: TImage;
+    ImgIndicatorCBOpen: TImage;
+    ImgIndicatorCBClose: TImage;
   private
     { Private declarations }
   public

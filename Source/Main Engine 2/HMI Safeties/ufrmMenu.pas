@@ -55,6 +55,7 @@ type
     Image12: TImage;
     Label13: TLabel;
     Label14: TLabel;
+    Image13: TImage;
     procedure FormCreate(Sender: TObject);
     procedure CompressedAirCircuitClick(Sender: TObject);
     procedure FreshandSeaWaterCircuitClick(Sender: TObject);
@@ -70,8 +71,10 @@ type
     procedure GeneralScreenClick(Sender: TObject);
     procedure GaugesClick(Sender: TObject);
     procedure SignalingClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure MenuClick(Sender: TObject);
   private
-    { Private declarations }
+
   public
     { Public declarations }
   end;
@@ -84,13 +87,33 @@ implementation
 uses
   ufrmGeneralScreen, ufrmClutchingAssitance, ufrmPLCNetwork, ufrmLubOilCircuit, ufrmFuelOilCircuit, ufrmFWSeaWaterCircuit,
   ufrmAirGasCircuit, ufrmEngineBearingTemperature, ufrmCrankinOilTemperature, ufrmPCOTFilteringDeviations, ufrmLineAExhaustGasTemperature,
-  ufrmLineBExhaustGasTemperature, ufrmSafetiesStop, ufrmCompressedAirCircuit, ufrmSetofPressureGaugesME2, ufrmSignalingLightME2;
+  ufrmLineBExhaustGasTemperature, ufrmSafetiesStop, ufrmCompressedAirCircuit, ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, uMainEngine2System;
 
 {$R *.dfm}
 
 procedure TfrmMenu.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmMenu.FormShow(Sender: TObject);
+begin
+  DefaultMonitor := dmDesktop;
+
+  if Screen.MonitorCount > 1 then
+  begin
+    Height := Screen.Monitors[MainEngine2System.IdScreenPmsHmi].Height;
+    Top    := Screen.Monitors[MainEngine2System.IdScreenPmsHmi].Top;
+    Left   := Screen.Monitors[MainEngine2System.IdScreenPmsHmi].Left;
+    width  := Screen.Monitors[MainEngine2System.IdScreenPmsHmi].Width;
+  end
+  else
+  begin
+    Height := Screen.Height;
+    Width := Screen.Width;
+    Left := 0;
+    Top := 0;
+  end;
 end;
 
 procedure TfrmMenu.AirandGasCircuitClick(Sender: TObject);
@@ -156,6 +179,12 @@ end;
 procedure TfrmMenu.LubOilCircuitClick(Sender: TObject);
 begin
   frmLubOilCircuit.Show;
+  Self.Hide;
+end;
+
+procedure TfrmMenu.MenuClick(Sender: TObject);
+begin
+  frmMenu.Show;
   Self.Hide;
 end;
 

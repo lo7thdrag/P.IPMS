@@ -187,10 +187,13 @@ type
     procedure AdjustSE3Change(Sender: TObject);
     procedure AdjustSE4Change(Sender: TObject);
     procedure SwitchMTP1Change(Sender: TObject);
+    procedure SwitchChannelATPChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
-    { Private declarations }
+
   public
-    { Public declarations }
+    imgLeds: array[0..15] of TImage;
   end;
 
 var
@@ -199,8 +202,48 @@ var
 implementation
 
 uses
-  ufrmSetofPressureGaugesME1;
+  ufrmSetofPressureGaugesME1, uMainEngine1System;
 {$R *.dfm}
+
+procedure TfrmPMSDieselEngineSafetiesME1.FormCreate(Sender: TObject);
+begin
+  imgLeds[0]  := imgLedGreenAIP9;
+  imgLeds[1]  := imgLedGreenAIP10;
+  imgLeds[2]  := imgLedGreenAIP11;
+  imgLeds[3]  := imgLedGreenAIP12;
+  imgLeds[4]  := imgLedGreenAIP13;
+  imgLeds[5]  := imgLedGreenAIP14;
+  imgLeds[6]  := imgLedGreenAIP15;
+  imgLeds[7]  := imgLedGreenAIP16;
+  imgLeds[8]  := imgLedGreenAIP1;
+  imgLeds[9]  := imgLedGreenAIP2;
+  imgLeds[10] := imgLedGreenAIP3;
+  imgLeds[11] := imgLedGreenAIP4;
+  imgLeds[12] := imgLedGreenAIP5;
+  imgLeds[13] := imgLedGreenAIP6;
+  imgLeds[14] := imgLedGreenAIP7;
+  imgLeds[15] := imgLedGreenAIP8;
+end;
+
+procedure TfrmPMSDieselEngineSafetiesME1.FormShow(Sender: TObject);
+begin
+  DefaultMonitor := dmDesktop;
+
+  if Screen.MonitorCount > 1 then
+  begin
+    Height := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Height;
+    Top    := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Top;
+    Left   := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Left;
+    width  := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Width;
+  end
+  else
+  begin
+    Height := Screen.Height;
+    Width := Screen.Width;
+    Left := 0;
+    Top := 0;
+  end;
+end;
 
 procedure TfrmPMSDieselEngineSafetiesME1.AdjustSE1Change(Sender: TObject);
 begin
@@ -278,6 +321,20 @@ procedure TfrmPMSDieselEngineSafetiesME1.NextClick(Sender: TObject);
 begin
   frmSetofPressureGaugesME1.Show;
   Self.Hide;
+end;
+
+procedure TfrmPMSDieselEngineSafetiesME1.SwitchChannelATPChange(Sender: TObject);
+var
+  i, SwitchPositionIndex : Integer;
+begin
+  SwitchPositionIndex := switchATPChannel.SwitchPosition;
+
+  for i := 0 to 15 do
+    imgLeds[i].Visible := False;
+
+  if (SwitchPositionIndex >= 0) and (SwitchPositionIndex <= 15) then
+    imgLeds[SwitchPositionIndex].Visible := True;
+
 end;
 
 procedure TfrmPMSDieselEngineSafetiesME1.SwitchMTP1Change(Sender: TObject);

@@ -56,6 +56,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
+    procedure MenuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -68,7 +69,7 @@ var
 implementation
 
 uses
-  ufrmCompressedAirCircuit, ufrmLineBExhaustGasTemperature;
+  ufrmCompressedAirCircuit, ufrmLineBExhaustGasTemperature, ufrmMenu;
 
 {$R *.dfm}
 
@@ -87,6 +88,12 @@ end;
 procedure TfrmSafetiesStop.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmSafetiesStop.MenuClick(Sender: TObject);
+begin
+  frmMenu.Show;
+  Self.Hide;
 end;
 
 end.

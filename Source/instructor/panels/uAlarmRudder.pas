@@ -77,9 +77,9 @@ type
     vrwhlRudderLeft: TVrWheel;
     lblSpedometer: TPanel;
     img1: TImage;
-    vra2: TVrAngularMeter;
-    RzSpinEdit1: TRzSpinEdit;
-    cbb1: TComboBox;
+    VrPSRudderAngle: TVrAngularMeter;
+    RzPSRudderAngle: TRzSpinEdit;
+    cbbPSRudderAngle: TComboBox;
     lblPumpStartboard: TPanel;
     btnPumpKanan1: TSpeedButtonImage;
     btnPumpKanan4: TSpeedButtonImage;
@@ -89,6 +89,11 @@ type
     btnPumpKanan6: TSpeedButtonImage;
     lbl1: TPanel;
     lbl2: TLabel;
+    Panel1: TPanel;
+    Image1: TImage;
+    VrSBRudderAngle: TVrAngularMeter;
+    RzSBRudderAngle: TRzSpinEdit;
+    cbbSBRudderAngle: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnInpRudderLeftClick(Sender: TObject);
@@ -99,7 +104,8 @@ type
     procedure btnLampKiri1Click(Sender: TObject);
     procedure btnPumpKiri1Click(Sender: TObject);
     procedure tmr1Timer(Sender: TObject);
-    procedure RzSpinEdit1Change(Sender: TObject);
+    procedure RzPSRudderAngleChange(Sender: TObject);
+    procedure RzSBRudderAngleChange(Sender: TObject);
   private
     { Private declarations }
     Alarm : TAlarmObj;
@@ -484,7 +490,7 @@ begin
       end;
 
       InstructorSys.ClassAlarm.setLamp(Alarm);
-      TSpeedButtonImage(sender).Color := clGray;
+      TSpeedButtonImage(sender).Color := clMaroon;
     end;
   end;
 end;
@@ -598,25 +604,43 @@ begin
   Alarm.Free;
 end;
 
-procedure TfrmAlarmRudder.RzSpinEdit1Change(Sender: TObject);
+procedure TfrmAlarmRudder.RzPSRudderAngleChange(Sender: TObject);
 var
   value : Integer;
 
 begin
-  if cbb1.ItemIndex = 0 then
+  if cbbPSRudderAngle.ItemIndex = 0 then
   begin
-    vra2.Position := RzSpinEdit1.Value + 50;
-    value := Round(RzSpinEdit1.Value + 50);
+    VrPSRudderAngle.Position := RzPSRudderAngle.Value + 50;
+    value := Round(RzPSRudderAngle.Value + 50);
   end
   else
   begin
-    vra2.Position := Abs(RzSpinEdit1.Value - 50);
-    value := Round(RzSpinEdit1.Value - 50);
+    VrPSRudderAngle.Position := Abs(RzPSRudderAngle.Value - 50);
+    value := Round(RzPSRudderAngle.Value - 50);
   end;
 
-//  rudderSent_PS := RzSpinEdit1.Value - 50;
-
   ERSystem.ERManager.EngineRoom.getPCSSystem.SetRudder('Main Engine PS', value);
+
+end;
+
+procedure TfrmAlarmRudder.RzSBRudderAngleChange(Sender: TObject);
+var
+  value : Integer;
+
+begin
+  if cbbSBRudderAngle.ItemIndex = 0 then
+  begin
+    VrSBRudderAngle.Position := RzSBRudderAngle.Value + 50;
+    value := Round(RzSBRudderAngle.Value + 50);
+  end
+  else
+  begin
+    VrSBRudderAngle.Position := Abs(RzSBRudderAngle.Value - 50);
+    value := Round(RzSBRudderAngle.Value - 50);
+  end;
+
+  ERSystem.ERManager.EngineRoom.getPCSSystem.SetRudder('Main Engine SB', value);
 
 end;
 

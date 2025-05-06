@@ -11,6 +11,8 @@ object frmSignalingLightME1: TfrmSignalingLightME1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -4717,7 +4719,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         03000000207B221800000000D9FB3FD16275083D48888D0000000049454E44AE
         426082}
       Stretch = True
-      OnClick = AirValveClick
     end
     object imgSignaling2: TImage
       Left = 48
@@ -6719,7 +6720,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         230926841042082184104208219A3D926042082184104208218410A2D9F3FF01
         7B67DB166AA0FADD0000000049454E44AE426082}
       Stretch = True
-      OnClick = AirValveClick
     end
     object imgAirValveOpenME1: TImage
       Left = 83
@@ -10371,6 +10371,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
       Top = 537
       Width = 144
       Height = 96
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D494844520000008F0000
         00610806000000EF2DF261000000097048597300000EC400000EC401952B0E1B
@@ -10465,7 +10466,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         2266A49A9B835CD15765FBC82344B5481EE146F208379247B8913CC2CD9FF1C5
         F3D720414E000000000049454E44AE426082}
       Visible = False
-      OnClick = AirValveClick
+      OnClick = btnStartStopClick
     end
     object imgClutchME1: TImage
       Left = 76
@@ -10576,7 +10577,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         8CABBB1B0A4BFCBBE752F11059C578488CF19018E32131C64362FF0789E964F5
         B644DA1D0000000049454E44AE426082}
       Visible = False
-      OnClick = AirValveClick
+      OnClick = btnClutchDeclutchClick
     end
     object imgByPassOpenME1: TImage
       Left = 76
@@ -10872,8 +10873,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         E47F8679B57099F7EF7CE8E421049487FC0B280F5113953CEEC46A1C7197C6BB
         ADA48191EDCA84ABD6FFCF3704C94348B4501EA286F210359487A8A13C44CDDF
         66A811D7A77F01E70000000049454E44AE426082}
-      Visible = False
-      OnClick = AirValveClick
+      OnClick = btnStartStopClick
     end
     object imgDeclutchME1: TImage
       Left = 419
@@ -10998,7 +10998,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         F210C2FC094EF5A0041DD8528C0000000049454E44AE426082}
       Stretch = True
       Visible = False
-      OnClick = AirValveClick
+      OnClick = btnClutchDeclutchClick
     end
     object imgByPassClosedME1: TImage
       Left = 421
@@ -11399,13 +11399,13 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         000049454E44AE426082}
       Stretch = True
       Visible = False
-      OnClick = AirValveClick
     end
     object imgSafetiesStopOverbiddenME1: TImage
       Left = 733
       Top = 662
       Width = 153
       Height = 98
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D494844520000008F0000
         00610806000000EF2DF261000000097048597300000EC400000EC401952B0E1B
@@ -11595,7 +11595,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         4E44AE426082}
       Stretch = True
       Visible = False
-      OnClick = AirValveClick
+      OnClick = btnSafetiesStopClick
     end
     object imgEmergencyStopME1: TImage
       Left = 1053
@@ -11755,6 +11755,55 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         454E44AE426082}
       Stretch = True
       Visible = False
+      OnClick = btnEmergencyStopClick
+    end
+    object btnStartPS: TSpeedButtonImage
+      Left = 427
+      Top = 547
+      Width = 126
+      Height = 78
+      Cursor = crHandPoint
+      Caption = ''
+      Flat = True
+      OnClick = btnStartStopClick
+      Color = clGreen
+    end
+    object Label1: TLabel
+      Left = 456
+      Top = 576
+      Width = 68
+      Height = 25
+      Caption = 'START'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -21
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object btnStopPS: TSpeedButtonImage
+      Left = 85
+      Top = 547
+      Width = 126
+      Height = 78
+      Cursor = crHandPoint
+      Caption = ''
+      Flat = True
+      OnClick = btnStartStopClick
+      Color = clRed
+    end
+    object Label2: TLabel
+      Left = 120
+      Top = 576
+      Width = 56
+      Height = 25
+      Caption = 'STOP'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -21
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
   end
 end
