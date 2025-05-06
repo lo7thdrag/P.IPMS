@@ -484,7 +484,7 @@ begin
       end;
 
       InstructorSys.ClassAlarm.setLamp(Alarm);
-      TSpeedButtonImage(sender).Color := clGray;
+      TSpeedButtonImage(sender).Color := clMaroon;
     end;
   end;
 end;
