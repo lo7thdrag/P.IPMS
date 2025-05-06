@@ -5,8 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, jpeg, ImgList, Buttons, StdCtrls, SpeedButtonImage,
-  TFlatSpeedButtonUnit, uDataType, uListener, ComCtrls, uFreezeFrom,
-  System.ImageList;
+  TFlatSpeedButtonUnit, uDataType, uListener, ComCtrls, uFreezeFrom;
 
 type
   Tfrm_GeneralPanel = class(TForm)

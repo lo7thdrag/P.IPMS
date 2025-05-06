@@ -1,23 +1,24 @@
 object frm_GeneralPanel: Tfrm_GeneralPanel
   Left = 0
-  Top = 0
+  Top = 1168
   BorderStyle = bsNone
   Caption = 'General Panel'
   ClientHeight = 768
-  ClientWidth = 1024
-  Color = clBtnFace
+  ClientWidth = 1083
+  Color = 3749426
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesigned
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlGeneralPanel: TPanel
-    Left = 0
+    Left = 29
     Top = 0
     Width = 1024
     Height = 768
@@ -4803,6 +4804,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'Stop Horn'
+      Caption = ''
       Flat = True
       OnClick = btnStop_HornClick
       OnMouseDown = btnMouseDown
@@ -4816,6 +4818,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'Lamp Test'
+      Caption = ''
       Flat = True
       OnMouseDown = btnLamp_TestMouseDown
       OnMouseUp = btnLamp_TestMouseUp
@@ -4828,6 +4831,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'Increase'
+      Caption = ''
       Flat = True
       OnClick = btnIndicatorLampClick
       ImageList = ilButton_Image
@@ -4839,6 +4843,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'Decrease'
+      Caption = ''
       Flat = True
       OnClick = btnIndicatorLampClick
       ImageList = ilButton_Image
@@ -4850,6 +4855,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'Decrease'
+      Caption = ''
       Flat = True
       OnClick = btnBackgroundLampClick
       ImageList = ilButton_Image
@@ -4861,6 +4867,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'Increase'
+      Caption = ''
       Flat = True
       OnClick = btnBackgroundLampClick
       ImageList = ilButton_Image
@@ -4872,6 +4879,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'PS'
+      Caption = ''
       Flat = True
       OnClick = btnMCRClick
       ImageList = ilButton_Image
@@ -4883,6 +4891,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'SB'
+      Caption = ''
       Flat = True
       OnClick = btnMCRClick
       ImageList = ilButton_Image
@@ -4894,6 +4903,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'PS'
+      Caption = ''
       Flat = True
       OnClick = btnBridgeClick
       ImageList = ilButton_Image
@@ -4905,6 +4915,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'SB'
+      Caption = ''
       Flat = True
       OnClick = btnBridgeClick
       ImageList = ilButton_Image
@@ -4916,6 +4927,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'Transit'
+      Caption = ''
       Flat = True
       OnClick = btnModeClick
       ImageList = ilButton_Image
@@ -4927,6 +4939,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'Manouvre'
+      Caption = ''
       Flat = True
       OnClick = btnModeClick
       ImageList = ilButton_Image
@@ -4938,6 +4951,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -4950,6 +4964,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -4962,6 +4977,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -4974,6 +4990,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -4986,6 +5003,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -4998,6 +5016,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Top = 481
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5010,6 +5029,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Top = 481
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5022,6 +5042,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5034,6 +5055,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5046,6 +5068,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5058,6 +5081,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5089,6 +5113,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Width = 95
       Height = 95
       Hint = 'Alarm Accept'
+      Caption = ''
       Flat = True
       OnClick = btnAlarm_AcceptClick
       OnMouseDown = btnMouseDown
@@ -5109,7 +5134,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
     Left = 440
     Top = 712
     Bitmap = {
-      494C010105004801480180008000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105004801040080008000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000000200000001000001002000000000000000
       0800000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
