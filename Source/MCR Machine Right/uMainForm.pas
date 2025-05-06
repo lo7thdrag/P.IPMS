@@ -336,7 +336,7 @@ begin
       GetIdBlinkTelegrapLamp(TVrRotarySwitch(Sender).SwitchPosition + 1);
       tmrTelegraph.Enabled := True;
 
-      MCRMachineRightSystem.sendTelegram(epBoardTelegramKiri, TVrRotarySwitch(Sender).SwitchPosition + 1, True, Ord(tsSend));
+      MCRMachineRightSystem.sendTelegram(epBoardTelegramKanan, TVrRotarySwitch(Sender).SwitchPosition + 1, True, Ord(tsSend));
       {$ENDREGION}
     end;
     tsReply :
@@ -350,7 +350,7 @@ begin
 
       tmrTelegraph.Enabled := False;
 
-      MCRMachineRightSystem.sendTelegram(epBoardTelegramKiri, TVrRotarySwitch(Sender).SwitchPosition + 1, True, Ord(tsReply));
+      MCRMachineRightSystem.sendTelegram(epBoardTelegramKanan, TVrRotarySwitch(Sender).SwitchPosition + 1, True, Ord(tsReply));
 
       {mengubah status dari penerima ke siap mengirim lagi}
       TelegrapStatus := tsSend;
