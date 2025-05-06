@@ -19,6 +19,7 @@ type
     Label3: TLabel;
     Label19: TLabel;
     procedure NextClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,9 +32,29 @@ var
 implementation
 
 uses
-  ufrmSignalingLightME1;
+  ufrmSignalingLightME1, uMainEngine1System;
 
 {$R *.dfm}
+
+procedure TfrmSetofPressureGaugesME1.FormShow(Sender: TObject);
+begin
+  DefaultMonitor := dmDesktop;
+
+  if Screen.MonitorCount > 1 then
+  begin
+    Height := Screen.Monitors[MainEngine1System.IdScreenGauges].Height;
+    Top    := Screen.Monitors[MainEngine1System.IdScreenGauges].Top;
+    Left   := Screen.Monitors[MainEngine1System.IdScreenGauges].Left;
+    width  := Screen.Monitors[MainEngine1System.IdScreenGauges].Width;
+  end
+  else
+  begin
+    Height := Screen.Height;
+    Width := Screen.Width;
+    Left := 0;
+    Top := 0;
+  end;
+end;
 
 procedure TfrmSetofPressureGaugesME1.NextClick(Sender: TObject);
 begin

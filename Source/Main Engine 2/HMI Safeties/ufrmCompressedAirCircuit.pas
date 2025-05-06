@@ -46,9 +46,11 @@ type
     Image7: TImage;
     Image2: TImage;
     Image5: TImage;
+    Image6: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
+    procedure MenuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -79,6 +81,12 @@ end;
 procedure TfrmCompressedAirCircuit.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmCompressedAirCircuit.MenuClick(Sender: TObject);
+begin
+  frmMenu.Show;
+  Self.Hide;
 end;
 
 end.

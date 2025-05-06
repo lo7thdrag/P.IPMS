@@ -58,9 +58,11 @@ type
     Label33: TLabel;
     lblAverageTempPCOT: TLabel;
     imgGrafik: TImage;
+    Image1: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
     procedure btnFilteringDeviationClick(Sender: TObject);
+    procedure MenuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -73,7 +75,7 @@ var
 implementation
 
 uses
-  ufrmPCOTFilteringDeviations, ufrmEngineBearingTemperature;
+  ufrmPCOTFilteringDeviations, ufrmEngineBearingTemperature, ufrmMenu;
 {$R *.dfm}
 
 procedure TfrmCrankpinOilTemperature.btnFilteringDeviationClick(
@@ -92,6 +94,12 @@ end;
 procedure TfrmCrankpinOilTemperature.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmCrankpinOilTemperature.MenuClick(Sender: TObject);
+begin
+  frmMenu.Show;
+  Self.Hide;
 end;
 
 end.

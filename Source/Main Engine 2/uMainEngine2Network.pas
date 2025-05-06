@@ -25,7 +25,7 @@ type
     procedure OnDisconnected(Sender : TObject);override;
 
     property VREngineSocket : TTCPClient read FVREngineSocket;
-    property MainEngine1ControllerSocket : TTCPClient read FMainEngineControllerSocket;
+    property MainEngine2ControllerSocket : TTCPClient read FMainEngineControllerSocket;
    end;
 
 implementation
@@ -73,7 +73,7 @@ procedure TMainEngine2Network.OnConnected(Sender: TObject);
 begin
   inherited;
 
-  Listeners.TriggerEvents(Self, epNetworkDebugInfo, 'Main Engine 1 connected to ' +  (Sender as TTCPClient).ServerAddress);
+  Listeners.TriggerEvents(Self, epNetworkDebugInfo, 'Main Engine 2 connected to ' +  (Sender as TTCPClient).ServerAddress);
 
 end;
 
@@ -81,7 +81,7 @@ procedure TMainEngine2Network.OnDisconnected(Sender: TObject);
 begin
   inherited;
 
-  Listeners.TriggerEvents(Self, epNetworkDebugInfo, 'Main Engine 1 disconnected from ' +  (Sender as TTCPClient).ServerAddress);
+  Listeners.TriggerEvents(Self, epNetworkDebugInfo, 'Main Engine 2 disconnected from ' +  (Sender as TTCPClient).ServerAddress);
 end;
 
 procedure TMainEngine2Network.StartNetwork;

@@ -1,6 +1,7 @@
 object frmSetofPressureGaugesME1: TfrmSetofPressureGaugesME1
   Left = 0
   Top = 0
+  Align = alClient
   BorderStyle = bsNone
   ClientHeight = 1024
   ClientWidth = 1280
@@ -11,6 +12,7 @@ object frmSetofPressureGaugesME1: TfrmSetofPressureGaugesME1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -163962,7 +163964,7 @@ object frmSetofPressureGaugesME1: TfrmSetofPressureGaugesME1
       ShowHint = False
     end
     object Label2: TLabel
-      Left = 568
+      Left = 567
       Top = 653
       Width = 154
       Height = 50
@@ -164014,7 +164016,7 @@ object frmSetofPressureGaugesME1: TfrmSetofPressureGaugesME1
       ShowHint = False
     end
     object Label3: TLabel
-      Left = 984
+      Left = 977
       Top = 664
       Width = 172
       Height = 25

@@ -32,9 +32,11 @@ type
     btnPrevious: TRzBmpButton;
     btnNext: TRzBmpButton;
     Image10: TImage;
+    Image2: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
+    procedure MenuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,7 +49,7 @@ var
 implementation
 
 uses
-  ufrmFWSeaWaterCircuit, ufrmLubOilCircuit;
+  ufrmFWSeaWaterCircuit, ufrmLubOilCircuit, ufrmMenu;
 
 {$R *.dfm}
 
@@ -66,6 +68,12 @@ end;
 procedure TfrmFuelOilCircuit.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmFuelOilCircuit.MenuClick(Sender: TObject);
+begin
+  frmMenu.Show;
+  Self.Hide;
 end;
 
 end.

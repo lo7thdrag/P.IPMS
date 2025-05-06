@@ -80,9 +80,11 @@ type
     btnCurves: TRzBmpButton;
     btnMenu: TRzBmpButton;
     btnAlarms: TRzBmpButton;
+    Image13: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
+    procedure MenuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -114,6 +116,12 @@ end;
 procedure TfrmGeneralScreen.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmGeneralScreen.MenuClick(Sender: TObject);
+begin
+  frmMenu.Show;
+  Self.Hide;
 end;
 
 end.

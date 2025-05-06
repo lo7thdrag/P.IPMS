@@ -81,9 +81,11 @@ type
     Label14: TLabel;
     Label18: TLabel;
     Label22: TLabel;
+    Image13: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btnNextclick(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
+    procedure MenuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -96,7 +98,7 @@ var
 implementation
 
 uses
-  ufrmFuelOilCircuit, ufrmPLCNetwork;
+  ufrmFuelOilCircuit, ufrmPLCNetwork, ufrmMenu;
 {$R *.dfm}
 
 procedure TfrmLubOilCircuit.btnNextclick(Sender: TObject);
@@ -114,6 +116,12 @@ end;
 procedure TfrmLubOilCircuit.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmLubOilCircuit.MenuClick(Sender: TObject);
+begin
+  frmMenu.Show;
+  Self.Hide;
 end;
 
 end.

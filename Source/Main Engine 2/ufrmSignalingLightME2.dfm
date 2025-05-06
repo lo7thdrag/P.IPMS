@@ -13,6 +13,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
   OldCreateOrder = False
   Position = poScreenCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel

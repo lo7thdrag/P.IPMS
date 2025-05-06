@@ -8,40 +8,56 @@ uses uMainEngine1Network, uListener, uTCPClient, uDataType, ExtCtrls, uFreezeFro
 type
 
   TMainEngine1System = class
-  private
-
-    FMainEngine1Network : TMainEngine1Network;
-    FLIstener   : TListeners;
-    FFreezed    : Boolean;
-
-    FIdFormMainEngine1 : string;
-
-    procedure NetworkEventAssignment;
-
-    {Receive Main Engine state from Engine}
-    procedure NetEventMainEngine1Command(apRec: PAnsiChar; aSize: Word);
-
-    {Receive command from instructur}
-    procedure NetEventInstructorCommonCmd(apRec: PAnsiChar; aSize: Word);
-
-    procedure LoadSettingForm(filepath: string);
-    procedure SetFreezed(const Value: boolean);
-
-  public
+    public
     FFormFreezed : array[0..2] of TfrmFreeze;
 
     constructor Create;
     destructor Destroy;override;
 
+    {Receive Main Engine state from Engine}
+    procedure NetEventMainEngine1Command(apRec: PAnsiChar; aSize: Word);
+
+    {Kontrol untuk panel PCS touch screen dengan Engine}
+    procedure RunningStart(aPortStaboard : String);
+    procedure StoppedStop(aPortStaboard : String);
+    procedure Clutch(aPortStaboard : string);
+    procedure SafetiesStop(aPortStaboard: string);
+    procedure EmergencyStop(aPortStaboard : String);
+
     procedure StartStopEngine(aValue : Boolean);
 
-    procedure sendPumpStatus(sideId : byte; pumpId, stadeId: Integer; status: Boolean);
+  private
+    FMainEngine1Network : TMainEngine1Network;
+    FLIstener   : TListeners;
+    FFreezed    : Boolean;
+
+    FIdPosisi : string;
+    FIdNumber : Integer;
+    FIdScreenGauges : Integer;
+    FIdScreenPmsHmi : Integer;
+    FIdScreenSignaling : Integer;
+
+    procedure NetworkEventAssignment;
+
+    {Receive command from MainEngine}
+    procedure NetEventMainEngineCommonCmd(apRec: PAnsiChar; aSize: Word);
+
+    procedure LoadSettingForm(filepath: string);
+    procedure SetFreezed(const Value: boolean);
+
+  public
+    FEmergencyStopPS, FEmergencyStopSB : Boolean;
 
     property Network : TMainEngine1Network read FMainEngine1Network;
     property Listener :TListeners read FListener;
     property Freezed : boolean read FFreezed write SetFreezed;
 
-    property IdFormMainEngine1: string read FIdFormMainEngine1 write FIdFormMainEngine1;
+    property IdPosisi: string read FIdPosisi write FIdPosisi;
+    property IdNumber: Integer read FIdNumber write FIdNumber;
+    property IdScreenGauges: Integer read FIdScreenGauges write FIdScreenGauges;
+    property IdScreenPmsHmi: Integer read FIdScreenPmsHmi write FIdScreenPmsHmi;
+    property IdScreenSignaling: Integer read FIdScreenSignaling write FIdScreenSignaling;
+
   end;
 
 var
@@ -66,16 +82,6 @@ begin
   FMainEngine1Network.StartNetwork;
 end;
 
-destructor TMainEngine1System.Destroy;
-begin
-  FLIstener.Free;
-
-  FMainEngine1Network.StopNetwork;
-  FMainEngine1Network.Free;
-
-  inherited;
-end;
-
 procedure TMainEngine1System.LoadSettingForm(filepath: string);
 var
   inifile    : TIniFile;
@@ -84,12 +90,26 @@ begin
   inifile    := TIniFile.Create(filepath);
   tempstring := TStringList.Create;
 
-  inifile.ReadSection('Form Main Engine 1', tempstring);
+  inifile.ReadSection('MAIN ENGINE', tempstring);
 
-  FIdFormMainEngine1 := inifile.ReadString('Form Main Engine 1', tempstring[0],'Default');
+  FIdPosisi := inifile.ReadString('MAIN ENGINE', tempstring[0],'KANAN');
+  FIdNumber := inifile.ReadInteger('MAIN ENGINE', tempstring[1],1);
+  FIdScreenGauges := inifile.ReadInteger('MAIN ENGINE', tempstring[2],0);
+  FIdScreenPmsHmi := inifile.ReadInteger('MAIN ENGINE', tempstring[3],1);
+  FIdScreenSignaling := inifile.ReadInteger('MAIN ENGINE', tempstring[4],2);
 
   inifile.Free;
   tempstring.Free;
+end;
+
+destructor TMainEngine1System.Destroy;
+begin
+  FLIstener.Free;
+
+  FMainEngine1Network.StopNetwork;
+  FMainEngine1Network.Free;
+
+  inherited;
 end;
 
 procedure TMainEngine1System.SetFreezed(const Value: boolean);
@@ -114,19 +134,19 @@ end;
 
 procedure TMainEngine1System.StartStopEngine(aValue: Boolean);
 var
-  recCmd : R_Common_PMS_Command;
+  recCmd : R_Common_PCS_Command;
 begin
-  recCmd.GenSwitchID := IdFormMainEngine1;
-  recCmd.CommandPropsID := epPMSGeneratorEngineRun;
-  recCmd.ValueBool := aValue;
+//  recCmd.GenSwitchID := IdScreenSignaling;
+//  recCmd.CommandPropsID := epPMSGeneratorEngineRun;
+//  recCmd.ValueBool := aValue;
 
   Network.MainEngine1ControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
 end;
 
 { fungsi untuk menangani event dari jaringan untuk PCSCommand }
-procedure TMainEngine1System.NetEventInstructorCommonCmd(apRec: PAnsiChar; aSize: Word);
+procedure TMainEngine1System.NetEventMainEngineCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
-  rec: ^R_Common_Instr_Command;
+  rec: ^R_Common_PCS_Command;
   i,aCount : integer;
 begin
   rec := @apRec^;
@@ -135,33 +155,22 @@ begin
     C_ORD_FREEZE_APP : Freezed := True;
 
     C_ORD_UNFREEZE_APP : Freezed := False;
-
-    C_ORD_CLOSE_APP :
-    begin
-//      if servoID = 1 then
-//        PCSSystem.sendServoLampStatus(C_ORD_SERVO_PS, False)
-//      else if servoID = 3  then
-//        PCSSystem.sendServoLampStatus(C_ORD_SERVO_SB, False);
-    end;
-
   end;
 end;
 
 procedure TMainEngine1System.NetEventMainEngine1Command(apRec: PAnsiChar; aSize: Word);
 var
-  rec: ^R_Common_PMS_Command;
+  rec: ^R_Common_PCS_Command;
+
 begin
 
   rec := @apRec^;
 
-  if FIdFormMainEngine1 <> rec.GenSwitchID then
-     Exit;
-
   case rec.CommandPropsID of
-    epPMSMeasPowFailure:
-    begin
-      FLIstener.TriggerEvents(Self, epPMSMeasPowFailure, rec.ValueBool);
-    end;
+     epPCSMERunning, epPCSMEClutched, epPCSMESafetyStop, epPCSMELocalEmergencyStop:
+     begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
+     end;
   end;
 end;
 
@@ -183,11 +192,9 @@ begin
   client := FMainEngine1Network.AsClients.Get('AsInstructorClient');
   if Assigned(client) then
   begin
-    with  client do
+    with client do
     begin
-      RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
-      RegisterProcedure(C_TELEGRAM_COMMAND, nil, SizeOf(R_Common_Telegram_Command));
-      RegisterProcedure(C_Servo_COMMAND, nil, SizeOf(R_ServoAndLamp_Command));
+      RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventMainEngineCommonCmd, SizeOf(R_Common_Instr_Command));
     end;
   end;
 
@@ -196,21 +203,68 @@ begin
    begin
      with client do
      begin
-//       RegisterProcedure(C_PUMP_COMMAND, NetEventStatusThrottleCommand, SizeOf(R_Common_PanelThrottle_Command));
-       RegisterProcedure(C_PUMP_COMMAND, nil, SizeOf(R_Common_PumpStatus_Command));
+      {kirim paket dari ME ke controller}
+       RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
      end;
    end;
 end;
 
-procedure TMainEngine1System.sendPumpStatus(sideId: Byte; pumpId: Integer; stadeId: Integer; status: Boolean);
+procedure TMainEngine1System.RunningStart(aPortStaboard: String);
 var
-  recCmd : R_Common_PumpStatus_Command;
+  recCmd : R_Common_PCS_Command;
+
 begin
-  recCmd.SideId   := sideId;
-  recCmd.PumpId   := pumpId;
-  recCmd.StadeId  := stadeId;
-  recCmd.ValueBool := status;
-  Network.MainEngine1ControllerSocket.SendData(C_PUMP_COMMAND, @recCmd);
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSMERunning;
+  recCmd.CommandID      := C_ORD_ME_RUNSTART;
+  recCmd.ValueBool      := True;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
+procedure TMainEngine1System.StoppedStop(aPortStaboard: String);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandID := C_ORD_ME_STOP;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine1System.Clutch(aPortStaboard: string);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSMEClutched;
+  recCmd.CommandID := C_ORD_GB_CLUTCH_ENGAGED;
+  recCmd.ValueBool := True;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine1System.EmergencyStop(aPortStaboard: String);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSMELocalEmergencyStop;
+  recCmd.CommandID := C_ORD_LEVER_EMERGENCYSTOP;
+  recCmd.ValueBool := True;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine1System.SafetiesStop(aPortStaboard: string);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSMESafetyStop;
+  recCmd.CommandID := C_ORD_LEVER_SHAFTSTOP;
+  recCmd.ValueBool := True;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
 end.

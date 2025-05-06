@@ -6,7 +6,9 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, VrRotarySwitch,
   VrControls, VrButtons, Vcl.Buttons, SpeedButtonImage, Vcl.ExtCtrls,
-  Vcl.ComCtrls, RzBmpBtn, Vcl.Imaging.pngimage;
+  Vcl.ComCtrls, RzBmpBtn, Vcl.Imaging.pngimage,
+
+  uListener, uDataType, uSetting;
 
 type
   TfrmSignalingLightME1 = class(TForm)
@@ -44,12 +46,36 @@ type
     imgSafetiesorECResetME1: TImage;
     imgSafetiesStopOverbiddenME1: TImage;
     imgEmergencyStopME1: TImage;
+    btnStartPS: TSpeedButtonImage;
+    Label1: TLabel;
+    btnStopPS: TSpeedButtonImage;
+    Label2: TLabel;
     procedure MenuClick(Sender: TObject);
     procedure AirValveClick(Sender: TObject);
+    procedure btnStartStopClick(Sender: TObject);
+    procedure btnClutchDeclutchClick(Sender: TObject);
+    procedure btnEmergencyStopClick(Sender: TObject);
+    procedure btnSafetiesStopClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
-    { Private declarations }
+    FIsBlinkState : Boolean;
+    FIdBlink : Integer;
+    FListener : TListeners;
+
+    procedure MainEngine1SystemEvent(Sender : TObject; PropsID : E_PropsID; Value : Integer);overload;
+    procedure MainEngine1SystemEvent(Sender : TObject; PropsID : E_PropsID; Value : Boolean);overload;
+    procedure MainEngine1SystemEvent(Sender : TObject; PropsID : E_PropsID; Value : Double);overload;
+
   public
-    { Public declarations }
+    picture_Path : string;
+
+    fIndicatorOn, fIndicatorOff, fIndicatorFault,
+    fAlarmIndicatorGreenOn, fAlarmIndicatorGreenOff, fAlarmIndicatorGreenFault,
+    fAlarmIndicatorBlueOn, fAlarmIndicatorBlueOff, fAlarmIndicatorBlueFault,
+    fAlarmIndicatorRedOn, fAlarmIndicatorRedOff, fAlarmIndicatorRedFault,
+    fAlarmIndicatorWhiteOn, fAlarmIndicatorWhiteOff, fAlarmIndicatorWhiteFault : string;
+    Start_ON : Boolean;
   end;
 
 var
@@ -58,9 +84,36 @@ var
 implementation
 
 uses
-  ufrmPMSDieselEngineSafetiesME1;
+  ufrmPMSDieselEngineSafetiesME1, ufrmSetofPressureGaugesME1, uMainEngine1System, uFreezeFrom;
 
 {$R *.dfm}
+
+procedure TfrmSignalingLightME1.FormCreate(Sender: TObject);
+var
+  i : Integer;
+begin
+
+end;
+
+procedure TfrmSignalingLightME1.FormShow(Sender: TObject);
+begin
+  DefaultMonitor := dmDesktop;
+
+  if Screen.MonitorCount > 1 then
+  begin
+    Height := Screen.Monitors[MainEngine1System.IdScreenSignaling].Height;
+    Top    := Screen.Monitors[MainEngine1System.IdScreenSignaling].Top;
+    Left   := Screen.Monitors[MainEngine1System.IdScreenSignaling].Left;
+    width  := Screen.Monitors[MainEngine1System.IdScreenSignaling].Width;
+  end
+  else
+  begin
+    Height := Screen.Height;
+    Width := Screen.Width;
+    Left := 0;
+    Top := 0;
+  end;
+end;
 
 procedure TfrmSignalingLightME1.AirValveClick(Sender: TObject);
 var
@@ -112,10 +165,68 @@ begin
   imgEmergencyStopME1.Visible := VisibleState;
 end;
 
+procedure TfrmSignalingLightME1.MainEngine1SystemEvent(Sender: TObject;
+  PropsID: E_PropsID; Value: Integer);
+begin
+  case PropsID of
+    epPCSFreezed:
+      if Value = 1 then
+      begin
+        frmSignalingLightME1.Enabled := False;
+        MainEngine1System.FFormFreezed[1] := TfrmFreeze.Create(frmSignalingLightME1);
+        with MainEngine1System.FFormFreezed[1] do
+        begin
+          Parent   := frmSignalingLightME1;
+          Position := poOwnerFormCenter;
+          BringToFront;
+          Show;
+        end;
+      end
+      else if Value = 0 then
+      begin
+        frmSignalingLightME1.Enabled := True;
+        if Assigned(MainEngine1System.FFormFreezed[1]) then
+           FreeAndNil(MainEngine1System.FFormFreezed[1]);
+      end;
+  end;
+end;
+
+
+procedure TfrmSignalingLightME1.MainEngine1SystemEvent(Sender: TObject;
+  PropsID: E_PropsID; Value: Boolean);
+begin
+
+end;
+
+procedure TfrmSignalingLightME1.MainEngine1SystemEvent(Sender: TObject;
+  PropsID: E_PropsID; Value: Double);
+begin
+
+end;
+
 procedure TfrmSignalingLightME1.MenuClick(Sender: TObject);
 begin
   frmPMSDieselEngineSafetiesME1.Show;
   Self.Hide;
 end;
 
+procedure TfrmSignalingLightME1.btnClutchDeclutchClick(Sender: TObject);
+begin
+  MainEngine1System.Clutch(C_PCS_ME_STARBOARD);
+end;
+
+procedure TfrmSignalingLightME1.btnEmergencyStopClick(Sender: TObject);
+begin
+  MainEngine1System.EmergencyStop(C_PCS_ME_STARBOARD);
+end;
+
+procedure TfrmSignalingLightME1.btnStartStopClick(Sender: TObject);
+begin
+  MainEngine1System.RunningStart(C_PCS_ME_STARBOARD);
+end;
+
+procedure TfrmSignalingLightME1.btnSafetiesStopClick(Sender: TObject);
+begin
+  MainEngine1System.SafetiesStop(C_PCS_ME_STARBOARD);
+end;
 end.

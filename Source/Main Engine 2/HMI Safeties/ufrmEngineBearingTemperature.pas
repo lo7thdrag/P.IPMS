@@ -47,9 +47,11 @@ type
     imgGrafik: TImage;
     lblEngineBearing11: TLabel;
     pnlGrafik11: TPanel;
+    Image2: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
+    procedure MenuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -62,7 +64,7 @@ var
 implementation
 
 uses
- ufrmCrankinOilTemperature, ufrmAirGasCircuit;
+ ufrmCrankinOilTemperature, ufrmAirGasCircuit, ufrmMenu;
 
 {$R *.dfm}
 
@@ -81,6 +83,12 @@ end;
 procedure TfrmEngineBearingTemperature.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmEngineBearingTemperature.MenuClick(Sender: TObject);
+begin
+  frmMenu.Show;
+  Self.Hide;
 end;
 
 end.

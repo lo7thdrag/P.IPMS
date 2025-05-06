@@ -22,9 +22,11 @@ type
     imgPLCNetwork: TImage;
     imgOperatorPanel: TImage;
     imgEngineController: TImage;
+    Image1: TImage;
     procedure btnNextClick(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure MenuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,7 +39,7 @@ var
 implementation
 
 uses
-  ufrmLubOilCircuit, ufrmClutchingAssitance;
+  ufrmLubOilCircuit, ufrmClutchingAssitance, ufrmMenu;
 {$R *.dfm}
 
 procedure TfrmPLCNetwork.btnNextClick(Sender: TObject);
@@ -55,6 +57,12 @@ end;
 procedure TfrmPLCNetwork.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmPLCNetwork.MenuClick(Sender: TObject);
+begin
+  frmMenu.Show;
+  Self.Hide;
 end;
 
 end.
