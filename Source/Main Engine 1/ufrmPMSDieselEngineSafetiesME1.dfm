@@ -172435,6 +172435,7 @@ object frmPMSDieselEngineSafetiesME1: TfrmPMSDieselEngineSafetiesME1
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
       OnClick = NextClick
     end
     object imgLedGreenRunSVAE: TImage

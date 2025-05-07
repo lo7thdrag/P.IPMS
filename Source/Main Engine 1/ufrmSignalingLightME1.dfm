@@ -11,6 +11,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -36,6 +37,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
       OnClick = MenuClick
     end
     object imgSignaling1: TImage
@@ -6879,7 +6881,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         D17F4621463C0C932A2C1E4619160FA30C8B875186C5C328F33F71673031F871
         D9660000000049454E44AE426082}
       Visible = False
-      OnClick = AirValveClick
     end
     object img24VDCSafetiesME1: TImage
       Left = 82
@@ -7223,7 +7224,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         50B05F8F2B63E2D427BDBE069AECBD093F443C04E117120F210C89871086C443
         0843E22184F93F3E153231BAFE4B710000000049454E44AE426082}
       Visible = False
-      OnClick = AirValveClick
     end
     object imgAirValveClosedME1: TImage
       Left = 248
@@ -7409,7 +7409,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         D1108F402017211E81628478048A11E21128468847A0987F0319657E40C8FFFA
         610000000049454E44AE426082}
       Visible = False
-      OnClick = AirValveClick
     end
     object imgGazValveClosedME1: TImage
       Left = 248
@@ -7601,7 +7600,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         458847A018211E81628478048A11E21128E6BFE6114C4021D87D6E0000000049
         454E44AE426082}
       Visible = False
-      OnClick = AirValveClick
     end
     object img24VDCControlME1: TImage
       Left = 248
@@ -7995,7 +7993,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         11C8139019FF0367FD348B7782F6FF0000000049454E44AE426082}
       Stretch = True
       Visible = False
-      OnClick = AirValveClick
     end
     object imgSafetiesCircuitFailureME1: TImage
       Left = 408
@@ -8176,7 +8173,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         766C0000000049454E44AE426082}
       Stretch = True
       Visible = False
-      OnClick = AirValveClick
     end
     object imgManualHandletoStopME1: TImage
       Left = 409
@@ -8502,7 +8498,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         4BC321280000000049454E44AE426082}
       Stretch = True
       Visible = False
-      OnClick = AirValveClick
     end
     object imgOverSpeedAirLowPressureME1: TImage
       Left = 574
@@ -8721,7 +8716,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         EB031E0000000049454E44AE426082}
       Stretch = True
       Visible = False
-      OnClick = AirValveClick
     end
     object imgStartingSequenceFailureME1: TImage
       Left = 575
@@ -9112,7 +9106,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         3C0E89F17FD179935EF6883F390000000049454E44AE426082}
       Stretch = True
       Visible = False
-      OnClick = AirValveClick
     end
     object imgMinorFaultME1: TImage
       Left = 903
@@ -9251,7 +9244,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         A318A3F228C6FC0FA72ABBF55DA00B330000000049454E44AE426082}
       Stretch = True
       Visible = False
-      OnClick = AirValveClick
     end
     object imgGovernorLimitationME1: TImage
       Left = 1064
@@ -9438,7 +9430,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         82}
       Stretch = True
       Visible = False
-      OnClick = AirValveClick
     end
     object imgRemotePositionME1: TImage
       Left = 1064
@@ -9613,7 +9604,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         01DB7A0C4F1624BA8E0000000049454E44AE426082}
       Stretch = True
       Visible = False
-      OnClick = AirValveClick
     end
     object imgLocalPositionME1: TImage
       Left = 906
@@ -9772,7 +9762,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         034054F4BDFD0000000049454E44AE426082}
       Stretch = True
       Visible = False
-      OnClick = AirValveClick
     end
     object imgTurningGearEngagedME1: TImage
       Left = 741
@@ -9964,7 +9953,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         DAB6CD547813B52B9027202029027902522390272035027902522390272035FE
         0FC58B697CAB55AA5B0000000049454E44AE426082}
       Visible = False
-      OnClick = AirValveClick
     end
     object imgSpare: TImage
       Left = 741

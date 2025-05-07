@@ -35,7 +35,8 @@ uses
   uListener in '..\common\uListener.pas',
   uSetting in '..\common\uSetting.pas',
   uMainEngine2Network in 'uMainEngine2Network.pas',
-  uMainEngine2System in 'uMainEngine2System.pas';
+  uMainEngine2System in 'uMainEngine2System.pas',
+  uMainForm in 'uMainForm.pas' {frmMainForm};
 
 {$R *.res}
 
@@ -46,7 +47,10 @@ begin
   Setting   := TSetting.Create;
   MainEngine2System := TMainEngine2System.Create;
 
+  Application.CreateForm(TfrmMainForm, frmMainForm);
+
   Application.CreateForm(TfrmSetofPressureGaugesME2, frmSetofPressureGaugesME2);
+  Application.CreateForm(TfrmMainForm, frmMainForm);
   frmSetofPressureGaugesME2.Show;
   Application.CreateForm(TfrmSignalingLightME2, frmSignalingLightME2);
   frmSignalingLightME2.Show;

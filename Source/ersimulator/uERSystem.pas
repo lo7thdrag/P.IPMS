@@ -325,6 +325,20 @@ begin
         FOnPCSCommand(rPCSCmd);
     end;
 
+    epPCSMERunningHour :
+    begin
+      if Sender is TMainEngine then
+      begin
+        rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
+      end;
+
+      rPCSCmd.CommandPropsID := PropsID;
+      rPCSCmd.ValueInt := Value;
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      if Assigned(FOnPCSCommand) then
+         FOnPCSCommand(rPCSCmd);
+    end;
+
 
     epPMSGeneratorMode, epPMSGeneratorState, epPMSGeneratorRunningHours:
     begin
@@ -696,8 +710,7 @@ begin
 
     epPCSMEClutched :
     begin
-      ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, False);
-      ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, False);
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, True);
     end;
 
    epPCSMELocalEmergencyStop :
@@ -706,29 +719,28 @@ begin
    end;
 
   {Main Engine 2}
+  //Signaling
   epPCSMERemoteControl:
   begin
-   main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
-   gearbox     := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
-
-   ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, False);
+     ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, True)
   end;
 
-  // Pump Gearbox
-  epPCSMEPrimLOPump :
+  epPCSMEActualSpeed :
   begin
-
+    ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
   end;
 
-  epPCSCtrlLocal:
+  epPCSMESTCInManualMode :
   begin
-
+    ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
   end;
 
-  epPCSMERunningHour :
+  epPCSMEPreStart :
   begin
-
+    ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(recERPCS.PortStaboardID);
+    ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
   end;
+
   end;
 
   case recERPCS.CommandID of

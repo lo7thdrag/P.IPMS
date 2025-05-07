@@ -13,7 +13,6 @@ object frmSignalingLightME2: TfrmSignalingLightME2
   OldCreateOrder = False
   Position = poScreenCenter
   OnCreate = FormCreate
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -50,6 +49,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
       OnClick = MenuClick
     end
     object grpRemote: TGroupBox
@@ -82,6 +82,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Width = 233
         Height = 225
         Radius = 80
+        OnChange = vrtryswtchRemoteChange
         SwitchPositions.Strings = (
           'Control'
           'Remote')
@@ -128,6 +129,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Width = 263
         Height = 229
         Radius = 80
+        OnChange = vrtryswtchSpeedChange
         SwitchPositions.Strings = (
           'Lower'
           ''
@@ -176,6 +178,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Width = 263
         Height = 197
         Radius = 80
+        OnChange = vrtryswtchPreStartInhibitionChange
         SwitchPositions.Strings = (
           'Inhibition'
           'On')
@@ -222,6 +225,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Width = 239
         Height = 210
         Radius = 80
+        OnChange = vrtryswtchSTCHChange
         SwitchPositions.Strings = (
           '2 TC'
           'AUTO'
@@ -262,110 +266,6 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Font.Height = -19
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object lblCounter1: TLabel
-        Left = 81
-        Top = 40
-        Width = 16
-        Height = 35
-        Caption = '1'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -29
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblCounter2: TLabel
-        Left = 105
-        Top = 40
-        Width = 16
-        Height = 35
-        Caption = '7'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -29
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblCounter3: TLabel
-        Left = 129
-        Top = 40
-        Width = 16
-        Height = 35
-        Caption = '5'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -29
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblCounter4: TLabel
-        Left = 153
-        Top = 40
-        Width = 16
-        Height = 35
-        Caption = '0'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -29
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblCounter5: TLabel
-        Left = 177
-        Top = 40
-        Width = 16
-        Height = 35
-        Caption = '9'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -29
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblCounter6: TLabel
-        Left = 201
-        Top = 40
-        Width = 16
-        Height = 35
-        Caption = '2'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -29
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblCounter7: TLabel
-        Left = 225
-        Top = 40
-        Width = 16
-        Height = 35
-        Caption = '2'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -29
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblCounter8: TLabel
-        Left = 249
-        Top = 40
-        Width = 16
-        Height = 35
-        Caption = '0'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -29
-        Font.Name = 'Tahoma'
-        Font.Style = []
         ParentFont = False
       end
       object Panel1: TPanel

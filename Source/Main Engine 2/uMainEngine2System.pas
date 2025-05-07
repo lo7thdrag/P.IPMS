@@ -41,9 +41,15 @@ type
     destructor Destroy;override;
 
     procedure StartStopEngine(aValue : Boolean);
-    procedure vrtryswtchRemotePS(aPortStarboard: string);
+
+    {Signaling}
+    procedure vrtryswtchRemotePS(aPortStarboard: string; aValue: Boolean);
+    procedure vrtryswtchSpeedPS(aPortStarboard: string; aValue: Boolean);
+    procedure vrtryswtchSTC_PS(aPortStarboard: string; aValue: Boolean);
+    procedure vrtryswtchPreStartInhibitionPS(aPortStarboard: string; aValue: Boolean);
 
     procedure sendPumpStatus(sideId : byte; pumpId, stadeId: Integer; status: Boolean);
+    procedure RunningStart(aPortStarboard: String);
 
     property Network : TMainEngine2Network read FMainEngine2Network;
     property Listener :TListeners read FListener;
@@ -161,6 +167,71 @@ begin
   rec := @apRec^;
 
   case rec.CommandPropsID of
+    epPCSMERunning:
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMEPSRunStart,rec.ValueBool);
+      end
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMESBRunStart,rec.ValueBool);
+      end;
+    end;
+
+    epPCSMERemoteControl :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMERemoteControl,rec.ValueBool);
+      end
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMERemoteControl,rec.ValueBool);
+      end;
+    end;
+
+    epPCSMEActualSpeed :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMEActualSpeed,rec.ValueBool);
+      end
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMEActualSpeed,rec.ValueBool);
+      end;
+    end;
+
+    epPCSMESTCInManualMode :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMESTCInManualMode,rec.ValueBool);
+      end
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMESTCInManualMode,rec.ValueBool);
+      end;
+    end;
+
+    epPCSMEPreStart :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMEPreStart,rec.ValueBool);
+      end
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMEPreStart,rec.ValueBool);
+      end;
+    end;
+
     epPCSMERunningHour:
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
@@ -214,14 +285,63 @@ begin
   Network.MainEngine2ControllerSocket.SendData(C_PUMP_COMMAND, @recCmd);
 end;
 
-procedure TMainEngine2System.vrtryswtchRemotePS(aPortStarboard: string);
+procedure TMainEngine2System.RunningStart(aPortStarboard: String);
+var
+  recCmd : R_Common_PCS_Command;
+
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSMERunning;
+  recCmd.CommandID      := C_ORD_ME_RUNSTART;
+  recCmd.ValueBool      := True;
+
+  Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine2System.vrtryswtchPreStartInhibitionPS(
+  aPortStarboard: string; aValue: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSMEPreStart;
+  recCmd.ValueBool      := aValue;
+
+  Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine2System.vrtryswtchRemotePS(aPortStarboard: string; aValue: Boolean);
 var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
   recCmd.CommandPropsID := epPCSMERemoteControl;
   recCmd.CommandID      := C_ORD_ME_REMOTEAUTO;
-  recCmd.ValueBool      := True;
+  recCmd.ValueBool      := aValue;
+
+  Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine2System.vrtryswtchSpeedPS(aPortStarboard: string;
+  aValue: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSMEActualSpeed;
+  recCmd.ValueBool      := aValue;
+
+  Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine2System.vrtryswtchSTC_PS(aPortStarboard: string;
+  aValue: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSMESTCInManualMode;
+  recCmd.ValueBool      := aValue;
 
   Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;

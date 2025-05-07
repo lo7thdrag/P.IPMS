@@ -71,7 +71,6 @@ type
     procedure GeneralScreenClick(Sender: TObject);
     procedure GaugesClick(Sender: TObject);
     procedure SignalingClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure MenuClick(Sender: TObject);
   private
 
@@ -94,26 +93,6 @@ uses
 procedure TfrmMenu.FormCreate(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
-end;
-
-procedure TfrmMenu.FormShow(Sender: TObject);
-begin
-  DefaultMonitor := dmDesktop;
-
-  if Screen.MonitorCount > 1 then
-  begin
-    Height := Screen.Monitors[MainEngine2System.IdScreenPmsHmi].Height;
-    Top    := Screen.Monitors[MainEngine2System.IdScreenPmsHmi].Top;
-    Left   := Screen.Monitors[MainEngine2System.IdScreenPmsHmi].Left;
-    width  := Screen.Monitors[MainEngine2System.IdScreenPmsHmi].Width;
-  end
-  else
-  begin
-    Height := Screen.Height;
-    Width := Screen.Width;
-    Left := 0;
-    Top := 0;
-  end;
 end;
 
 procedure TfrmMenu.AirandGasCircuitClick(Sender: TObject);

@@ -51,13 +51,14 @@ type
     btnStopPS: TSpeedButtonImage;
     Label2: TLabel;
     procedure MenuClick(Sender: TObject);
-    procedure AirValveClick(Sender: TObject);
     procedure btnStartStopClick(Sender: TObject);
     procedure btnClutchDeclutchClick(Sender: TObject);
     procedure btnEmergencyStopClick(Sender: TObject);
     procedure btnSafetiesStopClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+
+    procedure imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     FIsBlinkState : Boolean;
     FIdBlink : Integer;
@@ -92,77 +93,75 @@ procedure TfrmSignalingLightME1.FormCreate(Sender: TObject);
 var
   i : Integer;
 begin
-
+  FListener := TListeners.Create;
+  with MainEngine1System.Listener.Add('Main Engine 2') as TPropertyEventListener do
+  begin
+    OnPropertyIntChange := MainEngine1SystemEvent;
+    OnPropertyBoolChange := MainEngine1SystemEvent;
+  end;
 end;
 
 procedure TfrmSignalingLightME1.FormShow(Sender: TObject);
 begin
-  DefaultMonitor := dmDesktop;
-
-  if Screen.MonitorCount > 1 then
-  begin
-    Height := Screen.Monitors[MainEngine1System.IdScreenSignaling].Height;
-    Top    := Screen.Monitors[MainEngine1System.IdScreenSignaling].Top;
-    Left   := Screen.Monitors[MainEngine1System.IdScreenSignaling].Left;
-    width  := Screen.Monitors[MainEngine1System.IdScreenSignaling].Width;
-  end
-  else
-  begin
-    Height := Screen.Height;
-    Width := Screen.Width;
-    Left := 0;
-    Top := 0;
-  end;
+//  DefaultMonitor := dmDesktop;
+//
+//  if Screen.MonitorCount > 1 then
+//  begin
+//    Height := Screen.Monitors[MainEngine1System.IdScreenSignaling].Height;
+//    Top    := Screen.Monitors[MainEngine1System.IdScreenSignaling].Top;
+//    Left   := Screen.Monitors[MainEngine1System.IdScreenSignaling].Left;
+//    width  := Screen.Monitors[MainEngine1System.IdScreenSignaling].Width;
+//  end
+//  else
+//  begin
+//    Height := Screen.Height;
+//    Width := Screen.Width;
+//    Left := 0;
+//    Top := 0;
+//  end;
 end;
 
-procedure TfrmSignalingLightME1.AirValveClick(Sender: TObject);
-var
-  VisibleState : Boolean;
+procedure TfrmSignalingLightME1.imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
+  imgAirValveOpenME1.Visible := True;
+  imgGazValveOpenME1.Visible := True;
+  img24VDCSafetiesME1.Visible := True;
 
-  imgSignaling1.Tag := 1 - imgSignaling1.Tag;
+  imgAirValveClosedME1.Visible := True;
+  imgGazValveClosedME1.Visible := True;
+  img24VDCControlME1.Visible := True;
 
-  VisibleState := imgSignaling1.Tag = 1;
+  imgWatchDogorMajorFaultME1.Visible := True;
+  imgSafetiesCircuitFailureME1.Visible := True;
+  imgManualHandletoStopME1.Visible := True;
 
-  imgAirValveOpenME1.Visible := VisibleState;
-  imgGazValveOpenME1.Visible := VisibleState;
-  img24VDCSafetiesME1.Visible := VisibleState;
+  imgSafetyStopME1.Visible := True;
+  imgOverSpeedAirLowPressureME1.Visible := True;
+  imgStartingSequenceFailureME1.Visible := True;
 
-  imgAirValveClosedME1.Visible := VisibleState;
-  imgGazValveClosedME1.Visible := VisibleState;
-  img24VDCControlME1.Visible := VisibleState;
+  imgClutchGearboxFaultME1.Visible := True;
+  imgTurningGearEngagedME1.Visible := True;
+  imgSpare.Visible := True;
 
-  imgWatchDogorMajorFaultME1.Visible := VisibleState;
-  imgSafetiesCircuitFailureME1.Visible := VisibleState;
-  imgManualHandletoStopME1.Visible := VisibleState;
+  imgMinorFaultME1.Visible := True;
+  imgLocalPositionME1.Visible := True;
+  imgStartingAllowedME1.Visible := True;
 
-  imgSafetyStopME1.Visible := VisibleState;
-  imgOverSpeedAirLowPressureME1.Visible := VisibleState;
-  imgStartingSequenceFailureME1.Visible := VisibleState;
+  imgGovernorLimitationME1.Visible := True;
+  imgRemotePositionME1.Visible := True;
+  imgClutchAllowedME1.Visible := True;
 
-  imgClutchGearboxFaultME1.Visible := VisibleState;
-  imgTurningGearEngagedME1.Visible := VisibleState;
-  imgSpare.Visible := VisibleState;
+  imgStopME1.Visible := True;
+  imgClutchME1.Visible := True;
+  imgByPassOpenME1.Visible := True;
 
-  imgMinorFaultME1.Visible := VisibleState;
-  imgLocalPositionME1.Visible := VisibleState;
-  imgStartingAllowedME1.Visible := VisibleState;
+  imgStartME1.Visible := True;
+  imgDeclutchME1.Visible := True;
+  imgByPassClosedME1.Visible := True;
 
-  imgGovernorLimitationME1.Visible := VisibleState;
-  imgRemotePositionME1.Visible := VisibleState;
-  imgClutchAllowedME1.Visible := VisibleState;
-
-  imgStopME1.Visible := VisibleState;
-  imgClutchME1.Visible := VisibleState;
-  imgByPassOpenME1.Visible := VisibleState;
-
-  imgStartME1.Visible := VisibleState;
-  imgDeclutchME1.Visible := VisibleState;
-  imgByPassClosedME1.Visible := VisibleState;
-
-  imgSafetiesorECResetME1.Visible := VisibleState;
-  imgSafetiesStopOverbiddenME1.Visible := VisibleState;
-  imgEmergencyStopME1.Visible := VisibleState;
+  imgSafetiesorECResetME1.Visible := True;
+  imgSafetiesStopOverbiddenME1.Visible := True;
+  imgEmergencyStopME1.Visible := True;
 end;
 
 procedure TfrmSignalingLightME1.MainEngine1SystemEvent(Sender: TObject;

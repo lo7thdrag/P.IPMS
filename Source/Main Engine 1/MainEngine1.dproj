@@ -103,21 +103,21 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="ufrmPMSDieselEngineSafetiesME1.pas">
-            <Form>frmPMSDieselEngineSafetiesME1</Form>
+        <DCCReference Include="uMainForm.pas">
+            <Form>frmMainForm</Form>
         </DCCReference>
         <DCCReference Include="ufrmSetofPressureGaugesME1.pas">
             <Form>frmSetofPressureGaugesME1</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="ufrmSignalingLightME1.pas">
             <Form>frmSignalingLightME1</Form>
-            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ufrmPMSDieselEngineSafetiesME1.pas">
+            <Form>frmPMSDieselEngineSafetiesME1</Form>
         </DCCReference>
         <DCCReference Include="..\common\uDataType.pas"/>
         <DCCReference Include="..\common\uFreezeFrom.pas">
             <Form>frmFreeze</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\common\uFunction.pas"/>
         <DCCReference Include="..\common\uListener.pas"/>

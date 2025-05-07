@@ -13,7 +13,6 @@ object frmMenu: TfrmMenu
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -1757,6 +1756,7 @@ object frmMenu: TfrmMenu
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
       OnClick = GaugesClick
     end
     object Label14: TLabel
@@ -1772,6 +1772,7 @@ object frmMenu: TfrmMenu
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
       OnClick = SignalingClick
     end
     object Image13: TImage

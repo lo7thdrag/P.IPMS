@@ -227,22 +227,22 @@ end;
 
 procedure TfrmPMSDieselEngineSafetiesME1.FormShow(Sender: TObject);
 begin
-  DefaultMonitor := dmDesktop;
-
-  if Screen.MonitorCount > 1 then
-  begin
-    Height := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Height;
-    Top    := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Top;
-    Left   := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Left;
-    width  := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Width;
-  end
-  else
-  begin
-    Height := Screen.Height;
-    Width := Screen.Width;
-    Left := 0;
-    Top := 0;
-  end;
+//  DefaultMonitor := dmDesktop;
+//
+//  if Screen.MonitorCount > 1 then
+//  begin
+//    Height := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Height;
+//    Top    := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Top;
+//    Left   := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Left;
+//    width  := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Width;
+//  end
+//  else
+//  begin
+//    Height := Screen.Height;
+//    Width := Screen.Width;
+//    Left := 0;
+//    Top := 0;
+//  end;
 end;
 
 procedure TfrmPMSDieselEngineSafetiesME1.AdjustSE1Change(Sender: TObject);

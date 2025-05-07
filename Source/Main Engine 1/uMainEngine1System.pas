@@ -167,10 +167,57 @@ begin
   rec := @apRec^;
 
   case rec.CommandPropsID of
-     epPCSMERunning, epPCSMEClutched, epPCSMESafetyStop, epPCSMELocalEmergencyStop:
-     begin
-       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
-     end;
+    epPCSMERunning:
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMEPSRunStart,rec.ValueBool);
+      end
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMESBRunStart,rec.ValueBool);
+      end;
+    end;
+
+    epPCSMEClutched :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMEClutched,rec.ValueBool);
+      end
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMEClutched,rec.ValueBool);
+      end;
+    end;
+
+    epPCSMELocalEmergencyStop :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMELocalEmergencyStop,rec.ValueBool);
+      end
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMELocalEmergencyStop,rec.ValueBool);
+      end;
+    end;
+
+    epPCSMESafetyStop :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMESafetyStop,rec.ValueBool);
+      end
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMESafetyStop,rec.ValueBool);
+      end;
+    end;
   end;
 end;
 
