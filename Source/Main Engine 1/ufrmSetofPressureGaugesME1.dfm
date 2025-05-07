@@ -13,7 +13,6 @@ object frmSetofPressureGaugesME1: TfrmSetofPressureGaugesME1
   OldCreateOrder = False
   Position = poScreenCenter
   Visible = True
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel

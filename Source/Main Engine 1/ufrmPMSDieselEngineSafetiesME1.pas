@@ -189,7 +189,6 @@ type
     procedure SwitchMTP1Change(Sender: TObject);
     procedure SwitchChannelATPChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
   private
 
   public
@@ -223,26 +222,6 @@ begin
   imgLeds[13] := imgLedGreenAIP6;
   imgLeds[14] := imgLedGreenAIP7;
   imgLeds[15] := imgLedGreenAIP8;
-end;
-
-procedure TfrmPMSDieselEngineSafetiesME1.FormShow(Sender: TObject);
-begin
-//  DefaultMonitor := dmDesktop;
-//
-//  if Screen.MonitorCount > 1 then
-//  begin
-//    Height := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Height;
-//    Top    := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Top;
-//    Left   := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Left;
-//    width  := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Width;
-//  end
-//  else
-//  begin
-//    Height := Screen.Height;
-//    Width := Screen.Width;
-//    Left := 0;
-//    Top := 0;
-//  end;
 end;
 
 procedure TfrmPMSDieselEngineSafetiesME1.AdjustSE1Change(Sender: TObject);

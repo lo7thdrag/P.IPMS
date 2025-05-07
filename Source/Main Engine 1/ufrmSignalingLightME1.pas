@@ -55,7 +55,6 @@ type
     procedure btnClutchDeclutchClick(Sender: TObject);
     procedure btnEmergencyStopClick(Sender: TObject);
     procedure btnSafetiesStopClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
 
     procedure imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -99,26 +98,6 @@ begin
     OnPropertyIntChange := MainEngine1SystemEvent;
     OnPropertyBoolChange := MainEngine1SystemEvent;
   end;
-end;
-
-procedure TfrmSignalingLightME1.FormShow(Sender: TObject);
-begin
-//  DefaultMonitor := dmDesktop;
-//
-//  if Screen.MonitorCount > 1 then
-//  begin
-//    Height := Screen.Monitors[MainEngine1System.IdScreenSignaling].Height;
-//    Top    := Screen.Monitors[MainEngine1System.IdScreenSignaling].Top;
-//    Left   := Screen.Monitors[MainEngine1System.IdScreenSignaling].Left;
-//    width  := Screen.Monitors[MainEngine1System.IdScreenSignaling].Width;
-//  end
-//  else
-//  begin
-//    Height := Screen.Height;
-//    Width := Screen.Width;
-//    Left := 0;
-//    Top := 0;
-//  end;
 end;
 
 procedure TfrmSignalingLightME1.imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
