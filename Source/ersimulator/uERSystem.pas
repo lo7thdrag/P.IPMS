@@ -158,7 +158,7 @@ begin
       rPmsCmd.ValueBool   := Value;
       rPmsCmd.ValueKind   := 'boolean';
 
-      //      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
       if Assigned(FOnPMSCommand) then
         FOnPMSCommand(rPmsCmd);
     end;

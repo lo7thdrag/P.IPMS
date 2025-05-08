@@ -88,7 +88,6 @@ begin
 
   inifile.ReadSection('Form DieselGenerator', tempstring);
 
-//  FIdFormDieselGenerator := StrToInt(inifile.ReadString('Form DieselGenerator', tempstring[0],'Default'));
   FIdFormDieselGenerator := inifile.ReadString('Form DieselGenerator', tempstring[0],'Default');
 
   inifile.Free;
@@ -151,10 +150,7 @@ begin
 
     C_ORD_CLOSE_APP :
     begin
-//      if servoID = 1 then
-//        PCSSystem.sendServoLampStatus(C_ORD_SERVO_PS, False)
-//      else if servoID = 3  then
-//        PCSSystem.sendServoLampStatus(C_ORD_SERVO_SB, False);
+
     end;
 
   end;
