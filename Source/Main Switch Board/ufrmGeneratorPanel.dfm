@@ -72418,24 +72418,32 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Top = 474
         Width = 52
         Height = 52
+        Cursor = crHandPoint
+        OnClick = ImgStartClick
       end
       object ImgStop: TImage
         Left = 266
         Top = 474
         Width = 52
         Height = 52
+        Cursor = crHandPoint
+        OnClick = ImgStopClick
       end
       object ImgOI: TImage
         Left = 354
         Top = 474
         Width = 52
         Height = 52
+        Cursor = crHandPoint
+        OnClick = ImgOIClick
       end
       object ImgPref: TImage
         Left = 470
         Top = 474
         Width = 52
         Height = 52
+        Cursor = crHandPoint
+        OnClick = ImgPrefClick
       end
     end
     object vr1: TVrRotarySwitch

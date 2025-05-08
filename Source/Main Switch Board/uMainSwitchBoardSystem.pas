@@ -31,6 +31,10 @@ type
   public
     FFormFreezed : array[0..0] of TfrmFreeze;
 
+    procedure EngineRun(aValue : Boolean);
+    procedure GeneratorPreference(aValue : Boolean);
+    procedure CBClosed(aValue : Boolean);
+
     constructor Create;
     destructor Destroy;override;
 
@@ -39,7 +43,7 @@ type
     property Freezed : boolean read FFreezed write SetFreezed;
 
     property IdFormGensys: String read FIdFormGensys write FIdFormGensys;
-    property IdGenenerator: String read FIdGenerator write FIdGenerator;
+    property IdGenerator: String read FIdGenerator write FIdGenerator;
 
   end;
 
@@ -114,6 +118,39 @@ begin
   end;
 end;
 
+procedure TMainSwitchBoardSystem.EngineRun(aValue: Boolean);
+var
+  recCmd : R_Common_PMS_Command;
+begin
+  recCmd.GenSwitchID := IdGenerator;
+  recCmd.CommandPropsID := epPMSGeneratorEngineRun;
+  recCmd.ValueBool := aValue;
+
+  Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
+end;
+
+procedure TMainSwitchBoardSystem.GeneratorPreference(aValue: Boolean);
+var
+  recCmd : R_Common_PMS_Command;
+begin
+  recCmd.GenSwitchID := IdGenerator;
+  recCmd.CommandPropsID := epPMSGeneratorPreference;
+  recCmd.ValueBool := aValue;
+
+  Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
+end;
+
+procedure TMainSwitchBoardSystem.CBClosed(aValue: Boolean);
+var
+  recCmd : R_Common_PMS_Command;
+begin
+  recCmd.GenSwitchID := IdGenerator;
+  recCmd.CommandPropsID := epPMSGeneratorCBClosed;
+  recCmd.ValueBool := aValue;
+
+  Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
+end;
+
 { fungsi untuk menangani event dari jaringan untuk PCSCommand }
 procedure TMainSwitchBoardSystem.NetEventInstructorCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
@@ -146,9 +183,14 @@ begin
     Exit;
 
   case rec.CommandPropsID of
-    epPMSGeneratorEngineRun:
+    epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorSupplied, epPMSGeneratorCBClosed,
+    epPMSGeneratorPreference, epPMSGeneratorBusbar:
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
+    end;
+    epPMSGeneratorMode:
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
     end;
   end;
 end;

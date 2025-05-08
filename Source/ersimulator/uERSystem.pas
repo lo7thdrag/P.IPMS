@@ -125,7 +125,7 @@ var
 begin
   case PropsID of
     epPMSGeneratorEngineRun, epPMSGeneratorSupplied, epPMSGeneratorStop, epPMSGeneratorCBClosed,
-    epPMSGeneratorPreference, epPMSNotStandby, epPMSCanBusFailure, epPMSDCPowFailure,
+    epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSNotStandby, epPMSCanBusFailure, epPMSDCPowFailure,
     epPMSEngineAlarm, epPMSShutdown, epPMSFaultPageLed, epPMSGeneratorFuelRunsOut, epPMSFailureCBClosed,
 
     epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm,
@@ -601,7 +601,7 @@ begin
 
   case recER.CommandPropsID of
     epPMSGeneratorEmergencyStop, epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorCBClosed,
-    epPMSGeneratorPreference, epPMSGeneratorMode, epPMSNotStandby :
+    epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSGeneratorMode, epPMSNotStandby :
     begin
       generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
       if generator.NotStandby then
@@ -671,6 +671,10 @@ begin
     epPMSGeneratorMode :
     begin
       generator.GeneratorMode := recER.ValueInt;
+    end;
+    epPMSGeneratorBusbar:
+    begin
+      generator.Busbar := recER.ValueBool;
     end;
     epPMSMsbCBShore:
     begin

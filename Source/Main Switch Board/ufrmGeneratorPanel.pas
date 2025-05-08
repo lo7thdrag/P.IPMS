@@ -87,6 +87,10 @@ type
     ImgPref: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure ImgStartClick(Sender: TObject);
+    procedure ImgStopClick(Sender: TObject);
+    procedure ImgPrefClick(Sender: TObject);
+    procedure ImgOIClick(Sender: TObject);
   private
     { Private declarations }
     FListener : TListeners;
@@ -126,6 +130,7 @@ begin
   with MainSwitchBoardSystem.Listener.Add('GENERATORPANEL') as TPropertyEventListener do
   begin
     OnPropertyBoolChange := GeneratorPanelSystemEvent;
+    OnPropertyIntChange := GeneratorPanelSystemEvent;
   end;
 
   EnableComposited(pnlMainBackground);
@@ -150,9 +155,27 @@ end;
 procedure TfrmGeneratorPanel.GeneratorPanelSystemEvent(Sender: TObject;
   PropsID: E_PropsID; Value: Boolean);
 begin
-  case PropsID of
-     epPMSGeneratorEngineRun: ImgIndicatorER.Visible := Value;
-  end;
+//
+end;
+
+procedure TfrmGeneratorPanel.ImgOIClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.CBClosed(True);
+end;
+
+procedure TfrmGeneratorPanel.ImgPrefClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.GeneratorPreference(True);
+end;
+
+procedure TfrmGeneratorPanel.ImgStartClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.EngineRun(True);
+end;
+
+procedure TfrmGeneratorPanel.ImgStopClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.EngineRun(False);
 end;
 
 end.

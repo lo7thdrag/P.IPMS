@@ -156,6 +156,41 @@ begin
             FreeAndNil(MainSwitchBoardSystem.FFormFreezed[0]);
         end;
       end;
+    epPMSGeneratorMode:
+    begin
+      if MainSwitchBoardSystem.IdFormGensys = 'GENSYS' then
+      begin
+        with frmGeneratorPanel do
+        begin
+          if Value = 1 then
+          begin
+            ImgIndicatorMan.Visible := True;
+            ImgIndicatorSA.Visible := False;
+            ImgIndicatorAuto.Visible := False;
+          end
+          else if Value = 2 then
+          begin
+            ImgIndicatorMan.Visible := False;
+            ImgIndicatorSA.Visible := True;
+            ImgIndicatorAuto.Visible := False;
+          end
+          else if Value = 3 then
+          begin
+            ImgIndicatorMan.Visible := False;
+            ImgIndicatorSA.Visible := False;
+            ImgIndicatorAuto.Visible := True;
+          end;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
+      begin
+
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
+      begin
+
+      end;
+    end;
   end;
 end;
 
@@ -169,6 +204,96 @@ begin
         with frmGeneratorPanel do
         begin
           ImgIndicatorER.Visible := Value;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
+      begin
+
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
+      begin
+
+      end;
+    end;
+    epPMSGeneratorStop :
+    begin
+      if MainSwitchBoardSystem.IdFormGensys = 'GENSYS' then
+      begin
+        with frmGeneratorPanel do
+        begin
+          ImgIndicatorER.Visible := not Value;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
+      begin
+
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
+      begin
+
+      end;
+    end;
+    epPMSGeneratorSupplied :
+    begin
+      if MainSwitchBoardSystem.IdFormGensys = 'GENSYS' then
+      begin
+        with frmGeneratorPanel do
+        begin
+          ImgIndicatorGS.Visible := Value;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
+      begin
+
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
+      begin
+
+      end;
+    end;
+    epPMSGeneratorCBClosed :
+    begin
+      if MainSwitchBoardSystem.IdFormGensys = 'GENSYS' then
+      begin
+        with frmGeneratorPanel do
+        begin
+          ImgIndicatorCBC.Visible := Value;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
+      begin
+
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
+      begin
+
+      end;
+    end;
+    epPMSGeneratorPreference :
+    begin
+      if MainSwitchBoardSystem.IdFormGensys = 'GENSYS' then
+      begin
+        with frmGeneratorPanel do
+        begin
+          ImgIndicatorPreference.Visible := Value;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
+      begin
+
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
+      begin
+
+      end;
+    end;
+    epPMSGeneratorBusbar :
+    begin
+      if MainSwitchBoardSystem.IdFormGensys = 'GENSYS' then
+      begin
+        with frmGeneratorPanel do
+        begin
+          ImgIndicatorBS.Visible := Value;
         end;
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
