@@ -3,7 +3,7 @@ object MainForm: TMainForm
   Top = 0
   BorderStyle = bsNone
   Caption = 'Main Form'
-  ClientHeight = 1100
+  ClientHeight = 1936
   ClientWidth = 1083
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
