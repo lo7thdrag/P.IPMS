@@ -14,8 +14,6 @@ type
     FLIstener   : TListeners;
     FFreezed    : Boolean;
 
-    FIdFormMainEngine2 : string;
-
     {Screen Monitor}
     FIdPosisi : string;
     FIdNumber : Integer;
@@ -29,7 +27,7 @@ type
     procedure NetEventMainEngine2Command(apRec: PAnsiChar; aSize: Word);
 
     {Receive command from instructur}
-    procedure NetEventMainEngine2CommonCmd(apRec: PAnsiChar; aSize: Word);
+    procedure NetEventInstructorCommonCmd(apRec: PAnsiChar; aSize: Word);
 
     procedure LoadSettingForm(filepath: string);
     procedure SetFreezed(const Value: boolean);
@@ -55,7 +53,6 @@ type
     property Listener :TListeners read FListener;
     property Freezed : boolean read FFreezed write SetFreezed;
 
-    property IdFormMainEngine2: string read FIdFormMainEngine2 write FIdFormMainEngine2;
     property IdPosisi: string read FIdPosisi write FIdPosisi;
     property IdNumber: Integer read FIdNumber write FIdNumber;
     property IdScreenGauges: Integer read FIdScreenGauges write FIdScreenGauges;
@@ -126,12 +123,12 @@ begin
   if FFreezed then
   begin
     setFreezed := 1;
-    FLIstener.TriggerEvents(Self,epPMSFreezed,setFreezed)
+    FLIstener.TriggerEvents(Self,epPCSFreezed,setFreezed)
   end
   else
   begin
     setFreezed := 0;
-    FLIstener.TriggerEvents(Self,epPMSFreezed,setFreezed);
+    FLIstener.TriggerEvents(Self,epPCSFreezed,setFreezed);
   end;
 end;
 
@@ -145,9 +142,9 @@ begin
 end;
 
 { fungsi untuk menangani event dari jaringan untuk PCSCommand }
-procedure TMainEngine2System.NetEventMainEngine2CommonCmd(apRec: PAnsiChar; aSize: Word);
+procedure TMainEngine2System.NetEventInstructorCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
-  rec: ^R_Common_PCS_Command;
+  rec: ^R_Common_Instr_Command;
   i,aCount : integer;
 begin
   rec := @apRec^;
@@ -167,72 +164,12 @@ begin
   rec := @apRec^;
 
   case rec.CommandPropsID of
-    epPCSMERunning:
+    epPCSMERunning, epPCSMERemoteControl, epPCSMEActualSpeed, epPCSMESTCInManualMode, epPCSMEPreStart:
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMEPSRunStart,rec.ValueBool);
-      end
-      else
-      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMESBRunStart,rec.ValueBool);
-      end;
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
 
-    epPCSMERemoteControl :
-    begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMERemoteControl,rec.ValueBool);
-      end
-      else
-      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMERemoteControl,rec.ValueBool);
-      end;
-    end;
-
-    epPCSMEActualSpeed :
-    begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMEActualSpeed,rec.ValueBool);
-      end
-      else
-      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMEActualSpeed,rec.ValueBool);
-      end;
-    end;
-
-    epPCSMESTCInManualMode :
-    begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMESTCInManualMode,rec.ValueBool);
-      end
-      else
-      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMESTCInManualMode,rec.ValueBool);
-      end;
-    end;
-
-    epPCSMEPreStart :
-    begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMEPreStart,rec.ValueBool);
-      end
-      else
-      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMEPreStart,rec.ValueBool);
-      end;
-    end;
-
-    epPCSMERunningHour:
+    epPCSMERunningHours :
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
     end;
@@ -259,19 +196,19 @@ begin
   begin
     with  client do
     begin
-      RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventMainEngine2Command, SizeOf(R_Common_PCS_Command));
+      RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
     end;
   end;
 
-   client := FMainEngine2Network.AsClients.Get('AsControllerClient');
-   if Assigned(client) then
+  client := FMainEngine2Network.AsClients.Get('AsControllerClient');
+  if Assigned(client) then
+  begin
+   with client do
    begin
-     with client do
-     begin
-      {kirim paket dari ME ke controller}
-       RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
-     end;
+    {kirim paket dari ME ke controller}
+     RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
    end;
+  end;
 end;
 
 procedure TMainEngine2System.sendPumpStatus(sideId: Byte; pumpId: Integer; stadeId: Integer; status: Boolean);

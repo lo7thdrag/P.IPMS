@@ -39,8 +39,8 @@ type
 
     procedure NetworkEventAssignment;
 
-    {Receive command from MainEngine}
-    procedure NetEventMainEngineCommonCmd(apRec: PAnsiChar; aSize: Word);
+    {Receive command from Instruktur}
+    procedure NetEventInstructorCommonCmd(apRec: PAnsiChar; aSize: Word);
 
     procedure LoadSettingForm(filepath: string);
     procedure SetFreezed(const Value: boolean);
@@ -123,12 +123,12 @@ begin
   if FFreezed then
   begin
     setFreezed := 1;
-    FLIstener.TriggerEvents(Self,epPMSFreezed,setFreezed)
+    FLIstener.TriggerEvents(Self,epPCSFreezed,setFreezed)
   end
   else
   begin
     setFreezed := 0;
-    FLIstener.TriggerEvents(Self,epPMSFreezed,setFreezed);
+    FLIstener.TriggerEvents(Self,epPCSFreezed,setFreezed);
   end;
 end;
 
@@ -136,17 +136,14 @@ procedure TMainEngine1System.StartStopEngine(aValue: Boolean);
 var
   recCmd : R_Common_PCS_Command;
 begin
-//  recCmd.GenSwitchID := IdScreenSignaling;
-//  recCmd.CommandPropsID := epPMSGeneratorEngineRun;
-//  recCmd.ValueBool := aValue;
 
-  Network.MainEngine1ControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
 { fungsi untuk menangani event dari jaringan untuk PCSCommand }
-procedure TMainEngine1System.NetEventMainEngineCommonCmd(apRec: PAnsiChar; aSize: Word);
+procedure TMainEngine1System.NetEventInstructorCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
-  rec: ^R_Common_PCS_Command;
+  rec: ^R_Common_Instr_Command;
   i,aCount : integer;
 begin
   rec := @apRec^;
@@ -167,57 +164,11 @@ begin
   rec := @apRec^;
 
   case rec.CommandPropsID of
-    epPCSMERunning:
+    epPCSMERunning, epPCSMEClutched, epPCSMELocalEmergencyStop, epPCSMESafetyStop:
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMEPSRunStart,rec.ValueBool);
-      end
-      else
-      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMESBRunStart,rec.ValueBool);
-      end;
+      FLIstener.TriggerEvents(Self, rec.CommandPropsID, rec.ValueBool);
     end;
 
-    epPCSMEClutched :
-    begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMEClutched,rec.ValueBool);
-      end
-      else
-      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMEClutched,rec.ValueBool);
-      end;
-    end;
-
-    epPCSMELocalEmergencyStop :
-    begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMELocalEmergencyStop,rec.ValueBool);
-      end
-      else
-      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMELocalEmergencyStop,rec.ValueBool);
-      end;
-    end;
-
-    epPCSMESafetyStop :
-    begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMESafetyStop,rec.ValueBool);
-      end
-      else
-      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-      begin
-        FLIstener.TriggerEvents(Self,epPCSMESafetyStop,rec.ValueBool);
-      end;
-    end;
   end;
 end;
 
@@ -241,7 +192,7 @@ begin
   begin
     with client do
     begin
-      RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventMainEngineCommonCmd, SizeOf(R_Common_Instr_Command));
+      RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
     end;
   end;
 
@@ -274,7 +225,7 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStaboard;
-  recCmd.CommandID := C_ORD_ME_STOP;
+  recCmd.CommandID      := C_ORD_ME_STOP;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
@@ -285,8 +236,8 @@ var
 begin
   recCmd.PortStaboardID := aPortStaboard;
   recCmd.CommandPropsID := epPCSMEClutched;
-  recCmd.CommandID := C_ORD_GB_CLUTCH_ENGAGED;
-  recCmd.ValueBool := True;
+  recCmd.CommandID      := C_ORD_GB_CLUTCH_ENGAGED;
+  recCmd.ValueBool      := True;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
@@ -297,8 +248,8 @@ var
 begin
   recCmd.PortStaboardID := aPortStaboard;
   recCmd.CommandPropsID := epPCSMELocalEmergencyStop;
-  recCmd.CommandID := C_ORD_LEVER_EMERGENCYSTOP;
-  recCmd.ValueBool := True;
+  recCmd.CommandID      := C_ORD_LEVER_EMERGENCYSTOP;
+  recCmd.ValueBool      := True;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
@@ -309,8 +260,8 @@ var
 begin
   recCmd.PortStaboardID := aPortStaboard;
   recCmd.CommandPropsID := epPCSMESafetyStop;
-  recCmd.CommandID := C_ORD_LEVER_SHAFTSTOP;
-  recCmd.ValueBool := True;
+  recCmd.CommandID      := C_ORD_LEVER_SHAFTSTOP;
+  recCmd.ValueBool      := True;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;

@@ -12,7 +12,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  OnCreate = FormCreate
+  OnMouseDown = imgSTShadowMouseDown
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -23,22 +23,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
     Color = 14145495
     ParentBackground = False
     TabOrder = 0
-    object Label19: TLabel
-      Left = 1227
-      Top = 1004
-      Width = 45
-      Height = 18
-      Cursor = crHandPoint
-      Caption = 'MENU'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Arial'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Visible = False
-      OnClick = MenuClick
-    end
     object imgSignaling1: TImage
       Left = 48
       Top = 64
@@ -10452,7 +10436,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         71E85993CB053B0BFE76C923842179841BC923DC54254F5D261364BABBFBBBAE
         2266A49A9B835CD15765FBC82344B5481EE146F208379247B8913CC2CD9FF1C5
         F3D720414E000000000049454E44AE426082}
-      Visible = False
       OnClick = btnStartStopClick
     end
     object imgClutchME1: TImage
@@ -10460,6 +10443,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
       Top = 666
       Width = 144
       Height = 96
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D494844520000008F0000
         00610806000000EF2DF261000000097048597300000EC400000EC401952B0E1B
@@ -10563,7 +10547,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         4CFD05B4AB37AED9AE8BE22152180F89311E12B3148F83F191937DB7A6D795EC
         8CABBB1B0A4BFCBBE752F11059C578488CF19018E32131C64362FF0789E964F5
         B644DA1D0000000049454E44AE426082}
-      Visible = False
       OnClick = btnClutchDeclutchClick
     end
     object imgByPassOpenME1: TImage
@@ -10571,6 +10554,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
       Top = 794
       Width = 143
       Height = 97
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D494844520000008F0000
         00610806000000EF2DF261000000097048597300000EC400000EC401952B0E1B
@@ -10755,13 +10739,13 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         F248F886248F846F48F248F886248F846FFC1FAD23BD40341A52570000000049
         454E44AE426082}
       Stretch = True
-      Visible = False
     end
     object imgStartME1: TImage
       Left = 419
       Top = 537
       Width = 144
       Height = 96
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D494844520000008F0000
         00610806000000EF2DF261000000097048597300000EC400000EC401952B0E1B
@@ -10867,6 +10851,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
       Top = 666
       Width = 145
       Height = 96
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D494844520000008F0000
         00610806000000EF2DF261000000097048597300000EC400000EC401952B0E1B
@@ -10984,7 +10969,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         E2BA2E2BF19CA16F688072A8FEDBEF4AF21084A6903C8430240F210CC9430843
         F210C2FC094EF5A0041DD8528C0000000049454E44AE426082}
       Stretch = True
-      Visible = False
       OnClick = btnClutchDeclutchClick
     end
     object imgByPassClosedME1: TImage
@@ -10992,6 +10976,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
       Top = 793
       Width = 143
       Height = 97
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D494844520000008F0000
         00610806000000EF2DF261000000097048597300000EC400000EC401952B0E1B
@@ -11209,13 +11194,13 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         C896333B92A12695D4E29148F4458A476230523C128391E291188C148FC460FE
         0F3D6E345EE113857B0000000049454E44AE426082}
       Stretch = True
-      Visible = False
     end
     object imgSafetiesorECResetME1: TImage
       Left = 736
       Top = 538
       Width = 149
       Height = 95
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D494844520000008F0000
         00610806000000EF2DF261000000097048597300000EC400000EC401952B0E1B
@@ -11385,7 +11370,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         180CF162C463708D118FC135463C06D718F1185CF33F747C63139982E4D80000
         000049454E44AE426082}
       Stretch = True
-      Visible = False
     end
     object imgSafetiesStopOverbiddenME1: TImage
       Left = 733
@@ -11581,7 +11565,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         E391189E3C1E89E1C9E391189E3C1E89F13F6369836DD0623C61000000004945
         4E44AE426082}
       Stretch = True
-      Visible = False
       OnClick = btnSafetiesStopClick
     end
     object imgEmergencyStopME1: TImage
@@ -11589,6 +11572,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
       Top = 662
       Width = 149
       Height = 98
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D494844520000008F0000
         00610806000000EF2DF261000000097048597300000EC400000EC401952B0E1B
@@ -11741,56 +11725,13 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         298C3C866018790CC130F2188261E43104E3BFB3589E315C2E4CEC0000000049
         454E44AE426082}
       Stretch = True
-      Visible = False
       OnClick = btnEmergencyStopClick
     end
-    object btnStartPS: TSpeedButtonImage
-      Left = 427
-      Top = 547
-      Width = 126
-      Height = 78
-      Cursor = crHandPoint
-      Caption = ''
-      Flat = True
-      OnClick = btnStartStopClick
-      Color = clGreen
-    end
-    object Label1: TLabel
-      Left = 456
-      Top = 576
-      Width = 68
-      Height = 25
-      Caption = 'START'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -21
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object btnStopPS: TSpeedButtonImage
-      Left = 85
-      Top = 547
-      Width = 126
-      Height = 78
-      Cursor = crHandPoint
-      Caption = ''
-      Flat = True
-      OnClick = btnStartStopClick
-      Color = clRed
-    end
-    object Label2: TLabel
-      Left = 120
-      Top = 576
-      Width = 56
-      Height = 25
-      Caption = 'STOP'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -21
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
+  end
+  object tmrStart: TTimer
+    Enabled = False
+    OnTimer = tmrimgStartTimer
+    Left = 472
+    Top = 488
   end
 end

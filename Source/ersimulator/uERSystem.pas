@@ -228,7 +228,7 @@ begin
     end;
 
     {Paket data hanya dikirimkan ke Mimic}
-    eppCSMERunningHour, epPCSMEOverspeed, epPCSMELOPumpHour,
+    epPCSMERunningHourState, epPCSMEOverspeed, epPCSMELOPumpHour,
     epPCSMESafetyShutdown, epPCSMERemoteCtrl, epPCSMELowLoad, epPCSMEVeryLowLoad,
     epPCSMEFsrTimerExpired, epPCSMEMaxFsrKeySwitch, epPCSMEStopIncrease, epPCSMEStopDecrease,
     epPCSMEConRodBearingTempHigh, epPCSMEConRodBearingTempVeryHigh, epPCSMEBearingTempHigh,
@@ -325,7 +325,8 @@ begin
         FOnPCSCommand(rPCSCmd);
     end;
 
-    epPCSMERunningHour :
+    // Main Engine 2
+    epPCSMERunningHours :
     begin
       if Sender is TMainEngine then
       begin
@@ -704,7 +705,6 @@ begin
     epPCSMERunning :
     begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(recERPCS.PortStaboardID);
-      FFlashingStartPS := True;
       ERSystem.ERManager.EngineRoom.getPCSSystem.StoppedStop(recERPCS.PortStaboardID);
     end;
 
@@ -713,33 +713,33 @@ begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, True);
     end;
 
-   epPCSMELocalEmergencyStop :
-   begin
+    epPCSMELocalEmergencyStop :
+    begin
      ERSystem.ERManager.EngineRoom.getPCSSystem.EmergencyStop(recERPCS.PortStaboardID);
-   end;
+    end;
 
-  {Main Engine 2}
-  //Signaling
-  epPCSMERemoteControl:
-  begin
-     ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, True)
-  end;
+    {Main Engine 2}
+    //Signaling
+    epPCSMERemoteControl:
+    begin
+       ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, True)
+    end;
 
-  epPCSMEActualSpeed :
-  begin
-    ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
-  end;
+    epPCSMEActualSpeed :
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+    end;
 
-  epPCSMESTCInManualMode :
-  begin
-    ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
-  end;
+    epPCSMESTCInManualMode :
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+    end;
 
-  epPCSMEPreStart :
-  begin
-    ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(recERPCS.PortStaboardID);
-    ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
-  end;
+    epPCSMEPreStart :
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(recERPCS.PortStaboardID);
+      ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+    end;
 
   end;
 

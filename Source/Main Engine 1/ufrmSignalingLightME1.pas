@@ -13,7 +13,6 @@ uses
 type
   TfrmSignalingLightME1 = class(TForm)
     pnlMain: TPanel;
-    Label19: TLabel;
     imgSignaling1: TImage;
     imgSignaling2: TImage;
     imgAirValveOpenME1: TImage;
@@ -46,26 +45,22 @@ type
     imgSafetiesorECResetME1: TImage;
     imgSafetiesStopOverbiddenME1: TImage;
     imgEmergencyStopME1: TImage;
-    btnStartPS: TSpeedButtonImage;
-    Label1: TLabel;
-    btnStopPS: TSpeedButtonImage;
-    Label2: TLabel;
-    procedure MenuClick(Sender: TObject);
+    tmrStart: TTimer;
     procedure btnStartStopClick(Sender: TObject);
     procedure btnClutchDeclutchClick(Sender: TObject);
     procedure btnEmergencyStopClick(Sender: TObject);
     procedure btnSafetiesStopClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
 
     procedure imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure tmrimgStartTimer(Sender: TObject);
   private
-    FIsBlinkState : Boolean;
-    FIdBlink : Integer;
     FListener : TListeners;
 
-    procedure MainEngine1SystemEvent(Sender : TObject; PropsID : E_PropsID; Value : Integer);overload;
-    procedure MainEngine1SystemEvent(Sender : TObject; PropsID : E_PropsID; Value : Boolean);overload;
-    procedure MainEngine1SystemEvent(Sender : TObject; PropsID : E_PropsID; Value : Double);overload;
+    FBlinkStart   : Cardinal;
+    FImageToBlink : TImage;
+
+    Indicators : array of TImage;
+    IndicatorStatus : array of Boolean;
 
   public
     picture_Path : string;
@@ -87,18 +82,6 @@ uses
   ufrmPMSDieselEngineSafetiesME1, ufrmSetofPressureGaugesME1, uMainEngine1System, uFreezeFrom;
 
 {$R *.dfm}
-
-procedure TfrmSignalingLightME1.FormCreate(Sender: TObject);
-var
-  i : Integer;
-begin
-  FListener := TListeners.Create;
-  with MainEngine1System.Listener.Add('Main Engine 2') as TPropertyEventListener do
-  begin
-    OnPropertyIntChange := MainEngine1SystemEvent;
-    OnPropertyBoolChange := MainEngine1SystemEvent;
-  end;
-end;
 
 procedure TfrmSignalingLightME1.imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
@@ -143,49 +126,17 @@ begin
   imgEmergencyStopME1.Visible := True;
 end;
 
-procedure TfrmSignalingLightME1.MainEngine1SystemEvent(Sender: TObject;
-  PropsID: E_PropsID; Value: Integer);
+procedure TfrmSignalingLightME1.tmrimgStartTimer(Sender: TObject);
 begin
-  case PropsID of
-    epPCSFreezed:
-      if Value = 1 then
-      begin
-        frmSignalingLightME1.Enabled := False;
-        MainEngine1System.FFormFreezed[1] := TfrmFreeze.Create(frmSignalingLightME1);
-        with MainEngine1System.FFormFreezed[1] do
-        begin
-          Parent   := frmSignalingLightME1;
-          Position := poOwnerFormCenter;
-          BringToFront;
-          Show;
-        end;
-      end
-      else if Value = 0 then
-      begin
-        frmSignalingLightME1.Enabled := True;
-        if Assigned(MainEngine1System.FFormFreezed[1]) then
-           FreeAndNil(MainEngine1System.FFormFreezed[1]);
-      end;
+  imgStartME1.Visible := not imgStartME1.Visible;
+
+  if GetTickCount - FBlinkStart >= 10000 then
+  begin
+    tmrStart.Enabled    := False;
+
+    imgStartME1.Enabled := True;
+    imgStartME1.Enabled := False;
   end;
-end;
-
-
-procedure TfrmSignalingLightME1.MainEngine1SystemEvent(Sender: TObject;
-  PropsID: E_PropsID; Value: Boolean);
-begin
-
-end;
-
-procedure TfrmSignalingLightME1.MainEngine1SystemEvent(Sender: TObject;
-  PropsID: E_PropsID; Value: Double);
-begin
-
-end;
-
-procedure TfrmSignalingLightME1.MenuClick(Sender: TObject);
-begin
-  frmPMSDieselEngineSafetiesME1.Show;
-  Self.Hide;
 end;
 
 procedure TfrmSignalingLightME1.btnClutchDeclutchClick(Sender: TObject);
@@ -201,6 +152,11 @@ end;
 procedure TfrmSignalingLightME1.btnStartStopClick(Sender: TObject);
 begin
   MainEngine1System.RunningStart(C_PCS_ME_STARBOARD);
+
+  FBlinkStart       := GetTickCount;
+  tmrStart.Enabled  := True;
+
+  imgStartME1.Visible := True;
 end;
 
 procedure TfrmSignalingLightME1.btnSafetiesStopClick(Sender: TObject);

@@ -410,7 +410,7 @@ type
       epPCSMELeverSpeed, epPCSMESetPointSpeed,
       epPCSMEActualSpeed, epPCSMEDelayActualSpeed, epPCSMEActualSpeedPS, epPCSMEActualSpeedSB,
       epPCSMEFuelRack, epPCSMEFuelMargin,epPCSMERunning,
-      epPCSMERunningHour, epPCSMELOPumpHour,
+      epPCSMERunningHourState, epPCSMERunningHours, epPCSMELOPumpHour,
       epPCSMESafetyShutdown, epPCSMERemoteCtrl, epPCSMELowLoad, epPCSMEVeryLowLoad,
       epPCSMEFsrTimerExpired, epPCSMEMaxFsrKeySwitch, epPCSMEStopIncrease, epPCSMEStopDecrease,
       epPCSMEPSRunStart, epPCSMEPSRemoteAuto, epPCSMEPSRemoteManual,
@@ -456,7 +456,7 @@ type
       epPCSMEResetSafetyStopPossible,
 
       epPCSMERemoteControlProposed, epPCSMEStartingInProgress, epPCSME2TCMode,
-      epPCSMEStartingInterlocks, epPCSMESafetiesStop,
+      epPCSMEStartingInterlocks, epPCSMESafetiesStop, epPCSMEPreStart,
 
       //Main Engine Failure
       epPCSMEFailure, epPCSMEFailurePS, epPCSMEFailureSB,

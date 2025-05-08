@@ -326,7 +326,7 @@ begin
   Result := True;
   if PortStaboardID = C_PCS_ME_PORTS then
   begin
-    if Order = epPCSMERunningHour then
+    if Order = epPCSMERunningHourState then
       value := '2331E0011R'
     else
     if Order = epPCSMELOPumpHour then
@@ -344,7 +344,7 @@ begin
   else
   if PortStaboardID = C_PCS_ME_STARBOARD then
   begin
-    if Order = epPCSMERunningHour then
+    if Order = epPCSMERunningHourState then
       value := '2331E0012R'
     else
     if Order = epPCSMELOPumpHour then

@@ -4,13 +4,23 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+
+  uListener, uFreezeFrom, uDataType;
 
 type
   TfrmMainForm = class(TForm)
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+
   private
-    { Private declarations }
+    FListener : TListeners;
+
+    procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
+    procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
+    procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Double);overload;
+
   public
     { Public declarations }
   end;
@@ -24,6 +34,22 @@ uses
   ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, ufrmMenu, uMainEngine2System;
 
 {$R *.dfm}
+
+procedure TfrmMainForm.FormCreate(Sender: TObject);
+begin
+  FListener := TListeners.Create;
+  with MainEngine2System.Listener.Add('MAINENGINE 2') as TPropertyEventListener do
+  begin
+    OnPropertyIntChange := MainEngine2SystemEvent;
+    OnPropertyBoolChange := MainEngine2SystemEvent;
+    OnPropertyDblChange := MainEngine2SystemEvent;
+  end;
+end;
+
+procedure TfrmMainForm.FormDestroy(Sender: TObject);
+begin
+  FListener.Free;
+end;
 
 procedure TfrmMainForm.FormShow(Sender: TObject);
 begin
@@ -62,6 +88,75 @@ begin
       Show;
     end;
   end;
+end;
+
+procedure TfrmMainForm.MainEngine2SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);
+begin
+  case PropsID of
+    epPCSFreezed:
+    begin
+      if Value = 1 then
+      begin
+        frmSignalingLightME2.Enabled := False;
+        MainEngine2System.FFormFreezed[0] := TfrmFreeze.Create(frmSignalingLightME2);
+        with MainEngine2System.FFormFreezed[0] do
+        begin
+          Parent := frmSignalingLightME2;
+          Position := poOwnerFormCenter;
+          BringToFront;
+          Show;
+        end;
+
+        frmMenu.Enabled := False;
+//        MainEngine2System.FFormFreezed[1] := TfrmFreeze.Create(frmMenu);
+//        with MainEngine2System.FFormFreezed[1] do
+//        begin
+//          Parent := frmMenu;
+//          Position := poOwnerFormCenter;
+//          BringToFront;
+//          Show;
+//        end;
+
+        frmSetofPressureGaugesME2.Enabled := False;
+        MainEngine2System.FFormFreezed[2] := TfrmFreeze.Create(frmSetofPressureGaugesME2);
+        with MainEngine2System.FFormFreezed[2] do
+        begin
+          Parent := frmSetofPressureGaugesME2;
+          Position := poOwnerFormCenter;
+          BringToFront;
+          Show;
+        end;
+      end
+      else if Value = 0 then
+      begin
+        frmSignalingLightME2.Enabled := True;
+        if Assigned(MainEngine2System.FFormFreezed[0]) then
+          FreeAndNil(MainEngine2System.FFormFreezed[0]);
+
+        frmMenu.Enabled := True;
+//        if Assigned(MainEngine2System.FFormFreezed[1]) then
+//          FreeAndNil(MainEngine2System.FFormFreezed[1]);
+
+        frmSetofPressureGaugesME2.Enabled := True;
+        if Assigned(MainEngine2System.FFormFreezed[2]) then
+          FreeAndNil(MainEngine2System.FFormFreezed[2]);
+      end;
+    end;
+    epPCSMERunningHours :
+    begin
+      frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Value);
+    end;
+  end;
+end;
+
+procedure TfrmMainForm.MainEngine2SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
+begin
+
+end;
+
+procedure TfrmMainForm.MainEngine2SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
+begin
+
 end;
 
 end.

@@ -12,7 +12,6 @@ object frmSignalingLightME2: TfrmSignalingLightME2
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -35,22 +34,6 @@ object frmSignalingLightME2: TfrmSignalingLightME2
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
-    end
-    object Label13: TLabel
-      Left = 1208
-      Top = 992
-      Width = 56
-      Height = 22
-      Cursor = crHandPoint
-      Caption = 'MENU'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Arial'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Visible = False
-      OnClick = MenuClick
     end
     object grpRemote: TGroupBox
       Left = 41
@@ -283,7 +266,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
           Top = -4
           Width = 160
           Height = 45
-          Caption = '17509220'
+          Caption = '00000000'
           Color = clWhite
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
@@ -295,10 +278,5 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         end
       end
     end
-  end
-  object tmrHoorCounter: TTimer
-    OnTimer = tmrHoorCounterTimer
-    Left = 621
-    Top = 388
   end
 end

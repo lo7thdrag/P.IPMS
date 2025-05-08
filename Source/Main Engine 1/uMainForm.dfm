@@ -3,8 +3,8 @@ object frmMainForm: TfrmMainForm
   Top = 0
   BorderStyle = bsNone
   Caption = 'Main Form'
-  ClientHeight = 1024
-  ClientWidth = 1280
+  ClientHeight = 500
+  ClientWidth = 500
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,6 +12,8 @@ object frmMainForm: TfrmMainForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13

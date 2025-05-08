@@ -60,10 +60,10 @@
         <Projects Include="Auxilary\Auxilary.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\..\Main Engine 1\MainEngine1.dproj">
+        <Projects Include="Main Engine 1\MainEngine1.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\..\Main Engine 2\MainEngine2.dproj">
+        <Projects Include="Main Engine 2\MainEngine2.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -246,22 +246,22 @@
         <MSBuild Projects="Auxilary\Auxilary.dproj" Targets="Make"/>
     </Target>
     <Target Name="MainEngine1">
-        <MSBuild Projects="..\..\Main Engine 1\MainEngine1.dproj"/>
+        <MSBuild Projects="Main Engine 1\MainEngine1.dproj"/>
     </Target>
     <Target Name="MainEngine1:Clean">
-        <MSBuild Projects="..\..\Main Engine 1\MainEngine1.dproj" Targets="Clean"/>
+        <MSBuild Projects="Main Engine 1\MainEngine1.dproj" Targets="Clean"/>
     </Target>
     <Target Name="MainEngine1:Make">
-        <MSBuild Projects="..\..\Main Engine 1\MainEngine1.dproj" Targets="Make"/>
+        <MSBuild Projects="Main Engine 1\MainEngine1.dproj" Targets="Make"/>
     </Target>
     <Target Name="MainEngine2">
-        <MSBuild Projects="..\..\Main Engine 2\MainEngine2.dproj"/>
+        <MSBuild Projects="Main Engine 2\MainEngine2.dproj"/>
     </Target>
     <Target Name="MainEngine2:Clean">
-        <MSBuild Projects="..\..\Main Engine 2\MainEngine2.dproj" Targets="Clean"/>
+        <MSBuild Projects="Main Engine 2\MainEngine2.dproj" Targets="Clean"/>
     </Target>
     <Target Name="MainEngine2:Make">
-        <MSBuild Projects="..\..\Main Engine 2\MainEngine2.dproj" Targets="Make"/>
+        <MSBuild Projects="Main Engine 2\MainEngine2.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
         <CallTarget Targets="EmergencyStop;PanelThrottle;AlarmRudder;pcsUI;ACS;IPMSLoader;instructor;ERSimulator;IPMSComponent;controller;setting;Mimics;TrendChart;DieselGenerator;MCRMachineLeft;MCRMachineRight;GeneratorPanel;MainSwitchBoard;Auxilary;MainEngine1;MainEngine2"/>

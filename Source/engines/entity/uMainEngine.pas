@@ -8,6 +8,10 @@ type
 
   TMainEngine = class(TEntity)
   private
+
+    FRunningHours : Integer;
+    FRunningHourTemp : Integer;
+
     FDelayRandom,
     FDelayer,
     FDelayerActualSpeed,
@@ -62,7 +66,7 @@ type
     FRemoteAuto,
     FIncreaseSpeed,
     FDecreaseSpeed,
-    FRunningHour,
+    FRunningHourState,
     FOverspeed,
     FStopIncrease,
     FDecrease,
@@ -146,6 +150,8 @@ type
     FTankIsEmpty,
     FPreStartInhibition: Boolean;
 
+    procedure SetRunningHours(const Value: Integer);
+
     procedure SetSetpointSpeed(const Value: Double);
     procedure SetLeverSpeed(const Value: Double);
     procedure SetActualSpeed(const Value: Double);
@@ -207,7 +213,7 @@ type
     procedure SetRemoteAuto(const Value : Boolean);
     procedure SetIncreaseSpeed(const Value : Boolean);
     procedure SetDecreaseSpeed(const Value : Boolean);
-    procedure SetRunningHour(const Value : Boolean);
+    procedure SetRunningHourState(const Value : Boolean);
     procedure SetOverspeed(const Value : Boolean);
     procedure SetStopIncrease(const Value : Boolean);
     procedure SetDecrease(const Value : Boolean);
@@ -324,6 +330,8 @@ type
 
     procedure Run(const aDt : Double); override;
 
+    property RunningHours : Integer read FRunningHours write SetRunningHours;
+
     property AvgTempA : Double read FAvgTempA write SetAvgTempA;
     property AvgTempB : Double read FAvgTempB write SetAvgTempB;
     property CompProbA : Double read FCompProbA write SetCompProbA;
@@ -377,7 +385,7 @@ type
     property RemoteAuto : Boolean read FRemoteAuto write SetRemoteAuto;
     property IncreaseSpeed : Boolean read FIncreaseSpeed write SetIncreaseSpeed;
     property DecreaseSpeed : Boolean read FDecreaseSpeed write SetDecreaseSpeed;
-    property RunningHour : Boolean read FRunningHour write SetRunningHour;
+    property RunningHourState : Boolean read FRunningHourState write SetRunningHourState;
     property Overspeed : Boolean read FOverspeed write SetOverspeed;
     property StopIncrease : Boolean read FStopIncrease write SetStopIncrease;
     property Decrease : Boolean read FDecrease write SetDecrease;
@@ -492,6 +500,12 @@ begin
 
   if EngineRun then
   begin
+    FRunningHourTemp := FRunningHourTemp + 1;
+    if FRunningHourTemp > 25 then
+    begin
+      FRunningHourTemp := 0;
+      RunningHours := RunningHours + 1;
+    end;
 
     if IncreaseSpeed then
       SetSpeedInManual(1)
@@ -737,7 +751,7 @@ end;
 
 procedure TMainEngine.setMainEngineState(aEngineRun: Boolean);
 begin
-  RunningHour := aEngineRun;
+  RunningHourState := aEngineRun;
 end;
 
 procedure TMainEngine.setMainEngineTempValue(aRPM: Double);
@@ -2070,13 +2084,22 @@ begin
   Listener.TriggerEvents(Self,epPCSMEResetSafetyStopPossible,Value);
 end;
 
-procedure TMainEngine.SetRunningHour(const Value: Boolean);
+procedure TMainEngine.SetRunningHours(const Value: Integer);
 begin
-  if FRunningHour = Value then
+  if FRunningHours = Value then
     Exit;
 
-  FRunningHour := Value;
-  Listener.TriggerEvents(Self,eppCSMERunningHour,Value);
+  FRunningHours := Value;
+  Listener.TriggerEvents(Self,epPCSMERunningHours,Value);
+end;
+
+procedure TMainEngine.SetRunningHourState(const Value: Boolean);
+begin
+  if FRunningHourState = Value then
+    Exit;
+
+  FRunningHourState := Value;
+  Listener.TriggerEvents(Self,epPCSMERunningHourState,Value);
 end;
 
 procedure TMainEngine.SetSafetiesStop(const Value: Boolean);

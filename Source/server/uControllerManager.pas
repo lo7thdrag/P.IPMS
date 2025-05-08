@@ -1269,7 +1269,7 @@ procedure TControllerManager.MappingPCSStateToElement(aElement: TElement; Order:
   aValue: Integer);
 begin
   case Order of
-    epPCSMERunningHour, epPCSMELOPumpHour, epPCSCPPHydraulicPumpHour1,
+    epPCSMERunningHourState, epPCSMELOPumpHour, epPCSCPPHydraulicPumpHour1,
     epPCSCPPHydraulicPumpHour2, epPCSCPPHydraulicPumpHour3, epPCSGBLOPumpHour,
     epPCSMEFanExhSupplyHour , epPCSMEFanSupply1Hour, epPCSMEFanSupply2Hour:
     begin
@@ -1454,7 +1454,7 @@ begin
       setPCSAAEElementID(recCmd.PortStaboardID, recCmd.ValueDouble, recCmd.CommandPropsID);
     end;
 
-    epPCSMERunningHour, epPCSMELOPumpHour,
+    epPCSMERunningHourState, epPCSMELOPumpHour,
     epPCSCPPHydraulicPumpHour1, epPCSCPPHydraulicPumpHour2, epPCSCPPHydraulicPumpHour3,
     epPCSGBLOPumpHour, epPCSMEFanExhSupplyHour, epPCSMEFanSupply1Hour, epPCSMEFanSupply2Hour:
     begin
