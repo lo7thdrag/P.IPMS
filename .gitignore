@@ -6,19 +6,14 @@
 /Source/common
 /Source/bin
 /Source/components
-/Source/server
 /Source/components/TrendChart
 /Source/ersimulator/panel/__history
 /Source/ersimulator/__history
-/Source/ersimulator
 /Source/Emergency Stop/__history
-/Source/Emergency Stop
-/Source/Emergency Stop
 Source/DieselGenerator/__history
 /Source/DieselGenerator/__recovery
 /Source/DieselGenerator
 Source/MCR Machine Left/__history
-/Source/MCR Machine Left
 /Source/engines/__history
 /Source/engines/entity/__history
 /Source/engines/system/__history
@@ -26,9 +21,8 @@ Source/MCR Machine Left/__history
 /Source/Alarm Rudder/__recovery
 /Source/Main Switch Board/__history
 /Source/instructor/panels/__history
-/Source/mimics
-/Source/Panel Throttle
-/Source/server
 /Source/Auxilary/__history
 /Source/CCTV/__history
 /Source/MCR Machine Right/__history
+/Source/server/__history
+/Source/server/tester/__history
