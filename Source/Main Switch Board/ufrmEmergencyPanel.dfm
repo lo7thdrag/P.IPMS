@@ -91100,24 +91100,28 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Top = 472
         Width = 52
         Height = 52
+        OnClick = ImgStartClick
       end
       object ImgStop: TImage
         Left = 266
         Top = 472
         Width = 52
         Height = 52
+        OnClick = ImgStopClick
       end
       object ImgOI: TImage
         Left = 354
         Top = 472
         Width = 52
         Height = 52
+        OnClick = ImgOIClick
       end
       object ImgPref: TImage
         Left = 470
         Top = 472
         Width = 52
         Height = 52
+        OnClick = ImgPrefClick
       end
       object ImgIndicatorBS: TImage
         Left = 598

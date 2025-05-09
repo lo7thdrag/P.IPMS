@@ -92,6 +92,10 @@ type
     ImgIndicatorAP: TImage;
     ImgIndicatorFP: TImage;
     ImgIndicatorHO: TImage;
+    procedure ImgStartClick(Sender: TObject);
+    procedure ImgStopClick(Sender: TObject);
+    procedure ImgOIClick(Sender: TObject);
+    procedure ImgPrefClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -103,6 +107,29 @@ var
 
 implementation
 
+uses
+  uMainSwitchBoardSystem;
+
 {$R *.dfm}
+
+procedure TfrmEmergencyPanel.ImgOIClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.CBClosed(True);
+end;
+
+procedure TfrmEmergencyPanel.ImgPrefClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.GeneratorPreference(True);
+end;
+
+procedure TfrmEmergencyPanel.ImgStartClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.EngineRun(True);
+end;
+
+procedure TfrmEmergencyPanel.ImgStopClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.EngineRun(False);
+end;
 
 end.

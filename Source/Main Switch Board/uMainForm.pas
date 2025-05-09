@@ -184,7 +184,27 @@ begin
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
       begin
-
+        with frmEmergencyPanel do
+        begin
+          if Value = 1 then
+          begin
+            ImgIndicatorMan.Visible := True;
+            ImgIndicatorSA.Visible := False;
+            ImgIndicatorAuto.Visible := False;
+          end
+          else if Value = 2 then
+          begin
+            ImgIndicatorMan.Visible := False;
+            ImgIndicatorSA.Visible := True;
+            ImgIndicatorAuto.Visible := False;
+          end
+          else if Value = 3 then
+          begin
+            ImgIndicatorMan.Visible := False;
+            ImgIndicatorSA.Visible := False;
+            ImgIndicatorAuto.Visible := True;
+          end;
+        end;
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
       begin
@@ -208,7 +228,10 @@ begin
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
       begin
-
+        with frmEmergencyPanel do
+        begin
+          ImgIndicatorER.Visible := Value;
+        end;
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
       begin
@@ -226,7 +249,10 @@ begin
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
       begin
-
+        with frmEmergencyPanel do
+        begin
+          ImgIndicatorER.Visible := not Value;
+        end;
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
       begin
@@ -244,7 +270,10 @@ begin
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
       begin
-
+        with frmEmergencyPanel do
+        begin
+          ImgIndicatorGS.Visible := Value;
+        end;
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
       begin
@@ -262,7 +291,10 @@ begin
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
       begin
-
+        with frmEmergencyPanel do
+        begin
+          ImgIndicatorCBC.Visible := Value;
+        end;
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
       begin
@@ -280,7 +312,10 @@ begin
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
       begin
-
+        with frmEmergencyPanel do
+        begin
+          ImgIndicatorPreference.Visible := Value;
+        end;
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
       begin
@@ -298,7 +333,10 @@ begin
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
       begin
-
+        with frmEmergencyPanel do
+        begin
+          ImgIndicatorBS.Visible := Value;
+        end;
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
       begin
