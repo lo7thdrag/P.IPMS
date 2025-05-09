@@ -665,7 +665,6 @@ begin
   recCmd := @apRec^;
 
   recER.GenSwitchID := recCmd.GenSwitchID;
-//  recER.CommandID := recCmd.CommandID;
   recER.CommandPropsID := recCmd.CommandPropsID;
   recER.ValueBool := recCmd.ValueBool;
   recER.ValueInt := recCmd.ValueInt;

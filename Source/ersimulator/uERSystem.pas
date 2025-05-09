@@ -53,7 +53,7 @@ type
 
     //Prince
     function toCheckCB(IdGen : string; IdMsb : Integer): boolean;
-    procedure NetEvent_MimicCommonCmd(apRec: PAnsiChar; aSize: Word);
+    procedure NetEvent_PMSCommonCmd(apRec: PAnsiChar; aSize: Word);
     procedure NetEvent_PCSCommonCmd(apRec: PAnsiChar; aSize: Word);
     procedure SetOnPCSCommand(const Value: T_OnPCSCommand);
     procedure SetOnPMSCommand(const Value: T_OnPMSCommand);
@@ -589,15 +589,15 @@ begin
   end;
 end;
 
-procedure TERSystem.NetEvent_MimicCommonCmd(apRec: PAnsiChar; aSize: Word);
+procedure TERSystem.NetEvent_PMSCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
   recER : ^R_Common_PMS_Command;
   generator : TGenerator;
   switchboard : TSwitchboard;
-  recERPCS : ^R_Common_PCS_Command;
+//  recERPCS : ^R_Common_PCS_Command;
 begin
   recER := @apRec^;
-  recERPCS := @apRec^;
+//  recERPCS := @apRec^;
 
   case recER.CommandPropsID of
     epPMSGeneratorEmergencyStop, epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorCBClosed,
@@ -686,12 +686,12 @@ begin
       switchboard.MsbCircuitBreaker  := recER.ValueBool;
     end;
   end;
-  case recERPCS.CommandID of
-    1,2:
-    begin
-      ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(recERPCS.CommandID, recERPCS.Number, recERPCS.ValueInt, recERPCS.ValueBool);
-    end;
-  end;
+//  case recERPCS.CommandID of
+//    1,2:
+//    begin
+//      ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(recERPCS.CommandID, recERPCS.Number, recERPCS.ValueInt, recERPCS.ValueBool);
+//    end;
+//  end;
 end;
 
 procedure TERSystem.NetEvent_PCSCommonCmd(apRec: PAnsiChar; aSize: Word);
@@ -810,7 +810,7 @@ begin
       RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
 
       {terima paket dari controller ke ER}
-      RegisterProcedure(C_MIMICS_COMMAND, NetEvent_MimicCommonCmd, SizeOf(R_Common_PMS_Command));
+      RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PMSCommonCmd, SizeOf(R_Common_PMS_Command));
       RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PCSCommonCmd, SizeOf(R_Common_PCS_Command));
     end;
   end;
