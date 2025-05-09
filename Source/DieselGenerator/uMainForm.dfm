@@ -5744,7 +5744,6 @@ object MainForm: TMainForm
       69800F8A5333134F88337644099189BB0D3C2ACFFF00F70EE9D57C20F1960000
       000049454E44AE426082}
     Stretch = True
-    Visible = False
   end
   object imgStop: TImage
     Left = 480
@@ -5860,7 +5859,6 @@ object MainForm: TMainForm
       78A6A05774719A4E3A0A75DE23C1102D3CE0C9AB3CFF0B16D1A1D53D5AFEF600
       00000049454E44AE426082}
     Stretch = True
-    Visible = False
   end
   object imgStart: TImage
     Left = 479
@@ -10406,7 +10404,6 @@ object MainForm: TMainForm
       BD272CA1D4F9C997996A10CBEE00B5BEEEC1CBBEEE56CBFF03C8F85E0D1FAC88
       E90000000049454E44AE426082}
     Stretch = True
-    Visible = False
   end
   object imgJWHeater: TImage
     Left = 789
@@ -10787,7 +10784,6 @@ object MainForm: TMainForm
       BD272CA1D4F9C997996A10CBEE00B5BEEEC1CBBEEE56CBFF03C8F85E0D1FAC88
       E90000000049454E44AE426082}
     Stretch = True
-    Visible = False
   end
   object VrMainSwitch: TVrRotarySwitch
     Left = 728
@@ -10799,6 +10795,7 @@ object MainForm: TMainForm
     SwitchPositions.Strings = (
       'OFF'
       'ON')
+    SwitchPosition = 1
     SwitchAngleEnd = 90
     SwitchColor = clBlack
     Font.Charset = DEFAULT_CHARSET

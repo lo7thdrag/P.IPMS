@@ -85,21 +85,14 @@ begin
     with  client do
     begin
 
-      RegisterProcedure(C_BULK_ELEMENT_COMMAND,
-        Mimic.NetEvent_BulkElmtCommonCmd, SizeOf(R_Bulk_Common_Elmt_Command));
-
-      RegisterProcedure(C_INSTRUCTOR_COMMAND,
-        {Mimic.NetEvent_ScenarioConditionCmd,} nil,
-        SizeOf(R_Common_ScenarioCondition_Command));
+      RegisterProcedure(C_BULK_ELEMENT_COMMAND, Mimic.NetEvent_BulkElmtCommonCmd, SizeOf(R_Bulk_Common_Elmt_Command));
+      RegisterProcedure(C_INSTRUCTOR_COMMAND, {Mimic.NetEvent_ScenarioConditionCmd,} nil, SizeOf(R_Common_ScenarioCondition_Command));
 
       {register paket dr mimic k controller}
-      RegisterProcedure(C_MIMICS_COMMAND, Mimic.NetEvent_ControlCommonCmd,
-        SizeOf(R_Common_Mimic_Command));
-      RegisterProcedure(C_VENTSTATUS_COMMAND, nil,
-        SizeOf(R_Common_VentStatus_Command));
+      RegisterProcedure(C_MIMICS_COMMAND, Mimic.NetEvent_ControlCommonCmd, SizeOf(R_Common_Mimic_Command));
+      RegisterProcedure(C_VENTSTATUS_COMMAND, nil, SizeOf(R_Common_VentStatus_Command));
 
-      RegisterProcedure(C_FUNCTIONALLOCATION_COMMAND,
-        Mimic.NetEvent_FuncAllocCommand, SizeOf(R_Common_FuncAlloc_Command));
+      RegisterProcedure(C_FUNCTIONALLOCATION_COMMAND, Mimic.NetEvent_FuncAllocCommand, SizeOf(R_Common_FuncAlloc_Command));
     end;
   end;
 

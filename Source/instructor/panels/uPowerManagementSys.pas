@@ -290,11 +290,13 @@ type
 
     function toWarna(val : boolean): Integer;
 
-    procedure EnginePropertyBoolChange(Sender : TObject; PropsID : E_PropsID;Value : Boolean);overload;
-
     procedure SetBtnColor(Id : string; valbool: Boolean);
     procedure SetValueBool(IdGen : Integer; value : Boolean; modeAlarm : E_PropsID);
     procedure SetMimic(PageMimic : E_MimicType);
+
+    procedure EnginePropertyIntChange(Sender : TObject; PropsID : E_PropsID;Value : Integer);overload;
+    procedure EnginePropertyBoolChange(Sender : TObject; PropsID : E_PropsID;Value : Boolean);overload;
+    procedure EnginePropertyDouChange(Sender : TObject; PropsID : E_PropsID;Value : Double);overload;
 
   public
     { Public declarations }
@@ -315,7 +317,9 @@ uses
 
 procedure TfrmPowerManagementSyst.FormCreate(Sender: TObject);
 begin
-  ERSystem.ERManager.EngineRoom.getPMSSystem.addEntityListener('PMS Condition',EnginePropertyBoolChange)
+  ERSystem.ERManager.EngineRoom.getPMSSystem.addEntityListener('PMS Condition',EnginePropertyBoolChange);
+  ERSystem.ERManager.EngineRoom.getPMSSystem.addEntityListener('PMS Condition',EnginePropertyIntChange);
+  ERSystem.ERManager.EngineRoom.getPMSSystem.addEntityListener('PMS Condition',EnginePropertyDouChange);
 end;
 
 procedure TfrmPowerManagementSyst.EnginePropertyBoolChange(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
@@ -394,6 +398,34 @@ begin
           lblLampES04.Color := toWarna(Value);
         {$ENDREGION}
       end;
+      epPMSNotStandby :
+      begin
+        if TGenerator(Sender).Identifier = C_GENERATOR_ID[0] then
+        begin
+          rbStandby01.Checked := not Value;
+          rbManual01.Checked := Value;
+        end
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[1] then
+        begin
+          rbStandby02.Checked := not Value;
+          rbManual02.Checked := Value;
+        end
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[2] then
+        begin
+          rbStandby03.Checked := not Value;
+          rbManual03.Checked := Value;
+        end
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[3] then
+        begin
+          rbStandby04.Checked := not Value;
+          rbManual04.Checked := Value;
+        end
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[4] then
+        begin
+          rbStandby05.Checked := not Value;
+          rbManual05.Checked := Value;
+        end
+      end;
     end;
   end
   else if Sender is TSwitchboard then
@@ -410,6 +442,18 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TfrmPowerManagementSyst.EnginePropertyDouChange(Sender: TObject;
+  PropsID: E_PropsID; Value: Double);
+begin
+//m
+end;
+
+procedure TfrmPowerManagementSyst.EnginePropertyIntChange(Sender: TObject;
+  PropsID: E_PropsID; Value: Integer);
+begin
+//m
 end;
 
 {$REGION ' Alarm Condition Procedure '}

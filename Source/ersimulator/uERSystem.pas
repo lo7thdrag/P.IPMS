@@ -594,26 +594,27 @@ var
   recER : ^R_Common_PMS_Command;
   generator : TGenerator;
   switchboard : TSwitchboard;
-//  recERPCS : ^R_Common_PCS_Command;
+
 begin
   recER := @apRec^;
-//  recERPCS := @apRec^;
 
   case recER.CommandPropsID of
-    epPMSGeneratorEmergencyStop, epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorCBClosed,
-    epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSGeneratorMode, epPMSNotStandby :
+    epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorCBClosed,
+    epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSGeneratorMode :
     begin
       generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
       if generator.NotStandby then
         Exit;
     end;
-    epPMSMsbCBShore, epPMSMsbCircuitBreaker :
-    begin
-      switchboard := ERManager.EngineRoom.getPMSSystem.getSwitchboard(recER.GenSwitchID);
-    end;
   end;
 
   case recER.CommandPropsID of
+    epPMSNotStandby:
+    begin
+      generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
+      generator.NotStandby := recER.ValueBool;
+    end;
+
     epPMSGeneratorEmergencyStop :
     begin
       generator.EmergencyStop := recER.ValueBool;
@@ -678,6 +679,7 @@ begin
     end;
     epPMSMsbCBShore:
     begin
+      switchboard := ERManager.EngineRoom.getPMSSystem.getSwitchboard(recER.GenSwitchID);
       switchboard.MsbCBShore  := recER.ValueBool;
     end;
     epPMSMsbCircuitBreaker:
@@ -686,12 +688,6 @@ begin
       switchboard.MsbCircuitBreaker  := recER.ValueBool;
     end;
   end;
-//  case recERPCS.CommandID of
-//    1,2:
-//    begin
-//      ERManager.EngineRoom.getPCSSystem.CPPHydraulicPump(recERPCS.CommandID, recERPCS.Number, recERPCS.ValueInt, recERPCS.ValueBool);
-//    end;
-//  end;
 end;
 
 procedure TERSystem.NetEvent_PCSCommonCmd(apRec: PAnsiChar; aSize: Word);
@@ -802,16 +798,16 @@ begin
   begin
     with ERManager.EngineRoom do
     begin
-      RegisterProcedure(C_PCS_COMMAND, getPCSSystem.NetEvent_PCSCommand,
-        SizeOf(R_Common_PCS_Command));
+      RegisterProcedure(C_PCS_COMMAND, getPCSSystem.NetEvent_PCSCommand, SizeOf(R_Common_PCS_Command));
 
       {Kirim paket dari ER ke bawahannya}
       RegisterProcedure(C_PMS_COMMAND, nil, SizeOf(R_Common_PMS_Command));
       RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
 
       {terima paket dari controller ke ER}
-      RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PMSCommonCmd, SizeOf(R_Common_PMS_Command));
-      RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PCSCommonCmd, SizeOf(R_Common_PCS_Command));
+      RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PCSCommonCmd, SizeOf(R_Common_PMS_Command));
+      RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PMSCommonCmd, SizeOf(R_Common_PCS_Command));
+
     end;
   end;
 

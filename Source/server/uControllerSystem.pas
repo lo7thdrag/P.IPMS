@@ -657,22 +657,6 @@ begin
   Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
 end;
 
-procedure TControllerlSystem.NetEvent_GenCommonCmd(apRec: PAnsiChar; aSize: Word);
-var
-  recCmd  : ^R_Common_PMS_Command;
-  recER   : R_Common_PMS_Command;
-begin
-  recCmd := @apRec^;
-
-  recER.GenSwitchID := recCmd.GenSwitchID;
-  recER.CommandPropsID := recCmd.CommandPropsID;
-  recER.ValueBool := recCmd.ValueBool;
-  recER.ValueInt := recCmd.ValueInt;
-  recER.ValueDob := recCmd.ValueDob;
-
-  Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
-end;
-
 procedure TControllerlSystem.NetEvent_MECommonCmd(apRec: PAnsiChar; aSize: Word);
 var
   recCmd  : ^R_Common_PCS_Command;
@@ -761,13 +745,25 @@ begin
       TMCEElement(elmnt).StateElementDisabled := sdEnabled;
     end;
   end;
-
-
-
 end;
 
-procedure TControllerlSystem.NetEvent_PumpCommonCmd(apRec: PAnsiChar;
-  aSize: Word);
+procedure TControllerlSystem.NetEvent_GenCommonCmd(apRec: PAnsiChar; aSize: Word);
+var
+  recCmd  : ^R_Common_PMS_Command;
+  recPMS   : R_Common_PMS_Command;
+begin
+  recCmd := @apRec^;
+
+  recPMS.GenSwitchID := recCmd.GenSwitchID;
+  recPMS.CommandPropsID := recCmd.CommandPropsID;
+  recPMS.ValueBool := recCmd.ValueBool;
+  recPMS.ValueInt := recCmd.ValueInt;
+  recPMS.ValueDob := recCmd.ValueDob;
+
+  Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recPMS);
+end;
+
+procedure TControllerlSystem.NetEvent_PumpCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
   recCmd  : ^R_Common_PumpStatus_Command;
   recPCS   : R_Common_PCS_Command;
