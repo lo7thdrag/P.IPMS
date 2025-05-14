@@ -61,23 +61,23 @@ type
     Label37: TLabel;
     Label38: TLabel;
     Label40: TLabel;
-    Image1: TImage;
-    Image2: TImage;
-    Image3: TImage;
-    Image4: TImage;
-    Image5: TImage;
-    Image6: TImage;
-    Image7: TImage;
-    Image8: TImage;
-    Image9: TImage;
-    Image10: TImage;
-    Image11: TImage;
-    Image12: TImage;
-    Image13: TImage;
-    Image14: TImage;
-    Image15: TImage;
-    Image16: TImage;
-    Image17: TImage;
+    imgGenPSFWD: TImage;
+    imgGenSBFWD: TImage;
+    imgGenPSAFT: TImage;
+    imgGenSBAFT: TImage;
+    imgGenEmergency: TImage;
+    imgShore: TImage;
+    imgDG1: TImage;
+    imgDG2: TImage;
+    imgDG3: TImage;
+    imgDG4: TImage;
+    imgAux1: TImage;
+    imgAux2: TImage;
+    imgAux3: TImage;
+    imgME1PS: TImage;
+    imgME2PS: TImage;
+    imgME2SB: TImage;
+    imgME1SB: TImage;
     Label39: TLabel;
     Label41: TLabel;
     Label42: TLabel;
@@ -563,7 +563,41 @@ begin
   else if aIP = Setting.EmergencyStopIP then
     imgEmergencyStop.Picture.LoadFromFile(imgStat)
   else if aIP = Setting.CctvIP then
-    imgCCTV.Picture.LoadFromFile(imgStat);
+    imgCCTV.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.GenPsFwdIP then
+    imgGenPSFWD.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.GenSbFwdIP then
+    imgGenSBFWD.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.GenPsAftIP then
+    imgGenPSAFT.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.GenSbAftIP then
+    imgGenSBAFT.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.GenEmergencyIP then
+    imgGenEmergency.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.ShoreIP then
+    imgShore.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.MainEngine1PsIP then
+    imgME1PS.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.MainEngine2PsIP then
+    imgME2PS.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.MainEngine1Sb then
+    imgME1SB.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.MainEngine2Sb then
+    imgME2SB.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.Auxiliary1 then
+    imgAux1.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.Auxiliary2 then
+    imgAux2.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.Auxiliary3 then
+    imgAux3.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.DieselGenerator1 then
+    imgDG1.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.DieselGenerator2 then
+    imgDG2.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.DieselGenerator3 then
+    imgDG3.Picture.LoadFromFile(imgStat)
+  else if aIP = Setting.DieselGenerator4 then
+    imgDG4.Picture.LoadFromFile(imgStat);
 end;
 
 procedure TfrmClientControl.loadSettingAlarm(filepath: string);
