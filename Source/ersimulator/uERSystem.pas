@@ -805,8 +805,8 @@ begin
       RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
 
       {terima paket dari controller ke ER}
-      RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PCSCommonCmd, SizeOf(R_Common_PMS_Command));
-      RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PMSCommonCmd, SizeOf(R_Common_PCS_Command));
+      RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PMSCommonCmd, SizeOf(R_Common_PMS_Command));
+      RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PCSCommonCmd, SizeOf(R_Common_PCS_Command));
 
     end;
   end;
