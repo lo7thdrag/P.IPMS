@@ -1,4 +1,4 @@
-unit UFireProv;
+unit ufrmSWPumpProvRefrig2;
 
 interface
 
@@ -8,7 +8,7 @@ uses
   Vcl.Imaging.pngimage, Vcl.ExtCtrls;
 
 type
-  TfrmFirePumpProv = class(TForm)
+  TfrmSWPumpProvRefrig2 = class(TForm)
     Panel1: TPanel;
     Image1: TImage;
     Image6: TImage;
@@ -22,7 +22,7 @@ type
   end;
 
 var
-  frmFirePumpProv: TfrmFirePumpProv;
+  frmSWPumpProvRefrig2: TfrmSWPumpProvRefrig2;
 
 implementation
 

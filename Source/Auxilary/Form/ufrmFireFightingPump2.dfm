@@ -1,8 +1,7 @@
-object frmFireFightingPump: TfrmFireFightingPump
+object frmFireFightingPump2: TfrmFireFightingPump2
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  Caption = 'frmFireFightingPump'
   ClientHeight = 1040
   ClientWidth = 768
   Color = clBtnFace
@@ -12,6 +11,8 @@ object frmFireFightingPump: TfrmFireFightingPump
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -22,8 +23,6 @@ object frmFireFightingPump: TfrmFireFightingPump
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = 8
-    ExplicitHeight = 1024
     object Image1: TImage
       Left = 0
       Top = 0
