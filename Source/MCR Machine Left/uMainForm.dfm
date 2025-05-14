@@ -1,9 +1,9 @@
 object MainForm: TMainForm
-  Left = 1920
+  Left = 0
   Top = 0
   BorderStyle = bsNone
   Caption = 'Main Form'
-  ClientHeight = 1168
+  ClientHeight = 1150
   ClientWidth = 1083
   Color = clBtnFace
   DoubleBuffered = True
@@ -14,7 +14,6 @@ object MainForm: TMainForm
   Font.Style = []
   OldCreateOrder = False
   Position = poDesigned
-  WindowState = wsMaximized
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -22,13 +21,13 @@ object MainForm: TMainForm
     Left = 0
     Top = 0
     Width = 1083
-    Height = 1168
+    Height = 1150
     Align = alClient
     BevelOuter = bvNone
     Color = 3749426
     ParentBackground = False
     TabOrder = 0
-    ExplicitHeight = 1936
+    ExplicitHeight = 1137
     object pnlRpmMeSpeed: TPanel
       Left = 848
       Top = 7

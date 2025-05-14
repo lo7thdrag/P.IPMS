@@ -4,7 +4,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
   Align = alBottom
   BorderStyle = bsNone
   Caption = 'General Panel'
-  ClientHeight = 768
+  ClientHeight = 790
   ClientWidth = 1083
   Color = 3749426
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
   TextHeight = 13
   object pnlGeneralPanel: TPanel
     Left = 29
-    Top = 0
+    Top = 15
     Width = 1024
     Height = 768
     Caption = 'pnlGeneralPanel'
