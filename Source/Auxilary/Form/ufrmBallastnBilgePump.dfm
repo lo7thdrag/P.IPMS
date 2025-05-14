@@ -78345,6 +78345,7 @@ object frmBallastnBilgePump: TfrmBallastnBilgePump
       SwitchPositions.Strings = (
         'OFF'
         'ON')
+      SwitchPosition = 1
       SwitchAngleStart = 45
       SwitchAngleEnd = 150
       WinchColor = clBlack

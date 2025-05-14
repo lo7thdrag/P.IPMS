@@ -18,6 +18,8 @@ type
     Image6: TImage;
     VrRotarySwitch1: TVrRotarySwitch;
     VrRotarySwitch2: TVrRotarySwitch;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,6 +31,44 @@ var
 
 implementation
 
+uses
+  uAuxiliarySystem;
 {$R *.dfm}
+
+procedure EnableComposited(WinControl:TWinControl);
+var
+  i:Integer;
+  NewExStyle:DWORD;
+begin
+  NewExStyle := GetWindowLong(WinControl.Handle, GWL_EXSTYLE) or WS_EX_COMPOSITED;
+  SetWindowLong(WinControl.Handle, GWL_EXSTYLE, NewExStyle);
+
+  for I := 0 to WinControl.ControlCount - 1 do
+    if WinControl.Controls[i] is TWinControl then
+      EnableComposited(TWinControl(WinControl.Controls[i]));
+end;
+
+procedure TfrmSludge.FormCreate(Sender: TObject);
+begin
+//  EnableComposited(Panel1);
+end;
+
+procedure TfrmSludge.FormShow(Sender: TObject);
+begin
+  if Screen.MonitorCount > 1 then
+  begin
+    Left   := Screen.Monitors[AuxiliarySystem.IdScreen2].Left;
+    Top    := Screen.Monitors[AuxiliarySystem.IdScreen2].Top;
+    Width  := Screen.Monitors[AuxiliarySystem.IdScreen2].Width;
+    Height := Screen.Monitors[AuxiliarySystem.IdScreen2].Height;
+  end
+  else
+  begin
+    Left   := Screen.Monitors[0].Left;
+    Top    := Screen.Monitors[0].Top;
+    Width  := Screen.Monitors[0].Width;
+    Height := Screen.Monitors[0].Height;
+  end;
+end;
 
 end.

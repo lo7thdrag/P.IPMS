@@ -29,6 +29,14 @@ type
     { Public declarations }
   end;
 
+const
+  LoadBlueOn = '.\Images\Light Status\READY.bmp';
+  LoadBlueOff = '.\Images\Light Status\READY.bmp';
+  LoadLimeOn = '.\Images\Light Status\READY.bmp';
+  LoadLimeOff = '.\Images\Light Status\READY.bmp';
+  LoadRedOn = '.\Images\Light Status\READY.bmp';
+  LoadRedOff = '.\Images\Light Status\READY.bmp';
+
 var
   frmBallastnBilgePump: TfrmBallastnBilgePump;
 

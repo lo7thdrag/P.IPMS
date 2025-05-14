@@ -2,8 +2,8 @@ object frmMainForm: TfrmMainForm
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  ClientHeight = 338
-  ClientWidth = 415
+  ClientHeight = 306
+  ClientWidth = 372
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

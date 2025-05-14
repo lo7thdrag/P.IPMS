@@ -104,7 +104,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="uMainForm.pas">
-            <Form>frmMainForm</Form>
+            <Form>frmAuxBallastnBilgePump</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uAuxiliaryNetwork.pas"/>

@@ -2,7 +2,7 @@ program Auxilary;
 
 uses
   Vcl.Forms,
-  uMainForm in 'uMainForm.pas' {frmMainForm},
+  uMainForm in 'uMainForm.pas' {frmAuxBallastnBilgePump},
   uAuxiliaryNetwork in 'uAuxiliaryNetwork.pas',
   uAuxiliarySystem in 'uAuxiliarySystem.pas',
   uDataType in '..\common\uDataType.pas',

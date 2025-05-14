@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
 
-  uListener, uFreezeFrom, uDataType;
+  uListener, uFreezeFrom, uDataType, VrControls, VrRotarySwitch,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls;
 
 type
   TfrmMainForm = class(TForm)
