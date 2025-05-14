@@ -1,6 +1,7 @@
 object frm_GeneralPanel: Tfrm_GeneralPanel
   Left = 0
   Top = 1168
+  Align = alBottom
   BorderStyle = bsNone
   Caption = 'General Panel'
   ClientHeight = 768
