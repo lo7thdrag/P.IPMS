@@ -16342,7 +16342,7 @@ object frmClientControl: TfrmClientControl
         ParentFont = False
         WordWrap = True
       end
-      object Image1: TImage
+      object imgGenPSFWD: TImage
         Left = 35
         Top = 447
         Width = 15
@@ -16376,7 +16376,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image2: TImage
+      object imgGenSBFWD: TImage
         Left = 35
         Top = 384
         Width = 15
@@ -16410,7 +16410,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image3: TImage
+      object imgGenPSAFT: TImage
         Left = 35
         Top = 320
         Width = 15
@@ -16444,7 +16444,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image4: TImage
+      object imgGenSBAFT: TImage
         Left = 35
         Top = 260
         Width = 15
@@ -16478,7 +16478,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image5: TImage
+      object imgGenEmergency: TImage
         Left = 35
         Top = 198
         Width = 15
@@ -16512,7 +16512,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image6: TImage
+      object imgShore: TImage
         Left = 35
         Top = 136
         Width = 15
@@ -16546,7 +16546,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image7: TImage
+      object imgDG1: TImage
         Left = 430
         Top = 783
         Width = 15
@@ -16580,7 +16580,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image8: TImage
+      object imgDG2: TImage
         Left = 502
         Top = 783
         Width = 15
@@ -16614,7 +16614,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image9: TImage
+      object imgDG3: TImage
         Left = 571
         Top = 783
         Width = 15
@@ -16648,7 +16648,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image10: TImage
+      object imgDG4: TImage
         Left = 645
         Top = 783
         Width = 15
@@ -16682,7 +16682,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image11: TImage
+      object imgAux1: TImage
         Left = 119
         Top = 783
         Width = 15
@@ -16716,7 +16716,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image12: TImage
+      object imgAux2: TImage
         Left = 171
         Top = 783
         Width = 15
@@ -16750,7 +16750,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image13: TImage
+      object imgAux3: TImage
         Left = 225
         Top = 783
         Width = 15
@@ -16784,7 +16784,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image14: TImage
+      object imgME1PS: TImage
         Left = 27
         Top = 695
         Width = 15
@@ -16818,7 +16818,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image15: TImage
+      object imgME2PS: TImage
         Left = 27
         Top = 623
         Width = 15
@@ -16852,7 +16852,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image16: TImage
+      object imgME2SB: TImage
         Left = 312
         Top = 623
         Width = 15
@@ -16886,7 +16886,7 @@ object frmClientControl: TfrmClientControl
           FF00FFFF00FFFF00FFFF00FFFF00FF000000}
         Transparent = True
       end
-      object Image17: TImage
+      object imgME1SB: TImage
         Left = 312
         Top = 695
         Width = 15
