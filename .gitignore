@@ -1,5 +1,6 @@
 *.dcu
 *.exe
+*.identcache
 /Source/instructor/__history
 /Source/instructor/panels/__history
 /Source/instructor/panels/__recovery
