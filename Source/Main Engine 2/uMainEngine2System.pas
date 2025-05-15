@@ -169,17 +169,42 @@ begin
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
       begin
-        FLIstener.TriggerEvents(Self,epPCSMERemoteControl,rec.ValueBool);
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+        ControlRemotePS := rec.ValueBool;
       end;
     end;
+
+    epPCSCtrlMCR :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+        ControlRemotePS := rec.ValueBool;
+      end;
+    end;
+
+    epPCSCtrlLocal :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+        ControlRemotePS := rec.ValueBool;
+      end;
+    end;
+
     epPCSMESTCInManualMode, epPCSMEPreStart:
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
     end;
 
     epPCSMEActualSpeed :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+    end;
+
+    epPCSMEStopDecrease :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
     end;
 
     epPCSMERunningHours :

@@ -141,7 +141,38 @@ end;
 
 procedure TfrmMainForm.MainEngine2SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
+  case PropsID of
+    epPCSCtrlMCR :
+    begin
+      if Value then
+        frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 1
+      else
+        frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 0;
+    end;
+    epPCSCtrlLocal:
+    begin
+      if Value then
+        frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 0
+      else
+        frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 1;
+    end;
 
+    epPCSMEStopDecrease :
+    begin
+      if Value then
+        frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 0
+      else
+        frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 1;
+    end;
+
+    epPCSMEStopIncrease :
+    begin
+      if Value then
+        frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 1
+      else
+        frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 0;
+    end;
+  end;
 
 end;
 

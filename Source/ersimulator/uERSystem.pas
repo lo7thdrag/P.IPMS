@@ -722,23 +722,27 @@ begin
     //Signaling
     epPCSMERemoteControl:
     begin
-       ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, True)
+       ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, recERPCS.ValueBool)
     end;
 
     epPCSMEActualSpeed :
     begin
-      ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine.DecreaseSpeed := recERPCS.ValueBool;
+      main_engine.IncreaseSpeed := recERPCS.ValueBool;
     end;
 
     epPCSMESTCInManualMode :
     begin
-      ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine.STCInManualMode := recERPCS.ValueBool;
     end;
 
     epPCSMEPreStart :
     begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(recERPCS.PortStaboardID);
-      ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine.PreStartInhibition := recERPCS.ValueBool;
     end;
 
   end;
