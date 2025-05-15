@@ -38,16 +38,17 @@ object MainForm: TMainForm
       Color = clBtnText
       ParentBackground = False
       TabOrder = 0
-      object VrAngularMeter1: TVrAngularMeter
+      object vraMeSpeed: TVrAngularMeter
         Left = 10
         Top = 10
         Width = 200
         Height = 200
         MaxValue = 1250.000000000000000000
         Decimals = 0
+        Angle = 42
         Spacing = 10
         TicksMin = -10
-        TicksMax = -20
+        TicksMax = -15
         TicksEnlarge = 4
         TicksColor = clBlack
         ColorZone1 = clBlack
@@ -57,7 +58,7 @@ object MainForm: TMainForm
         Percent2 = 50
         Labels = 0
         LabelsOffset = -35
-        NeedleLength = 70
+        NeedleLength = 60
         NeedleBaseWidth = 10
         NeedleColor = clBlack
         CenterDotWidth = 4
@@ -190,17 +191,19 @@ object MainForm: TMainForm
       Color = clBtnText
       ParentBackground = False
       TabOrder = 1
-      object VrAngularMeter2: TVrAngularMeter
+      object vraShaftSpeed: TVrAngularMeter
         Left = 10
         Top = 10
         Width = 200
         Height = 200
         MaxValue = 280.000000000000000000
         Decimals = 0
+        Angle = 42
         Spacing = 10
+        Ticks = 140
         TicksMin = -10
-        TicksMax = -20
-        TicksEnlarge = 4
+        TicksMax = -15
+        TicksEnlarge = 5
         TicksColor = clBlack
         ColorZone1 = clBlack
         ColorZone2 = clBlack
@@ -209,7 +212,7 @@ object MainForm: TMainForm
         Percent2 = 50
         Labels = 0
         LabelsOffset = -35
-        NeedleLength = 70
+        NeedleLength = 60
         NeedleBaseWidth = 10
         NeedleColor = clBlack
         CenterDotWidth = 4
@@ -228,8 +231,8 @@ object MainForm: TMainForm
         Font.Style = [fsBold]
       end
       object Label9: TLabel
-        Left = 71
-        Top = 145
+        Left = 64
+        Top = 151
         Width = 8
         Height = 16
         Caption = '0'
@@ -241,8 +244,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label10: TLabel
-        Left = 47
-        Top = 102
+        Left = 40
+        Top = 100
         Width = 16
         Height = 16
         Caption = '50'
@@ -254,8 +257,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label8: TLabel
-        Left = 63
-        Top = 61
+        Left = 60
+        Top = 52
         Width = 24
         Height = 16
         Caption = '100'
@@ -267,8 +270,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label11: TLabel
-        Left = 107
-        Top = 48
+        Left = 113
+        Top = 38
         Width = 24
         Height = 16
         Caption = '150'
@@ -280,8 +283,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label12: TLabel
-        Left = 145
-        Top = 75
+        Left = 153
+        Top = 76
         Width = 24
         Height = 16
         Caption = '200'
@@ -293,8 +296,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label13: TLabel
-        Left = 149
-        Top = 120
+        Left = 152
+        Top = 125
         Width = 24
         Height = 16
         Caption = '250'
@@ -329,7 +332,7 @@ object MainForm: TMainForm
       Color = clBtnText
       ParentBackground = False
       TabOrder = 2
-      object VrAngularMeter3: TVrAngularMeter
+      object vraCPP: TVrAngularMeter
         Left = 10
         Top = 10
         Width = 200
@@ -337,10 +340,11 @@ object MainForm: TMainForm
         MaxValue = 100.000000000000000000
         Position = 50.000000000000000000
         Decimals = 0
+        Angle = 42
         Spacing = 10
         Ticks = 96
         TicksMin = -10
-        TicksMax = -20
+        TicksMax = -15
         TicksEnlarge = 4
         TicksColor = clBlack
         ColorZone1 = clBlack
@@ -350,7 +354,7 @@ object MainForm: TMainForm
         Percent2 = 50
         Labels = 0
         LabelsOffset = -35
-        NeedleLength = 65
+        NeedleLength = 60
         NeedleBaseWidth = 10
         NeedleColor = clBlack
         CenterDotWidth = 4
@@ -114025,5 +114029,26 @@ object MainForm: TMainForm
     OnTimer = tmrTelegraphTimer
     Left = 57
     Top = 584
+  end
+  object tmrMeSpeed: TTimer
+    Enabled = False
+    Interval = 50
+    OnTimer = tmrMeSpeedTimer
+    Left = 857
+    Top = 16
+  end
+  object tmrShaftSpeed: TTimer
+    Enabled = False
+    Interval = 50
+    OnTimer = tmrShaftSpeedTimer
+    Left = 849
+    Top = 224
+  end
+  object tmrCPP: TTimer
+    Enabled = False
+    Interval = 50
+    OnTimer = tmrCPPTimer
+    Left = 857
+    Top = 464
   end
 end

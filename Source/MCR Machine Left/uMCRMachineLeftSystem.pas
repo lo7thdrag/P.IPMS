@@ -265,6 +265,33 @@ begin
       else if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
         FLIstener.TriggerEvents(Self,epPCSCPPPumpStart3SB,rec.ValueBool);
     end;
+
+    epPCSMESetPointSpeed:
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSMEActualSpeedPS,rec.ValueDouble)
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSMEActualSpeedSB,rec.ValueDouble);
+    end;
+
+    epPCSGBSetpShaftSpeed:
+    begin
+      if rec.PortStaboardID = C_PCS_GB_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSGBShaftSpeedPS,rec.ValueDouble)
+      else
+      if rec.PortStaboardID = C_PCS_GB_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSGBShaftSpeedSB,rec.ValueDouble);
+    end;
+
+    epPCSCPPSetPointPitch:
+    begin
+      if rec.PortStaboardID = C_PCS_CPP_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSCPPActualPitchPS,Round(rec.ValueDouble))
+      else
+      if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSCPPActualPitchSB,Round(rec.ValueDouble));
+    end;
   end;
 
   case rec.CommandID of
