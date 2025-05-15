@@ -14,6 +14,7 @@ object MainForm: TMainForm
   OldCreateOrder = False
   WindowState = wsMaximized
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -27,9 +28,9 @@ object MainForm: TMainForm
     TabOrder = 0
     object PanelSpedometer: TPanel
       Left = 22
-      Top = 685
-      Width = 220
-      Height = 220
+      Top = 832
+      Width = 270
+      Height = 270
       BevelOuter = bvNone
       Caption = 'Panel2'
       Color = clBtnText
@@ -38,8 +39,8 @@ object MainForm: TMainForm
       object Image3: TImage
         Left = 0
         Top = 0
-        Width = 220
-        Height = 220
+        Width = 270
+        Height = 270
         Align = alClient
         ParentShowHint = False
         Picture.Data = {
@@ -6115,12 +6116,14 @@ object MainForm: TMainForm
         Transparent = True
         ExplicitLeft = 7
         ExplicitTop = 1
+        ExplicitWidth = 220
+        ExplicitHeight = 220
       end
       object vraSbRudderServo: TVrAngularMeter
-        Left = 0
-        Top = 1
+        Left = 25
+        Top = 10
         Width = 220
-        Height = 220
+        Height = 250
         MaxValue = 100.000000000000000000
         Position = 50.000000000000000000
         Decimals = 0
@@ -6160,19 +6163,19 @@ object MainForm: TMainForm
     end
     object pnlCPPpersen: TPanel
       Left = 22
-      Top = 460
-      Width = 220
-      Height = 220
+      Top = 558
+      Width = 270
+      Height = 270
       BevelOuter = bvNone
       Caption = 'Panel2'
       Color = clBtnText
       ParentBackground = False
       TabOrder = 1
-      object VrAngularMeter3: TVrAngularMeter
+      object vraCPP: TVrAngularMeter
         Left = 10
         Top = 10
-        Width = 200
-        Height = 200
+        Width = 250
+        Height = 250
         MaxValue = 100.000000000000000000
         Position = 50.000000000000000000
         Decimals = 0
@@ -6273,7 +6276,7 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label21: TLabel
-        Left = 102
+        Left = 127
         Top = 165
         Width = 16
         Height = 19
@@ -6289,18 +6292,18 @@ object MainForm: TMainForm
     object pnlRPMMESPEED: TPanel
       Left = 22
       Top = 10
-      Width = 220
-      Height = 220
+      Width = 270
+      Height = 270
       BevelOuter = bvNone
       Caption = 'pnlRPMMESPEED'
       Color = clBtnText
       ParentBackground = False
       TabOrder = 2
-      object VrAngularMeter1: TVrAngularMeter
+      object vraMeSpeed: TVrAngularMeter
         Left = 10
         Top = 10
-        Width = 200
-        Height = 200
+        Width = 250
+        Height = 250
         MaxValue = 1250.000000000000000000
         Decimals = 0
         Spacing = 10
@@ -6425,7 +6428,7 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label20: TLabel
-        Left = 91
+        Left = 115
         Top = 187
         Width = 40
         Height = 10
@@ -6440,19 +6443,19 @@ object MainForm: TMainForm
     end
     object pnlRPMSHAFTSPEED: TPanel
       Left = 22
-      Top = 235
-      Width = 220
-      Height = 220
+      Top = 284
+      Width = 270
+      Height = 270
       BevelOuter = bvNone
       Caption = 'Panel2'
       Color = clBtnText
       ParentBackground = False
       TabOrder = 3
-      object VrAngularMeter2: TVrAngularMeter
+      object vraShaftSpeed: TVrAngularMeter
         Left = 10
         Top = 10
-        Width = 200
-        Height = 200
+        Width = 250
+        Height = 250
         MaxValue = 280.000000000000000000
         Decimals = 0
         Spacing = 10
@@ -6564,7 +6567,7 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label19: TLabel
-        Left = 83
+        Left = 108
         Top = 187
         Width = 54
         Height = 10
@@ -6578,17 +6581,17 @@ object MainForm: TMainForm
       end
     end
     object pnlAlarmIndicator: TPanel
-      Left = 255
+      Left = 312
       Top = 10
-      Width = 450
-      Height = 515
+      Width = 738
+      Height = 695
       BevelOuter = bvNone
       TabOrder = 4
       object Image2: TImage
         Left = 0
         Top = 0
-        Width = 450
-        Height = 515
+        Width = 738
+        Height = 695
         Align = alClient
         Picture.Data = {
           07544269746D61700EA00A00424D0EA00A00000000003600000028000000C201
@@ -28355,12 +28358,14 @@ object MainForm: TMainForm
         Stretch = True
         ExplicitLeft = -32
         ExplicitTop = 51
+        ExplicitWidth = 450
+        ExplicitHeight = 515
       end
       object imgOP1: TImage
-        Left = 55
-        Top = 57
-        Width = 70
-        Height = 46
+        Left = 93
+        Top = 77
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -28669,13 +28674,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0000}
+        Stretch = True
         Visible = False
       end
       object ImgOP2: TImage
-        Left = 122
-        Top = 57
-        Width = 70
-        Height = 46
+        Left = 203
+        Top = 77
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -28984,13 +28990,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0EFFFF}
+        Stretch = True
         Visible = False
       end
       object ImgCFP2: TImage
-        Left = 322
-        Top = 57
-        Width = 70
-        Height = 46
+        Left = 534
+        Top = 77
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -29299,13 +29306,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0EFFFF}
+        Stretch = True
         Visible = False
       end
       object ImgHLP1: TImage
-        Left = 188
-        Top = 57
-        Width = 70
-        Height = 46
+        Left = 313
+        Top = 77
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -29614,13 +29622,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0000}
+        Stretch = True
         Visible = False
       end
       object ImgCFP1: TImage
-        Left = 255
-        Top = 57
-        Width = 70
-        Height = 46
+        Left = 424
+        Top = 77
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -29929,13 +29938,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0EFFFF}
+        Stretch = True
         Visible = False
       end
       object ImgPFP1: TImage
-        Left = 55
-        Top = 104
-        Width = 70
-        Height = 46
+        Left = 93
+        Top = 140
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -30244,13 +30254,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0EFFFF}
+        Stretch = True
         Visible = False
       end
       object ImgPFP2: TImage
-        Left = 122
-        Top = 104
-        Width = 70
-        Height = 46
+        Left = 203
+        Top = 140
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -30559,13 +30570,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0000}
+        Stretch = True
         Visible = False
       end
       object ImgHLP2: TImage
-        Left = 188
-        Top = 104
-        Width = 70
-        Height = 46
+        Left = 313
+        Top = 140
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -30874,13 +30886,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0000}
+        Stretch = True
         Visible = False
       end
       object ImgPowerFP1: TImage
-        Left = 255
-        Top = 104
-        Width = 70
-        Height = 46
+        Left = 424
+        Top = 140
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -31189,13 +31202,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0000}
+        Stretch = True
         Visible = False
       end
       object ImgPowerFP2: TImage
-        Left = 322
-        Top = 104
-        Width = 70
-        Height = 46
+        Left = 534
+        Top = 140
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -31504,13 +31518,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0000}
+        Stretch = True
         Visible = False
       end
       object ImgPFS: TImage
-        Left = 55
-        Top = 150
-        Width = 70
-        Height = 46
+        Left = 93
+        Top = 203
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -31819,13 +31834,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0EFFFF}
+        Stretch = True
         Visible = False
       end
       object ImgPFC1: TImage
-        Left = 122
-        Top = 150
-        Width = 70
-        Height = 46
+        Left = 203
+        Top = 203
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -32134,13 +32150,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0EFFFF}
+        Stretch = True
         Visible = False
       end
       object ImgPFC2: TImage
-        Left = 188
-        Top = 150
-        Width = 70
-        Height = 46
+        Left = 313
+        Top = 203
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -32449,13 +32466,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0000}
+        Stretch = True
         Visible = False
       end
       object ImgLOLP1: TImage
-        Left = 55
-        Top = 197
-        Width = 70
-        Height = 46
+        Left = 93
+        Top = 265
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -32764,13 +32782,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0000}
+        Stretch = True
         Visible = False
       end
       object ImgLOLP2: TImage
-        Left = 55
-        Top = 244
-        Width = 70
-        Height = 46
+        Left = 93
+        Top = 328
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -33079,14 +33098,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0EFFFF}
-        Proportional = True
+        Stretch = True
         Visible = False
       end
       object ImgST: TImage
-        Left = 55
-        Top = 409
-        Width = 70
-        Height = 46
+        Left = 92
+        Top = 552
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -33395,13 +33414,14 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0EFFFF}
+        Stretch = True
         Visible = False
       end
       object ImgAudible: TImage
-        Left = 255
-        Top = 409
-        Width = 70
-        Height = 46
+        Left = 425
+        Top = 551
+        Width = 110
+        Height = 64
         Picture.Data = {
           07544269746D61704E260000424D4E2600000000000036000000280000004600
           00002E000000010018000000000018260000120B0000120B0000000000000000
@@ -33710,30 +33730,33 @@ object MainForm: TMainForm
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C
           0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0D0D0C0D0D0C0D0D
           0C0D0D0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0E0D0E0EFFFF}
+        Stretch = True
         Visible = False
       end
       object imgSTShadow: TImage
-        Left = 55
-        Top = 409
-        Width = 70
-        Height = 46
+        Left = 92
+        Top = 552
+        Width = 110
+        Height = 64
+        Stretch = True
         OnMouseDown = imgSTShadowMouseDown
         OnMouseUp = imgSTShadowMouseUp
       end
       object imgAudibleShadow: TImage
-        Left = 255
-        Top = 409
-        Width = 70
-        Height = 46
+        Left = 425
+        Top = 551
+        Width = 110
+        Height = 64
+        Stretch = True
         OnMouseDown = imgAudibleShadowMouseDown
         OnMouseUp = imgAudibleShadowMouseUp
       end
     end
     object pnlTelegraph: TPanel
-      Left = 345
-      Top = 544
-      Width = 360
-      Height = 360
+      Left = 312
+      Top = 723
+      Width = 379
+      Height = 379
       BevelOuter = bvNone
       DoubleBuffered = True
       ParentDoubleBuffered = False
@@ -33742,8 +33765,8 @@ object MainForm: TMainForm
         Tag = 1002
         Left = 0
         Top = 0
-        Width = 360
-        Height = 360
+        Width = 379
+        Height = 379
         Align = alClient
         Picture.Data = {
           07544269746D61701EF40F00424D1EF40F000000000036000000280000004E02
@@ -66422,8 +66445,10 @@ object MainForm: TMainForm
           72727575757979790000}
         Proportional = True
         Transparent = True
-        ExplicitLeft = 13
-        ExplicitTop = 64
+        ExplicitLeft = 8
+        ExplicitTop = 128
+        ExplicitWidth = 360
+        ExplicitHeight = 360
       end
       object imgsb1: TImage
         Tag = 1
@@ -73658,11 +73683,47 @@ object MainForm: TMainForm
         Color = clWhite
       end
     end
+    object pnlSparator: TPanel
+      Left = 0
+      Top = 1140
+      Width = 1083
+      Height = 796
+      Align = alBottom
+      BevelOuter = bvNone
+      Caption = 'pnlSparator'
+      Color = clBlack
+      ParentBackground = False
+      TabOrder = 6
+      ExplicitLeft = 472
+      ExplicitTop = 1712
+      ExplicitWidth = 185
+    end
   end
   object tmrTelegraph: TTimer
     Enabled = False
     OnTimer = tmrTelegraphTimer
     Left = 625
     Top = 552
+  end
+  object tmrMeSpeed: TTimer
+    Enabled = False
+    Interval = 50
+    OnTimer = tmrMeSpeedTimer
+    Left = 33
+    Top = 24
+  end
+  object tmrShaftSpeed: TTimer
+    Enabled = False
+    Interval = 50
+    OnTimer = tmrShaftSpeedTimer
+    Left = 25
+    Top = 232
+  end
+  object tmrCPP: TTimer
+    Enabled = False
+    Interval = 50
+    OnTimer = tmrCPPTimer
+    Left = 33
+    Top = 472
   end
 end

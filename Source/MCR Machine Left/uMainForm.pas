@@ -9,9 +9,6 @@ uses
   uListener, uFreezeFrom, uDataType, RzBmpBtn, VrControls, VrRotarySwitch,
   Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls;
 
-//const
-//  LAMP_COUNT = 15;    //total Lamp
-
 type
   TMainForm = class(TForm)
     Panel1: TPanel;
@@ -223,8 +220,8 @@ end;
 
 procedure TMainForm.FormShow(Sender: TObject);
 begin
-  Left   := Screen.Monitors[0].Left;
-  Top    := Screen.Monitors[0].Top;
+//  Left   := Screen.Monitors[0].Left;
+//  Top    := Screen.Monitors[0].Top;
 
 end;
 

@@ -14,8 +14,6 @@ type
     FLIstener    : TListeners;
     FFreezed     : boolean;
 
-//    FIdFormDieselGenerator : String;
-
     procedure NetworkEventAssignment;
 
     {Receive Diesel Generator state from Engine}
@@ -40,8 +38,6 @@ type
     property Listener :TListeners read FListener;
     property Freezed : boolean read FFreezed write SetFreezed;
 
-//    property IdFormDieselGenerator: String read FIdFormDieselGenerator write FIdFormDieselGenerator;
-
   end;
 
 var
@@ -51,6 +47,7 @@ implementation
 
 uses
   uMainForm;
+
 
 { TMCRMachineLeftSystem }
 
@@ -87,8 +84,6 @@ begin
   tempstring := TStringList.Create;
 
   inifile.ReadSection('Form MCR Machine Left', tempstring);
-
-//  FIdFormDieselGenerator := inifile.ReadString('Form DieselGenerator', tempstring[0],'Default');
 
   inifile.Free;
   tempstring.Free;
@@ -129,12 +124,8 @@ begin
 
     C_ORD_CLOSE_APP :
     begin
-//      if servoID = 1 then
-//        PCSSystem.sendServoLampStatus(C_ORD_SERVO_PS, False)
-//      else if servoID = 3  then
-//        PCSSystem.sendServoLampStatus(C_ORD_SERVO_SB, False);
-    end;
 
+    end;
   end;
 
   case E_PropsID(rec^.aProps) of
@@ -269,28 +260,19 @@ begin
     epPCSMESetPointSpeed:
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
-        FLIstener.TriggerEvents(Self,epPCSMEActualSpeedPS,rec.ValueDouble)
-      else
-      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-        FLIstener.TriggerEvents(Self,epPCSMEActualSpeedSB,rec.ValueDouble);
+        FLIstener.TriggerEvents(Self,epPCSMEActualSpeedPS,rec.ValueDouble);
     end;
 
     epPCSGBSetpShaftSpeed:
     begin
       if rec.PortStaboardID = C_PCS_GB_PORTS then
-        FLIstener.TriggerEvents(Self,epPCSGBShaftSpeedPS,rec.ValueDouble)
-      else
-      if rec.PortStaboardID = C_PCS_GB_STARBOARD then
-        FLIstener.TriggerEvents(Self,epPCSGBShaftSpeedSB,rec.ValueDouble);
+        FLIstener.TriggerEvents(Self,epPCSGBShaftSpeedPS,rec.ValueDouble);
     end;
 
     epPCSCPPSetPointPitch:
     begin
       if rec.PortStaboardID = C_PCS_CPP_PORTS then
-        FLIstener.TriggerEvents(Self,epPCSCPPActualPitchPS,Round(rec.ValueDouble))
-      else
-      if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
-        FLIstener.TriggerEvents(Self,epPCSCPPActualPitchSB,Round(rec.ValueDouble));
+        FLIstener.TriggerEvents(Self,epPCSCPPActualPitchPS,Round(rec.ValueDouble));
     end;
   end;
 

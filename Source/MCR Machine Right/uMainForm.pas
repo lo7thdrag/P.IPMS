@@ -16,7 +16,7 @@ type
     Image3: TImage;
     vraSbRudderServo: TVrAngularMeter;
     pnlCPPpersen: TPanel;
-    VrAngularMeter3: TVrAngularMeter;
+    vraCPP: TVrAngularMeter;
     Label15: TLabel;
     Label14: TLabel;
     Label16: TLabel;
@@ -24,7 +24,7 @@ type
     Label18: TLabel;
     Label21: TLabel;
     pnlRPMMESPEED: TPanel;
-    VrAngularMeter1: TVrAngularMeter;
+    vraMeSpeed: TVrAngularMeter;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -34,7 +34,7 @@ type
     Label7: TLabel;
     Label20: TLabel;
     pnlRPMSHAFTSPEED: TPanel;
-    VrAngularMeter2: TVrAngularMeter;
+    vraShaftSpeed: TVrAngularMeter;
     Label9: TLabel;
     Label10: TLabel;
     Label8: TLabel;
@@ -78,6 +78,10 @@ type
     vrSbTelegrap: TVrRotarySwitch;
     imgSTShadow: TImage;
     imgAudibleShadow: TImage;
+    tmrMeSpeed: TTimer;
+    tmrShaftSpeed: TTimer;
+    tmrCPP: TTimer;
+    pnlSparator: TPanel;
     procedure tmrTelegraphTimer(Sender: TObject);
     procedure vrSbTelegrapChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -89,6 +93,10 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure imgAudibleShadowMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure tmrMeSpeedTimer(Sender: TObject);
+    procedure tmrShaftSpeedTimer(Sender: TObject);
+    procedure tmrCPPTimer(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
   private
     FIsBlinkState : Boolean;
@@ -100,6 +108,10 @@ type
     procedure MCRMachineRightSystemEvent(Sender : TObject; PropsID : E_PropsID; Value : Double); overload;
 
   public
+    OrderMeSpeed : Double;
+    OrderShaftSpeed : Double;
+    OrderCPP : Double;
+
     IdReceive : Integer;
     TelegrapStatus : E_TelegrapState;
 
@@ -123,7 +135,6 @@ uses
 
 {$R *.dfm}
 
-{ TfrmMachineRight }
 procedure EnableComposited(WinControl:TWinControl);
 var
   i:Integer;
@@ -158,13 +169,19 @@ begin
   SetAlarmIndicator;
   {$ENDREGION}
 
-   {$REGION ' Set Telegrap Indicator '}
+  {$REGION ' Set Telegrap Indicator '}
   TelegrapStatus := tsSend;
   FIsBlinkState := False;
   {$ENDREGION}
 
   EnableComposited(pnlAlarmIndicator);
   EnableComposited(pnlTelegraph);
+end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+  Left   := Screen.Monitors[0].Left;
+  Top    := Screen.Monitors[0].Top;
 end;
 
 procedure TMainForm.GetIdBlinkTelegrapLamp(value: Integer);
@@ -189,20 +206,17 @@ begin
   end;
 end;
 
-procedure TMainForm.imgAudibleShadowMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TMainForm.imgAudibleShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   imgAudible.Visible := True;
 end;
 
-procedure TMainForm.imgAudibleShadowMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TMainForm.imgAudibleShadowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   imgAudible.Visible := False;
 end;
 
-procedure TMainForm.imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+procedure TMainForm.imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   ImgST.Visible         := True;
   imgOP1.Visible        := True;
@@ -226,15 +240,13 @@ begin
   ImgPowerFP2.Visible   := True;
 end;
 
-procedure TMainForm.imgSTShadowMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+procedure TMainForm.imgSTShadowMouseUp(Sender: TObject; Button: TMouseButton;   Shift: TShiftState; X, Y: Integer);
 begin
   ImgST.Visible := False;
   SetAlarmIndicator;
 end;
 
-procedure TMainForm.MCRMachineRightSystemEvent(Sender: TObject;
-  PropsID: E_PropsID; Value: Integer);
+procedure TMainForm.MCRMachineRightSystemEvent(Sender: TObject;   PropsID: E_PropsID; Value: Integer);
 var
     koefRate, degRate : Double;
     outputRudderLeft, outputRudderRight : Integer;
@@ -269,53 +281,30 @@ begin
   end;
 end;
 
-procedure TMainForm.MCRMachineRightSystemEvent(Sender: TObject;
-  PropsID: E_PropsID; Value: Boolean);
+procedure TMainForm.MCRMachineRightSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
 
 end;
 
-procedure TMainForm.MCRMachineRightSystemEvent(Sender: TObject;
-  PropsID: E_PropsID; Value: Double);
+procedure TMainForm.MCRMachineRightSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
 begin
   case PropsID of
-    epPCSMEActualSpeedPS:
+    epPCSMEActualSpeedSB:
     begin
-      ShowMessage('ME');
-//      TempSpeedMELeft := Value;
-//      edtRPMME.Text := FloatToStr(TempSpeedMELeft);
+      OrderMESpeed := Value;
+      tmrMeSpeed.Enabled := True;
     end;
 
-    epPCSGBShaftSpeedPS:
+    epPCSGBShaftSpeedSB:
     begin
-      ShowMessage('Shaftspeed');
-//      TempSpeedSHAFTLeft := Value;
-//      edtRPMSHAFT.Text := FloatToStr(TempSpeedSHAFTLeft);
+      OrderShaftSpeed := Value;
+      tmrShaftSpeed.Enabled := True;
     end;
 
-    epPCSCPPActualPitchPS:
+    epPCSCPPActualPitchSB:
     begin
-      ShowMessage('Actual Speed');
-//      TempSpeedCPPLeft := Value;
-//      edt7.Text := FloatToStr(TempSpeedCPPLeft);
-    end;
-
-    epPCSMEActualSpeedSB :
-    begin
-//      TempSpeedMERight := Value;
-//      edtRPMME.Text := FloatToStr(TempSpeedMERight);
-    end;
-
-    epPCSGBShaftSpeedSB :
-    begin
-//      TempSpeedSHAFTRight := Value;
-//      edtRPMSHAFT.Text := FloatToStr(TempSpeedSHAFTRight);
-    end;
-
-    epPCSCPPActualPitchSB :
-    begin
-//      TempSpeedCPPRight := Value;
-//      edt6.Text := FloatToStr(TempSpeedCPPRight);
+      OrderCPP := Value;
+      tmrCPP.Enabled := True;
     end;
   end;
 end;
@@ -363,6 +352,54 @@ begin
       GetIdBlinkTelegrapLamp(IdReceive);
       tmrTelegraph.Enabled := True;
     end;
+  end;
+end;
+
+procedure TMainForm.tmrCPPTimer(Sender: TObject);
+begin
+  if vraCPP.Position > OrderCPP then
+  begin
+    vraCPP.Position := vraCPP.Position - 1;
+  end
+  else if vraCPP.Position < OrderCPP then
+  begin
+    vraCPP.Position := vraCPP.Position + 1;
+  end
+  else
+  begin
+    tmrCPP.Enabled := False;
+  end;
+end;
+
+procedure TMainForm.tmrMeSpeedTimer(Sender: TObject);
+begin
+  if vraMeSpeed.Position > OrderMeSpeed then
+  begin
+    vraMeSpeed.Position := vraMeSpeed.Position - 1;
+  end
+  else if vraMeSpeed.Position < OrderMeSpeed then
+  begin
+    vraMeSpeed.Position := vraMeSpeed.Position + 1;
+  end
+  else
+  begin
+    tmrMeSpeed.Enabled := False;
+  end;
+end;
+
+procedure TMainForm.tmrShaftSpeedTimer(Sender: TObject);
+begin
+  if vraShaftSpeed.Position > OrderShaftSpeed then
+  begin
+    vraShaftSpeed.Position := vraShaftSpeed.Position - 1;
+  end
+  else if vraShaftSpeed.Position < OrderShaftSpeed then
+  begin
+    vraShaftSpeed.Position := vraShaftSpeed.Position + 1;
+  end
+  else
+  begin
+    tmrShaftSpeed.Enabled := False;
   end;
 end;
 
