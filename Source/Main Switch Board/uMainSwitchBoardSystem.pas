@@ -32,6 +32,7 @@ type
     FFormFreezed : array[0..0] of TfrmFreeze;
 
     procedure EngineRun(aValue : Boolean);
+    procedure EngineStop(aValue : Boolean);
     procedure GeneratorPreference(aValue : Boolean);
     procedure CBClosed(aValue : Boolean);
     procedure GeneratorMode(aValue : Integer);
@@ -125,6 +126,17 @@ var
 begin
   recCmd.GenSwitchID := IdGenerator;
   recCmd.CommandPropsID := epPMSGeneratorEngineRun;
+  recCmd.ValueBool := aValue;
+
+  Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
+end;
+
+procedure TMainSwitchBoardSystem.EngineStop(aValue: Boolean);
+var
+  recCmd : R_Common_PMS_Command;
+begin
+  recCmd.GenSwitchID := IdGenerator;
+  recCmd.CommandPropsID := epPMSGeneratorStop;
   recCmd.ValueBool := aValue;
 
   Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);

@@ -238,7 +238,7 @@ end;
 
 procedure TfrmGeneratorPanel.ImgStopClick(Sender: TObject);
 begin
-  MainSwitchBoardSystem.EngineRun(False);
+  MainSwitchBoardSystem.EngineStop(True);
 end;
 
 end.

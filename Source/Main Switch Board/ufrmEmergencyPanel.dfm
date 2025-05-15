@@ -91085,24 +91085,31 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Top = 363
         Width = 52
         Height = 52
+        Cursor = crHandPoint
+        OnClick = ImgAUTOClick
       end
       object ImgSA: TImage
         Left = 101
         Top = 417
         Width = 52
         Height = 52
+        Cursor = crHandPoint
+        OnClick = ImgSAClick
       end
       object ImgMAN: TImage
         Left = 101
         Top = 472
         Width = 52
         Height = 52
+        Cursor = crHandPoint
+        OnClick = ImgMANClick
       end
       object ImgStart: TImage
         Left = 201
         Top = 472
         Width = 52
         Height = 52
+        Cursor = crHandPoint
         OnClick = ImgStartClick
       end
       object ImgStop: TImage
@@ -91110,6 +91117,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Top = 472
         Width = 52
         Height = 52
+        Cursor = crHandPoint
         OnClick = ImgStopClick
       end
       object ImgOI: TImage
@@ -91117,6 +91125,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Top = 472
         Width = 52
         Height = 52
+        Cursor = crHandPoint
         OnClick = ImgOIClick
       end
       object ImgPref: TImage
@@ -91124,6 +91133,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Top = 472
         Width = 52
         Height = 52
+        Cursor = crHandPoint
         OnClick = ImgPrefClick
       end
       object ImgIndicatorBS: TImage

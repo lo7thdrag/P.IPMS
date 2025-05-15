@@ -102,6 +102,9 @@ type
     procedure ImgLTMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormCreate(Sender: TObject);
+    procedure ImgAUTOClick(Sender: TObject);
+    procedure ImgSAClick(Sender: TObject);
+    procedure ImgMANClick(Sender: TObject);
   private
     { Private declarations }
     Led  : array of TImage;
@@ -149,6 +152,21 @@ begin
   SetLength(LedStatus, Length(Led));
 end;
 
+procedure TfrmEmergencyPanel.ImgMANClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.GeneratorMode(1);
+end;
+
+procedure TfrmEmergencyPanel.ImgSAClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.GeneratorMode(2);
+end;
+
+procedure TfrmEmergencyPanel.ImgAUTOClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.GeneratorMode(3);
+end;
+
 procedure TfrmEmergencyPanel.ImgLTMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
@@ -178,7 +196,7 @@ end;
 
 procedure TfrmEmergencyPanel.ImgStopClick(Sender: TObject);
 begin
-  MainSwitchBoardSystem.EngineRun(False);
+  MainSwitchBoardSystem.EngineStop(True);
 end;
 
 end.
