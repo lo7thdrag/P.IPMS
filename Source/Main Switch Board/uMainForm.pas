@@ -301,6 +301,27 @@ begin
 
       end;
     end;
+    epPMSGeneratorCKClosed :
+    begin
+      if MainSwitchBoardSystem.IdFormGensys = 'GENSYS' then
+      begin
+        with frmGeneratorPanel do
+        begin
+
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
+      begin
+        with frmEmergencyPanel do
+        begin
+          ImgIndicatorCKC.Visible := Value;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
+      begin
+
+      end;
+    end;
     epPMSGeneratorPreference :
     begin
       if MainSwitchBoardSystem.IdFormGensys = 'GENSYS' then
