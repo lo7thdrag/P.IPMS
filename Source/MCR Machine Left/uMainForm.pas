@@ -156,6 +156,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure imgAudibleShadowMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure FormShow(Sender: TObject);
 
   private
     FIsBlinkState : Boolean;
@@ -208,6 +209,13 @@ begin
   for I := 0 to WinControl.ControlCount - 1 do
     if WinControl.Controls[i] is TWinControl then
       EnableComposited(TWinControl(WinControl.Controls[i]));
+end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+//  Left   := Screen.Monitors[1].Left;
+//  Top    := Screen.Monitors[1].Top;
+
 end;
 
 procedure TMainForm.GetIdBlinkTelegrapLamp(value: Integer);
