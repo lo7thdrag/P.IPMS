@@ -35,6 +35,8 @@ type
   public
     FFormFreezed : array[0..2] of TfrmFreeze;
 
+    ControlRemotePS, ControlRemoteSB: Boolean;
+
     constructor Create;
     destructor Destroy;override;
 
@@ -46,7 +48,6 @@ type
     procedure vrtryswtchSTC_PS(aPortStarboard: string; aValue: Boolean);
     procedure vrtryswtchPreStartInhibitionPS(aPortStarboard: string; aValue: Boolean);
 
-    procedure sendPumpStatus(sideId : byte; pumpId, stadeId: Integer; status: Boolean);
     procedure RunningStart(aPortStarboard: String);
 
     property Network : TMainEngine2Network read FMainEngine2Network;
@@ -164,7 +165,19 @@ begin
   rec := @apRec^;
 
   case rec.CommandPropsID of
-    epPCSMERunning, epPCSMERemoteControl, epPCSMEActualSpeed, epPCSMESTCInManualMode, epPCSMEPreStart:
+    epPCSMERemoteControl:
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMERemoteControl,rec.ValueBool);
+      end;
+    end;
+    epPCSMESTCInManualMode, epPCSMEPreStart:
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
+    end;
+
+    epPCSMEActualSpeed :
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
@@ -211,17 +224,6 @@ begin
   end;
 end;
 
-procedure TMainEngine2System.sendPumpStatus(sideId: Byte; pumpId: Integer; stadeId: Integer; status: Boolean);
-var
-  recCmd : R_Common_PumpStatus_Command;
-begin
-  recCmd.SideId    := sideId;
-  recCmd.PumpId    := pumpId;
-  recCmd.StadeId   := stadeId;
-  recCmd.ValueBool := status;
-  Network.MainEngine2ControllerSocket.SendData(C_PUMP_COMMAND, @recCmd);
-end;
-
 procedure TMainEngine2System.RunningStart(aPortStarboard: String);
 var
   recCmd : R_Common_PCS_Command;
@@ -235,8 +237,7 @@ begin
   Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
-procedure TMainEngine2System.vrtryswtchPreStartInhibitionPS(
-  aPortStarboard: string; aValue: Boolean);
+procedure TMainEngine2System.vrtryswtchPreStartInhibitionPS(aPortStarboard: string; aValue: Boolean);
 var
   recCmd : R_Common_PCS_Command;
 begin
@@ -259,8 +260,7 @@ begin
   Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
-procedure TMainEngine2System.vrtryswtchSpeedPS(aPortStarboard: string;
-  aValue: Boolean);
+procedure TMainEngine2System.vrtryswtchSpeedPS(aPortStarboard: string; aValue: Boolean);
 var
   recCmd : R_Common_PCS_Command;
 begin
@@ -271,8 +271,7 @@ begin
   Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
-procedure TMainEngine2System.vrtryswtchSTC_PS(aPortStarboard: string;
-  aValue: Boolean);
+procedure TMainEngine2System.vrtryswtchSTC_PS(aPortStarboard: string; aValue: Boolean);
 var
   recCmd : R_Common_PCS_Command;
 begin

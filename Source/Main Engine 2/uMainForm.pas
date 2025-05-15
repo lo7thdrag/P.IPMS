@@ -40,9 +40,9 @@ begin
   FListener := TListeners.Create;
   with MainEngine2System.Listener.Add('MAINENGINE 2') as TPropertyEventListener do
   begin
-    OnPropertyIntChange := MainEngine2SystemEvent;
+    OnPropertyIntChange  := MainEngine2SystemEvent;
     OnPropertyBoolChange := MainEngine2SystemEvent;
-    OnPropertyDblChange := MainEngine2SystemEvent;
+    OnPropertyDblChange  := MainEngine2SystemEvent;
   end;
 end;
 
@@ -108,14 +108,6 @@ begin
         end;
 
         frmMenu.Enabled := False;
-//        MainEngine2System.FFormFreezed[1] := TfrmFreeze.Create(frmMenu);
-//        with MainEngine2System.FFormFreezed[1] do
-//        begin
-//          Parent := frmMenu;
-//          Position := poOwnerFormCenter;
-//          BringToFront;
-//          Show;
-//        end;
 
         frmSetofPressureGaugesME2.Enabled := False;
         MainEngine2System.FFormFreezed[2] := TfrmFreeze.Create(frmSetofPressureGaugesME2);
@@ -134,8 +126,6 @@ begin
           FreeAndNil(MainEngine2System.FFormFreezed[0]);
 
         frmMenu.Enabled := True;
-//        if Assigned(MainEngine2System.FFormFreezed[1]) then
-//          FreeAndNil(MainEngine2System.FFormFreezed[1]);
 
         frmSetofPressureGaugesME2.Enabled := True;
         if Assigned(MainEngine2System.FFormFreezed[2]) then
@@ -152,10 +142,12 @@ end;
 procedure TfrmMainForm.MainEngine2SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
 
+
 end;
 
 procedure TfrmMainForm.MainEngine2SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
 begin
+
 
 end;
 

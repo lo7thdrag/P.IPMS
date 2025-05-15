@@ -67,7 +67,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Radius = 80
         OnChange = vrtryswtchRemoteChange
         SwitchPositions.Strings = (
-          'Control'
+          'Local'
           'Remote')
         SwitchAngleStart = 140
         SwitchAngleEnd = 220

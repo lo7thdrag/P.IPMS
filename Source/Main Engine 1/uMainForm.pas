@@ -38,9 +38,9 @@ begin
   FListener := TListeners.Create;
   with MainEngine1System.Listener.Add('MAINENGINE 1') as TPropertyEventListener do
   begin
-    OnPropertyIntChange := MainEngine1SystemEvent;
+    OnPropertyIntChange  := MainEngine1SystemEvent;
     OnPropertyBoolChange := MainEngine1SystemEvent;
-    OnPropertyDblChange := MainEngine1SystemEvent;
+    OnPropertyDblChange  := MainEngine1SystemEvent;
   end;
 end;
 
