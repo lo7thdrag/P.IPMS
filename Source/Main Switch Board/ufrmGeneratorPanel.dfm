@@ -72152,18 +72152,24 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Top = 365
         Width = 52
         Height = 52
+        Cursor = crHandPoint
+        OnClick = ImgAUTOClick
       end
       object ImgSA: TImage
         Left = 101
         Top = 419
         Width = 52
         Height = 52
+        Cursor = crHandPoint
+        OnClick = ImgSAClick
       end
       object ImgMAN: TImage
         Left = 101
         Top = 474
         Width = 52
         Height = 52
+        Cursor = crHandPoint
+        OnClick = ImgMANClick
       end
       object ImgIndicatorHO: TImage
         Left = 607
@@ -72412,6 +72418,8 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Top = 299
         Width = 78
         Height = 52
+        OnMouseDown = ImgLTMouseDown
+        OnMouseUp = ImgLTMouseUp
       end
       object ImgStart: TImage
         Left = 201

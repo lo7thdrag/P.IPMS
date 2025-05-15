@@ -82,8 +82,8 @@ type
     ImgOI: TImage;
     ImgPref: TImage;
     ImgIndicatorBS: TImage;
-    ImgIndicatorPreference: TImage;
     ImgIndicatorCBC: TImage;
+    ImgIndicatorCKC: TImage;
     ImgIndicatorGS: TImage;
     ImgIndicatorER: TImage;
     IMGIndicatorAuto: TImage;
@@ -96,8 +96,16 @@ type
     procedure ImgStopClick(Sender: TObject);
     procedure ImgOIClick(Sender: TObject);
     procedure ImgPrefClick(Sender: TObject);
+    procedure DoLedTest(OnOff : Boolean);
+    procedure ImgLTMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure ImgLTMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
+    Led  : array of TImage;
+    LedStatus  : array of Boolean;
   public
     { Public declarations }
   end;
@@ -111,6 +119,47 @@ uses
   uMainSwitchBoardSystem;
 
 {$R *.dfm}
+
+procedure TfrmEmergencyPanel.DoLedTest(OnOff: Boolean);
+var
+  i : Integer;
+begin
+  if OnOff then
+  begin
+    for i := 0 to High(Led) do
+    begin
+      LedStatus[i] := Led[i].Visible;
+      Led[i].Visible := True;
+    end;
+  end
+  else
+  begin
+     for i := 0 to High(Led) do
+    begin
+      Led[i].Visible := LedStatus[i];
+    end;
+  end;
+end;
+
+procedure TfrmEmergencyPanel.FormCreate(Sender: TObject);
+begin
+  Led := [IMGIndicatorAuto, ImgIndicatorSA, ImgIndicatorMan,
+          ImgIndicatorER, ImgIndicatorGS, ImgIndicatorCKC, ImgIndicatorCBC, ImgIndicatorBS,
+          ImgIndicatorHO, ImgIndicatorFP, ImgIndicatorAP];
+  SetLength(LedStatus, Length(Led));
+end;
+
+procedure TfrmEmergencyPanel.ImgLTMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  DoLedTest(True);
+end;
+
+procedure TfrmEmergencyPanel.ImgLTMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  DoLedTest(False);
+end;
 
 procedure TfrmEmergencyPanel.ImgOIClick(Sender: TObject);
 begin

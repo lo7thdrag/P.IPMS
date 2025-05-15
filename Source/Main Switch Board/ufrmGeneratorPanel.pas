@@ -91,9 +91,19 @@ type
     procedure ImgStopClick(Sender: TObject);
     procedure ImgPrefClick(Sender: TObject);
     procedure ImgOIClick(Sender: TObject);
+    procedure DoLedTest(OnOff : Boolean);
+    procedure ImgLTMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure ImgLTMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure ImgAUTOClick(Sender: TObject);
+    procedure ImgSAClick(Sender: TObject);
+    procedure ImgMANClick(Sender: TObject);
   private
     { Private declarations }
     FListener : TListeners;
+    Led  : array of TImage;
+    LedStatus  : array of Boolean;
 
     procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
@@ -124,6 +134,27 @@ begin
       EnableComposited(TWinControl(WinControl.Controls[i]));
 end;
 
+procedure TfrmGeneratorPanel.DoLedTest(OnOff: Boolean);
+var
+  i : Integer;
+begin
+  if OnOff then
+  begin
+    for i := 0 to High(Led) do
+    begin
+      LedStatus[i] := Led[i].Visible;
+      Led[i].Visible := True;
+    end;
+  end
+  else
+  begin
+     for i := 0 to High(Led) do
+    begin
+      Led[i].Visible := LedStatus[i];
+    end;
+  end;
+end;
+
 procedure TfrmGeneratorPanel.FormCreate(Sender: TObject);
 begin
   FListener := TListeners.Create;
@@ -139,6 +170,11 @@ begin
   EnableComposited(pnlHz);
   EnableComposited(pnlkW);
   EnableComposited(pnlV);
+
+  Led := [ImgIndicatorAuto, ImgIndicatorSA, ImgIndicatorMan,
+          ImgIndicatorER, ImgIndicatorGS, ImgIndicatorCBC, ImgIndicatorPreference, ImgIndicatorBS,
+          ImgIndicatorHO, ImgIndicatorFP, ImgIndicatorAP];
+  SetLength(LedStatus, Length(Led));
 end;
 
 procedure TfrmGeneratorPanel.FormDestroy(Sender: TObject);
@@ -156,6 +192,33 @@ procedure TfrmGeneratorPanel.GeneratorPanelSystemEvent(Sender: TObject;
   PropsID: E_PropsID; Value: Boolean);
 begin
 //
+end;
+
+procedure TfrmGeneratorPanel.ImgMANClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.GeneratorMode(1);
+end;
+
+procedure TfrmGeneratorPanel.ImgSAClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.GeneratorMode(2);
+end;
+
+procedure TfrmGeneratorPanel.ImgAUTOClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.GeneratorMode(3);
+end;
+
+procedure TfrmGeneratorPanel.ImgLTMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  DoLedTest(True);
+end;
+
+procedure TfrmGeneratorPanel.ImgLTMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  DoLedTest(False);
 end;
 
 procedure TfrmGeneratorPanel.ImgOIClick(Sender: TObject);

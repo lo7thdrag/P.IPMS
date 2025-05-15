@@ -12,6 +12,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlEmergency: TPanel
@@ -91022,6 +91023,8 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Top = 297
         Width = 78
         Height = 52
+        OnMouseDown = ImgLTMouseDown
+        OnMouseUp = ImgLTMouseUp
       end
       object ImgIP: TImage
         Left = 545
@@ -91139,7 +91142,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
           88FF8588FF8588FF8500}
         Visible = False
       end
-      object ImgIndicatorPreference: TImage
+      object ImgIndicatorCBC: TImage
         Left = 492
         Top = 391
         Width = 9
@@ -91155,7 +91158,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
           88FF8588FF8588FF8500}
         Visible = False
       end
-      object ImgIndicatorCBC: TImage
+      object ImgIndicatorCKC: TImage
         Left = 374
         Top = 391
         Width = 9

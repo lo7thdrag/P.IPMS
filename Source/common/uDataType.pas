@@ -250,6 +250,8 @@ const
     C_PUMP_CPP_HYDRAULIC_START    = 3;
     C_PUMP_CPP_HYDRAULIC_AUTO     = 4;
 
+  C_PMSCLIENT_COMMAND = 66;
+
   { const mimic component identifier }
   C_WB_TK_PS = 'WB TK PS';
   C_WB_TK_SB = 'WB TK SB';

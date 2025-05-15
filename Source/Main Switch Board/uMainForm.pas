@@ -314,7 +314,7 @@ begin
       begin
         with frmEmergencyPanel do
         begin
-          ImgIndicatorPreference.Visible := Value;
+//          ImgIndicatorPreference.Visible := Value;
         end;
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then

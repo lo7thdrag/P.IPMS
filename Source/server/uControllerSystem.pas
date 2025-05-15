@@ -760,7 +760,7 @@ begin
   recPMS.ValueInt := recCmd.ValueInt;
   recPMS.ValueDob := recCmd.ValueDob;
 
-  Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recPMS);
+  Network.SimEngineSocket.SendData(C_PMSCLIENT_COMMAND,@recPMS);
 end;
 
 procedure TControllerlSystem.NetEvent_PumpCommonCmd(apRec: PAnsiChar; aSize: Word);
@@ -1168,7 +1168,8 @@ begin
 //    client.RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEvent_InstructorCommand, SizeOf(R_Common_Instr_Command));
 
     {Kirim paket dari controller ke ER}
-    client.RegisterProcedure(C_MIMICS_COMMAND,nil,SizeOf(R_Common_PMS_Command));
+    client.RegisterProcedure(C_PMSCLIENT_COMMAND,nil,SizeOf(R_Common_PMS_Command));
+//    client.RegisterProcedure(C_MIMICS_COMMAND,nil,SizeOf(R_Common_PMS_Command));
     client.RegisterProcedure(C_MIMICS_COMMAND,nil,SizeOf(R_Common_PCS_Command));
   end;
 

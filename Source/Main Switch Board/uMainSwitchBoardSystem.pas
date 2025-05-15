@@ -34,6 +34,7 @@ type
     procedure EngineRun(aValue : Boolean);
     procedure GeneratorPreference(aValue : Boolean);
     procedure CBClosed(aValue : Boolean);
+    procedure GeneratorMode(aValue : Integer);
 
     constructor Create;
     destructor Destroy;override;
@@ -125,6 +126,17 @@ begin
   recCmd.GenSwitchID := IdGenerator;
   recCmd.CommandPropsID := epPMSGeneratorEngineRun;
   recCmd.ValueBool := aValue;
+
+  Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
+end;
+
+procedure TMainSwitchBoardSystem.GeneratorMode(aValue: Integer);
+var
+  recCmd : R_Common_PMS_Command;
+begin
+  recCmd.GenSwitchID := IdGenerator;
+  recCmd.CommandPropsID := epPMSGeneratorMode;
+  recCmd.ValueInt := aValue;
 
   Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
 end;
