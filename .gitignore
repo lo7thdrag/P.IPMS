@@ -1,10 +1,10 @@
 *.dcu
+*.exe
 /Source/instructor/__history
 /Source/instructor/panels/__history
 /Source/instructor/panels/__recovery
 /Source/bin
 /Source/common
-/Source/bin
 /Source/components
 /Source/components/TrendChart
 /Source/ersimulator/panel/__history
@@ -26,7 +26,6 @@ Source/MCR Machine Left/__history
 /Source/MCR Machine Right/__history
 /Source/server/__history
 /Source/server/tester/__history
-/Source/bin
 /Source/Auxilary/Form/__history
 Source/Auxilary/Auxilary.dproj.local
 /Source/PCS/__history
