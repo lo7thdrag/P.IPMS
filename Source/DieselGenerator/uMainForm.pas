@@ -290,6 +290,7 @@ procedure TMainForm.DieselGeneratorSystemEvent(Sender: TObject; PropsID: E_Props
 begin
   case PropsID of
     epPMSFreezed:
+    begin
       if Value = 1 then
       begin
         MainForm.Enabled := False;
@@ -308,6 +309,7 @@ begin
         if Assigned(DieselGeneratorSystem.FFormFreezed[1]) then
           FreeAndNil(DieselGeneratorSystem.FFormFreezed[1]);
       end;
+    end;
     epPMSGeneratorRunningHours:
     begin
       lblRunningHours.Caption := IntToStr(Value);

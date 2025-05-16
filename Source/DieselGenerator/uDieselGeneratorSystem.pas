@@ -14,7 +14,7 @@ type
     FLIstener    : TListeners;
     FFreezed     : boolean;
 
-    FIdFormDieselGenerator : String;
+    FIdConsole : String;
 
     procedure NetworkEventAssignment;
 
@@ -44,7 +44,7 @@ type
     property Listener :TListeners read FListener;
     property Freezed : boolean read FFreezed write SetFreezed;
 
-    property IdFormDieselGenerator: String read FIdFormDieselGenerator write FIdFormDieselGenerator;
+    property IdConsole: String read FIdConsole write FIdConsole;
 
   end;
 
@@ -87,9 +87,9 @@ begin
   inifile := TIniFile.Create(filepath);
   tempstring := TStringList.Create;
 
-  inifile.ReadSection('Form DieselGenerator', tempstring);
+  inifile.ReadSection('CONSOLE DIESEL GENERATOR', tempstring);
 
-  FIdFormDieselGenerator := inifile.ReadString('Form DieselGenerator', tempstring[0],'Default');
+  FIdConsole := inifile.ReadString('CONSOLE DIESEL GENERATOR', tempstring[0],'Default');
 
   inifile.Free;
   tempstring.Free;
@@ -119,7 +119,7 @@ procedure TDieselGeneratorSystem.EngineMode(aValue: Boolean);
 var
   recCmd : R_Common_PMS_Command;
 begin
-  recCmd.GenSwitchID := IdFormDieselGenerator;
+  recCmd.GenSwitchID := IdConsole;
   recCmd.CommandPropsID := epPMSNotStandby;
   recCmd.ValueBool := aValue;
 
@@ -130,7 +130,7 @@ procedure TDieselGeneratorSystem.EngineRun(aValue: Boolean);
 var
   recCmd : R_Common_PMS_Command;
 begin
-  recCmd.GenSwitchID := IdFormDieselGenerator;
+  recCmd.GenSwitchID := IdConsole;
   recCmd.CommandPropsID := epPMSGeneratorEngineRun;
   recCmd.ValueBool := aValue;
 
@@ -141,7 +141,7 @@ procedure TDieselGeneratorSystem.EngineStop(aValue: Boolean);
 var
   recCmd : R_Common_PMS_Command;
 begin
-  recCmd.GenSwitchID := IdFormDieselGenerator;
+  recCmd.GenSwitchID := IdConsole;
   recCmd.CommandPropsID := epPMSGeneratorStop;
   recCmd.ValueBool := aValue;
 
@@ -175,7 +175,7 @@ begin
 
   rec := @apRec^;
 
-  if FIdFormDieselGenerator <> rec.GenSwitchID then
+  if FIdConsole <> rec.GenSwitchID then
     Exit;
 
   case rec.CommandPropsID of
