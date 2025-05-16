@@ -132,6 +132,14 @@ begin
     begin
       {$REGION ' Set Alarm Indicator '}
 
+      if rec.Value then
+      begin
+        MainForm.silence := True;
+        MainForm.mpAlarm.OnNotify := MainForm.mpAlarmNotify;
+        MainForm.mpAlarm.Open;
+        MainForm.mpAlarm.Play;
+      end;
+
       for I := 0 to  Length(MainForm.FAlarmIndicator)- 1 do
       begin
         if rec.ID = (i+1) then  //penyesuaian arraynya>> mulai dari 0 sedangkan ID mulai dari 1

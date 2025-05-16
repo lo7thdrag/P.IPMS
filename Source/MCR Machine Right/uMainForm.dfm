@@ -6178,6 +6178,7 @@ object MainForm: TMainForm
         MaxValue = 100.000000000000000000
         Position = 50.000000000000000000
         Decimals = 0
+        Angle = 42
         Spacing = 10
         Ticks = 96
         TicksMin = -10
@@ -6276,7 +6277,7 @@ object MainForm: TMainForm
       end
       object Label21: TLabel
         Left = 127
-        Top = 165
+        Top = 188
         Width = 16
         Height = 19
         Caption = '%'
@@ -6305,6 +6306,7 @@ object MainForm: TMainForm
         Height = 250
         MaxValue = 1250.000000000000000000
         Decimals = 0
+        Angle = 42
         Spacing = 10
         TicksMin = -10
         TicksMax = -20
@@ -6428,7 +6430,7 @@ object MainForm: TMainForm
       end
       object Label20: TLabel
         Left = 115
-        Top = 187
+        Top = 214
         Width = 40
         Height = 10
         Caption = 'ME SPPED'
@@ -6457,10 +6459,12 @@ object MainForm: TMainForm
         Height = 250
         MaxValue = 280.000000000000000000
         Decimals = 0
+        Angle = 42
         Spacing = 10
+        Ticks = 140
         TicksMin = -10
-        TicksMax = -20
-        TicksEnlarge = 4
+        TicksMax = -15
+        TicksEnlarge = 5
         TicksColor = clBlack
         ColorZone1 = clBlack
         ColorZone2 = clBlack
@@ -6567,7 +6571,7 @@ object MainForm: TMainForm
       end
       object Label19: TLabel
         Left = 108
-        Top = 187
+        Top = 216
         Width = 54
         Height = 10
         Caption = 'SHAFT SPPED'
@@ -86464,7 +86468,7 @@ object MainForm: TMainForm
           '.'
           '.')
         ShowLabel = False
-        SwitchPosition = 10
+        SwitchPosition = 5
         SwitchAngleStart = 35
         SwitchAngleEnd = 325
         WinchColor = clWhite
@@ -86502,6 +86506,7 @@ object MainForm: TMainForm
       Visible = False
       ParentDoubleBuffered = False
       TabOrder = 7
+      OnNotify = mpAlarmNotify
     end
   end
   object tmrTelegraph: TTimer

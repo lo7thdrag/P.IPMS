@@ -98,6 +98,7 @@ type
     procedure tmrShaftSpeedTimer(Sender: TObject);
     procedure tmrCPPTimer(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure mpAlarmNotify(Sender: TObject);
 
   private
     FIsBlinkState : Boolean;
@@ -109,6 +110,7 @@ type
     procedure MCRMachineRightSystemEvent(Sender : TObject; PropsID : E_PropsID; Value : Double); overload;
 
   public
+    silence : Boolean;
     OrderMeSpeed : Double;
     OrderShaftSpeed : Double;
     OrderCPP : Double;
@@ -177,6 +179,8 @@ begin
 
   EnableComposited(pnlAlarmIndicator);
   EnableComposited(pnlTelegraph);
+
+  silence := False;
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);
@@ -210,6 +214,10 @@ end;
 procedure TMainForm.imgAudibleShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   imgAudible.Visible := True;
+  mpAlarm.Open;
+  mpAlarm.Stop;
+  mpAlarm.Notify := False;
+  silence := False
 end;
 
 procedure TMainForm.imgAudibleShadowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -307,6 +315,15 @@ begin
       OrderCPP := Value;
       tmrCPP.Enabled := True;
     end;
+  end;
+end;
+
+procedure TMainForm.mpAlarmNotify(Sender: TObject);
+begin
+  if (mpAlarm.NotifyValue = nvSuccessful) and silence then
+  begin
+    mpAlarm.Play;
+    mpAlarm.Notify := True;
   end;
 end;
 

@@ -114007,7 +114007,7 @@ object MainForm: TMainForm
           '.'
           '.')
         ShowLabel = False
-        SwitchPosition = 10
+        SwitchPosition = 5
         SwitchAngleStart = 35
         SwitchAngleEnd = 325
         WinchColor = clWhite
