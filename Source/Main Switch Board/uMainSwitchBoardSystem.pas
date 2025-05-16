@@ -35,6 +35,7 @@ type
     procedure EngineStop(aValue : Boolean);
     procedure GeneratorPreference(aValue : Boolean);
     procedure CBClosed(aValue : Boolean);
+    procedure CBShore(aValue : Boolean);
     procedure GeneratorMode(aValue : Integer);
 
     constructor Create;
@@ -170,6 +171,17 @@ var
 begin
   recCmd.GenSwitchID := IdGenerator;
   recCmd.CommandPropsID := epPMSGeneratorCBClosed;
+  recCmd.ValueBool := aValue;
+
+  Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
+end;
+
+procedure TMainSwitchBoardSystem.CBShore(aValue: Boolean);
+var
+  recCmd : R_Common_PMS_Command;
+begin
+  recCmd.GenSwitchID := IdGenerator;
+  recCmd.CommandPropsID := epPMSMsbCBShore;
   recCmd.ValueBool := aValue;
 
   Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);

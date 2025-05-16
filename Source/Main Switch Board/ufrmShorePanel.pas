@@ -35,6 +35,8 @@ type
     Image8: TImage;
     ImgIndicatorCBOpen: TImage;
     ImgIndicatorCBClose: TImage;
+    procedure ImgIndicatorCBOpenClick(Sender: TObject);
+    procedure ImgIndicatorCBCloseClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,6 +48,19 @@ var
 
 implementation
 
+uses
+  uMainSwitchBoardSystem;
+
 {$R *.dfm}
+
+procedure TfrmShorePanel.ImgIndicatorCBCloseClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.CBShore(True);
+end;
+
+procedure TfrmShorePanel.ImgIndicatorCBOpenClick(Sender: TObject);
+begin
+  MainSwitchBoardSystem.CBShore(False);
+end;
 
 end.

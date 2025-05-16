@@ -150402,6 +150402,7 @@ object frmShorePanel: TfrmShorePanel
         A280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280
         BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA2
         80BDA280BDA280BDA280BDA280BDA2802F77}
+      OnClick = ImgIndicatorCBOpenClick
     end
     object ImgIndicatorCBClose: TImage
       Left = 1039
@@ -150862,6 +150863,7 @@ object frmShorePanel: TfrmShorePanel
         A280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280
         BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA2
         80BDA280BDA280BDA280BDA280BDA2802F77}
+      OnClick = ImgIndicatorCBCloseClick
     end
     object pnlA: TPanel
       Left = 394
@@ -151181,7 +151183,6 @@ object frmShorePanel: TfrmShorePanel
       Font.Height = -13
       Font.Name = 'Arial'
       Font.Style = [fsBold]
-      Color = 12427904
     end
     object VrRotarySwitch3: TVrRotarySwitch
       Left = 465
@@ -151199,7 +151200,6 @@ object frmShorePanel: TfrmShorePanel
       Font.Height = -11
       Font.Name = 'Arial'
       Font.Style = [fsBold]
-      Color = 12427904
     end
   end
 end

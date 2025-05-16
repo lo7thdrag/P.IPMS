@@ -298,7 +298,10 @@ begin
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
       begin
+        with frmShorePanel do
+        begin
 
+        end;
       end;
     end;
     epPMSGeneratorPreference :
