@@ -532,7 +532,7 @@ begin
   g := 255;
   b := 255;
   image_index := 0;
-//  Left   := Screen.Monitors[1].Left;
+//  Left   := Screen.Monitors[0].Left;
 end;
 
 procedure Tfrm_GeneralPanel.LampTestIndicator(aOnOff: Integer);

@@ -27,12 +27,11 @@ object MainForm: TMainForm
     ParentBackground = False
     TabOrder = 0
     object PanelSpedometer: TPanel
-      Left = 22
+      Left = 16
       Top = 832
       Width = 270
       Height = 270
       BevelOuter = bvNone
-      Caption = 'Panel2'
       Color = clBtnText
       ParentBackground = False
       TabOrder = 0
@@ -6162,7 +6161,7 @@ object MainForm: TMainForm
       end
     end
     object pnlCPPpersen: TPanel
-      Left = 22
+      Left = 16
       Top = 558
       Width = 270
       Height = 270
@@ -6290,7 +6289,7 @@ object MainForm: TMainForm
       end
     end
     object pnlRPMMESPEED: TPanel
-      Left = 22
+      Left = 16
       Top = 10
       Width = 270
       Height = 270
@@ -6442,7 +6441,7 @@ object MainForm: TMainForm
       end
     end
     object pnlRPMSHAFTSPEED: TPanel
-      Left = 22
+      Left = 16
       Top = 284
       Width = 270
       Height = 270
@@ -6581,7 +6580,7 @@ object MainForm: TMainForm
       end
     end
     object pnlAlarmIndicator: TPanel
-      Left = 312
+      Left = 330
       Top = 10
       Width = 738
       Height = 695
@@ -71120,7 +71119,7 @@ object MainForm: TMainForm
       end
     end
     object pnlTelegraph: TPanel
-      Left = 671
+      Left = 689
       Top = 723
       Width = 379
       Height = 379
@@ -84641,7 +84640,7 @@ object MainForm: TMainForm
           0000000000000000000000000000000000000000000000000000000000000000
           00000000000000000000000000000000000000000000000000000091E33D}
         Proportional = True
-        ExplicitLeft = 1
+        ExplicitLeft = 18
       end
       object imgsb1: TImage
         Tag = 1
@@ -86492,6 +86491,17 @@ object MainForm: TMainForm
       Color = clBlack
       ParentBackground = False
       TabOrder = 6
+    end
+    object mpAlarm: TMediaPlayer
+      Left = 815
+      Top = 8
+      Width = 253
+      Height = 30
+      DoubleBuffered = True
+      FileName = 'buzzer 2.wav'
+      Visible = False
+      ParentDoubleBuffered = False
+      TabOrder = 7
     end
   end
   object tmrTelegraph: TTimer

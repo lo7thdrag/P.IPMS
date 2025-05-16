@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RzBmpBtn, Vcl.StdCtrls, VrControls,
   VrAngularMeter, Vcl.ExtCtrls,
 
-  uListener, uFreezeFrom, uDataType, VrRotarySwitch;
+  uListener, uFreezeFrom, uDataType, VrRotarySwitch, Vcl.MPlayer;
 
 type
   TMainForm = class(TForm)
@@ -82,6 +82,7 @@ type
     tmrShaftSpeed: TTimer;
     tmrCPP: TTimer;
     pnlSparator: TPanel;
+    mpAlarm: TMediaPlayer;
     procedure tmrTelegraphTimer(Sender: TObject);
     procedure vrSbTelegrapChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
