@@ -114023,6 +114023,18 @@ object MainForm: TMainForm
         Color = clWhite
       end
     end
+    object mpAlarm: TMediaPlayer
+      Left = 815
+      Top = 8
+      Width = 253
+      Height = 30
+      DoubleBuffered = True
+      FileName = 'buzzer 2.wav'
+      Visible = False
+      ParentDoubleBuffered = False
+      TabOrder = 9
+      OnNotify = mpAlarmNotify
+    end
   end
   object tmrTelegraph: TTimer
     Enabled = False

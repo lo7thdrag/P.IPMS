@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
 
   uListener, uFreezeFrom, uDataType, RzBmpBtn, VrControls, VrRotarySwitch,
-  Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls;
+  Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls, Vcl.MPlayer;
 
 type
   TMainForm = class(TForm)
@@ -143,6 +143,7 @@ type
     tmrMeSpeed: TTimer;
     tmrShaftSpeed: TTimer;
     tmrCPP: TTimer;
+    mpAlarm: TMediaPlayer;
 
     procedure FormCreate(Sender: TObject);
     procedure imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -152,14 +153,13 @@ type
     procedure vrSbPumpChange(Sender: TObject);
     procedure vrPsTelegrapChange(Sender: TObject);
     procedure tmrTelegraphTimer(Sender: TObject);
-    procedure imgAudibleShadowMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure imgAudibleShadowMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+    procedure imgAudibleShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure imgAudibleShadowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
     procedure tmrShaftSpeedTimer(Sender: TObject);
     procedure tmrMeSpeedTimer(Sender: TObject);
     procedure tmrCPPTimer(Sender: TObject);
+    procedure mpAlarmNotify(Sender: TObject);
 
   private
     FIsBlinkState : Boolean;
@@ -171,6 +171,7 @@ type
     procedure MCRMachineLeftSystemEvent(Sender : TObject; PropsID : E_PropsID; Value : Double); overload;
 
   public
+    silence : Boolean;
     OrderMeSpeed : Double;
     OrderShaftSpeed : Double;
     OrderCPP : Double;
@@ -194,6 +195,7 @@ type
     procedure SetTelegrap;
 
     procedure GetIdBlinkTelegrapLamp(value : Integer);
+
   end;
 
 var
@@ -301,6 +303,8 @@ begin
   EnableComposited(pnlAlramPump34);
   EnableComposited(pnlCppHidraulicPump);
   EnableComposited(pnlTelegraph);
+
+  silence := False;
 end;
 
 procedure TMainForm.SetAlarmIndicator;
@@ -591,6 +595,10 @@ end;
 procedure TMainForm.imgAudibleShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   imgAudible.Visible := True;
+  mpAlarm.Open;
+  mpAlarm.Stop;
+  mpAlarm.Notify := False;
+  silence := False
 end;
 
 procedure TMainForm.imgAudibleShadowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -869,6 +877,15 @@ begin
       OrderCPP := Value;
       tmrCPP.Enabled := True;
     end;
+  end;
+end;
+
+procedure TMainForm.mpAlarmNotify(Sender: TObject);
+begin
+  if (mpAlarm.NotifyValue = nvSuccessful) and silence then
+  begin
+    mpAlarm.Play;
+    mpAlarm.Notify := True;
   end;
 end;
 
