@@ -539,7 +539,7 @@ type
       { use in PMS System}
       epPMSPowerMode, epPMSPowerConsmr, epPMSPower, epPMSFrequency, epPMSSwitchFrequency,epPMSCurrent, epPMSCosPhi, epPMSVoltage, epPMSU, epPMSV, epPMSW,
       epPMSGeneratorEmergencyStop, epPMSGeneratorMode, epPMSGeneratorFuelRunsOut, epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorSupplied,
-      epPMSGeneratorState, epPMSGeneratorCBClosed, epPMSGeneratorCKClosed, {epPMSGeneratorCBClosedE,} epPMSGeneratorPreference, epPMSGeneratorBusbar,
+      epPMSGeneratorState, epPMSGeneratorCBClosed, {epPMSGeneratorCBClosedE,} epPMSGeneratorPreference, epPMSGeneratorBusbar,
       epPMSGeneratorRunHourState, epPMSGeneratorRunningHours, epPMSNotStandby, epPMSShutdown, epPMSStartDisable,
 
       {Generator PMS System Alarm}

@@ -35,7 +35,6 @@ type
     procedure EngineStop(aValue : Boolean);
     procedure GeneratorPreference(aValue : Boolean);
     procedure CBClosed(aValue : Boolean);
-    procedure CKClosed(aValue : Boolean);
     procedure GeneratorMode(aValue : Integer);
 
     constructor Create;
@@ -176,17 +175,6 @@ begin
   Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
 end;
 
-procedure TMainSwitchBoardSystem.CKClosed(aValue: Boolean);
-var
-  recCmd : R_Common_PMS_Command;
-begin
-  recCmd.GenSwitchID := IdGenerator;
-  recCmd.CommandPropsID := epPMSGeneratorCKClosed;
-  recCmd.ValueBool := aValue;
-
-  Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
-end;
-
 { fungsi untuk menangani event dari jaringan untuk PCSCommand }
 procedure TMainSwitchBoardSystem.NetEventInstructorCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
@@ -220,7 +208,7 @@ begin
 
   case rec.CommandPropsID of
     epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorSupplied, epPMSGeneratorCBClosed,
-    epPMSGeneratorCKClosed, epPMSGeneratorPreference, epPMSGeneratorBusbar:
+    epPMSGeneratorPreference, epPMSGeneratorBusbar:
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;

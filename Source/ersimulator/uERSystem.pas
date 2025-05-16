@@ -124,7 +124,7 @@ var
   rPCSCmd : R_Common_PCS_Command;
 begin
   case PropsID of
-    epPMSGeneratorEngineRun, epPMSGeneratorSupplied, epPMSGeneratorStop, epPMSGeneratorCBClosed,epPMSGeneratorCKClosed,
+    epPMSGeneratorEngineRun, epPMSGeneratorSupplied, epPMSGeneratorStop, epPMSGeneratorCBClosed,
     epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSNotStandby, epPMSCanBusFailure, epPMSDCPowFailure,
     epPMSEngineAlarm, epPMSShutdown, epPMSFaultPageLed, epPMSGeneratorFuelRunsOut, epPMSFailureCBClosed,
 
@@ -599,7 +599,7 @@ begin
   recER := @apRec^;
 
   case recER.CommandPropsID of
-    epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorCBClosed, epPMSGeneratorCKClosed,
+    epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorCBClosed,
     epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSGeneratorMode :
     begin
       generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
@@ -668,10 +668,6 @@ begin
         end;
         generator.Preference  := True;
       end;
-    end;
-    epPMSGeneratorCKClosed:
-    begin
-      generator.CKClosed := recER.ValueBool;
     end;
     epPMSGeneratorMode :
     begin

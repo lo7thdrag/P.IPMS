@@ -181,7 +181,7 @@ end;
 
 procedure TfrmEmergencyPanel.ImgOIClick(Sender: TObject);
 begin
-  MainSwitchBoardSystem.CKClosed(True);
+  MainSwitchBoardSystem.CBClosed(True);
 end;
 
 procedure TfrmEmergencyPanel.ImgPrefClick(Sender: TObject);

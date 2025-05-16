@@ -34,7 +34,6 @@ type
     FIsEngineRun : Boolean;
     FIsGeneratorSupplied : Boolean;
     FIsCBClosed : Boolean;
-    FIsCKClosed : Boolean;
     FIsPreference : Boolean;
     FBusbar  : boolean;
     FRunHourState : Boolean;
@@ -89,7 +88,6 @@ type
     procedure SetGeneratorMode(const Value : Integer);
     procedure SetFuelRunsOut(const Value : Boolean);
     procedure SetCBClosed(const Value : Boolean);
-    procedure SetCKClosed(const Value : Boolean);
     procedure SetPreference(const Value : Boolean);
     procedure SetBusbar(const Value : Boolean);
     procedure SetRunHourState(const Value : Boolean);
@@ -166,7 +164,6 @@ type
     property GeneratorState : Integer read FGeneratorState write SetGeneratorState;
     property FuelRunsOut : Boolean read FIsFuelRunsOut write SetFuelRunsOut;
     property CBClosed : Boolean read FIsCBClosed write SetCBClosed;
-    property CKClosed : Boolean read FIsCKClosed write SetCKClosed;
     property Preference : Boolean read FIsPreference write SetPreference;
     property Busbar : Boolean read FBusbar write SetBusbar;
     property RunHourState : Boolean read FRunHourState write SetRunHourState;
@@ -773,14 +770,6 @@ begin
     exit;
   FIsCBClosed := Value;
   Listener.TriggerEvents(Self,epPMSGeneratorCBClosed,Value);
-end;
-
-procedure TGenerator.SetCKClosed(const Value: Boolean);
-begin
-  if FIsCKClosed = Value then
-    exit;
-  FIsCKClosed := Value;
-  Listener.TriggerEvents(Self,epPMSGeneratorCKClosed,Value);
 end;
 
 procedure TGenerator.SetCosPhi(const Value: Double);
