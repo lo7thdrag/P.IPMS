@@ -179,7 +179,7 @@ begin
     Exit;
 
   case rec.CommandPropsID of
-    epPMSGeneratorEngineRun, epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm, epPMSLubOilTempHigh,
+    epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm, epPMSLubOilTempHigh,
     epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage, epPMSNotStandby, epPMSStartDisable, epPMSShutdown,
     epPMSSpeedSensorFailureShutdown, epPMSLubOilPressLowShutdown, epPMSCoolWaterTempHighShutdown:
     begin
