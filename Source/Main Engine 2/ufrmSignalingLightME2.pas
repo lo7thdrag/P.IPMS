@@ -30,10 +30,11 @@ type
     Panel1: TPanel;
     lblHoorCounter: TLabel;
 
-    procedure vrtryswtchRemoteChange(Sender: TObject);
-    procedure vrtryswtchSpeedChange(Sender: TObject);
-    procedure vrtryswtchPreStartInhibitionChange(Sender: TObject);
-    procedure vrtryswtchSTCHChange(Sender: TObject);
+
+    procedure vrtryswtchRemotePSClick(Sender: TObject);
+    procedure vrtryswtchSpeedPSClick(Sender: TObject);
+    procedure vrtryswtchSTC_PSClick(Sender: TObject);
+    procedure vrtryswtchPreStartPSClick(Sender: TObject);
   private
 
 
@@ -51,8 +52,7 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmSignalingLightME2.vrtryswtchPreStartInhibitionChange(
-  Sender: TObject);
+procedure TfrmSignalingLightME2.vrtryswtchPreStartPSClick(Sender: TObject);
 begin
   if TVrRotarySwitch(Sender).Tag = 0 then
   begin
@@ -69,7 +69,7 @@ begin
   end;
 end;
 
-procedure TfrmSignalingLightME2.vrtryswtchRemoteChange(Sender: TObject);
+procedure TfrmSignalingLightME2.vrtryswtchRemotePSClick(Sender: TObject);
 begin
   if TVrRotarySwitch(Sender).Tag = 0 then
   begin
@@ -80,20 +80,25 @@ begin
   end;
 end;
 
-procedure TfrmSignalingLightME2.vrtryswtchSpeedChange(Sender: TObject);
+procedure TfrmSignalingLightME2.vrtryswtchSpeedPSClick(Sender: TObject);
 begin
+//  if TVrRotarySwitch(Sender).Tag = 0 then
+//  begin
+//    if vrtryswtchSpeedPS.SwitchPosition = 0 then
+//      MainEngine2System.vrtryswtchLowerSpeedPS(C_PCS_ME_PORTS, True)
+//    else if vrtryswtchSpeedPS.SwitchPosition = 1 then
+//      MainEngine2System.vrtryswtchLowerSpeedPS(C_PCS_ME_PORTS, False)
+//    else if vrtryswtchSpeedPS.SwitchPosition = 2 then
+//      MainEngine2System.vrtryswtchLowerSpeedPS(C_PCS_ME_PORTS, True);
+//  end;
+
   if TVrRotarySwitch(Sender).Tag = 0 then
   begin
-    if vrtryswtchSpeedPS.SwitchPosition = 0 then
-      MainEngine2System.vrtryswtchSpeedPS(C_PCS_ME_PORTS, True)
-    else if vrtryswtchSpeedPS.SwitchPosition = 1 then
-      MainEngine2System.vrtryswtchSpeedPS(C_PCS_ME_PORTS, False)
-    else if vrtryswtchSpeedPS.SwitchPosition = 2 then
-      MainEngine2System.vrtryswtchSpeedPS(C_PCS_ME_PORTS, True);
+    MainEngine2System.vrtryswtchRiseSpeedPS(C_PCS_ME_PORTS, vrtryswtchSpeedPS.SwitchPosition);
   end;
 end;
 
-procedure TfrmSignalingLightME2.vrtryswtchSTCHChange(Sender: TObject);
+procedure TfrmSignalingLightME2.vrtryswtchSTC_PSClick(Sender: TObject);
 begin
   if TVrRotarySwitch(Sender).Tag = 0 then
   begin

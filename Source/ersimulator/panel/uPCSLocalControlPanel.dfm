@@ -14059,8 +14059,9 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 95
               Radius = 30
+              OnChange = vrtryswtchRemotePSChange
               SwitchPositions.Strings = (
-                'Control'
+                'Local'
                 'Remote')
               SwitchAngleStart = 140
               SwitchAngleEnd = 220
@@ -14105,6 +14106,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 95
               Radius = 30
+              OnChange = vrtryswtchSpeedPSChange
               SwitchPositions.Strings = (
                 'Lower'
                 ''
@@ -14152,6 +14154,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 104
               Radius = 30
+              OnChange = vrtryswtchSTC_PSChange
               SwitchPositions.Strings = (
                 '2 TC'
                 'AUTO'
@@ -14200,6 +14203,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 95
               Radius = 30
+              OnChange = vrtryswtchPreStartPSChange
               SwitchPositions.Strings = (
                 'Inhibition'
                 'On')
@@ -29286,9 +29290,9 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 95
               Radius = 30
-              OnChange = vrtryswtchRemoteChange
+              OnChange = vrtryswtchRemotePSChange
               SwitchPositions.Strings = (
-                'Control'
+                'Local'
                 'Remote')
               SwitchAngleStart = 140
               SwitchAngleEnd = 220
@@ -29334,7 +29338,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 95
               Radius = 30
-              OnChange = vrtryswtchSpeedChange
+              OnChange = vrtryswtchSpeedPSChange
               SwitchPositions.Strings = (
                 'Lower'
                 ''
@@ -29383,7 +29387,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 104
               Radius = 30
-              OnChange = vrtryswtchTCControlChange
+              OnChange = vrtryswtchSTC_PSChange
               SwitchPositions.Strings = (
                 '2 TC'
                 'AUTO'
@@ -29433,7 +29437,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 95
               Radius = 30
-              OnChange = vrtryswtchPreStartInhibitionChange
+              OnChange = vrtryswtchPreStartPSChange
               SwitchPositions.Strings = (
                 'Inhibition'
                 'On')

@@ -340,6 +340,20 @@ begin
          FOnPCSCommand(rPCSCmd);
     end;
 
+    epPCSSpeedState :
+    begin
+      if Sender is TMainEngine then
+      begin
+        rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
+      end;
+
+      rPCSCmd.CommandPropsID := PropsID;
+      rPCSCmd.ValueInt := Value;
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      if Assigned(FOnPCSCommand) then
+         FOnPCSCommand(rPCSCmd);
+    end;
+
 
     epPMSGeneratorMode, epPMSGeneratorState, epPMSGeneratorRunningHours:
     begin
@@ -725,14 +739,30 @@ begin
        ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, recERPCS.ValueBool)
     end;
 
-    epPCSMEActualSpeed :
+    epPCSSpeedState :
     begin
       main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
-      main_engine.DecreaseSpeed := recERPCS.ValueBool;
-      main_engine.IncreaseSpeed := recERPCS.ValueBool;
+
+      case recERPCS.ValueInt of
+        0:    {Lower}
+        begin
+          main_engine.DecreaseSpeed := True;
+          main_engine.IncreaseSpeed := False;
+        end;
+        1:  {Off}
+        begin
+          main_engine.DecreaseSpeed := False;
+          main_engine.IncreaseSpeed := False;
+        end;
+        2:  {Rise}
+        begin
+          main_engine.DecreaseSpeed := False;
+          main_engine.IncreaseSpeed := True;
+        end;
+      end;
     end;
 
-    epPCSMESTCInManualMode :
+    epPCSMESTCInManualModePS :
     begin
       main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
       main_engine.STCInManualMode := recERPCS.ValueBool;

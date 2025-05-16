@@ -44,7 +44,9 @@ type
 
     {Signaling}
     procedure vrtryswtchRemotePS(aPortStarboard: string; aValue: Boolean);
-    procedure vrtryswtchSpeedPS(aPortStarboard: string; aValue: Boolean);
+    procedure vrtryswtchLowerSpeedPS(aPortStarboard: string; aSwitchPos: Boolean);
+    procedure vrtryswtchRiseSpeedPS(aPortStarboard: string; aSwitchPos: Integer);
+    procedure vrtryswtchOffSpeedPS(aPortStarboard: string; aSwitchPos: Boolean);
     procedure vrtryswtchSTC_PS(aPortStarboard: string; aValue: Boolean);
     procedure vrtryswtchPreStartInhibitionPS(aPortStarboard: string; aValue: Boolean);
 
@@ -194,20 +196,18 @@ begin
 
     epPCSMESTCInManualMode, epPCSMEPreStart:
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
-    end;
-
-    epPCSMEActualSpeed :
-    begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
-    end;
-
-    epPCSMEStopDecrease :
-    begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
     end;
 
     epPCSMERunningHours :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
+    end;
+
+    epPCSSpeedState :
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
     end;
@@ -285,15 +285,38 @@ begin
   Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
-procedure TMainEngine2System.vrtryswtchSpeedPS(aPortStarboard: string; aValue: Boolean);
+procedure TMainEngine2System.vrtryswtchRiseSpeedPS(aPortStarboard: string; aSwitchPos: Integer);
 var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
-  recCmd.CommandPropsID := epPCSMEActualSpeed;
-  recCmd.ValueBool      := aValue;
+  recCmd.CommandPropsID := epPCSSpeedState;
+  recCmd.ValueInt       := aSwitchPos;
 
   Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine2System.vrtryswtchLowerSpeedPS(aPortStarboard: string; aSwitchPos: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSMEStopDecrease;
+  recCmd.ValueBool       := not aSwitchPos;
+
+  Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSMEStopIncrease;
+  recCmd.ValueBool       := aSwitchPos;
+
+  Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine2System.vrtryswtchOffSpeedPS(aPortStarboard: string;
+  aSwitchPos: Boolean);
+begin
+
 end;
 
 procedure TMainEngine2System.vrtryswtchSTC_PS(aPortStarboard: string; aValue: Boolean);
@@ -301,7 +324,8 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
-  recCmd.CommandPropsID := epPCSMESTCInManualMode;
+//  recCmd.CommandPropsID := epPCSMESTCInManualMode;
+  recCmd.CommandPropsID := epPCSMESTCInManualModePS;
   recCmd.ValueBool      := aValue;
 
   Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);

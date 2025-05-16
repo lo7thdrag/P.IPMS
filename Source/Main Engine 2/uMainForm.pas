@@ -136,6 +136,10 @@ begin
     begin
       frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Value);
     end;
+    epPCSSpeedState :
+    begin
+      frmSignalingLightME2.vrtryswtchSpeedPS.SwitchPosition := Value;
+    end;
   end;
 end;
 
@@ -157,20 +161,12 @@ begin
         frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 1;
     end;
 
-    epPCSMEStopDecrease :
+    epPCSMESTCInManualMode :
     begin
       if Value then
-        frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 0
+        frmSignalingLightME2.vrtryswtchSTC_PS.SwitchPosition := 1
       else
-        frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 1;
-    end;
-
-    epPCSMEStopIncrease :
-    begin
-      if Value then
-        frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 1
-      else
-        frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 0;
+        frmSignalingLightME2.vrtryswtchSTC_PS.SwitchPosition := 0;
     end;
   end;
 

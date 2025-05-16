@@ -275,7 +275,6 @@ type
     procedure btnOFFClick(Sender: TObject);
     procedure tmr1Timer(Sender: TObject);
     procedure btnStartClick(Sender: TObject);
-    procedure vrtryswtchRemoteChange(Sender: TObject);
     procedure btnStopClick(Sender: TObject);
     procedure btnClutchClick(Sender: TObject);
     procedure btnDeclutchClick(Sender: TObject);
@@ -285,10 +284,11 @@ type
 
     procedure FormShortcut(var Msg: TWMKey; var Handled: Boolean);
     procedure btnEmergencStopClick(Sender: TObject);
-    procedure vrtryswtchSpeedChange(Sender: TObject);
-    procedure vrtryswtchTCControlChange(Sender: TObject);
-    procedure vrtryswtchPreStartInhibitionChange(Sender: TObject);
     procedure btnSafetiesStopClick(Sender: TObject);
+    procedure vrtryswtchRemotePSChange(Sender: TObject);
+    procedure vrtryswtchSpeedPSChange(Sender: TObject);
+    procedure vrtryswtchPreStartPSChange(Sender: TObject);
+    procedure vrtryswtchSTC_PSChange(Sender: TObject);
 
   private
     aplctnvntsKey : TApplicationEvents;
@@ -301,6 +301,9 @@ type
 //    cpp    : TCPP;
     cpp_PS : TCPP;
     cpp_SB : TCPP;
+
+    FStopDecrease: Boolean;
+    FStopIncrease: Boolean;
 
     cppHydraulicPumpID, cppConditionStatus : string;
     cppConditionStatusTag,counter : Integer;
@@ -736,8 +739,10 @@ end;
 
 procedure TfrmPCSLocalControlPanel.EnginePropertyBoolChange(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
+
   if Sender is TCPP then
   begin
+    {$REGION ' CPP Section '}
     if TCPP(Sender).Identifier = 'CPP PS' then
     begin
       case PropsID of
@@ -910,8 +915,58 @@ begin
         end;
       end;
     end;
-
+    {$ENDREGION}
   end
+  else if Sender is TMainEngine then
+  begin
+    {$REGION ' ME Section '}
+    if TMainEngine(Sender).Identifier = 'Main Engine PS' then
+    begin
+      case PropsID of
+        epPCSCtrlMCR:
+        begin
+          if Value then
+            vrtryswtchRemotePS.SwitchPosition := 1
+          else
+            vrtryswtchRemotePS.SwitchPosition := 0;
+        end;
+        epPCSCtrlLocal:
+        begin
+          if Value then
+            vrtryswtchRemotePS.SwitchPosition := 0
+          else
+            vrtryswtchRemotePS.SwitchPosition := 1;
+        end;
+        epPCSMESTCInManualMode :
+        begin
+          if Value then
+             vrtryswtchSTC_PS.SwitchPosition := 1
+          else
+            vrtryswtchSTC_PS.SwitchPosition := 0;
+        end;
+      end;
+    end
+    else if TMainEngine(Sender).Identifier = 'Main Engine SB' then
+    begin
+      case PropsID of
+        epPCSCtrlMCR:
+        begin
+          if Value then
+            vrtryswtchRemotePS.SwitchPosition := 1
+          else
+            vrtryswtchRemotePS.SwitchPosition := 0;
+        end;
+        epPCSCtrlLocal:
+        begin
+          if Value then
+            vrtryswtchRemotePS.SwitchPosition := 0
+          else
+            vrtryswtchRemotePS.SwitchPosition := 1;
+        end;
+      end;
+    {$ENDREGION}
+    end;
+  end;
 end;
 
 procedure TfrmPCSLocalControlPanel.EnginePropertyDouChange(Sender: TObject; PropsID: E_PropsID; Value: Double);
@@ -921,6 +976,19 @@ end;
 
 procedure TfrmPCSLocalControlPanel.EnginePropertyIntChange(Sender: TObject; PropsID: E_PropsID; Value: Integer);
 begin
+  if Sender is TMainEngine then
+  begin
+    {$REGION ' ME Section '}
+    if TMainEngine(Sender).Identifier = 'Main Engine PS' then
+    begin
+      case PropsID of
+        epPCSSpeedState :
+        begin
+          vrtryswtchSpeedPS.SwitchPosition := Value;
+        end;
+      end;
+    end;
+  end;
 
 end;
 
@@ -1048,8 +1116,8 @@ begin
   counter := 0;
 
   ERSystem.ERManager.EngineRoom.getPCSSystem.addEntityListener('PCS Local Panel',EnginePropertyBoolChange);
-  ERSystem.ERManager.EngineRoom.getPMSSystem.addEntityListener('PCS Local Panel',EnginePropertyIntChange);
-  ERSystem.ERManager.EngineRoom.getPMSSystem.addEntityListener('PCS Local Panel',EnginePropertyDouChange);
+  ERSystem.ERManager.EngineRoom.getPCSSystem.addEntityListener('PCS Local Panel',EnginePropertyIntChange);
+  ERSystem.ERManager.EngineRoom.getPCSSystem.addEntityListener('PCS Local Panel',EnginePropertyDouChange);
 end;
 
 procedure TfrmPCSLocalControlPanel.FormShortcut(var Msg: TWMKey;
@@ -1360,8 +1428,7 @@ begin
   end;
 end;
 
-procedure TfrmPCSLocalControlPanel.vrtryswtchPreStartInhibitionChange(
-  Sender: TObject);
+procedure TfrmPCSLocalControlPanel.vrtryswtchPreStartPSChange(Sender: TObject);
 begin
   if (TVrRotarySwitch(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
@@ -1384,7 +1451,7 @@ begin
   end;
 end;
 
-procedure TfrmPCSLocalControlPanel.vrtryswtchRemoteChange(Sender: TObject);
+procedure TfrmPCSLocalControlPanel.vrtryswtchRemotePSChange(Sender: TObject);
 begin
   if TVrRotarySwitch(Sender).Tag = 0 then
   begin
@@ -1402,7 +1469,8 @@ begin
   end;
 end;
 
-procedure TfrmPCSLocalControlPanel.vrtryswtchSpeedChange(Sender: TObject);
+
+procedure TfrmPCSLocalControlPanel.vrtryswtchSpeedPSChange(Sender: TObject);
 begin
   if (TVrRotarySwitch(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
@@ -1438,7 +1506,7 @@ begin
   end;
 end;
 
-procedure TfrmPCSLocalControlPanel.vrtryswtchTCControlChange(Sender: TObject);
+procedure TfrmPCSLocalControlPanel.vrtryswtchSTC_PSChange(Sender: TObject);
 begin
   if (TVrRotarySwitch(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
@@ -1455,5 +1523,6 @@ begin
       main_engine_SB.STCInManualMode := False;
   end;
 end;
+
 
 end.

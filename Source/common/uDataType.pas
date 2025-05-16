@@ -423,6 +423,7 @@ type
       epPCSMEPressAirInlet, epPCSMETempSuperChargAir, epPCSMEPressFOInlet, epPCSMETempFWHTOutlet,
       epPCSMETempFWHTInlet, epPCSMEPressFWHTInlet, epPCSMEPressSeaWaterOutlet, epPCSMELOPressInlet,
       epPCSMELOTempInlet, epPCSMEAlarmPropulsionCheck,
+      epPCSSpeedState,
 
       epPCSMEAvgTempA, epPCSMEAvgTempB, epPCSMECompProbA, epPCSMECompProbB,
       epPCSMETempExhCylA1, epPCSMETempExhCylA2, epPCSMETempExhCylA3, epPCSMETempExhCylA4, epPCSMETempExhCylA5,
@@ -458,7 +459,7 @@ type
       epPCSMEResetSafetyStopPossible,
 
       epPCSMERemoteControlProposed, epPCSMEStartingInProgress, epPCSME2TCMode,
-      epPCSMEStartingInterlocks, epPCSMESafetiesStop, epPCSMEPreStart,
+      epPCSMEStartingInterlocks, epPCSMESafetiesStop, epPCSMEPreStart, epPCSMESTCInManualModePS,
 
       //Main Engine Failure
       epPCSMEFailure, epPCSMEFailurePS, epPCSMEFailureSB,

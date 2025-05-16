@@ -11,6 +11,8 @@ type
 
     FRunningHours : Integer;
     FRunningHourTemp : Integer;
+    FRemoteControl : Boolean;
+    FSTCInManual : Boolean;
 
     FDelayRandom,
     FDelayer,
@@ -50,6 +52,7 @@ type
     FAlarmPropulsionCheck : Double;
 
     FLeverControl : Integer;
+    FSpeedState : Integer;
 
     FTempExhCylA, FTempExhCylB,
     FDevTempExhCylA, FDevTempExhCylB,
@@ -150,7 +153,10 @@ type
     FTankIsEmpty,
     FPreStartInhibition: Boolean;
 
+    // Main Engine 2
     procedure SetRunningHours(const Value: Integer);
+    procedure SetRemoteControl(const Value: Boolean);
+    procedure SetSTCInManual(const Value: Boolean);
 
     procedure SetSetpointSpeed(const Value: Double);
     procedure SetLeverSpeed(const Value: Double);
@@ -186,6 +192,7 @@ type
     procedure SetCompProbB(const Value : Double);
     procedure SetAlarmPropulsionCheck(const Value : Double);
     procedure SetLeverControl(const Value : Integer);
+    procedure SetSpeedState(const Value : Integer);
 
     function GetTempExhCylA(i: Integer):Double;
     function GetTempExhCylB(i: Integer): Double;
@@ -379,6 +386,9 @@ type
 
     property LeverControl : Integer read FLeverControl write SetLeverControl;
 
+    {0: Lower; 1: off; 2: Rise}
+    property SpeedState : Integer read FSpeedState write SetSpeedState;
+
     property EngineRun : Boolean read FEngineRun write SetEngineRun;
     property ReadyForUse : Boolean read FReadyForUse write SetReadyForUse;
     property RemoteManual : Boolean read FRemoteManual write SetRemoteManual;
@@ -508,9 +518,19 @@ begin
     end;
 
     if IncreaseSpeed then
-      SetSpeedInManual(1)
+    begin
+      SetSpeedInManual(1);
+      SpeedState := 2;
+    end
     else if DecreaseSpeed then
+    begin
       SetSpeedInManual(-1);
+      SpeedState := 0;
+    end
+    else
+    begin
+      SpeedState := 1;
+    end;
 
     if ActualSpeed >= 900 then
       TC2Mode := True
@@ -574,6 +594,15 @@ begin
         SetPointSpeed := 0;
     end;
   end;
+end;
+
+procedure TMainEngine.SetSpeedState(const Value: Integer);
+begin
+  if FSpeedState = Value then
+    Exit;
+
+  FSpeedState := Value;
+  Listener.TriggerEvents(Self,epPCSSpeedState, Value);
 end;
 
 procedure TMainEngine.calcConRodBearTemp(aTemp: Double);
@@ -922,7 +951,7 @@ begin
     exit;
 
   FActualSpeed := Value;
-//  Listener.TriggerEvents(Self,epPCSMEActualSpeed, Value);
+  Listener.TriggerEvents(Self,epPCSMEActualSpeed, Value);     {comment dibuka}
 end;
 
 procedure TMainEngine.SetAirValve(const Value: Boolean);
@@ -1425,6 +1454,7 @@ begin
     Exit;
 
   FDecreaseSpeed := Value;
+//  Listener.TriggerEvents(Self,epPCSMEStopDecrease,Value);{tambahan sendiri}
 end;
 
 procedure TMainEngine.SetDelayActualSpeed(const Value: Double);
@@ -1660,6 +1690,7 @@ begin
     Exit;
 
   FIncreaseSpeed := Value;
+//  Listener.TriggerEvents(Self,epPCSMEStopIncrease,Value);{tambahan sendiri}
 end;
 
 procedure TMainEngine.SetInjPipeALeakFO(const Value: Boolean);
@@ -1999,6 +2030,7 @@ begin
     Exit;
 
   FPreStartInhibition := Value;
+  Listener.TriggerEvents(Self,epPCSMEPreStart,Value); {Tambahan Main Engine}
 end;
 
 procedure TMainEngine.SetPrimLOPump(const Value: Boolean);
@@ -2044,6 +2076,26 @@ begin
 
   FRemoteAuto := Value;
   Listener.TriggerEvents(Self,epPCSMERemoteAuto, Value);
+end;
+
+// Main Engine 2
+procedure TMainEngine.SetRemoteControl(const Value: Boolean);
+begin
+  if FRemoteControl then
+    Exit;
+
+  FRemoteControl := Value;
+  Listener.TriggerEvents(Self, epPCSMERemoteControl, Value);
+end;
+
+procedure TMainEngine.SetSTCInManual(const Value: Boolean);
+begin
+  if FSTCInManual then
+    Exit;
+
+  FSTCInManual := Value;
+  PC_Alarms[5] := Value;
+  Listener.TriggerEvents(Self, epPCSMESTCInManualModePS, Value);
 end;
 
 procedure TMainEngine.SetRemoteControlProposed(const Value: Boolean);

@@ -65,7 +65,6 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Width = 233
         Height = 225
         Radius = 80
-        OnChange = vrtryswtchRemoteChange
         SwitchPositions.Strings = (
           'Local'
           'Remote')
@@ -80,6 +79,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Font.Height = -11
         Font.Name = 'Arial'
         Font.Style = [fsBold]
+        OnClick = vrtryswtchRemotePSClick
       end
     end
     object grpSpeed: TGroupBox
@@ -112,7 +112,6 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Width = 263
         Height = 229
         Radius = 80
-        OnChange = vrtryswtchSpeedChange
         SwitchPositions.Strings = (
           'Lower'
           ''
@@ -129,6 +128,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Font.Height = -11
         Font.Name = 'Arial'
         Font.Style = [fsBold]
+        OnClick = vrtryswtchSpeedPSClick
       end
     end
     object grpPreStartingInhibition: TGroupBox
@@ -161,7 +161,6 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Width = 263
         Height = 197
         Radius = 80
-        OnChange = vrtryswtchPreStartInhibitionChange
         SwitchPositions.Strings = (
           'Inhibition'
           'On')
@@ -176,6 +175,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Font.Height = -11
         Font.Name = 'Arial'
         Font.Style = [fsBold]
+        OnClick = vrtryswtchPreStartPSClick
       end
     end
     object grpSTCControl: TGroupBox
@@ -208,7 +208,6 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Width = 239
         Height = 210
         Radius = 80
-        OnChange = vrtryswtchSTCHChange
         SwitchPositions.Strings = (
           '2 TC'
           'AUTO'
@@ -225,6 +224,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         Font.Height = -11
         Font.Name = 'Arial'
         Font.Style = [fsBold]
+        OnClick = vrtryswtchSTC_PSClick
       end
     end
     object GroupBox1: TGroupBox
