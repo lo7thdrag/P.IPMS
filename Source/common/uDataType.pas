@@ -459,7 +459,7 @@ type
       epPCSMEResetSafetyStopPossible,
 
       epPCSMERemoteControlProposed, epPCSMEStartingInProgress, epPCSME2TCMode,
-      epPCSMEStartingInterlocks, epPCSMESafetiesStop, epPCSMEPreStart, epPCSMESTCInManualModePS,
+      epPCSMEStartingInterlocks, epPCSMESafetiesStop, epPCSMEPreStart, epPCSMESTCInManual,
 
       //Main Engine Failure
       epPCSMEFailure, epPCSMEFailurePS, epPCSMEFailureSB,

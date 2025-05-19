@@ -47,7 +47,10 @@ type
     procedure vrtryswtchLowerSpeedPS(aPortStarboard: string; aSwitchPos: Boolean);
     procedure vrtryswtchRiseSpeedPS(aPortStarboard: string; aSwitchPos: Integer);
     procedure vrtryswtchOffSpeedPS(aPortStarboard: string; aSwitchPos: Boolean);
-    procedure vrtryswtchSTC_PS(aPortStarboard: string; aValue: Boolean);
+
+    procedure vrtryswtchAutoSTC_PS(aPortStarboard: string; aSwitchPos: Integer);
+    procedure vrtryswtch1TCSTC_PS(aPortStarboard: string; aSwitchPos: Boolean);
+    procedure vrtryswtch2TCSTC_PS(aPortStarboard: string; aSwitchPos: Boolean);
     procedure vrtryswtchPreStartInhibitionPS(aPortStarboard: string; aValue: Boolean);
 
     procedure RunningStart(aPortStarboard: String);
@@ -194,7 +197,15 @@ begin
       end;
     end;
 
-    epPCSMESTCInManualMode, epPCSMEPreStart:
+    epPCSMERunning :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+
+    epPCSMEPreStart :
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
       begin
@@ -210,6 +221,11 @@ begin
     epPCSSpeedState :
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
+    end;
+
+    epPCSMESTCInManual :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt);
     end;
   end;
 end;
@@ -302,31 +318,51 @@ var
 begin
   recCmd.PortStaboardID := aPortStarboard;
   recCmd.CommandPropsID := epPCSMEStopDecrease;
-  recCmd.ValueBool       := not aSwitchPos;
+  recCmd.ValueBool      := not aSwitchPos;
 
   Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 
   recCmd.PortStaboardID := aPortStarboard;
   recCmd.CommandPropsID := epPCSMEStopIncrease;
-  recCmd.ValueBool       := aSwitchPos;
+  recCmd.ValueBool      := aSwitchPos;
 
   Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
-procedure TMainEngine2System.vrtryswtchOffSpeedPS(aPortStarboard: string;
-  aSwitchPos: Boolean);
+procedure TMainEngine2System.vrtryswtchOffSpeedPS(aPortStarboard: string; aSwitchPos: Boolean);
 begin
 
 end;
 
-procedure TMainEngine2System.vrtryswtchSTC_PS(aPortStarboard: string; aValue: Boolean);
+procedure TMainEngine2System.vrtryswtch1TCSTC_PS(aPortStarboard: string; aSwitchPos: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+//  recCmd.PortStaboardID := aPortStarboard;
+//  recCmd.CommandPropsID := epPCSMESTCInManualMode;
+//  recCmd.ValueBool      := not aSwitchPos;
+//
+//  Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine2System.vrtryswtch2TCSTC_PS(aPortStarboard: string; aSwitchPos: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+//  recCmd.PortStaboardID := aPortStarboard;
+//  recCmd.CommandPropsID := epPCSMESTCInManualMode;
+//  recCmd.ValueBool      := not aSwitchPos;
+//
+//  Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine2System.vrtryswtchAutoSTC_PS(aPortStarboard: string; aSwitchPos: Integer);
 var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
-//  recCmd.CommandPropsID := epPCSMESTCInManualMode;
-  recCmd.CommandPropsID := epPCSMESTCInManualModePS;
-  recCmd.ValueBool      := aValue;
+  recCmd.CommandPropsID := epPCSMESTCInManual;
+  recCmd.ValueInt       := aSwitchPos;
 
   Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;

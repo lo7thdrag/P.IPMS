@@ -12,7 +12,7 @@ type
     FRunningHours : Integer;
     FRunningHourTemp : Integer;
     FRemoteControl : Boolean;
-    FSTCInManual : Boolean;
+    FSTCInManual : Integer;
 
     FDelayRandom,
     FDelayer,
@@ -53,6 +53,9 @@ type
 
     FLeverControl : Integer;
     FSpeedState : Integer;
+
+    FSTCState : Integer;
+    F2TCState : Boolean;
 
     FTempExhCylA, FTempExhCylB,
     FDevTempExhCylA, FDevTempExhCylB,
@@ -156,7 +159,8 @@ type
     // Main Engine 2
     procedure SetRunningHours(const Value: Integer);
     procedure SetRemoteControl(const Value: Boolean);
-    procedure SetSTCInManual(const Value: Boolean);
+    procedure SetSTCInManual(const Value: Integer);
+    procedure Set2TCInManual(const Value: Boolean);
 
     procedure SetSetpointSpeed(const Value: Double);
     procedure SetLeverSpeed(const Value: Double);
@@ -389,6 +393,10 @@ type
     {0: Lower; 1: off; 2: Rise}
     property SpeedState : Integer read FSpeedState write SetSpeedState;
 
+    {0: 2TC; 1: Auto; 2: 1TC}
+    property STCState : Integer read FSTCState write SetSTCInManual;
+    property S2TCState : Boolean read F2TCState write Set2TCInManual;
+
     property EngineRun : Boolean read FEngineRun write SetEngineRun;
     property ReadyForUse : Boolean read FReadyForUse write SetReadyForUse;
     property RemoteManual : Boolean read FRemoteManual write SetRemoteManual;
@@ -530,6 +538,19 @@ begin
     else
     begin
       SpeedState := 1;
+    end;
+
+    if not STCInManualMode then
+    begin
+      STCState := 1
+    end
+    else if S2TCState then
+    begin
+      STCState := 0
+    end
+    else
+    begin
+      STCState := 2
     end;
 
     if ActualSpeed >= 900 then
@@ -935,6 +956,7 @@ function TMainEngine.GetTempExhCylB(i: Integer): Double;
 begin
   Result := FTempExhCylB[i];
 end;
+
 
 procedure TMainEngine.Set2TCMode(const Value: Boolean);
 begin
@@ -2079,6 +2101,24 @@ begin
 end;
 
 // Main Engine 2
+procedure TMainEngine.SetSTCInManual(const Value: Integer);
+begin
+  if FSTCInManual = Value then
+    Exit;
+
+  FSTCInManual := Value;
+
+  Listener.TriggerEvents(Self, epPCSMESTCInManual, Value);
+end;
+
+procedure TMainEngine.Set2TCInManual(const Value: Boolean);
+begin
+  if F2TCState = Value then
+    Exit;
+
+  F2TCState := Value;
+end;
+
 procedure TMainEngine.SetRemoteControl(const Value: Boolean);
 begin
   if FRemoteControl then
@@ -2086,16 +2126,6 @@ begin
 
   FRemoteControl := Value;
   Listener.TriggerEvents(Self, epPCSMERemoteControl, Value);
-end;
-
-procedure TMainEngine.SetSTCInManual(const Value: Boolean);
-begin
-  if FSTCInManual then
-    Exit;
-
-  FSTCInManual := Value;
-  PC_Alarms[5] := Value;
-  Listener.TriggerEvents(Self, epPCSMESTCInManualModePS, Value);
 end;
 
 procedure TMainEngine.SetRemoteControlProposed(const Value: Boolean);

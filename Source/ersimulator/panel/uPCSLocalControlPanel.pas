@@ -937,12 +937,12 @@ begin
           else
             vrtryswtchRemotePS.SwitchPosition := 1;
         end;
-        epPCSMESTCInManualMode :
+        epPCSMEPreStart :
         begin
           if Value then
-             vrtryswtchSTC_PS.SwitchPosition := 1
+            vrtryswtchPreStartPS.SwitchPosition := 0
           else
-            vrtryswtchSTC_PS.SwitchPosition := 0;
+            vrtryswtchPreStartPS.SwitchPosition := 1;
         end;
       end;
     end
@@ -985,6 +985,10 @@ begin
         epPCSSpeedState :
         begin
           vrtryswtchSpeedPS.SwitchPosition := Value;
+        end;
+        epPCSMESTCInManual :
+        begin
+          vrtryswtchSTC_PS.SwitchPosition := Value;
         end;
       end;
     end;
@@ -1523,6 +1527,5 @@ begin
       main_engine_SB.STCInManualMode := False;
   end;
 end;
-
 
 end.

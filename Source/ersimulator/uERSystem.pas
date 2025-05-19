@@ -196,6 +196,26 @@ begin
         FOnPCSCommand(rPCSCmd);
     end;
 
+    {Main Engine 2}
+    epPCSMEPreStart :
+    begin
+      if Sender is TMainEngine then
+      begin
+        rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
+      end;
+
+      rPCSCmd.CommandPropsID := PropsID;
+      rPCSCmd.ValueBool := Value;
+//      if Value then
+//        rPCSCmd.ValueInt := 1
+//      else
+//        rPCSCmd.ValueInt := 0;
+
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      if Assigned(FOnPCSCommand) then
+         FOnPCSCommand(rPCSCmd)
+    end;
+
     {Paket data hanya dikirimkan ke Panel PCS}
     epPCSCtrlLamptTest:
     begin
@@ -354,6 +374,19 @@ begin
          FOnPCSCommand(rPCSCmd);
     end;
 
+   epPCSMESTCInManual :
+   begin
+      if Sender is TMainEngine then
+      begin
+        rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
+      end;
+
+      rPCSCmd.CommandPropsID := PropsID;
+      rPCSCmd.ValueInt := Value;
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      if Assigned(FOnPCSCommand) then
+        FOnPCSCommand(rPCSCmd);
+   end;
 
     epPMSGeneratorMode, epPMSGeneratorState, epPMSGeneratorRunningHours:
     begin
@@ -708,8 +741,6 @@ procedure TERSystem.NetEvent_PCSCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
   recERPCS : ^R_Common_PCS_Command;
   main_engine : TMainEngine;
-  main_engine_PS : TMainEngine;
-  main_engine_SB : TMainEngine;
   gearbox : TGearBox;
 begin
   recERPCS := @apRec^;
@@ -762,19 +793,35 @@ begin
       end;
     end;
 
-    epPCSMESTCInManualModePS :
-    begin
-      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
-      main_engine.STCInManualMode := recERPCS.ValueBool;
-    end;
-
     epPCSMEPreStart :
     begin
-      ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(recERPCS.PortStaboardID);
       main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(recERPCS.PortStaboardID);
       main_engine.PreStartInhibition := recERPCS.ValueBool;
     end;
 
+    epPCSMESTCInManual :
+    begin
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+
+      case recERPCS.ValueInt of
+        0 : {2 TC}
+        begin
+          main_engine.STCInManualMode := True;
+          main_engine.S2TCState := True;
+        end;
+        1 : {Auto}
+        begin
+          main_engine.STCInManualMode := False;
+          main_engine.S2TCState := False;
+        end;
+        2 : {1 TC}
+        begin
+          main_engine.STCInManualMode := True;
+          main_engine.S2TCState := False;
+        end;
+      end;
+    end;
   end;
 
   case recERPCS.CommandID of

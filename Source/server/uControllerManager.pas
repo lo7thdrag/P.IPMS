@@ -1139,6 +1139,9 @@ begin
     epPCSMERemoteControlProposed, epPCSMEStartingInProgress, epPCSME2TCMode, epPCSGBClutched,
     epPCSGBDeclutched, epPCSGBSafetyDeclutch,
 
+    //Main Engine 2
+    epPCSMERemoteControl, epPCSMESTCInManualMode, epPCSMEPreStart, epPCSMEActualSpeed, epPCSMESTCInManual,
+
     epPCSMEFanExhSupply, epPCSMEFanSupply1, epPCSMEFanSupply2:
     begin
       if aElement.ElementType = eltSWE then
@@ -1230,7 +1233,7 @@ begin
     epPCSMELOPressureVeryLow, epPCSMEBearTempVeryHigh, epPCSMEFwHtExpTkLevelVeryLow, epPCSMEFwTempVeryHigh,
     epPCSMEConRodBearTempVeryHigh, epPCSMERedGearSafetyStop, epPCSMEOilMistDetHigh, epPCSMEEmergencyShutdown,
     epPCSMELocalEmergencyStop, epPCSMEEngInletLubOilVeryHigh, epPCSMEEngineControllerWatchdog, epPCSMECtrlPowerSupplyOn,
-    epPCSMESafetyPowerSuppOn, epPCSMESTCSequenceAlarm, epPCSMEGovernorMinorFail, epPCSMESTCInManualMode, epPCSMELocalCtrlFail,
+    epPCSMESafetyPowerSuppOn, epPCSMESTCSequenceAlarm, epPCSMEGovernorMinorFail, epPCSMELocalCtrlFail,
     epPCSMEClutchFail, epPCSMEDeclutchFail, epPCSMECommFailEC_PLC, epPCSMEPLCMonitoringFail, epPCSMEClutchFailure,
     epPCSMEBridgeLeverOORFailure, epPCSMEMCRLeverOORFailure, epPCSMEGeneralSensorFailure, epPCSMETrailAlarm,
     epPCSMEResetSafetyStopPossible,
@@ -1399,7 +1402,7 @@ begin
     epPCSMELOPressureVeryLow, epPCSMEBearTempVeryHigh, epPCSMEFwHtExpTkLevelVeryLow, epPCSMEFwTempVeryHigh,
     epPCSMEConRodBearTempVeryHigh, epPCSMERedGearSafetyStop, epPCSMEOilMistDetHigh, epPCSMEEmergencyShutdown,
     epPCSMELocalEmergencyStop, epPCSMEEngInletLubOilVeryHigh, epPCSMEEngineControllerWatchdog, epPCSMECtrlPowerSupplyOn,
-    epPCSMESafetyPowerSuppOn, epPCSMESTCSequenceAlarm, epPCSMEGovernorMinorFail, epPCSMESTCInManualMode, epPCSMELocalCtrlFail,
+    epPCSMESafetyPowerSuppOn, epPCSMESTCSequenceAlarm, epPCSMEGovernorMinorFail, epPCSMELocalCtrlFail,
     epPCSMEClutchFail, epPCSMEDeclutchFail, epPCSMECommFailEC_PLC, epPCSMEPLCMonitoringFail, epPCSMEClutchFailure,
     epPCSMEBridgeLeverOORFailure, epPCSMEMCRLeverOORFailure, epPCSMEGeneralSensorFailure, epPCSMETrailAlarm,
     epPCSMEResetSafetyStopPossible,
@@ -1414,6 +1417,9 @@ begin
     epPCSGBPitchNotZero, epPCSGBPCSClutchInterlock, epPCSGBClutchAllowedLOP,
 
     epPCSCtrlLocal, epPCSCtrlMCR, epPCSCtrlBridge,
+
+    //Main Engine 2
+    epPCSMERemoteControl, epPCSMESTCInManualMode, epPCSMEPreStart, epPCSMEActualSpeed, epPCSMESTCInManual,
 
     epPCSMERemoteControlProposed, epPCSMEStartingInProgress, epPCSME2TCMode, epPCSGBClutched,
     epPCSGBDeclutched, epPCSGBSafetyDeclutch:
@@ -1464,6 +1470,7 @@ begin
     epPCSMEPrimLOPump, epPCSMEPreHeatingPump,
     epPCSCPPPumpStart1, epPCSCPPPumpStart2, epPCSCPPPumpStart3,
     epPCSGBStandbyPump,
+
     epPCSMEFanSupply1:
     begin
       setPCSMCEElementID(recCmd.PortStaboardID, recCmd.ValueBool, recCmd.CommandPropsID);

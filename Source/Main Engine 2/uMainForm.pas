@@ -140,6 +140,10 @@ begin
     begin
       frmSignalingLightME2.vrtryswtchSpeedPS.SwitchPosition := Value;
     end;
+    epPCSMESTCInManual :
+    begin
+      frmSignalingLightME2.vrtryswtchSTC_PS.SwitchPosition := Value;
+    end;
   end;
 end;
 
@@ -161,15 +165,14 @@ begin
         frmSignalingLightME2.vrtryswtchRemotePS.SwitchPosition := 1;
     end;
 
-    epPCSMESTCInManualMode :
+    epPCSMEPreStart :
     begin
       if Value then
-        frmSignalingLightME2.vrtryswtchSTC_PS.SwitchPosition := 1
+        frmSignalingLightME2.vrtryswtchPreStartPS.SwitchPosition := 0
       else
-        frmSignalingLightME2.vrtryswtchSTC_PS.SwitchPosition := 0;
+        frmSignalingLightME2.vrtryswtchPreStartPS.SwitchPosition := 1;
     end;
   end;
-
 end;
 
 procedure TfrmMainForm.MainEngine2SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
