@@ -1,10 +1,10 @@
 object frmSetting: TfrmSetting
   Left = 425
   Top = 102
-  BorderStyle = bsToolWindow
+  BorderStyle = bsNone
   Caption = 'IPMS Setting'
-  ClientHeight = 858
-  ClientWidth = 1077
+  ClientHeight = 887
+  ClientWidth = 1083
   Color = 4799038
   TransparentColor = True
   TransparentColorValue = 3749426
@@ -23,21 +23,17 @@ object frmSetting: TfrmSetting
   object pnlMain: TPanel
     Left = 274
     Top = 75
-    Width = 529
-    Height = 743
+    Width = 535
+    Height = 772
     Align = alClient
     BevelOuter = bvNone
     Color = 3749682
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 270
-    ExplicitTop = 77
-    ExplicitWidth = 535
-    ExplicitHeight = 772
     object pnlPage: TPanel
-      Left = 7
+      Left = 14
       Top = 15
-      Width = 522
+      Width = 506
       Height = 31
       BevelOuter = bvNone
       Color = 7960953
@@ -51,9 +47,9 @@ object frmSetting: TfrmSetting
       TabOrder = 0
     end
     object pnlPCS: TPanel
-      Left = 6
+      Left = 14
       Top = 162
-      Width = 258
+      Width = 250
       Height = 106
       BevelOuter = bvNone
       Color = 7960953
@@ -62,7 +58,7 @@ object frmSetting: TfrmSetting
       object lbl52: TLabel
         Left = 12
         Top = 17
-        Width = 86
+        Width = 80
         Height = 18
         Caption = 'Form Type :'
         Font.Charset = ANSI_CHARSET
@@ -99,9 +95,9 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object cbbPCSFormType: TComboBox
-        Left = 134
+        Left = 129
         Top = 13
-        Width = 113
+        Width = 104
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -118,9 +114,9 @@ object frmSetting: TfrmSetting
           'PCS Kanan')
       end
       object cbbSBScreen: TComboBox
-        Left = 134
+        Left = 129
         Top = 69
-        Width = 113
+        Width = 32
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -136,9 +132,9 @@ object frmSetting: TfrmSetting
           '2')
       end
       object cbbPSScreen: TComboBox
-        Left = 134
+        Left = 129
         Top = 41
-        Width = 113
+        Width = 32
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -375,9 +371,9 @@ object frmSetting: TfrmSetting
       end
     end
     object pnlInstructor: TPanel
-      Left = 6
+      Left = 14
       Top = 52
-      Width = 258
+      Width = 250
       Height = 50
       BevelOuter = bvNone
       Color = 7960953
@@ -397,9 +393,9 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object cbbInstrukturMonitor: TComboBox
-        Left = 134
+        Left = 129
         Top = 12
-        Width = 113
+        Width = 104
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -417,9 +413,9 @@ object frmSetting: TfrmSetting
       end
     end
     object pnlRole: TPanel
-      Left = 271
+      Left = 270
       Top = 52
-      Width = 258
+      Width = 250
       Height = 50
       BevelOuter = bvNone
       Color = 7960953
@@ -439,9 +435,9 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object cbbRoleName: TComboBox
-        Left = 134
+        Left = 129
         Top = 13
-        Width = 113
+        Width = 104
         Height = 26
         Style = csDropDownList
         Font.Charset = ANSI_CHARSET
@@ -461,9 +457,9 @@ object frmSetting: TfrmSetting
       end
     end
     object pnlDG: TPanel
-      Left = 6
+      Left = 14
       Top = 646
-      Width = 258
+      Width = 250
       Height = 50
       BevelOuter = bvNone
       Color = 7960953
@@ -483,9 +479,9 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object cbbDG: TComboBox
-        Left = 134
+        Left = 129
         Top = 14
-        Width = 113
+        Width = 107
         Height = 26
         Style = csDropDownList
         Font.Charset = ANSI_CHARSET
@@ -866,9 +862,9 @@ object frmSetting: TfrmSetting
       end
     end
     object pnlMainEngine: TPanel
-      Left = 6
+      Left = 14
       Top = 383
-      Width = 258
+      Width = 250
       Height = 174
       BevelOuter = bvNone
       Color = 7960953
@@ -881,7 +877,7 @@ object frmSetting: TfrmSetting
       ParentFont = False
       TabOrder = 8
       object lbl59: TLabel
-        Left = 12
+        Left = 15
         Top = 20
         Width = 80
         Height = 18
@@ -894,7 +890,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object lbl60: TLabel
-        Left = 12
+        Left = 15
         Top = 49
         Width = 105
         Height = 18
@@ -907,7 +903,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object lbl61: TLabel
-        Left = 12
+        Left = 15
         Top = 78
         Width = 103
         Height = 18
@@ -920,7 +916,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object lbl62: TLabel
-        Left = 12
+        Left = 15
         Top = 136
         Width = 111
         Height = 18
@@ -933,7 +929,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object lbl63: TLabel
-        Left = 12
+        Left = 15
         Top = 107
         Width = 112
         Height = 18
@@ -946,9 +942,9 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object cbbMEId: TComboBox
-        Left = 134
+        Left = 137
         Top = 45
-        Width = 113
+        Width = 32
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -964,9 +960,9 @@ object frmSetting: TfrmSetting
           '2')
       end
       object cbbMEFormType: TComboBox
-        Left = 134
+        Left = 137
         Top = 16
-        Width = 113
+        Width = 99
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -982,9 +978,9 @@ object frmSetting: TfrmSetting
           'Kiri')
       end
       object cbbMEScreenGauges: TComboBox
-        Left = 134
+        Left = 137
         Top = 74
-        Width = 113
+        Width = 32
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1001,9 +997,9 @@ object frmSetting: TfrmSetting
           '2')
       end
       object cbbMEScreenSignaling: TComboBox
-        Left = 134
+        Left = 137
         Top = 132
-        Width = 113
+        Width = 32
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1020,9 +1016,9 @@ object frmSetting: TfrmSetting
           '2')
       end
       object cbbMEScreenPMS: TComboBox
-        Left = 134
+        Left = 137
         Top = 103
-        Width = 113
+        Width = 32
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1040,9 +1036,9 @@ object frmSetting: TfrmSetting
       end
     end
     object pnlMainSwitchBoard: TPanel
-      Left = 6
+      Left = 14
       Top = 562
-      Width = 258
+      Width = 250
       Height = 79
       BevelOuter = bvNone
       Color = 7960953
@@ -1075,8 +1071,8 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object cbbMsbFormType: TComboBox
-        Left = 134
-        Top = 8
+        Left = 129
+        Top = 12
         Width = 113
         Height = 26
         Font.Charset = ANSI_CHARSET
@@ -1097,7 +1093,7 @@ object frmSetting: TfrmSetting
           'SHORE')
       end
       object cbbMsbGeneratorID: TComboBox
-        Left = 134
+        Left = 129
         Top = 40
         Width = 113
         Height = 26
@@ -1119,9 +1115,9 @@ object frmSetting: TfrmSetting
       end
     end
     object pnlAuxiliary: TPanel
-      Left = 6
+      Left = 14
       Top = 273
-      Width = 258
+      Width = 250
       Height = 105
       BevelOuter = bvNone
       Color = 7960953
@@ -1167,7 +1163,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object cbbAuxFormType: TComboBox
-        Left = 134
+        Left = 129
         Top = 11
         Width = 113
         Height = 26
@@ -1176,19 +1172,19 @@ object frmSetting: TfrmSetting
         Font.Height = -16
         Font.Name = 'Berlin Sans FB'
         Font.Style = []
-        ItemIndex = 0
+        ItemIndex = 1
         ParentFont = False
         ParentShowHint = False
         ShowHint = False
         TabOrder = 0
-        Text = 'AUXILIARY 1'
+        Text = 'AUXILIARY 2'
         Items.Strings = (
           'AUXILIARY 1'
           'AUXILIARY 2'
           'AUXILIARY 3')
       end
       object cbbAuxScreen1: TComboBox
-        Left = 134
+        Left = 129
         Top = 39
         Width = 113
         Height = 26
@@ -1206,7 +1202,7 @@ object frmSetting: TfrmSetting
           '1')
       end
       object cbbAuxScreen2: TComboBox
-        Left = 134
+        Left = 129
         Top = 67
         Width = 113
         Height = 26
@@ -1225,9 +1221,9 @@ object frmSetting: TfrmSetting
       end
     end
     object pnlMimic: TPanel
-      Left = 6
+      Left = 14
       Top = 107
-      Width = 258
+      Width = 250
       Height = 50
       BevelOuter = bvNone
       Color = 7960953
@@ -1247,9 +1243,9 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object cbbMimicMonitor: TComboBox
-        Left = 134
+        Left = 129
         Top = 12
-        Width = 113
+        Width = 104
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1264,11 +1260,85 @@ object frmSetting: TfrmSetting
           '2')
       end
     end
+    object pnlApp: TPanel
+      Left = 271
+      Top = 162
+      Width = 258
+      Height = 106
+      BevelOuter = bvNone
+      Color = 7960953
+      ParentBackground = False
+      TabOrder = 12
+      Visible = False
+      object lbl73: TLabel
+        Left = 18
+        Top = 17
+        Width = 90
+        Height = 18
+        Caption = 'Application 1 :'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Berlin Sans FB'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl74: TLabel
+        Left = 18
+        Top = 73
+        Width = 94
+        Height = 18
+        Caption = 'Application 3 :'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Berlin Sans FB'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl75: TLabel
+        Left = 18
+        Top = 45
+        Width = 94
+        Height = 18
+        Caption = 'Application 2 :'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Berlin Sans FB'
+        Font.Style = []
+        ParentFont = False
+      end
+      object edtAppName: TEdit
+        Left = 126
+        Top = 13
+        Width = 113
+        Height = 21
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object edtAppName2: TEdit
+        Left = 126
+        Top = 41
+        Width = 113
+        Height = 21
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object edtAppName3: TEdit
+        Left = 126
+        Top = 69
+        Width = 113
+        Height = 21
+        ReadOnly = True
+        TabOrder = 2
+      end
+    end
   end
   object pnlHeader: TPanel
     Left = 0
     Top = 0
-    Width = 1077
+    Width = 1083
     Height = 73
     Align = alTop
     BevelOuter = bvNone
@@ -1278,7 +1348,7 @@ object frmSetting: TfrmSetting
     object img1: TImage
       Left = 0
       Top = 0
-      Width = 1077
+      Width = 1083
       Height = 73
       Align = alClient
       Picture.Data = {
@@ -19295,15 +19365,12 @@ object frmSetting: TfrmSetting
     Left = 0
     Top = 75
     Width = 272
-    Height = 743
+    Height = 772
     Align = alLeft
     BevelOuter = bvNone
     Color = 3749682
     ParentBackground = False
     TabOrder = 2
-    ExplicitLeft = 1089
-    ExplicitTop = 45
-    ExplicitHeight = 786
     object pnlConsoleHeader: TPanel
       Left = 15
       Top = 606
@@ -19598,14 +19665,6 @@ object frmSetting: TfrmSetting
         Font.Style = []
         ParentFont = False
       end
-      object edtAppName: TEdit
-        Left = 16
-        Top = 94
-        Width = 209
-        Height = 21
-        ReadOnly = True
-        TabOrder = 0
-      end
       object edtInsHost: TEdit
         Left = 96
         Top = 15
@@ -19617,7 +19676,7 @@ object frmSetting: TfrmSetting
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 0
         Text = '192.168.1.10'
       end
       object edtInsPort: TEdit
@@ -19631,7 +19690,7 @@ object frmSetting: TfrmSetting
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 1
         Text = '9898'
       end
     end
@@ -19801,41 +19860,35 @@ object frmSetting: TfrmSetting
   object pnlSparatorTop: TPanel
     Left = 0
     Top = 73
-    Width = 1077
+    Width = 1083
     Height = 2
     Align = alTop
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 3
-    ExplicitWidth = 1361
   end
   object pnlSparatorLeft: TPanel
     Left = 272
     Top = 75
     Width = 2
-    Height = 743
+    Height = 772
     Align = alLeft
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 4
-    ExplicitLeft = 266
-    ExplicitTop = 83
-    ExplicitHeight = 869
   end
   object pnlRight: TPanel
-    Left = 805
+    Left = 811
     Top = 75
     Width = 272
-    Height = 743
+    Height = 772
     Align = alRight
     BevelOuter = bvNone
     Color = 3749682
     ParentBackground = False
     TabOrder = 5
-    ExplicitLeft = 10
-    ExplicitHeight = 840
     object pnl3: TPanel
       Left = 15
       Top = 15
@@ -20213,7 +20266,7 @@ object frmSetting: TfrmSetting
         Font.Style = []
         ParentFont = False
       end
-      object edt1: TEdit
+      object edtDG2: TEdit
         Left = 128
         Top = 621
         Width = 100
@@ -20227,7 +20280,7 @@ object frmSetting: TfrmSetting
         TabOrder = 24
         Text = '192.168.1.33'
       end
-      object edt2: TEdit
+      object edtDG1: TEdit
         Left = 128
         Top = 598
         Width = 100
@@ -20241,7 +20294,7 @@ object frmSetting: TfrmSetting
         TabOrder = 23
         Text = '192.168.1.32'
       end
-      object edt3: TEdit
+      object edtAUX3: TEdit
         Left = 128
         Top = 562
         Width = 100
@@ -20255,7 +20308,7 @@ object frmSetting: TfrmSetting
         TabOrder = 22
         Text = '192.168.1.31'
       end
-      object edt4: TEdit
+      object edtAUX2: TEdit
         Left = 128
         Top = 539
         Width = 100
@@ -20269,7 +20322,7 @@ object frmSetting: TfrmSetting
         TabOrder = 21
         Text = '192.168.1.30'
       end
-      object edt5: TEdit
+      object edtAUX1: TEdit
         Left = 128
         Top = 516
         Width = 100
@@ -20283,7 +20336,7 @@ object frmSetting: TfrmSetting
         TabOrder = 20
         Text = '192.168.1.29'
       end
-      object edt6: TEdit
+      object edtME2SB: TEdit
         Left = 128
         Top = 480
         Width = 100
@@ -20297,7 +20350,7 @@ object frmSetting: TfrmSetting
         TabOrder = 19
         Text = '192.168.1.28'
       end
-      object edt7: TEdit
+      object edtME1SB: TEdit
         Left = 128
         Top = 457
         Width = 100
@@ -20311,7 +20364,7 @@ object frmSetting: TfrmSetting
         TabOrder = 18
         Text = '192.168.1.27'
       end
-      object edt8: TEdit
+      object edtME2PS: TEdit
         Left = 128
         Top = 434
         Width = 100
@@ -20325,7 +20378,7 @@ object frmSetting: TfrmSetting
         TabOrder = 17
         Text = '192.168.1.26'
       end
-      object edt9: TEdit
+      object edtME1PS: TEdit
         Left = 128
         Top = 411
         Width = 100
@@ -20339,7 +20392,7 @@ object frmSetting: TfrmSetting
         TabOrder = 16
         Text = '192.168.1.25'
       end
-      object edt10: TEdit
+      object edtShore: TEdit
         Left = 128
         Top = 375
         Width = 100
@@ -20353,7 +20406,7 @@ object frmSetting: TfrmSetting
         TabOrder = 15
         Text = '192.168.1.24'
       end
-      object edt11: TEdit
+      object edtGenEmergency: TEdit
         Left = 128
         Top = 352
         Width = 100
@@ -20367,7 +20420,7 @@ object frmSetting: TfrmSetting
         TabOrder = 14
         Text = '192.168.1.23'
       end
-      object edt12: TEdit
+      object edtGenSBAFT: TEdit
         Left = 128
         Top = 329
         Width = 100
@@ -20381,7 +20434,7 @@ object frmSetting: TfrmSetting
         TabOrder = 13
         Text = '192.168.1.22'
       end
-      object edt13: TEdit
+      object edtGenPSAFT: TEdit
         Left = 128
         Top = 306
         Width = 100
@@ -20395,7 +20448,7 @@ object frmSetting: TfrmSetting
         TabOrder = 12
         Text = '192.168.1.21'
       end
-      object edt14: TEdit
+      object edtGenSBFWD: TEdit
         Left = 128
         Top = 283
         Width = 100
@@ -20563,7 +20616,7 @@ object frmSetting: TfrmSetting
         TabOrder = 1
         Text = '192.168.1.10'
       end
-      object edt15: TEdit
+      object edtDG3: TEdit
         Left = 128
         Top = 644
         Width = 100
@@ -20577,7 +20630,7 @@ object frmSetting: TfrmSetting
         TabOrder = 25
         Text = '192.168.1.34'
       end
-      object edt16: TEdit
+      object edtDG4: TEdit
         Left = 128
         Top = 667
         Width = 100
@@ -20594,37 +20647,33 @@ object frmSetting: TfrmSetting
     end
   end
   object pnlSparatorRight: TPanel
-    Left = 803
+    Left = 809
     Top = 75
     Width = 2
-    Height = 743
+    Height = 772
     Align = alRight
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 6
-    ExplicitLeft = 280
-    ExplicitHeight = 869
   end
   object pnlFooter: TPanel
     Left = 0
-    Top = 818
-    Width = 1077
+    Top = 847
+    Width = 1083
     Height = 40
     Align = alBottom
     BevelOuter = bvNone
     Color = 3749426
     ParentBackground = False
     TabOrder = 7
-    ExplicitTop = 904
-    ExplicitWidth = 1083
     DesignSize = (
-      1077
+      1083
       40)
     object img6: TImage
       Left = 0
       Top = 0
-      Width = 1077
+      Width = 1083
       Height = 40
       Align = alClient
       Picture.Data = {

@@ -530,87 +530,87 @@ end;
 
 function TSetting.GetGenPsFwdIP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'GenPsFwd', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'GenPsFwd', '192.168.1.19');
 end;
 
 function TSetting.GetGenSbFwdIP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'GenSbFwd', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'GenSbFwd', '192.168.1.20');
 end;
 
 function TSetting.GetGenPsAftIP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'GenPsAft', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'GenPsAft', '192.168.1.21');
 end;
 
 function TSetting.GetGenSbAftIP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'GenSbAft', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'GenSbAft', '192.168.1.22');
 end;
 
 function TSetting.GetGenEmergencyIP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'GenEmergency', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'GenEmergency', '192.168.1.23');
 end;
 
 function TSetting.GetShoreIP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'Shore', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'Shore', '192.168.1.24');
 end;
 
 function TSetting.GetMainEngine1PsIP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'MainEngine1Ps', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'MainEngine1Ps', '192.168.1.25');
 end;
 
 function TSetting.GetMainEngine2PsIP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'MainEngine2Ps', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'MainEngine2Ps', '192.168.1.26');
 end;
 
 function TSetting.GetMainEngine1SbIP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'MainEngine1Sb', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'MainEngine1Sb', '192.168.1.27');
 end;
 
 function TSetting.GetMainEngine2SbIP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'MainEngine2Sb', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'MainEngine2Sb', '192.168.1.28');
 end;
 
 function TSetting.GetAuxiliary1IP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'Auxiliary1', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'Auxiliary1', '192.168.1.29');
 end;
 
 function TSetting.GetAuxiliary2IP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'Auxiliary2', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'Auxiliary2', '192.168.1.30');
 end;
 
 function TSetting.GetAuxiliary3IP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'Auxiliary3', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'Auxiliary3', '192.168.1.31');
 end;
 
 function TSetting.GetDieselGenerator1IP: string;
 begin
-   Result := FIniFile.ReadString('CONSOLE', 'DieselGenerator1', '192.168.1.18');
+   Result := FIniFile.ReadString('CONSOLE', 'DieselGenerator1', '192.168.1.32');
 end;
 
 function TSetting.GetDieselGenerator2IP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'DieselGenerator2', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'DieselGenerator2', '192.168.1.33');
 end;
 
 function TSetting.GetDieselGenerator3IP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'DieselGenerator3', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'DieselGenerator3', '192.168.1.34');
 end;
 
 function TSetting.GetDieselGenerator4IP: string;
 begin
-  Result := FIniFile.ReadString('CONSOLE', 'DieselGenerator4', '192.168.1.18');
+  Result := FIniFile.ReadString('CONSOLE', 'DieselGenerator4', '192.168.1.35');
 end;
 
 procedure TSetting.SetServerIP(const Value: string);

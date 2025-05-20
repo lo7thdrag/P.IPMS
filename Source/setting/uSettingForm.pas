@@ -35,7 +35,6 @@ type
     lbl2: TLabel;
     lbl3: TLabel;
     lbl4: TLabel;
-    edtAppName: TEdit;
     edtInsHost: TEdit;
     edtInsPort: TEdit;
     pnlLpuHeader: TPanel;
@@ -80,20 +79,20 @@ type
     lbl51: TLabel;
     lbl5: TLabel;
     lbl36: TLabel;
-    edt1: TEdit;
-    edt2: TEdit;
-    edt3: TEdit;
-    edt4: TEdit;
-    edt5: TEdit;
-    edt6: TEdit;
-    edt7: TEdit;
-    edt8: TEdit;
-    edt9: TEdit;
-    edt10: TEdit;
-    edt11: TEdit;
-    edt12: TEdit;
-    edt13: TEdit;
-    edt14: TEdit;
+    edtDG2: TEdit;
+    edtDG1: TEdit;
+    edtAUX3: TEdit;
+    edtAUX2: TEdit;
+    edtAUX1: TEdit;
+    edtME2SB: TEdit;
+    edtME1SB: TEdit;
+    edtME2PS: TEdit;
+    edtME1PS: TEdit;
+    edtShore: TEdit;
+    edtGenEmergency: TEdit;
+    edtGenSBAFT: TEdit;
+    edtGenPSAFT: TEdit;
+    edtGenSBFWD: TEdit;
     edtGenPSFWD: TEdit;
     edtServer: TEdit;
     edtCCTVIP: TEdit;
@@ -105,8 +104,8 @@ type
     edtMimicKiriIP: TEdit;
     edtACSIP: TEdit;
     edtInstrukturIP: TEdit;
-    edt15: TEdit;
-    edt16: TEdit;
+    edtDG3: TEdit;
+    edtDG4: TEdit;
     pnlPage: TPanel;
     pnlPCS: TPanel;
     lbl52: TLabel;
@@ -200,6 +199,13 @@ type
     pnlMimic: TPanel;
     lbl56: TLabel;
     cbbMimicMonitor: TComboBox;
+    pnlApp: TPanel;
+    lbl73: TLabel;
+    lbl74: TLabel;
+    lbl75: TLabel;
+    edtAppName: TEdit;
+    edtAppName2: TEdit;
+    edtAppName3: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -241,35 +247,35 @@ var
   listMainSwitchboard: TStringList;
   listAuxiliary: TStringList;
 begin
-  listServoID := TStringList.Create;
-  listServoID.Add(edtIDRPMMEPS.Text);
-  listServoID.Add(edtIDRPMMESB.Text);
-  listServoID.Add(edtIDRPMSHAFTPS.Text);
-  listServoID.Add(edtIDRPMSHAFTSB.Text);
-  listServoID.Add(edtIDCPPPS.Text);
-  listServoID.Add(edtIDCPPSB.Text);
-  listServoID.Add(edtIDRUDDERPS.Text);
-  listServoID.Add(edtIDRUDDERSB.Text);
+//  listServoID := TStringList.Create;
+//  listServoID.Add(edtIDRPMMEPS.Text);
+//  listServoID.Add(edtIDRPMMESB.Text);
+//  listServoID.Add(edtIDRPMSHAFTPS.Text);
+//  listServoID.Add(edtIDRPMSHAFTSB.Text);
+//  listServoID.Add(edtIDCPPPS.Text);
+//  listServoID.Add(edtIDCPPSB.Text);
+//  listServoID.Add(edtIDRUDDERPS.Text);
+//  listServoID.Add(edtIDRUDDERSB.Text);
+//
+//  listServoDeg := TStringList.Create;
+//  listServoDeg.Add(edtDegRPMMEPS.Text);
+//  listServoDeg.Add(edtDegRPMMESB.Text);
+//  listServoDeg.Add(edtDegRPMSHAFTPS.Text);
+//  listServoDeg.Add(edtDegRPMSHAFTSB.Text);
+//  listServoDeg.Add(edtDegCPPPS.Text);
+//  listServoDeg.Add(edtDegCPPSB.Text);
+//  listServoDeg.Add(edtDegRUDDERPS.Text);
+//  listServoDeg.Add(edtDegRUDDERSB.Text);
 
-  listServoDeg := TStringList.Create;
-  listServoDeg.Add(edtDegRPMMEPS.Text);
-  listServoDeg.Add(edtDegRPMMESB.Text);
-  listServoDeg.Add(edtDegRPMSHAFTPS.Text);
-  listServoDeg.Add(edtDegRPMSHAFTSB.Text);
-  listServoDeg.Add(edtDegCPPPS.Text);
-  listServoDeg.Add(edtDegCPPSB.Text);
-  listServoDeg.Add(edtDegRUDDERPS.Text);
-  listServoDeg.Add(edtDegRUDDERSB.Text);
-
-  if cbbModeServo.Text = 'On' then
-    modeServo := 0
-  else if cbbModeServo.Text = 'Off' then
-    modeServo := 1;
-  listMode := TStringList.Create;
-  listMode.Add(IntToStr(modeServo));
-  listMode.Add(edtServoPort.Text);
-  listMode.Add(edtAlarmPort.Text);
-  listMode.Add(edtEmergencyPort.Text);
+//  if cbbModeServo.Text = 'On' then
+//    modeServo := 0
+//  else if cbbModeServo.Text = 'Off' then
+//    modeServo := 1;
+//  listMode := TStringList.Create;
+//  listMode.Add(IntToStr(modeServo));
+//  listMode.Add(edtServoPort.Text);
+//  listMode.Add(edtAlarmPort.Text);
+//  listMode.Add(edtEmergencyPort.Text);
 
   with Setting do
   begin
@@ -284,8 +290,14 @@ begin
     {$REGION ' Save Instructor Setting  '}
     InstructorHost := edtInsHost.Text;
     InstructorPort := edtInsPort.Text;
-    ExecutedApp := edtAppName.Text;
     {$ENDREGION}
+
+    {$REGION ' Save Application Setting  '}
+    ExecutedApp := edtAppName.Text;
+    ExecutedApp2 := edtAppName2.Text;
+    ExecutedApp3 := edtAppName3.Text;
+    {$ENDREGION}
+
     {$REGION ' Save Sim Engine Setting  '}
     SimEngineServer := edtSimEngineSvr.Text;
     SimEnginePort := edtSimEnginePort.Text;
@@ -297,16 +309,38 @@ begin
     {$ENDREGION}
 
     {$REGION ' Save IP Setting  '}
-    InstrukturIP := edtInstrukturIP.Text;
-    Setting.AcsIP := edtACSIP.Text;
-    Setting.MimicKiriIP := edtMimicKiriIP.Text;
-    Setting.PcsKiriIP := edtPCSKiriIP.Text;
-    Setting.MimicTengahIP := edtMimicTengahIP.Text;
-    Setting.PcsKananIP := edtPCSKananIP.Text;
-    Setting.MimicKananIP := edtMimicKananIP.Text;
+    Setting.ServerIP        := edtServer.Text;
+    InstrukturIP            := edtInstrukturIP.Text;
+    Setting.AcsIP           := edtACSIP.Text;
+    Setting.MimicKiriIP     := edtMimicKiriIP.Text;
+    Setting.PcsKiriIP       := edtPCSKiriIP.Text;
+    Setting.MimicTengahIP   := edtMimicTengahIP.Text;
+    Setting.PcsKananIP      := edtPCSKananIP.Text;
+    Setting.MimicKananIP    := edtMimicKananIP.Text;
     Setting.EmergencyStopIP := edtEmergencyStopIP.Text;
-    Setting.CctvIP := edtCCTVIP.Text;
-    Setting.ServerIP := edtServer.Text;
+    Setting.CctvIP          := edtCCTVIP.Text;
+
+    Setting.GenPsFwdIP      :=edtGenPSFWD.Text;
+    Setting.GenSbFwdIP      := edtGenSBFWD.Text;
+    Setting.GenPsAftIP      := edtGenPSAFT.Text;
+    Setting.GenSbAftIP      :=  edtGenPSAFT.Text;
+    Setting.GenEmergencyIP  := edtGenEmergency.Text;
+    Setting.ShoreIP         := edtShore.Text;
+
+    Setting.MainEngine1PsIP := edtME1PS.Text;
+    Setting.MainEngine2PsIP := edtME2PS.Text;
+    Setting.MainEngine1Sb   := edtME1SB.Text;
+    Setting.MainEngine2Sb   := edtME2SB.Text;
+
+    Setting.Auxiliary1      := edtAUX1.Text;
+    Setting.Auxiliary2      := edtAUX2.Text;
+    Setting.Auxiliary3      := edtAUX2.Text;
+
+    Setting.DieselGenerator1:= edtDG1.Text;
+    Setting.DieselGenerator2:= edtDG2.Text;
+    Setting.DieselGenerator3:= edtDG3.Text;
+    Setting.DieselGenerator4:= edtDG4.Text;
+
     {$ENDREGION}
 
     {$REGION ' Save Instructor Screen '}
@@ -360,9 +394,9 @@ begin
     ConsoleMainEngine := listMainEngine;
     {$ENDREGION}
 
-    ServoID := listServoID;
-    servoDegree := listServoDeg;
-    mode := listMode;
+//    ServoID := listServoID;
+//    servoDegree := listServoDeg;
+//    mode := listMode;
 
     Setting.ManualIPMS := 'Manual IPMS.pdf';
     Setting.OperationalInstruktur := 'Operational Instruktur.pdf';
@@ -374,14 +408,16 @@ begin
 
   end;
 
-  listServoID.Free;
-  listServoDeg.Free;
-  listMode.Free;
+//  listServoID.Free;
+//  listServoDeg.Free;
+//  listMode.Free;
   listFormPCS.Free;
   listMainEngine.Free;
   listDG.Free;
   listMainSwitchboard.Free;
   listAuxiliary.Free;
+
+  ShowMessage('Setting has been update');
 
   Application.Terminate;
 end;
@@ -393,13 +429,13 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlInstructor.Left := 6;
+    pnlInstructor.Left := 14;
     pnlInstructor.Top := 52;
 
-    pnlMimic.Left := 6;
+    pnlMimic.Left := 14;
     pnlMimic.Top := 107;
 
-    pnlRole.Left := 271;
+    pnlRole.Left := 270;
     pnlRole.Top := 52;
 
   end
@@ -408,10 +444,10 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlMimic.Left := 6;
+    pnlMimic.Left := 14;
     pnlMimic.Top := 52;
 
-    pnlRole.Left := 271;
+    pnlRole.Left := 270;
     pnlRole.Top := 52;
 
   end
@@ -420,7 +456,7 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlPCS.Left := 6;
+    pnlPCS.Left := 14;
     pnlPCS.Top := 52;
   end
   else if cbbConsoleSetting.Text = 'MIMIC TENGAH' then
@@ -428,13 +464,13 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlMimic.Left := 6;
+    pnlMimic.Left := 14;
     pnlMimic.Top := 52;
 
-    pnlRole.Left := 271;
+    pnlRole.Left := 270;
     pnlRole.Top := 52;
 
-    pnlPCS.Left := 6;
+    pnlPCS.Left := 14;
     pnlPCS.Top := 107;
   end
   else if cbbConsoleSetting.Text = 'PCS KANAN' then
@@ -448,10 +484,10 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlMimic.Left := 6;
+    pnlMimic.Left := 14;
     pnlMimic.Top := 52;
 
-    pnlRole.Left := 271;
+    pnlRole.Left := 270;
     pnlRole.Top := 52;
   end
   else if cbbConsoleSetting.Text = 'EMERGENCY STOP' then
@@ -465,7 +501,7 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlDG.Left := 6;
+    pnlDG.Left := 14;
     pnlDG.Top := 52;
 
   end
@@ -474,7 +510,7 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlMainEngine.Left := 6;
+    pnlMainEngine.Left := 14;
     pnlMainEngine.Top := 52;
 
   end
@@ -483,7 +519,7 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlAuxiliary.Left := 6;
+    pnlAuxiliary.Left := 14;
     pnlAuxiliary.Top := 52;
 
   end
@@ -492,7 +528,7 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlMainSwitchBoard.Left := 6;
+    pnlMainSwitchBoard.Left := 14;
     pnlMainSwitchBoard.Top := 52;
 
   end;
@@ -540,9 +576,9 @@ var
   listAuxiliary: TStringList;
 begin
   Setting := TSetting.Create;
-  listServoID := TStringList.Create;
-  listServoDeg := TStringList.Create;
-  listMode := TStringList.Create;
+//  listServoID := TStringList.Create;
+//  listServoDeg := TStringList.Create;
+//  listMode := TStringList.Create;
 
   {$REGION ' Load Database Setting  '}
   edtConnection.Text := Setting.Database;
@@ -555,7 +591,12 @@ begin
   {$REGION ' Load Instructor Setting  '}
   edtInsHost.Text := Setting.InstructorHost;
   edtInsPort.Text := Setting.InstructorPort;
+  {$ENDREGION}
+
+  {$REGION ' Load Application Setting  '}
   edtAppName.Text := Setting.ExecutedApp;
+  edtAppName2.Text := Setting.ExecutedApp2;
+  edtAppName3.Text := Setting.ExecutedApp3;
   {$ENDREGION}
 
   {$REGION ' Load Sim Engine Setting  '}
@@ -569,17 +610,37 @@ begin
   {$ENDREGION}
 
   {$REGION ' Load IP Setting  '}
-  edtServer.Text := Setting.ServerIP;
-  edtInstrukturIP.Text := Setting.InstrukturIP;
-  edtACSIP.Text := Setting.AcsIP;
-  edtMimicKiriIP.Text := Setting.MimicKiriIP;
-  edtPCSKiriIP.Text := Setting.PcsKiriIP;
-  edtMimicTengahIP.Text := Setting.MimicTengahIP;
-  edtPCSKananIP.Text := Setting.PcsKananIP;
-  edtMimicKananIP.Text := Setting.MimicKananIP;
+  edtServer.Text          := Setting.ServerIP;
+  edtInstrukturIP.Text    := Setting.InstrukturIP;
+  edtACSIP.Text           := Setting.AcsIP;
+  edtMimicKiriIP.Text     := Setting.MimicKiriIP;
+  edtPCSKiriIP.Text       := Setting.PcsKiriIP;
+  edtMimicTengahIP.Text   := Setting.MimicTengahIP;
+  edtPCSKananIP.Text      := Setting.PcsKananIP;
+  edtMimicKananIP.Text    := Setting.MimicKananIP;
   edtEmergencyStopIP.Text := Setting.EmergencyStopIP;
-  edtCCTVIP.Text := Setting.CctvIP;
-  // Kurang
+  edtCCTVIP.Text          := Setting.CctvIP;
+
+  edtGenPSFWD.Text        := Setting.GenPsFwdIP;
+  edtGenSBFWD.Text        := Setting.GenSbFwdIP;
+  edtGenPSAFT.Text        := Setting.GenPsAftIP;
+  edtGenPSAFT.Text        := Setting.GenSbAftIP;
+  edtGenEmergency.Text    := Setting.GenEmergencyIP;
+  edtShore.Text           := Setting.ShoreIP;
+
+  edtME1PS.Text           := Setting.MainEngine1PsIP;
+  edtME2PS.Text           := Setting.MainEngine2PsIP;
+  edtME1SB.Text           := Setting.MainEngine1Sb;
+  edtME2SB.Text           := Setting.MainEngine2Sb;
+
+  edtAUX1.Text            := Setting.Auxiliary1;
+  edtAUX2.Text            := Setting.Auxiliary2;
+  edtAUX2.Text            := Setting.Auxiliary3;
+
+  edtDG1.Text             := Setting.DieselGenerator1;
+  edtDG2.Text             := Setting.DieselGenerator2;
+  edtDG3.Text             := Setting.DieselGenerator3;
+  edtDG4.Text             := Setting.DieselGenerator4;
   {$ENDREGION}
 
   {$REGION ' Load Instructor Screen '}
@@ -630,42 +691,42 @@ begin
   {$ENDREGION}
 
   {$REGION ' Sepertinya gak kepake '}
-  listServoID := Setting.ServoID;
-  listServoDeg := Setting.servoDegree;
-  listMode := Setting.mode;
-
-  edtIDRPMMEPS.Text := listServoID[0];
-  edtIDRPMMESB.Text := listServoID[1];
-  edtIDRPMSHAFTPS.Text := listServoID[2];
-  edtIDRPMSHAFTSB.Text := listServoID[3];
-  edtIDCPPPS.Text := listServoID[4];
-  edtIDCPPSB.Text := listServoID[5];
-  edtIDRUDDERPS.Text := listServoID[6];
-  edtIDRUDDERSB.Text := listServoID[7];
-
-  edtDegRPMMEPS.Text := listServoDeg[0];
-  edtDegRPMMESB.Text := listServoDeg[1];
-  edtDegRPMSHAFTPS.Text := listServoDeg[2];
-  edtDegRPMSHAFTSB.Text := listServoDeg[3];
-  edtDegCPPPS.Text := listServoDeg[4];
-  edtDegCPPSB.Text := listServoDeg[5];
-  edtDegRUDDERPS.Text := listServoDeg[6];
-  edtDegRUDDERSB.Text := listServoDeg[7];
-
-  if listMode[0] = '0' then
-    cbbModeServo.Text := 'On'
-  else if listMode[0] = '1' then
-  begin
-    cbbModeServo.Text := 'Off'
-  end;
-  edtServoPort.Text := listMode[1];
-  edtAlarmPort.Text := listMode[2];
-  edtEmergencyPort.Text := listMode[3];
+//  listServoID := Setting.ServoID;
+//  listServoDeg := Setting.servoDegree;
+//  listMode := Setting.mode;
+//
+//  edtIDRPMMEPS.Text := listServoID[0];
+//  edtIDRPMMESB.Text := listServoID[1];
+//  edtIDRPMSHAFTPS.Text := listServoID[2];
+//  edtIDRPMSHAFTSB.Text := listServoID[3];
+//  edtIDCPPPS.Text := listServoID[4];
+//  edtIDCPPSB.Text := listServoID[5];
+//  edtIDRUDDERPS.Text := listServoID[6];
+//  edtIDRUDDERSB.Text := listServoID[7];
+//
+//  edtDegRPMMEPS.Text := listServoDeg[0];
+//  edtDegRPMMESB.Text := listServoDeg[1];
+//  edtDegRPMSHAFTPS.Text := listServoDeg[2];
+//  edtDegRPMSHAFTSB.Text := listServoDeg[3];
+//  edtDegCPPPS.Text := listServoDeg[4];
+//  edtDegCPPSB.Text := listServoDeg[5];
+//  edtDegRUDDERPS.Text := listServoDeg[6];
+//  edtDegRUDDERSB.Text := listServoDeg[7];
+//
+//  if listMode[0] = '0' then
+//    cbbModeServo.Text := 'On'
+//  else if listMode[0] = '1' then
+//  begin
+//    cbbModeServo.Text := 'Off'
+//  end;
+//  edtServoPort.Text := listMode[1];
+//  edtAlarmPort.Text := listMode[2];
+//  edtEmergencyPort.Text := listMode[3];
   {$ENDREGION}
 
-  listServoID.Free;
-  listServoDeg.Free;
-  listMode.Free;
+//  listServoID.Free;
+//  listServoDeg.Free;
+//  listMode.Free;
   listFormPCS.Free;
   listMainEngine.Free;
   listDG.Free;
