@@ -30,6 +30,8 @@ object frmSetting: TfrmSetting
     Color = 3749682
     ParentBackground = False
     TabOrder = 1
+    ExplicitLeft = 285
+    ExplicitTop = 69
     object pnlPage: TPanel
       Left = 14
       Top = 15
@@ -99,6 +101,7 @@ object frmSetting: TfrmSetting
         Top = 13
         Width = 104
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -106,7 +109,6 @@ object frmSetting: TfrmSetting
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        Text = 'PCS Tengah'
         OnChange = cbbPCSFormTypeChange
         Items.Strings = (
           'PCS Kiri'
@@ -118,6 +120,7 @@ object frmSetting: TfrmSetting
         Top = 69
         Width = 32
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -127,15 +130,17 @@ object frmSetting: TfrmSetting
         ParentFont = False
         TabOrder = 1
         Text = '1'
+        OnChange = cbbSBScreenChange
         Items.Strings = (
           '1'
           '2')
       end
       object cbbPSScreen: TComboBox
         Left = 129
-        Top = 41
+        Top = 45
         Width = 32
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -145,6 +150,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
         TabOrder = 2
         Text = '1'
+        OnChange = cbbPSScreenChange
         Items.Strings = (
           '1'
           '2')
@@ -393,10 +399,11 @@ object frmSetting: TfrmSetting
         ParentFont = False
       end
       object cbbInstrukturMonitor: TComboBox
-        Left = 129
+        Left = 130
         Top = 12
         Width = 104
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -406,7 +413,7 @@ object frmSetting: TfrmSetting
         ParentShowHint = False
         ShowHint = False
         TabOrder = 0
-        Text = '2'
+        OnChange = cbbInstrukturMonitorChange
         Items.Strings = (
           '1'
           '2')
@@ -449,6 +456,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
         TabOrder = 0
         Text = 'IPMS'
+        OnChange = cbbRoleNameChange
         Items.Strings = (
           'IPMS'
           'AUX'
@@ -493,6 +501,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
         TabOrder = 0
         Text = 'Generator 4'
+        OnChange = cbbDGChange
         Items.Strings = (
           'Generator 1'
           'Generator 2'
@@ -944,8 +953,9 @@ object frmSetting: TfrmSetting
       object cbbMEId: TComboBox
         Left = 137
         Top = 45
-        Width = 32
+        Width = 40
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -955,6 +965,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
         TabOrder = 0
         Text = '1'
+        OnChange = cbbMEIdChange
         Items.Strings = (
           '1'
           '2')
@@ -964,15 +975,17 @@ object frmSetting: TfrmSetting
         Top = 16
         Width = 99
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
         Font.Name = 'Berlin Sans FB'
         Font.Style = []
-        ItemIndex = 0
+        ItemIndex = 1
         ParentFont = False
         TabOrder = 1
-        Text = 'Kanan'
+        Text = 'Kiri'
+        OnChange = cbbMEFormTypeChange
         Items.Strings = (
           'Kanan'
           'Kiri')
@@ -980,8 +993,9 @@ object frmSetting: TfrmSetting
       object cbbMEScreenGauges: TComboBox
         Left = 137
         Top = 74
-        Width = 32
+        Width = 40
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -991,6 +1005,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
         TabOrder = 2
         Text = '0'
+        OnChange = cbbMEScreenGaugesChange
         Items.Strings = (
           '0'
           '1'
@@ -999,8 +1014,9 @@ object frmSetting: TfrmSetting
       object cbbMEScreenSignaling: TComboBox
         Left = 137
         Top = 132
-        Width = 32
+        Width = 40
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -1010,6 +1026,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
         TabOrder = 3
         Text = '0'
+        OnChange = cbbMEScreenSignalingChange
         Items.Strings = (
           '0'
           '1'
@@ -1018,8 +1035,9 @@ object frmSetting: TfrmSetting
       object cbbMEScreenPMS: TComboBox
         Left = 137
         Top = 103
-        Width = 32
+        Width = 40
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -1029,6 +1047,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
         TabOrder = 4
         Text = '0'
+        OnChange = cbbMEScreenPMSChange
         Items.Strings = (
           '0'
           '1'
@@ -1075,6 +1094,7 @@ object frmSetting: TfrmSetting
         Top = 12
         Width = 113
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -1107,6 +1127,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
         TabOrder = 1
         Text = 'Generator 1'
+        OnChange = cbbMsbGeneratorIDChange
         Items.Strings = (
           'Generator 1'
           'Generator 2'
@@ -1167,6 +1188,7 @@ object frmSetting: TfrmSetting
         Top = 11
         Width = 113
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -1178,6 +1200,7 @@ object frmSetting: TfrmSetting
         ShowHint = False
         TabOrder = 0
         Text = 'AUXILIARY 2'
+        OnChange = cbbAuxFormTypeChange
         Items.Strings = (
           'AUXILIARY 1'
           'AUXILIARY 2'
@@ -1188,6 +1211,7 @@ object frmSetting: TfrmSetting
         Top = 39
         Width = 113
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -1197,6 +1221,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
         TabOrder = 1
         Text = '0'
+        OnChange = cbbAuxScreen1Change
         Items.Strings = (
           '0'
           '1')
@@ -1206,6 +1231,7 @@ object frmSetting: TfrmSetting
         Top = 67
         Width = 113
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -1215,6 +1241,7 @@ object frmSetting: TfrmSetting
         ParentFont = False
         TabOrder = 2
         Text = '0'
+        OnChange = cbbAuxScreen2Change
         Items.Strings = (
           '0'
           '1')
@@ -1247,6 +1274,7 @@ object frmSetting: TfrmSetting
         Top = 12
         Width = 104
         Height = 26
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -1254,7 +1282,7 @@ object frmSetting: TfrmSetting
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        Text = '1'
+        OnChange = cbbMimicMonitorChange
         Items.Strings = (
           '1'
           '2')
@@ -19414,12 +19442,13 @@ object frmSetting: TfrmSetting
         Left = 96
         Top = 15
         Width = 128
-        Height = 23
+        Height = 21
+        Style = csDropDownList
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -11
         Font.Name = 'Berlin Sans FB'
-        Font.Style = [fsBold]
+        Font.Style = []
         ItemIndex = 0
         ParentFont = False
         TabOrder = 0

@@ -214,6 +214,21 @@ type
     procedure FormShow(Sender: TObject);
     procedure cbbPCSFormTypeChange(Sender: TObject);
     procedure cbbMsbFormTypeChange(Sender: TObject);
+    procedure cbbInstrukturMonitorChange(Sender: TObject);
+    procedure cbbRoleNameChange(Sender: TObject);
+    procedure cbbMimicMonitorChange(Sender: TObject);
+    procedure cbbPSScreenChange(Sender: TObject);
+    procedure cbbSBScreenChange(Sender: TObject);
+    procedure cbbAuxFormTypeChange(Sender: TObject);
+    procedure cbbAuxScreen1Change(Sender: TObject);
+    procedure cbbAuxScreen2Change(Sender: TObject);
+    procedure cbbMEFormTypeChange(Sender: TObject);
+    procedure cbbMEIdChange(Sender: TObject);
+    procedure cbbMEScreenGaugesChange(Sender: TObject);
+    procedure cbbMEScreenPMSChange(Sender: TObject);
+    procedure cbbMEScreenSignalingChange(Sender: TObject);
+    procedure cbbMsbGeneratorIDChange(Sender: TObject);
+    procedure cbbDGChange(Sender: TObject);
   private
     procedure SetMainFormPanel;
   public
@@ -422,8 +437,29 @@ begin
   Application.Terminate;
 end;
 
+procedure TfrmSetting.cbbAuxFormTypeChange(Sender: TObject);
+begin
+if cbbAuxFormType.ItemIndex = -1 then
+    cbbAuxFormType.ItemIndex := 0;
+end;
+
+procedure TfrmSetting.cbbAuxScreen1Change(Sender: TObject);
+begin
+if cbbAuxScreen1.ItemIndex = -1 then
+    cbbAuxScreen1.ItemIndex := 0;
+end;
+
+procedure TfrmSetting.cbbAuxScreen2Change(Sender: TObject);
+begin
+if cbbAuxScreen2.ItemIndex = -1 then
+    cbbAuxScreen2.ItemIndex := 0;
+end;
+
 procedure TfrmSetting.cbbConsoleSettingChange(Sender: TObject);
 begin
+  if cbbConsoleSetting.ItemIndex = -1 then
+    cbbConsoleSetting.ItemIndex := 0;
+
   if cbbConsoleSetting.Text = 'INSTRUCTOR' then
   begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
@@ -534,8 +570,59 @@ begin
   end;
 end;
 
+procedure TfrmSetting.cbbDGChange(Sender: TObject);
+begin
+if cbbDG.ItemIndex = -1 then
+    cbbDG.ItemIndex := 0;
+end;
+
+procedure TfrmSetting.cbbInstrukturMonitorChange(Sender: TObject);
+begin
+  if cbbInstrukturMonitor.ItemIndex = -1 then
+    cbbInstrukturMonitor.ItemIndex := 0;
+end;
+
+procedure TfrmSetting.cbbMEFormTypeChange(Sender: TObject);
+begin
+  if cbbMEFormType.ItemIndex = -1 then
+    cbbMEFormType.ItemIndex := 0;
+end;
+
+procedure TfrmSetting.cbbMEIdChange(Sender: TObject);
+begin
+  if cbbMEId.ItemIndex = -1 then
+    cbbMEId.ItemIndex := 0;
+end;
+
+procedure TfrmSetting.cbbMEScreenGaugesChange(Sender: TObject);
+begin
+if cbbMEScreenGauges.ItemIndex = -1 then
+    cbbMEScreenGauges.ItemIndex := 0;
+end;
+
+procedure TfrmSetting.cbbMEScreenPMSChange(Sender: TObject);
+begin
+if cbbMEScreenPMS.ItemIndex = -1 then
+    cbbMEScreenPMS.ItemIndex := 0;
+end;
+
+procedure TfrmSetting.cbbMEScreenSignalingChange(Sender: TObject);
+begin
+  if cbbMEScreenSignaling.ItemIndex = -1 then
+    cbbMEScreenSignaling.ItemIndex := 0;
+end;
+
+procedure TfrmSetting.cbbMimicMonitorChange(Sender: TObject);
+begin
+if cbbMimicMonitor.ItemIndex = -1 then
+    cbbMimicMonitor.ItemIndex := 0;
+end;
+
 procedure TfrmSetting.cbbMsbFormTypeChange(Sender: TObject);
 begin
+  if cbbMsbFormType.ItemIndex = -1 then
+    cbbMsbFormType.ItemIndex := 0;
+
   cbbMsbGeneratorID.Clear;
 
   if cbbMsbFormType.Text = 'GENSYS' then
@@ -557,10 +644,34 @@ begin
   cbbMsbGeneratorID.ItemIndex := 0;
 end;
 
+procedure TfrmSetting.cbbMsbGeneratorIDChange(Sender: TObject);
+begin
+  if cbbMsbGeneratorID.ItemIndex = -1 then
+    cbbMsbGeneratorID.ItemIndex := 0;
+end;
+
 procedure TfrmSetting.cbbPCSFormTypeChange(Sender: TObject);
 begin
-  cbbSBScreen.Enabled := cbbPCSFormType.Text = 'PCS Tengah';
-  cbbPSScreen.Enabled := cbbPCSFormType.Text = 'PCS Tengah';
+  if cbbPCSFormType.ItemIndex = -1 then
+    cbbPCSFormType.ItemIndex := 0;
+end;
+
+procedure TfrmSetting.cbbPSScreenChange(Sender: TObject);
+begin
+if cbbPSScreen.ItemIndex = -1 then
+    cbbPSScreen.ItemIndex := 0;
+end;
+
+procedure TfrmSetting.cbbRoleNameChange(Sender: TObject);
+begin
+if cbbRoleName.ItemIndex = -1 then
+    cbbRoleName.ItemIndex := 0;
+end;
+
+procedure TfrmSetting.cbbSBScreenChange(Sender: TObject);
+begin
+if cbbSBScreen.ItemIndex = -1 then
+    cbbSBScreen.ItemIndex := 0;
 end;
 
 procedure TfrmSetting.FormCreate(Sender: TObject);
