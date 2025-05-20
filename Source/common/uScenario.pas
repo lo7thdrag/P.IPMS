@@ -331,8 +331,8 @@ begin
       pmsData.PMS_SWB_ESBIntrMode := swt.ESBIntrMode;               {-----> 1:Aft; 2:Off; 3:Fwd; 4:Dbl}
       pmsData.PMS_SWB_ShoreIntrMode := swt.ShoreIntrMode;           {-----> 1:Man; 2:Off; 3:Aut}
       pmsData.PMS_SWB_MsbCBIntr := setBooltoInt(swt.MsbCircuitBreaker);
-      pmsData.PMS_SWB_EsbAftCBIntr := setBooltoInt(swt.EsbAftCBIntr);
-      pmsData.PMS_SWB_EsbAftCBIntr := setBooltoInt(swt.EsbAftCBIntr);
+      pmsData.PMS_SWB_EsbAftCBIntr := setBooltoInt(swt.EsbCBIntr);
+      pmsData.PMS_SWB_EsbAftCBIntr := setBooltoInt(swt.EsbCBIntr);
       pmsData.PMS_SWB_MsbCBShore := setBooltoInt(swt.MsbCBShore);
       pmsData.PMS_SWB_MsbCBNavNaut := setBooltoInt(swt.MsbCBNavNaut);
       pmsData.PMS_SWB_Busbar := setBooltoInt(swt.Busbar);
@@ -753,8 +753,8 @@ begin
         swt.ESBIntrMode := data.PMS_SWB_ESBIntrMode;
         swt.ShoreIntrMode := data.PMS_SWB_ShoreIntrMode;
         swt.MsbCircuitBreaker := setInttoBool(data.PMS_SWB_MsbCBIntr);
-        swt.EsbAftCBIntr := setInttoBool(data.PMS_SWB_EsbAftCBIntr);
-        swt.EsbFwdCBIntr := setInttoBool(data.PMS_SWB_EsbFwdCBIntr);
+        swt.EsbCBIntr := setInttoBool(data.PMS_SWB_EsbAftCBIntr);
+//        swt.EsbFwdCBIntr := setInttoBool(data.PMS_SWB_EsbFwdCBIntr);
         swt.MsbCBShore := setInttoBool(data.PMS_SWB_MsbCBShore);
         swt.EmergencyCon := setInttoBool(data.PMS_SWB_EmergencyCon);
         swt.TripReduct := setInttoBool(data.PMS_SWB_TripReduct);

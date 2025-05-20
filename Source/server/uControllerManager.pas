@@ -1523,7 +1523,7 @@ begin
       epPMSGeneratorPreference :
         setPMSSWEElementID(rec.GenSwitchID, rec.ValueBool, C_IND_PREF);
 
-      epPMSEsbAftCBIntr, epPMSEsbFwdCBIntr :
+      epPMSEsbCBIntr, epPMSEsbFwdCBIntr :
       begin
         if rec.ValueInt = 4 then
           setPMSCBEEmergency(rec.ValueBool, C_CBE_ESB)

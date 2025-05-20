@@ -518,9 +518,9 @@ begin
     else if TButton(Sender).Name = 'btnFwdCBCloseEmergency' then
       SetValueBool(C_SWITCHBOARD, 2, True, epPMSEsbFwdCBIntr)
     else if TButton(Sender).Name = 'btnAftCBOpenEmergency' then
-      SetValueBool(C_SWITCHBOARD, 3, False, epPMSEsbAftCBIntr)
+      SetValueBool(C_SWITCHBOARD, 3, False, epPMSEsbCBIntr)
     else if TButton(Sender).Name = 'btnAftCBCloseEmergency' then
-      SetValueBool(C_SWITCHBOARD, 3, True, epPMSEsbAftCBIntr)
+      SetValueBool(C_SWITCHBOARD, 3, True, epPMSEsbCBIntr)
     else if TButton(Sender).Name = 'btnCBOpenShore' then
       SetValueBool(C_SWITCHBOARD, 4, False, epPMSMsbCBShore)
     else if TButton(Sender).Name = 'btnCBCloseShore' then
@@ -624,93 +624,33 @@ begin
     case PropsID of
       epPMSMsbCircuitBreaker: switchboard.MsbCircuitBreaker := value;
       epPMSMsbCBShore: switchboard.MsbCBShore  := value;
-      epPMSEsbAftCBIntr: switchboard.EsbAftCBIntr := value;
-      epPMSEsbFwdCBIntr: switchboard.EsbFwdCBIntr := value;
-
-//      begin
-//        if (rbFwdDistrE.Checked)then
-//        begin
-//          {1:Aft; 2:Off; 3:Fwd; 4:Dbl}
-//          if value then
-//          begin
-//            if switchboard.EsbAftCBIntr then
-//            begin
-//              if switchboard.ESBIntrMode = 1 then
-//              begin
-//                switchboard.ESBIntrMode := 4;
-//              end
-//              else
-//                switchboard.ESBIntrMode := 3;
-//            end
-//            else
-//            begin
-//              switchboard.EsbAftCBIntr  := True;
-//              switchboard.ESBIntrMode := 3;
-//
-//            end;
-//          end
-//          else
-//          begin
-//            if switchboard.ESBIntrMode = 4 then
-//            begin
-//              switchboard.ESBIntrMode := 1;
-//            end
-//            else
-//            begin
-//              switchboard.EsbAftCBIntr  := False;
-//            end;
-//          end;
-//
-////          if switchboard.EsbCBIntr and (switchboard.ESBIntrMode = 1) then
-////            switchboard.EsbCBIntr  := value
-////          else
-////          begin
-//////            switchboard.EsbCBIntr  := False;
-//////            switchboard.ESBIntrMode := 3;
-//////            switchboard.EsbCBIntr   := True;
-////          end;
-//        end
-//        else if (rbAftDistrE.Checked)then
-//        begin
-//          {1:Aft; 2:Off; 3:Fwd; 4:Dbl}
-//          if value then
-//          begin
-//            if switchboard.EsbAftCBIntr then
-//            begin
-//              if switchboard.ESBIntrMode = 3 then
-//              begin
-//                switchboard.ESBIntrMode := 4;
-//              end
-//              else
-//                switchboard.ESBIntrMode := 1;
-//            end
-//            else
-//            begin
-//              switchboard.EsbAftCBIntr  := True;
-//              switchboard.ESBIntrMode := 1;
-//            end;
-//          end
-//          else
-//          begin
-//            if switchboard.ESBIntrMode = 4 then
-//            begin
-//              switchboard.ESBIntrMode := 3;
-//            end
-//            else
-//            begin
-//              switchboard.EsbAftCBIntr  := False;
-//            end;
-//          end;
-////          if switchboard.EsbCBIntr and (switchboard.ESBIntrMode = 3) then
-////            switchboard.EsbCBIntr  := False
-////          else
-////          begin
-////            switchboard.EsbCBIntr  := False;
-////            switchboard.ESBIntrMode := 1;
-////            switchboard.EsbCBIntr   := True;
-////          end;
-//        end
-//      end;
+//      epPMSEsbCBIntr: switchboard.EsbCBIntr := value;
+//      epPMSEsbFwdCBIntr: switchboard.EsbFwdCBIntr := value;
+      epPMSEsbCBIntr:
+      begin
+        if (rbFwdDistrE.Checked)then
+        begin
+          if switchboard.EsbCBIntr and (switchboard.ESBIntrMode = 1) then
+            switchboard.EsbCBIntr  := False
+          else
+          begin
+            switchboard.EsbCBIntr  := False;
+            switchboard.ESBIntrMode := 3;
+            switchboard.EsbCBIntr   := True;
+          end;
+        end
+        else if (rbAftDistrE.Checked)then
+        begin
+          if switchboard.EsbCBIntr and (switchboard.ESBIntrMode = 3) then
+            switchboard.EsbCBIntr  := False
+          else
+          begin
+            switchboard.EsbCBIntr  := False;
+            switchboard.ESBIntrMode := 1;
+            switchboard.EsbCBIntr   := True;
+          end;
+        end
+      end;
     end;
   end;
 end;
@@ -749,7 +689,7 @@ begin
       begin
         if (rbOffDistrE.Checked)then
         begin
-          switchboard.EsbAftCBIntr  := False;
+          switchboard.EsbCBIntr  := False;
           switchboard.ESBIntrMode := 2;
         end
       end;
@@ -960,7 +900,7 @@ begin
         SetPowerConnection(lblCBCloseInn1.Color, lblCBCloseInn2.Color)
 
       end;
-      epPMSEsbAftCBIntr, epPMSEsbFwdCBIntr :
+      epPMSEsbCBIntr, epPMSEsbFwdCBIntr :
       begin
         if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[2] then
           lblCBOpenClosedE.Color := toLblWarna(Value);

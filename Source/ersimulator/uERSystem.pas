@@ -150,7 +150,7 @@ begin
         FOnPMSCommand(rPmsCmd);
 
     end;
-    {epPMSGeneratorCBClosedE}epPMSEsbAftCBIntr, epPMSEsbFwdCBIntr :
+    {epPMSGeneratorCBClosedE}epPMSEsbCBIntr, epPMSEsbFwdCBIntr :
     begin
       rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
       rPmsCmd.CommandPropsID   := PropsID;

@@ -553,7 +553,7 @@ type
       {Gensys PMS System Alarm}
       epPMSCanBusFailure, epPMSDCPowFailure, epPMSFaultPageLed, epPMSFailureCBClosed,
 
-      epPMSMsbIntrMode, epPMSEsbIntrMode, epPMSMsbShoreMode, epPMSMsbCBShore, epPMSMsbCircuitBreaker, epPMSEsbAftCBIntr, epPMSEsbFwdCBIntr,
+      epPMSMsbIntrMode, epPMSEsbIntrMode, epPMSMsbShoreMode, epPMSMsbCBShore, epPMSMsbCircuitBreaker, epPMSEsbCBIntr, epPMSEsbFwdCBIntr,
       epPMSMsbCBNavNaut, epPMSEmergencyCon, epPMSMsbBusbar, epPMSMsbTripReduct, epPMSSycnFail, epPMSTrafo115Volt, epPMSTrafo230Volt,
 
       epPMSFreezed,
