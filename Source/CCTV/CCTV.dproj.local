@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.442,=C:\Users\3D_6\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025-05-06 12:38:33.000.846,=C:\Users\3D_6\Documents\Embarcadero\Studio\Projects\Unit6.pas</Transaction>
+    <Transaction>2025-05-06 12:40:47.000.297,C:\Users\3D_6\Documents\Embarcadero\Studio\Projects\Unit6.dfm=D:\CAECILIA MC\P.IPMS\Source\CCTV\uCCTV.dfm</Transaction>
+    <Transaction>2025-05-06 12:40:47.000.297,C:\Users\3D_6\Documents\Embarcadero\Studio\Projects\Unit6.pas=D:\CAECILIA MC\P.IPMS\Source\CCTV\uCCTV.pas</Transaction>
+    <Transaction>2025-05-06 12:40:54.000.569,C:\Users\3D_6\Documents\Embarcadero\Studio\Projects\Project7.dproj=D:\CAECILIA MC\P.IPMS\Source\CCTV\CCTV.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
