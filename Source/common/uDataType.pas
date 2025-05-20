@@ -559,7 +559,7 @@ type
       epPMSFreezed,
 
       {use in panel hardware}
-      epBoardAlarmLamp, epBoardAlarmLampKanan, epBoardTelegramKiri, epBoardTelegramKanan, epRudderIndicator,
+      epBoardAlarmLampKiri, epBoardAlarmLampKanan, epBoardTelegramKiri, epBoardTelegramKanan, epRudderIndicator,
 
       { use in Scenario}
       epScenarioLoad, epScenarioRunState, epScenarioCondition, epScenarioRunningTime,

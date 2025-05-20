@@ -445,7 +445,7 @@ begin
     begin
       with Alarm do
       begin
-        props := epBoardAlarmLamp;
+        props := epBoardAlarmLampKiri;
         Value := true;
         aID   := TSpeedButtonImage(sender).Tag;
       end;
@@ -457,7 +457,7 @@ begin
     begin
       with Alarm do
       begin
-        props := epBoardAlarmLamp;
+        props := epBoardAlarmLampKiri;
         Value := false;
         aID   := TSpeedButtonImage(sender).Tag;
       end;
