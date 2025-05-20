@@ -224,15 +224,12 @@ type
     Label63: TLabel;
     Label43: TLabel;
     cbbCircuitBreakerAft: TComboBox;
-    cbbCircuitBreakerEmFwd: TComboBox;
     GroupBox6: TGroupBox;
     Label44: TLabel;
     Label46: TLabel;
     Label65: TLabel;
     Label66: TLabel;
     ComboBox12: TComboBox;
-    RadioButton5: TRadioButton;
-    RadioButton6: TRadioButton;
     GroupBox7: TGroupBox;
     Label49: TLabel;
     Label50: TLabel;
@@ -240,11 +237,6 @@ type
     chkEngineE: TCheckBox;
     cbbModeGenE: TComboBox;
     cbbCircuitBreakerE: TComboBox;
-    GroupBox8: TGroupBox;
-    Label68: TLabel;
-    Label69: TLabel;
-    Label70: TLabel;
-    cbbCircuitBreakerEmAft: TComboBox;
     Panel5: TPanel;
     Label52: TLabel;
     Panel6: TPanel;
@@ -354,12 +346,8 @@ type
     cbbModeInnFwd: TComboBox;
     lbl39: TLabel;
     lbl40: TLabel;
-    lbl43: TLabel;
     lbl44: TLabel;
-    cbbModeInnEmAft: TComboBox;
-    lbl45: TLabel;
-    cbbModeInnEmFwd: TComboBox;
-    lbl46: TLabel;
+    cbbModeInnEm: TComboBox;
     lbl41: TPanel;
     lbl42: TLabel;
     lbl47: TPanel;
@@ -373,6 +361,12 @@ type
     img3: TImage;
     btnClearSession: TRzBmpButton;
     btnEditSession: TRzBmpButton;
+    pnl1: TPanel;
+    lbl12: TLabel;
+    pnl2: TPanel;
+    lbl43: TLabel;
+    cbb1: TComboBox;
+    lbl45: TLabel;
 
     {$REGION ' Form Section '}
     procedure FormCreate(Sender: TObject);
@@ -1267,14 +1261,8 @@ begin
   cbbCircuitBreakerAft.ItemIndex := 0;
   {$ENDREGION}
 
-  {$REGION ' Switchboard Emergency FWD '}
-  cbbModeInnEmFwd.ItemIndex := 0;
-  cbbCircuitBreakerEmFwd.ItemIndex := 0;
-  {$ENDREGION}
-
-  {$REGION ' Switchboard Emergency AFT '}
-  cbbModeInnEmAft.ItemIndex := 0;
-  cbbCircuitBreakerEmAft.ItemIndex := 0;
+  {$REGION ' Switchboard Emergency '}
+  cbbModeInnEm.ItemIndex := 0;
   {$ENDREGION}
 
 end;
@@ -1377,26 +1365,14 @@ begin
     begin
       {$REGION ' Switchboard Emergency FWD '}
       case pmsDataTemp.PMS_SWB_MSBIntrMode of
-        1 : cbbModeInnEmFwd.ItemIndex := 0;
-        3: cbbModeInnEmFwd.ItemIndex := 1;
+        1 : cbbModeInnEm.ItemIndex := 0;
+        3: cbbModeInnEm.ItemIndex := 1;
       end;
-      cbbCircuitBreakerEmFwd.ItemIndex := pmsDataTemp.PMS_SWB_MsbCBIntr;
+//      cbbCircuitBreakerEmFwd.ItemIndex := pmsDataTemp.PMS_SWB_MsbCBIntr;
 
-      cbbModeSWBChange(cbbModeInnEmFwd);
+      cbbModeSWBChange(cbbModeInnEm);
       {$ENDREGION}
     end
-    else if pmsDataTemp.PMS_Name = C_SWITCHBOARD_ID[3] then
-    begin
-      {$REGION ' Switchboard Emergency AFT '}
-      case pmsDataTemp.PMS_SWB_MSBIntrMode of
-        1 : cbbModeInnEmAft.ItemIndex := 0;
-        3: cbbModeInnEmAft.ItemIndex := 1;
-      end;
-      cbbCircuitBreakerEmAft.ItemIndex := pmsDataTemp.PMS_SWB_MsbCBIntr;
-
-      cbbModeSWBChange(cbbModeInnEmAft);
-      {$ENDREGION}
-    end;
   end;
 
   pmsListTemp.Free;
@@ -1554,39 +1530,39 @@ begin
   pmsListTemp.Add(pmsDataTemp);
   {$ENDREGION}
 
-  {$REGION ' Switchboard Emergency FWD '}
+  {$REGION ' Switchboard Emergency '}
   pmsDataTemp := TPMSCond_Data.Create;
   pmsDataTemp.PMS_Name := C_SWITCHBOARD_ID[2];
   pmsDataTemp.PMS_Type := 2;
   pmsDataTemp.PMS_ID := FPmsIDBuffer[7];
   pmsDataTemp.Condition_ID := FPMSConditionID;
 
-  case cbbModeInnEmFwd.ItemIndex of
+  case cbbModeInnEm.ItemIndex of
     0 : pmsDataTemp.PMS_SWB_MSBIntrMode := 1;
     1: pmsDataTemp.PMS_SWB_MSBIntrMode := 3;
   end;
 
-  pmsDataTemp.PMS_SWB_MsbCBIntr := cbbCircuitBreakerEmFwd.ItemIndex;
+//  pmsDataTemp.PMS_SWB_MsbCBIntr := cbbCircuitBreakerEmFwd.ItemIndex;
 
   pmsListTemp.Add(pmsDataTemp);
   {$ENDREGION}
 
-  {$REGION ' Switchboard Emergency AFT '}
-  pmsDataTemp := TPMSCond_Data.Create;
-  pmsDataTemp.PMS_Name := C_SWITCHBOARD_ID[3];
-  pmsDataTemp.PMS_Type := 2;
-  pmsDataTemp.PMS_ID := FPmsIDBuffer[8];
-  pmsDataTemp.Condition_ID := FPMSConditionID;
-
-  case cbbModeInnEmAft.ItemIndex of
-    0 : pmsDataTemp.PMS_SWB_MSBIntrMode := 1;
-    1: pmsDataTemp.PMS_SWB_MSBIntrMode := 3;
-  end;
-
-  pmsDataTemp.PMS_SWB_MsbCBIntr := cbbCircuitBreakerEmAft.ItemIndex;
-
-  pmsListTemp.Add(pmsDataTemp);
-  {$ENDREGION}
+//  {$REGION ' Switchboard Emergency AFT '}
+//  pmsDataTemp := TPMSCond_Data.Create;
+//  pmsDataTemp.PMS_Name := C_SWITCHBOARD_ID[3];
+//  pmsDataTemp.PMS_Type := 2;
+//  pmsDataTemp.PMS_ID := FPmsIDBuffer[8];
+//  pmsDataTemp.Condition_ID := FPMSConditionID;
+//
+//  case cbbModeInnEmAft.ItemIndex of
+//    0 : pmsDataTemp.PMS_SWB_MSBIntrMode := 1;
+//    1: pmsDataTemp.PMS_SWB_MSBIntrMode := 3;
+//  end;
+//
+//  pmsDataTemp.PMS_SWB_MsbCBIntr := cbbCircuitBreakerEmAft.ItemIndex;
+//
+//  pmsListTemp.Add(pmsDataTemp);
+//  {$ENDREGION}
 
   if FPMSConditionID = 0 then
   begin
@@ -1675,23 +1651,14 @@ begin
       cbbCircuitBreakerAft.ItemIndex := 0;
     end;
   end
-  else if TComboBox(Sender).Name = 'cbbModeInnEmFwd' then
+  else if TComboBox(Sender).Name = 'cbbModeInnEm' then
   begin
-    cbbCircuitBreakerEmFwd.Enabled := not (cbbModeInnEmFwd.ItemIndex = 1);
+//    cbbCircuitBreakerEmFwd.Enabled := not (cbbModeInnEmFwd.ItemIndex = 1);
 
-    if cbbModeInnEmFwd.ItemIndex = 1  then
-    begin
-      cbbCircuitBreakerEmFwd.ItemIndex := 0;
-    end;
-  end
-  else if TComboBox(Sender).Name = 'cbbModeInnEmAft' then
-  begin
-    cbbCircuitBreakerEmAft.Enabled := not (cbbModeInnEmAft.ItemIndex = 1);
-
-    if cbbModeInnEmAft.ItemIndex = 1  then
-    begin
-      cbbCircuitBreakerEmAft.ItemIndex := 0;
-    end;
+//    if cbbModeInnEmFwd.ItemIndex = 1  then
+//    begin
+//      cbbCircuitBreakerEmFwd.ItemIndex := 0;
+//    end;
   end
 end;
 

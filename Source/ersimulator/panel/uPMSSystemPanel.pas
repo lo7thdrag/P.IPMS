@@ -157,7 +157,6 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Panel24: TPanel;
-    btnFwdCBOpenEmergency: TButton;
     lblCBOpenClosedE: TLabel;
     Panel26: TPanel;
     rbSemGenE: TRadioButton;
@@ -186,21 +185,7 @@ type
     btn1: TButton;
     edt1: TEdit;
     btnabc: TButton;
-    lbl4: TPanel;
-    lbl9: TPanel;
-    btnAftCBCloseEmergency: TButton;
-    btnFwdCBCloseEmergency: TButton;
-    btnAftCBOpenEmergency: TButton;
-    lbl5: TLabel;
     lbl6: TLabel;
-    rbManEmgAft: TRadioButton;
-    lbl7: TLabel;
-    rbAutoEmgAft: TRadioButton;
-    lbl8: TLabel;
-    lbl11: TLabel;
-    rbAutoEmgFwd: TRadioButton;
-    lbl12: TLabel;
-    rbManEmgFwd: TRadioButton;
 
     procedure Gen1ModeClick(Sender: TObject);
     procedure Gen2ModeClick(Sender: TObject);
@@ -505,12 +490,12 @@ begin
   if Sender is TRadioButton then
   begin
     {C_SWITCHBOARD: Objk Switchboard; 2:Esb; value: Mode Switchboard; epPMSEsbIntrMode: ProsID}
-//    if TRadioButton(Sender).Name = 'rbAftDistrE' then
-//      SetValueInt(C_SWITCHBOARD, 2, 1, epPMSEsbIntrMode)
-//    else if TRadioButton(Sender).Name = 'rbOffDistrE' then
-//      SetValueInt(C_SWITCHBOARD, 2, 2, epPMSEsbIntrMode)
-//    else if TRadioButton(Sender).Name = 'rbFwdDistrE' then
-//      SetValueInt(C_SWITCHBOARD, 2, 3, epPMSEsbIntrMode)
+    if TRadioButton(Sender).Name = 'rbAftDistrE' then
+      SetValueInt(C_SWITCHBOARD, 2, 1, epPMSEsbIntrMode)
+    else if TRadioButton(Sender).Name = 'rbOffDistrE' then
+      SetValueInt(C_SWITCHBOARD, 2, 2, epPMSEsbIntrMode)
+    else if TRadioButton(Sender).Name = 'rbFwdDistrE' then
+      SetValueInt(C_SWITCHBOARD, 2, 3, epPMSEsbIntrMode)
   end;
 end;
 
@@ -833,16 +818,6 @@ begin
           rbOffInn2.Checked := Value = 2;// toCheck(2, Value);
           rbAutInn2.Checked := Value = 3;// toCheck(3, Value);
         end
-        else if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[2] then
-        begin
-          rbManEmgFwd.Checked := Value = 1;// toCheck(1, Value);
-          rbAutoEmgFwd.Checked := Value = 3;// toCheck(3, Value);
-        end
-        else if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[3] then
-        begin
-          rbManEmgAft.Checked := Value = 1;// toCheck(1, Value);
-          rbAutoEmgAft.Checked := Value = 3;// toCheck(3, Value);
-        end;
       end;
       epPMSMsbShoreMode :
       begin
@@ -860,12 +835,12 @@ begin
       end;
       epPMSEsbIntrMode :
       begin
-//        if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[2] then
-//        begin
-//          rbAftDistrE.Checked := toCheck(1, Value);
-//          rbOffDistrE.Checked := toCheck(2, Value);
-//          rbFwdDistrE.Checked := toCheck(3, Value);
-//        end;
+        if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[2] then
+        begin
+          rbAftDistrE.Checked := toCheck(1, Value);
+          rbOffDistrE.Checked := toCheck(2, Value);
+          rbFwdDistrE.Checked := toCheck(3, Value);
+        end;
       end;
     end;
   end

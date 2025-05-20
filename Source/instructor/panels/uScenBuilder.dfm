@@ -55346,7 +55346,7 @@ object frmScenBuilder: TfrmScenBuilder
       end
       object grpAfter: TGroupBox
         Left = 377
-        Top = 297
+        Top = 296
         Width = 130
         Height = 147
         Color = clBtnShadow
@@ -55424,9 +55424,9 @@ object frmScenBuilder: TfrmScenBuilder
       end
       object GroupBox5: TGroupBox
         Left = 562
-        Top = 25
+        Top = 251
         Width = 130
-        Height = 147
+        Height = 84
         Color = clBtnShadow
         ParentBackground = False
         ParentColor = False
@@ -55470,13 +55470,13 @@ object frmScenBuilder: TfrmScenBuilder
           ParentFont = False
         end
         object lbl44: TLabel
-          Left = 34
+          Left = 29
           Top = 10
-          Width = 63
+          Width = 72
           Height = 14
           Align = alCustom
           Alignment = taCenter
-          Caption = 'FORWARD'
+          Caption = 'EMERGENCY'
           Color = clBlack
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
@@ -55486,39 +55486,7 @@ object frmScenBuilder: TfrmScenBuilder
           ParentColor = False
           ParentFont = False
         end
-        object lbl46: TLabel
-          Left = 21
-          Top = 81
-          Width = 89
-          Height = 14
-          Caption = 'Circuit Breaker'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object cbbCircuitBreakerEmFwd: TComboBox
-          Left = 21
-          Top = 103
-          Width = 89
-          Height = 22
-          Enabled = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ItemIndex = 0
-          ParentFont = False
-          TabOrder = 0
-          Text = 'Open '
-          Items.Strings = (
-            'Open '
-            'Close')
-        end
-        object cbbModeInnEmFwd: TComboBox
+        object cbbModeInnEm: TComboBox
           Left = 21
           Top = 41
           Width = 89
@@ -55528,28 +55496,28 @@ object frmScenBuilder: TfrmScenBuilder
           Font.Height = -12
           Font.Name = 'Tahoma'
           Font.Style = []
-          ItemIndex = 1
           ParentFont = False
-          TabOrder = 1
-          Text = 'Auto Close'
+          TabOrder = 0
+          Text = 'Off'
           OnChange = cbbModeSWBChange
           Items.Strings = (
-            'Manual'
-            'Auto Close')
+            'After'
+            'Off'
+            'Forward')
         end
       end
       object GroupBox6: TGroupBox
-        Left = 342
-        Top = 450
-        Width = 165
-        Height = 98
+        Left = 562
+        Top = 418
+        Width = 130
+        Height = 147
         Color = clBtnShadow
         ParentBackground = False
         ParentColor = False
         TabOrder = 7
         Visible = False
         object Label44: TLabel
-          Left = 67
+          Left = 44
           Top = 10
           Width = 42
           Height = 14
@@ -55602,10 +55570,23 @@ object frmScenBuilder: TfrmScenBuilder
           ParentColor = False
           ParentFont = False
         end
+        object lbl45: TLabel
+          Left = 21
+          Top = 90
+          Width = 89
+          Height = 14
+          Caption = 'Circuit Breaker'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
         object ComboBox12: TComboBox
-          Left = 3
-          Top = 66
-          Width = 62
+          Left = 20
+          Top = 110
+          Width = 87
           Height = 22
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -55619,42 +55600,31 @@ object frmScenBuilder: TfrmScenBuilder
             'Open '
             'Close')
         end
-        object RadioButton5: TRadioButton
-          Left = 3
-          Top = 36
-          Width = 58
-          Height = 17
-          Caption = 'Manual'
+        object cbb1: TComboBox
+          Left = 10
+          Top = 41
+          Width = 109
+          Height = 22
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
+          Font.Color = clWindowText
           Font.Height = -12
           Font.Name = 'Tahoma'
           Font.Style = []
+          ItemIndex = 2
           ParentFont = False
           TabOrder = 1
-        end
-        object RadioButton6: TRadioButton
-          Left = 67
-          Top = 36
-          Width = 108
-          Height = 17
-          Caption = 'Auto Take Over'
-          Checked = True
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -12
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 2
-          TabStop = True
+          Text = 'Auto Take Over'
+          Items.Strings = (
+            'Manual'
+            'Off'
+            'Auto Take Over')
         end
       end
       object GroupBox7: TGroupBox
         Left = 562
-        Top = 231
+        Top = 60
         Width = 130
-        Height = 164
+        Height = 185
         Color = clBtnShadow
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -55683,21 +55653,24 @@ object frmScenBuilder: TfrmScenBuilder
           ParentFont = False
         end
         object Label50: TLabel
-          Left = 23
+          Left = 18
           Top = 10
-          Width = 84
-          Height = 14
-          Caption = 'GENERATOR E'
+          Width = 93
+          Height = 32
+          Alignment = taCenter
+          AutoSize = False
+          Caption = 'Emergency Generator'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -12
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
+          WordWrap = True
         end
         object Label51: TLabel
-          Left = 15
-          Top = 114
+          Left = 20
+          Top = 122
           Width = 89
           Height = 14
           Caption = 'Circuit Breaker'
@@ -55707,11 +55680,10 @@ object frmScenBuilder: TfrmScenBuilder
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
-          Visible = False
         end
         object chkEngineE: TCheckBox
-          Left = 15
-          Top = 85
+          Left = 20
+          Top = 93
           Width = 90
           Height = 17
           Caption = 'Switch On'
@@ -55724,8 +55696,8 @@ object frmScenBuilder: TfrmScenBuilder
           TabOrder = 1
         end
         object cbbModeGenE: TComboBox
-          Left = 15
-          Top = 41
+          Left = 20
+          Top = 60
           Width = 89
           Height = 22
           Font.Charset = DEFAULT_CHARSET
@@ -55743,8 +55715,8 @@ object frmScenBuilder: TfrmScenBuilder
             'Auto')
         end
         object cbbCircuitBreakerE: TComboBox
-          Left = 15
-          Top = 135
+          Left = 20
+          Top = 143
           Width = 89
           Height = 22
           Font.Charset = DEFAULT_CHARSET
@@ -55756,139 +55728,23 @@ object frmScenBuilder: TfrmScenBuilder
           ParentFont = False
           TabOrder = 2
           Text = 'Open '
-          Visible = False
           Items.Strings = (
             'Open '
             'Close')
-        end
-      end
-      object GroupBox8: TGroupBox
-        Left = 562
-        Top = 417
-        Width = 130
-        Height = 147
-        Color = clBtnShadow
-        ParentBackground = False
-        ParentColor = False
-        TabOrder = 9
-        object Label68: TLabel
-          Left = 57
-          Top = 125
-          Width = 9
-          Height = 13
-          Alignment = taCenter
-          Caption = '   '
-          Color = clWindow
-          ParentColor = False
-        end
-        object Label69: TLabel
-          Left = 129
-          Top = 125
-          Width = 9
-          Height = 13
-          Alignment = taCenter
-          Caption = '   '
-          Color = clWindow
-          ParentColor = False
-        end
-        object Label70: TLabel
-          Left = -2
-          Top = 50
-          Width = 200
-          Height = 2
-          Align = alCustom
-          Alignment = taCenter
-          AutoSize = False
-          Color = clBlack
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -19
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-        end
-        object lbl43: TLabel
-          Left = 46
-          Top = 10
-          Width = 38
-          Height = 14
-          Align = alCustom
-          Alignment = taCenter
-          Caption = 'AFTER'
-          Color = clBlack
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-        end
-        object lbl45: TLabel
-          Left = 21
-          Top = 82
-          Width = 89
-          Height = 14
-          Caption = 'Circuit Breaker'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object cbbCircuitBreakerEmAft: TComboBox
-          Left = 21
-          Top = 104
-          Width = 87
-          Height = 22
-          Enabled = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ItemIndex = 0
-          ParentFont = False
-          TabOrder = 0
-          Text = 'Open '
-          Items.Strings = (
-            'Open '
-            'Close')
-        end
-        object cbbModeInnEmAft: TComboBox
-          Left = 21
-          Top = 42
-          Width = 89
-          Height = 22
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ItemIndex = 1
-          ParentFont = False
-          TabOrder = 1
-          Text = 'Auto Close'
-          OnChange = cbbModeSWBChange
-          Items.Strings = (
-            'Manual'
-            'Auto Close')
         end
       end
       object Panel5: TPanel
         Left = 342
         Top = 144
         Width = 29
-        Height = 300
+        Height = 298
         BevelOuter = bvNone
         Color = clBtnShadow
         ParentBackground = False
-        TabOrder = 10
+        TabOrder = 9
         object Label52: TLabel
           Left = 4
-          Top = 69
+          Top = 68
           Width = 21
           Height = 162
           Align = alCustom
@@ -55913,7 +55769,7 @@ object frmScenBuilder: TfrmScenBuilder
         BevelOuter = bvNone
         Color = clBtnShadow
         ParentBackground = False
-        TabOrder = 11
+        TabOrder = 10
         object Label47: TLabel
           Left = 40
           Top = 6
@@ -55940,7 +55796,7 @@ object frmScenBuilder: TfrmScenBuilder
         BevelOuter = bvNone
         Color = clBtnShadow
         ParentBackground = False
-        TabOrder = 12
+        TabOrder = 11
         object Label39: TLabel
           Left = 25
           Top = 5
@@ -55963,14 +55819,14 @@ object frmScenBuilder: TfrmScenBuilder
         Left = 698
         Top = 25
         Width = 29
-        Height = 539
+        Height = 310
         BevelOuter = bvNone
         Color = clBtnShadow
         ParentBackground = False
-        TabOrder = 13
+        TabOrder = 12
         object lbl42: TLabel
           Left = 4
-          Top = 153
+          Top = 39
           Width = 21
           Height = 232
           Align = alCustom
@@ -55989,13 +55845,13 @@ object frmScenBuilder: TfrmScenBuilder
       end
       object lbl47: TPanel
         Left = 562
-        Top = 196
+        Top = 25
         Width = 130
         Height = 29
         BevelOuter = bvNone
         Color = clBtnShadow
         ParentBackground = False
-        TabOrder = 14
+        TabOrder = 13
         object lbl48: TLabel
           Left = 14
           Top = 5
@@ -56004,6 +55860,63 @@ object frmScenBuilder: TfrmScenBuilder
           Align = alCustom
           Alignment = taCenter
           Caption = 'EMERGENCY'
+          Color = clBtnShadow
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+      end
+      object pnl1: TPanel
+        Left = 698
+        Top = 383
+        Width = 29
+        Height = 188
+        BevelOuter = bvNone
+        Color = clBtnShadow
+        ParentBackground = False
+        TabOrder = 14
+        Visible = False
+        object lbl12: TLabel
+          Left = 4
+          Top = 66
+          Width = 21
+          Height = 56
+          Align = alCustom
+          Alignment = taCenter
+          Caption = 'SHORE'
+          Color = clBlack
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Orientation = 900
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+      end
+      object pnl2: TPanel
+        Left = 562
+        Top = 383
+        Width = 130
+        Height = 29
+        BevelOuter = bvNone
+        Color = clBtnShadow
+        ParentBackground = False
+        TabOrder = 15
+        Visible = False
+        object lbl43: TLabel
+          Left = 37
+          Top = 5
+          Width = 56
+          Height = 19
+          Align = alCustom
+          Alignment = taCenter
+          Caption = 'SHORE'
           Color = clBtnShadow
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
