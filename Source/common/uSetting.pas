@@ -185,6 +185,18 @@ type
     procedure setFormPCS(liststring: TStringList);
     function getFormPCS: TStringList;
 
+    procedure setConsoleMainEngine(liststring: TStringList);
+    function getConsoleMainEngine: TStringList;
+
+    procedure setConsoleDG(liststring: TStringList);
+    function getConsoleDG: TStringList;
+
+    procedure setConsoleMainSwitchboard(liststring: TStringList);
+    function getConsoleMainSwitchboard: TStringList;
+
+    procedure setConsoleAuxiliary(liststring: TStringList);
+    function getConsoleAuxiliary: TStringList;
+
     function GetManualIPMS: string;
     function GetModulPCS: string;
     function GetOperationalACS: string;
@@ -222,7 +234,6 @@ type
 
     property LPUServer : string read GetLPUServer write SetLPUServer;
     property LPUPort : string read GetLPUPort write SetLPUPort;
-    property Role : string read GetRole write SetRole;
 
     property ExecutedApp : string read GetExecutedApp write SetExecutedApp;
     property ExecutedApp2 : string read GetExecutedApp2 write SetExecutedApp2;
@@ -230,11 +241,17 @@ type
 
     property MonitorMimic : Integer read GetMonitorMimic write SetMonitorMimic;
     property MonitorInstructor : Integer read GetMonitorInstructor write SetMonitorInstructor;
+    property Role : string read GetRole write SetRole;
+    property formPCS : TStringList read getFormPCS write setFormPCS;
+    property ConsoleMainEngine : TStringList read getConsoleMainEngine write setConsoleMainEngine;
+    property ConsoleDG : TStringList read getConsoleDG write setConsoleDG;
+    property ConsoleMainSwitchboard : TStringList read getConsoleMainSwitchboard write setConsoleMainSwitchboard;
+    property ConsoleAuxiliary : TStringList read getConsoleAuxiliary write setConsoleAuxiliary;
 
     property ServoID : TStringList read getServoID write setServoID;
     property servoDegree : TStringList read getServoDegree write setServoDegree;
     property mode : TStringList read getMode write setMode;
-    property formPCS : TStringList read getFormPCS write setFormPCS;
+
 
     {$REGION ' Console IP '}
     property ServerIP : string read GetServerIP write SetServerIP;
@@ -480,6 +497,37 @@ begin
   Result := FIniFile.ReadString('CONSOLE', 'cctv', '192.168.1.18');
 end;
 
+function TSetting.getConsoleAuxiliary: TStringList;
+begin
+  Result := TStringList.Create;
+  Result.Add(FIniFile.ReadString('CONSOLE AUXILIARY', 'ID CONSOLE', 'AUXILIARY 1'));
+  Result.Add(FIniFile.ReadString('CONSOLE AUXILIARY', 'ID SCREEN 1', '1'));
+  Result.Add(FIniFile.ReadString('CONSOLE AUXILIARY', 'ID SCREEN 2', '1'));
+end;
+
+function TSetting.getConsoleDG: TStringList;
+begin
+  Result := TStringList.Create;
+  Result.Add(FIniFile.ReadString('CONSOLE DIESEL GENERATOR', 'ID CONSOLE', 'Generator 1'));
+end;
+
+function TSetting.getConsoleMainEngine: TStringList;
+begin
+  Result := TStringList.Create;
+  Result.Add(FIniFile.ReadString('MAIN ENGINE', 'POSISI', 'KANAN'));
+  Result.Add(FIniFile.ReadString('MAIN ENGINE', 'ID', '1'));
+  Result.Add(FIniFile.ReadString('MAIN ENGINE', 'SCREEN_GAUGES', '1'));
+  Result.Add(FIniFile.ReadString('MAIN ENGINE', 'SCREEN_PMS/HMI', '1'));
+  Result.Add(FIniFile.ReadString('MAIN ENGINE', 'SCREEN_SIGNALING', '1'));
+end;
+
+function TSetting.getConsoleMainSwitchboard: TStringList;
+begin
+  Result := TStringList.Create;
+  Result.Add(FIniFile.ReadString('CONSOLE MAINSWITCHBOARD', 'FORM GENSYS', 'GENSYS'));
+  Result.Add(FIniFile.ReadString('CONSOLE MAINSWITCHBOARD', 'ID GENSYS', 'Generator 1'));
+end;
+
 function TSetting.GetGenPsFwdIP: string;
 begin
   Result := FIniFile.ReadString('CONSOLE', 'GenPsFwd', '192.168.1.18');
@@ -625,6 +673,33 @@ begin
   FIniFile.WriteString('CONSOLE', 'cctv', Value);
 end;
 
+procedure TSetting.setConsoleAuxiliary(liststring: TStringList);
+begin
+  FIniFile.WriteString('CONSOLE AUXILIARY', 'ID CONSOLE', liststring[0]);
+  FIniFile.WriteString('CONSOLE AUXILIARY', 'ID SCREEN 1', liststring[1]);
+  FIniFile.WriteString('CONSOLE AUXILIARY', 'ID SCREEN 2', liststring[2]);
+end;
+
+procedure TSetting.setConsoleDG(liststring: TStringList);
+begin
+  FIniFile.WriteString('CONSOLE DIESEL GENERATOR', 'ID CONSOLE', liststring[0]);
+end;
+
+procedure TSetting.setConsoleMainEngine(liststring: TStringList);
+begin
+  FIniFile.WriteString('MAIN ENGINE', 'POSISI', liststring[0]);
+  FIniFile.WriteString('MAIN ENGINE', 'ID', liststring[1]);
+  FIniFile.WriteString('MAIN ENGINE', 'SCREEN_GAUGES', liststring[2]);
+  FIniFile.WriteString('MAIN ENGINE', 'SCREEN_PMS/HMI', liststring[3]);
+  FIniFile.WriteString('MAIN ENGINE', 'SCREEN_SIGNALING', liststring[4]);
+end;
+
+procedure TSetting.setConsoleMainSwitchboard(liststring: TStringList);
+begin
+  FIniFile.WriteString('CONSOLE MAINSWITCHBOARD', 'FORM GENSYS', liststring[0]);
+  FIniFile.WriteString('CONSOLE MAINSWITCHBOARD', 'ID GENSYS', liststring[1]);
+end;
+
 procedure TSetting.SetGenPsFwdIP(const Value: string);
 begin
   FGenPsFwdIP := Value;
@@ -764,6 +839,8 @@ function TSetting.getFormPCS: TStringList;
 begin
   Result := TStringList.Create;
   Result.Add(FIniFile.ReadString(C_Section_PCS, C_idFormPCS, idFormPCSDef));
+  Result.Add(FIniFile.ReadString(C_Section_PCS, 'idFormPCS_PS', idFormPCSDef));
+  Result.Add(FIniFile.ReadString(C_Section_PCS, 'idFormPCS_SB', idFormPCSDef));
 end;
 
 function TSetting.GetModulPCS: string;
@@ -772,17 +849,13 @@ begin
 end;
 
 function TSetting.GetMonitorInstructor: Integer;
-//var
-//  tes : string;
 begin
-//  tes := FIniFile.ReadString('INSTRUCTORSCREEN', 'SCREEN', '0');
   Result := FIniFile.ReadInteger('INSTRUCTORSCREEN', 'SCREEN',0);
 end;
 
 function TSetting.GetMonitorMimic: Integer;
 begin
-  Result := FIniFile.ReadInteger(C_Section_Monitor, C_Ident_Mimic,
-    C_Monitor_Mimic);
+  Result := FIniFile.ReadInteger(C_Section_Monitor, C_Ident_Mimic, C_Monitor_Mimic);
 end;
 
 function TSetting.GetOperationalACS: string;
@@ -1002,14 +1075,16 @@ end;
 
 procedure TSetting.setFormPCS(liststring: TStringList);
 begin
-  if liststring[0] = 'PCS Kiri' then
-    liststring[0] := '1'
-  else if liststring[0] = 'PCS Tengah' then
-    liststring[0] := '2'
-  else if liststring[0] = 'PCS Kanan' then
-    liststring[0] := '3';
+//  if liststring[0] = 'PCS Kiri' then
+//    liststring[0] := '1'
+//  else if liststring[0] = 'PCS Tengah' then
+//    liststring[0] := '2'
+//  else if liststring[0] = 'PCS Kanan' then
+//    liststring[0] := '3';
 
   FIniFile.WriteString(C_Section_PCS, C_idFormPCS, liststring[0]);
+  FIniFile.WriteString(C_Section_PCS, 'idFormPCS_PS', liststring[1]);
+  FIniFile.WriteString(C_Section_PCS, 'idFormPCS_SB', liststring[2]);
 end;
 
 procedure TSetting.SetInstructorHost(const Value: string);
@@ -1070,7 +1145,7 @@ end;
 procedure TSetting.SetMonitorInstructor(const Value: Integer);
 begin
   FMonitorInstructor := Value;
-  FIniFile.WriteInteger(C_Section_Instructor, C_Ident_Mimic, Value);
+  FIniFile.WriteInteger('INSTRUCTORSCREEN', 'SCREEN', Value);
 end;
 
 procedure TSetting.SetMonitorMimic(const Value: Integer);
