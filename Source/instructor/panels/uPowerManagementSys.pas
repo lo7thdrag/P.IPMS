@@ -346,13 +346,13 @@ begin
         if TGenerator(Sender).Identifier = C_GENERATOR_ID[0] then
           lblLampOS01.Color := toWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[1] then
-          lblLampOS01.Color := toWarna(Value)
+          lblLampOS02.Color := toWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[2] then
-          lblLampOS01.Color := toWarna(Value)
+          lblLampOS03.Color := toWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[3] then
-          lblLampOS01.Color := toWarna(Value)
+          lblLampOS04.Color := toWarna(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[4] then
-          lblLampOS01.Color := toWarna(Value)
+          lblLampOS05.Color := toWarna(Value)
         {$ENDREGION}
       end;
       epPMSLubOilPressLowShutdown:

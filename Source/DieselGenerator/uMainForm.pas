@@ -59,6 +59,7 @@ type
     procedure DoLampTest(OnOff : Boolean);
     procedure btnSirenOffClick(Sender: TObject);
     procedure mpAlarmNotify(Sender: TObject);
+    procedure btnResetClick(Sender: TObject);
 
   private
     FListener : TListeners;
@@ -90,6 +91,7 @@ begin
     begin
       imgStart.Visible          := Value;
       imgStop.Visible           := not Value;
+
       imgRunning.Visible        := Value;
       imgJWHeater.Visible       := not Value;
       imgGenSpaceHeater.Visible := not Value;
@@ -98,6 +100,10 @@ begin
     begin
       imgStart.Visible          := not Value;
       imgStop.Visible           := Value;
+
+      imgRunning.Visible        := not Value;
+      imgJWHeater.Visible       := Value;
+      imgGenSpaceHeater.Visible := Value;
     end;
     epPMSMeasPowFailure :
     begin
@@ -108,10 +114,22 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      silence := True;
-      mpAlarm.OnNotify := mpAlarmNotify;
-      mpAlarm.Open;
-      mpAlarm.Play;
+      if Value then
+      begin
+        silence := True;
+        mpAlarm.OnNotify := mpAlarmNotify;
+        if not (mpAlarm.Mode = mpPlaying) then
+        begin
+          mpAlarm.Open;
+          mpAlarm.Play;
+        end;
+      end
+      else
+      begin
+        mpAlarm.Open;
+        mpAlarm.Stop;
+        mpAlarm.Notify := False;
+      end;
     end;
     epPMSAutStartFailure :
     begin
@@ -122,10 +140,22 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      silence := True;
-      mpAlarm.OnNotify := mpAlarmNotify;
-      mpAlarm.Open;
-      mpAlarm.Play;
+      if Value then
+      begin
+        silence := True;
+        mpAlarm.OnNotify := mpAlarmNotify;
+        if not (mpAlarm.Mode = mpPlaying) then
+        begin
+          mpAlarm.Open;
+          mpAlarm.Play;
+        end;
+      end
+      else
+      begin
+        mpAlarm.Open;
+        mpAlarm.Stop;
+        mpAlarm.Notify := False;
+      end;
     end;
     epPMSSpeedSensorFailureAlrm :
     begin
@@ -136,10 +166,22 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      silence := True;
-      mpAlarm.OnNotify := mpAlarmNotify;
-      mpAlarm.Open;
-      mpAlarm.Play;
+      if Value then
+      begin
+        silence := True;
+        mpAlarm.OnNotify := mpAlarmNotify;
+        if not (mpAlarm.Mode = mpPlaying) then
+        begin
+          mpAlarm.Open;
+          mpAlarm.Play;
+        end;
+      end
+      else
+      begin
+        mpAlarm.Open;
+        mpAlarm.Stop;
+        mpAlarm.Notify := False;
+      end;
     end;
     epPMSLubOilPressLowAlrm     :
     begin
@@ -150,10 +192,22 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      silence := True;
-      mpAlarm.OnNotify := mpAlarmNotify;
-      mpAlarm.Open;
-      mpAlarm.Play;
+      if Value then
+      begin
+        silence := True;
+        mpAlarm.OnNotify := mpAlarmNotify;
+        if not (mpAlarm.Mode = mpPlaying) then
+        begin
+          mpAlarm.Open;
+          mpAlarm.Play;
+        end;
+      end
+      else
+      begin
+        mpAlarm.Open;
+        mpAlarm.Stop;
+        mpAlarm.Notify := False;
+      end;
     end;
     epPMSLubOilTempHigh         :
     begin
@@ -164,10 +218,22 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      silence := True;
-      mpAlarm.OnNotify := mpAlarmNotify;
-      mpAlarm.Open;
-      mpAlarm.Play;
+      if Value then
+      begin
+        silence := True;
+        mpAlarm.OnNotify := mpAlarmNotify;
+        if not (mpAlarm.Mode = mpPlaying) then
+        begin
+          mpAlarm.Open;
+          mpAlarm.Play;
+        end;
+      end
+      else
+      begin
+        mpAlarm.Open;
+        mpAlarm.Stop;
+        mpAlarm.Notify := False;
+      end;
     end;
     epPMSCoolWaterTempHighAlrm  :
     begin
@@ -178,10 +244,22 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      silence := True;
-      mpAlarm.OnNotify := mpAlarmNotify;
-      mpAlarm.Open;
-      mpAlarm.Play;
+      if Value then
+      begin
+        silence := True;
+        mpAlarm.OnNotify := mpAlarmNotify;
+        if not (mpAlarm.Mode = mpPlaying) then
+        begin
+          mpAlarm.Open;
+          mpAlarm.Play;
+        end;
+      end
+      else
+      begin
+        mpAlarm.Open;
+        mpAlarm.Stop;
+        mpAlarm.Notify := False;
+      end;
     end;
     epPMSCoolWaterLevelLow :
     begin
@@ -192,10 +270,22 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      silence := True;
-      mpAlarm.OnNotify := mpAlarmNotify;
-      mpAlarm.Open;
-      mpAlarm.Play;
+      if Value then
+      begin
+        silence := True;
+        mpAlarm.OnNotify := mpAlarmNotify;
+        if not (mpAlarm.Mode = mpPlaying) then
+        begin
+          mpAlarm.Open;
+          mpAlarm.Play;
+        end;
+      end
+      else
+      begin
+        mpAlarm.Open;
+        mpAlarm.Stop;
+        mpAlarm.Notify := False;
+      end;
     end;
     epPMSFuelOilLeakage :
     begin
@@ -206,10 +296,22 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      silence := True;
-      mpAlarm.OnNotify := mpAlarmNotify;
-      mpAlarm.Open;
-      mpAlarm.Play;
+      if Value then
+      begin
+        silence := True;
+        mpAlarm.OnNotify := mpAlarmNotify;
+        if not (mpAlarm.Mode = mpPlaying) then
+        begin
+          mpAlarm.Open;
+          mpAlarm.Play;
+        end;
+      end
+      else
+      begin
+        mpAlarm.Open;
+        mpAlarm.Stop;
+        mpAlarm.Notify := False;
+      end;
     end;
 
     epPMSSpeedSensorFailureShutdown : imgShutdownOverSpeed.Visible := Value;
@@ -262,6 +364,11 @@ end;
 procedure TMainForm.btnManualClick(Sender: TObject);
 begin
   DieselGeneratorSystem.EngineMode(True);
+end;
+
+procedure TMainForm.btnResetClick(Sender: TObject);
+begin
+//
 end;
 
 procedure TMainForm.btnSirenOffClick(Sender: TObject);
