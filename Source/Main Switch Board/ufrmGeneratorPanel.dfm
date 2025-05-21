@@ -35352,7 +35352,7 @@ object frmGeneratorPanel: TfrmGeneratorPanel
       Color = clBackground
       ParentBackground = False
       TabOrder = 0
-      object vra1: TVrAngularMeter
+      object vraPower: TVrAngularMeter
         Left = 0
         Top = 0
         Width = 360
@@ -35483,7 +35483,7 @@ object frmGeneratorPanel: TfrmGeneratorPanel
       Color = clBackground
       ParentBackground = False
       TabOrder = 1
-      object vra2: TVrAngularMeter
+      object vraFrequency: TVrAngularMeter
         Left = 0
         Top = 0
         Width = 360
@@ -35601,7 +35601,7 @@ object frmGeneratorPanel: TfrmGeneratorPanel
       Color = clBackground
       ParentBackground = False
       TabOrder = 2
-      object vra3: TVrAngularMeter
+      object vraV: TVrAngularMeter
         Left = 0
         Top = 0
         Width = 360
@@ -35814,7 +35814,7 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object vra5: TVrAngularMeter
+      object vraAmpere: TVrAngularMeter
         Left = 0
         Top = 0
         Width = 360
