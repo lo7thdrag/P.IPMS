@@ -944,6 +944,19 @@ begin
           else
             vrtryswtchPreStartPS.SwitchPosition := 1;
         end;
+
+        epPCSMERunning :
+        begin
+          if Value then
+            FFlashingStartPS := True
+          else
+            FFlashingStartPS := False;
+
+          if Value then
+            FFlashingStopPS := True
+          else
+            FFlashingStopPS := False;
+        end;
       end;
     end
     else if TMainEngine(Sender).Identifier = 'Main Engine SB' then
@@ -993,7 +1006,6 @@ begin
       end;
     end;
   end;
-
 end;
 
 procedure TfrmPCSLocalControlPanel.FlashingIndicatorClutch(SenderOn,
@@ -1514,17 +1526,39 @@ procedure TfrmPCSLocalControlPanel.vrtryswtchSTC_PSChange(Sender: TObject);
 begin
   if (TVrRotarySwitch(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
-    if not (vrtryswtchSTC_PS.SwitchPosition = 1) then
-      main_engine_PS.STCInManualMode := True
-    else
+    if vrtryswtchSTC_PS.SwitchPosition = 0 then
+    begin
+      main_engine_PS.STCInManualMode := True;
+      main_engine_PS.S2TCState := True;
+    end
+    else if vrtryswtchSTC_PS.SwitchPosition = 1 then
+    begin
       main_engine_PS.STCInManualMode := False;
+      main_engine_PS.S2TCState := False;
+    end
+    else if vrtryswtchSTC_PS.SwitchPosition = 2 then
+    begin
+      main_engine_PS.STCInManualMode := True;
+      main_engine_PS.S2TCState := False;
+    end
   end
   else if (TVrRotarySwitch(Sender).Tag = 1) and main_engine_SB.LocalControl then
   begin
-    if not (vrtryswtchSTC_SB.SwitchPosition = 1) then
-      main_engine_SB.STCInManualMode := True
-    else
+    if vrtryswtchSTC_SB.SwitchPosition = 0 then
+    begin
+      main_engine_SB.STCInManualMode := True;
+      main_engine_SB.S2TCState := True;
+    end
+    else if vrtryswtchSTC_SB.SwitchPosition = 1 then
+    begin
       main_engine_SB.STCInManualMode := False;
+      main_engine_SB.S2TCState := False;
+    end
+    else if vrtryswtchSTC_SB.SwitchPosition = 2 then
+    begin
+      main_engine_SB.STCInManualMode := True;
+      main_engine_SB.S2TCState := False;
+    end;
   end;
 end;
 

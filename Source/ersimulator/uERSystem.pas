@@ -24,6 +24,8 @@ type
 
     FFlashingStartPS : Boolean;
     FFlashingStartSB : Boolean;
+    FFlashingStopPS  : Boolean;
+    FFlashingStopSB  : Boolean;
 
     procedure OnNetworkLogger(const Value : string);
     procedure NetworkEventAssignment;
@@ -750,7 +752,9 @@ begin
     epPCSMERunning :
     begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(recERPCS.PortStaboardID);
+      FFlashingStartPS := recERPCS.ValueBool;
       ERSystem.ERManager.EngineRoom.getPCSSystem.StoppedStop(recERPCS.PortStaboardID);
+      FFlashingStopPS := recERPCS.ValueBool;
     end;
 
     epPCSMEClutched :

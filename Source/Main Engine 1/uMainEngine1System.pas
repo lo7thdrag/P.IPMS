@@ -23,6 +23,7 @@ type
     procedure Clutch(aPortStaboard : string);
     procedure SafetiesStop(aPortStaboard: string);
     procedure EmergencyStop(aPortStaboard : String);
+    procedure LocalRemote(aPortStaboard : String);
 
     procedure StartStopEngine(aValue : Boolean);
 
@@ -47,6 +48,7 @@ type
 
   public
     FEmergencyStopPS, FEmergencyStopSB : Boolean;
+    ControlRemotePS, ControlRemoteSB: Boolean;
 
     property Network : TMainEngine1Network read FMainEngine1Network;
     property Listener :TListeners read FListener;
@@ -160,13 +162,28 @@ var
   rec: ^R_Common_PCS_Command;
 
 begin
-
   rec := @apRec^;
 
   case rec.CommandPropsID of
-    epPCSMERunning, epPCSMEClutched, epPCSMELocalEmergencyStop, epPCSMESafetyStop:
+    epPCSMEClutched, epPCSMELocalEmergencyStop, epPCSMESafetyStop:
     begin
       FLIstener.TriggerEvents(Self, rec.CommandPropsID, rec.ValueBool);
+    end;
+
+    epPCSMERunning :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+
+    epPCSCtrlLocal :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
     end;
 
   end;
@@ -225,7 +242,9 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSMERunning;
   recCmd.CommandID      := C_ORD_ME_STOP;
+  recCmd.ValueBool      := False;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
@@ -249,6 +268,18 @@ begin
   recCmd.PortStaboardID := aPortStaboard;
   recCmd.CommandPropsID := epPCSMELocalEmergencyStop;
   recCmd.CommandID      := C_ORD_LEVER_EMERGENCYSTOP;
+  recCmd.ValueBool      := True;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine1System.LocalRemote(aPortStaboard: String);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSCtrlLocal;
+  recCmd.CommandID      := C_ORD_ME_REMOTEAUTO;
   recCmd.ValueBool      := True;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);

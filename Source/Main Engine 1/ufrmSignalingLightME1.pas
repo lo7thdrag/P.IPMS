@@ -52,9 +52,10 @@ type
     procedure btnSafetiesStopClick(Sender: TObject);
 
     procedure imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure tmrimgStartTimer(Sender: TObject);
   private
     FListener : TListeners;
+    FIsBlinkState : Boolean;
+    FIdBlink : Integer;
 
     FBlinkStart   : Cardinal;
     FImageToBlink : TImage;
@@ -126,19 +127,6 @@ begin
   imgEmergencyStopME1.Visible := True;
 end;
 
-procedure TfrmSignalingLightME1.tmrimgStartTimer(Sender: TObject);
-begin
-  imgStartME1.Visible := not imgStartME1.Visible;
-
-  if GetTickCount - FBlinkStart >= 10000 then
-  begin
-    tmrStart.Enabled    := False;
-
-    imgStartME1.Enabled := True;
-    imgStartME1.Enabled := False;
-  end;
-end;
-
 procedure TfrmSignalingLightME1.btnClutchDeclutchClick(Sender: TObject);
 begin
   MainEngine1System.Clutch(C_PCS_ME_STARBOARD);
@@ -152,11 +140,6 @@ end;
 procedure TfrmSignalingLightME1.btnStartStopClick(Sender: TObject);
 begin
   MainEngine1System.RunningStart(C_PCS_ME_STARBOARD);
-
-  FBlinkStart       := GetTickCount;
-  tmrStart.Enabled  := True;
-
-  imgStartME1.Visible := True;
 end;
 
 procedure TfrmSignalingLightME1.btnSafetiesStopClick(Sender: TObject);

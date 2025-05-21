@@ -6,15 +6,20 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
 
-  uListener, uFreezeFrom, uDataType;
+  uListener, uFreezeFrom, uDataType, Vcl.ExtCtrls;
 
 type
   TfrmMainForm = class(TForm)
+    tmrBlinkTimer: TTimer;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure tmrBlinkMe1Timer(Sender: TObject);
   private
     FListener : TListeners;
+    FIsBlinkState : Boolean;
+    FIsStartBlink : Boolean;
+    FIsStopBlink  : Boolean;
 
     procedure MainEngine1SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure MainEngine1SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
@@ -145,11 +150,61 @@ end;
 
 procedure TfrmMainForm.MainEngine1SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
-
+  case PropsID of
+    epPCSMERunning :
+    begin
+      if Value then
+      begin
+        FIsStartBlink := True;
+        FIsStopBlink  := False;
+        tmrBlinkTimer.Enabled := True
+      end
+      else
+      begin
+        FIsStartBlink := False;
+        FIsStopBlink := True;
+        tmrBlinkTimer.Enabled := False;
+//        frmSignalingLightME1.imgStartME1.Visible := False;
+      end;
+    end;
+    epPCSCtrlLocal :
+    begin
+      frmSignalingLightME1.imgLocalPositionME1.Visible := True
+    end;
+  end;
 end;
 
 procedure TfrmMainForm.MainEngine1SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
 begin
+
+end;
+
+procedure TfrmMainForm.tmrBlinkMe1Timer(Sender: TObject);
+begin
+  FIsBlinkState := not FIsBlinkState;
+
+  if FIsStartBlink then
+  begin
+    frmSignalingLightME1.imgStartME1.Visible := FIsBlinkState;
+    frmSignalingLightME1.imgStartingAllowedME1.Visible := True;
+  end
+  else
+  begin
+    frmSignalingLightME1.imgStartME1.Visible := False;
+    frmSignalingLightME1.imgStartingAllowedME1.Visible := False;
+  end;
+
+  if FIsStopBlink then
+  begin
+    frmSignalingLightME1.imgStopME1.Visible := FIsBlinkState;
+  end
+  else
+  begin
+    frmSignalingLightME1.imgStopME1.Visible := False;
+  end;
+
+ if not FIsStartBlink and not FIsStopBlink then
+  tmrBlinkTimer.Enabled := False;
 
 end;
 

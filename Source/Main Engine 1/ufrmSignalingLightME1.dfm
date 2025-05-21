@@ -11730,7 +11730,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
   end
   object tmrStart: TTimer
     Enabled = False
-    OnTimer = tmrimgStartTimer
     Left = 472
     Top = 488
   end

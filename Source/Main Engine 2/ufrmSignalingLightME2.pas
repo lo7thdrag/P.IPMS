@@ -90,15 +90,6 @@ end;
 
 procedure TfrmSignalingLightME2.vrtryswtchSTC_PSClick(Sender: TObject);
 begin
-//  if TVrRotarySwitch(Sender).Tag = 0 then
-//  begin
-//    if vrtryswtchSTC_PS.SwitchPosition = 0 then
-//      MainEngine2System.vrtryswtchSTC_PS(C_PCS_ME_PORTS, True)
-//    else if vrtryswtchSTC_PS.SwitchPosition = 1 then
-//      MainEngine2System.vrtryswtchSTC_PS(C_PCS_ME_PORTS, False)
-//    else if vrtryswtchSTC_PS.SwitchPosition = 2 then
-//      MainEngine2System.vrtryswtchSTC_PS(C_PCS_ME_PORTS, True);
-//  end;
   if TVrRotarySwitch(Sender).Tag = 0 then
   begin
     MainEngine2System.vrtryswtchAutoSTC_PS(C_PCS_ME_PORTS, vrtryswtchSTC_PS.SwitchPosition);
