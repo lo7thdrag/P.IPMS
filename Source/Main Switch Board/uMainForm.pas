@@ -293,7 +293,7 @@ begin
       begin
         with frmEmergencyPanel do
         begin
-          ImgIndicatorCBC.Visible := Value;
+          ImgIndicatorCKC.Visible := Value;
         end;
       end
       else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
@@ -351,7 +351,90 @@ end;
 
 procedure TfrmMainForm.MainSwitchBoardSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
 begin
+  case PropsID of
+    epPMSPower:
+    begin
+      if MainSwitchBoardSystem.IdFormGensys = 'GENSYS' then
+      begin
+        with frmGeneratorPanel do
+        begin
+          vraPower.Position := Value;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
+      begin
+        with frmEmergencyPanel do
+        begin
+          VraPower.Position := Value;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
+      begin
+        with frmShorePanel do
+        begin
+          VraPower.Position := Value;
+        end;
+      end;
+    end;
+    epPMSFrequency:
+    begin
+      if MainSwitchBoardSystem.IdFormGensys = 'GENSYS' then
+      begin
+        with frmGeneratorPanel do
+        begin
+          vraFrequency.Position := Value;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
+      begin
+        with frmEmergencyPanel do
+        begin
 
+        end;
+      end;
+    end;
+    epPMSV:
+    begin
+      if MainSwitchBoardSystem.IdFormGensys = 'GENSYS' then
+      begin
+        with frmGeneratorPanel do
+        begin
+          vraV.Position := Value;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
+      begin
+        with frmEmergencyPanel do
+        begin
+          VraV.Position := Value;
+        end;
+      end;
+    end;
+    epPMSCurrent:
+    begin
+      if MainSwitchBoardSystem.IdFormGensys = 'GENSYS' then
+      begin
+        with frmGeneratorPanel do
+        begin
+          vraAmpere.Position := Value;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'EMERGENCY' then
+      begin
+        with frmEmergencyPanel do
+        begin
+          VraAmpere.Position := Value;
+        end;
+      end
+      else if MainSwitchBoardSystem.IdFormGensys = 'SHORE' then
+      begin
+        with frmShorePanel do
+        begin
+          VraAmpere.Position := Value;
+        end;
+      end;
+    end;
+  end;
 end;
 
 end.

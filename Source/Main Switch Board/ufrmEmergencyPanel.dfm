@@ -91418,7 +91418,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object VrAngularMeter5: TVrAngularMeter
+      object VraAmpere: TVrAngularMeter
         Left = 0
         Top = 0
         Width = 360
@@ -91467,7 +91467,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
       Color = clBackground
       ParentBackground = False
       TabOrder = 2
-      object VrAngularMeter1: TVrAngularMeter
+      object VraPower: TVrAngularMeter
         Left = 0
         Top = 0
         Width = 360
@@ -91585,7 +91585,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
       Color = clBackground
       ParentBackground = False
       TabOrder = 3
-      object VrAngularMeter4: TVrAngularMeter
+      object VraV: TVrAngularMeter
         Left = 0
         Top = 0
         Width = 360

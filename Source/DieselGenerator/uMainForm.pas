@@ -59,6 +59,7 @@ type
     procedure DoLampTest(OnOff : Boolean);
     procedure btnSirenOffClick(Sender: TObject);
     procedure mpAlarmNotify(Sender: TObject);
+    procedure Alarm(Value: Boolean);
     procedure btnResetClick(Sender: TObject);
 
   private
@@ -83,6 +84,34 @@ uses
   uDieselGeneratorSystem;
 
 {$R *.dfm}
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+  FListener := TListeners.Create;
+  with DieselGeneratorSystem.Listener.Add('DIESELGENERATOR') as TPropertyEventListener do
+  begin
+    OnPropertyIntChange := DieselGeneratorSystemEvent;
+    OnPropertyBoolChange := DieselGeneratorSystemEvent;
+  end;
+
+  Lamps := [imgSupplyVoltageLow, imgAutomaticStartFailed, imgSpeedSensorFailure,
+            imgLubOilPressLow, imgLubOilTempHigh, imgCoolingWaterTempHigh,
+            imgCoolingWaterLevelLow, imgFuelOilLeakage, imgSpare,
+            imgShutdownOverSpeed, imgShutdownLOPressLow, imgShutdownCWTempHigh, imgShutDownSpare,
+            imgRunning, imgStartDisable,
+            imgStart, imgStop, imgStandby, imgManual, imgReset ];
+
+  SetLength(LampStatus, Length(Lamps));
+
+  if not FileExists(ExtractFilePath(Application.Exename) + 'ACS_ALARM.mp3') then
+  begin
+    raise Exception.Create('ACS_ALARM.mp3 Not found');
+  end
+  else
+    mpAlarm.FileName:= ExtractFilePath(Application.Exename) + 'ACS_ALARM.mp3';
+
+  silence := False;
+end;
 
 procedure TMainForm.DieselGeneratorSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
@@ -114,22 +143,7 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      if Value then
-      begin
-        silence := True;
-        mpAlarm.OnNotify := mpAlarmNotify;
-        if not (mpAlarm.Mode = mpPlaying) then
-        begin
-          mpAlarm.Open;
-          mpAlarm.Play;
-        end;
-      end
-      else
-      begin
-        mpAlarm.Open;
-        mpAlarm.Stop;
-        mpAlarm.Notify := False;
-      end;
+      Alarm(Value);
     end;
     epPMSAutStartFailure :
     begin
@@ -140,22 +154,7 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      if Value then
-      begin
-        silence := True;
-        mpAlarm.OnNotify := mpAlarmNotify;
-        if not (mpAlarm.Mode = mpPlaying) then
-        begin
-          mpAlarm.Open;
-          mpAlarm.Play;
-        end;
-      end
-      else
-      begin
-        mpAlarm.Open;
-        mpAlarm.Stop;
-        mpAlarm.Notify := False;
-      end;
+      Alarm(Value);
     end;
     epPMSSpeedSensorFailureAlrm :
     begin
@@ -166,24 +165,9 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      if Value then
-      begin
-        silence := True;
-        mpAlarm.OnNotify := mpAlarmNotify;
-        if not (mpAlarm.Mode = mpPlaying) then
-        begin
-          mpAlarm.Open;
-          mpAlarm.Play;
-        end;
-      end
-      else
-      begin
-        mpAlarm.Open;
-        mpAlarm.Stop;
-        mpAlarm.Notify := False;
-      end;
+      Alarm(Value);
     end;
-    epPMSLubOilPressLowAlrm     :
+    epPMSLubOilPressLowAlrm :
     begin
       imgLubOilPressLow.Visible := Value;
 
@@ -192,24 +176,9 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      if Value then
-      begin
-        silence := True;
-        mpAlarm.OnNotify := mpAlarmNotify;
-        if not (mpAlarm.Mode = mpPlaying) then
-        begin
-          mpAlarm.Open;
-          mpAlarm.Play;
-        end;
-      end
-      else
-      begin
-        mpAlarm.Open;
-        mpAlarm.Stop;
-        mpAlarm.Notify := False;
-      end;
+      Alarm(Value);
     end;
-    epPMSLubOilTempHigh         :
+    epPMSLubOilTempHigh :
     begin
       imgLubOilTempHigh.Visible := Value;
 
@@ -218,22 +187,7 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      if Value then
-      begin
-        silence := True;
-        mpAlarm.OnNotify := mpAlarmNotify;
-        if not (mpAlarm.Mode = mpPlaying) then
-        begin
-          mpAlarm.Open;
-          mpAlarm.Play;
-        end;
-      end
-      else
-      begin
-        mpAlarm.Open;
-        mpAlarm.Stop;
-        mpAlarm.Notify := False;
-      end;
+      Alarm(Value);
     end;
     epPMSCoolWaterTempHighAlrm  :
     begin
@@ -244,22 +198,7 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      if Value then
-      begin
-        silence := True;
-        mpAlarm.OnNotify := mpAlarmNotify;
-        if not (mpAlarm.Mode = mpPlaying) then
-        begin
-          mpAlarm.Open;
-          mpAlarm.Play;
-        end;
-      end
-      else
-      begin
-        mpAlarm.Open;
-        mpAlarm.Stop;
-        mpAlarm.Notify := False;
-      end;
+      Alarm(Value);
     end;
     epPMSCoolWaterLevelLow :
     begin
@@ -270,22 +209,7 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      if Value then
-      begin
-        silence := True;
-        mpAlarm.OnNotify := mpAlarmNotify;
-        if not (mpAlarm.Mode = mpPlaying) then
-        begin
-          mpAlarm.Open;
-          mpAlarm.Play;
-        end;
-      end
-      else
-      begin
-        mpAlarm.Open;
-        mpAlarm.Stop;
-        mpAlarm.Notify := False;
-      end;
+      Alarm(Value);
     end;
     epPMSFuelOilLeakage :
     begin
@@ -296,25 +220,10 @@ begin
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
 
-      if Value then
-      begin
-        silence := True;
-        mpAlarm.OnNotify := mpAlarmNotify;
-        if not (mpAlarm.Mode = mpPlaying) then
-        begin
-          mpAlarm.Open;
-          mpAlarm.Play;
-        end;
-      end
-      else
-      begin
-        mpAlarm.Open;
-        mpAlarm.Stop;
-        mpAlarm.Notify := False;
-      end;
+      Alarm(Value);
     end;
 
-    epPMSSpeedSensorFailureShutdown : imgShutdownOverSpeed.Visible := Value;
+    epPMSSpeedSensorFailureShutdown : imgShutdownOverSpeed.Visible  := Value;
     epPMSLubOilPressLowShutdown     : imgShutdownLOPressLow.Visible := Value;
     epPMSCoolWaterTempHighShutdown  : imgShutdownCWTempHigh.Visible := Value;
 
@@ -349,6 +258,26 @@ begin
 
 end;
 
+procedure TMainForm.Alarm(Value: Boolean);
+begin
+  if Value then
+  begin
+    silence := True;
+    mpAlarm.OnNotify := mpAlarmNotify;
+    if not (mpAlarm.Mode = mpPlaying) then
+    begin
+      mpAlarm.Open;
+      mpAlarm.Play;
+    end;
+  end
+  else
+  begin
+    mpAlarm.Open;
+    mpAlarm.Stop;
+    mpAlarm.Notify := False;
+  end;
+end;
+
 procedure TMainForm.btnLampTestMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
@@ -368,7 +297,16 @@ end;
 
 procedure TMainForm.btnResetClick(Sender: TObject);
 begin
-//
+  imgReset.Visible := True;
+
+  imgSupplyVoltageLow.Visible     := False;
+  imgAutomaticStartFailed.Visible := False;
+  imgSpeedSensorFailure.Visible   := False;
+  imgLubOilPressLow.Visible       := False;
+  imgLubOilTempHigh.Visible       := False;
+  imgCoolingWaterTempHigh.Visible := False;
+  imgCoolingWaterLevelLow.Visible := False;
+  imgFuelOilLeakage.Visible       := False;
 end;
 
 procedure TMainForm.btnSirenOffClick(Sender: TObject);
@@ -421,41 +359,7 @@ begin
     begin
       lblRunningHours.Caption := IntToStr(Value);
     end;
-
-//    epPCSCtrlBackgroundLamp:
-//      BackgroundLampIndicator(Value);
-//
-//    epPCSCtrlLamptTest:
-//      LampTestIndicator(Value);
   end;
-end;
-
-procedure TMainForm.FormCreate(Sender: TObject);
-begin
-  FListener := TListeners.Create;
-  with DieselGeneratorSystem.Listener.Add('DIESELGENERATOR') as TPropertyEventListener do
-  begin
-    OnPropertyIntChange := DieselGeneratorSystemEvent;
-    OnPropertyBoolChange := DieselGeneratorSystemEvent;
-  end;
-
-  Lamps := [imgSupplyVoltageLow, imgAutomaticStartFailed, imgSpeedSensorFailure,
-            imgLubOilPressLow, imgLubOilTempHigh, imgCoolingWaterTempHigh,
-            imgCoolingWaterLevelLow, imgFuelOilLeakage, imgSpare,
-            imgShutdownOverSpeed, imgShutdownLOPressLow, imgShutdownCWTempHigh, imgShutDownSpare,
-            imgRunning, imgStartDisable,
-            imgStart, imgStop, imgStandby, imgManual, imgReset ];
-
-  SetLength(LampStatus, Length(Lamps));
-
-  if not FileExists(ExtractFilePath(Application.Exename) + 'ACS_ALARM.mp3') then
-  begin
-    raise Exception.Create('ACS_ALARM.mp3 Not found');
-  end
-  else
-    mpAlarm.FileName:= ExtractFilePath(Application.Exename) + 'ACS_ALARM.mp3';
-
-  silence := False;
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);

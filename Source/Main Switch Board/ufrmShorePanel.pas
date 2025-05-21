@@ -21,9 +21,9 @@ type
     Label17: TLabel;
     Label18: TLabel;
     Label16: TLabel;
-    VrAngularMeter5: TVrAngularMeter;
+    VraAmpere: TVrAngularMeter;
     pnlkW: TPanel;
-    VrAngularMeter1: TVrAngularMeter;
+    VraPower: TVrAngularMeter;
     Label20: TLabel;
     Label19: TLabel;
     Label1: TLabel;
