@@ -19,7 +19,7 @@ type
     img5: TImage;
     img6: TImage;
     pnlkW: TPanel;
-    vraPower: TVrAngularMeter;
+    VraPower: TVrAngularMeter;
     lbl1: TLabel;
     lbl2: TLabel;
     lbl3: TLabel;
@@ -27,14 +27,14 @@ type
     lbl5: TLabel;
     lbl6: TLabel;
     pnlHz: TPanel;
-    vraFrequency: TVrAngularMeter;
+    VraFrequency: TVrAngularMeter;
     lbl7: TLabel;
     lbl8: TLabel;
     lbl9: TLabel;
     lbl10: TLabel;
     lbl11: TLabel;
     pnlV: TPanel;
-    vraV: TVrAngularMeter;
+    VraV: TVrAngularMeter;
     lbl12: TLabel;
     lbl13: TLabel;
     lbl14: TLabel;
