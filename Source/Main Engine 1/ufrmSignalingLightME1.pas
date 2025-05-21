@@ -45,13 +45,13 @@ type
     imgSafetiesorECResetME1: TImage;
     imgSafetiesStopOverbiddenME1: TImage;
     imgEmergencyStopME1: TImage;
-    tmrStart: TTimer;
-    procedure btnStartStopClick(Sender: TObject);
+    procedure btnStartClick(Sender: TObject);
     procedure btnClutchDeclutchClick(Sender: TObject);
     procedure btnEmergencyStopClick(Sender: TObject);
     procedure btnSafetiesStopClick(Sender: TObject);
 
     procedure imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure imgStopME1Click(Sender: TObject);
   private
     FListener : TListeners;
     FIsBlinkState : Boolean;
@@ -137,9 +137,14 @@ begin
   MainEngine1System.EmergencyStop(C_PCS_ME_STARBOARD);
 end;
 
-procedure TfrmSignalingLightME1.btnStartStopClick(Sender: TObject);
+procedure TfrmSignalingLightME1.btnStartClick(Sender: TObject);
 begin
   MainEngine1System.RunningStart(C_PCS_ME_STARBOARD);
+end;
+
+procedure TfrmSignalingLightME1.imgStopME1Click(Sender: TObject);
+begin
+  MainEngine1System.StoppedStop(C_PCS_STARBOARD);
 end;
 
 procedure TfrmSignalingLightME1.btnSafetiesStopClick(Sender: TObject);

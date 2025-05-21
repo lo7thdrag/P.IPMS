@@ -57,6 +57,8 @@ type
     FSTCState : Integer;
     F2TCState : Boolean;
 
+    FPreState : Boolean;
+
     FTempExhCylA, FTempExhCylB,
     FDevTempExhCylA, FDevTempExhCylB,
     FTempConRodBear : array [0..9] of Double;
@@ -159,6 +161,7 @@ type
     // Main Engine 2
     procedure SetRunningHours(const Value: Integer);
     procedure SetRemoteControl(const Value: Boolean);
+    procedure SetPreStartState(const Value: Boolean);
     procedure SetSTCInManual(const Value: Integer);
     procedure Set2TCInManual(const Value: Boolean);
 
@@ -1476,7 +1479,7 @@ begin
     Exit;
 
   FDecreaseSpeed := Value;
-//  Listener.TriggerEvents(Self,epPCSMEStopDecrease,Value);{tambahan sendiri}
+  Listener.TriggerEvents(Self,epPCSMEStopDecrease,Value);{tambahan sendiri}
 end;
 
 procedure TMainEngine.SetDelayActualSpeed(const Value: Double);
@@ -2126,6 +2129,15 @@ begin
 
   FRemoteControl := Value;
   Listener.TriggerEvents(Self, epPCSMERemoteControl, Value);
+end;
+
+procedure TMainEngine.SetPreStartState(const Value: Boolean);
+begin
+  if FPreState then
+    Exit;
+
+  FPreState := Value;
+  Listener.TriggerEvents(Self, epPCSMEPreStartInhibition, Value);
 end;
 
 procedure TMainEngine.SetRemoteControlProposed(const Value: Boolean);

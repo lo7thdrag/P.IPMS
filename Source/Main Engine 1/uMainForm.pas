@@ -153,23 +153,22 @@ begin
   case PropsID of
     epPCSMERunning :
     begin
-      if Value then
-      begin
-        FIsStartBlink := True;
-        FIsStopBlink  := False;
-        tmrBlinkTimer.Enabled := True
-      end
-      else
-      begin
-        FIsStartBlink := False;
-        FIsStopBlink := True;
-        tmrBlinkTimer.Enabled := False;
-//        frmSignalingLightME1.imgStartME1.Visible := False;
-      end;
+      FIsStartBlink := Value;
+      FIsStopBlink  := not Value;
+      tmrBlinkTimer.Enabled := FIsStartBlink or FIsStopBlink;
     end;
     epPCSCtrlLocal :
     begin
-      frmSignalingLightME1.imgLocalPositionME1.Visible := True
+      if Value then
+      begin
+        frmSignalingLightME1.imgLocalPositionME1.Visible := True;
+        frmSignalingLightME1.imgRemotePositionME1.Visible := False;
+      end
+      else
+      begin
+        frmSignalingLightME1.imgLocalPositionME1.Visible := False;
+        frmSignalingLightME1.imgRemotePositionME1.Visible := True;
+      end;
     end;
   end;
 end;
@@ -205,7 +204,6 @@ begin
 
  if not FIsStartBlink and not FIsStopBlink then
   tmrBlinkTimer.Enabled := False;
-
 end;
 
 end.

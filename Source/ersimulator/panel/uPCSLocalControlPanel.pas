@@ -948,14 +948,15 @@ begin
         epPCSMERunning :
         begin
           if Value then
-            FFlashingStartPS := True
+          begin
+            FFlashingStartPS := True;
+            FFlashingStopPS := True;
+          end
           else
+          begin
             FFlashingStartPS := False;
-
-          if Value then
-            FFlashingStopPS := True
-          else
             FFlashingStopPS := False;
+          end;
         end;
       end;
     end
@@ -1454,7 +1455,6 @@ begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(C_PCS_ME_PORTS);
       vrtryswtchPreStartPS.SwitchPosition := 0;
     end;
-
   end
   else if (TVrRotarySwitch(Sender).Tag = 1) and main_engine_SB.LocalControl then
   begin

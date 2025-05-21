@@ -244,7 +244,7 @@ begin
   recCmd.PortStaboardID := aPortStaboard;
   recCmd.CommandPropsID := epPCSMERunning;
   recCmd.CommandID      := C_ORD_ME_STOP;
-  recCmd.ValueBool      := False;
+  recCmd.ValueBool      := True;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;

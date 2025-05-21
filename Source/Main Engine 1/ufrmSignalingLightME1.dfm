@@ -10436,7 +10436,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         71E85993CB053B0BFE76C923842179841BC923DC54254F5D261364BABBFBBBAE
         2266A49A9B835CD15765FBC82344B5481EE146F208379247B8913CC2CD9FF1C5
         F3D720414E000000000049454E44AE426082}
-      OnClick = btnStartStopClick
+      OnClick = imgStopME1Click
     end
     object imgClutchME1: TImage
       Left = 76
@@ -10844,7 +10844,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         E47F8679B57099F7EF7CE8E421049487FC0B280F5113953CEEC46A1C7197C6BB
         ADA48191EDCA84ABD6FFCF3704C94348B4501EA286F210359487A8A13C44CDDF
         66A811D7A77F01E70000000049454E44AE426082}
-      OnClick = btnStartStopClick
+      OnClick = btnStartClick
     end
     object imgDeclutchME1: TImage
       Left = 419
@@ -11727,10 +11727,5 @@ object frmSignalingLightME1: TfrmSignalingLightME1
       Stretch = True
       OnClick = btnEmergencyStopClick
     end
-  end
-  object tmrStart: TTimer
-    Enabled = False
-    Left = 472
-    Top = 488
   end
 end
