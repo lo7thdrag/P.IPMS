@@ -174,9 +174,13 @@ begin
     end;
     epPCSGBClutchAllowed :
     begin
-//      FIsClutchBlink := Value;
-//      tmrBlinkTimer.Enabled := FIsClutchBlink;
-      frmSignalingLightME1.imgClutchAllowedME1.Visible := True;
+      frmSignalingLightME1.imgClutchAllowedME1.Visible := True
+    end;
+    epPCSGBClutchEngaged :
+    begin
+      FIsClutchBlink := Value;
+      tmrBlinkTimer.Enabled := FIsClutchBlink;
+      frmSignalingLightME1.imgClutchAllowedME1.Visible := False
     end;
   end;
 
@@ -210,14 +214,14 @@ begin
     frmSignalingLightME1.imgStopME1.Visible := False;
   end;
 
-//  if FIsClutchBlink then
-//  begin
-//    frmSignalingLightME1.imgClutchME1.Visible := FIsBlinkState;
-//  end
-//  else
-//  begin
-//    frmSignalingLightME1.imgClutchME1.Visible := False;
-//  end;
+  if FIsClutchBlink then
+  begin
+    frmSignalingLightME1.imgClutchME1.Visible := FIsBlinkState;
+  end
+  else
+  begin
+    frmSignalingLightME1.imgClutchME1.Visible := False;
+  end;
 
  if not FIsStartBlink and not FIsStopBlink and not FIsClutchBlink then
   tmrBlinkTimer.Enabled := False;

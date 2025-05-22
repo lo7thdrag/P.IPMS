@@ -21,6 +21,7 @@ type
     procedure RunningStart(aPortStaboard : String);
     procedure StoppedStop(aPortStaboard : String);
     procedure Clutch(aPortStaboard : string);
+    procedure ClutchAllowed(aPortStaboard : string);
     procedure SafetiesStop(aPortStaboard: string);
     procedure EmergencyStop(aPortStaboard : String);
     procedure LocalRemote(aPortStaboard : String);
@@ -193,7 +194,13 @@ begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
-
+    epPCSGBClutchEngaged :
+    begin
+      if rec.PortStaboardID = C_PCS_GB_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
   end;
 end;
 
@@ -258,6 +265,18 @@ begin
 end;
 
 procedure TMainEngine1System.Clutch(aPortStaboard: string);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSGBClutchEngaged;
+  recCmd.CommandID      := C_ORD_GB_CLUTCH_ENGAGED;
+  recCmd.ValueBool      := True;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine1System.ClutchAllowed(aPortStaboard: string);
 var
   recCmd : R_Common_PCS_Command;
 begin

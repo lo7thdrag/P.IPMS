@@ -949,29 +949,30 @@ begin
         begin
           if Value then
           begin
-            FFlashingStartPS := True;
+            FFlashingStartPS := False;
             FFlashingStopPS  := True;
             img18.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
           end
           else
           begin
-            FFlashingStartPS := False;
+            FFlashingStartPS := True;
             FFlashingStopPS  := False;
             img18.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
           end;
         end;
-        epPCSGBClutchAllowed :
+        epPCSGBClutchAllowed :    //Lamp Indicator
         begin
           if Value then
-          begin
-//            FFlashingClutchPS := True;
-            img21.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
-          end
+            img21.Picture.LoadFromFile(fAlarmIndicatorGreenOn)
           else
-          begin
-//            FFlashingClutchPS := False;
             img21.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
-          end;
+        end;
+        epPCSGBClutchEngaged :
+        begin
+          if Value then
+             FFlashingClutchPS := True
+          else
+            FFlashingClutchPS := False;
         end;
       end;
     end

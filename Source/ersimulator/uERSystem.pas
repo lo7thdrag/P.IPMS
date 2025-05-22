@@ -759,11 +759,17 @@ begin
       FFlashingStopPS := recERPCS.ValueBool;
     end;
 
-    epPCSMEClutched :
+    epPCSGBClutchAllowed :        // Lamp Indicator
     begin
       gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
       ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, recERPCS.ValueBool);
-//      FFlashingClutchPS := recERPCS.ValueBool;
+    end;
+
+    epPCSGBClutchEngaged :
+    begin
+      gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, recERPCS.ValueBool);
+      FFlashingClutchPS := recERPCS.ValueBool;
     end;
 
     epPCSMELocalEmergencyStop :
