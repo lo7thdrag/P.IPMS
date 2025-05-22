@@ -65,6 +65,7 @@ begin
     begin
       MainEngine2System.vrtryswtchPreStartInhibitionPS(C_PCS_ME_PORTS, False);
       MainEngine2System.RunningStart(C_PCS_ME_PORTS);
+      vrtryswtchPreStartPS.SwitchPosition := 0
     end;
   end;
 end;

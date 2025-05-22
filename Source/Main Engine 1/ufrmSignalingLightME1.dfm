@@ -10436,6 +10436,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         71E85993CB053B0BFE76C923842179841BC923DC54254F5D261364BABBFBBBAE
         2266A49A9B835CD15765FBC82344B5481EE146F208379247B8913CC2CD9FF1C5
         F3D720414E000000000049454E44AE426082}
+      Visible = False
       OnClick = imgStopME1Click
     end
     object imgClutchME1: TImage
@@ -10547,6 +10548,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         4CFD05B4AB37AED9AE8BE22152180F89311E12B3148F83F191937DB7A6D795EC
         8CABBB1B0A4BFCBBE752F11059C578488CF19018E32131C64362FF0789E964F5
         B644DA1D0000000049454E44AE426082}
+      Visible = False
       OnClick = btnClutchClick
     end
     object imgByPassOpenME1: TImage
@@ -10739,6 +10741,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         F248F886248F846F48F248F886248F846FFC1FAD23BD40341A52570000000049
         454E44AE426082}
       Stretch = True
+      Visible = False
     end
     object imgStartME1: TImage
       Left = 419
@@ -10969,6 +10972,8 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         E2BA2E2BF19CA16F688072A8FEDBEF4AF21084A6903C8430240F210CC9430843
         F210C2FC094EF5A0041DD8528C0000000049454E44AE426082}
       Stretch = True
+      Visible = False
+      OnClick = btnClutchClick
     end
     object imgByPassClosedME1: TImage
       Left = 421
@@ -11193,6 +11198,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         C896333B92A12695D4E29148F4458A476230523C128391E291188C148FC460FE
         0F3D6E345EE113857B0000000049454E44AE426082}
       Stretch = True
+      Visible = False
     end
     object imgSafetiesorECResetME1: TImage
       Left = 736
@@ -11369,6 +11375,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         180CF162C463708D118FC135463C06D718F1185CF33F747C63139982E4D80000
         000049454E44AE426082}
       Stretch = True
+      Visible = False
     end
     object imgSafetiesStopOverbiddenME1: TImage
       Left = 733
@@ -11564,6 +11571,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         E391189E3C1E89E1C9E391189E3C1E89F13F6369836DD0623C61000000004945
         4E44AE426082}
       Stretch = True
+      Visible = False
       OnClick = btnSafetiesStopClick
     end
     object imgEmergencyStopME1: TImage
@@ -11724,7 +11732,80 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         298C3C866018790CC130F2188261E43104E3BFB3589E315C2E4CEC0000000049
         454E44AE426082}
       Stretch = True
+      Visible = False
       OnClick = btnEmergencyStopClick
+    end
+    object imgStartME1Shadow: TImage
+      Left = 419
+      Top = 537
+      Width = 144
+      Height = 96
+      Cursor = crHandPoint
+      OnClick = btnStartClick
+    end
+    object imgStopME1Shadow: TImage
+      Left = 75
+      Top = 537
+      Width = 144
+      Height = 96
+      Cursor = crHandPoint
+      OnClick = btnStartClick
+    end
+    object imgClutchME1Shadow: TImage
+      Left = 75
+      Top = 665
+      Width = 144
+      Height = 96
+      Cursor = crHandPoint
+      OnClick = btnStartClick
+    end
+    object imgByPassOpenME1Shadow: TImage
+      Left = 75
+      Top = 793
+      Width = 144
+      Height = 96
+      Cursor = crHandPoint
+      OnClick = btnStartClick
+    end
+    object imgDeclutchME1Shadow: TImage
+      Left = 419
+      Top = 665
+      Width = 144
+      Height = 96
+      Cursor = crHandPoint
+      OnClick = btnStartClick
+    end
+    object imgByPassClosedME1Shadow: TImage
+      Left = 419
+      Top = 793
+      Width = 144
+      Height = 96
+      Cursor = crHandPoint
+      OnClick = btnStartClick
+    end
+    object imgSafetiesorECResetME1Shadow: TImage
+      Left = 737
+      Top = 538
+      Width = 144
+      Height = 96
+      Cursor = crHandPoint
+      OnClick = btnStartClick
+    end
+    object imgSafetiesStopOverbiddenME1Shadow: TImage
+      Left = 736
+      Top = 665
+      Width = 147
+      Height = 96
+      Cursor = crHandPoint
+      OnClick = btnStartClick
+    end
+    object imgEmergencyStopME1Shadow: TImage
+      Left = 1054
+      Top = 665
+      Width = 144
+      Height = 96
+      Cursor = crHandPoint
+      OnClick = btnStartClick
     end
   end
 end

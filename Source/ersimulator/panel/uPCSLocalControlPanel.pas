@@ -285,10 +285,10 @@ type
     procedure FormShortcut(var Msg: TWMKey; var Handled: Boolean);
     procedure btnEmergencStopClick(Sender: TObject);
     procedure btnSafetiesStopClick(Sender: TObject);
-    procedure vrtryswtchRemotePSChange(Sender: TObject);
-    procedure vrtryswtchSpeedPSChange(Sender: TObject);
-    procedure vrtryswtchPreStartPSChange(Sender: TObject);
-    procedure vrtryswtchSTC_PSChange(Sender: TObject);
+    procedure vrtryswtchPreStartPSClick(Sender: TObject);
+    procedure vrtryswtchRemotePSClick(Sender: TObject);
+    procedure vrtryswtchSpeedPSClick(Sender: TObject);
+    procedure vrtryswtchSTC_PSClick(Sender: TObject);
 
   private
     aplctnvntsKey : TApplicationEvents;
@@ -970,9 +970,15 @@ begin
         epPCSGBClutchEngaged :
         begin
           if Value then
-             FFlashingClutchPS := True
+          begin
+             FFlashingClutchPS := True;
+             FFlashingDeclutchPS := False;
+          end
           else
+          begin
             FFlashingClutchPS := False;
+            FFlashingDeclutchPS := True;
+          end;
         end;
       end;
     end
@@ -1461,15 +1467,22 @@ begin
   end;
 end;
 
-procedure TfrmPCSLocalControlPanel.vrtryswtchPreStartPSChange(Sender: TObject);
+procedure TfrmPCSLocalControlPanel.vrtryswtchPreStartPSClick(Sender: TObject);
 begin
-  if (TVrRotarySwitch(Sender).Tag = 0) and main_engine_PS.LocalControl then
+  if (TVrRotarySwitch(Sender).Tag = 0)then
   begin
-    if vrtryswtchPreStartPS.SwitchPosition = 1 then
+    if  main_engine_PS.LocalControl then
     begin
-      main_engine_PS.PreStartInhibition := True;
-      ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(C_PCS_ME_PORTS);
-      vrtryswtchPreStartPS.SwitchPosition := 0;
+      if vrtryswtchPreStartPS.SwitchPosition = 1 then
+      begin
+        main_engine_PS.PreStartInhibition := True;
+        ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(C_PCS_ME_PORTS);
+        vrtryswtchPreStartPS.SwitchPosition := 0;
+      end;
+    end
+    else
+    begin
+      vrtryswtchPreStartPS.SwitchPosition := 0
     end;
   end
   else if (TVrRotarySwitch(Sender).Tag = 1) and main_engine_SB.LocalControl then
@@ -1483,7 +1496,7 @@ begin
   end;
 end;
 
-procedure TfrmPCSLocalControlPanel.vrtryswtchRemotePSChange(Sender: TObject);
+procedure TfrmPCSLocalControlPanel.vrtryswtchRemotePSClick(Sender: TObject);
 begin
   if TVrRotarySwitch(Sender).Tag = 0 then
   begin
@@ -1501,8 +1514,7 @@ begin
   end;
 end;
 
-
-procedure TfrmPCSLocalControlPanel.vrtryswtchSpeedPSChange(Sender: TObject);
+procedure TfrmPCSLocalControlPanel.vrtryswtchSpeedPSClick(Sender: TObject);
 begin
   if (TVrRotarySwitch(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
@@ -1538,9 +1550,9 @@ begin
   end;
 end;
 
-procedure TfrmPCSLocalControlPanel.vrtryswtchSTC_PSChange(Sender: TObject);
+procedure TfrmPCSLocalControlPanel.vrtryswtchSTC_PSClick(Sender: TObject);
 begin
-  if (TVrRotarySwitch(Sender).Tag = 0) and main_engine_PS.LocalControl then
+ if (TVrRotarySwitch(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
     if vrtryswtchSTC_PS.SwitchPosition = 0 then
     begin

@@ -21,7 +21,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
     Top = 0
     Width = 1687
     Height = 856
-    ActivePage = tsPS
+    ActivePage = tsSB
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -14059,7 +14059,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 95
               Radius = 30
-              OnChange = vrtryswtchRemotePSChange
               SwitchPositions.Strings = (
                 'Local'
                 'Remote')
@@ -14074,6 +14073,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Font.Height = -11
               Font.Name = 'Arial'
               Font.Style = [fsBold]
+              OnClick = vrtryswtchRemotePSClick
             end
           end
           object grpSpeed: TGroupBox
@@ -14106,7 +14106,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 95
               Radius = 30
-              OnChange = vrtryswtchSpeedPSChange
               SwitchPositions.Strings = (
                 'Lower'
                 ''
@@ -14122,6 +14121,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Font.Height = -11
               Font.Name = 'Arial'
               Font.Style = [fsBold]
+              OnClick = vrtryswtchSpeedPSClick
             end
           end
           object grpSTCControl: TGroupBox
@@ -14154,7 +14154,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 104
               Radius = 30
-              OnChange = vrtryswtchSTC_PSChange
               SwitchPositions.Strings = (
                 '2 TC'
                 'AUTO'
@@ -14171,6 +14170,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Font.Height = -11
               Font.Name = 'Arial'
               Font.Style = [fsBold]
+              OnClick = vrtryswtchSTC_PSClick
             end
           end
           object grpPreStartingInhibition: TGroupBox
@@ -14203,7 +14203,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 95
               Radius = 30
-              OnChange = vrtryswtchPreStartPSChange
               SwitchPositions.Strings = (
                 'Inhibition'
                 'On')
@@ -14218,6 +14217,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Font.Height = -11
               Font.Name = 'Arial'
               Font.Style = [fsBold]
+              OnClick = vrtryswtchPreStartPSClick
             end
           end
         end
@@ -14425,10 +14425,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
     object tsSB: TTabSheet
       Caption = 'LCP Startboard Side'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pnlLCPSB: TPanel
         Left = 0
         Top = 0
@@ -29294,7 +29290,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 95
               Radius = 30
-              OnChange = vrtryswtchRemotePSChange
               SwitchPositions.Strings = (
                 'Local'
                 'Remote')
@@ -29309,6 +29304,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Font.Height = -11
               Font.Name = 'Arial'
               Font.Style = [fsBold]
+              OnClick = vrtryswtchRemotePSClick
             end
           end
           object grp2: TGroupBox
@@ -29342,7 +29338,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 95
               Radius = 30
-              OnChange = vrtryswtchSpeedPSChange
               SwitchPositions.Strings = (
                 'Lower'
                 ''
@@ -29358,6 +29353,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Font.Height = -11
               Font.Name = 'Arial'
               Font.Style = [fsBold]
+              OnClick = vrtryswtchSpeedPSClick
             end
           end
           object grp3: TGroupBox
@@ -29391,7 +29387,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 104
               Radius = 30
-              OnChange = vrtryswtchSTC_PSChange
               SwitchPositions.Strings = (
                 '2 TC'
                 'AUTO'
@@ -29408,6 +29403,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Font.Height = -11
               Font.Name = 'Arial'
               Font.Style = [fsBold]
+              OnClick = vrtryswtchSTC_PSClick
             end
           end
           object grp7: TGroupBox
@@ -29441,7 +29437,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Width = 140
               Height = 95
               Radius = 30
-              OnChange = vrtryswtchPreStartPSChange
               SwitchPositions.Strings = (
                 'Inhibition'
                 'On')
@@ -29456,6 +29451,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
               Font.Height = -11
               Font.Name = 'Arial'
               Font.Style = [fsBold]
+              OnClick = vrtryswtchPreStartPSClick
             end
           end
         end

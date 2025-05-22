@@ -45,6 +45,15 @@ type
     imgSafetiesorECResetME1: TImage;
     imgSafetiesStopOverbiddenME1: TImage;
     imgEmergencyStopME1: TImage;
+    imgStartME1Shadow: TImage;
+    imgStopME1Shadow: TImage;
+    imgClutchME1Shadow: TImage;
+    imgByPassOpenME1Shadow: TImage;
+    imgDeclutchME1Shadow: TImage;
+    imgByPassClosedME1Shadow: TImage;
+    imgSafetiesorECResetME1Shadow: TImage;
+    imgSafetiesStopOverbiddenME1Shadow: TImage;
+    imgEmergencyStopME1Shadow: TImage;
     procedure btnStartClick(Sender: TObject);
     procedure btnClutchClick(Sender: TObject);
     procedure btnEmergencyStopClick(Sender: TObject);
@@ -129,7 +138,7 @@ end;
 
 procedure TfrmSignalingLightME1.btnClutchClick(Sender: TObject);
 begin
-  MainEngine1System.Clutch(C_PCS_ME_STARBOARD);
+  MainEngine1System.Clutch(C_PCS_ME_STARBOARD, True);
 end;
 
 procedure TfrmSignalingLightME1.btnEmergencyStopClick(Sender: TObject);
