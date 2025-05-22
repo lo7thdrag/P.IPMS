@@ -10547,7 +10547,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         4CFD05B4AB37AED9AE8BE22152180F89311E12B3148F83F191937DB7A6D795EC
         8CABBB1B0A4BFCBBE752F11059C578488CF19018E32131C64362FF0789E964F5
         B644DA1D0000000049454E44AE426082}
-      OnClick = btnClutchDeclutchClick
+      OnClick = btnClutchClick
     end
     object imgByPassOpenME1: TImage
       Left = 76
@@ -10969,7 +10969,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         E2BA2E2BF19CA16F688072A8FEDBEF4AF21084A6903C8430240F210CC9430843
         F210C2FC094EF5A0041DD8528C0000000049454E44AE426082}
       Stretch = True
-      OnClick = btnClutchDeclutchClick
     end
     object imgByPassClosedME1: TImage
       Left = 421

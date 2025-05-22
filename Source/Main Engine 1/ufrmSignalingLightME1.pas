@@ -46,7 +46,7 @@ type
     imgSafetiesStopOverbiddenME1: TImage;
     imgEmergencyStopME1: TImage;
     procedure btnStartClick(Sender: TObject);
-    procedure btnClutchDeclutchClick(Sender: TObject);
+    procedure btnClutchClick(Sender: TObject);
     procedure btnEmergencyStopClick(Sender: TObject);
     procedure btnSafetiesStopClick(Sender: TObject);
 
@@ -127,7 +127,7 @@ begin
   imgEmergencyStopME1.Visible := True;
 end;
 
-procedure TfrmSignalingLightME1.btnClutchDeclutchClick(Sender: TObject);
+procedure TfrmSignalingLightME1.btnClutchClick(Sender: TObject);
 begin
   MainEngine1System.Clutch(C_PCS_ME_STARBOARD);
 end;

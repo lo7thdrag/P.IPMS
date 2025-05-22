@@ -22,10 +22,12 @@ type
     FFile : TextFile;
     FNum  : Int64;
 
-    FFlashingStartPS : Boolean;
-    FFlashingStartSB : Boolean;
-    FFlashingStopPS  : Boolean;
-    FFlashingStopSB  : Boolean;
+    FFlashingStartPS  : Boolean;
+    FFlashingStartSB  : Boolean;
+    FFlashingStopPS   : Boolean;
+    FFlashingStopSB   : Boolean;
+    FFlashingClutchPS : Boolean;
+    FFlashingClutchSB : Boolean;
 
     procedure OnNetworkLogger(const Value : string);
     procedure NetworkEventAssignment;
@@ -759,7 +761,9 @@ begin
 
     epPCSMEClutched :
     begin
-      ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, True);
+      gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, recERPCS.ValueBool);
+//      FFlashingClutchPS := recERPCS.ValueBool;
     end;
 
     epPCSMELocalEmergencyStop :

@@ -950,12 +950,27 @@ begin
           if Value then
           begin
             FFlashingStartPS := True;
-            FFlashingStopPS := True;
+            FFlashingStopPS  := True;
+            img18.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
           end
           else
           begin
             FFlashingStartPS := False;
-            FFlashingStopPS := False;
+            FFlashingStopPS  := False;
+            img18.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
+          end;
+        end;
+        epPCSGBClutchAllowed :
+        begin
+          if Value then
+          begin
+//            FFlashingClutchPS := True;
+            img21.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
+          end
+          else
+          begin
+//            FFlashingClutchPS := False;
+            img21.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
           end;
         end;
       end;

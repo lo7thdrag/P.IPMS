@@ -165,7 +165,7 @@ begin
   rec := @apRec^;
 
   case rec.CommandPropsID of
-    epPCSMEClutched, epPCSMELocalEmergencyStop, epPCSMESafetyStop:
+    epPCSMELocalEmergencyStop, epPCSMESafetyStop:
     begin
       FLIstener.TriggerEvents(Self, rec.CommandPropsID, rec.ValueBool);
     end;
@@ -181,6 +181,14 @@ begin
     epPCSCtrlLocal :
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+
+    epPCSGBClutchAllowed :
+    begin
+      if rec.PortStaboardID = C_PCS_GB_PORTS then
       begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
@@ -254,7 +262,7 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStaboard;
-  recCmd.CommandPropsID := epPCSMEClutched;
+  recCmd.CommandPropsID := epPCSGBClutchAllowed;
   recCmd.CommandID      := C_ORD_GB_CLUTCH_ENGAGED;
   recCmd.ValueBool      := True;
 
