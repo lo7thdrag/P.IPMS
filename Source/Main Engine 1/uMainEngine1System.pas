@@ -20,8 +20,8 @@ type
     {Kontrol untuk panel PCS touch screen dengan Engine}
     procedure RunningStart(aPortStaboard : String);
     procedure StoppedStop(aPortStaboard : String);
-    procedure Clutch(aPortStaboard : string);
-    procedure ClutchAllowed(aPortStaboard : string);
+    procedure Clutch(aPortStaboard : string; aValue : Boolean);
+    procedure ClutchAllowed(aPortStaboard : string; aValue : Boolean);
     procedure SafetiesStop(aPortStaboard: string);
     procedure EmergencyStop(aPortStaboard : String);
     procedure LocalRemote(aPortStaboard : String);
@@ -264,26 +264,34 @@ begin
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
-procedure TMainEngine1System.Clutch(aPortStaboard: string);
+procedure TMainEngine1System.Clutch(aPortStaboard: string; aValue : Boolean);
 var
   recCmd : R_Common_PCS_Command;
 begin
+
   recCmd.PortStaboardID := aPortStaboard;
   recCmd.CommandPropsID := epPCSGBClutchEngaged;
   recCmd.CommandID      := C_ORD_GB_CLUTCH_ENGAGED;
-  recCmd.ValueBool      := True;
+  recCmd.ValueBool      := aValue;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSGBClutchEngaged;
+  recCmd.CommandID      := C_ORD_GB_CLUTCH_ENGAGED;
+  recCmd.ValueBool      := not aValue;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
-procedure TMainEngine1System.ClutchAllowed(aPortStaboard: string);
+procedure TMainEngine1System.ClutchAllowed(aPortStaboard: string; aValue : Boolean);
 var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStaboard;
   recCmd.CommandPropsID := epPCSGBClutchAllowed;
   recCmd.CommandID      := C_ORD_GB_CLUTCH_ENGAGED;
-  recCmd.ValueBool      := True;
+  recCmd.ValueBool      := aValue;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;

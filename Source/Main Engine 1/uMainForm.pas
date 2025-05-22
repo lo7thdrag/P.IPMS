@@ -17,10 +17,12 @@ type
     procedure tmrBlinkMe1Timer(Sender: TObject);
   private
     FListener : TListeners;
-    FIsBlinkState  : Boolean;
-    FIsStartBlink  : Boolean;
-    FIsStopBlink   : Boolean;
-    FIsClutchBlink : Boolean;
+    FIsBlinkState    : Boolean;
+    FIsStartBlink    : Boolean;
+    FIsStopBlink     : Boolean;
+    FIsClutchBlink   : Boolean;
+    FIsDeclutchBlink : Boolean;
+    FBlinkCounter    : Integer;
 
     procedure MainEngine1SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure MainEngine1SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
@@ -174,17 +176,19 @@ begin
     end;
     epPCSGBClutchAllowed :
     begin
-      frmSignalingLightME1.imgClutchAllowedME1.Visible := True
+      if Value then
+        frmSignalingLightME1.imgClutchAllowedME1.Visible := True
+      else
+        frmSignalingLightME1.imgClutchAllowedME1.Visible := False
     end;
     epPCSGBClutchEngaged :
     begin
       FIsClutchBlink := Value;
-      tmrBlinkTimer.Enabled := FIsClutchBlink;
-      frmSignalingLightME1.imgClutchAllowedME1.Visible := False
+      FIsDeclutchBlink := not Value;
+      tmrBlinkTimer.Enabled := FIsClutchBlink or FIsDeclutchBlink;
     end;
   end;
-
-  tmrBlinkTimer.Enabled := FIsStartBlink or FIsStopBlink or FIsClutchBlink;
+  tmrBlinkTimer.Enabled := FIsStartBlink or FIsStopBlink or FIsClutchBlink or FIsDeclutchBlink;
 end;
 
 procedure TfrmMainForm.MainEngine1SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
@@ -194,12 +198,11 @@ end;
 
 procedure TfrmMainForm.tmrBlinkMe1Timer(Sender: TObject);
 begin
+  FBlinkCounter := FBlinkCounter + tmrBlinkTimer.Interval;
   FIsBlinkState := not FIsBlinkState;
 
   if FIsStartBlink then
-  begin
-    frmSignalingLightME1.imgStartME1.Visible := FIsBlinkState;
-  end
+    frmSignalingLightME1.imgStartME1.Visible := FIsBlinkState
   else
   begin
     frmSignalingLightME1.imgStartME1.Visible := False;
@@ -223,7 +226,36 @@ begin
     frmSignalingLightME1.imgClutchME1.Visible := False;
   end;
 
- if not FIsStartBlink and not FIsStopBlink and not FIsClutchBlink then
+  if FIsDeclutchBlink then
+  begin
+    frmSignalingLightME1.imgDeclutchME1.Visible := FIsBlinkState;
+  end
+  else
+  begin
+    frmSignalingLightME1.imgDeclutchME1.Visible := False;
+  end;
+
+  if FBlinkCounter >= 8000 then
+  begin
+    tmrBlinkTimer.Enabled := False;
+    FBlinkCounter := 0;
+
+    if FIsStartBlink then
+      frmSignalingLightME1.imgStartME1.Visible := True;
+    if FIsStopBlink then
+      frmSignalingLightME1.imgStopME1.Visible := True;
+    if FIsClutchBlink then
+      frmSignalingLightME1.imgClutchME1.Visible := True;
+    if FIsDeclutchBlink then
+      frmSignalingLightME1.imgDeclutchME1.Visible := True;
+
+    FIsStartBlink    := False;
+    FIsStopBlink     := False;
+    FIsClutchBlink   := False;
+    FIsDeclutchBlink := False;
+  end;
+
+ if not FIsStartBlink and not FIsStopBlink and not FIsClutchBlink and not FIsDeclutchBlink then
   tmrBlinkTimer.Enabled := False;
 end;
 

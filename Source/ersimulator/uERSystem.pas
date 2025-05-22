@@ -28,6 +28,8 @@ type
     FFlashingStopSB   : Boolean;
     FFlashingClutchPS : Boolean;
     FFlashingClutchSB : Boolean;
+    FFlashingDeclutchPS : Boolean;
+    FFlashingDeclutchSB : Boolean;
 
     procedure OnNetworkLogger(const Value : string);
     procedure NetworkEventAssignment;
@@ -770,6 +772,7 @@ begin
       gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
       ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, recERPCS.ValueBool);
       FFlashingClutchPS := recERPCS.ValueBool;
+      FFlashingDeclutchPS := recERPCS.ValueBool;
     end;
 
     epPCSMELocalEmergencyStop :
