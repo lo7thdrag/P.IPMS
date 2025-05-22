@@ -99,6 +99,10 @@ type
     procedure ImgAUTOClick(Sender: TObject);
     procedure ImgSAClick(Sender: TObject);
     procedure ImgMANClick(Sender: TObject);
+    procedure ImgHOClick(Sender: TObject);
+    procedure ImgFPClick(Sender: TObject);
+    procedure ImgAPClick(Sender: TObject);
+    procedure ImgIPClick(Sender: TObject);
   private
     { Private declarations }
     FListener : TListeners;
@@ -204,9 +208,29 @@ begin
   MainSwitchBoardSystem.GeneratorMode(2);
 end;
 
+procedure TfrmGeneratorPanel.ImgAPClick(Sender: TObject);
+begin
+//
+end;
+
 procedure TfrmGeneratorPanel.ImgAUTOClick(Sender: TObject);
 begin
   MainSwitchBoardSystem.GeneratorMode(3);
+end;
+
+procedure TfrmGeneratorPanel.ImgFPClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmGeneratorPanel.ImgHOClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TfrmGeneratorPanel.ImgIPClick(Sender: TObject);
+begin
+//
 end;
 
 procedure TfrmGeneratorPanel.ImgLTMouseDown(Sender: TObject;

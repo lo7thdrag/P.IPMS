@@ -271,7 +271,7 @@ begin
       if Assigned(frmGeneratorPanel) then
         frmGeneratorPanel.VraFrequency.Position := Value;
     end;
-    epPMSV:
+    epPMSVoltage:
     begin
       if Assigned(frmGeneratorPanel) then
         frmGeneratorPanel.VraV.Position := Value;

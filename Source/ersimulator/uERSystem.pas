@@ -540,7 +540,7 @@ begin
       rPmsCmd.CommandPropsID   := PropsID;
       rPmsCmd.ValueDob    := Value;
       rPmsCmd.ValueKind   := 'double';
-//      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
       if Assigned(FOnPMSCommand) then
         FOnPMSCommand(rPmsCmd);
     end;

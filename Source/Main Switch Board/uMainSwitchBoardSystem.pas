@@ -228,7 +228,7 @@ begin
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
     end;
-    epPMSPower, epPMSFrequency, epPMSV, epPMSCurrent:
+    epPMSPower, epPMSFrequency, epPMSV, epPMSVoltage, epPMSCurrent:
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDob)
     end;

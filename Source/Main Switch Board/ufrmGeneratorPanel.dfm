@@ -72134,18 +72134,21 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Top = 83
         Width = 78
         Height = 52
+        OnClick = ImgHOClick
       end
       object ImgFP: TImage
         Left = 545
         Top = 137
         Width = 78
         Height = 52
+        OnClick = ImgFPClick
       end
       object ImgAP: TImage
         Left = 545
         Top = 191
         Width = 78
         Height = 52
+        OnClick = ImgAPClick
       end
       object ImgAUTO: TImage
         Left = 101
@@ -72412,6 +72415,7 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Top = 245
         Width = 78
         Height = 52
+        OnClick = ImgIPClick
       end
       object ImgLT: TImage
         Left = 545
