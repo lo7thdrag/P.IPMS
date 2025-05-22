@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage;
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.MPlayer, Vcl.Mask, RzEdit,
+  RzSpnEdt, Vcl.Buttons, SpeedButtonImage;
 
 type
   TuMainForm = class(TForm)
@@ -74,6 +75,20 @@ type
     Image20: TImage;
     Image21: TImage;
     Image22: TImage;
+    imgKiri: TImage;
+    imgKanan: TImage;
+    Image25: TImage;
+    imgAtas: TImage;
+    imgBawah: TImage;
+    img1: TImage;
+    imgAtas6: TImage;
+    imgBawah6: TImage;
+    imgKanan6: TImage;
+    imgKiri6: TImage;
+    imgBackLittle6: TImage;
+    imgBackLittle2: TImage;
+    tmrCam2: TTimer;
+    tmrCam6: TTimer;
     procedure tmr1Timer(Sender: TObject);
     procedure ZoomCam2Click(Sender: TObject);
     procedure ZoomCam1Click(Sender: TObject);
@@ -84,10 +99,41 @@ type
     procedure ZoomCam6Click(Sender: TObject);
     procedure ZoomCam7Click(Sender: TObject);
     procedure ZoomCam8Click(Sender: TObject);
+//    procedure btnKiriClick(Sender: TObject);
+//    procedure btnKananClick(Sender: TObject);
+    procedure btnKananMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure btnKiriMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure btnKananClick(Sender: TObject);
+    procedure imgAtasMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgBawahMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgAtas6MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgKanan6MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgBawah6MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgKiri6MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure tmrCam2Timer(Sender: TObject);
+    procedure imgKananMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgKiriMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgKanan6MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgKiri6Click(Sender: TObject);
+    procedure imgKiri6MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure tmrCam6Timer(Sender: TObject);
 
-     procedure Button1Click(Sender: TObject);
   private
-    { Private declarations }
+    stateButton: Integer; {0: Kiri; 1:Kanan}
+    valtemp : Integer;
+    isMouseDown : Boolean;
   public
     { Public declarations }
   end;
@@ -140,6 +186,10 @@ begin
   pnlRec2.Width   := 20;
   pnlRec2.Left    := 130;
   pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
   {$ENDREGION}
 
   {$REGION ' Camera 3 ' }
@@ -222,6 +272,10 @@ begin
   pnlRec6.Left    := 130;
   pnlRec6.Top     := 76;
 
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
+
   {$ENDREGION}
 
   {$REGION ' Camera 7 ' }
@@ -294,6 +348,8 @@ begin
   pnlRec2.Width   := 30;
   pnlRec2.Left    := 811;
   pnlRec2.Top     := 717;
+
+  imgBackLittle2.SendToBack;
 
   {$ENDREGION}
 
@@ -396,6 +452,10 @@ begin
   pnlRec6.Width   := 20;
   pnlRec6.Left    := 130;
   pnlRec6.Top     := 76;
+
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
 
   {$ENDREGION}
 
@@ -509,6 +569,11 @@ begin
   pnlRec2.Width   := 20;
   pnlRec2.Left    := 130;
   pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+
   {$ENDREGION}
 
   {$REGION ' Camera 4 ' }
@@ -570,6 +635,10 @@ begin
   pnlRec6.Width   := 20;
   pnlRec6.Left    := 130;
   pnlRec6.Top     := 76;
+
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
 
   {$ENDREGION}
 
@@ -683,6 +752,11 @@ begin
   pnlRec2.Width   := 20;
   pnlRec2.Left    := 130;
   pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+
   {$ENDREGION}
 
   {$REGION ' Camera 3 ' }
@@ -744,6 +818,10 @@ begin
   pnlRec6.Width   := 20;
   pnlRec6.Left    := 130;
   pnlRec6.Top     := 76;
+
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
 
   {$ENDREGION}
 
@@ -857,6 +935,11 @@ begin
   pnlRec2.Width   := 20;
   pnlRec2.Left    := 130;
   pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+
   {$ENDREGION}
 
   {$REGION ' Camera 3 ' }
@@ -917,6 +1000,10 @@ begin
   pnlRec6.Width   := 20;
   pnlRec6.Left    := 130;
   pnlRec6.Top     := 76;
+
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
 
   {$ENDREGION}
 
@@ -990,6 +1077,8 @@ begin
   pnlRec6.Width   := 30;
   pnlRec6.Left    := 811;
   pnlRec6.Top     := 717;
+
+  imgBackLittle6.SendToBack;
   {$ENDREGION}
 
   {$REGION ' Camera 1 ' }
@@ -1030,6 +1119,11 @@ begin
   pnlRec2.Width   := 20;
   pnlRec2.Left    := 130;
   pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+
   {$ENDREGION}
 
   {$REGION ' Camera 3 ' }
@@ -1090,6 +1184,9 @@ begin
   pnlRec5.Width   := 20;
   pnlRec5.Left    := 130;
   pnlRec5.Top     := 76;
+
+//  ImgPercobaan.Visible := False;
+//  Image22.SendToBack;
 
   {$ENDREGION}
 
@@ -1207,6 +1304,11 @@ begin
   pnlRec2.Width   := 20;
   pnlRec2.Left    := 130;
   pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+
   {$ENDREGION}
 
   {$REGION ' Camera 3 ' }
@@ -1288,6 +1390,10 @@ begin
   pnlRec6.Width   := 20;
   pnlRec6.Left    := 130;
   pnlRec6.Top     := 76;
+
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
 
   {$ENDREGION}
 
@@ -1381,6 +1487,11 @@ begin
   pnlRec2.Width   := 20;
   pnlRec2.Left    := 130;
   pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+
   {$ENDREGION}
 
   {$REGION ' Camera 3 ' }
@@ -1463,6 +1574,10 @@ begin
   pnlRec6.Left    := 130;
   pnlRec6.Top     := 76;
 
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
+
   {$ENDREGION}
 
   {$REGION ' Camera 7 ' }
@@ -1491,9 +1606,195 @@ begin
 
  end;
 
-procedure TuMainForm.Button1Click(Sender: TObject);
+//procedure TuMainForm.Button1Click(Sender: TObject);
+//begin
+////  ShowMessage('lebar : '+FloatToStr(uMainForm.Width)+ '' + 'Tinggi : '+Floattostr(uMainForm.Height));
+//  MDSound.Open;
+//  MDSound.Play;
+//end;
+//
+//procedure TuMainForm.MDSoundClick(Sender: TObject; Button: TMPBtnType;
+//  var DoDefault: Boolean);
+//begin
+////  MDSound.FileName := 'D:\CAECILIA MC\P.IPMS';
+//  MDSound.Open;
+//  MDSound.Play;
+//end;
+//
+//procedure TuMainForm.MDSoundNotify(Sender: TObject);
+//begin
+//  MDSound.Open;
+//  MDSound.Play;
+//end;
+
+procedure TuMainForm.btnKananClick(Sender: TObject);
 begin
-  ShowMessage('lebar : '+FloatToStr(uMainForm.Width)+ '' + 'Tinggi : '+Floattostr(uMainForm.Height));
+//    if (Image2.Left < -1543) or ((Image2.Left > 0)) then
+//    Exit;
+//
+//  Image2.Left := Image2.Left + Round(RzPSRudderAngle.Value);
+//
+//  valtemp := Round(RzPSRudderAngle.Value);
+end;
+
+procedure TuMainForm.btnKananMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+
+begin
+  isMouseDown := True;
+  stateButton := 1; {Kanan}
+  tmrCam2.Enabled := True;
+end;
+procedure TuMainForm.btnKiriMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := True;
+  stateButton := 0; {Kiri}
+  tmrCam2.Enabled := True;
+
+end;
+
+procedure TuMainForm.imgAtas6MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if (Image22.Top <0) or ((Image22.Top > 0)) then
+    Exit;
+
+  Image22.Top := Image22.Top - 10;
+end;
+
+procedure TuMainForm.imgAtasMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if (Image2.Top <0) or ((Image2.Top > 0)) then
+    Exit;
+
+  Image2.Top := Image2.Top - 10;
+end;
+
+procedure TuMainForm.imgBawah6MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if (Image22.Top <0) or ((Image22.Top > 0)) then
+    Exit;
+
+  Image22.Top := Image22.Top + 10;
+end;
+
+procedure TuMainForm.imgBawahMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if (Image2.Top <0) or ((Image2.Top > 0)) then
+    Exit;
+
+  Image2.Top := Image2.Top + 10;
+end;
+
+procedure TuMainForm.imgKanan6MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := True;
+  stateButton := 1; {Kanan}
+  tmrCam6.Enabled := True;
+end;
+
+procedure TuMainForm.imgKanan6MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := False;
+  tmrCam6.Enabled := False;
+end;
+
+procedure TuMainForm.imgKananMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := False;
+  tmrCam2.Enabled := False;
+end;
+
+procedure TuMainForm.imgKiriMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := False;
+  tmrCam2.Enabled := False;
+end;
+
+procedure TuMainForm.imgKiri6Click(Sender: TObject);
+begin
+  isMouseDown := True;
+  stateButton := 0; {Kiri}
+  tmrCam2.Enabled := True;
+end;
+
+procedure TuMainForm.imgKiri6MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if Image22.Left < -2550 then
+    Exit;
+
+  Image22.Left := Image22.Left - 10;
+end;
+
+procedure TuMainForm.imgKiri6MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := False;
+  tmrCam6.Enabled := False;
+end;
+
+procedure TuMainForm.tmrCam2Timer(Sender: TObject);
+begin
+  if stateButton = 0 then
+  begin
+    if Image2.Left < -2749 then
+    begin
+      tmrCam2.Enabled := False;
+      Exit;
+    end;
+
+    Image2.Left := Image2.Left - 10;
+  end
+  else if stateButton = 1 then
+  begin
+    if Image2.Left > 0 then
+    begin
+      tmrCam2.Enabled := False;
+      Exit;
+    end;
+
+    Image2.Left := Image2.Left + 10;
+  end
+  else
+  begin
+    tmrCam2.Enabled := False
+  end;
+end;
+
+procedure TuMainForm.tmrCam6Timer(Sender: TObject);
+begin
+  if stateButton = 0 then
+  begin
+    if Image22.Left < -2749 then
+    begin
+      tmrCam6.Enabled := False;
+      Exit;
+    end;
+
+    Image22.Left := Image22.Left - 10;
+  end
+  else if stateButton = 1 then
+  begin
+    if Image22.Left > 0 then
+    begin
+      tmrCam6.Enabled := False;
+      Exit;
+    end;
+
+    Image22.Left := Image22.Left + 10;
+  end
+  else
+  begin
+    tmrCam6.Enabled := False
+  end;
 end;
 
 procedure TuMainForm.tmr1Timer(Sender: TObject);
