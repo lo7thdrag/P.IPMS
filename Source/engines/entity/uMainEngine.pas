@@ -161,7 +161,6 @@ type
     // Main Engine 2
     procedure SetRunningHours(const Value: Integer);
     procedure SetRemoteControl(const Value: Boolean);
-    procedure SetPreStartState(const Value: Boolean);
     procedure SetSTCInManual(const Value: Integer);
     procedure Set2TCInManual(const Value: Boolean);
 
@@ -2129,15 +2128,6 @@ begin
 
   FRemoteControl := Value;
   Listener.TriggerEvents(Self, epPCSMERemoteControl, Value);
-end;
-
-procedure TMainEngine.SetPreStartState(const Value: Boolean);
-begin
-  if FPreState then
-    Exit;
-
-  FPreState := Value;
-  Listener.TriggerEvents(Self, epPCSMEPreStartInhibition, Value);
 end;
 
 procedure TMainEngine.SetRemoteControlProposed(const Value: Boolean);
