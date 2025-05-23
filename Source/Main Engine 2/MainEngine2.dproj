@@ -155,10 +155,6 @@
             <Form>frmLubOilCircuit</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="HMI Safeties\ufrmMenu.pas">
-            <Form>frmMenu</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="HMI Safeties\ufrmPCOTFilteringDeviations.pas">
             <Form>frmPCOTFilteringDeviations</Form>
             <FormType>dfm</FormType>
@@ -193,6 +189,10 @@
         <DCCReference Include="uMainEngine2System.pas"/>
         <DCCReference Include="uMainForm.pas">
             <Form>frmMainForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ufrmMenu.pas">
+            <Form>frmMenu</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

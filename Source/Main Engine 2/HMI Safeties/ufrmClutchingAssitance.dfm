@@ -13607,7 +13607,6 @@ object frmClutchingAssistance: TfrmClutchingAssistance
         FFFF}
       Color = clBtnFace
       TabOrder = 8
-      OnClick = MenuClick
     end
     object btnMenu: TRzBmpButton
       Left = 1134

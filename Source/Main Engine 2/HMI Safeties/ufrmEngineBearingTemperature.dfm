@@ -14221,7 +14221,6 @@ object frmEngineBearingTemperature: TfrmEngineBearingTemperature
         FFFF}
       Color = clBtnFace
       TabOrder = 2
-      OnClick = MenuClick
     end
     object btnMenu: TRzBmpButton
       Left = 1133

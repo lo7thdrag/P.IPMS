@@ -12505,7 +12505,6 @@ object frmLubOilCircuit: TfrmLubOilCircuit
         FFFF}
       Color = clBtnFace
       TabOrder = 9
-      OnClick = MenuClick
     end
     object btnMenu: TRzBmpButton
       Left = 1128

@@ -14,8 +14,6 @@ type
     StartingAirPressureMeter: TVrAngularMeter;
     EngineInletLubOilPressureMeter: TVrAngularMeter;
     FuelOilPressureMeter: TVrAngularMeter;
-    Label19: TLabel;
-    procedure NextClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,10 +30,5 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmSetofPressureGaugesME1.NextClick(Sender: TObject);
-begin
-  frmSignalingLightME1.Show;
-  Self.Hide;
-end;
 
 end.

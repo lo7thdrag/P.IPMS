@@ -55,7 +55,7 @@ type
     imgSafetiesStopOverbiddenME1Shadow: TImage;
     imgEmergencyStopME1Shadow: TImage;
     procedure btnStartClick(Sender: TObject);
-    procedure btnClutchClick(Sender: TObject);
+    procedure btnClutchDeclutchClick(Sender: TObject);
     procedure btnEmergencyStopClick(Sender: TObject);
     procedure btnSafetiesStopClick(Sender: TObject);
 
@@ -136,28 +136,28 @@ begin
   imgEmergencyStopME1.Visible := True;
 end;
 
-procedure TfrmSignalingLightME1.btnClutchClick(Sender: TObject);
+procedure TfrmSignalingLightME1.btnClutchDeclutchClick(Sender: TObject);
 begin
-  MainEngine1System.Clutch(C_PCS_ME_STARBOARD, True);
+  MainEngine1System.Clutch(C_PCS_ME_PORTS, True);
 end;
 
 procedure TfrmSignalingLightME1.btnEmergencyStopClick(Sender: TObject);
 begin
-  MainEngine1System.EmergencyStop(C_PCS_ME_STARBOARD);
+  MainEngine1System.EmergencyStop(C_PCS_ME_PORTS);
 end;
 
 procedure TfrmSignalingLightME1.btnStartClick(Sender: TObject);
 begin
-  MainEngine1System.RunningStart(C_PCS_ME_STARBOARD);
+  MainEngine1System.RunningStart(C_PCS_ME_PORTS);
 end;
 
 procedure TfrmSignalingLightME1.imgStopME1Click(Sender: TObject);
 begin
-  MainEngine1System.StoppedStop(C_PCS_STARBOARD);
+  MainEngine1System.StoppedStop(C_PCS_ME_PORTS);
 end;
 
 procedure TfrmSignalingLightME1.btnSafetiesStopClick(Sender: TObject);
 begin
-  MainEngine1System.SafetiesStop(C_PCS_ME_STARBOARD);
+  MainEngine1System.SafetiesStop(C_PCS_ME_PORTS);
 end;
 end.

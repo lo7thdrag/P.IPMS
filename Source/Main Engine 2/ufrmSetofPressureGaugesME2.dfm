@@ -6419,22 +6419,6 @@ object frmSetofPressureGaugesME2: TfrmSetofPressureGaugesME2
       ParentShowHint = False
       ShowHint = False
     end
-    object Label13: TLabel
-      Left = 1176
-      Top = 992
-      Width = 56
-      Height = 22
-      Cursor = crHandPoint
-      Caption = 'MENU'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Arial'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Visible = False
-      OnClick = MenuClick
-    end
     object btnAlarm: TRzBmpButton
       Left = 960
       Top = 680
@@ -17482,6 +17466,17 @@ object frmSetofPressureGaugesME2: TfrmSetofPressureGaugesME2
       TabOrder = 1
       Visible = False
       OnClick = AlarmFlashLightingClick
+    end
+    object mpAlarm: TMediaPlayer
+      Left = 1015
+      Top = 8
+      Width = 253
+      Height = 30
+      DoubleBuffered = True
+      FileName = 'buzzer 2.wav'
+      Visible = False
+      ParentDoubleBuffered = False
+      TabOrder = 2
     end
   end
 end

@@ -193,7 +193,23 @@ end;
 
 procedure TfrmMainForm.MainEngine1SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
 begin
-
+  case PropsID of
+    epPCSMEStartingAir :
+    begin
+      if Assigned(frmSetofPressureGaugesME1) then
+        frmSetofPressureGaugesME1.StartingAirPressureMeter.Position := Value
+    end;
+    epPCSMELOPressInlet :
+    begin
+      if Assigned(frmSetofPressureGaugesME1) then
+        frmSetofPressureGaugesME1.EngineInletLubOilPressureMeter.Position := Value
+    end;
+    epPCSMEPressFOInlet :
+    begin
+      if Assigned(frmSetofPressureGaugesME1) then
+        frmSetofPressureGaugesME1.FuelOilPressureMeter.Position := Value
+    end;
+  end;
 end;
 
 procedure TfrmMainForm.tmrBlinkMe1Timer(Sender: TObject);

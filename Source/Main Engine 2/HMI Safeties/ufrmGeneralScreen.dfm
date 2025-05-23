@@ -11801,13 +11801,13 @@ object frmGeneralScreen: TfrmGeneralScreen
         FFFF}
       Color = clBtnFace
       TabOrder = 10
-      OnClick = MenuClick
     end
     object btnMenu: TRzBmpButton
       Left = 1130
       Top = 0
       Width = 145
       Height = 151
+      Cursor = crHandPoint
       Bitmaps.TransparentColor = clOlive
       Bitmaps.Up.Data = {
         5E560100424D5E56010000000000420000002800000091000000970000000100

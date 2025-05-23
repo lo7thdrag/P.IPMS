@@ -177,8 +177,18 @@ end;
 
 procedure TfrmMainForm.MainEngine2SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
 begin
-
-
+  case PropsID of
+    epPCSMEPressFWHTInlet :
+    begin
+      if Assigned(frmSetofPressureGaugesME2) then
+        frmSetofPressureGaugesME2.EngineInletFWPressureMeter.Position := Value
+    end;
+    epPCSMEPressAirInlet :
+    begin
+      if Assigned(frmSetofPressureGaugesME2) then
+        frmSetofPressureGaugesME2.EngineInletAirPressureMeter.Position := Value
+    end;
+  end;
 end;
 
 end.

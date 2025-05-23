@@ -11743,7 +11743,6 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         FFFF}
       Color = clBtnFace
       TabOrder = 6
-      OnClick = MenuClick
     end
     object btnMenu: TRzBmpButton
       Left = 1133

@@ -4784,21 +4784,5 @@ object frmSetofPressureGaugesME1: TfrmSetofPressureGaugesME1
       ParentShowHint = False
       ShowHint = False
     end
-    object Label19: TLabel
-      Left = 1224
-      Top = 1000
-      Width = 41
-      Height = 18
-      Cursor = crHandPoint
-      Caption = 'NEXT'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -15
-      Font.Name = 'Arial'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Visible = False
-      OnClick = NextClick
-    end
   end
 end

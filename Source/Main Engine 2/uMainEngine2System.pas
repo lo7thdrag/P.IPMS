@@ -227,6 +227,22 @@ begin
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt);
     end;
+
+    // Gauges
+    epPCSMEPressFWHTInlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMEPressAirInlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
   end;
 end;
 

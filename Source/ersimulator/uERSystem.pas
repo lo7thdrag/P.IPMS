@@ -619,7 +619,7 @@ begin
       rPCSCmd.CommandPropsID   := PropsID;
       rPCSCmd.ValueDouble := Value;
 
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
 
       if Assigned(FOnPCSCommand) then
         FOnPCSCommand(rPCSCmd);

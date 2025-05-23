@@ -12278,7 +12278,6 @@ object frmLineAExhaustGasTemperature: TfrmLineAExhaustGasTemperature
         FFFF}
       Color = clBtnFace
       TabOrder = 1
-      OnClick = MenuClick
     end
     object btnMenu: TRzBmpButton
       Left = 1133
