@@ -11,7 +11,6 @@ object frmMainDisplay: TfrmMainDisplay
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  WindowState = wsMaximized
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -22,7 +21,9 @@ object frmMainDisplay: TfrmMainDisplay
     Height = 1050
     BevelOuter = bvNone
     Color = clBlack
+    DoubleBuffered = False
     ParentBackground = False
+    ParentDoubleBuffered = False
     TabOrder = 0
     object pnlCIPInfo: TPanel
       Left = 0
@@ -306,7 +307,7 @@ object frmMainDisplay: TfrmMainDisplay
       Left = 0
       Top = 0
       Width = 1680
-      Height = 56
+      Height = 81
       Align = alTop
       Color = clSilver
       ParentBackground = False
@@ -327,16 +328,17 @@ object frmMainDisplay: TfrmMainDisplay
         Left = 1
         Top = 46
         Width = 1678
-        Height = 9
+        Height = 34
         Align = alClient
         Color = 13026246
         ParentBackground = False
         TabOrder = 0
+        ExplicitHeight = 131
       end
     end
     object pnlMimic: TPanel
       Left = 0
-      Top = 56
+      Top = 81
       Width = 1680
       Height = 41
       Align = alTop
@@ -345,6 +347,7 @@ object frmMainDisplay: TfrmMainDisplay
       Color = clBlack
       ParentBackground = False
       TabOrder = 3
+      ExplicitTop = 56
     end
   end
   object mpAlarm: TMediaPlayer

@@ -78,6 +78,7 @@ type
     procedure imgLogoClick(Sender: TObject);
     procedure tmr1Timer(Sender: TObject);
     procedure aplctnvnts1Message(var Msg: tagMSG; var Handled: Boolean);
+    procedure pnlIndicatorClick(Sender: TObject);
 
   private
     FAppHeight, FAppWidth : Integer;
@@ -204,6 +205,19 @@ begin
     Result := pmc.WorkingSetSize
   else
     RaiseLastOSError;
+end;
+
+procedure EnableComposited(WinControl:TWinControl);
+var
+  i:Integer;
+  NewExStyle:DWORD;
+begin
+  NewExStyle := GetWindowLong(WinControl.Handle, GWL_EXSTYLE) or WS_EX_COMPOSITED;
+  SetWindowLong(WinControl.Handle, GWL_EXSTYLE, NewExStyle);
+
+  for I := 0 to WinControl.ControlCount - 1 do
+    if WinControl.Controls[i] is TWinControl then
+      EnableComposited(TWinControl(WinControl.Controls[i]));
 end;
 
 { TfrmMainDisplay }
@@ -347,7 +361,7 @@ begin
               0:
               begin
                 if faData.FA_DGSETS_State = 0 then
-                  pnlAllocInfo[j].Color := clSilver
+                  pnlAllocInfo[j].Color := clblue
                 else
                   pnlAllocInfo[j].Color := clYellow;
               end;
@@ -1131,6 +1145,7 @@ begin
   for i := 0 to C_AlarmGroupCount - 1 do
   begin
     btnAlarmGroups[i] := TPanel.Create(Self);
+    btnAlarmGroups[i].ParentBackground := False;
     btnAlarmGroups[i].Caption := C_AlarmsGroupItem[i];
     btnAlarmGroups[i].Color := clSilver;
     btnAlarmGroups[i].Font.Name := 'Arial';
@@ -1149,6 +1164,7 @@ begin
     btnAlarmGroups[i].BevelOuter := bvRaised;
 
     pnlAllocInfo[i] := TPanel.Create(Self);
+    pnlAllocInfo[i].ParentBackground := False;
     pnlAllocInfo[i].Color := clSilver;
     pnlAllocInfo[i].Height := Round(0.8 * pnlIndicator.Height);
     pnlAllocInfo[i].Left := i * w;
@@ -1254,6 +1270,10 @@ end;
 
 procedure TfrmMainDisplay.FormCreate(Sender: TObject);
 begin
+
+  EnableComposited(pnlMain);
+  EnableComposited(pnlAlarm);
+  EnableComposited(pnlIndicator);
 
   aplctnvntsKEy := TApplicationEvents.Create(self);
   aplctnvntsKEy.OnShortCut := aplctnvntsKEyShortCut;
@@ -1368,7 +1388,7 @@ begin
   pnlMain.Left := Round((Width - FAppWidth) / 2);
   pnlMain.Top := 0;
 
-  pnlAlarm.Height := Round(0.053 * FAppHeight);
+//  pnlAlarm.Height := Round(0.053 * FAppHeight);
   pnlAlarm.Width := FAppWidth;
   pnlGroup.Height := Round(0.8 * pnlAlarm.Height);
   pnlGroup.Width := pnlAlarm.Width;
@@ -1414,7 +1434,8 @@ begin
 
   pnlCIPButton.Height := Round(0.044 * FAppHeight);
 
-  pnlMimic.Height := FAppHeight;// - (pnlAlarm.Height + pnlCIPInfo.Height + pnlCIPButton.Height);
+//  pnlMimic.Height := FAppHeight;
+  pnlMimic.Height := FAppHeight - (pnlAlarm.Height + pnlCIPInfo.Height + pnlCIPButton.Height);
   pnlMimic.Width := FAppWidth;
 
   BorderStyle := bsNone;
@@ -2397,6 +2418,11 @@ begin
 
   capData.Free;
   cipInfo.Free;
+end;
+
+procedure TfrmMainDisplay.pnlIndicatorClick(Sender: TObject);
+begin
+
 end;
 
 //procedure TfrmMainDisplay.PlayAlarmSound;

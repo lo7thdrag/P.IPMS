@@ -465,14 +465,14 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlInstructor.Left := 14;
+    pnlInstructor.Left := 10;
     pnlInstructor.Top := 52;
 
-    pnlMimic.Left := 14;
+    pnlMimic.Left := 10;
     pnlMimic.Top := 107;
 
-    pnlRole.Left := 270;
-    pnlRole.Top := 52;
+    pnlRole.Left := 10;
+    pnlRole.Top := 162;
 
   end
   else if cbbConsoleSetting.Text = 'MIMIC KIRI' then
@@ -480,11 +480,11 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlMimic.Left := 14;
+    pnlMimic.Left := 10;
     pnlMimic.Top := 52;
 
-    pnlRole.Left := 270;
-    pnlRole.Top := 52;
+    pnlRole.Left := 10;
+    pnlRole.Top := 107;
 
   end
   else if cbbConsoleSetting.Text = 'PCS KIRI' then
@@ -492,7 +492,7 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlPCS.Left := 14;
+    pnlPCS.Left := 10;
     pnlPCS.Top := 52;
   end
   else if cbbConsoleSetting.Text = 'MIMIC TENGAH' then
@@ -500,14 +500,14 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlMimic.Left := 14;
+    pnlMimic.Left := 10;
     pnlMimic.Top := 52;
 
-    pnlRole.Left := 270;
-    pnlRole.Top := 52;
+    pnlRole.Left := 10;
+    pnlRole.Top := 107;
 
-    pnlPCS.Left := 14;
-    pnlPCS.Top := 107;
+    pnlPCS.Left := 10;
+    pnlPCS.Top := 162;
   end
   else if cbbConsoleSetting.Text = 'PCS KANAN' then
   begin
@@ -520,11 +520,11 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlMimic.Left := 14;
+    pnlMimic.Left := 10;
     pnlMimic.Top := 52;
 
-    pnlRole.Left := 270;
-    pnlRole.Top := 52;
+    pnlRole.Left := 10;
+    pnlRole.Top := 107;
   end
   else if cbbConsoleSetting.Text = 'EMERGENCY STOP' then
   begin
@@ -537,7 +537,7 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlDG.Left := 14;
+    pnlDG.Left := 10;
     pnlDG.Top := 52;
 
   end
@@ -546,7 +546,7 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlMainEngine.Left := 14;
+    pnlMainEngine.Left := 10;
     pnlMainEngine.Top := 52;
 
   end
@@ -555,7 +555,7 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlAuxiliary.Left := 14;
+    pnlAuxiliary.Left := 10;
     pnlAuxiliary.Top := 52;
 
   end
@@ -564,7 +564,7 @@ begin
     pnlPage.Caption := '.: ' + cbbConsoleSetting.Text + ' :.';
     SetMainFormPanel;
 
-    pnlMainSwitchBoard.Left := 14;
+    pnlMainSwitchBoard.Left := 10;
     pnlMainSwitchBoard.Top := 52;
 
   end;

@@ -3,8 +3,8 @@ object frmMimicPanel: TfrmMimicPanel
   Top = 283
   BorderStyle = bsNone
   Caption = 'Mimic Panel'
-  ClientHeight = 800
-  ClientWidth = 735
+  ClientHeight = 761
+  ClientWidth = 1105
   Color = clBlack
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,6 +12,7 @@ object frmMimicPanel: TfrmMimicPanel
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -19,18 +20,21 @@ object frmMimicPanel: TfrmMimicPanel
   object scrlbxMimic: TScrollBox
     Left = 0
     Top = 3
-    Width = 735
-    Height = 794
+    Width = 1105
+    Height = 755
     Align = alClient
     AutoScroll = False
     BorderStyle = bsNone
+    Color = clBlack
+    ParentColor = False
     TabOrder = 0
-    ExplicitHeight = 750
+    ExplicitWidth = 735
+    ExplicitHeight = 794
   end
   object pnlHideShowBarTop: TPanel
     Left = 0
     Top = 0
-    Width = 735
+    Width = 1105
     Height = 3
     Align = alTop
     BevelEdges = []
@@ -39,11 +43,12 @@ object frmMimicPanel: TfrmMimicPanel
     ParentBackground = False
     TabOrder = 1
     OnClick = pnlHideShowBarTopClick
+    ExplicitWidth = 735
   end
   object pnlHideShowBtm: TPanel
     Left = 0
-    Top = 797
-    Width = 735
+    Top = 758
+    Width = 1105
     Height = 3
     Align = alBottom
     BevelEdges = []
@@ -52,6 +57,7 @@ object frmMimicPanel: TfrmMimicPanel
     ParentBackground = False
     TabOrder = 2
     OnClick = pnlHideShowBarTopClick
-    ExplicitTop = 477
+    ExplicitTop = 797
+    ExplicitWidth = 735
   end
 end
