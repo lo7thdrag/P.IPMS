@@ -15,13 +15,13 @@ type
     Image6: TImage;
     Image4: TImage;
     pnlA: TPanel;
-    VrAngularMeter3: TVrAngularMeter;
+    VraAmpere1: TVrAngularMeter;
     Label9: TLabel;
     Label15: TLabel;
     Label17: TLabel;
     Label18: TLabel;
     Label16: TLabel;
-    VraAmpere: TVrAngularMeter;
+    VraAmpere2: TVrAngularMeter;
     pnlkW: TPanel;
     VraPower: TVrAngularMeter;
     Label20: TLabel;
@@ -35,12 +35,14 @@ type
     Image8: TImage;
     ImgIndicatorCBOpen: TImage;
     ImgIndicatorCBClose: TImage;
+    tmrAmpere: TTimer;
     procedure ImgIndicatorCBOpenClick(Sender: TObject);
     procedure ImgIndicatorCBCloseClick(Sender: TObject);
+    procedure tmrAmpereTimer(Sender: TObject);
   private
     { Private declarations }
   public
-    { Public declarations }
+    OrderAmpere : Double;
   end;
 
 var
@@ -61,6 +63,22 @@ end;
 procedure TfrmShorePanel.ImgIndicatorCBOpenClick(Sender: TObject);
 begin
   MainSwitchBoardSystem.CBShore(False);
+end;
+
+procedure TfrmShorePanel.tmrAmpereTimer(Sender: TObject);
+begin
+  if vraAmpere1.Position > OrderAmpere then
+  begin
+    vraAmpere1.Position := vraAmpere1.Position - 1;
+  end
+  else if vraAmpere1.Position < OrderAmpere then
+  begin
+    vraAmpere1.Position := vraAmpere1.Position + 1;
+  end
+  else
+  begin
+    tmrAmpere.Enabled := False;
+  end;
 end;
 
 end.

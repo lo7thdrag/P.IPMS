@@ -26,11 +26,11 @@ type
     imgGensys: TImage;
     pnlA: TPanel;
     Label9: TLabel;
-    VrAngularMeter3: TVrAngularMeter;
+    VraAmpere1: TVrAngularMeter;
     Label15: TLabel;
     Label18: TLabel;
     Label16: TLabel;
-    VraAmpere: TVrAngularMeter;
+    VraAmpere2: TVrAngularMeter;
     pnlkW: TPanel;
     VraPower: TVrAngularMeter;
     Label2: TLabel;
@@ -92,6 +92,7 @@ type
     ImgIndicatorAP: TImage;
     ImgIndicatorFP: TImage;
     ImgIndicatorHO: TImage;
+    tmrAmpere: TTimer;
     procedure ImgStartClick(Sender: TObject);
     procedure ImgStopClick(Sender: TObject);
     procedure ImgOIClick(Sender: TObject);
@@ -105,12 +106,13 @@ type
     procedure ImgAUTOClick(Sender: TObject);
     procedure ImgSAClick(Sender: TObject);
     procedure ImgMANClick(Sender: TObject);
+    procedure tmrAmpereTimer(Sender: TObject);
   private
     { Private declarations }
     Led  : array of TImage;
     LedStatus  : array of Boolean;
   public
-    { Public declarations }
+    OrderAmpere : Double;
   end;
 
 var
@@ -197,6 +199,22 @@ end;
 procedure TfrmEmergencyPanel.ImgStopClick(Sender: TObject);
 begin
   MainSwitchBoardSystem.EngineStop(True);
+end;
+
+procedure TfrmEmergencyPanel.tmrAmpereTimer(Sender: TObject);
+begin
+  if vraAmpere1.Position > OrderAmpere then
+  begin
+    vraAmpere1.Position := vraAmpere1.Position - 1;
+  end
+  else if vraAmpere1.Position < OrderAmpere then
+  begin
+    vraAmpere1.Position := vraAmpere1.Position + 1;
+  end
+  else
+  begin
+    tmrAmpere.Enabled := False;
+  end;
 end;
 
 end.

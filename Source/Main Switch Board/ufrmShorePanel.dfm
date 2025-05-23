@@ -150876,7 +150876,7 @@ object frmShorePanel: TfrmShorePanel
       Color = clBackground
       ParentBackground = False
       TabOrder = 0
-      object VrAngularMeter3: TVrAngularMeter
+      object VraAmpere1: TVrAngularMeter
         Left = 0
         Top = -1
         Width = 360
@@ -150983,7 +150983,7 @@ object frmShorePanel: TfrmShorePanel
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object VraAmpere: TVrAngularMeter
+      object VraAmpere2: TVrAngularMeter
         Left = 0
         Top = -1
         Width = 360
@@ -151201,5 +151201,10 @@ object frmShorePanel: TfrmShorePanel
       Font.Name = 'Arial'
       Font.Style = [fsBold]
     end
+  end
+  object tmrAmpere: TTimer
+    OnTimer = tmrAmpereTimer
+    Left = 562
+    Top = 290
   end
 end

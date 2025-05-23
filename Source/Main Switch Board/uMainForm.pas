@@ -269,7 +269,11 @@ begin
     epPMSFrequency:
     begin
       if Assigned(frmGeneratorPanel) then
-        frmGeneratorPanel.VraFrequency.Position := Value;
+      begin
+        frmGeneratorPanel.OrderFrequency := Value;
+//        frmGeneratorPanel.VraFrequency.Position := Value;
+        frmGeneratorPanel.tmrFrequency.Enabled := True;
+      end;
     end;
     epPMSVoltage:
     begin
@@ -282,13 +286,25 @@ begin
     epPMSCurrent:
     begin
       if Assigned(frmGeneratorPanel) then
-        frmGeneratorPanel.VraAmpere.Position := Value;
+      begin
+//        frmGeneratorPanel.VraAmpere1.Position := Value;
+        frmGeneratorPanel.OrderAmpere := Value;
+        frmGeneratorPanel.tmrAmpere.Enabled := True;
+      end;
 
       if Assigned(frmEmergencyPanel) then
-        frmEmergencyPanel.VraAmpere.Position := Value;
+      begin
+//        frmEmergencyPanel.VraAmpere1.Position := Value;
+        frmEmergencyPanel.OrderAmpere := Value;
+        frmEmergencyPanel.tmrAmpere.Enabled := True;
+      end;
 
       if Assigned(frmShorePanel) then
-        frmShorePanel.VraAmpere.Position := Value;
+      begin
+//        frmShorePanel.VraAmpere1.Position := Value;
+        frmShorePanel.OrderAmpere := Value;
+        frmShorePanel.tmrAmpere.Enabled := True;
+      end;
     end;
   end;
 

@@ -40,13 +40,13 @@ type
     lbl14: TLabel;
     lbl15: TLabel;
     pnlA: TPanel;
-    vra4: TVrAngularMeter;
+    vraAmpere1: TVrAngularMeter;
     lbl16: TLabel;
     lbl17: TLabel;
     lbl18: TLabel;
     lbl19: TLabel;
     lbl20: TLabel;
-    vraAmpere: TVrAngularMeter;
+    vraAmpere2: TVrAngularMeter;
     pnlGensys: TPanel;
     imgGensys: TImage;
     vr1: TVrRotarySwitch;
@@ -85,6 +85,8 @@ type
     ImgStop: TImage;
     ImgOI: TImage;
     ImgPref: TImage;
+    tmrFrequency: TTimer;
+    tmrAmpere: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ImgStartClick(Sender: TObject);
@@ -103,6 +105,8 @@ type
     procedure ImgFPClick(Sender: TObject);
     procedure ImgAPClick(Sender: TObject);
     procedure ImgIPClick(Sender: TObject);
+    procedure tmrFrequencyTimer(Sender: TObject);
+    procedure tmrAmpereTimer(Sender: TObject);
   private
     { Private declarations }
     FListener : TListeners;
@@ -113,7 +117,8 @@ type
     procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
 
   public
-    { Public declarations }
+    OrderFrequency : Double;
+    OrderAmpere : Double;
   end;
 
 var
@@ -263,6 +268,38 @@ end;
 procedure TfrmGeneratorPanel.ImgStopClick(Sender: TObject);
 begin
   MainSwitchBoardSystem.EngineStop(True);
+end;
+
+procedure TfrmGeneratorPanel.tmrAmpereTimer(Sender: TObject);
+begin
+  if vraAmpere1.Position > OrderAmpere then
+  begin
+    vraAmpere1.Position := vraAmpere1.Position - 1;
+  end
+  else if vraAmpere1.Position < OrderAmpere then
+  begin
+    vraAmpere1.Position := vraAmpere1.Position + 1;
+  end
+  else
+  begin
+    tmrAmpere.Enabled := False;
+  end;
+end;
+
+procedure TfrmGeneratorPanel.tmrFrequencyTimer(Sender: TObject);
+begin
+  if VraFrequency.Position > OrderFrequency then
+  begin
+    VraFrequency.Position := VraFrequency.Position - 1;
+  end
+  else if VraFrequency.Position < OrderFrequency then
+  begin
+    VraFrequency.Position := VraFrequency.Position + 1;
+  end
+  else
+  begin
+    tmrFrequency.Enabled := False;
+  end;
 end;
 
 end.

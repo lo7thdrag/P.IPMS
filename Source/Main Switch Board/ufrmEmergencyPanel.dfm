@@ -91337,7 +91337,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object VrAngularMeter3: TVrAngularMeter
+      object VraAmpere1: TVrAngularMeter
         Left = 0
         Top = 0
         Width = 360
@@ -91418,7 +91418,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object VraAmpere: TVrAngularMeter
+      object VraAmpere2: TVrAngularMeter
         Left = 0
         Top = 0
         Width = 360
@@ -91958,5 +91958,10 @@ object frmEmergencyPanel: TfrmEmergencyPanel
       Caption = 'Button1'
       TabOrder = 10
     end
+  end
+  object tmrAmpere: TTimer
+    OnTimer = tmrAmpereTimer
+    Left = 479
+    Top = 518
   end
 end
