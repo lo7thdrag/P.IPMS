@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch,
   Vcl.StdCtrls, Vcl.Samples.Spin, Vcl.ExtCtrls, VrAngularMeter, RzBmpBtn,
-  Vcl.Imaging.jpeg;
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage;
 
 type
   TfrmPMSDieselEngineSafetiesME1 = class(TForm)
@@ -24,44 +24,7 @@ type
     Image2: TImage;
     Image3: TImage;
     imgBackground: TImage;
-    Label1: TLabel;
-    Label10: TLabel;
-    Label100: TLabel;
-    Label106: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    Label13: TLabel;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label157: TLabel;
-    Label16: TLabel;
-    Label162: TLabel;
-    Label163: TLabel;
-    Label164: TLabel;
-    Label167: TLabel;
-    Label169: TLabel;
-    Label17: TLabel;
-    Label170: TLabel;
-    Label171: TLabel;
-    Label173: TLabel;
-    Label18: TLabel;
-    Label2: TLabel;
-    Label26: TLabel;
-    Label27: TLabel;
     Label28: TLabel;
-    Label29: TLabel;
-    Label3: TLabel;
-    Label30: TLabel;
-    Label31: TLabel;
-    Label32: TLabel;
-    Label33: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label72: TLabel;
-    Label8: TLabel;
-    Label9: TLabel;
     lblTemperature: TLabel;
     ledOffTestRSP: TRzBmpButton;
     ptSE2: TSpinEdit;
@@ -71,7 +34,6 @@ type
     ptSVAE: TSpinEdit;
     switchATPChannel: TVrRotarySwitch;
     switchModeATP: TVrRotarySwitch;
-    Label19: TLabel;
     Channel1Stop1MTP1: TVrRotarySwitch;
     Channel1Alarm1MTP1: TVrRotarySwitch;
     Channel1Stop2MTP1: TVrRotarySwitch;
@@ -116,7 +78,6 @@ type
     imgLedGreen2AE9: TImage;
     imgLedGreen3AE9: TImage;
     imgLedRedRunSPH: TImage;
-    Image5: TImage;
     imgLedGreenAIP1: TImage;
     imgLedGreenAIP2: TImage;
     imgLedGreenAIP3: TImage;
@@ -143,20 +104,20 @@ type
     imgledRedNoActiveChannel2ICM1: TImage;
     imgledGreenAlarmChannel1ICM1: TImage;
     imgledGreenAlarmChannel2ICM1: TImage;
-    Image1: TImage;
-    Image4: TImage;
-    Image6: TImage;
-    Image7: TImage;
+    imgRedAlarmChannel1ICM3: TImage;
+    imgRedNoActiveChannel1ICM3: TImage;
+    imgRedAlarmChannel3ICM3: TImage;
+    imgRedNoActiveChannel1ICM4: TImage;
     imgledGreenAlarmChannel3ICM1: TImage;
     imgledGreenAlarmChannel4ICM1: TImage;
-    Image8: TImage;
-    Image9: TImage;
-    Image10: TImage;
-    Image11: TImage;
-    Image12: TImage;
-    Image13: TImage;
-    Image14: TImage;
-    Image15: TImage;
+    imgRedAlarmChannel2ICM1: TImage;
+    imgRedNoActiveChannel1ICM1: TImage;
+    imgRedAlarmChannel2ICM2: TImage;
+    imgRedNoActiveChannel2ICM2: TImage;
+    imgRedAlarmChannel2ICM3: TImage;
+    imgRedNoActiveChannel2ICM3: TImage;
+    imgRedAlarmChannel2ICM4: TImage;
+    imgRedNoActiveChannel2ICM4: TImage;
     imgledGreenAlarmChannel1ICM2: TImage;
     imgledGreenAlarmChannel2ICM2: TImage;
     imgledGreenAlarmChannel3ICM2: TImage;
@@ -168,7 +129,7 @@ type
     imgledRedAlarmChannel3ICM3: TImage;
     imgledRedNoActiveChannel3ICM3: TImage;
     imgledRedAlarmChannel4ICM3: TImage;
-    Image23: TImage;
+    imgRedNoActiveChannel3ICM4: TImage;
     imgledGreenAlarmChannel1ICM3: TImage;
     imgledGreenAlarmChannel2ICM3: TImage;
     imgledGreenAlarmChannel3ICM3: TImage;
@@ -180,7 +141,6 @@ type
     imgLedRedONACT1ACM: TImage;
     imgLedRedFailACT2ACM: TImage;
     imgLedRedONACT2ACM: TImage;
-    Label20: TLabel;
     procedure NextClick(Sender: TObject);
     procedure AdjustSE1Change(Sender: TObject);
     procedure AdjustSE2Change(Sender: TObject);
