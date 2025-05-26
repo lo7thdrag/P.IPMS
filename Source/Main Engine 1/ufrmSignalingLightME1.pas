@@ -58,8 +58,6 @@ type
     procedure btnClutchDeclutchClick(Sender: TObject);
     procedure btnEmergencyStopClick(Sender: TObject);
     procedure btnSafetiesStopClick(Sender: TObject);
-
-    procedure imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure imgStopME1Click(Sender: TObject);
   private
     FListener : TListeners;
@@ -92,49 +90,6 @@ uses
   ufrmPMSDieselEngineSafetiesME1, ufrmSetofPressureGaugesME1, uMainEngine1System, uFreezeFrom;
 
 {$R *.dfm}
-
-procedure TfrmSignalingLightME1.imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  imgAirValveOpenME1.Visible := True;
-  imgGazValveOpenME1.Visible := True;
-  img24VDCSafetiesME1.Visible := True;
-
-  imgAirValveClosedME1.Visible := True;
-  imgGazValveClosedME1.Visible := True;
-  img24VDCControlME1.Visible := True;
-
-  imgWatchDogorMajorFaultME1.Visible := True;
-  imgSafetiesCircuitFailureME1.Visible := True;
-  imgManualHandletoStopME1.Visible := True;
-
-  imgSafetyStopME1.Visible := True;
-  imgOverSpeedAirLowPressureME1.Visible := True;
-  imgStartingSequenceFailureME1.Visible := True;
-
-  imgClutchGearboxFaultME1.Visible := True;
-  imgTurningGearEngagedME1.Visible := True;
-  imgSpare.Visible := True;
-
-  imgMinorFaultME1.Visible := True;
-  imgLocalPositionME1.Visible := True;
-  imgStartingAllowedME1.Visible := True;
-
-  imgGovernorLimitationME1.Visible := True;
-  imgRemotePositionME1.Visible := True;
-  imgClutchAllowedME1.Visible := True;
-
-  imgStopME1.Visible := True;
-  imgClutchME1.Visible := True;
-  imgByPassOpenME1.Visible := True;
-
-  imgStartME1.Visible := True;
-  imgDeclutchME1.Visible := True;
-  imgByPassClosedME1.Visible := True;
-
-  imgSafetiesorECResetME1.Visible := True;
-  imgSafetiesStopOverbiddenME1.Visible := True;
-  imgEmergencyStopME1.Visible := True;
-end;
 
 procedure TfrmSignalingLightME1.btnClutchDeclutchClick(Sender: TObject);
 begin

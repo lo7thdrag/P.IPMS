@@ -15,7 +15,6 @@ uses
   ufrmLineAExhaustGasTemperature in 'HMI Safeties\ufrmLineAExhaustGasTemperature.pas' {frmLineAExhaustGasTemperature},
   ufrmLineBExhaustGasTemperature in 'HMI Safeties\ufrmLineBExhaustGasTemperature.pas' {frmLineBExhaustGasTemperature},
   ufrmLubOilCircuit in 'HMI Safeties\ufrmLubOilCircuit.pas' {frmLubOilCircuit},
-  ufrmMenu in 'HMI Safeties\ufrmMenu.pas' {frmMenu},
   ufrmPCOTFilteringDeviations in 'HMI Safeties\ufrmPCOTFilteringDeviations.pas' {frmPCOTFilteringDeviations},
   ufrmPLCNetwork in 'HMI Safeties\ufrmPLCNetwork.pas' {frmPLCNetwork},
   ufrmSafetiesStop in 'HMI Safeties\ufrmSafetiesStop.pas' {frmSafetiesStop},
@@ -36,7 +35,8 @@ uses
   uSetting in '..\common\uSetting.pas',
   uMainEngine2Network in 'uMainEngine2Network.pas',
   uMainEngine2System in 'uMainEngine2System.pas',
-  uMainForm in 'uMainForm.pas' {frmMainForm};
+  uMainForm in 'uMainForm.pas' {frmMainForm},
+  ufrmMenu in 'ufrmMenu.pas' {frmMenu};
 
 {$R *.res}
 
@@ -48,9 +48,9 @@ begin
   MainEngine2System := TMainEngine2System.Create;
 
   Application.CreateForm(TfrmMainForm, frmMainForm);
-
   Application.CreateForm(TfrmSetofPressureGaugesME2, frmSetofPressureGaugesME2);
   Application.CreateForm(TfrmMainForm, frmMainForm);
+  Application.CreateForm(TfrmMenu, frmMenu);
   frmSetofPressureGaugesME2.Show;
   Application.CreateForm(TfrmSignalingLightME2, frmSignalingLightME2);
   frmSignalingLightME2.Show;

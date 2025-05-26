@@ -194,6 +194,20 @@ begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
+    epPCSMEAirValve :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEGasValve :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
     epPCSGBClutchEngaged :
     begin
       if rec.PortStaboardID = C_PCS_GB_PORTS then
@@ -218,6 +232,22 @@ begin
       end;
     end;
     epPCSMEPressFOInlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+
+    // PMS
+    epPCSMEFuelRack :
+    begin
+        if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMESpeed :
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
       begin
@@ -348,7 +378,8 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStaboard;
-  recCmd.CommandPropsID := epPCSMESafetyStop;
+//  recCmd.CommandPropsID := epPCSMESafetyStop;
+  recCmd.CommandPropsID := epPCSLeverEmergencyStop;
   recCmd.CommandID      := C_ORD_LEVER_SHAFTSTOP;
   recCmd.ValueBool      := True;
 

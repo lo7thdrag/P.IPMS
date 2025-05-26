@@ -10955,7 +10955,6 @@ object frmSafetiesStop: TfrmSafetiesStop
         FFFF}
       Color = clBtnFace
       TabOrder = 4
-      OnClick = MenuClick
     end
     object btnMenu: TRzBmpButton
       Left = 1133

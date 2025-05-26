@@ -967,6 +967,20 @@ begin
           else
             img21.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
         end;
+        epPCSMEAirValve :
+        begin
+          if Value then
+            img1.Picture.LoadFromFile(fAlarmIndicatorBlueOn)
+          else
+            img1.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+        end;
+        epPCSMEGasValve :
+        begin
+          if Value then
+            img2.Picture.LoadFromFile(fAlarmIndicatorBlueOn)
+          else
+            img2.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+        end;
         epPCSGBClutchEngaged :
         begin
           if Value then
@@ -979,6 +993,10 @@ begin
             FFlashingClutchPS := False;
             FFlashingDeclutchPS := True;
           end;
+        end;
+        epPCSLeverEmergencyStop :
+        begin
+
         end;
       end;
     end
@@ -1369,9 +1387,9 @@ begin
 
 //  if not main_engine_PS.EngineRun then
 //    FlashingIndicatorStart(btnStartPS,btnStopPS,False);
-//
+
 //  if not main_engine_SB.EngineRun then
-//    FlashingIndicatorStart(btnStartSB,btnStartSB);
+//    FlashingIndicatorStart(btnStartSB,btnStopSB, False);
 
 
   if FFlashingStopPS then

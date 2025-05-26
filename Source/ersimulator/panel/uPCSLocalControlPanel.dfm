@@ -21,7 +21,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
     Top = 0
     Width = 1687
     Height = 856
-    ActivePage = tsSB
+    ActivePage = tsPS
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -14425,6 +14425,10 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
     object tsSB: TTabSheet
       Caption = 'LCP Startboard Side'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pnlLCPSB: TPanel
         Left = 0
         Top = 0

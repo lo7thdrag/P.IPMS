@@ -766,6 +766,16 @@ begin
       gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
       ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, recERPCS.ValueBool);
     end;
+    epPCSMEAirValve :
+    begin
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine.AirValve := recERPCS.ValueBool;
+    end;
+    epPCSMEGasValve :
+    begin;
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine.GasValve := recERPCS.ValueBool;
+    end;
 
     epPCSGBClutchEngaged :
     begin
@@ -773,6 +783,12 @@ begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, recERPCS.ValueBool);
       FFlashingClutchPS := recERPCS.ValueBool;
       FFlashingDeclutchPS := recERPCS.ValueBool;
+    end;
+
+    epPCSLeverEmergencyStop :
+    begin
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine.EmergencyStop := recERPCS.ValueBool;
     end;
 
     epPCSMELocalEmergencyStop :

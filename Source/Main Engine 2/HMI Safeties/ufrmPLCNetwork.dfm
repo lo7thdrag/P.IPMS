@@ -176101,7 +176101,6 @@ object frmPLCNetwork: TfrmPLCNetwork
         FFFF}
       Color = clBtnFace
       TabOrder = 3
-      OnClick = MenuClick
     end
     object btnMenu: TRzBmpButton
       Left = 1134

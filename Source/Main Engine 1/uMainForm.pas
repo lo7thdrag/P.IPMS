@@ -181,11 +181,29 @@ begin
       else
         frmSignalingLightME1.imgClutchAllowedME1.Visible := False
     end;
+    epPCSMEAirValve :
+    begin
+      if Value then
+        frmSignalingLightME1.imgAirValveOpenME1.Visible := True
+      else
+        frmSignalingLightME1.imgAirValveOpenME1.Visible := False
+    end;
+    epPCSMEGasValve :
+    begin
+      if Value then
+        frmSignalingLightME1.imgGazValveOpenME1.Visible := True
+      else
+        frmSignalingLightME1.imgGazValveOpenME1.Visible := False
+    end;
     epPCSGBClutchEngaged :
     begin
       FIsClutchBlink := Value;
       FIsDeclutchBlink := not Value;
       tmrBlinkTimer.Enabled := FIsClutchBlink or FIsDeclutchBlink;
+    end;
+    epPCSLeverEmergencyStop :
+    begin
+
     end;
   end;
   tmrBlinkTimer.Enabled := FIsStartBlink or FIsStopBlink or FIsClutchBlink or FIsDeclutchBlink;
@@ -208,6 +226,18 @@ begin
     begin
       if Assigned(frmSetofPressureGaugesME1) then
         frmSetofPressureGaugesME1.FuelOilPressureMeter.Position := Value
+    end;
+
+    // PMS
+    epPCSMEFuelRack :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.FuelRackMeter.Position := Value
+    end;
+    epPCSMESpeed :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.EngineSpeedMeter.Position := Value
     end;
   end;
 end;

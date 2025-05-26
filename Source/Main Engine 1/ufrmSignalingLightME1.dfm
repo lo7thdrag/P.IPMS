@@ -12,7 +12,6 @@ object frmSignalingLightME1: TfrmSignalingLightME1
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  OnMouseDown = imgSTShadowMouseDown
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
