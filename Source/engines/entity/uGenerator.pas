@@ -777,7 +777,7 @@ begin
   if FCosPhi = Value then
     exit;
   FCosPhi := Value;
-  Listener.TriggerEvents(Self,epPMSCosPhi,Value);
+//  Listener.TriggerEvents(Self,epPMSCosPhi,Value);
 end;
 
 procedure TGenerator.SetCurrent(const Value: Double);
@@ -785,7 +785,7 @@ begin
   if FCurrent = Value then
     exit;
   FCurrent := Value;
-  Listener.TriggerEvents(Self,epPMSCurrent,Value);
+//  Listener.TriggerEvents(Self,epPMSCurrent,Value);
 end;
 
 procedure TGenerator.SetDCPowFailure(const Value: Boolean);
@@ -831,7 +831,7 @@ begin
   if FFrequency = Value then
     exit;
   FFrequency := Value;
-  Listener.TriggerEvents(Self,epPMSFrequency,Value);
+//  Listener.TriggerEvents(Self,epPMSFrequency,Value);
 end;
 
 procedure TGenerator.SetFuelRunsOut(const Value: Boolean);
@@ -873,7 +873,7 @@ begin
   if FPower = Value then
     exit;
   FPower := Value;
-  Listener.TriggerEvents(Self,epPMSPower,Value);
+//  Listener.TriggerEvents(Self,epPMSPower,Value);
 end;
 
 procedure TGenerator.SetPreference(const Value: Boolean);
@@ -1034,7 +1034,7 @@ begin
   if FVoltage = Value then
     exit;
   FVoltage := Value;
-  Listener.TriggerEvents(Self,epPMSVoltage,Value);
+//  Listener.TriggerEvents(Self,epPMSVoltage,Value);
 end;
 
 { TBeban }
