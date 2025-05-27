@@ -687,11 +687,24 @@ begin
       end;
       epPMSEsbIntrMode:
       begin
-        if (rbOffDistrE.Checked)then
+        if (rbAftDistrE.Checked)then
+        begin
+          switchboard.EsbCircuitBreaker  := False;
+          switchboard.ESBInterconnectionMode := 1;
+          switchboard.EsbCircuitBreaker  := True;
+        end
+        else if rbOffDistrE.Checked then
         begin
           switchboard.EsbCircuitBreaker  := False;
           switchboard.ESBInterconnectionMode := 2;
         end
+        else if rbFwdDistrE.Checked then
+        begin
+          switchboard.EsbCircuitBreaker  := False;
+          switchboard.ESBInterconnectionMode := 3;
+          switchboard.EsbCircuitBreaker  := True;
+        end;
+
       end;
     end;
   end;

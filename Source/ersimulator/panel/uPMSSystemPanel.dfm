@@ -2190,7 +2190,6 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        Visible = False
       end
       object Label5: TLabel
         Left = 113
@@ -2204,7 +2203,6 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        Visible = False
       end
       object Label6: TLabel
         Left = 166
@@ -2218,7 +2216,6 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        Visible = False
       end
       object lblCBOpenClosedE: TLabel
         Left = 149
@@ -2231,13 +2228,13 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentColor = False
       end
       object lbl6: TLabel
-        Left = 80
+        Left = 41
         Top = 14
-        Width = 85
+        Width = 162
         Height = 19
         Align = alCustom
         Alignment = taCenter
-        Caption = 'FORWARD'
+        Caption = 'INTERCONNECTION'
         Color = clBlack
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
@@ -2259,7 +2256,6 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        Visible = False
         OnClick = InterEmergencyModeClick
       end
       object rbOffDistrE: TRadioButton
@@ -2274,7 +2270,6 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Style = []
         ParentFont = False
         TabOrder = 1
-        Visible = False
         OnClick = InterEmergencyModeClick
       end
       object rbFwdDistrE: TRadioButton
@@ -2289,7 +2284,6 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        Visible = False
         OnClick = InterEmergencyModeClick
       end
       object Panel24: TPanel
@@ -2342,11 +2336,11 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       object Label13: TLabel
         Left = 155
         Top = 7
-        Width = 269
+        Width = 233
         Height = 19
         Align = alCustom
         Alignment = taCenter
-        Caption = 'EMERGENCY INTERCONNECTION'
+        Caption = 'EMERGENCY SWITCHBOARD'
         Color = clBlack
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
