@@ -737,6 +737,9 @@ begin
 end;
 
 procedure TfrmScenBuilder.btnDeleteScenarioClick(Sender: TObject);
+var
+  i : Integer;
+  tempList : TStrings;
 begin
   if FScenarioID = 0 then
     Exit;
@@ -744,7 +747,26 @@ begin
   if MessageDlg('Are You Sure To Delete "' + FScenarioName + '" Scenario ? '+#13+#10+
       'All Sessions Linked To Scenario Will Be Deleted..!', mtWarning, [mbYes, mbNo], 0) = mrYes then;
   begin
+    tempList := nil;
+
+    InstructorSys.Scenario.GetAllRunningScenarioByScenId(FScenarioID, tempList);
+
+    if not Assigned(tempList) then
+      Exit;
+
+    for i := 0 to tempList.Count - 1 do
+    begin
+      InstructorSys.Scenario.DeleteRsPmsCondition(StrToInt(tempList[i]));
+      InstructorSys.Scenario.DeleteRsPcsCondition(StrToInt(tempList[i]));
+      InstructorSys.Scenario.DeleteRsTankCondition(StrToInt(tempList[i]));
+      InstructorSys.Scenario.DeleteRsFaCondition(StrToInt(tempList[i]));
+    end;
+
+    tempList.Free;
+
+    InstructorSys.Scenario.DeleteRunningScenario(FScenarioID);
     InstructorSys.Scenario.DeleteScenario(FScenarioID);
+
     MessageDlg('Delete "' + FScenarioName + '" Scenario Success', mtInformation, [mbOK], 0);
     btnNewScenarioClick(nil);
     UpdateScenarioList;
@@ -1363,13 +1385,8 @@ begin
     end
     else if pmsDataTemp.PMS_Name = C_SWITCHBOARD_ID[2] then
     begin
-      {$REGION ' Switchboard Emergency FWD '}
-      case pmsDataTemp.PMS_SWB_MSBIntrMode of
-        1 : cbbModeInnEm.ItemIndex := 0;
-        3: cbbModeInnEm.ItemIndex := 1;
-      end;
-//      cbbCircuitBreakerEmFwd.ItemIndex := pmsDataTemp.PMS_SWB_MsbCBIntr;
-
+      {$REGION ' Switchboard Emergency '}
+      cbbModeInnEm.ItemIndex := pmsDataTemp.PMS_SWB_ESBIntrMode;
       cbbModeSWBChange(cbbModeInnEm);
       {$ENDREGION}
     end
@@ -1537,32 +1554,32 @@ begin
   pmsDataTemp.PMS_ID := FPmsIDBuffer[7];
   pmsDataTemp.Condition_ID := FPMSConditionID;
 
-  case cbbModeInnEm.ItemIndex of
-    0 : pmsDataTemp.PMS_SWB_MSBIntrMode := 1;
-    1: pmsDataTemp.PMS_SWB_MSBIntrMode := 3;
-  end;
+  pmsDataTemp.PMS_SWB_ESBIntrMode := cbbModeInnEm.ItemIndex;
+
+//  case cbbModeInnEm.ItemIndex of
+//    0 : pmsDataTemp.PMS_SWB_MSBIntrMode := 1;
+//    1: pmsDataTemp.PMS_SWB_MSBIntrMode := 3;
+//  end;
 
 //  pmsDataTemp.PMS_SWB_MsbCBIntr := cbbCircuitBreakerEmFwd.ItemIndex;
 
   pmsListTemp.Add(pmsDataTemp);
   {$ENDREGION}
 
-//  {$REGION ' Switchboard Emergency AFT '}
-//  pmsDataTemp := TPMSCond_Data.Create;
-//  pmsDataTemp.PMS_Name := C_SWITCHBOARD_ID[3];
-//  pmsDataTemp.PMS_Type := 2;
-//  pmsDataTemp.PMS_ID := FPmsIDBuffer[8];
-//  pmsDataTemp.Condition_ID := FPMSConditionID;
-//
-//  case cbbModeInnEmAft.ItemIndex of
-//    0 : pmsDataTemp.PMS_SWB_MSBIntrMode := 1;
-//    1: pmsDataTemp.PMS_SWB_MSBIntrMode := 3;
-//  end;
-//
-//  pmsDataTemp.PMS_SWB_MsbCBIntr := cbbCircuitBreakerEmAft.ItemIndex;
-//
-//  pmsListTemp.Add(pmsDataTemp);
-//  {$ENDREGION}
+  {$REGION ' Variabel '}
+  pmsDataTemp := TPMSCond_Data.Create;
+  pmsDataTemp.PMS_Name := 'Variabel';
+  pmsDataTemp.PMS_Type := 3;
+  pmsDataTemp.PMS_ID := FPmsIDBuffer[8];
+  pmsDataTemp.Condition_ID := FPMSConditionID;
+
+  pmsDataTemp.PMS_FirstLoad := 1;
+  pmsDataTemp.PMS_StateRunFull := 1;
+  pmsDataTemp.PMS_StateRunFwd := 1;
+  pmsDataTemp.PMS_StateRunAft := 1;
+
+  pmsListTemp.Add(pmsDataTemp);
+  {$ENDREGION}
 
   if FPMSConditionID = 0 then
   begin

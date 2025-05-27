@@ -87,7 +87,7 @@ type
     procedure SaveTanksCondition(aIsNew: Boolean; aName: string; var aList: TList; var ConditionID: Integer);
     {$ENDREGION}
 
-    {$REGION ' FA '}
+    {$REGION ' FA Section '}
     function DeleteFACondition(aID: Integer): Boolean;
     function GetFACondID(aID, aIndex: Integer): Integer;
     procedure GetFACondition(aID: Integer; var aList: TList);
@@ -95,10 +95,15 @@ type
     procedure SaveFACondition(aIsNew: Boolean; aName: string; aList: TList; var ConditionID: Integer);
     {$ENDREGION}
 
+    {$REGION ' Running Scenario Section '}
+    function DeleteRsPmsCondition(aRunningId: Integer): Boolean;
+    function DeleteRsPcsCondition(aRunningId: Integer): Boolean;
+    function DeleteRsTankCondition(aRunningId: Integer): Boolean;
+    function DeleteRsFaCondition(aRunningId: Integer): Boolean;
+    function DeleteRunningScenario(aScenId: Integer): Boolean;
 
-
-
-
+    procedure GetAllRunningScenarioByScenId(aScenId: Integer; var aList: TStrings);
+    {$ENDREGION}
 
     function getSession(aSessionID: Integer): TSession_Data; overload;
     function insertScenario(aID: Integer; aName, aDesc: string; intArr: array of Integer): Integer;
@@ -615,6 +620,40 @@ end;
 procedure TScenario.GetFACondition(aID: Integer; var aList: TList);
 begin
   FDatabase.GetFACondByID(aID, aList);
+end;
+
+{$ENDREGION}
+
+{$REGION ' Running Scenario Section '}
+
+procedure TScenario.GetAllRunningScenarioByScenId(aScenId: Integer; var aList: TStrings);
+begin
+  FDatabase.GetAllRunningScenarioByScenId(aScenId, aList);
+end;
+
+function TScenario.DeleteRsPmsCondition(aRunningId: Integer): Boolean;
+begin
+  Result := FDatabase.DeleteRsPmsCondition(aRunningId);
+end;
+
+function TScenario.DeleteRsPcsCondition(aRunningId: Integer): Boolean;
+begin
+  Result := FDatabase.DeleteRsPcsCondition(aRunningId);
+end;
+
+function TScenario.DeleteRsTankCondition(aRunningId: Integer): Boolean;
+begin
+  Result := FDatabase.DeleteRsTankCondition(aRunningId);
+end;
+
+function TScenario.DeleteRsFaCondition(aRunningId: Integer): Boolean;
+begin
+  Result := FDatabase.DeleteRsFaCondition(aRunningId);
+end;
+
+function TScenario.DeleteRunningScenario(aScenId: Integer): Boolean;
+begin
+  Result := FDatabase.DeleteRunningScenario(aScenId);
 end;
 
 {$ENDREGION}

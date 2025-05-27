@@ -83,6 +83,16 @@ type
     procedure GetFACondByID(aID: Integer; var aList: TList);
     {$ENDREGION}
 
+    {$REGION ' Running Scenario Section '}
+    function DeleteRsPmsCondition(aRunningId: Integer): Boolean;
+    function DeleteRsPcsCondition(aRunningId: Integer): Boolean;
+    function DeleteRsTankCondition(aRunningId: Integer): Boolean;
+    function DeleteRsFaCondition(aRunningId: Integer): Boolean;
+    function DeleteRunningScenario(aScenId: Integer): Boolean;
+
+    procedure GetAllRunningScenarioByScenId(aScenId: Integer; var aList: TStrings);
+    {$ENDREGION}
+
     procedure PopulateController;
     procedure PopulateElements(CtrlID: string);
     function PopulateDefaultElementParameter: TList;
@@ -1813,6 +1823,193 @@ begin
     Connection := nil;
     Free;
   end;
+end;
+
+{$ENDREGION}
+
+{$REGION ' Running Scenario Section '}
+
+procedure TIPMSDatabase.GetAllRunningScenarioByScenId(aScenId: Integer; var aList: TStrings);
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  if not Assigned(aList) then
+    aList := TStringList.Create;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'SELECT * FROM RunningScenario WHERE Scenario_ID = ' + IntToStr(aScenId);
+
+    SQL.Add(query);
+    Open;
+
+    while not Eof do
+    begin
+      aList.Add(FieldByName('Running_ID').AsString);
+
+      Next;
+    end;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+end;
+
+function TIPMSDatabase.DeleteRsPmsCondition(aRunningId: Integer): Boolean;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'DELETE FROM RS_PMS_Condition WHERE Running_ID = ' + IntToStr(aRunningId);
+    SQL.Add(query);
+
+    ExecSQL;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+
+  Result := True;
+end;
+
+function TIPMSDatabase.DeleteRsPcsCondition(aRunningId: Integer): Boolean;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'DELETE FROM RS_PCS_Condition WHERE Running_ID = ' + IntToStr(aRunningId);
+    SQL.Add(query);
+
+    ExecSQL;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+
+  Result := True;
+end;
+
+function TIPMSDatabase.DeleteRsTankCondition(aRunningId: Integer): Boolean;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'DELETE FROM RS_Tanks_Condition WHERE Running_ID = ' + IntToStr(aRunningId);
+    SQL.Add(query);
+
+    ExecSQL;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+
+  Result := True;
+end;
+
+function TIPMSDatabase.DeleteRsFaCondition(aRunningId: Integer): Boolean;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'DELETE FROM RS_FA_Condition WHERE Running_ID = ' + IntToStr(aRunningId);
+    SQL.Add(query);
+
+    ExecSQL;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+
+  Result := True;
+end;
+
+function TIPMSDatabase.DeleteRunningScenario(aScenId: Integer): Boolean;
+var
+  FQuery : TZQuery;
+  query : string;
+begin
+  Result := False;
+
+  if not FConnection.Connected then
+    Exit;
+
+  FQuery := TZQuery.Create(nil);
+
+  with FQuery do
+  begin
+    Connection := FConnection;
+    SQL.Clear;
+
+    query := 'DELETE FROM RunningScenario WHERE Scenario_ID = ' + IntToStr(aScenId);
+    SQL.Add(query);
+
+    ExecSQL;
+
+    Close;
+    Connection := nil;
+    Free;
+  end;
+
+  Result := True;
 end;
 
 {$ENDREGION}
