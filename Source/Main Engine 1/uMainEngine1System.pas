@@ -166,7 +166,7 @@ begin
   rec := @apRec^;
 
   case rec.CommandPropsID of
-    epPCSMELocalEmergencyStop, epPCSMESafetyStop:
+    epPCSMESafetyStop:
     begin
       FLIstener.TriggerEvents(Self, rec.CommandPropsID, rec.ValueBool);
     end;
@@ -180,6 +180,14 @@ begin
     end;
 
     epPCSCtrlLocal :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+
+    epPCSLeverEmergencyStop :
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
       begin
@@ -219,40 +227,25 @@ begin
     // Gauges
     epPCSMEStartingAir :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
-      end;
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
     end;
     epPCSMELOPressInlet :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
-      end;
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
     end;
     epPCSMEPressFOInlet :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
-      end;
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
     end;
 
     // PMS
     epPCSMEFuelRack :
     begin
-        if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
-      end;
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
     end;
     epPCSMESpeed :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
-      end;
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
     end;
   end;
 end;
@@ -354,7 +347,8 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStaboard;
-  recCmd.CommandPropsID := epPCSMELocalEmergencyStop;
+  recCmd.CommandPropsID := epPCSLeverEmergencyStop;
+//  recCmd.CommandPropsID := epPCSMELocalEmergencyStop;
   recCmd.CommandID      := C_ORD_LEVER_EMERGENCYSTOP;
   recCmd.ValueBool      := True;
 

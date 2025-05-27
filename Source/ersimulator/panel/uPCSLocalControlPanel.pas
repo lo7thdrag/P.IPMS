@@ -996,7 +996,7 @@ begin
         end;
         epPCSLeverEmergencyStop :
         begin
-
+           main_engine_PS.EmergencyStop := True;
         end;
       end;
     end
@@ -1387,10 +1387,9 @@ begin
 
 //  if not main_engine_PS.EngineRun then
 //    FlashingIndicatorStart(btnStartPS,btnStopPS,False);
-
+//
 //  if not main_engine_SB.EngineRun then
-//    FlashingIndicatorStart(btnStartSB,btnStopSB, False);
-
+//    FlashingIndicatorStart(btnStartSB,btnStartSB);
 
   if FFlashingStopPS then
     FlashingIndicatorStop(btnStopPS,btnStartPS,True);

@@ -616,8 +616,8 @@ begin
       else if Sender is TGearBox then
         rPCSCmd.PortStaboardID := TGearBox(Sender).Identifier;
 
-      rPCSCmd.CommandPropsID   := PropsID;
-      rPCSCmd.ValueDouble := Value;
+      rPCSCmd.CommandPropsID  := PropsID;
+      rPCSCmd.ValueDouble     := Value;
 
       Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
 
@@ -785,15 +785,10 @@ begin
       FFlashingDeclutchPS := recERPCS.ValueBool;
     end;
 
-    epPCSLeverEmergencyStop :
+    epPCSLeverEmergencyStop :      // Safeties Stop
     begin
       main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
       main_engine.EmergencyStop := recERPCS.ValueBool;
-    end;
-
-    epPCSMELocalEmergencyStop :
-    begin
-     ERSystem.ERManager.EngineRoom.getPCSSystem.EmergencyStop(recERPCS.PortStaboardID);
     end;
 
     {Main Engine 2}
