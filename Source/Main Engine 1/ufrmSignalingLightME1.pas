@@ -93,7 +93,7 @@ uses
 
 procedure TfrmSignalingLightME1.btnClutchDeclutchClick(Sender: TObject);
 begin
-  MainEngine1System.Clutch(C_PCS_ME_PORTS, True);
+  MainEngine1System.Clutch(C_PCS_GB_PORTS, True);
 end;
 
 procedure TfrmSignalingLightME1.btnEmergencyStopClick(Sender: TObject);
@@ -103,12 +103,12 @@ end;
 
 procedure TfrmSignalingLightME1.btnStartClick(Sender: TObject);
 begin
-  MainEngine1System.RunningStart(C_PCS_ME_PORTS);
+  MainEngine1System.RunningStart(C_PCS_ME_STARBOARD);
 end;
 
 procedure TfrmSignalingLightME1.imgStopME1Click(Sender: TObject);
 begin
-  MainEngine1System.StoppedStop(C_PCS_ME_PORTS);
+  MainEngine1System.StoppedStop(C_PCS_STARBOARD);
 end;
 
 procedure TfrmSignalingLightME1.btnSafetiesStopClick(Sender: TObject);
