@@ -56,16 +56,16 @@ type
     procedure Run(const aDt : Double);override;
 
     {1:Man; 2:Off; 3:Aut}
-    property MsbMode : Integer read FMsbMode write SetMsbMode;
+    property MsbInterconnectionMode : Integer read FMsbMode write SetMsbMode;
     {1:Aft; 2:Off; 3:Fwd; 4:Dbl}
-    property ESBIntrMode : Integer read FESBIntrMode write SetESBIntrMode;
+    property ESBInterconnectionMode : Integer read FESBIntrMode write SetESBIntrMode;
     {1:Man; 2:Off; 3:Aut}
-    property ShoreIntrMode : Integer read FShoreIntrMode write SetShoreIntrMode;
+    property ShoreInterconnectionMode : Integer read FShoreIntrMode write SetShoreIntrMode;
 
     property MsbCircuitBreaker : Boolean read FIsMsbCircuitBreaker write SetMsbCircuitBreaker;
-    property EsbCBIntr : Boolean read FIsEsbCBIntr write SetEsbCBIntr;
+    property EsbCircuitBreaker : Boolean read FIsEsbCBIntr write SetEsbCBIntr;
 //    property EsbFwdCBIntr : Boolean read FIsEsbFwdCBIntr write SetEsbFwdCBIntr;
-    property MsbCBShore : Boolean read FIsMsbCBShore write SetMsbCBShore;
+    property ShoresbCircuitBreaker : Boolean read FIsMsbCBShore write SetMsbCBShore;
     property MsbCBNavNaut : Boolean read FIsMsbCBNavNaut write SetMsbCBNavNaut;
     property Busbar : Boolean read FIsBusbar write SetBusbar;
     property TripReduct : Boolean read FIsTripReduct write SetTripReduct;
@@ -95,13 +95,13 @@ begin
   FTrafo115Volt := 0;
   FDelay      := 0;
 
-  ShoreIntrMode  := C_ModeOff;
-  MsbMode := C_ModeOff;
-  ESBIntrMode := 2;
+  ShoreInterconnectionMode  := C_ModeOff;
+  MsbInterconnectionMode := C_ModeOff;
+  ESBInterconnectionMode := 2;
 
-  MsbCBShore := False;
+  ShoresbCircuitBreaker := False;
   MsbCircuitBreaker := False;
-  EsbCBIntr := False;
+  EsbCircuitBreaker := False;
 //  EsbFwdCBIntr := False;
 end;
 
@@ -114,12 +114,12 @@ end;
 procedure TSwitchboard.Run(const aDt: Double);
 begin
   inherited;
-  if ShoreIntrMode = 2 then
+  if ShoreInterconnectionMode = 2 then
   begin
-    MsbCBShore := False;
+    ShoresbCircuitBreaker := False;
   end;
 
-  case MsbMode of
+  case MsbInterconnectionMode of
     C_ModeOff:
     begin
       MsbCircuitBreaker := False;

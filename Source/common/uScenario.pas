@@ -332,13 +332,13 @@ begin
 
       {Entity Element}
       pmsData.PMS_Name := C_SWITCHBOARD_ID[i];
-      pmsData.PMS_SWB_MSBIntrMode := swt.MsbMode;               {-----> 1:Man; 2:Off; 3:Aut}
-      pmsData.PMS_SWB_ESBIntrMode := swt.ESBIntrMode;               {-----> 1:Aft; 2:Off; 3:Fwd; 4:Dbl}
-      pmsData.PMS_SWB_ShoreIntrMode := swt.ShoreIntrMode;           {-----> 1:Man; 2:Off; 3:Aut}
+      pmsData.PMS_SWB_MSBIntrMode := swt.MsbInterconnectionMode;               {-----> 1:Man; 2:Off; 3:Aut}
+      pmsData.PMS_SWB_ESBIntrMode := swt.ESBInterconnectionMode;               {-----> 1:Aft; 2:Off; 3:Fwd; 4:Dbl}
+      pmsData.PMS_SWB_ShoreIntrMode := swt.ShoreInterconnectionMode;           {-----> 1:Man; 2:Off; 3:Aut}
       pmsData.PMS_SWB_MsbCBIntr := setBooltoInt(swt.MsbCircuitBreaker);
-      pmsData.PMS_SWB_EsbAftCBIntr := setBooltoInt(swt.EsbCBIntr);
-      pmsData.PMS_SWB_EsbAftCBIntr := setBooltoInt(swt.EsbCBIntr);
-      pmsData.PMS_SWB_MsbCBShore := setBooltoInt(swt.MsbCBShore);
+      pmsData.PMS_SWB_EsbCBIntr := setBooltoInt(swt.EsbCircuitBreaker);
+      pmsData.PMS_SWB_EsbCBIntr := setBooltoInt(swt.EsbCircuitBreaker);
+      pmsData.PMS_SWB_MsbCBShore := setBooltoInt(swt.ShoresbCircuitBreaker);
       pmsData.PMS_SWB_MsbCBNavNaut := setBooltoInt(swt.MsbCBNavNaut);
       pmsData.PMS_SWB_Busbar := setBooltoInt(swt.Busbar);
       pmsData.PMS_SWB_TripReduct := setBooltoInt(swt.TripReduct);
@@ -788,13 +788,14 @@ begin
 
       if Assigned(swt) then
       begin
-        swt.MsbMode := data.PMS_SWB_MSBIntrMode;
-        swt.ESBIntrMode := data.PMS_SWB_ESBIntrMode;
-        swt.ShoreIntrMode := data.PMS_SWB_ShoreIntrMode;
+        swt.MsbInterconnectionMode := data.PMS_SWB_MSBIntrMode;
+        swt.ESBInterconnectionMode := data.PMS_SWB_ESBIntrMode;
+        swt.ShoreInterconnectionMode := data.PMS_SWB_ShoreIntrMode;
         swt.MsbCircuitBreaker := setInttoBool(data.PMS_SWB_MsbCBIntr);
-        swt.EsbCBIntr := setInttoBool(data.PMS_SWB_EsbAftCBIntr);
-//        swt.EsbFwdCBIntr := setInttoBool(data.PMS_SWB_EsbFwdCBIntr);
-        swt.MsbCBShore := setInttoBool(data.PMS_SWB_MsbCBShore);
+
+        {1:Aft; 2:Off; 3:Fwd; 4:Dbl}
+        swt.EsbCircuitBreaker := swt.ESBInterconnectionMode <> 2;
+        swt.ShoresbCircuitBreaker := setInttoBool(data.PMS_SWB_MsbCBShore);
         swt.EmergencyCon := setInttoBool(data.PMS_SWB_EmergencyCon);
         swt.TripReduct := setInttoBool(data.PMS_SWB_TripReduct);
       end;

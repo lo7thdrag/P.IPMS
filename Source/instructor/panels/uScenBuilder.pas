@@ -1386,7 +1386,7 @@ begin
     else if pmsDataTemp.PMS_Name = C_SWITCHBOARD_ID[2] then
     begin
       {$REGION ' Switchboard Emergency '}
-      cbbModeInnEm.ItemIndex := pmsDataTemp.PMS_SWB_ESBIntrMode;
+      cbbModeInnEm.ItemIndex := pmsDataTemp.PMS_SWB_ESBIntrMode - 1;
       cbbModeSWBChange(cbbModeInnEm);
       {$ENDREGION}
     end
@@ -1554,7 +1554,7 @@ begin
   pmsDataTemp.PMS_ID := FPmsIDBuffer[7];
   pmsDataTemp.Condition_ID := FPMSConditionID;
 
-  pmsDataTemp.PMS_SWB_ESBIntrMode := cbbModeInnEm.ItemIndex;
+  pmsDataTemp.PMS_SWB_ESBIntrMode := cbbModeInnEm.ItemIndex + 1;
 
 //  case cbbModeInnEm.ItemIndex of
 //    0 : pmsDataTemp.PMS_SWB_MSBIntrMode := 1;

@@ -160,7 +160,7 @@ begin
     begin
       rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
       rPmsCmd.CommandPropsID   := PropsID;
-      rPmsCmd.ValueInt    := TSwitchboard(Sender).ESBIntrMode;
+      rPmsCmd.ValueInt    := TSwitchboard(Sender).ESBInterconnectionMode;
       rPmsCmd.ValueBool   := Value;
       rPmsCmd.ValueKind   := 'boolean';
 
@@ -733,7 +733,7 @@ begin
     epPMSMsbCBShore:
     begin
       switchboard := ERManager.EngineRoom.getPMSSystem.getSwitchboard(recER.GenSwitchID);
-      switchboard.MsbCBShore  := recER.ValueBool;
+      switchboard.ShoresbCircuitBreaker  := recER.ValueBool;
     end;
     epPMSMsbCircuitBreaker:
     begin

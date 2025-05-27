@@ -393,40 +393,40 @@ function TSearchPMSElementID.getCBEElementIDInt(GenSwitchID: string;
   var value: string; valueint, konstanta: Integer): Boolean;
 begin
   Result := False;
-  if GenSwitchID = 'Switchboard Emergency FWD' then
-  begin
-    if konstanta = C_CBE_ESB then
-    begin
-      value := '3241E50031H';
-      Result := True;
-    end
-  end
-  else if GenSwitchID = 'Switchboard Emergency AFT' then
-  begin
-    if konstanta = C_CBE_ESB then
-    begin
-      value := '3241E50031G';
-      Result := True;
-    end
-  end
-
-//  if GenSwitchID = 'Switchboard Emergency' then
+//  if GenSwitchID = 'Switchboard Emergency FWD' then
 //  begin
 //    if konstanta = C_CBE_ESB then
 //    begin
-//      {valueint 1:aft; valueint 2:fwd }
-//      if valueint = 1 then
-//      begin
-//        value := '3241E50031G';
-//        Result := True;
-//      end
-//      else if valueint = 3 then
-//      begin
-//        value := '3241E50031H';
-//        Result := True;
-//      end
+//      value := '3241E50031H';
+//      Result := True;
 //    end
 //  end
+//  else if GenSwitchID = 'Switchboard Emergency AFT' then
+//  begin
+//    if konstanta = C_CBE_ESB then
+//    begin
+//      value := '3241E50031G';
+//      Result := True;
+//    end
+//  end
+
+  if GenSwitchID = 'Switchboard Emergency' then
+  begin
+    if konstanta = C_CBE_ESB then
+    begin
+      {valueint 1:aft; valueint 3:fwd }
+      if valueint = 1 then
+      begin
+        value := '3241E50031G';
+        Result := True;
+      end
+      else if valueint = 3 then
+      begin
+        value := '3241E50031H';
+        Result := True;
+      end
+    end
+  end
 end;
 
 function TSearchPMSElementID.getCTRElementID(GenSwitchID: string;

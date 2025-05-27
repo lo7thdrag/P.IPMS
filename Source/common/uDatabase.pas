@@ -945,7 +945,7 @@ begin
                ', ' + IntToStr(pmsData.PMS_SWB_ShoreIntrMode) +
 
                ', ' + IntToStr(pmsData.PMS_SWB_MsbCBIntr) +
-               ', ' + IntToStr(pmsData.PMS_SWB_EsbAftCBIntr) +
+               ', ' + IntToStr(pmsData.PMS_SWB_EsbCBIntr) +
                ', ' + IntToStr(pmsData.PMS_SWB_MsbCBShore) +
                ', ' + IntToStr(pmsData.PMS_SWB_MsbCBNavNaut) +
                ', ' + IntToStr(pmsData.PMS_SWB_Busbar) +
@@ -4552,7 +4552,7 @@ begin
       FData.PMS_SWB_ShoreIntrMode := FieldByName('PMS_SWB_ShoreIntrMode').AsInteger;
 
       FData.PMS_SWB_MsbCBIntr := FieldByName('PMS_SWB_MsbCBIntr').AsInteger;
-      FData.PMS_SWB_EsbAftCBIntr := FieldByName('PMS_SWB_EsbCBIntr').AsInteger;
+      FData.PMS_SWB_EsbCBIntr := FieldByName('PMS_SWB_EsbCBIntr').AsInteger;
       FData.PMS_SWB_MsbCBShore := FieldByName('PMS_SWB_MsbCBShore').AsInteger;
       FData.PMS_SWB_MsbCBNavNaut := FieldByName('PMS_SWB_MsbCBNavNaut').AsInteger;
       FData.PMS_SWB_Busbar := FieldByName('PMS_SWB_Busbar').AsInteger;

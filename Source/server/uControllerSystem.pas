@@ -819,7 +819,7 @@ begin
           end;
           recER.GenSwitchID := val1;
           recER.CommandPropsID   := val2;
-          Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
+          Network.SimEngineSocket.SendData(C_PMSCLIENT_COMMAND,@recER);
         end
       end
     end;
@@ -835,7 +835,7 @@ begin
         end;
         recER.GenSwitchID := val1;
         recER.CommandPropsID   := val2;
-        Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
+        Network.SimEngineSocket.SendData(C_PMSCLIENT_COMMAND,@recER);
       end;
     end;
     C_ORD_OPEN :
@@ -850,7 +850,7 @@ begin
         end;
         recER.GenSwitchID := val1;
         recER.CommandPropsID   := val2;
-        Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
+        Network.SimEngineSocket.SendData(C_PMSCLIENT_COMMAND,@recER);
       end;
     end;
     C_ORD_DISABLE :
@@ -1046,7 +1046,7 @@ begin
         end;
         recER.GenSwitchID := val1;
         recER.CommandPropsID   := val2;
-        Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
+        Network.SimEngineSocket.SendData(C_PMSCLIENT_COMMAND,@recER);
       end;
     end;
     C_ORD_AUTO:
@@ -1059,7 +1059,7 @@ begin
         end;
         recER.GenSwitchID := val1;
         recER.CommandPropsID   := val2;
-        Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
+        Network.SimEngineSocket.SendData(C_PMSCLIENT_COMMAND,@recER);
       end;
     end;
     C_ORD_MIMIC_ACK:

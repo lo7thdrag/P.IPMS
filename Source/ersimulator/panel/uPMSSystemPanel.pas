@@ -623,31 +623,31 @@ begin
     switchboard := ERSystem.ERManager.EngineRoom.getPMSSystem.getSwitchboard(C_SWITCHBOARD_ID[IdObj]);
     case PropsID of
       epPMSMsbCircuitBreaker: switchboard.MsbCircuitBreaker := value;
-      epPMSMsbCBShore: switchboard.MsbCBShore  := value;
+      epPMSMsbCBShore: switchboard.ShoresbCircuitBreaker  := value;
 //      epPMSEsbCBIntr: switchboard.EsbCBIntr := value;
 //      epPMSEsbFwdCBIntr: switchboard.EsbFwdCBIntr := value;
       epPMSEsbCBIntr:
       begin
         if (rbFwdDistrE.Checked)then
         begin
-          if switchboard.EsbCBIntr and (switchboard.ESBIntrMode = 1) then
-            switchboard.EsbCBIntr  := False
+          if switchboard.EsbCircuitBreaker and (switchboard.ESBInterconnectionMode = 1) then
+            switchboard.EsbCircuitBreaker  := False
           else
           begin
-            switchboard.EsbCBIntr  := False;
-            switchboard.ESBIntrMode := 3;
-            switchboard.EsbCBIntr   := True;
+            switchboard.EsbCircuitBreaker  := False;
+            switchboard.ESBInterconnectionMode := 3;
+            switchboard.EsbCircuitBreaker   := True;
           end;
         end
         else if (rbAftDistrE.Checked)then
         begin
-          if switchboard.EsbCBIntr and (switchboard.ESBIntrMode = 3) then
-            switchboard.EsbCBIntr  := False
+          if switchboard.EsbCircuitBreaker and (switchboard.ESBInterconnectionMode = 3) then
+            switchboard.EsbCircuitBreaker  := False
           else
           begin
-            switchboard.EsbCBIntr  := False;
-            switchboard.ESBIntrMode := 1;
-            switchboard.EsbCBIntr   := True;
+            switchboard.EsbCircuitBreaker  := False;
+            switchboard.ESBInterconnectionMode := 1;
+            switchboard.EsbCircuitBreaker   := True;
           end;
         end
       end;
@@ -679,18 +679,18 @@ begin
     case PropsID of
       epPMSMsbIntrMode:
       begin
-        switchboard.MsbMode := value;
+        switchboard.MsbInterconnectionMode := value;
       end;
       epPMSMsbShoreMode:
       begin
-        switchboard.ShoreIntrMode := value;
+        switchboard.ShoreInterconnectionMode := value;
       end;
       epPMSEsbIntrMode:
       begin
         if (rbOffDistrE.Checked)then
         begin
-          switchboard.EsbCBIntr  := False;
-          switchboard.ESBIntrMode := 2;
+          switchboard.EsbCircuitBreaker  := False;
+          switchboard.ESBInterconnectionMode := 2;
         end
       end;
     end;
@@ -881,7 +881,7 @@ begin
       begin
         if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[0] then
         begin
-          if TSwitchboard(Sender).MsbMode = 2 then
+          if TSwitchboard(Sender).MsbInterconnectionMode = 2 then
             exit;
 
           lblCBCloseInn1.Color := toLblWarna(Value);
@@ -889,7 +889,7 @@ begin
         end
         else if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[1] then
         begin
-          if TSwitchboard(Sender).MsbMode = 2 then
+          if TSwitchboard(Sender).MsbInterconnectionMode = 2 then
             exit;
 
           lblCBCloseInn2.Color := toLblWarna(Value);
@@ -909,7 +909,7 @@ begin
       begin
         if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[1] then
         begin
-          if TSwitchboard(Sender).ShoreIntrMode = 2 then
+          if TSwitchboard(Sender).ShoreInterconnectionMode = 2 then
             exit;
 
           lblCBCloseShore.Color := toLblWarna(Value);

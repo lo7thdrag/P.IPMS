@@ -93,29 +93,29 @@ begin
   case IdBusKopler of
     1: {U/ mengecek koneksi antar MSB}
     begin
-      if (Msb[0].MsbCircuitBreaker and (Msb[1].MsbCircuitBreaker)) or (Msb[0].MsbMode = C_ModeAuto) and (Msb[1].MsbMode = C_ModeAuto) then
+      if (Msb[0].MsbCircuitBreaker and (Msb[1].MsbCircuitBreaker)) or (Msb[0].MsbInterconnectionMode = C_ModeAuto) and (Msb[1].MsbInterconnectionMode = C_ModeAuto) then
         Result := True
     end;
     2: {kiriman dari Emergency n blackout}
     begin
       {di false kan dulu semua}
-      Msb[2].EsbCBIntr  := False;
+      Msb[2].EsbCircuitBreaker  := False;
 //      Msb[2].EsbFwdCBIntr  := False;
 
       {mode 4 : smua EsbCB tertutup}
       if IdIntrMode = 0 then
-        Msb[2].ESBIntrMode := 1
+        Msb[2].ESBInterconnectionMode := 1
       else if IdIntrMode = 4 then
-        Msb[2].ESBIntrMode := 4
+        Msb[2].ESBInterconnectionMode := 4
       else
-        Msb[2].ESBIntrMode := 3;
+        Msb[2].ESBInterconnectionMode := 3;
 
-      Msb[2].EsbCBIntr := True;
+      Msb[2].EsbCircuitBreaker := True;
 //      Msb[2].EsbFwdCBIntr := True;
     end;
     3: {U/ mengecek koneksi MSB dgn ESB}
     begin
-      if (Msb[2].EsbCBIntr) and (Msb[2].ESBIntrMode = IdIntrMode) then
+      if (Msb[2].EsbCircuitBreaker) and (Msb[2].ESBInterconnectionMode = IdIntrMode) then
         Result := True
     end;
   end;
