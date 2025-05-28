@@ -5793,7 +5793,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object VrDemoButton1: TVrDemoButton
+      object btnPS_SS_FwHtExpTkLevelVeryLow: TVrDemoButton
         Tag = 1
         Left = 8
         Top = 37
@@ -5814,7 +5814,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 0
       end
-      object VrDemoButton2: TVrDemoButton
+      object btnPS_SS_FwTempVeryHigh: TVrDemoButton
         Tag = 1
         Left = 7
         Top = 63
@@ -5835,7 +5835,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 1
       end
-      object VrDemoButton3: TVrDemoButton
+      object btnPS_SS_ConRodBearTempVeryHigh: TVrDemoButton
         Tag = 1
         Left = 6
         Top = 89
@@ -5856,7 +5856,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 2
       end
-      object VrDemoButton4: TVrDemoButton
+      object btnPS_SS_EngInletLubOilVeryHighTemperature: TVrDemoButton
         Tag = 1
         Left = 6
         Top = 115
@@ -5877,7 +5877,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 3
       end
-      object VrDemoButton5: TVrDemoButton
+      object btnPS_SS_OilMistDetHigh: TVrDemoButton
         Tag = 1
         Left = 6
         Top = 141
@@ -6067,7 +6067,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 1
       end
-      object VrDemoButton9: TVrDemoButton
+      object btnPS_SI_TurningGearDisengaged: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 75
@@ -6088,7 +6088,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 2
       end
-      object VrDemoButton10: TVrDemoButton
+      object btnPS_SI_ManHandleAtStop: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 112
@@ -6172,7 +6172,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 6
       end
-      object VrDemoButton14: TVrDemoButton
+      object btnPS_SI_FuelRackAtStop: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 260
@@ -6235,7 +6235,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 9
       end
-      object VrDemoButton17: TVrDemoButton
+      object btnPS_SI_PrelubeInProgress: TVrDemoButton
         Tag = 1
         Left = 1
         Top = 371
@@ -6256,7 +6256,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 10
       end
-      object VrDemoButton18: TVrDemoButton
+      object btnPS_SI_PrelubeFailure: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 408
@@ -6277,7 +6277,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 11
       end
-      object VrDemoButton19: TVrDemoButton
+      object btnPS_SI_StartingFailure: TVrDemoButton
         Tag = 1
         Left = 281
         Top = 408
@@ -6298,7 +6298,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 12
       end
-      object VrDemoButton20: TVrDemoButton
+      object btnPS_SI_STCSequenceFail: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 445
@@ -6319,7 +6319,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 13
       end
-      object VrDemoButton21: TVrDemoButton
+      object btnPS_SI_SlowTurningFailure: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 482
@@ -6340,7 +6340,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 14
       end
-      object VrDemoButton22: TVrDemoButton
+      object btnPS_SI_SafetyStop: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 519

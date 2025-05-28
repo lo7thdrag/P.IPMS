@@ -6554,7 +6554,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label11: TLabel
+      object lblTurboCharge2: TLabel
         Left = 92
         Top = 44
         Width = 20
@@ -6572,7 +6572,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         Top = 166
         Width = 134
         Height = 54
-        Caption = 'TURBO CHARGER'#13#10'     SPEED N'#176'1'#13#10
+        Caption = 'TURBO CHARGER'#13#10'     SPEED N'#176'2'#13#10
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -6700,7 +6700,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label15: TLabel
+      object lblTurboCharge1: TLabel
         Left = 96
         Top = 43
         Width = 20
@@ -6718,7 +6718,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         Top = 162
         Width = 134
         Height = 36
-        Caption = 'TURBO CHARGER'#13#10'     SPEED N'#176'12'
+        Caption = 'TURBO CHARGER'#13#10'     SPEED N'#176'1'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -6870,7 +6870,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
       BorderStyle = bsSingle
       TabOrder = 3
       object Image7: TImage
-        Left = 8
+        Left = 0
         Top = 0
         Width = 214
         Height = 210

@@ -49,11 +49,10 @@ type
     procedure vrtryswtchOffSpeedPS(aPortStarboard: string; aSwitchPos: Boolean);
 
     procedure vrtryswtchAutoSTC_PS(aPortStarboard: string; aSwitchPos: Integer);
-    procedure vrtryswtch1TCSTC_PS(aPortStarboard: string; aSwitchPos: Boolean);
-    procedure vrtryswtch2TCSTC_PS(aPortStarboard: string; aSwitchPos: Boolean);
     procedure vrtryswtchPreStartInhibitionPS(aPortStarboard: string; aValue: Boolean);
 
     procedure RunningStart(aPortStarboard: String);
+    procedure EmergencyShutdown(aPortStarboard: string; aValue: Boolean);
 
     property Network : TMainEngine2Network read FMainEngine2Network;
     property Listener :TListeners read FListener;
@@ -213,7 +212,7 @@ begin
       end;
     end;
 
-    epPCSMERunningHours :
+    epPCSMERunningHourState :            // Awalnya menggunakan epPCSMERunningHours
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
     end;
@@ -231,17 +230,149 @@ begin
     // Gauges
     epPCSMEPressFWHTInlet :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
-      end;
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
     end;
     epPCSMEPressAirInlet :
     begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+
+    // HMI
+    epPCSMEEmergencyShutdown:
+    begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
       begin
-        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
+    end;
+    epPCSMEOverspeedAlarm :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMELOPressVeryLow :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMERedGearSafetyStop :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEFwHtExpTkLevelVeryLow :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEFwTempVeryHigh :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEConRodBearingTempVeryHigh :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEEngInletLubOilVeryHigh :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEOilMistDetSafety :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMETurningGearEngaged :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEManHandleAtStop :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEFuelRackAtStop :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEPrelubInProgress :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEPrelubricationFailure :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEStartingFault :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMESTCSequenceFail :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMESlowTurningFault :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMESafetyShutdown :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+
+    epPCSMETurboChargerSpeedA :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+
+    epPCSMETurboChargerSpeedB :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
     end;
   end;
 end;
@@ -350,27 +481,6 @@ begin
 
 end;
 
-procedure TMainEngine2System.vrtryswtch1TCSTC_PS(aPortStarboard: string; aSwitchPos: Boolean);
-var
-  recCmd : R_Common_PCS_Command;
-begin
-//  recCmd.PortStaboardID := aPortStarboard;
-//  recCmd.CommandPropsID := epPCSMESTCInManualMode;
-//  recCmd.ValueBool      := not aSwitchPos;
-//
-//  Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
-end;
-
-procedure TMainEngine2System.vrtryswtch2TCSTC_PS(aPortStarboard: string; aSwitchPos: Boolean);
-var
-  recCmd : R_Common_PCS_Command;
-begin
-//  recCmd.PortStaboardID := aPortStarboard;
-//  recCmd.CommandPropsID := epPCSMESTCInManualMode;
-//  recCmd.ValueBool      := not aSwitchPos;
-//
-//  Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
-end;
 
 procedure TMainEngine2System.vrtryswtchAutoSTC_PS(aPortStarboard: string; aSwitchPos: Integer);
 var
@@ -379,6 +489,17 @@ begin
   recCmd.PortStaboardID := aPortStarboard;
   recCmd.CommandPropsID := epPCSMESTCInManual;
   recCmd.ValueInt       := aSwitchPos;
+
+  Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine2System.EmergencyShutdown(aPortStarboard: string; aValue: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSMEEmergencyShutdown;
+  recCmd.ValueBool      := aValue;
 
   Network.MainEngine2ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;

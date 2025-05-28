@@ -16,4 +16,9 @@ object frmMainForm: TfrmMainForm
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object tmrRunningMETimer1: TTimer
+    OnTimer = tmrRunningMETimer1Timer
+    Left = 344
+    Top = 424
+  end
 end

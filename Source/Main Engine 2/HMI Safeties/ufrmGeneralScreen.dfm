@@ -7014,7 +7014,7 @@ object frmGeneralScreen: TfrmGeneralScreen
         ParentBiDiMode = False
         TabOrder = 0
       end
-      object VrDemoButton5: TVrDemoButton
+      object btnPS_SI_SlowTurningFailure: TVrDemoButton
         Tag = 1
         Left = 4
         Top = 57

@@ -27,7 +27,7 @@ type
     VrDemoButton3: TVrDemoButton;
     pnlEngineController: TPanel;
     VrDemoButton4: TVrDemoButton;
-    VrDemoButton5: TVrDemoButton;
+    btnPS_SI_SlowTurningFailure: TVrDemoButton;
     VrDemoButton6: TVrDemoButton;
     VrDemoButton7: TVrDemoButton;
     VrDemoButton8: TVrDemoButton;

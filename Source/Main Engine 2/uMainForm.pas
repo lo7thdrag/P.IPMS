@@ -6,16 +6,20 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
 
-  uListener, uFreezeFrom, uDataType;
+  uListener, uFreezeFrom, uDataType, Vcl.ExtCtrls;
 
 type
   TfrmMainForm = class(TForm)
+    tmrRunningMETimer1: TTimer;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure tmrRunningMETimer1Timer(Sender: TObject);
 
   private
     FListener : TListeners;
+    CurrentHourCounter: Integer;
+    FIsRunningHours : Boolean;
 
     procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
@@ -31,7 +35,7 @@ var
 implementation
 
 uses
-  ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, ufrmMenu, uMainEngine2System;
+  ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, ufrmMenu, uMainEngine2System, ufrmSafetiesStop, ufrmAirGasCircuit, ufrmGeneralScreen;
 
 {$R *.dfm}
 
@@ -132,9 +136,24 @@ begin
           FreeAndNil(MainEngine2System.FFormFreezed[2]);
       end;
     end;
-    epPCSMERunningHours :
+    epPCSMERunningHourState :
     begin
-      frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Value);
+      if Value >= 0 then
+      begin
+        CurrentHourCounter := Value;
+        frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Value);
+
+        if not FIsRunningHours then
+        begin
+          tmrRunningMETimer1.Enabled := True;
+          FIsRunningHours := True;
+        end;
+      end
+      else
+      begin
+          tmrRunningMETimer1.Enabled := False;
+          FIsRunningHours := False;
+      end;
     end;
     epPCSSpeedState :
     begin
@@ -172,6 +191,140 @@ begin
       else
         frmSignalingLightME2.vrtryswtchPreStartPS.SwitchPosition := 1;
     end;
+
+    // HMI
+    epPCSMEEmergencyShutdown :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clBtnFace;
+    end;
+    epPCSMEOverspeedAlarm :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SS_Overspeed.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SS_Overspeed.Color := clBtnFace;
+    end;
+    epPCSMELOPressVeryLow :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clBtnFace;
+    end;
+    epPCSMERedGearSafetyStop :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clBtnFace;
+    end;
+    epPCSMEFwHtExpTkLevelVeryLow :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clBtnFace;
+    end;
+    epPCSMEFwTempVeryHigh :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clBtnFace;
+    end;
+    epPCSMEConRodBearingTempVeryHigh :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clBtnFace;
+    end;
+    epPCSMEEngInletLubOilVeryHigh :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clBtnFace;
+    end;
+    epPCSMEOilMistDetSafety :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clBtnFace;
+    end;
+    epPCSMETurningGearEngaged :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clBtnFace;
+    end;
+    epPCSMEManHandleAtStop :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clBtnFace;
+    end;
+    epPCSMEFuelRackAtStop :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clBtnFace;
+    end;
+    epPCSMEPrelubInProgress :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clBtnFace;
+    end;
+    epPCSMEPrelubricationFailure :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clBtnFace;
+    end;
+    epPCSMEStartingFault :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SI_StartingFailure.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SI_StartingFailure.Color := clBtnFace;
+    end;
+    epPCSMESTCSequenceFail :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clBtnFace;
+    end;
+    epPCSMESlowTurningFault :
+    begin
+      if Value then
+      begin
+        frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clRed;
+        frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clRed
+      end
+      else
+      begin
+        frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clBtnFace;
+        frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clBtnFace
+      end;
+    end;
+    epPCSMESafetyShutdown :
+    begin
+      if Value then
+        frmSafetiesStop.btnPS_SI_SafetyStop.Color := clRed
+      else
+        frmSafetiesStop.btnPS_SI_SafetyStop.Color := clBtnFace;
+    end;
   end;
 end;
 
@@ -188,7 +341,26 @@ begin
       if Assigned(frmSetofPressureGaugesME2) then
         frmSetofPressureGaugesME2.EngineInletAirPressureMeter.Position := Value
     end;
+
+    // HMI
+    epPCSMETurboChargerSpeedA :
+    begin
+      if Assigned(frmAirGasCircuit) then
+        frmAirGasCircuit.lblTurboCharge1.Caption := FloatToStr(Value);
+    end;
+    epPCSMETurboChargerSpeedB :
+    begin
+      if Assigned(frmAirGasCircuit) then
+        frmAirGasCircuit.lblTurboCharge2.Caption := FloatToStr(Value);
+    end;
   end;
+end;
+
+procedure TfrmMainForm.tmrRunningMETimer1Timer(Sender: TObject);
+begin
+  if FIsRunningHours then
+    Inc(CurrentHourCounter);
+    frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(CurrentHourCounter);
 end;
 
 end.

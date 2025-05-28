@@ -4672,11 +4672,11 @@ object frmSetofPressureGaugesME1: TfrmSetofPressureGaugesME1
       Top = 293
       Width = 417
       Height = 369
-      MaxValue = 400.000000000000000000
+      MaxValue = 40.000000000000000000
       Decimals = 0
       Angle = 50
       AngleOffset = 260
-      Ticks = 120
+      Ticks = 80
       TicksMin = -8
       TicksMax = -13
       TicksColor = clBlack
@@ -4685,7 +4685,7 @@ object frmSetofPressureGaugesME1: TfrmSetofPressureGaugesME1
       ColorZone3 = clWhite
       Percent1 = 50
       Percent2 = 50
-      Labels = 4
+      Labels = 0
       LabelsOffset = -30
       NeedleColor = clBlack
       CenterDotColor = clBlack
@@ -4783,6 +4783,71 @@ object frmSetofPressureGaugesME1: TfrmSetofPressureGaugesME1
       Font.Style = []
       ParentShowHint = False
       ShowHint = False
+    end
+    object Label1: TLabel
+      Left = 176
+      Top = 552
+      Width = 10
+      Height = 19
+      Caption = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 152
+      Top = 416
+      Width = 20
+      Height = 19
+      Caption = '10'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 252
+      Top = 360
+      Width = 20
+      Height = 19
+      Caption = '20'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 348
+      Top = 416
+      Width = 20
+      Height = 19
+      Caption = '30'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 335
+      Top = 544
+      Width = 20
+      Height = 19
+      Caption = '40'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
   end
 end

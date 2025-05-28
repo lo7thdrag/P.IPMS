@@ -5,7 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, VrControls, VrButtons,
-  Vcl.ExtCtrls, Vcl.Imaging.pngimage, RzBmpBtn;
+  Vcl.ExtCtrls, Vcl.Imaging.pngimage, RzBmpBtn,
+
+  uListener, uFreezeFrom, uDataType;
 
 type
   TfrmSafetiesStop = class(TForm)
@@ -14,27 +16,27 @@ type
     Panel2: TPanel;
     VrDemoButton7: TVrDemoButton;
     VrDemoButton8: TVrDemoButton;
-    VrDemoButton9: TVrDemoButton;
-    VrDemoButton10: TVrDemoButton;
+    btnPS_SI_TurningGearDisengaged: TVrDemoButton;
+    btnPS_SI_ManHandleAtStop: TVrDemoButton;
     VrDemoButton11: TVrDemoButton;
     VrDemoButton12: TVrDemoButton;
     VrDemoButton13: TVrDemoButton;
-    VrDemoButton14: TVrDemoButton;
+    btnPS_SI_FuelRackAtStop: TVrDemoButton;
     VrDemoButton15: TVrDemoButton;
     VrDemoButton16: TVrDemoButton;
-    VrDemoButton17: TVrDemoButton;
-    VrDemoButton18: TVrDemoButton;
-    VrDemoButton19: TVrDemoButton;
-    VrDemoButton20: TVrDemoButton;
-    VrDemoButton21: TVrDemoButton;
-    VrDemoButton22: TVrDemoButton;
+    btnPS_SI_PrelubeInProgress: TVrDemoButton;
+    btnPS_SI_PrelubeFailure: TVrDemoButton;
+    btnPS_SI_StartingFailure: TVrDemoButton;
+    btnPS_SI_STCSequenceFail: TVrDemoButton;
+    btnPS_SI_SlowTurningFailure: TVrDemoButton;
+    btnPS_SI_SafetyStop: TVrDemoButton;
     pnlSafetiesOverbidden: TPanel;
     Label2: TLabel;
-    VrDemoButton1: TVrDemoButton;
-    VrDemoButton2: TVrDemoButton;
-    VrDemoButton3: TVrDemoButton;
-    VrDemoButton4: TVrDemoButton;
-    VrDemoButton5: TVrDemoButton;
+    btnPS_SS_FwHtExpTkLevelVeryLow: TVrDemoButton;
+    btnPS_SS_FwTempVeryHigh: TVrDemoButton;
+    btnPS_SS_ConRodBearTempVeryHigh: TVrDemoButton;
+    btnPS_SS_EngInletLubOilVeryHighTemperature: TVrDemoButton;
+    btnPS_SS_OilMistDetHigh: TVrDemoButton;
     VrDemoButton6: TVrDemoButton;
     pnlSafetiesStop: TPanel;
     btnPS_SS_EmergencyShutdown: TVrDemoButton;
@@ -58,7 +60,7 @@ type
     procedure btnPreviousClick(Sender: TObject);
     procedure MenuClick(Sender: TObject);
   private
-    { Private declarations }
+
   public
     { Public declarations }
   end;
@@ -69,9 +71,14 @@ var
 implementation
 
 uses
-  ufrmCompressedAirCircuit, ufrmLineBExhaustGasTemperature, ufrmMenu;
+  ufrmCompressedAirCircuit, ufrmLineBExhaustGasTemperature, ufrmMenu, uMainEngine2System;
 
 {$R *.dfm}
+
+procedure TfrmSafetiesStop.FormCreate(Sender: TObject);
+begin
+  lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
 
 procedure TfrmSafetiesStop.btnNextClick(Sender: TObject);
 begin
@@ -83,11 +90,6 @@ procedure TfrmSafetiesStop.btnPreviousClick(Sender: TObject);
 begin
   frmLineBExhaustGasTemperature.Show;
   Self.Hide;
-end;
-
-procedure TfrmSafetiesStop.FormCreate(Sender: TObject);
-begin
-  lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
 end;
 
 procedure TfrmSafetiesStop.MenuClick(Sender: TObject);

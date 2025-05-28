@@ -17,10 +17,10 @@ type
     Panel5: TPanel;
     Label9: TLabel;
     Label10: TLabel;
-    Label11: TLabel;
+    lblTurboCharge2: TLabel;
     Label12: TLabel;
     Panel6: TPanel;
-    Label15: TLabel;
+    lblTurboCharge1: TLabel;
     Label14: TLabel;
     Panel7: TPanel;
     Label17: TLabel;
