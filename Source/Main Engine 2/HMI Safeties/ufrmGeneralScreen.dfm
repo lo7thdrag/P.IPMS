@@ -6830,7 +6830,7 @@ object frmGeneralScreen: TfrmGeneralScreen
       BorderWidth = 2
       BorderStyle = bsSingle
       TabOrder = 0
-      object btnPS_SS_EmergencyShutdown: TVrDemoButton
+      object btnPS_SS_EngineStopped: TVrDemoButton
         Tag = 1
         Left = 5
         Top = 4
@@ -6853,7 +6853,7 @@ object frmGeneralScreen: TfrmGeneralScreen
         ParentBiDiMode = False
         TabOrder = 0
       end
-      object btnPS_SS_EngInletLubOilVeryHigh: TVrDemoButton
+      object btnPS_SS_SpeedSetting: TVrDemoButton
         Tag = 1
         Left = 3
         Top = 57
@@ -6874,7 +6874,7 @@ object frmGeneralScreen: TfrmGeneralScreen
         Color = 10658466
         TabOrder = 1
       end
-      object btnPS_SS_RedGearSafetyStop: TVrDemoButton
+      object btnPS_SS_ClutcInterlocks: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 84
@@ -6895,7 +6895,7 @@ object frmGeneralScreen: TfrmGeneralScreen
         Color = 5475327
         TabOrder = 2
       end
-      object btnPS_SS_Overspeed: TVrDemoButton
+      object btnPS_SS_StartingInterlocks: TVrDemoButton
         Tag = 1
         Left = 4
         Top = 31
@@ -7056,7 +7056,7 @@ object frmGeneralScreen: TfrmGeneralScreen
         Color = 12032000
         TabOrder = 2
       end
-      object VrDemoButton7: TVrDemoButton
+      object btnPS_SI_StartingFailure: TVrDemoButton
         Tag = 1
         Left = 4
         Top = 31

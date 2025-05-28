@@ -54,6 +54,7 @@ type
     Image11: TImage;
     Image12: TImage;
     Image13: TImage;
+    Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure CompressedAirCircuitClick(Sender: TObject);
     procedure FreshandSeaWaterCircuitClick(Sender: TObject);
@@ -70,6 +71,7 @@ type
     procedure GaugesClick(Sender: TObject);
     procedure SignalingClick(Sender: TObject);
     procedure MenuClick(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
 
   public
@@ -88,9 +90,14 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmMenu.FormCreate(Sender: TObject);
+procedure TfrmMenu.Timer1Timer(Sender: TObject);
 begin
   lblTime.Caption := FormatDateTime('dd"/"mm"/"yyyy hh:nn:ss ampm', Now);
+end;
+
+procedure TfrmMenu.FormCreate(Sender: TObject);
+begin
+  //
 end;
 
 procedure TfrmMenu.AirandGasCircuitClick(Sender: TObject);
@@ -182,5 +189,6 @@ begin
   frmSignalingLightME2.Show;
   Self.Hide;
 end;
+
 
 end.

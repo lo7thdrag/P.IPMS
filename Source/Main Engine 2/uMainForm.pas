@@ -35,7 +35,8 @@ var
 implementation
 
 uses
-  ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, ufrmMenu, uMainEngine2System, ufrmSafetiesStop, ufrmAirGasCircuit, ufrmGeneralScreen;
+  ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, ufrmMenu, uMainEngine2System, ufrmSafetiesStop, ufrmAirGasCircuit, ufrmGeneralScreen,
+  ufrmLineAExhaustGasTemperature, ufrmLineBExhaustGasTemperature;
 
 {$R *.dfm}
 
@@ -294,9 +295,15 @@ begin
     epPCSMEStartingFault :
     begin
       if Value then
-        frmSafetiesStop.btnPS_SI_StartingFailure.Color := clRed
+      begin
+        frmSafetiesStop.btnPS_SI_StartingFailure.Color := clRed;
+        frmGeneralScreen.btnPS_SI_StartingFailure.Color := clRed;
+      end
       else
+      begin
         frmSafetiesStop.btnPS_SI_StartingFailure.Color := clBtnFace;
+        frmGeneralScreen.btnPS_SI_StartingFailure.Color := clBtnFace;
+      end;
     end;
     epPCSMESTCSequenceFail :
     begin
@@ -325,6 +332,13 @@ begin
       else
         frmSafetiesStop.btnPS_SI_SafetyStop.Color := clBtnFace;
     end;
+    epPCSGBPCSClutchInterlock :
+    begin
+      if Value then
+        frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clRed
+      else
+        frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clBtnFace;
+    end;
   end;
 end;
 
@@ -352,6 +366,168 @@ begin
     begin
       if Assigned(frmAirGasCircuit) then
         frmAirGasCircuit.lblTurboCharge2.Caption := FloatToStr(Value);
+    end;
+
+    //Line Exhaust A
+    epPCSMETempExhCylA1 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblB1LineA.Caption := FloatToStr(Value);
+    end;
+    epPCSMEDevTempExhCylA1 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblA1LineA.Caption := FloatToStr(Value);
+
+      if StrToInt(frmLineAExhaustGasTemperature.lblA1LineA.Caption) < 0 then
+      begin
+        frmLineAExhaustGasTemperature.pnlGrafik1.Height := abs(StrToInt(frmLineAExhaustGasTemperature.lblA1LineA.Caption));
+        frmLineAExhaustGasTemperature.pnlGrafik1.Top := 546;
+      end;
+    end;
+    epPCSMETempExhCylA2 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblB2LineA.Caption := FloatToStr(Value);
+    end;
+    epPCSMEDevTempExhCylA2 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblA2LineA.Caption := FloatToStr(Value);
+
+      if StrToInt(frmLineAExhaustGasTemperature.lblA2LineA.Caption) < 0 then
+      begin
+        frmLineAExhaustGasTemperature.pnlGrafik2.Height := abs(StrToInt(frmLineAExhaustGasTemperature.lblA2LineA.Caption));
+        frmLineAExhaustGasTemperature.pnlGrafik2.Top := 546;
+      end;
+    end;
+    epPCSMETempExhCylA3 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblB3LineA.Caption := FloatToStr(Value);
+    end;
+    epPCSMEDevTempExhCylA3 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblA3LineA.Caption := FloatToStr(Value);
+
+      if StrToInt(frmLineAExhaustGasTemperature.lblA3LineA.Caption) < 0 then
+      begin
+        frmLineAExhaustGasTemperature.pnlGrafik3.Height := abs(StrToInt(frmLineAExhaustGasTemperature.lblA3LineA.Caption));
+        frmLineAExhaustGasTemperature.pnlGrafik3.Top := 546;
+      end;
+    end;
+    epPCSMETempExhCylA4 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblB4LineA.Caption := FloatToStr(Value);
+    end;
+    epPCSMEDevTempExhCylA4 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblA4LineA.Caption := FloatToStr(Value);
+
+      if StrToInt(frmLineAExhaustGasTemperature.lblA4LineA.Caption) < 0 then
+      begin
+        frmLineAExhaustGasTemperature.pnlGrafik4.Height := abs(StrToInt(frmLineAExhaustGasTemperature.lblA4LineA.Caption));
+        frmLineAExhaustGasTemperature.pnlGrafik4.Top := 546;
+      end;
+    end;
+    epPCSMETempExhCylA5 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblB5LineA.Caption := FloatToStr(Value);
+    end;
+    epPCSMEDevTempExhCylA5 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblA5LineA.Caption := FloatToStr(Value);
+
+      if StrToInt(frmLineAExhaustGasTemperature.lblA5LineA.Caption) < 0 then
+      begin
+        frmLineAExhaustGasTemperature.pnlGrafik5.Height := abs(StrToInt(frmLineAExhaustGasTemperature.lblA5LineA.Caption));
+        frmLineAExhaustGasTemperature.pnlGrafik5.Top := 546;
+      end;
+    end;
+    epPCSMETempExhCylA6 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblB6LineA.Caption := FloatToStr(Value);
+    end;
+    epPCSMEDevTempExhCylA6 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblA6LineA.Caption := FloatToStr(Value);
+
+      if StrToInt(frmLineAExhaustGasTemperature.lblA6LineA.Caption) < 0 then
+      begin
+        frmLineAExhaustGasTemperature.pnlGrafik6.Height := abs(StrToInt(frmLineAExhaustGasTemperature.lblA6LineA.Caption));
+        frmLineAExhaustGasTemperature.pnlGrafik6.Top := 546;
+      end;
+    end;
+    epPCSMETempExhCylA7 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblB7LineA.Caption := FloatToStr(Value);
+    end;
+    epPCSMEDevTempExhCylA7 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblA7LineA.Caption := FloatToStr(Value);
+
+      if StrToInt(frmLineAExhaustGasTemperature.lblA7LineA.Caption) < 0 then
+      begin
+        frmLineAExhaustGasTemperature.pnlGrafik7.Height := abs(StrToInt(frmLineAExhaustGasTemperature.lblA7LineA.Caption));
+        frmLineAExhaustGasTemperature.pnlGrafik7.Top := 546;
+      end;
+    end;
+    epPCSMETempExhCylA8 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblB8LineA.Caption := FloatToStr(Value);
+    end;
+    epPCSMEDevTempExhCylA8 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblA8LineA.Caption := FloatToStr(Value);
+
+      if StrToInt(frmLineAExhaustGasTemperature.lblA8LineA.Caption) < 0 then
+      begin
+        frmLineAExhaustGasTemperature.pnlGrafik8.Height := abs(StrToInt(frmLineAExhaustGasTemperature.lblA8LineA.Caption));
+        frmLineAExhaustGasTemperature.pnlGrafik8.Top := 546;
+      end;
+    end;
+    epPCSMETempExhCylA9 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblB9LineA.Caption := FloatToStr(Value);
+    end;
+    epPCSMEDevTempExhCylA9 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblA9LineA.Caption := FloatToStr(Value);
+
+      if StrToInt(frmLineAExhaustGasTemperature.lblA9LineA.Caption) < 0 then
+      begin
+        frmLineAExhaustGasTemperature.pnlGrafik9.Height := abs(StrToInt(frmLineAExhaustGasTemperature.lblA9LineA.Caption));
+        frmLineAExhaustGasTemperature.pnlGrafik9.Top := 546;
+      end;
+    end;
+    epPCSMETempExhCylA10 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblB10LineA.Caption := FloatToStr(Value);
+    end;
+    epPCSMEDevTempExhCylA10 :
+    begin
+      if Assigned(frmLineAExhaustGasTemperature) then
+        frmLineAExhaustGasTemperature.lblA10LineA.Caption := FloatToStr(Value);
+
+      if StrToInt(frmLineAExhaustGasTemperature.lblA10LineA.Caption) < 0 then
+      begin
+        frmLineAExhaustGasTemperature.pnlGrafik10.Height := abs(StrToInt(frmLineAExhaustGasTemperature.lblA10LineA.Caption));
+        frmLineAExhaustGasTemperature.pnlGrafik10.Top := 546;
+      end;
     end;
   end;
 end;

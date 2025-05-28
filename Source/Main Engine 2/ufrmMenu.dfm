@@ -52247,4 +52247,9 @@ object frmMenu: TfrmMenu
       TabOrder = 15
     end
   end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 504
+    Top = 104
+  end
 end

@@ -18,10 +18,10 @@ type
     Image6: TImage;
     VrAngularMeter1: TVrAngularMeter;
     pnlSafetiesStop: TPanel;
-    btnPS_SS_EmergencyShutdown: TVrDemoButton;
-    btnPS_SS_EngInletLubOilVeryHigh: TVrDemoButton;
-    btnPS_SS_RedGearSafetyStop: TVrDemoButton;
-    btnPS_SS_Overspeed: TVrDemoButton;
+    btnPS_SS_EngineStopped: TVrDemoButton;
+    btnPS_SS_SpeedSetting: TVrDemoButton;
+    btnPS_SS_ClutcInterlocks: TVrDemoButton;
+    btnPS_SS_StartingInterlocks: TVrDemoButton;
     VrDemoButton1: TVrDemoButton;
     VrDemoButton2: TVrDemoButton;
     VrDemoButton3: TVrDemoButton;
@@ -29,7 +29,7 @@ type
     VrDemoButton4: TVrDemoButton;
     btnPS_SI_SlowTurningFailure: TVrDemoButton;
     VrDemoButton6: TVrDemoButton;
-    VrDemoButton7: TVrDemoButton;
+    btnPS_SI_StartingFailure: TVrDemoButton;
     VrDemoButton8: TVrDemoButton;
     VrDemoButton9: TVrDemoButton;
     pnlPT119: TPanel;

@@ -202,6 +202,27 @@ begin
       else
         frmSignalingLightME1.imgGazValveOpenME1.Visible := False
     end;
+    epPCSMESafetyShutdown :
+    begin
+      if Value then
+        frmSignalingLightME1.imgSafetyStopME1.Visible := True
+      else
+        frmSignalingLightME1.imgSafetyStopME1.Visible := False
+    end;
+    epPCSMEManHandleAtStop :
+    begin
+      if Value then
+        frmSignalingLightME1.imgManualHandletoStopME1.Visible := True
+      else
+        frmSignalingLightME1.imgManualHandletoStopME1.Visible := False
+    end;
+    epPCSMESTCSequenceFail :
+    begin
+      if Value then
+        frmSignalingLightME1.imgStartingSequenceFailureME1.Visible := True
+      else
+        frmSignalingLightME1.imgStartingSequenceFailureME1.Visible := False
+    end;
     epPCSGBClutchEngaged :
     begin
       FIsClutchBlink := Value;

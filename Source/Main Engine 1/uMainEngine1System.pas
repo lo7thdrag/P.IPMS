@@ -223,6 +223,18 @@ begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
+    epPCSMESafetyShutdown :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+    end;
+    epPCSMEManHandleAtStop :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+    end;
+    epPCSMESTCSequenceFail :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+    end;
 
     // Gauges
     epPCSMEStartingAir :

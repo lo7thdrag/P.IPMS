@@ -374,6 +374,92 @@ begin
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
     end;
+
+    epPCSGBPCSClutchInterlock :
+    begin
+     FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+     // Line Exhaust A
+    epPCSMETempExhCylA1 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMEDevTempExhCylA1 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempExhCylA2 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMEDevTempExhCylA2 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempExhCylA3 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMEDevTempExhCylA3 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempExhCylA4 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMEDevTempExhCylA4 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempExhCylA5 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMEDevTempExhCylA5 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempExhCylA6 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMEDevTempExhCylA6 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempExhCylA7 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMEDevTempExhCylA7 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempExhCylA8 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMEDevTempExhCylA8 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempExhCylA9 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMEDevTempExhCylA9 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempExhCylA10 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMEDevTempExhCylA10 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
   end;
 end;
 
