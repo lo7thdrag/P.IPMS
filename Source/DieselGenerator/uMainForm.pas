@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   VrControls, VrRotarySwitch, Vcl.StdCtrls,
 
-  uListener, uFreezeFrom, uDataType, Vcl.MPlayer;
+  uSetting, uListener, uFreezeFrom, uDataType, Vcl.MPlayer;
 
 type
   TMainForm = class(TForm)
@@ -44,6 +44,7 @@ type
     imgGenSpaceHeater: TImage;
     imgJWHeater: TImage;
     mpAlarm: TMediaPlayer;
+    tmrRunningHours: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnLampTestMouseDown(Sender: TObject; Button: TMouseButton;
@@ -61,11 +62,14 @@ type
     procedure mpAlarmNotify(Sender: TObject);
     procedure Alarm(Value: Boolean);
     procedure btnResetClick(Sender: TObject);
+    procedure tmrRunningHoursTimer(Sender: TObject);
 
   private
     FListener : TListeners;
     Lamps  : array of TImage;
     LampStatus  : array of Boolean;
+    FRunningHourTemp : Integer;
+    FRunningHour : Integer;
 
     procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
@@ -87,6 +91,9 @@ uses
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+  Setting   := TSetting.Create;
+  DieselGeneratorSystem := TDieselGeneratorSystem.Create;
+
   FListener := TListeners.Create;
   with DieselGeneratorSystem.Listener.Add('DIESELGENERATOR') as TPropertyEventListener do
   begin
@@ -120,6 +127,7 @@ begin
     begin
       imgStart.Visible          := Value;
       imgStop.Visible           := not Value;
+      tmrRunningHours.Enabled   := Value;
 
       imgRunning.Visible        := Value;
       imgJWHeater.Visible       := not Value;
@@ -129,6 +137,7 @@ begin
     begin
       imgStart.Visible          := not Value;
       imgStop.Visible           := Value;
+      tmrRunningHours.Enabled   := not Value;
 
       imgRunning.Visible        := not Value;
       imgJWHeater.Visible       := Value;
@@ -355,16 +364,18 @@ begin
           FreeAndNil(DieselGeneratorSystem.FFormFreezed[1]);
       end;
     end;
-    epPMSGeneratorRunningHours:
-    begin
-      lblRunningHours.Caption := IntToStr(Value);
-    end;
+//    epPMSGeneratorRunningHours:
+//    begin
+//      lblRunningHours.Caption := IntToStr(Value);
+//    end;
   end;
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
   FListener.Free;
+  DieselGeneratorSystem.Free;
+  Setting.Free;
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);
@@ -386,6 +397,17 @@ begin
   begin
     mpAlarm.Play;
     mpAlarm.Notify := True;
+  end;
+end;
+
+procedure TMainForm.tmrRunningHoursTimer(Sender: TObject);
+begin
+  FRunningHourTemp := FRunningHourTemp + 1;
+  if FRunningHourTemp > 25 then
+  begin
+    FRunningHourTemp := 0;
+    FRunningHour := FRunningHour + 1;
+    lblRunningHours.Caption := IntToStr(FRunningHour);
   end;
 end;
 

@@ -94,7 +94,8 @@ procedure TMSTimer.Execute;
 begin
   while not Terminated do begin
 
-    Synchronize(DoByMySelf);
+    Queue(DoByMySelf);
+//    Synchronize(DoByMySelf);
 
     Sleep(FInterval);
   end;

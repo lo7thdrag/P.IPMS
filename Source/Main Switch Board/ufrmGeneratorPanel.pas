@@ -107,11 +107,13 @@ type
     procedure ImgIPClick(Sender: TObject);
     procedure tmrFrequencyTimer(Sender: TObject);
     procedure tmrAmpereTimer(Sender: TObject);
+    procedure ImgRaiseClick(Sender: TObject);
   private
     { Private declarations }
     FListener : TListeners;
     Led  : array of TImage;
     LedStatus  : array of Boolean;
+    ShiftMode : Boolean;
 
     procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
@@ -258,6 +260,15 @@ end;
 procedure TfrmGeneratorPanel.ImgPrefClick(Sender: TObject);
 begin
   MainSwitchBoardSystem.GeneratorPreference(True);
+end;
+
+procedure TfrmGeneratorPanel.ImgRaiseClick(Sender: TObject);
+begin
+  ShiftMode := not ShiftMode;
+  if ShiftMode then
+    ShowMessage('Shift Mode ON')
+  else
+    ShowMessage('Shift Mode OFF');
 end;
 
 procedure TfrmGeneratorPanel.ImgStartClick(Sender: TObject);

@@ -254,55 +254,55 @@ end;
 
 procedure TfrmMainForm.MainSwitchBoardSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
 begin
-  case PropsID of
-    epPMSPower:
-    begin
-      if Assigned(frmGeneratorPanel) then
-        frmGeneratorPanel.VraPower.Position := Value;
-
-      if Assigned(frmEmergencyPanel) then
-        frmEmergencyPanel.VraPower.Position := Value;
-
-      if Assigned(frmShorePanel) then
-        frmShorePanel.VraPower.Position := Value;
-    end;
-    epPMSFrequency:
-    begin
-      if Assigned(frmGeneratorPanel) then
-      begin
-        frmGeneratorPanel.OrderFrequency := Value;
-        frmGeneratorPanel.tmrFrequency.Enabled := True;
-      end;
-    end;
-    epPMSVoltage:
-    begin
-      if Assigned(frmGeneratorPanel) then
-        frmGeneratorPanel.VraV.Position := Value;
-
-      if Assigned(frmEmergencyPanel) then
-        frmEmergencyPanel.VraV.Position := Value;
-    end;
-    epPMSCurrent:
-    begin
-      if Assigned(frmGeneratorPanel) then
-      begin
-        frmGeneratorPanel.OrderAmpere := Value;
-        frmGeneratorPanel.tmrAmpere.Enabled := True;
-      end;
-
-      if Assigned(frmEmergencyPanel) then
-      begin
-        frmEmergencyPanel.OrderAmpere := Value;
-        frmEmergencyPanel.tmrAmpere.Enabled := True;
-      end;
-
-      if Assigned(frmShorePanel) then
-      begin
-        frmShorePanel.OrderAmpere := Value;
-        frmShorePanel.tmrAmpere.Enabled := True;
-      end;
-    end;
-  end;
+//  case PropsID of
+//    epPMSPower:
+//    begin
+//      if Assigned(frmGeneratorPanel) then
+//        frmGeneratorPanel.VraPower.Position := Value;
+//
+//      if Assigned(frmEmergencyPanel) then
+//        frmEmergencyPanel.VraPower.Position := Value;
+//
+//      if Assigned(frmShorePanel) then
+//        frmShorePanel.VraPower.Position := Value;
+//    end;
+//    epPMSFrequency:
+//    begin
+//      if Assigned(frmGeneratorPanel) then
+//      begin
+//        frmGeneratorPanel.OrderFrequency := Value;
+//        frmGeneratorPanel.tmrFrequency.Enabled := True;
+//      end;
+//    end;
+//    epPMSVoltage:
+//    begin
+//      if Assigned(frmGeneratorPanel) then
+//        frmGeneratorPanel.VraV.Position := Value;
+//
+//      if Assigned(frmEmergencyPanel) then
+//        frmEmergencyPanel.VraV.Position := Value;
+//    end;
+//    epPMSCurrent:
+//    begin
+//      if Assigned(frmGeneratorPanel) then
+//      begin
+//        frmGeneratorPanel.OrderAmpere := Value;
+//        frmGeneratorPanel.tmrAmpere.Enabled := True;
+//      end;
+//
+//      if Assigned(frmEmergencyPanel) then
+//      begin
+//        frmEmergencyPanel.OrderAmpere := Value;
+//        frmEmergencyPanel.tmrAmpere.Enabled := True;
+//      end;
+//
+//      if Assigned(frmShorePanel) then
+//      begin
+//        frmShorePanel.OrderAmpere := Value;
+//        frmShorePanel.tmrAmpere.Enabled := True;
+//      end;
+//    end;
+//  end;
 
 end;
 

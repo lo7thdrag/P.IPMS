@@ -10816,4 +10816,11 @@ object MainForm: TMainForm
     TabOrder = 1
     OnNotify = mpAlarmNotify
   end
+  object tmrRunningHours: TTimer
+    Enabled = False
+    Interval = 25
+    OnTimer = tmrRunningHoursTimer
+    Left = 248
+    Top = 648
+  end
 end

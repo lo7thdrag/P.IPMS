@@ -24,11 +24,9 @@ uses
 {$R *.res}
 
 begin
+  ReportMemoryLeaksOnShutdown := True;
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-
-  Setting   := TSetting.Create;
-  DieselGeneratorSystem := TDieselGeneratorSystem.Create;
 
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TfrmFreeze, frmFreeze);

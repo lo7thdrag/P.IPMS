@@ -185,10 +185,10 @@ begin
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
-    epPMSGeneratorRunningHours:
-    begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
-    end;
+//    epPMSGeneratorRunningHours:
+//    begin
+//      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
+//    end;
 
   end;
 end;
