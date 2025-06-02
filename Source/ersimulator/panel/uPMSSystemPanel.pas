@@ -513,14 +513,14 @@ begin
       SetValueBool(C_SWITCHBOARD, 1, False, epPMSMsbCircuitBreaker)
     else if TButton(Sender).Name = 'btnCBCloseInn2' then
       SetValueBool(C_SWITCHBOARD, 1, True, epPMSMsbCircuitBreaker)
-    else if TButton(Sender).Name = 'btnFwdCBOpenEmergency' then
-      SetValueBool(C_SWITCHBOARD, 2, False, epPMSEsbFwdCBIntr)
-    else if TButton(Sender).Name = 'btnFwdCBCloseEmergency' then
-      SetValueBool(C_SWITCHBOARD, 2, True, epPMSEsbFwdCBIntr)
-    else if TButton(Sender).Name = 'btnAftCBOpenEmergency' then
-      SetValueBool(C_SWITCHBOARD, 3, False, epPMSEsbCBIntr)
-    else if TButton(Sender).Name = 'btnAftCBCloseEmergency' then
-      SetValueBool(C_SWITCHBOARD, 3, True, epPMSEsbCBIntr)
+//    else if TButton(Sender).Name = 'btnFwdCBOpenEmergency' then
+//      SetValueBool(C_SWITCHBOARD, 2, False, epPMSEsbFwdCBIntr)
+//    else if TButton(Sender).Name = 'btnFwdCBCloseEmergency' then
+//      SetValueBool(C_SWITCHBOARD, 2, True, epPMSEsbFwdCBIntr)
+//    else if TButton(Sender).Name = 'btnAftCBOpenEmergency' then
+//      SetValueBool(C_SWITCHBOARD, 3, False, epPMSEsbCBIntr)
+//    else if TButton(Sender).Name = 'btnAftCBCloseEmergency' then
+//      SetValueBool(C_SWITCHBOARD, 3, True, epPMSEsbCBIntr)
     else if TButton(Sender).Name = 'btnCBOpenShore' then
       SetValueBool(C_SWITCHBOARD, 4, False, epPMSMsbCBShore)
     else if TButton(Sender).Name = 'btnCBCloseShore' then

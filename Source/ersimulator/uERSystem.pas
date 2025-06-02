@@ -129,46 +129,110 @@ var
   rPmsCmd : R_Common_PMS_Command;
   rPCSCmd : R_Common_PCS_Command;
 begin
+  if not Assigned(Sender) then
+    Exit;
+
   case PropsID of
+
+    {$REGION ' PMS Section '}
     epPMSGeneratorEngineRun, epPMSGeneratorSupplied, epPMSGeneratorStop, epPMSGeneratorCBClosed,
-    epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSNotStandby, epPMSCanBusFailure, epPMSDCPowFailure,
-    epPMSEngineAlarm, epPMSShutdown, epPMSFaultPageLed, epPMSGeneratorFuelRunsOut, epPMSFailureCBClosed,
-
-    epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm,
-    epPMSLubOilTempHigh, epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage, epPMSStartDisable,
-    epPMSSpeedSensorFailureShutdown, epPMSLubOilPressLowShutdown, epPMSCoolWaterTempHighShutdown,
-
-    epPMSMsbCBShore, epPMSMsbCircuitBreaker, epPMSMsbCBNavNaut, epPMSGeneratorRunHourState,epPMSGeneratorEmergencyStop,
-    epPMSMsbTripReduct, epPMSSycnFail :
+    epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSGeneratorRunHourState, epPMSGeneratorEmergencyStop :
     begin
+      rPmsCmd.GenSwitchID := '';
+
       if Sender is TGenerator then
         rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier
       else if Sender is TSwitchboard then
         rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
 
-      rPmsCmd.CommandPropsID   := PropsID;
-      rPmsCmd.ValueBool   := Value;
-      rPmsCmd.ValueKind   := 'boolean';
+      if rPmsCmd.GenSwitchID <> '' then
+      begin
+        rPmsCmd.CommandPropsID   := PropsID;
+        rPmsCmd.ValueBool   := Value;
+        rPmsCmd.ValueKind   := 'boolean';
 
-      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      end;
 
       if Assigned(FOnPMSCommand) then
         FOnPMSCommand(rPmsCmd);
 
     end;
-    {epPMSGeneratorCBClosedE}epPMSEsbCBIntr, epPMSEsbFwdCBIntr :
+
+    epPMSNotStandby, epPMSCanBusFailure, epPMSDCPowFailure,
+    epPMSEngineAlarm, epPMSShutdown, epPMSFaultPageLed, epPMSGeneratorFuelRunsOut, epPMSFailureCBClosed,
+    epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm,
+    epPMSLubOilTempHigh, epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage, epPMSStartDisable,
+    epPMSSpeedSensorFailureShutdown, epPMSLubOilPressLowShutdown, epPMSCoolWaterTempHighShutdown, epPMSSycnFail :
     begin
-      rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
-      rPmsCmd.CommandPropsID   := PropsID;
-      rPmsCmd.ValueInt    := TSwitchboard(Sender).ESBInterconnectionMode;
-      rPmsCmd.ValueBool   := Value;
-      rPmsCmd.ValueKind   := 'boolean';
+      rPmsCmd.GenSwitchID := '';
 
-      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      if Sender is TGenerator then
+        rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier
+      else if Sender is TSwitchboard then
+        rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
+
+      if rPmsCmd.GenSwitchID <> '' then
+      begin
+        rPmsCmd.CommandPropsID   := PropsID;
+        rPmsCmd.ValueBool   := Value;
+        rPmsCmd.ValueKind   := 'boolean';
+
+        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      end;
+
+      if Assigned(FOnPMSCommand) then
+        FOnPMSCommand(rPmsCmd);
+
+    end;
+
+    epPMSMsbCBShore, epPMSMsbCircuitBreaker, epPMSMsbCBNavNaut, epPMSMsbTripReduct :
+    begin
+      rPmsCmd.GenSwitchID := '';
+
+      if Sender is TGenerator then
+        rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier
+      else if Sender is TSwitchboard then
+        rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
+
+      if rPmsCmd.GenSwitchID <> '' then
+      begin
+        rPmsCmd.CommandPropsID   := PropsID;
+        rPmsCmd.ValueBool   := Value;
+        rPmsCmd.ValueKind   := 'boolean';
+
+        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      end;
+
+      if Assigned(FOnPMSCommand) then
+        FOnPMSCommand(rPmsCmd);
+
+    end;
+
+    epPMSEsbCBIntr, epPMSEsbFwdCBIntr :
+    begin
+      rPmsCmd.GenSwitchID := '';
+
+      if Sender is TSwitchboard then
+        rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
+
+      if rPmsCmd.GenSwitchID <> '' then
+      begin
+        rPmsCmd.CommandPropsID   := PropsID;
+        rPmsCmd.ValueInt    := TSwitchboard(Sender).ESBInterconnectionMode;
+        rPmsCmd.ValueBool   := Value;
+        rPmsCmd.ValueKind   := 'boolean';
+
+        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      end;
+
       if Assigned(FOnPMSCommand) then
         FOnPMSCommand(rPmsCmd);
     end;
 
+    {$ENDREGION}
+
+    {$REGION ' PCS Section '}
     {Paket data dikirimkan ke Mimic dan PCS Panel}
     epPCSMERunning, epPCSMERemoteAuto, epPCSMERemoteManual, epPCSMEReadyForUse,
     epPCSCPPRemoteAuto, epPCSCPPRemoteManual, epPCSCPPRemote, epPCSCPPReadyForUse,
@@ -308,12 +372,9 @@ begin
       if Assigned(FOnPCSCommand) then
         FOnPCSCommand(rPCSCmd);
     end;
+    {$ENDREGION}
+
   end;
-end;
-
-procedure TERSystem.ElementPropByteChange(Sender: TObject; PropsID: E_PropsID; Value: Byte);
-begin
-
 end;
 
 procedure TERSystem.ElementPropIntChange(Sender: TObject; PropsID: E_PropsID; Value: Integer);
@@ -321,7 +382,47 @@ var
   rPCSCmd : R_Common_PCS_Command;
   rPmsCmd : R_Common_PMS_Command;
 begin
+  if not Assigned(Sender) then
+    Exit;
+
   case PropsID of
+    {$REGION ' PMS Section '}
+//    epPMSPowerConsmr, epPMSPower :
+//    begin
+//      rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier;
+//      rPmsCmd.CommandPropsID   := PropsID;
+//      rPmsCmd.ValueInt    := Value;
+//      rPmsCmd.ValueKind   := 'integer';
+//      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+//      if Assigned(FOnPMSCommand) then
+//        FOnPMSCommand(rPmsCmd);
+//    end;
+
+    epPMSGeneratorMode, epPMSGeneratorState{, epPMSGeneratorRunningHours}:
+    begin
+      rPmsCmd.GenSwitchID := '';
+
+      if Sender is TGenerator then
+        rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier
+      else if Sender is TSwitchboard then
+        rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
+
+      if rPmsCmd.GenSwitchID <> '' then
+      begin
+        rPmsCmd.CommandPropsID   := PropsID;
+        rPmsCmd.ValueInt   := Value;
+        rPmsCmd.ValueKind   := 'integer';
+
+        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      end;
+
+      if Assigned(FOnPMSCommand) then
+        FOnPMSCommand(rPmsCmd);
+    end;
+
+    {$ENDREGION}
+
+    {$REGION ' PCS Section '}
 //    epPCSCtrlBackgroundLamp:
 //    begin
 //      rPCSCmd.CommandID := C_ORD_CTRL_BACKGROUND_LAMP;
@@ -394,156 +495,88 @@ begin
         FOnPCSCommand(rPCSCmd);
    end;
 
-    epPMSGeneratorMode, epPMSGeneratorState{, epPMSGeneratorRunningHours}:
-    begin
-      if Sender is TGenerator then
-        rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier
-      else if Sender is TSwitchboard then
-        rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
-
-      rPmsCmd.CommandPropsID   := PropsID;
-      rPmsCmd.ValueInt    := Value;
-      rPmsCmd.ValueKind   := 'integer';
-      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
-      if Assigned(FOnPMSCommand) then
-        FOnPMSCommand(rPmsCmd);
-    end;
-
-    epPMSPowerConsmr:
-    begin
-      rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier;
-      rPmsCmd.CommandPropsID   := PropsID;
-      rPmsCmd.ValueInt    := Value;
-      rPmsCmd.ValueKind   := 'integer';
-      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
-      if Assigned(FOnPMSCommand) then
-        FOnPMSCommand(rPmsCmd);
-    end;
+    {$ENDREGION}
   end;
 end;
 
-procedure TERSystem.ElementPropStrChange(Sender: TObject;
-  PropsID: E_PropsID; Value: String);
-begin
-
-end;
-
-procedure TERSystem.LogElementPropBoolChange(Sender: TObject;
-  PropsID: E_PropsID; Value: Boolean);
-var
-  s : String;
-begin
-
-  s := GetEnumName(TypeInfo(E_PropsID),integer(PropsID)) ;
-
-  if Sender is TEntity then
-    s := TEntity(Sender).Identifier + ':' + s + '->' + BoolToStr(Value,True)
-  else
-    s := Sender.ClassName + ':' + s + '->' + BoolToStr(Value,True);
-
-  LoggedProperties(s);
-end;
-
-procedure TERSystem.LogElementPropByteChange(Sender: TObject;
-  PropsID: E_PropsID; Value: Byte);
-var
-  s : String;
-begin
-
-  s := GetEnumName(TypeInfo(E_PropsID),integer(PropsID)) ;
-
-  if Sender is TEntity then
-    s := TEntity(Sender).Identifier + ':' + s + '->' + IntToStr(Value)
-  else
-    s := Sender.ClassName + ':' + s + '->' + IntToStr(Value);
-
-  LoggedProperties(s);
-end;
-
-procedure TERSystem.LogElementPropDblChange(Sender: TObject; PropsID: E_PropsID;
-  Value: Double);
-var
-  s : String;
-begin
-
-  s := GetEnumName(TypeInfo(E_PropsID),integer(PropsID)) ;
-
-  if Sender is TEntity then
-    s := TEntity(Sender).Identifier + ':' + s + '->' + FloatToStr(Value)
-  else
-    s := Sender.ClassName + ':' + s + '->' + FloatToStr(Value);
-
-  LoggedProperties(s);
-end;
-
-procedure TERSystem.LogElementPropIntChange(Sender: TObject; PropsID: E_PropsID;
-  Value: Integer);
-var
-  s : String;
-begin
-
-  s := GetEnumName(TypeInfo(E_PropsID),integer(PropsID)) ;
-
-  if Sender is TEntity then
-    s := TEntity(Sender).Identifier + ':' + s + '->' + IntToStr(Value)
-  else
-    s := Sender.ClassName + ':' + s + '->' + IntToStr(Value);
-
-  LoggedProperties(s);
-end;
-
-procedure TERSystem.LogElementPropStrChange(Sender: TObject; PropsID: E_PropsID;
-  Value: String);
-var
-  s : String;
-begin
-
-  s := GetEnumName(TypeInfo(E_PropsID),integer(PropsID)) ;
-
-  if Sender is TEntity then
-    s := TEntity(Sender).Identifier + ':' + s + '->' + Value
-  else
-    s := Sender.ClassName + ':' + s + '->' + Value;
-
-  LoggedProperties(s);
-end;
-
-procedure TERSystem.LoggedProperties(Value: String);
-begin
-
-  Inc(FNum);
-  value := IntToStr(FNum) + ' ' + FormatDateTime('hh:nn:ss:zzz',Now) + ' ' + Value;
-//  Writeln(FFile,Value);
-
-  try
-    Writeln(FFile,value);
-  finally
-  end;
-end;
-
-procedure TERSystem.ElementPropDblChange(Sender: TObject;
-  PropsID: E_PropsID; Value: Double);
+procedure TERSystem.ElementPropDblChange(Sender: TObject; PropsID: E_PropsID; Value: Double);
 var
   rPmsCmd : R_Common_PMS_Command;
   rPCSCmd : R_Common_PCS_Command;
   rTankCmd : R_Common_TANK_Command;
 begin
+  if not Assigned(Sender) then
+    Exit;
+
   case PropsID of
-    epPMSPower, epPMSFrequency, epPMSCurrent, epPMSCosPhi, epPMSVoltage, epPMSU,
-    epPMSV, epPMSW, epPMSTrafo115Volt, epPMSTrafo230Volt :
+    {$REGION ' PMS Section '}
+    epPMSFrequency, epPMSCurrent, epPMSVoltage:
     begin
+      rPmsCmd.GenSwitchID := '';
+
       if Sender is TGenerator then
         rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier
       else if Sender is TSwitchboard then
         rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
 
-      rPmsCmd.CommandPropsID   := PropsID;
-      rPmsCmd.ValueDob    := Value;
-      rPmsCmd.ValueKind   := 'double';
-//      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      if rPmsCmd.GenSwitchID <> '' then
+      begin
+        rPmsCmd.CommandPropsID   := PropsID;
+        rPmsCmd.ValueDob   := Value;
+        rPmsCmd.ValueKind   := 'double';
+
+        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      end;
+
       if Assigned(FOnPMSCommand) then
         FOnPMSCommand(rPmsCmd);
     end;
+
+    epPMSPowerConsmr, epPMSPower :
+    begin
+      rPmsCmd.GenSwitchID := '';
+
+      if Sender is TGenerator then
+        rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier
+      else if Sender is TSwitchboard then
+        rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
+
+      if rPmsCmd.GenSwitchID <> '' then
+      begin
+        rPmsCmd.CommandPropsID   := PropsID;
+        rPmsCmd.ValueDob   := Value;
+        rPmsCmd.ValueKind   := 'double';
+
+//        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      end;
+
+      if Assigned(FOnPMSCommand) then
+        FOnPMSCommand(rPmsCmd);
+    end;
+
+    epPMSCosPhi, epPMSU, epPMSV, epPMSW, epPMSTrafo115Volt, epPMSTrafo230Volt :
+    begin
+      rPmsCmd.GenSwitchID := '';
+
+      if Sender is TGenerator then
+        rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier
+      else if Sender is TSwitchboard then
+        rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
+
+      if rPmsCmd.GenSwitchID <> '' then
+      begin
+        rPmsCmd.CommandPropsID   := PropsID;
+        rPmsCmd.ValueDob   := Value;
+        rPmsCmd.ValueKind   := 'double';
+
+//        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      end;
+
+      if Assigned(FOnPMSCommand) then
+        FOnPMSCommand(rPmsCmd);
+    end;
+
+    {$ENDREGION}
 
     {Paket data dikirimkan ke Mimic dan PCS Panel}
     epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSCPPSetPointPitch, epPCSGBSetpShaftSpeed:
@@ -639,6 +672,104 @@ begin
       if Assigned(FOnTankCommand) then
         FOnTankCommand(rTankCmd);
     end;
+  end;
+end;
+
+procedure TERSystem.ElementPropByteChange(Sender: TObject; PropsID: E_PropsID; Value: Byte);
+begin
+
+end;
+
+procedure TERSystem.ElementPropStrChange(Sender: TObject; PropsID: E_PropsID; Value: String);
+begin
+
+end;
+
+procedure TERSystem.LogElementPropBoolChange(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
+var
+  s : String;
+begin
+
+  s := GetEnumName(TypeInfo(E_PropsID),integer(PropsID)) ;
+
+  if Sender is TEntity then
+    s := TEntity(Sender).Identifier + ':' + s + '->' + BoolToStr(Value,True)
+  else
+    s := Sender.ClassName + ':' + s + '->' + BoolToStr(Value,True);
+
+  LoggedProperties(s);
+end;
+
+procedure TERSystem.LogElementPropByteChange(Sender: TObject; PropsID: E_PropsID; Value: Byte);
+var
+  s : String;
+begin
+
+  s := GetEnumName(TypeInfo(E_PropsID),integer(PropsID)) ;
+
+  if Sender is TEntity then
+    s := TEntity(Sender).Identifier + ':' + s + '->' + IntToStr(Value)
+  else
+    s := Sender.ClassName + ':' + s + '->' + IntToStr(Value);
+
+  LoggedProperties(s);
+end;
+
+procedure TERSystem.LogElementPropDblChange(Sender: TObject; PropsID: E_PropsID; Value: Double);
+var
+  s : String;
+begin
+
+  s := GetEnumName(TypeInfo(E_PropsID),integer(PropsID)) ;
+
+  if Sender is TEntity then
+    s := TEntity(Sender).Identifier + ':' + s + '->' + FloatToStr(Value)
+  else
+    s := Sender.ClassName + ':' + s + '->' + FloatToStr(Value);
+
+  LoggedProperties(s);
+end;
+
+procedure TERSystem.LogElementPropIntChange(Sender: TObject; PropsID: E_PropsID; Value: Integer);
+var
+  s : String;
+begin
+
+  s := GetEnumName(TypeInfo(E_PropsID),integer(PropsID)) ;
+
+  if Sender is TEntity then
+    s := TEntity(Sender).Identifier + ':' + s + '->' + IntToStr(Value)
+  else
+    s := Sender.ClassName + ':' + s + '->' + IntToStr(Value);
+
+  LoggedProperties(s);
+end;
+
+procedure TERSystem.LogElementPropStrChange(Sender: TObject; PropsID: E_PropsID; Value: String);
+var
+  s : String;
+begin
+
+  s := GetEnumName(TypeInfo(E_PropsID),integer(PropsID)) ;
+
+  if Sender is TEntity then
+    s := TEntity(Sender).Identifier + ':' + s + '->' + Value
+  else
+    s := Sender.ClassName + ':' + s + '->' + Value;
+
+  LoggedProperties(s);
+end;
+
+procedure TERSystem.LoggedProperties(Value: String);
+begin
+
+  Inc(FNum);
+  value := IntToStr(FNum) + ' ' + FormatDateTime('hh:nn:ss:zzz',Now) + ' ' + Value;
+//  Writeln(FFile,Value);
+
+  try
+    Writeln(FFile,value);
+  finally
   end;
 end;
 

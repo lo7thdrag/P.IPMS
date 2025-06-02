@@ -272,8 +272,7 @@ begin
     Result := True;
 end;
 
-procedure TPMSSystem.SetFreqVoltValue(IdMsb: Integer; ValBus: Boolean; Valfreq,
-  Valvolt: Double);
+procedure TPMSSystem.SetFreqVoltValue(IdMsb: Integer; ValBus: Boolean; Valfreq, Valvolt: Double);
 begin
   Msb[IdMsb].Busbar := ValBus;
   Msb[IdMsb].Frequency := Valfreq;
@@ -886,132 +885,323 @@ begin
     end
   end;
 
-  {Saat Emergency Switchboard yang menyuply listrik}
+
   if EsbBusbar then
   begin
+    {$REGION ' Saat Emergency Switchboard yang menyuply listrik '}
+    Msb[2].Busbar := True;
+    Msb[2].Frequency := EsbFreq;
+    Msb[2].Voltage := EsbVolt;
+
     Msb[2].MsbCBNavNaut := True;
     Msb[0].MsbCBNavNaut := False;
 
-    if CekBusKoplerHandle(3,3) then {nyambung ke forward}
+    if CekBusKoplerHandle(3,4) then
     begin
-      SetFreqVoltValue(0, True, EsbFreq, EsbVolt);
-      SetFreqVoltValue(1, False, 0, 0);
+      {$REGION ' Cek apakah nyambung ke dua Msb '}
+      {Set MSB Forward}
+      Msb[0].Busbar := True;
+      Msb[0].Frequency := EsbFreq;
+      Msb[0].Voltage := EsbVolt;
+
+      SetSwitchFreqValue(0, 0, 1, True);
+
+      {Set MSB After}
+      Msb[1].Busbar := True;
+      Msb[1].Frequency := EsbFreq;
+      Msb[1].Voltage := EsbVolt;
+
+      SetSwitchFreqValue(1, 2, 3, True);
+      {$ENDREGION}
     end
-    else if CekBusKoplerHandle(3,1) then {nyambung ke after}
+    else if CekBusKoplerHandle(3,1) then
     begin
-      SetFreqVoltValue(1, True, EsbFreq, EsbVolt);
-      SetFreqVoltValue(0, False, 0, 0);
+      {$REGION ' Cek apakah nyambung ke after '}
+      Msb[1].Busbar := True;
+      Msb[1].Frequency := EsbFreq;
+      Msb[1].Voltage := EsbVolt;
+
+      SetSwitchFreqValue(1, 2, 3, True);
+
+      if CekBusKoplerHandle(1,0) then
+      begin
+        Msb[0].Busbar := True;
+        Msb[0].Frequency := EsbFreq;
+        Msb[0].Voltage := EsbVolt;
+
+        SetSwitchFreqValue(0, 0, 1, True);
+      end;
+
+      {$ENDREGION}
     end
-    else if CekBusKoplerHandle(3,4) then {nyambung ke dua Msb}
+    else if CekBusKoplerHandle(3,3) then
     begin
-      SetFreqVoltValue(0, True, EsbFreq, EsbVolt);
-      SetFreqVoltValue(1, True, EsbFreq, EsbVolt)
+      {$REGION ' Cek apakah nyambung ke forward '}
+
+      Msb[0].Busbar := True;
+      Msb[0].Frequency := EsbFreq;
+      Msb[0].Voltage := EsbVolt;
+
+      SetSwitchFreqValue(0, 0, 1, True);
+
+      if CekBusKoplerHandle(1,0) then
+      begin
+        Msb[1].Busbar := True;
+        Msb[1].Frequency := EsbFreq;
+        Msb[1].Voltage := EsbVolt;
+
+        SetSwitchFreqValue(1, 2, 3, True);
+      end;
+      {$ENDREGION}
     end
     else {mati}
     begin
-      SetFreqVoltValue(0, False, 0, 0);
-      SetFreqVoltValue(1, False, 0, 0);
+      Msb[0].Busbar := False;
+      Msb[0].Frequency := 0;
+      Msb[0].Voltage := 0;
+
+      SetSwitchFreqValue(0, 0, 1, False);
+
+      Msb[1].Busbar := False;
+      Msb[1].Frequency := 0;
+      Msb[1].Voltage := 0;
+
+      SetSwitchFreqValue(1, 2, 3, False);
     end;
+
+    SetSwitchFreqValue(2, 4, 4, True);
+
+    {$ENDREGION}
   end
   else
   begin
-    {BusKopler tertutup}
+    {$REGION ' Saat Main Switchboard yg menyuply listrik '}
+
     if CekBusKoplerHandle(1,0) then
     begin
-      {yg nyala 2}
+      {$REGION ' BusKopler tertutup, MSB Forward dan MSB After terhubung '}
+
       if (FwdBusbar and AftBusbar) then
       begin
-        SetFreqVoltValue(0, True, (FwdFreq + AftFreq)/ 2, (FwdVolt + AftVolt)/ 2);
-        SetFreqVoltValue(1, True, (FwdFreq + AftFreq)/ 2, (FwdVolt + AftVolt)/ 2);
+        {$REGION ' MSB Forward dan MSB After sama-sama menghasilkan listrik '}
+        {Set MSB Forward}
+        Msb[0].Busbar := True;
+        Msb[0].Frequency := (FwdFreq + AftFreq)/ 2;
+        Msb[0].Voltage := (FwdVolt + AftVolt)/ 2;
+
+        {Set MSB After}
+        Msb[1].Busbar := True;
+        Msb[1].Frequency := (FwdFreq + AftFreq)/ 2;
+        Msb[1].Voltage := (FwdVolt + AftVolt)/ 2;
+
+        {Set MSB Emergency}
+        if (CekBusKoplerHandle(3,3) or CekBusKoplerHandle(3,1))  then
+        begin
+          Msb[2].Busbar := True;
+          Msb[2].Frequency := (FwdFreq + AftFreq)/ 2;
+          Msb[2].Voltage := (FwdVolt + AftVolt)/ 2;
+
+          SetSwitchFreqValue(2, 4, 4, True);
+        end
+        else
+        begin
+          Msb[2].Busbar := False;
+          Msb[2].Frequency := 0;
+          Msb[2].Voltage := 0;
+
+          SetSwitchFreqValue(2, 4, 4, False);
+        end;
+        {$ENDREGION}
       end
-      {yg nyala fwd}
       else if FwdBusbar then
       begin
-        SetFreqVoltValue(0, True, FwdFreq, FwdVolt);
+        {$REGION ' Hanya MSB Forward yang menghasilkan listrik '}
+        {Set MSB Forward}
+        Msb[0].Busbar := True;
+        Msb[0].Frequency := FwdFreq;
+        Msb[0].Voltage := FwdVolt;
+
+        SetSwitchFreqValue(0, 0, 1, True);
 
         if (Msb[0].Busbar) and (Msb[0].MsbCircuitBreaker) then
         begin
           SetDelayConnection(2);
           if (Msb[1].MsbCircuitBreaker) then
           begin
-            SetFreqVoltValue(1, True, FwdFreq, FwdVolt);
+            {Set MSB After}
+            Msb[1].Busbar := True;
+            Msb[1].Frequency := FwdFreq;
+            Msb[1].Voltage := FwdVolt;
+
+            SetSwitchFreqValue(1, 2, 3, True);
+            AftToEsb := CekBusKoplerHandle(3,1);
           end;
         end;
+
+        FwdToEsb := CekBusKoplerHandle(3,3);
+
+        {Set MSB Emergency}
+        if (not AftToEsb) and (not FwdToEsb)  then
+        begin
+          Msb[2].Busbar := False;
+          Msb[2].Frequency := 0;
+          Msb[2].Voltage := 0;
+
+          SetSwitchFreqValue(2, 4, 4, False);
+        end
+        else
+        begin
+          Msb[2].Busbar := True;
+          Msb[2].Frequency := FwdFreq;
+          Msb[2].Voltage := FwdFreq;
+
+          SetSwitchFreqValue(2, 4, 4, True);
+        end;
+        {$ENDREGION}
       end
-      {yg nyala aft}
       else if AftBusbar then
       begin
-        SetFreqVoltValue(1, True, AftFreq, AftVolt);
+        {$REGION ' Hanya MSB After yang menghasilkan listrik '}
+        {Set MSB After}
+        Msb[1].Busbar := True;
+        Msb[1].Frequency := AftFreq;
+        Msb[1].Voltage := AftVolt;
+
+        SetSwitchFreqValue(1, 2, 3, True);
 
         if (Msb[1].Busbar) and (Msb[1].MsbCircuitBreaker) then
         begin
           SetDelayConnection(1);
           if (Msb[0].MsbCircuitBreaker) then
           begin
-            SetFreqVoltValue(0, True, AftFreq, AftVolt);
+            {Set MSB Forward}
+            Msb[0].Busbar := True;
+            Msb[0].Frequency := AftFreq;
+            Msb[0].Voltage := AftVolt;
+
+            SetSwitchFreqValue(0, 0, 1, True);
+
+            FwdToEsb := CekBusKoplerHandle(3,3);
           end;
         end;
+
+        AftToEsb := CekBusKoplerHandle(3,1);
+
+        {Set MSB Emergency}
+        if (not AftToEsb) and (not FwdToEsb)  then
+        begin
+          Msb[2].Busbar := False;
+          Msb[2].Frequency := 0;
+          Msb[2].Voltage := 0;
+
+          SetSwitchFreqValue(2, 4, 4, False);
+        end
+        else
+        begin
+          Msb[2].Busbar := True;
+          Msb[2].Frequency := FwdFreq;
+          Msb[2].Voltage := FwdFreq;
+
+          SetSwitchFreqValue(2, 4, 4, True);
+        end;
+        {$ENDREGION}
       end
-      {mati}
       else
       begin
-        SetFreqVoltValue(0, False, 0, 0);
-        SetFreqVoltValue(1, False, 0, 0);
+        {$REGION ' Keduanya tidak menghasilkan listrik '}
+        Msb[0].Busbar := False;
+        Msb[0].Frequency := 0;
+        Msb[0].Voltage := 0;
+        SetSwitchFreqValue(0, 0, 1, False);
+
+        Msb[1].Busbar := False;
+        Msb[1].Frequency := 0;
+        Msb[1].Voltage := 0;
+        SetSwitchFreqValue(1, 2, 3, False);
+
+        Msb[2].Busbar := False;
+        Msb[2].Frequency := 0;
+        Msb[2].Voltage := 0;
+
+        SetSwitchFreqValue(2, 4, 4, False);
+        {$ENDREGION}
       end;
+      {$ENDREGION}
     end
-    {BusKopler terbuka}
     else
     begin
+      {$REGION ' BusKopler terbuka, MSB Forward dan MSB After Tidak Terhubung '}
+
+      {$REGION ' MSB Forward '}
       if FwdBusbar then
-        SetFreqVoltValue(0, True, FwdFreq, FwdVolt)
-      else
-        SetFreqVoltValue(0, False, 0, 0);
+      begin
+        Msb[0].Busbar := True;
+        Msb[0].Frequency := FwdFreq;
+        Msb[0].Voltage := FwdVolt;
 
+        FwdToEsb := CekBusKoplerHandle(3,3);
+      end
+      else
+      begin
+        Msb[0].Busbar := False;
+        Msb[0].Frequency := 0;
+        Msb[0].Voltage := 0;
+      end;
+
+      SetSwitchFreqValue(0, 0, 1, FwdBusbar);
+      {$ENDREGION}
+
+      {$REGION ' MSB After '}
       if AftBusbar then
-        SetFreqVoltValue(1, True, AftFreq, AftVolt)
+      begin
+        Msb[1].Busbar := True;
+        Msb[1].Frequency := AftFreq;
+        Msb[1].Voltage := AftVolt;
+
+        AftToEsb := CekBusKoplerHandle(3,1);
+      end
       else
-        SetFreqVoltValue(1, False, 0, 0);
+      begin
+        Msb[1].Busbar := False;
+        Msb[1].Frequency := 0;
+        Msb[1].Voltage := 0;
+      end;
+
+      SetSwitchFreqValue(1, 2, 3, AftBusbar);
+      {$ENDREGION}
+
+      {$REGION ' MSB Emergency '}
+      if FwdToEsb  then
+      begin
+        Msb[2].Busbar := True;
+        Msb[2].Frequency := FwdFreq;
+        Msb[2].Voltage := FwdVolt;
+
+        SetSwitchFreqValue(2, 4, 4, True);
+      end
+      else if AftToEsb  then
+      begin
+        Msb[2].Busbar := True;
+        Msb[2].Frequency := AftFreq;
+        Msb[2].Voltage := AftVolt;
+
+        SetSwitchFreqValue(2, 4, 4, True);
+      end
+      else
+      begin
+        Msb[2].Busbar := False;
+        Msb[2].Frequency := 0;
+        Msb[2].Voltage := 0;
+
+        SetSwitchFreqValue(2, 4, 4, False);
+      end
+      {$ENDREGION}
+
+      {$ENDREGION}
     end;
+    {$ENDREGION}
   end;
 
-  if Msb[0].Busbar then
-  begin
-    SetSwitchFreqValue(0, 0, 1, True);
-    if CekBusKoplerHandle(3,3) then
-      FwdToEsb := True;
-  end
-  else
-    SetSwitchFreqValue(0, 0, 1, False);
-
-  if Msb[1].Busbar then
-  begin
-    SetSwitchFreqValue(1, 2, 3, True);
-    if CekBusKoplerHandle(3,1) then
-      AftToEsb := True;
-  end
-  else
-    SetSwitchFreqValue(1, 2, 3, False);
-
-  if EsbBusbar then
-  begin
-    SetFreqVoltValue(2, True, EsbFreq, EsbVolt);
-    SetSwitchFreqValue(2, 4, 4, True);
-  end
-  else if FwdToEsb then
-  begin
-    SetFreqVoltValue(2, True, FwdFreq, FwdVolt);
-    SetSwitchFreqValue(2, 4, 4, True);
-  end
-  else if AftToEsb then
-  begin
-    SetFreqVoltValue(2, True, AftFreq, AftVolt);
-    SetSwitchFreqValue(2, 4, 4, True);
-  end
-  else
-  begin
-    SetFreqVoltValue(2, False, 0, 0);
-    SetSwitchFreqValue(2, 4, 4, False);
-  end;
 end;
 
 function TPMSSystem.SetDelayConnection(IdBuskopler: integer): Boolean;

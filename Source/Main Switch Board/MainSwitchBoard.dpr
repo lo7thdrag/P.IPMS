@@ -30,8 +30,8 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
 
-  Setting   := TSetting.Create;
-  MainSwitchBoardSystem := TMainSwitchBoardSystem.Create;
+//  Setting   := TSetting.Create;
+//  MainSwitchBoardSystem := TMainSwitchBoardSystem.Create;
 
   Application.CreateForm(TfrmMainForm, frmMainForm);
 //  Application.CreateForm(TfrmGeneratorPanel, frmGeneratorPanel);

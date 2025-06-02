@@ -97,9 +97,9 @@ begin
   FIdFormGensys := inifile.ReadString('CONSOLE MAINSWITCHBOARD', tempstring[0],'GENSYS');
   FIdGenerator := inifile.ReadString('CONSOLE MAINSWITCHBOARD', tempstring[1],'Generator 1');
 
-  inifile.Free;
   tempstring.Free;
-end;
+  inifile.Free;
+end;
 
 procedure TMainSwitchBoardSystem.SetFreezed(const Value: boolean);
 var

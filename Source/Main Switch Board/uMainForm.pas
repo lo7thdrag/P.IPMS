@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, VrControls,
   VrRotarySwitch, RzBmpBtn, VrAngularMeter, Vcl.ExtCtrls,
 
-  uListener, uFreezeFrom, uDataType;
+  uSetting, uListener, uFreezeFrom, uDataType;
 
 type
   TfrmMainForm = class(TForm)
@@ -38,6 +38,9 @@ uses
 
 procedure TfrmMainForm.FormCreate(Sender: TObject);
 begin
+  Setting   := TSetting.Create;
+  MainSwitchBoardSystem := TMainSwitchBoardSystem.Create;
+
   FListener := TListeners.Create;
   with MainSwitchBoardSystem.Listener.Add('MAINSWITCHBOARD') as TPropertyEventListener do
   begin
@@ -50,6 +53,8 @@ end;
 procedure TfrmMainForm.FormDestroy(Sender: TObject);
 begin
   FListener.Free;
+  MainSwitchBoardSystem.Free;
+  Setting.Free;
 end;
 
 procedure TfrmMainForm.FormShow(Sender: TObject);
