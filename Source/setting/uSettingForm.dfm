@@ -30,10 +30,6 @@ object frmSetting: TfrmSetting
     Color = 3749682
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 274
-    ExplicitTop = 75
-    ExplicitWidth = 535
-    ExplicitHeight = 772
     object pnlPage: TPanel
       Left = 10
       Top = 15
@@ -1364,6 +1360,51 @@ object frmSetting: TfrmSetting
         TabOrder = 2
       end
     end
+    object pnlSave: TPanel
+      Left = 9
+      Top = 606
+      Width = 285
+      Height = 50
+      BevelOuter = bvNone
+      Color = 7960953
+      ParentBackground = False
+      TabOrder = 13
+      DesignSize = (
+        285
+        50)
+      object btnOK: TButton
+        Left = 41
+        Top = 13
+        Width = 100
+        Height = 23
+        Anchors = [akLeft, akBottom]
+        Caption = 'Save'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Berlin Sans FB'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = btnOKClick
+      end
+      object btnCancel: TButton
+        Left = 145
+        Top = 13
+        Width = 100
+        Height = 23
+        Anchors = [akLeft, akBottom]
+        Caption = 'Cancel'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Berlin Sans FB'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = btnCancelClick
+      end
+    end
   end
   object pnlHeader: TPanel
     Left = 0
@@ -1375,7 +1416,6 @@ object frmSetting: TfrmSetting
     Color = 3749426
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 885
     object img1: TImage
       Left = 0
       Top = 0
@@ -19899,8 +19939,6 @@ object frmSetting: TfrmSetting
     Color = clWhite
     ParentBackground = False
     TabOrder = 3
-    ExplicitTop = 73
-    ExplicitWidth = 1083
   end
   object pnlSparatorLeft: TPanel
     Left = 260
@@ -19912,9 +19950,6 @@ object frmSetting: TfrmSetting
     Color = clWhite
     ParentBackground = False
     TabOrder = 4
-    ExplicitLeft = 272
-    ExplicitTop = 75
-    ExplicitHeight = 772
   end
   object pnlRight: TPanel
     Left = 568
@@ -19926,7 +19961,6 @@ object frmSetting: TfrmSetting
     Color = 3749682
     ParentBackground = False
     TabOrder = 5
-    ExplicitLeft = 589
     object pnl3: TPanel
       Left = 9
       Top = 15
@@ -20694,9 +20728,6 @@ object frmSetting: TfrmSetting
     Color = clWhite
     ParentBackground = False
     TabOrder = 6
-    ExplicitLeft = 809
-    ExplicitTop = 75
-    ExplicitHeight = 772
   end
   object pnlFooter: TPanel
     Left = 0
@@ -20708,11 +20739,6 @@ object frmSetting: TfrmSetting
     Color = 3749426
     ParentBackground = False
     TabOrder = 7
-    ExplicitTop = 847
-    ExplicitWidth = 1083
-    DesignSize = (
-      828
-      40)
     object img6: TImage
       Left = 0
       Top = 0
@@ -20820,38 +20846,6 @@ object frmSetting: TfrmSetting
       ExplicitTop = 754
       ExplicitWidth = 272
       ExplicitHeight = 32
-    end
-    object btnOK: TButton
-      Left = 322
-      Top = 8
-      Width = 100
-      Height = 23
-      Anchors = [akLeft, akBottom]
-      Caption = 'Save'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Berlin Sans FB'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      OnClick = btnOKClick
-    end
-    object btnCancel: TButton
-      Left = 432
-      Top = 8
-      Width = 100
-      Height = 23
-      Anchors = [akLeft, akBottom]
-      Caption = 'Cancel'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Berlin Sans FB'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-      OnClick = btnCancelClick
     end
   end
 end

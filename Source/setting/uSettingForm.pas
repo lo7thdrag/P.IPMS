@@ -165,8 +165,6 @@ type
     pnlSparatorRight: TPanel;
     pnlFooter: TPanel;
     img6: TImage;
-    btnOK: TButton;
-    btnCancel: TButton;
     pnlMainEngine: TPanel;
     lbl59: TLabel;
     lbl60: TLabel;
@@ -206,6 +204,9 @@ type
     edtAppName: TEdit;
     edtAppName2: TEdit;
     edtAppName3: TEdit;
+    pnlSave: TPanel;
+    btnOK: TButton;
+    btnCancel: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -474,6 +475,8 @@ begin
     pnlRole.Left := 10;
     pnlRole.Top := 162;
 
+    pnlSave.Top := pnlRole.Top + pnlRole.Height + 5;
+
   end
   else if cbbConsoleSetting.Text = 'MIMIC KIRI' then
   begin
@@ -486,6 +489,8 @@ begin
     pnlRole.Left := 10;
     pnlRole.Top := 107;
 
+    pnlSave.Top := pnlRole.Top + pnlRole.Height + 5;
+
   end
   else if cbbConsoleSetting.Text = 'PCS KIRI' then
   begin
@@ -494,6 +499,8 @@ begin
 
     pnlPCS.Left := 10;
     pnlPCS.Top := 52;
+
+    pnlSave.Top := pnlPCS.Top + pnlPCS.Height + 5;
   end
   else if cbbConsoleSetting.Text = 'MIMIC TENGAH' then
   begin
@@ -508,6 +515,8 @@ begin
 
     pnlPCS.Left := 10;
     pnlPCS.Top := 162;
+
+    pnlSave.Top := pnlPCS.Top + pnlPCS.Height + 5;
   end
   else if cbbConsoleSetting.Text = 'PCS KANAN' then
   begin
@@ -525,6 +534,8 @@ begin
 
     pnlRole.Left := 10;
     pnlRole.Top := 107;
+
+    pnlSave.Top := pnlRole.Top + pnlRole.Height + 5;
   end
   else if cbbConsoleSetting.Text = 'EMERGENCY STOP' then
   begin
@@ -540,6 +551,8 @@ begin
     pnlDG.Left := 10;
     pnlDG.Top := 52;
 
+    pnlSave.Top := pnlDG.Top + pnlDG.Height + 5;
+
   end
   else if cbbConsoleSetting.Text = 'MAIN ENGINE' then
   begin
@@ -548,6 +561,8 @@ begin
 
     pnlMainEngine.Left := 10;
     pnlMainEngine.Top := 52;
+
+    pnlSave.Top := pnlMainEngine.Top + pnlMainEngine.Height + 5;
 
   end
   else if cbbConsoleSetting.Text = 'AUXILIARY' then
@@ -558,6 +573,8 @@ begin
     pnlAuxiliary.Left := 10;
     pnlAuxiliary.Top := 52;
 
+    pnlSave.Top := pnlAuxiliary.Top + pnlAuxiliary.Height + 5;
+
   end
   else if cbbConsoleSetting.Text = 'MAIN SWITCHBOARD' then
   begin
@@ -566,6 +583,8 @@ begin
 
     pnlMainSwitchBoard.Left := 10;
     pnlMainSwitchBoard.Top := 52;
+
+    pnlSave.Top := pnlMainSwitchBoard.Top + pnlMainSwitchBoard.Height + 5;
 
   end;
 end;
