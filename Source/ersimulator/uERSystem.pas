@@ -132,6 +132,9 @@ begin
   if not Assigned(Sender) then
     Exit;
 
+  FillChar(rPmsCmd, SizeOf(R_Common_PMS_Command), 0);
+  FillChar(rPCSCmd, SizeOf(R_Common_PCS_Command), 0);
+
   case PropsID of
 
     {$REGION ' PMS Section '}
@@ -214,7 +217,12 @@ begin
       rPmsCmd.GenSwitchID := '';
 
       if Sender is TSwitchboard then
-        rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
+      begin
+        if TSwitchboard(Sender).Identifier <> 'Emergency Generator'  then
+          rPmsCmd.GenSwitchID := ''
+        else
+          rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
+      end;
 
       if rPmsCmd.GenSwitchID <> '' then
       begin
@@ -385,6 +393,9 @@ begin
   if not Assigned(Sender) then
     Exit;
 
+  FillChar(rPmsCmd, SizeOf(R_Common_PMS_Command), 0);
+  FillChar(rPCSCmd, SizeOf(R_Common_PCS_Command), 0);
+
   case PropsID of
     {$REGION ' PMS Section '}
 //    epPMSPowerConsmr, epPMSPower :
@@ -508,6 +519,9 @@ begin
   if not Assigned(Sender) then
     Exit;
 
+  FillChar(rPmsCmd, SizeOf(R_Common_PMS_Command), 0);
+  FillChar(rPCSCmd, SizeOf(R_Common_PCS_Command), 0);
+
   case PropsID of
     {$REGION ' PMS Section '}
     epPMSFrequency, epPMSCurrent, epPMSVoltage:
@@ -578,6 +592,7 @@ begin
 
     {$ENDREGION}
 
+    {$REGION ' PCS Section '}
     {Paket data dikirimkan ke Mimic dan PCS Panel}
     epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSCPPSetPointPitch, epPCSGBSetpShaftSpeed:
     begin
@@ -672,6 +687,7 @@ begin
       if Assigned(FOnTankCommand) then
         FOnTankCommand(rTankCmd);
     end;
+    {$ENDREGION}
   end;
 end;
 
