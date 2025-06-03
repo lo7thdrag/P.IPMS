@@ -82,6 +82,7 @@ var pid: ^TPacketID;
     aSize: Word;
     IPSender : string;
     pLocBuff : PAnsiChar;
+    cnt: Integer;
 begin
   with FBuff.LockList do begin
 //    for i := Count-1 downto 0  do begin
@@ -91,7 +92,8 @@ begin
 //           FLogRecv(TimeStr + ' : Get Count Buffer = ' + IntToStr(Count));
 //      end;
 
-      Result := Count > 0;
+      cnt := Count;
+      Result := cnt > 0;
       if Result then
       begin
         pLocBuff  := Items[0];
@@ -146,7 +148,10 @@ begin
     pid := @pLocBuff^;
     pid^.recSize := aSize;
 
-    l.Add(pLocBuff);
+    if FRegProcs.IsHandled(pid.recID) then
+      l.Add(pLocBuff)
+    else
+      FreeMem(pLocBuff);
   finally
     FBuff.UnlockList;
   end;
