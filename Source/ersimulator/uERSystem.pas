@@ -189,7 +189,30 @@ begin
 
     end;
 
-    epPMSMsbCBShore, epPMSMsbCircuitBreaker, epPMSMsbCBNavNaut, epPMSMsbTripReduct :
+    epPMSMsbCBNavNaut :
+    begin
+      rPmsCmd.GenSwitchID := '';
+
+      if Sender is TGenerator then
+        rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier
+      else if Sender is TSwitchboard then
+        rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;
+
+      if rPmsCmd.GenSwitchID <> '' then
+      begin
+        rPmsCmd.CommandPropsID   := PropsID;
+        rPmsCmd.ValueBool   := Value;
+        rPmsCmd.ValueKind   := 'boolean';
+
+//        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+      end;
+
+      if Assigned(FOnPMSCommand) then
+        FOnPMSCommand(rPmsCmd);
+
+    end;
+
+    epPMSMsbCBShore, epPMSMsbCircuitBreaker, epPMSMsbTripReduct :
     begin
       rPmsCmd.GenSwitchID := '';
 
