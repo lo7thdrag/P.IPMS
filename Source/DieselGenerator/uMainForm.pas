@@ -45,6 +45,7 @@ type
     imgJWHeater: TImage;
     mpAlarm: TMediaPlayer;
     tmrRunningHours: TTimer;
+    tmrStop: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnLampTestMouseDown(Sender: TObject; Button: TMouseButton;
@@ -130,24 +131,20 @@ begin
       tmrRunningHours.Enabled   := Value;
 
       imgRunning.Visible        := Value;
-      imgJWHeater.Visible       := not Value;
-      imgGenSpaceHeater.Visible := not Value;
     end;
     epPMSGeneratorStop:
     begin
       imgStart.Visible          := not Value;
       imgStop.Visible           := Value;
-      tmrRunningHours.Enabled   := not Value;
+      tmrRunningHours.Enabled   := False;
+      tmrStop.Enabled           := True;
 
       imgRunning.Visible        := not Value;
-      imgJWHeater.Visible       := Value;
-      imgGenSpaceHeater.Visible := Value;
     end;
     epPMSMeasPowFailure :
     begin
       imgSupplyVoltageLow.Visible := Value;
 
-      imgStartDisable.Visible := Value;
       imgRunning.Visible      := not Value;
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
@@ -158,7 +155,6 @@ begin
     begin
       imgAutomaticStartFailed.Visible := Value;
 
-      imgStartDisable.Visible := Value;
       imgRunning.Visible      := not Value;
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
@@ -169,7 +165,6 @@ begin
     begin
       imgSpeedSensorFailure.Visible := Value;
 
-      imgStartDisable.Visible := Value;
       imgRunning.Visible      := not Value;
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
@@ -180,7 +175,6 @@ begin
     begin
       imgLubOilPressLow.Visible := Value;
 
-      imgStartDisable.Visible := Value;
       imgRunning.Visible      := not Value;
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
@@ -191,7 +185,6 @@ begin
     begin
       imgLubOilTempHigh.Visible := Value;
 
-      imgStartDisable.Visible := Value;
       imgRunning.Visible      := not Value;
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
@@ -202,7 +195,6 @@ begin
     begin
       imgCoolingWaterTempHigh.Visible := Value;
 
-      imgStartDisable.Visible := Value;
       imgRunning.Visible      := not Value;
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
@@ -213,7 +205,6 @@ begin
     begin
       imgCoolingWaterLevelLow.Visible := Value;
 
-      imgStartDisable.Visible := Value;
       imgRunning.Visible      := not Value;
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
@@ -224,7 +215,6 @@ begin
     begin
       imgFuelOilLeakage.Visible := Value;
 
-      imgStartDisable.Visible := Value;
       imgRunning.Visible      := not Value;
       imgStart.Visible        := not Value;
       btnStart.Enabled        := not Value;
@@ -301,12 +291,17 @@ end;
 
 procedure TMainForm.btnManualClick(Sender: TObject);
 begin
-  DieselGeneratorSystem.EngineMode(True);
+  DieselGeneratorSystem.EngineMode(1);
 end;
 
 procedure TMainForm.btnResetClick(Sender: TObject);
 begin
   imgReset.Visible := True;
+
+//  imgStart.Visible    := False;
+//  imgStop.Visible     := False;
+//  imgStandby.Visible  := False;
+//  imgManual.Visible   := False;
 
   imgSupplyVoltageLow.Visible     := False;
   imgAutomaticStartFailed.Visible := False;
@@ -316,6 +311,11 @@ begin
   imgCoolingWaterTempHigh.Visible := False;
   imgCoolingWaterLevelLow.Visible := False;
   imgFuelOilLeakage.Visible       := False;
+
+  imgShutdownOverSpeed.Visible  := False;
+  imgShutdownLOPressLow.Visible := False;
+  imgShutdownCWTempHigh.Visible := False;
+  imgShutDownSpare.Visible      := False;
 end;
 
 procedure TMainForm.btnSirenOffClick(Sender: TObject);
@@ -327,7 +327,7 @@ end;
 
 procedure TMainForm.btnStandbyClick(Sender: TObject);
 begin
-  DieselGeneratorSystem.EngineMode(False);
+  DieselGeneratorSystem.EngineMode(3);
 end;
 
 procedure TMainForm.btnStartClick(Sender: TObject);
@@ -362,6 +362,21 @@ begin
         MainForm.Enabled := True;
         if Assigned(DieselGeneratorSystem.FFormFreezed[1]) then
           FreeAndNil(DieselGeneratorSystem.FFormFreezed[1]);
+      end;
+    end;
+    epPMSGeneratorMode:
+    begin
+      if Value = 1 then
+      begin
+        btnStart.Enabled  := True;
+        imgManual.Visible := True;
+        imgStandby.Visible := False;
+      end
+      else if Value = 3 then
+      begin
+        btnStart.Enabled := False;
+        imgManual.Visible := False;
+        imgStandby.Visible := True;
       end;
     end;
 //    epPMSGeneratorRunningHours:

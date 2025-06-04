@@ -37,7 +37,7 @@ type
     {Prosedur untuk mengirimkan paket data dari inputan PCS Panel Touch Screen ke Engine}
     procedure EngineRun(aValue : Boolean);
     procedure EngineStop(aValue : Boolean);
-    procedure EngineMode(aValue : Boolean);
+    procedure EngineMode(aValue : Integer);
     {--}
 
     property Network : TDieselGeneratorNetwork read FDieselGeneratorNetwork;
@@ -115,13 +115,13 @@ begin
   end;
 end;
 
-procedure TDieselGeneratorSystem.EngineMode(aValue: Boolean);
+procedure TDieselGeneratorSystem.EngineMode(aValue: Integer);
 var
   recCmd : R_Common_PMS_Command;
 begin
   recCmd.GenSwitchID := IdConsole;
-  recCmd.CommandPropsID := epPMSNotStandby;
-  recCmd.ValueBool := aValue;
+  recCmd.CommandPropsID := epPMSGeneratorMode;
+  recCmd.ValueInt := aValue;
 
   Network.DieselGeneratorControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
 end;
@@ -184,6 +184,10 @@ begin
     epPMSSpeedSensorFailureShutdown, epPMSLubOilPressLowShutdown, epPMSCoolWaterTempHighShutdown:
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
+    end;
+    epPMSGeneratorMode:
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
     end;
 //    epPMSGeneratorRunningHours:
 //    begin

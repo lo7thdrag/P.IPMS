@@ -7,6 +7,7 @@ object MainForm: TMainForm
   ClientHeight = 768
   ClientWidth = 1024
   Color = clBtnFace
+  DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -10025,6 +10026,7 @@ object MainForm: TMainForm
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+    Transparent = True
   end
   object imgGenSpaceHeater: TImage
     Left = 789
@@ -10820,7 +10822,12 @@ object MainForm: TMainForm
     Enabled = False
     Interval = 25
     OnTimer = tmrRunningHoursTimer
-    Left = 248
-    Top = 648
+    Left = 224
+    Top = 592
+  end
+  object tmrStop: TTimer
+    Interval = 5000
+    Left = 632
+    Top = 152
   end
 end
