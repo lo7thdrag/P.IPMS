@@ -99,19 +99,20 @@ begin
     2: {kiriman dari Emergency n blackout}
     begin
       {di false kan dulu semua}
-      Msb[2].EsbCircuitBreaker  := False;
-//      Msb[2].EsbFwdCBIntr  := False;
+      if Msb[2].ESBInterconnectionMode <> IdIntrMode then
+      begin
+        Msb[2].EsbCircuitBreaker  := False;
 
-      {mode 4 : smua EsbCB tertutup}
-      if IdIntrMode = 0 then
-        Msb[2].ESBInterconnectionMode := 1
-      else if IdIntrMode = 4 then
-        Msb[2].ESBInterconnectionMode := 4
-      else
-        Msb[2].ESBInterconnectionMode := 3;
+        {mode 4 : smua EsbCB tertutup}
+        if IdIntrMode = 0 then
+          Msb[2].ESBInterconnectionMode := 1
+        else if IdIntrMode = 4 then
+          Msb[2].ESBInterconnectionMode := 4
+        else
+          Msb[2].ESBInterconnectionMode := 3;
 
-      Msb[2].EsbCircuitBreaker := True;
-//      Msb[2].EsbFwdCBIntr := True;
+        Msb[2].EsbCircuitBreaker := True;
+      end;
     end;
     3: {U/ mengecek koneksi MSB dgn ESB}
     begin
@@ -236,7 +237,7 @@ end;
 
 function TPMSSystem.SetDGStartHandle(DGUpLimit, DGLowLimit: Integer): Boolean ;
 var
-  i : Integer;
+  i, j : Integer;
 begin
   Result:= False;
   {Menyalakan DG}
@@ -249,8 +250,14 @@ begin
     begin
       Gen[i].EmergencyStart := True;
       Gen[i].EngineRun := True;
-      Result := True;
+
+      {digunakan untuk mendelay saja}
+      for j := 0 to 1000 do
+      begin
+        Result := True;
+      end;
     end;
+
   end;
 end;
 
@@ -297,8 +304,7 @@ begin
   result := Entities.Get(aIdent) as TSwitchboard;
 end;
 
-procedure TPMSSystem.GetVariablePMS(var aStateRunFull,
-  aStateRunFwd, aStateRunAft: Integer);
+procedure TPMSSystem.GetVariablePMS(var aStateRunFull, aStateRunFwd, aStateRunAft: Integer);
 begin
   aStateRunFull := FStateRunFull;
   aStateRunFwd := FStateRunFwd;
@@ -480,14 +486,14 @@ begin
     {jk tdk ada DG pre alaram maka blackout}
     else
     begin
-      if (Msb[0].Voltage > 0) or (Msb[1].Voltage > 0) then
-      begin
-        for i := DGLowLimit to DGUpLimit do
-        begin
-          SetDGOff(i);
-        end;
-        Exit;
-      end;
+//      if (Msb[0].Voltage > 0) or (Msb[1].Voltage > 0) then
+//      begin
+//        for i := DGLowLimit to DGUpLimit do
+//        begin
+//          SetDGOff(i);
+//        end;
+//        Exit;
+//      end;
 
       setBlackOut(IdMode, DGUpLimit, DGLowLimit, MSBUpLimit, MSBLowLimit);
     end;
@@ -615,12 +621,19 @@ end;
 
 procedure TPMSSystem.setBlackOut(IdMode : E_ModeID; DGUpLimit, DGLowLimit, MSBUpLimit, MSBLowLimit: Integer);
 var
-  i, j : Integer;
+  i, j, k : Integer;
 begin
   {Mematikan semua DG yg terhubung ke MSB}
   for i := DGLowLimit to DGUpLimit do
   begin
     SetDGOff(i);
+
+    {Hanya untuk dellay saja, variabel ini tidak ngefek apa2}
+    for k := 0 to 1000 do
+    begin
+      Msb[2].EmergencyCon := True;
+    end;
+
   end;
 
   {Memutus power yg masuk ke MSB}
@@ -766,8 +779,7 @@ begin
   end;
 end;
 
-procedure TPMSSystem.SetVariablePMS(aFirstLoad: Boolean; aStateRunFull,
-  aStateRunFwd, aStateRunAft: Integer);
+procedure TPMSSystem.SetVariablePMS(aFirstLoad: Boolean; aStateRunFull, aStateRunFwd, aStateRunAft: Integer);
 begin
   FIsFirstLoad := aFirstLoad;
   FStateRunFull := aStateRunFull;
@@ -1248,17 +1260,18 @@ procedure TPMSSystem.SetDGOff(IdGen: Integer);
 begin
   if (Gen[IdGen].GeneratorSupplied and Gen[IdGen].CBClosed) then
   begin
-    Gen[IdGen].EngineRun := False;
-    Gen[IdGen].CBClosed := False;
-    Gen[IdGen].GeneratorSupplied := False;
-    Gen[IdGen].Preference := False;
-    Gen[IdGen].GeneratorState := Ord(gsWaiting);//1;
-    Gen[IdGen].Busbar := False;
-    Gen[IdGen].Power := 0;
-    Gen[IdGen].Voltage := 0;
-    Gen[IdGen].Frequency := 0;
-    Gen[IdGen].Current := 0;
-    Gen[IdGen].CosPhi  := 0;
+    Gen[IdGen].EmergencyStopGenerator;
+//    Gen[IdGen].EngineRun := False;
+//    Gen[IdGen].CBClosed := False;
+//    Gen[IdGen].GeneratorSupplied := False;
+//    Gen[IdGen].Preference := False;
+//    Gen[IdGen].GeneratorState := Ord(gsWaiting);//1;
+//    Gen[IdGen].Busbar := False;
+//    Gen[IdGen].Power := 0;
+//    Gen[IdGen].Voltage := 0;
+//    Gen[IdGen].Frequency := 0;
+//    Gen[IdGen].Current := 0;
+//    Gen[IdGen].CosPhi  := 0;
   end;
 end;
 

@@ -35,7 +35,7 @@ begin
 
   SysMimics.Network.StartNetwork;
   PCSSystem.Network.StartNetwork;
-  DieselGeneratorSystem.Network.StartNetwork;
+//  DieselGeneratorSystem.Network.StartNetwork;
 end;
 
 procedure StopNetwork;
@@ -45,7 +45,7 @@ begin
   CtrlSystem.Network.StopNetwork;
   SysMimics.Network.StopNetwork;
   PCSSystem.Network.StopNetwork;
-  DieselGeneratorSystem.Network.StopNetwork;
+//  DieselGeneratorSystem.Network.StopNetwork;
 end;
 
 procedure BeginSimulation;
@@ -70,8 +70,8 @@ begin
   {PCS System }
   PCSSystem := TPCSSystem.Create;
 
-  {PMS System }
-  DieselGeneratorSystem := TDieselGeneratorSystem.Create;
+//  {PMS System }
+//  DieselGeneratorSystem := TDieselGeneratorSystem.Create;
 
   { instructor system }
   InstructorSys := TInstructorSystem.Create(FDatabase);
@@ -84,7 +84,7 @@ begin
 
   InstructorSys.Free;
   PCSSystem.Free;
-  DieselGeneratorSystem.Free;
+//  DieselGeneratorSystem.Free;
   CtrlSystem.Free;
   ERSystem.Free;
   SysMimics.Free;

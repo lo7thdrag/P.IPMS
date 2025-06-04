@@ -144,7 +144,7 @@ type
     procedure StopGenerator(const aDt : Double);
     procedure StateOnGenerator(const aDt : Double);
     procedure StateOffGenerator(const aDt : Double);
-    procedure EmergencyStopGenerator(const aDt : Double);
+    procedure EmergencyStopGenerator;
 
 
     property Power : Double read FPower write SetPower;
@@ -330,12 +330,12 @@ begin
   begin
     {detik ke 1}
     Frequency := 6000;
-    Voltage   := (random(10)+ 247);
+    Voltage   := 247; //(random(10)+ 247);
   end
   else if FEmergencyStartState = 20 then
   begin
     {detik ke 2}
-    Voltage := (VoltageMax/2) + random(2);
+    Voltage := (VoltageMax/2);
     CosPhi := 81;
 
     SetUVW(52, 53, 49);
@@ -350,7 +350,7 @@ begin
     if (GeneratorMode = 3) and (not FailureCBClosed) then
       CBClosed := True;
 
-    Voltage := VoltageMax + random(2);
+    Voltage := VoltageMax;
 
     FrequencyState  := Frequency;
     VoltageState    := Voltage;
@@ -369,7 +369,7 @@ begin
   end;
 end;
 
-procedure TGenerator.EmergencyStopGenerator(const aDt : Double);
+procedure TGenerator.EmergencyStopGenerator;
 begin
   EngineRun := False;
   GeneratorSupplied := False;
@@ -378,11 +378,11 @@ begin
   FailureCBClosed := False;
   GeneratorState := Ord(gsWaiting);//1;
 //  Busbar := False;
-  Power := 0;
-  Voltage := 0;
-  Frequency := 0;
-  Current := 0;
-  CosPhi  := 0;
+  FPower := 0;
+  FVoltage := 0;
+  FFrequency := 0;
+  FCurrent := 0;
+  FCosPhi  := 0;
 
   SetUVW(54, 57, 56);
 end;
@@ -406,17 +406,17 @@ begin
     begin
       if Voltage < 247 then
       begin
-        GeneratorState := Ord(gsWarmUp);//2;{Warm Up}
+        GeneratorState := Ord(gsWarmUp);
         CosPhi := 0;
         Frequency := 5815;
-        Voltage := (random(10)+ 247);
+        Voltage := 247; //(random(10)+ 247);
 
         SetUVW(32, 31, 32);
       end
       else
       begin
         {set naik nilai Voltage}
-        tempVolt := Voltage + (random(10)+ 50);
+        tempVolt := Voltage + 50; //Voltage + (random(10)+ 50);
 
         if tempVolt < VoltageMax  then
         begin
@@ -425,20 +425,20 @@ begin
         end
         else
         begin
-          GeneratorState := 4;{Engine Ready}
+          GeneratorState := Ord(gsEngineReady);{Engine Ready}
           Frequency := 5965;
           Voltage := VoltageMax;
-          if (CosPhi + (random(4)+ 10)) < 81 then
-            CosPhi  := CosPhi + (random(4)+ 10);
+          if (CosPhi + 10) < 81 then
+            CosPhi  := CosPhi + 10;
         end;
       end;
     end
     else
     begin
-      GeneratorState := Ord(gsGenReady);//5; {Gen Ready}
+      GeneratorState := Ord(gsGenReady); {Gen Ready}
       GeneratorSupplied := True;
 
-      Voltage := VoltageMax + random(2);
+      Voltage := VoltageMax;
 
       FrequencyState  := Frequency;
       VoltageState    := Voltage;
@@ -583,7 +583,7 @@ begin
 
   if EmergencyStop or DCPowFailure then
   begin
-    EmergencyStopGenerator(aDt);
+    EmergencyStopGenerator;
     exit;
   end;
 
@@ -594,12 +594,12 @@ begin
   begin
     RunHourState := True;
 
-    FRunningHourTemp := FRunningHourTemp + 1;
-    if FRunningHourTemp > 25 then
-    begin
-      FRunningHourTemp := 0;
-      RunningHour := RunningHour + 1;
-    end;
+//    FRunningHourTemp := FRunningHourTemp + 1;
+//    if FRunningHourTemp > 25 then
+//    begin
+//      FRunningHourTemp := 0;
+//      RunningHour := RunningHour + 1;
+//    end;
 
     if (not GeneratorSupplied) then
     begin
@@ -668,13 +668,13 @@ begin
 
       if Current > 75 then
       begin
-        Current := Current  - (random(5)+ 20);
-        if (Power - (random(5)+ 10)) < 0 then
+        Current := Current - 20;//Current  - (random(5)+ 20);
+        if (Power - 10) < 0 then //if (Power - (random(5)+ 10)) < 0 then
           Power := 0
         else
-          Power   := Power - (random(5)+ 10);
+          Power   := Power - 10; //Power   := Power - (random(5)+ 10);
 
-        CosPhi  := CosPhi   - (random(4)+ 10);
+        CosPhi  := CosPhi   - 10; //CosPhi  := CosPhi   - (random(4)+ 10);
         exit;
       end
       else
@@ -684,10 +684,10 @@ begin
         Current := 0;
         CosPhi :=0;
 
-        if (Frequency  - (random(5)+ 10)*100) > 1000 then
+        if (Frequency  - 1000) > 1000 then //if (Frequency  - (random(5)+ 10)*100) > 1000 then
         begin
-          Frequency := Frequency  - (random(5)+ 10)*100;
-          Voltage   := Voltage    - (random(5)+ 80);
+          Frequency := Frequency  - 1000; //(random(5)+ 10)*100;
+          Voltage   := Voltage    - 80; //(random(5)+ 80);
           exit;
         end
         else
@@ -798,6 +798,8 @@ end;
 
 procedure TGenerator.SetEmergencyStart(const Value: Boolean);
 begin
+  if FEmergencyStart = Value then
+    exit;
   FEmergencyStart := Value;
 end;
 
@@ -973,7 +975,7 @@ begin
   begin
     if FStateOnDelay > 1 then
     begin
-      flag := Power + (random(3) + 20);
+      flag := Power + 20;//(random(3) + 20);
 
       if (flag < PowerState) then
         Power   := flag
@@ -988,7 +990,7 @@ begin
   begin
     if FStateOnDelay > 1 then
     begin
-      flag := Power - (random(3) + 20);
+      flag := Power - 20;//(random(3) + 20);
       if (flag > PowerState) then
         Power   := flag
       else
@@ -1008,18 +1010,18 @@ begin
 
       if ( Round(FStateOnDelay) mod 2 = 0) then
       begin
-        Frequency := FrequencyState + (random(3)+ (-1))*10;
-        Voltage := VoltageState  + random(2) + (-1);
+        Frequency := FrequencyState;// + (random(3)+ (-1))*10;
+        Voltage := VoltageState;//  + random(2) + (-1);
       end;
 
       if (Round(FStateOnDelay) mod 5 = 0) then
       begin
-        Power   := PowerState + random(2) + (-1);
+        Power   := PowerState;// + random(2) + (-1);
         if Power < 0 then
           Power := 0;
 
         Current   := 4/3 * Power;
-        CosPhi  := 81 + random(2) + (-1);
+        CosPhi  := 81;// + random(2) + (-1);
       end;
     end
     else

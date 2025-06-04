@@ -3,12 +3,14 @@ unit uMainSwitchBoardSystem;
 interface
 
 uses uMainSwitchBoardNetwork, uListener, uTCPClient, uDataType, ExtCtrls, uFreezeFrom, SysUtils,
-  Forms, IniFiles, Classes;
+  Forms, IniFiles, Classes, typinfo;
 
 type
 
   TMainSwitchBoardSystem = class
   private
+    T:TextFile;
+    FN:string;
 
     FMainSwitchBoardNetwork  : TMainSwitchBoardNetwork;
     FLIstener    : TListeners;
@@ -16,6 +18,8 @@ type
 
     FIdFormGensys : String;
     FIdGenerator : String;
+
+    procedure CreateLogFile;
 
     procedure NetworkEventAssignment;
 
@@ -71,6 +75,16 @@ begin
 
   FMainSwitchBoardNetwork.StartNetwork;
 
+end;
+
+procedure TMainSwitchBoardSystem.CreateLogFile;
+begin
+  FN := ChangeFileExt('TulisLog', '.log');
+  AssignFile(T, FN);
+  Rewrite(T);
+  Append(T);
+  Writeln(T,'BreakingLine');
+  CloseFile(T);
 end;
 
 destructor TMainSwitchBoardSystem.Destroy;
@@ -214,6 +228,25 @@ var
 begin
 
   rec := @apRec^;
+  {Tambahan}
+  FN := ChangeFileExt('TulisLog', '.log');
+  if not FileExists(FN) then
+  begin
+    CreateLogFile
+  end;
+
+  AssignFile(T, FN);
+  Append(T);
+  Writeln(T, (rec.pid.recID));
+  Writeln(T, (rec.GenSwitchID));
+  Writeln(T, (GetEnumName(typeInfo(E_PropsID ), Ord(rec.CommandPropsID))));
+  Writeln(T, 'Kind : ', rec.ValueKind);
+  Writeln(T, 'Bool : ', BoolToStr(rec.ValueBool, True));
+  Writeln(T, 'Int : ', rec.ValueInt.ToString);
+  Writeln(T, 'Double : ', rec.ValueDob.ToString);
+  Writeln(T, '---');
+  CloseFile(T);
+  {Tambahan}
 
   if FIdGenerator <> rec.GenSwitchID then
     Exit;

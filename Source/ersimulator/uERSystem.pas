@@ -212,13 +212,13 @@ begin
 
     end;
 
-    epPMSEsbCBIntr, epPMSEsbFwdCBIntr :
+    epPMSEsbCBIntr :
     begin
       rPmsCmd.GenSwitchID := '';
 
       if Sender is TSwitchboard then
       begin
-        if TSwitchboard(Sender).Identifier <> 'Emergency Generator'  then
+        if TSwitchboard(Sender).Identifier <> 'Switchboard Emergency'  then
           rPmsCmd.GenSwitchID := ''
         else
           rPmsCmd.GenSwitchID := TSwitchboard(Sender).Identifier;

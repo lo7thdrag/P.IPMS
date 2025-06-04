@@ -185,7 +185,7 @@ begin
   if FIsEmergencyCon = Value then
     exit;
   FIsEmergencyCon := Value;
-  Listener.TriggerEvents(Self,epPMSEmergencyCon,Value);
+//  Listener.TriggerEvents(Self,epPMSEmergencyCon,Value);
 end;
 
 procedure TSwitchboard.SetEsbCBIntr(const Value: Boolean);
