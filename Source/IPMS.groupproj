@@ -60,10 +60,16 @@
         <Projects Include="Auxilary\Auxilary.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Main Engine 1\MainEngine1.dproj">
+        <Projects Include="Main Engine 1 PS\MainEngine1PS.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Main Engine 2\MainEngine2.dproj">
+        <Projects Include="Main Engine 2 PS\MainEngine2PS.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Main Engine 1 SB\MainEngine1SB.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Main Engine 2 SB\MainEngine2SB.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -245,32 +251,50 @@
     <Target Name="Auxilary:Make">
         <MSBuild Projects="Auxilary\Auxilary.dproj" Targets="Make"/>
     </Target>
-    <Target Name="MainEngine1">
-        <MSBuild Projects="Main Engine 1\MainEngine1.dproj"/>
+    <Target Name="MainEngine1PS">
+        <MSBuild Projects="Main Engine 1 PS\MainEngine1PS.dproj"/>
     </Target>
-    <Target Name="MainEngine1:Clean">
-        <MSBuild Projects="Main Engine 1\MainEngine1.dproj" Targets="Clean"/>
+    <Target Name="MainEngine1PS:Clean">
+        <MSBuild Projects="Main Engine 1 PS\MainEngine1PS.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="MainEngine1:Make">
-        <MSBuild Projects="Main Engine 1\MainEngine1.dproj" Targets="Make"/>
+    <Target Name="MainEngine1PS:Make">
+        <MSBuild Projects="Main Engine 1 PS\MainEngine1PS.dproj" Targets="Make"/>
     </Target>
-    <Target Name="MainEngine2">
-        <MSBuild Projects="Main Engine 2\MainEngine2.dproj"/>
+    <Target Name="MainEngine2PS">
+        <MSBuild Projects="Main Engine 2 PS\MainEngine2PS.dproj"/>
     </Target>
-    <Target Name="MainEngine2:Clean">
-        <MSBuild Projects="Main Engine 2\MainEngine2.dproj" Targets="Clean"/>
+    <Target Name="MainEngine2PS:Clean">
+        <MSBuild Projects="Main Engine 2 PS\MainEngine2PS.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="MainEngine2:Make">
-        <MSBuild Projects="Main Engine 2\MainEngine2.dproj" Targets="Make"/>
+    <Target Name="MainEngine2PS:Make">
+        <MSBuild Projects="Main Engine 2 PS\MainEngine2PS.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MainEngine1SB">
+        <MSBuild Projects="Main Engine 1 SB\MainEngine1SB.dproj"/>
+    </Target>
+    <Target Name="MainEngine1SB:Clean">
+        <MSBuild Projects="Main Engine 1 SB\MainEngine1SB.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MainEngine1SB:Make">
+        <MSBuild Projects="Main Engine 1 SB\MainEngine1SB.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MainEngine2SB">
+        <MSBuild Projects="Main Engine 2 SB\MainEngine2SB.dproj"/>
+    </Target>
+    <Target Name="MainEngine2SB:Clean">
+        <MSBuild Projects="Main Engine 2 SB\MainEngine2SB.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MainEngine2SB:Make">
+        <MSBuild Projects="Main Engine 2 SB\MainEngine2SB.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="EmergencyStop;PanelThrottle;AlarmRudder;pcsUI;ACS;IPMSLoader;instructor;ERSimulator;IPMSComponent;controller;setting;Mimics;TrendChart;DieselGenerator;MCRMachineLeft;MCRMachineRight;GeneratorPanel;MainSwitchBoard;Auxilary;MainEngine1;MainEngine2"/>
+        <CallTarget Targets="EmergencyStop;PanelThrottle;AlarmRudder;pcsUI;ACS;IPMSLoader;instructor;ERSimulator;IPMSComponent;controller;setting;Mimics;TrendChart;DieselGenerator;MCRMachineLeft;MCRMachineRight;GeneratorPanel;MainSwitchBoard;Auxilary;MainEngine1PS;MainEngine2PS;MainEngine1SB;MainEngine2SB"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="EmergencyStop:Clean;PanelThrottle:Clean;AlarmRudder:Clean;pcsUI:Clean;ACS:Clean;IPMSLoader:Clean;instructor:Clean;ERSimulator:Clean;IPMSComponent:Clean;controller:Clean;setting:Clean;Mimics:Clean;TrendChart:Clean;DieselGenerator:Clean;MCRMachineLeft:Clean;MCRMachineRight:Clean;GeneratorPanel:Clean;MainSwitchBoard:Clean;Auxilary:Clean;MainEngine1:Clean;MainEngine2:Clean"/>
+        <CallTarget Targets="EmergencyStop:Clean;PanelThrottle:Clean;AlarmRudder:Clean;pcsUI:Clean;ACS:Clean;IPMSLoader:Clean;instructor:Clean;ERSimulator:Clean;IPMSComponent:Clean;controller:Clean;setting:Clean;Mimics:Clean;TrendChart:Clean;DieselGenerator:Clean;MCRMachineLeft:Clean;MCRMachineRight:Clean;GeneratorPanel:Clean;MainSwitchBoard:Clean;Auxilary:Clean;MainEngine1PS:Clean;MainEngine2PS:Clean;MainEngine1SB:Clean;MainEngine2SB:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="EmergencyStop:Make;PanelThrottle:Make;AlarmRudder:Make;pcsUI:Make;ACS:Make;IPMSLoader:Make;instructor:Make;ERSimulator:Make;IPMSComponent:Make;controller:Make;setting:Make;Mimics:Make;TrendChart:Make;DieselGenerator:Make;MCRMachineLeft:Make;MCRMachineRight:Make;GeneratorPanel:Make;MainSwitchBoard:Make;Auxilary:Make;MainEngine1:Make;MainEngine2:Make"/>
+        <CallTarget Targets="EmergencyStop:Make;PanelThrottle:Make;AlarmRudder:Make;pcsUI:Make;ACS:Make;IPMSLoader:Make;instructor:Make;ERSimulator:Make;IPMSComponent:Make;controller:Make;setting:Make;Mimics:Make;TrendChart:Make;DieselGenerator:Make;MCRMachineLeft:Make;MCRMachineRight:Make;GeneratorPanel:Make;MainSwitchBoard:Make;Auxilary:Make;MainEngine1PS:Make;MainEngine2PS:Make;MainEngine1SB:Make;MainEngine2SB:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
