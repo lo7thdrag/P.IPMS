@@ -985,12 +985,12 @@ begin
         begin
           if Value then
           begin
-             FFlashingClutchPS := True;
+             FFlashingClutchPS   := True;
              FFlashingDeclutchPS := False;
           end
           else
           begin
-            FFlashingClutchPS := False;
+            FFlashingClutchPS   := False;
             FFlashingDeclutchPS := True;
           end;
         end;
@@ -1006,16 +1006,76 @@ begin
         epPCSCtrlMCR:
         begin
           if Value then
-            vrtryswtchRemotePS.SwitchPosition := 1
+            vrtryswtchRemoteSB.SwitchPosition := 1
           else
-            vrtryswtchRemotePS.SwitchPosition := 0;
+            vrtryswtchRemoteSB.SwitchPosition := 0;
         end;
         epPCSCtrlLocal:
         begin
           if Value then
-            vrtryswtchRemotePS.SwitchPosition := 0
+            vrtryswtchRemoteSB.SwitchPosition := 0
           else
-            vrtryswtchRemotePS.SwitchPosition := 1;
+            vrtryswtchRemoteSB.SwitchPosition := 1;
+        end;
+        epPCSMEPreStart :
+        begin
+          if Value then
+            vrtryswtchPreStartSB.SwitchPosition := 0
+          else
+            vrtryswtchPreStartSB.SwitchPosition := 1;
+        end;
+        epPCSMERunning :
+        begin
+          if Value then
+          begin
+            FFlashingStartSB := False;
+            FFlashingStopSB  := True;
+            img18.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
+          end
+          else
+          begin
+            FFlashingStartSB := True;
+            FFlashingStopSB  := False;
+            img18.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
+          end;
+        end;
+        epPCSGBClutchAllowed :
+        begin
+          if Value then
+              img21.Picture.LoadFromFile(fAlarmIndicatorGreenOn)
+          else
+              img21.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
+        end;
+        epPCSMEAirValve :
+        begin
+          if Value then
+            img1.Picture.LoadFromFile(fAlarmIndicatorBlueOn)
+          else
+            img1.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+        end;
+        epPCSMEGasValve :
+        begin
+          if Value then
+            img2.Picture.LoadFromFile(fAlarmIndicatorBlueOn)
+          else
+            img2.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+        end;
+        epPCSGBClutchEngaged :
+        begin
+          if Value then
+          begin
+             FFlashingClutchSB   := True;
+             FFlashingDeclutchSB := False;
+          end
+          else
+          begin
+            FFlashingClutchSB   := False;
+            FFlashingDeclutchSB := True;
+          end;
+        end;
+        epPCSLeverEmergencyStop :
+        begin
+           main_engine_PS.EmergencyStop := True;
         end;
       end;
     {$ENDREGION}
@@ -1043,6 +1103,19 @@ begin
         epPCSMESTCInManual :
         begin
           vrtryswtchSTC_PS.SwitchPosition := Value;
+        end;
+      end;
+    end
+    else if TMainEngine(Sender).Identifier = 'Main Engine SB' then
+    begin
+      case PropsID of
+        epPCSSpeedState :
+        begin
+          vrtryswtchSpeedSB.SwitchPosition := Value;
+        end;
+        epPCSMESTCInManual :
+        begin
+          vrtryswtchSTC_SB.SwitchPosition := Value;
         end;
       end;
     end;

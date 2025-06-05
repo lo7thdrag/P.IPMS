@@ -400,6 +400,8 @@ begin
       else
         rPCSCmd.ValueInt := 0;
 
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+
       if Assigned(FOnPCSCommand) then
         FOnPCSCommand(rPCSCmd);
     end;
@@ -457,12 +459,12 @@ begin
     {$ENDREGION}
 
     {$REGION ' PCS Section '}
-//    epPCSCtrlBackgroundLamp:
-//    begin
-//      rPCSCmd.CommandID := C_ORD_CTRL_BACKGROUND_LAMP;
-//      rPCSCmd.ValueInt := Value;
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
-//    end;
+    epPCSCtrlBackgroundLamp:
+    begin
+      rPCSCmd.CommandID := C_ORD_CTRL_BACKGROUND_LAMP;
+      rPCSCmd.ValueInt := Value;
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+    end;
 
     //Rudder
     epRudderValuePS, epRudderValueSB:
