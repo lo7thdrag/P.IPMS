@@ -68,7 +68,7 @@ begin
       Top    := Screen.Monitors[MainEngine1System.IdScreenSignaling].Top;
       Width  := Screen.Monitors[MainEngine1System.IdScreenSignaling].Width;
       Height := Screen.Monitors[MainEngine1System.IdScreenSignaling].Height;
-      frmSignalingLightME1.Show;
+      Show;
     end;
   end;
 
@@ -80,7 +80,7 @@ begin
       Top    := Screen.Monitors[MainEngine1System.IdScreenGauges].Top;
       Width  := Screen.Monitors[MainEngine1System.IdScreenGauges].Width;
       Height := Screen.Monitors[MainEngine1System.IdScreenGauges].Height;
-      frmSignalingLightME1.Show;
+      Show;
     end;
   end;
 
@@ -92,7 +92,7 @@ begin
       Top    := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Top;
       Width  := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Width;
       Height := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Height;
-      frmSignalingLightME1.Show;
+      Show;
     end;
   end;
 end;
