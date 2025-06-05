@@ -91312,6 +91312,15 @@ object frmEmergencyPanel: TfrmEmergencyPanel
           88FF8588FF8588FF8500}
         Visible = False
       end
+      object Memo1: TMemo
+        Left = 87
+        Top = 90
+        Width = 330
+        Height = 195
+        Lines.Strings = (
+          'Memo1')
+        TabOrder = 0
+      end
     end
     object pnlA: TPanel
       Left = 303

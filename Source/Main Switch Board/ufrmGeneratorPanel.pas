@@ -109,14 +109,10 @@ type
     procedure tmrAmpereTimer(Sender: TObject);
     procedure ImgRaiseClick(Sender: TObject);
   private
-    { Private declarations }
-//    FListener : TListeners;
     Led  : array of TImage;
     LedStatus  : array of Boolean;
     ShiftMode : Boolean;
 
-//    procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
-//    procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
 
   public
     OrderFrequency : Double;
@@ -170,13 +166,6 @@ end;
 
 procedure TfrmGeneratorPanel.FormCreate(Sender: TObject);
 begin
-//  FListener := TListeners.Create;
-//  with MainSwitchBoardSystem.Listener.Add('GENERATORPANEL') as TPropertyEventListener do
-//  begin
-//    OnPropertyBoolChange := GeneratorPanelSystemEvent;
-//    OnPropertyIntChange := GeneratorPanelSystemEvent;
-//  end;
-
   EnableComposited(pnlMainBackground);
   EnableComposited(pnlGensys);
   EnableComposited(pnlA);
@@ -194,16 +183,6 @@ procedure TfrmGeneratorPanel.FormDestroy(Sender: TObject);
 begin
 // FListener.Free;
 end;
-
-//procedure TfrmGeneratorPanel.GeneratorPanelSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);
-//begin
-////
-//end;
-//
-//procedure TfrmGeneratorPanel.GeneratorPanelSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
-//begin
-////
-//end;
 
 procedure TfrmGeneratorPanel.ImgMANClick(Sender: TObject);
 begin

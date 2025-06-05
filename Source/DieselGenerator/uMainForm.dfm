@@ -10820,14 +10820,23 @@ object MainForm: TMainForm
   end
   object tmrRunningHours: TTimer
     Enabled = False
-    Interval = 25
+    Interval = 50
     OnTimer = tmrRunningHoursTimer
-    Left = 224
-    Top = 592
+    Left = 240
+    Top = 656
   end
   object tmrStop: TTimer
+    Enabled = False
     Interval = 5000
+    OnTimer = tmrStopTimer
     Left = 632
     Top = 152
+  end
+  object tmrReset: TTimer
+    Enabled = False
+    Interval = 3000
+    OnTimer = tmrResetTimer
+    Left = 640
+    Top = 368
   end
 end

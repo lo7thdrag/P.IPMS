@@ -5,7 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, VrControls,
-  VrRotarySwitch, VrAngularMeter, Vcl.ExtCtrls;
+  VrRotarySwitch, VrAngularMeter, Vcl.ExtCtrls,
+
+  uGenerator;
 
 type
   TfrmEmergencyPanel = class(TForm)
@@ -93,6 +95,7 @@ type
     ImgIndicatorFP: TImage;
     ImgIndicatorHO: TImage;
     tmrAmpere: TTimer;
+    Memo1: TMemo;
     procedure ImgStartClick(Sender: TObject);
     procedure ImgStopClick(Sender: TObject);
     procedure ImgOIClick(Sender: TObject);
@@ -113,6 +116,8 @@ type
     LedStatus  : array of Boolean;
   public
     OrderAmpere : Double;
+
+    procedure UpdateForm(Generator : TGenerator);
   end;
 
 var
@@ -215,6 +220,19 @@ begin
   begin
     tmrAmpere.Enabled := False;
   end;
+end;
+
+procedure TfrmEmergencyPanel.UpdateForm(Generator: TGenerator);
+begin
+  ImgIndicatorMan.Visible := Generator.GeneratorMode = 1;
+  ImgIndicatorSA.Visible := Generator.GeneratorMode = 2;
+  ImgIndicatorAuto.Visible := Generator.GeneratorMode = 3;
+
+  ImgIndicatorER.Visible := Generator.EngineRun;
+  ImgIndicatorGS.Visible := Generator.GeneratorSupplied;
+
+  ImgIndicatorCKC.Visible := Generator.CBClosed;
+  ImgIndicatorBS.Visible := Generator.Busbar;
 end;
 
 end.

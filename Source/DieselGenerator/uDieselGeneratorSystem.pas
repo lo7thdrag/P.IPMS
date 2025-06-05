@@ -37,7 +37,7 @@ type
     {Prosedur untuk mengirimkan paket data dari inputan PCS Panel Touch Screen ke Engine}
     procedure EngineRun(aValue : Boolean);
     procedure EngineStop(aValue : Boolean);
-    procedure EngineMode(aValue : Integer);
+    procedure EngineMode(aValue : Boolean);
     {--}
 
     property Network : TDieselGeneratorNetwork read FDieselGeneratorNetwork;
@@ -115,13 +115,13 @@ begin
   end;
 end;
 
-procedure TDieselGeneratorSystem.EngineMode(aValue: Integer);
+procedure TDieselGeneratorSystem.EngineMode(aValue: Boolean);
 var
   recCmd : R_Common_PMS_Command;
 begin
   recCmd.GenSwitchID := IdConsole;
-  recCmd.CommandPropsID := epPMSGeneratorMode;
-  recCmd.ValueInt := aValue;
+  recCmd.CommandPropsID := epPMSNotStandby;
+  recCmd.ValueBool := aValue;
 
   Network.DieselGeneratorControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
 end;

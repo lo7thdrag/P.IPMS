@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RzBmpBtn, VrControls, VrRotarySwitch,
-  Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls;
+  Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls, Vcl.Imaging.pngimage;
 
 type
   TfrmShorePanel = class(TForm)
@@ -36,6 +36,39 @@ type
     ImgIndicatorCBOpen: TImage;
     ImgIndicatorCBClose: TImage;
     tmrAmpere: TTimer;
+    imgSync: TImage;
+    Image3: TImage;
+    Image5: TImage;
+    Image7: TImage;
+    Image9: TImage;
+    Panel1: TPanel;
+    lblVoltageBusbar: TLabel;
+    lblFrequency: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Image10: TImage;
+    Image11: TImage;
+    Image12: TImage;
+    Image13: TImage;
+    Image14: TImage;
+    Image15: TImage;
+    Image16: TImage;
+    Image17: TImage;
+    Image18: TImage;
+    Image19: TImage;
+    Image20: TImage;
+    Image21: TImage;
+    Image22: TImage;
+    Image23: TImage;
+    Image24: TImage;
+    Image25: TImage;
+    Image26: TImage;
+    Image27: TImage;
+    Image28: TImage;
+    Image29: TImage;
+    Image30: TImage;
+    Image31: TImage;
+    Image32: TImage;
     procedure ImgIndicatorCBOpenClick(Sender: TObject);
     procedure ImgIndicatorCBCloseClick(Sender: TObject);
     procedure tmrAmpereTimer(Sender: TObject);

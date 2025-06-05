@@ -46,6 +46,7 @@ type
     mpAlarm: TMediaPlayer;
     tmrRunningHours: TTimer;
     tmrStop: TTimer;
+    tmrReset: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnLampTestMouseDown(Sender: TObject; Button: TMouseButton;
@@ -64,6 +65,8 @@ type
     procedure Alarm(Value: Boolean);
     procedure btnResetClick(Sender: TObject);
     procedure tmrRunningHoursTimer(Sender: TObject);
+    procedure tmrResetTimer(Sender: TObject);
+    procedure tmrStopTimer(Sender: TObject);
 
   private
     FListener : TListeners;
@@ -78,6 +81,9 @@ type
   public
     { Public declarations }
     silence : Boolean;
+//    ObjectGenerator : TGenerator;
+//
+//    procedure UpdateForm(Generator : TGenerator);
   end;
 
 var
@@ -136,8 +142,8 @@ begin
     begin
       imgStart.Visible          := not Value;
       imgStop.Visible           := Value;
-      tmrRunningHours.Enabled   := False;
       tmrStop.Enabled           := True;
+      tmrRunningHours.Enabled   := False;
 
       imgRunning.Visible        := not Value;
     end;
@@ -291,12 +297,13 @@ end;
 
 procedure TMainForm.btnManualClick(Sender: TObject);
 begin
-  DieselGeneratorSystem.EngineMode(1);
+  DieselGeneratorSystem.EngineMode(True);
 end;
 
 procedure TMainForm.btnResetClick(Sender: TObject);
 begin
   imgReset.Visible := True;
+  tmrReset.Enabled := True;
 
 //  imgStart.Visible    := False;
 //  imgStop.Visible     := False;
@@ -320,14 +327,12 @@ end;
 
 procedure TMainForm.btnSirenOffClick(Sender: TObject);
 begin
-  mpAlarm.Open;
-  mpAlarm.Stop;
-  mpAlarm.Notify := False;
+  Alarm(False);
 end;
 
 procedure TMainForm.btnStandbyClick(Sender: TObject);
 begin
-  DieselGeneratorSystem.EngineMode(3);
+  DieselGeneratorSystem.EngineMode(False);
 end;
 
 procedure TMainForm.btnStartClick(Sender: TObject);
@@ -337,7 +342,9 @@ end;
 
 procedure TMainForm.btnStopClick(Sender: TObject);
 begin
+  tmrStop.Enabled := True;
   DieselGeneratorSystem.EngineStop(True);
+
 end;
 
 procedure TMainForm.DieselGeneratorSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);
@@ -362,21 +369,6 @@ begin
         MainForm.Enabled := True;
         if Assigned(DieselGeneratorSystem.FFormFreezed[1]) then
           FreeAndNil(DieselGeneratorSystem.FFormFreezed[1]);
-      end;
-    end;
-    epPMSGeneratorMode:
-    begin
-      if Value = 1 then
-      begin
-        btnStart.Enabled  := True;
-        imgManual.Visible := True;
-        imgStandby.Visible := False;
-      end
-      else if Value = 3 then
-      begin
-        btnStart.Enabled := False;
-        imgManual.Visible := False;
-        imgStandby.Visible := True;
       end;
     end;
 //    epPMSGeneratorRunningHours:
@@ -415,6 +407,12 @@ begin
   end;
 end;
 
+procedure TMainForm.tmrResetTimer(Sender: TObject);
+begin
+  imgReset.Visible := False;
+  tmrReset.Enabled := False;
+end;
+
 procedure TMainForm.tmrRunningHoursTimer(Sender: TObject);
 begin
   FRunningHourTemp := FRunningHourTemp + 1;
@@ -425,6 +423,17 @@ begin
     lblRunningHours.Caption := IntToStr(FRunningHour);
   end;
 end;
+
+procedure TMainForm.tmrStopTimer(Sender: TObject);
+begin
+  imgStop.Visible := False;
+  tmrStop.Enabled := False;
+end;
+
+//procedure TMainForm.UpdateForm(Generator: TGenerator);
+//begin
+////
+//end;
 
 procedure TMainForm.VrMainSwitchChange(Sender: TObject);
 begin

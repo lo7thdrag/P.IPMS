@@ -176,7 +176,7 @@ begin
 
       if Assigned(frmEmergencyPanel) then
       begin
-//        frmEmergencyPanel.UpdateForm(GeneratorTemp);
+        frmEmergencyPanel.UpdateForm(GeneratorTemp);
       end;
     end;
   end;
@@ -199,7 +199,7 @@ begin
 
   if Assigned(frmEmergencyPanel) then
   begin
-//        frmEmergencyPanel.UpdateForm(GeneratorTemp);
+    frmEmergencyPanel.UpdateForm(GeneratorTemp);
   end;
 end;
 
