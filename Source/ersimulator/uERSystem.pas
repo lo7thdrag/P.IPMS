@@ -823,15 +823,15 @@ var
 begin
   recER := @apRec^;
 
-  case recER.CommandPropsID of
-    epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorCBClosed,
-    epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSGeneratorMode :
-    begin
-      generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
-      if generator.NotStandby then
-        Exit;
-    end;
-  end;
+//  case recER.CommandPropsID of
+//    epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorCBClosed,
+//    epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSGeneratorMode, epPMSGeneratorEmergencyStop :
+//    begin
+//      generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
+//      if generator.NotStandby then
+//        Exit;
+//    end;
+//  end;
 
   case recER.CommandPropsID of
     epPMSNotStandby:
@@ -842,28 +842,46 @@ begin
 
     epPMSGeneratorEmergencyStop :
     begin
+      generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
+      if generator.NotStandby then
+        Exit;
+
       generator.EmergencyStop := recER.ValueBool;
     end;
 
     epPMSGeneratorFuelRunsOut :
     begin
+      generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
+      if generator.NotStandby then
+        Exit;
+
       generator.FuelRunsOut := recER.ValueBool;
     end;
 
     epPMSGeneratorEngineRun:
     begin
+      generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
+
       {hanya bisa nyala jk state 'waiting', tdk shutdown, tdk emergency stop}
       if (generator.GeneratorState = Ord(gsWaiting){1}) and (not generator.ShutDown) and (not generator.EmergencyStop) then
         generator.EngineRun := recER.ValueBool;
     end;
     epPMSGeneratorStop:
     begin
+      generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
+      if generator.NotStandby then
+        Exit;
+
       {hanya bisa mati jk state 'Gen Ready'}
       if generator.GeneratorState = Ord(gsGenReady){5} then
         generator.GeneratorState := Ord(gsCoolDown);//6;
     end;
     epPMSGeneratorCBClosed:
     begin
+      generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
+      if generator.NotStandby then
+        Exit;
+
       if (generator.GeneratorMode = 2) and (not generator.FailureCBClosed) then
       begin
         if generator.CbClosed then
@@ -880,6 +898,10 @@ begin
     end;
     epPMSGeneratorPreference:
     begin
+      generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
+      if generator.NotStandby then
+        Exit;
+
       if generator.Preference then
           generator.Preference  := False
       else
@@ -896,10 +918,15 @@ begin
     end;
     epPMSGeneratorMode :
     begin
+      generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
+      if generator.NotStandby then
+        Exit;
+
       generator.GeneratorMode := recER.ValueInt;
     end;
     epPMSGeneratorBusbar:
     begin
+      generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
       generator.Busbar := recER.ValueBool;
     end;
     epPMSMsbCBShore:

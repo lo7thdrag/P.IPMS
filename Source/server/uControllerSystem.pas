@@ -654,7 +654,7 @@ begin
   recER.CommandPropsID := epPMSGeneratorEmergencyStop;
   recER.ValueBool := recCmd.ValueBool;
 
-  Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
+  Network.SimEngineSocket.SendData(C_PMSCLIENT_COMMAND,@recER);
 end;
 
 procedure TControllerlSystem.NetEvent_MECommonCmd(apRec: PAnsiChar; aSize: Word);

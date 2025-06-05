@@ -26,7 +26,8 @@ uses
   uListener in '..\common\uListener.pas',
   uSteppers in '..\framework\LibBaseUtils\Counter\uSteppers.pas',
   uThreadTimer in '..\framework\LibBaseUtils\Counter\uThreadTimer.pas',
-  uVirtualTime in '..\framework\LibBaseUtils\Counter\uVirtualTime.pas';
+  uVirtualTime in '..\framework\LibBaseUtils\Counter\uVirtualTime.pas',
+  uFreezeFrom in '..\common\uFreezeFrom.pas' {frmFreeze};
 
 {$R *.res}
 
@@ -38,5 +39,6 @@ begin
   EmergencyStopSystem := TEmergencyStopSystem.Create;
 
   Application.CreateForm(TfrmEmergencyStop, frmEmergencyStop);
+  Application.CreateForm(TfrmFreeze, frmFreeze);
   Application.Run;
 end.
