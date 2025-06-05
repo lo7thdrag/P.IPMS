@@ -70,19 +70,7 @@ begin
       Top    := Screen.Monitors[MainEngine1System.IdScreenSignaling].Top;
       Width  := Screen.Monitors[MainEngine1System.IdScreenSignaling].Width;
       Height := Screen.Monitors[MainEngine1System.IdScreenSignaling].Height;
-      frmSignalingLightME1.Show;
-    end;
-  end;
-
-  if Screen.MonitorCount > MainEngine1System.IdScreenGauges then
-  begin
-    with frmSetofPressureGaugesME1 do
-    begin
-      Left   := Screen.Monitors[MainEngine1System.IdScreenGauges].Left;
-      Top    := Screen.Monitors[MainEngine1System.IdScreenGauges].Top;
-      Width  := Screen.Monitors[MainEngine1System.IdScreenGauges].Width;
-      Height := Screen.Monitors[MainEngine1System.IdScreenGauges].Height;
-      frmSignalingLightME1.Show;
+      Show;
     end;
   end;
 
@@ -94,7 +82,19 @@ begin
       Top    := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Top;
       Width  := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Width;
       Height := Screen.Monitors[MainEngine1System.IdScreenPmsHmi].Height;
-      frmSignalingLightME1.Show;
+      Show;
+    end;
+  end;
+
+  if Screen.MonitorCount > MainEngine1System.IdScreenGauges then
+  begin
+    with frmSetofPressureGaugesME1 do
+    begin
+      Left   := Screen.Monitors[MainEngine1System.IdScreenGauges].Left;
+      Top    := Screen.Monitors[MainEngine1System.IdScreenGauges].Top;
+      Width  := Screen.Monitors[MainEngine1System.IdScreenGauges].Width;
+      Height := Screen.Monitors[MainEngine1System.IdScreenGauges].Height;
+      Show;
     end;
   end;
 end;
@@ -171,7 +171,8 @@ begin
       frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible   := True;
       frmPMSDieselEngineSafetiesME1.imgLedGreen1AE24.Visible   := True;
       frmPMSDieselEngineSafetiesME1.imgLedGreen1AE15.Visible   := True;
-      frmPMSDieselEngineSafetiesME1.imgLedGreen1AE9.Visible   := True;
+      frmPMSDieselEngineSafetiesME1.imgLedGreen1AE9.Visible    := True;
+      frmPMSDieselEngineSafetiesME1.imgLedGreenRunRSP.Visible  := True;
     end;
     epPCSCtrlLocal :
     begin
@@ -272,6 +273,62 @@ begin
     begin
       if Assigned(frmPMSDieselEngineSafetiesME1) then
         frmPMSDieselEngineSafetiesME1.EngineSpeedMeter.Position := Value;
+    end;
+    // PMS ATP
+    epPCSMETempBear1 :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.FBearingTemperatures[8] := Value / 10;
+    end;
+    epPCSMETempBear2 :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.FBearingTemperatures[9] := Value / 10;
+    end;
+    epPCSMETempBear3 :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.FBearingTemperatures[10] := Value / 10;
+    end;
+    epPCSMETempBear4 :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.FBearingTemperatures[11] := Value / 10;
+    end;
+    epPCSMETempBear5 :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.FBearingTemperatures[12] := Value / 10;
+    end;
+    epPCSMETempBear6 :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.FBearingTemperatures[13] := Value / 10;
+    end;
+    epPCSMETempBear7 :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.FBearingTemperatures[14] := Value / 10;
+    end;
+    epPCSMETempBear8 :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.FBearingTemperatures[15] := Value / 10;
+    end;
+    epPCSMETempBear9 :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.FBearingTemperatures[0] := Value / 10;
+    end;
+    epPCSMETempBear10 :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.FBearingTemperatures[1] := Value / 10;
+    end;
+    epPCSMETempBear11 :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+        frmPMSDieselEngineSafetiesME1.FBearingTemperatures[2] := Value / 10;
     end;
   end;
 end;

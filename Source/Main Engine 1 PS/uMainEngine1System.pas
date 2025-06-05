@@ -259,6 +259,50 @@ begin
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
     end;
+    epPCSMETempBear1 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear2 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear3 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear4 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear5 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear6 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear7 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear8 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear9 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear10 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear11 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
   end;
 end;
 
