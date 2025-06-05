@@ -98,21 +98,26 @@ begin
     end;
     2: {kiriman dari Emergency n blackout}
     begin
+      if (IdIntrMode = 0) and (Msb[2].ESBInterconnectionMode = 1) then
+        Exit
+      else if (IdIntrMode = 4) and (Msb[2].ESBInterconnectionMode = 4) then
+        Exit
+      else if (IdIntrMode = 1) and (Msb[2].ESBInterconnectionMode = 3) then
+        Exit;
+
       {di false kan dulu semua}
-      if Msb[2].ESBInterconnectionMode <> IdIntrMode then
-      begin
-        Msb[2].EsbCircuitBreaker  := False;
+      Msb[2].EsbCircuitBreaker  := False;
 
-        {mode 4 : smua EsbCB tertutup}
-        if IdIntrMode = 0 then
-          Msb[2].ESBInterconnectionMode := 1
-        else if IdIntrMode = 4 then
-          Msb[2].ESBInterconnectionMode := 4
-        else
-          Msb[2].ESBInterconnectionMode := 3;
+      {mode 4 : smua EsbCB tertutup}
+      if IdIntrMode = 0 then
+        Msb[2].ESBInterconnectionMode := 1
+      else if IdIntrMode = 4 then
+        Msb[2].ESBInterconnectionMode := 4
+      else
+        Msb[2].ESBInterconnectionMode := 3;
 
-        Msb[2].EsbCircuitBreaker := True;
-      end;
+      Msb[2].EsbCircuitBreaker := True;
+
     end;
     3: {U/ mengecek koneksi MSB dgn ESB}
     begin

@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch, RzBmpBtn,
   Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls,
 
-  uListener, uFreezeFrom, uDataType;
+  uListener, uFreezeFrom, uDataType, uGenerator;
 
 type
   TfrmGeneratorPanel = class(TForm)
@@ -110,17 +110,19 @@ type
     procedure ImgRaiseClick(Sender: TObject);
   private
     { Private declarations }
-    FListener : TListeners;
+//    FListener : TListeners;
     Led  : array of TImage;
     LedStatus  : array of Boolean;
     ShiftMode : Boolean;
 
-    procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
-    procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
+//    procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
+//    procedure GeneratorPanelSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
 
   public
     OrderFrequency : Double;
     OrderAmpere : Double;
+
+    procedure UpdateForm(Generator : TGenerator);
   end;
 
 var
@@ -168,12 +170,12 @@ end;
 
 procedure TfrmGeneratorPanel.FormCreate(Sender: TObject);
 begin
-  FListener := TListeners.Create;
-  with MainSwitchBoardSystem.Listener.Add('GENERATORPANEL') as TPropertyEventListener do
-  begin
-    OnPropertyBoolChange := GeneratorPanelSystemEvent;
-    OnPropertyIntChange := GeneratorPanelSystemEvent;
-  end;
+//  FListener := TListeners.Create;
+//  with MainSwitchBoardSystem.Listener.Add('GENERATORPANEL') as TPropertyEventListener do
+//  begin
+//    OnPropertyBoolChange := GeneratorPanelSystemEvent;
+//    OnPropertyIntChange := GeneratorPanelSystemEvent;
+//  end;
 
   EnableComposited(pnlMainBackground);
   EnableComposited(pnlGensys);
@@ -190,20 +192,18 @@ end;
 
 procedure TfrmGeneratorPanel.FormDestroy(Sender: TObject);
 begin
- FListener.Free;
+// FListener.Free;
 end;
 
-procedure TfrmGeneratorPanel.GeneratorPanelSystemEvent(Sender: TObject;
-  PropsID: E_PropsID; Value: Integer);
-begin
+//procedure TfrmGeneratorPanel.GeneratorPanelSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);
+//begin
+////
+//end;
 //
-end;
-
-procedure TfrmGeneratorPanel.GeneratorPanelSystemEvent(Sender: TObject;
-  PropsID: E_PropsID; Value: Boolean);
-begin
-//
-end;
+//procedure TfrmGeneratorPanel.GeneratorPanelSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
+//begin
+////
+//end;
 
 procedure TfrmGeneratorPanel.ImgMANClick(Sender: TObject);
 begin
@@ -240,14 +240,12 @@ begin
 //
 end;
 
-procedure TfrmGeneratorPanel.ImgLTMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TfrmGeneratorPanel.ImgLTMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   DoLedTest(True);
 end;
 
-procedure TfrmGeneratorPanel.ImgLTMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+procedure TfrmGeneratorPanel.ImgLTMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   DoLedTest(False);
 end;
@@ -311,6 +309,20 @@ begin
   begin
     tmrFrequency.Enabled := False;
   end;
+end;
+
+procedure TfrmGeneratorPanel.updateForm(Generator : TGenerator);
+begin
+  ImgIndicatorMan.Visible := Generator.GeneratorMode = 1;
+  ImgIndicatorSA.Visible := Generator.GeneratorMode = 2;
+  ImgIndicatorAuto.Visible := Generator.GeneratorMode = 3;
+
+  ImgIndicatorER.Visible := Generator.EngineRun;
+  ImgIndicatorGS.Visible := Generator.GeneratorSupplied;
+
+  ImgIndicatorCBC.Visible := Generator.CBClosed;
+  ImgIndicatorPreference.Visible := Generator.Preference;
+  ImgIndicatorBS.Visible := Generator.Busbar;
 end;
 
 end.

@@ -22,7 +22,10 @@ uses
   uPacketRegister in '..\network\uPacketRegister.pas',
   uTCPClient in '..\network\uTCPClient.pas',
   uTCPDatatype in '..\network\uTCPDatatype.pas',
-  uTCPServer in '..\network\uTCPServer.pas';
+  uTCPServer in '..\network\uTCPServer.pas',
+  uGenerator in '..\engines\entity\uGenerator.pas',
+  uEntity in '..\engines\entity\uEntity.pas',
+  uConsumption in '..\engines\entity\uConsumption.pas';
 
 {$R *.res}
 
@@ -34,7 +37,7 @@ begin
 //  MainSwitchBoardSystem := TMainSwitchBoardSystem.Create;
 
   Application.CreateForm(TfrmMainForm, frmMainForm);
-//  Application.CreateForm(TfrmGeneratorPanel, frmGeneratorPanel);
+  //  Application.CreateForm(TfrmGeneratorPanel, frmGeneratorPanel);
 //  Application.CreateForm(TfrmEmergencyPanel, frmEmergencyPanel);
 //  Application.CreateForm(TfrmShorePanel, frmShorePanel);
   Application.CreateForm(TfrmFreeze, frmFreeze);

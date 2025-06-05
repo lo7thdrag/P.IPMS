@@ -252,7 +252,7 @@ begin
     Exit;
 
   case rec.CommandPropsID of
-    epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorSupplied, epPMSGeneratorCBClosed,
+    epPMSGeneratorEngineRun, epPMSGeneratorSupplied, epPMSGeneratorCBClosed,
     epPMSGeneratorPreference, epPMSGeneratorBusbar:
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)

@@ -7,15 +7,18 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, VrControls,
   VrRotarySwitch, RzBmpBtn, VrAngularMeter, Vcl.ExtCtrls,
 
-  uSetting, uListener, uFreezeFrom, uDataType;
+  uSetting, uListener, uFreezeFrom, uDataType, uGenerator;
 
 type
   TfrmMainForm = class(TForm)
+
+    tmr1: TTimer;
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
 
   private
+
     FListener : TListeners;
 
     procedure MainSwitchBoardSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
@@ -23,7 +26,8 @@ type
     procedure MainSwitchBoardSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Double);overload;
 
   public
-    { Public declarations }
+    GeneratorTemp : TGenerator;
+
   end;
 
 var
@@ -48,10 +52,17 @@ begin
     OnPropertyBoolChange := MainSwitchBoardSystemEvent;
     OnPropertyDblChange := MainSwitchBoardSystemEvent;
   end;
+
+  {Create Generator Temporary}
+  GeneratorTemp := TGenerator.Create;
+  GeneratorTemp.Identifier := MainSwitchBoardSystem.IdGenerator;
+  GeneratorTemp.GeneratorState := 9;
 end;
 
 procedure TfrmMainForm.FormDestroy(Sender: TObject);
 begin
+  GeneratorTemp.Destroy;
+
   FListener.Free;
   MainSwitchBoardSystem.Free;
   Setting.Free;
@@ -88,6 +99,7 @@ procedure TfrmMainForm.MainSwitchBoardSystemEvent(Sender: TObject; PropsID: E_Pr
 begin
   case PropsID of
     epPMSFreezed:
+    begin
       if Value = 1 then
       begin
         if Assigned(frmGeneratorPanel) then
@@ -152,55 +164,19 @@ begin
             FreeAndNil(MainSwitchBoardSystem.FFormFreezed[0]);
         end;
       end;
+    end;
     epPMSGeneratorMode:
     begin
-      if Value = 1 then
-      begin
-        if Assigned(frmGeneratorPanel) then
-        begin
-          frmGeneratorPanel.ImgIndicatorMan.Visible := True;
-          frmGeneratorPanel.ImgIndicatorSA.Visible := False;
-          frmGeneratorPanel.ImgIndicatorAuto.Visible := False;
-        end;
+      GeneratorTemp.GeneratorMode := Value;
 
-        if Assigned(frmEmergencyPanel) then
-        begin
-          frmEmergencyPanel.ImgIndicatorMan.Visible := True;
-          frmEmergencyPanel.ImgIndicatorSA.Visible := False;
-          frmEmergencyPanel.ImgIndicatorAuto.Visible := False;
-        end;
-      end
-      else if Value = 2 then
+      if Assigned(frmGeneratorPanel) then
       begin
-        if Assigned(frmGeneratorPanel) then
-        begin
-          frmGeneratorPanel.ImgIndicatorMan.Visible := False;
-          frmGeneratorPanel.ImgIndicatorSA.Visible := True;
-          frmGeneratorPanel.ImgIndicatorAuto.Visible := False;
-        end;
+        frmGeneratorPanel.UpdateForm(GeneratorTemp);
+      end;
 
-        if Assigned(frmEmergencyPanel) then
-        begin
-          frmEmergencyPanel.ImgIndicatorMan.Visible := False;
-          frmEmergencyPanel.ImgIndicatorSA.Visible := True;
-          frmEmergencyPanel.ImgIndicatorAuto.Visible := False;
-        end;
-      end
-      else if Value = 3 then
+      if Assigned(frmEmergencyPanel) then
       begin
-        if Assigned(frmGeneratorPanel) then
-        begin
-          frmGeneratorPanel.ImgIndicatorMan.Visible := False;
-          frmGeneratorPanel.ImgIndicatorSA.Visible := False;
-          frmGeneratorPanel.ImgIndicatorAuto.Visible := True;
-        end;
-
-        if Assigned(frmEmergencyPanel) then
-        begin
-          frmEmergencyPanel.ImgIndicatorMan.Visible := False;
-          frmEmergencyPanel.ImgIndicatorSA.Visible := False;
-          frmEmergencyPanel.ImgIndicatorAuto.Visible := True;
-        end;
+//        frmEmergencyPanel.UpdateForm(GeneratorTemp);
       end;
     end;
   end;
@@ -209,51 +185,21 @@ end;
 procedure TfrmMainForm.MainSwitchBoardSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
   case PropsID of
-    epPMSGeneratorEngineRun :
-    begin
-      if Assigned(frmGeneratorPanel) then
-        frmGeneratorPanel.ImgIndicatorER.Visible := Value;
+    epPMSGeneratorEngineRun : GeneratorTemp.EngineRun := Value;
+    epPMSGeneratorSupplied : GeneratorTemp.GeneratorSupplied := Value;
+    epPMSGeneratorCBClosed : GeneratorTemp.CBClosed := Value;
+    epPMSGeneratorPreference : GeneratorTemp.Preference := Value;
+    epPMSGeneratorBusbar : GeneratorTemp.Busbar := Value;
+  end;
 
-      if Assigned(frmEmergencyPanel) then
-        frmEmergencyPanel.ImgIndicatorER.Visible := Value;
-    end;
-    epPMSGeneratorStop :
-    begin
-      if Assigned(frmGeneratorPanel) then
-        frmGeneratorPanel.ImgIndicatorER.Visible := not Value;
+  if Assigned(frmGeneratorPanel) then
+  begin
+    frmGeneratorPanel.UpdateForm(GeneratorTemp);
+  end;
 
-      if Assigned(frmEmergencyPanel) then
-        frmEmergencyPanel.ImgIndicatorER.Visible := not Value;
-    end;
-    epPMSGeneratorSupplied :
-    begin
-      if Assigned(frmGeneratorPanel) then
-        frmGeneratorPanel.ImgIndicatorGS.Visible := Value;
-
-      if Assigned(frmEmergencyPanel) then
-        frmEmergencyPanel.ImgIndicatorGS.Visible := Value;
-    end;
-    epPMSGeneratorCBClosed :
-    begin
-      if Assigned(frmGeneratorPanel) then
-        frmGeneratorPanel.ImgIndicatorCBC.Visible := Value;
-
-      if Assigned(frmEmergencyPanel) then
-        frmEmergencyPanel.ImgIndicatorCKC.Visible := Value;
-    end;
-    epPMSGeneratorPreference :
-    begin
-      if Assigned(frmGeneratorPanel) then
-        frmGeneratorPanel.ImgIndicatorPreference.Visible := Value;
-    end;
-    epPMSGeneratorBusbar :
-    begin
-      if Assigned(frmGeneratorPanel) then
-        frmGeneratorPanel.ImgIndicatorBS.Visible := Value;
-
-      if Assigned(frmEmergencyPanel) then
-        frmEmergencyPanel.ImgIndicatorBS.Visible := Value;
-    end;
+  if Assigned(frmEmergencyPanel) then
+  begin
+//        frmEmergencyPanel.UpdateForm(GeneratorTemp);
   end;
 end;
 
