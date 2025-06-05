@@ -292,7 +292,7 @@ begin
       else
         rPCSCmd.ValueInt := 0;
 
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
       if Assigned(FOnPCSCommand) then
         FOnPCSCommand(rPCSCmd);
     end;
@@ -312,7 +312,7 @@ begin
 //      else
 //        rPCSCmd.ValueInt := 0;
 
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
       if Assigned(FOnPCSCommand) then
          FOnPCSCommand(rPCSCmd)
     end;
@@ -326,7 +326,7 @@ begin
       else
         rPCSCmd.ValueInt := 0;
 
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
     end;
 
     epPCSCtrlAlarmAccept, epPCSCtrlStopHorn, epPCSCtrlBackgroundLamp:
@@ -345,7 +345,7 @@ begin
       else
         rPCSCmd.ValueInt := 0;
 
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
     end;
 
     {Paket data hanya dikirimkan ke Mimic}
@@ -481,7 +481,7 @@ begin
       rPCSCmd.CommandID := C_ORD_RUDDER;
       rPCSCmd.ValueInt := Value;
       rPCSCmd.ValueDouble := Round(Value);
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
       if Assigned(FOnPCSCommand) then
         FOnPCSCommand(rPCSCmd);
     end;
@@ -496,7 +496,7 @@ begin
 
       rPCSCmd.CommandPropsID := PropsID;
       rPCSCmd.ValueInt := Value;
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
       if Assigned(FOnPCSCommand) then
          FOnPCSCommand(rPCSCmd);
     end;
@@ -510,7 +510,7 @@ begin
 
       rPCSCmd.CommandPropsID := PropsID;
       rPCSCmd.ValueInt := Value;
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
       if Assigned(FOnPCSCommand) then
          FOnPCSCommand(rPCSCmd);
     end;
@@ -524,7 +524,7 @@ begin
 
       rPCSCmd.CommandPropsID := PropsID;
       rPCSCmd.ValueInt := Value;
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
       if Assigned(FOnPCSCommand) then
         FOnPCSCommand(rPCSCmd);
    end;
@@ -629,7 +629,7 @@ begin
       rPCSCmd.CommandPropsID := PropsID;
       rPCSCmd.ValueDouble := Value;
 
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
 
       if Assigned(FOnPCSCommand) then
         FOnPCSCommand(rPCSCmd);
@@ -690,7 +690,7 @@ begin
       rPCSCmd.CommandPropsID  := PropsID;
       rPCSCmd.ValueDouble     := Value;
 
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
 
       if Assigned(FOnPCSCommand) then
         FOnPCSCommand(rPCSCmd);

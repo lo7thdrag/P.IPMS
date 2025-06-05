@@ -129,7 +129,7 @@ begin
   end;
 
   case E_PropsID(rec^.aProps) of
-    epBoardAlarmLamp:
+    epBoardAlarmLampKiri:
     begin
       {$REGION ' Set Alarm Indicator '}
 
