@@ -2136,6 +2136,8 @@ begin
      edtBILGEWTK.Text := floattostr(tankDataTemp.Tanks_Value)
     else if tankDataTemp.Tanks_ElementID = '2622S0001A' then
      edtSLDIRTYTK.Text := floattostr(tankDataTemp.Tanks_Value)
+
+
   end;
 
   tankListTemp.Free;

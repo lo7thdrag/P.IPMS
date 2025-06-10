@@ -1515,7 +1515,7 @@ begin
                  'SET Tanks_ElementID = ' + QuotedStr(TanksData.Tanks_ElementID) +
                  ', Tanks_Value = ' + FloatToStr(TanksData.Tanks_Value) +
                  ' WHERE Condition_ID = ' + IntToStr(TanksData.Condition_ID) +
-                 ' AND Tanks_ID = ' + IntToStr(TanksData.Tanks_ID);
+                 ' AND Tanks_ElementID = ' + QuotedStr(TanksData.Tanks_ElementID);
 
         SQL.Add(query);
         ExecSQL;
