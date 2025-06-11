@@ -276,29 +276,20 @@ begin
   client := FMainSwitchBoardNetwork.AsClients.Get('AsSimEngineClient');
   if Assigned(client) then
   begin
-    with  client do
-    begin
-      RegisterProcedure(C_PMS_COMMAND, NetEventMainSwitchBoardCommand, SizeOf(R_Common_PMS_Command));
-    end;
+    client.RegisterProcedure(C_PMS_COMMAND, NetEventMainSwitchBoardCommand, SizeOf(R_Common_PMS_Command));
   end;
 
   { set all network event here.. as instructor client}
   client := FMainSwitchBoardNetwork.AsClients.Get('AsInstructorClient');
   if Assigned(client) then
   begin
-    with  client do
-    begin
-      RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
-    end;
+    client.RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
   end;
 
    client := FMainSwitchBoardNetwork.AsClients.Get('AsControllerClient');
    if Assigned(client) then
    begin
-     with client do
-     begin
-       client.RegisterProcedure(C_PMS_COMMAND, nil, SizeOf(R_Common_PMS_Command));
-     end;
+     client.RegisterProcedure(C_PMS_COMMAND, nil, SizeOf(R_Common_PMS_Command));
    end;
 end;
 

@@ -20,10 +20,14 @@ type
     FAutoReconnect: boolean;
     FServerPort: String;
     FServerAddress: String;
+
     function getConnected: boolean;
     procedure SetLogData(const Value: TGetStrProc);
     procedure SetServerAddress(const Value: String);
     procedure SetServerPort(const Value: String);
+
+    function GetIsLogged: Boolean;
+    procedure SetIsLogged(aValue: Boolean);
 
   protected
     FBuffer   : PAnsiChar;
@@ -41,7 +45,6 @@ type
     procedure WSocket_OnSessionConnected(Sender: TObject; Error: Word);
     procedure WSocket_OnSessionClosed(Sender: TObject; Error: Word);
     procedure WSocket_OnSessionAvailable(Sender: TObject; Error: Word);
-
 
     procedure WSocket_OnDataSent(Sender: TObject; Error: word);
 
@@ -78,6 +81,7 @@ type
     property ServerAddress : String read FServerAddress write SetServerAddress;
     property ServerPort : String read FServerPort write SetServerPort;
 
+    property IsLogged: Boolean read GetIsLogged write SetIsLogged;
 
   end;
 
@@ -110,6 +114,8 @@ end;
 constructor TTCPClient.Create;
 begin
   inherited;
+
+
 
   GetMem(FBuffer, CSOCK_BUFFER_SIZE);
 
@@ -378,6 +384,16 @@ begin
     pid   := @aBuffer^;
     pid.ipSender := MyLongIP;
   end;
+end;
+
+function TTCPClient.GetIsLogged: Boolean;
+begin
+  Result:= FDataBuffer.IsLogged;
+end;
+
+procedure TTCPClient.SetIsLogged(aValue: Boolean);
+begin
+  FDataBuffer.IsLogged:= aValue;
 end;
 
 end.

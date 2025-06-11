@@ -3,12 +3,29 @@ unit uThreadTimer;
 interface
 
 uses
-  Classes, Windows;
+  Classes, Windows, Vcl.ExtCtrls;
 
 type
 
 //==============================================================================
   TRunningEvent = procedure(const dt: double) of object;
+
+  TCustomTimer = class(TTimer)
+  private
+    FLastPerfCount,
+    FPerfFreq: Int64;
+
+    FOnRunning: TRunningEvent;
+
+    procedure DoByMySelf(Sender: TObject);
+
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    property OnRunning: TRunningEvent read FOnRunning write FOnRunning;
+
+  end;
 
   TMSTimer = class(TThread)
   private
@@ -35,9 +52,10 @@ type
   public
 
     property OnRunning: TRunningEvent read FOnRunning write FOnRunning;
-    property Interval: Word read FInterval write SetInterval; //millisecond
 
     property OnTimer: TNotifyEvent read FOnTimer write FOnTimer;
+
+    property Interval: Word read FInterval write SetInterval;
 
     property Enabled: boolean read GetEnabled write SetEnabled;
 
@@ -51,7 +69,44 @@ type
 
 implementation
 
+//==============================================================================
+{ TCustomTimer }
 
+constructor TCustomTimer.Create;
+begin
+  inherited Create(nil);
+  Enabled:= False;
+
+//  timeBeginPeriod(10);
+  Interval := 10;
+  OnTimer:= DoByMySelf;
+
+  QueryPerformanceFrequency(FPerfFreq);
+  QueryPerformanceCounter(FLastPerfCount);
+
+end;
+
+destructor TCustomTimer.Destroy;
+begin
+  FOnRunning := nil;
+  OnTimer:= nil;
+
+//  timeEndPeriod(10);
+  inherited;
+end;
+
+procedure TCustomTimer.DoByMySelf(Sender: TObject);
+var
+  Count: Int64;
+  Sec: double;
+begin
+  QueryPerformanceCounter(Count);
+  Sec := (Count - FLastPerfCount) / FPerfFreq;
+  FLastPerfCount := Count;
+  if Assigned(FOnRunning) then begin
+    FOnRunning(Sec); // detik.
+  end;
+end;
 
 //==============================================================================
 { TMSTimer }
@@ -94,8 +149,8 @@ procedure TMSTimer.Execute;
 begin
   while not Terminated do begin
 
-//    Synchronize(DoByMySelf);
-    Queue(DoByMySelf);
+    Synchronize(DoByMySelf);
+//    Queue(DoByMySelf);
 
     Sleep(FInterval);
   end;

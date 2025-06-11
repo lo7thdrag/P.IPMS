@@ -17,6 +17,7 @@ object frmMainForm: TfrmMainForm
   PixelsPerInch = 96
   TextHeight = 13
   object tmr1: TTimer
+    Enabled = False
     Left = 120
     Top = 128
   end

@@ -129,7 +129,7 @@ begin
     OnRunning := FNetworkThread_OnRunning;
     OnTerminate := FNetworkThread_OnTerminate;
 
-    Interval := 2;
+    Interval := 30;
     Enabled := True;
 
   end;
@@ -301,7 +301,7 @@ begin
   end;
 
   { uncomment for specific action, not debugging }
-  Listeners.TriggerEvents(Self, epNetworkStop,Integer(0));
+  Listeners.TriggerEvents(Self, epNetworkStop, Integer(0));
 
   FStarted := false;
 end;

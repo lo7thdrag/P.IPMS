@@ -8,7 +8,7 @@ unit uMainSwitchBoardNetwork;
 
 interface
 
-uses uNetworkManager, uTCPClient, ExtCtrls, uDataType;
+uses uNetworkManagerTimer, uTCPClient, ExtCtrls, uDataType;
 
 type
   TMainSwitchBoardNetwork = class (TNetworkManager)
@@ -51,14 +51,15 @@ begin
     ServerAddress := Setting.SimEngineServer;
     ServerPort    := Setting.SimEnginePort;
     AutoReconnect := True;
+    IsLogged      := True;
   end;
-  FVREngineSocket := AsClients.Get('AsSimEngineClient');
 
   with CreateClientSocket('AsInstructorClient') do
   begin
     ServerAddress := Setting.InstructorHost;
     ServerPort    := Setting.InstructorPort;
     AutoReconnect := True;
+//    IsLogged      := True;
   end;
 
   with CreateClientSocket('AsControllerClient') do
@@ -66,8 +67,10 @@ begin
     ServerAddress := Setting.LPUServer;
     ServerPort    := Setting.LPUPort;
     AutoReconnect := True;
+//    IsLogged      := True;
   end;
 
+  FVREngineSocket := AsClients.Get('AsSimEngineClient');
   FMainSwitchBoardControllerSocket := AsClients.Get('AsControllerClient');
 end;
 
@@ -97,7 +100,7 @@ begin
   inherited;
 
   FVREngineSocket.AutoReconnect := True;
-  FMainSwitchBoardControllerSocket.AutoReconnect := True;
+//  FMainSwitchBoardControllerSocket.AutoReconnect := True;
 end;
 
 procedure TMainSwitchBoardNetwork.StopNetwork;
@@ -107,8 +110,8 @@ begin
   FVREngineSocket.Disconnect;
   FVREngineSocket.AutoReconnect := false;
 
-  FMainSwitchBoardControllerSocket.Disconnect;
-  FMainSwitchBoardControllerSocket.AutoReconnect := false;
+//  FMainSwitchBoardControllerSocket.Disconnect;
+//  FMainSwitchBoardControllerSocket.AutoReconnect := false;
 
 end;
 
