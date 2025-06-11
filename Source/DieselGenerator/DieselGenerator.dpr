@@ -19,7 +19,8 @@ uses
   uFreezeFrom in '..\common\uFreezeFrom.pas' {frmFreeze},
   uFunction in '..\common\uFunction.pas',
   uListener in '..\common\uListener.pas',
-  uSetting in '..\common\uSetting.pas';
+  uSetting in '..\common\uSetting.pas',
+  uNetworkManagerTimer in '..\network\uNetworkManagerTimer.pas';
 
 {$R *.res}
 

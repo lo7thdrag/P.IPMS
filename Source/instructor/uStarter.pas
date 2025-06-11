@@ -3,7 +3,7 @@ unit uStarter;
 interface
 
 uses
-  uERSystem, uMimicsSystem, uControllerSystem, uPCSSystem, uDieselGeneratorSystem, SysUtils,
+  uERSystem, uMimicsSystem, uControllerSystem, uPCSSystem, SysUtils,
   uInstructorSystem;
 
 procedure BeginSimulation;

@@ -564,7 +564,7 @@ begin
         rPmsCmd.ValueDob   := Value;
         rPmsCmd.ValueKind   := 'double';
 
-//        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
       end;
 
       if Assigned(FOnPMSCommand) then
@@ -586,7 +586,7 @@ begin
         rPmsCmd.ValueDob   := Value;
         rPmsCmd.ValueKind   := 'double';
 
-//        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
+        Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
       end;
 
       if Assigned(FOnPMSCommand) then

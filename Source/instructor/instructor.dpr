@@ -288,9 +288,7 @@ uses
   lognya in '..\datatrend\lognya.pas' {Form5},
   uFuelOilPanel in 'panels\uFuelOilPanel.pas' {frmFuelOilPanel},
   uBallastPanel in 'panels\uBallastPanel.pas' {frmBallastPanel},
-  uFreshWaterPanel in 'panels\uFreshWaterPanel.pas' {frmFreshWaterPanel},
-  uDieselGeneratorSystem in '..\DieselGenerator\uDieselGeneratorSystem.pas',
-  uDieselGeneratorNetwork in '..\DieselGenerator\uDieselGeneratorNetwork.pas';
+  uFreshWaterPanel in 'panels\uFreshWaterPanel.pas' {frmFreshWaterPanel};
 
 {$R *.res}
 {$R IPMS_Resource.res}
@@ -302,7 +300,7 @@ begin
   BeginSimulation;
   Application.CreateForm(TfrmInstructorPanel, frmInstructorPanel);
   Application.CreateForm(TfrmLogin, frmLogin);
-//  Application.CreateForm(TfrmFFSystem, frmFFSystem);
+  //  Application.CreateForm(TfrmFFSystem, frmFFSystem);
 //  Application.CreateForm(TfrmReport, frmReport);
 //  Application.CreateForm(TfrmSetpoint, frmSetpoint);
 //  Application.CreateForm(TfrmACSControl, frmACSControl);

@@ -100,7 +100,7 @@ begin
   inherited;
 
   FVREngineSocket.AutoReconnect := True;
-//  FMainSwitchBoardControllerSocket.AutoReconnect := True;
+  FMainSwitchBoardControllerSocket.AutoReconnect := True;
 end;
 
 procedure TMainSwitchBoardNetwork.StopNetwork;
@@ -110,8 +110,8 @@ begin
   FVREngineSocket.Disconnect;
   FVREngineSocket.AutoReconnect := false;
 
-//  FMainSwitchBoardControllerSocket.Disconnect;
-//  FMainSwitchBoardControllerSocket.AutoReconnect := false;
+  FMainSwitchBoardControllerSocket.Disconnect;
+  FMainSwitchBoardControllerSocket.AutoReconnect := false;
 
 end;
 

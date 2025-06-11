@@ -8,7 +8,7 @@ unit uDieselGeneratorNetwork;
 
 interface
 
-uses uNetworkManager, uTCPClient, ExtCtrls, uDataType;
+uses uNetworkManagerTimer, uTCPClient, ExtCtrls, uDataType;
 
 type
   TDieselGeneratorNetwork = class (TNetworkManager)

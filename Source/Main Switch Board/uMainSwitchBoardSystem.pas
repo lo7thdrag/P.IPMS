@@ -229,23 +229,23 @@ begin
 
   rec := @apRec^;
   {Tambahan}
-  FN := ChangeFileExt('TulisLog', '.log');
-  if not FileExists(FN) then
-  begin
-    CreateLogFile
-  end;
-
-  AssignFile(T, FN);
-  Append(T);
-  Writeln(T, (rec.pid.recID));
-  Writeln(T, (rec.GenSwitchID));
-  Writeln(T, (GetEnumName(typeInfo(E_PropsID ), Ord(rec.CommandPropsID))));
-  Writeln(T, 'Kind : ', rec.ValueKind);
-  Writeln(T, 'Bool : ', BoolToStr(rec.ValueBool, True));
-  Writeln(T, 'Int : ', rec.ValueInt.ToString);
-  Writeln(T, 'Double : ', rec.ValueDob.ToString);
-  Writeln(T, '---');
-  CloseFile(T);
+//  FN := ChangeFileExt('TulisLog', '.log');
+//  if not FileExists(FN) then
+//  begin
+//    CreateLogFile
+//  end;
+//
+//  AssignFile(T, FN);
+//  Append(T);
+//  Writeln(T, (rec.pid.recID));
+//  Writeln(T, (rec.GenSwitchID));
+//  Writeln(T, (GetEnumName(typeInfo(E_PropsID ), Ord(rec.CommandPropsID))));
+//  Writeln(T, 'Kind : ', rec.ValueKind);
+//  Writeln(T, 'Bool : ', BoolToStr(rec.ValueBool, True));
+//  Writeln(T, 'Int : ', rec.ValueInt.ToString);
+//  Writeln(T, 'Double : ', rec.ValueDob.ToString);
+//  Writeln(T, '---');
+//  CloseFile(T);
   {Tambahan}
 
   if FIdGenerator <> rec.GenSwitchID then
@@ -261,10 +261,10 @@ begin
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
     end;
-//    epPMSPower, epPMSFrequency, epPMSV, epPMSVoltage, epPMSCurrent:
-//    begin
-//      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDob)
-//    end;
+    epPMSPower, epPMSFrequency, epPMSV, epPMSVoltage, epPMSCurrent:
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDob)
+    end;
   end;
 end;
 
