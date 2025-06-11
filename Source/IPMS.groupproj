@@ -51,9 +51,6 @@
         <Projects Include="MCR Machine Right\MCRMachineRight.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Generator Panel\GeneratorPanel.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="Main Switch Board\MainSwitchBoard.dproj">
             <Dependencies/>
         </Projects>
@@ -224,15 +221,6 @@
     <Target Name="MCRMachineRight:Make">
         <MSBuild Projects="MCR Machine Right\MCRMachineRight.dproj" Targets="Make"/>
     </Target>
-    <Target Name="GeneratorPanel">
-        <MSBuild Projects="Generator Panel\GeneratorPanel.dproj"/>
-    </Target>
-    <Target Name="GeneratorPanel:Clean">
-        <MSBuild Projects="Generator Panel\GeneratorPanel.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="GeneratorPanel:Make">
-        <MSBuild Projects="Generator Panel\GeneratorPanel.dproj" Targets="Make"/>
-    </Target>
     <Target Name="MainSwitchBoard">
         <MSBuild Projects="Main Switch Board\MainSwitchBoard.dproj"/>
     </Target>
@@ -288,13 +276,13 @@
         <MSBuild Projects="Main Engine 2 SB\MainEngine2SB.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="EmergencyStop;PanelThrottle;AlarmRudder;pcsUI;ACS;IPMSLoader;instructor;ERSimulator;IPMSComponent;controller;setting;Mimics;TrendChart;DieselGenerator;MCRMachineLeft;MCRMachineRight;GeneratorPanel;MainSwitchBoard;Auxilary;MainEngine1PS;MainEngine2PS;MainEngine1SB;MainEngine2SB"/>
+        <CallTarget Targets="EmergencyStop;PanelThrottle;AlarmRudder;pcsUI;ACS;IPMSLoader;instructor;ERSimulator;IPMSComponent;controller;setting;Mimics;TrendChart;DieselGenerator;MCRMachineLeft;MCRMachineRight;MainSwitchBoard;Auxilary;MainEngine1PS;MainEngine2PS;MainEngine1SB;MainEngine2SB"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="EmergencyStop:Clean;PanelThrottle:Clean;AlarmRudder:Clean;pcsUI:Clean;ACS:Clean;IPMSLoader:Clean;instructor:Clean;ERSimulator:Clean;IPMSComponent:Clean;controller:Clean;setting:Clean;Mimics:Clean;TrendChart:Clean;DieselGenerator:Clean;MCRMachineLeft:Clean;MCRMachineRight:Clean;GeneratorPanel:Clean;MainSwitchBoard:Clean;Auxilary:Clean;MainEngine1PS:Clean;MainEngine2PS:Clean;MainEngine1SB:Clean;MainEngine2SB:Clean"/>
+        <CallTarget Targets="EmergencyStop:Clean;PanelThrottle:Clean;AlarmRudder:Clean;pcsUI:Clean;ACS:Clean;IPMSLoader:Clean;instructor:Clean;ERSimulator:Clean;IPMSComponent:Clean;controller:Clean;setting:Clean;Mimics:Clean;TrendChart:Clean;DieselGenerator:Clean;MCRMachineLeft:Clean;MCRMachineRight:Clean;MainSwitchBoard:Clean;Auxilary:Clean;MainEngine1PS:Clean;MainEngine2PS:Clean;MainEngine1SB:Clean;MainEngine2SB:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="EmergencyStop:Make;PanelThrottle:Make;AlarmRudder:Make;pcsUI:Make;ACS:Make;IPMSLoader:Make;instructor:Make;ERSimulator:Make;IPMSComponent:Make;controller:Make;setting:Make;Mimics:Make;TrendChart:Make;DieselGenerator:Make;MCRMachineLeft:Make;MCRMachineRight:Make;GeneratorPanel:Make;MainSwitchBoard:Make;Auxilary:Make;MainEngine1PS:Make;MainEngine2PS:Make;MainEngine1SB:Make;MainEngine2SB:Make"/>
+        <CallTarget Targets="EmergencyStop:Make;PanelThrottle:Make;AlarmRudder:Make;pcsUI:Make;ACS:Make;IPMSLoader:Make;instructor:Make;ERSimulator:Make;IPMSComponent:Make;controller:Make;setting:Make;Mimics:Make;TrendChart:Make;DieselGenerator:Make;MCRMachineLeft:Make;MCRMachineRight:Make;MainSwitchBoard:Make;Auxilary:Make;MainEngine1PS:Make;MainEngine2PS:Make;MainEngine1SB:Make;MainEngine2SB:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
