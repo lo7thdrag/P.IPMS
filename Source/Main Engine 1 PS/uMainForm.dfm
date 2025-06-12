@@ -18,6 +18,7 @@ object frmMainForm: TfrmMainForm
   PixelsPerInch = 96
   TextHeight = 13
   object tmrBlinkTimer: TTimer
+    Enabled = False
     OnTimer = tmrBlinkMe1Timer
     Left = 432
     Top = 440

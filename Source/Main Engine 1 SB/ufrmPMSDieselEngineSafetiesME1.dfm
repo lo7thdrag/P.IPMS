@@ -26206,7 +26206,6 @@ object frmPMSDieselEngineSafetiesME1: TfrmPMSDieselEngineSafetiesME1
       Width = 138
       Height = 113
       Radius = 25
-      OnChange = SwitchChannelATPChange
       SwitchPositions.Strings = (
         '9'
         '10'
@@ -26236,6 +26235,7 @@ object frmPMSDieselEngineSafetiesME1: TfrmPMSDieselEngineSafetiesME1
       Font.Name = 'Arial'
       Font.Style = []
       Color = 10064258
+      OnClick = switchATPChannelClick
     end
     object switchModeATP: TVrRotarySwitch
       Left = 48

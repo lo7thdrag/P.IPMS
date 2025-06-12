@@ -55,10 +55,13 @@ type
     imgSafetiesStopOverbiddenME1Shadow: TImage;
     imgEmergencyStopME1Shadow: TImage;
     procedure btnStartClick(Sender: TObject);
-    procedure btnClutchDeclutchClick(Sender: TObject);
+    procedure btnClutchClick(Sender: TObject);
     procedure btnEmergencyStopClick(Sender: TObject);
     procedure btnSafetiesStopClick(Sender: TObject);
     procedure imgStopME1Click(Sender: TObject);
+    procedure btnDeclutchClick(Sender: TObject);
+    procedure btnByPassP2P4OpenClick(Sender: TObject);
+    procedure btnByPassP2P4CloseClick(Sender: TObject);
   private
     FListener : TListeners;
     FIsBlinkState : Boolean;
@@ -91,9 +94,24 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmSignalingLightME1.btnClutchDeclutchClick(Sender: TObject);
+procedure TfrmSignalingLightME1.btnByPassP2P4CloseClick(Sender: TObject);
 begin
-  MainEngine1System.Clutch(C_PCS_GB_STARBOARD, True);
+  MainEngine1System.ByPassCloseP2P4(C_PCS_ME_STARBOARD);
+end;
+
+procedure TfrmSignalingLightME1.btnByPassP2P4OpenClick(Sender: TObject);
+begin
+  MainEngine1System.ByPassOpenP2P4(C_PCS_ME_STARBOARD);
+end;
+
+procedure TfrmSignalingLightME1.btnClutchClick(Sender: TObject);
+begin
+  MainEngine1System.Clutch(C_PCS_GB_STARBOARD);
+end;
+
+procedure TfrmSignalingLightME1.btnDeclutchClick(Sender: TObject);
+begin
+  MainEngine1System.Declutch(C_PCS_GB_STARBOARD);
 end;
 
 procedure TfrmSignalingLightME1.btnEmergencyStopClick(Sender: TObject);

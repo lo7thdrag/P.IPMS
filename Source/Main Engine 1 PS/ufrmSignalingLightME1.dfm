@@ -10548,7 +10548,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         8CABBB1B0A4BFCBBE752F11059C578488CF19018E32131C64362FF0789E964F5
         B644DA1D0000000049454E44AE426082}
       Visible = False
-      OnClick = btnClutchDeclutchClick
+      OnClick = btnClutchClick
     end
     object imgByPassOpenME1: TImage
       Left = 76
@@ -10741,6 +10741,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         454E44AE426082}
       Stretch = True
       Visible = False
+      OnClick = btnByPassP2P4OpenClick
     end
     object imgStartME1: TImage
       Left = 419
@@ -10846,6 +10847,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         E47F8679B57099F7EF7CE8E421049487FC0B280F5113953CEEC46A1C7197C6BB
         ADA48191EDCA84ABD6FFCF3704C94348B4501EA286F210359487A8A13C44CDDF
         66A811D7A77F01E70000000049454E44AE426082}
+      Visible = False
       OnClick = btnStartClick
     end
     object imgDeclutchME1: TImage
@@ -10972,7 +10974,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         F210C2FC094EF5A0041DD8528C0000000049454E44AE426082}
       Stretch = True
       Visible = False
-      OnClick = btnClutchDeclutchClick
+      OnClick = btnDeclutchClick
     end
     object imgByPassClosedME1: TImage
       Left = 421
@@ -11198,6 +11200,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         0F3D6E345EE113857B0000000049454E44AE426082}
       Stretch = True
       Visible = False
+      OnClick = btnByPassP2P4CloseClick
     end
     object imgSafetiesorECResetME1: TImage
       Left = 736
@@ -11751,12 +11754,12 @@ object frmSignalingLightME1: TfrmSignalingLightME1
       OnClick = imgStopME1Click
     end
     object imgClutchME1Shadow: TImage
-      Left = 75
+      Left = 76
       Top = 665
       Width = 144
       Height = 96
       Cursor = crHandPoint
-      OnClick = btnClutchDeclutchClick
+      OnClick = btnClutchClick
     end
     object imgByPassOpenME1Shadow: TImage
       Left = 75
@@ -11764,6 +11767,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
       Width = 144
       Height = 96
       Cursor = crHandPoint
+      OnClick = btnByPassP2P4OpenClick
     end
     object imgDeclutchME1Shadow: TImage
       Left = 419
@@ -11771,14 +11775,15 @@ object frmSignalingLightME1: TfrmSignalingLightME1
       Width = 144
       Height = 96
       Cursor = crHandPoint
-      OnClick = btnClutchDeclutchClick
+      OnClick = btnDeclutchClick
     end
     object imgByPassClosedME1Shadow: TImage
-      Left = 419
+      Left = 425
       Top = 793
       Width = 144
       Height = 96
       Cursor = crHandPoint
+      OnClick = btnByPassP2P4CloseClick
     end
     object imgSafetiesorECResetME1Shadow: TImage
       Left = 737

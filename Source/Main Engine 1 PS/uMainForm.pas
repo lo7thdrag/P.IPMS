@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
 
-  uListener, uFreezeFrom, uDataType, Vcl.ExtCtrls;
+  uSetting, uListener, uFreezeFrom, uDataType, Vcl.ExtCtrls;
 
 type
   TfrmMainForm = class(TForm)
@@ -46,6 +46,9 @@ uses
 
 procedure TfrmMainForm.FormCreate(Sender: TObject);
 begin
+  Setting   := TSetting.Create;
+  MainEngine1System := TMainEngine1System.Create;
+
   FListener := TListeners.Create;
   with MainEngine1System.Listener.Add('MAINENGINE 1') as TPropertyEventListener do
   begin
@@ -58,6 +61,9 @@ end;
 procedure TfrmMainForm.FormDestroy(Sender: TObject);
 begin
   FListener.Free;
+
+  MainEngine1System.Free;
+  Setting.Free;
 end;
 
 procedure TfrmMainForm.FormShow(Sender: TObject);
@@ -163,16 +169,41 @@ begin
       FIsStartBlink := Value;
       FIsStopBlink  := not Value;
       tmrBlinkTimer.Enabled := FIsStartBlink or FIsStopBlink;
-      frmSignalingLightME1.imgStartingAllowedME1.Visible := True;
-      frmPMSDieselEngineSafetiesME1.imgLedGreenRunSVAE.Visible := True;
-      frmPMSDieselEngineSafetiesME1.imgLedGreenRunSPH.Visible  := True;
-      frmPMSDieselEngineSafetiesME1.imgLedGreenRunRGM.Visible  := True;
-      frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible   := True;
-      frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible   := True;
-      frmPMSDieselEngineSafetiesME1.imgLedGreen1AE24.Visible   := True;
-      frmPMSDieselEngineSafetiesME1.imgLedGreen1AE15.Visible   := True;
-      frmPMSDieselEngineSafetiesME1.imgLedGreen1AE9.Visible    := True;
-      frmPMSDieselEngineSafetiesME1.imgLedGreenRunRSP.Visible  := True;
+
+      if FIsStartBlink then
+      begin
+        frmSignalingLightME1.imgStartingAllowedME1.Visible := True;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenRunSVAE.Visible := True;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenRunSPH.Visible  := True;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenRunRGM.Visible  := True;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible   := True;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible   := True;
+        frmPMSDieselEngineSafetiesME1.imgLedGreen1AE24.Visible   := True;
+        frmPMSDieselEngineSafetiesME1.imgLedGreen1AE15.Visible   := True;
+        frmPMSDieselEngineSafetiesME1.imgLedGreen1AE9.Visible    := True;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenRunRSP.Visible  := True;
+
+        frmPMSDieselEngineSafetiesME1.imgLedRedStopSPH.Visible   := False;
+        frmPMSDieselEngineSafetiesME1.imgLedRedStopRSP.Visible   := False;
+        frmPMSDieselEngineSafetiesME1.imgLedRedStopRGM.Visible   := False;
+      end
+      else if FIsStopBlink then
+      begin
+        frmSignalingLightME1.imgStartingAllowedME1.Visible := False;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenRunSVAE.Visible := False;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenRunSPH.Visible  := False;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenRunRGM.Visible  := False;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible   := False;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible   := False;
+        frmPMSDieselEngineSafetiesME1.imgLedGreen1AE24.Visible   := False;
+        frmPMSDieselEngineSafetiesME1.imgLedGreen1AE15.Visible   := False;
+        frmPMSDieselEngineSafetiesME1.imgLedGreen1AE9.Visible    := False;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenRunRSP.Visible  := False;
+
+        frmPMSDieselEngineSafetiesME1.imgLedRedStopSPH.Visible   := True;
+        frmPMSDieselEngineSafetiesME1.imgLedRedStopRSP.Visible   := True;
+        frmPMSDieselEngineSafetiesME1.imgLedRedStopRGM.Visible   := True;
+      end;
     end;
     epPCSCtrlLocal :
     begin
@@ -202,16 +233,41 @@ begin
     epPCSMEAirValve :
     begin
       if Value then
-        frmSignalingLightME1.imgAirValveOpenME1.Visible := True
+      begin
+        frmSignalingLightME1.imgAirValveOpenME1.Visible   := True;
+        frmSignalingLightME1.imgAirValveClosedME1.Visible := False;
+      end
       else
-        frmSignalingLightME1.imgAirValveOpenME1.Visible := False
+      begin
+        frmSignalingLightME1.imgAirValveClosedME1.Visible := True;
+        frmSignalingLightME1.imgAirValveOpenME1.Visible   := False;
+      end;
     end;
     epPCSMEGasValve :
     begin
       if Value then
-        frmSignalingLightME1.imgGazValveOpenME1.Visible := True
+      begin
+        frmSignalingLightME1.imgGazValveOpenME1.Visible   := True;
+        frmSignalingLightME1.imgGazValveClosedME1.Visible := False;
+      end
       else
-        frmSignalingLightME1.imgGazValveOpenME1.Visible := False
+      begin
+        frmSignalingLightME1.imgGazValveClosedME1.Visible := True;
+        frmSignalingLightME1.imgGazValveOpenME1.Visible   := False;
+      end;
+    end;
+    epPCSMEBypassP2P4 :
+    begin
+      if Value then
+      begin
+        frmSignalingLightME1.imgByPassOpenME1.Visible    := True;
+        frmSignalingLightME1.imgByPassClosedME1.Visible  := False;
+      end
+      else
+      begin
+        frmSignalingLightME1.imgByPassClosedME1.Visible  := True;
+        frmSignalingLightME1.imgByPassOpenME1.Visible    := False;
+      end;
     end;
     epPCSMESafetyShutdown :
     begin
@@ -339,7 +395,6 @@ begin
   FIsBlinkState := not FIsBlinkState;
 
   if FIsStartBlink then
-
     frmSignalingLightME1.imgStartME1.Visible := FIsBlinkState
   else
     frmSignalingLightME1.imgStartME1.Visible := FIsRunning;

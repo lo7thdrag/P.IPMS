@@ -18,8 +18,9 @@ type
 
   private
     FListener : TListeners;
-    CurrentHourCounter: Integer;
-    FIsRunningHours : Boolean;
+    CurrentHourCounter : Integer;
+    FRunningHourTemp   : Integer;
+    FIsRunningHours    : Boolean;
 
     procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
@@ -138,25 +139,25 @@ begin
           FreeAndNil(MainEngine2System.FFormFreezed[2]);
       end;
     end;
-    epPCSMERunningHourState :
-    begin
-      if Value >= 0 then
-      begin
-        CurrentHourCounter := Value;
-        frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Value);
-
-        if not FIsRunningHours then
-        begin
-          tmrRunningMETimer1.Enabled := True;
-          FIsRunningHours := True;
-        end;
-      end
-      else
-      begin
-          tmrRunningMETimer1.Enabled := False;
-          FIsRunningHours := False;
-      end;
-    end;
+//    epPCSMERunningHourState :
+//    begin
+//      if Value >= 0 then
+//      begin
+//        CurrentHourCounter := Value;
+//        frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Value);
+//
+//        if not FIsRunningHours then
+//        begin
+//          tmrRunningMETimer1.Enabled := True;
+//          FIsRunningHours := True;
+//        end;
+//      end
+//      else
+//      begin
+//        tmrRunningMETimer1.Enabled := False;
+//        FIsRunningHours := False;
+//      end;
+//    end;
     epPCSSpeedState :
     begin
       frmSignalingLightME2.vrtryswtchSpeedPS.SwitchPosition := Value;
@@ -1515,9 +1516,17 @@ end;
 
 procedure TfrmMainForm.tmrRunningMETimer1Timer(Sender: TObject);
 begin
-  if FIsRunningHours then
-    Inc(CurrentHourCounter);
-    frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(CurrentHourCounter);
+//  if FIsRunningHours then
+//    Inc(CurrentHourCounter);
+//    frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(CurrentHourCounter);
+
+  FRunningHourTemp := FRunningHourTemp + 1;
+  if FRunningHourTemp > 10 then
+  begin
+    FRunningHourTemp := 0;
+    FIsRunningHours := FIsRunningHours + 1;
+    frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(FIsRunningHours);
+  end;
 end;
 
 end.

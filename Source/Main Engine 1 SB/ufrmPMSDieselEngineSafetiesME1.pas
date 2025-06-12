@@ -162,12 +162,13 @@ type
     procedure AdjustSE3Change(Sender: TObject);
     procedure AdjustSE4Change(Sender: TObject);
     procedure SwitchMTP1Change(Sender: TObject);
-    procedure SwitchChannelATPChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure switchATPChannelClick(Sender: TObject);
   private
 
   public
     imgLeds: array[0..15] of TImage;
+    FBearingTemperatures: array[0..15] of Double;
   end;
 
 var
@@ -277,7 +278,7 @@ begin
   Self.Hide;
 end;
 
-procedure TfrmPMSDieselEngineSafetiesME1.SwitchChannelATPChange(Sender: TObject);
+procedure TfrmPMSDieselEngineSafetiesME1.switchATPChannelClick(Sender: TObject);
 var
   i, SwitchPositionIndex : Integer;
 begin
@@ -288,7 +289,7 @@ begin
 
   if (SwitchPositionIndex >= 0) and (SwitchPositionIndex <= 15) then
     imgLeds[SwitchPositionIndex].Visible := True;
-
+    lblTemperature.Caption := FloatToStr(FBearingTemperatures[SwitchPositionIndex]);
 end;
 
 procedure TfrmPMSDieselEngineSafetiesME1.SwitchMTP1Change(Sender: TObject);

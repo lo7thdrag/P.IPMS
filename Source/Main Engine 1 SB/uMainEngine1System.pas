@@ -20,11 +20,14 @@ type
     {Kontrol untuk panel PCS touch screen dengan Engine}
     procedure RunningStart(aPortStaboard : String);
     procedure StoppedStop(aPortStaboard : String);
-    procedure Clutch(aPortStaboard : string; aValue : Boolean);
+    procedure Clutch(aPortStaboard : string);
+    procedure Declutch(aPortStaboard : String);
     procedure ClutchAllowed(aPortStaboard : string; aValue : Boolean);
     procedure SafetiesStop(aPortStaboard: string);
     procedure EmergencyStop(aPortStaboard : String);
     procedure LocalRemote(aPortStaboard : String);
+    procedure ByPassOpenP2P4(aPortStaboard : String);
+    procedure ByPassCloseP2P4(aPortStaboard : String);
 
     procedure StartStopEngine(aValue : Boolean);
 
@@ -250,12 +253,56 @@ begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
     end;
 
-    // PMS
+    // PMS Safeties Diesel
     epPCSMEFuelRack :
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
     end;
     epPCSMESpeed :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear1:
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear2 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear3 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear4 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear5 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear6 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear7 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear8 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear9 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear10 :
+    begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+    end;
+    epPCSMETempBear11 :
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
     end;
@@ -317,12 +364,12 @@ begin
   recCmd.PortStaboardID := aPortStaboard;
   recCmd.CommandPropsID := epPCSMERunning;
   recCmd.CommandID      := C_ORD_ME_STOP;
-  recCmd.ValueBool      := True;
+  recCmd.ValueBool      := False;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
-procedure TMainEngine1System.Clutch(aPortStaboard: string; aValue : Boolean);
+procedure TMainEngine1System.Clutch(aPortStaboard: string);
 var
   recCmd : R_Common_PCS_Command;
 begin
@@ -330,14 +377,19 @@ begin
   recCmd.PortStaboardID := aPortStaboard;
   recCmd.CommandPropsID := epPCSGBClutchEngaged;
   recCmd.CommandID      := C_ORD_GB_CLUTCH_ENGAGED;
-  recCmd.ValueBool      := aValue;
+  recCmd.ValueBool      := True;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
 
+procedure TMainEngine1System.Declutch(aPortStaboard: String);
+var
+  recCmd : R_Common_PCS_Command;
+begin
   recCmd.PortStaboardID := aPortStaboard;
   recCmd.CommandPropsID := epPCSGBClutchEngaged;
   recCmd.CommandID      := C_ORD_GB_CLUTCH_ENGAGED;
-  recCmd.ValueBool      := not aValue;
+  recCmd.ValueBool      := False;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
@@ -391,4 +443,51 @@ begin
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
+
+procedure TMainEngine1System.ByPassCloseP2P4(aPortStaboard: String);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSMEBypassP2P4;
+  recCmd.ValueBool      := False;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSMEAirValve;
+  recCmd.ValueBool      := False;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSMEGasValve;
+  recCmd.ValueBool      := False;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TMainEngine1System.ByPassOpenP2P4(aPortStaboard: String);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSMEBypassP2P4;
+  recCmd.ValueBool      := True;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSMEAirValve;
+  recCmd.ValueBool      := True;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSMEGasValve;
+  recCmd.ValueBool      := True;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
 end.
