@@ -954,10 +954,36 @@ begin
     {Main Engine 1}
     epPCSMERunning :
     begin
-      ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(recERPCS.PortStaboardID);
-      FFlashingStartPS := recERPCS.ValueBool;
-      ERSystem.ERManager.EngineRoom.getPCSSystem.StoppedStop(recERPCS.PortStaboardID);
-      FFlashingStopPS := recERPCS.ValueBool;
+      if recERPCS.CommandID = C_ORD_ME_RUNSTART then
+      begin
+        ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(recERPCS.PortStaboardID);
+
+        if recERPCS.PortStaboardID = C_PCS_ME_PORTS then
+        begin
+          FFlashingStartPS := recERPCS.ValueBool;
+          FFlashingStopPS  := not recERPCS.ValueBool;
+        end
+        else if recERPCS.PortStaboardID = C_PCS_ME_STARBOARD then
+        begin
+          FFlashingStartSB := recERPCS.ValueBool;
+          FFlashingStopSB  := not recERPCS.ValueBool;
+        end;
+      end
+      else if recERPCS.CommandID = C_ORD_ME_STOP then
+      begin
+        ERSystem.ERManager.EngineRoom.getPCSSystem.StoppedStop(recERPCS.PortStaboardID);
+
+        if recERPCS.PortStaboardID = C_PCS_ME_PORTS then
+        begin
+          FFlashingStopPS  := recERPCS.ValueBool;
+          FFlashingStartPS := not recERPCS.ValueBool;
+        end
+        else if recERPCS.PortStaboardID = C_PCS_ME_STARBOARD then
+        begin
+          FFlashingStopSB  := recERPCS.ValueBool;
+          FFlashingStartSB := not recERPCS.ValueBool;
+        end;
+      end;
     end;
 
     epPCSGBClutchAllowed :        // Lamp Indicator
@@ -975,13 +1001,44 @@ begin
       main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
       main_engine.GasValve := recERPCS.ValueBool;
     end;
+    epPCSMEBypassP2P4 :
+    begin
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine.BypassP2P4 := recERPCS.ValueBool;
+    end;
 
     epPCSGBClutchEngaged :
     begin
-      gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
-      ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, recERPCS.ValueBool);
-      FFlashingClutchPS := recERPCS.ValueBool;
-      FFlashingDeclutchPS := recERPCS.ValueBool;
+      if recERPCS.CommandID = C_ORD_GB_CLUTCH_ENGAGED then
+      begin
+        gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
+        ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, recERPCS.ValueBool);
+        if recERPCS.PortStaboardID = C_PCS_GB_PORTS then
+        begin
+          FFlashingClutchPS   := recERPCS.ValueBool;
+          FFlashingDeclutchPS := not recERPCS.ValueBool;
+        end
+        else if recERPCS.PortStaboardID = C_PCS_GB_STARBOARD then
+        begin
+          FFlashingClutchSB   := recERPCS.ValueBool;
+          FFlashingDeclutchSB := not recERPCS.ValueBool;
+        end;
+      end
+      else
+      begin
+        gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
+        ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, recERPCS.ValueBool);
+        if recERPCS.PortStaboardID = C_PCS_GB_PORTS then
+        begin
+          FFlashingDeclutchPS := recERPCS.ValueBool;
+          FFlashingClutchPS   := not recERPCS.ValueBool;
+        end
+        else if recERPCS.PortStaboardID = C_PCS_GB_STARBOARD then
+        begin
+          FFlashingDeclutchSB := recERPCS.ValueBool;
+          FFlashingClutchSB   := not recERPCS.ValueBool;
+        end;
+      end;
     end;
 
     epPCSLeverEmergencyStop :      // Safeties Stop

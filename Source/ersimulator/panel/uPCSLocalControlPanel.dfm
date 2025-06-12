@@ -3347,6 +3347,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 35
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
             OnClick = btnStopClick
@@ -3357,6 +3358,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 35
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
             OnClick = btnStartClick
@@ -3367,6 +3369,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 35
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
             Color = clMaroon
@@ -3376,6 +3379,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 105
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Hint = 'Clutch'
             Caption = ''
             Flat = True
@@ -3387,6 +3391,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 105
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Hint = 'Declutch'
             Caption = ''
             Flat = True
@@ -3398,6 +3403,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 105
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
             OnClick = btnSafetiesStopClick
@@ -3408,6 +3414,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 105
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
             OnClick = btnEmergencStopClick
@@ -3418,8 +3425,10 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 176
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
+            OnClick = btnByPassOpenClick
             Color = clGreen
           end
           object btnP2P4Closed: TSpeedButtonImage
@@ -3427,8 +3436,10 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 176
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
+            OnClick = btnByPassClosedClick
             Color = clSilver
           end
           object lbl31: TLabel
@@ -3436,6 +3447,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 53
             Width = 37
             Height = 13
+            Cursor = crHandPoint
             Alignment = taCenter
             Caption = 'START'
             Font.Charset = DEFAULT_CHARSET
@@ -3452,6 +3464,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 123
             Width = 57
             Height = 13
+            Cursor = crHandPoint
             Alignment = taCenter
             Caption = 'DECLUTCH'
             Font.Charset = DEFAULT_CHARSET
@@ -3468,6 +3481,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 53
             Width = 32
             Height = 13
+            Cursor = crHandPoint
             Alignment = taCenter
             Caption = ' STOP'
             Font.Charset = DEFAULT_CHARSET
@@ -3484,6 +3498,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 123
             Width = 43
             Height = 13
+            Cursor = crHandPoint
             Alignment = taCenter
             Caption = 'CLUTCH'
             Font.Charset = DEFAULT_CHARSET
@@ -3500,6 +3515,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 116
             Width = 52
             Height = 26
+            Cursor = crHandPoint
             Alignment = taCenter
             Caption = 'SAFETIES'#13#10'   STOP'
             Font.Charset = DEFAULT_CHARSET
@@ -3516,6 +3532,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 117
             Width = 65
             Height = 26
+            Cursor = crHandPoint
             Alignment = taCenter
             Caption = 'EMERGENCY'#13#10' STOP'
             Font.Charset = DEFAULT_CHARSET
@@ -3532,6 +3549,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 40
             Width = 52
             Height = 39
+            Cursor = crHandPoint
             Alignment = taCenter
             Caption = 'SAFETIES'#13#10'  EN CR'#13#10'  RESET'
             Font.Charset = DEFAULT_CHARSET
@@ -3541,6 +3559,42 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Style = [fsBold]
             ParentFont = False
             Transparent = True
+          end
+          object Label6: TLabel
+            Tag = 1
+            Left = 35
+            Top = 180
+            Width = 46
+            Height = 39
+            Cursor = crHandPoint
+            Alignment = taCenter
+            Caption = 'BY PASS'#13#10' P2-P4'#13#10' OPEN'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            OnClick = btnByPassOpenClick
+          end
+          object Label7: TLabel
+            Tag = 1
+            Left = 121
+            Top = 180
+            Width = 46
+            Height = 39
+            Cursor = crHandPoint
+            Alignment = taCenter
+            Caption = 'BY PASS'#13#10' P2-P4'#13#10'CLOSED'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            OnClick = btnByPassClosedClick
           end
           object btnAlarmPropulsion: TVrDemoButton
             Tag = 1
@@ -3579,6 +3633,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Hint = 'Heater'
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
@@ -3929,6 +3984,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Hint = 'Heater'
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
@@ -11840,6 +11896,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Hint = 'Prelub'
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
@@ -12190,6 +12247,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Hint = 'Prelub'
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
@@ -12573,6 +12631,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Hint = 'Preheating Pump'
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
@@ -12923,6 +12982,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Hint = 'Preheating Pump'
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
@@ -13306,6 +13366,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
               00003C0000000100180000000000302A00000000000000000000000000000000
@@ -13654,6 +13715,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
               00003C0000000100180000000000302A00000000000000000000000000000000
@@ -14425,10 +14487,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
     object tsSB: TTabSheet
       Caption = 'LCP Startboard Side'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pnlLCPSB: TPanel
         Left = 0
         Top = 0
@@ -18536,6 +18594,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 35
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
             OnClick = btnStopClick
@@ -18547,9 +18606,10 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 35
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
-            OnClick = btnStopClick
+            OnClick = btnStartClick
             Color = clGreen
           end
           object btnAlarm_Accept3: TSpeedButtonImage
@@ -18558,6 +18618,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 35
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
             Color = clMaroon
@@ -18568,6 +18629,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 105
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Hint = 'Clutch'
             Caption = ''
             Flat = True
@@ -18580,6 +18642,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 105
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Hint = 'Declutch'
             Caption = ''
             Flat = True
@@ -18592,6 +18655,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 105
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
             OnClick = btnSafetiesStopClick
@@ -18603,29 +18667,34 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 105
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
             OnClick = btnEmergencStopClick
             Color = clGreen
           end
-          object btnAlarm_Accept8: TSpeedButtonImage
+          object btnByPassOpen: TSpeedButtonImage
             Tag = 1
             Left = 25
             Top = 176
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
+            OnClick = btnByPassOpenClick
             Color = clGreen
           end
-          object btnAlarm_Accept9: TSpeedButtonImage
+          object btnByPassClosed: TSpeedButtonImage
             Tag = 1
             Left = 110
             Top = 176
             Width = 66
             Height = 49
+            Cursor = crHandPoint
             Caption = ''
             Flat = True
+            OnClick = btnByPassClosedClick
             Color = clSilver
           end
           object lbl53: TLabel
@@ -18634,6 +18703,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 53
             Width = 37
             Height = 13
+            Cursor = crHandPoint
             Caption = 'START'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -18650,6 +18720,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 123
             Width = 57
             Height = 13
+            Cursor = crHandPoint
             Caption = 'DECLUTCH'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -18666,6 +18737,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 53
             Width = 32
             Height = 13
+            Cursor = crHandPoint
             Caption = ' STOP'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -18682,6 +18754,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 123
             Width = 46
             Height = 13
+            Cursor = crHandPoint
             Alignment = taCenter
             Caption = ' CLUTCH'
             Font.Charset = DEFAULT_CHARSET
@@ -18699,6 +18772,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 116
             Width = 52
             Height = 26
+            Cursor = crHandPoint
             Alignment = taCenter
             Caption = 'SAFETIES'#13#10'   STOP'
             Font.Charset = DEFAULT_CHARSET
@@ -18716,6 +18790,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 117
             Width = 65
             Height = 26
+            Cursor = crHandPoint
             Alignment = taCenter
             Caption = 'EMERGENCY'#13#10' STOP'
             Font.Charset = DEFAULT_CHARSET
@@ -18733,8 +18808,44 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 40
             Width = 52
             Height = 39
+            Cursor = crHandPoint
             Alignment = taCenter
             Caption = 'SAFETIES'#13#10'  EN CR'#13#10'  RESET'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+          end
+          object Label4: TLabel
+            Tag = 1
+            Left = 32
+            Top = 180
+            Width = 46
+            Height = 39
+            Cursor = crHandPoint
+            Alignment = taCenter
+            Caption = 'BY PASS'#13#10' P2-P4'#13#10' OPEN'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            OnClick = btnByPassOpenClick
+          end
+          object Label5: TLabel
+            Tag = 1
+            Left = 118
+            Top = 180
+            Width = 46
+            Height = 39
+            Cursor = crHandPoint
+            Alignment = taCenter
+            Caption = 'BY PASS'#13#10' P2-P4'#13#10'CLOSED'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -26330,6 +26441,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Hint = 'Heater'
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
@@ -26681,6 +26793,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Hint = 'Heater'
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
@@ -27066,6 +27179,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Hint = 'Prelub'
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
@@ -27417,6 +27531,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Hint = 'Prelub'
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
@@ -27802,6 +27917,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
               00003C0000000100180000000000302A00000000000000000000000000000000
@@ -28151,6 +28267,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
               00003C0000000100180000000000302A00000000000000000000000000000000
@@ -28533,6 +28650,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Hint = 'Preheating Pump'
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00
@@ -28884,6 +29002,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Top = 70
             Width = 80
             Height = 80
+            Cursor = crHandPoint
             Hint = 'Preheating Pump'
             Picture.Data = {
               07544269746D6170662A0000424D662A00000000000036000000280000003C00

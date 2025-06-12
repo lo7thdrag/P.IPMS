@@ -111,8 +111,8 @@ type
     btnDeclutchSB: TSpeedButtonImage;
     btnSafetiesStopSB: TSpeedButtonImage;
     btnEmergencStopSB: TSpeedButtonImage;
-    btnAlarm_Accept8: TSpeedButtonImage;
-    btnAlarm_Accept9: TSpeedButtonImage;
+    btnByPassOpen: TSpeedButtonImage;
+    btnByPassClosed: TSpeedButtonImage;
     lbl53: TLabel;
     lbl54: TLabel;
     lbl55: TLabel;
@@ -269,6 +269,10 @@ type
     btnSB_Auto3: TVrDemoButton;
     btnSB_Stop3: TVrDemoButton;
     btnSB_Start3: TVrDemoButton;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure vrtryswtchChange(Sender: TObject);
     procedure btnONClick(Sender: TObject);
@@ -289,6 +293,8 @@ type
     procedure vrtryswtchRemotePSClick(Sender: TObject);
     procedure vrtryswtchSpeedPSClick(Sender: TObject);
     procedure vrtryswtchSTC_PSClick(Sender: TObject);
+    procedure btnByPassOpenClick(Sender: TObject);
+    procedure btnByPassClosedClick(Sender: TObject);
 
   private
     aplctnvntsKey : TApplicationEvents;
@@ -307,6 +313,8 @@ type
 
     cppHydraulicPumpID, cppConditionStatus : string;
     cppConditionStatusTag,counter : Integer;
+    counterStartPS, counterStartSB, counterStopPS, counterStopSB, counterClutchPS, counterClutchSB,
+    counterDeclutchPS, counterDeclutchSB : Integer;
     FFlashingStartPS, FFlashingStartSB, FFlashingStopPS, FFlashingStopSB,
     FFlashingClutchPS, FFlashingClutchSB, FFlashingDeclutchPS, FFlashingDeclutchSB : Boolean;
 
@@ -452,6 +460,38 @@ begin
   else if (TButton(Sender).Tag = 1) and main_engine_SB.LocalControl then
   begin
     main_engine_SB.EmergencyStop := True;
+  end;
+end;
+
+procedure TfrmPCSLocalControlPanel.btnByPassClosedClick(Sender: TObject);
+begin
+  if (TButton(Sender).Tag = 0) and main_engine_PS.LocalControl then
+  begin
+    main_engine_PS.BypassP2P4 := False;
+    main_engine_PS.AirValve   := False;
+    main_engine_PS.GasValve   := False;
+  end
+  else if (TButton(Sender).Tag = 1) and main_engine_SB.LocalControl then
+  begin
+    main_engine_SB.BypassP2P4 := False;
+    main_engine_SB.AirValve   := False;
+    main_engine_SB.GasValve   := False;
+  end;
+end;
+
+procedure TfrmPCSLocalControlPanel.btnByPassOpenClick(Sender: TObject);
+begin
+  if (TButton(Sender).Tag = 0) and main_engine_PS.LocalControl then
+  begin
+    main_engine_PS.BypassP2P4 := True;
+    main_engine_PS.AirValve   := True;
+    main_engine_PS.GasValve   := True;
+  end
+  else if (TButton(Sender).Tag = 1) and main_engine_SB.LocalControl then
+  begin
+    main_engine_SB.BypassP2P4 := True;
+    main_engine_SB.AirValve   := True;
+    main_engine_SB.GasValve   := True;
   end;
 end;
 
@@ -949,14 +989,14 @@ begin
         begin
           if Value then
           begin
-            FFlashingStartPS := False;
-            FFlashingStopPS  := True;
+            FFlashingStartPS := True;
+            FFlashingStopPS  := False;
             img18.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
           end
           else
           begin
-            FFlashingStartPS := True;
-            FFlashingStopPS  := False;
+            FFlashingStartPS := False;
+            FFlashingStopPS  := True;
             img18.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
           end;
         end;
@@ -1028,37 +1068,37 @@ begin
         begin
           if Value then
           begin
-            FFlashingStartSB := False;
-            FFlashingStopSB  := True;
-            img18.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
+            FFlashingStartSB := True;
+            FFlashingStopSB  := False;
+            img30.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
           end
           else
           begin
-            FFlashingStartSB := True;
-            FFlashingStopSB  := False;
-            img18.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
+            FFlashingStartSB := False;
+            FFlashingStopSB  := True;
+            img30.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
           end;
         end;
         epPCSGBClutchAllowed :
         begin
           if Value then
-              img21.Picture.LoadFromFile(fAlarmIndicatorGreenOn)
+            img31.Picture.LoadFromFile(fAlarmIndicatorGreenOn)
           else
-              img21.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
+            img31.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
         end;
         epPCSMEAirValve :
         begin
           if Value then
-            img1.Picture.LoadFromFile(fAlarmIndicatorBlueOn)
+            img32.Picture.LoadFromFile(fAlarmIndicatorBlueOn)
           else
-            img1.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+            img32.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
         end;
         epPCSMEGasValve :
         begin
           if Value then
-            img2.Picture.LoadFromFile(fAlarmIndicatorBlueOn)
+            img33.Picture.LoadFromFile(fAlarmIndicatorBlueOn)
           else
-            img2.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+            img33.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
         end;
         epPCSGBClutchEngaged :
         begin
@@ -1120,6 +1160,7 @@ begin
       end;
     end;
   end;
+  {$ENDREGION}
 end;
 
 procedure TfrmPCSLocalControlPanel.FlashingIndicatorClutch(SenderOn,
@@ -1130,7 +1171,7 @@ begin
   if counter < 5 then
   begin
     if TSpeedButtonImage(SenderOn).Color = clGray then
-      TSpeedButtonImage(SenderOn).Color := clSilver
+      TSpeedButtonImage(SenderOn).Color := clWhite
     else
       TSpeedButtonImage(SenderOn).Color := clGray;
   end;
@@ -1139,7 +1180,7 @@ begin
   begin
     if aOnOff then
     begin
-      TSpeedButtonImage(SenderOn).Color := clSilver;
+      TSpeedButtonImage(SenderOn).Color := clWhite;
       TSpeedButtonImage(SenderOff).Color:= clGray;
     end
     else
@@ -1159,63 +1200,76 @@ end;
 
 procedure TfrmPCSLocalControlPanel.FlashingIndicatorStart(SenderOn,SenderOff: TSpeedButtonImage;
   aOnOff: Boolean);
+var
+  CurrentCounter : PInteger;
 begin
-  counter := counter + 1;
+  if SenderOn.Tag = 0 then
+    CurrentCounter := @counterStartPS
+  else
+    CurrentCounter := @counterStartSB;
 
-  if counter < 5 then
+  Inc(CurrentCounter^);
+
+  if CurrentCounter^ < 5 then
   begin
-    if TSpeedButtonImage(SenderOn).Color = clGreen then
-      TSpeedButtonImage(SenderOn).Color := clLime
+    if SenderOn.Color = clGreen then
+      SenderOn.Color := clLime
     else
-      TSpeedButtonImage(SenderOn).Color := clGreen;
+      SenderOn.Color := clGreen;
   end;
 
-  if counter > 5 then
+  if CurrentCounter^ > 5 then
   begin
     if aOnOff then
     begin
-      TSpeedButtonImage(SenderOn).Color := clLime;
-      TSpeedButtonImage(SenderOff).Color:= clMaroon;
+      SenderOn.Color  := clLime;
+      SenderOff.Color := clMaroon;
     end
     else
-      TSpeedButtonImage(SenderOn).Color := clGreen;
+      SenderOn.Color := clGreen;
 
-    counter := 0;
+    CurrentCounter^ := 0;
     if SenderOn.Tag = 0 then
-      FFlashingStartPS := not aOnOff
+       FFlashingStartPS := not aOnOff
     else if SenderOn.Tag = 1 then
-      FFlashingStartSB := not aOnOff;
+       FFlashingStartSB := not aOnOff;
   end;
 end;
 
-procedure TfrmPCSLocalControlPanel.FlashingIndicatorStop(SenderOn,
-  SenderOff: TSpeedButtonImage; aOnOff: Boolean);
+procedure TfrmPCSLocalControlPanel.FlashingIndicatorStop(SenderOn, SenderOff: TSpeedButtonImage; aOnOff: Boolean);
+var
+  CurrentCounter : PInteger;
 begin
-  counter := counter + 1;
+  if SenderOn.Tag = 0 then
+    CurrentCounter := @counterStopPS
+  else
+    CurrentCounter := @counterStopSB;
 
-  if counter < 5 then
+  Inc(CurrentCounter^);
+
+  if CurrentCounter^ < 5 then
   begin
-    if TSpeedButtonImage(SenderOn).Color = clMaroon then
-      TSpeedButtonImage(SenderOn).Color := clRed
+    if SenderOn.Color = clMaroon then
+      SenderOn.Color := clRed
     else
-      TSpeedButtonImage(SenderOn).Color := clMaroon;
+      SenderOn.Color := clMaroon;
   end;
 
-  if counter > 5 then
+  if CurrentCounter^ > 5 then
   begin
     if aOnOff then
     begin
-      TSpeedButtonImage(SenderOn).Color := clRed;
-      TSpeedButtonImage(SenderOff).Color:= clGreen;
+      SenderOn.Color  := clRed;
+      SenderOff.Color := clGreen;
     end
     else
-      TSpeedButtonImage(SenderOn).Color := clMaroon;
+      SenderOn.Color := clMaroon;
 
-    counter := 0;
+    CurrentCounter^ := 0;
     if SenderOn.Tag = 0 then
-      FFlashingStopPS := not aOnOff
+       FFlashingStopPS := not aOnOff
     else if SenderOn.Tag = 1 then
-      FFlashingStopSB := not aOnOff;
+       FFlashingStopSB := not aOnOff;
   end;
 end;
 
@@ -1279,45 +1333,45 @@ end;
 
 procedure TfrmPCSLocalControlPanel.LampIndicator;
 begin
-  if main_engine_PS.PrimLOPump then
-    imgPrelubeON_PS.Picture.LoadFromFile(fIndicatorOn)
-  else
-    imgPrelubeON_PS.Picture.LoadFromFile(fIndicatorOff);
+//  if main_engine_PS.PrimLOPump then
+//    imgPrelubeON_PS.Picture.LoadFromFile(fIndicatorOn)
+//  else
+//    imgPrelubeON_PS.Picture.LoadFromFile(fIndicatorOff);
 
-  if main_engine_SB.PrimLOPump then
-    imgPrelubeON_SB.Picture.LoadFromFile(fIndicatorOn)
-  else
-    imgPrelubeON_SB.Picture.LoadFromFile(fIndicatorOff);
-
-  if main_engine_PS.PreHeatingPump then
-    imgPreheatingPumpOn_PS.Picture.LoadFromFile(fIndicatorOn)
-  else
-    imgPreheatingPumpOn_PS.Picture.LoadFromFile(fIndicatorOff);
-
-  if main_engine_SB.PreHeatingPump then
-    imgPreheatingPumpOn_SB.Picture.LoadFromFile(fIndicatorOn)
-  else
-    imgPreheatingPumpOn_SB.Picture.LoadFromFile(fIndicatorOff);
-
-  if main_engine_PS.Heater then
-    imgHeaterON_PS.Picture.LoadFromFile(fIndicatorOn)
-  else
-    imgHeaterON_PS.Picture.LoadFromFile(fIndicatorOff);
-
-  if main_engine_SB.Heater then
-    imgHeaterON_SB.Picture.LoadFromFile(fIndicatorOn)
-  else
-    imgHeaterON_SB.Picture.LoadFromFile(fIndicatorOff);
-
-  if gearbox_PS.StandbyPump then
-    imgStandByPumpGBON_PS.Picture.LoadFromFile(fIndicatorOn)
-  else
-    imgStandByPumpGBON_PS.Picture.LoadFromFile(fIndicatorOff);
-
-  if gearbox_SB.StandbyPump then
-    imgStandByPumpGBON_SB.Picture.LoadFromFile(fIndicatorOn)
-  else
-    imgStandByPumpGBON_SB.Picture.LoadFromFile(fIndicatorOff);
+//  if main_engine_SB.PrimLOPump then
+//    imgPrelubeON_SB.Picture.LoadFromFile(fIndicatorOn)
+//  else
+//    imgPrelubeON_SB.Picture.LoadFromFile(fIndicatorOff);
+//
+//  if main_engine_PS.PreHeatingPump then
+//    imgPreheatingPumpOn_PS.Picture.LoadFromFile(fIndicatorOn)
+//  else
+//    imgPreheatingPumpOn_PS.Picture.LoadFromFile(fIndicatorOff);
+//
+//  if main_engine_SB.PreHeatingPump then
+//    imgPreheatingPumpOn_SB.Picture.LoadFromFile(fIndicatorOn)
+//  else
+//    imgPreheatingPumpOn_SB.Picture.LoadFromFile(fIndicatorOff);
+//
+//  if main_engine_PS.Heater then
+//    imgHeaterON_PS.Picture.LoadFromFile(fIndicatorOn)
+//  else
+//    imgHeaterON_PS.Picture.LoadFromFile(fIndicatorOff);
+//
+//  if main_engine_SB.Heater then
+//    imgHeaterON_SB.Picture.LoadFromFile(fIndicatorOn)
+//  else
+//    imgHeaterON_SB.Picture.LoadFromFile(fIndicatorOff);
+//
+//  if gearbox_PS.StandbyPump then
+//    imgStandByPumpGBON_PS.Picture.LoadFromFile(fIndicatorOn)
+//  else
+//    imgStandByPumpGBON_PS.Picture.LoadFromFile(fIndicatorOff);
+//
+//  if gearbox_SB.StandbyPump then
+//    imgStandByPumpGBON_SB.Picture.LoadFromFile(fIndicatorOn)
+//  else
+//    imgStandByPumpGBON_SB.Picture.LoadFromFile(fIndicatorOff);
 
   if main_engine_PS.ReadyForUse then
     img18.Picture.LoadFromFile(fAlarmIndicatorGreenOn)
