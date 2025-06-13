@@ -35,7 +35,7 @@ type
   public
     FFormFreezed : array[0..2] of TfrmFreeze;
 
-    ControlRemotePS, ControlRemoteSB: Boolean;
+    ControlRemoteSB: Boolean;
 
     constructor Create;
     destructor Destroy;override;
@@ -174,7 +174,7 @@ begin
       if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
-        ControlRemotePS := rec.ValueBool;
+        ControlRemoteSB := rec.ValueBool;
       end;
     end;
 
@@ -183,7 +183,7 @@ begin
       if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
-        ControlRemotePS := rec.ValueBool;
+        ControlRemoteSB := rec.ValueBool;
       end;
     end;
 
@@ -192,7 +192,7 @@ begin
       if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
-        ControlRemotePS := rec.ValueBool;
+        ControlRemoteSB := rec.ValueBool;
       end;
     end;
 
@@ -214,27 +214,42 @@ begin
 
     epPCSMERunningHourState :            // Awalnya menggunakan epPCSMERunningHours
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
+      end;
     end;
 
     epPCSSpeedState :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
+      end;
     end;
 
     epPCSMESTCInManual :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
+      end;
     end;
 
     // Gauges
     epPCSMEPressFWHTInlet :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEPressAirInlet :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
 
     // HMI
@@ -367,297 +382,513 @@ begin
 
     epPCSMETurboChargerSpeedA :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
     end;
 
     epPCSMETurboChargerSpeedB :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
 
     epPCSGBPCSClutchInterlock :
     begin
-     FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
      // Line Exhaust A
     epPCSMETempExhCylA1 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylA1 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylA2 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylA2 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylA3 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylA3 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylA4 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylA4 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylA5 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylA5 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylA6 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylA6 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylA7 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylA7 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylA8 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylA8 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylA9 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylA9 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylA10 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylA10 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempTCInletA :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempTCOutletA :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEAvgTempA :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMECompProbA :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     // Line Exhaust B
     epPCSMETempExhCylB1 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylB1 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylB2 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylB2 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylB3 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylB3 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylB4 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylB4 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylB5 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylB5 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylB6 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylB6 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylB7 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylB7 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylB8 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylB8 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylB9 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylB9 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempExhCylB10 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEDevTempExhCylB10 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempTCInletB :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempTCOutletB :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEAvgTempB :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMECompProbB :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     // Engine Bearing
     epPCSMETempBear1 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear2 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear3 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear4 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear5 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear6 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear7 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear8 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear9 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear10 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear11 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     // PCOT dan Crankin
     epPCSMETempConRodBear1 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempConRodBear2 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempConRodBear3 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempConRodBear4 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempConRodBear5 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempConRodBear6 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempConRodBear7 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempConRodBear8 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempConRodBear9 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempConRodBear10 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
   end;
 end;
@@ -670,30 +901,21 @@ begin
   client := FMainEngine2Network.AsClients.Get('AsSimEngineClient');
   if Assigned(client) then
   begin
-    with  client do
-    begin
-      RegisterProcedure(C_PCS_COMMAND, NetEventMainEngine2Command, SizeOf(R_Common_PCS_Command));
-    end;
+    client.RegisterProcedure(C_PCS_COMMAND, NetEventMainEngine2Command, SizeOf(R_Common_PCS_Command));
   end;
 
   { set all network event here.. as instructor client}
   client := FMainEngine2Network.AsClients.Get('AsInstructorClient');
   if Assigned(client) then
   begin
-    with  client do
-    begin
-      RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
-    end;
+    client.RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
   end;
 
   client := FMainEngine2Network.AsClients.Get('AsControllerClient');
   if Assigned(client) then
   begin
-   with client do
-   begin
     {kirim paket dari ME ke controller}
-     RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
-   end;
+    client.RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
   end;
 end;
 

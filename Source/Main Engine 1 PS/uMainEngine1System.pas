@@ -171,7 +171,10 @@ begin
   case rec.CommandPropsID of
     epPCSMESafetyStop:
     begin
-      FLIstener.TriggerEvents(Self, rec.CommandPropsID, rec.ValueBool);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self, rec.CommandPropsID, rec.ValueBool);
+      end;
     end;
 
     epPCSMERunning :
@@ -235,83 +238,140 @@ begin
     end;
     epPCSMESafetyShutdown :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
     end;
     epPCSMEManHandleAtStop :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
     end;
     epPCSMESTCSequenceFail :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
     end;
 
     // Gauges
     epPCSMEStartingAir :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMELOPressInlet :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMEPressFOInlet :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
 
     // PMS Safeties Diesel
     epPCSMEFuelRack :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMESpeed :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear1:
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear2 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear3 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear4 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear5 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear6 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear7 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear8 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear9 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear10 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
     epPCSMETempBear11 :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
     end;
   end;
 end;
@@ -324,30 +384,21 @@ begin
   client := FMainEngine1Network.AsClients.Get('AsSimEngineClient');
   if Assigned(client) then
   begin
-    with  client do
-    begin
-      RegisterProcedure(C_PCS_COMMAND, NetEventMainEngine1Command, SizeOf(R_Common_PCS_Command));
-    end;
+    client.RegisterProcedure(C_PCS_COMMAND, NetEventMainEngine1Command, SizeOf(R_Common_PCS_Command));
   end;
 
   { set all network event here.. as instructor client}
   client := FMainEngine1Network.AsClients.Get('AsInstructorClient');
   if Assigned(client) then
   begin
-    with client do
-    begin
-      RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
-    end;
+    client.RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
   end;
 
    client := FMainEngine1Network.AsClients.Get('AsControllerClient');
    if Assigned(client) then
    begin
-     with client do
-     begin
-      {kirim paket dari ME ke controller}
-       RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
-     end;
+    {kirim paket dari ME ke controller}
+    client.RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
    end;
 end;
 

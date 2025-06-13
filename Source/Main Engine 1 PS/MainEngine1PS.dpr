@@ -4,7 +4,6 @@ uses
   Vcl.Forms,
   uMainForm in 'uMainForm.pas' {frmMainForm},
   ufrmSetofPressureGaugesME1 in 'ufrmSetofPressureGaugesME1.pas' {frmSetofPressureGaugesME1},
-  ufrmSignalingLightME1 in 'ufrmSignalingLightME1.pas' {frmSignalingLightME1},
   ufrmPMSDieselEngineSafetiesME1 in 'ufrmPMSDieselEngineSafetiesME1.pas' {frmPMSDieselEngineSafetiesME1},
   uDataType in '..\common\uDataType.pas',
   uFreezeFrom in '..\common\uFreezeFrom.pas' {frmFreeze},
@@ -22,7 +21,8 @@ uses
   uTCPDatatype in '..\network\uTCPDatatype.pas',
   uTCPServer in '..\network\uTCPServer.pas',
   uMainEngine1Network in 'uMainEngine1Network.pas',
-  uMainEngine1System in 'uMainEngine1System.pas';
+  uMainEngine1System in 'uMainEngine1System.pas',
+  ufrmSignalingLightME1 in 'ufrmSignalingLightME1.pas' {frmSignalingLightME1};
 
 {$R *.res}
 
@@ -30,12 +30,9 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
 
-  Setting   := TSetting.Create;
-  MainEngine1System := TMainEngine1System.Create;
-
   Application.CreateForm(TfrmMainForm, frmMainForm);
-
   Application.CreateForm(TfrmSetofPressureGaugesME1, frmSetofPressureGaugesME1);
+  Application.CreateForm(TfrmSignalingLightME1, frmSignalingLightME1);
   frmSetofPressureGaugesME1.Show;
   Application.CreateForm(TfrmSignalingLightME1, frmSignalingLightME1);
   frmSignalingLightME1.Show;

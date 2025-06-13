@@ -43,6 +43,7 @@ begin
     ServerAddress := Setting.SimEngineServer;
     ServerPort    := Setting.SimEnginePort;
     AutoReconnect := True;
+    IsLogged      := True;
   end;
   FVREngineSocket := AsClients.Get('AsSimEngineClient');
 
@@ -51,6 +52,7 @@ begin
     ServerAddress := Setting.InstructorHost;
     ServerPort    := Setting.InstructorPort;
     AutoReconnect := True;
+    IsLogged      := True;
   end;
 
   with CreateClientSocket('AsControllerClient') do
@@ -58,8 +60,10 @@ begin
     ServerAddress := Setting.LPUServer;
     ServerPort    := Setting.LPUPort;
     AutoReconnect := True;
+    IsLogged      := True;
   end;
 
+  FVREngineSocket := AsClients.Get('AsSimEngineClient');
   FMainEngineControllerSocket := AsClients.Get('AsControllerClient');
 end;
 

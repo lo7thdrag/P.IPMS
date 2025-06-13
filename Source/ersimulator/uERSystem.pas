@@ -692,7 +692,7 @@ begin
       rPCSCmd.CommandPropsID  := PropsID;
       rPCSCmd.ValueDouble     := Value;
 
-//      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
 
       if Assigned(FOnPCSCommand) then
         FOnPCSCommand(rPCSCmd);
@@ -1056,7 +1056,7 @@ begin
     //Signaling
     epPCSMERemoteControl:
     begin
-       ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, recERPCS.ValueBool)
+      ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, recERPCS.ValueBool)
     end;
 
     epPCSSpeedState :

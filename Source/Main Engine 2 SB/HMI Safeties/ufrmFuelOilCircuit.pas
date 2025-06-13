@@ -35,6 +35,13 @@ type
     pnlTime: TPanel;
     lblTime: TLabel;
     Timer1: TTimer;
+    Label31: TLabel;
+    Label32: TLabel;
+    Label33: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    Label36: TLabel;
+    Label37: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);

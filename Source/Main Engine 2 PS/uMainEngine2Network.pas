@@ -43,6 +43,7 @@ begin
     ServerAddress := Setting.SimEngineServer;
     ServerPort    := Setting.SimEnginePort;
     AutoReconnect := True;
+    IsLogged      := True;
   end;
   FVREngineSocket := AsClients.Get('AsSimEngineClient');
 
@@ -60,6 +61,7 @@ begin
     AutoReconnect := True;
   end;
 
+  FVREngineSocket := AsClients.Get('AsSimEngineClient');
   FMainEngineControllerSocket := AsClients.Get('AsControllerClient');
 end;
 

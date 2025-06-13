@@ -159,11 +159,13 @@ begin
     end;
     epPCSSpeedState :
     begin
-      frmSignalingLightME2.vrtryswtchSpeedSB.SwitchPosition := Value;
+      if Assigned(frmSignalingLightME2) then
+        frmSignalingLightME2.vrtryswtchSpeedSB.SwitchPosition := Value;
     end;
     epPCSMESTCInManual :
     begin
-      frmSignalingLightME2.vrtryswtchSTC_SB.SwitchPosition := Value;
+      if Assigned(frmSignalingLightME2) then
+        frmSignalingLightME2.vrtryswtchSTC_SB.SwitchPosition := Value;
     end;
   end;
 end;

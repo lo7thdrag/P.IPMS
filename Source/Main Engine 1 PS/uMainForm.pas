@@ -271,17 +271,23 @@ begin
     end;
     epPCSMESafetyShutdown :
     begin
-      if Value then
-        frmSignalingLightME1.imgSafetyStopME1.Visible := True
-      else
-        frmSignalingLightME1.imgSafetyStopME1.Visible := False
+      if Assigned(frmSignalingLightME1) then
+      begin
+        if Value then
+          frmSignalingLightME1.imgSafetyStopME1.Visible := True
+        else
+          frmSignalingLightME1.imgSafetyStopME1.Visible := False
+      end;
     end;
     epPCSMEManHandleAtStop :
     begin
-      if Value then
-        frmSignalingLightME1.imgManualHandletoStopME1.Visible := True
-      else
-        frmSignalingLightME1.imgManualHandletoStopME1.Visible := False
+      if Assigned(frmSignalingLightME1) then
+      begin
+        if Value then
+          frmSignalingLightME1.imgManualHandletoStopME1.Visible := True
+        else
+          frmSignalingLightME1.imgManualHandletoStopME1.Visible := False
+      end;
     end;
     epPCSMESTCSequenceFail :
     begin
