@@ -72355,24 +72355,28 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Top = 299
         Width = 52
         Height = 52
+        OnClick = ImgF1Click
       end
       object ImgF2: TImage
         Left = 164
         Top = 299
         Width = 52
         Height = 52
+        OnClick = ImgF2Click
       end
       object ImgF3: TImage
         Left = 228
         Top = 299
         Width = 52
         Height = 52
+        OnClick = ImgF3Click
       end
       object ImgF4: TImage
         Left = 293
         Top = 299
         Width = 52
         Height = 52
+        OnClick = ImgF4Click
       end
       object ImgF5: TImage
         Left = 359
@@ -72380,13 +72384,14 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Width = 52
         Height = 52
       end
-      object ImgEsc: TImage
+      object ImgEnter: TImage
         Left = 452
         Top = 299
         Width = 52
         Height = 52
+        OnClick = ImgEnterClick
       end
-      object ImgRaise: TImage
+      object ImgShift: TImage
         Left = 452
         Top = 245
         Width = 52
@@ -72397,18 +72402,21 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Top = 191
         Width = 52
         Height = 52
+        OnClick = ImgLowerClick
       end
-      object ImgShift: TImage
+      object ImgRaise: TImage
         Left = 452
         Top = 137
         Width = 52
         Height = 52
+        OnClick = ImgRaiseClick
       end
-      object ImgEnter: TImage
+      object ImgEsc: TImage
         Left = 452
         Top = 83
         Width = 52
         Height = 52
+        OnClick = ImgEscClick
       end
       object ImgIP: TImage
         Left = 545
@@ -72457,8 +72465,122 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Cursor = crHandPoint
         OnClick = ImgPrefClick
       end
+      object lstMenu: TListBox
+        Left = 86
+        Top = 88
+        Width = 332
+        Height = 197
+        ItemHeight = 13
+        TabOrder = 0
+      end
+      object Panel1: TPanel
+        Left = 101
+        Top = 250
+        Width = 52
+        Height = 29
+        Caption = '<<'
+        Color = clGrayText
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 1
+      end
+      object Panel2: TPanel
+        Left = 164
+        Top = 250
+        Width = 52
+        Height = 29
+        Caption = '>>'
+        Color = clGrayText
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 2
+      end
+      object Panel3: TPanel
+        Left = 228
+        Top = 250
+        Width = 52
+        Height = 29
+        Caption = 'Raise'
+        Color = clGrayText
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 3
+      end
+      object Panel4: TPanel
+        Left = 293
+        Top = 250
+        Width = 52
+        Height = 29
+        Caption = 'Lower'
+        Color = clGrayText
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 4
+      end
+      object Panel5: TPanel
+        Left = 359
+        Top = 250
+        Width = 52
+        Height = 29
+        Color = clGrayText
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 5
+      end
+      object lstFaultPage: TListBox
+        Left = 86
+        Top = 88
+        Width = 332
+        Height = 197
+        ItemHeight = 13
+        TabOrder = 6
+        Visible = False
+      end
+      object lstAlarmPage: TListBox
+        Left = 86
+        Top = 88
+        Width = 332
+        Height = 197
+        ItemHeight = 13
+        TabOrder = 7
+        Visible = False
+      end
+      object lstInfoPage: TListBox
+        Left = 86
+        Top = 88
+        Width = 332
+        Height = 197
+        ItemHeight = 13
+        TabOrder = 8
+        Visible = False
+      end
     end
-    object vr1: TVrRotarySwitch
+    object vrAmpere: TVrRotarySwitch
       Left = 328
       Top = 802
       Width = 140
@@ -72477,7 +72599,7 @@ object frmGeneratorPanel: TfrmGeneratorPanel
       Font.Name = 'Arial'
       Font.Style = [fsBold]
     end
-    object vr2: TVrRotarySwitch
+    object vrVoltage: TVrRotarySwitch
       Left = 84
       Top = 802
       Width = 140

@@ -91312,15 +91312,6 @@ object frmEmergencyPanel: TfrmEmergencyPanel
           88FF8588FF8588FF8500}
         Visible = False
       end
-      object Memo1: TMemo
-        Left = 87
-        Top = 90
-        Width = 330
-        Height = 195
-        Lines.Strings = (
-          'Memo1')
-        TabOrder = 0
-      end
     end
     object pnlA: TPanel
       Left = 303
@@ -91849,7 +91840,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Font.Style = [fsBold]
       end
     end
-    object VrRotarySwitch4: TVrRotarySwitch
+    object VrAmpere2: TVrRotarySwitch
       Left = 1113
       Top = 744
       Width = 140
@@ -91868,7 +91859,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
       Font.Name = 'Arial'
       Font.Style = [fsBold]
     end
-    object VrRotarySwitch2: TVrRotarySwitch
+    object VrAmpere1: TVrRotarySwitch
       Left = 208
       Top = 744
       Width = 140
@@ -91895,6 +91886,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
       SwitchPositions.Strings = (
         '0'
         '1')
+      SwitchPosition = 1
       SwitchAngleStart = 180
       SwitchAngleEnd = 230
       WinchColor = clWhite
@@ -91906,7 +91898,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
       Font.Name = 'Arial'
       Font.Style = [fsBold]
     end
-    object VrRotarySwitch1: TVrRotarySwitch
+    object VrVoltage: TVrRotarySwitch
       Left = 43
       Top = 744
       Width = 140
@@ -91938,11 +91930,12 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         ParentFont = False
       end
     end
-    object VrRotarySwitch5: TVrRotarySwitch
+    object VrCBClosed: TVrRotarySwitch
       Left = 946
       Top = 745
       Width = 140
       Height = 140
+      OnChange = VrCBClosedChange
       SwitchPositions.Strings = (
         '2'
         '0'

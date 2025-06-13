@@ -150405,7 +150405,7 @@ object frmShorePanel: TfrmShorePanel
       OnClick = ImgIndicatorCBOpenClick
     end
     object ImgIndicatorCBClose: TImage
-      Left = 1039
+      Left = 1037
       Top = 581
       Width = 70
       Height = 67
@@ -150985,7 +150985,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image3: TImage
+    object img24: TImage
       Left = 970
       Top = 123
       Width = 14
@@ -151465,7 +151465,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image10: TImage
+    object img1: TImage
       Left = 987
       Top = 124
       Width = 14
@@ -151585,7 +151585,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image11: TImage
+    object img2: TImage
       Left = 1004
       Top = 128
       Width = 14
@@ -151705,7 +151705,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image12: TImage
+    object img3: TImage
       Left = 1020
       Top = 133
       Width = 14
@@ -151825,7 +151825,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image13: TImage
+    object img4: TImage
       Left = 1035
       Top = 141
       Width = 14
@@ -151945,7 +151945,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image14: TImage
+    object img5: TImage
       Left = 1073
       Top = 174
       Width = 14
@@ -152065,7 +152065,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image15: TImage
+    object img6: TImage
       Left = 1093
       Top = 210
       Width = 14
@@ -152185,7 +152185,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image16: TImage
+    object img7: TImage
       Left = 1100
       Top = 251
       Width = 14
@@ -152305,7 +152305,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image17: TImage
+    object img8: TImage
       Left = 1095
       Top = 292
       Width = 14
@@ -152425,7 +152425,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image18: TImage
+    object img9: TImage
       Left = 1076
       Top = 329
       Width = 14
@@ -152545,7 +152545,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image19: TImage
+    object img10: TImage
       Left = 1047
       Top = 358
       Width = 14
@@ -152665,7 +152665,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image20: TImage
+    object img11: TImage
       Left = 1011
       Top = 378
       Width = 14
@@ -152785,7 +152785,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image21: TImage
+    object img12: TImage
       Left = 970
       Top = 384
       Width = 14
@@ -152905,7 +152905,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image22: TImage
+    object img13: TImage
       Left = 929
       Top = 377
       Width = 14
@@ -153025,7 +153025,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image23: TImage
+    object img14: TImage
       Left = 893
       Top = 358
       Width = 14
@@ -153145,7 +153145,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image24: TImage
+    object img15: TImage
       Left = 863
       Top = 329
       Width = 14
@@ -153265,7 +153265,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image25: TImage
+    object img16: TImage
       Left = 845
       Top = 292
       Width = 14
@@ -153385,7 +153385,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image26: TImage
+    object img17: TImage
       Left = 839
       Top = 251
       Width = 14
@@ -153505,7 +153505,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image27: TImage
+    object img18: TImage
       Left = 846
       Top = 211
       Width = 14
@@ -153625,7 +153625,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image28: TImage
+    object img19: TImage
       Left = 866
       Top = 174
       Width = 14
@@ -153745,7 +153745,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image29: TImage
+    object img20: TImage
       Left = 905
       Top = 140
       Width = 14
@@ -153865,7 +153865,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image30: TImage
+    object img21: TImage
       Left = 920
       Top = 133
       Width = 14
@@ -153985,7 +153985,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image31: TImage
+    object img22: TImage
       Left = 936
       Top = 128
       Width = 14
@@ -154105,7 +154105,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image32: TImage
+    object img23: TImage
       Left = 953
       Top = 124
       Width = 14
@@ -154523,11 +154523,12 @@ object frmShorePanel: TfrmShorePanel
         ParentFont = False
       end
     end
-    object VrRotarySwitch2: TVrRotarySwitch
+    object VrShoreMode: TVrRotarySwitch
       Left = 906
       Top = 769
       Width = 140
       Height = 140
+      OnChange = VrShoreModeChange
       SwitchPositions.Strings = (
         '2'
         '0'
@@ -154627,5 +154628,11 @@ object frmShorePanel: TfrmShorePanel
     OnTimer = tmrAmpereTimer
     Left = 562
     Top = 290
+  end
+  object tmrSync: TTimer
+    Interval = 100
+    OnTimer = tmrSyncTimer
+    Left = 1192
+    Top = 192
   end
 end

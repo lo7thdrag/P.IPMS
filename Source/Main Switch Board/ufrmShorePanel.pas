@@ -5,7 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RzBmpBtn, VrControls, VrRotarySwitch,
-  Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls, Vcl.Imaging.pngimage;
+  Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
+
+  uGenerator;
 
 type
   TfrmShorePanel = class(TForm)
@@ -30,14 +32,14 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    VrRotarySwitch2: TVrRotarySwitch;
+    VrShoreMode: TVrRotarySwitch;
     VrRotarySwitch3: TVrRotarySwitch;
     Image8: TImage;
     ImgIndicatorCBOpen: TImage;
     ImgIndicatorCBClose: TImage;
     tmrAmpere: TTimer;
     imgSync: TImage;
-    Image3: TImage;
+    img24: TImage;
     Image5: TImage;
     Image7: TImage;
     Image9: TImage;
@@ -46,36 +48,46 @@ type
     lblFrequency: TLabel;
     Label7: TLabel;
     Label8: TLabel;
-    Image10: TImage;
-    Image11: TImage;
-    Image12: TImage;
-    Image13: TImage;
-    Image14: TImage;
-    Image15: TImage;
-    Image16: TImage;
-    Image17: TImage;
-    Image18: TImage;
-    Image19: TImage;
-    Image20: TImage;
-    Image21: TImage;
-    Image22: TImage;
-    Image23: TImage;
-    Image24: TImage;
-    Image25: TImage;
-    Image26: TImage;
-    Image27: TImage;
-    Image28: TImage;
-    Image29: TImage;
-    Image30: TImage;
-    Image31: TImage;
-    Image32: TImage;
+    img1: TImage;
+    img2: TImage;
+    img3: TImage;
+    img4: TImage;
+    img5: TImage;
+    img6: TImage;
+    img7: TImage;
+    img8: TImage;
+    img9: TImage;
+    img10: TImage;
+    img11: TImage;
+    img12: TImage;
+    img13: TImage;
+    img14: TImage;
+    img15: TImage;
+    img16: TImage;
+    img17: TImage;
+    img18: TImage;
+    img19: TImage;
+    img20: TImage;
+    img21: TImage;
+    img22: TImage;
+    img23: TImage;
+    tmrSync: TTimer;
     procedure ImgIndicatorCBOpenClick(Sender: TObject);
     procedure ImgIndicatorCBCloseClick(Sender: TObject);
     procedure tmrAmpereTimer(Sender: TObject);
+    procedure VrShoreModeChange(Sender: TObject);
+    procedure tmrSyncTimer(Sender: TObject);
   private
-    { Private declarations }
+    IndSync : array of TImage;
+    CurrentIndex : Integer;
+    StopIndex : Integer;
+    Loop : Integer;
+
+    procedure IndicatorSync;
   public
     OrderAmpere : Double;
+
+    procedure UpdateForm(Generator : TGenerator);
   end;
 
 var
@@ -91,11 +103,28 @@ uses
 procedure TfrmShorePanel.ImgIndicatorCBCloseClick(Sender: TObject);
 begin
   MainSwitchBoardSystem.CBShore(True);
+  ImgIndicatorCBClose.Visible := False;
+  ImgIndicatorCBOpen.Visible := True;
 end;
 
 procedure TfrmShorePanel.ImgIndicatorCBOpenClick(Sender: TObject);
 begin
   MainSwitchBoardSystem.CBShore(False);
+  ImgIndicatorCBClose.Visible := True;
+  ImgIndicatorCBOpen.Visible := False;
+end;
+
+procedure TfrmShorePanel.IndicatorSync;
+begin
+  IndSync := [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10,
+              img11, img12, img13, img14, img15, img16, img17, img18, img19, img20,
+              img21, img22, img23, img24];
+
+  CurrentIndex := 0;
+  StopIndex := 24;
+  Loop := 0;
+  tmrSync.Enabled := True;
+
 end;
 
 procedure TfrmShorePanel.tmrAmpereTimer(Sender: TObject);
@@ -112,6 +141,53 @@ begin
   begin
     tmrAmpere.Enabled := False;
   end;
+end;
+
+procedure TfrmShorePanel.tmrSyncTimer(Sender: TObject);
+var
+  i : Integer;
+begin
+//  for i := 0 to High(IndSync) do
+//    IndSync[i].Visible := False;
+//
+//  IndSync[CurrentIndex].Visible := True;
+//
+//  if (CurrentIndex = StopIndex) and (Loop >= 2) then
+//  begin
+//    tmrSync.Enabled := False;
+//
+//    img24.Visible := True;
+//    imgSync.Visible := True;
+//  end
+//  else
+//  begin
+//    Inc(currentIndex);
+//    if CurrentIndex > High(IndSync) then
+//    begin
+//      CurrentIndex := 0;
+//      inc(Loop);
+//    end;
+//  end;
+end;
+
+procedure TfrmShorePanel.UpdateForm(Generator: TGenerator);
+begin
+//
+end;
+
+procedure TfrmShorePanel.VrShoreModeChange(Sender: TObject);
+begin
+  if VrShoreMode.SwitchPosition = 0 then
+  begin
+    MainSwitchBoardSystem.ShoreMode(2);
+  end
+  else if VrShoreMode.SwitchPosition = 1 then
+  begin
+    MainSwitchBoardSystem.ShoreMode(3);
+  end
+  else
+    MainSwitchBoardSystem.ShoreMode(1);
+
 end;
 
 end.

@@ -179,6 +179,10 @@ begin
         frmEmergencyPanel.UpdateForm(GeneratorTemp);
       end;
     end;
+    epPMSMsbShoreMode:
+    begin
+//
+    end;
   end;
 end;
 
@@ -200,6 +204,11 @@ begin
   if Assigned(frmEmergencyPanel) then
   begin
     frmEmergencyPanel.UpdateForm(GeneratorTemp);
+  end;
+
+  if Assigned(frmShorePanel) then
+  begin
+    frmShorePanel.UpdateForm(GeneratorTemp);
   end;
 end;
 

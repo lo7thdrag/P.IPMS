@@ -41,6 +41,7 @@ type
     procedure CBClosed(aValue : Boolean);
     procedure CBShore(aValue : Boolean);
     procedure GeneratorMode(aValue : Integer);
+    procedure ShoreMode(aValue : Integer);
 
     constructor Create;
     destructor Destroy;override;
@@ -133,6 +134,17 @@ begin
     setFreezed := 0;
     FLIstener.TriggerEvents(Self,epPMSFreezed,setFreezed);
   end;
+end;
+
+procedure TMainSwitchBoardSystem.ShoreMode(aValue: Integer);
+var
+  recCmd : R_Common_PMS_Command;
+begin
+  recCmd.GenSwitchID := IdGenerator;
+  recCmd.CommandPropsID := epPMSMsbShoreMode;
+  recCmd.ValueInt := aValue;
+
+  Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
 end;
 
 procedure TMainSwitchBoardSystem.EngineRun(aValue: Boolean);

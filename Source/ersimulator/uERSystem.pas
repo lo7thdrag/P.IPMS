@@ -939,6 +939,11 @@ begin
       switchboard := ERManager.EngineRoom.getPMSSystem.getSwitchboard(recER.GenSwitchID);
       switchboard.MsbCircuitBreaker  := recER.ValueBool;
     end;
+    epPMSMsbShoreMode:
+    begin
+      switchboard := ERManager.EngineRoom.getPMSSystem.getSwitchboard(recER.GenSwitchID);
+      switchboard.MsbInterconnectionMode := recER.ValueInt;
+    end;
   end;
 end;
 

@@ -3875,7 +3875,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'START'
     Status = CTtaOFF
     Style = CTtyButton
@@ -3890,7 +3889,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'STOP'
     Status = CTtaOFF
     Style = CTtyButton
@@ -3905,7 +3903,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014C'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'AUTO'
     Status = CTtaOFF
     Style = CTtyButton
@@ -3920,7 +3917,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014D'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SEMI-AUTO'
     Status = CTtaOFF
     Style = CTtyButton
@@ -3935,7 +3931,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014E'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'PREFERENCE'
     Status = CTtaOFF
     Style = CTtyButton
@@ -3950,7 +3945,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0003C'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 31.000000000000000000
@@ -3968,7 +3962,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0003D'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 33.000000000000000000
@@ -3986,7 +3979,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0003E'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 31.000000000000000000
@@ -4004,7 +3996,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014M'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpElectricalPower
     SensorValue = 0.010000000000000000
@@ -4022,7 +4013,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014K'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpElectricalCurrent
     ShowHead = True
@@ -4039,7 +4029,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014L'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpFrequency
     SensorValue = 0.010000000000000000
@@ -4057,7 +4046,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014N'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpVoltage
     ShowHead = True
@@ -4074,7 +4062,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014O'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 2
     SensorType = StpCosPhi
     SensorValue = 0.001000000000000000
@@ -4092,7 +4079,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0004C'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 32.000000000000000000
@@ -4110,7 +4096,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0004D'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 31.000000000000000000
@@ -4128,7 +4113,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0004E'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 31.000000000000000000
@@ -4146,7 +4130,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013M'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpElectricalPower
     SensorValue = 0.010000000000000000
@@ -4164,7 +4147,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013L'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpFrequency
     SensorValue = 0.010000000000000000
@@ -4182,7 +4164,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013K'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpElectricalCurrent
     ShowHead = True
@@ -4199,7 +4180,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013N'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpVoltage
     ShowHead = True
@@ -4216,7 +4196,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013O'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 2
     SensorType = StpCosPhi
     SensorValue = 0.001000000000000000
@@ -4234,7 +4213,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0001C'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 32.000000000000000000
@@ -4252,7 +4230,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0001D'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 33.000000000000000000
@@ -4270,7 +4247,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0001E'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 31.000000000000000000
@@ -4288,7 +4264,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024M'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpElectricalPower
     SensorValue = 0.010000000000000000
@@ -4306,7 +4281,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024L'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpFrequency
     SensorValue = 0.010000000000000000
@@ -4324,7 +4298,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024K'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpElectricalCurrent
     ShowHead = True
@@ -4341,7 +4314,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024N'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpVoltage
     ShowHead = True
@@ -4358,7 +4330,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024O'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 2
     SensorType = StpCosPhi
     SensorValue = 0.001000000000000000
@@ -4376,7 +4347,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0002C'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 31.000000000000000000
@@ -4394,7 +4364,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0002D'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 32.000000000000000000
@@ -4412,7 +4381,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0002E'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 32.000000000000000000
@@ -4430,7 +4398,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023M'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpElectricalPower
     SensorValue = 0.010000000000000000
@@ -4448,7 +4415,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023L'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpFrequency
     SensorValue = 0.010000000000000000
@@ -4466,7 +4432,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023K'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpElectricalCurrent
     ShowHead = True
@@ -4483,7 +4448,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023N'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpVoltage
     ShowHead = True
@@ -4500,7 +4464,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023O'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 2
     SensorType = StpCosPhi
     SensorValue = 0.001000000000000000
@@ -4518,7 +4481,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E5001L'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpFrequency
     SensorValue = 0.010000000000000000
@@ -4536,7 +4498,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E5001N'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpVoltage
     ShowHead = True
@@ -4553,7 +4514,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E5002L'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpFrequency
     SensorValue = 0.010000000000000000
@@ -4571,7 +4531,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E5002N'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpVoltage
     ShowHead = True
@@ -4588,7 +4547,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014R'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpTemperature
     SensorValue = 32.000000000000000000
@@ -4606,7 +4564,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031C'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpElectricalPower
     SensorValue = 0.010000000000000000
@@ -4624,7 +4581,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpFrequency
     SensorValue = 0.010000000000000000
@@ -4642,7 +4598,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpElectricalCurrent
     ShowHead = True
@@ -4659,7 +4614,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031D'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 1
     SensorType = StpVoltage
     ShowHead = True
@@ -4676,7 +4630,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031E'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     DecimalPlace = 2
     SensorType = StpCosPhi
     SensorValue = 0.001000000000000000
@@ -4694,7 +4647,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014G'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'ENG RUNNING'
     Size = SWszBig
     Status = SWtaFalse
@@ -4710,7 +4662,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014H'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Face = MCfcRight
     GenType = MCgtG3
     SensorType = stGenerator
@@ -4728,7 +4679,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013H'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Face = MCfcRight
     GenType = MCgtG4
     SensorType = stGenerator
@@ -4746,7 +4696,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024H'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Face = MCfcRight
     GenType = MCgtG1
     SensorType = stGenerator
@@ -4764,7 +4713,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023H'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Face = MCfcRight
     GenType = MCgtG2
     SensorType = stGenerator
@@ -4782,7 +4730,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031J'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Face = MCfcRight
     GenType = MCgtEG
     SensorType = stGenerator
@@ -4800,7 +4747,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014F'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     ShowAutoHandle = True
     ShowManHandle = True
     Status = CBtaNotReadyClose
@@ -4816,7 +4762,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013F'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     ShowAutoHandle = True
     ShowManHandle = True
     Status = CBtaNotReadyClose
@@ -4832,7 +4777,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013Z'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     ShowAutoHandle = True
     ShowManHandle = False
     Status = CBtaNotReadyClose
@@ -4848,7 +4792,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024Z'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     ShowAutoHandle = True
     ShowManHandle = False
     Status = CBtaNotReadyClose
@@ -4864,7 +4807,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024F'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     ShowAutoHandle = True
     ShowManHandle = True
     Status = CBtaNotReadyClose
@@ -4880,7 +4822,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023F'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     ShowAutoHandle = True
     ShowManHandle = True
     Status = CBtaNotReadyClose
@@ -4896,7 +4837,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014Z'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     ShowAutoHandle = False
     ShowManHandle = False
     Status = CBtaOpen
@@ -4912,7 +4852,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031F'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     ShowAutoHandle = True
     ShowManHandle = False
     Status = CBtaOpen
@@ -4928,7 +4867,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031G'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     ShowAutoHandle = True
     ShowManHandle = False
     Status = CBtaOpen
@@ -4944,7 +4882,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031H'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     ShowAutoHandle = True
     ShowManHandle = False
     Status = CBtaOpen
@@ -4960,7 +4897,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014I'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'AUTO'
     Size = SWszBig
     Status = SWtaFalse
@@ -4976,7 +4912,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014P'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SEMI-AUTO'
     Size = SWszBig
     Status = SWtaFalse
@@ -4992,7 +4927,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014S'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'MANUAL'
     Size = SWszBig
     Status = SWtaFalse
@@ -5008,7 +4942,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014J'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'PREFERENCE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5024,7 +4957,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014Q'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'CAN BUS FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5040,7 +4972,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014U'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'MEAS VOLT/CTRL POW FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5056,7 +4987,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014V'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = '24VDC INT POW SUPPLY FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5072,7 +5002,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014X'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'NOT STANDBY'
     Size = SWszBig
     Status = SWtaFalse
@@ -5088,7 +5017,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014T'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = '***************'
     Size = SWszBig
     Status = SWtaFalse
@@ -5104,7 +5032,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0003B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'ENGINE ALARM'
     Size = SWszBig
     Status = SWtaFalse
@@ -5120,7 +5047,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0003A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SHUTDOWN'
     Size = SWszBig
     Status = SWtaFalse
@@ -5136,7 +5062,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'START'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5151,7 +5076,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'STOP'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5166,7 +5090,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013C'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'AUTO'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5181,7 +5104,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013D'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SEMI-AUTO'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5196,7 +5118,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013E'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'PREFERENCE'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5211,7 +5132,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013G'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'ENG RUNNING'
     Size = SWszBig
     Status = SWtaFalse
@@ -5227,7 +5147,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013T'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = '***************'
     Size = SWszBig
     Status = SWtaFalse
@@ -5243,7 +5162,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013I'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'AUTO'
     Size = SWszBig
     Status = SWtaFalse
@@ -5259,7 +5177,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013P'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SEMI-AUTO'
     Size = SWszBig
     Status = SWtaFalse
@@ -5275,7 +5192,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013S'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'MANUAL'
     Size = SWszBig
     Status = SWtaFalse
@@ -5291,7 +5207,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013J'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'PREFERENCE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5307,7 +5222,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013Q'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'CAN BUS FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5323,7 +5237,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013U'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'MEAS VOLT/CTRL POW FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5339,7 +5252,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013V'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = '24VDC INT POW SUPPLY FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5355,7 +5267,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013X'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'NOT STANDBY'
     Size = SWszBig
     Status = SWtaFalse
@@ -5371,7 +5282,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0004B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'ENGINE ALARM'
     Size = SWszBig
     Status = SWtaFalse
@@ -5387,7 +5297,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0004A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SHUTDOWN'
     Size = SWszBig
     Status = SWtaFalse
@@ -5403,7 +5312,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024G'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'ENG RUNNING'
     Size = SWszBig
     Status = SWtaFalse
@@ -5419,7 +5327,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024T'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = '***************'
     Size = SWszBig
     Status = SWtaFalse
@@ -5435,7 +5342,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024I'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'AUTO'
     Size = SWszBig
     Status = SWtaFalse
@@ -5451,7 +5357,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024P'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SEMI-AUTO'
     Size = SWszBig
     Status = SWtaFalse
@@ -5467,7 +5372,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024S'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'MANUAL'
     Size = SWszBig
     Status = SWtaFalse
@@ -5483,7 +5387,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024J'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'PREFERENCE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5499,7 +5402,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024Q'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'CAN BUS FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5515,7 +5417,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024U'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'MEAS VOLT/CTRL POW FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5531,7 +5432,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024V'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = '24VDC INT POW SUPPLY FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5547,7 +5447,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024X'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'NOT STANDBY'
     Size = SWszBig
     Status = SWtaFalse
@@ -5563,7 +5462,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0001B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'ENGINE ALARM'
     Size = SWszBig
     Status = SWtaFalse
@@ -5579,7 +5477,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0001A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SHUTDOWN'
     Size = SWszBig
     Status = SWtaFalse
@@ -5595,7 +5492,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'START'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5610,7 +5506,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'STOP'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5625,7 +5520,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024C'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'AUTO'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5640,7 +5534,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024D'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SEMI-AUTO'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5655,7 +5548,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024E'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'PREFERENCE'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5670,7 +5562,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'START'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5685,7 +5576,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'STOP'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5700,7 +5590,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023C'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'AUTO'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5715,7 +5604,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023D'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SEMI-AUTO'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5730,7 +5618,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023E'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'PREFERENCE'
     Status = CTtaOFF
     Style = CTtyButton
@@ -5745,7 +5632,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023G'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'ENG RUNNING'
     Size = SWszBig
     Status = SWtaFalse
@@ -5761,7 +5647,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023T'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = '***************'
     Size = SWszBig
     Status = SWtaFalse
@@ -5777,7 +5662,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023I'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'AUTO'
     Size = SWszBig
     Status = SWtaFalse
@@ -5793,7 +5677,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023P'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SEMI-AUTO'
     Size = SWszBig
     Status = SWtaFalse
@@ -5809,7 +5692,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023S'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'MANUAL'
     Size = SWszBig
     Status = SWtaFalse
@@ -5825,7 +5707,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023J'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'PREFERENCE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5841,7 +5722,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023Q'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'CAN BUS FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5857,7 +5737,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023U'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'MEAS VOLT/CTRL POW FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5873,7 +5752,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023V'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = '24VDC INT POW SUPPLY FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -5889,7 +5767,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50023X'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'NOT STANDBY'
     Size = SWszBig
     Status = SWtaFalse
@@ -5905,7 +5782,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0002B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'ENGINE ALARM'
     Size = SWszBig
     Status = SWtaFalse
@@ -5921,7 +5797,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3110A0002A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SHUTDOWN'
     Size = SWszBig
     Status = SWtaFalse
@@ -5937,7 +5812,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031K'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'ENG RUNNING'
     Size = SWszBig
     Status = SWtaFalse
@@ -5953,7 +5827,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031T'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = '***************'
     Size = SWszBig
     Status = SWtaFalse
@@ -5969,7 +5842,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031I'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'AUTO'
     Size = SWszBig
     Status = SWtaFalse
@@ -5985,7 +5857,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031P'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SEMI-AUTO'
     Size = SWszBig
     Status = SWtaFalse
@@ -6001,7 +5872,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031S'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'MANUAL'
     Size = SWszBig
     Status = SWtaFalse
@@ -6017,7 +5887,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031U'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'MEAS VOLT/CTRL POW FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -6033,7 +5902,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031V'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = '24VDC INT POW SUPPLY FAILURE'
     Size = SWszBig
     Status = SWtaFalse
@@ -6049,7 +5917,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031W'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'NON ESSENT LOAD TRIP/REDUCT'
     Size = SWszBig
     Status = SWtaFalse
@@ -6065,7 +5932,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031X'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'NOT STANDBY'
     Size = SWszBig
     Status = SWtaFalse
@@ -6081,7 +5947,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031Z'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'FAULT PAGE LED'
     Size = SWszBig
     Status = SWtaFalse
@@ -6097,7 +5962,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014W'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'NON ESSENT LOAD TRIP/REDUCT'
     Size = SWszBig
     Status = SWtaFalse
@@ -6113,7 +5977,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50014Y'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SYNC FAIL'
     Size = SWszBig
     Status = SWtaFalse
@@ -6129,7 +5992,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024Y'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SYNC FAIL'
     Size = SWszBig
     Status = SWtaFalse
@@ -6145,7 +6007,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50024W'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'NON ESSENT LOAD TRIP/REDUCT'
     Size = SWszBig
     Status = SWtaFalse
@@ -6161,7 +6022,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E5001A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'R'
     Size = SWszBig
     Status = SWtaFalse
@@ -6177,7 +6037,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E5002A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'R'
     Size = SWszBig
     Status = SWtaFalse
@@ -6193,7 +6052,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3120A0005B'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'ENGINE ALARM'
     Size = SWszBig
     Status = SWtaFalse
@@ -6209,7 +6067,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3120A0005A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SHUTDOWN'
     Size = SWszBig
     Status = SWtaFalse
@@ -6225,7 +6082,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50013Y'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'SYNC FAIL'
     Size = SWszBig
     Status = SWtaFalse
@@ -6241,7 +6097,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E50031F'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'R'
     Size = SWszBig
     Status = SWtaFalse
@@ -6257,7 +6112,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = '3241E5002A'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Caption = 'R'
     Size = SWszBig
     Status = SWtaFalse
@@ -6273,7 +6127,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = 'ABCDEFGH'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Page = 12
   end
   object Shortcut2: TShortcut
@@ -6286,7 +6139,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = 'ABCDEFGH'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Page = 12
   end
   object Shortcut3: TShortcut
@@ -6299,7 +6151,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = 'ABCDEFGH'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Page = 13
   end
   object Shortcut4: TShortcut
@@ -6312,7 +6163,6 @@ object frmPowerManagementOverview: TfrmPowerManagementOverview
     ElementID = 'ABCDEFGH'
     ElementType = 0
     ElementVisible = False
-    EnbAlmInhibited = 0
     Page = 14
   end
 end

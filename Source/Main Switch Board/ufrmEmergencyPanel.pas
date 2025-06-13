@@ -54,12 +54,12 @@ type
     Label7: TLabel;
     Label8: TLabel;
     VrAngularMeter6: TVrAngularMeter;
-    VrRotarySwitch4: TVrRotarySwitch;
-    VrRotarySwitch2: TVrRotarySwitch;
+    VrAmpere2: TVrRotarySwitch;
+    VrAmpere1: TVrRotarySwitch;
     VrRotarySwitch3: TVrRotarySwitch;
-    VrRotarySwitch1: TVrRotarySwitch;
+    VrVoltage: TVrRotarySwitch;
     Label17: TLabel;
-    VrRotarySwitch5: TVrRotarySwitch;
+    VrCBClosed: TVrRotarySwitch;
     Button1: TButton;
     ImgEnter: TImage;
     ImgShift: TImage;
@@ -95,7 +95,6 @@ type
     ImgIndicatorFP: TImage;
     ImgIndicatorHO: TImage;
     tmrAmpere: TTimer;
-    Memo1: TMemo;
     procedure ImgStartClick(Sender: TObject);
     procedure ImgStopClick(Sender: TObject);
     procedure ImgOIClick(Sender: TObject);
@@ -110,6 +109,7 @@ type
     procedure ImgSAClick(Sender: TObject);
     procedure ImgMANClick(Sender: TObject);
     procedure tmrAmpereTimer(Sender: TObject);
+    procedure VrCBClosedChange(Sender: TObject);
   private
     { Private declarations }
     Led  : array of TImage;
@@ -233,6 +233,16 @@ begin
 
   ImgIndicatorCKC.Visible := Generator.CBClosed;
   ImgIndicatorBS.Visible := Generator.Busbar;
+end;
+
+procedure TfrmEmergencyPanel.VrCBClosedChange(Sender: TObject);
+begin
+  if VrCBClosed.SwitchPosition = 0 then
+  begin
+    MainSwitchBoardSystem.CBClosed(False);
+  end
+  else if (VrCBClosed.SwitchPosition = 1) or (VrCBClosed.SwitchPosition = 2) then
+    MainSwitchBoardSystem.CBClosed(True);
 end;
 
 end.
