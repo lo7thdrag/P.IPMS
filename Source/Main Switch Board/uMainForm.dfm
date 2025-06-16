@@ -16,6 +16,26 @@ object frmMainForm: TfrmMainForm
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object mmoNetLogger: TMemo
+    Left = 8
+    Top = 48
+    Width = 361
+    Height = 89
+    ReadOnly = True
+    ScrollBars = ssBoth
+    TabOrder = 0
+    WordWrap = False
+  end
+  object mmoLogReceive: TMemo
+    Left = 8
+    Top = 176
+    Width = 361
+    Height = 89
+    ReadOnly = True
+    ScrollBars = ssBoth
+    TabOrder = 1
+    WordWrap = False
+  end
   object tmr1: TTimer
     Enabled = False
     Left = 120
