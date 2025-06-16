@@ -42,6 +42,6 @@ begin
   //  Application.CreateForm(TfrmGeneratorPanel, frmGeneratorPanel);
 //  Application.CreateForm(TfrmEmergencyPanel, frmEmergencyPanel);
 //  Application.CreateForm(TfrmShorePanel, frmShorePanel);
-  Application.CreateForm(TfrmFreeze, frmFreeze);
+//  Application.CreateForm(TfrmFreeze, frmFreeze);
   Application.Run;
 end.
