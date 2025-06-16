@@ -176,8 +176,6 @@ begin
         frmPMSDieselEngineSafetiesME1.imgLedGreenRunSVAE.Visible := True;
         frmPMSDieselEngineSafetiesME1.imgLedGreenRunSPH.Visible  := True;
         frmPMSDieselEngineSafetiesME1.imgLedGreenRunRGM.Visible  := True;
-        frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible   := True;
-        frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible   := True;
         frmPMSDieselEngineSafetiesME1.imgLedGreen1AE24.Visible   := True;
         frmPMSDieselEngineSafetiesME1.imgLedGreen1AE15.Visible   := True;
         frmPMSDieselEngineSafetiesME1.imgLedGreen1AE9.Visible    := True;
@@ -195,6 +193,8 @@ begin
         frmPMSDieselEngineSafetiesME1.imgLedGreenRunRGM.Visible  := False;
         frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible   := False;
         frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible   := False;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible   := False;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenTH4SE.Visible   := False;
         frmPMSDieselEngineSafetiesME1.imgLedGreen1AE24.Visible   := False;
         frmPMSDieselEngineSafetiesME1.imgLedGreen1AE15.Visible   := False;
         frmPMSDieselEngineSafetiesME1.imgLedGreen1AE9.Visible    := False;
@@ -335,6 +335,18 @@ begin
     begin
       if Assigned(frmPMSDieselEngineSafetiesME1) then
         frmPMSDieselEngineSafetiesME1.EngineSpeedMeter.Position := Value;
+
+      if Value > 80 then
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible := True;
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible := True;
+      if Value > 405 then
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible := True;
+      if Value < 405 then
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible := False;
+      if Value > 500 then
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH4SE.Visible := True;
+      if Value < 500 then
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH4SE.Visible := False;
     end;
     // PMS ATP
     epPCSMETempBear1 :

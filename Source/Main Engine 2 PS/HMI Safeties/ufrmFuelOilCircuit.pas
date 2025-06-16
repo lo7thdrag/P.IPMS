@@ -11,12 +11,12 @@ type
   TfrmFuelOilCircuit = class(TForm)
     pnlMain: TPanel;
     Image1: TImage;
-    VrAngularMeter3: TVrAngularMeter;
+    VrEngineInletFuelOilCircuit: TVrAngularMeter;
     Panel3: TPanel;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    Label4: TLabel;
+    lblEngineInletFuelOilCircuit: TLabel;
     Panel2: TPanel;
     VrDemoButton4: TVrDemoButton;
     VrDemoButton5: TVrDemoButton;

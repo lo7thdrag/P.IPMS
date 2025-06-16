@@ -20,7 +20,6 @@ type
     btnTestSVAE: TRzBmpButton;
     btnTestWithoutStopSPH: TRzBmpButton;
     EngineSpeedMeter: TVrAngularMeter;
-    FuelRackMeter: TVrAngularMeter;
     Image2: TImage;
     Image3: TImage;
     imgBackground: TImage;
@@ -156,6 +155,7 @@ type
     Label13: TLabel;
     Label14: TLabel;
     Label15: TLabel;
+    FuelRackMeter: TVrAngularMeter;
     procedure NextClick(Sender: TObject);
     procedure AdjustSE1Change(Sender: TObject);
     procedure AdjustSE2Change(Sender: TObject);

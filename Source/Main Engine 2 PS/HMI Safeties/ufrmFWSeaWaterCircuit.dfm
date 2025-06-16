@@ -2422,7 +2422,7 @@ object frmFWSeaWaterCircuit: TfrmFWSeaWaterCircuit
         86AD4D40260000000049454E44AE426082}
       Stretch = True
     end
-    object VrAngularMeter1: TVrAngularMeter
+    object VrEngineInletFWPressSeaWater: TVrAngularMeter
       Left = 390
       Top = 135
       Width = 273
@@ -2460,7 +2460,7 @@ object frmFWSeaWaterCircuit: TfrmFWSeaWaterCircuit
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter3: TVrAngularMeter
+    object VrEngineInletFWTemp: TVrAngularMeter
       Left = -25
       Top = 104
       Width = 261
@@ -2498,7 +2498,7 @@ object frmFWSeaWaterCircuit: TfrmFWSeaWaterCircuit
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter4: TVrAngularMeter
+    object VrEngineOutletSeaWaterPress: TVrAngularMeter
       Left = 390
       Top = 336
       Width = 273
@@ -7433,7 +7433,7 @@ object frmFWSeaWaterCircuit: TfrmFWSeaWaterCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label4: TLabel
+      object lblEngineInletFWTemp: TLabel
         Left = 91
         Top = 41
         Width = 20
@@ -7673,9 +7673,9 @@ object frmFWSeaWaterCircuit: TfrmFWSeaWaterCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label11: TLabel
+      object lblEngineInletFWPressSeaWater: TLabel
         Left = 100
-        Top = 36
+        Top = 42
         Width = 20
         Height = 18
         Caption = '0.0'
@@ -7806,7 +7806,7 @@ object frmFWSeaWaterCircuit: TfrmFWSeaWaterCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label15: TLabel
+      object lblEngineOutletSeaWaterPress: TLabel
         Left = 96
         Top = 43
         Width = 20
@@ -7966,7 +7966,7 @@ object frmFWSeaWaterCircuit: TfrmFWSeaWaterCircuit
         ParentFont = False
       end
       object Label19: TLabel
-        Left = 88
+        Left = 104
         Top = 43
         Width = 20
         Height = 18

@@ -2281,7 +2281,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         86AD4D40260000000049454E44AE426082}
       Stretch = True
     end
-    object VrAngularMeter1: TVrAngularMeter
+    object VrTurboChargerA: TVrAngularMeter
       Left = -20
       Top = 136
       Width = 285
@@ -2321,7 +2321,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter2: TVrAngularMeter
+    object VrTurboChargerB: TVrAngularMeter
       Left = -17
       Top = 373
       Width = 282
@@ -2360,7 +2360,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter3: TVrAngularMeter
+    object VrEngineAirInletPressure: TVrAngularMeter
       Left = 360
       Top = 136
       Width = 361
@@ -2399,7 +2399,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter4: TVrAngularMeter
+    object VrEngineAirInletTemperature: TVrAngularMeter
       Left = 371
       Top = 375
       Width = 345
@@ -7173,7 +7173,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label19: TLabel
+      object lblEngineAirInletPressure: TLabel
         Left = 98
         Top = 43
         Width = 20
@@ -7293,7 +7293,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label7: TLabel
+      object lblEngineAirInletTemperature: TLabel
         Left = 99
         Top = 43
         Width = 20

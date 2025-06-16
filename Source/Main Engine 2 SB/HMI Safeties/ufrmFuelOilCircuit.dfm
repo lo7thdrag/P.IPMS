@@ -1859,7 +1859,7 @@ object frmFuelOilCircuit: TfrmFuelOilCircuit
         86AD4D40260000000049454E44AE426082}
       Stretch = True
     end
-    object VrAngularMeter3: TVrAngularMeter
+    object VrEngineInletFuelOilCircuit: TVrAngularMeter
       Left = 408
       Top = 232
       Width = 281
@@ -6122,9 +6122,9 @@ object frmFuelOilCircuit: TfrmFuelOilCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label4: TLabel
-        Left = 94
-        Top = 49
+      object lblEngineInletFuelOilCircuit: TLabel
+        Left = 97
+        Top = 42
         Width = 20
         Height = 18
         Caption = '0.0'

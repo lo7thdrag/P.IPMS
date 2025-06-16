@@ -21566,44 +21566,6 @@ object frmPMSDieselEngineSafetiesME1: TfrmPMSDieselEngineSafetiesME1
       ParentShowHint = False
       ShowHint = False
     end
-    object FuelRackMeter: TVrAngularMeter
-      Left = 584
-      Top = 48
-      Width = 465
-      Height = 577
-      MaxValue = 35.000000000000000000
-      Decimals = 0
-      Angle = 90
-      AngleOffset = 90
-      TicksMin = -8
-      TicksMax = -13
-      TicksColor = clBlack
-      ColorZone1 = clWhite
-      ColorZone2 = clWhite
-      ColorZone3 = clWhite
-      Percent1 = 50
-      Percent2 = 50
-      Labels = 0
-      LabelsOffset = -30
-      NeedleColor = clBlack
-      CenterDotColor = clBlack
-      LabelsFont.Charset = DEFAULT_CHARSET
-      LabelsFont.Color = clBlack
-      LabelsFont.Height = -16
-      LabelsFont.Name = 'Tahoma'
-      LabelsFont.Pitch = fpFixed
-      LabelsFont.Style = [fsBold]
-      Transparent = True
-      Caption = '||'
-      Color = clWhite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentShowHint = False
-      ShowHint = False
-    end
     object Label28: TLabel
       Left = 656
       Top = 144
@@ -23967,6 +23929,48 @@ object frmPMSDieselEngineSafetiesME1: TfrmPMSDieselEngineSafetiesME1
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+    end
+    object FuelRackMeter: TVrAngularMeter
+      Left = 608
+      Top = 120
+      Width = 401
+      Height = 433
+      MaxValue = 35.000000000000000000
+      Decimals = 0
+      Angle = 90
+      AngleOffset = 90
+      Spacing = 10
+      Ticks = 50
+      TicksMin = -10
+      TicksMax = -20
+      TicksEnlarge = 2
+      TicksColor = clBlack
+      ColorZone1 = clBlack
+      ColorZone2 = clBlack
+      ColorZone3 = clBlack
+      Percent1 = 20
+      Percent2 = 50
+      Labels = 0
+      LabelsOffset = -35
+      NeedleLength = 160
+      NeedleBaseWidth = 10
+      NeedleColor = clBlack
+      CenterDotColor = clBlack
+      CenterDotWidth = 4
+      LabelsFont.Charset = DEFAULT_CHARSET
+      LabelsFont.Color = clBlack
+      LabelsFont.Height = -13
+      LabelsFont.Name = 'Tahoma'
+      LabelsFont.Style = [fsBold]
+      Transparent = True
+      Caption = '||'
+      CaptionYOffset = 50
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
     end
     object btnInsulationTestATP: TRzBmpButton
       Left = 105

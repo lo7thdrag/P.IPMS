@@ -2153,7 +2153,7 @@ object frmCompressedAirCircuit: TfrmCompressedAirCircuit
         86AD4D40260000000049454E44AE426082}
       Stretch = True
     end
-    object EngineAirInletPressure: TVrAngularMeter
+    object VrTCAirSealCompress: TVrAngularMeter
       Left = 366
       Top = 503
       Width = 369
@@ -2191,7 +2191,7 @@ object frmCompressedAirCircuit: TfrmCompressedAirCircuit
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter3: TVrAngularMeter
+    object VrControlAirCompress: TVrAngularMeter
       Left = 214
       Top = 243
       Width = 265
@@ -2229,7 +2229,7 @@ object frmCompressedAirCircuit: TfrmCompressedAirCircuit
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter4: TVrAngularMeter
+    object VrStartingAirPressureCompress: TVrAngularMeter
       Left = 616
       Top = 280
       Width = 297
@@ -6724,7 +6724,7 @@ object frmCompressedAirCircuit: TfrmCompressedAirCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label4: TLabel
+      object lblControlAirCompress: TLabel
         Left = 94
         Top = 41
         Width = 20
@@ -6831,7 +6831,7 @@ object frmCompressedAirCircuit: TfrmCompressedAirCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label11: TLabel
+      object lblStartingAirPressureCompress: TLabel
         Left = 97
         Top = 42
         Width = 20
@@ -6951,7 +6951,7 @@ object frmCompressedAirCircuit: TfrmCompressedAirCircuit
           8280B020202C08080B02C282C03EACD14360697E001FCBAC931C6CC3C8000000
           0049454E44AE426082}
       end
-      object Label15: TLabel
+      object lblTCAirSealCompress: TLabel
         Left = 96
         Top = 43
         Width = 20

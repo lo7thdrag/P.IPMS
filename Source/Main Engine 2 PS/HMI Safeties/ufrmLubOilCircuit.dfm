@@ -2580,7 +2580,7 @@ object frmLubOilCircuit: TfrmLubOilCircuit
         86AD4D40260000000049454E44AE426082}
       Stretch = True
     end
-    object VrAngularMeter2: TVrAngularMeter
+    object VrEngineInletLOTemp: TVrAngularMeter
       Left = 372
       Top = 139
       Width = 305
@@ -2618,7 +2618,7 @@ object frmLubOilCircuit: TfrmLubOilCircuit
       ParentShowHint = False
       ShowHint = False
     end
-    object EngineAirInletPressure: TVrAngularMeter
+    object VrEngineAirInletPressure: TVrAngularMeter
       Left = -21
       Top = 136
       Width = 250
@@ -2656,7 +2656,7 @@ object frmLubOilCircuit: TfrmLubOilCircuit
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter4: TVrAngularMeter
+    object VrEngineInletLubOilTemp: TVrAngularMeter
       Left = 792
       Top = 140
       Width = 305
@@ -2694,7 +2694,7 @@ object frmLubOilCircuit: TfrmLubOilCircuit
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter3: TVrAngularMeter
+    object VrLATCOutletLOTemp: TVrAngularMeter
       Left = 370
       Top = 373
       Width = 305
@@ -2732,7 +2732,7 @@ object frmLubOilCircuit: TfrmLubOilCircuit
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter5: TVrAngularMeter
+    object VrLBTCOutletLOTemp: TVrAngularMeter
       Left = 791
       Top = 372
       Width = 305
@@ -2770,7 +2770,7 @@ object frmLubOilCircuit: TfrmLubOilCircuit
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter1: TVrAngularMeter
+    object VrTCInletLubOilPress: TVrAngularMeter
       Left = -21
       Top = 368
       Width = 250
@@ -8005,9 +8005,9 @@ object frmLubOilCircuit: TfrmLubOilCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label4: TLabel
-        Left = 91
-        Top = 41
+      object lblEngineAirInletPressureLO: TLabel
+        Left = 100
+        Top = 42
         Width = 20
         Height = 18
         Caption = '0.0'
@@ -8112,7 +8112,7 @@ object frmLubOilCircuit: TfrmLubOilCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label7: TLabel
+      object lblTCInletLubOilPress: TLabel
         Left = 93
         Top = 41
         Width = 20
@@ -8245,7 +8245,7 @@ object frmLubOilCircuit: TfrmLubOilCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label11: TLabel
+      object lblEngineInletLOTemp: TLabel
         Left = 100
         Top = 44
         Width = 20
@@ -8365,7 +8365,7 @@ object frmLubOilCircuit: TfrmLubOilCircuit
           8280B020202C08080B02C282C03EACD14360697E001FCBAC931C6CC3C8000000
           0049454E44AE426082}
       end
-      object Label15: TLabel
+      object lblLATCOutletLOTemp: TLabel
         Left = 96
         Top = 43
         Width = 20
@@ -8511,9 +8511,9 @@ object frmLubOilCircuit: TfrmLubOilCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label19: TLabel
+      object lblEngineInletLubOilTemp: TLabel
         Left = 101
-        Top = 43
+        Top = 41
         Width = 20
         Height = 18
         Caption = '0.0'
@@ -8657,9 +8657,9 @@ object frmLubOilCircuit: TfrmLubOilCircuit
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label23: TLabel
-        Left = 93
-        Top = 38
+      object lblLBTCOutletLOTemp: TLabel
+        Left = 100
+        Top = 43
         Width = 20
         Height = 18
         Caption = '0.0'

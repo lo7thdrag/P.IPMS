@@ -2281,7 +2281,7 @@ object frmClutchingAssistance: TfrmClutchingAssistance
         86AD4D40260000000049454E44AE426082}
       Stretch = True
     end
-    object VrAngularMeter1: TVrAngularMeter
+    object VrEngineInletLOClutching: TVrAngularMeter
       Left = 399
       Top = 139
       Width = 265
@@ -2319,7 +2319,7 @@ object frmClutchingAssistance: TfrmClutchingAssistance
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter2: TVrAngularMeter
+    object VrEngineOutletFWClutching: TVrAngularMeter
       Left = 815
       Top = 136
       Width = 273
@@ -2357,7 +2357,7 @@ object frmClutchingAssistance: TfrmClutchingAssistance
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter3: TVrAngularMeter
+    object VrEngineSpeedClutching: TVrAngularMeter
       Left = -21
       Top = 137
       Width = 273
@@ -2395,7 +2395,7 @@ object frmClutchingAssistance: TfrmClutchingAssistance
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter4: TVrAngularMeter
+    object VrPropellerPitchClutching: TVrAngularMeter
       Left = 400
       Top = 529
       Width = 265
@@ -7059,7 +7059,7 @@ object frmClutchingAssistance: TfrmClutchingAssistance
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label4: TLabel
+      object lblEngineSpeedClutching: TLabel
         Left = 91
         Top = 41
         Width = 20
@@ -7166,7 +7166,7 @@ object frmClutchingAssistance: TfrmClutchingAssistance
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label11: TLabel
+      object lblEngineInletLOClutching: TLabel
         Left = 92
         Top = 44
         Width = 20
@@ -7325,9 +7325,9 @@ object frmClutchingAssistance: TfrmClutchingAssistance
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label19: TLabel
+      object lblEngineOutletFWClutching: TLabel
         Left = 101
-        Top = 51
+        Top = 43
         Width = 20
         Height = 18
         Caption = '0.0'
@@ -7432,7 +7432,7 @@ object frmClutchingAssistance: TfrmClutchingAssistance
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label7: TLabel
+      object lblPropellerPitchClutching: TLabel
         Left = 92
         Top = 44
         Width = 20

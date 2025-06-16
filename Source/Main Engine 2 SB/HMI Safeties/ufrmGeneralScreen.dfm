@@ -2567,7 +2567,7 @@ object frmGeneralScreen: TfrmGeneralScreen
         86AD4D40260000000049454E44AE426082}
       Stretch = True
     end
-    object VrAngularMeter1: TVrAngularMeter
+    object VrTCSpeedA: TVrAngularMeter
       Left = -32
       Top = 343
       Width = 281
@@ -2605,7 +2605,7 @@ object frmGeneralScreen: TfrmGeneralScreen
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter2: TVrAngularMeter
+    object VrEngineSpeed: TVrAngularMeter
       Left = 392
       Top = 126
       Width = 265
@@ -2643,7 +2643,7 @@ object frmGeneralScreen: TfrmGeneralScreen
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter3: TVrAngularMeter
+    object VrDigitalSpeedSetPoint: TVrAngularMeter
       Left = 352
       Top = 344
       Width = 345
@@ -2681,7 +2681,7 @@ object frmGeneralScreen: TfrmGeneralScreen
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter4: TVrAngularMeter
+    object VrFuelRack: TVrAngularMeter
       Left = 808
       Top = 83
       Width = 273
@@ -2719,7 +2719,7 @@ object frmGeneralScreen: TfrmGeneralScreen
       ParentShowHint = False
       ShowHint = False
     end
-    object VrAngularMeter5: TVrAngularMeter
+    object VrTCSpeedB: TVrAngularMeter
       Left = 808
       Top = 338
       Width = 273
@@ -2757,7 +2757,7 @@ object frmGeneralScreen: TfrmGeneralScreen
       ParentShowHint = False
       ShowHint = False
     end
-    object EngineAirInletPressure: TVrAngularMeter
+    object VrEngineAirInletPressure: TVrAngularMeter
       Left = -29
       Top = 93
       Width = 273
@@ -7707,7 +7707,7 @@ object frmGeneralScreen: TfrmGeneralScreen
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label4: TLabel
+      object lblEngineAirInletPressure: TLabel
         Left = 99
         Top = 41
         Width = 20
@@ -7827,7 +7827,7 @@ object frmGeneralScreen: TfrmGeneralScreen
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label7: TLabel
+      object lblTCSpeedA: TLabel
         Left = 101
         Top = 41
         Width = 20
@@ -7947,9 +7947,9 @@ object frmGeneralScreen: TfrmGeneralScreen
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label11: TLabel
+      object lblEngineSpeed: TLabel
         Left = 100
-        Top = 36
+        Top = 39
         Width = 20
         Height = 18
         Caption = '0.0'
@@ -8080,7 +8080,7 @@ object frmGeneralScreen: TfrmGeneralScreen
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label15: TLabel
+      object lblDigitalSpeedSetPoint: TLabel
         Left = 99
         Top = 42
         Width = 20
@@ -8213,9 +8213,9 @@ object frmGeneralScreen: TfrmGeneralScreen
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label19: TLabel
+      object lblFuelRack: TLabel
         Left = 104
-        Top = 38
+        Top = 40
         Width = 20
         Height = 18
         Caption = '0.0'
@@ -8359,7 +8359,7 @@ object frmGeneralScreen: TfrmGeneralScreen
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label23: TLabel
+      object lblTCSpeedB: TLabel
         Left = 102
         Top = 41
         Width = 20

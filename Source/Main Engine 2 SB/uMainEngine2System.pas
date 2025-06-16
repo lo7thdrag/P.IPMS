@@ -890,6 +890,112 @@ begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
       end;
     end;
+
+    epPCSMESpeed :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMEFuelRack :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMESetPointSpeed :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMELOTempInlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMETempFWHTOutlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMEControlAir :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMEStartingAir :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMETCAirSeal :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMEPressFOInlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMETempFWHTInlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMEPressSeaWaterOutlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMELOPressInlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMETCOutlLOTempA :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMETCOutlLOTempB :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMETCLOPressInlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
   end;
 end;
 

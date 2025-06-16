@@ -37,7 +37,8 @@ implementation
 uses
   ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, ufrmMenu, uMainEngine2System, ufrmSafetiesStop, ufrmAirGasCircuit, ufrmGeneralScreen,
   ufrmLineAExhaustGasTemperature, ufrmLineBExhaustGasTemperature, ufrmEngineBearingTemperature, ufrmPCOTFilteringDeviations,
-  ufrmCrankinOilTemperature;
+  ufrmCrankinOilTemperature, ufrmClutchingAssitance, ufrmCompressedAirCircuit, ufrmFuelOilCircuit, ufrmFWSeaWaterCircuit,
+  ufrmLubOilCircuit, ufrmPLCNetwork;
 
 {$R *.dfm}
 
@@ -202,110 +203,110 @@ begin
       if Value then
         frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clRed
       else
-        frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clAqua;
     end;
     epPCSMEOverspeedAlarm :
     begin
       if Value then
         frmSafetiesStop.btnPS_SS_Overspeed.Color := clRed
       else
-        frmSafetiesStop.btnPS_SS_Overspeed.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SS_Overspeed.Color := clAqua;
     end;
     epPCSMELOPressVeryLow :
     begin
       if Value then
         frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clRed
       else
-        frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clAqua;
     end;
     epPCSMERedGearSafetyStop :
     begin
       if Value then
         frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clRed
       else
-        frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clAqua;
     end;
     epPCSMEFwHtExpTkLevelVeryLow :
     begin
       if Value then
         frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clRed
       else
-        frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clAqua;
     end;
     epPCSMEFwTempVeryHigh :
     begin
       if Value then
         frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clRed
       else
-        frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clAqua;
     end;
     epPCSMEConRodBearingTempVeryHigh :
     begin
       if Value then
         frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clRed
       else
-        frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clAqua;
     end;
     epPCSMEEngInletLubOilVeryHigh :
     begin
       if Value then
         frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clRed
       else
-        frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clAqua;
     end;
     epPCSMEOilMistDetSafety :
     begin
       if Value then
         frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clRed
       else
-        frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clAqua;
     end;
     epPCSMETurningGearEngaged :
     begin
       if Value then
         frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clRed
       else
-        frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clAqua;
     end;
     epPCSMEManHandleAtStop :
     begin
       if Value then
         frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clRed
       else
-        frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clAqua;
     end;
     epPCSMEFuelRackAtStop :
     begin
       if Value then
         frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clRed
       else
-        frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clAqua;
     end;
     epPCSMEPrelubInProgress :
     begin
       if Value then
         frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clRed
       else
-        frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clAqua;
     end;
     epPCSMEPrelubricationFailure :
     begin
       if Value then
         frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clRed
       else
-        frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clAqua;
     end;
     epPCSMEStartingFault :
     begin
       if Value then
       begin
-        frmSafetiesStop.btnPS_SI_StartingFailure.Color := clRed;
+        frmSafetiesStop.btnPS_SI_StartingFailure.Color  := clRed;
         frmGeneralScreen.btnPS_SI_StartingFailure.Color := clRed;
       end
       else
       begin
-        frmSafetiesStop.btnPS_SI_StartingFailure.Color := clBtnFace;
-        frmGeneralScreen.btnPS_SI_StartingFailure.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SI_StartingFailure.Color  := clAqua;
+        frmGeneralScreen.btnPS_SI_StartingFailure.Color := clAqua;
       end;
     end;
     epPCSMESTCSequenceFail :
@@ -313,7 +314,7 @@ begin
       if Value then
         frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clRed
       else
-        frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clAqua;
     end;
     epPCSMESlowTurningFault :
     begin
@@ -324,8 +325,8 @@ begin
       end
       else
       begin
-        frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clBtnFace;
-        frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clBtnFace
+        frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color  := clAqua;
+        frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clAqua
       end;
     end;
     epPCSMESafetyShutdown :
@@ -333,14 +334,14 @@ begin
       if Value then
         frmSafetiesStop.btnPS_SI_SafetyStop.Color := clRed
       else
-        frmSafetiesStop.btnPS_SI_SafetyStop.Color := clBtnFace;
+        frmSafetiesStop.btnPS_SI_SafetyStop.Color := clAqua;
     end;
     epPCSGBPCSClutchInterlock :
     begin
       if Value then
         frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clRed
       else
-        frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clBtnFace;
+        frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clAqua;
     end;
   end;
 end;
@@ -367,24 +368,198 @@ begin
     epPCSMEPressFWHTInlet :
     begin
       if Assigned(frmSetofPressureGaugesME2) then
-        frmSetofPressureGaugesME2.EngineInletFWPressureMeter.Position := Value
+        frmSetofPressureGaugesME2.EngineInletFWPressureMeter.Position := Value;
+
+      if Assigned(frmFWSeaWaterCircuit) then
+      begin
+        frmFWSeaWaterCircuit.VrEngineInletFWPressSeaWater.Position := Value;
+        frmFWSeaWaterCircuit.lblEngineInletFWPressSeaWater.Caption := FloatToStr(Value);
+      end;
     end;
     epPCSMEPressAirInlet :
     begin
       if Assigned(frmSetofPressureGaugesME2) then
-        frmSetofPressureGaugesME2.EngineInletAirPressureMeter.Position := Value
+        frmSetofPressureGaugesME2.EngineInletAirPressureMeter.Position := Value;
+
+      if Assigned(frmAirGasCircuit) then
+      begin
+        frmAirGasCircuit.lblEngineAirInletPressure.Caption := FloatToStr(Value);
+        frmAirGasCircuit.VrEngineAirInletPressure.Position := Value;
+      end;
+
+      if Assigned(frmGeneralScreen) then
+      begin
+        frmGeneralScreen.VrEngineAirInletPressure.Position := Value;
+        frmGeneralScreen.lblEngineAirInletPressure.Caption := FloatToStr(Value);
+      end;
     end;
 
     // HMI
     epPCSMETurboChargerSpeedA :
     begin
       if Assigned(frmAirGasCircuit) then
-        frmAirGasCircuit.lblTurboCharge1.Caption := FloatToStr(Value);
+      begin
+        frmAirGasCircuit.VrTurboChargerA.Position := Value;
+        frmAirGasCircuit.lblTurboCharge1.Caption  := FloatToStr(Value);
+      end;
+
+      if Assigned(frmGeneralScreen) then
+      begin
+        frmGeneralScreen.VrTCSpeedA.Position := Value;
+        frmGeneralScreen.lblTCSpeedA.Caption := FloatToStr(Value);
+      end;
     end;
     epPCSMETurboChargerSpeedB :
     begin
       if Assigned(frmAirGasCircuit) then
-        frmAirGasCircuit.lblTurboCharge2.Caption := FloatToStr(Value);
+      begin
+        frmAirGasCircuit.VrTurboChargerB.Position := Value;
+        frmAirGasCircuit.lblTurboCharge2.Caption  := FloatToStr(Value);
+      end;
+
+      if Assigned(frmGeneralScreen) then
+      begin
+        frmGeneralScreen.VrTCSpeedB.Position := Value;
+        frmGeneralScreen.lblTCSpeedB.Caption := FloatToStr(Value);
+      end;
+    end;
+    epPCSMESpeed :
+    begin
+      if Assigned(frmClutchingAssistance) then
+      begin
+        frmClutchingAssistance.VrEngineSpeedClutching.Position := Value;
+        frmClutchingAssistance.lblEngineSpeedClutching.Caption := FloatToStr(Value);
+      end;
+
+      if Assigned(frmGeneralScreen) then
+      begin
+        frmGeneralScreen.VrEngineSpeed.Position := Value;
+        frmGeneralScreen.lblEngineSpeed.Caption := FloatToStr(Value);
+      end;
+
+      if Assigned(frmSafetiesStop) then
+        frmSafetiesStop.lblSpeedSVAE.Caption := FloatToStr(Value);
+    end;
+    epPCSMEFuelRack :
+    begin
+      if Assigned(frmGeneralScreen) then
+      begin
+        frmGeneralScreen.VrFuelRack.Position := Value;
+        frmGeneralScreen.lblFuelRack.Caption := FloatToStr(Value);
+      end;
+    end;
+    epPCSMESetPointSpeed :
+    begin
+      if Assigned(frmGeneralScreen) then
+      begin
+        frmGeneralScreen.VrDigitalSpeedSetPoint.Position := Value;
+        frmGeneralScreen.lblDigitalSpeedSetPoint.Caption := FloatToStr(Value);
+      end;
+    end;
+    epPCSMELOTempInlet :
+    begin
+      if Assigned(frmClutchingAssistance) then
+      begin
+        frmClutchingAssistance.VrEngineInletLOClutching.Position := Value /10;
+        frmClutchingAssistance.lblEngineInletLOClutching.Caption := FloatToStr(Value /10);
+      end;
+
+      if Assigned(frmLubOilCircuit) then
+      begin
+        frmLubOilCircuit.VrEngineInletLOTemp.Position := Value /10;
+        frmLubOilCircuit.lblEngineInletLOTemp.Caption := FloatToStr(Value /10);
+
+        frmLubOilCircuit.VrEngineInletLubOilTemp.Position := Value /10;
+        frmLubOilCircuit.lblEngineInletLubOilTemp.Caption := FloatToStr(Value /10);
+      end;
+    end;
+    epPCSMETempFWHTOutlet :
+    begin
+      if Assigned(frmClutchingAssistance) then
+      begin
+        frmClutchingAssistance.VrEngineOutletFWClutching.Position := Value /10;
+        frmClutchingAssistance.lblEngineOutletFWClutching.Caption := FloatToStr(Value /10);
+      end;
+    end;
+    epPCSMEControlAir :
+    begin
+      if Assigned(frmCompressedAirCircuit) then
+      begin
+        frmCompressedAirCircuit.VrControlAirCompress.Position := Value;
+        frmCompressedAirCircuit.lblControlAirCompress.Caption := FloatToStr(Value);
+      end;
+    end;
+    epPCSMEStartingAir :
+    begin
+      if Assigned(frmCompressedAirCircuit) then
+      begin
+        frmCompressedAirCircuit.VrStartingAirPressureCompress.Position := Value;
+        frmCompressedAirCircuit.lblStartingAirPressureCompress.Caption := FloatToStr(Value);
+      end;
+    end;
+    epPCSMETCAirSeal :
+    begin
+      if Assigned(frmCompressedAirCircuit) then
+      begin
+        frmCompressedAirCircuit.VrTCAirSealCompress.Position := Value;
+        frmCompressedAirCircuit.lblTCAirSealCompress.Caption := FloatToStr(Value);
+      end;
+    end;
+    epPCSMEPressFOInlet :
+    begin
+      if Assigned(frmFuelOilCircuit) then
+      begin
+        frmFuelOilCircuit.VrEngineInletFuelOilCircuit.Position := Value;
+        frmFuelOilCircuit.lblEngineInletFuelOilCircuit.Caption := FloatToStr(Value);
+      end;
+    end;
+    epPCSMETempFWHTInlet :
+    begin
+      if Assigned(frmFWSeaWaterCircuit) then
+      begin
+        frmFWSeaWaterCircuit.VrEngineInletFWTemp.Position := Value /10;
+        frmFWSeaWaterCircuit.lblEngineInletFWTemp.Caption := FloatToStr(Value /10);
+      end;
+    end;
+    epPCSMEPressSeaWaterOutlet :
+    begin
+      if Assigned(frmFWSeaWaterCircuit) then
+      begin
+        frmFWSeaWaterCircuit.VrEngineOutletSeaWaterPress.Position := Value;
+        frmFWSeaWaterCircuit.lblEngineOutletSeaWaterPress.Caption := FloatToStr(Value);
+      end;
+    end;
+    epPCSMELOPressInlet :
+    begin
+      if Assigned(frmLubOilCircuit) then
+      begin
+        frmLubOilCircuit.VrEngineAirInletPressure.Position := Value;
+        frmLubOilCircuit.lblEngineAirInletPressureLO.Caption := FloatToStr(Value);
+      end;
+    end;
+    epPCSMETCOutlLOTempA :
+    begin
+      if Assigned(frmLubOilCircuit) then
+      begin
+        frmLubOilCircuit.VrLATCOutletLOTemp.Position := Value /10;
+        frmLubOilCircuit.lblLATCOutletLOTemp.Caption := FloatToStr(Value /10);
+      end;
+    end;
+    epPCSMETCOutlLOTempB :
+    begin
+      if Assigned(frmLubOilCircuit) then
+      begin
+        frmLubOilCircuit.VrLBTCOutletLOTemp.Position := Value /10;
+        frmLubOilCircuit.lblLBTCOutletLOTemp.Caption := FloatToStr(Value /10);
+      end;
+    end;
+    epPCSMETCLOPressInlet :
+    begin
+      if Assigned(frmLubOilCircuit) then
+      begin
+        frmLubOilCircuit.VrTCInletLubOilPress.Position := Value;
+        frmLubOilCircuit.lblTCInletLubOilPress.Caption := FloatToStr(Value);
+      end;
     end;
 
     //Line Exhaust A
