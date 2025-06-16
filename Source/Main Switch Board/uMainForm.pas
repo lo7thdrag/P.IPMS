@@ -13,17 +13,21 @@ type
   TfrmMainForm = class(TForm)
 
     tmr1: TTimer;
+    mmoNetLogger: TMemo;
+    mmoLogReceive: TMemo;
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
 
   private
 
-    FListener : TListeners;
+//    FListener : TListeners;
 
     procedure MainSwitchBoardSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure MainSwitchBoardSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
     procedure MainSwitchBoardSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Double);overload;
+    procedure MainSwitchBoardSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : string);overload;
+    procedure MainSwitchBoardSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : TObject);overload;
 
   public
     GeneratorTemp : TGenerator;
@@ -36,7 +40,7 @@ var
 implementation
 
 uses
-  uMainSwitchBoardSystem, ufrmGeneratorPanel, ufrmEmergencyPanel, ufrmShorePanel;
+  uTCPClient, uMainSwitchBoardSystem, ufrmGeneratorPanel, ufrmEmergencyPanel, ufrmShorePanel;
 
 {$R *.dfm}
 
@@ -45,7 +49,7 @@ begin
   Setting   := TSetting.Create;
   MainSwitchBoardSystem := TMainSwitchBoardSystem.Create;
 
-  FListener := TListeners.Create;
+//  FListener := TListeners.Create;
   with MainSwitchBoardSystem.Listener.Add('MAINSWITCHBOARD') as TPropertyEventListener do
   begin
     OnPropertyIntChange := MainSwitchBoardSystemEvent;
@@ -53,17 +57,23 @@ begin
     OnPropertyDblChange := MainSwitchBoardSystemEvent;
   end;
 
+  with MainSwitchBoardSystem.Network.Listeners.Add('MAINSWITCHBOARDNETWORK') as TPropertyEventListener do
+    OnPropertyStringChange:= MainSwitchBoardSystemEvent;
+    with MainSwitchBoardSystem.Network.Listeners.Add('MAINSWITCHBOARDNETWORK') as TPropertyEventListener do
+    OnPropertyObjectChange:= MainSwitchBoardSystemEvent;
+
+
   {Create Generator Temporary}
   GeneratorTemp := TGenerator.Create;
   GeneratorTemp.Identifier := MainSwitchBoardSystem.IdGenerator;
-  GeneratorTemp.GeneratorState := 9;
+  GeneratorTemp.GeneratorState := 1;
 end;
 
 procedure TfrmMainForm.FormDestroy(Sender: TObject);
 begin
   GeneratorTemp.Destroy;
 
-  FListener.Free;
+//  FListener.Free;
   MainSwitchBoardSystem.Free;
   Setting.Free;
 end;
@@ -179,9 +189,19 @@ begin
         frmEmergencyPanel.UpdateForm(GeneratorTemp);
       end;
     end;
-    epPMSMsbShoreMode:
+    epPMSGeneratorState:
     begin
-//
+      GeneratorTemp.GeneratorState := Value;
+
+      if Assigned(frmGeneratorPanel) then
+      begin
+        frmGeneratorPanel.UpdateForm(GeneratorTemp);
+      end;
+
+      if Assigned(frmEmergencyPanel) then
+      begin
+        frmEmergencyPanel.UpdateForm(GeneratorTemp);
+      end;
     end;
   end;
 end;
@@ -194,6 +214,11 @@ begin
     epPMSGeneratorCBClosed : GeneratorTemp.CBClosed := Value;
     epPMSGeneratorPreference : GeneratorTemp.Preference := Value;
     epPMSGeneratorBusbar : GeneratorTemp.Busbar := Value;
+    epPMSNotStandby : GeneratorTemp.NotStandby := Value;
+    epPMSGeneratorFuelRunsOut : GeneratorTemp.FuelRunsOut := Value;
+    epPMSGeneratorEmergencyStop : GeneratorTemp.EmergencyStop := Value;
+    epPMSShutDown : GeneratorTemp.ShutDown := Value;
+    epPMSFailureCBClosed : GeneratorTemp.FailureCBClosed := Value;
   end;
 
   if Assigned(frmGeneratorPanel) then
@@ -264,6 +289,34 @@ begin
     end;
   end;
 
+end;
+
+procedure TfrmMainForm.MainSwitchBoardSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: string);
+begin
+	case PropsID of
+	  epNetworkLogRcv: begin
+	    if mmoLogReceive.Lines.Count>100 then
+	      mmoLogReceive.Lines.Delete(0);
+	    mmoLogReceive.Lines.Add(Value);
+	  end;
+	end;
+end;
+
+procedure TfrmMainForm.MainSwitchBoardSystemEvent(Sender: TObject;
+  PropsID: E_PropsID; Value: TObject);
+begin
+  case PropsID of
+    epNetworkConnectedToServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + '] Connected to : ' + TTCPClient(Value).ServerAddress);
+    end;
+    epNetworkDisconnectedFromServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + ']Disconnected from : ' + TTCPClient(Value).ServerAddress);
+    end;
+  end;
 end;
 
 end.

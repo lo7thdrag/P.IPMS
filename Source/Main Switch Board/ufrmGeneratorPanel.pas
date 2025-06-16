@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch, RzBmpBtn,
   Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls,
 
-  uListener, uFreezeFrom, uDataType, uGenerator;
+  uListener, uFreezeFrom, uDataType, uGenerator, uMainForm;
 
 type
   TfrmGeneratorPanel = class(TForm)
@@ -142,6 +142,8 @@ type
     procedure MenuFaultPage;
     procedure MenuAlarmPage;
     procedure MenuInfoPage;
+    
+    function CekGeneratorCondition : Boolean;
 
 
   public
@@ -171,6 +173,19 @@ begin
   for I := 0 to WinControl.ControlCount - 1 do
     if WinControl.Controls[i] is TWinControl then
       EnableComposited(TWinControl(WinControl.Controls[i]));
+end;
+
+function TfrmGeneratorPanel.CekGeneratorCondition: Boolean;
+begin
+  Result := False;
+
+  if frmMainForm.GeneratorTemp.NotStandby or frmMainForm.GeneratorTemp.FuelRunsOut then
+    Exit;
+
+  if frmMainForm.GeneratorTemp.EmergencyStop or frmMainForm.GeneratorTemp.ShutDown then
+    exit;
+
+  Result := True;
 end;
 
 procedure TfrmGeneratorPanel.DoLedTest(OnOff: Boolean);
@@ -447,11 +462,17 @@ end;
 
 procedure TfrmGeneratorPanel.ImgOIClick(Sender: TObject);
 begin
+  if (frmMainForm.GeneratorTemp.GeneratorMode = 3) or (frmMainForm.GeneratorTemp.FailureCBClosed) then
+    exit;
+
   MainSwitchBoardSystem.CBClosed(True);
 end;
 
 procedure TfrmGeneratorPanel.ImgPrefClick(Sender: TObject);
 begin
+  if not CekGeneratorCondition then
+    Exit;
+
   MainSwitchBoardSystem.GeneratorPreference(True);
 end;
 
@@ -469,11 +490,32 @@ end;
 
 procedure TfrmGeneratorPanel.ImgStartClick(Sender: TObject);
 begin
+  if not CekGeneratorCondition then
+    Exit;
+
+  if frmMainForm.GeneratorTemp.GeneratorMode = 3 then
+    exit;
+
+  if frmMainForm.GeneratorTemp.GeneratorState <> Ord(gsWaiting){1} then
+    exit;
+
   MainSwitchBoardSystem.EngineRun(True);
 end;
 
 procedure TfrmGeneratorPanel.ImgStopClick(Sender: TObject);
 begin
+  if not CekGeneratorCondition then
+    Exit;
+
+  if (frmMainForm.GeneratorTemp.GeneratorMode = 3) or (frmMainForm.GeneratorTemp.Preference) or (frmMainForm.GeneratorTemp.GeneratorState <> ord(gsGenReady){5}) then
+    exit;
+
+  if (frmMainForm.GeneratorTemp.GeneratorMode = 2) then
+  begin
+    if frmMainForm.GeneratorTemp.CBClosed <> False then
+      Exit;
+  end;
+
   MainSwitchBoardSystem.EngineStop(True);
 end;
 
@@ -562,34 +604,34 @@ end;
 
 procedure TfrmGeneratorPanel.tmrAmpereTimer(Sender: TObject);
 begin
-  if vraAmpere1.Position > OrderAmpere then
-  begin
-    vraAmpere1.Position := vraAmpere1.Position - 1;
-  end
-  else if vraAmpere1.Position < OrderAmpere then
-  begin
-    vraAmpere1.Position := vraAmpere1.Position + 1;
-  end
-  else
-  begin
-    tmrAmpere.Enabled := False;
-  end;
+//  if vraAmpere1.Position > OrderAmpere then
+//  begin
+//    vraAmpere1.Position := vraAmpere1.Position - 1;
+//  end
+//  else if vraAmpere1.Position < OrderAmpere then
+//  begin
+//    vraAmpere1.Position := vraAmpere1.Position + 1;
+//  end
+//  else
+//  begin
+//    tmrAmpere.Enabled := False;
+//  end;
 end;
 
 procedure TfrmGeneratorPanel.tmrFrequencyTimer(Sender: TObject);
 begin
-  if VraFrequency.Position > OrderFrequency then
-  begin
-    VraFrequency.Position := VraFrequency.Position - 1;
-  end
-  else if VraFrequency.Position < OrderFrequency then
-  begin
-    VraFrequency.Position := VraFrequency.Position + 1;
-  end
-  else
-  begin
-    tmrFrequency.Enabled := False;
-  end;
+//  if VraFrequency.Position > OrderFrequency then
+//  begin
+//    VraFrequency.Position := VraFrequency.Position - 1;
+//  end
+//  else if VraFrequency.Position < OrderFrequency then
+//  begin
+//    VraFrequency.Position := VraFrequency.Position + 1;
+//  end
+//  else
+//  begin
+//    tmrFrequency.Enabled := False;
+//  end;
 end;
 
 procedure TfrmGeneratorPanel.updateForm(Generator : TGenerator);

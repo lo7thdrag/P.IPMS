@@ -8,7 +8,7 @@ unit uMainSwitchBoardNetwork;
 
 interface
 
-uses uNetworkManagerTimer, uTCPClient, ExtCtrls, uDataType;
+uses uNetworkManager, uTCPClient, ExtCtrls, uDataType;
 
 type
   TMainSwitchBoardNetwork = class (TNetworkManager)
@@ -51,15 +51,6 @@ begin
     ServerAddress := Setting.SimEngineServer;
     ServerPort    := Setting.SimEnginePort;
     AutoReconnect := True;
-    IsLogged      := True;
-  end;
-
-  with CreateClientSocket('AsInstructorClient') do
-  begin
-    ServerAddress := Setting.InstructorHost;
-    ServerPort    := Setting.InstructorPort;
-    AutoReconnect := True;
-//    IsLogged      := True;
   end;
 
   with CreateClientSocket('AsControllerClient') do
@@ -67,7 +58,13 @@ begin
     ServerAddress := Setting.LPUServer;
     ServerPort    := Setting.LPUPort;
     AutoReconnect := True;
-//    IsLogged      := True;
+  end;
+
+  with CreateClientSocket('AsInstructorClient') do
+  begin
+    ServerAddress := Setting.InstructorHost;
+    ServerPort    := Setting.InstructorPort;
+    AutoReconnect := True;
   end;
 
   FVREngineSocket := AsClients.Get('AsSimEngineClient');

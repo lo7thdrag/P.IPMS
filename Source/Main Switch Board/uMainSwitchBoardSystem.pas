@@ -240,36 +240,19 @@ var
 begin
 
   rec := @apRec^;
-  {Tambahan}
-//  FN := ChangeFileExt('TulisLog', '.log');
-//  if not FileExists(FN) then
-//  begin
-//    CreateLogFile
-//  end;
-//
-//  AssignFile(T, FN);
-//  Append(T);
-//  Writeln(T, (rec.pid.recID));
-//  Writeln(T, (rec.GenSwitchID));
-//  Writeln(T, (GetEnumName(typeInfo(E_PropsID ), Ord(rec.CommandPropsID))));
-//  Writeln(T, 'Kind : ', rec.ValueKind);
-//  Writeln(T, 'Bool : ', BoolToStr(rec.ValueBool, True));
-//  Writeln(T, 'Int : ', rec.ValueInt.ToString);
-//  Writeln(T, 'Double : ', rec.ValueDob.ToString);
-//  Writeln(T, '---');
-//  CloseFile(T);
-  {Tambahan}
 
   if FIdGenerator <> rec.GenSwitchID then
     Exit;
 
   case rec.CommandPropsID of
     epPMSGeneratorEngineRun, epPMSGeneratorSupplied, epPMSGeneratorCBClosed,
-    epPMSGeneratorPreference, epPMSGeneratorBusbar:
+    epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSNotStandby,
+    epPMSGeneratorFuelRunsOut, epPMSGeneratorEmergencyStop, epPMSShutDown,
+    epPMSFailureCBClosed :
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
-    epPMSGeneratorMode:
+    epPMSGeneratorMode, epPMSGeneratorState:
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
     end;
