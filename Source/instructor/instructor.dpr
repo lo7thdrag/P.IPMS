@@ -294,10 +294,12 @@ uses
 {$R IPMS_Resource.res}
 
 begin
+  ReportMemoryLeaksOnShutdown:= True;
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
 
   BeginSimulation;
+
   Application.CreateForm(TfrmInstructorPanel, frmInstructorPanel);
   Application.CreateForm(TfrmLogin, frmLogin);
   //  Application.CreateForm(TfrmFFSystem, frmFFSystem);
@@ -310,9 +312,10 @@ begin
 //  Application.CreateForm(TfrmFuelOilPanel, frmFuelOilPanel);
 //  Application.CreateForm(TfrmBallastPanel, frmBallastPanel);
 //  Application.CreateForm(TfrmFreshWaterPanel, frmFreshWaterPanel);
+
   StartNetwork;
 
   Application.Run;
 
-  EndSimulation;
+//  EndSimulation;
 end.

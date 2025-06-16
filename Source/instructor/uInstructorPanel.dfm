@@ -15,6 +15,7 @@ object frmInstructorPanel: TfrmInstructorPanel
   OldCreateOrder = False
   Position = poDesigned
   WindowState = wsMaximized
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnShow = FormShow
@@ -47,8 +48,6 @@ object frmInstructorPanel: TfrmInstructorPanel
         Color = clGray
         ParentBackground = False
         TabOrder = 0
-        ExplicitLeft = -2
-        ExplicitTop = -3
       end
     end
     object pnlHeaderContent: TPanel

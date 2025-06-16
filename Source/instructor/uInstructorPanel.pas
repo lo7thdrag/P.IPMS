@@ -102,6 +102,7 @@ type
     procedure mniManualIPMS1Click(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     FDockedForm : TForm;
@@ -131,7 +132,7 @@ var
 implementation
 
 uses
-  uScenBuilder, uScenLoader, uElementTesterForm, uPMSSystemPanel, uPMSEditor,
+  uStarter, uScenBuilder, uScenLoader, uElementTesterForm, uPMSSystemPanel, uPMSEditor,
   uMimicPanel, uNetArchitectur, uPCSPanelBridge, uDataLogger, uInstructorSystem,
   uNetworkStatus, uListener, uPCSLocalControlPanel, uMimicsSystem, ufrmMimics,
   uPCSEditor, uDBSupportClasses, uControllerSystem, uERSystem, uProgress,
@@ -637,6 +638,12 @@ begin
       TelegrapTimerFlag := True;
     end;
   end
+end;
+
+procedure TfrmInstructorPanel.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EndSimulation;
 end;
 
 procedure TfrmInstructorPanel.FormCloseQuery(Sender: TObject;

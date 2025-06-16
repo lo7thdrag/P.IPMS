@@ -89,11 +89,11 @@ uses uDataType;
 constructor TSwitchboard.Create;
 begin
   inherited;
-  FFrequency  := 0;
-  FVoltage    := 0;
+  FFrequency := 0;
+  FVoltage := 0;
   FTrafo230Volt := 0;
   FTrafo115Volt := 0;
-  FDelay      := 0;
+  FDelay := 0;
 
   ShoreInterconnectionMode  := C_ModeOff;
   MsbInterconnectionMode := C_ModeOff;

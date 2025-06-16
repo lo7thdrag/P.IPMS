@@ -129,7 +129,7 @@ begin
     OnRunning := FNetworkThread_OnRunning;
     OnTerminate := FNetworkThread_OnTerminate;
 
-    Interval := 30;
+    Interval := 16;
     Enabled := True;
 
   end;
@@ -137,7 +137,7 @@ begin
   FDelayReconnect := TDelayer.Create;
   with FDelayReconnect do begin
 
-    DInterval := 1;
+    DInterval := 3;
     Ontime := OnDelayTime;
     Enabled := True;
 
@@ -151,6 +151,7 @@ begin
   Result := FAsClientsSocket.Add(aClientID);
   Result.OnConnected    := OnConnected;
   Result.OnDisConnected := OnDisConnected;
+  Result.OnlogRecv := OnNetworkLogStr;
 
 end;
 
@@ -231,15 +232,15 @@ end;
 procedure TNetworkManager.OnClientDisconnect(const aValue: String);
 begin
   { uncomment for specific action, not debugging }
-  Listeners.TriggerEvents(Self, epNetworkClientConnect, AsServer);
-  Listeners.TriggerEvents(Self, epNetworkClientConnect, aValue);
+  Listeners.TriggerEvents(Self, epNetworkClientDisconnect, AsServer);
+  Listeners.TriggerEvents(Self, epNetworkClientDisconnect, aValue);
 
 end;
 
 procedure TNetworkManager.OnConnected(Sender: TObject);
 begin
   { uncomment for specific action, not debugging }
-  Listeners.TriggerEvents(Self, epNetworkConnectedToServer,Sender);
+  Listeners.TriggerEvents(Self, epNetworkConnectedToServer, Sender);
 
   // sending acknowledge
 end;
@@ -313,6 +314,7 @@ begin
 
   Result := TTCPClient.Create;
   Result.SocketIdentifier := aClientId;
+  Result.SetDataBufferIdentifier;
 
   FClients.Add(result);
 

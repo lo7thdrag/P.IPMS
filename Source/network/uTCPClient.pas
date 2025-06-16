@@ -26,8 +26,8 @@ type
     procedure SetServerAddress(const Value: String);
     procedure SetServerPort(const Value: String);
 
-    function GetIsLogged: Boolean;
-    procedure SetIsLogged(aValue: Boolean);
+//    function GetIsLogged: Boolean;
+//    procedure SetIsLogged(aValue: Boolean);
 
   protected
     FBuffer   : PAnsiChar;
@@ -65,6 +65,7 @@ type
   public
     procedure GetPacket();
     function GetBufferCount : integer;
+    procedure SetDataBufferIdentifier;
 
     property Connected: boolean read getConnected;
     property State: TSocketState read getState;
@@ -81,7 +82,7 @@ type
     property ServerAddress : String read FServerAddress write SetServerAddress;
     property ServerPort : String read FServerPort write SetServerPort;
 
-    property IsLogged: Boolean read GetIsLogged write SetIsLogged;
+//    property IsLogged: Boolean read GetIsLogged write SetIsLogged;
 
   end;
 
@@ -105,7 +106,7 @@ begin
     WSocket.Port      := FServerPort;
     WSocket.Addr      := FServerAddress;
 
-    FLogStat(DateStr + ': ' + 'Connecting to ' + FServerAddress + ' port ' + FServerPort);
+    FLogStat(DateStr + ': [' + SocketIdentifier + '] ' + 'Connecting to ' + FServerAddress + ' port ' + FServerPort);
 
     WSocket.Connect;
   end;
@@ -142,7 +143,7 @@ begin
   FreeMem(FBuffer);
 
   FDataBuffer.Clear;
-//  FDataBuffer.Free;
+  FDataBuffer.Free;
 
   inherited;
 end;
@@ -164,7 +165,7 @@ begin
     WSocket.Port      := aPort;
     WSocket.Addr      := aAddr;
 
-    FLogStat(DateStr + ': ' + 'Connecting to ' + aAddr + ' port ' + aPort);
+    FLogStat(DateStr + ': [' + SocketIdentifier + '] ' + 'Connecting to ' + aAddr + ' port ' + aPort);
 
     WSocket.Connect;
   end;
@@ -172,7 +173,7 @@ end;
 
 procedure TTCPClient.Disconnect;
 begin
-  FLogStat(DateStr + ': ' + 'Disconnecting ...');
+  FLogStat(DateStr + ': [' + SocketIdentifier + '] ' + 'Disconnecting ...');
   WSocket.OnDataAvailable := nil;
 
   WSocket.Close;
@@ -183,7 +184,7 @@ var pSize: word;
     pid : ^TPacketID;
 begin
   if not PrepareSendData(aID, aBuffer) then begin
-    FLogSend(TimeStr + ': Unregistered Packet ID ' + inttostr(aID));
+    FLogSend(TimeStr + ': [' + SocketIdentifier + '] ' + 'Unregistered Packet ID ' + inttostr(aID));
     Exit;
   end;
   pid := @aBuffer^;
@@ -191,14 +192,14 @@ begin
 
   if WSocket.State = wsConnected then begin
     if not WSocket.AllSent then begin
-      FLogSend(TimeStr + ': flush!');
+      FLogSend(TimeStr + ': [' + SocketIdentifier + '] ' + 'flush!');
       WSocket.Flush;
 
     end;
 
     pSize :=  FRegProcs[aID].recSize;
 
-    FLogSend(TimeStr + ': Send id ' + IntToStr(aID) + ' -  ' + IntToStr(pSize)  + ' byte' );
+    FLogSend(TimeStr + ': [' + SocketIdentifier + '] ' + 'Send id ' + IntToStr(aID) + ' -  ' + IntToStr(pSize)  + ' byte' );
     try
       WSocket.Send(aBuffer, pSize);
     except
@@ -228,14 +229,14 @@ begin
     if Assigned(FOnConnected) then
       FOnConnected(self);
 
-    FLogStat(TimeStr + ': ' + 'Connected to ' + s);
+    FLogStat(TimeStr + ': [' + SocketIdentifier + '] ' + 'Connected to ' + s);
   end;
 end;
 
 procedure TTCPClient.WSocket_OnSessionClosed(Sender: TObject; Error: Word);
 var s: string;
 begin
-  s := TimeStr + ': ' + 'DisConnected from ' +LongIp_To_StrIp(FLongXAddress);
+  s := TimeStr + ': [' + SocketIdentifier + '] ' + 'DisConnected from ' +LongIp_To_StrIp(FLongXAddress);
 
   FLongXAddress := 0;
 
@@ -252,7 +253,7 @@ begin
     s := WSocket.GetXAddr;
     FLongXAddress := StrIp_To_LongIp(s);
 
-    FLogStat(TimeStr + ': ' + 'available ' + s);
+    FLogStat(TimeStr + ': [' + SocketIdentifier + '] ' + 'available ' + s);
   end;
 
 end;
@@ -276,11 +277,11 @@ begin
 
   if receivedByte < 1 then exit;
 
-  if Assigned(FLogRecv) then
-    FLogRecv(TimeStr + ': ' + inttostr(receivedByte));
-
   GetMem(lbuffer, receivedByte + 1);
   readByte := TWSocket(Sender).Receive(lbuffer, receivedByte);
+
+  if Assigned(FLogRecv) then
+    FLogRecv(TimeStr + ': [' + SocketIdentifier + '] ' + 'ReadByte from Receive : ' + inttostr(readByte));
 
   if readByte < 1 then exit;
   svrIP := TWSocket(Sender).Addr;
@@ -352,6 +353,11 @@ begin
   WSocket.OnChangeState := Value;
 end;
 
+procedure TTCPClient.SetDataBufferIdentifier;
+begin
+  FDataBuffer.SocketIdentifier:= SocketIdentifier;
+end;
+
 procedure TTCPClient.SetLogData(const Value: TGetStrProc);
 begin
   FLogData := Value;
@@ -386,15 +392,15 @@ begin
   end;
 end;
 
-function TTCPClient.GetIsLogged: Boolean;
-begin
-  Result:= FDataBuffer.IsLogged;
-end;
-
-procedure TTCPClient.SetIsLogged(aValue: Boolean);
-begin
-  FDataBuffer.IsLogged:= aValue;
-end;
+//function TTCPClient.GetIsLogged: Boolean;
+//begin
+//  Result:= FDataBuffer.IsLogged;
+//end;
+//
+//procedure TTCPClient.SetIsLogged(aValue: Boolean);
+//begin
+//  FDataBuffer.IsLogged:= aValue;
+//end;
 
 end.
 

@@ -203,7 +203,7 @@ uses
 
 procedure TfrmClientControl.AddNetLogger(const Value: string);
 begin
-   if mmoNetLogger.Lines.Count > 50 then
+   if mmoNetLogger.Lines.Count > 100 then
     mmoNetLogger.Lines.Delete(0);
 
   mmoNetLogger.Lines.Add(Value);
@@ -261,6 +261,8 @@ end;
 procedure TfrmClientControl.EventLogger(Sender: Tobject; Props_ID: E_PropsID;
   Value: String);
 begin
+  if mmoEvntLog.Lines.Count > 100 then
+    mmoEvntLog.Lines.Delete(0);
   mmoEvntLog.Lines.Add(GetEnumName(TypeInfo(E_PropsID),integer(Props_ID)) + ' : ' + Value);
   case Props_ID of
     epNetworkDebugInfo : AddNetLogger(Value);

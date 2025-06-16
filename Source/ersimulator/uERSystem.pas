@@ -423,17 +423,6 @@ begin
 
   case PropsID of
     {$REGION ' PMS Section '}
-//    epPMSPowerConsmr, epPMSPower :
-//    begin
-//      rPmsCmd.GenSwitchID := TGenerator(Sender).Identifier;
-//      rPmsCmd.CommandPropsID   := PropsID;
-//      rPmsCmd.ValueInt    := Value;
-//      rPmsCmd.ValueKind   := 'integer';
-//      Network.AsServer.SendData(C_PMS_COMMAND,@rPmsCmd);
-//      if Assigned(FOnPMSCommand) then
-//        FOnPMSCommand(rPmsCmd);
-//    end;
-
     epPMSGeneratorMode, epPMSGeneratorState{, epPMSGeneratorRunningHours}:
     begin
       rPmsCmd.GenSwitchID := '';

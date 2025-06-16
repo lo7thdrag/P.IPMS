@@ -378,11 +378,11 @@ begin
   FailureCBClosed := False;
   GeneratorState := Ord(gsWaiting);//1;
 //  Busbar := False;
-  FPower := 0;
-  FVoltage := 0;
-  FFrequency := 0;
-  FCurrent := 0;
-  FCosPhi  := 0;
+  Power := 0;
+  Voltage := 0;
+  Frequency := 0;
+  Current := 0;
+  CosPhi  := 0;
 
   SetUVW(54, 57, 56);
 end;

@@ -13,9 +13,10 @@ type
   *}
   TDataBuffer = class
   private
-    FFileName: string;
-    FIsLogged: Boolean;
-    procedure CreateLogFile;
+//    FFileName: string;
+//    FIsLogged: Boolean;
+//    procedure CreateLogFile;
+    FSocketIdentifier: string;
   protected
     FBuff    : TThreadList;
     FRegProcs   : TRegisterPacket;
@@ -37,8 +38,9 @@ type
 
     property RegProcs : TRegisterPacket read FRegProcs write FRegProcs;
     property LogRecv: TGetStrProc read FLogRecv write FLogRecv;
+    property SocketIdentifier: string read FSocketIdentifier write FSocketIdentifier;
 
-    property IsLogged: Boolean read FIsLogged write FIsLogged;
+//    property IsLogged: Boolean read FIsLogged write FIsLogged;
   end;
 
 implementation
@@ -63,23 +65,23 @@ end;
 constructor TDataBuffer.Create;
 begin
   FBuff := TThreadList.Create;
-  FFileName:= ChangeFileExt('DataBuffer', '.log');
-  FIsLogged:= False;
+//  FFileName:= ChangeFileExt('DataBuffer', '.log');
+//  FIsLogged:= False;
 end;
 
-procedure TDataBuffer.CreateLogFile;
-var
-  T: TextFile;
-begin
-  AssignFile(T, FFileName);
-  try
-    Rewrite(T);
-    Append(T);
-    Writeln(T,'--- DataBuffer ---');
-  finally
-    CloseFile(T);
-  end;
-end;
+//procedure TDataBuffer.CreateLogFile;
+//var
+//  T: TextFile;
+//begin
+//  AssignFile(T, FFileName);
+//  try
+//    Rewrite(T);
+//    Append(T);
+//    Writeln(T,'--- DataBuffer ---');
+//  finally
+//    CloseFile(T);
+//  end;
+//end;
 
 destructor TDataBuffer.Destroy;
 begin
@@ -131,21 +133,21 @@ begin
         FreeMem(pLocBuff);
         Delete(0);
 
-        if IsLogged then begin
-          if not FileExists(FFileName) then
-          begin
-            CreateLogFile
-          end;
-
-          AssignFile(T, FFileName);
-          try
-          Append(T);
-          Writeln(T, 'After GetPacket, Buffer = ', Count);
-          Writeln(T, '---');
-          finally
-            CloseFile(T);
-          end;
-        end;
+//        if IsLogged then begin
+//          if not FileExists(FFileName) then
+//          begin
+//            CreateLogFile
+//          end;
+//
+//          AssignFile(T, FFileName);
+//          try
+//          Append(T);
+//          Writeln(T, 'After GetPacket, Buffer = ', Count);
+//          Writeln(T, '---');
+//          finally
+//            CloseFile(T);
+//          end;
+//        end;
 
       end;
 //    end;
@@ -162,14 +164,14 @@ begin
   recID := pid^.recID;
 
   if FRegProcs.IsHandled(recID) then begin
-    if Assigned(FLogRecv) then
-       FLogRecv(TimeStr + ': Data ' + FRegProcs[recID].recName);
+//    if Assigned(FLogRecv) then
+//       FLogRecv(TimeStr + ': Data ' + FRegProcs[recID].recName);
 //    FLogRecv(TimeStr + ': Data ' + getPacketIDname(recID));
     FRegProcs[recID].theProc(aP, FRegProcs[recID].recSize);
   end
   else
-    if Assigned(FLogRecv) then
-      FLogRecv(TimeStr + ': ' + 'UnRegistered ID ' + inttostr(recID) );
+//    if Assigned(FLogRecv) then
+//      FLogRecv(TimeStr + ': ' + 'UnRegistered ID ' + inttostr(recID) );
 end;
 
 procedure TDataBuffer.PutPacket(aP: PAnsiChar;
@@ -190,37 +192,41 @@ begin
     pid := @pLocBuff^;
     pid^.recSize := aSize;
 
-//    if FRegProcs.IsHandled(pid.recID) then begin
-//      l.Add(pLocBuff);
-//
-//    end else
-//      FreeMem(pLocBuff);
-
-    l.Add(pLocBuff);
-
-    if IsLogged then begin
-      if not FileExists(FFileName) then
-      begin
-        CreateLogFile
-      end;
-
-      AssignFile(T, FFileName);
-      try
-      Append(T);
-      Writeln(T, 'After PutPacket, Count = ', l.Count);
-      Writeln(T, 'RecID = ', pid.recID);
-
-      if pid.recID=52 then begin
-        r:= @pLocBuff^;
-        Writeln(T, 'CommandID = ', r.CommandID);
-        Writeln(T, 'CommandPropsID = ', Ord(r.CommandPropsID));
-      end;
-
-      Writeln(T, '---');
-      finally
-        CloseFile(T);
-      end;
+    if FRegProcs.IsHandled(pid.recID) then begin
+      l.Add(pLocBuff);
+      if Assigned(FLogRecv) then
+        FLogRecv(TimeStr + ': [' + SocketIdentifier + '] ' + 'Data ' + FRegProcs[pid.recID].recName);
+    end else begin
+      FreeMem(pLocBuff);
+      if Assigned(FLogRecv) then
+        FLogRecv(TimeStr + ': [' + SocketIdentifier + '] ' + 'UnRegistered ID ' + inttostr(pid.recID) );
     end;
+
+//    l.Add(pLocBuff);
+
+//    if IsLogged then begin
+//      if not FileExists(FFileName) then
+//      begin
+//        CreateLogFile
+//      end;
+//
+//      AssignFile(T, FFileName);
+//      try
+//      Append(T);
+//      Writeln(T, 'After PutPacket, Count = ', l.Count);
+//      Writeln(T, 'RecID = ', pid.recID);
+//
+//      if pid.recID=52 then begin
+//        r:= @pLocBuff^;
+//        Writeln(T, 'CommandID = ', r.CommandID);
+//        Writeln(T, 'CommandPropsID = ', Ord(r.CommandPropsID));
+//      end;
+//
+//      Writeln(T, '---');
+//      finally
+//        CloseFile(T);
+//      end;
+//    end;
 
   finally
     FBuff.UnlockList;

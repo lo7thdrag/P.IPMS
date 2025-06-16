@@ -71,9 +71,18 @@ end;
 { TEntities }
 
 procedure TEntities.Add(aEntity : TEntity);
+var
+  l: TList;
 begin
-  FList.LockList.Add(aEntity);
-  FList.UnlockList;
+//  FList.LockList.Add(aEntity);
+//  FList.UnlockList;
+
+  l:= FList.LockList;
+  try
+    l.Add(aEntity);
+  finally
+    FList.UnlockList;
+  end;
 end;
 
 constructor TEntities.Create;
@@ -86,18 +95,18 @@ var
   l : TList;
   obj : TObject;
 begin
-
   l := Flist.LockList;
-
-  while l.Count > 0 do
-  begin
-    obj := l.Items[0];
-    FreeAndNil(obj);
-    l.Delete(0);
+  try
+    while l.Count > 0 do
+    begin
+      obj := l.Items[0];
+      FreeAndNil(obj);
+      l.Delete(0);
+    end;
+  finally
+    FList.UnlockList;
+    FList.Free;
   end;
-
-  FList.Free;
-
   inherited;
 end;
 
@@ -114,24 +123,25 @@ begin
   Result := nil;
 
   l := FList.LockList;
+  try
+    if l.Count <= 0 then
+      Exit;
 
-  if l.Count <= 0 then
-    Exit;
+    while (not found) and (i<l.Count) do
+    begin
+      obj := l.Items[i];
 
-  while (not found) and (i<l.Count) do
-  begin
-    obj := l.Items[i];
+      if CompareStr(TEntity(obj).Identifier,aKey) = 0 then
+        found := True;
 
-    if CompareStr(TEntity(obj).Identifier,aKey) = 0 then
-      found := True;
+      Inc(i);
+    end;
 
-    Inc(i);
+    if found then
+      Result := TEntity(obj);
+  finally
+    Flist.UnlockList;
   end;
-
-  if found then
-    Result := TEntity(obj);
-
-  Flist.UnlockList;
 end;
 
 function TEntities.Get(aIndex: integer): TEntity;
@@ -141,33 +151,46 @@ begin
   Result := nil;
 
   l := FList.LockList;
-  if l.Count <= aIndex then
-    Exit;
+  try
+    if l.Count <= aIndex then begin
+      FList.UnlockList;
+      Exit;
+    end;
 
-  Result := TEntity(l.Items[aIndex]);
-
-  Flist.UnlockList;
-
+    Result := TEntity(l.Items[aIndex]);
+  finally
+    Flist.UnlockList;
+  end;
 end;
 
 function TEntities.getCount: integer;
+var
+  l: TList;
 begin
-  result := FList.LockList.Count;
-
-  FList.UnlockList;
+  l:= FList.LockList;
+  try
+    result := l.Count;
+  finally
+    FList.UnlockList;
+  end;
 end;
 
 procedure TEntities.Remove(aKey: string);
 var
   ent : TEntity;
+  l: TList;
 begin
   ent := Get(aKey);
 
   if Assigned(ent) then
   begin
-    FList.LockList.Remove(ent);
-    ent.Free;
-    FList.UnlockList;
+    l:= FList.LockList;
+    try
+      l.Remove(ent);
+      ent.Free;
+    finally
+      FList.UnlockList;
+    end;
   end;
 end;
 
@@ -179,14 +202,15 @@ var
 begin
 
   l := Flist.LockList;
-
-  for i := 0 to l.Count - 1 do
-  begin
-    obj := l.Items[i];
-    obj.Run(aDt);
+  try
+    for i := 0 to l.Count - 1 do
+    begin
+      obj := l.Items[i];
+      obj.Run(aDt);
+    end;
+  finally
+    FList.UnlockList;
   end;
-
-  FList.UnlockList;
 end;
 
 end.

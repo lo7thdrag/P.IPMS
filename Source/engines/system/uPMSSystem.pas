@@ -491,14 +491,14 @@ begin
     {jk tdk ada DG pre alaram maka blackout}
     else
     begin
-//      if (Msb[0].Voltage > 0) or (Msb[1].Voltage > 0) then
-//      begin
-//        for i := DGLowLimit to DGUpLimit do
-//        begin
-//          SetDGOff(i);
-//        end;
-//        Exit;
-//      end;
+      if (Msb[0].Voltage > 0) or (Msb[1].Voltage > 0) then
+      begin
+        for i := DGLowLimit to DGUpLimit do
+        begin
+          SetDGOff(i);
+        end;
+        Exit;
+      end;
 
       setBlackOut(IdMode, DGUpLimit, DGLowLimit, MSBUpLimit, MSBLowLimit);
     end;
@@ -633,11 +633,11 @@ begin
   begin
     SetDGOff(i);
 
-    {Hanya untuk dellay saja, variabel ini tidak ngefek apa2}
-    for k := 0 to 1000 do
-    begin
-      Msb[2].EmergencyCon := True;
-    end;
+//    {Hanya untuk dellay saja, variabel ini tidak ngefek apa2}
+//    for k := 0 to 1000 do
+//    begin
+//      Msb[2].EmergencyCon := True;
+//    end;
 
   end;
 
@@ -1266,17 +1266,17 @@ begin
   if (Gen[IdGen].GeneratorSupplied and Gen[IdGen].CBClosed) then
   begin
     Gen[IdGen].EmergencyStopGenerator;
-//    Gen[IdGen].EngineRun := False;
-//    Gen[IdGen].CBClosed := False;
-//    Gen[IdGen].GeneratorSupplied := False;
-//    Gen[IdGen].Preference := False;
-//    Gen[IdGen].GeneratorState := Ord(gsWaiting);//1;
-//    Gen[IdGen].Busbar := False;
-//    Gen[IdGen].Power := 0;
-//    Gen[IdGen].Voltage := 0;
-//    Gen[IdGen].Frequency := 0;
-//    Gen[IdGen].Current := 0;
-//    Gen[IdGen].CosPhi  := 0;
+    Gen[IdGen].EngineRun := False;
+    Gen[IdGen].CBClosed := False;
+    Gen[IdGen].GeneratorSupplied := False;
+    Gen[IdGen].Preference := False;
+    Gen[IdGen].GeneratorState := Ord(gsWaiting);//1;
+    Gen[IdGen].Busbar := False;
+    Gen[IdGen].Power := 0;
+    Gen[IdGen].Voltage := 0;
+    Gen[IdGen].Frequency := 0;
+    Gen[IdGen].Current := 0;
+    Gen[IdGen].CosPhi  := 0;
   end;
 end;
 
