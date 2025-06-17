@@ -6176,7 +6176,7 @@ object MainForm: TMainForm
         Width = 250
         Height = 250
         MaxValue = 100.000000000000000000
-        Position = 50.000000000000000000
+        Position = 100.000000000000000000
         Decimals = 0
         Angle = 42
         Spacing = 10
@@ -6192,7 +6192,7 @@ object MainForm: TMainForm
         Percent2 = 50
         Labels = 0
         LabelsOffset = -35
-        NeedleLength = 65
+        NeedleLength = 80
         NeedleBaseWidth = 10
         NeedleColor = clBlack
         CenterDotWidth = 4
@@ -6211,8 +6211,8 @@ object MainForm: TMainForm
         Font.Style = [fsBold]
       end
       object Label15: TLabel
-        Left = 72
-        Top = 145
+        Left = 70
+        Top = 186
         Width = 24
         Height = 16
         Caption = '100'
@@ -6224,8 +6224,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label14: TLabel
-        Left = 51
-        Top = 84
+        Left = 53
+        Top = 99
         Width = 16
         Height = 16
         Caption = '50'
@@ -6237,9 +6237,9 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label16: TLabel
-        Left = 107
-        Top = 47
-        Width = 8
+        Left = 134
+        Top = 48
+        Width = 24
         Height = 16
         Caption = '0'
         Font.Charset = DEFAULT_CHARSET
@@ -6250,8 +6250,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label17: TLabel
-        Left = 156
-        Top = 84
+        Left = 205
+        Top = 103
         Width = 16
         Height = 16
         Caption = '50'
@@ -6263,8 +6263,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label18: TLabel
-        Left = 133
-        Top = 144
+        Left = 172
+        Top = 190
         Width = 24
         Height = 16
         Caption = '100'
@@ -6305,6 +6305,7 @@ object MainForm: TMainForm
         Width = 250
         Height = 250
         MaxValue = 1250.000000000000000000
+        Position = 1200.000000000000000000
         Decimals = 0
         Angle = 42
         Spacing = 10
@@ -6319,7 +6320,7 @@ object MainForm: TMainForm
         Percent2 = 50
         Labels = 0
         LabelsOffset = -35
-        NeedleLength = 70
+        NeedleLength = 80
         NeedleBaseWidth = 10
         NeedleColor = clBlack
         CenterDotWidth = 4
@@ -6339,7 +6340,7 @@ object MainForm: TMainForm
       end
       object Label2: TLabel
         Left = 40
-        Top = 106
+        Top = 129
         Width = 32
         Height = 16
         Caption = ' 200 '
@@ -6351,8 +6352,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label3: TLabel
-        Left = 52
-        Top = 67
+        Left = 61
+        Top = 73
         Width = 32
         Height = 16
         Caption = ' 400 '
@@ -6364,8 +6365,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label4: TLabel
-        Left = 92
-        Top = 48
+        Left = 118
+        Top = 49
         Width = 28
         Height = 16
         Caption = '600 '
@@ -6377,9 +6378,9 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label1: TLabel
-        Left = 71
-        Top = 145
-        Width = 8
+        Left = 78
+        Top = 185
+        Width = 30
         Height = 16
         Caption = '0'
         Font.Charset = DEFAULT_CHARSET
@@ -6390,8 +6391,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label5: TLabel
-        Left = 132
-        Top = 60
+        Left = 173
+        Top = 66
         Width = 28
         Height = 16
         Caption = '800 '
@@ -6403,8 +6404,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label6: TLabel
-        Left = 148
-        Top = 97
+        Left = 198
+        Top = 126
         Width = 32
         Height = 16
         Caption = '1000'
@@ -6416,8 +6417,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label7: TLabel
-        Left = 136
-        Top = 136
+        Left = 175
+        Top = 182
         Width = 32
         Height = 16
         Caption = '1200'
@@ -6458,6 +6459,7 @@ object MainForm: TMainForm
         Width = 250
         Height = 250
         MaxValue = 280.000000000000000000
+        Position = 250.000000000000000000
         Decimals = 0
         Angle = 42
         Spacing = 10
@@ -6473,7 +6475,7 @@ object MainForm: TMainForm
         Percent2 = 50
         Labels = 0
         LabelsOffset = -35
-        NeedleLength = 70
+        NeedleLength = 80
         NeedleBaseWidth = 10
         NeedleColor = clBlack
         CenterDotWidth = 4
@@ -6492,9 +6494,9 @@ object MainForm: TMainForm
         Font.Style = [fsBold]
       end
       object Label9: TLabel
-        Left = 71
-        Top = 145
-        Width = 8
+        Left = 78
+        Top = 186
+        Width = 23
         Height = 16
         Caption = '0'
         Font.Charset = DEFAULT_CHARSET
@@ -6505,8 +6507,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label10: TLabel
-        Left = 47
-        Top = 102
+        Left = 48
+        Top = 126
         Width = 16
         Height = 16
         Caption = '50'
@@ -6518,8 +6520,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label8: TLabel
-        Left = 63
-        Top = 61
+        Left = 74
+        Top = 65
         Width = 24
         Height = 16
         Caption = '100'
@@ -6531,8 +6533,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label11: TLabel
-        Left = 107
-        Top = 48
+        Left = 138
+        Top = 49
         Width = 24
         Height = 16
         Caption = '150'
@@ -6544,8 +6546,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label12: TLabel
-        Left = 145
-        Top = 75
+        Left = 193
+        Top = 87
         Width = 24
         Height = 16
         Caption = '200'
@@ -6557,8 +6559,8 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object Label13: TLabel
-        Left = 149
-        Top = 120
+        Left = 198
+        Top = 155
         Width = 24
         Height = 16
         Caption = '250'
