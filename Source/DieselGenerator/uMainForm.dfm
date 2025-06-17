@@ -10840,6 +10840,7 @@ object MainForm: TMainForm
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 0
+      Visible = False
       WordWrap = False
     end
     object mmoNetLogger: TMemo
@@ -10850,6 +10851,7 @@ object MainForm: TMainForm
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 1
+      Visible = False
       WordWrap = False
     end
   end

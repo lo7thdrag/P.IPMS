@@ -212,7 +212,7 @@ object frmPowerManagementSyst: TfrmPowerManagementSyst
       FontLeave.Name = 'Arial'
       FontLeave.Style = [fsBold]
       Font3D.ShadowColor = clGray
-      Caption = 'NSL TRIP/REDUCT EMERGENCY'
+      Caption = 'NEL TRIP/REDUCT EMERGENCY'
       TabOrder = 0
       OnClick = btnResetClick
     end

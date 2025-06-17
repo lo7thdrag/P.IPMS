@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch, RzBmpBtn,
   Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls,
 
-  uListener, uFreezeFrom, uDataType, uGenerator, uMainForm;
+  uDataType, uGenerator, uMainForm;
 
 type
   TfrmGeneratorPanel = class(TForm)
@@ -85,8 +85,6 @@ type
     ImgStop: TImage;
     ImgOI: TImage;
     ImgPref: TImage;
-    tmrFrequency: TTimer;
-    tmrAmpere: TTimer;
     lstMenu: TListBox;
     Panel1: TPanel;
     Panel2: TPanel;
@@ -114,8 +112,8 @@ type
     procedure ImgFPClick(Sender: TObject);
     procedure ImgAPClick(Sender: TObject);
     procedure ImgIPClick(Sender: TObject);
-    procedure tmrFrequencyTimer(Sender: TObject);
-    procedure tmrAmpereTimer(Sender: TObject);
+//    procedure tmrFrequencyTimer(Sender: TObject);
+//    procedure tmrAmpereTimer(Sender: TObject);
     procedure ImgRaiseClick(Sender: TObject);
     procedure ImgEscClick(Sender: TObject);
     procedure ImgLowerClick(Sender: TObject);
@@ -176,39 +174,7 @@ begin
       EnableComposited(TWinControl(WinControl.Controls[i]));
 end;
 
-function TfrmGeneratorPanel.CekGeneratorCondition: Boolean;
-begin
-  Result := False;
-
-  if frmMainForm.GeneratorTemp.NotStandby or frmMainForm.GeneratorTemp.FuelRunsOut then
-    Exit;
-
-  if frmMainForm.GeneratorTemp.EmergencyStop or frmMainForm.GeneratorTemp.ShutDown then
-    exit;
-
-  Result := True;
-end;
-
-procedure TfrmGeneratorPanel.DoLedTest(OnOff: Boolean);
-var
-  i : Integer;
-begin
-  if OnOff then
-  begin
-    for i := 0 to High(Led) do
-    begin
-      LedStatus[i] := Led[i].Visible;
-      Led[i].Visible := True;
-    end;
-  end
-  else
-  begin
-     for i := 0 to High(Led) do
-    begin
-      Led[i].Visible := LedStatus[i];
-    end;
-  end;
-end;
+{$REGION ' Form Procedure '}
 
 procedure TfrmGeneratorPanel.FormCreate(Sender: TObject);
 begin
@@ -241,95 +207,9 @@ begin
 // FListener.Free;
 end;
 
-procedure TfrmGeneratorPanel.InitMenu;
-begin
-  SetLength(MainMenu, 4);
-  SetLength(SubMenu, 3);
-  SetLength(SubSubMenu, 9);
+{$ENDREGION}
 
-  MainMenu[0]:= TStringList.Create;
-  MainMenu[0].AddStrings(['> Display', '> Configuration', '> System']);
-
-  SubMenu[0] := TStringList.Create;
-  SubMenu[0].AddStrings([
-    '> Generator electrical meter',
-    '> Mains/bus electrical meter',
-    '> Engine meters',
-    '> Digital inputs/outputs',
-    '> Power plant overview',
-    '> Synchronization'
-  ]);
-
-  SubMenu[1] := TStringList.Create;
-  SubMenu[1].AddStrings([
-    '> Power Plant Overview',
-    '> Start / Stop Sequence',
-    '> Gen. Electrical Settings',
-    '> Mains Electrical Settings',
-    '> Engine / battery Settings',
-    '> Active Power Regulation'
-  ]);
-
-  SubMenu[2] := TStringList.Create;
-  SubMenu[2].AddStrings([
-    '> Date / Time / Meters',
-    '> Passwords / Options',
-    '> Gensys Screen Saver',
-    '> Back Light Timer / Languages',
-    '> Serial Ports Configuration',
-    '> Serial Number / Soft Version'
-  ]);
-
-  {SubSubMenu Display -> Generator electrical meter}
-  SubSubMenu[0] := TStringList.Create;
-  SubSubMenu[0].Add('Generator Phase-Neutral Volt');
-  SubSubMenu[0].Add('V1 = 00000 V');
-  SubSubMenu[0].Add('V2 = 00000 V');
-  SubSubMenu[0].Add('V3 = 00000 V');
-
-  SubSubMenu[1] := TStringList.Create;
-  SubSubMenu[1].Add('Generator Phase-Phase Volt');
-  SubSubMenu[1].Add('U31 = 00000 V');
-  SubSubMenu[1].Add('U23 = 00000 V');
-  SubSubMenu[1].Add('U12 = 00000 V');
-
-  SubSubMenu[2] := TStringList.Create;
-  SubSubMenu[2].Add('Generator amps');
-  SubSubMenu[2].Add('I1 = 00000 A');
-  SubSubMenu[2].Add('I2 = 00000 A');
-  SubSubMenu[2].Add('I3 = 00000 A');
-
-  SubSubMenu[3] := TStringList.Create;
-  SubSubMenu[3].Add('Generator kW');
-  SubSubMenu[3].Add('P1 = 00000 kW');
-  SubSubMenu[3].Add('P2 = 00000 kW');
-  SubSubMenu[3].Add('P3 = 00000 kW');
-
-  SubSubMenu[4] := TStringList.Create;
-  SubSubMenu[4].Add('Generator kVAR');
-  SubSubMenu[4].Add('Q1 = 00000 kVAR');
-  SubSubMenu[4].Add('Q2 = 00000 kVAR');
-  SubSubMenu[4].Add('Q3 = 00000 kVAR');
-
-  SubSubMenu[5] := TStringList.Create;
-  SubSubMenu[5].Add('Generator PF');
-  SubSubMenu[5].Add('cos(1) = 1.00I');
-  SubSubMenu[5].Add('cos(2) = 1.00I');
-  SubSubMenu[5].Add('cos(3) = 1.00I');
-
-  SubSubMenu[6] := TStringList.Create;
-  SubSubMenu[6].Add('Generator parameters');
-  SubSubMenu[6].Add('P = 00000 kW');
-  SubSubMenu[6].Add('Q = 00000 kVAR');
-  SubSubMenu[6].Add('F = 00. 00 Hz');
-  SubSubMenu[6].Add('cos() = 0. 00I');
-
-  SubSubMenu[7] := TStringList.Create;
-  SubSubMenu[7].Add('KW meter');
-  SubSubMenu[7].Add('0005339192kWh');
-  SubSubMenu[7].Add('kVAR meter');
-  SubSubMenu[7].Add('0003989214kVARh');
-end;
+{$REGION ' Button Handle Procedure '}
 
 procedure TfrmGeneratorPanel.ImgMANClick(Sender: TObject);
 begin
@@ -460,16 +340,6 @@ begin
 //
 end;
 
-procedure TfrmGeneratorPanel.ImgLTMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  DoLedTest(True);
-end;
-
-procedure TfrmGeneratorPanel.ImgLTMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  DoLedTest(False);
-end;
-
 procedure TfrmGeneratorPanel.ImgOIClick(Sender: TObject);
 begin
   if (frmMainForm.GeneratorTemp.GeneratorMode = 3) or (frmMainForm.GeneratorTemp.FailureCBClosed) then
@@ -529,6 +399,144 @@ begin
   MainSwitchBoardSystem.EngineStop(True);
 end;
 
+procedure TfrmGeneratorPanel.ImgLTMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  DoLedTest(True);
+end;
+
+procedure TfrmGeneratorPanel.ImgLTMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  DoLedTest(False);
+end;
+
+{$ENDREGION}
+
+{$REGION ' Additional Procedure '}
+
+function TfrmGeneratorPanel.CekGeneratorCondition: Boolean;
+begin
+  Result := False;
+
+  if frmMainForm.GeneratorTemp.NotStandby or frmMainForm.GeneratorTemp.FuelRunsOut then
+    Exit;
+
+  if frmMainForm.GeneratorTemp.EmergencyStop or frmMainForm.GeneratorTemp.ShutDown then
+    exit;
+
+  Result := True;
+end;
+
+procedure TfrmGeneratorPanel.DoLedTest(OnOff: Boolean);
+var
+  i : Integer;
+begin
+  if OnOff then
+  begin
+    for i := 0 to High(Led) do
+    begin
+      LedStatus[i] := Led[i].Visible;
+      Led[i].Visible := True;
+    end;
+  end
+  else
+  begin
+     for i := 0 to High(Led) do
+    begin
+      Led[i].Visible := LedStatus[i];
+    end;
+  end;
+end;
+
+procedure TfrmGeneratorPanel.InitMenu;
+begin
+  SetLength(MainMenu, 4);
+  SetLength(SubMenu, 3);
+  SetLength(SubSubMenu, 9);
+
+  MainMenu[0]:= TStringList.Create;
+  MainMenu[0].AddStrings(['> Display', '> Configuration', '> System']);
+
+  SubMenu[0] := TStringList.Create;
+  SubMenu[0].AddStrings([
+    '> Generator electrical meter',
+    '> Mains/bus electrical meter',
+    '> Engine meters',
+    '> Digital inputs/outputs',
+    '> Power plant overview',
+    '> Synchronization'
+  ]);
+
+  SubMenu[1] := TStringList.Create;
+  SubMenu[1].AddStrings([
+    '> Power Plant Overview',
+    '> Start / Stop Sequence',
+    '> Gen. Electrical Settings',
+    '> Mains Electrical Settings',
+    '> Engine / battery Settings',
+    '> Active Power Regulation'
+  ]);
+
+  SubMenu[2] := TStringList.Create;
+  SubMenu[2].AddStrings([
+    '> Date / Time / Meters',
+    '> Passwords / Options',
+    '> Gensys Screen Saver',
+    '> Back Light Timer / Languages',
+    '> Serial Ports Configuration',
+    '> Serial Number / Soft Version'
+  ]);
+
+  {SubSubMenu Display -> Generator electrical meter}
+  SubSubMenu[0] := TStringList.Create;
+  SubSubMenu[0].Add('Generator Phase-Neutral Volt');
+  SubSubMenu[0].Add('V1 = 00000 V');
+  SubSubMenu[0].Add('V2 = 00000 V');
+  SubSubMenu[0].Add('V3 = 00000 V');
+
+  SubSubMenu[1] := TStringList.Create;
+  SubSubMenu[1].Add('Generator Phase-Phase Volt');
+  SubSubMenu[1].Add('U31 = 00000 V');
+  SubSubMenu[1].Add('U23 = 00000 V');
+  SubSubMenu[1].Add('U12 = 00000 V');
+
+  SubSubMenu[2] := TStringList.Create;
+  SubSubMenu[2].Add('Generator amps');
+  SubSubMenu[2].Add('I1 = 00000 A');
+  SubSubMenu[2].Add('I2 = 00000 A');
+  SubSubMenu[2].Add('I3 = 00000 A');
+
+  SubSubMenu[3] := TStringList.Create;
+  SubSubMenu[3].Add('Generator kW');
+  SubSubMenu[3].Add('P1 = 00000 kW');
+  SubSubMenu[3].Add('P2 = 00000 kW');
+  SubSubMenu[3].Add('P3 = 00000 kW');
+
+  SubSubMenu[4] := TStringList.Create;
+  SubSubMenu[4].Add('Generator kVAR');
+  SubSubMenu[4].Add('Q1 = 00000 kVAR');
+  SubSubMenu[4].Add('Q2 = 00000 kVAR');
+  SubSubMenu[4].Add('Q3 = 00000 kVAR');
+
+  SubSubMenu[5] := TStringList.Create;
+  SubSubMenu[5].Add('Generator PF');
+  SubSubMenu[5].Add('cos(1) = 1.00I');
+  SubSubMenu[5].Add('cos(2) = 1.00I');
+  SubSubMenu[5].Add('cos(3) = 1.00I');
+
+  SubSubMenu[6] := TStringList.Create;
+  SubSubMenu[6].Add('Generator parameters');
+  SubSubMenu[6].Add('P = 00000 kW');
+  SubSubMenu[6].Add('Q = 00000 kVAR');
+  SubSubMenu[6].Add('F = 00. 00 Hz');
+  SubSubMenu[6].Add('cos() = 0. 00I');
+
+  SubSubMenu[7] := TStringList.Create;
+  SubSubMenu[7].Add('KW meter');
+  SubSubMenu[7].Add('0005339192kWh');
+  SubSubMenu[7].Add('kVAR meter');
+  SubSubMenu[7].Add('0003989214kVARh');
+end;
+
 procedure TfrmGeneratorPanel.LoadMainMenu;
 var
   ActiveListBox : TListBox;
@@ -584,7 +592,6 @@ begin
 
 end;
 
-
 procedure TfrmGeneratorPanel.MenuAlarmPage;
 begin
   MainMenu[0]:= TStringList.Create;
@@ -612,38 +619,6 @@ begin
     '01/06/25 15:55:01 Emergency sto 2005=Off']);
 end;
 
-procedure TfrmGeneratorPanel.tmrAmpereTimer(Sender: TObject);
-begin
-//  if vraAmpere1.Position > OrderAmpere then
-//  begin
-//    vraAmpere1.Position := vraAmpere1.Position - 1;
-//  end
-//  else if vraAmpere1.Position < OrderAmpere then
-//  begin
-//    vraAmpere1.Position := vraAmpere1.Position + 1;
-//  end
-//  else
-//  begin
-//    tmrAmpere.Enabled := False;
-//  end;
-end;
-
-procedure TfrmGeneratorPanel.tmrFrequencyTimer(Sender: TObject);
-begin
-//  if VraFrequency.Position > OrderFrequency then
-//  begin
-//    VraFrequency.Position := VraFrequency.Position - 1;
-//  end
-//  else if VraFrequency.Position < OrderFrequency then
-//  begin
-//    VraFrequency.Position := VraFrequency.Position + 1;
-//  end
-//  else
-//  begin
-//    tmrFrequency.Enabled := False;
-//  end;
-end;
-
 procedure TfrmGeneratorPanel.updateForm(Generator : TGenerator);
 begin
   ImgIndicatorMan.Visible := Generator.GeneratorMode = 1;
@@ -657,5 +632,7 @@ begin
   ImgIndicatorPreference.Visible := Generator.Preference;
   ImgIndicatorBS.Visible := Generator.Busbar;
 end;
+
+{$ENDREGION}
 
 end.

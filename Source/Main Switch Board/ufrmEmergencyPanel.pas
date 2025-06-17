@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, VrControls,
   VrRotarySwitch, VrAngularMeter, Vcl.ExtCtrls,
 
-  uGenerator;
+  uGenerator, uDataType, uMainForm;
 
 type
   TfrmEmergencyPanel = class(TForm)
@@ -60,7 +60,6 @@ type
     VrVoltage: TVrRotarySwitch;
     Label17: TLabel;
     VrCBClosed: TVrRotarySwitch;
-    Button1: TButton;
     ImgEnter: TImage;
     ImgShift: TImage;
     ImgLower: TImage;
@@ -108,12 +107,15 @@ type
     procedure ImgAUTOClick(Sender: TObject);
     procedure ImgSAClick(Sender: TObject);
     procedure ImgMANClick(Sender: TObject);
-    procedure tmrAmpereTimer(Sender: TObject);
+//    procedure tmrAmpereTimer(Sender: TObject);
     procedure VrCBClosedChange(Sender: TObject);
   private
     { Private declarations }
     Led  : array of TImage;
     LedStatus  : array of Boolean;
+
+    function CekGeneratorCondition : Boolean;
+
   public
     OrderAmpere : Double;
 
@@ -129,6 +131,138 @@ uses
   uMainSwitchBoardSystem;
 
 {$R *.dfm}
+
+procedure EnableComposited(WinControl:TWinControl);
+var
+  i:Integer;
+  NewExStyle:DWORD;
+begin
+  NewExStyle := GetWindowLong(WinControl.Handle, GWL_EXSTYLE) or WS_EX_COMPOSITED;
+  SetWindowLong(WinControl.Handle, GWL_EXSTYLE, NewExStyle);
+
+  for I := 0 to WinControl.ControlCount - 1 do
+    if WinControl.Controls[i] is TWinControl then
+      EnableComposited(TWinControl(WinControl.Controls[i]));
+end;
+
+{$REGION ' Form Procedure '}
+
+procedure TfrmEmergencyPanel.FormCreate(Sender: TObject);
+begin
+  EnableComposited(pnlEmergency);
+  EnableComposited(pnlGensys);
+  EnableComposited(pnlA);
+  EnableComposited(pnlHz);
+  EnableComposited(pnlkW);
+  EnableComposited(pnlV);
+
+  Led := [IMGIndicatorAuto, ImgIndicatorSA, ImgIndicatorMan,
+          ImgIndicatorER, ImgIndicatorGS, ImgIndicatorCKC, ImgIndicatorCBC, ImgIndicatorBS,
+          ImgIndicatorHO, ImgIndicatorFP, ImgIndicatorAP];
+  SetLength(LedStatus, Length(Led));
+end;
+
+{$ENDREGION}
+
+{$REGION ' Button Handle Procedure '}
+
+procedure TfrmEmergencyPanel.ImgMANClick(Sender: TObject);
+begin
+  if frmMainForm.GeneratorTemp.NotStandby then
+    Exit;
+
+  MainSwitchBoardSystem.GeneratorMode(1);
+end;
+
+procedure TfrmEmergencyPanel.ImgSAClick(Sender: TObject);
+begin
+  if frmMainForm.GeneratorTemp.NotStandby then
+    Exit;
+
+  MainSwitchBoardSystem.GeneratorMode(2);
+end;
+
+procedure TfrmEmergencyPanel.ImgAUTOClick(Sender: TObject);
+begin
+  if frmMainForm.GeneratorTemp.NotStandby then
+    Exit;
+
+  MainSwitchBoardSystem.GeneratorMode(3);
+end;
+
+procedure TfrmEmergencyPanel.ImgOIClick(Sender: TObject);
+begin
+  if (frmMainForm.GeneratorTemp.GeneratorMode = 3) or (frmMainForm.GeneratorTemp.FailureCBClosed) then
+    exit;
+
+  MainSwitchBoardSystem.CBClosed(True);
+end;
+
+procedure TfrmEmergencyPanel.ImgPrefClick(Sender: TObject);
+begin
+  if not CekGeneratorCondition then
+    Exit;
+
+  MainSwitchBoardSystem.GeneratorPreference(True);
+end;
+
+procedure TfrmEmergencyPanel.ImgStartClick(Sender: TObject);
+begin
+  if not CekGeneratorCondition then
+    Exit;
+
+  if frmMainForm.GeneratorTemp.GeneratorMode = 3 then
+    exit;
+
+  if frmMainForm.GeneratorTemp.GeneratorState <> Ord(gsWaiting){1} then
+    exit;
+
+  MainSwitchBoardSystem.EngineRun(True);
+end;
+
+procedure TfrmEmergencyPanel.ImgStopClick(Sender: TObject);
+begin
+  if not CekGeneratorCondition then
+    Exit;
+
+  if (frmMainForm.GeneratorTemp.GeneratorMode = 3) or (frmMainForm.GeneratorTemp.Preference) or (frmMainForm.GeneratorTemp.GeneratorState <> ord(gsGenReady){5}) then
+    exit;
+
+  if (frmMainForm.GeneratorTemp.GeneratorMode = 2) then
+  begin
+    if frmMainForm.GeneratorTemp.CBClosed <> False then
+      Exit;
+  end;
+
+  MainSwitchBoardSystem.EngineStop(True);
+end;
+
+procedure TfrmEmergencyPanel.ImgLTMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  DoLedTest(True);
+end;
+
+procedure TfrmEmergencyPanel.ImgLTMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  DoLedTest(False);
+end;
+
+{$ENDREGION}
+
+{$REGION ' Additional Procedure '}
+
+function TfrmEmergencyPanel.CekGeneratorCondition: Boolean;
+begin
+  Result := False;
+
+  if frmMainForm.GeneratorTemp.NotStandby or frmMainForm.GeneratorTemp.FuelRunsOut then
+    Exit;
+
+  if frmMainForm.GeneratorTemp.EmergencyStop or frmMainForm.GeneratorTemp.ShutDown then
+    exit;
+
+  Result := True;
+end;
 
 procedure TfrmEmergencyPanel.DoLedTest(OnOff: Boolean);
 var
@@ -148,77 +282,6 @@ begin
     begin
       Led[i].Visible := LedStatus[i];
     end;
-  end;
-end;
-
-procedure TfrmEmergencyPanel.FormCreate(Sender: TObject);
-begin
-  Led := [IMGIndicatorAuto, ImgIndicatorSA, ImgIndicatorMan,
-          ImgIndicatorER, ImgIndicatorGS, ImgIndicatorCKC, ImgIndicatorCBC, ImgIndicatorBS,
-          ImgIndicatorHO, ImgIndicatorFP, ImgIndicatorAP];
-  SetLength(LedStatus, Length(Led));
-end;
-
-procedure TfrmEmergencyPanel.ImgMANClick(Sender: TObject);
-begin
-  MainSwitchBoardSystem.GeneratorMode(1);
-end;
-
-procedure TfrmEmergencyPanel.ImgSAClick(Sender: TObject);
-begin
-  MainSwitchBoardSystem.GeneratorMode(2);
-end;
-
-procedure TfrmEmergencyPanel.ImgAUTOClick(Sender: TObject);
-begin
-  MainSwitchBoardSystem.GeneratorMode(3);
-end;
-
-procedure TfrmEmergencyPanel.ImgLTMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  DoLedTest(True);
-end;
-
-procedure TfrmEmergencyPanel.ImgLTMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  DoLedTest(False);
-end;
-
-procedure TfrmEmergencyPanel.ImgOIClick(Sender: TObject);
-begin
-  MainSwitchBoardSystem.CBClosed(True);
-end;
-
-procedure TfrmEmergencyPanel.ImgPrefClick(Sender: TObject);
-begin
-  MainSwitchBoardSystem.GeneratorPreference(True);
-end;
-
-procedure TfrmEmergencyPanel.ImgStartClick(Sender: TObject);
-begin
-  MainSwitchBoardSystem.EngineRun(True);
-end;
-
-procedure TfrmEmergencyPanel.ImgStopClick(Sender: TObject);
-begin
-  MainSwitchBoardSystem.EngineStop(True);
-end;
-
-procedure TfrmEmergencyPanel.tmrAmpereTimer(Sender: TObject);
-begin
-  if vraAmpere1.Position > OrderAmpere then
-  begin
-    vraAmpere1.Position := vraAmpere1.Position - 1;
-  end
-  else if vraAmpere1.Position < OrderAmpere then
-  begin
-    vraAmpere1.Position := vraAmpere1.Position + 1;
-  end
-  else
-  begin
-    tmrAmpere.Enabled := False;
   end;
 end;
 
@@ -244,5 +307,23 @@ begin
   else if (VrCBClosed.SwitchPosition = 1) or (VrCBClosed.SwitchPosition = 2) then
     MainSwitchBoardSystem.CBClosed(True);
 end;
+
+//procedure TfrmEmergencyPanel.tmrAmpereTimer(Sender: TObject);
+//begin
+//  if vraAmpere1.Position > OrderAmpere then
+//  begin
+//    vraAmpere1.Position := vraAmpere1.Position - 1;
+//  end
+//  else if vraAmpere1.Position < OrderAmpere then
+//  begin
+//    vraAmpere1.Position := vraAmpere1.Position + 1;
+//  end
+//  else
+//  begin
+//    tmrAmpere.Enabled := False;
+//  end;
+//end;
+
+{$ENDREGION}
 
 end.

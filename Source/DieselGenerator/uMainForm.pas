@@ -112,7 +112,6 @@ begin
       EnableComposited(TWinControl(WinControl.Controls[i]));
 end;
 
-
 {$REGION ' Form Procedure '}
 
 procedure TMainForm.FormCreate(Sender: TObject);
