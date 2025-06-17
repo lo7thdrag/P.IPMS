@@ -6,11 +6,14 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
 
-  uSetting, uListener, uFreezeFrom, uDataType, Vcl.ExtCtrls;
+  uSetting, uListener, uFreezeFrom, uDataType, Vcl.ExtCtrls, Vcl.StdCtrls;
 
 type
   TfrmMainForm = class(TForm)
     tmrBlinkTimer: TTimer;
+    mmoNetLogger: TMemo;
+    tmr1: TTimer;
+    mmoLogReceive: TMemo;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -30,6 +33,8 @@ type
     procedure MainEngine1SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure MainEngine1SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
     procedure MainEngine1SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Double);overload;
+    procedure MainEngine1SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : string);overload;
+    procedure MainEngine1SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : TObject);overload;
   public
     { Public declarations }
   end;
@@ -40,7 +45,7 @@ var
 implementation
 
 uses
-  ufrmSetofPressureGaugesME1, ufrmSignalingLightME1, ufrmPMSDieselEngineSafetiesME1, uMainEngine1System;
+  ufrmSetofPressureGaugesME1, ufrmSignalingLightME1, ufrmPMSDieselEngineSafetiesME1, uMainEngine1System, uTCPClient;
 
 {$R *.dfm}
 
@@ -49,18 +54,23 @@ begin
   Setting   := TSetting.Create;
   MainEngine1System := TMainEngine1System.Create;
 
-  FListener := TListeners.Create;
+//  FListener := TListeners.Create;
   with MainEngine1System.Listener.Add('MAINENGINE 1') as TPropertyEventListener do
   begin
     OnPropertyIntChange  := MainEngine1SystemEvent;
     OnPropertyBoolChange := MainEngine1SystemEvent;
     OnPropertyDblChange  := MainEngine1SystemEvent;
   end;
+
+  with MainEngine1System.Network.Listeners.Add('MAINENGINE1NETWORK') as TPropertyEventListener do
+     OnPropertyStringChange := MainEngine1SystemEvent;
+  with MainEngine1System.Network.Listeners.Add('MAINENGINE1NETWORK') as TPropertyEventListener do
+     OnPropertyObjectChange := MainEngine1SystemEvent;
 end;
 
 procedure TfrmMainForm.FormDestroy(Sender: TObject);
 begin
-  FListener.Free;
+//  FListener.Free;
 
   MainEngine1System.Free;
   Setting.Free;
@@ -103,6 +113,33 @@ begin
       Show;
     end;
   end;
+end;
+
+procedure TfrmMainForm.MainEngine1SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: TObject);
+begin
+  case PropsID of
+    epNetworkConnectedToServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + '] Connected to : ' + TTCPClient(Value).ServerAddress);
+    end;
+    epNetworkDisconnectedFromServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + ']Disconnected from : ' + TTCPClient(Value).ServerAddress);
+    end;
+  end;
+end;
+
+procedure TfrmMainForm.MainEngine1SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: string);
+begin
+	case PropsID of
+	  epNetworkLogRcv: begin
+	    if mmoLogReceive.Lines.Count>100 then
+	      mmoLogReceive.Lines.Delete(0);
+	    mmoLogReceive.Lines.Add(Value);
+	  end;
+	end;
 end;
 
 procedure TfrmMainForm.MainEngine1SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);

@@ -46425,6 +46425,7 @@ object frmMenu: TfrmMenu
         00FF}
       Color = clBtnFace
       TabOrder = 12
+      OnClick = btnAlarmsClick
     end
     object btnCurves: TRzBmpButton
       Left = 1027

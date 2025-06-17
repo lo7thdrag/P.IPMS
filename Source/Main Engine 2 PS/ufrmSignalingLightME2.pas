@@ -29,6 +29,7 @@ type
     Label2: TLabel;
     Panel1: TPanel;
     lblHoorCounter: TLabel;
+    tmrRunningMETimer1: TTimer;
 
 
     procedure vrtryswtchRemotePSClick(Sender: TObject);
@@ -36,7 +37,6 @@ type
     procedure vrtryswtchSTC_PSClick(Sender: TObject);
     procedure vrtryswtchPreStartPSClick(Sender: TObject);
   private
-
 
   public
 

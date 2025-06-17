@@ -6,18 +6,21 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
 
-  uListener, uFreezeFrom, uDataType, Vcl.ExtCtrls, Math;
+  uSetting, uListener, uFreezeFrom, uDataType, Vcl.ExtCtrls, Math, Vcl.StdCtrls;
 
 type
   TfrmMainForm = class(TForm)
     tmrRunningMETimer1: TTimer;
+    mmoNetLogger: TMemo;
+    mmoLogReceive: TMemo;
+    tmr1: TTimer;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure tmrRunningMETimer1Timer(Sender: TObject);
 
   private
-    FListener : TListeners;
+//    FListener : TListeners;
     CurrentHourCounter : Integer;
     FRunningHourTemp   : Integer;
     FIsRunningHours    : Boolean;
@@ -25,6 +28,8 @@ type
     procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
     procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Double);overload;
+    procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : string);overload;
+    procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : TObject);overload;
 
   public
     { Public declarations }
@@ -39,24 +44,32 @@ uses
   ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, ufrmMenu, uMainEngine2System, ufrmSafetiesStop, ufrmAirGasCircuit, ufrmGeneralScreen,
   ufrmLineAExhaustGasTemperature, ufrmLineBExhaustGasTemperature, ufrmEngineBearingTemperature, ufrmPCOTFilteringDeviations,
   ufrmCrankinOilTemperature, ufrmClutchingAssitance, ufrmCompressedAirCircuit, ufrmFuelOilCircuit, ufrmFWSeaWaterCircuit,
-  ufrmLubOilCircuit, ufrmPLCNetwork;
+  ufrmLubOilCircuit, ufrmPLCNetwork, uTCPClient;
 
 {$R *.dfm}
 
 procedure TfrmMainForm.FormCreate(Sender: TObject);
 begin
-  FListener := TListeners.Create;
+//  FListener := TListeners.Create;
   with MainEngine2System.Listener.Add('MAINENGINE 2') as TPropertyEventListener do
   begin
     OnPropertyIntChange  := MainEngine2SystemEvent;
     OnPropertyBoolChange := MainEngine2SystemEvent;
     OnPropertyDblChange  := MainEngine2SystemEvent;
   end;
+
+  with MainEngine2System.Network.Listeners.Add('MAINENGINE2NETWORK') as TPropertyEventListener do
+     OnPropertyStringChange := MainEngine2SystemEvent;
+  with MainEngine2System.Network.Listeners.Add('MAINENGINE2NETWORK') as TPropertyEventListener do
+     OnPropertyObjectChange := MainEngine2SystemEvent;
 end;
 
 procedure TfrmMainForm.FormDestroy(Sender: TObject);
 begin
-  FListener.Free;
+//  FListener.Free;
+
+  MainEngine2System.Free;
+  Setting.Free;
 end;
 
 procedure TfrmMainForm.FormShow(Sender: TObject);
@@ -96,6 +109,33 @@ begin
       Show;
     end;
   end;
+end;
+
+procedure TfrmMainForm.MainEngine2SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: TObject);
+begin
+  case PropsID of
+    epNetworkConnectedToServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + '] Connected to : ' + TTCPClient(Value).ServerAddress);
+    end;
+    epNetworkDisconnectedFromServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + ']Disconnected from : ' + TTCPClient(Value).ServerAddress);
+    end;
+  end;
+end;
+
+procedure TfrmMainForm.MainEngine2SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: string);
+begin
+	case PropsID of
+	  epNetworkLogRcv: begin
+	    if mmoLogReceive.Lines.Count>100 then
+	      mmoLogReceive.Lines.Delete(0);
+	    mmoLogReceive.Lines.Add(Value);
+	  end;
+	end;
 end;
 
 procedure TfrmMainForm.MainEngine2SystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);
@@ -142,7 +182,7 @@ begin
     end;
     epPCSMERunningHourState :
     begin
-      if Value >= 0 then
+      if Trunc(Value) > Trunc(CurrentHourCounter) then
       begin
         CurrentHourCounter := Value;
         frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Value);
@@ -360,7 +400,7 @@ const
 
   // Engine Bearing
   TopMinTemp = 332;
-  TopMaxTemp = 857;
+  TopMaxTemp = 872;
   MaxTemp    = 150;
 var
   deviasi: Integer;

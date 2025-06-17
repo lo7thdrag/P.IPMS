@@ -279,4 +279,10 @@ object frmSignalingLightME2: TfrmSignalingLightME2
       end
     end
   end
+  object tmrRunningMETimer1: TTimer
+    Enabled = False
+    Interval = 50
+    Left = 624
+    Top = 312
+  end
 end
