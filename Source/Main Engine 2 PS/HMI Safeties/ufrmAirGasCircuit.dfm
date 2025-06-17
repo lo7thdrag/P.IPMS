@@ -10075,6 +10075,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         00FF}
       Color = clBtnFace
       TabOrder = 5
+      OnClick = btnAlarmsClick
     end
     object btnCurves: TRzBmpButton
       Left = 1027

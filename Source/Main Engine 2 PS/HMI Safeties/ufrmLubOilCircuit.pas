@@ -149,6 +149,7 @@ type
     procedure btnPreviousClick(Sender: TObject);
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure btnAlarmsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -161,8 +162,14 @@ var
 implementation
 
 uses
-  ufrmFuelOilCircuit, ufrmPLCNetwork, ufrmMenu;
+  ufrmFuelOilCircuit, ufrmPLCNetwork, ufrmMenu, ufrmAlarms;
 {$R *.dfm}
+
+procedure TfrmLubOilCircuit.btnAlarmsClick(Sender: TObject);
+begin
+  frmAlarms.Show;
+  Self.Hide;
+end;
 
 procedure TfrmLubOilCircuit.btnNextclick(Sender: TObject);
 begin

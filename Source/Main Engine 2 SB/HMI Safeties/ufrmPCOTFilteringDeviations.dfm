@@ -13517,6 +13517,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       Top = 1
       Width = 137
       Height = 151
+      Cursor = crHandPoint
       Bitmaps.TransparentColor = clOlive
       Bitmaps.Up.Data = {
         7E430100424D7E43010000000000420000002800000089000000970000000100
@@ -16110,6 +16111,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
         00FF}
       Color = clBtnFace
       TabOrder = 5
+      OnClick = btnAlarmsClick
     end
     object btnInstantaneousDeviation: TRzBmpButton
       Left = 26

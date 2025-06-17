@@ -69,6 +69,7 @@ type
     procedure Edit1KeyPress(Sender: TObject; var Key: Char);
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure btnAlarmsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -81,8 +82,14 @@ var
 implementation
 
 uses
-  ufrmLineAExhaustGasTemperature, ufrmCrankinOilTemperature, ufrmMenu;
+  ufrmLineAExhaustGasTemperature, ufrmCrankinOilTemperature, ufrmMenu, ufrmAlarms;
 {$R *.dfm}
+
+procedure TfrmPCOTFilteringDeviations.btnAlarmsClick(Sender: TObject);
+begin
+  frmAlarms.Show;
+  Self.Hide;
+end;
 
 procedure TfrmPCOTFilteringDeviations.btnNextClick(Sender: TObject);
 begin

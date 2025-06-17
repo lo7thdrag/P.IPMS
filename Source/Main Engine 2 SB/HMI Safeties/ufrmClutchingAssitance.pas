@@ -103,6 +103,7 @@ type
     procedure btnPreviousClick(Sender: TObject);
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure btnAlarmsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -115,9 +116,15 @@ var
 implementation
 
 uses
-  ufrmPLCNetwork, ufrmGeneralScreen, ufrmMenu;
+  ufrmPLCNetwork, ufrmGeneralScreen, ufrmMenu, ufrmAlarms;
 
 {$R *.dfm}
+
+procedure TfrmClutchingAssistance.btnAlarmsClick(Sender: TObject);
+begin
+  frmAlarms.Show;
+  Self.Hide;
+end;
 
 procedure TfrmClutchingAssistance.btnNextClick(Sender: TObject);
 begin

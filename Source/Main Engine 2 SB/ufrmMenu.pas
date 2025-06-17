@@ -73,6 +73,7 @@ type
     procedure SignalingClick(Sender: TObject);
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure btnAlarmsClick(Sender: TObject);
   private
 
   public
@@ -87,7 +88,8 @@ implementation
 uses
   ufrmGeneralScreen, ufrmClutchingAssitance, ufrmPLCNetwork, ufrmLubOilCircuit, ufrmFuelOilCircuit, ufrmFWSeaWaterCircuit,
   ufrmAirGasCircuit, ufrmEngineBearingTemperature, ufrmCrankinOilTemperature, ufrmPCOTFilteringDeviations, ufrmLineAExhaustGasTemperature,
-  ufrmLineBExhaustGasTemperature, ufrmSafetiesStop, ufrmCompressedAirCircuit, ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, uMainEngine2System;
+  ufrmLineBExhaustGasTemperature, ufrmSafetiesStop, ufrmCompressedAirCircuit, ufrmSetofPressureGaugesME2, ufrmSignalingLightME2,
+  ufrmAlarms, uMainEngine2System;
 
 {$R *.dfm}
 
@@ -108,6 +110,12 @@ end;
 procedure TfrmMenu.AirandGasCircuitClick(Sender: TObject);
 begin
   frmAirGasCircuit.Show;
+  Self.Hide;
+end;
+
+procedure TfrmMenu.btnAlarmsClick(Sender: TObject);
+begin
+  frmAlarms.Show;
   Self.Hide;
 end;
 

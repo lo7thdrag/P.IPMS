@@ -19,7 +19,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure tmrBlinkMe1Timer(Sender: TObject);
   private
-    FListener : TListeners;
+//    FListener : TListeners;
     FIsBlinkState    : Boolean;
     FIsStartBlink    : Boolean;
     FIsStopBlink     : Boolean;

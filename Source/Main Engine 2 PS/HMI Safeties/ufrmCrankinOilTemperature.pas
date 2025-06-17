@@ -66,6 +66,7 @@ type
     procedure btnFilteringDeviationClick(Sender: TObject);
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure btnAlarmsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -78,8 +79,14 @@ var
 implementation
 
 uses
-  ufrmPCOTFilteringDeviations, ufrmEngineBearingTemperature, ufrmMenu;
+  ufrmPCOTFilteringDeviations, ufrmEngineBearingTemperature, ufrmMenu, ufrmAlarms;
 {$R *.dfm}
+
+procedure TfrmCrankpinOilTemperature.btnAlarmsClick(Sender: TObject);
+begin
+  frmAlarms.Show;
+  Self.Hide;
+end;
 
 procedure TfrmCrankpinOilTemperature.btnFilteringDeviationClick(
   Sender: TObject);

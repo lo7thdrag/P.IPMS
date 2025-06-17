@@ -44,12 +44,15 @@ uses
   ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, ufrmMenu, uMainEngine2System, ufrmSafetiesStop, ufrmAirGasCircuit, ufrmGeneralScreen,
   ufrmLineAExhaustGasTemperature, ufrmLineBExhaustGasTemperature, ufrmEngineBearingTemperature, ufrmPCOTFilteringDeviations,
   ufrmCrankinOilTemperature, ufrmClutchingAssitance, ufrmCompressedAirCircuit, ufrmFuelOilCircuit, ufrmFWSeaWaterCircuit,
-  ufrmLubOilCircuit, ufrmPLCNetwork, uTCPClient;
+  ufrmLubOilCircuit, ufrmPLCNetwork, uTCPClient, ufrmAlarms, ufrmPCOTValueHistory;
 
 {$R *.dfm}
 
 procedure TfrmMainForm.FormCreate(Sender: TObject);
 begin
+  Setting   := TSetting.Create;
+  MainEngine2System := TMainEngine2System.Create;
+
 //  FListener := TListeners.Create;
   with MainEngine2System.Listener.Add('MAINENGINE 2') as TPropertyEventListener do
   begin
@@ -149,7 +152,7 @@ begin
         MainEngine2System.FFormFreezed[0] := TfrmFreeze.Create(frmSignalingLightME2);
         with MainEngine2System.FFormFreezed[0] do
         begin
-          Parent := frmSignalingLightME2;
+          Parent   := frmSignalingLightME2;
           Position := poOwnerFormCenter;
           BringToFront;
           Show;
@@ -244,148 +247,255 @@ begin
       if Assigned(frmSafetiesStop) then
       begin
         if Value then
-          frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clRed
+        begin
+          frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clRed;
+          frmAlarms.AddAlarmToLog('EMERGENCY SHUTDOWN');
+        end
         else
           frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clAqua;
       end;
     end;
     epPCSMEOverspeedAlarm :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SS_Overspeed.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SS_Overspeed.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SS_Overspeed.Color := clRed;
+          frmAlarms.AddAlarmToLog('OVERSPEED');
+        end
+        else
+          frmSafetiesStop.btnPS_SS_Overspeed.Color := clAqua;
+      end;
     end;
     epPCSMELOPressVeryLow :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clRed;
+          frmAlarms.AddAlarmToLog('LO PRESSURE VERY LOW');
+        end
+        else
+          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clAqua;
+      end;
     end;
     epPCSMERedGearSafetyStop :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clRed;
+          frmAlarms.AddAlarmToLog('RED GEAR SAFETY STOP');
+        end
+        else
+          frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clAqua;
+      end;
     end;
     epPCSMEFwHtExpTkLevelVeryLow :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clRed;
+          frmAlarms.AddAlarmToLog('FW HT EXP TK LEVEL VERY LOW');
+        end
+        else
+          frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clAqua;
+      end;
     end;
     epPCSMEFwTempVeryHigh :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clRed;
+          frmAlarms.AddAlarmToLog('FW TEMP VERY HIGH');
+        end
+        else
+          frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clAqua;
+      end;
     end;
     epPCSMEConRodBearingTempVeryHigh :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clRed;
+          frmAlarms.AddAlarmToLog('CON ROD BEAR TEMP VERY HIGH');
+        end
+        else
+          frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clAqua;
+      end;
     end;
     epPCSMEEngInletLubOilVeryHigh :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clRed;
+          frmAlarms.AddAlarmToLog('ENG INLET LUB OIL VERY HIGH');
+        end
+        else
+          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clAqua;
+      end;
     end;
     epPCSMEOilMistDetSafety :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clRed;
+          frmAlarms.AddAlarmToLog('OIL MIST DET HIGH');
+        end
+        else
+          frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clAqua;
+      end;
     end;
     epPCSMETurningGearEngaged :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clRed;
+          frmAlarms.AddAlarmToLog('TURNING GEAR ENGAGED');
+        end
+        else
+          frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clAqua;
+      end;
     end;
     epPCSMEManHandleAtStop :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clRed;
+          frmAlarms.AddAlarmToLog('MAN HANDLE AT STOP');
+        end
+        else
+          frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clAqua;
+      end;
     end;
     epPCSMEFuelRackAtStop :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clRed;
+          frmAlarms.AddAlarmToLog('FUEL RACK AT STOP');
+        end
+        else
+          frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clAqua;
+      end;
     end;
     epPCSMEPrelubInProgress :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clRed;
+          frmAlarms.AddAlarmToLog('PRE LUB IN PROGRESS');
+        end
+        else
+          frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clAqua;
+      end;
     end;
     epPCSMEPrelubricationFailure :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clRed;
+          frmAlarms.AddAlarmToLog('PRELUBRICATION FAILURE');
+        end
+        else
+          frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clAqua;
+      end;
     end;
     epPCSMEStartingFault :
     begin
-      if Value then
+      if Assigned(frmSafetiesStop) then
       begin
-        frmSafetiesStop.btnPS_SI_StartingFailure.Color := clRed;
-        frmGeneralScreen.btnPS_SI_StartingFailure.Color := clRed;
-      end
-      else
-      begin
-        frmSafetiesStop.btnPS_SI_StartingFailure.Color := clAqua;
-        frmGeneralScreen.btnPS_SI_StartingFailure.Color := clAqua;
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SI_StartingFailure.Color := clRed;
+          frmGeneralScreen.btnPS_SI_StartingFailure.Color := clRed;
+          frmAlarms.AddAlarmToLog('STARTING FAULT');
+        end
+        else
+        begin
+          frmSafetiesStop.btnPS_SI_StartingFailure.Color := clAqua;
+          frmGeneralScreen.btnPS_SI_StartingFailure.Color := clAqua;
+        end;
       end;
     end;
     epPCSMESTCSequenceFail :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clRed;
+          frmAlarms.AddAlarmToLog('STC SEQUENCE FAIL');
+        end
+        else
+          frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clAqua;
+      end;
     end;
     epPCSMESlowTurningFault :
     begin
-      if Value then
+      if Assigned(frmSafetiesStop) then
       begin
-        frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clRed;
-        frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clRed
-      end
-      else
-      begin
-        frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clAqua;
-        frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clAqua
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clRed;
+          frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clRed;
+          frmAlarms.AddAlarmToLog('SLOW TURNING FAULT');
+        end
+        else
+        begin
+          frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clAqua;
+          frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clAqua
+        end;
       end;
     end;
     epPCSMESafetyShutdown :
     begin
-      if Value then
-        frmSafetiesStop.btnPS_SI_SafetyStop.Color := clRed
-      else
-        frmSafetiesStop.btnPS_SI_SafetyStop.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btnPS_SI_SafetyStop.Color := clRed;
+          frmAlarms.AddAlarmToLog('SAFETY STOP');
+        end
+        else
+          frmSafetiesStop.btnPS_SI_SafetyStop.Color := clAqua;
+      end;
     end;
     epPCSGBPCSClutchInterlock :
     begin
-      if Value then
-        frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clRed
-      else
-        frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clAqua;
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clRed;
+          frmAlarms.AddAlarmToLog('PCS CLUTCH INTERLOCK');
+        end
+        else
+          frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clAqua;
+      end;
     end;
   end;
 end;
@@ -1738,9 +1848,12 @@ end;
 
 procedure TfrmMainForm.tmrRunningMETimer1Timer(Sender: TObject);
 begin
-  if FIsRunningHours then
-    Inc(CurrentHourCounter);
-    frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(CurrentHourCounter);
+  if Assigned(frmSignalingLightME2) then
+  begin
+    if FIsRunningHours then
+      Inc(CurrentHourCounter);
+      frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(CurrentHourCounter);
+  end;
 
 //  FRunningHourTemp := FRunningHourTemp + 1;
 //  if FRunningHourTemp > 25 then
@@ -1750,5 +1863,4 @@ begin
 //    frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(FIsRunningHours);
 //  end;
 end;
-
 end.

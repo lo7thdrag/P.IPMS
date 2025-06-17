@@ -30,6 +30,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure btnAlarmsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,8 +43,14 @@ var
 implementation
 
 uses
-  ufrmLubOilCircuit, ufrmClutchingAssitance, ufrmMenu;
+  ufrmLubOilCircuit, ufrmClutchingAssitance, ufrmMenu, ufrmAlarms;
 {$R *.dfm}
+
+procedure TfrmPLCNetwork.btnAlarmsClick(Sender: TObject);
+begin
+  frmAlarms.Show;
+  Self.Hide;
+end;
 
 procedure TfrmPLCNetwork.btnNextClick(Sender: TObject);
 begin

@@ -55,6 +55,7 @@ type
     procedure btnPreviousClick(Sender: TObject);
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure btnAlarmsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,9 +68,15 @@ var
 implementation
 
 uses
- ufrmCrankinOilTemperature, ufrmAirGasCircuit, ufrmMenu;
+ ufrmCrankinOilTemperature, ufrmAirGasCircuit, ufrmMenu, ufrmAlarms;
 
 {$R *.dfm}
+
+procedure TfrmEngineBearingTemperature.btnAlarmsClick(Sender: TObject);
+begin
+  frmAlarms.Show;
+  Self.Hide;
+end;
 
 procedure TfrmEngineBearingTemperature.btnNextClick(Sender: TObject);
 begin

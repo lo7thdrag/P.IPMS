@@ -62,6 +62,7 @@ type
     procedure btnPreviousClick(Sender: TObject);
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure btnAlarmsClick(Sender: TObject);
   private
 
   public
@@ -74,7 +75,7 @@ var
 implementation
 
 uses
-  ufrmCompressedAirCircuit, ufrmLineBExhaustGasTemperature, ufrmMenu, uMainEngine2System;
+  ufrmCompressedAirCircuit, ufrmLineBExhaustGasTemperature, ufrmMenu, uMainEngine2System, ufrmAlarms;
 
 {$R *.dfm}
 
@@ -85,6 +86,12 @@ begin
   lblTime.Transparent := True;
   imgBackground.SendToBack;
   pnlTime.DoubleBuffered := True;
+end;
+
+procedure TfrmSafetiesStop.btnAlarmsClick(Sender: TObject);
+begin
+  frmAlarms.Show;
+  Self.Hide;
 end;
 
 procedure TfrmSafetiesStop.btnNextClick(Sender: TObject);

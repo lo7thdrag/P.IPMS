@@ -43832,6 +43832,7 @@ object frmMenu: TfrmMenu
       Top = 1
       Width = 137
       Height = 151
+      Cursor = crHandPoint
       Bitmaps.TransparentColor = clOlive
       Bitmaps.Up.Data = {
         7E430100424D7E43010000000000420000002800000089000000970000000100
@@ -51178,6 +51179,7 @@ object frmMenu: TfrmMenu
       Top = 952
       Width = 129
       Height = 65
+      Cursor = crHandPoint
       Bitmaps.TransparentColor = clOlive
       Bitmaps.Up.Data = {
         46830000424D4683000000000000420000002800000081000000410000000100
@@ -52233,6 +52235,7 @@ object frmMenu: TfrmMenu
         FFFFFFFFFFFFFFFFFFFF}
       Color = clBtnFace
       TabOrder = 15
+      OnClick = btnPCOTValuesHistoryClick
     end
     object pnlTime: TPanel
       Left = 592
