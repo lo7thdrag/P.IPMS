@@ -144,6 +144,8 @@ type
     tmrShaftSpeed: TTimer;
     tmrCPP: TTimer;
     mpAlarm: TMediaPlayer;
+    mmoNetLogger: TMemo;
+    mmoLogReceive: TMemo;
 
     procedure FormCreate(Sender: TObject);
     procedure imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -220,33 +222,13 @@ begin
       EnableComposited(TWinControl(WinControl.Controls[i]));
 end;
 
+
+{$REGION ' Form Procedure '}
+
 procedure TMainForm.FormShow(Sender: TObject);
 begin
 //  Left   := Screen.Monitors[0].Left;
 //  Top    := Screen.Monitors[0].Top;
-
-end;
-
-procedure TMainForm.GetIdBlinkTelegrapLamp(value: Integer);
-var
-  i : Integer;
-
-begin
-  for i := 0 to ComponentCount - 1 do
-  begin
-    if Components[i] is TImage then
-    begin
-      if TImage(Components[i]).Hint <> 'Telegrap' then
-        Continue;
-
-      TImage(Components[i]).Visible := False;
-
-      if (TImage(Components[i]).Tag = value ) then
-      begin
-        FIdBlink := i;
-      end;
-    end;
-  end;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
@@ -255,11 +237,18 @@ var
 
 begin
   FListener := TListeners.Create;
+
   with MCRMachineLeftSystem.Listener.Add('MCRMACHINELEFT') as TPropertyEventListener do
   begin
     OnPropertyIntChange := MCRMachineLeftSystemEvent;
     OnPropertyBoolChange := MCRMachineLeftSystemEvent;
     OnPropertyDblChange := MCRMachineLeftSystemEvent;
+  end;
+
+  with MCRMachineLeftSystem.Network.Listeners.Add('MCRMACHINELEFTNETWORK') as TPropertyEventListener do
+  begin
+//    OnPropertyStringChange:= DieselGeneratorSystemEvent;
+//    OnPropertyObjectChange:= DieselGeneratorSystemEvent;
   end;
 
   {$REGION ' Set Alarm Indicator '}
@@ -305,6 +294,30 @@ begin
   EnableComposited(pnlTelegraph);
 
   silence := False;
+end;
+
+{$ENDREGION}
+
+procedure TMainForm.GetIdBlinkTelegrapLamp(value: Integer);
+var
+  i : Integer;
+
+begin
+  for i := 0 to ComponentCount - 1 do
+  begin
+    if Components[i] is TImage then
+    begin
+      if TImage(Components[i]).Hint <> 'Telegrap' then
+        Continue;
+
+      TImage(Components[i]).Visible := False;
+
+      if (TImage(Components[i]).Tag = value ) then
+      begin
+        FIdBlink := i;
+      end;
+    end;
+  end;
 end;
 
 procedure TMainForm.SetAlarmIndicator;

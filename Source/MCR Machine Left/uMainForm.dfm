@@ -114035,6 +114035,28 @@ object MainForm: TMainForm
       TabOrder = 9
       OnNotify = mpAlarmNotify
     end
+    object mmoNetLogger: TMemo
+      Left = 707
+      Top = 686
+      Width = 361
+      Height = 89
+      ReadOnly = True
+      ScrollBars = ssBoth
+      TabOrder = 10
+      Visible = False
+      WordWrap = False
+    end
+    object mmoLogReceive: TMemo
+      Left = 707
+      Top = 814
+      Width = 361
+      Height = 89
+      ReadOnly = True
+      ScrollBars = ssBoth
+      TabOrder = 11
+      Visible = False
+      WordWrap = False
+    end
   end
   object tmrTelegraph: TTimer
     Enabled = False
