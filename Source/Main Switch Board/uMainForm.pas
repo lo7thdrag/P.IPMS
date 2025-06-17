@@ -59,7 +59,7 @@ begin
 
   with MainSwitchBoardSystem.Network.Listeners.Add('MAINSWITCHBOARDNETWORK') as TPropertyEventListener do
     OnPropertyStringChange:= MainSwitchBoardSystemEvent;
-    with MainSwitchBoardSystem.Network.Listeners.Add('MAINSWITCHBOARDNETWORK') as TPropertyEventListener do
+  with MainSwitchBoardSystem.Network.Listeners.Add('MAINSWITCHBOARDNETWORK') as TPropertyEventListener do
     OnPropertyObjectChange:= MainSwitchBoardSystemEvent;
 
 

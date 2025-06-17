@@ -34,10 +34,11 @@ type
     constructor Create;
     destructor Destroy;override;
 
-    {Prosedur untuk mengirimkan paket data dari inputan PCS Panel Touch Screen ke Engine}
+    {Prosedur untuk mengirimkan paket data dari inputan Diesel Generator ke Engine}
     procedure EngineRun(aValue : Boolean);
     procedure EngineStop(aValue : Boolean);
     procedure EngineMode(aValue : Boolean);
+    procedure GeneratorMode(aValue : Integer);
     {--}
 
     property Network : TDieselGeneratorNetwork read FDieselGeneratorNetwork;
@@ -148,6 +149,17 @@ begin
   Network.DieselGeneratorControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
 end;
 
+procedure TDieselGeneratorSystem.GeneratorMode(aValue: Integer);
+var
+  recCmd : R_Common_PMS_Command;
+begin
+  recCmd.GenSwitchID := IdConsole;
+  recCmd.CommandPropsID := epPMSGeneratorMode;
+  recCmd.ValueInt := aValue;
+
+  Network.DieselGeneratorControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
+end;
+
 { fungsi untuk menangani event dari jaringan untuk PCSCommand }
 procedure TDieselGeneratorSystem.NetEventInstructorCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
@@ -179,8 +191,8 @@ begin
     Exit;
 
   case rec.CommandPropsID of
-    epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm, epPMSLubOilTempHigh,
-    epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage, epPMSNotStandby, epPMSStartDisable, epPMSShutdown,
+    epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm,
+    epPMSLubOilTempHigh, epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage, epPMSNotStandby, epPMSStartDisable, epPMSShutdown,
     epPMSSpeedSensorFailureShutdown, epPMSLubOilPressLowShutdown, epPMSCoolWaterTempHighShutdown:
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)

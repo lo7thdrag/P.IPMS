@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   VrControls, VrRotarySwitch, Vcl.StdCtrls,
 
-  uSetting, uListener, uFreezeFrom, uDataType, Vcl.MPlayer;
+  uSetting, uListener, uFreezeFrom, uDataType, Vcl.MPlayer, uGenerator;
 
 type
   TMainForm = class(TForm)
@@ -33,13 +33,6 @@ type
     imgStandby: TImage;
     imgStop: TImage;
     imgStart: TImage;
-    btnStart: TImage;
-    btnStop: TImage;
-    btnStandby: TImage;
-    btnManual: TImage;
-    btnReset: TImage;
-    btnSirenOff: TImage;
-    btnLampTest: TImage;
     lblRunningHours: TLabel;
     imgGenSpaceHeater: TImage;
     imgJWHeater: TImage;
@@ -47,12 +40,21 @@ type
     tmrRunningHours: TTimer;
     tmrStop: TTimer;
     tmrReset: TTimer;
+    mmoNetLogger: TMemo;
+    mmoLogReceive: TMemo;
+    pnlMainBackground: TPanel;
+    btnLampTest: TImage;
+    btnManual: TImage;
+    btnReset: TImage;
+    btnSirenOff: TImage;
+    btnStandby: TImage;
+    btnStart: TImage;
+    btnStop: TImage;
+
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure btnLampTestMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btnLampTestMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+    procedure btnLampTestMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure btnLampTestMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
     procedure btnStartClick(Sender: TObject);
     procedure btnStopClick(Sender: TObject);
@@ -69,7 +71,7 @@ type
     procedure tmrStopTimer(Sender: TObject);
 
   private
-    FListener : TListeners;
+//    FListener : TListeners;
     Lamps  : array of TImage;
     LampStatus  : array of Boolean;
     FRunningHourTemp : Integer;
@@ -77,13 +79,14 @@ type
 
     procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
+    procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : string);overload;
+    procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : TObject);overload;
 
   public
     { Public declarations }
     silence : Boolean;
-//    ObjectGenerator : TGenerator;
-//
-//    procedure UpdateForm(Generator : TGenerator);
+    GeneratorTemp : TGenerator;
+
   end;
 
 var
@@ -92,20 +95,44 @@ var
 implementation
 
 uses
-  uDieselGeneratorSystem;
+  uTCPClient, uDieselGeneratorSystem;
 
 {$R *.dfm}
 
+procedure EnableComposited(WinControl:TWinControl);
+var
+  i:Integer;
+  NewExStyle:DWORD;
+begin
+  NewExStyle := GetWindowLong(WinControl.Handle, GWL_EXSTYLE) or WS_EX_COMPOSITED;
+  SetWindowLong(WinControl.Handle, GWL_EXSTYLE, NewExStyle);
+
+  for I := 0 to WinControl.ControlCount - 1 do
+    if WinControl.Controls[i] is TWinControl then
+      EnableComposited(TWinControl(WinControl.Controls[i]));
+end;
+
+
+{$REGION ' Form Procedure '}
+
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+  EnableComposited(pnlMainBackground);
+
   Setting   := TSetting.Create;
   DieselGeneratorSystem := TDieselGeneratorSystem.Create;
 
-  FListener := TListeners.Create;
+//  FListener := TListeners.Create;
   with DieselGeneratorSystem.Listener.Add('DIESELGENERATOR') as TPropertyEventListener do
   begin
     OnPropertyIntChange := DieselGeneratorSystemEvent;
     OnPropertyBoolChange := DieselGeneratorSystemEvent;
+  end;
+
+  with DieselGeneratorSystem.Network.Listeners.Add('MAINSWITCHBOARDNETWORK') as TPropertyEventListener do
+  begin
+    OnPropertyStringChange:= DieselGeneratorSystemEvent;
+    OnPropertyObjectChange:= DieselGeneratorSystemEvent;
   end;
 
   Lamps := [imgSupplyVoltageLow, imgAutomaticStartFailed, imgSpeedSensorFailure,
@@ -125,121 +152,323 @@ begin
     mpAlarm.FileName:= ExtractFilePath(Application.Exename) + 'ACS_ALARM.mp3';
 
   silence := False;
+
+  {Create Generator Temporary}
+  GeneratorTemp := TGenerator.Create;
+  GeneratorTemp.Identifier := DieselGeneratorSystem.IdConsole;
+  GeneratorTemp.GeneratorState := 1;
 end;
+
+procedure TMainForm.FormDestroy(Sender: TObject);
+begin
+  GeneratorTemp.Destroy;
+//  FListener.Free;
+  DieselGeneratorSystem.Free;
+  Setting.Free;
+end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+  if Screen.MonitorCount > 1 then
+  begin
+    DefaultMonitor := dmDesktop;
+
+    Width := Screen.Monitors[1].Width;
+    Height := Screen.Monitors[1].Height;
+    Left := Screen.Monitors[1].Left;
+    Top := Screen.Monitors[1].Top;
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION ' Event Procedure '}
 
 procedure TMainForm.DieselGeneratorSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
   case PropsID of
     epPMSGeneratorEngineRun :
     begin
-      imgStart.Visible          := Value;
-      imgStop.Visible           := not Value;
-      tmrRunningHours.Enabled   := Value;
+      GeneratorTemp.EngineRun := Value;
+      imgStart.Visible := Value;
+      imgStop.Visible := not Value;
+      tmrRunningHours.Enabled := Value;
 
-      imgRunning.Visible        := Value;
-    end;
-    epPMSGeneratorStop:
-    begin
-      imgStart.Visible          := not Value;
-      imgStop.Visible           := Value;
-      tmrStop.Enabled           := True;
-      tmrRunningHours.Enabled   := False;
-
-      imgRunning.Visible        := not Value;
-    end;
-    epPMSMeasPowFailure :
-    begin
-      imgSupplyVoltageLow.Visible := Value;
-
-      imgRunning.Visible      := not Value;
-      imgStart.Visible        := not Value;
-      btnStart.Enabled        := not Value;
-
-      Alarm(Value);
-    end;
-    epPMSAutStartFailure :
-    begin
-      imgAutomaticStartFailed.Visible := Value;
-
-      imgRunning.Visible      := not Value;
-      imgStart.Visible        := not Value;
-      btnStart.Enabled        := not Value;
-
-      Alarm(Value);
-    end;
-    epPMSSpeedSensorFailureAlrm :
-    begin
-      imgSpeedSensorFailure.Visible := Value;
-
-      imgRunning.Visible      := not Value;
-      imgStart.Visible        := not Value;
-      btnStart.Enabled        := not Value;
-
-      Alarm(Value);
-    end;
-    epPMSLubOilPressLowAlrm :
-    begin
-      imgLubOilPressLow.Visible := Value;
-
-      imgRunning.Visible      := not Value;
-      imgStart.Visible        := not Value;
-      btnStart.Enabled        := not Value;
-
-      Alarm(Value);
-    end;
-    epPMSLubOilTempHigh :
-    begin
-      imgLubOilTempHigh.Visible := Value;
-
-      imgRunning.Visible      := not Value;
-      imgStart.Visible        := not Value;
-      btnStart.Enabled        := not Value;
-
-      Alarm(Value);
-    end;
-    epPMSCoolWaterTempHighAlrm  :
-    begin
-      imgCoolingWaterTempHigh.Visible := Value;
-
-      imgRunning.Visible      := not Value;
-      imgStart.Visible        := not Value;
-      btnStart.Enabled        := not Value;
-
-      Alarm(Value);
-    end;
-    epPMSCoolWaterLevelLow :
-    begin
-      imgCoolingWaterLevelLow.Visible := Value;
-
-      imgRunning.Visible      := not Value;
-      imgStart.Visible        := not Value;
-      btnStart.Enabled        := not Value;
-
-      Alarm(Value);
-    end;
-    epPMSFuelOilLeakage :
-    begin
-      imgFuelOilLeakage.Visible := Value;
-
-      imgRunning.Visible      := not Value;
-      imgStart.Visible        := not Value;
-      btnStart.Enabled        := not Value;
-
-      Alarm(Value);
+      imgRunning.Visible := Value;
     end;
 
-    epPMSSpeedSensorFailureShutdown : imgShutdownOverSpeed.Visible  := Value;
-    epPMSLubOilPressLowShutdown     : imgShutdownLOPressLow.Visible := Value;
-    epPMSCoolWaterTempHighShutdown  : imgShutdownCWTempHigh.Visible := Value;
+    epPMSGeneratorSupplied : GeneratorTemp.GeneratorSupplied := Value;
+    epPMSGeneratorCBClosed : GeneratorTemp.CBClosed := Value;
+    epPMSGeneratorPreference : GeneratorTemp.Preference := Value;
+    epPMSGeneratorBusbar : GeneratorTemp.Busbar := Value;
+    epPMSGeneratorFuelRunsOut : GeneratorTemp.FuelRunsOut := Value;
+    epPMSGeneratorEmergencyStop : GeneratorTemp.EmergencyStop := Value;
+    epPMSShutDown : GeneratorTemp.ShutDown := Value;
+    epPMSFailureCBClosed : GeneratorTemp.FailureCBClosed := Value;
 
     epPMSNotStandby :
     begin
+      GeneratorTemp.NotStandby := Value;
+
       imgManual.Visible := Value;
       imgStandby.Visible := not Value
     end;
+
+    epPMSMeasPowFailure :
+    begin
+      GeneratorTemp.MeasPowFailure := Value;
+
+      if Value then
+      begin
+        imgSupplyVoltageLow.Visible := Value;
+        Alarm(Value);
+      end;
+    end;
+
+    epPMSAutStartFailure :
+    begin
+      GeneratorTemp.AutStartFailure := Value;
+
+      if Value then
+      begin
+        imgAutomaticStartFailed.Visible := Value;
+        Alarm(Value);
+      end;
+    end;
+
+    epPMSSpeedSensorFailureAlrm :
+    begin
+      GeneratorTemp.SpeedSensorFailureAlrm := Value;
+
+      if Value then
+      begin
+        imgSpeedSensorFailure.Visible := Value;
+        Alarm(Value);
+      end;
+    end;
+
+    epPMSLubOilPressLowAlrm :
+    begin
+      GeneratorTemp.LubOilPressLowAlrm := Value;
+
+      if Value then
+      begin
+        imgLubOilPressLow.Visible := Value;
+        Alarm(Value);
+      end;
+    end;
+
+    epPMSLubOilTempHigh :
+    begin
+      GeneratorTemp.LubOilTempHigh := Value;
+
+      if Value then
+      begin
+        imgLubOilTempHigh.Visible := Value;
+        Alarm(Value);
+      end;
+    end;
+
+    epPMSCoolWaterTempHighAlrm  :
+    begin
+      GeneratorTemp.CoolWaterTempHighAlrm := Value;
+
+      if Value then
+      begin
+        imgCoolingWaterTempHigh.Visible := Value;
+        Alarm(Value);
+      end;
+    end;
+
+    epPMSCoolWaterLevelLow :
+    begin
+      GeneratorTemp.CoolWaterLevelLow := Value;
+
+      if Value then
+      begin
+        imgCoolingWaterLevelLow.Visible := Value;
+        Alarm(Value);
+      end;
+    end;
+
+    epPMSFuelOilLeakage :
+    begin
+      GeneratorTemp.FuelOilLeakage := Value;
+
+      if Value then
+      begin
+        imgFuelOilLeakage.Visible := Value;
+        Alarm(Value);
+      end;
+    end;
+
+    epPMSSpeedSensorFailureShutdown :
+    begin
+      GeneratorTemp.SpeedSensorFailureShutdown := Value;
+
+      if Value then
+      begin
+        imgShutdownOverSpeed.Visible  := Value;
+      end;
+    end;
+
+    epPMSLubOilPressLowShutdown :
+    begin
+      GeneratorTemp.LubOilPressLowShutdown := Value;
+
+      if Value then
+      begin
+        imgShutdownLOPressLow.Visible := Value;
+      end;
+    end;
+
+    epPMSCoolWaterTempHighShutdown :
+    begin
+      GeneratorTemp.CoolWaterTempHighShutdown := Value;
+
+      if Value then
+      begin
+        imgShutdownCWTempHigh.Visible := Value;
+      end;
+    end;
+
     epPMSStartDisable : imgStartDisable.Visible := Value;
   end;
 end;
+
+procedure TMainForm.DieselGeneratorSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);
+begin
+  case PropsID of
+    epPMSFreezed:
+    begin
+      if Value = 1 then
+      begin
+        MainForm.Enabled := False;
+        DieselGeneratorSystem.FFormFreezed[1] := TfrmFreeze.Create(MainForm);
+        with DieselGeneratorSystem.FFormFreezed[1] do
+        begin
+          Parent := MainForm;
+          Position := poOwnerFormCenter;
+          BringToFront;
+          Show;
+        end;
+      end
+      else if Value = 0 then
+      begin
+        MainForm.Enabled := True;
+        if Assigned(DieselGeneratorSystem.FFormFreezed[1]) then
+          FreeAndNil(DieselGeneratorSystem.FFormFreezed[1]);
+      end;
+    end;
+//    epPMSGeneratorRunningHours:
+//    begin
+//      lblRunningHours.Caption := IntToStr(Value);
+//    end;
+  end;
+end;
+
+procedure TMainForm.DieselGeneratorSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: string);
+begin
+  case PropsID of
+	  epNetworkLogRcv: begin
+	    if mmoLogReceive.Lines.Count>100 then
+	      mmoLogReceive.Lines.Delete(0);
+	    mmoLogReceive.Lines.Add(Value);
+	  end;
+	end;
+end;
+
+procedure TMainForm.DieselGeneratorSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: TObject);
+begin
+  case PropsID of
+    epNetworkConnectedToServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + '] Connected to : ' + TTCPClient(Value).ServerAddress);
+    end;
+    epNetworkDisconnectedFromServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + ']Disconnected from : ' + TTCPClient(Value).ServerAddress);
+    end;
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION ' Button Handle Procedure '}
+
+procedure TMainForm.btnStartClick(Sender: TObject);
+begin
+  with GeneratorTemp do
+  begin
+    if MeasPowFailure or AutStartFailure  or SpeedSensorFailureAlrm or LubOilPressLowAlrm or LubOilTempHigh or CoolWaterTempHighAlrm or
+       CoolWaterLevelLow or FuelOilLeakage or SpeedSensorFailureShutdown or LubOilPressLowShutdown or CoolWaterTempHighShutdown or EmergencyStop then
+       Exit;
+  end;
+
+  DieselGeneratorSystem.EngineRun(True);
+end;
+
+procedure TMainForm.btnStopClick(Sender: TObject);
+begin
+  tmrStop.Enabled := True;
+  DieselGeneratorSystem.EngineStop(True);
+end;
+
+procedure TMainForm.btnStandbyClick(Sender: TObject);
+begin
+  DieselGeneratorSystem.GeneratorMode(3);
+  DieselGeneratorSystem.EngineMode(False);
+end;
+
+procedure TMainForm.btnManualClick(Sender: TObject);
+begin
+  if GeneratorTemp.EngineRun then
+    Exit;
+
+  DieselGeneratorSystem.GeneratorMode(1);
+  DieselGeneratorSystem.EngineMode(True);
+end;
+
+procedure TMainForm.btnResetClick(Sender: TObject);
+begin
+  imgReset.Visible := True;
+  tmrReset.Enabled := True;
+
+  imgSupplyVoltageLow.Visible     := GeneratorTemp.MeasPowFailure;
+  imgAutomaticStartFailed.Visible := GeneratorTemp.AutStartFailure;
+  imgSpeedSensorFailure.Visible   := GeneratorTemp.SpeedSensorFailureAlrm;
+  imgLubOilPressLow.Visible       := GeneratorTemp.LubOilPressLowAlrm;
+  imgLubOilTempHigh.Visible       := GeneratorTemp.LubOilTempHigh;
+  imgCoolingWaterTempHigh.Visible := GeneratorTemp.CoolWaterTempHighAlrm;
+  imgCoolingWaterLevelLow.Visible := GeneratorTemp.CoolWaterLevelLow;
+  imgFuelOilLeakage.Visible       := GeneratorTemp.FuelOilLeakage;
+
+  imgShutdownOverSpeed.Visible  := GeneratorTemp.SpeedSensorFailureShutdown;
+  imgShutdownLOPressLow.Visible := GeneratorTemp.LubOilPressLowShutdown;
+  imgShutdownCWTempHigh.Visible := GeneratorTemp.CoolWaterTempHighShutdown;
+  imgShutDownSpare.Visible      := False;
+end;
+
+procedure TMainForm.btnLampTestMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  DoLampTest(True);
+end;
+
+procedure TMainForm.btnLampTestMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  DoLampTest(False);
+end;
+
+procedure TMainForm.btnSirenOffClick(Sender: TObject);
+begin
+  Alarm(False);
+end;
+
+{$ENDREGION}
+
+{$REGION ' Additional Procedure '}
 
 procedure TMainForm.DoLampTest(OnOff: Boolean);
 var
@@ -283,121 +512,6 @@ begin
   end;
 end;
 
-procedure TMainForm.btnLampTestMouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  DoLampTest(True);
-end;
-
-procedure TMainForm.btnLampTestMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  DoLampTest(False);
-end;
-
-procedure TMainForm.btnManualClick(Sender: TObject);
-begin
-  DieselGeneratorSystem.EngineMode(True);
-end;
-
-procedure TMainForm.btnResetClick(Sender: TObject);
-begin
-  imgReset.Visible := True;
-  tmrReset.Enabled := True;
-
-//  imgStart.Visible    := False;
-//  imgStop.Visible     := False;
-//  imgStandby.Visible  := False;
-//  imgManual.Visible   := False;
-
-  imgSupplyVoltageLow.Visible     := False;
-  imgAutomaticStartFailed.Visible := False;
-  imgSpeedSensorFailure.Visible   := False;
-  imgLubOilPressLow.Visible       := False;
-  imgLubOilTempHigh.Visible       := False;
-  imgCoolingWaterTempHigh.Visible := False;
-  imgCoolingWaterLevelLow.Visible := False;
-  imgFuelOilLeakage.Visible       := False;
-
-  imgShutdownOverSpeed.Visible  := False;
-  imgShutdownLOPressLow.Visible := False;
-  imgShutdownCWTempHigh.Visible := False;
-  imgShutDownSpare.Visible      := False;
-end;
-
-procedure TMainForm.btnSirenOffClick(Sender: TObject);
-begin
-  Alarm(False);
-end;
-
-procedure TMainForm.btnStandbyClick(Sender: TObject);
-begin
-  DieselGeneratorSystem.EngineMode(False);
-end;
-
-procedure TMainForm.btnStartClick(Sender: TObject);
-begin
-  DieselGeneratorSystem.EngineRun(True);
-end;
-
-procedure TMainForm.btnStopClick(Sender: TObject);
-begin
-  tmrStop.Enabled := True;
-  DieselGeneratorSystem.EngineStop(True);
-
-end;
-
-procedure TMainForm.DieselGeneratorSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);
-begin
-  case PropsID of
-    epPMSFreezed:
-    begin
-      if Value = 1 then
-      begin
-        MainForm.Enabled := False;
-        DieselGeneratorSystem.FFormFreezed[1] := TfrmFreeze.Create(MainForm);
-        with DieselGeneratorSystem.FFormFreezed[1] do
-        begin
-          Parent := MainForm;
-          Position := poOwnerFormCenter;
-          BringToFront;
-          Show;
-        end;
-      end
-      else if Value = 0 then
-      begin
-        MainForm.Enabled := True;
-        if Assigned(DieselGeneratorSystem.FFormFreezed[1]) then
-          FreeAndNil(DieselGeneratorSystem.FFormFreezed[1]);
-      end;
-    end;
-//    epPMSGeneratorRunningHours:
-//    begin
-//      lblRunningHours.Caption := IntToStr(Value);
-//    end;
-  end;
-end;
-
-procedure TMainForm.FormDestroy(Sender: TObject);
-begin
-  FListener.Free;
-  DieselGeneratorSystem.Free;
-  Setting.Free;
-end;
-
-procedure TMainForm.FormShow(Sender: TObject);
-begin
-  if Screen.MonitorCount > 1 then
-  begin
-    DefaultMonitor := dmDesktop;
-
-    Width := Screen.Monitors[1].Width;
-    Height := Screen.Monitors[1].Height;
-    Left := Screen.Monitors[1].Left;
-    Top := Screen.Monitors[1].Top;
-  end;
-end;
-
 procedure TMainForm.mpAlarmNotify(Sender: TObject);
 begin
   if (mpAlarm.NotifyValue = nvSuccessful) and silence then
@@ -430,11 +544,6 @@ begin
   tmrStop.Enabled := False;
 end;
 
-//procedure TMainForm.UpdateForm(Generator: TGenerator);
-//begin
-////
-//end;
-
 procedure TMainForm.VrMainSwitchChange(Sender: TObject);
 begin
   if VrMainSwitch.SwitchPosition = 0 then
@@ -448,5 +557,7 @@ begin
     imgGenSpaceHeater.Visible := True;
   end;
 end;
+
+{$ENDREGION}
 
 end.

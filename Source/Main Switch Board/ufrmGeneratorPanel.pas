@@ -162,6 +162,7 @@ uses
   uMainSwitchBoardSystem;
 
 {$R *.dfm}
+
 procedure EnableComposited(WinControl:TWinControl);
 var
   i:Integer;
@@ -332,16 +333,25 @@ end;
 
 procedure TfrmGeneratorPanel.ImgMANClick(Sender: TObject);
 begin
+  if frmMainForm.GeneratorTemp.NotStandby then
+    Exit;
+
   MainSwitchBoardSystem.GeneratorMode(1);
 end;
 
 procedure TfrmGeneratorPanel.ImgSAClick(Sender: TObject);
 begin
+  if frmMainForm.GeneratorTemp.NotStandby then
+    Exit;
+
   MainSwitchBoardSystem.GeneratorMode(2);
 end;
 
 procedure TfrmGeneratorPanel.ImgAUTOClick(Sender: TObject);
 begin
+  if frmMainForm.GeneratorTemp.NotStandby then
+    Exit;
+
   MainSwitchBoardSystem.GeneratorMode(3);
 end;
 
