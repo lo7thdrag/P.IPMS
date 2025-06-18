@@ -3,8 +3,8 @@ object Form1: TForm1
   Top = 137
   BorderStyle = bsNone
   Caption = 'PCS'
-  ClientHeight = 325
-  ClientWidth = 293
+  ClientHeight = 567
+  ClientWidth = 568
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -307,6 +307,26 @@ object Form1: TForm1
     TabOrder = 12
     Visible = False
     OnClick = btn2Click
+  end
+  object mmoNetLogger: TMemo
+    Left = 8
+    Top = 356
+    Width = 361
+    Height = 89
+    ReadOnly = True
+    ScrollBars = ssBoth
+    TabOrder = 13
+    WordWrap = False
+  end
+  object mmoLogReceive: TMemo
+    Left = 8
+    Top = 451
+    Width = 361
+    Height = 89
+    ReadOnly = True
+    ScrollBars = ssBoth
+    TabOrder = 14
+    WordWrap = False
   end
   object tmr1: TTimer
     OnTimer = tmr1Timer
