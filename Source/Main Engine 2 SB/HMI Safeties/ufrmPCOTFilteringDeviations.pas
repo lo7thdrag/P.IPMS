@@ -48,7 +48,6 @@ type
     lblAverageTempPCOT: TLabel;
     btnAlarmReset: TRzBmpButton;
     pnlGrafik1: TPanel;
-    Edit1: TEdit;
     pnlGrafik2: TPanel;
     pnlGrafik3: TPanel;
     pnlGrafik4: TPanel;
@@ -66,10 +65,10 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
-    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnAlarmsClick(Sender: TObject);
+    procedure btnCurvesClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -82,12 +81,18 @@ var
 implementation
 
 uses
-  ufrmLineAExhaustGasTemperature, ufrmCrankinOilTemperature, ufrmMenu, ufrmAlarms;
+  ufrmLineAExhaustGasTemperature, ufrmCrankinOilTemperature, ufrmMenu, ufrmAlarms, ufrmCurves;
 {$R *.dfm}
 
 procedure TfrmPCOTFilteringDeviations.btnAlarmsClick(Sender: TObject);
 begin
   frmAlarms.Show;
+  Self.Hide;
+end;
+
+procedure TfrmPCOTFilteringDeviations.btnCurvesClick(Sender: TObject);
+begin
+  frmCurves.Show;
   Self.Hide;
 end;
 
@@ -101,24 +106,6 @@ procedure TfrmPCOTFilteringDeviations.btnPreviousClick(Sender: TObject);
 begin
   frmCrankpinOilTemperature.Show;
   Self.Hide;
-end;
-
-procedure TfrmPCOTFilteringDeviations.Edit1KeyPress(Sender: TObject;
-  var Key: Char);
-begin
-  if Key = #13 then
-  begin
-    if StrToInt(Edit1.Text) < 0 then
-    begin
-      pnlGrafik1.Height := abs(StrToInt(Edit1.Text));
-      pnlGrafik1.Top := 568
-    end
-    else
-    begin
-      pnlGrafik1.Height := abs(StrToInt(Edit1.Text));
-      pnlGrafik1.Top := 568 - StrToInt(Edit1.Text);
-    end;
-  end;
 end;
 
 procedure TfrmPCOTFilteringDeviations.FormCreate(Sender: TObject);

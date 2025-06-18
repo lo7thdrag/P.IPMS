@@ -93,6 +93,7 @@ type
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnAlarmsClick(Sender: TObject);
+    procedure btnCurvesClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -105,13 +106,19 @@ var
 implementation
 
 uses
-  ufrmEngineBearingTemperature, ufrmFWSeaWaterCircuit, ufrmMenu, ufrmAlarms;
+  ufrmEngineBearingTemperature, ufrmFWSeaWaterCircuit, ufrmMenu, ufrmAlarms, ufrmCurves;
 
 {$R *.dfm}
 
 procedure TfrmAirGasCircuit.btnAlarmsClick(Sender: TObject);
 begin
   frmAlarms.Show;
+  Self.Hide;
+end;
+
+procedure TfrmAirGasCircuit.btnCurvesClick(Sender: TObject);
+begin
+  frmCurves.Show;
   Self.Hide;
 end;
 

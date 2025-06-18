@@ -12,8 +12,8 @@ type
   TfrmMainForm = class(TForm)
     tmrRunningMETimer1: TTimer;
     mmoNetLogger: TMemo;
-    tmr1: TTimer;
     mmoLogReceive: TMemo;
+    tmr1: TTimer;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -21,8 +21,9 @@ type
 
   private
 //    FListener : TListeners;
-    CurrentHourCounter: Integer;
-    FIsRunningHours : Boolean;
+    CurrentHourCounter : Integer;
+    FRunningHourTemp   : Integer;
+    FIsRunningHours    : Boolean;
 
     procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
@@ -43,7 +44,7 @@ uses
   ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, ufrmMenu, uMainEngine2System, ufrmSafetiesStop, ufrmAirGasCircuit, ufrmGeneralScreen,
   ufrmLineAExhaustGasTemperature, ufrmLineBExhaustGasTemperature, ufrmEngineBearingTemperature, ufrmPCOTFilteringDeviations,
   ufrmCrankinOilTemperature, ufrmClutchingAssitance, ufrmCompressedAirCircuit, ufrmFuelOilCircuit, ufrmFWSeaWaterCircuit,
-  ufrmLubOilCircuit, ufrmPLCNetwork, uTCPClient, ufrmAlarms;
+  ufrmLubOilCircuit, ufrmPLCNetwork, uTCPClient, ufrmAlarms, ufrmPCOTValueHistory;
 
 {$R *.dfm}
 
@@ -249,9 +250,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clRed;
           frmAlarms.AddAlarmToLog('EMERGENCY SHUTDOWN');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMEOverspeedAlarm :
@@ -262,9 +267,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SS_Overspeed.Color := clRed;
           frmAlarms.AddAlarmToLog('OVERSPEED');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SS_Overspeed.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMELOPressVeryLow :
@@ -275,9 +284,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clRed;
           frmAlarms.AddAlarmToLog('LO PRESSURE VERY LOW');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clAqua;
+          frmAlarms.Alarm(True);
+        end;
       end;
     end;
     epPCSMERedGearSafetyStop :
@@ -288,9 +301,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clRed;
           frmAlarms.AddAlarmToLog('RED GEAR SAFETY STOP');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMEFwHtExpTkLevelVeryLow :
@@ -301,9 +318,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clRed;
           frmAlarms.AddAlarmToLog('FW HT EXP TK LEVEL VERY LOW');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMEFwTempVeryHigh :
@@ -314,9 +335,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clRed;
           frmAlarms.AddAlarmToLog('FW TEMP VERY HIGH');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMEConRodBearingTempVeryHigh :
@@ -327,9 +352,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clRed;
           frmAlarms.AddAlarmToLog('CON ROD BEAR TEMP VERY HIGH');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMEEngInletLubOilVeryHigh :
@@ -340,9 +369,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clRed;
           frmAlarms.AddAlarmToLog('ENG INLET LUB OIL VERY HIGH');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMEOilMistDetSafety :
@@ -353,9 +386,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clRed;
           frmAlarms.AddAlarmToLog('OIL MIST DET HIGH');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMETurningGearEngaged :
@@ -366,9 +403,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clRed;
           frmAlarms.AddAlarmToLog('TURNING GEAR ENGAGED');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMEManHandleAtStop :
@@ -379,9 +420,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clRed;
           frmAlarms.AddAlarmToLog('MAN HANDLE AT STOP');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMEFuelRackAtStop :
@@ -392,9 +437,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clRed;
           frmAlarms.AddAlarmToLog('FUEL RACK AT STOP');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMEPrelubInProgress :
@@ -405,9 +454,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clRed;
           frmAlarms.AddAlarmToLog('PRE LUB IN PROGRESS');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMEPrelubricationFailure :
@@ -418,9 +471,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clRed;
           frmAlarms.AddAlarmToLog('PRELUBRICATION FAILURE');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMEStartingFault :
@@ -432,11 +489,13 @@ begin
           frmSafetiesStop.btnPS_SI_StartingFailure.Color := clRed;
           frmGeneralScreen.btnPS_SI_StartingFailure.Color := clRed;
           frmAlarms.AddAlarmToLog('STARTING FAULT');
+          frmAlarms.Alarm(True);
         end
         else
         begin
           frmSafetiesStop.btnPS_SI_StartingFailure.Color := clAqua;
           frmGeneralScreen.btnPS_SI_StartingFailure.Color := clAqua;
+          frmAlarms.Alarm(False);
         end;
       end;
     end;
@@ -448,9 +507,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clRed;
           frmAlarms.AddAlarmToLog('STC SEQUENCE FAIL');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSMESlowTurningFault :
@@ -462,11 +525,13 @@ begin
           frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clRed;
           frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clRed;
           frmAlarms.AddAlarmToLog('SLOW TURNING FAULT');
+          frmAlarms.Alarm(True);
         end
         else
         begin
           frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clAqua;
-          frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clAqua
+          frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clAqua;
+          frmAlarms.Alarm(False);
         end;
       end;
     end;
@@ -478,9 +543,13 @@ begin
         begin
           frmSafetiesStop.btnPS_SI_SafetyStop.Color := clRed;
           frmAlarms.AddAlarmToLog('SAFETY STOP');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmSafetiesStop.btnPS_SI_SafetyStop.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
     epPCSGBPCSClutchInterlock :
@@ -491,9 +560,13 @@ begin
         begin
           frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clRed;
           frmAlarms.AddAlarmToLog('PCS CLUTCH INTERLOCK');
+          frmAlarms.Alarm(True);
         end
         else
+        begin
           frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clAqua;
+          frmAlarms.Alarm(False);
+        end;
       end;
     end;
   end;
@@ -532,7 +605,9 @@ begin
     epPCSMEPressAirInlet :
     begin
       if Assigned(frmSetofPressureGaugesME2) then
+      begin
         frmSetofPressureGaugesME2.EngineInletAirPressureMeter.Position := Value;
+      end;
 
       if Assigned(frmAirGasCircuit) then
       begin
@@ -591,7 +666,25 @@ begin
       end;
 
       if Assigned(frmSafetiesStop) then
-        frmSafetiesStop.lblSpeedSVAE.Caption := FloatToStr(Value);
+         frmSafetiesStop.lblSpeedSVAE.Caption := FloatToStr(Value);
+
+      if Assigned(frmPCOTValueHistory) then
+         frmPCOTValueHistory.lblSpeed.Caption := FloatToStr(Value);
+
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value < 80 then
+        begin
+           frmSafetiesStop.btnEngineSpeed80Rpm.Color := clRed;
+//           frmAlarms.AddAlarmToLog('ENGINE SPEED < 80 RPM');
+//           frmAlarms.Alarm(True);
+        end
+        else
+        begin
+           frmSafetiesStop.btnEngineSpeed80Rpm.Color := clAqua;
+//           frmAlarms.Alarm(False);
+        end;
+      end;
     end;
     epPCSMEFuelRack :
     begin
@@ -719,7 +812,7 @@ begin
     epPCSMETempExhCylA1 :
     begin
       if Assigned(frmLineAExhaustGasTemperature) then
-        frmLineAExhaustGasTemperature.lblB1LineA.Caption := FloatToStr(Value);
+        frmLineAExhaustGasTemperature.lblB1LineA.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylA1 :
     begin
@@ -750,7 +843,7 @@ begin
     epPCSMETempExhCylA2 :
     begin
       if Assigned(frmLineAExhaustGasTemperature) then
-        frmLineAExhaustGasTemperature.lblB2LineA.Caption := FloatToStr(Value);
+        frmLineAExhaustGasTemperature.lblB2LineA.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylA2 :
     begin
@@ -781,7 +874,7 @@ begin
     epPCSMETempExhCylA3 :
     begin
       if Assigned(frmLineAExhaustGasTemperature) then
-        frmLineAExhaustGasTemperature.lblB3LineA.Caption := FloatToStr(Value);
+        frmLineAExhaustGasTemperature.lblB3LineA.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylA3 :
     begin
@@ -812,7 +905,7 @@ begin
     epPCSMETempExhCylA4 :
     begin
       if Assigned(frmLineAExhaustGasTemperature) then
-        frmLineAExhaustGasTemperature.lblB4LineA.Caption := FloatToStr(Value);
+        frmLineAExhaustGasTemperature.lblB4LineA.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylA4 :
     begin
@@ -843,7 +936,7 @@ begin
     epPCSMETempExhCylA5 :
     begin
       if Assigned(frmLineAExhaustGasTemperature) then
-        frmLineAExhaustGasTemperature.lblB5LineA.Caption := FloatToStr(Value);
+        frmLineAExhaustGasTemperature.lblB5LineA.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylA5 :
     begin
@@ -874,7 +967,7 @@ begin
     epPCSMETempExhCylA6 :
     begin
       if Assigned(frmLineAExhaustGasTemperature) then
-        frmLineAExhaustGasTemperature.lblB6LineA.Caption := FloatToStr(Value);
+        frmLineAExhaustGasTemperature.lblB6LineA.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylA6 :
     begin
@@ -905,7 +998,7 @@ begin
     epPCSMETempExhCylA7 :
     begin
       if Assigned(frmLineAExhaustGasTemperature) then
-        frmLineAExhaustGasTemperature.lblB7LineA.Caption := FloatToStr(Value);
+        frmLineAExhaustGasTemperature.lblB7LineA.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylA7 :
     begin
@@ -936,7 +1029,7 @@ begin
     epPCSMETempExhCylA8 :
     begin
       if Assigned(frmLineAExhaustGasTemperature) then
-        frmLineAExhaustGasTemperature.lblB8LineA.Caption := FloatToStr(Value);
+        frmLineAExhaustGasTemperature.lblB8LineA.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylA8 :
     begin
@@ -967,7 +1060,7 @@ begin
     epPCSMETempExhCylA9 :
     begin
       if Assigned(frmLineAExhaustGasTemperature) then
-        frmLineAExhaustGasTemperature.lblB9LineA.Caption := FloatToStr(Value);
+        frmLineAExhaustGasTemperature.lblB9LineA.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylA9 :
     begin
@@ -998,7 +1091,7 @@ begin
     epPCSMETempExhCylA10 :
     begin
       if Assigned(frmLineAExhaustGasTemperature) then
-        frmLineAExhaustGasTemperature.lblB10LineA.Caption := FloatToStr(Value);
+        frmLineAExhaustGasTemperature.lblB10LineA.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylA10 :
     begin
@@ -1050,7 +1143,7 @@ begin
     epPCSMETempExhCylB1 :
     begin
       if Assigned(frmLineBExhaustGasTemperature) then
-        frmLineBExhaustGasTemperature.lblA1LineB.Caption := FloatToStr(Value);
+        frmLineBExhaustGasTemperature.lblA1LineB.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylB1 :
     begin
@@ -1081,7 +1174,7 @@ begin
     epPCSMETempExhCylB2 :
     begin
       if Assigned(frmLineBExhaustGasTemperature) then
-        frmLineBExhaustGasTemperature.lblA2LineB.Caption := FloatToStr(Value);
+        frmLineBExhaustGasTemperature.lblA2LineB.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylB2 :
     begin
@@ -1112,7 +1205,7 @@ begin
     epPCSMETempExhCylB3 :
     begin
       if Assigned(frmLineBExhaustGasTemperature) then
-        frmLineBExhaustGasTemperature.lblA3LineB.Caption := FloatToStr(Value);
+        frmLineBExhaustGasTemperature.lblA3LineB.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylB3 :
     begin
@@ -1143,7 +1236,7 @@ begin
     epPCSMETempExhCylB4 :
     begin
       if Assigned(frmLineBExhaustGasTemperature) then
-        frmLineBExhaustGasTemperature.lblA4LineB.Caption := FloatToStr(Value);
+        frmLineBExhaustGasTemperature.lblA4LineB.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylB4 :
     begin
@@ -1174,7 +1267,7 @@ begin
     epPCSMETempExhCylB5 :
     begin
       if Assigned(frmLineBExhaustGasTemperature) then
-        frmLineBExhaustGasTemperature.lblA5LineB.Caption := FloatToStr(Value);
+        frmLineBExhaustGasTemperature.lblA5LineB.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylB5 :
     begin
@@ -1205,7 +1298,7 @@ begin
     epPCSMETempExhCylB6 :
     begin
       if Assigned(frmLineBExhaustGasTemperature) then
-        frmLineBExhaustGasTemperature.lblA6LineB.Caption := FloatToStr(Value);
+        frmLineBExhaustGasTemperature.lblA6LineB.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylB6 :
     begin
@@ -1236,7 +1329,7 @@ begin
     epPCSMETempExhCylB7 :
     begin
       if Assigned(frmLineBExhaustGasTemperature) then
-        frmLineBExhaustGasTemperature.lblA7LineB.Caption := FloatToStr(Value);
+        frmLineBExhaustGasTemperature.lblA7LineB.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylB7 :
     begin
@@ -1267,7 +1360,7 @@ begin
     epPCSMETempExhCylB8 :
     begin
      if Assigned(frmLineBExhaustGasTemperature) then
-        frmLineBExhaustGasTemperature.lblA8LineB.Caption := FloatToStr(Value);
+        frmLineBExhaustGasTemperature.lblA8LineB.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylB8 :
     begin
@@ -1298,7 +1391,7 @@ begin
     epPCSMETempExhCylB9 :
     begin
      if Assigned(frmLineBExhaustGasTemperature) then
-        frmLineBExhaustGasTemperature.lblA9LineB.Caption := FloatToStr(Value);
+        frmLineBExhaustGasTemperature.lblA9LineB.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylB9 :
     begin
@@ -1329,7 +1422,7 @@ begin
     epPCSMETempExhCylB10 :
     begin
       if Assigned(frmLineBExhaustGasTemperature) then
-        frmLineBExhaustGasTemperature.lblA10LineB.Caption := FloatToStr(Value);
+        frmLineBExhaustGasTemperature.lblA10LineB.Caption := FloatToStr(Value /10);
     end;
     epPCSMEDevTempExhCylB10 :
     begin

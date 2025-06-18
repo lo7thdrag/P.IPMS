@@ -17609,7 +17609,7 @@ object frmSetofPressureGaugesME2: TfrmSetofPressureGaugesME2
       Visible = False
       OnClick = AlarmFlashLightingClick
     end
-    object mpAlarm: TMediaPlayer
+    object mpAlarmgGauges: TMediaPlayer
       Left = 1015
       Top = 8
       Width = 253

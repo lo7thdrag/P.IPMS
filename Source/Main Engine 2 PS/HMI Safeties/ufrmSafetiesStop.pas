@@ -14,7 +14,7 @@ type
     Label4: TLabel;
     Panel2: TPanel;
     VrDemoButton7: TVrDemoButton;
-    VrDemoButton8: TVrDemoButton;
+    btnEngineSpeed80Rpm: TVrDemoButton;
     btnPS_SI_TurningGearDisengaged: TVrDemoButton;
     btnPS_SI_ManHandleAtStop: TVrDemoButton;
     VrDemoButton11: TVrDemoButton;
@@ -49,8 +49,8 @@ type
     btnPrevious: TRzBmpButton;
     btnNext: TRzBmpButton;
     ImgBackground: TImage;
-    VrDemoButton23: TVrDemoButton;
-    VrDemoButton24: TVrDemoButton;
+    lblSafetiesStop: TVrDemoButton;
+    lblStartingInterlocks: TVrDemoButton;
     Label1: TLabel;
     lblSpeedSVAE: TLabel;
     Image1: TImage;
@@ -63,6 +63,7 @@ type
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnAlarmsClick(Sender: TObject);
+    procedure btnCurvesClick(Sender: TObject);
   private
 
   public
@@ -75,7 +76,7 @@ var
 implementation
 
 uses
-  ufrmCompressedAirCircuit, ufrmLineBExhaustGasTemperature, ufrmMenu, uMainEngine2System, ufrmAlarms;
+  ufrmCompressedAirCircuit, ufrmLineBExhaustGasTemperature, ufrmMenu, uMainEngine2System, ufrmAlarms, ufrmCurves;
 
 {$R *.dfm}
 
@@ -91,6 +92,12 @@ end;
 procedure TfrmSafetiesStop.btnAlarmsClick(Sender: TObject);
 begin
   frmAlarms.Show;
+  Self.Hide;
+end;
+
+procedure TfrmSafetiesStop.btnCurvesClick(Sender: TObject);
+begin
+  frmCurves.Show;
   Self.Hide;
 end;
 

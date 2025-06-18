@@ -11,6 +11,7 @@ object frmAlarms: TfrmAlarms
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -10322,6 +10323,7 @@ object frmAlarms: TfrmAlarms
         FFFF}
       Color = clBtnFace
       TabOrder = 1
+      OnClick = btnCurvesClick
     end
     object btnMenu: TRzBmpButton
       Left = 1133
@@ -13144,6 +13146,7 @@ object frmAlarms: TfrmAlarms
       Visible = False
       ParentDoubleBuffered = False
       TabOrder = 5
+      OnNotify = mpAlarmNotify
     end
   end
   object Timer1: TTimer

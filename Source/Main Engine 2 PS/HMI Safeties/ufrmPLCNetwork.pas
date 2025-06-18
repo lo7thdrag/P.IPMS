@@ -31,6 +31,7 @@ type
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnAlarmsClick(Sender: TObject);
+    procedure btnCurvesClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,12 +44,18 @@ var
 implementation
 
 uses
-  ufrmLubOilCircuit, ufrmClutchingAssitance, ufrmMenu, ufrmAlarms;
+  ufrmLubOilCircuit, ufrmClutchingAssitance, ufrmMenu, ufrmAlarms, ufrmCurves;
 {$R *.dfm}
 
 procedure TfrmPLCNetwork.btnAlarmsClick(Sender: TObject);
 begin
   frmAlarms.Show;
+  Self.Hide;
+end;
+
+procedure TfrmPLCNetwork.btnCurvesClick(Sender: TObject);
+begin
+  frmCurves.Show;
   Self.Hide;
 end;
 

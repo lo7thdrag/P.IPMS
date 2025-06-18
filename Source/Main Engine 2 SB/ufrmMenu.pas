@@ -74,6 +74,7 @@ type
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnAlarmsClick(Sender: TObject);
+    procedure btnCurvesClick(Sender: TObject);
   private
 
   public
@@ -114,6 +115,12 @@ begin
 end;
 
 procedure TfrmMenu.btnAlarmsClick(Sender: TObject);
+begin
+  frmAlarms.Show;
+  Self.Hide;
+end;
+
+procedure TfrmMenu.btnCurvesClick(Sender: TObject);
 begin
   frmAlarms.Show;
   Self.Hide;
