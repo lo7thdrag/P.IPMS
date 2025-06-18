@@ -603,10 +603,10 @@ begin
   begin
     if aValue > 0 then
     begin
-      if SetPointSpeed < 1050 then
+      if SetPointSpeed < 1084 then         // awalnya 1050
         SetPointSpeed := SetPointSpeed + aValue
       else
-        SetPointSpeed := 1050;
+        SetPointSpeed := 1084;
     end
     else
     if aValue < 0 then
