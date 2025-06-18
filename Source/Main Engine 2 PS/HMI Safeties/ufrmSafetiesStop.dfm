@@ -6033,7 +6033,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 0
       end
-      object VrDemoButton8: TVrDemoButton
+      object btnEngineSpeed80Rpm: TVrDemoButton
         Tag = 1
         Left = 3
         Top = 38
@@ -8955,6 +8955,7 @@ object frmSafetiesStop: TfrmSafetiesStop
       Top = 0
       Width = 105
       Height = 151
+      Cursor = crHandPoint
       Bitmaps.TransparentColor = clOlive
       Bitmaps.Up.Data = {
         FEF70000424DFEF7000000000000420000002800000069000000970000000100
@@ -10944,6 +10945,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         FFFF}
       Color = clBtnFace
       TabOrder = 4
+      OnClick = btnCurvesClick
     end
     object btnMenu: TRzBmpButton
       Left = 1133
@@ -15599,7 +15601,7 @@ object frmSafetiesStop: TfrmSafetiesStop
       TabOrder = 7
       OnClick = btnNextClick
     end
-    object VrDemoButton23: TVrDemoButton
+    object lblSafetiesStop: TVrDemoButton
       Tag = 1
       Left = 186
       Top = 211
@@ -15620,7 +15622,7 @@ object frmSafetiesStop: TfrmSafetiesStop
       Color = 12032000
       TabOrder = 8
     end
-    object VrDemoButton24: TVrDemoButton
+    object lblStartingInterlocks: TVrDemoButton
       Tag = 1
       Left = 793
       Top = 211

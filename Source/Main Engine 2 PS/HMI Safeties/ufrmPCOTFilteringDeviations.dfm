@@ -8770,6 +8770,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       Top = 1
       Width = 105
       Height = 151
+      Cursor = crHandPoint
       Bitmaps.TransparentColor = clOlive
       Bitmaps.Up.Data = {
         FEF70000424DFEF7000000000000420000002800000069000000970000000100
@@ -10759,6 +10760,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
         FFFF}
       Color = clBtnFace
       TabOrder = 3
+      OnClick = btnCurvesClick
     end
     object btnMenu: TRzBmpButton
       Left = 1134
@@ -18021,15 +18023,6 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       ParentBackground = False
       TabOrder = 8
     end
-    object Edit1: TEdit
-      Left = 152
-      Top = 880
-      Width = 57
-      Height = 21
-      TabOrder = 9
-      Text = 'Edit1'
-      OnKeyPress = Edit1KeyPress
-    end
     object pnlGrafik2: TPanel
       Left = 351
       Top = 571
@@ -18038,7 +18031,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       BevelOuter = bvNone
       Color = 8453888
       ParentBackground = False
-      TabOrder = 10
+      TabOrder = 9
     end
     object pnlGrafik3: TPanel
       Left = 448
@@ -18048,7 +18041,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       BevelOuter = bvNone
       Color = 8453888
       ParentBackground = False
-      TabOrder = 11
+      TabOrder = 10
     end
     object pnlGrafik4: TPanel
       Left = 546
@@ -18058,7 +18051,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       BevelOuter = bvNone
       Color = 8453888
       ParentBackground = False
-      TabOrder = 12
+      TabOrder = 11
     end
     object pnlGrafik5: TPanel
       Left = 644
@@ -18068,7 +18061,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       BevelOuter = bvNone
       Color = 8453888
       ParentBackground = False
-      TabOrder = 13
+      TabOrder = 12
     end
     object pnlGrafik6: TPanel
       Left = 739
@@ -18078,7 +18071,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       BevelOuter = bvNone
       Color = 8453888
       ParentBackground = False
-      TabOrder = 14
+      TabOrder = 13
     end
     object pnlGrafik7: TPanel
       Left = 835
@@ -18088,7 +18081,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       BevelOuter = bvNone
       Color = 8453888
       ParentBackground = False
-      TabOrder = 15
+      TabOrder = 14
     end
     object pnlGrafik8: TPanel
       Left = 932
@@ -18098,7 +18091,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       BevelOuter = bvNone
       Color = 8453888
       ParentBackground = False
-      TabOrder = 16
+      TabOrder = 15
     end
     object pnlGrafik9: TPanel
       Left = 1026
@@ -18108,7 +18101,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       BevelOuter = bvNone
       Color = 8453888
       ParentBackground = False
-      TabOrder = 17
+      TabOrder = 16
     end
     object pnlGrafik10: TPanel
       Left = 1124
@@ -18118,7 +18111,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       BevelOuter = bvNone
       Color = 8453888
       ParentBackground = False
-      TabOrder = 18
+      TabOrder = 17
     end
     object pnlTime: TPanel
       Left = 616
@@ -18128,7 +18121,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       BevelOuter = bvNone
       Color = 11313826
       ParentBackground = False
-      TabOrder = 19
+      TabOrder = 18
       object lblTime: TLabel
         Left = 1
         Top = -4

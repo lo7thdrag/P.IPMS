@@ -15,7 +15,7 @@ type
     EngineInletAirPressureMeter: TVrAngularMeter;
     btnAlarm: TRzBmpButton;
     imgFlashLighting: TRzBmpButton;
-    mpAlarm: TMediaPlayer;
+    mpAlarmgGauges: TMediaPlayer;
     Label10: TLabel;
     Label6: TLabel;
     Label7: TLabel;

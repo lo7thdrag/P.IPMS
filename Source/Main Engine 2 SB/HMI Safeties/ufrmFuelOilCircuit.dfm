@@ -8859,6 +8859,7 @@ object frmFuelOilCircuit: TfrmFuelOilCircuit
       Top = 1
       Width = 105
       Height = 151
+      Cursor = crHandPoint
       Bitmaps.TransparentColor = clOlive
       Bitmaps.Up.Data = {
         FEF70000424DFEF7000000000000420000002800000069000000970000000100
@@ -10848,6 +10849,7 @@ object frmFuelOilCircuit: TfrmFuelOilCircuit
         FFFF}
       Color = clBtnFace
       TabOrder = 3
+      OnClick = btnCurvesClick
     end
     object btnMenu: TRzBmpButton
       Left = 1134
