@@ -199,12 +199,12 @@
             <Form>frmAlarms</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="HMI Safeties\ufrmPCOTValueHistory.pas">
-            <Form>frmPCOTValueHistory</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="HMI Safeties\ufrmCurves.pas">
             <Form>frmCurves</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="HMI Safeties\ufrmPCOTValueHistory.pas">
+            <Form>frmPCOTValueHistory</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

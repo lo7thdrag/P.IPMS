@@ -185,7 +185,6 @@
         <DCCReference Include="..\network\uTCPServer.pas"/>
         <DCCReference Include="HMI Safeties\ufrmPCOTFilteringDeviations.pas">
             <Form>frmPCOTFilteringDeviations</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="HMI Safeties\ufrmPLCNetwork.pas">
             <Form>frmPLCNetwork</Form>
@@ -199,12 +198,12 @@
             <Form>frmAlarms</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="HMI Safeties\ufrmPCOTValueHistory.pas">
-            <Form>frmPCOTValueHistory</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="HMI Safeties\ufrmCurves.pas">
             <Form>frmCurves</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="HMI Safeties\ufrmPCOTValueHistory.pas">
+            <Form>frmPCOTValueHistory</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

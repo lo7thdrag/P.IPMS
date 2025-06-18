@@ -32,12 +32,11 @@ begin
 
   Application.CreateForm(TfrmMainForm, frmMainForm);
   Application.CreateForm(TfrmSetofPressureGaugesME1, frmSetofPressureGaugesME1);
-  Application.CreateForm(TfrmSignalingLightME1, frmSignalingLightME1);
   frmSetofPressureGaugesME1.Show;
   Application.CreateForm(TfrmSignalingLightME1, frmSignalingLightME1);
   frmSignalingLightME1.Show;
   Application.CreateForm(TfrmPMSDieselEngineSafetiesME1, frmPMSDieselEngineSafetiesME1);
   frmPMSDieselEngineSafetiesME1.Show;
-  Application.CreateForm(TfrmFreeze, frmFreeze);
+//  Application.CreateForm(TfrmFreeze, frmFreeze);
   Application.Run;
 end.

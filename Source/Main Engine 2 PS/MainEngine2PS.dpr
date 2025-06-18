@@ -38,8 +38,8 @@ uses
   uMainForm in 'uMainForm.pas' {frmMainForm},
   ufrmMenu in 'ufrmMenu.pas' {frmMenu},
   ufrmAlarms in 'HMI Safeties\ufrmAlarms.pas' {frmAlarms},
-  ufrmPCOTValueHistory in 'HMI Safeties\ufrmPCOTValueHistory.pas' {frmPCOTValueHistory},
-  ufrmCurves in 'HMI Safeties\ufrmCurves.pas' {frmCurves};
+  ufrmCurves in 'HMI Safeties\ufrmCurves.pas' {frmCurves},
+  ufrmPCOTValueHistory in 'HMI Safeties\ufrmPCOTValueHistory.pas' {frmPCOTValueHistory};
 
 {$R *.res}
 
@@ -50,8 +50,8 @@ begin
   Application.CreateForm(TfrmMainForm, frmMainForm);
   Application.CreateForm(TfrmSetofPressureGaugesME2, frmSetofPressureGaugesME2);
   Application.CreateForm(TfrmAlarms, frmAlarms);
-  Application.CreateForm(TfrmPCOTValueHistory, frmPCOTValueHistory);
   Application.CreateForm(TfrmCurves, frmCurves);
+  Application.CreateForm(TfrmPCOTValueHistory, frmPCOTValueHistory);
   frmSetofPressureGaugesME2.Show;
   Application.CreateForm(TfrmSignalingLightME2, frmSignalingLightME2);
   frmSignalingLightME2.Show;

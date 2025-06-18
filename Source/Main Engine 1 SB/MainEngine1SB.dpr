@@ -41,6 +41,6 @@ begin
   frmSignalingLightME1.Show;
   Application.CreateForm(TfrmPMSDieselEngineSafetiesME1, frmPMSDieselEngineSafetiesME1);
   frmPMSDieselEngineSafetiesME1.Show;
-  Application.CreateForm(TfrmFreeze, frmFreeze);
+//  Application.CreateForm(TfrmFreeze, frmFreeze);
   Application.Run;
 end.
