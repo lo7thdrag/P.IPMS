@@ -41,6 +41,8 @@ type
     btnPCSAlarmSound: TButton;
     btn1: TButton;
     btn2: TButton;
+    mmoNetLogger: TMemo;
+    mmoLogReceive: TMemo;
     procedure btnGeneralPanelStartClick(Sender: TObject);
     procedure btnPSPanelStartClick(Sender: TObject);
     procedure btnSBPanelStartClick(Sender: TObject);
@@ -77,6 +79,8 @@ type
 
     FListener : TListeners;
     procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
+    procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : string);overload;
+    procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : TObject);overload;
 
     procedure EventLogStr(Sender :TObject; Props :E_PropsID; Value : string);
 
@@ -99,8 +103,10 @@ var
 
 implementation
 
-uses uPSPanel, uSBPanel, uGeneralPanel, ufrmLogger, uPCSPanelBridge,
-  uPCSSystem, uLeverControl, ComMainForm, uAlarmPCS;
+uses
+  uTCPClient, uPSPanel, uSBPanel, uGeneralPanel, ufrmLogger, uPCSPanelBridge,   uPCSSystem, uLeverControl,
+  ComMainForm, uAlarmPCS;
+
 {$R *.dfm}
 
 procedure TForm1.btn1Click(Sender: TObject);
@@ -289,6 +295,12 @@ begin
     OnPropertyBoolChange := PCSSystemEvent;
   end;
 
+  with PCSSystem.Network.Listeners.Add('PCSUINETWORK') as TPropertyEventListener do
+  begin
+    OnPropertyStringChange:= PCSSystemEvent;
+    OnPropertyObjectChange:= PCSSystemEvent;
+  end;
+
   LoadSettingForm('..\bin\setting.ini');
 
   counterCheck := 0;
@@ -310,7 +322,7 @@ begin
     frmPCSAlarm := TfrmPCSAlarm.Create(Self);
     frm_GeneralPanel.FAlarmON := True;
 //    ShowCursor(False);
-    Height := 0;
+//    Height := 0;
     Top := 1150;
   end
   else
@@ -362,8 +374,34 @@ begin
   tempstring.Free;
 end;
 
-procedure TForm1.PCSSystemEvent(Sender: TObject; PropsID: E_PropsID;
-  Value: Boolean);
+procedure TForm1.PCSSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: TObject);
+begin
+  case PropsID of
+    epNetworkConnectedToServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + '] Connected to : ' + TTCPClient(Value).ServerAddress);
+    end;
+    epNetworkDisconnectedFromServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + ']Disconnected from : ' + TTCPClient(Value).ServerAddress);
+    end;
+  end;
+end;
+
+procedure TForm1.PCSSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: string);
+begin
+  case PropsID of
+	  epNetworkLogRcv: begin
+	    if mmoLogReceive.Lines.Count>100 then
+	      mmoLogReceive.Lines.Delete(0);
+	    mmoLogReceive.Lines.Add(Value);
+	  end;
+	end;
+end;
+
+procedure TForm1.PCSSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
   case PropsID of
     epPCSLeverShaftDrivenPS:
@@ -448,7 +486,6 @@ begin
 
   end;
 end;
-
 
 procedure TForm1.tmr1Timer(Sender: TObject);
 begin

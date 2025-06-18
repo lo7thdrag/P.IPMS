@@ -91952,17 +91952,8 @@ object frmEmergencyPanel: TfrmEmergencyPanel
       Font.Name = 'Arial'
       Font.Style = [fsBold]
     end
-    object Button1: TButton
-      Left = 1188
-      Top = 968
-      Width = 75
-      Height = 25
-      Caption = 'Button1'
-      TabOrder = 10
-    end
   end
   object tmrAmpere: TTimer
-    OnTimer = tmrAmpereTimer
     Left = 479
     Top = 518
   end

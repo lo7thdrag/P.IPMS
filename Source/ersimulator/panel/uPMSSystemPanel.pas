@@ -262,7 +262,17 @@ end;
 {----------Generator Panel----------}
 procedure TfrmPMSSystemPanel.Gen1ModeClick(Sender: TObject);
 begin
-  {GenMode Circuit Breaker 1: Manual; 2: SemiAuto(manual); 3: Auto; 4: SemiAuto(auto);}
+  generator := ERSystem.ERManager.EngineRoom.getPMSSystem.getGenerator(C_GENERATOR_ID[0]);
+
+  if generator.NotStandby then
+  begin
+    rbManGen1.Checked := generator.GeneratorMode = 1;
+    rbSemGen1.Checked := generator.GeneratorMode = 2;
+    rbAutGen1.Checked := generator.GeneratorMode = 3;
+
+    Exit;
+  end;
+
   if rbManGen1.Checked = true then
   begin
     SetValueInt(C_GENERATOR, 0, 1, epPMSGeneratorMode);
@@ -282,6 +292,17 @@ end;
 
 procedure TfrmPMSSystemPanel.Gen2ModeClick(Sender: TObject);
 begin
+  generator := ERSystem.ERManager.EngineRoom.getPMSSystem.getGenerator(C_GENERATOR_ID[1]);
+
+  if generator.NotStandby then
+  begin
+    rbManGen2.Checked := generator.GeneratorMode = 1;
+    rbSemGen2.Checked := generator.GeneratorMode = 2;
+    rbAutGen2.Checked := generator.GeneratorMode = 3;
+
+    Exit;
+  end;
+
   if rbManGen2.Checked = true then
   begin
     SetValueInt(C_GENERATOR, 1, 1, epPMSGeneratorMode);
@@ -301,6 +322,17 @@ end;
 
 procedure TfrmPMSSystemPanel.Gen3ModeClick(Sender: TObject);
 begin
+  generator := ERSystem.ERManager.EngineRoom.getPMSSystem.getGenerator(C_GENERATOR_ID[2]);
+
+  if generator.NotStandby then
+  begin
+    rbManGen3.Checked := generator.GeneratorMode = 1;
+    rbSemGen3.Checked := generator.GeneratorMode = 2;
+    rbAutGen3.Checked := generator.GeneratorMode = 3;
+
+    Exit;
+  end;
+
   if rbManGen3.Checked = true then
   begin
     SetValueInt(C_GENERATOR, 2, 1, epPMSGeneratorMode);
@@ -320,6 +352,17 @@ end;
 
 procedure TfrmPMSSystemPanel.Gen4ModeClick(Sender: TObject);
 begin
+  generator := ERSystem.ERManager.EngineRoom.getPMSSystem.getGenerator(C_GENERATOR_ID[3]);
+
+  if generator.NotStandby then
+  begin
+    rbManGen4.Checked := generator.GeneratorMode = 1;
+    rbSemGen4.Checked := generator.GeneratorMode = 2;
+    rbAutGen4.Checked := generator.GeneratorMode = 3;
+
+    Exit;
+  end;
+
   if rbManGen4.Checked = true then
   begin
     SetValueInt(C_GENERATOR, 3, 1, epPMSGeneratorMode);
@@ -662,6 +705,7 @@ begin
     generator := ERSystem.ERManager.EngineRoom.getPMSSystem.getGenerator(C_GENERATOR_ID[IdObj]);
     if generator.NotStandby then
       Exit;
+
     case PropsID of
       epPMSGeneratorMode :
       begin
@@ -710,8 +754,7 @@ begin
   end;
 end;
 
-procedure TfrmPMSSystemPanel.EnginePropertyIntChange(Sender: TObject;
-  PropsID: E_PropsID; Value: Integer);
+procedure TfrmPMSSystemPanel.EnginePropertyIntChange(Sender: TObject; PropsID: E_PropsID; Value: Integer);
 begin
   if Sender is TGenerator then
   begin

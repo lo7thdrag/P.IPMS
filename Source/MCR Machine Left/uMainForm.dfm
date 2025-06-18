@@ -28,6 +28,13 @@ object MainForm: TMainForm
     Color = 3749426
     ParentBackground = False
     TabOrder = 0
+    object img1: TImage
+      Left = 19
+      Top = 910
+      Width = 46
+      Height = 43
+      OnDblClick = img1DblClick
+    end
     object pnlRpmMeSpeed: TPanel
       Left = 848
       Top = 7
@@ -114007,7 +114014,7 @@ object MainForm: TMainForm
           '.'
           '.')
         ShowLabel = False
-        SwitchPosition = 5
+        SwitchPosition = 6
         SwitchAngleStart = 35
         SwitchAngleEnd = 325
         WinchColor = clWhite
@@ -114034,6 +114041,28 @@ object MainForm: TMainForm
       ParentDoubleBuffered = False
       TabOrder = 9
       OnNotify = mpAlarmNotify
+    end
+    object mmoNetLogger: TMemo
+      Left = 340
+      Top = 926
+      Width = 361
+      Height = 89
+      ReadOnly = True
+      ScrollBars = ssBoth
+      TabOrder = 10
+      Visible = False
+      WordWrap = False
+    end
+    object mmoLogReceive: TMemo
+      Left = 707
+      Top = 926
+      Width = 361
+      Height = 89
+      ReadOnly = True
+      ScrollBars = ssBoth
+      TabOrder = 11
+      Visible = False
+      WordWrap = False
     end
   end
   object tmrTelegraph: TTimer

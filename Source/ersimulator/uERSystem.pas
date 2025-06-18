@@ -422,6 +422,7 @@ begin
   FillChar(rPCSCmd, SizeOf(R_Common_PCS_Command), 0);
 
   case PropsID of
+
     {$REGION ' PMS Section '}
     epPMSGeneratorMode, epPMSGeneratorState{, epPMSGeneratorRunningHours}:
     begin
@@ -537,6 +538,7 @@ begin
   FillChar(rPCSCmd, SizeOf(R_Common_PCS_Command), 0);
 
   case PropsID of
+
     {$REGION ' PMS Section '}
     epPMSFrequency, epPMSCurrent, epPMSVoltage:
     begin
@@ -841,8 +843,8 @@ begin
     epPMSGeneratorFuelRunsOut :
     begin
       generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
-      if generator.NotStandby then
-        Exit;
+//      if generator.NotStandby then
+//        Exit;
 
       generator.FuelRunsOut := recER.ValueBool;
     end;
@@ -858,8 +860,8 @@ begin
     epPMSGeneratorStop:
     begin
       generator := ERManager.EngineRoom.getPMSSystem.getGenerator(recER.GenSwitchID);
-      if generator.NotStandby then
-        Exit;
+//      if generator.NotStandby then
+//        Exit;
 
       {hanya bisa mati jk state 'Gen Ready'}
       if generator.GeneratorState = Ord(gsGenReady){5} then

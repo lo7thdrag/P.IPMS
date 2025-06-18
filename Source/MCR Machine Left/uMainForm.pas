@@ -144,6 +144,9 @@ type
     tmrShaftSpeed: TTimer;
     tmrCPP: TTimer;
     mpAlarm: TMediaPlayer;
+    mmoNetLogger: TMemo;
+    mmoLogReceive: TMemo;
+    img1: TImage;
 
     procedure FormCreate(Sender: TObject);
     procedure imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -160,6 +163,7 @@ type
     procedure tmrMeSpeedTimer(Sender: TObject);
     procedure tmrCPPTimer(Sender: TObject);
     procedure mpAlarmNotify(Sender: TObject);
+    procedure img1DblClick(Sender: TObject);
 
   private
     FIsBlinkState : Boolean;
@@ -169,6 +173,8 @@ type
     procedure MCRMachineLeftSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure MCRMachineLeftSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
     procedure MCRMachineLeftSystemEvent(Sender : TObject; PropsID : E_PropsID; Value : Double); overload;
+    procedure MCRMachineLeftSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : string);overload;
+    procedure MCRMachineLeftSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : TObject);overload;
 
   public
     silence : Boolean;
@@ -204,9 +210,10 @@ var
 implementation
 
 uses
-  uMCRMachineLeftSystem;
+  uTCPClient, uMCRMachineLeftSystem;
 
 {$R *.dfm}
+
 procedure EnableComposited(WinControl:TWinControl);
 var
   i:Integer;
@@ -220,33 +227,12 @@ begin
       EnableComposited(TWinControl(WinControl.Controls[i]));
 end;
 
+{$REGION ' Form Procedure '}
+
 procedure TMainForm.FormShow(Sender: TObject);
 begin
 //  Left   := Screen.Monitors[0].Left;
 //  Top    := Screen.Monitors[0].Top;
-
-end;
-
-procedure TMainForm.GetIdBlinkTelegrapLamp(value: Integer);
-var
-  i : Integer;
-
-begin
-  for i := 0 to ComponentCount - 1 do
-  begin
-    if Components[i] is TImage then
-    begin
-      if TImage(Components[i]).Hint <> 'Telegrap' then
-        Continue;
-
-      TImage(Components[i]).Visible := False;
-
-      if (TImage(Components[i]).Tag = value ) then
-      begin
-        FIdBlink := i;
-      end;
-    end;
-  end;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
@@ -255,11 +241,18 @@ var
 
 begin
   FListener := TListeners.Create;
+
   with MCRMachineLeftSystem.Listener.Add('MCRMACHINELEFT') as TPropertyEventListener do
   begin
     OnPropertyIntChange := MCRMachineLeftSystemEvent;
     OnPropertyBoolChange := MCRMachineLeftSystemEvent;
     OnPropertyDblChange := MCRMachineLeftSystemEvent;
+  end;
+
+  with MCRMachineLeftSystem.Network.Listeners.Add('MCRMACHINELEFTNETWORK') as TPropertyEventListener do
+  begin
+    OnPropertyStringChange:= MCRMachineLeftSystemEvent;
+    OnPropertyObjectChange:= MCRMachineLeftSystemEvent;
   end;
 
   {$REGION ' Set Alarm Indicator '}
@@ -307,333 +300,35 @@ begin
   silence := False;
 end;
 
-procedure TMainForm.SetAlarmIndicator;
+{$ENDREGION}
+
+{$REGION ' Event Procedure '}
+
+procedure TMainForm.MCRMachineLeftSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: TObject);
 begin
-  imgOP1.Visible        := FAlarmIndicator[0];
-  ImgPFP1.Visible       := FAlarmIndicator[1];
-  ImgPFS.Visible        := FAlarmIndicator[2];
-  ImgLOLP1.Visible      := FAlarmIndicator[3];
-  ImgLOLP2.Visible      := FAlarmIndicator[4];
-
-  imgOP2.Visible        := FAlarmIndicator[5];
-  ImgPFP2.Visible       := FAlarmIndicator[6];
-  ImgPFC1.Visible       := FAlarmIndicator[7];
-
-  ImgHLP1.Visible       := FAlarmIndicator[8];
-  ImgHLP2.Visible       := FAlarmIndicator[9];
-  ImgPFC2.Visible       := FAlarmIndicator[10];
-
-  ImgCFP1.Visible       := FAlarmIndicator[11];
-  ImgPowerFP1.Visible   := FAlarmIndicator[12];
-
-  ImgCFP2.Visible       := FAlarmIndicator[13];
-  ImgPowerFP2.Visible   := FAlarmIndicator[14];
-end;
-
-procedure TMainForm.SetHidroulicPump;
-begin
-  ImgStandbyPS1.Visible := FPsPump1[0];
-  ImgStartPS1.Visible   := FPsPump1[2];
-
-  ImgStandbyPS2.Visible := FPsPump2[0];
-  ImgStartPS2.Visible   := FPsPump2[2];
-
-  ImgStandbyPS3.Visible := FPsPump3[0];
-  ImgStartPS3.Visible   := FPsPump3[2];
-
-  ImgStandbySB1.Visible := FSbPump1[0];
-  ImgStartSB1.Visible   := FSbPump1[2];
-
-  ImgStandbySB2.Visible := FSbPump2[0];
-  ImgStartSB2.Visible   := FSbPump2[2];
-
-  ImgStandbySB3.Visible := FSbPump3[0];
-  ImgStartSB3.Visible   := FSbPump3[2];
-end;
-
-procedure TMainForm.SetPumpRudderIndicator;
-begin
-  ImgRP1.Visible    := FPumpRudderIndicator[0];
-  ImgSTOP1.Visible  := FPumpRudderIndicator[1];
-  ImgASP1.Visible   := FPumpRudderIndicator[2];
-
-  ImgRP2.Visible    := FPumpRudderIndicator[3];
-  ImgSTOP2.Visible  := FPumpRudderIndicator[4];
-  ImgASP2.Visible   := FPumpRudderIndicator[5];
-
-  ImgRP3.Visible    := FPumpRudderIndicator[6];
-  ImgSTOP3.Visible  := FPumpRudderIndicator[7];
-  ImgASP3.Visible   := FPumpRudderIndicator[8];
-
-  ImgRP4.Visible    := FPumpRudderIndicator[9];
-  ImgSTOP4.Visible  := FPumpRudderIndicator[10];
-  ImgASP4.Visible   := FPumpRudderIndicator[11];
-end;
-
-procedure TMainForm.SetTelegrap;
-begin
-  case TelegrapStatus of
-    tsReceive :
-    begin
-      if (IdReceive <> (vrPsTelegrap.SwitchPosition + 1))then
-        exit;
-
-      GetIdBlinkTelegrapLamp(IdReceive);
-
-      tmrTelegraph.Enabled := False;
-      TImage(Components[FIdBlink]).Visible := True;
-
-      TelegrapStatus := tsSend;
+  case PropsID of
+    epNetworkConnectedToServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + '] Connected to : ' + TTCPClient(Value).ServerAddress);
     end;
-    tsReply :
-    begin
-      GetIdBlinkTelegrapLamp(IdReceive);
-      tmrTelegraph.Enabled := True;
+    epNetworkDisconnectedFromServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + ']Disconnected from : ' + TTCPClient(Value).ServerAddress);
     end;
   end;
 end;
 
-procedure TMainForm.tmrCPPTimer(Sender: TObject);
+procedure TMainForm.MCRMachineLeftSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: string);
 begin
-  if vraCPP.Position > OrderCPP then
-  begin
-    vraCPP.Position := vraCPP.Position - 1;
-  end
-  else if vraCPP.Position < OrderCPP then
-  begin
-    vraCPP.Position := vraCPP.Position + 1;
-  end
-  else
-  begin
-    tmrCPP.Enabled := False;
-  end;
-end;
-
-procedure TMainForm.tmrMeSpeedTimer(Sender: TObject);
-begin
-  if vraMeSpeed.Position > OrderMeSpeed then
-  begin
-    vraMeSpeed.Position := vraMeSpeed.Position - 1;
-  end
-  else if vraMeSpeed.Position < OrderMeSpeed then
-  begin
-    vraMeSpeed.Position := vraMeSpeed.Position + 1;
-  end
-  else
-  begin
-    tmrMeSpeed.Enabled := False;
-  end;
-end;
-
-procedure TMainForm.tmrShaftSpeedTimer(Sender: TObject);
-begin
-  if vraShaftSpeed.Position > OrderShaftSpeed then
-  begin
-    vraShaftSpeed.Position := vraShaftSpeed.Position - 1;
-  end
-  else if vraShaftSpeed.Position < OrderShaftSpeed then
-  begin
-    vraShaftSpeed.Position := vraShaftSpeed.Position + 1;
-  end
-  else
-  begin
-    tmrShaftSpeed.Enabled := False;
-  end;
-end;
-
-procedure TMainForm.tmrTelegraphTimer(Sender: TObject);
-begin
-  if FIsBlinkState then
-  begin
-    TImage(Components[FIdBlink]).Visible := True;
-    FIsBlinkState := False;
-  end
-  else
-  begin
-    TImage(Components[FIdBlink]).Visible := False;
-    FIsBlinkState := True;
-  end;
-end;
-
-procedure TMainForm.vrPsPumpChange(Sender: TObject);
-var
-  i : Integer;
-  stateIdTemp : Integer;
-
-begin
-  case TVrRotarySwitch(Sender).Tag of
-    1:
-    begin
-      for i := 0 to 2 do
-      begin
-        case i of
-          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
-          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
-          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
-        end;
-
-        if vrPsPump1.SwitchPosition = i then
-          MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrPsPump1.SwitchPosition = i);
-      end;
-    end;
-    2:
-    begin
-      for i := 0 to 2 do
-      begin
-        case i of
-          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
-          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
-          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
-        end;
-
-        if vrPsPump2.SwitchPosition = i then
-          MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrPsPump2.SwitchPosition = i);
-      end;
-    end;
-    3:
-    begin
-      for i := 0 to 2 do
-      begin
-        case i of
-          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
-          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
-          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
-        end;
-
-        if vrPsPump3.SwitchPosition = i then
-          MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrPsPump3.SwitchPosition = i);
-      end;
-    end;
-  end;
-end;
-
-procedure TMainForm.vrSbPumpChange(Sender: TObject);
-var
-  i : Integer;
-  stateIdTemp : Integer;
-
-begin
-  case TVrRotarySwitch(Sender).Tag of
-    1:
-    begin
-      for i := 0 to 2 do
-      begin
-        case i of
-          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
-          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
-          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
-        end;
-
-        if vrSbPump1.SwitchPosition = i then
-          MCRMachineLeftSystem.sendPumpStatus(2, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrSbPump1.SwitchPosition = i);
-      end;
-    end;
-    2:
-    begin
-      for i := 0 to 2 do
-      begin
-        case i of
-          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
-          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
-          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
-        end;
-
-        if vrSbPump2.SwitchPosition = i then
-          MCRMachineLeftSystem.sendPumpStatus(2, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrSbPump2.SwitchPosition = i);
-      end;
-    end;
-    3:
-    begin
-      for i := 0 to 2 do
-      begin
-        case i of
-          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
-          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
-          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
-        end;
-
-        if vrSbPump3.SwitchPosition = i then
-          MCRMachineLeftSystem.sendPumpStatus(2, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrSbPump3.SwitchPosition = i);
-      end;
-    end;
-  end;
-end;
-
-procedure TMainForm.vrPsTelegrapChange(Sender: TObject);
-begin
-
-  case TelegrapStatus of
-    tsSend :
-    begin
-      {$REGION ' Pd saat kita mengirim pesan '}
-      GetIdBlinkTelegrapLamp(TVrRotarySwitch(Sender).SwitchPosition + 1);
-      tmrTelegraph.Enabled := True;
-
-      MCRMachineLeftSystem.sendTelegram(epBoardTelegramKiri, TVrRotarySwitch(Sender).SwitchPosition + 1, True, Ord(tsSend));
-      {$ENDREGION}
-    end;
-    tsReply :
-    begin
-      {$REGION ' Pd saat kita membalas pesan '}
-      if (IdReceive <> (vrPsTelegrap.SwitchPosition + 1))then
-        exit;
-
-      GetIdBlinkTelegrapLamp(TVrRotarySwitch(Sender).SwitchPosition + 1);
-      TImage(Components[FIdBlink]).Visible := True;
-
-      tmrTelegraph.Enabled := False;
-
-      MCRMachineLeftSystem.sendTelegram(epBoardTelegramKiri, TVrRotarySwitch(Sender).SwitchPosition + 1, True, Ord(tsReply));
-
-      {mengubah status dari penerima ke siap mengirim lagi}
-      TelegrapStatus := tsSend;
-      {$ENDREGION}
-    end;
-  end;
-end;
-
-procedure TMainForm.imgAudibleShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  imgAudible.Visible := True;
-  mpAlarm.Open;
-  mpAlarm.Stop;
-  mpAlarm.Notify := False;
-  silence := False
-end;
-
-procedure TMainForm.imgAudibleShadowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  imgAudible.Visible := False;
-end;
-
-procedure TMainForm.imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  ImgST.Visible         := True;
-  imgOP1.Visible        := True;
-  ImgPFP1.Visible       := True;
-  ImgPFS.Visible        := True;
-  ImgLOLP1.Visible      := True;
-  ImgLOLP2.Visible      := True;
-
-  imgOP2.Visible        := True;
-  ImgPFP2.Visible       := True;
-  ImgPFC1.Visible       := True;
-
-  ImgHLP1.Visible       := True;
-  ImgHLP2.Visible       := True;
-  ImgPFC2.Visible       := True;
-
-  ImgCFP1.Visible       := True;
-  ImgPowerFP1.Visible   := True;
-
-  ImgCFP2.Visible       := True;
-  ImgPowerFP2.Visible   := True;
-end;
-
-procedure TMainForm.imgSTShadowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  ImgST.Visible := False;
-  SetAlarmIndicator;
+  case PropsID of
+	  epNetworkLogRcv: begin
+	    if mmoLogReceive.Lines.Count>100 then
+	      mmoLogReceive.Lines.Delete(0);
+	    mmoLogReceive.Lines.Add(Value);
+	  end;
+	end;
 end;
 
 procedure TMainForm.MCRMachineLeftSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
@@ -880,6 +575,371 @@ begin
   end;
 end;
 
+{$ENDREGION}
+
+{$REGION ' Button Handle Procedure '}
+
+procedure TMainForm.vrPsPumpChange(Sender: TObject);
+var
+  i : Integer;
+  stateIdTemp : Integer;
+
+begin
+  case TVrRotarySwitch(Sender).Tag of
+    1:
+    begin
+      for i := 0 to 2 do
+      begin
+        case i of
+          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
+          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
+          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
+        end;
+
+        if vrPsPump1.SwitchPosition = i then
+          MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrPsPump1.SwitchPosition = i);
+      end;
+    end;
+    2:
+    begin
+      for i := 0 to 2 do
+      begin
+        case i of
+          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
+          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
+          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
+        end;
+
+        if vrPsPump2.SwitchPosition = i then
+          MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrPsPump2.SwitchPosition = i);
+      end;
+    end;
+    3:
+    begin
+      for i := 0 to 2 do
+      begin
+        case i of
+          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
+          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
+          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
+        end;
+
+        if vrPsPump3.SwitchPosition = i then
+          MCRMachineLeftSystem.sendPumpStatus(1, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrPsPump3.SwitchPosition = i);
+      end;
+    end;
+  end;
+end;
+
+procedure TMainForm.vrSbPumpChange(Sender: TObject);
+var
+  i : Integer;
+  stateIdTemp : Integer;
+
+begin
+  case TVrRotarySwitch(Sender).Tag of
+    1:
+    begin
+      for i := 0 to 2 do
+      begin
+        case i of
+          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
+          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
+          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
+        end;
+
+        if vrSbPump1.SwitchPosition = i then
+          MCRMachineLeftSystem.sendPumpStatus(2, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrSbPump1.SwitchPosition = i);
+      end;
+    end;
+    2:
+    begin
+      for i := 0 to 2 do
+      begin
+        case i of
+          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
+          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
+          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
+        end;
+
+        if vrSbPump2.SwitchPosition = i then
+          MCRMachineLeftSystem.sendPumpStatus(2, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrSbPump2.SwitchPosition = i);
+      end;
+    end;
+    3:
+    begin
+      for i := 0 to 2 do
+      begin
+        case i of
+          0 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STANDBY;
+          1 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_STOP;
+          2 : stateIdTemp := C_PUMP_CPP_HYDRAULIC_START;
+        end;
+
+        if vrSbPump3.SwitchPosition = i then
+          MCRMachineLeftSystem.sendPumpStatus(2, TVrRotarySwitch(Sender).Tag, stateIdTemp, vrSbPump3.SwitchPosition = i);
+      end;
+    end;
+  end;
+end;
+
+procedure TMainForm.vrPsTelegrapChange(Sender: TObject);
+begin
+
+  case TelegrapStatus of
+    tsSend :
+    begin
+      {$REGION ' Pd saat kita mengirim pesan '}
+      GetIdBlinkTelegrapLamp(TVrRotarySwitch(Sender).SwitchPosition + 1);
+      tmrTelegraph.Enabled := True;
+
+      MCRMachineLeftSystem.sendTelegram(epBoardTelegramKiri, TVrRotarySwitch(Sender).SwitchPosition + 1, True, Ord(tsSend));
+      {$ENDREGION}
+    end;
+    tsReply :
+    begin
+      {$REGION ' Pd saat kita membalas pesan '}
+      if (IdReceive <> (vrPsTelegrap.SwitchPosition + 1))then
+        exit;
+
+      GetIdBlinkTelegrapLamp(TVrRotarySwitch(Sender).SwitchPosition + 1);
+      TImage(Components[FIdBlink]).Visible := True;
+
+      tmrTelegraph.Enabled := False;
+
+      MCRMachineLeftSystem.sendTelegram(epBoardTelegramKiri, TVrRotarySwitch(Sender).SwitchPosition + 1, True, Ord(tsReply));
+
+      {mengubah status dari penerima ke siap mengirim lagi}
+      TelegrapStatus := tsSend;
+      {$ENDREGION}
+    end;
+  end;
+end;
+
+procedure TMainForm.img1DblClick(Sender: TObject);
+begin
+  mmoNetLogger.Visible := not mmoNetLogger.Visible;
+  mmoLogReceive.Visible := not mmoLogReceive.Visible;
+end;
+
+procedure TMainForm.imgAudibleShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  imgAudible.Visible := True;
+  mpAlarm.Open;
+  mpAlarm.Stop;
+  mpAlarm.Notify := False;
+  silence := False
+end;
+
+procedure TMainForm.imgAudibleShadowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  imgAudible.Visible := False;
+end;
+
+procedure TMainForm.imgSTShadowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  ImgST.Visible         := True;
+  imgOP1.Visible        := True;
+  ImgPFP1.Visible       := True;
+  ImgPFS.Visible        := True;
+  ImgLOLP1.Visible      := True;
+  ImgLOLP2.Visible      := True;
+
+  imgOP2.Visible        := True;
+  ImgPFP2.Visible       := True;
+  ImgPFC1.Visible       := True;
+
+  ImgHLP1.Visible       := True;
+  ImgHLP2.Visible       := True;
+  ImgPFC2.Visible       := True;
+
+  ImgCFP1.Visible       := True;
+  ImgPowerFP1.Visible   := True;
+
+  ImgCFP2.Visible       := True;
+  ImgPowerFP2.Visible   := True;
+end;
+
+procedure TMainForm.imgSTShadowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  ImgST.Visible := False;
+  SetAlarmIndicator;
+end;
+
+{$ENDREGION}
+
+{$REGION ' Additional Procedure '}
+
+procedure TMainForm.GetIdBlinkTelegrapLamp(value: Integer);
+var
+  i : Integer;
+
+begin
+  for i := 0 to ComponentCount - 1 do
+  begin
+    if Components[i] is TImage then
+    begin
+      if TImage(Components[i]).Hint <> 'Telegrap' then
+        Continue;
+
+      TImage(Components[i]).Visible := False;
+
+      if (TImage(Components[i]).Tag = value ) then
+      begin
+        FIdBlink := i;
+      end;
+    end;
+  end;
+end;
+
+procedure TMainForm.SetAlarmIndicator;
+begin
+  imgOP1.Visible        := FAlarmIndicator[0];
+  ImgPFP1.Visible       := FAlarmIndicator[1];
+  ImgPFS.Visible        := FAlarmIndicator[2];
+  ImgLOLP1.Visible      := FAlarmIndicator[3];
+  ImgLOLP2.Visible      := FAlarmIndicator[4];
+
+  imgOP2.Visible        := FAlarmIndicator[5];
+  ImgPFP2.Visible       := FAlarmIndicator[6];
+  ImgPFC1.Visible       := FAlarmIndicator[7];
+
+  ImgHLP1.Visible       := FAlarmIndicator[8];
+  ImgHLP2.Visible       := FAlarmIndicator[9];
+  ImgPFC2.Visible       := FAlarmIndicator[10];
+
+  ImgCFP1.Visible       := FAlarmIndicator[11];
+  ImgPowerFP1.Visible   := FAlarmIndicator[12];
+
+  ImgCFP2.Visible       := FAlarmIndicator[13];
+  ImgPowerFP2.Visible   := FAlarmIndicator[14];
+end;
+
+procedure TMainForm.SetHidroulicPump;
+begin
+  ImgStandbyPS1.Visible := FPsPump1[0];
+  ImgStartPS1.Visible   := FPsPump1[2];
+
+  ImgStandbyPS2.Visible := FPsPump2[0];
+  ImgStartPS2.Visible   := FPsPump2[2];
+
+  ImgStandbyPS3.Visible := FPsPump3[0];
+  ImgStartPS3.Visible   := FPsPump3[2];
+
+  ImgStandbySB1.Visible := FSbPump1[0];
+  ImgStartSB1.Visible   := FSbPump1[2];
+
+  ImgStandbySB2.Visible := FSbPump2[0];
+  ImgStartSB2.Visible   := FSbPump2[2];
+
+  ImgStandbySB3.Visible := FSbPump3[0];
+  ImgStartSB3.Visible   := FSbPump3[2];
+end;
+
+procedure TMainForm.SetPumpRudderIndicator;
+begin
+  ImgRP1.Visible    := FPumpRudderIndicator[0];
+  ImgSTOP1.Visible  := FPumpRudderIndicator[1];
+  ImgASP1.Visible   := FPumpRudderIndicator[2];
+
+  ImgRP2.Visible    := FPumpRudderIndicator[3];
+  ImgSTOP2.Visible  := FPumpRudderIndicator[4];
+  ImgASP2.Visible   := FPumpRudderIndicator[5];
+
+  ImgRP3.Visible    := FPumpRudderIndicator[6];
+  ImgSTOP3.Visible  := FPumpRudderIndicator[7];
+  ImgASP3.Visible   := FPumpRudderIndicator[8];
+
+  ImgRP4.Visible    := FPumpRudderIndicator[9];
+  ImgSTOP4.Visible  := FPumpRudderIndicator[10];
+  ImgASP4.Visible   := FPumpRudderIndicator[11];
+end;
+
+procedure TMainForm.SetTelegrap;
+begin
+  case TelegrapStatus of
+    tsReceive :
+    begin
+      if (IdReceive <> (vrPsTelegrap.SwitchPosition + 1))then
+        exit;
+
+      GetIdBlinkTelegrapLamp(IdReceive);
+
+      tmrTelegraph.Enabled := False;
+      TImage(Components[FIdBlink]).Visible := True;
+
+      TelegrapStatus := tsSend;
+    end;
+    tsReply :
+    begin
+      GetIdBlinkTelegrapLamp(IdReceive);
+      tmrTelegraph.Enabled := True;
+    end;
+  end;
+end;
+
+procedure TMainForm.tmrCPPTimer(Sender: TObject);
+begin
+  if vraCPP.Position > OrderCPP then
+  begin
+    vraCPP.Position := vraCPP.Position - 1;
+  end
+  else if vraCPP.Position < OrderCPP then
+  begin
+    vraCPP.Position := vraCPP.Position + 1;
+  end
+  else
+  begin
+    tmrCPP.Enabled := False;
+  end;
+end;
+
+procedure TMainForm.tmrMeSpeedTimer(Sender: TObject);
+begin
+  if vraMeSpeed.Position > OrderMeSpeed then
+  begin
+    vraMeSpeed.Position := vraMeSpeed.Position - 1;
+  end
+  else if vraMeSpeed.Position < OrderMeSpeed then
+  begin
+    vraMeSpeed.Position := vraMeSpeed.Position + 1;
+  end
+  else
+  begin
+    tmrMeSpeed.Enabled := False;
+  end;
+end;
+
+procedure TMainForm.tmrShaftSpeedTimer(Sender: TObject);
+begin
+  if vraShaftSpeed.Position > OrderShaftSpeed then
+  begin
+    vraShaftSpeed.Position := vraShaftSpeed.Position - 1;
+  end
+  else if vraShaftSpeed.Position < OrderShaftSpeed then
+  begin
+    vraShaftSpeed.Position := vraShaftSpeed.Position + 1;
+  end
+  else
+  begin
+    tmrShaftSpeed.Enabled := False;
+  end;
+end;
+
+procedure TMainForm.tmrTelegraphTimer(Sender: TObject);
+begin
+  if FIsBlinkState then
+  begin
+    TImage(Components[FIdBlink]).Visible := True;
+    FIsBlinkState := False;
+  end
+  else
+  begin
+    TImage(Components[FIdBlink]).Visible := False;
+    FIsBlinkState := True;
+  end;
+end;
+
 procedure TMainForm.mpAlarmNotify(Sender: TObject);
 begin
   if (mpAlarm.NotifyValue = nvSuccessful) and silence then
@@ -888,5 +948,7 @@ begin
     mpAlarm.Notify := True;
   end;
 end;
+
+{$ENDREGION}
 
 end.

@@ -72632,16 +72632,4 @@ object frmGeneratorPanel: TfrmGeneratorPanel
       end
     end
   end
-  object tmrFrequency: TTimer
-    Interval = 50
-    OnTimer = tmrFrequencyTimer
-    Left = 452
-    Top = 212
-  end
-  object tmrAmpere: TTimer
-    Interval = 50
-    OnTimer = tmrAmpereTimer
-    Left = 460
-    Top = 494
-  end
 end

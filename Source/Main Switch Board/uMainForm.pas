@@ -44,6 +44,8 @@ uses
 
 {$R *.dfm}
 
+{$REGION ' Form Procedure '}
+
 procedure TfrmMainForm.FormCreate(Sender: TObject);
 begin
   Setting   := TSetting.Create;
@@ -59,7 +61,7 @@ begin
 
   with MainSwitchBoardSystem.Network.Listeners.Add('MAINSWITCHBOARDNETWORK') as TPropertyEventListener do
     OnPropertyStringChange:= MainSwitchBoardSystemEvent;
-    with MainSwitchBoardSystem.Network.Listeners.Add('MAINSWITCHBOARDNETWORK') as TPropertyEventListener do
+  with MainSwitchBoardSystem.Network.Listeners.Add('MAINSWITCHBOARDNETWORK') as TPropertyEventListener do
     OnPropertyObjectChange:= MainSwitchBoardSystemEvent;
 
 
@@ -104,6 +106,10 @@ begin
     frmShorePanel.Show;
   end;
 end;
+
+{$ENDREGION}
+
+{$REGION ' Event Procedure '}
 
 procedure TfrmMainForm.MainSwitchBoardSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Integer);
 begin
@@ -256,7 +262,6 @@ begin
       if Assigned(frmGeneratorPanel) then
       begin
         frmGeneratorPanel.OrderFrequency := Value;
-        frmGeneratorPanel.tmrFrequency.Enabled := True;
       end;
     end;
     epPMSVoltage:
@@ -272,7 +277,6 @@ begin
       if Assigned(frmGeneratorPanel) then
       begin
         frmGeneratorPanel.OrderAmpere := Value;
-        frmGeneratorPanel.tmrAmpere.Enabled := True;
       end;
 
       if Assigned(frmEmergencyPanel) then
@@ -302,8 +306,7 @@ begin
 	end;
 end;
 
-procedure TfrmMainForm.MainSwitchBoardSystemEvent(Sender: TObject;
-  PropsID: E_PropsID; Value: TObject);
+procedure TfrmMainForm.MainSwitchBoardSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: TObject);
 begin
   case PropsID of
     epNetworkConnectedToServer: begin
@@ -318,5 +321,7 @@ begin
     end;
   end;
 end;
+
+{$ENDREGION}
 
 end.

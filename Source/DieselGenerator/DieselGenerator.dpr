@@ -20,7 +20,10 @@ uses
   uFunction in '..\common\uFunction.pas',
   uListener in '..\common\uListener.pas',
   uSetting in '..\common\uSetting.pas',
-  uNetworkManagerTimer in '..\network\uNetworkManagerTimer.pas';
+  uNetworkManagerTimer in '..\network\uNetworkManagerTimer.pas',
+  uConsumption in '..\engines\entity\uConsumption.pas',
+  uEntity in '..\engines\entity\uEntity.pas',
+  uGenerator in '..\engines\entity\uGenerator.pas';
 
 {$R *.res}
 

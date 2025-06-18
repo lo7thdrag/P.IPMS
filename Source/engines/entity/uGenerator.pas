@@ -594,12 +594,12 @@ begin
   begin
     RunHourState := True;
 
-//    FRunningHourTemp := FRunningHourTemp + 1;
-//    if FRunningHourTemp > 25 then
-//    begin
-//      FRunningHourTemp := 0;
-//      RunningHour := RunningHour + 1;
-//    end;
+    FRunningHourTemp := FRunningHourTemp + 1;
+    if FRunningHourTemp > 25 then
+    begin
+      FRunningHourTemp := 0;
+      FRunningHour := FRunningHour + 1;
+    end;
 
     if (not GeneratorSupplied) then
     begin
