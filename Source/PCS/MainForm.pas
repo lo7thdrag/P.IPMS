@@ -321,8 +321,8 @@ begin
     frm_GeneralPanel.Show;
     frmPCSAlarm := TfrmPCSAlarm.Create(Self);
     frm_GeneralPanel.FAlarmON := True;
-//    ShowCursor(False);
-//    Height := 0;
+    ShowCursor(False);
+    Height := 0;
     Top := 1150;
   end
   else
@@ -330,7 +330,7 @@ begin
   begin
     frmPSPanel.Show;
     frmSBPanel.Show;
-//    ShowCursor(False);
+    ShowCursor(False);
   end
   else
   if PCSSystem.idFormPCS = 3 then

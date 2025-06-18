@@ -70,8 +70,7 @@ begin
   if Assigned(client) then
   with  client do
   begin
-      RegisterProcedure(C_FIRE_ACS_COMMAND, Alarm.NetEvent_ACSCommonCmd,
-            SizeOf(R_Common_ACS_Command));
+      RegisterProcedure(C_FIRE_ACS_COMMAND, Alarm.NetEvent_ACSCommonCmd, SizeOf(R_Common_ACS_Command));
 
       RegisterProcedure(C_INSTRUCTOR_COMMAND, EventManager.NetEventInstructorCommonCmd, SizeOf(R_Common_ACS_Command));
   end;

@@ -83,6 +83,9 @@ type
     tmrCPP: TTimer;
     pnlSparator: TPanel;
     mpAlarm: TMediaPlayer;
+    mmoNetLogger: TMemo;
+    mmoLogReceive: TMemo;
+    btnimg1: TImage;
     procedure tmrTelegraphTimer(Sender: TObject);
     procedure vrSbTelegrapChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -99,6 +102,7 @@ type
     procedure tmrCPPTimer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure mpAlarmNotify(Sender: TObject);
+    procedure btnimg1DblClick(Sender: TObject);
 
   private
     FIsBlinkState : Boolean;
@@ -108,6 +112,8 @@ type
     procedure MCRMachineRightSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure MCRMachineRightSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
     procedure MCRMachineRightSystemEvent(Sender : TObject; PropsID : E_PropsID; Value : Double); overload;
+    procedure MCRMachineRightSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : string);overload;
+    procedure MCRMachineRightSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : TObject);overload;
 
   public
     silence : Boolean;
@@ -134,7 +140,7 @@ var
 implementation
 
 uses
-  uMCRMachineRightSystem;
+  uTCPClient, uMCRMachineRightSystem;
 
 {$R *.dfm}
 
@@ -151,6 +157,12 @@ begin
       EnableComposited(TWinControl(WinControl.Controls[i]));
 end;
 
+procedure TMainForm.btnimg1DblClick(Sender: TObject);
+begin
+  mmoNetLogger.Visible := not mmoNetLogger.Visible;
+  mmoLogReceive.Visible := not mmoLogReceive.Visible;
+end;
+
 procedure TMainForm.FormCreate(Sender: TObject);
 var
   i : Integer;
@@ -162,6 +174,12 @@ begin
     OnPropertyIntChange := MCRMachineRightSystemEvent;
     OnPropertyBoolChange := MCRMachineRightSystemEvent;
     OnPropertyDblChange := MCRMachineRightSystemEvent;
+  end;
+
+  with MCRMachineRightSystem.Network.Listeners.Add('MCRMACHINELEFTNETWORK') as TPropertyEventListener do
+  begin
+    OnPropertyStringChange:= MCRMachineRightSystemEvent;
+    OnPropertyObjectChange:= MCRMachineRightSystemEvent;
   end;
 
   {$REGION ' Set Alarm Indicator '}
@@ -293,6 +311,33 @@ end;
 procedure TMainForm.MCRMachineRightSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
 
+end;
+
+procedure TMainForm.MCRMachineRightSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: TObject);
+begin
+  case PropsID of
+    epNetworkConnectedToServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + '] Connected to : ' + TTCPClient(Value).ServerAddress);
+    end;
+    epNetworkDisconnectedFromServer: begin
+      if mmoNetLogger.Lines.Count>100 then
+        mmoNetLogger.Lines.Delete(0);
+      mmoNetLogger.Lines.Add('[' + TTCPClient(Value).SocketIdentifier + ']Disconnected from : ' + TTCPClient(Value).ServerAddress);
+    end;
+  end;
+end;
+
+procedure TMainForm.MCRMachineRightSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: string);
+begin
+  case PropsID of
+	  epNetworkLogRcv: begin
+	    if mmoLogReceive.Lines.Count>100 then
+	      mmoLogReceive.Lines.Delete(0);
+	    mmoLogReceive.Lines.Add(Value);
+	  end;
+	end;
 end;
 
 procedure TMainForm.MCRMachineRightSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);

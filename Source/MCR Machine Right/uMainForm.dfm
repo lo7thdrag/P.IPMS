@@ -26,6 +26,13 @@ object MainForm: TMainForm
     Color = 3749426
     ParentBackground = False
     TabOrder = 0
+    object btnimg1: TImage
+      Left = 1022
+      Top = 1108
+      Width = 46
+      Height = 43
+      OnDblClick = btnimg1DblClick
+    end
     object PanelSpedometer: TPanel
       Left = 16
       Top = 832
@@ -6176,7 +6183,7 @@ object MainForm: TMainForm
         Width = 250
         Height = 250
         MaxValue = 100.000000000000000000
-        Position = 100.000000000000000000
+        Position = 50.000000000000000000
         Decimals = 0
         Angle = 42
         Spacing = 10
@@ -6239,7 +6246,7 @@ object MainForm: TMainForm
       object Label16: TLabel
         Left = 134
         Top = 48
-        Width = 24
+        Width = 8
         Height = 16
         Caption = '0'
         Font.Charset = DEFAULT_CHARSET
@@ -6305,7 +6312,6 @@ object MainForm: TMainForm
         Width = 250
         Height = 250
         MaxValue = 1250.000000000000000000
-        Position = 1200.000000000000000000
         Decimals = 0
         Angle = 42
         Spacing = 10
@@ -6380,7 +6386,7 @@ object MainForm: TMainForm
       object Label1: TLabel
         Left = 78
         Top = 185
-        Width = 30
+        Width = 8
         Height = 16
         Caption = '0'
         Font.Charset = DEFAULT_CHARSET
@@ -6459,7 +6465,6 @@ object MainForm: TMainForm
         Width = 250
         Height = 250
         MaxValue = 280.000000000000000000
-        Position = 250.000000000000000000
         Decimals = 0
         Angle = 42
         Spacing = 10
@@ -6496,7 +6501,7 @@ object MainForm: TMainForm
       object Label9: TLabel
         Left = 78
         Top = 186
-        Width = 23
+        Width = 8
         Height = 16
         Caption = '0'
         Font.Charset = DEFAULT_CHARSET
@@ -86470,7 +86475,7 @@ object MainForm: TMainForm
           '.'
           '.')
         ShowLabel = False
-        SwitchPosition = 5
+        SwitchPosition = 6
         SwitchAngleStart = 35
         SwitchAngleEnd = 325
         WinchColor = clWhite
@@ -86509,6 +86514,26 @@ object MainForm: TMainForm
       ParentDoubleBuffered = False
       TabOrder = 7
       OnNotify = mpAlarmNotify
+    end
+    object mmoNetLogger: TMemo
+      Left = 322
+      Top = 729
+      Width = 361
+      Height = 89
+      ReadOnly = True
+      ScrollBars = ssBoth
+      TabOrder = 8
+      WordWrap = False
+    end
+    object mmoLogReceive: TMemo
+      Left = 322
+      Top = 824
+      Width = 361
+      Height = 89
+      ReadOnly = True
+      ScrollBars = ssBoth
+      TabOrder = 9
+      WordWrap = False
     end
   end
   object tmrTelegraph: TTimer

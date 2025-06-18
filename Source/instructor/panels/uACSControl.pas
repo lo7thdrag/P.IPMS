@@ -8,12 +8,8 @@ uses
 
 type
   TfrmACSControl = class(TForm)
-    btnApply: TButton;
-    btnReset: TButton;
     pnlAlarm: TPanel;
     pnlFault: TPanel;
-    lvAlarmStatus: TListView;
-    btnAck: TButton;
     pmlLocation: TPanel;
     Label1: TLabel;
     Panel2: TPanel;
@@ -37,6 +33,13 @@ type
     mmoFault: TMemo;
     Label2: TLabel;
     Panel4: TPanel;
+    pnl1: TPanel;
+    btnApply: TButton;
+    btnReset: TButton;
+    pnl2: TPanel;
+    pnl3: TPanel;
+    lvAlarmStatus: TListView;
+    btnAck: TButton;
     procedure cbbLocationsSelect(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure cbbAlarmSetSelect(Sender: TObject);
