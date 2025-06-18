@@ -58,10 +58,6 @@ object MainForm: TMainForm
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 336
-    ExplicitTop = 288
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object imgBackground: TImage
       Left = 0
       Top = 0

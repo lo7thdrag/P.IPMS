@@ -528,6 +528,9 @@ end;
 
 procedure TMainForm.tmrRunningHoursTimer(Sender: TObject);
 begin
+  if DieselGeneratorSystem.Freezed then
+    Exit;
+
   FRunningHourTemp := FRunningHourTemp + 1;
   if FRunningHourTemp > 25 then
   begin
