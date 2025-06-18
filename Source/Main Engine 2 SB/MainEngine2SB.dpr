@@ -36,7 +36,10 @@ uses
   uTCPServer in '..\network\uTCPServer.pas',
   ufrmPCOTFilteringDeviations in 'HMI Safeties\ufrmPCOTFilteringDeviations.pas' {frmPCOTFilteringDeviations},
   ufrmPLCNetwork in 'HMI Safeties\ufrmPLCNetwork.pas' {frmPLCNetwork},
-  ufrmSafetiesStop in 'HMI Safeties\ufrmSafetiesStop.pas' {frmSafetiesStop};
+  ufrmSafetiesStop in 'HMI Safeties\ufrmSafetiesStop.pas' {frmSafetiesStop},
+  ufrmAlarms in 'HMI Safeties\ufrmAlarms.pas' {frmAlarms},
+  ufrmPCOTValueHistory in 'HMI Safeties\ufrmPCOTValueHistory.pas' {frmPCOTValueHistory},
+  ufrmCurves in 'HMI Safeties\ufrmCurves.pas' {frmCurves};
 
 {$R *.res}
 
@@ -44,13 +47,11 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
 
-  Setting   := TSetting.Create;
-  MainEngine2System := TMainEngine2System.Create;
-
   Application.CreateForm(TfrmMainForm, frmMainForm);
   Application.CreateForm(TfrmSetofPressureGaugesME2, frmSetofPressureGaugesME2);
-  Application.CreateForm(TfrmMainForm, frmMainForm);
-  Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmAlarms, frmAlarms);
+  Application.CreateForm(TfrmPCOTValueHistory, frmPCOTValueHistory);
+  Application.CreateForm(TfrmCurves, frmCurves);
   frmSetofPressureGaugesME2.Show;
   Application.CreateForm(TfrmSignalingLightME2, frmSignalingLightME2);
   frmSignalingLightME2.Show;

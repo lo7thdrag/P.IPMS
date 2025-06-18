@@ -13089,7 +13089,7 @@ object frmAlarms: TfrmAlarms
       object lblTime: TLabel
         Left = 49
         Top = 12
-        Width = 248
+        Width = 233
         Height = 29
         Caption = '27/03/2025 9:16:01 AMPM'
         Color = 11313826

@@ -195,6 +195,18 @@
             <Form>frmMenu</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="HMI Safeties\ufrmAlarms.pas">
+            <Form>frmAlarms</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="HMI Safeties\ufrmPCOTValueHistory.pas">
+            <Form>frmPCOTValueHistory</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="HMI Safeties\ufrmCurves.pas">
+            <Form>frmCurves</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

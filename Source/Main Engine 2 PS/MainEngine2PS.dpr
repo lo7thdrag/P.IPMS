@@ -36,7 +36,10 @@ uses
   uMainEngine2Network in 'uMainEngine2Network.pas',
   uMainEngine2System in 'uMainEngine2System.pas',
   uMainForm in 'uMainForm.pas' {frmMainForm},
-  ufrmMenu in 'ufrmMenu.pas' {frmMenu};
+  ufrmMenu in 'ufrmMenu.pas' {frmMenu},
+  ufrmAlarms in 'HMI Safeties\ufrmAlarms.pas' {frmAlarms},
+  ufrmPCOTValueHistory in 'HMI Safeties\ufrmPCOTValueHistory.pas' {frmPCOTValueHistory},
+  ufrmCurves in 'HMI Safeties\ufrmCurves.pas' {frmCurves};
 
 {$R *.res}
 
@@ -44,13 +47,11 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
 
-  Setting   := TSetting.Create;
-  MainEngine2System := TMainEngine2System.Create;
-
   Application.CreateForm(TfrmMainForm, frmMainForm);
   Application.CreateForm(TfrmSetofPressureGaugesME2, frmSetofPressureGaugesME2);
-  Application.CreateForm(TfrmMainForm, frmMainForm);
-  Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmAlarms, frmAlarms);
+  Application.CreateForm(TfrmPCOTValueHistory, frmPCOTValueHistory);
+  Application.CreateForm(TfrmCurves, frmCurves);
   frmSetofPressureGaugesME2.Show;
   Application.CreateForm(TfrmSignalingLightME2, frmSignalingLightME2);
   frmSignalingLightME2.Show;
@@ -70,6 +71,6 @@ begin
   Application.CreateForm(TfrmLineBExhaustGasTemperature, frmLineBExhaustGasTemperature);
   Application.CreateForm(TfrmSafetiesStop, frmSafetiesStop);
   Application.CreateForm(TfrmCompressedAirCircuit, frmCompressedAirCircuit);
-  Application.CreateForm(TfrmFreeze, frmFreeze);
+//  Application.CreateForm(TfrmFreeze, frmFreeze);
   Application.Run;
 end.
