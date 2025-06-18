@@ -128,7 +128,7 @@ begin
     OnPropertyBoolChange := DieselGeneratorSystemEvent;
   end;
 
-  with DieselGeneratorSystem.Network.Listeners.Add('MAINSWITCHBOARDNETWORK') as TPropertyEventListener do
+  with DieselGeneratorSystem.Network.Listeners.Add('DIESELGENERATORNETWORK') as TPropertyEventListener do
   begin
     OnPropertyStringChange:= DieselGeneratorSystemEvent;
     OnPropertyObjectChange:= DieselGeneratorSystemEvent;

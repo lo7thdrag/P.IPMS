@@ -40195,7 +40195,7 @@ object frmTelegram: TfrmTelegram
           '.'
           '.')
         ShowLabel = False
-        SwitchPosition = 5
+        SwitchPosition = 6
         SwitchAngleStart = 35
         SwitchAngleEnd = 325
         WinchColor = clWhite
@@ -80386,7 +80386,7 @@ object frmTelegram: TfrmTelegram
           '.'
           '.')
         ShowLabel = False
-        SwitchPosition = 5
+        SwitchPosition = 6
         SwitchAngleStart = 35
         SwitchAngleEnd = 325
         WinchColor = clWhite
