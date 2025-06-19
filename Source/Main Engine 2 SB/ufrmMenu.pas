@@ -74,6 +74,7 @@ type
     procedure MenuClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnAlarmsClick(Sender: TObject);
+    procedure btnPCOTValuesHistoryClick(Sender: TObject);
     procedure btnCurvesClick(Sender: TObject);
   private
 
@@ -89,8 +90,8 @@ implementation
 uses
   ufrmGeneralScreen, ufrmClutchingAssitance, ufrmPLCNetwork, ufrmLubOilCircuit, ufrmFuelOilCircuit, ufrmFWSeaWaterCircuit,
   ufrmAirGasCircuit, ufrmEngineBearingTemperature, ufrmCrankinOilTemperature, ufrmPCOTFilteringDeviations, ufrmLineAExhaustGasTemperature,
-  ufrmLineBExhaustGasTemperature, ufrmSafetiesStop, ufrmCompressedAirCircuit, ufrmSetofPressureGaugesME2, ufrmSignalingLightME2,
-  ufrmAlarms, uMainEngine2System;
+  ufrmLineBExhaustGasTemperature, ufrmSafetiesStop, ufrmCompressedAirCircuit, ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, ufrmAlarms,
+  ufrmPCOTValueHistory, ufrmCurves, uMainEngine2System;
 
 {$R *.dfm}
 
@@ -122,7 +123,13 @@ end;
 
 procedure TfrmMenu.btnCurvesClick(Sender: TObject);
 begin
-  frmAlarms.Show;
+  frmCurves.Show;
+  Self.Hide;
+end;
+
+procedure TfrmMenu.btnPCOTValuesHistoryClick(Sender: TObject);
+begin
+  frmPCOTValueHistory.Show;
   Self.Hide;
 end;
 

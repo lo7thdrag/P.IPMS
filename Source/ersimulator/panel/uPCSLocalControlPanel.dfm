@@ -3420,7 +3420,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnEmergencStopClick
             Color = clGreen
           end
-          object btnBypassP2P4Open: TSpeedButtonImage
+          object btnBypassP2P4OpenPS: TSpeedButtonImage
             Left = 25
             Top = 176
             Width = 66
@@ -3431,7 +3431,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnByPassOpenClick
             Color = clGreen
           end
-          object btnP2P4Closed: TSpeedButtonImage
+          object btnP2P4ClosedPS: TSpeedButtonImage
             Left = 110
             Top = 176
             Width = 66
@@ -14487,10 +14487,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
     object tsSB: TTabSheet
       Caption = 'LCP Startboard Side'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pnlLCPSB: TPanel
         Left = 0
         Top = 0
@@ -18677,7 +18673,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnEmergencStopClick
             Color = clGreen
           end
-          object btnByPassOpen: TSpeedButtonImage
+          object btnByPassOpenSB: TSpeedButtonImage
             Tag = 1
             Left = 25
             Top = 176
@@ -18689,7 +18685,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnByPassOpenClick
             Color = clGreen
           end
-          object btnByPassClosed: TSpeedButtonImage
+          object btnByPassClosedSB: TSpeedButtonImage
             Tag = 1
             Left = 110
             Top = 176

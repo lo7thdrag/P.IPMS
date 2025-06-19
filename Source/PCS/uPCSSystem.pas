@@ -117,6 +117,8 @@ type
       throttleTest, alarmAcceptControlPS, alarmAcceptControlSB,
       ControlRemotePS, ControlRemoteSB: Boolean;
 
+      FPrelubInProgressPS, FPrelubInProgressSB : Boolean;
+
 
   end;
 
@@ -729,6 +731,21 @@ begin
       begin
         FClutchAllowedSB := rec.ValueBool;
         FLIstener.TriggerEvents(Self,epPCSGBClutchAllowedSB,rec.ValueBool);
+      end;
+    end;
+
+    epPCSMEPrelubeInProgress :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FPrelubInProgressPS := rec.ValueBool;
+        FLIstener.TriggerEvents(Self,epPCSMEPrelubeInProgressPS,rec.ValueBool);
+      end
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FPrelubInProgressSB := rec.ValueBool;
+        FLIstener.TriggerEvents(Self,epPCSMEPrelubeInProgressSB,rec.ValueBool);
       end;
     end;
 

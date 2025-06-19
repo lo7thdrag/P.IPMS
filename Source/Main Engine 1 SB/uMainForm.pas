@@ -230,8 +230,8 @@ begin
         frmPMSDieselEngineSafetiesME1.imgLedGreenRunRGM.Visible  := False;
         frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible   := False;
         frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible   := False;
-        frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible   := True;
-        frmPMSDieselEngineSafetiesME1.imgLedGreenTH4SE.Visible   := True;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible   := False;
+        frmPMSDieselEngineSafetiesME1.imgLedGreenTH4SE.Visible   := False;
         frmPMSDieselEngineSafetiesME1.imgLedGreen1AE24.Visible   := False;
         frmPMSDieselEngineSafetiesME1.imgLedGreen1AE15.Visible   := False;
         frmPMSDieselEngineSafetiesME1.imgLedGreen1AE9.Visible    := False;
@@ -266,6 +266,8 @@ begin
     begin
       frmSignalingLightME1.imgEmergencyStopME1.Visible := True;
       frmSignalingLightME1.imgSafetiesStopOverbiddenME1.Visible := True;
+
+      frmPMSDieselEngineSafetiesME1.imgledRedAlarmChannel1ICM1.Visible := True;
     end;
     epPCSMEAirValve :
     begin
@@ -308,17 +310,23 @@ begin
     end;
     epPCSMESafetyShutdown :
     begin
-      if Value then
-        frmSignalingLightME1.imgSafetyStopME1.Visible := True
-      else
-        frmSignalingLightME1.imgSafetyStopME1.Visible := False
+      if Assigned(frmSignalingLightME1) then
+      begin
+        if Value then
+          frmSignalingLightME1.imgSafetyStopME1.Visible := True
+        else
+          frmSignalingLightME1.imgSafetyStopME1.Visible := False
+      end;
     end;
     epPCSMEManHandleAtStop :
     begin
-      if Value then
-        frmSignalingLightME1.imgManualHandletoStopME1.Visible := True
-      else
-        frmSignalingLightME1.imgManualHandletoStopME1.Visible := False
+      if Assigned(frmSignalingLightME1) then
+      begin
+        if Value then
+          frmSignalingLightME1.imgManualHandletoStopME1.Visible := True
+        else
+          frmSignalingLightME1.imgManualHandletoStopME1.Visible := False
+      end;
     end;
     epPCSMESTCSequenceFail :
     begin
@@ -332,6 +340,81 @@ begin
       FIsClutchBlink := Value;
       FIsDeclutchBlink := not Value;
       tmrBlinkTimer.Enabled := FIsClutchBlink or FIsDeclutchBlink;
+    end;
+    epPCSMEOverspeedAlarm :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+      begin
+        if Value then
+          frmPMSDieselEngineSafetiesME1.imgledRedAlarmChannel2ICM1.Visible := True
+        else
+          frmPMSDieselEngineSafetiesME1.imgledRedAlarmChannel2ICM1.Visible := False;
+
+        if Value > 1176 then
+          frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := True
+        else
+          frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := False
+      end;
+    end;
+    epPCSMELOPressVeryLow :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+      begin
+        if Value then
+          frmPMSDieselEngineSafetiesME1.imgRedAlarmChannel1ICM3.Visible := True
+        else
+          frmPMSDieselEngineSafetiesME1.imgRedAlarmChannel1ICM3.Visible := False
+      end;
+    end;
+    epPCSMERedGearSafetyStop :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+      begin
+        if Value then
+          frmPMSDieselEngineSafetiesME1.imgRedAlarmChannel3ICM3.Visible := True
+        else
+          frmPMSDieselEngineSafetiesME1.imgRedAlarmChannel3ICM3.Visible := False
+      end;
+    end;
+    epPCSMEFwHtExpTkLevelVeryLow :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+      begin
+        if Value then
+          frmPMSDieselEngineSafetiesME1.imgRedAlarmChannel2ICM2.Visible := True
+        else
+          frmPMSDieselEngineSafetiesME1.imgRedAlarmChannel2ICM2.Visible := False
+      end;
+    end;
+    epPCSMEFwTempVeryHigh :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+      begin
+        if Value then
+          frmPMSDieselEngineSafetiesME1.imgRedAlarmChannel2ICM3.Visible := True
+        else
+          frmPMSDieselEngineSafetiesME1.imgRedAlarmChannel2ICM3.Visible := False
+      end;
+    end;
+    epPCSMEConRodBearingTempVeryHigh :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+      begin
+        if Value then
+          frmPMSDieselEngineSafetiesME1.imgRedAlarmChannel2ICM4.Visible := True
+        else
+          frmPMSDieselEngineSafetiesME1.imgRedAlarmChannel2ICM4.Visible := False
+      end;
+    end;
+    epPCSMEOilMistDetAlarm :
+    begin
+      if Assigned(frmPMSDieselEngineSafetiesME1) then
+      begin
+        if Value then
+          frmPMSDieselEngineSafetiesME1.imgledRedAlarmChannel3ICM3.Visible := True
+        else
+          frmPMSDieselEngineSafetiesME1.imgledRedAlarmChannel3ICM3.Visible := False
+      end;
     end;
   end;
   tmrBlinkTimer.Enabled := FIsStartBlink or FIsStopBlink or FIsClutchBlink or FIsDeclutchBlink;

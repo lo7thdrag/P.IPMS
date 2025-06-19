@@ -26,8 +26,8 @@ type
     btnDeclutchPS: TSpeedButtonImage;
     btnSafetiesStopPS: TSpeedButtonImage;
     btnEmergencStopPS: TSpeedButtonImage;
-    btnBypassP2P4Open: TSpeedButtonImage;
-    btnP2P4Closed: TSpeedButtonImage;
+    btnBypassP2P4OpenPS: TSpeedButtonImage;
+    btnP2P4ClosedPS: TSpeedButtonImage;
     imgPrelubeON_PS: TImage;
     imgPrelubeOff_PS: TImage;
     vrtryswtchPrelubePS: TVrRotarySwitch;
@@ -111,8 +111,8 @@ type
     btnDeclutchSB: TSpeedButtonImage;
     btnSafetiesStopSB: TSpeedButtonImage;
     btnEmergencStopSB: TSpeedButtonImage;
-    btnByPassOpen: TSpeedButtonImage;
-    btnByPassClosed: TSpeedButtonImage;
+    btnByPassOpenSB: TSpeedButtonImage;
+    btnByPassClosedSB: TSpeedButtonImage;
     lbl53: TLabel;
     lbl54: TLabel;
     lbl55: TLabel;
@@ -1665,6 +1665,7 @@ begin
     if vrtryswtchSpeedPS.SwitchPosition = 0 then
     begin
       main_engine_PS.DecreaseSpeed := True;
+      main_engine_PS.IncreaseSpeed := False;
     end
     else if vrtryswtchSpeedPS.SwitchPosition = 1 then
     begin
@@ -1673,6 +1674,7 @@ begin
     end
     else if vrtryswtchSpeedPS.SwitchPosition = 2 then
     begin
+      main_engine_PS.DecreaseSpeed := False;
       main_engine_PS.IncreaseSpeed := True;
     end;
   end
@@ -1681,6 +1683,7 @@ begin
     if vrtryswtchSpeedSB.SwitchPosition = 0 then
     begin
       main_engine_SB.DecreaseSpeed := True;
+      main_engine_SB.IncreaseSpeed := False;
     end
     else if vrtryswtchSpeedSB.SwitchPosition = 1 then
     begin
@@ -1689,6 +1692,7 @@ begin
     end
     else if vrtryswtchSpeedSB.SwitchPosition = 2 then
     begin
+      main_engine_SB.DecreaseSpeed := False;
       main_engine_SB.IncreaseSpeed := True;
     end;
   end;

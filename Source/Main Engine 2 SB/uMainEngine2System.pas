@@ -398,10 +398,10 @@ begin
 
     epPCSGBPCSClutchInterlock :
     begin
-      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
-      begin
-        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
-      end;
+     if rec.PortStaboardID = C_PCS_GB_STARBOARD then
+     begin
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+     end;
     end;
      // Line Exhaust A
     epPCSMETempExhCylA1 :

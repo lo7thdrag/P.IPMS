@@ -373,6 +373,55 @@ begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
       end;
     end;
+    epPCSMEOverspeedAlarm :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMELOPressVeryLow :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMERedGearSafetyStop :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEFwHtExpTkLevelVeryLow :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEFwTempVeryHigh :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEConRodBearingTempVeryHigh :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEOilMistDetAlarm :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
   end;
 end;
 
