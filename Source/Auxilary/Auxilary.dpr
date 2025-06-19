@@ -25,16 +25,16 @@ uses
   ufrmSWPumpProvRefrig2 in 'Form\ufrmSWPumpProvRefrig2.pas' {frmSWPumpProvRefrig2},
   ufrmSludge in 'Form\ufrmSludge.pas' {frmSludge},
   ufrmSWCoolingPumpChiller1 in 'Form\ufrmSWCoolingPumpChiller1.pas' {frmSWCoolingPumpChiller1},
-  ufrmSWPumpProvRefrig1 in 'Form\ufrmSWPumpProvRefrig1.pas' {frmSWPumpProvRefrig1};
+  ufrmSWPumpProvRefrig1 in 'Form\ufrmSWPumpProvRefrig1.pas' {frmSWPumpProvRefrig1},
+  uConsumption in '..\engines\entity\uConsumption.pas',
+  uEntity in '..\engines\entity\uEntity.pas',
+  uPump in '..\engines\entity\uPump.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-
-  Setting   := TSetting.Create;
-  AuxiliarySystem := TAuxiliarySystem.Create;
 
   Application.CreateForm(TfrmMainForm, frmMainForm);
   Application.CreateForm(TfrmFreeze, frmFreeze);

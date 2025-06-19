@@ -11,7 +11,7 @@ type
 
   TEngineRoom = class
   private
-    FSubSystems : array [0..5] of TCommonSystem;
+    FSubSystems : array [0..6] of TCommonSystem;
     FFreezed : Boolean;
     FDelay : Double;
   public
@@ -26,6 +26,7 @@ type
     function getFFSystem : TFireFightingSystem;
     function getFuelOilSystem : TFuelOilSystem;
     function getSeaFWSystem : TSeaFreshWaterSystem;
+    function getAUXSystem : TAuxilliarySystem;
 
     function getSystem(aIndex: Integer): TCommonSystem;
     function getSystemCount: Integer;
@@ -57,6 +58,7 @@ begin
   FSubSystems[3] := TSeaFreshWaterSystem.Create;
   FSubSystems[4] := TPropulsionSystem.Create;
   FSubSystems[5] := TFuelOilSystem.Create;
+  FSubSystems[6] := TAuxilliarySystem.Create;
 
   FFreezed := False;
   FDelay := 0;
@@ -155,9 +157,24 @@ begin
   Result := FSubSystems[0] as TBallastSystem;
 end;
 
+function TEngineRoom.getPMSSystem: TPMSSystem;
+begin
+  Result := FSubSystems[1] as TPMSSystem;
+end;
+
 function TEngineRoom.getFFSystem: TFireFightingSystem;
 begin
   Result := FSubSystems[2] as TFireFightingSystem;
+end;
+
+function TEngineRoom.getSeaFWSystem: TSeaFreshWaterSystem;
+begin
+  Result := FSubSystems[3] as TSeaFreshWaterSystem;
+end;
+
+function TEngineRoom.getPCSSystem: TPropulsionSystem;
+begin
+  Result := FSubSystems[4] as TPropulsionSystem;
 end;
 
 function TEngineRoom.getFuelOilSystem: TFuelOilSystem;
@@ -165,9 +182,9 @@ begin
   Result := FSubSystems[5] as TFuelOilSystem;
 end;
 
-function TEngineRoom.getPCSSystem: TPropulsionSystem;
+function TEngineRoom.getAUXSystem: TAuxilliarySystem;
 begin
-  Result := FSubSystems[4] as TPropulsionSystem;
+  Result := FSubSystems[6] as TAuxilliarySystem;
 end;
 
 procedure TEngineRoom.getPMSConditionData(var aList: TList);
@@ -207,16 +224,6 @@ begin
 
     aList.Add(conditionData);
   end;
-end;
-
-function TEngineRoom.getPMSSystem: TPMSSystem;
-begin
-  Result := FSubSystems[1] as TPMSSystem;
-end;
-
-function TEngineRoom.getSeaFWSystem: TSeaFreshWaterSystem;
-begin
-  Result := FSubSystems[3] as TSeaFreshWaterSystem;
 end;
 
 function TEngineRoom.getSystem(aIndex: Integer): TCommonSystem;

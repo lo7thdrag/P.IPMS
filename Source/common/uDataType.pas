@@ -252,6 +252,8 @@ const
 
   C_PMSCLIENT_COMMAND = 66;
 
+  C_AUX_COMMAND = 67;
+
   { const mimic component identifier }
   C_WB_TK_PS = 'WB TK PS';
   C_WB_TK_SB = 'WB TK SB';
@@ -263,6 +265,8 @@ const
   C_GENERATOR_ID : array [0..4] of string = ('Generator 1', 'Generator 2', 'Generator 3', 'Generator 4', 'Emergency Generator');
   C_SWITCHBOARD_ID : array [0..3] of string = ('Switchboard FWD', 'Switchboard AFT', 'Switchboard Emergency', 'Switchboard Shore');
   C_POWER_ID : array [0..1] of string = ('Power FWD', 'Power AFT');
+  C_PUMP_ID : array [0..5] of string = ('BALLAST PUMP', 'SW PUMP PROV REFRIG UNIT 1', 'COOLING PUMP CHILLER 1',
+                                        'FIFI PUMP 2', 'SW PUMP PROV REFRIG UNIT 2', 'SLUDGE DIRTY OIL PUMP');
 
   A_MimicType : array [0..31] of Integer = (0, 1, 2, 4, 5,
                                             11, 12, 13, 14,
@@ -567,6 +571,9 @@ type
 
       {use in Tank}
       epTankLevel, epTankValueSensor, epElementParamChange,
+
+      {use in Aux System}
+      epAuxEngineRun, epAuxPowerSupply,
 
       {use in ACS}
       epFaultStatus
@@ -904,6 +911,16 @@ type
     ValueBool : boolean;
   end;
 
+  R_Common_AUX_Command = record
+    pid             : TPacketID;
+    PumpID          : string[26];
+    CommandPropsID  : E_PropsID;
+    ValueDob        : Double;
+    ValueInt        : Integer;
+    ValueBool       : boolean;
+    ValueKind       : string[10];
+  end;
+
   R_Common_FuncAlloc_Command = record
     pid : TPacketID;
     role : string[20];
@@ -937,6 +954,7 @@ type
   T_OnPCSCommand = procedure (Value : R_Common_PCS_Command) of object;
   T_OnPMSCommand = procedure (Value : R_Common_PMS_Command) of object;
   T_OnTankCommand = procedure(aCommand: R_Common_TANK_Command) of object;
+  T_OnAuxCommand = procedure(aCommand: R_Common_AUX_Command) of object;
 
 implementation
 end.

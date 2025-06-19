@@ -129,6 +129,7 @@ type
 
     procedure NetEvent_PMSElmtCommonCmd(rCmd : R_Common_PMS_Command);
     procedure NetEvent_PCSElmtCommonCmd(rCmd : R_Common_PCS_Command);
+    procedure NetEvent_AUXElmtCommonCmd(rCmd : R_Common_AUX_Command);
 
     procedure setElementCondition(aElement : TElement;aCondition : TElementCondition);overload;
 
@@ -142,6 +143,7 @@ type
     procedure ERCommand(rCmd : R_Common_PCS_Command); overload;
     procedure ERCommand(rCmd : R_Common_PMS_Command); overload;
     procedure ERCommand(rCmd: R_Common_TANK_Command); overload;
+    procedure ERCommand(rCmd: R_Common_AUX_Command); overload;
 
     procedure AllElementCalcd;
     procedure AllDefaultValue;
@@ -1373,6 +1375,26 @@ end;
 
 //procedure TControllerManager.NetEvent_PCSElmtCommonCmd(apRec: PAnsiChar;
 //  aSize: Word);
+procedure TControllerManager.NetEvent_AUXElmtCommonCmd(rCmd: R_Common_AUX_Command);
+var
+  rec       : R_Common_AUX_Command;
+begin
+  rec.PumpID := rCmd.PumpID;
+  rec.CommandPropsID := rCmd.CommandPropsID;
+  rec.ValueDob := rCmd.ValueDob;
+  rec.ValueInt := rCmd.ValueInt;
+  rec.ValueBool := rCmd.ValueBool;
+  rec.ValueKind := rCmd.ValueKind;
+
+  if rec.ValueKind = 'boolean' then
+  begin
+    case rec.CommandPropsID of
+      epAuxEngineRun : setPMSSWEElementID(rec.PumpID, rec.ValueBool, C_IND_ENGINERUNNING);
+      epAuxPowerSupply : setPMSCBEElementID(rec.PumpID, rec.ValueBool, C_CBE_GEN);
+    end;
+  end
+end;
+
 procedure TControllerManager.NetEvent_PCSElmtCommonCmd(rCmd : R_Common_PCS_Command);
 var
   recCmd : R_Common_PCS_Command;
@@ -2257,6 +2279,11 @@ begin
 //        TSSLElement(element).Parameters.
     end;
   end;
+end;
+
+procedure TControllerManager.ERCommand(rCmd: R_Common_AUX_Command);
+begin
+  NetEvent_AUXElmtCommonCmd(rCmd);
 end;
 
 end.

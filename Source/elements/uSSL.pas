@@ -463,13 +463,9 @@ begin
     oldTankData := newTankData;
   end;
 
-  try
-    FValueElementPercent := 100 * FValueElementM3 / GetMaxContent;
-  except
-
-  end;
-
-  FValueElementMass := FValueElementM3 * Parameters.GetParameter(epSG).ParamDoubleValue / 1000;
+  FValueElementPercent := 100 * FValueElementM3 / GetMaxContent;
+  FValueElementMass := FValueElementM3 *
+    Parameters.GetParameter(epSG).ParamDoubleValue / 1000;
 
   {Update View}
   Listeners.TriggerEvents(Self, epValElementPercentChange, FValueElementPercent);

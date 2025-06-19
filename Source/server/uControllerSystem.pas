@@ -86,9 +86,8 @@ type
     procedure NetEvent_EmergencyCommonCmd(apRec: PAnsiChar; aSize: Word);
     procedure NetEvent_GenCommonCmd(apRec: PAnsiChar; aSize: Word);
     procedure NetEvent_PumpCommonCmd(apRec: PAnsiChar; aSize: Word);
-
     procedure NetEvent_MECommonCmd(apRec: PAnsiChar; aSize: Word);
-
+    procedure NetEvent_AuxCommonCmd(apRec: PAnsiChar; aSize: Word);
     procedure NetEvent_VentStatusCmd(apRec: PAnsiChar; aSize: Word);
 
      procedure NetEventStatusThrottleCommand(apRec: PAnsiChar; aSize: Word);
@@ -309,7 +308,7 @@ begin
 
   { save alarm to database }
   FAlarmDelayer := TDelayer.Create;
-  FAlarmDelayer.DInterval := 0.7;
+  FAlarmDelayer.DInterval := 1;//0.7;
   FAlarmDelayer.Enabled := True;
   FAlarmDelayer.OnTime := OnAlarmDispatch;
 
@@ -672,6 +671,22 @@ begin
   recER.ValueDouble := recCmd.ValueDouble;
 
   Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
+end;
+
+procedure TControllerlSystem.NetEvent_AuxCommonCmd(apRec: PAnsiChar; aSize: Word);
+var
+  recCmd  : ^R_Common_AUX_Command;
+  recER   : R_Common_AUX_Command;
+begin
+  recCmd := @apRec^;
+
+  recER.PumpID := recCmd.PumpID;
+  recER.CommandPropsID := recCmd.CommandPropsID;
+  recER.ValueBool := recCmd.ValueBool;
+  recER.ValueInt := recCmd.ValueInt;
+  recER.ValueDob := recCmd.ValueDob;
+
+  Network.SimEngineSocket.SendData(C_AUX_COMMAND,@recER);
 end;
 
 procedure TControllerlSystem.NetEvent_FuncAllocCommand(apRec: PAnsiChar;
@@ -1156,6 +1171,9 @@ begin
     {terima paket dari ShipAlarm k controller}
     RegisterProcedure(C_PUMP_COMMAND,NetEvent_PumpCommonCmd,SizeOf(R_Common_PumpStatus_Command));
 
+    {terima paket dari Auxiliary k controller}
+    RegisterProcedure(C_AUX_COMMAND,NetEvent_AuxCommonCmd,SizeOf(R_Common_AUX_Command));
+
 
   end;
 
@@ -1169,8 +1187,8 @@ begin
 
     {Kirim paket dari controller ke ER}
     client.RegisterProcedure(C_PMSCLIENT_COMMAND,nil,SizeOf(R_Common_PMS_Command));
-//    client.RegisterProcedure(C_MIMICS_COMMAND,nil,SizeOf(R_Common_PMS_Command));
     client.RegisterProcedure(C_MIMICS_COMMAND,nil,SizeOf(R_Common_PCS_Command));
+    client.RegisterProcedure(C_AUX_COMMAND,nil,SizeOf(R_Common_AUX_Command));
   end;
 
   client := FControllerNetwork.AsClients.Get('AsInstructorClient');

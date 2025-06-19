@@ -7,35 +7,33 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch,
   Vcl.Imaging.pngimage, Vcl.ExtCtrls,
 
-  uDataType;
+  uDataType, uMainForm;
 
 type
   TfrmBallastnBilgePump = class(TForm)
     pnlMainBackground: TPanel;
     imgMainBackground: TImage;
-    Image2: TImage;
-    Image3: TImage;
-    Image4: TImage;
+    imgACHeating: TImage;
+    imgStart: TImage;
+    imgStop: TImage;
     Image5: TImage;
     Image6: TImage;
-    VrRotarySwitch1: TVrRotarySwitch;
-    VrRotarySwitch2: TVrRotarySwitch;
+    vrAcHeating: TVrRotarySwitch;
+    vrPowerSupply: TVrRotarySwitch;
+    imgShadowStart: TImage;
+    imgShadowStop: TImage;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure vrAcHeatingClick(Sender: TObject);
+    procedure imgShadowStartClick(Sender: TObject);
+    procedure imgShadowStopClick(Sender: TObject);
+    procedure vrPowerSupplyClick(Sender: TObject);
 
   private
 
   public
     { Public declarations }
   end;
-
-const
-  LoadBlueOn = '.\Images\Light Status\READY.bmp';
-  LoadBlueOff = '.\Images\Light Status\READY.bmp';
-  LoadLimeOn = '.\Images\Light Status\READY.bmp';
-  LoadLimeOff = '.\Images\Light Status\READY.bmp';
-  LoadRedOn = '.\Images\Light Status\READY.bmp';
-  LoadRedOff = '.\Images\Light Status\READY.bmp';
 
 var
   frmBallastnBilgePump: TfrmBallastnBilgePump;
@@ -60,6 +58,8 @@ begin
       EnableComposited(TWinControl(WinControl.Controls[i]));
 end;
 
+{$REGION ' Form Procedure '}
+
 procedure TfrmBallastnBilgePump.FormCreate(Sender: TObject);
 begin
   EnableComposited(pnlMainBackground);
@@ -82,5 +82,37 @@ begin
     Height := Screen.Monitors[0].Height;
   end;
 end;
+
+{$ENDREGION}
+
+{$REGION ' Button Handle Procedure '}
+
+procedure TfrmBallastnBilgePump.imgShadowStartClick(Sender: TObject);
+begin
+  if frmMainForm.pumpTemp[0].PowerSupply then
+    AuxiliarySystem.EngineRun(C_PUMP_ID[0], True);
+
+end;
+
+procedure TfrmBallastnBilgePump.imgShadowStopClick(Sender: TObject);
+begin
+  if frmMainForm.pumpTemp[0].PowerSupply then
+    AuxiliarySystem.EngineRun(C_PUMP_ID[0], False);
+end;
+
+procedure TfrmBallastnBilgePump.vrAcHeatingClick(Sender: TObject);
+begin
+  imgACHeating.Visible := not (vrAcHeating.SwitchPosition = 1);
+end;
+
+procedure TfrmBallastnBilgePump.vrPowerSupplyClick(Sender: TObject);
+begin
+  case vrPowerSupply.SwitchPosition of
+    0: AuxiliarySystem.EngineRun(C_PUMP_ID[0], False);
+    1: AuxiliarySystem.EngineRun(C_PUMP_ID[0], True)
+  end;
+end;
+
+{$ENDREGION}
 
 end.

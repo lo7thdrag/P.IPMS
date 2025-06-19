@@ -60,10 +60,10 @@ begin
   end;
 
   with MainSwitchBoardSystem.Network.Listeners.Add('MAINSWITCHBOARDNETWORK') as TPropertyEventListener do
+  begin
     OnPropertyStringChange:= MainSwitchBoardSystemEvent;
-  with MainSwitchBoardSystem.Network.Listeners.Add('MAINSWITCHBOARDNETWORK') as TPropertyEventListener do
     OnPropertyObjectChange:= MainSwitchBoardSystemEvent;
-
+  end;
 
   {Create Generator Temporary}
   GeneratorTemp := TGenerator.Create;

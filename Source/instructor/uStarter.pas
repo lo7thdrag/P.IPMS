@@ -32,6 +32,7 @@ begin
   ERSystem.OnPCSCommand := CtrlSystem.Controller.ERCommand;
   ERSystem.OnPMSCommand := CtrlSystem.Controller.ERCommand;
   ERSystem.OnTankCommand := CtrlSystem.Controller.ERCommand;
+  ERSystem.OnAUXCommand:= CtrlSystem.Controller.ERCommand;
 
   SysMimics.Network.StartNetwork;
   PCSSystem.Network.StartNetwork;

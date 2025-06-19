@@ -33,9 +33,8 @@ type
   public
     FFormFreezed : array[0..1] of TfrmFreeze;
 
-//    procedure EngineRun(aValue : Boolean);
-//    procedure GeneratorPreference(aValue : Boolean);
-//    procedure CBClosed(aValue : Boolean);
+    procedure EngineRun(aIdentifier : string; aValue : Boolean);
+    procedure PowerSupply(aIdentifier : string; aValue : Boolean);
 
     constructor Create;
     destructor Destroy;override;
@@ -122,40 +121,28 @@ begin
   end;
 end;
 
-//procedure TAuxiliarySystem.EngineRun(aValue: Boolean);
-//var
-//  recCmd : R_Common_PMS_Command;
-//begin
-//  recCmd.GenSwitchID := IdGenerator;
-//  recCmd.CommandPropsID := epPMSGeneratorEngineRun;
-//  recCmd.ValueBool := aValue;
-//
-//  Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
-//end;
+procedure TAuxiliarySystem.EngineRun(aIdentifier : string; aValue: Boolean);
+var
+  recCmd : R_Common_AUX_Command;
+begin
+  recCmd.PumpID := aIdentifier;
+  recCmd.CommandPropsID := epAuxEngineRun;
+  recCmd.ValueBool := aValue;
 
-//procedure TAuxiliarySystem.GeneratorPreference(aValue: Boolean);
-//var
-//  recCmd : R_Common_PMS_Command;
-//begin
-//  recCmd.GenSwitchID := IdGenerator;
-//  recCmd.CommandPropsID := epPMSGeneratorPreference;
-//  recCmd.ValueBool := aValue;
-//
-//  Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
-//end;
+  Network.AuxiliaryControllerSocket.SendData(C_AUX_COMMAND,@recCmd);
+end;
 
-//procedure TAuxiliarySystem.CBClosed(aValue: Boolean);
-//var
-//  recCmd : R_Common_PMS_Command;
-//begin
-//  recCmd.GenSwitchID := IdGenerator;
-//  recCmd.CommandPropsID := epPMSGeneratorCBClosed;
-//  recCmd.ValueBool := aValue;
-//
-//  Network.MainSwitchBoardControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
-//end;
+procedure TAuxiliarySystem.PowerSupply(aIdentifier : string; aValue : Boolean);
+var
+  recCmd : R_Common_AUX_Command;
+begin
+  recCmd.PumpID := aIdentifier;
+  recCmd.CommandPropsID := epAuxPowerSupply;
+  recCmd.ValueBool := aValue;
 
-{ fungsi untuk menangani event dari jaringan untuk PCSCommand }
+  Network.AuxiliaryControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
+end;
+
 procedure TAuxiliarySystem.NetEventInstructorCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
   rec: ^R_Common_Instr_Command;
@@ -178,23 +165,28 @@ end;
 
 procedure TAuxiliarySystem.NetEventAuxiliaryCommand(apRec: PAnsiChar; aSize: Word);
 var
-  rec: ^R_Common_PMS_Command;
+  rec: ^R_Common_AUX_Command;
+  i : Integer;
+
 begin
 
   rec := @apRec^;
 
-//  if FIdGenerator <> rec.GenSwitchID then
-//    Exit;
+  i := frmMainForm.GetPumpID(rec.PumpID);
+
+  if i = -1 then
+    Exit;
 
   case rec.CommandPropsID of
-    epPMSGeneratorEngineRun, epPMSGeneratorStop, epPMSGeneratorSupplied, epPMSGeneratorCBClosed,
-    epPMSGeneratorPreference, epPMSGeneratorBusbar:
+    epAuxEngineRun :
     begin
+      frmMainForm.pumpTemp[i].EngineRun := rec.ValueBool;
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
-    epPMSGeneratorMode:
+    epAuxPowerSupply :
     begin
-      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
+      frmMainForm.pumpTemp[i].PowerSupply := rec.ValueBool;
+      FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
   end;
 end;
@@ -209,7 +201,7 @@ begin
   begin
     with  client do
     begin
-      RegisterProcedure(C_PMS_COMMAND, NetEventAuxiliaryCommand, SizeOf(R_Common_PMS_Command));
+      RegisterProcedure(C_AUX_COMMAND, NetEventAuxiliaryCommand, SizeOf(R_Common_AUX_Command));
     end;
   end;
 
@@ -228,7 +220,7 @@ begin
    begin
      with client do
      begin
-       client.RegisterProcedure(C_PMS_COMMAND, nil, SizeOf(R_Common_PMS_Command));
+       client.RegisterProcedure(C_AUX_COMMAND, nil, SizeOf(R_Common_AUX_Command));
      end;
    end;
 end;

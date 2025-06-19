@@ -3,7 +3,7 @@ unit uERSystem;
 interface
 
 uses uDataType, Classes, uDatabase, uERManager, uERNetwork, uListener, uSwitchboard, uGenerator,
-  SysUtils, uFreezeFrom, uMainEngine, uCPP, uGearBox, uTCPClient, Forms;
+  SysUtils, uFreezeFrom, uMainEngine, uCPP, uGearBox, uTCPClient, uPump, Forms;
 
 type
 
@@ -17,6 +17,7 @@ type
     FOnPMSCommand : T_OnPMSCommand;
     FOnPCSCommand : T_OnPCSCommand;
     FOnTankCommand : T_OnTankCommand;
+    FOnAUXCommand : T_OnAuxCommand;
 
     FLoggerFileName : String;
     FFile : TextFile;
@@ -61,9 +62,11 @@ type
     function toCheckCB(IdGen : string; IdMsb : Integer): boolean;
     procedure NetEvent_PMSCommonCmd(apRec: PAnsiChar; aSize: Word);
     procedure NetEvent_PCSCommonCmd(apRec: PAnsiChar; aSize: Word);
+    procedure NetEvent_AUXCommonCmd(apRec: PAnsiChar; aSize: Word);
     procedure SetOnPCSCommand(const Value: T_OnPCSCommand);
     procedure SetOnPMSCommand(const Value: T_OnPMSCommand);
     procedure SetOnTankCommand(const Value: T_OnTankCommand);
+    procedure SetOnAuxCommand(const Value: T_OnAuxCommand);
 
 
   public
@@ -75,12 +78,11 @@ type
     property Network : TERNetwork read FERNetwork;
     property Database : TIPMSDatabase read FIPMSDatabase;
 
-    property OnPMSCommand : T_OnPMSCommand read FOnPMSCommand
-      write SetOnPMSCommand;
-    property OnPCSCommand : T_OnPCSCommand read FOnPCSCommand
-      write SetOnPCSCommand;
-    property OnTankCommand : T_OnTankCommand read FOnTankCommand
-      write SetOnTankCommand;
+    property OnPMSCommand : T_OnPMSCommand read FOnPMSCommand write SetOnPMSCommand;
+    property OnPCSCommand : T_OnPCSCommand read FOnPCSCommand write SetOnPCSCommand;
+    property OnTankCommand : T_OnTankCommand read FOnTankCommand write SetOnTankCommand;
+    property OnAUXCommand : T_OnAuxCommand read FOnAUXCommand write SetOnAuxCommand;
+
   end;
 
 var
@@ -128,12 +130,14 @@ procedure TERSystem.ElementPropBoolChange(Sender: TObject; PropsID: E_PropsID; V
 var
   rPmsCmd : R_Common_PMS_Command;
   rPCSCmd : R_Common_PCS_Command;
+  rAuxCmd : R_Common_AUX_Command;
 begin
   if not Assigned(Sender) then
     Exit;
 
   FillChar(rPmsCmd, SizeOf(R_Common_PMS_Command), 0);
   FillChar(rPCSCmd, SizeOf(R_Common_PCS_Command), 0);
+  FillChar(rAuxCmd, SizeOf(R_Common_AUX_Command), 0);
 
   case PropsID of
 
@@ -407,6 +411,28 @@ begin
     end;
     {$ENDREGION}
 
+    {$REGION ' AUX Section '}
+    epAuxEngineRun :
+    begin
+      rAuxCmd.PumpID := '';
+
+      if Sender is TPump then
+        rAuxCmd.PumpID := TPump(Sender).Identifier;
+
+      if rAuxCmd.PumpID <> '' then
+      begin
+        rAuxCmd.CommandPropsID   := PropsID;
+        rAuxCmd.ValueBool   := Value;
+        rAuxCmd.ValueKind   := 'boolean';
+
+        Network.AsServer.SendData(C_AUX_COMMAND,@rAuxCmd);
+      end;
+
+      if Assigned(FOnAUXCommand) then
+        FOnAuxCommand(rAuxCmd);
+
+    end;
+    {$ENDREGION}
   end;
 end;
 
@@ -938,6 +964,29 @@ begin
   end;
 end;
 
+procedure TERSystem.NetEvent_AUXCommonCmd(apRec: PAnsiChar; aSize: Word);
+var
+  recER : ^R_Common_AUX_Command;
+  pump : TPump;
+
+begin
+  recER := @apRec^;
+
+  case recER.CommandPropsID of
+    epAuxEngineRun:
+    begin
+      pump := ERManager.EngineRoom.getAUXSystem.GetPump(recER.PumpID);
+      pump.EngineRun := recER.ValueBool;
+    end;
+
+    epAuxPowerSupply :
+    begin
+      pump := ERManager.EngineRoom.getAUXSystem.GetPump(recER.PumpID);
+      pump.PowerSupply := recER.ValueBool;
+    end;
+  end;
+end;
+
 procedure TERSystem.NetEvent_PCSCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
   recERPCS : ^R_Common_PCS_Command;
@@ -1169,6 +1218,7 @@ begin
 //      RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PMSCommonCmd, SizeOf(R_Common_PMS_Command));
       RegisterProcedure(C_PMSCLIENT_COMMAND, NetEvent_PMSCommonCmd, SizeOf(R_Common_PMS_Command));
       RegisterProcedure(C_MIMICS_COMMAND, NetEvent_PCSCommonCmd, SizeOf(R_Common_PCS_Command));
+      RegisterProcedure(C_AUX_COMMAND, NetEvent_AUXCommonCmd, SizeOf(R_Common_AUX_Command));
 
     end;
   end;
@@ -1197,6 +1247,11 @@ begin
     Writeln(FFile,IntToStr(FNum) + ' ' + value);
   finally
   end;
+end;
+
+procedure TERSystem.SetOnAuxCommand(const Value: T_OnAuxCommand);
+begin
+  FOnAUXCommand := Value;
 end;
 
 procedure TERSystem.SetOnPCSCommand(const Value: T_OnPCSCommand);
