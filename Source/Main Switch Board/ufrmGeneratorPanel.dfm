@@ -72518,7 +72518,6 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         ParentBackground = False
         ParentFont = False
         TabOrder = 1
-        Visible = False
       end
       object Panel2: TPanel
         Left = 155
@@ -72535,7 +72534,6 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         ParentBackground = False
         ParentFont = False
         TabOrder = 2
-        Visible = False
       end
       object Panel3: TPanel
         Left = 220
@@ -72552,7 +72550,6 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         ParentBackground = False
         ParentFont = False
         TabOrder = 3
-        Visible = False
       end
       object Panel4: TPanel
         Left = 285
@@ -72569,7 +72566,6 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         ParentBackground = False
         ParentFont = False
         TabOrder = 4
-        Visible = False
       end
       object Panel5: TPanel
         Left = 351
@@ -72585,7 +72581,6 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         ParentBackground = False
         ParentFont = False
         TabOrder = 5
-        Visible = False
       end
     end
     object vrAmpere: TVrRotarySwitch

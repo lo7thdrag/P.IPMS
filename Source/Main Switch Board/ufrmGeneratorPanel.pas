@@ -309,6 +309,11 @@ begin
     lstAlarmPage.Visible := False;
     lstInfoPage.Visible := False;
 
+    Panel1.Caption := 'Raise';
+    Panel2.Caption := 'Lower';
+    Panel3.Caption := ' ';
+    Panel4.Caption := ' ';
+
     lstMenu.Visible := True;
     InitMenu;
     CurrentMenuIndex := 0;
@@ -318,11 +323,17 @@ end;
 
 procedure TfrmGeneratorPanel.ImgF1Click(Sender: TObject);
 begin
-  {down}
   if not InSubMenu and not InSubSubMenu then
   begin
+    {up}
     if lstMenu.ItemIndex > 0 then
-    lstMenu.ItemIndex := lstMenu.ItemIndex - 1;
+      lstMenu.ItemIndex := lstMenu.ItemIndex - 1;
+
+    if lstInfoPage.Visible then
+    begin
+      Dec(CurrentMenuIndex);
+      LoadMainMenu(CurrentMenuIndex);
+    end;
   end;
 
   {previous page}
@@ -335,15 +346,20 @@ end;
 
 procedure TfrmGeneratorPanel.ImgF2Click(Sender: TObject);
 begin
+  {next page}
   if not InSubMenu and not InSubSubMenu then
   begin
-    {up}
+    if lstInfoPage.Visible then
+    begin
+      Inc(CurrentMenuIndex);
+      LoadMainMenu(CurrentMenuIndex);
+    end;
+
+    {Down}
     if lstMenu.ItemIndex < lstMenu.Count -1 then
       lstMenu.ItemIndex := lstMenu.ItemIndex +1;
-  end;
-
-  {next page}
-  if InSubSubMenu and (SubSubMenuPage + 1 < Length(SubSubMenu1[SubMenuIndex])) then
+  end
+  else if InSubSubMenu and (SubSubMenuPage + 1 < Length(SubSubMenu1[SubMenuIndex])) then
   begin
     Inc(SubSubMenuPage);
     LoadSubSubMenu(SubSubMenuPage);
@@ -382,6 +398,11 @@ begin
   lstAlarmPage.Visible := False;
   lstInfoPage.Visible := False;
 
+  Panel1.Caption := '<<';
+  Panel2.Caption := '>>';
+  Panel3.Caption := 'Refresh';
+  Panel4.Caption := 'Reset';
+
   CurrentMenuIndex := 0;
 
   LoadMainMenu(CurrentMenuIndex);
@@ -397,6 +418,11 @@ begin
   lstAlarmPage.Visible := True;
   lstInfoPage.Visible := False;
 
+  Panel1.Caption := '<<';
+  Panel2.Caption := '>>';
+  Panel3.Caption := 'Refresh';
+  Panel4.Caption := 'Reset';
+
   CurrentMenuIndex := 0;
 
   LoadMainMenu(CurrentMenuIndex);
@@ -409,8 +435,13 @@ begin
 
   lstMenu.Visible := False;
   lstFaultPage.Visible := False;
-  lstAlarmPage.Visible := True;
-  lstInfoPage.Visible := False;
+  lstAlarmPage.Visible := False;
+  lstInfoPage.Visible := True;
+
+  Panel1.Caption := '<<';
+  Panel2.Caption := '>>';
+  Panel3.Caption := 'Raise';
+  Panel4.Caption := 'Lower';
 
   CurrentMenuIndex := 0;
 
@@ -1103,37 +1134,28 @@ begin
   if lstMenu.Visible then
   begin
     ActiveListBox := lstMenu;
-    if not InSubMenu then
-    begin
-      Panel1.Visible := True;
-      Panel2.Visible := True;
-      Panel3.Visible := True;
-      Panel4.Visible := True;
-      Panel5.Visible := True;
-
-      Panel1.Caption := 'Raise';
-      Panel2.Caption := 'Lower';
-      Panel3.Caption := ' ';
-      Panel4.Caption := ' ';
-    end;
+    Panel1.Caption := 'Raise';
+    Panel2.Caption := 'Lower';
+    Panel3.Caption := ' ';
+    Panel4.Caption := ' ';
   end
   else if lstFaultPage.Visible then
-    ActiveListBox := lstFaultPage
+  begin
+    ActiveListBox := lstFaultPage;
+  end
   else if lstAlarmPage.Visible then
-    ActiveListBox := lstAlarmPage
+  begin
+    ActiveListBox := lstAlarmPage;
+  end
   else if lstInfoPage.Visible then
+  begin
     ActiveListBox := lstInfoPage;
+  end;
 
-//  ActiveListBox.Items.Assign(MainMenu[0]);
-//  ActiveListBox.ItemIndex := CurrentMenuIndex;
-//  InSubMenu := False;
-
-  CurrentMenuIndex := 0;
-  ActiveListBox.Items.Assign(MainMenu[CurrentMenuIndex]);
+  CurrentMenuIndex := MainIndex;
+  ActiveListBox.Items.Assign(MainMenu[MainIndex]);
   InSubMenu := False;
   InSubSubMenu := False;
-
-
 end;
 
 procedure TfrmGeneratorPanel.LoadSubMenu(SubIndex : Integer);
@@ -1145,14 +1167,6 @@ begin
     SubMenuIndex := SubIndex;
     InSubSubMenu := False;
   end;
-
-//  if (Index >= 0) and (index < Length(SubMenu)) then
-//  begin
-//    lstMenu.Items.Assign(SubMenu[index]);
-//    lstMenu.ItemIndex := 0;
-//    InSubMenu := True;
-//  end;
-
 end;
 
 procedure TfrmGeneratorPanel.LoadSubSubMenu(page : Integer);
@@ -1183,16 +1197,6 @@ begin
     InSubSubMenu := True;
     SubSubMenuPage := Page;
   end;
-
-//  if Assigned(SubSubMenu[CurrentMenuIndex]) then
-//  begin
-//    if (Index >= 0) and (index < Length(SubSubMenu)) then
-//    begin
-//      lstMenu.Items.Assign(SubSubMenu[index]);
-//      lstMenu.ItemIndex := 0;
-//      InSubSubMenu := True;
-//    end;
-//  end;
 end;
 
 procedure TfrmGeneratorPanel.lstMenuDrawItem(Control: TWinControl;
