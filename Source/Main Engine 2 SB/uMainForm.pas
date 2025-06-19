@@ -196,10 +196,16 @@ begin
           FIsRunningHours := True;
         end;
       end
-      else
+      else if Trunc(Value) < Trunc(CurrentHourCounter) then
       begin
+        CurrentHourCounter := Value;
+        frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Value);
+
+        if FIsRunningHours then
+        begin
           tmrRunningMETimer1.Enabled := False;
           FIsRunningHours := False;
+        end;
       end;
     end;
     epPCSSpeedState :
@@ -1675,7 +1681,7 @@ begin
         frmCrankpinOilTemperature.pnlGrafik1.Height := Max(grafikHeight, 1);
 
       // PCOT
-      if Assigned(frmCrankpinOilTemperature) then
+      if Assigned(frmPCOTFilteringDeviations) then
         frmPCOTFilteringDeviations.lblB1PCOT.Caption := FloatToStr(Value /10);
 
       deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB1PCOT.Caption, 0);
@@ -1698,6 +1704,10 @@ begin
         grafikHeight := 1;
       end;
         frmPCOTFilteringDeviations.pnlGrafik1.Height := Max(grafikHeight, 1);
+
+      // PCOT History
+      if Assigned(frmPCOtValueHistory) then
+        frmPCOtValueHistory.lblA1PCOT.Caption := FloatToStr(Value /10);
     end;
     epPCSMETempConRodBear2 :
     begin
@@ -1724,6 +1734,35 @@ begin
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik2.Height := Max(grafikHeight, 1);
+
+      // PCOT
+      if Assigned(frmPCOTFilteringDeviations) then
+        frmPCOTFilteringDeviations.lblB2PCOT.Caption := FloatToStr(Value /10);
+
+      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB2PCOT.Caption, 0);
+
+      if deviasi < 0 then
+      begin
+        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
+        frmPCOTFilteringDeviations.pnlGrafik2.Top := TopZero + offset;
+        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+      end
+      else if deviasi > 0 then
+      begin
+        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
+        frmPCOTFilteringDeviations.pnlGrafik2.Top := TopZero - offset;
+        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+      end
+      else
+      begin
+        frmPCOTFilteringDeviations.pnlGrafik2.Top := TopZero;
+        grafikHeight := 1;
+      end;
+        frmPCOTFilteringDeviations.pnlGrafik2.Height := Max(grafikHeight, 1);
+
+      // PCOT History
+      if Assigned(frmPCOtValueHistory) then
+        frmPCOtValueHistory.lblA2PCOT.Caption := FloatToStr(Value /10);
     end;
     epPCSMETempConRodBear3 :
     begin
@@ -1750,6 +1789,35 @@ begin
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik3.Height := Max(grafikHeight, 1);
+
+      // PCOT
+      if Assigned(frmPCOTFilteringDeviations) then
+        frmPCOTFilteringDeviations.lblB3PCOT.Caption := FloatToStr(Value /10);
+
+      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB3PCOT.Caption, 0);
+
+      if deviasi < 0 then
+      begin
+        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
+        frmPCOTFilteringDeviations.pnlGrafik3.Top := TopZero + offset;
+        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+      end
+      else if deviasi > 0 then
+      begin
+        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
+        frmPCOTFilteringDeviations.pnlGrafik3.Top := TopZero - offset;
+        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+      end
+      else
+      begin
+        frmPCOTFilteringDeviations.pnlGrafik3.Top := TopZero;
+        grafikHeight := 1;
+      end;
+        frmPCOTFilteringDeviations.pnlGrafik3.Height := Max(grafikHeight, 1);
+
+      // PCOT History
+      if Assigned(frmPCOtValueHistory) then
+        frmPCOtValueHistory.lblA3PCOT.Caption := FloatToStr(Value /10);
     end;
     epPCSMETempConRodBear4 :
     begin
@@ -1776,6 +1844,35 @@ begin
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik4.Height := Max(grafikHeight, 1);
+
+      // PCOT
+      if Assigned(frmPCOTFilteringDeviations) then
+        frmPCOTFilteringDeviations.lblB4PCOT.Caption := FloatToStr(Value /10);
+
+      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB4PCOT.Caption, 0);
+
+      if deviasi < 0 then
+      begin
+        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
+        frmPCOTFilteringDeviations.pnlGrafik4.Top := TopZero + offset;
+        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+      end
+      else if deviasi > 0 then
+      begin
+        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
+        frmPCOTFilteringDeviations.pnlGrafik4.Top := TopZero - offset;
+        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+      end
+      else
+      begin
+        frmPCOTFilteringDeviations.pnlGrafik4.Top := TopZero;
+        grafikHeight := 1;
+      end;
+        frmPCOTFilteringDeviations.pnlGrafik4.Height := Max(grafikHeight, 1);
+
+      // PCOT History
+      if Assigned(frmPCOtValueHistory) then
+        frmPCOtValueHistory.lblA4PCOT.Caption := FloatToStr(Value /10);
     end;
     epPCSMETempConRodBear5 :
     begin
@@ -1802,6 +1899,35 @@ begin
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik5.Height := Max(grafikHeight, 1);
+
+      // PCOT
+      if Assigned(frmPCOTFilteringDeviations) then
+        frmPCOTFilteringDeviations.lblB5PCOT.Caption := FloatToStr(Value /10);
+
+      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB5PCOT.Caption, 0);
+
+      if deviasi < 0 then
+      begin
+        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
+        frmPCOTFilteringDeviations.pnlGrafik5.Top := TopZero + offset;
+        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+      end
+      else if deviasi > 0 then
+      begin
+        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
+        frmPCOTFilteringDeviations.pnlGrafik5.Top := TopZero - offset;
+        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+      end
+      else
+      begin
+        frmPCOTFilteringDeviations.pnlGrafik5.Top := TopZero;
+        grafikHeight := 1;
+      end;
+        frmPCOTFilteringDeviations.pnlGrafik5.Height := Max(grafikHeight, 1);
+
+      // PCOT History
+      if Assigned(frmPCOtValueHistory) then
+        frmPCOtValueHistory.lblA5PCOT.Caption := FloatToStr(Value /10);
     end;
     epPCSMETempConRodBear6 :
     begin
@@ -1828,6 +1954,35 @@ begin
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik6.Height := Max(grafikHeight, 1);
+
+      // PCOT
+      if Assigned(frmPCOTFilteringDeviations) then
+        frmPCOTFilteringDeviations.lblB6PCOT.Caption := FloatToStr(Value /10);
+
+      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB6PCOT.Caption, 0);
+
+      if deviasi < 0 then
+      begin
+        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
+        frmPCOTFilteringDeviations.pnlGrafik6.Top := TopZero + offset;
+        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+      end
+      else if deviasi > 0 then
+      begin
+        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
+        frmPCOTFilteringDeviations.pnlGrafik6.Top := TopZero - offset;
+        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+      end
+      else
+      begin
+        frmPCOTFilteringDeviations.pnlGrafik6.Top := TopZero;
+        grafikHeight := 1;
+      end;
+        frmPCOTFilteringDeviations.pnlGrafik6.Height := Max(grafikHeight, 1);
+
+      // PCOT History
+      if Assigned(frmPCOtValueHistory) then
+        frmPCOtValueHistory.lblA6PCOT.Caption := FloatToStr(Value /10);
     end;
     epPCSMETempConRodBear7 :
     begin
@@ -1854,6 +2009,35 @@ begin
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik7.Height := Max(grafikHeight, 1);
+
+      // PCOT
+      if Assigned(frmPCOTFilteringDeviations) then
+        frmPCOTFilteringDeviations.lblB7PCOT.Caption := FloatToStr(Value /10);
+
+      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB7PCOT.Caption, 0);
+
+      if deviasi < 0 then
+      begin
+        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
+        frmPCOTFilteringDeviations.pnlGrafik7.Top := TopZero + offset;
+        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+      end
+      else if deviasi > 0 then
+      begin
+        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
+        frmPCOTFilteringDeviations.pnlGrafik7.Top := TopZero - offset;
+        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+      end
+      else
+      begin
+        frmPCOTFilteringDeviations.pnlGrafik7.Top := TopZero;
+        grafikHeight := 1;
+      end;
+        frmPCOTFilteringDeviations.pnlGrafik7.Height := Max(grafikHeight, 1);
+
+      // PCOT History
+      if Assigned(frmPCOtValueHistory) then
+        frmPCOtValueHistory.lblA7PCOT.Caption := FloatToStr(Value /10);
     end;
     epPCSMETempConRodBear8 :
     begin
@@ -1880,6 +2064,35 @@ begin
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik8.Height := Max(grafikHeight, 1);
+
+      // PCOT
+      if Assigned(frmPCOTFilteringDeviations) then
+        frmPCOTFilteringDeviations.lblB8PCOT.Caption := FloatToStr(Value /10);
+
+      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB8PCOT.Caption, 0);
+
+      if deviasi < 0 then
+      begin
+        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
+        frmPCOTFilteringDeviations.pnlGrafik8.Top := TopZero + offset;
+        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+      end
+      else if deviasi > 0 then
+      begin
+        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
+        frmPCOTFilteringDeviations.pnlGrafik8.Top := TopZero - offset;
+        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+      end
+      else
+      begin
+        frmPCOTFilteringDeviations.pnlGrafik8.Top := TopZero;
+        grafikHeight := 1;
+      end;
+        frmPCOTFilteringDeviations.pnlGrafik8.Height := Max(grafikHeight, 1);
+
+      // PCOT History
+      if Assigned(frmPCOtValueHistory) then
+        frmPCOtValueHistory.lblA8PCOT.Caption := FloatToStr(Value /10);
     end;
     epPCSMETempConRodBear9 :
     begin
@@ -1906,6 +2119,35 @@ begin
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik9.Height := Max(grafikHeight, 1);
+
+      // PCOT
+      if Assigned(frmPCOTFilteringDeviations) then
+        frmPCOTFilteringDeviations.lblB9PCOT.Caption := FloatToStr(Value /10);
+
+      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB9PCOT.Caption, 0);
+
+      if deviasi < 0 then
+      begin
+        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
+        frmPCOTFilteringDeviations.pnlGrafik9.Top := TopZero + offset;
+        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+      end
+      else if deviasi > 0 then
+      begin
+        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
+        frmPCOTFilteringDeviations.pnlGrafik9.Top := TopZero - offset;
+        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+      end
+      else
+      begin
+        frmPCOTFilteringDeviations.pnlGrafik9.Top := TopZero;
+        grafikHeight := 1;
+      end;
+        frmPCOTFilteringDeviations.pnlGrafik9.Height := Max(grafikHeight, 1);
+
+      // PCOT History
+      if Assigned(frmPCOtValueHistory) then
+        frmPCOtValueHistory.lblA9PCOT.Caption := FloatToStr(Value /10);
     end;
     epPCSMETempConRodBear10 :
     begin
@@ -1932,6 +2174,35 @@ begin
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik10.Height := Max(grafikHeight, 1);
+
+      // PCOT
+      if Assigned(frmPCOTFilteringDeviations) then
+        frmPCOTFilteringDeviations.lblB10PCOT.Caption := FloatToStr(Value /10);
+
+      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB10PCOT.Caption, 0);
+
+      if deviasi < 0 then
+      begin
+        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
+        frmPCOTFilteringDeviations.pnlGrafik10.Top := TopZero + offset;
+        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+      end
+      else if deviasi > 0 then
+      begin
+        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
+        frmPCOTFilteringDeviations.pnlGrafik10.Top := TopZero - offset;
+        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+      end
+      else
+      begin
+        frmPCOTFilteringDeviations.pnlGrafik10.Top := TopZero;
+        grafikHeight := 1;
+      end;
+        frmPCOTFilteringDeviations.pnlGrafik10.Height := Max(grafikHeight, 1);
+
+      // PCOT History
+      if Assigned(frmPCOtValueHistory) then
+        frmPCOtValueHistory.lblA10PCOT.Caption := FloatToStr(Value /10);
     end;
   end;
 end;

@@ -95,8 +95,7 @@ begin
   Self.Hide;
 end;
 
-procedure TfrmCrankpinOilTemperature.btnFilteringDeviationClick(
-  Sender: TObject);
+procedure TfrmCrankpinOilTemperature.btnFilteringDeviationClick(Sender: TObject);
 begin
   frmPCOTFilteringDeviations.Show;
   Self.Hide;

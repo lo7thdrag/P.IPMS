@@ -12,6 +12,7 @@ object frmSetofPressureGaugesME2: TfrmSetofPressureGaugesME2
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -11906,7 +11907,6 @@ object frmSetofPressureGaugesME2: TfrmSetofPressureGaugesME2
       Color = clBtnFace
       ButtonSize = bszStretchToButton
       TabOrder = 0
-      OnClick = AlarmFlashLightingClick
     end
     object imgFlashLighting: TRzBmpButton
       Left = 902
@@ -17607,9 +17607,8 @@ object frmSetofPressureGaugesME2: TfrmSetofPressureGaugesME2
       Color = clBtnFace
       TabOrder = 1
       Visible = False
-      OnClick = AlarmFlashLightingClick
     end
-    object mpAlarm: TMediaPlayer
+    object mpAlarmGauges: TMediaPlayer
       Left = 1015
       Top = 8
       Width = 253
@@ -17619,6 +17618,7 @@ object frmSetofPressureGaugesME2: TfrmSetofPressureGaugesME2
       Visible = False
       ParentDoubleBuffered = False
       TabOrder = 2
+      OnNotify = mpAlarmGaugesNotify
     end
   end
 end

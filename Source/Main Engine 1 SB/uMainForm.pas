@@ -350,7 +350,7 @@ begin
         else
           frmPMSDieselEngineSafetiesME1.imgledRedAlarmChannel2ICM1.Visible := False;
 
-        if Value > 1176 then
+        if Value then
           frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := True
         else
           frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := False

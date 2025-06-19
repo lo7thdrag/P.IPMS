@@ -139,7 +139,7 @@ var
 implementation
 
 uses
-  ufrmClutchingAssitance, ufrmMenu, ufrmAlarms, ufrmCurves;
+  ufrmClutchingAssitance, ufrmLineAExhaustGasTemperature,ufrmMenu, ufrmAlarms, ufrmCurves;
 
 {$R *.dfm}
 
@@ -163,7 +163,7 @@ end;
 
 procedure TfrmGeneralScreen.btnPreviousClick(Sender: TObject);
 begin
-  frmMenu.Show;
+  frmLineAExhaustGasTemperature.Show;
   Self.Hide;
 end;
 

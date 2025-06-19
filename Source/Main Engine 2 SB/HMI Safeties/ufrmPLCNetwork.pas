@@ -44,7 +44,7 @@ var
 implementation
 
 uses
-  ufrmLubOilCircuit, ufrmClutchingAssitance, ufrmMenu, ufrmAlarms, ufrmCurves;
+  ufrmLubOilCircuit, ufrmSafetiesStop, ufrmMenu, ufrmAlarms, ufrmCurves;
 {$R *.dfm}
 
 procedure TfrmPLCNetwork.btnAlarmsClick(Sender: TObject);
@@ -61,13 +61,13 @@ end;
 
 procedure TfrmPLCNetwork.btnNextClick(Sender: TObject);
 begin
-  frmLubOilCircuit.Show;
+  frmMenu.Show;
   Self.Hide;
 end;
 
 procedure TfrmPLCNetwork.btnPreviousClick(Sender: TObject);
 begin
-  frmClutchingAssistance.Show;
+  frmSafetiesStop.Show;
   Self.Hide;
 end;
 

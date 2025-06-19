@@ -76,7 +76,7 @@ var
 implementation
 
 uses
-  ufrmCompressedAirCircuit, ufrmLineBExhaustGasTemperature, ufrmMenu, uMainEngine2System, ufrmAlarms, ufrmCurves;
+  ufrmPLCNetwork, ufrmClutchingAssitance, ufrmMenu, uMainEngine2System, ufrmAlarms, ufrmCurves;
 
 {$R *.dfm}
 
@@ -103,13 +103,13 @@ end;
 
 procedure TfrmSafetiesStop.btnNextClick(Sender: TObject);
 begin
-  frmCompressedAirCircuit.Show;
+  frmPLCNetwork.Show;
   Self.Hide;
 end;
 
 procedure TfrmSafetiesStop.btnPreviousClick(Sender: TObject);
 begin
-  frmLineBExhaustGasTemperature.Show;
+  frmClutchingAssistance.Show;
   Self.Hide;
 end;
 

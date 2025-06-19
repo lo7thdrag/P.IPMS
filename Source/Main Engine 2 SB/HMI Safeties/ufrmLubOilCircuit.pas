@@ -163,7 +163,7 @@ var
 implementation
 
 uses
-  ufrmFuelOilCircuit, ufrmPLCNetwork, ufrmMenu, ufrmAlarms, ufrmCurves;
+  ufrmFuelOilCircuit, ufrmCompressedAirCircuit, ufrmMenu, ufrmAlarms, ufrmCurves;
 {$R *.dfm}
 
 procedure TfrmLubOilCircuit.btnAlarmsClick(Sender: TObject);
@@ -186,7 +186,7 @@ end;
 
 procedure TfrmLubOilCircuit.btnPreviousClick(Sender: TObject);
 begin
-  frmPLCNetwork.Show;
+  frmCompressedAirCircuit.Show;
   Self.Hide;
 end;
 

@@ -11906,7 +11906,6 @@ object frmSetofPressureGaugesME2: TfrmSetofPressureGaugesME2
       Color = clBtnFace
       ButtonSize = bszStretchToButton
       TabOrder = 0
-      OnClick = AlarmFlashLightingClick
     end
     object imgFlashLighting: TRzBmpButton
       Left = 902
@@ -17607,7 +17606,6 @@ object frmSetofPressureGaugesME2: TfrmSetofPressureGaugesME2
       Color = clBtnFace
       TabOrder = 1
       Visible = False
-      OnClick = AlarmFlashLightingClick
     end
     object mpAlarmgGauges: TMediaPlayer
       Left = 1015

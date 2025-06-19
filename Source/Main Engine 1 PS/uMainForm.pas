@@ -350,7 +350,7 @@ begin
         else
           frmPMSDieselEngineSafetiesME1.imgledRedAlarmChannel2ICM1.Visible := False;
 
-        if Value > 1176 then
+        if Value then
           frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := True
         else
           frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := False
@@ -451,16 +451,30 @@ begin
         frmPMSDieselEngineSafetiesME1.EngineSpeedMeter.Position := Value;
 
       if Value > 80 then
+      begin
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible := True;
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible := True;
+      end
+      else if Value < 80 then
+      begin
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible := False;
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible := False;
+      end;
+
       if Value > 405 then
-         frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible := True;
-      if Value < 405 then
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible := True
+      else if Value < 405 then
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible := False;
+
       if Value > 500 then
-         frmPMSDieselEngineSafetiesME1.imgLedGreenTH4SE.Visible := True;
-      if Value < 500 then
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH4SE.Visible := True
+      else if Value < 500 then
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH4SE.Visible := False;
+
+      if Value > 1176 then
+         frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := True
+      else
+         frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := False
     end;
     // PMS ATP
     epPCSMETempBear1 :
