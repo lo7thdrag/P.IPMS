@@ -44,6 +44,7 @@ type
     procedure MappingPCSStateToElement(aElement : TElement; Order : E_PropsID; aValue : Boolean);overload;
     procedure MappingPCSStateToElement(aElement : TElement; Order : E_PropsID; aValue : Double);overload;
     procedure MappingPCSStateToElement(aElement : TElement; Order : E_PropsID; aValue : Integer);overload;
+    procedure MappingAUXStateToElement(aElement : TElement; Order : E_PropsID; aValue : Boolean);overload;
 
 
     procedure setPMSGenMode(GenSwitchID: string; ValueInt : Integer; konstanta: Integer);
@@ -66,6 +67,8 @@ type
     procedure setPCSRHEElementID(aPortStaboardID : string; aValue : Integer; Order : E_PropsID);
     procedure setPCSVCEElementID(aPortStaboardID : string; aValue : Boolean; Order : E_PropsID);
     procedure setPCSSAEElementID(aPortStaboardID : string; aValue : Double; Order : E_PropsID);
+
+    procedure setAUXMCEElementID(aPumpID: string; aValue : Boolean; Order : E_PropsID);
 
     procedure getElementCondition(aElement : TAAEElement;aCondition : TElementCondition);overload;
     procedure getElementCondition(aElement : TCBAElement;aCondition : TElementCondition);overload;
@@ -153,7 +156,7 @@ type
 implementation
 
 uses
-  Dialogs, uPMSDataElement, uPCSDataElement,
+  Dialogs, uAUXDataElement, uPMSDataElement, uPCSDataElement,
   uControllerSystem; // contoh yg gampang
 
 { TControllerManager }
@@ -1270,6 +1273,35 @@ begin
   end;
 end;
 
+procedure TControllerManager.MappingAUXStateToElement(aElement: TElement; Order: E_PropsID; aValue: Boolean);
+begin
+  case Order of
+    epAuxEngineRun, epAuxPowerSupply:
+    begin
+      if aElement.ElementType = eltMCE then
+      begin
+        if aValue then
+        begin
+//          TMCEElement(aElement).StateElement := seValueOK;
+          TMCEElement(aElement).StateValueValid := svValid;
+          TMCEElement(aElement).StateSwitchNoFault := esNoFault;
+          TMCEElement(aElement).StateSwitchRemote := esLocal;
+          TMCEElement(aElement).StateSwitchRunning := esRunning;
+          TMCEElement(aElement).StateElementDisabled := sdEnabled;
+        end
+        else
+        begin
+          TMCEElement(aElement).StateValueValid := svValid;
+          TMCEElement(aElement).StateSwitchNoFault := esNoFault;
+          TMCEElement(aElement).StateSwitchRemote := esLocal;
+          TMCEElement(aElement).StateSwitchRunning := esNotRunning;
+          TMCEElement(aElement).StateElementDisabled := sdEnabled;
+        end
+      end;
+    end;
+  end;
+end;
+
 procedure TControllerManager.MappingPCSStateToElement(aElement: TElement; Order: E_PropsID;
   aValue: Integer);
 begin
@@ -1389,8 +1421,8 @@ begin
   if rec.ValueKind = 'boolean' then
   begin
     case rec.CommandPropsID of
-      epAuxEngineRun : setPMSSWEElementID(rec.PumpID, rec.ValueBool, C_IND_ENGINERUNNING);
-      epAuxPowerSupply : setPMSCBEElementID(rec.PumpID, rec.ValueBool, C_CBE_GEN);
+      epAuxEngineRun : setAUXMCEElementID(rec.PumpID, rec.ValueBool, rec.CommandPropsID);
+      epAuxPowerSupply : setAUXMCEElementID(rec.PumpID, rec.ValueBool, rec.CommandPropsID);
     end;
   end
 end;
@@ -2212,6 +2244,19 @@ begin
     if Assigned(elmnt) then
       MappingPMSStatetoElement(elmnt,konstanta, aValue);
   end;
+end;
+
+procedure TControllerManager.setAUXMCEElementID(aPumpID: string; aValue: Boolean; Order : E_PropsID);
+var
+  ElementID : string;
+  elmnt     : TElement;
+begin
+  elmnt := nil;
+  if SearchAUXElementID.getMCEElementID(aPumpID, ElementID, Ord(Order)) then
+    elmnt := getElement(ElementID);
+
+  if Assigned(elmnt) then
+    MappingAUXStateToElement(elmnt, Order, aValue);
 end;
 
 procedure TControllerManager.setElementCondition(aElement: TElement;

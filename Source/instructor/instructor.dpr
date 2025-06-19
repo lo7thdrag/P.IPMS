@@ -288,7 +288,8 @@ uses
   lognya in '..\datatrend\lognya.pas' {Form5},
   uFuelOilPanel in 'panels\uFuelOilPanel.pas' {frmFuelOilPanel},
   uBallastPanel in 'panels\uBallastPanel.pas' {frmBallastPanel},
-  uFreshWaterPanel in 'panels\uFreshWaterPanel.pas' {frmFreshWaterPanel};
+  uFreshWaterPanel in 'panels\uFreshWaterPanel.pas' {frmFreshWaterPanel},
+  uAUXDataElement in '..\common\uAUXDataElement.pas';
 
 {$R *.res}
 {$R IPMS_Resource.res}
