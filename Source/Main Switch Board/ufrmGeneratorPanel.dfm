@@ -25,6 +25,8 @@ object frmGeneratorPanel: TfrmGeneratorPanel
     Color = 12427904
     ParentBackground = False
     TabOrder = 0
+    ExplicitLeft = -32
+    ExplicitTop = 8
     object img1: TImage
       Left = 33
       Top = 114
@@ -72465,93 +72467,6 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Cursor = crHandPoint
         OnClick = ImgPrefClick
       end
-      object lstMenu: TListBox
-        Left = 86
-        Top = 88
-        Width = 332
-        Height = 197
-        ItemHeight = 13
-        TabOrder = 0
-      end
-      object Panel1: TPanel
-        Left = 101
-        Top = 250
-        Width = 52
-        Height = 29
-        Caption = '<<'
-        Color = clGrayText
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        TabOrder = 1
-      end
-      object Panel2: TPanel
-        Left = 164
-        Top = 250
-        Width = 52
-        Height = 29
-        Caption = '>>'
-        Color = clGrayText
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        TabOrder = 2
-      end
-      object Panel3: TPanel
-        Left = 228
-        Top = 250
-        Width = 52
-        Height = 29
-        Caption = 'Raise'
-        Color = clGrayText
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        TabOrder = 3
-      end
-      object Panel4: TPanel
-        Left = 293
-        Top = 250
-        Width = 52
-        Height = 29
-        Caption = 'Lower'
-        Color = clGrayText
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        TabOrder = 4
-      end
-      object Panel5: TPanel
-        Left = 359
-        Top = 250
-        Width = 52
-        Height = 29
-        Color = clGrayText
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        TabOrder = 5
-      end
       object lstFaultPage: TListBox
         Left = 86
         Top = 88
@@ -72577,6 +72492,99 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Height = 197
         ItemHeight = 13
         TabOrder = 8
+        Visible = False
+      end
+      object lstMenu: TListBox
+        Left = 86
+        Top = 88
+        Width = 332
+        Height = 197
+        ItemHeight = 13
+        TabOrder = 0
+        OnDrawItem = lstMenuDrawItem
+      end
+      object Panel1: TPanel
+        Left = 89
+        Top = 253
+        Width = 64
+        Height = 26
+        Caption = '<<'
+        Color = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clLime
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 1
+        Visible = False
+      end
+      object Panel2: TPanel
+        Left = 155
+        Top = 253
+        Width = 64
+        Height = 26
+        Caption = '>>'
+        Color = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clLime
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 2
+        Visible = False
+      end
+      object Panel3: TPanel
+        Left = 220
+        Top = 253
+        Width = 64
+        Height = 26
+        Caption = 'Raise'
+        Color = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clLime
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 3
+        Visible = False
+      end
+      object Panel4: TPanel
+        Left = 285
+        Top = 253
+        Width = 64
+        Height = 26
+        Caption = 'Lower'
+        Color = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clLime
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 4
+        Visible = False
+      end
+      object Panel5: TPanel
+        Left = 351
+        Top = 253
+        Width = 64
+        Height = 26
+        Color = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clLime
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 5
         Visible = False
       end
     end
