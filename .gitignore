@@ -5,7 +5,6 @@
 /Source/instructor/panels/__history
 /Source/instructor/panels/__recovery
 /Source/bin
-/Source/common
 /Source/components
 /Source/components/TrendChart
 /Source/ersimulator/panel/__history
@@ -37,3 +36,4 @@
 /Source/Main Engine 2 PS/__history
 /Source/Main Engine 2 PS/__recovery
 /Source/bin
+/Source/common/__history
