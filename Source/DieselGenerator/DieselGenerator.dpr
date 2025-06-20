@@ -7,7 +7,7 @@ uses
   uDieselGeneratorSystem in 'uDieselGeneratorSystem.pas',
   uDataBuffer in '..\network\uDataBuffer.pas',
   uNetBaseSocket in '..\network\uNetBaseSocket.pas',
-  uNetworkManager in '..\network\uNetworkManager.pas',
+  //uNetworkManager in '..\network\uNetworkManager.pas',
   uPacketRegister in '..\network\uPacketRegister.pas',
   uTCPClient in '..\network\uTCPClient.pas',
   uTCPDatatype in '..\network\uTCPDatatype.pas',
@@ -20,7 +20,7 @@ uses
   uFunction in '..\common\uFunction.pas',
   uListener in '..\common\uListener.pas',
   uSetting in '..\common\uSetting.pas',
-  uNetworkManagerTimer in '..\network\uNetworkManagerTimer.pas',
+  uNetworkManager in '..\network\uNetworkManager.pas',
   uConsumption in '..\engines\entity\uConsumption.pas',
   uEntity in '..\engines\entity\uEntity.pas',
   uGenerator in '..\engines\entity\uGenerator.pas';

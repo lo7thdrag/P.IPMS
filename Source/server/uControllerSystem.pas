@@ -168,35 +168,36 @@ begin
   found := False;
   l := FElmtCmdList.LockList;
 
-  for I := 0 to l.Count - 1 do
-  begin
-    item := l.Items[I];
-    if (item.ElementID = data.ElementID) and
-       (item.CommandID = data.CommandID) then
+  try
+    for I := 0 to l.Count - 1 do
     begin
+      item := l.Items[I];
+      if (item.ElementID = data.ElementID) and
+         (item.CommandID = data.CommandID) then
+      begin
+        item.ValueByte := data.ValueByte;
+        item.ValueDouble := data.ValueDouble;
+        item.ValueBool := data.ValueBool;
+        found := True;
+        Break;
+      end;
+    end;
+
+    if not found then
+    begin
+      item := TCommon_ELmt_Command.Create;
+      item.ElementID := data.ElementID;
+      item.MimicID := data.MimicID;
+      item.CommandID := data.CommandID;
       item.ValueByte := data.ValueByte;
       item.ValueDouble := data.ValueDouble;
       item.ValueBool := data.ValueBool;
-      found := True;
-      Break;
+
+      l.Add(item);
     end;
+  finally
+    FElmtCmdList.UnlockList;
   end;
-
-  if not found then
-  begin
-    item := TCommon_ELmt_Command.Create;
-    item.ElementID := data.ElementID;
-    item.MimicID := data.MimicID;
-    item.CommandID := data.CommandID;
-    item.ValueByte := data.ValueByte;
-    item.ValueDouble := data.ValueDouble;
-    item.ValueBool := data.ValueBool;
-
-    l.Add(item);
-  end;
-
-  FElmtCmdList.UnlockList;
-
 end;
 
 procedure TControllerlSystem.SilentListener(ListenerID : string; Silent : Boolean);
@@ -406,24 +407,25 @@ begin
 
   //-============
   list := FAlarmQueue.LockList;
+  try
+    if list.Count > 0 then
+    begin
+      // FIFO
+      objElm := list.Items[0];
 
-  if list.Count > 0 then
-  begin
-    // FIFO
-    objElm := list.Items[0];
+      FIPMSDatabase.SaveAlarm(FRunningScenario,objElm.ElementID,
+        FServerRunningTime, objElm.ElementID+'.ALM.TRU', IntToStr(objElm.AlarmgroupID),
+        'ALARM','MCR_Instructor', objElm.ElementID+'.ALM.TRU','N','G','G',
+        IntToStr(objElm.MainMimic_IDfk)+ ' '+objElm.AlarmgroupAbbreviation+' '+
+        objElm.ElementID+' '+objElm.Elementname+' '+objElm.Text_0,FServerRunningTime);
 
-    FIPMSDatabase.SaveAlarm(FRunningScenario,objElm.ElementID,
-      FServerRunningTime, objElm.ElementID+'.ALM.TRU', IntToStr(objElm.AlarmgroupID),
-      'ALARM','MCR_Instructor', objElm.ElementID+'.ALM.TRU','N','G','G',
-      IntToStr(objElm.MainMimic_IDfk)+ ' '+objElm.AlarmgroupAbbreviation+' '+
-      objElm.ElementID+' '+objElm.Elementname+' '+objElm.Text_0,FServerRunningTime);
-
-    list.Delete(0);
-    objElm.Free;
-    needUpdate := True;
+      list.Delete(0);
+      objElm.Free;
+      needUpdate := True;
+    end;
+  finally
+    FAlarmQueue.UnlockList;
   end;
-
-  FAlarmQueue.UnlockList;
   //==================
 
   // remove alarm to database then broadcast updated alarm to client
@@ -431,40 +433,42 @@ begin
   //-============
   list := FAlarmRemQueue.LockList;
 
-  if list.Count > 0 then
-  begin
-    // FIFO
-    objElm := list.Items[0];
+  try 
+    if list.Count > 0 then
+    begin
+      // FIFO
+      objElm := list.Items[0];
 
-    FIPMSDatabase.GetAlarmByRunningIDElemnID(FRunningScenario, objElm.ElementID, objAlm);
+      FIPMSDatabase.GetAlarmByRunningIDElemnID(FRunningScenario, objElm.ElementID, objAlm);
 
-    if (objElm.aAck = 'Y') and ((objAlm.final_state <> 'A') or (objAlm.final_state <> 'D')) then
+      if (objElm.aAck = 'Y') and ((objAlm.final_state <> 'A') or (objAlm.final_state <> 'D')) then
 
-      { save alarm -> Running ID to RS_ALARM_LOG table ->
-             state (prev: Ack, action: Reset, final: Delete) }
-      FIPMSDatabase.SaveAlarm2(FRunningScenario,FServerRunningTime,
-        objElm.ElementID+'.ALM.TRU', IntToStr(objElm.AlarmgroupID), 'ALARM',
-        'MCR_Instructor', objElm.ElementID+'.ALM.TRU','A','R','D',
-        IntToStr(objElm.MainMimic_IDfk)+' '+objElm.AlarmgroupAbbreviation+
-        ' '+objElm.ElementID+' '+objElm.Elementname+' '+objElm.Text_0,
-        FServerRunningTime)
-    else
-      { save alarm -> Running ID to RS_ALARM_LOG table ->
-          state (prev: Generate, action: Reset, final: Reset) }
-      FIPMSDatabase.SaveAlarm2(FRunningScenario, FServerRunningTime,
-        objElm.ElementID+'.ALM.TRU',IntToStr(objElm.AlarmgroupID),
-        'ALARM','MCR_Instructor',objElm.ElementID+'.ALM.TRU','G','R','R',
-        IntToStr(objElm.MainMimic_IDfk)+' '+
-        objElm.AlarmgroupAbbreviation+' '+objElm.ElementID+' '+
-        objElm.Elementname+' '+objElm.Text_0,
-        FServerRunningTime);
+        { save alarm -> Running ID to RS_ALARM_LOG table ->
+               state (prev: Ack, action: Reset, final: Delete) }
+        FIPMSDatabase.SaveAlarm2(FRunningScenario,FServerRunningTime,
+          objElm.ElementID+'.ALM.TRU', IntToStr(objElm.AlarmgroupID), 'ALARM',
+          'MCR_Instructor', objElm.ElementID+'.ALM.TRU','A','R','D',
+          IntToStr(objElm.MainMimic_IDfk)+' '+objElm.AlarmgroupAbbreviation+
+          ' '+objElm.ElementID+' '+objElm.Elementname+' '+objElm.Text_0,
+          FServerRunningTime)
+      else
+        { save alarm -> Running ID to RS_ALARM_LOG table ->
+            state (prev: Generate, action: Reset, final: Reset) }
+        FIPMSDatabase.SaveAlarm2(FRunningScenario, FServerRunningTime,
+          objElm.ElementID+'.ALM.TRU',IntToStr(objElm.AlarmgroupID),
+          'ALARM','MCR_Instructor',objElm.ElementID+'.ALM.TRU','G','R','R',
+          IntToStr(objElm.MainMimic_IDfk)+' '+
+          objElm.AlarmgroupAbbreviation+' '+objElm.ElementID+' '+
+          objElm.Elementname+' '+objElm.Text_0,
+          FServerRunningTime);
 
-    list.Delete(0);
-    objElm.Free;
-    needUpdate := True;
+      list.Delete(0);
+      objElm.Free;
+      needUpdate := True;
+    end;
+  finally
+    FAlarmRemQueue.UnlockList;
   end;
-
-  FAlarmRemQueue.UnlockList;
   //==================
 
   if needUpdate then
@@ -514,8 +518,12 @@ begin
       end;
 
       lAlarm := FAlarmRemQueue.LockList;
-      lAlarm.Add(objElm);
-      FAlarmRemQueue.UnlockList;
+      try
+        lAlarm.Add(objElm);
+      finally
+        FAlarmRemQueue.UnlockList;
+      end;
+      
 
     end;
 
@@ -559,8 +567,11 @@ begin
       objElm := FIPMSDatabase.GetElement(TElement(Sender).ElementID);
 
       lAlarm := FAlarmQueue.LockList;
-      lAlarm.Add(objElm);
-      FAlarmQueue.UnlockList;
+      try
+        lAlarm.Add(objElm);
+      finally
+        FAlarmQueue.UnlockList;
+      end;
     end;
   end;
 
@@ -1270,26 +1281,28 @@ begin
 
   l := FElmtCmdList.LockList;
 
-  while (i < C_BULK_ELEMENT_MAX) and
-    (l.Count > 0) do
-  begin
-    item := l.Items[0];
+  try
+    while (i < C_BULK_ELEMENT_MAX) and
+      (l.Count > 0) do
+    begin
+      item := l.Items[0];
 
-    bulkData.bunchData[i].ElementID := item.ElementID;
-    bulkData.bunchData[i].MimicID := item.MimicID;
-    bulkData.bunchData[i].CommandID := item.CommandID;
-    bulkData.bunchData[i].ValueByte := item.ValueByte;
-    bulkData.bunchData[i].ValueDouble := item.ValueDouble;
-    bulkData.bunchData[i].ValueBool := item.ValueBool;
+      bulkData.bunchData[i].ElementID := item.ElementID;
+      bulkData.bunchData[i].MimicID := item.MimicID;
+      bulkData.bunchData[i].CommandID := item.CommandID;
+      bulkData.bunchData[i].ValueByte := item.ValueByte;
+      bulkData.bunchData[i].ValueDouble := item.ValueDouble;
+      bulkData.bunchData[i].ValueBool := item.ValueBool;
 
-    item.Free;
-    l.Delete(0);
+      item.Free;
+      l.Delete(0);
 
-    Inc(i);
-    Result := True;
+      Inc(i);
+      Result := True;
+    end;
+  finally
+    FElmtCmdList.UnlockList;
   end;
-
-  FElmtCmdList.UnlockList;
 
 end;
 

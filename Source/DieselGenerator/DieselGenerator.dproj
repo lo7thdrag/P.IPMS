@@ -111,7 +111,6 @@
         <DCCReference Include="uDieselGeneratorSystem.pas"/>
         <DCCReference Include="..\network\uDataBuffer.pas"/>
         <DCCReference Include="..\network\uNetBaseSocket.pas"/>
-        <DCCReference Include="..\network\uNetworkManager.pas"/>
         <DCCReference Include="..\network\uPacketRegister.pas"/>
         <DCCReference Include="..\network\uTCPClient.pas"/>
         <DCCReference Include="..\network\uTCPDatatype.pas"/>
@@ -122,12 +121,11 @@
         <DCCReference Include="..\common\uDataType.pas"/>
         <DCCReference Include="..\common\uFreezeFrom.pas">
             <Form>frmFreeze</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\common\uFunction.pas"/>
         <DCCReference Include="..\common\uListener.pas"/>
         <DCCReference Include="..\common\uSetting.pas"/>
-        <DCCReference Include="..\network\uNetworkManagerTimer.pas"/>
+        <DCCReference Include="..\network\uNetworkManager.pas"/>
         <DCCReference Include="..\engines\entity\uConsumption.pas"/>
         <DCCReference Include="..\engines\entity\uEntity.pas"/>
         <DCCReference Include="..\engines\entity\uGenerator.pas"/>
