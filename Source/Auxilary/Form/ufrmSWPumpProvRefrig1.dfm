@@ -15,7 +15,7 @@ object frmSWPumpProvRefrig1: TfrmSWPumpProvRefrig1
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object pnlMainBackground: TPanel
     Left = 0
     Top = 0
     Width = 768
@@ -73841,7 +73841,7 @@ object frmSWPumpProvRefrig1: TfrmSWPumpProvRefrig1
         217627C4EE84D89D10BB13627742EC4E88DD09B13B217627C4EE84D89D10BB13
         6277420E7C1D00FB6B6F63560000000049454E44AE426082}
     end
-    object Image3: TImage
+    object imgStart: TImage
       Left = 163
       Top = 615
       Width = 125
@@ -75308,7 +75308,7 @@ object frmSWPumpProvRefrig1: TfrmSWPumpProvRefrig1
         7E83817E83817E83817E83817E83817E83817E83817E83817E83817E83817E83
         813B}
     end
-    object Image4: TImage
+    object imgStop: TImage
       Left = 533
       Top = 615
       Width = 125
@@ -76775,7 +76775,21 @@ object frmSWPumpProvRefrig1: TfrmSWPumpProvRefrig1
         7E83817E83817E83817E83817E83817E83817E83817E83817E83817E83817E83
         81BE}
     end
-    object VrRotarySwitch2: TVrRotarySwitch
+    object imgShadowStart: TImage
+      Left = 163
+      Top = 615
+      Width = 125
+      Height = 124
+      OnClick = imgShadowStartClick
+    end
+    object imgShadowStop: TImage
+      Left = 533
+      Top = 615
+      Width = 125
+      Height = 124
+      OnClick = imgShadowStopClick
+    end
+    object vrPowerSupply: TVrRotarySwitch
       Left = 309
       Top = 804
       Width = 150
@@ -76784,6 +76798,7 @@ object frmSWPumpProvRefrig1: TfrmSWPumpProvRefrig1
       SwitchPositions.Strings = (
         'OFF'
         'ON')
+      SwitchPosition = 1
       SwitchAngleStart = 45
       SwitchAngleEnd = 150
       WinchColor = clBlack
@@ -76794,6 +76809,7 @@ object frmSWPumpProvRefrig1: TfrmSWPumpProvRefrig1
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
+      OnClick = vrPowerSupplyClick
     end
   end
 end

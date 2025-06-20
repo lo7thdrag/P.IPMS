@@ -4,20 +4,22 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch,
-  Vcl.StdCtrls, VrAngularMeter, Vcl.Imaging.pngimage, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch, Vcl.StdCtrls, VrAngularMeter,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls,
+
+  uDataType, uMainForm;
 
 type
   TfrmFireFightingPump2 = class(TForm)
-    Panel1: TPanel;
+    pnlMainBackground: TPanel;
     Image1: TImage;
     Image10: TImage;
     Image2: TImage;
     Image3: TImage;
     Image4: TImage;
-    Image6: TImage;
-    Image7: TImage;
-    Image8: TImage;
+    imgACHeating: TImage;
+    imgStart: TImage;
+    imgStop: TImage;
     Image9: TImage;
     Image5: TImage;
     pnlV: TPanel;
@@ -27,11 +29,18 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    VrRotarySwitch1: TVrRotarySwitch;
-    VrRotarySwitch2: TVrRotarySwitch;
-    VrRotarySwitch3: TVrRotarySwitch;
+    vrAcHeating: TVrRotarySwitch;
+    vrRemote: TVrRotarySwitch;
+    vrPowerSupply: TVrRotarySwitch;
+    imgShadowStop: TImage;
+    imgShadowStart: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure vrAcHeatingClick(Sender: TObject);
+    procedure imgShadowStartClick(Sender: TObject);
+    procedure imgShadowStopClick(Sender: TObject);
+    procedure vrPowerSupplyClick(Sender: TObject);
+    procedure vrRemoteClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -62,9 +71,11 @@ begin
       EnableComposited(TWinControl(WinControl.Controls[i]));
 end;
 
+{$REGION ' Form Procedure '}
+
 procedure TfrmFireFightingPump2.FormCreate(Sender: TObject);
 begin
-//  EnableComposited(pnlMainBackground);
+  EnableComposited(pnlMainBackground);
 end;
 
 procedure TfrmFireFightingPump2.FormShow(Sender: TObject);
@@ -84,5 +95,41 @@ begin
     Height := Screen.Monitors[0].Height;
   end;
 end;
+
+{$ENDREGION}
+
+{$REGION ' Button Handle Procedure '}
+
+procedure TfrmFireFightingPump2.imgShadowStartClick(Sender: TObject);
+begin
+  if frmMainForm.pumpTemp[3].PowerSupply then
+    AuxiliarySystem.EngineRun(C_PUMP_ID[3], True);
+end;
+
+procedure TfrmFireFightingPump2.imgShadowStopClick(Sender: TObject);
+begin
+  if frmMainForm.pumpTemp[3].PowerSupply then
+    AuxiliarySystem.EngineRun(C_PUMP_ID[3], False);
+end;
+
+procedure TfrmFireFightingPump2.vrAcHeatingClick(Sender: TObject);
+begin
+  imgACHeating.Visible := not (vrAcHeating.SwitchPosition = 1);
+end;
+
+procedure TfrmFireFightingPump2.vrPowerSupplyClick(Sender: TObject);
+begin
+  case vrPowerSupply.SwitchPosition of
+    0: AuxiliarySystem.PowerSupply(C_PUMP_ID[3], False);
+    1: AuxiliarySystem.PowerSupply(C_PUMP_ID[3], True)
+  end;
+end;
+
+procedure TfrmFireFightingPump2.vrRemoteClick(Sender: TObject);
+begin
+  //
+end;
+
+{$ENDREGION}
 
 end.

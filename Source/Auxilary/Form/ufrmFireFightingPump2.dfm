@@ -15,7 +15,7 @@ object frmFireFightingPump2: TfrmFireFightingPump2
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object pnlMainBackground: TPanel
     Left = 0
     Top = 0
     Width = 768
@@ -153464,7 +153464,7 @@ object frmFireFightingPump2: TfrmFireFightingPump2
         6277420E7C1D00FB6B6F63560000000049454E44AE426082}
     end
     object Image4: TImage
-      Left = 149
+      Left = 161
       Top = 830
       Width = 137
       Height = 136
@@ -153541,7 +153541,7 @@ object frmFireFightingPump2: TfrmFireFightingPump2
         217627C4EE84D89D10BB13627742EC4E88DD09B13B217627C4EE84D89D10BB13
         6277420E7C1D00FB6B6F63560000000049454E44AE426082}
     end
-    object Image6: TImage
+    object imgACHeating: TImage
       Left = 162
       Top = 212
       Width = 125
@@ -155008,7 +155008,7 @@ object frmFireFightingPump2: TfrmFireFightingPump2
         7E83817E83817E83817E83817E83817E83817E83817E83817E83817E83817E83
         8146}
     end
-    object Image7: TImage
+    object imgStart: TImage
       Left = 162
       Top = 614
       Width = 125
@@ -156475,7 +156475,7 @@ object frmFireFightingPump2: TfrmFireFightingPump2
         7E83817E83817E83817E83817E83817E83817E83817E83817E83817E83817E83
         813B}
     end
-    object Image8: TImage
+    object imgStop: TImage
       Left = 531
       Top = 614
       Width = 125
@@ -158098,6 +158098,20 @@ object frmFireFightingPump2: TfrmFireFightingPump2
         217627C4EE84D89D10BB13627742EC4E88DD09B13B217627C4EE84D89D10BB13
         6277420E7C1D00FB6B6F63560000000049454E44AE426082}
     end
+    object imgShadowStop: TImage
+      Left = 531
+      Top = 614
+      Width = 125
+      Height = 124
+      OnClick = imgShadowStopClick
+    end
+    object imgShadowStart: TImage
+      Left = 162
+      Top = 614
+      Width = 125
+      Height = 124
+      OnClick = imgShadowStartClick
+    end
     object pnlV: TPanel
       Left = 129
       Top = 347
@@ -158217,7 +158231,7 @@ object frmFireFightingPump2: TfrmFireFightingPump2
         ParentFont = False
       end
     end
-    object VrRotarySwitch1: TVrRotarySwitch
+    object vrAcHeating: TVrRotarySwitch
       Left = 531
       Top = 212
       Width = 125
@@ -158235,9 +158249,10 @@ object frmFireFightingPump2: TfrmFireFightingPump2
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
+      OnClick = vrAcHeatingClick
     end
-    object VrRotarySwitch2: TVrRotarySwitch
-      Left = 155
+    object vrRemote: TVrRotarySwitch
+      Left = 167
       Top = 836
       Width = 125
       Height = 124
@@ -158245,6 +158260,7 @@ object frmFireFightingPump2: TfrmFireFightingPump2
         '2'
         '0'
         '1')
+      SwitchPosition = 2
       SwitchAngleStart = 130
       SwitchAngleEnd = 225
       WinchColor = clBlack
@@ -158255,8 +158271,9 @@ object frmFireFightingPump2: TfrmFireFightingPump2
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
+      OnClick = vrRemoteClick
     end
-    object VrRotarySwitch3: TVrRotarySwitch
+    object vrPowerSupply: TVrRotarySwitch
       Left = 506
       Top = 810
       Width = 150
@@ -158265,6 +158282,7 @@ object frmFireFightingPump2: TfrmFireFightingPump2
       SwitchPositions.Strings = (
         'OFF'
         'ON')
+      SwitchPosition = 1
       SwitchAngleStart = 45
       SwitchAngleEnd = 150
       WinchColor = clBlack
@@ -158275,6 +158293,7 @@ object frmFireFightingPump2: TfrmFireFightingPump2
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
+      OnClick = vrPowerSupplyClick
     end
   end
 end

@@ -4,19 +4,25 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch,
-  Vcl.Imaging.pngimage, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
+
+  uDataType, uMainForm;
 
 type
   TfrmSWPumpProvRefrig1 = class(TForm)
-    Panel1: TPanel;
+    pnlMainBackground: TPanel;
     Image1: TImage;
     Image6: TImage;
-    Image3: TImage;
-    Image4: TImage;
-    VrRotarySwitch2: TVrRotarySwitch;
+    imgStart: TImage;
+    imgStop: TImage;
+    vrPowerSupply: TVrRotarySwitch;
+    imgShadowStart: TImage;
+    imgShadowStop: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure vrPowerSupplyClick(Sender: TObject);
+    procedure imgShadowStartClick(Sender: TObject);
+    procedure imgShadowStopClick(Sender: TObject);
   private
 
   public
@@ -46,9 +52,11 @@ begin
       EnableComposited(TWinControl(WinControl.Controls[i]));
 end;
 
+{$REGION ' Form Procedure '}
+
 procedure TfrmSWPumpProvRefrig1.FormCreate(Sender: TObject);
 begin
-  EnableComposited(Panel1);
+  EnableComposited(pnlMainBackground);
 end;
 
 procedure TfrmSWPumpProvRefrig1.FormShow(Sender: TObject);
@@ -68,5 +76,31 @@ begin
     Height := Screen.Monitors[0].Height;
   end;
 end;
+
+{$ENDREGION}
+
+{$REGION ' Button Handle Procedure '}
+
+procedure TfrmSWPumpProvRefrig1.imgShadowStartClick(Sender: TObject);
+begin
+  if frmMainForm.pumpTemp[1].PowerSupply then
+    AuxiliarySystem.EngineRun(C_PUMP_ID[1], True);
+end;
+
+procedure TfrmSWPumpProvRefrig1.imgShadowStopClick(Sender: TObject);
+begin
+  if frmMainForm.pumpTemp[1].PowerSupply then
+    AuxiliarySystem.EngineRun(C_PUMP_ID[1], False);
+end;
+
+procedure TfrmSWPumpProvRefrig1.vrPowerSupplyClick(Sender: TObject);
+begin
+  case vrPowerSupply.SwitchPosition of
+    0: AuxiliarySystem.PowerSupply(C_PUMP_ID[1], False);
+    1: AuxiliarySystem.PowerSupply(C_PUMP_ID[1], True)
+  end;
+end;
+
+{$ENDREGION}
 
 end.

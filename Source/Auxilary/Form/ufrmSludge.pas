@@ -4,22 +4,29 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch,
-  Vcl.Imaging.pngimage, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
+
+  uDataType, uMainForm;
 
 type
   TfrmSludge = class(TForm)
-    Panel1: TPanel;
+    pnlMainBackground: TPanel;
     Image1: TImage;
-    Image2: TImage;
-    Image3: TImage;
-    Image4: TImage;
+    imgACHeating: TImage;
+    imgStart: TImage;
+    imgStop: TImage;
     Image5: TImage;
     Image6: TImage;
-    VrRotarySwitch1: TVrRotarySwitch;
-    VrRotarySwitch2: TVrRotarySwitch;
+    vrAcHeating: TVrRotarySwitch;
+    vrPowerSupply: TVrRotarySwitch;
+    imgShadowStart: TImage;
+    imgShadowStop: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure vrAcHeatingClick(Sender: TObject);
+    procedure imgShadowStartClick(Sender: TObject);
+    procedure imgShadowStopClick(Sender: TObject);
+    procedure vrPowerSupplyClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,9 +55,11 @@ begin
       EnableComposited(TWinControl(WinControl.Controls[i]));
 end;
 
+{$REGION ' Form Procedure '}
+
 procedure TfrmSludge.FormCreate(Sender: TObject);
 begin
-//  EnableComposited(Panel1);
+  EnableComposited(pnlMainBackground);
 end;
 
 procedure TfrmSludge.FormShow(Sender: TObject);
@@ -70,5 +79,37 @@ begin
     Height := Screen.Monitors[0].Height;
   end;
 end;
+
+{$ENDREGION}
+
+{$REGION ' Button Handle Procedure '}
+
+procedure TfrmSludge.imgShadowStartClick(Sender: TObject);
+begin
+  if frmMainForm.pumpTemp[2].PowerSupply then
+    AuxiliarySystem.EngineRun(C_PUMP_ID[2], True);
+
+end;
+
+procedure TfrmSludge.imgShadowStopClick(Sender: TObject);
+begin
+  if frmMainForm.pumpTemp[2].PowerSupply then
+    AuxiliarySystem.EngineRun(C_PUMP_ID[2], False);
+end;
+
+procedure TfrmSludge.vrAcHeatingClick(Sender: TObject);
+begin
+  imgACHeating.Visible := not (vrAcHeating.SwitchPosition = 1);
+end;
+
+procedure TfrmSludge.vrPowerSupplyClick(Sender: TObject);
+begin
+  case vrPowerSupply.SwitchPosition of
+    0: AuxiliarySystem.PowerSupply(C_PUMP_ID[2], False);
+    1: AuxiliarySystem.PowerSupply(C_PUMP_ID[2], True)
+  end;
+end;
+
+{$ENDREGION}
 
 end.

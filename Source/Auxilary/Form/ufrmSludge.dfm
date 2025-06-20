@@ -15,7 +15,7 @@ object frmSludge: TfrmSludge
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object pnlMainBackground: TPanel
     Left = 0
     Top = 0
     Width = 768
@@ -73760,7 +73760,7 @@ object frmSludge: TfrmSludge
         817E83817E83817E83817E83817E83817E83817E83817E83817E83817E83817E
         8381}
     end
-    object Image2: TImage
+    object imgACHeating: TImage
       Left = 162
       Top = 212
       Width = 125
@@ -75227,7 +75227,7 @@ object frmSludge: TfrmSludge
         7E83817E83817E83817E83817E83817E83817E83817E83817E83817E83817E83
         8146}
     end
-    object Image3: TImage
+    object imgStart: TImage
       Left = 162
       Top = 614
       Width = 125
@@ -76694,7 +76694,7 @@ object frmSludge: TfrmSludge
         7E83817E83817E83817E83817E83817E83817E83817E83817E83817E83817E83
         813B}
     end
-    object Image4: TImage
+    object imgStop: TImage
       Left = 531
       Top = 614
       Width = 125
@@ -78317,7 +78317,21 @@ object frmSludge: TfrmSludge
         217627C4EE84D89D10BB13627742EC4E88DD09B13B217627C4EE84D89D10BB13
         6277420E7C1D00FB6B6F63560000000049454E44AE426082}
     end
-    object VrRotarySwitch1: TVrRotarySwitch
+    object imgShadowStart: TImage
+      Left = 162
+      Top = 614
+      Width = 125
+      Height = 124
+      OnClick = imgShadowStartClick
+    end
+    object imgShadowStop: TImage
+      Left = 531
+      Top = 614
+      Width = 125
+      Height = 124
+      OnClick = imgShadowStopClick
+    end
+    object vrAcHeating: TVrRotarySwitch
       Left = 531
       Top = 212
       Width = 125
@@ -78325,6 +78339,7 @@ object frmSludge: TfrmSludge
       SwitchPositions.Strings = (
         '0'
         '1')
+      SwitchPosition = 1
       SwitchAngleStart = 180
       SwitchAngleEnd = 225
       WinchColor = clBlack
@@ -78335,8 +78350,9 @@ object frmSludge: TfrmSludge
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
+      OnClick = vrAcHeatingClick
     end
-    object VrRotarySwitch2: TVrRotarySwitch
+    object vrPowerSupply: TVrRotarySwitch
       Left = 309
       Top = 804
       Width = 150
@@ -78355,6 +78371,7 @@ object frmSludge: TfrmSludge
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
+      OnClick = vrPowerSupplyClick
     end
   end
 end
