@@ -238,6 +238,7 @@ type
     procedure SetOilMistDetFailure(const Value : Boolean);
     procedure SetOilMistDetAlarm(const Value : Boolean);
     procedure SetPrelubeInProgress(const Value : Boolean);
+    procedure SetPrelubInProgress(const Value : Boolean);
     procedure SetPrelubeFailure(const Value : Boolean);
     procedure SetOilSumpLevel(const Value : Boolean);
     procedure SetPrimLOPump(const Value : Boolean);
@@ -416,7 +417,7 @@ type
     property OilMistDetSafety : Boolean read FOilMistDetSafety write SetOilMistDetSafety;
     property OilMistDetFailure : Boolean read FOilMistDetFailure write SetOilMistDetFailure;
     property OilMistDetAlarm : Boolean read FOilMistDetAlarm write SetOilMistDetAlarm;
-    property PrelubeInProgress : Boolean read FPrelubeInProgress write SetPrelubeInProgress;
+    property PrelubeInProgress : Boolean read FPrelubeInProgress write SetPrelubInProgress;
     property PrelubeFailure : Boolean read FPrelubeFailure write SetPrelubeFailure;
     property OilSumpLevel : Boolean read FOilSumpLevel write SetOilSumpLevel;
     property PrimLOPump : Boolean read FPrimLOPump write SetPrimLOPump;
@@ -445,8 +446,8 @@ type
     property SafetyStopSysFail : Boolean read FSafetyStopSysFail write SetSafetyStopSysFail;
     property SafetyStop : Boolean read FSafetyStop write SetSafetyStop;
     property PrelubricationFailure : Boolean read FPrelubricationFailure write SetPrelubricationFailure;
-    property PrelubInProgress : Boolean read FPrelubInProgress write SetPrelubeInProgress;
     property SafetyStopsOverriden : Boolean read FSafetyStopsOverriden write SetSafetyStopsOverriden;
+    property PrelubInProgress : Boolean read FPrelubInProgress write SetPrelubeInProgress;
     property OverspeedAlarm : Boolean read FOverspeedAlarm write SetOverspeedAlarm;
     property LOPressureVeryLow : Boolean read FLOPressureVeryLow write SetLOPressureVeryLow;
     property BearTempVeryHigh : Boolean read FBearTempVeryHigh write SetBearTempVeryHigh;
@@ -1991,6 +1992,15 @@ begin
   FPrelubeInProgress := Value;
   PC_StartingInterlocks[11] := Value;
   Listener.TriggerEvents(Self,epPCSMEPrelubInProgress,Value);
+end;
+
+procedure TMainEngine.SetPrelubInProgress(const Value: Boolean);
+begin
+  if FPrelubeInProgress = Value then
+    Exit;
+
+  FPrelubeInProgress := Value;
+  Listener.TriggerEvents(Self,epPCSMEPrelubeInProgress,Value);
 end;
 
 procedure TMainEngine.SetPrelubricationFailure(const Value: Boolean);

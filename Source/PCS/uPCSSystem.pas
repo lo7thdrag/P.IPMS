@@ -734,6 +734,7 @@ begin
       end;
     end;
 
+    {Bagian Pre Lub In Progree}
     epPCSMEPrelubeInProgress :
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
