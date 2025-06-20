@@ -445,7 +445,7 @@ type
 
       epPCSMEOverspeed, epPCSMEConRodBearingTempHigh, epPCSMEConRodBearingTempVeryHigh,
       epPCSMEBearingTempHigh, epPCSMEBearingTempVeryHigh, epPCSMEOilMistDetSafety, epPCSMEOilMistDetFailure,
-      epPCSMEOilMistDetAlarm, epPCSMEPrelubeInProgress, epPCSMEPrelubeFailure,
+      epPCSMEOilMistDetAlarm, epPCSMEPrelubeInProgress, epPCSMEPrelubeInProgressPS, epPCSMEPrelubeInProgressSB, epPCSMEPrelubeFailure,
       epPCSMEOilSumpLevel, epPCSMEHeater,epPCSMELOPressVeryLow, epPCSMELOPressClogg,
       epPCSMEPressFOClogg, epPCSMEInjPipeALeakFO, epPCSMEInjPipeBLeakFO,
       epPCSMEPrimLOPump, epPCSMEPreHeatingPump, epPCSMEAirValve, epPCSMEGasValve, epPCSMEBypassP2P4,
