@@ -108,8 +108,8 @@ end;
 procedure TfrmBallastnBilgePump.vrPowerSupplyClick(Sender: TObject);
 begin
   case vrPowerSupply.SwitchPosition of
-    0: AuxiliarySystem.EngineRun(C_PUMP_ID[0], False);
-    1: AuxiliarySystem.EngineRun(C_PUMP_ID[0], True)
+    0: AuxiliarySystem.PowerSupply(C_PUMP_ID[0], False);
+    1: AuxiliarySystem.PowerSupply(C_PUMP_ID[0], True)
   end;
 end;
 

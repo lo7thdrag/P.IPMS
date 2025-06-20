@@ -140,7 +140,7 @@ begin
   recCmd.CommandPropsID := epAuxPowerSupply;
   recCmd.ValueBool := aValue;
 
-  Network.AuxiliaryControllerSocket.SendData(C_PMS_COMMAND,@recCmd);
+  Network.AuxiliaryControllerSocket.SendData(C_AUX_COMMAND,@recCmd);
 end;
 
 procedure TAuxiliarySystem.NetEventInstructorCommonCmd(apRec: PAnsiChar; aSize: Word);

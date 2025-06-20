@@ -1276,7 +1276,7 @@ end;
 procedure TControllerManager.MappingAUXStateToElement(aElement: TElement; Order: E_PropsID; aValue: Boolean);
 begin
   case Order of
-    epAuxEngineRun, epAuxPowerSupply:
+    epAuxEngineRun :
     begin
       if aElement.ElementType = eltMCE then
       begin
@@ -1295,6 +1295,28 @@ begin
           TMCEElement(aElement).StateSwitchNoFault := esNoFault;
           TMCEElement(aElement).StateSwitchRemote := esLocal;
           TMCEElement(aElement).StateSwitchRunning := esNotRunning;
+          TMCEElement(aElement).StateElementDisabled := sdEnabled;
+        end
+      end;
+    end;
+    epAuxPowerSupply :
+    begin
+      if aElement.ElementType = eltMCE then
+      begin
+        if aValue then
+        begin
+          TMCEElement(aElement).StateValueValid := svValid;
+          TMCEElement(aElement).StateSwitchNoFault := esNoFault;
+          TMCEElement(aElement).StateSwitchRemote := esLocal;
+//          TMCEElement(aElement).StateSwitchRunning := esRunning;
+          TMCEElement(aElement).StateElementDisabled := sdEnabled;
+        end
+        else
+        begin
+          TMCEElement(aElement).StateValueValid := svValid;
+          TMCEElement(aElement).StateSwitchNoFault := esFault;
+          TMCEElement(aElement).StateSwitchRemote := esLocal;
+//          TMCEElement(aElement).StateSwitchRunning := esNotRunning;
           TMCEElement(aElement).StateElementDisabled := sdEnabled;
         end
       end;

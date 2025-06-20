@@ -712,10 +712,9 @@ begin
 //--- start loading scenario here
 //  Application.ProcessMessages;
 
-  // load PMS condition
   FDatabase.GetRS_PMSCondition(aSessionID,l);
 
-  // 1st 50% step;
+  {$REGION ' Load PMS '}
 
   if l.Count <= 0 then
   begin
@@ -824,10 +823,11 @@ begin
 
   FreeList(l);
 
-  // end load PMS condition
+  {$ENDREGION}
 
-  //load PCS condition
   FDatabase.GetRS_PCSCondition(aSessionID, l);
+
+  {$REGION ' Load PCS  '}
 
   if l.Count <= 0 then
   begin
@@ -1190,10 +1190,12 @@ begin
   end;
 
   FreeList(l);
-  //End load PCS Condition
 
-  //load Tank condition
+  {$ENDREGION}
+
   FDatabase.GetRS_TanksCondition(aSessionID, l);
+
+  {$REGION ' Load Tank '}
 
   if l.Count <= 0 then
   begin
@@ -1228,11 +1230,12 @@ begin
   end;
 
   FreeList(l);
-  //end load Tank condition
 
-  // load element condition
+  {$ENDREGION}
+
   FDatabase.GetRS_ElementCondition(aSessionID, l);
 
+  {$REGION ' Load Element '}
   if l.Count <= 0 then
   begin
     aDiv := 100;
@@ -1262,7 +1265,7 @@ begin
 
   FreeList(l);
 
-  // end load element condition
+  {$ENDREGION}
 
   {Ryu : untuk FA dan Tank condition akan diload di mimic berdasar running scenario}
 

@@ -412,7 +412,7 @@ begin
     {$ENDREGION}
 
     {$REGION ' AUX Section '}
-    epAuxEngineRun :
+    epAuxEngineRun, epAuxPowerSupply :
     begin
       rAuxCmd.PumpID := '';
 
@@ -562,6 +562,7 @@ begin
 
   FillChar(rPmsCmd, SizeOf(R_Common_PMS_Command), 0);
   FillChar(rPCSCmd, SizeOf(R_Common_PCS_Command), 0);
+  FillChar(rTankCmd, SizeOf(R_Common_TANK_Command), 0);
 
   case PropsID of
 
@@ -714,7 +715,9 @@ begin
       if Assigned(FOnPCSCommand) then
         FOnPCSCommand(rPCSCmd);
     end;
+    {$ENDREGION}
 
+    {$REGION ' Tank Section '}
     epTankLevel:
     begin
       if Sender is TTank then

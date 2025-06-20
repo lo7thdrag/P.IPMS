@@ -9667,8 +9667,6 @@ object frmTester: TfrmTester
       TabWidth = 130
       object tsElement: TTabSheet
         Caption = 'Element Control'
-        ExplicitWidth = 744
-        ExplicitHeight = 511
         object grpElementInput: TGroupBox
           Left = 0
           Top = 0
@@ -9684,8 +9682,6 @@ object frmTester: TfrmTester
           ParentBackground = False
           ParentFont = False
           TabOrder = 0
-          ExplicitTop = 16
-          ExplicitHeight = 495
         end
       end
     end
@@ -9696,7 +9692,7 @@ object frmTester: TfrmTester
       Height = 22
       Style = csDropDownList
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
+      Font.Color = clBlack
       Font.Height = -12
       Font.Name = 'Tahoma'
       Font.Style = []
@@ -9711,7 +9707,7 @@ object frmTester: TfrmTester
       Height = 22
       Style = csDropDownList
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
+      Font.Color = clBlack
       Font.Height = -12
       Font.Name = 'Tahoma'
       Font.Style = []
@@ -9725,7 +9721,7 @@ object frmTester: TfrmTester
       Width = 125
       Height = 138
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
+      Font.Color = clBlack
       Font.Height = -12
       Font.Name = 'Tahoma'
       Font.Style = []
