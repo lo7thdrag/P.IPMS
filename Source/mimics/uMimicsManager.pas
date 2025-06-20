@@ -355,8 +355,11 @@ begin
   ClearList(FMimicsList);
 
   l := FElementList.LockList;
-  ClearList(l);
-  FElementList.UnlockList;
+  try
+    ClearList(l);
+  finally
+    FElementList.UnlockList;
+  end;
 
   FRunner.Free;
   FElementList.Free;

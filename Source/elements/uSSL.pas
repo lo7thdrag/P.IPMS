@@ -420,6 +420,9 @@ end;
 
 procedure TSSLElement.SetValueElementLevel(const aValue: Double);
 begin
+  if FValueElementLevel = aValue then
+    Exit;
+
   FValueElementLevel := aValue;
 
   TankContentDetermination;

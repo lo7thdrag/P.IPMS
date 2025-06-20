@@ -39,6 +39,7 @@ constructor TERManager.Create;
 begin
 
   FEngineThread := TMSTimer.Create;
+
   FEngineThread.OnRunning := OnRunningThread;
   FEngineThread.Interval := 10;
 

@@ -75,13 +75,17 @@ var
   list : TList;
 begin
   list := FElements.LockList;
-  for I := 0 to list.Count - 1 do
-  begin
-    element := list.Items[i];
-    element.Free;
+  try
+    for I := 0 to list.Count - 1 do
+    begin
+      element := list.Items[i];
+      element.Free;
+    end;
+    list.Clear;
+  finally
+    FElements.UnlockList;
   end;
-  FElements.UnlockList;
-  FElements.Clear;
+
   FElements.Free;
   inherited;
 end;
