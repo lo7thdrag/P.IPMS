@@ -81,10 +81,10 @@ type
     ImgStart: TImage;
     ImgStop: TImage;
     ImgOI: TImage;
-    ImgPref: TImage;
+    ImgCBClosed: TImage;
     ImgIndicatorBS: TImage;
+    ImgIndicatorMsbCB: TImage;
     ImgIndicatorCBC: TImage;
-    ImgIndicatorCKC: TImage;
     ImgIndicatorGS: TImage;
     ImgIndicatorER: TImage;
     IMGIndicatorAuto: TImage;
@@ -94,10 +94,13 @@ type
     ImgIndicatorFP: TImage;
     ImgIndicatorHO: TImage;
     tmrAmpere: TTimer;
+    imgMenu: TImage;
+    lblDate: TLabel;
+    lblTime: TLabel;
     procedure ImgStartClick(Sender: TObject);
     procedure ImgStopClick(Sender: TObject);
     procedure ImgOIClick(Sender: TObject);
-    procedure ImgPrefClick(Sender: TObject);
+    procedure ImgCBClosedClick(Sender: TObject);
     procedure DoLedTest(OnOff : Boolean);
     procedure ImgLTMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -157,7 +160,7 @@ begin
   EnableComposited(pnlV);
 
   Led := [IMGIndicatorAuto, ImgIndicatorSA, ImgIndicatorMan,
-          ImgIndicatorER, ImgIndicatorGS, ImgIndicatorCKC, ImgIndicatorCBC, ImgIndicatorBS,
+          ImgIndicatorER, ImgIndicatorGS, ImgIndicatorCBC, ImgIndicatorMsbCB, ImgIndicatorBS,
           ImgIndicatorHO, ImgIndicatorFP, ImgIndicatorAP];
   SetLength(LedStatus, Length(Led));
 end;
@@ -198,12 +201,15 @@ begin
   MainSwitchBoardSystem.CBClosed(True);
 end;
 
-procedure TfrmEmergencyPanel.ImgPrefClick(Sender: TObject);
+procedure TfrmEmergencyPanel.ImgCBClosedClick(Sender: TObject);
 begin
   if not CekGeneratorCondition then
     Exit;
 
-  MainSwitchBoardSystem.GeneratorPreference(True);
+  if (VrCBClosed.SwitchPosition = 1) and (VrCBClosed.SwitchPosition = 2) then
+    MainSwitchBoardSystem.CBClosed(True)
+  else if (VrCBClosed.SwitchPosition = 0) then
+    MainSwitchBoardSystem.CBClosed(False)
 end;
 
 procedure TfrmEmergencyPanel.ImgStartClick(Sender: TObject);
@@ -294,8 +300,10 @@ begin
   ImgIndicatorER.Visible := Generator.EngineRun;
   ImgIndicatorGS.Visible := Generator.GeneratorSupplied;
 
-  ImgIndicatorCKC.Visible := Generator.CBClosed;
+  ImgIndicatorCBC.Visible := Generator.CBClosed;
+  ImgIndicatorMsbCB.Visible := Generator.CBClosed;
   ImgIndicatorBS.Visible := Generator.Busbar;
+
 end;
 
 procedure TfrmEmergencyPanel.VrCBClosedChange(Sender: TObject);

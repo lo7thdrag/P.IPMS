@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch, RzBmpBtn,
   Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls,
 
-  uDataType, uGenerator, uMainForm;
+  uDataType, uGenerator, uMainForm, Vcl.ComCtrls;
 
 type
   TfrmGeneratorPanel = class(TForm)
@@ -94,6 +94,59 @@ type
     lstFaultPage: TListBox;
     lstAlarmPage: TListBox;
     lstInfoPage: TListBox;
+    imgMenu: TImage;
+    lblTime: TLabel;
+    lblDate: TLabel;
+    pnlEngineMeters1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    ProgressBar1: TProgressBar;
+    ProgressBar2: TProgressBar;
+    ProgressBar3: TProgressBar;
+    ProgressBar4: TProgressBar;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    pnlEngineMeters2: TPanel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    Label28: TLabel;
+    Label29: TLabel;
+    Label30: TLabel;
+    Label35: TLabel;
+    Label36: TLabel;
+    Label39: TLabel;
+    Label40: TLabel;
+    ProgressBar5: TProgressBar;
+    ProgressBar6: TProgressBar;
+    Label31: TLabel;
+    Label32: TLabel;
+    Label33: TLabel;
+    Label37: TLabel;
+    Label38: TLabel;
+    Label43: TLabel;
+    Label44: TLabel;
+    Label45: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ImgStartClick(Sender: TObject);
@@ -194,16 +247,26 @@ begin
           ImgIndicatorHO, ImgIndicatorFP, ImgIndicatorAP];
   SetLength(LedStatus, Length(Led));
 
-  SetLCDLook;
-  {Menu}
-  InitMenu;
+  imgMenu.BringToFront;
+  lblTime.BringToFront;
+  lblDate.BringToFront;
+  lblTime.Caption := FormatDateTime('hh:nn:ss', Now);
+  lblDate.Caption := FormatDateTime('dd"/"mm"/"yy', Now);
 
-  CurrentMenuIndex := 0;
-//  SubMenuIndex := -1;
-//  SubSubMenuPage := 0;
-  InSubMenu := False;
-  InSubSubMenu := False;
-  LoadMainMenu(CurrentMenuIndex);
+  lstMenu.Visible := False;
+  Panel1.Visible := False;
+  Panel2.Visible := False;
+  Panel3.Visible := False;
+  Panel4.Visible := False;
+  Panel5.Visible := False;
+
+//  SetLCDLook;
+//  InitMenu;
+//
+//  CurrentMenuIndex := 0;
+//  InSubMenu := False;
+//  InSubSubMenu := False;
+//  LoadMainMenu(CurrentMenuIndex);
 end;
 
 procedure TfrmGeneratorPanel.FormDestroy(Sender: TObject);
@@ -268,12 +331,22 @@ begin
     Panel3.Caption := 'Raise';
     Panel4.Caption := 'Lower';
 
+    if InSubMenu then
+    begin
+      if (CurrentMenuIndex = 0) and (SubMenuIndex = 2) then
+      begin
+        pnlEngineMeters1.Visible := True;
+        pnlEngineMeters1.BringToFront;
+      end;
+    end;
+
     // Cek apakah submenu ini punya SubSubMenu
     if (CurrentMenuIndex = 0) and (SubMenuIndex < Length(SubSubMenu1)) and (Length(SubSubMenu1[SubMenuIndex]) > 0) then
     begin
       SubSubMenuPage := 0;
       InSubSubMenu := True;
       LoadSubSubMenu(SubSubMenuPage);
+
     end
     else if (CurrentMenuIndex = 1) and (SubMenuIndex < Length(SubSubMenu2)) and (Length(SubSubMenu2[SubMenuIndex]) > 0) then
     begin
@@ -292,10 +365,31 @@ end;
 
 procedure TfrmGeneratorPanel.ImgEscClick(Sender: TObject);
 begin
+  if not InSubMenu then
+  begin
+    lstMenu.Visible := True;
+    SetLCDLook;
+    InitMenu;
+    CurrentMenuIndex := 0;
+    LoadMainMenu(CurrentMenuIndex);
+
+    Panel1.Visible := True;
+    Panel2.Visible := True;
+    Panel3.Visible := True;
+    Panel4.Visible := True;
+    Panel5.Visible := True;
+    panel1.BringToFront;
+    Panel2.BringToFront;
+    Panel3.BringToFront;
+    Panel4.BringToFront;
+    Panel5.BringToFront;
+  end;
+
   if InSubSubMenu then
   begin
     InSubSubMenu := False;
     LoadSubMenu(CurrentMenuIndex);
+
   end
   else if InSubMenu then
   begin
@@ -309,15 +403,24 @@ begin
     lstAlarmPage.Visible := False;
     lstInfoPage.Visible := False;
 
+    lstMenu.Visible := True;
     Panel1.Caption := 'Raise';
     Panel2.Caption := 'Lower';
     Panel3.Caption := ' ';
     Panel4.Caption := ' ';
-
-    lstMenu.Visible := True;
     InitMenu;
     CurrentMenuIndex := 0;
     LoadMainMenu(CurrentMenuIndex);
+  end;
+
+  if (CurrentMenuIndex = 0) and (SubMenuIndex = 2) then
+  begin
+    pnlEngineMeters1.SendToBack;
+    pnlEngineMeters1.Visible := False;
+    pnlEngineMeters2.SendToBack;
+    pnlEngineMeters2.Visible := False;
+
+    LoadSubMenu(CurrentMenuIndex);
   end;
 end;
 
@@ -342,6 +445,15 @@ begin
     Dec(SubSubMenuPage);
     LoadSubSubMenu(SubSubMenuPage);
   end;
+
+  if InSubMenu then
+  begin
+    if (CurrentMenuIndex = 0) and (SubMenuIndex = 2) then
+    begin
+      pnlEngineMeters1.Visible := True;
+      pnlEngineMeters1.BringToFront;
+    end;
+  end;
 end;
 
 procedure TfrmGeneratorPanel.ImgF2Click(Sender: TObject);
@@ -351,8 +463,11 @@ begin
   begin
     if lstInfoPage.Visible then
     begin
-      Inc(CurrentMenuIndex);
-      LoadMainMenu(CurrentMenuIndex);
+      if CurrentMenuIndex < High(MainMenu) then
+      begin
+        Inc(CurrentMenuIndex);
+        lstInfoPage.Items.Assign(MainMenu[CurrentMenuIndex]);
+      end;
     end;
 
     {Down}
@@ -374,6 +489,15 @@ begin
     Inc(SubSubMenuPage);
     LoadSubSubMenu(SubSubMenuPage);
   end;
+
+  if InSubMenu then
+  begin
+    if (CurrentMenuIndex = 0) and (SubMenuIndex = 2) then
+    begin
+      pnlEngineMeters2.Visible := True;
+      pnlEngineMeters2.BringToFront;
+    end;
+  end;
 end;
 
 procedure TfrmGeneratorPanel.ImgF3Click(Sender: TObject);
@@ -390,7 +514,6 @@ end;
 
 procedure TfrmGeneratorPanel.ImgFPClick(Sender: TObject);
 begin
-  SetLCDLook;
   MenuFaultPage;
 
   lstMenu.Visible := False;
@@ -398,6 +521,7 @@ begin
   lstAlarmPage.Visible := False;
   lstInfoPage.Visible := False;
 
+  SetLCDLook;
   Panel1.Caption := '<<';
   Panel2.Caption := '>>';
   Panel3.Caption := 'Refresh';
@@ -410,7 +534,6 @@ end;
 
 procedure TfrmGeneratorPanel.ImgAPClick(Sender: TObject);
 begin
-  SetLCDLook;
   MenuAlarmPage;
 
   lstMenu.Visible := False;
@@ -418,6 +541,7 @@ begin
   lstAlarmPage.Visible := True;
   lstInfoPage.Visible := False;
 
+  SetLCDLook;
   Panel1.Caption := '<<';
   Panel2.Caption := '>>';
   Panel3.Caption := 'Refresh';
@@ -430,7 +554,6 @@ end;
 
 procedure TfrmGeneratorPanel.ImgIPClick(Sender: TObject);
 begin
-  SetLCDLook;
   MenuInfoPage;
 
   lstMenu.Visible := False;
@@ -438,6 +561,7 @@ begin
   lstAlarmPage.Visible := False;
   lstInfoPage.Visible := True;
 
+  SetLCDLook;
   Panel1.Caption := '<<';
   Panel2.Caption := '>>';
   Panel3.Caption := 'Raise';
@@ -464,6 +588,9 @@ end;
 procedure TfrmGeneratorPanel.ImgPrefClick(Sender: TObject);
 begin
   if not CekGeneratorCondition then
+    Exit;
+
+  if (frmMainForm.GeneratorTemp.GeneratorMode = 1) or (frmMainForm.GeneratorTemp.GeneratorMode = 2) then
     Exit;
 
   MainSwitchBoardSystem.GeneratorPreference(True);
@@ -643,24 +770,22 @@ begin
   SubSubMenu1[1][0].Add('F = 60.06 Hz');
 
   // SubSubMenu Engine meters (index = 2)
-  SetLength(SubSubMenu1[2], 3);
-  SubSubMenu1[2][0] := TStringList.Create;
-  SubSubMenu1[2][0].Add('Engine meters');
-  SubSubMenu1[2][0].Add('AI oil press.  : 0029-001000 mBa');
-  SubSubMenu1[2][0].Add('AI water temp. : 0030-000046 C');
-  SubSubMenu1[2][0].Add('Batt voltage   : 0041-024.1 V');
-  SubSubMenu1[2][0].Add('Engine speed   : 0033-00000 rpm');
-
-  SubSubMenu1[2][1] := TStringList.Create;
-  SubSubMenu1[2][1].Add('Engine meters');
-  SubSubMenu1[2][1].Add('AI spare 1     : 0031-00601');
-  SubSubMenu1[2][1].Add('AI spare 2     : 0032-00602');
-  SubSubMenu1[2][1].Add('Nb of starts   : 2787');
-  SubSubMenu1[2][1].Add('Hours run      : 0000038087h');
-
-  SubSubMenu1[2][2] := TStringList.Create;
-  SubSubMenu1[2][2].Add('User meter 1  : 0000000000');
-  SubSubMenu1[2][2].Add('User meter 2  : 0000000000');
+//  SetLength(SubSubMenu1[2], 2);
+//  SubSubMenu1[2][0] := TStringList.Create;
+//  SubSubMenu1[2][0].Add('Engine meters');
+//  SubSubMenu1[2][0].Add('AI oil press.  : 0029-001000 mBa');
+//  SubSubMenu1[2][0].Add('AI water temp. : 0030-000046 C');
+//  SubSubMenu1[2][0].Add('Batt voltage   : 0041-024.1 V');
+//  SubSubMenu1[2][0].Add('Engine speed   : 0033-00000 rpm');
+//
+//  SubSubMenu1[2][1] := TStringList.Create;
+//  SubSubMenu1[2][1].Add('Engine meters');
+//  SubSubMenu1[2][1].Add('AI spare 1     : 0031-00601');
+//  SubSubMenu1[2][1].Add('AI spare 2     : 0032-00602');
+//  SubSubMenu1[2][1].Add('Nb of starts   : 2787');
+//  SubSubMenu1[2][1].Add('Hours run      : 0000038087h');
+//  SubSubMenu1[2][1].Add('User meter 1  : 0000000000');
+//  SubSubMenu1[2][1].Add('User meter 2  : 0000000000');
 
   // SubSubMenu Digital Inputs
   SetLength(SubSubMenu1[3], 3);
@@ -1152,8 +1277,8 @@ begin
     ActiveListBox := lstInfoPage;
   end;
 
-  CurrentMenuIndex := MainIndex;
-  ActiveListBox.Items.Assign(MainMenu[MainIndex]);
+  CurrentMenuIndex := 0;
+  ActiveListBox.Items.Assign(MainMenu[CurrentMenuIndex]);
   InSubMenu := False;
   InSubSubMenu := False;
 end;
