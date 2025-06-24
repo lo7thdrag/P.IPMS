@@ -14487,10 +14487,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
     object tsSB: TTabSheet
       Caption = 'LCP Startboard Side'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pnlLCPSB: TPanel
         Left = 0
         Top = 0
@@ -29684,5 +29680,10 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
   object tmr1: TTimer
     OnTimer = tmr1Timer
     Left = 1272
+  end
+  object PrelubTimer: TTimer
+    OnTimer = PrelubTimerTimer
+    Left = 872
+    Top = 757
   end
 end

@@ -398,7 +398,7 @@ begin
     begin
       if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
-        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
       end;
     end;
 
@@ -1008,6 +1008,28 @@ begin
       if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    // Air Gas
+    epPCSMEAirValve :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEGasValve :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMESTCInManualMode :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt);
       end;
     end;
   end;

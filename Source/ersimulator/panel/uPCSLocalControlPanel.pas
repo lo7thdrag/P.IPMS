@@ -273,6 +273,7 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    PrelubTimer: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure vrtryswtchChange(Sender: TObject);
     procedure btnONClick(Sender: TObject);
@@ -295,6 +296,7 @@ type
     procedure vrtryswtchSTC_PSClick(Sender: TObject);
     procedure btnByPassOpenClick(Sender: TObject);
     procedure btnByPassClosedClick(Sender: TObject);
+    procedure PrelubTimerTimer(Sender: TObject);
 
   private
     aplctnvntsKey : TApplicationEvents;
@@ -315,7 +317,7 @@ type
     cppConditionStatusTag,counter : Integer;
     counterStartPS, counterStartSB, counterStopPS, counterStopSB, counterClutchPS, counterClutchSB,
     counterDeclutchPS, counterDeclutchSB : Integer;
-    FFlashingStartPS, FFlashingStartSB, FFlashingStopPS, FFlashingStopSB,
+    FFlashingStartPS, FFlashingStartSB, FFlashingStopPS, FFlashingStopSB, FPrelubBlinkPS, FPrelubBlinkSB,
     FFlashingClutchPS, FFlashingClutchSB, FFlashingDeclutchPS, FFlashingDeclutchSB : Boolean;
 
     procedure FlashingIndicatorStart(SenderOn, SenderOff: TSpeedButtonImage; aOnOff: Boolean);
@@ -745,7 +747,15 @@ begin
     begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(C_PCS_ME_PORTS);
       FFlashingStartPS := True;
-    end
+
+      // bagian pump dan proses prelub
+      main_engine.PrelubeInProgress  := False;
+      PrelubTimer.Enabled := False;
+
+      main_engine.PrimLOPumpAuto     := False;
+      main_engine.PreHeatingPumpAuto := False;
+      main_engine.HeaterAuto         := False;
+    end;
   end
   else if TButton(Sender).Tag = 1 then
   begin
@@ -753,6 +763,14 @@ begin
     begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(C_PCS_ME_STARBOARD);
       FFlashingStartSB := True;
+
+      // bagian pump dan proses prelub
+      main_engine.PrelubeInProgress  := False;
+      PrelubTimer.Enabled := False;
+
+      main_engine.PrimLOPumpAuto     := False;
+      main_engine.PreHeatingPumpAuto := False;
+      main_engine.HeaterAuto         := False
     end;
   end;
 end;
@@ -765,6 +783,11 @@ begin
     begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.StoppedStop(C_PCS_ME_PORTS);
       FFlashingStopPS := True;
+
+      // bagian pump dan proses prelub
+      main_engine.PrimLOPumpAuto     := True;
+      main_engine.PreHeatingPumpAuto := True;
+      main_engine.HeaterAuto         := True;
     end
   end
   else if TButton(Sender).Tag = 1 then
@@ -773,6 +796,11 @@ begin
     begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.StoppedStop(C_PCS_ME_STARBOARD);
       FFlashingStopSB := True;
+
+      // bagian pump dan proses prelub
+      main_engine.PrimLOPumpAuto     := True;
+      main_engine.PreHeatingPumpAuto := True;
+      main_engine.HeaterAuto         := True;
     end;
   end;
 end;
@@ -1061,8 +1089,8 @@ begin
         begin
           if Value then
             vrtryswtchPreStartSB.SwitchPosition := 0
-          else
-            vrtryswtchPreStartSB.SwitchPosition := 1;
+//          else
+//            vrtryswtchPreStartSB.SwitchPosition := 1;
         end;
         epPCSMERunning :
         begin
@@ -1474,6 +1502,12 @@ begin
 
 end;
 
+procedure TfrmPCSLocalControlPanel.PrelubTimerTimer(Sender: TObject);
+begin
+  if Assigned(main_engine) then
+      main_engine.PrelubeInProgress := not main_engine.PrelubeInProgress;
+end;
+
 procedure TfrmPCSLocalControlPanel.tmr1Timer(Sender: TObject);
 begin
   if (main_engine_PS.PreHeatingPump or main_engine_PS.PreHeatingPumpAuto)
@@ -1560,10 +1594,28 @@ begin
     begin
       main_engine.PrimLOPump     := False;
       main_engine.PrimLOPumpAuto := False;
+
+      // Prelub In Progress
+      main_engine.PrelubeInProgress := False;
+      PrelubTimer.Enabled := False;
+
+      // Gaz Valve, Air Valve dan By Pass P2-P4 tutup otomatis
+      main_engine.BypassP2P4 := False;
+      main_engine.AirValve   := False;
+      main_engine.GasValve   := False;
     end
     else if TVrRotarySwitch(Sender).SwitchPosition = 2 then
     begin
-      main_engine.PrimLOPumpAuto := True;
+      main_engine.PrimLOPumpAuto    := True;
+
+      // Prelub In Progress
+      main_engine.PrelubeInProgress := True;
+      PrelubTimer.Enabled := True;
+
+      // Gaz Valve, Air Valve dan By Pass P2-P4 buka otomatis
+      main_engine.BypassP2P4 := True;
+      main_engine.AirValve   := True;
+      main_engine.GasValve   := True;
     end;
   end
   else if TVrRotarySwitch(Sender).Hint = 'Preheating Pump' then
@@ -1686,6 +1738,7 @@ begin
     begin
       main_engine_SB.DecreaseSpeed := True;
       main_engine_SB.IncreaseSpeed := False;
+      vrtryswtchSpeedSB.SwitchPosition := 1;
     end
     else if vrtryswtchSpeedSB.SwitchPosition = 1 then
     begin
@@ -1696,6 +1749,7 @@ begin
     begin
       main_engine_SB.DecreaseSpeed := False;
       main_engine_SB.IncreaseSpeed := True;
+      vrtryswtchSpeedSB.SwitchPosition := 1;
     end;
   end;
 end;

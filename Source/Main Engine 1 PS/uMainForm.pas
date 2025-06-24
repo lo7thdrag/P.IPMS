@@ -221,6 +221,9 @@ begin
         frmPMSDieselEngineSafetiesME1.imgLedRedStopSPH.Visible   := False;
         frmPMSDieselEngineSafetiesME1.imgLedRedStopRSP.Visible   := False;
         frmPMSDieselEngineSafetiesME1.imgLedRedStopRGM.Visible   := False;
+
+        frmSignalingLightME1.img24VDCControlME1.Visible   := True;
+        frmSignalingLightME1.img24VDCSafetiesME1.Visible  := True;
       end
       else if FIsStopBlink then
       begin
@@ -240,6 +243,8 @@ begin
         frmPMSDieselEngineSafetiesME1.imgLedRedStopSPH.Visible   := True;
         frmPMSDieselEngineSafetiesME1.imgLedRedStopRSP.Visible   := True;
         frmPMSDieselEngineSafetiesME1.imgLedRedStopRGM.Visible   := True;
+
+        frmSignalingLightME1.img24VDCSafetiesME1.Visible  := False;
       end;
     end;
     epPCSCtrlLocal :
@@ -461,9 +466,9 @@ begin
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible := False;
       end;
 
-      if Value > 405 then
+      if Value > 400 then
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible := True
-      else if Value < 405 then
+      else if Value < 400 then
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible := False;
 
       if Value > 500 then
@@ -471,7 +476,7 @@ begin
       else if Value < 500 then
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH4SE.Visible := False;
 
-      if Value > 1176 then
+      if Value > 1085 then
          frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := True
       else
          frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := False

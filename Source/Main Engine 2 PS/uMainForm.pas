@@ -1031,6 +1031,9 @@ begin
         frmLubOilCircuit.VrEngineInletLubOilTemp.Position := Value /10;
         frmLubOilCircuit.lblEngineInletLubOilTemp.Caption := FloatToStr(Value /10);
       end;
+
+      if Assigned(frmPCOTValueHistory) then
+         frmPCOTValueHistory.lblTOil.Caption := FloatToStr(Value /10);
     end;
     epPCSMETempFWHTOutlet :
     begin

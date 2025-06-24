@@ -221,7 +221,19 @@ begin
     begin
       if Assigned(frmSignalingLightME2) then
         frmSignalingLightME2.vrtryswtchSTC_SB.SwitchPosition := Value;
-    end;
+
+      if Assigned(frmAirGasCircuit) then
+      begin
+        frmSignalingLightME2.vrtryswtchSTC_PS.SwitchPosition := 1;
+        frmAirGasCircuit.lblSTCInAutoMode.Color              := clGreen;
+        frmAirGasCircuit.lblSTCInAutoMode.FontLeave.Color    := clBlack;
+      end
+      else
+      begin
+        frmAirGasCircuit.lblSTCInAutoMode.Color            := clAqua;
+        frmAirGasCircuit.lblSTCInAutoMode.FontLeave.Color  := clWhite;
+      end;
+    end
   end;
 end;
 
@@ -596,6 +608,18 @@ begin
           frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
         end;
       end;
+
+      if Assigned(frmAirGasCircuit) then
+      begin
+        if not Value then
+        begin
+          frmAirGasCircuit.lblByPassClosed.Color      := clGray;
+        end
+        else
+        begin
+          frmAirGasCircuit.lblByPassClosed.Color      := clAqua;
+        end;
+      end;
     end;
     epPCSMEPrelubInProgress :
     begin
@@ -788,6 +812,40 @@ begin
         end;
       end;
     end;
+
+    // Air Gas Circuit
+    epPCSMEAirValve :
+    begin
+      if Assigned(frmAirGasCircuit) then
+      begin
+        if not Value then
+        begin
+          frmAirGasCircuit.lblAirValveClosed.Color            := clGray;
+          frmAirGasCircuit.lblAirValveClosed.FontLeave.Color  := clYellow;
+        end
+        else
+        begin
+          frmAirGasCircuit.lblAirValveClosed.Color            := clAqua;
+          frmAirGasCircuit.lblAirValveClosed.FontLeave.Color  := clWhite;
+        end;
+      end;
+    end;
+    epPCSMEGasValve :
+    begin
+      if Assigned(frmAirGasCircuit) then
+      begin
+        if not Value then
+        begin
+          frmAirGasCircuit.lblGazValveClosed.Color            := clGray;
+          frmAirGasCircuit.lblGazValveClosed.FontLeave.Color  := clYellow;
+        end
+        else
+        begin
+          frmAirGasCircuit.lblGazValveClosed.Color            := clAqua;
+          frmAirGasCircuit.lblGazValveClosed.FontLeave.Color  := clWhite;
+        end;
+      end;
+    end;
   end;
 end;
 
@@ -842,7 +900,7 @@ begin
     end;
 
     // HMI
-    epPCSMETurboChargerSpeedA :
+    epPCSMETurboChargerSpeedB :
     begin
       if Assigned(frmAirGasCircuit) then
       begin
@@ -863,7 +921,7 @@ begin
         Inc(frmCurves.FXCounterTC1Speed);
       end;
     end;
-    epPCSMETurboChargerSpeedB :
+    epPCSMETurboChargerSpeedA :
     begin
       if Assigned(frmAirGasCircuit) then
       begin
