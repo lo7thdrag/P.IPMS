@@ -337,6 +337,20 @@ begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
+    epPCSGBDeclutched :
+    begin
+      if rec.PortStaboardID = C_PCS_GB_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEBypassP2P4 :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
     epPCSMEPrelubInProgress :
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
@@ -898,6 +912,13 @@ begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
       end;
     end;
+    epPCSCPPSetPointPitch :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
     epPCSMEFuelRack :
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
@@ -994,6 +1015,28 @@ begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    // Air Gas
+    epPCSMEAirValve :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEGasValve :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMESTCInManualMode :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt);
       end;
     end;
   end;

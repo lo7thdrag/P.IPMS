@@ -17607,16 +17607,5 @@ object frmSetofPressureGaugesME2: TfrmSetofPressureGaugesME2
       TabOrder = 1
       Visible = False
     end
-    object mpAlarmgGauges: TMediaPlayer
-      Left = 1015
-      Top = 8
-      Width = 253
-      Height = 30
-      DoubleBuffered = True
-      FileName = 'buzzer 2.wav'
-      Visible = False
-      ParentDoubleBuffered = False
-      TabOrder = 2
-    end
   end
 end

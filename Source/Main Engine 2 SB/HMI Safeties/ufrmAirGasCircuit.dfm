@@ -7329,7 +7329,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
       BorderWidth = 2
       BorderStyle = bsSingle
       TabOrder = 4
-      object VrDemoButton8: TVrDemoButton
+      object lblAirValveClosed: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 2
@@ -7350,7 +7350,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         Color = 12032000
         TabOrder = 0
       end
-      object VrDemoButton1: TVrDemoButton
+      object lblGazValveClosed: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 49
@@ -7371,7 +7371,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         Color = 12032000
         TabOrder = 1
       end
-      object VrDemoButton2: TVrDemoButton
+      object lblByPassClosed: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 96
@@ -7413,7 +7413,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         Color = 12032000
         TabOrder = 3
       end
-      object VrDemoButton4: TVrDemoButton
+      object lblSTCInAutoMode: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 190
@@ -7434,7 +7434,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         Color = 12032000
         TabOrder = 4
       end
-      object VrDemoButton5: TVrDemoButton
+      object lblSTCAlarm: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 237
@@ -7455,7 +7455,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         Color = 12032000
         TabOrder = 5
       end
-      object VrDemoButton6: TVrDemoButton
+      object lblSTCFailure: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 284

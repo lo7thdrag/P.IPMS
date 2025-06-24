@@ -337,6 +337,20 @@ begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
+    epPCSGBDeclutched :
+    begin
+      if rec.PortStaboardID = C_PCS_GB_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEBypassP2P4 :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
     epPCSMEPrelubInProgress :
     begin
       if rec.PortStaboardID = C_PCS_ME_STARBOARD then

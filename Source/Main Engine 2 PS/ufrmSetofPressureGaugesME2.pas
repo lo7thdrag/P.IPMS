@@ -15,7 +15,6 @@ type
     EngineInletAirPressureMeter: TVrAngularMeter;
     btnAlarm: TRzBmpButton;
     imgFlashLighting: TRzBmpButton;
-    mpAlarmgGauges: TMediaPlayer;
     Label10: TLabel;
     Label6: TLabel;
     Label7: TLabel;
@@ -27,9 +26,9 @@ type
     Label1: TLabel;
     Label5: TLabel;
     Label4: TLabel;
-    procedure AlarmFlashLightingClick(Sender: TObject);
+
   private
-    { Private declarations }
+
   public
     { Public declarations }
   end;
@@ -44,9 +43,5 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmSetofPressureGaugesME2.AlarmFlashLightingClick(Sender: TObject);
-begin
-//  imgFlashLighting.Visible := True;
-end;
 
 end.

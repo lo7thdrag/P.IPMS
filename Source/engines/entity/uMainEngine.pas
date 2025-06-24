@@ -532,11 +532,15 @@ begin
     begin
       SetSpeedInManual(1);
       SpeedState := 2;
+      SpeedState := 1;
+      IncreaseSpeed := False;
     end
     else if DecreaseSpeed then
     begin
       SetSpeedInManual(-1);
       SpeedState := 0;
+      SpeedState := 1;
+      DecreaseSpeed := False;
     end
     else
     begin
@@ -604,10 +608,10 @@ begin
   begin
     if aValue > 0 then
     begin
-      if SetPointSpeed < 1084 then         // awalnya 1050
+      if SetPointSpeed < 1050 then         // dibuat 100%
         SetPointSpeed := SetPointSpeed + aValue
       else
-        SetPointSpeed := 1084;
+        SetPointSpeed := 1050;
     end
     else
     if aValue < 0 then

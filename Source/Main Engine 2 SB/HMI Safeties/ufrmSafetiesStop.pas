@@ -21,8 +21,8 @@ type
     VrDemoButton12: TVrDemoButton;
     VrDemoButton13: TVrDemoButton;
     btnPS_SI_FuelRackAtStop: TVrDemoButton;
-    VrDemoButton15: TVrDemoButton;
-    VrDemoButton16: TVrDemoButton;
+    btn_Engine_Declutch: TVrDemoButton;
+    Vr7BarControlAirLowPressure: TVrDemoButton;
     btnPS_SI_PrelubeInProgress: TVrDemoButton;
     btnPS_SI_PrelubeFailure: TVrDemoButton;
     btnPS_SI_StartingFailure: TVrDemoButton;

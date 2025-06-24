@@ -1736,11 +1736,13 @@ object frmSafetiesStop: TfrmSafetiesStop
       Width = 264
       Height = 22
       Caption = 'ENGINE SPEED SVAE(RPM): '
+      Color = clYellow
       Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
+      Font.Color = clYellow
       Font.Height = -19
       Font.Name = 'Arial'
       Font.Style = []
+      ParentColor = False
       ParentFont = False
     end
     object lblSpeedSVAE: TLabel
@@ -1749,11 +1751,13 @@ object frmSafetiesStop: TfrmSafetiesStop
       Width = 11
       Height = 22
       Caption = '0'
+      Color = clYellow
       Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
+      Font.Color = clYellow
       Font.Height = -19
       Font.Name = 'Arial'
       Font.Style = []
+      ParentColor = False
       ParentFont = False
     end
     object Image1: TImage
@@ -6180,7 +6184,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 7
       end
-      object VrDemoButton15: TVrDemoButton
+      object btn_Engine_Declutch: TVrDemoButton
         Tag = 1
         Left = 1
         Top = 297
@@ -6201,7 +6205,7 @@ object frmSafetiesStop: TfrmSafetiesStop
         Color = 12032000
         TabOrder = 8
       end
-      object VrDemoButton16: TVrDemoButton
+      object Vr7BarControlAirLowPressure: TVrDemoButton
         Tag = 1
         Left = 1
         Top = 334

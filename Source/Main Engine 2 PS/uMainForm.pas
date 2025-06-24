@@ -24,6 +24,10 @@ type
     CurrentHourCounter : Integer;
     FRunningHourTemp   : Integer;
     FIsRunningHours    : Boolean;
+    FIsImageBlink      : Boolean;
+    FIsBlinkState      : Boolean;
+    FBlinkCounter      : Integer;
+
 
     procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure MainEngine2SystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
@@ -44,7 +48,7 @@ uses
   ufrmSetofPressureGaugesME2, ufrmSignalingLightME2, ufrmMenu, uMainEngine2System, ufrmSafetiesStop, ufrmAirGasCircuit, ufrmGeneralScreen,
   ufrmLineAExhaustGasTemperature, ufrmLineBExhaustGasTemperature, ufrmEngineBearingTemperature, ufrmPCOTFilteringDeviations,
   ufrmCrankinOilTemperature, ufrmClutchingAssitance, ufrmCompressedAirCircuit, ufrmFuelOilCircuit, ufrmFWSeaWaterCircuit,
-  ufrmLubOilCircuit, ufrmPLCNetwork, uTCPClient, ufrmAlarms, ufrmPCOTValueHistory;
+  ufrmLubOilCircuit, ufrmPLCNetwork, uTCPClient, ufrmAlarms, ufrmPCOTValueHistory, ufrmCurves;
 
 {$R *.dfm}
 
@@ -217,7 +221,19 @@ begin
     begin
       if Assigned(frmSignalingLightME2) then
         frmSignalingLightME2.vrtryswtchSTC_PS.SwitchPosition := Value;
-    end;
+
+      if Assigned(frmAirGasCircuit) then
+      begin
+        frmSignalingLightME2.vrtryswtchSTC_PS.SwitchPosition := 1;
+        frmAirGasCircuit.lblSTCInAutoMode.Color              := clGreen;
+        frmAirGasCircuit.lblSTCInAutoMode.FontLeave.Color    := clBlack;
+      end
+      else
+      begin
+        frmAirGasCircuit.lblSTCInAutoMode.Color            := clAqua;
+        frmAirGasCircuit.lblSTCInAutoMode.FontLeave.Color  := clWhite;
+      end;
+    end
   end;
 end;
 
@@ -255,13 +271,20 @@ begin
         if Value then
         begin
           frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clRed;
+          frmSafetiesStop.lblSafetiesStop.Color            := clRed;
           frmAlarms.AddAlarmToLog('EMERGENCY SHUTDOWN');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clAqua;
+          frmSafetiesStop.lblSafetiesStop.Color            := clAqua;
           frmAlarms.Alarm(False);
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -272,13 +295,23 @@ begin
         if Value then
         begin
           frmSafetiesStop.btnPS_SS_Overspeed.Color := clRed;
+          frmSafetiesStop.lblSafetiesStop.Color    := clRed;
           frmAlarms.AddAlarmToLog('OVERSPEED');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SS_Overspeed.Color := clAqua;
+          frmSafetiesStop.lblSafetiesStop.Color    := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -289,13 +322,23 @@ begin
         if Value then
         begin
           frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clRed;
+          frmSafetiesStop.lblSafetiesStop.Color := clRed;
           frmAlarms.AddAlarmToLog('LO PRESSURE VERY LOW');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clAqua;
-          frmAlarms.Alarm(True);
+          frmSafetiesStop.lblSafetiesStop.Color := clAqua;
+          frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -306,13 +349,23 @@ begin
         if Value then
         begin
           frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clRed;
+          frmSafetiesStop.lblSafetiesStop.Color := clRed;
           frmAlarms.AddAlarmToLog('RED GEAR SAFETY STOP');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clAqua;
+          frmSafetiesStop.lblSafetiesStop.Color := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -325,11 +378,19 @@ begin
           frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clRed;
           frmAlarms.AddAlarmToLog('FW HT EXP TK LEVEL VERY LOW');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -342,11 +403,19 @@ begin
           frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clRed;
           frmAlarms.AddAlarmToLog('FW TEMP VERY HIGH');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -359,11 +428,19 @@ begin
           frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clRed;
           frmAlarms.AddAlarmToLog('CON ROD BEAR TEMP VERY HIGH');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -376,11 +453,19 @@ begin
           frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clRed;
           frmAlarms.AddAlarmToLog('ENG INLET LUB OIL VERY HIGH');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -393,11 +478,19 @@ begin
           frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clRed;
           frmAlarms.AddAlarmToLog('OIL MIST DET HIGH');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -408,13 +501,23 @@ begin
         if Value then
         begin
           frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clRed;
+          frmSafetiesStop.lblStartingInterlocks.Color := clRed;
           frmAlarms.AddAlarmToLog('TURNING GEAR ENGAGED');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clAqua;
+          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -425,13 +528,23 @@ begin
         if Value then
         begin
           frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clRed;
+          frmSafetiesStop.lblStartingInterlocks.Color    := clRed;
           frmAlarms.AddAlarmToLog('MAN HANDLE AT STOP');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clAqua;
+          frmSafetiesStop.lblStartingInterlocks.Color    := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -442,13 +555,69 @@ begin
         if Value then
         begin
           frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clRed;
+          frmSafetiesStop.lblStartingInterlocks.Color   := clRed;
           frmAlarms.AddAlarmToLog('FUEL RACK AT STOP');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clAqua;
+          frmSafetiesStop.lblStartingInterlocks.Color   := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
+        end;
+      end;
+    end;
+    epPCSGBDeclutched :
+    begin
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.btn_Engine_Declutch.Color   := clLime;
+          frmSafetiesStop.lblStartingInterlocks.Color := clLime;
+          frmAlarms.AddAlarmToLog('ENGINE DECLUTCHED');
+        end
+        else
+        begin
+          frmSafetiesStop.btn_Engine_Declutch.Color   := clAqua;
+          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+        end;
+      end;
+    end;
+    epPCSMEBypassP2P4 :        // 7 Bar Control Air Low Pressure
+    begin
+      if Assigned(frmSafetiesStop) then
+      begin
+        if Value then
+        begin
+          frmSafetiesStop.Vr7BarControlAirLowPressure.Color := clWebOrange;
+          frmSafetiesStop.lblStartingInterlocks.Color       := clWebOrange;
+          frmAlarms.AddAlarmToLog('7 BAR CONTROL AIR LOW PRESSURE');
+        end
+        else
+        begin
+          frmSafetiesStop.btn_Engine_Declutch.Color   := clAqua;
+          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+        end;
+      end;
+
+      if Assigned(frmAirGasCircuit) then
+      begin
+        if not Value then
+        begin
+          frmAirGasCircuit.lblByPassClosed.Color      := clGray;
+        end
+        else
+        begin
+          frmAirGasCircuit.lblByPassClosed.Color      := clAqua;
         end;
       end;
     end;
@@ -459,13 +628,23 @@ begin
         if Value then
         begin
           frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clRed;
+          frmSafetiesStop.lblStartingInterlocks.Color      := clRed;
           frmAlarms.AddAlarmToLog('PRE LUB IN PROGRESS');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clAqua;
+          frmSafetiesStop.lblStartingInterlocks.Color      := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -476,13 +655,23 @@ begin
         if Value then
         begin
           frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clRed;
+          frmSafetiesStop.lblStartingInterlocks.Color   := clRed;
           frmAlarms.AddAlarmToLog('PRELUBRICATION FAILURE');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clAqua;
+          frmSafetiesStop.lblStartingInterlocks.Color   := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -492,16 +681,26 @@ begin
       begin
         if Value then
         begin
-          frmSafetiesStop.btnPS_SI_StartingFailure.Color := clRed;
+          frmSafetiesStop.btnPS_SI_StartingFailure.Color  := clRed;
           frmGeneralScreen.btnPS_SI_StartingFailure.Color := clRed;
+          frmSafetiesStop.lblStartingInterlocks.Color     := clRed;
           frmAlarms.AddAlarmToLog('STARTING FAULT');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_StartingFailure.Color := clAqua;
+          frmSafetiesStop.btnPS_SI_StartingFailure.Color  := clAqua;
           frmGeneralScreen.btnPS_SI_StartingFailure.Color := clAqua;
+          frmSafetiesStop.lblStartingInterlocks.Color     := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -512,13 +711,23 @@ begin
         if Value then
         begin
           frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clRed;
+          frmSafetiesStop.lblStartingInterlocks.Color    := clRed;
           frmAlarms.AddAlarmToLog('STC SEQUENCE FAIL');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clAqua;
+          frmSafetiesStop.lblStartingInterlocks.Color    := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -528,16 +737,26 @@ begin
       begin
         if Value then
         begin
-          frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clRed;
+          frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color  := clRed;
           frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clRed;
+          frmSafetiesStop.lblStartingInterlocks.Color := clRed;
           frmAlarms.AddAlarmToLog('SLOW TURNING FAULT');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clAqua;
           frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clAqua;
+          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -547,14 +766,24 @@ begin
       begin
         if Value then
         begin
-          frmSafetiesStop.btnPS_SI_SafetyStop.Color := clRed;
+          frmSafetiesStop.btnPS_SI_SafetyStop.Color   := clRed;
+          frmSafetiesStop.lblStartingInterlocks.Color := clRed;
           frmAlarms.AddAlarmToLog('SAFETY STOP');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_SafetyStop.Color := clAqua;
+          frmSafetiesStop.btnPS_SI_SafetyStop.Color   := clAqua;
+          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
     end;
@@ -567,11 +796,53 @@ begin
           frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clRed;
           frmAlarms.AddAlarmToLog('PCS CLUTCH INTERLOCK');
           frmAlarms.Alarm(True);
+
+          FIsImageBlink := Value;
+          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
         begin
           frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clAqua;
           frmAlarms.Alarm(False);
+
+          FIsImageBlink := not Value;
+          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
+        end;
+      end;
+    end;
+
+    // Air Gas Circuit
+    epPCSMEAirValve :
+    begin
+      if Assigned(frmAirGasCircuit) then
+      begin
+        if not Value then
+        begin
+          frmAirGasCircuit.lblAirValveClosed.Color            := clGray;
+          frmAirGasCircuit.lblAirValveClosed.FontLeave.Color  := clYellow;
+        end
+        else
+        begin
+          frmAirGasCircuit.lblAirValveClosed.Color            := clAqua;
+          frmAirGasCircuit.lblAirValveClosed.FontLeave.Color  := clWhite;
+        end;
+      end;
+    end;
+    epPCSMEGasValve :
+    begin
+      if Assigned(frmAirGasCircuit) then
+      begin
+        if not Value then
+        begin
+          frmAirGasCircuit.lblGazValveClosed.Color            := clGray;
+          frmAirGasCircuit.lblGazValveClosed.FontLeave.Color  := clYellow;
+        end
+        else
+        begin
+          frmAirGasCircuit.lblGazValveClosed.Color            := clAqua;
+          frmAirGasCircuit.lblGazValveClosed.FontLeave.Color  := clWhite;
         end;
       end;
     end;
@@ -629,7 +900,7 @@ begin
     end;
 
     // HMI
-    epPCSMETurboChargerSpeedA :
+    epPCSMETurboChargerSpeedB :
     begin
       if Assigned(frmAirGasCircuit) then
       begin
@@ -642,8 +913,15 @@ begin
         frmGeneralScreen.VrTCSpeedA.Position := Value;
         frmGeneralScreen.lblTCSpeedA.Caption := FloatToStr(Value);
       end;
+
+      if Assigned(frmCurves) then
+      begin
+        frmCurves.lblTC1Speed.Caption := FloatToStr(Value);
+        frmCurves.TC1Speed.AddXY(frmCurves.FXCounterTC1Speed, Value);
+        Inc(frmCurves.FXCounterTC1Speed);
+      end;
     end;
-    epPCSMETurboChargerSpeedB :
+    epPCSMETurboChargerSpeedA :
     begin
       if Assigned(frmAirGasCircuit) then
       begin
@@ -655,6 +933,13 @@ begin
       begin
         frmGeneralScreen.VrTCSpeedB.Position := Value;
         frmGeneralScreen.lblTCSpeedB.Caption := FloatToStr(Value);
+      end;
+
+      if Assigned(frmCurves) then
+      begin
+        frmCurves.lblTC2Speed.Caption := FloatToStr(Value);
+        frmCurves.TC2Speed.AddXY(frmCurves.FXCounterTC2Speed, Value);
+        Inc(frmCurves.FXCounterTC2Speed);
       end;
     end;
     epPCSMESpeed :
@@ -681,15 +966,30 @@ begin
       begin
         if Value < 80 then
         begin
-           frmSafetiesStop.btnEngineSpeed80Rpm.Color := clRed;
-//           frmAlarms.AddAlarmToLog('ENGINE SPEED < 80 RPM');
-//           frmAlarms.Alarm(True);
+           frmSafetiesStop.btnEngineSpeed80Rpm.Color   := clRed;
+           frmSafetiesStop.lblStartingInterlocks.Color := clRed;
         end
         else
         begin
-           frmSafetiesStop.btnEngineSpeed80Rpm.Color := clAqua;
-//           frmAlarms.Alarm(False);
+           frmSafetiesStop.btnEngineSpeed80Rpm.Color   := clAqua;
+           frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
         end;
+      end;
+
+      if Assigned(frmCurves) then
+      begin
+        frmCurves.lblEngineSpeed.Caption := FloatToStr(Value);
+        frmCurves.EngineSpeed.AddXY(frmCurves.FXCounterEngineSpeed, Value);
+        Inc(frmCurves.FXCounterEngineSpeed);
+      end;
+    end;
+    epPCSCPPSetPointPitch :
+    begin
+      if Assigned(frmCurves) then
+      begin
+        frmCurves.lblPitch.Caption := FloatToStr(Value);
+        frmCurves.Pitch.AddXY(frmCurves.FXCounterPitch, Value);
+        Inc(frmCurves.FXCounterPitch);
       end;
     end;
     epPCSMEFuelRack :
@@ -698,6 +998,13 @@ begin
       begin
         frmGeneralScreen.VrFuelRack.Position := Value;
         frmGeneralScreen.lblFuelRack.Caption := FloatToStr(Value);
+      end;
+
+      if Assigned(frmCurves) then
+      begin
+        frmCurves.lblFuelRack.Caption := FloatToStr(Value);
+        frmCurves.FuelRack.AddXY(frmCurves.FXCounterFuelRack, Value);
+        Inc(frmCurves.FXCounterFuelRack);
       end;
     end;
     epPCSMESetPointSpeed :
@@ -2212,16 +2519,18 @@ begin
   if Assigned(frmSignalingLightME2) then
   begin
     if FIsRunningHours then
+    begin
       Inc(CurrentHourCounter);
       frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(CurrentHourCounter);
+    end;
   end;
 
-//  FRunningHourTemp := FRunningHourTemp + 1;
-//  if FRunningHourTemp > 25 then
-//  begin
-//    FRunningHourTemp := 0;
-//    FIsRunningHours := FIsRunningHours + 1;
-//    frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(FIsRunningHours);
-//  end;
+  FBlinkCounter := FBlinkCounter + tmrRunningMETimer1.Interval;
+  FIsBlinkState := not FIsBlinkState;
+
+  if FIsImageBlink then
+     frmSetofPressureGaugesME2.imgFlashLighting.Visible := FIsBlinkState
+  else
+     frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
 end;
 end.

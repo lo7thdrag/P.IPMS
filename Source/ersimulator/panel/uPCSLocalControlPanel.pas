@@ -980,9 +980,9 @@ begin
         epPCSMEPreStart :
         begin
           if Value then
-            vrtryswtchPreStartPS.SwitchPosition := 0
-          else
-            vrtryswtchPreStartPS.SwitchPosition := 1;
+            vrtryswtchPreStartPS.SwitchPosition := 0;
+//          else
+//            vrtryswtchPreStartPS.SwitchPosition := 1;
         end;
 
         epPCSMERunning :
@@ -1558,7 +1558,7 @@ begin
     end
     else if TVrRotarySwitch(Sender).SwitchPosition = 1 then
     begin
-      main_engine.PrimLOPump := False;
+      main_engine.PrimLOPump     := False;
       main_engine.PrimLOPumpAuto := False;
     end
     else if TVrRotarySwitch(Sender).SwitchPosition = 2 then
@@ -1666,6 +1666,7 @@ begin
     begin
       main_engine_PS.DecreaseSpeed := True;
       main_engine_PS.IncreaseSpeed := False;
+      vrtryswtchSpeedPS.SwitchPosition := 1;
     end
     else if vrtryswtchSpeedPS.SwitchPosition = 1 then
     begin
@@ -1676,6 +1677,7 @@ begin
     begin
       main_engine_PS.DecreaseSpeed := False;
       main_engine_PS.IncreaseSpeed := True;
+      vrtryswtchSpeedPS.SwitchPosition := 1;
     end;
   end
   else if (TVrRotarySwitch(Sender).Tag = 1) and main_engine_SB.LocalControl then
