@@ -411,8 +411,8 @@ end;
 
 procedure TMainForm.btnStopClick(Sender: TObject);
 begin
-  tmrStop.Enabled := True;
   DieselGeneratorSystem.EngineStop(True);
+  tmrStop.Enabled := True;
 end;
 
 procedure TMainForm.btnStandbyClick(Sender: TObject);
@@ -434,6 +434,7 @@ procedure TMainForm.btnResetClick(Sender: TObject);
 begin
   imgReset.Visible := True;
   tmrReset.Enabled := True;
+  Alarm(False);
 
   imgSupplyVoltageLow.Visible     := GeneratorTemp.MeasPowFailure;
   imgAutomaticStartFailed.Visible := GeneratorTemp.AutStartFailure;
@@ -443,6 +444,7 @@ begin
   imgCoolingWaterTempHigh.Visible := GeneratorTemp.CoolWaterTempHighAlrm;
   imgCoolingWaterLevelLow.Visible := GeneratorTemp.CoolWaterLevelLow;
   imgFuelOilLeakage.Visible       := GeneratorTemp.FuelOilLeakage;
+  imgStop.Visible                 := False;
 
   imgShutdownOverSpeed.Visible  := GeneratorTemp.SpeedSensorFailureShutdown;
   imgShutdownLOPressLow.Visible := GeneratorTemp.LubOilPressLowShutdown;
@@ -505,9 +507,9 @@ begin
   end
   else
   begin
-    mpAlarm.Open;
-    mpAlarm.Stop;
     mpAlarm.Notify := False;
+    mpAlarm.OnNotify := nil;
+    mpAlarm.Stop;
   end;
 end;
 
