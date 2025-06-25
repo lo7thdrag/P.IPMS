@@ -24996,6 +24996,7 @@ object frmPMSDieselEngineSafetiesME1: TfrmPMSDieselEngineSafetiesME1
       Top = 232
       Width = 45
       Height = 45
+      Cursor = crHandPoint
       Bitmaps.TransparentColor = clOlive
       Bitmaps.Up.Data = {
         E61F0000424DE61F00000000000042000000280000002D0000002D0000000100
@@ -25256,6 +25257,7 @@ object frmPMSDieselEngineSafetiesME1: TfrmPMSDieselEngineSafetiesME1
         82FF999182FF999182FF}
       Color = clBtnFace
       TabOrder = 4
+      OnClick = btnResetSVAEClick
     end
     object btnTestSPH: TRzBmpButton
       Left = 121
@@ -26158,6 +26160,7 @@ object frmPMSDieselEngineSafetiesME1: TfrmPMSDieselEngineSafetiesME1
       MinValue = 0
       TabOrder = 13
       Value = 0
+      OnChange = ptSVAEChange
     end
     object switchATPChannel: TVrRotarySwitch
       Left = 156

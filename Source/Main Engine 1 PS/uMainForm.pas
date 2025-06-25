@@ -267,10 +267,13 @@ begin
       else
         frmSignalingLightME1.imgClutchAllowedME1.Visible := False
     end;
-    epPCSLeverEmergencyStop :
+    epPCSLeverEmergencyStop : // Safeties Stop
+    begin
+      frmSignalingLightME1.imgSafetiesStopOverbiddenME1.Visible := True;
+    end;
+    epPCSMELocalEmergencyStop :
     begin
       frmSignalingLightME1.imgEmergencyStopME1.Visible := True;
-      frmSignalingLightME1.imgSafetiesStopOverbiddenME1.Visible := True;
 
       frmPMSDieselEngineSafetiesME1.imgledRedAlarmChannel1ICM1.Visible := True;
     end;
@@ -536,6 +539,17 @@ begin
     begin
       if Assigned(frmPMSDieselEngineSafetiesME1) then
         frmPMSDieselEngineSafetiesME1.FBearingTemperatures[2] := Value / 10;
+    end;
+
+    epPCSMETempFWHTInlet :
+    begin
+      if Assigned(frmSignalingLightME1) then
+        frmSignalingLightME1.lblInletTemperature.Caption := FloatToStr(Value / 10);
+    end;
+    epPCSMETempFWHTOutlet :
+    begin
+      if Assigned(frmSignalingLightME1) then
+        frmSignalingLightME1.lblOutletTemperature.Caption := FloatToStr(Value / 10);
     end;
   end;
 end;

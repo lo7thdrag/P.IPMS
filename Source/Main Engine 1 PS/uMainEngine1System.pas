@@ -193,7 +193,15 @@ begin
       end;
     end;
 
-    epPCSLeverEmergencyStop :
+    epPCSLeverEmergencyStop :     // Safeties Stop
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+
+    epPCSMELocalEmergencyStop :
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
       begin
@@ -422,6 +430,20 @@ begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
+    epPCSMETempFWHTInlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMETempFWHTOutlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
   end;
 end;
 
@@ -518,8 +540,8 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStaboard;
-  recCmd.CommandPropsID := epPCSLeverEmergencyStop;
-//  recCmd.CommandPropsID := epPCSMELocalEmergencyStop;
+//  recCmd.CommandPropsID := epPCSLeverEmergencyStop;
+  recCmd.CommandPropsID := epPCSMELocalEmergencyStop;
   recCmd.CommandID      := C_ORD_LEVER_EMERGENCYSTOP;
   recCmd.ValueBool      := True;
 

@@ -542,11 +542,11 @@ procedure TfrmPCSLocalControlPanel.btnEmergencStopClick(Sender: TObject);
 begin
   if (TButton(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
-    main_engine_PS.EmergencyStop := True;
+    main_engine_PS.LocalEmergencyStop := True;
   end
   else if (TButton(Sender).Tag = 1) and main_engine_SB.LocalControl then
   begin
-    main_engine_SB.EmergencyStop := True;
+    main_engine_SB.LocalEmergencyStop := True;
   end;
 end;
 
@@ -1066,6 +1066,10 @@ begin
         epPCSLeverEmergencyStop :
         begin
            main_engine_PS.EmergencyStop := True;
+        end;
+        epPCSMELocalEmergencyStop :
+        begin
+          main_engine_PS.LocalEmergencyStop := True;
         end;
       end;
     end

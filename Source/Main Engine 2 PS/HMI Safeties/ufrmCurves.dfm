@@ -11,7 +11,6 @@ object frmCurves: TfrmCurves
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -5730,8 +5729,8 @@ object frmCurves: TfrmCurves
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 120
-      Top = 920
+      Left = 98
+      Top = 882
       Width = 157
       Height = 18
       Caption = 'ENGINE SPEED(RPM)'
@@ -5743,8 +5742,8 @@ object frmCurves: TfrmCurves
       ParentFont = False
     end
     object Label2: TLabel
-      Left = 384
-      Top = 920
+      Left = 368
+      Top = 882
       Width = 119
       Height = 18
       Caption = 'FUEL RACK(mm)'
@@ -5756,8 +5755,8 @@ object frmCurves: TfrmCurves
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 616
-      Top = 920
+      Left = 595
+      Top = 882
       Width = 170
       Height = 18
       Caption = 'TC1 SPEED(RPMX1000)'
@@ -5769,8 +5768,8 @@ object frmCurves: TfrmCurves
       ParentFont = False
     end
     object Label4: TLabel
-      Left = 854
-      Top = 920
+      Left = 851
+      Top = 882
       Width = 170
       Height = 18
       Caption = 'TC2 SPEED(RPMX1000)'
@@ -5783,7 +5782,7 @@ object frmCurves: TfrmCurves
     end
     object Label5: TLabel
       Left = 1080
-      Top = 920
+      Top = 882
       Width = 130
       Height = 18
       Caption = 'PITCH(100/+100%)'
@@ -5795,8 +5794,8 @@ object frmCurves: TfrmCurves
       ParentFont = False
     end
     object lblEngineSpeed: TLabel
-      Left = 184
-      Top = 944
+      Left = 173
+      Top = 906
       Width = 8
       Height = 18
       Caption = '0'
@@ -5808,39 +5807,39 @@ object frmCurves: TfrmCurves
       ParentFont = False
     end
     object lblFuelrack: TLabel
-      Left = 432
-      Top = 944
+      Left = 416
+      Top = 906
       Width = 8
       Height = 18
       Caption = '0'
       Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
+      Font.Color = clBlue
       Font.Height = -15
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object lblTC1Speed: TLabel
-      Left = 696
-      Top = 944
+      Left = 675
+      Top = 906
       Width = 8
       Height = 18
       Caption = '0'
       Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
+      Font.Color = clRed
       Font.Height = -15
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object lblTC2Speed: TLabel
-      Left = 928
-      Top = 944
+      Left = 925
+      Top = 906
       Width = 8
       Height = 18
       Caption = '0'
       Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
+      Font.Color = clGreen
       Font.Height = -15
       Font.Name = 'Arial'
       Font.Style = [fsBold]
@@ -5848,16 +5847,126 @@ object frmCurves: TfrmCurves
     end
     object lblPitch: TLabel
       Left = 1136
-      Top = 944
+      Top = 906
       Width = 8
       Height = 18
       Caption = '0'
       Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
+      Font.Color = clPurple
       Font.Height = -15
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
+    end
+    object chtCurves: TChart
+      Left = 40
+      Top = 200
+      Width = 1193
+      Height = 665
+      BackWall.Visible = False
+      BottomWall.Visible = False
+      LeftWall.Visible = False
+      Legend.Visible = False
+      BottomAxis.Items = {
+        19000000010556616C75650500000000000000C0034000010556616C75650500
+        000000000000B8034000010556616C75650500000000000000B0034000010556
+        616C75650500000000000000A8034000010556616C75650500000000000000A0
+        034000010556616C7565050000000000000098034000010556616C7565050000
+        000000000090034000010556616C756505000000000000008803400001055661
+        6C7565050000000000000080034000010556616C75650500000000000000F002
+        4000010556616C75650500000000000000E0024000010556616C756505000000
+        00000000D0024000010556616C75650500000000000000C0024000010556616C
+        75650500000000000000B0024000010556616C75650500000000000000A00240
+        00010556616C7565050000000000000090024000010556616C75650500000000
+        00000080024000010556616C75650500000000000000E0014000010556616C75
+        650500000000000000C0014000010556616C75650500000000000000A0014000
+        010556616C7565050000000000000080014000010556616C7565050000000000
+        0000C0004000010556616C7565050000000000000080004000010556616C7565
+        050000000000000080FF3F000100}
+      Chart3DPercent = 1
+      LeftAxis.Automatic = False
+      LeftAxis.AutomaticMaximum = False
+      LeftAxis.AutomaticMinimum = False
+      LeftAxis.Maximum = 1250.000000000000000000
+      LeftAxis.Items = {
+        1A0000000104546578740604313235300556616C756505000000000000409C09
+        4000010556616C7565050000000000000096094000010556616C756505000000
+        000000C08F094000010556616C7565050000000000008089094000010556616C
+        75650500000000000040830940000104546578740604313030300556616C7565
+        0500000000000000FA084000010556616C75650500000000000080ED08400001
+        0556616C75650500000000000000E1084000010556616C756505000000000000
+        80D4084000010556616C75650500000000000000C80840000104546578740603
+        3735300556616C75650500000000000080BB084000010556616C756505000000
+        00000000AF084000010556616C75650500000000000080A2084000010556616C
+        7565050000000000000096084000010556616C75650500000000000080890840
+        0001045465787406033530300556616C75650500000000000000FA0740000105
+        56616C75650500000000000000E1074000010556616C75650500000000000000
+        C8074000010556616C75650500000000000000AF074000010556616C75650500
+        0000000000009607400001045465787406033235300556616C75650500000000
+        000000FA064000010556616C75650500000000000000C8064000010556616C75
+        65050000000000000096064000010556616C75650500000000000000C8054000
+        010556616C75650500000000000000C804400001045465787406013000}
+      RightAxis.Automatic = False
+      RightAxis.AutomaticMaximum = False
+      RightAxis.AutomaticMinimum = False
+      RightAxis.Maximum = 35.000000000000000000
+      RightAxis.Items = {
+        24000000010454657874060233350556616C756505000000000000008C044000
+        010556616C7565050000000000000088044000010556616C7565050000000000
+        000084044000010556616C7565050000000000000080044000010556616C7565
+        0500000000000000F8034000010454657874060233300556616C756505000000
+        00000000F0034000010556616C75650500000000000000E8034000010556616C
+        75650500000000000000E0034000010556616C75650500000000000000D80340
+        00010556616C75650500000000000000D0034000010454657874060232350556
+        616C75650500000000000000C8034000010556616C75650500000000000000C0
+        034000010556616C75650500000000000000B8034000010556616C7565050000
+        0000000000B0034000010556616C75650500000000000000A803400001045465
+        7874060232300556616C75650500000000000000A0034000010556616C756505
+        0000000000000098034000010556616C75650500000000000000900340000105
+        56616C7565050000000000000088034000010556616C75650500000000000000
+        80034000010454657874060231350556616C75650500000000000000F0024000
+        010556616C75650500000000000000E0024000010556616C7565050000000000
+        0000D0024000010556616C75650500000000000000C0024000010556616C7565
+        0500000000000000B0024000010454657874060231300556616C756505000000
+        00000000A0024000010556616C7565050000000000000090024000010556616C
+        7565050000000000000080024000010556616C75650500000000000000E00140
+        00010556616C75650500000000000000C0014000010454657874060135055661
+        6C75650500000000000000A0014000010556616C756505000000000000008001
+        4000010556616C75650500000000000000C0004000010556616C756505000000
+        0000000080004000010556616C7565050000000000000080FF3F000104546578
+        7406013000}
+      View3D = False
+      View3DOptions.Elevation = 360
+      View3DOptions.HorizOffset = -151
+      View3DOptions.Orthogonal = False
+      View3DOptions.Rotation = 360
+      View3DOptions.Zoom = 125
+      View3DWalls = False
+      BevelOuter = bvNone
+      Color = clWhite
+      TabOrder = 9
+      DefaultCanvas = 'TGDIPlusCanvas'
+      object Series1: TFastLineSeries
+        SeriesColor = clBlue
+        Title = 'EngineSpeed'
+        LinePen.Color = clBlue
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Y'
+        YValues.Order = loNone
+        Data = {
+          00060000000000000000207C400000000000207C400000000000207C40000000
+          0000207C400000000000207C400000000000207C40}
+        Detail = {0000000000}
+      end
+      object Series2: TFastLineSeries
+        Active = False
+        LinePen.Color = clRed
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Y'
+        YValues.Order = loNone
+      end
     end
     object btnAlarms: TRzBmpButton
       Left = 0
@@ -13233,161 +13342,18 @@ object frmCurves: TfrmCurves
         ParentFont = False
       end
     end
-    object chtCurves: TChart
-      Left = 48
-      Top = 168
-      Width = 1185
-      Height = 721
-      Legend.ResizeChart = False
-      Legend.Visible = False
-      Title.Text.Strings = (
-        'Curves')
-      Title.Visible = False
-      BottomAxis.Automatic = False
-      BottomAxis.AutomaticMaximum = False
-      BottomAxis.AutomaticMinimum = False
-      BottomAxis.Labels = False
-      BottomAxis.LabelsFormat.Visible = False
-      BottomAxis.LabelsSeparation = 0
-      BottomAxis.Maximum = 13.000000000000000000
-      BottomAxis.Items = {
-        0E000000010556616C75650500000000000000D0024000010556616C75650500
-        000000000000C0024000010556616C75650500000000000000B0024000010556
-        616C75650500000000000000A0024000010556616C7565050000000000000090
-        024000010556616C7565050000000000000080024000010556616C7565050000
-        0000000000E0014000010556616C75650500000000000000C001400001055661
-        6C75650500000000000000A0014000010556616C756505000000000000008001
-        4000010556616C75650500000000000000C0004000010556616C756505000000
-        0000000080004000010556616C7565050000000000000080FF3F000100}
-      Chart3DPercent = 1
-      DepthAxis.Automatic = False
-      DepthAxis.AutomaticMaximum = False
-      DepthAxis.AutomaticMinimum = False
-      DepthAxis.Items = {
-        010000000104546578740607536572696573310556616C756505000000000000
-        0080FEBF00}
-      DepthTopAxis.Automatic = False
-      DepthTopAxis.AutomaticMaximum = False
-      DepthTopAxis.AutomaticMinimum = False
-      DepthTopAxis.Maximum = 0.500000000000000000
-      DepthTopAxis.Minimum = -0.500000000000000000
-      LeftAxis.Automatic = False
-      LeftAxis.AutomaticMaximum = False
-      LeftAxis.AutomaticMinimum = False
-      LeftAxis.LogarithmicBase = 7.000000000000000000
-      LeftAxis.Maximum = 1250.000000000000000000
-      LeftAxis.Items = {
-        1A0000000104546578740604313235300556616C756505000000000000409C09
-        4000010556616C7565050000000000000096094000010556616C756505000000
-        000000C08F094000010556616C7565050000000000008089094000010556616C
-        75650500000000000040830940000104546578740604313030300556616C7565
-        0500000000000000FA084000010556616C75650500000000000080ED08400001
-        0556616C75650500000000000000E1084000010556616C756505000000000000
-        80D4084000010556616C75650500000000000000C80840000104546578740603
-        3735300556616C75650500000000000080BB084000010556616C756505000000
-        00000000AF084000010556616C75650500000000000080A2084000010556616C
-        7565050000000000000096084000010556616C75650500000000000080890840
-        0001045465787406033530300556616C75650500000000000000FA0740000105
-        56616C75650500000000000000E1074000010556616C75650500000000000000
-        C8074000010556616C75650500000000000000AF074000010556616C75650500
-        0000000000009607400001045465787406033235300556616C75650500000000
-        000000FA064000010556616C75650500000000000000C8064000010556616C75
-        65050000000000000096064000010556616C75650500000000000000C8054000
-        010556616C75650500000000000000C804400001045465787406013000}
-      RightAxis.Automatic = False
-      RightAxis.AutomaticMaximum = False
-      RightAxis.AutomaticMinimum = False
-      RightAxis.LabelsOnAxis = False
-      RightAxis.LabelsSeparation = 0
-      RightAxis.Maximum = 35.000000000000000000
-      RightAxis.Items = {
-        08000000010454657874060236300556616C75650500000000000000F0044000
-        010454657874060235300556616C75650500000000000000C804400001045465
-        7874060234350556616C75650500000000000000B40440000104546578740602
-        34300556616C75650500000000000000A0044000010454657874060233300556
-        616C75650500000000000000F0034000010454657874060232300556616C7565
-        0500000000000000A0034000010454657874060231300556616C756505000000
-        00000000A00240000100}
-      TopAxis.Automatic = False
-      TopAxis.AutomaticMaximum = False
-      TopAxis.AutomaticMinimum = False
-      TopAxis.Visible = False
-      View3D = False
-      View3DOptions.HorizOffset = 14
-      View3DOptions.Orthogonal = False
-      View3DOptions.Zoom = 97
-      BevelOuter = bvNone
-      Color = clWhite
-      TabOrder = 4
-      DefaultCanvas = 'TGDIPlusCanvas'
-      PrintMargins = (
-        15
-        22
-        15
-        22)
-      ColorPaletteIndex = 5
-      object EngineSpeed: TFastLineSeries
-        SeriesColor = clBlack
-        XValues.Name = 'X'
-        XValues.Order = loAscending
-        YValues.Name = 'Y'
-        YValues.Order = loNone
-        Data = {0000000000}
-        Detail = {0000000000}
-      end
-      object FuelRack: TFastLineSeries
-        LinePen.Color = clBlue
-        XValues.Name = 'X'
-        XValues.Order = loAscending
-        YValues.Name = 'Y'
-        YValues.Order = loNone
-        Data = {0000000000}
-        Detail = {0000000000}
-      end
-      object TC1Speed: TFastLineSeries
-        SeriesColor = 4227327
-        LinePen.Color = 4227327
-        XValues.Name = 'X'
-        XValues.Order = loAscending
-        YValues.Name = 'Y'
-        YValues.Order = loNone
-        Data = {0000000000}
-        Detail = {0000000000}
-      end
-      object Pitch: TFastLineSeries
-        Title = 'TC2Speed'
-        LinePen.Color = clFuchsia
-        XValues.Name = 'X'
-        XValues.Order = loAscending
-        YValues.Name = 'Y'
-        YValues.Order = loNone
-        Data = {0000000000}
-        Detail = {0000000000}
-      end
-      object TC2Speed: TFastLineSeries
-        SeriesColor = clGreen
-        Title = 'Pitch'
-        LinePen.Color = clGreen
-        XValues.Name = 'X'
-        XValues.Order = loAscending
-        YValues.Name = 'Y'
-        YValues.Order = loNone
-        Data = {0000000000}
-        Detail = {0000000000}
-      end
-    end
     object pnlEngineSpeed: TPanel
-      Left = 128
-      Top = 867
+      Left = 104
+      Top = 828
       Width = 129
-      Height = 49
+      Height = 53
       BevelOuter = bvNone
       Color = clWhite
       ParentBackground = False
-      TabOrder = 5
+      TabOrder = 4
       object lblDate1: TLabel
-        Left = 25
-        Top = 4
+        Left = 23
+        Top = 28
         Width = 84
         Height = 19
         Caption = '27/03/2025 '
@@ -13402,7 +13368,7 @@ object frmCurves: TfrmCurves
       end
       object lblTimes1: TLabel
         Left = 18
-        Top = 28
+        Top = 4
         Width = 93
         Height = 19
         Caption = '01:36:22 am'
@@ -13417,17 +13383,17 @@ object frmCurves: TfrmCurves
       end
     end
     object pnlFuelRack: TPanel
-      Left = 376
-      Top = 867
+      Left = 360
+      Top = 832
       Width = 129
       Height = 49
       BevelOuter = bvNone
       Color = clWhite
       ParentBackground = False
-      TabOrder = 6
+      TabOrder = 5
       object lblDate2: TLabel
         Left = 25
-        Top = 4
+        Top = 28
         Width = 84
         Height = 19
         Caption = '27/03/2025 '
@@ -13442,7 +13408,7 @@ object frmCurves: TfrmCurves
       end
       object lblTimes2: TLabel
         Left = 19
-        Top = 28
+        Top = 4
         Width = 93
         Height = 19
         Caption = '01:36:22 am'
@@ -13457,17 +13423,17 @@ object frmCurves: TfrmCurves
       end
     end
     object pnlTC1Speed: TPanel
-      Left = 632
-      Top = 867
+      Left = 611
+      Top = 832
       Width = 129
       Height = 49
       BevelOuter = bvNone
       Color = clWhite
       ParentBackground = False
-      TabOrder = 7
+      TabOrder = 6
       object lblDate3: TLabel
         Left = 25
-        Top = 4
+        Top = 27
         Width = 84
         Height = 19
         Caption = '27/03/2025 '
@@ -13482,7 +13448,7 @@ object frmCurves: TfrmCurves
       end
       object lblTimes3: TLabel
         Left = 19
-        Top = 28
+        Top = 3
         Width = 93
         Height = 19
         Caption = '01:36:22 am'
@@ -13497,17 +13463,17 @@ object frmCurves: TfrmCurves
       end
     end
     object pnlTC2Speed: TPanel
-      Left = 864
-      Top = 867
+      Left = 861
+      Top = 832
       Width = 129
       Height = 49
       BevelOuter = bvNone
       Color = clWhite
       ParentBackground = False
-      TabOrder = 8
+      TabOrder = 7
       object lblDate4: TLabel
         Left = 25
-        Top = 4
+        Top = 27
         Width = 84
         Height = 19
         Caption = '27/03/2025 '
@@ -13522,7 +13488,7 @@ object frmCurves: TfrmCurves
       end
       object lblTimes4: TLabel
         Left = 19
-        Top = 28
+        Top = 4
         Width = 93
         Height = 19
         Caption = '01:36:22 am'
@@ -13538,16 +13504,16 @@ object frmCurves: TfrmCurves
     end
     object pnlPitch: TPanel
       Left = 1072
-      Top = 867
+      Top = 832
       Width = 129
       Height = 49
       BevelOuter = bvNone
       Color = clWhite
       ParentBackground = False
-      TabOrder = 9
+      TabOrder = 8
       object lblDate5: TLabel
         Left = 25
-        Top = 4
+        Top = 28
         Width = 84
         Height = 19
         Caption = '27/03/2025 '
@@ -13562,7 +13528,7 @@ object frmCurves: TfrmCurves
       end
       object lblTimes5: TLabel
         Left = 20
-        Top = 28
+        Top = 4
         Width = 93
         Height = 19
         Caption = '01:36:22 am'

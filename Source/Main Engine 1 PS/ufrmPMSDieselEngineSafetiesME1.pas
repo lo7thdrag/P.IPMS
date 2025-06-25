@@ -164,6 +164,8 @@ type
     procedure SwitchMTP1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure switchATPChannelClick(Sender: TObject);
+    procedure ptSVAEChange(Sender: TObject);
+    procedure btnResetSVAEClick(Sender: TObject);
   private
 
   public
@@ -202,7 +204,7 @@ end;
 
 procedure TfrmPMSDieselEngineSafetiesME1.AdjustSE1Change(Sender: TObject);
 begin
-  EngineSpeedMeter.Position := ptSE1.Value * 10;
+  EngineSpeedMeter.Position := ptSE1.Value;
 
   if ptSE1.Value = 0 then
   begin
@@ -220,7 +222,7 @@ end;
 
 procedure TfrmPMSDieselEngineSafetiesME1.AdjustSE2Change(Sender: TObject);
 begin
-  EngineSpeedMeter.Position := ptSE2.Value * 10;
+  EngineSpeedMeter.Position := ptSE2.Value;
 
   if ptSE2.Value = 0 then
   begin
@@ -238,7 +240,7 @@ end;
 
 procedure TfrmPMSDieselEngineSafetiesME1.AdjustSE3Change(Sender: TObject);
 begin
-  EngineSpeedMeter.Position := ptSE3.Value * 10;
+  EngineSpeedMeter.Position := ptSE3.Value;
 
   if ptSE3.Value = 0 then
   begin
@@ -256,7 +258,7 @@ end;
 
 procedure TfrmPMSDieselEngineSafetiesME1.AdjustSE4Change(Sender: TObject);
 begin
-  EngineSpeedMeter.Position := ptSE4.Value * 10;
+  EngineSpeedMeter.Position := ptSE4.Value;
 
   if ptSE4.Value = 0 then
   begin
@@ -272,10 +274,26 @@ begin
   end
 end;
 
+procedure TfrmPMSDieselEngineSafetiesME1.btnResetSVAEClick(Sender: TObject);
+begin
+  EngineSpeedMeter.Position := 0;
+  ptSVAE.Value := 0;
+end;
+
 procedure TfrmPMSDieselEngineSafetiesME1.NextClick(Sender: TObject);
 begin
   frmSetofPressureGaugesME1.Show;
   Self.Hide;
+end;
+
+procedure TfrmPMSDieselEngineSafetiesME1.ptSVAEChange(Sender: TObject);
+begin
+  EngineSpeedMeter.Position := ptSVAE.Value;
+
+  if ptSVAE.Value > 1085 then
+  begin
+    imgLedRedOverspeedSVAE.Visible := True;
+  end;
 end;
 
 procedure TfrmPMSDieselEngineSafetiesME1.switchATPChannelClick(Sender: TObject);

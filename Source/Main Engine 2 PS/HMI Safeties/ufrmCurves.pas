@@ -20,12 +20,6 @@ type
     pnlTime: TPanel;
     lblTime: TLabel;
     Timer1: TTimer;
-    chtCurves: TChart;
-    FuelRack: TFastLineSeries;
-    TC1Speed: TFastLineSeries;
-    EngineSpeed: TFastLineSeries;
-    Pitch: TFastLineSeries;
-    TC2Speed: TFastLineSeries;
     pnlEngineSpeed: TPanel;
     lblDate1: TLabel;
     lblTimes1: TLabel;
@@ -51,10 +45,12 @@ type
     lblTC1Speed: TLabel;
     lblTC2Speed: TLabel;
     lblPitch: TLabel;
+    chtCurves: TChart;
+    Series1: TFastLineSeries;
+    Series2: TFastLineSeries;
     procedure Timer1Timer(Sender: TObject);
     procedure btnMenuClick(Sender: TObject);
     procedure btnAlarmsClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
   private
 
   public
@@ -75,34 +71,6 @@ implementation
 uses
   ufrmMenu, ufrmAlarms;
 {$R *.dfm}
-
-procedure TfrmCurves.FormCreate(Sender: TObject);
-begin
-  FXCounterEngineSpeed := 0;
-  FXCounterFuelRack    := 0;
-  FXCounterTC1Speed    := 0;
-  FXCounterTC2Speed    := 0;
-  FXCounterPitch       := 0;
-
-//  FXCounter := 0;
-
-  chtCurves.BottomAxis.Automatic := False;
-  chtCurves.BottomAxis.Minimum := 0;
-  chtCurves.BottomAxis.Maximum := 1250;
-
-  chtCurves.LeftAxis.Automatic := False;
-  chtCurves.LeftAxis.Minimum   := 0;
-  chtCurves.LeftAxis.Maximum   := 1250;
-
-  chtCurves.RightAxis.Automatic := False;
-  chtCurves.RightAxis.Minimum  := 0;
-  chtCurves.RightAxis.Maximum  := 35;
-
-  EngineSpeed.VertAxis := aLeftAxis;
-  TC1Speed.VertAxis    := aLeftAxis;
-  TC2Speed.VertAxis    := aLeftAxis;
-  FuelRack.VertAxis    := aRightAxis;
-end;
 
 procedure TfrmCurves.Timer1Timer(Sender: TObject);
 begin

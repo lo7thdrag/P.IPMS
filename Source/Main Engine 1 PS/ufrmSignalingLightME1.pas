@@ -54,6 +54,11 @@ type
     imgSafetiesorECResetME1Shadow: TImage;
     imgSafetiesStopOverbiddenME1Shadow: TImage;
     imgEmergencyStopME1Shadow: TImage;
+    imgFWTempRegulator: TImage;
+    lblInletTemperature: TLabel;
+    lblOutletTemperature: TLabel;
+    Panel1: TPanel;
+    Label2: TLabel;
     procedure btnStartClick(Sender: TObject);
     procedure btnClutchClick(Sender: TObject);
     procedure btnEmergencyStopClick(Sender: TObject);

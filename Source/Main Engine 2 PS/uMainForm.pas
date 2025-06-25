@@ -917,8 +917,6 @@ begin
       if Assigned(frmCurves) then
       begin
         frmCurves.lblTC1Speed.Caption := FloatToStr(Value);
-        frmCurves.TC1Speed.AddXY(frmCurves.FXCounterTC1Speed, Value);
-        Inc(frmCurves.FXCounterTC1Speed);
       end;
     end;
     epPCSMETurboChargerSpeedA :
@@ -938,8 +936,6 @@ begin
       if Assigned(frmCurves) then
       begin
         frmCurves.lblTC2Speed.Caption := FloatToStr(Value);
-        frmCurves.TC2Speed.AddXY(frmCurves.FXCounterTC2Speed, Value);
-        Inc(frmCurves.FXCounterTC2Speed);
       end;
     end;
     epPCSMESpeed :
@@ -979,8 +975,6 @@ begin
       if Assigned(frmCurves) then
       begin
         frmCurves.lblEngineSpeed.Caption := FloatToStr(Value);
-        frmCurves.EngineSpeed.AddXY(frmCurves.FXCounterEngineSpeed, Value);
-        Inc(frmCurves.FXCounterEngineSpeed);
       end;
     end;
     epPCSCPPSetPointPitch :
@@ -988,8 +982,6 @@ begin
       if Assigned(frmCurves) then
       begin
         frmCurves.lblPitch.Caption := FloatToStr(Value);
-        frmCurves.Pitch.AddXY(frmCurves.FXCounterPitch, Value);
-        Inc(frmCurves.FXCounterPitch);
       end;
     end;
     epPCSMEFuelRack :
@@ -1003,8 +995,6 @@ begin
       if Assigned(frmCurves) then
       begin
         frmCurves.lblFuelRack.Caption := FloatToStr(Value);
-        frmCurves.FuelRack.AddXY(frmCurves.FXCounterFuelRack, Value);
-        Inc(frmCurves.FXCounterFuelRack);
       end;
     end;
     epPCSMESetPointSpeed :
