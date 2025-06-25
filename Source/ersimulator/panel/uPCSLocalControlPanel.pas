@@ -312,6 +312,7 @@ type
 
     FStopDecrease: Boolean;
     FStopIncrease: Boolean;
+    PrelubeCounter : Integer;
 
     cppHydraulicPumpID, cppConditionStatus : string;
     cppConditionStatusTag,counter : Integer;
@@ -1498,14 +1499,24 @@ begin
 
   if main_engine_SB.MCRControl then
     vrtryswtchRemoteSB.SwitchPosition := 1;
-
-
 end;
 
 procedure TfrmPCSLocalControlPanel.PrelubTimerTimer(Sender: TObject);
 begin
   if Assigned(main_engine) then
       main_engine.PrelubeInProgress := not main_engine.PrelubeInProgress;
+
+  Inc(PrelubeCounter);
+
+  if PrelubeCounter >= 57 then
+  begin
+    if Assigned(main_engine) then
+    begin
+      main_engine.BypassP2P4 := True;
+      main_engine.AirValve   := True;
+      main_engine.GasValve   := True;
+    end;
+  end;
 end;
 
 procedure TfrmPCSLocalControlPanel.tmr1Timer(Sender: TObject);
@@ -1608,14 +1619,16 @@ begin
     begin
       main_engine.PrimLOPumpAuto    := True;
 
+      // Gaz Valve, Air Valve dan By Pass P2-P4 buka otomatis
+      main_engine.BypassP2P4 := False;
+      main_engine.AirValve   := False;
+      main_engine.GasValve   := False;
+
       // Prelub In Progress
       main_engine.PrelubeInProgress := True;
+      PrelubeCounter := 0;
+      PrelubTimer.Interval := 1000;
       PrelubTimer.Enabled := True;
-
-      // Gaz Valve, Air Valve dan By Pass P2-P4 buka otomatis
-      main_engine.BypassP2P4 := True;
-      main_engine.AirValve   := True;
-      main_engine.GasValve   := True;
     end;
   end
   else if TVrRotarySwitch(Sender).Hint = 'Preheating Pump' then

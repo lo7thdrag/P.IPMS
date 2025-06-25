@@ -467,22 +467,34 @@ end;
 procedure TPropulsionSystem.setLCPCondition;
 begin
   if ME[0].PrimLOPumpAuto then
-    ME[0].PrimLOPump := True;
+    ME[0].PrimLOPump := True
+  else
+    ME[0].PrimLOPump := False;
 
   if ME[1].PrimLOPumpAuto then
-    ME[1].PrimLOPump := True;
+    ME[1].PrimLOPump := True
+  else
+    ME[1].PrimLOPump := False;
 
   if ME[0].PreHeatingPumpAuto then
-    ME[0].PreHeatingPump := True;
+    ME[0].PreHeatingPump := True
+  else
+    ME[0].PreHeatingPump := False;
 
   if ME[1].PreHeatingPumpAuto then
-    ME[1].PreHeatingPump := True;
+    ME[1].PreHeatingPump := True
+  else
+    ME[1].PreHeatingPump := False;
 
   if ME[0].HeaterAuto then
-    ME[0].Heater := True;
+    ME[0].Heater := True
+  else
+    ME[0].Heater := False;
 
   if ME[1].HeaterAuto then
-    ME[1].Heater := True;
+    ME[1].Heater := True
+  else
+    ME[1].Heater := False;
 end;
 
 procedure TPropulsionSystem.SetManouveringMode(const aValue: Boolean);
