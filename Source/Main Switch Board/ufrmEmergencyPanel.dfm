@@ -90988,11 +90988,12 @@ object frmEmergencyPanel: TfrmEmergencyPanel
           0000}
         Stretch = True
       end
-      object ImgEnter: TImage
+      object ImgEsc: TImage
         Left = 452
         Top = 81
         Width = 52
         Height = 52
+        OnClick = ImgEscClick
       end
       object ImgShift: TImage
         Left = 452
@@ -91012,7 +91013,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Width = 52
         Height = 52
       end
-      object ImgEsc: TImage
+      object ImgEnter: TImage
         Left = 452
         Top = 297
         Width = 52
@@ -91051,34 +91052,39 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Height = 52
       end
       object ImgF5: TImage
-        Left = 359
+        Left = 357
         Top = 297
         Width = 52
         Height = 52
+        OnClick = ImgF5Click
       end
       object ImgF4: TImage
         Left = 293
         Top = 297
         Width = 52
         Height = 52
+        OnClick = ImgF4Click
       end
       object ImgF3: TImage
         Left = 228
         Top = 297
         Width = 52
         Height = 52
+        OnClick = ImgF3Click
       end
       object ImgF2: TImage
-        Left = 164
+        Left = 165
         Top = 297
         Width = 52
         Height = 52
+        OnClick = ImgF2Click
       end
       object ImgF1: TImage
         Left = 101
         Top = 297
         Width = 52
         Height = 52
+        OnClick = ImgF1Click
       end
       object ImgAUTO: TImage
         Left = 101
@@ -97252,6 +97258,41 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Font.Name = 'Courier New'
         Font.Style = []
         ParentFont = False
+      end
+      object pnlPassword: TPanel
+        Left = 88
+        Top = 90
+        Width = 328
+        Height = 193
+        Color = clLime
+        ParentBackground = False
+        TabOrder = 0
+        Visible = False
+        object Label34: TLabel
+          Left = 16
+          Top = 18
+          Width = 88
+          Height = 16
+          Caption = 'Password : '
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Courier New'
+          Font.Style = []
+          ParentFont = False
+        end
+        object lblPass: TLabel
+          Left = 111
+          Top = 18
+          Width = 8
+          Height = 16
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Courier New'
+          Font.Style = []
+          ParentFont = False
+        end
       end
     end
     object pnlA: TPanel

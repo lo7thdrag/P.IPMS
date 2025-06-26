@@ -1,4 +1,4 @@
-unit ufrmEmergencyPanel;
+﻿unit ufrmEmergencyPanel;
 
 interface
 
@@ -60,11 +60,11 @@ type
     VrVoltage: TVrRotarySwitch;
     Label17: TLabel;
     VrCBClosed: TVrRotarySwitch;
-    ImgEnter: TImage;
+    ImgEsc: TImage;
     ImgShift: TImage;
     ImgLower: TImage;
     ImgRaise: TImage;
-    ImgEsc: TImage;
+    ImgEnter: TImage;
     ImgLT: TImage;
     ImgIP: TImage;
     ImgAP: TImage;
@@ -97,6 +97,9 @@ type
     imgMenu: TImage;
     lblDate: TLabel;
     lblTime: TLabel;
+    pnlPassword: TPanel;
+    Label34: TLabel;
+    lblPass: TLabel;
     procedure ImgStartClick(Sender: TObject);
     procedure ImgStopClick(Sender: TObject);
     procedure ImgOIClick(Sender: TObject);
@@ -112,10 +115,24 @@ type
     procedure ImgMANClick(Sender: TObject);
 //    procedure tmrAmpereTimer(Sender: TObject);
     procedure VrCBClosedChange(Sender: TObject);
+    procedure ImgEscClick(Sender: TObject);
+    procedure ImgF1Click(Sender: TObject);
+    procedure ImgF2Click(Sender: TObject);
+    procedure ImgF3Click(Sender: TObject);
+    procedure ImgF4Click(Sender: TObject);
+    procedure ImgF5Click(Sender: TObject);
   private
-    { Private declarations }
     Led  : array of TImage;
     LedStatus  : array of Boolean;
+
+    labels : array[0..62] of TLabel;
+    currentIndex : Integer;
+
+    procedure createlabels;
+    procedure HighlightLabel(index : Integer);
+    procedure UnhighlightLabel(index : Integer);
+    procedure ClearAllHighlight;
+
 
     function CekGeneratorCondition : Boolean;
 
@@ -163,6 +180,8 @@ begin
           ImgIndicatorER, ImgIndicatorGS, ImgIndicatorCBC, ImgIndicatorMsbCB, ImgIndicatorBS,
           ImgIndicatorHO, ImgIndicatorFP, ImgIndicatorAP];
   SetLength(LedStatus, Length(Led));
+
+  createlabels;
 end;
 
 {$ENDREGION}
@@ -210,6 +229,81 @@ begin
     MainSwitchBoardSystem.CBClosed(True)
   else if (VrCBClosed.SwitchPosition = 0) then
     MainSwitchBoardSystem.CBClosed(False)
+end;
+
+procedure TfrmEmergencyPanel.ImgEscClick(Sender: TObject);
+begin
+  createlabels;
+  pnlPassword.Visible := True;
+end;
+
+procedure TfrmEmergencyPanel.ImgF1Click(Sender: TObject);
+var
+  colsPerRow: Integer;
+begin
+  colsPerRow := 26;
+  if CurrentIndex >= colsPerRow then
+  begin
+    UnhighlightLabel(CurrentIndex);
+    Dec(CurrentIndex, colsPerRow);
+    ClearAllHighlight;
+    HighlightLabel(CurrentIndex);
+  end;
+end;
+
+procedure TfrmEmergencyPanel.ImgF2Click(Sender: TObject);
+var
+  colsPerRow: Integer;
+begin
+  colsPerRow := 26;
+  if CurrentIndex + colsPerRow <= High(Labels) then
+  begin
+    UnhighlightLabel(CurrentIndex);
+    Inc(CurrentIndex, colsPerRow);
+    ClearAllHighlight;
+    HighlightLabel(CurrentIndex);
+  end;
+end;
+
+procedure TfrmEmergencyPanel.ImgF3Click(Sender: TObject);
+begin
+  if CurrentIndex > 0 then
+  begin
+    UnhighlightLabel(CurrentIndex);
+    Dec(CurrentIndex);
+    ClearAllHighlight;
+    HighlightLabel(CurrentIndex);
+  end;
+end;
+
+procedure TfrmEmergencyPanel.ImgF4Click(Sender: TObject);
+begin
+  if CurrentIndex < High(Labels) then
+  begin
+    UnhighlightLabel(CurrentIndex);
+    Inc(CurrentIndex);
+    ClearAllHighlight;
+    HighlightLabel(CurrentIndex);
+  end;
+end;
+
+procedure TfrmEmergencyPanel.ImgF5Click(Sender: TObject);
+var
+  currentText, tempText : string;
+begin
+  currentText := labels[currentIndex].Caption;
+
+  if currentText = '←' then
+  begin
+    tempText := lblPass.Caption;
+    if Length(lblPass.Caption)>0 then
+      Delete(tempText, Length(tempText), 1);
+    lblPass.Caption := tempText;
+  end
+  else
+  begin
+    lblPass.Caption := lblPass.Caption + currentText;
+  end;
 end;
 
 procedure TfrmEmergencyPanel.ImgStartClick(Sender: TObject);
@@ -270,6 +364,53 @@ begin
   Result := True;
 end;
 
+procedure TfrmEmergencyPanel.createlabels;
+var
+  i: Integer;
+  x, y: Integer;
+  chars: string;
+  labelWidth, labelHeight, spaceX, spaceY: Integer;
+begin
+  chars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789←';
+
+  labelWidth := 15;    // Lebar setiap label
+  labelHeight := 15;   // Tinggi setiap label
+  spaceX := -3;         // Jarak horizontal antar label
+  spaceY := 6;         // Jarak vertikal antar baris
+
+  x := 7;
+  y := 100;
+
+  for i := 0 to Length(chars) - 1 do
+  begin
+    Labels[i] := TLabel.Create(Self);
+    Labels[i].Parent := pnlPassword;  // Semua label di panel
+    Labels[i].Caption := chars[i + 1];
+    Labels[i].Left := x;
+    Labels[i].Top := y;
+    Labels[i].Width := labelWidth;
+    Labels[i].Height := labelHeight;
+    Labels[i].Alignment := taCenter;
+    Labels[i].Layout := tlCenter;
+    labels[i].Font.Name := 'Courier New';
+    Labels[i].Font.Size := 10;
+    Labels[i].AutoSize := False;
+
+    Inc(x, labelWidth + spaceX);
+
+    // Pindah baris setelah huruf besar, huruf kecil
+    if (i = 25) or (i = 51) then
+    begin
+      x := 7;
+      Inc(y, labelHeight + spaceY);
+    end;
+  end;
+
+  CurrentIndex := 0;
+  HighlightLabel(CurrentIndex);
+  ClearAllHighlight;
+end;
+
 procedure TfrmEmergencyPanel.DoLedTest(OnOff: Boolean);
 var
   i : Integer;
@@ -288,6 +429,32 @@ begin
     begin
       Led[i].Visible := LedStatus[i];
     end;
+  end;
+end;
+
+procedure TfrmEmergencyPanel.HighlightLabel(index: Integer);
+begin
+  Labels[Index].Color := clBlack;
+  Labels[Index].Font.Color := clLime;
+  Labels[index].Transparent := False;
+end;
+
+procedure TfrmEmergencyPanel.UnhighlightLabel(index: Integer);
+begin
+  Labels[Index].Color := pnlPassword.Color;
+  Labels[Index].Font.Color := clBlack;
+  Labels[index].Transparent := True;
+end;
+
+procedure TfrmEmergencyPanel.ClearAllHighlight;
+var
+  i: Integer;
+begin
+  for i := 0 to High(Labels) do
+  begin
+    Labels[i].Color := pnlPassword.Color;
+    Labels[i].Font.Color := clBlack;
+    Labels[i].Transparent := True;
   end;
 end;
 

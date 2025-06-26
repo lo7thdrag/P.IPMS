@@ -1,4 +1,4 @@
-unit ufrmGeneratorPanel;
+﻿unit ufrmGeneratorPanel;
 
 interface
 
@@ -86,11 +86,11 @@ type
     ImgOI: TImage;
     ImgPref: TImage;
     lstMenu: TListBox;
-    Panel1: TPanel;
-    Panel2: TPanel;
-    Panel3: TPanel;
-    Panel4: TPanel;
-    Panel5: TPanel;
+    pnlUp1: TPanel;
+    pnlDown1: TPanel;
+    pnlBlack1: TPanel;
+    pnlBlack2: TPanel;
+    pnlBlack3: TPanel;
     lstFaultPage: TListBox;
     lstAlarmPage: TListBox;
     lstInfoPage: TListBox;
@@ -139,14 +139,55 @@ type
     Label40: TLabel;
     ProgressBar5: TProgressBar;
     ProgressBar6: TProgressBar;
-    Label31: TLabel;
-    Label32: TLabel;
-    Label33: TLabel;
-    Label37: TLabel;
     Label38: TLabel;
     Label43: TLabel;
     Label44: TLabel;
     Label45: TLabel;
+    pnlPassword: TPanel;
+    Label34: TLabel;
+    lblPass: TLabel;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    Image6: TImage;
+    Image1: TImage;
+    Image7: TImage;
+    pnlLeft: TPanel;
+    pnlRight: TPanel;
+    pnlUp2: TPanel;
+    pnlDown2: TPanel;
+    pnlRefresh: TPanel;
+    Image8: TImage;
+    Image9: TImage;
+    Image10: TImage;
+    Image11: TImage;
+    Image12: TImage;
+    pnlReset: TPanel;
+    Image13: TImage;
+    Image14: TImage;
+    Image15: TImage;
+    Image16: TImage;
+    Panel1: TPanel;
+    Image17: TImage;
+    Panel2: TPanel;
+    Image18: TImage;
+    Panel3: TPanel;
+    Image19: TImage;
+    Panel4: TPanel;
+    Image20: TImage;
+    Panel5: TPanel;
+    Image21: TImage;
+    Panel6: TPanel;
+    Image22: TImage;
+    Panel7: TPanel;
+    Image23: TImage;
+    Panel8: TPanel;
+    Image24: TImage;
+    Panel9: TPanel;
+    Image25: TImage;
+    Panel10: TPanel;
+    Image26: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ImgStartClick(Sender: TObject);
@@ -177,16 +218,19 @@ type
     procedure ImgF4Click(Sender: TObject);
     procedure lstMenuDrawItem(Control: TWinControl; Index: Integer; Rect: TRect;
       State: TOwnerDrawState);
+    procedure ImgF5Click(Sender: TObject);
   private
     Led  : array of TImage;
     LedStatus  : array of Boolean;
     ShiftMode : Boolean;
 
-//    MainMenu : TStringList;
     MainMenu, SubMenu : array of TStringList;
     SubSubMenu1, SubSubMenu2, SubSubMenu3 : array of array of TStringList;
     CurrentMenuIndex, SubMenuIndex, SubSubMenuPage: Integer;
     InSubMenu, InSubSubMenu : Boolean;
+
+    labels : array[0..62] of TLabel;
+    currentIndex : Integer;
 
     procedure InitMenu;
     procedure LoadMainMenu(MainIndex : Integer);
@@ -196,6 +240,11 @@ type
     procedure MenuFaultPage;
     procedure MenuAlarmPage;
     procedure MenuInfoPage;
+
+    procedure createlabels;
+    procedure HighlightLabel(index : Integer);
+    procedure UnhighlightLabel(index : Integer);
+    procedure ClearAllHighlight;
 
     procedure SetLCDLook;
 
@@ -254,25 +303,14 @@ begin
   lblDate.Caption := FormatDateTime('dd"/"mm"/"yy', Now);
 
   lstMenu.Visible := False;
-  Panel1.Visible := False;
-  Panel2.Visible := False;
-  Panel3.Visible := False;
-  Panel4.Visible := False;
-  Panel5.Visible := False;
 
-//  SetLCDLook;
-//  InitMenu;
-//
-//  CurrentMenuIndex := 0;
-//  InSubMenu := False;
-//  InSubSubMenu := False;
-//  LoadMainMenu(CurrentMenuIndex);
 end;
 
 procedure TfrmGeneratorPanel.FormDestroy(Sender: TObject);
 begin
 // FListener.Free;
 end;
+
 
 {$ENDREGION}
 
@@ -303,33 +341,56 @@ begin
 end;
 
 procedure TfrmGeneratorPanel.ImgEnterClick(Sender: TObject);
+var
+  enteredPass : string;
 begin
+  if pnlPassword.Visible then
+  begin
+    enteredPass := lblPass.Caption;
+    if enteredPass = '123' then
+    begin
+      pnlPassword.Visible := False;
+      lstMenu.Visible := True;
+      SetLCDLook;
+      InitMenu;
+      CurrentMenuIndex := 0;
+      LoadMainMenu(CurrentMenuIndex);
+
+      pnlUp1.Visible := True;
+      pnlDown1.Visible := True;
+      pnlBlack1.Visible := True;
+      pnlBlack2.Visible := True;
+      pnlBlack3.Visible := True;
+
+      InSubMenu := False;
+      InSubSubMenu := False;
+    end
+    else
+    begin
+      ShowMessage('Password salah!');
+      lblPass.Caption := '';
+    end;
+    Exit;
+  end;
+
+
+  if lstMenu.ItemIndex = -1 then
+      Exit;
+
   if not InSubMenu then
   begin
-    CurrentMenuIndex := lstMenu.ItemIndex;
-    InSubMenu := True;
-    LoadSubMenu(CurrentMenuIndex);
-
-    Panel1.Caption := 'Raise';
-    Panel2.Caption := 'Lower';
-    Panel3.Caption := ' ';
-    Panel4.Caption := ' ';
-
-    if InSubMenu = True then
+    if lstMenu.ItemIndex >= 0 then
     begin
-      Panel1.Caption := '<<';
-      Panel2.Caption := '>>';
-      Panel3.Caption := 'Raise';
-      Panel4.Caption := 'Lower';
+      CurrentMenuIndex := lstMenu.ItemIndex;
+      InSubMenu := True;
+      LoadSubMenu(CurrentMenuIndex);
+
+      lstMenu.Refresh;
     end;
   end
   else if not InSubSubMenu then
   begin
     SubMenuIndex := lstMenu.ItemIndex;
-    Panel1.Caption := '<<';
-    Panel2.Caption := '>>';
-    Panel3.Caption := 'Raise';
-    Panel4.Caption := 'Lower';
 
     if InSubMenu then
     begin
@@ -360,41 +421,33 @@ begin
       InSubSubMenu := True;
       LoadSubSubMenu(SubSubMenuPage);
     end;
+
   end;
 end;
 
 procedure TfrmGeneratorPanel.ImgEscClick(Sender: TObject);
 begin
-  if not InSubMenu then
-  begin
-    lstMenu.Visible := True;
-    SetLCDLook;
-    InitMenu;
-    CurrentMenuIndex := 0;
-    LoadMainMenu(CurrentMenuIndex);
-
-    Panel1.Visible := True;
-    Panel2.Visible := True;
-    Panel3.Visible := True;
-    Panel4.Visible := True;
-    Panel5.Visible := True;
-    panel1.BringToFront;
-    Panel2.BringToFront;
-    Panel3.BringToFront;
-    Panel4.BringToFront;
-    Panel5.BringToFront;
-  end;
-
   if InSubSubMenu then
   begin
     InSubSubMenu := False;
     LoadSubMenu(CurrentMenuIndex);
+    Exit;
+  end;
 
-  end
-  else if InSubMenu then
+  if InSubMenu then
   begin
     InSubMenu := False;
     LoadMainMenu(CurrentMenuIndex);
+
+    if (CurrentMenuIndex = 0) and (SubMenuIndex = 2) then
+    begin
+      pnlEngineMeters1.Visible := False;
+      pnlEngineMeters2.Visible := False;
+
+      LoadSubMenu(CurrentMenuIndex);
+    end;
+
+    Exit;
   end;
 
   if lstFaultPage.Visible or lstAlarmPage.Visible or lstInfoPage.Visible then
@@ -404,38 +457,44 @@ begin
     lstInfoPage.Visible := False;
 
     lstMenu.Visible := True;
-    Panel1.Caption := 'Raise';
-    Panel2.Caption := 'Lower';
-    Panel3.Caption := ' ';
-    Panel4.Caption := ' ';
+
     InitMenu;
     CurrentMenuIndex := 0;
     LoadMainMenu(CurrentMenuIndex);
+    Exit;
   end;
 
-  if (CurrentMenuIndex = 0) and (SubMenuIndex = 2) then
-  begin
-    pnlEngineMeters1.SendToBack;
-    pnlEngineMeters1.Visible := False;
-    pnlEngineMeters2.SendToBack;
-    pnlEngineMeters2.Visible := False;
-
-    LoadSubMenu(CurrentMenuIndex);
-  end;
+  createlabels;
+  pnlPassword.Visible := True;
+  lstMenu.Visible := False;
 end;
 
 procedure TfrmGeneratorPanel.ImgF1Click(Sender: TObject);
+var
+  colsPerRow: Integer;
 begin
+  colsPerRow := 26;
+  if CurrentIndex >= colsPerRow then
+  begin
+    UnhighlightLabel(CurrentIndex);
+    Dec(CurrentIndex, colsPerRow);
+    ClearAllHighlight;
+    HighlightLabel(CurrentIndex);
+  end;
+
+  {up}
+  if lstMenu.ItemIndex > 0 then
+    lstMenu.ItemIndex := lstMenu.ItemIndex - 1;
+
   if not InSubMenu and not InSubSubMenu then
   begin
-    {up}
-    if lstMenu.ItemIndex > 0 then
-      lstMenu.ItemIndex := lstMenu.ItemIndex - 1;
-
     if lstInfoPage.Visible then
     begin
-      Dec(CurrentMenuIndex);
-      LoadMainMenu(CurrentMenuIndex);
+      if CurrentMenuIndex > 0 then
+      begin
+        Dec(CurrentMenuIndex);
+        LoadMainMenu(CurrentMenuIndex);
+      end;
     end;
   end;
 
@@ -457,7 +516,22 @@ begin
 end;
 
 procedure TfrmGeneratorPanel.ImgF2Click(Sender: TObject);
+var
+  colsPerRow: Integer;
 begin
+  colsPerRow := 26;
+  if CurrentIndex + colsPerRow <= High(Labels) then
+  begin
+    UnhighlightLabel(CurrentIndex);
+    Inc(CurrentIndex, colsPerRow);
+    ClearAllHighlight;
+    HighlightLabel(CurrentIndex);
+  end;
+
+  {Down}
+  if lstMenu.ItemIndex < lstMenu.Count -1 then
+      lstMenu.ItemIndex := lstMenu.ItemIndex +1;
+
   {next page}
   if not InSubMenu and not InSubSubMenu then
   begin
@@ -470,9 +544,6 @@ begin
       end;
     end;
 
-    {Down}
-    if lstMenu.ItemIndex < lstMenu.Count -1 then
-      lstMenu.ItemIndex := lstMenu.ItemIndex +1;
   end
   else if InSubSubMenu and (SubSubMenuPage + 1 < Length(SubSubMenu1[SubMenuIndex])) then
   begin
@@ -502,30 +573,74 @@ end;
 
 procedure TfrmGeneratorPanel.ImgF3Click(Sender: TObject);
 begin
+  if CurrentIndex > 0 then
+  begin
+    UnhighlightLabel(CurrentIndex);
+    Dec(CurrentIndex);
+    ClearAllHighlight;
+    HighlightLabel(CurrentIndex);
+  end;
+
   if lstMenu.ItemIndex > 0 then
     lstMenu.ItemIndex := lstMenu.ItemIndex - 1;
 end;
 
 procedure TfrmGeneratorPanel.ImgF4Click(Sender: TObject);
 begin
+  if CurrentIndex < High(Labels) then
+  begin
+    UnhighlightLabel(CurrentIndex);
+    Inc(CurrentIndex);
+    ClearAllHighlight;
+    HighlightLabel(CurrentIndex);
+  end;
+
   if lstMenu.ItemIndex < lstMenu.Items.Count -1 then
     lstMenu.ItemIndex := lstMenu.ItemIndex + 1;
+end;
+
+procedure TfrmGeneratorPanel.ImgF5Click(Sender: TObject);
+var
+  currentText, tempText : string;
+begin
+  currentText := labels[currentIndex].Caption;
+
+  if currentText = '←' then
+  begin
+    tempText := lblPass.Caption;
+    if Length(lblPass.Caption)>0 then
+      Delete(tempText, Length(tempText), 1);
+    lblPass.Caption := tempText;
+  end
+  else
+  begin
+    lblPass.Caption := lblPass.Caption + currentText;
+  end;
 end;
 
 procedure TfrmGeneratorPanel.ImgFPClick(Sender: TObject);
 begin
   MenuFaultPage;
 
+  pnlPassword.Visible := False;
   lstMenu.Visible := False;
   lstFaultPage.Visible := True;
   lstAlarmPage.Visible := False;
   lstInfoPage.Visible := False;
 
   SetLCDLook;
-  Panel1.Caption := '<<';
-  Panel2.Caption := '>>';
-  Panel3.Caption := 'Refresh';
-  Panel4.Caption := 'Reset';
+
+  pnlLeft.Visible := True;
+  pnlRight.Visible := True;
+  pnlRefresh.Visible := True;
+  pnlReset.Visible := True;
+  pnlBlack3.Visible := True;
+
+  pnlLeft.BringToFront;
+  pnlRight.BringToFront;
+  pnlRefresh.BringToFront;
+  pnlReset.BringToFront;
+  pnlBlack3.BringToFront;
 
   CurrentMenuIndex := 0;
 
@@ -536,16 +651,25 @@ procedure TfrmGeneratorPanel.ImgAPClick(Sender: TObject);
 begin
   MenuAlarmPage;
 
+  pnlPassword.Visible := False;
   lstMenu.Visible := False;
   lstFaultPage.Visible := False;
   lstAlarmPage.Visible := True;
   lstInfoPage.Visible := False;
 
   SetLCDLook;
-  Panel1.Caption := '<<';
-  Panel2.Caption := '>>';
-  Panel3.Caption := 'Refresh';
-  Panel4.Caption := 'Reset';
+
+  pnlLeft.Visible := True;
+  pnlRight.Visible := True;
+  pnlRefresh.Visible := True;
+  pnlReset.Visible := True;
+  pnlBlack3.Visible := True;
+
+  pnlLeft.BringToFront;
+  pnlRight.BringToFront;
+  pnlRefresh.BringToFront;
+  pnlReset.BringToFront;
+  pnlBlack3.BringToFront;
 
   CurrentMenuIndex := 0;
 
@@ -556,16 +680,25 @@ procedure TfrmGeneratorPanel.ImgIPClick(Sender: TObject);
 begin
   MenuInfoPage;
 
+  pnlPassword.Visible := False;
   lstMenu.Visible := False;
   lstFaultPage.Visible := False;
   lstAlarmPage.Visible := False;
   lstInfoPage.Visible := True;
 
   SetLCDLook;
-  Panel1.Caption := '<<';
-  Panel2.Caption := '>>';
-  Panel3.Caption := 'Raise';
-  Panel4.Caption := 'Lower';
+
+  pnlLeft.Visible := True;
+  pnlRight.Visible := True;
+  pnlUp2.Visible := True;
+  pnlDown2.Visible := True;
+  pnlBlack3.Visible := True;
+
+  pnlLeft.BringToFront;
+  pnlRight.BringToFront;
+  pnlUp2.BringToFront;
+  pnlDown2.BringToFront;
+  pnlBlack3.BringToFront;
 
   CurrentMenuIndex := 0;
 
@@ -666,6 +799,79 @@ begin
   Result := True;
 end;
 
+procedure TfrmGeneratorPanel.createlabels;
+var
+  i: Integer;
+  x, y: Integer;
+  chars: string;
+  labelWidth, labelHeight, spaceX, spaceY: Integer;
+begin
+  chars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789←';
+
+  labelWidth := 15;    // Lebar setiap label
+  labelHeight := 15;   // Tinggi setiap label
+  spaceX := -3;         // Jarak horizontal antar label
+  spaceY := 1;         // Jarak vertikal antar baris
+
+  x := 7;
+  y := 100;
+
+  for i := 0 to Length(chars) - 1 do
+  begin
+    Labels[i] := TLabel.Create(Self);
+    Labels[i].Parent := pnlPassword;  // Semua label di panel
+    Labels[i].Caption := chars[i + 1];
+    Labels[i].Left := x;
+    Labels[i].Top := y;
+    Labels[i].Width := labelWidth;
+    Labels[i].Height := labelHeight;
+    Labels[i].Alignment := taCenter;
+    Labels[i].Layout := tlCenter;
+    labels[i].Font.Name := 'Courier New';
+    Labels[i].Font.Size := 10;
+    Labels[i].AutoSize := False;
+
+    Inc(x, labelWidth + spaceX);
+
+    // Pindah baris setelah huruf besar, huruf kecil
+    if (i = 25) or (i = 51) then
+    begin
+      x := 7;
+      Inc(y, labelHeight + spaceY);
+    end;
+  end;
+
+  CurrentIndex := 0;
+  HighlightLabel(CurrentIndex);
+  ClearAllHighlight;
+end;
+
+procedure TfrmGeneratorPanel.HighlightLabel(index: Integer);
+begin
+  Labels[Index].Color := clBlack;
+  Labels[Index].Font.Color := clLime;
+  Labels[index].Transparent := False;
+end;
+
+procedure TfrmGeneratorPanel.UnhighlightLabel(index: Integer);
+begin
+  Labels[Index].Color := pnlPassword.Color;
+  Labels[Index].Font.Color := clBlack;
+  Labels[index].Transparent := True;
+end;
+
+procedure TfrmGeneratorPanel.ClearAllHighlight;
+var
+  i: Integer;
+begin
+  for i := 0 to High(Labels) do
+  begin
+    Labels[i].Color := pnlPassword.Color;
+    Labels[i].Font.Color := clBlack;
+    Labels[i].Transparent := True;
+  end;
+end;
+
 procedure TfrmGeneratorPanel.DoLedTest(OnOff: Boolean);
 var
   i : Integer;
@@ -688,6 +894,8 @@ begin
 end;
 
 procedure TfrmGeneratorPanel.InitMenu;
+var
+  Generator : TGenerator;
 begin
   SetLength(MainMenu, 3);
 
@@ -716,13 +924,13 @@ begin
   SetLength(SubSubMenu1[0], 9);
   SubSubMenu1[0][0] := TStringList.Create;
   SubSubMenu1[0][0].Add('Generator Phase-Neutral Volt');
-  SubSubMenu1[0][0].Add('V1 = 00000 V');
+  SubSubMenu1[0][0].Add('V1 = ' + FormatFloat('0.0', Generator.V) +' V');
   SubSubMenu1[0][0].Add('V2 = 00000 V');
   SubSubMenu1[0][0].Add('V3 = 00000 V');
 
   SubSubMenu1[0][1] := TStringList.Create;
   SubSubMenu1[0][1].Add('Generator Phase-Phase Volt');
-  SubSubMenu1[0][1].Add('U31 = 00000 V');
+  SubSubMenu1[0][1].Add('U31 = ' + FormatFloat('0.0', Generator.Voltage) +' V');
   SubSubMenu1[0][1].Add('U23 = 00000 V');
   SubSubMenu1[0][1].Add('U12 = 00000 V');
 
@@ -733,6 +941,7 @@ begin
   SubSubMenu1[0][2].Add('I3 = 00000 A');
 
   SubSubMenu1[0][3] := TStringList.Create;
+  SubSubMenu1[0][3].Add('Generator kW');
   SubSubMenu1[0][3].Add('P1 = 00000 kW');
   SubSubMenu1[0][3].Add('P2 = 00000 kW');
   SubSubMenu1[0][3].Add('P3 = 00000 kW');
@@ -761,6 +970,17 @@ begin
   SubSubMenu1[0][7].Add('0005339192kWh');
   SubSubMenu1[0][7].Add('kVAR meter');
   SubSubMenu1[0][7].Add('0003989214kVARh');
+
+  SubSubMenu1[0][8] := TStringList.Create;
+  SubSubMenu1[0][8].Add('Global view');
+  SubSubMenu1[0][8].Add('V1 = 00000 V   U31 = 00000 V   I1 = 00000 A');
+  SubSubMenu1[0][8].Add('V2 = 00000 V   U23 = 00000 V   I2 = 00000 A');
+  SubSubMenu1[0][8].Add('V3 = 00000 V   U12 = 00000 V   I3 = 00000 A');
+  SubSubMenu1[0][8].Add('P1 = 00000 kW  Q1 = 00000 kVAR  cos(1) = 1.00I');
+  SubSubMenu1[0][8].Add('P2 = 00000 kW  Q2 = 00000 kVAR  cos(2) = 1.00I');
+  SubSubMenu1[0][8].Add('P3 = 00000 kW  Q3 = 00000 kVAR  cos(3) = 1.00I');
+  SubSubMenu1[0][8].Add('P = 00000 kW     F = 50.09 Hz');
+  SubSubMenu1[0][8].Add('Q = 00000 kVAR   cos(1) = 0.791');
 
   // SubSubMenu Mains/bus electrical meter (index = 1)
   SetLength(SubSubMenu1[1], 1);
@@ -1252,6 +1472,60 @@ begin
   {$ENDREGION}
 end;
 
+procedure TfrmGeneratorPanel.MenuAlarmPage;
+begin
+  MainMenu[0]:= TStringList.Create;
+  MainMenu[0].AddStrings([
+    'Alarm 1/2',
+    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now) + ' ' ]);
+end;
+
+procedure TfrmGeneratorPanel.MenuFaultPage;
+begin
+  MainMenu[0]:= TStringList.Create;
+  MainMenu[0].AddStrings([
+    'Faults 1/2',
+    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now)+ '  ']);
+end;
+
+procedure TfrmGeneratorPanel.MenuInfoPage;
+begin
+  MainMenu[0]:= TStringList.Create;
+  MainMenu[0].AddStrings([
+    'Information 1/2',
+    'Power : Waiting',
+    'Engine : Waiting',
+    'Generator freq >20     = 000.00 Hz',
+    'Bus frequency >23      = 059.99 Hz',
+    'Engine speed >33       = 000000 rpm',
+    'Speed sign sum > 2058  = 000000',
+    'Gen. number >1179      = 000002',
+    'Bus CAN fault >1259    = 000006',
+    'Load sharing I >1901   = 000005',
+    'User pram 091 >1728    = 000000',
+    'Master gen. Nb >2739   = 000000',
+    'Priority gen. > 2241   = 000000'
+    ]);
+
+  MainMenu[1]:= TStringList.Create;
+  MainMenu[1].AddStrings([
+    'Information 2/2',
+    'Power : Waiting',
+    'Engine : Waiting',
+    'Generator freq >20     = 000.00 Hz',
+    'Freq G >1111           = 000020%',
+    'Freq P >1112           = 000080%',
+    'Freq I >1113           = 000020%',
+    'Nb of gen. >1147       = 000004',
+    'Hz center gain >1902   = 000025%',
+    'Inhibit GE04 >2694     = 000000',
+    'Load sharing P >1900   = 000005%',
+    'Power mode >2088       = 000000',
+    'Fault >1332            = 000005'
+    ]);
+end;
+
+
 procedure TfrmGeneratorPanel.LoadMainMenu(MainIndex : Integer);
 var
   ActiveListBox : TListBox;
@@ -1259,10 +1533,18 @@ begin
   if lstMenu.Visible then
   begin
     ActiveListBox := lstMenu;
-    Panel1.Caption := 'Raise';
-    Panel2.Caption := 'Lower';
-    Panel3.Caption := ' ';
-    Panel4.Caption := ' ';
+
+    pnlUp1.Visible := True;
+    pnlDown1.Visible := True;
+    pnlBlack1.Visible := True;
+    pnlBlack2.Visible := True;
+    pnlBlack3.Visible := True;
+
+    pnlUp1.BringToFront;
+    pnlDown1.BringToFront;
+    pnlBlack1.BringToFront;
+    pnlBlack2.BringToFront;
+    pnlBlack3.BringToFront;
   end
   else if lstFaultPage.Visible then
   begin
@@ -1291,12 +1573,36 @@ begin
     InSubMenu := True;
     SubMenuIndex := SubIndex;
     InSubSubMenu := False;
+
+    pnlLeft.Visible := True;
+    pnlRight.Visible := True;
+    pnlUp2.Visible := True;
+    pnlDown2.Visible := True;
+    pnlBlack3.Visible := True;
+
+    pnlLeft.BringToFront;
+    pnlRight.BringToFront;
+    pnlUp2.BringToFront;
+    pnlDown2.BringToFront;
+    pnlBlack3.BringToFront;
   end;
 end;
 
 procedure TfrmGeneratorPanel.LoadSubSubMenu(page : Integer);
 begin
   lstMenu.Clear;
+
+  pnlLeft.Visible := True;
+  pnlRight.Visible := True;
+  pnlBlack1.Visible := True;
+  pnlBlack2.Visible := True;
+  pnlBlack3.Visible := True;
+
+  pnlLeft.BringToFront;
+  pnlRight.BringToFront;
+  pnlBlack1.BringToFront;
+  pnlBlack2.BringToFront;
+  pnlBlack3.BringToFront;
 
   if (CurrentMenuIndex = 0) and
      (SubMenuIndex < Length(SubSubMenu1)) and
@@ -1345,59 +1651,6 @@ begin
   end;
 end;
 
-procedure TfrmGeneratorPanel.MenuAlarmPage;
-begin
-  MainMenu[0]:= TStringList.Create;
-  MainMenu[0].AddStrings([
-    'Alarm 1/2',
-    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now) + 'DG not standby 2296=Off' ]);
-end;
-
-procedure TfrmGeneratorPanel.MenuFaultPage;
-begin
-  MainMenu[0]:= TStringList.Create;
-  MainMenu[0].AddStrings([
-    'Faults 1/2',
-    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now)+ ' DG Common air 2298=Off ']);
-end;
-
-procedure TfrmGeneratorPanel.MenuInfoPage;
-begin
-  MainMenu[0]:= TStringList.Create;
-  MainMenu[0].AddStrings([
-    'Information 1/2',
-    'Power : Waiting',
-    'Engine : Waiting',
-    'Generator freq >20     = 000.00 Hz',
-    'Bus frequency >23      = 059.99 Hz',
-    'Engine speed >33       = 000000 rpm',
-    'Speed sign sum > 2058  = 000000',
-    'Gen. number >1179      = 000002',
-    'Bus CAN fault >1259    = 000006',
-    'Load sharing I >1901   = 000005',
-    'User pram 091 >1728    = 000000',
-    'Master gen. Nb >2739   = 000000',
-    'Priority gen. > 2241   = 000000'
-    ]);
-
-  MainMenu[1]:= TStringList.Create;
-  MainMenu[1].AddStrings([
-    'Information 2/2',
-    'Power : Waiting',
-    'Engine : Waiting',
-    'Generator freq >20     = 000.00 Hz',
-    'Freq G >1111           = 000020%',
-    'Freq P >1112           = 000080%',
-    'Freq I >1113           = 000020%',
-    'Nb of gen. >1147       = 000004',
-    'Hz center gain >1902   = 000025%',
-    'Inhibit GE04 >2694     = 000000',
-    'Load sharing P >1900   = 000005%',
-    'Power mode >2088       = 000000',
-    'Fault >1332            = 000005'
-    ]);
-end;
-
 procedure TfrmGeneratorPanel.SetLCDLook;
 var
   ActiveListBox : TListBox;
@@ -1416,6 +1669,7 @@ begin
   ActiveListBox.Font.Color := clBlack;
   ActiveListBox.Color := clLime;
 end;
+
 
 procedure TfrmGeneratorPanel.updateForm(Generator : TGenerator);
 begin
