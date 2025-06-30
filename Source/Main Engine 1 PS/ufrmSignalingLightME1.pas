@@ -57,7 +57,7 @@ type
     imgFWTempRegulator: TImage;
     lblInletTemperature: TLabel;
     lblOutletTemperature: TLabel;
-    Panel1: TPanel;
+    pnlTemperatureRegulator: TPanel;
     Label2: TLabel;
     procedure btnStartClick(Sender: TObject);
     procedure btnClutchClick(Sender: TObject);
@@ -67,6 +67,7 @@ type
     procedure btnDeclutchClick(Sender: TObject);
     procedure btnByPassP2P4OpenClick(Sender: TObject);
     procedure btnByPassP2P4CloseClick(Sender: TObject);
+    procedure imgSafetiesorECResetME1Click(Sender: TObject);
   private
     FListener : TListeners;
     FIsBlinkState : Boolean;
@@ -127,6 +128,12 @@ end;
 procedure TfrmSignalingLightME1.btnStartClick(Sender: TObject);
 begin
   MainEngine1System.RunningStart(C_PCS_ME_PORTS);
+end;
+
+procedure TfrmSignalingLightME1.imgSafetiesorECResetME1Click(
+  Sender: TObject);
+begin
+  MainEngine1System.SafetiesReset(C_PCS_ME_PORTS);
 end;
 
 procedure TfrmSignalingLightME1.imgStopME1Click(Sender: TObject);

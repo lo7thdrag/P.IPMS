@@ -221,6 +221,9 @@ begin
         frmPMSDieselEngineSafetiesME1.imgLedRedStopSPH.Visible   := False;
         frmPMSDieselEngineSafetiesME1.imgLedRedStopRSP.Visible   := False;
         frmPMSDieselEngineSafetiesME1.imgLedRedStopRGM.Visible   := False;
+
+        frmSignalingLightME1.img24VDCControlME1.Visible   := True;
+        frmSignalingLightME1.img24VDCSafetiesME1.Visible  := True;
       end
       else if FIsStopBlink then
       begin
@@ -240,6 +243,8 @@ begin
         frmPMSDieselEngineSafetiesME1.imgLedRedStopSPH.Visible   := True;
         frmPMSDieselEngineSafetiesME1.imgLedRedStopRSP.Visible   := True;
         frmPMSDieselEngineSafetiesME1.imgLedRedStopRGM.Visible   := True;
+
+        frmSignalingLightME1.img24VDCSafetiesME1.Visible  := False;
       end;
     end;
     epPCSCtrlLocal :
@@ -262,12 +267,19 @@ begin
       else
         frmSignalingLightME1.imgClutchAllowedME1.Visible := False
     end;
-    epPCSLeverEmergencyStop :
+    epPCSMESafetyStopsOverriden : // Safeties Stop  (epPCSLeverEmergencyStop)
+    begin
+      frmSignalingLightME1.imgSafetiesStopOverbiddenME1.Visible := True;
+    end;
+    epPCSMELocalEmergencyStop :
     begin
       frmSignalingLightME1.imgEmergencyStopME1.Visible := True;
-      frmSignalingLightME1.imgSafetiesStopOverbiddenME1.Visible := True;
 
       frmPMSDieselEngineSafetiesME1.imgledRedAlarmChannel1ICM1.Visible := True;
+    end;
+    epPCSMEResetSafetyStopPossible :
+    begin
+      frmSignalingLightME1.imgSafetiesorECResetME1.Visible := True;
     end;
     epPCSMEAirValve :
     begin
@@ -451,16 +463,28 @@ begin
         frmPMSDieselEngineSafetiesME1.EngineSpeedMeter.Position := Value;
 
       if Value > 80 then
+      begin
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible := True;
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible := True;
-      if Value > 405 then
-         frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible := True;
-      if Value < 405 then
+
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible := False;
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible := False;
+      end;
+
+      if Value > 400 then
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible := True
+      else if Value < 400 then
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH3SE.Visible := False;
+
       if Value > 500 then
-         frmPMSDieselEngineSafetiesME1.imgLedGreenTH4SE.Visible := True;
-      if Value < 500 then
+         frmPMSDieselEngineSafetiesME1.imgLedGreenTH4SE.Visible := True
+      else if Value < 500 then
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH4SE.Visible := False;
+
+      if Value > 1085 then
+         frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := True
+      else
+         frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := False
     end;
     // PMS ATP
     epPCSMETempBear1 :
@@ -517,6 +541,17 @@ begin
     begin
       if Assigned(frmPMSDieselEngineSafetiesME1) then
         frmPMSDieselEngineSafetiesME1.FBearingTemperatures[2] := Value / 10;
+    end;
+
+    epPCSMETempFWHTInlet :
+    begin
+      if Assigned(frmSignalingLightME1) then
+        frmSignalingLightME1.lblInletTemperature.Caption := FloatToStr(Value / 10);
+    end;
+    epPCSMETempFWHTOutlet :
+    begin
+      if Assigned(frmSignalingLightME1) then
+        frmSignalingLightME1.lblOutletTemperature.Caption := FloatToStr(Value / 10);
     end;
   end;
 end;

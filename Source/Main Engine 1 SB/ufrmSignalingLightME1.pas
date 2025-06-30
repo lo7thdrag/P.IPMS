@@ -54,6 +54,11 @@ type
     imgSafetiesorECResetME1Shadow: TImage;
     imgSafetiesStopOverbiddenME1Shadow: TImage;
     imgEmergencyStopME1Shadow: TImage;
+    pnlTemperatureRegulator: TPanel;
+    Label2: TLabel;
+    imgFWTempRegulator: TImage;
+    lblInletTemperature: TLabel;
+    lblOutletTemperature: TLabel;
     procedure btnStartClick(Sender: TObject);
     procedure btnClutchClick(Sender: TObject);
     procedure btnEmergencyStopClick(Sender: TObject);
@@ -62,6 +67,8 @@ type
     procedure btnDeclutchClick(Sender: TObject);
     procedure btnByPassP2P4OpenClick(Sender: TObject);
     procedure btnByPassP2P4CloseClick(Sender: TObject);
+    procedure imgSafetiesorECResetME1Click(Sender: TObject);
+    procedure imgSafetiesorECResetME1Click(Sender: TObject);
   private
     FListener : TListeners;
     FIsBlinkState : Boolean;
@@ -121,7 +128,18 @@ end;
 
 procedure TfrmSignalingLightME1.btnStartClick(Sender: TObject);
 begin
-  MainEngine1System.RunningStart(C_PCS_ME_STARBOARD);
+ procedure TfrmSignalingLightME1.imgSafetiesorECResetME1Click(Sender: TObject);
+begin
+
+end;
+
+ MainEngine1System.RunningStart(C_PCS_ME_STARBOARD);
+end;
+
+procedure TfrmSignalingLightME1.imgSafetiesorECResetME1Click(
+  Sender: TObject);
+begin
+  MainEngine1System.SafetiesReset(C_PCS_ME_STARBOARD);
 end;
 
 procedure TfrmSignalingLightME1.imgStopME1Click(Sender: TObject);

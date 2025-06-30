@@ -297,6 +297,7 @@ type
     procedure btnByPassOpenClick(Sender: TObject);
     procedure btnByPassClosedClick(Sender: TObject);
     procedure PrelubTimerTimer(Sender: TObject);
+    procedure btnSafetiesResetClick(Sender: TObject);
 
   private
     aplctnvntsKey : TApplicationEvents;
@@ -454,15 +455,27 @@ begin
   end;
 end;
 
+procedure TfrmPCSLocalControlPanel.btnSafetiesResetClick(Sender: TObject);
+begin
+  if (TButton(Sender).Tag = 0) and main_engine_PS.LocalControl then
+  begin
+    main_engine_PS.ResetSafetyStopPossible := True;
+  end
+  else if (TButton(Sender).Tag = 1) and main_engine_SB.LocalControl then
+  begin
+    main_engine_SB.ResetSafetyStopPossible := True;
+  end;
+end;
+
 procedure TfrmPCSLocalControlPanel.btnSafetiesStopClick(Sender: TObject);
 begin
   if (TButton(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
-    main_engine_PS.EmergencyStop := True;
+    main_engine_PS.SafetyStopsOverriden := True;
   end
   else if (TButton(Sender).Tag = 1) and main_engine_SB.LocalControl then
   begin
-    main_engine_SB.EmergencyStop := True;
+    main_engine_SB.SafetyStopsOverriden := True;
   end;
 end;
 
@@ -1063,13 +1076,17 @@ begin
             FFlashingDeclutchPS := True;
           end;
         end;
-        epPCSLeverEmergencyStop :
+        epPCSMESafetyStopsOverriden :
         begin
            main_engine_PS.EmergencyStop := True;
         end;
         epPCSMELocalEmergencyStop :
         begin
           main_engine_PS.LocalEmergencyStop := True;
+        end;
+        epPCSMEResetSafetyStopPossible :
+        begin
+          main_engine.ResetSafetyStopPossible := True;
         end;
       end;
     end
@@ -1146,9 +1163,17 @@ begin
             FFlashingDeclutchSB := True;
           end;
         end;
-        epPCSLeverEmergencyStop :
+        epPCSMESafetyStopsOverriden :
         begin
            main_engine_PS.EmergencyStop := True;
+        end;
+        epPCSMELocalEmergencyStop :
+        begin
+          main_engine_PS.LocalEmergencyStop := True;
+        end;
+        epPCSMEResetSafetyStopPossible :
+        begin
+          main_engine.ResetSafetyStopPossible := True;
         end;
       end;
     {$ENDREGION}

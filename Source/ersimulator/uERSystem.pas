@@ -1089,10 +1089,22 @@ begin
       end;
     end;
 
-    epPCSLeverEmergencyStop :      // Safeties Stop
+    epPCSMESafetyStopsOverriden :      // Safeties Stop Overriden
     begin
       main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
-      main_engine.EmergencyStop := recERPCS.ValueBool;
+      main_engine.SafetyStopsOverriden := recERPCS.ValueBool;
+    end;
+
+    epPCSMELocalEmergencyStop :      // Emergency Stop
+    begin
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine.LocalEmergencyStop := recERPCS.ValueBool;
+    end;
+
+    epPCSMEResetSafetyStopPossible :     // Safeties Riset
+    begin
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine.ResetSafetyStopPossible := recERPCS.ValueBool;
     end;
 
     {Main Engine 2}

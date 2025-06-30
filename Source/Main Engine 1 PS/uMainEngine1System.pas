@@ -23,6 +23,7 @@ type
     procedure Clutch(aPortStaboard : string);
     procedure Declutch(aPortStaboard : String);
     procedure ClutchAllowed(aPortStaboard : string; aValue : Boolean);
+    procedure SafetiesReset(aPortStaboard: string);
     procedure SafetiesStop(aPortStaboard: string);
     procedure EmergencyStop(aPortStaboard : String);
     procedure LocalRemote(aPortStaboard : String);
@@ -193,7 +194,7 @@ begin
       end;
     end;
 
-    epPCSLeverEmergencyStop :     // Safeties Stop
+    epPCSMESafetyStopsOverriden :     // Safeties Stop
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
       begin
@@ -202,6 +203,14 @@ begin
     end;
 
     epPCSMELocalEmergencyStop :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+
+    epPCSMEResetSafetyStopPossible :
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
       begin
@@ -540,7 +549,6 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStaboard;
-//  recCmd.CommandPropsID := epPCSLeverEmergencyStop;
   recCmd.CommandPropsID := epPCSMELocalEmergencyStop;
   recCmd.CommandID      := C_ORD_LEVER_EMERGENCYSTOP;
   recCmd.ValueBool      := True;
@@ -560,14 +568,23 @@ begin
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
+procedure TMainEngine1System.SafetiesReset(aPortStaboard: string);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStaboard;
+  recCmd.CommandPropsID := epPCSMEResetSafetyStopPossible;
+  recCmd.ValueBool      := True;
+
+  Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
 procedure TMainEngine1System.SafetiesStop(aPortStaboard: string);
 var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStaboard;
-//  recCmd.CommandPropsID := epPCSMESafetyStop;
-  recCmd.CommandPropsID := epPCSLeverEmergencyStop;
-  recCmd.CommandID      := C_ORD_LEVER_SHAFTSTOP;
+  recCmd.CommandPropsID := epPCSMESafetyStopsOverriden;
   recCmd.ValueBool      := True;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);

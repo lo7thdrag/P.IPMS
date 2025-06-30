@@ -3372,6 +3372,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Cursor = crHandPoint
             Caption = ''
             Flat = True
+            OnClick = btnSafetiesResetClick
             Color = clMaroon
           end
           object btnClutchPS: TSpeedButtonImage
@@ -3559,6 +3560,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Style = [fsBold]
             ParentFont = False
             Transparent = True
+            OnClick = btnSafetiesResetClick
           end
           object Label6: TLabel
             Tag = 1
@@ -14487,10 +14489,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
     object tsSB: TTabSheet
       Caption = 'LCP Startboard Side'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pnlLCPSB: TPanel
         Left = 0
         Top = 0
@@ -18625,6 +18623,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Cursor = crHandPoint
             Caption = ''
             Flat = True
+            OnClick = btnSafetiesResetClick
             Color = clMaroon
           end
           object btnClutchSB: TSpeedButtonImage
@@ -18822,6 +18821,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             Font.Style = [fsBold]
             ParentFont = False
             Transparent = True
+            OnClick = btnSafetiesResetClick
           end
           object Label4: TLabel
             Tag = 1

@@ -267,7 +267,7 @@ begin
       else
         frmSignalingLightME1.imgClutchAllowedME1.Visible := False
     end;
-    epPCSLeverEmergencyStop : // Safeties Stop
+    epPCSMESafetyStopsOverriden : // Safeties Stop  (epPCSLeverEmergencyStop)
     begin
       frmSignalingLightME1.imgSafetiesStopOverbiddenME1.Visible := True;
     end;
@@ -276,6 +276,10 @@ begin
       frmSignalingLightME1.imgEmergencyStopME1.Visible := True;
 
       frmPMSDieselEngineSafetiesME1.imgledRedAlarmChannel1ICM1.Visible := True;
+    end;
+    epPCSMEResetSafetyStopPossible :
+    begin
+      frmSignalingLightME1.imgSafetiesorECResetME1.Visible := True;
     end;
     epPCSMEAirValve :
     begin
