@@ -81854,22 +81854,6 @@ object frmGeneratorPanel: TfrmGeneratorPanel
             000000000000}
         end
       end
-      object lstAlarmPage: TListBox
-        Left = 86
-        Top = 88
-        Width = 332
-        Height = 197
-        Color = clLime
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Courier New'
-        Font.Style = []
-        ItemHeight = 14
-        ParentFont = False
-        TabOrder = 7
-        Visible = False
-      end
       object lstInfoPage: TListBox
         Left = 86
         Top = 88
@@ -81902,6 +81886,45 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         TabOrder = 0
         Visible = False
         OnDrawItem = lstMenuDrawItem
+      end
+      object lstAlarmPage: TListBox
+        Left = 86
+        Top = 88
+        Width = 332
+        Height = 197
+        Color = clLime
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Courier New'
+        Font.Style = []
+        ItemHeight = 14
+        ParentFont = False
+        TabOrder = 7
+        Visible = False
+      end
+      object pnlPage: TPanel
+        Left = 88
+        Top = 92
+        Width = 81
+        Height = 14
+        BevelOuter = bvNone
+        ParentColor = True
+        TabOrder = 18
+        Visible = False
+        object lblPage: TLabel
+          Left = 3
+          Top = -2
+          Width = 49
+          Height = 15
+          Caption = 'lblPage'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Courier New'
+          Font.Style = []
+          ParentFont = False
+        end
       end
     end
     object vrAmpere: TVrRotarySwitch

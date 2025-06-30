@@ -220,11 +220,30 @@ begin
     epPMSGeneratorCBClosed : GeneratorTemp.CBClosed := Value;
     epPMSGeneratorPreference : GeneratorTemp.Preference := Value;
     epPMSGeneratorBusbar : GeneratorTemp.Busbar := Value;
-    epPMSNotStandby : GeneratorTemp.NotStandby := Value;
+    epPMSNotStandby :
+    begin
+      GeneratorTemp.NotStandby := Value;
+
+      if Value then
+        frmGeneratorPanel.AddAlarmToLog('DG not standby');
+    end;
     epPMSGeneratorFuelRunsOut : GeneratorTemp.FuelRunsOut := Value;
     epPMSGeneratorEmergencyStop : GeneratorTemp.EmergencyStop := Value;
     epPMSShutDown : GeneratorTemp.ShutDown := Value;
     epPMSFailureCBClosed : GeneratorTemp.FailureCBClosed := Value;
+
+    epPMSMeasPowFailure:
+    begin
+      GeneratorTemp.MeasPowFailure := Value;
+      if Value then
+        frmGeneratorPanel.AddFaultToLog('Supply Voltage Low');
+    end;
+    epPMSAutStartFailure:
+    begin
+      GeneratorTemp.AutStartFailure := Value;
+      if Value then
+        frmGeneratorPanel.AddFaultToLog('Automatic Start Failed');
+    end;
   end;
 
   if Assigned(frmGeneratorPanel) then

@@ -248,7 +248,8 @@ begin
     epPMSGeneratorEngineRun, epPMSGeneratorSupplied, epPMSGeneratorCBClosed,
     epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSNotStandby,
     epPMSGeneratorFuelRunsOut, epPMSGeneratorEmergencyStop, epPMSShutDown,
-    epPMSFailureCBClosed :
+    epPMSFailureCBClosed,
+    epPMSMeasPowFailure, epPMSAutStartFailure :
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
@@ -260,6 +261,7 @@ begin
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDob)
     end;
+
   end;
 end;
 

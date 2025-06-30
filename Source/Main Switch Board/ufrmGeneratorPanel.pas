@@ -188,6 +188,8 @@ type
     Image25: TImage;
     Panel10: TPanel;
     Image26: TImage;
+    pnlPage: TPanel;
+    lblPage: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ImgStartClick(Sender: TObject);
@@ -254,6 +256,8 @@ type
     OrderAmpere : Double;
 
     procedure UpdateForm(Generator : TGenerator);
+    procedure AddAlarmToLog(const AText: string);
+    procedure AddFaultToLog(const AText: string);
   end;
 
 var
@@ -640,7 +644,7 @@ end;
 
 procedure TfrmGeneratorPanel.ImgFPClick(Sender: TObject);
 begin
-  MenuFaultPage;
+//  MenuFaultPage;
 
   pnlPassword.Visible := False;
   lstMenu.Visible := False;
@@ -648,7 +652,8 @@ begin
   lstAlarmPage.Visible := False;
   lstInfoPage.Visible := False;
 
-//  SetLCDLook;
+  pnlPage.Visible:= True;
+  lblPage.Caption := 'Faults 1/2';
 
   pnlLeft.Visible := True;
   pnlRight.Visible := True;
@@ -662,14 +667,15 @@ begin
   pnlReset.BringToFront;
   pnlBlack3.BringToFront;
 
-  CurrentMenuIndex := 0;
+//  CurrentMenuIndex := 0;
 
-  LoadMainMenu(CurrentMenuIndex);
+//  LoadMainMenu(CurrentMenuIndex);
 end;
 
 procedure TfrmGeneratorPanel.ImgAPClick(Sender: TObject);
 begin
-  MenuAlarmPage;
+//  MenuAlarmPage;
+
 
   pnlPassword.Visible := False;
   lstMenu.Visible := False;
@@ -677,7 +683,8 @@ begin
   lstAlarmPage.Visible := True;
   lstInfoPage.Visible := False;
 
-//  SetLCDLook;
+  pnlPage.Visible:= True;
+  lblPage.Caption := 'Alarm 1/2';
 
   pnlLeft.Visible := True;
   pnlRight.Visible := True;
@@ -691,9 +698,9 @@ begin
   pnlReset.BringToFront;
   pnlBlack3.BringToFront;
 
-  CurrentMenuIndex := 0;
+//  CurrentMenuIndex := 0;
 
-  LoadMainMenu(CurrentMenuIndex);
+//  LoadMainMenu(CurrentMenuIndex);
 end;
 
 procedure TfrmGeneratorPanel.ImgIPClick(Sender: TObject);
@@ -805,6 +812,35 @@ end;
 {$ENDREGION}
 
 {$REGION ' Additional Procedure '}
+
+procedure TfrmGeneratorPanel.AddAlarmToLog(const AText: string);
+var
+  LogEntry : String;
+begin
+  LogEntry:= FormatDateTime('dd"/"mm"/"yyyy', Now) + ' ' +
+             FormatDateTime('hh:nn:ss AM/PM', Now) + ' ' +
+             AText;
+
+  if lstAlarmPage.Items.Count = 0 then
+    lstAlarmPage.Items.Add(' ');
+
+  lstAlarmPage.Items.Insert(1, LogEntry)
+end;
+
+procedure TfrmGeneratorPanel.AddFaultToLog(const AText: string);
+var
+  LogEntry : String;
+begin
+  LogEntry:= FormatDateTime('dd"/"mm"/"yyyy', Now) + ' ' +
+             FormatDateTime('hh:nn:ss AM/PM', Now) + ' ' +
+             AText;
+
+  if lstFaultPage.Items.Count = 0 then
+    lstFaultPage.Items.Add(' ');
+
+
+  lstFaultPage.Items.Insert(1, LogEntry)
+end;
 
 function TfrmGeneratorPanel.CekGeneratorCondition: Boolean;
 begin
@@ -1494,10 +1530,12 @@ end;
 
 procedure TfrmGeneratorPanel.MenuAlarmPage;
 begin
-  MainMenu[0]:= TStringList.Create;
-  MainMenu[0].AddStrings([
-    'Alarm 1/2',
-    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now) + ' ' ]);
+
+
+//  MainMenu[0]:= TStringList.Create;
+//  MainMenu[0].AddStrings([
+//    'Alarm 1/2',
+//    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now) + ' ' ]);
 end;
 
 procedure TfrmGeneratorPanel.MenuFaultPage;
@@ -1703,6 +1741,11 @@ begin
   ImgIndicatorCBC.Visible := Generator.CBClosed;
   ImgIndicatorPreference.Visible := Generator.Preference;
   ImgIndicatorBS.Visible := Generator.Busbar;
+
+  ImgIndicatorFP.Visible := Generator.MeasPowFailure;
+//  ImgIndicatorFP.Visible := Generator.AutStartFailure;
+
+  ImgIndicatorAP.Visible := Generator.NotStandby;
 end;
 
 {$ENDREGION}
