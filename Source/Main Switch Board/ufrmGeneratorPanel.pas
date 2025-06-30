@@ -303,6 +303,7 @@ begin
   lblDate.Caption := FormatDateTime('dd"/"mm"/"yy', Now);
 
   lstMenu.Visible := False;
+  lstMenu.Style := lbOwnerDrawFixed;
 
 end;
 
@@ -351,7 +352,7 @@ begin
     begin
       pnlPassword.Visible := False;
       lstMenu.Visible := True;
-      SetLCDLook;
+//      SetLCDLook;
       InitMenu;
       CurrentMenuIndex := 0;
       LoadMainMenu(CurrentMenuIndex);
@@ -586,6 +587,8 @@ begin
 end;
 
 procedure TfrmGeneratorPanel.ImgF4Click(Sender: TObject);
+var
+  i : Integer;
 begin
   if CurrentIndex < High(Labels) then
   begin
@@ -597,6 +600,23 @@ begin
 
   if lstMenu.ItemIndex < lstMenu.Items.Count -1 then
     lstMenu.ItemIndex := lstMenu.ItemIndex + 1;
+
+  if lstAlarmPage.Visible then
+  begin
+    if Assigned(MainMenu[0]) then
+    begin
+      // Mulai dari index terakhir sampai index 1
+      for i := MainMenu[0].Count - 1 downto 1 do
+        MainMenu[0].Delete(i);
+    end;
+    Exit;
+  end
+  else if lstFaultPage.Visible then
+  begin
+    lstFaultPage.Clear;
+    lstFaultPage.ItemIndex := -1;
+    Exit;
+  end;
 end;
 
 procedure TfrmGeneratorPanel.ImgF5Click(Sender: TObject);
@@ -628,7 +648,7 @@ begin
   lstAlarmPage.Visible := False;
   lstInfoPage.Visible := False;
 
-  SetLCDLook;
+//  SetLCDLook;
 
   pnlLeft.Visible := True;
   pnlRight.Visible := True;
@@ -657,7 +677,7 @@ begin
   lstAlarmPage.Visible := True;
   lstInfoPage.Visible := False;
 
-  SetLCDLook;
+//  SetLCDLook;
 
   pnlLeft.Visible := True;
   pnlRight.Visible := True;
@@ -686,7 +706,7 @@ begin
   lstAlarmPage.Visible := False;
   lstInfoPage.Visible := True;
 
-  SetLCDLook;
+//  SetLCDLook;
 
   pnlLeft.Visible := True;
   pnlRight.Visible := True;
