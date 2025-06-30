@@ -549,8 +549,7 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStaboard;
-  recCmd.CommandPropsID := epPCSMELocalEmergencyStop;
-  recCmd.CommandID      := C_ORD_LEVER_EMERGENCYSTOP;
+  recCmd.CommandPropsID := epPCSMELocalEmergencyStop;         //awalnya menggunakan epPCSLeverEmergencyStop  diganti epPCSMELocalEmergencyStop
   recCmd.ValueBool      := True;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);

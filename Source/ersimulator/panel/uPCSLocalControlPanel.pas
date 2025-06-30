@@ -456,26 +456,34 @@ begin
 end;
 
 procedure TfrmPCSLocalControlPanel.btnSafetiesResetClick(Sender: TObject);
+var
+  SenderOn, SenderOff : TSpeedButtonImage;
 begin
   if (TButton(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
     main_engine_PS.ResetSafetyStopPossible := True;
+    TSpeedButtonImage(SenderOn).Color      := clRed;
   end
   else if (TButton(Sender).Tag = 1) and main_engine_SB.LocalControl then
   begin
     main_engine_SB.ResetSafetyStopPossible := True;
+    TSpeedButtonImage(SenderOn).Color      := clRed;
   end;
 end;
 
 procedure TfrmPCSLocalControlPanel.btnSafetiesStopClick(Sender: TObject);
+var
+  SenderOn, SenderOff : TSpeedButtonImage;
 begin
   if (TButton(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
     main_engine_PS.SafetyStopsOverriden := True;
+    TSpeedButtonImage(SenderOn).Color   := clLime;
   end
   else if (TButton(Sender).Tag = 1) and main_engine_SB.LocalControl then
   begin
     main_engine_SB.SafetyStopsOverriden := True;
+    TSpeedButtonImage(SenderOn).Color   := clLime;
   end;
 end;
 
@@ -552,14 +560,18 @@ begin
 end;
 
 procedure TfrmPCSLocalControlPanel.btnEmergencStopClick(Sender: TObject);
+var
+  SenderOn, SenderOff : TSpeedButtonImage;
 begin
   if (TButton(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
     main_engine_PS.LocalEmergencyStop := True;
+    TSpeedButtonImage(SenderOn).Color := clLime;
   end
   else if (TButton(Sender).Tag = 1) and main_engine_SB.LocalControl then
   begin
     main_engine_SB.LocalEmergencyStop := True;
+    TSpeedButtonImage(SenderOn).Color := clLime;
   end;
 end;
 

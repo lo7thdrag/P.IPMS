@@ -223,14 +223,13 @@ begin
 
       if Assigned(frmAirGasCircuit) then
       begin
-        frmSignalingLightME2.vrtryswtchSTC_PS.SwitchPosition := 1;
         frmAirGasCircuit.lblSTCInAutoMode.Color              := clGreen;
         frmAirGasCircuit.lblSTCInAutoMode.FontLeave.Color    := clBlack;
       end
       else
       begin
-        frmAirGasCircuit.lblSTCInAutoMode.Color            := clAqua;
-        frmAirGasCircuit.lblSTCInAutoMode.FontLeave.Color  := clWhite;
+        frmAirGasCircuit.lblSTCInAutoMode.Color              := clGray;
+        frmAirGasCircuit.lblSTCInAutoMode.FontLeave.Color    := clYellow;
       end;
     end
   end;
@@ -280,8 +279,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clAqua;
-          frmSafetiesStop.lblSafetiesStop.Color            := clAqua;
+          frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_EmergencyShutdown.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblSafetiesStop.Color                      := clGray;
+          frmSafetiesStop.lblSafetiesStop.FontLeave.Color            := clYellow;
           frmAlarms.Alarm(False);
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
@@ -304,8 +305,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_Overspeed.Color := clAqua;
-          frmSafetiesStop.lblSafetiesStop.Color    := clAqua;
+          frmSafetiesStop.btnPS_SS_Overspeed.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_Overspeed.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblSafetiesStop.Color              := clGray;
+          frmSafetiesStop.lblSafetiesStop.FontLeave.Color    := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -331,8 +334,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clAqua;
-          frmSafetiesStop.lblSafetiesStop.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblSafetiesStop.Color                           := clGray;
+          frmSafetiesStop.lblSafetiesStop.FontLeave.Color                 := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -358,8 +363,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clAqua;
-          frmSafetiesStop.lblSafetiesStop.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_RedGearSafetyStop.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblSafetiesStop.Color                      := clGray;
+          frmSafetiesStop.lblSafetiesStop.FontLeave.Color            := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -384,7 +391,8 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -409,7 +417,8 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_FwTempVeryHigh.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -434,7 +443,8 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -459,7 +469,8 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -484,7 +495,8 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_OilMistDetHigh.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -510,8 +522,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+          frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color           := clGray;
+          frmSafetiesStop.btnPS_SI_TurningGearDisengaged.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color                    := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color          := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -537,8 +551,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color    := clAqua;
+          frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color           := clGray;
+          frmSafetiesStop.btnPS_SI_ManHandleAtStop.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color              := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color    := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -564,8 +580,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color   := clAqua;
+          frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clGray;
+          frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color   := clGray;
+          frmSafetiesStop.lblStartingInterlocks.Color   := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -586,8 +604,24 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btn_Engine_Declutch.Color   := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+          frmSafetiesStop.btn_Engine_Declutch.Color             := clGray;
+          frmSafetiesStop.btn_Engine_Declutch.FontLeave.Color   := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color           := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color := clYellow;
+        end;
+      end;
+
+      if Assigned(frmClutchingAssistance) then
+      begin
+        if Value then
+        begin
+          frmClutchingAssistance.lblEngineDeclutched.Color           := clGreen;
+          frmClutchingAssistance.lblEngineDeclutched.FontLeave.Color := clBlack;
+        end
+        else
+        begin
+          frmClutchingAssistance.lblEngineDeclutched.Color           := clGray;
+          frmClutchingAssistance.lblEngineDeclutched.FontLeave.Color := clYellow;
         end;
       end;
     end;
@@ -603,8 +637,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btn_Engine_Declutch.Color   := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+          frmSafetiesStop.btn_Engine_Declutch.Color             := clGray;
+          frmSafetiesStop.btn_Engine_Declutch.FontLeave.Color   := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color           := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color := clYellow;
         end;
       end;
 
@@ -612,11 +648,13 @@ begin
       begin
         if not Value then
         begin
-          frmAirGasCircuit.lblByPassClosed.Color      := clGray;
+          frmAirGasCircuit.lblByPassClosed.Color            := clGreen;
+          frmAirGasCircuit.lblByPassClosed.FontLeave.Color  := clBlack;
         end
         else
         begin
-          frmAirGasCircuit.lblByPassClosed.Color      := clAqua;
+          frmAirGasCircuit.lblByPassClosed.Color            := clGray;
+          frmAirGasCircuit.lblByPassClosed.FontLeave.Color  := clYellow;
         end;
       end;
     end;
@@ -637,8 +675,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color      := clAqua;
+          frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color           := clGray;
+          frmSafetiesStop.btnPS_SI_PrelubeInProgress.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color                := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color      := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -664,8 +704,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color   := clAqua;
+          frmSafetiesStop.btnPS_SI_PrelubeFailure.Color           := clGray;
+          frmSafetiesStop.btnPS_SI_PrelubeFailure.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color             := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color   := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -692,9 +734,12 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_StartingFailure.Color  := clAqua;
-          frmGeneralScreen.btnPS_SI_StartingFailure.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color     := clAqua;
+          frmSafetiesStop.btnPS_SI_StartingFailure.Color            := clGray;
+          frmSafetiesStop.btnPS_SI_StartingFailure.FontLeave.Color  := clYellow;
+          frmGeneralScreen.btnPS_SI_StartingFailure.Color           := clGray;
+          frmGeneralScreen.btnPS_SI_StartingFailure.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color               := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color     := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -720,8 +765,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color    := clAqua;
+          frmSafetiesStop.btnPS_SI_STCSequenceFail.Color           := clGray;
+          frmSafetiesStop.btnPS_SI_STCSequenceFail.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color              := clGray;
+          frmSafetiesStop.btnPS_SI_STCSequenceFail.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -748,9 +795,12 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clAqua;
-          frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+          frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color            := clGray;
+          frmSafetiesStop.btnPS_SI_SlowTurningFailure.FontLeave.Color  := clYellow;
+          frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color           := clGray;
+          frmGeneralScreen.btnPS_SI_SlowTurningFailure.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color                  := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color        := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -776,8 +826,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_SafetyStop.Color   := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+          frmSafetiesStop.btnPS_SI_SafetyStop.Color             := clGray;
+          frmSafetiesStop.btnPS_SI_SafetyStop.FontLeave.Color   := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color           := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -802,7 +854,8 @@ begin
         end
         else
         begin
-          frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clAqua;
+          frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color           := clGray;
+          frmGeneralScreen.btnPS_SS_ClutcInterlocks.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -819,13 +872,13 @@ begin
       begin
         if not Value then
         begin
-          frmAirGasCircuit.lblAirValveClosed.Color            := clGray;
-          frmAirGasCircuit.lblAirValveClosed.FontLeave.Color  := clYellow;
+          frmAirGasCircuit.lblAirValveClosed.Color            := clGreen;
+          frmAirGasCircuit.lblAirValveClosed.FontLeave.Color  := clBlack;
         end
         else
         begin
-          frmAirGasCircuit.lblAirValveClosed.Color            := clAqua;
-          frmAirGasCircuit.lblAirValveClosed.FontLeave.Color  := clWhite;
+          frmAirGasCircuit.lblAirValveClosed.Color            := clGray;
+          frmAirGasCircuit.lblAirValveClosed.FontLeave.Color  := clYellow;
         end;
       end;
     end;
@@ -835,13 +888,13 @@ begin
       begin
         if not Value then
         begin
-          frmAirGasCircuit.lblGazValveClosed.Color            := clGray;
-          frmAirGasCircuit.lblGazValveClosed.FontLeave.Color  := clYellow;
+          frmAirGasCircuit.lblGazValveClosed.Color            := clGreen;
+          frmAirGasCircuit.lblGazValveClosed.FontLeave.Color  := clBlack;
         end
         else
         begin
-          frmAirGasCircuit.lblGazValveClosed.Color            := clAqua;
-          frmAirGasCircuit.lblGazValveClosed.FontLeave.Color  := clWhite;
+          frmAirGasCircuit.lblGazValveClosed.Color            := clGray;
+          frmAirGasCircuit.lblGazValveClosed.FontLeave.Color  := clYellow;
         end;
       end;
     end;
@@ -1015,8 +1068,10 @@ begin
         end
         else
         begin
-           frmSafetiesStop.btnEngineSpeed80Rpm.Color   := clAqua;
-           frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+           frmSafetiesStop.btnEngineSpeed80Rpm.Color             := clGray;
+           frmSafetiesStop.btnEngineSpeed80Rpm.FontLeave.Color   := clYellow;
+           frmSafetiesStop.lblStartingInterlocks.Color           := clGray;
+           frmSafetiesStop.lblStartingInterlocks.FontLeave.Color := clYellow;
         end;
       end;
 

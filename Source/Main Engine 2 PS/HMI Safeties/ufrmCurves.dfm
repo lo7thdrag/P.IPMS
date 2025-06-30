@@ -5946,6 +5946,7 @@ object frmCurves: TfrmCurves
       Color = clWhite
       TabOrder = 9
       DefaultCanvas = 'TGDIPlusCanvas'
+      ColorPaletteIndex = 13
       object Series1: TFastLineSeries
         SeriesColor = clBlue
         Title = 'EngineSpeed'

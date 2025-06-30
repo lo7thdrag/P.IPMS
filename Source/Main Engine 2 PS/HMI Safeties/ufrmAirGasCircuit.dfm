@@ -7391,7 +7391,7 @@ object frmAirGasCircuit: TfrmAirGasCircuit
         Color = 12032000
         TabOrder = 2
       end
-      object VrDemoButton3: TVrDemoButton
+      object lbl1TCRunning: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 143

@@ -485,7 +485,7 @@ begin
 
       if Value > 1085 then
          frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := True
-      else
+      else if Value < 1085 then
          frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := False
     end;
     // PMS ATP

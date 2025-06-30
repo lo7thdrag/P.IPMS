@@ -32,7 +32,7 @@ type
     Image3: TImage;
     Panel4: TPanel;
     VrDemoButton8: TVrDemoButton;
-    VrDemoButton1: TVrDemoButton;
+    lblEngineDeclutched: TVrDemoButton;
     VrDemoButton2: TVrDemoButton;
     VrDemoButton3: TVrDemoButton;
     VrDemoButton4: TVrDemoButton;
