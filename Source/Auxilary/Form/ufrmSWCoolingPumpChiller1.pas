@@ -14,10 +14,10 @@ type
     Image1: TImage;
     Image6: TImage;
     imgStart: TImage;
-    imgStop: TImage;
     vrPowerSupply: TVrRotarySwitch;
     imgShadowStart: TImage;
     imgShadowStop: TImage;
+    imgStop: TImage;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure imgShadowStartClick(Sender: TObject);

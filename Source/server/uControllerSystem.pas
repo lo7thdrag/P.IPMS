@@ -758,7 +758,7 @@ begin
     begin
       TMCEElement(elmnt).StateValueValid := svValid;
       TMCEElement(elmnt).StateSwitchNoFault := esNoFault;
-      TMCEElement(elmnt).StateSwitchRemote := esLocal;
+//      TMCEElement(elmnt).StateSwitchRemote := esLocal;
       TMCEElement(elmnt).StateSwitchRunning := esNotRunning;
       TMCEElement(elmnt).StateElementDisabled := sdEnabled;
     end
@@ -766,7 +766,7 @@ begin
     begin
       TMCEElement(elmnt).StateValueValid := svValid;
       TMCEElement(elmnt).StateSwitchNoFault := esNoFault;
-      TMCEElement(elmnt).StateSwitchRemote := esLocal;
+//      TMCEElement(elmnt).StateSwitchRemote := esLocal;
       TMCEElement(elmnt).StateSwitchRunning := esRunning;
       TMCEElement(elmnt).StateElementDisabled := sdEnabled;
     end;

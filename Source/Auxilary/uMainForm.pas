@@ -144,11 +144,145 @@ begin
   case PropsID of
     epAuxEngineRun :
     begin
+      if AuxiliarySystem.IdConsole = 'AUXILIARY 1' then
+      begin
+        if Assigned(frmBallastnBilgePump) then
+        begin
+          frmBallastnBilgePump.imgStart.Visible := pumpTemp[0].EngineRun;
+          frmBallastnBilgePump.imgStop.Visible := not pumpTemp[0].EngineRun;
+        end;
 
+        if Assigned(frmFireFightingPump2) then
+        begin
+          frmFireFightingPump2.imgStart.Visible := pumpTemp[3].EngineRun;
+          frmFireFightingPump2.imgStop.Visible := not pumpTemp[3].EngineRun;
+        end;
+      end
+      else
+      if AuxiliarySystem.IdConsole = 'AUXILIARY 2' then
+      begin
+        if Assigned(frmSWPumpProvRefrig1) then
+        begin
+          frmSWPumpProvRefrig1.imgStart.Visible := pumpTemp[1].EngineRun;
+          frmSWPumpProvRefrig1.imgStop.Visible := not pumpTemp[1].EngineRun;
+        end;
+
+        if Assigned(frmSWPumpProvRefrig2) then
+        begin
+          frmSWPumpProvRefrig2.imgStart.Visible := pumpTemp[4].EngineRun;
+          frmSWPumpProvRefrig2.imgStop.Visible := not pumpTemp[4].EngineRun;
+        end;
+      end
+      else
+      if AuxiliarySystem.IdConsole = 'AUXILIARY 3' then
+      begin
+        if Assigned(frmSWCoolingPumpChiller1) then
+        begin
+          frmSWCoolingPumpChiller1.imgStart.Visible := pumpTemp[2].EngineRun;
+          frmSWCoolingPumpChiller1.imgStop.Visible := not pumpTemp[2].EngineRun;
+        end;
+
+        if Assigned(frmSludge) then
+        begin
+          frmSludge.imgStart.Visible := pumpTemp[5].EngineRun;
+          frmSludge.imgStop.Visible := not pumpTemp[5].EngineRun;
+        end;
+      end;
     end;
     epAuxPowerSupply :
     begin
+      if AuxiliarySystem.IdConsole = 'AUXILIARY 1' then
+      begin
+        if Assigned(frmBallastnBilgePump) then
+        begin
+          if pumpTemp[0].PowerSupply then
+          begin
+            frmBallastnBilgePump.imgStart.Visible := pumpTemp[0].EngineRun;
+            frmBallastnBilgePump.imgStop.Visible := not pumpTemp[0].EngineRun;
+          end
+          else
+          begin
+            frmBallastnBilgePump.imgStart.Visible := False;
+            frmBallastnBilgePump.imgStop.Visible := False;
+          end;
+        end;
 
+        if Assigned(frmFireFightingPump2) then
+        begin
+          if pumpTemp[3].PowerSupply then
+          begin
+            frmFireFightingPump2.imgStart.Visible := pumpTemp[3].EngineRun;
+            frmFireFightingPump2.imgStop.Visible := not pumpTemp[3].EngineRun;
+          end
+          else
+          begin
+            frmFireFightingPump2.imgStart.Visible := False;
+            frmFireFightingPump2.imgStop.Visible := False;
+          end;
+        end;
+      end
+      else
+      if AuxiliarySystem.IdConsole = 'AUXILIARY 2' then
+      begin
+        if Assigned(frmSWPumpProvRefrig1) then
+        begin
+          if pumpTemp[1].PowerSupply then
+          begin
+            frmSWPumpProvRefrig1.imgStart.Visible := pumpTemp[1].EngineRun;
+            frmSWPumpProvRefrig1.imgStop.Visible := not pumpTemp[1].EngineRun;
+          end
+          else
+          begin
+            frmSWPumpProvRefrig1.imgStart.Visible := False;
+            frmSWPumpProvRefrig1.imgStop.Visible := False;
+          end;
+        end;
+
+        if Assigned(frmSWPumpProvRefrig2) then
+        begin
+          if pumpTemp[4].PowerSupply then
+          begin
+            frmSWPumpProvRefrig2.imgStart.Visible := pumpTemp[4].EngineRun;
+            frmSWPumpProvRefrig2.imgStop.Visible := not pumpTemp[4].EngineRun;
+          end
+          else
+          begin
+            frmSWPumpProvRefrig2.imgStart.Visible := False;
+            frmSWPumpProvRefrig2.imgStop.Visible := False;
+          end;
+        end;
+      end
+      else
+      if AuxiliarySystem.IdConsole = 'AUXILIARY 3' then
+      begin
+        if Assigned(frmSWCoolingPumpChiller1) then
+        begin
+          if pumpTemp[2].PowerSupply then
+          begin
+            frmSWCoolingPumpChiller1.imgStart.Visible := pumpTemp[2].EngineRun;
+            frmSWCoolingPumpChiller1.imgStop.Visible := not pumpTemp[2].EngineRun;
+          end
+          else
+          begin
+            frmSWCoolingPumpChiller1.imgStart.Visible := False;
+            frmSWCoolingPumpChiller1.imgStop.Visible := False;
+          end;
+        end;
+
+        if Assigned(frmSludge) then
+        begin
+          if pumpTemp[5].PowerSupply then
+          begin
+            frmSludge.imgStart.Visible := pumpTemp[5].EngineRun;
+            frmSludge.imgStop.Visible := not pumpTemp[5].EngineRun;
+          end
+          else
+          begin
+            frmSludge.imgStart.Visible := False;
+            frmSludge.imgStop.Visible := False;
+          end;
+        end;
+      end;
     end;
   end;
 end;

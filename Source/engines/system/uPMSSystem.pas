@@ -55,7 +55,7 @@ type
 
 
   public
-    Gen : array [0..4] of TGenerator;
+    Gen : array [0..5] of TGenerator;
     Msb : array [0..2] of TSwitchboard;
     Pwr : array [0..1] of TPower;
 

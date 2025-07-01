@@ -440,12 +440,14 @@ procedure TERSystem.ElementPropIntChange(Sender: TObject; PropsID: E_PropsID; Va
 var
   rPCSCmd : R_Common_PCS_Command;
   rPmsCmd : R_Common_PMS_Command;
+  rAuxCmd : R_Common_AUX_Command;
 begin
   if not Assigned(Sender) then
     Exit;
 
   FillChar(rPmsCmd, SizeOf(R_Common_PMS_Command), 0);
   FillChar(rPCSCmd, SizeOf(R_Common_PCS_Command), 0);
+  FillChar(rAuxCmd, SizeOf(R_Common_AUX_Command), 0);
 
   case PropsID of
 
@@ -547,6 +549,29 @@ begin
         FOnPCSCommand(rPCSCmd);
    end;
 
+    {$ENDREGION}
+
+    {$REGION ' AUX Section '}
+    epAuxMode :
+    begin
+      rAuxCmd.PumpID := '';
+
+      if Sender is TPump then
+        rAuxCmd.PumpID := TPump(Sender).Identifier;
+
+      if rAuxCmd.PumpID <> '' then
+      begin
+        rAuxCmd.CommandPropsID   := PropsID;
+        rAuxCmd.ValueInt   := Value;
+        rAuxCmd.ValueKind   := 'integer';
+
+        Network.AsServer.SendData(C_AUX_COMMAND,@rAuxCmd);
+      end;
+
+      if Assigned(FOnAUXCommand) then
+        FOnAuxCommand(rAuxCmd);
+
+    end;
     {$ENDREGION}
   end;
 end;
@@ -986,6 +1011,12 @@ begin
     begin
       pump := ERManager.EngineRoom.getAUXSystem.GetPump(recER.PumpID);
       pump.PowerSupply := recER.ValueBool;
+    end;
+
+    epAuxMode :
+    begin
+      pump := ERManager.EngineRoom.getAUXSystem.GetPump(recER.PumpID);
+      pump.Mode := recER.ValueInt;
     end;
   end;
 end;

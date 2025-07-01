@@ -45,6 +45,7 @@ type
     procedure MappingPCSStateToElement(aElement : TElement; Order : E_PropsID; aValue : Double);overload;
     procedure MappingPCSStateToElement(aElement : TElement; Order : E_PropsID; aValue : Integer);overload;
     procedure MappingAUXStateToElement(aElement : TElement; Order : E_PropsID; aValue : Boolean);overload;
+    procedure MappingAUXStateToElement(aElement : TElement; Order : E_PropsID; aValue : Integer);overload;
 
 
     procedure setPMSGenMode(GenSwitchID: string; ValueInt : Integer; konstanta: Integer);
@@ -69,6 +70,7 @@ type
     procedure setPCSSAEElementID(aPortStaboardID : string; aValue : Double; Order : E_PropsID);
 
     procedure setAUXMCEElementID(aPumpID: string; aValue : Boolean; Order : E_PropsID);
+    procedure setAUXMCEModeElementID(aPumpID: string; aValue : Integer; Order : E_PropsID);
 
     procedure getElementCondition(aElement : TAAEElement;aCondition : TElementCondition);overload;
     procedure getElementCondition(aElement : TCBAElement;aCondition : TElementCondition);overload;
@@ -1283,19 +1285,19 @@ begin
         if aValue then
         begin
 //          TMCEElement(aElement).StateElement := seValueOK;
-          TMCEElement(aElement).StateValueValid := svValid;
-          TMCEElement(aElement).StateSwitchNoFault := esNoFault;
-          TMCEElement(aElement).StateSwitchRemote := esLocal;
+//          TMCEElement(aElement).StateValueValid := svValid;
+//          TMCEElement(aElement).StateSwitchNoFault := esNoFault;
+//          TMCEElement(aElement).StateSwitchRemote := esLocal;
           TMCEElement(aElement).StateSwitchRunning := esRunning;
-          TMCEElement(aElement).StateElementDisabled := sdEnabled;
+//          TMCEElement(aElement).StateElementDisabled := sdEnabled;
         end
         else
         begin
-          TMCEElement(aElement).StateValueValid := svValid;
-          TMCEElement(aElement).StateSwitchNoFault := esNoFault;
-          TMCEElement(aElement).StateSwitchRemote := esLocal;
+//          TMCEElement(aElement).StateValueValid := svValid;
+//          TMCEElement(aElement).StateSwitchNoFault := esNoFault;
+//          TMCEElement(aElement).StateSwitchRemote := esLocal;
           TMCEElement(aElement).StateSwitchRunning := esNotRunning;
-          TMCEElement(aElement).StateElementDisabled := sdEnabled;
+//          TMCEElement(aElement).StateElementDisabled := sdEnabled;
         end
       end;
     end;
@@ -1305,19 +1307,48 @@ begin
       begin
         if aValue then
         begin
-          TMCEElement(aElement).StateValueValid := svValid;
+//          TMCEElement(aElement).StateValueValid := svValid;
           TMCEElement(aElement).StateSwitchNoFault := esNoFault;
-          TMCEElement(aElement).StateSwitchRemote := esLocal;
+//          TMCEElement(aElement).StateSwitchRemote := esLocal;
 //          TMCEElement(aElement).StateSwitchRunning := esRunning;
-          TMCEElement(aElement).StateElementDisabled := sdEnabled;
+//          TMCEElement(aElement).StateElementDisabled := sdEnabled;
         end
         else
         begin
-          TMCEElement(aElement).StateValueValid := svValid;
+//          TMCEElement(aElement).StateValueValid := svValid;
           TMCEElement(aElement).StateSwitchNoFault := esFault;
-          TMCEElement(aElement).StateSwitchRemote := esLocal;
+//          TMCEElement(aElement).StateSwitchRemote := esLocal;
 //          TMCEElement(aElement).StateSwitchRunning := esNotRunning;
-          TMCEElement(aElement).StateElementDisabled := sdEnabled;
+//          TMCEElement(aElement).StateElementDisabled := sdEnabled;
+        end
+      end;
+    end;
+  end;
+end;
+
+procedure TControllerManager.MappingAUXStateToElement(aElement: TElement;
+  Order: E_PropsID; aValue: Integer);
+begin
+  case Order of
+    epAuxMode :
+    begin
+      if aElement.ElementType = eltMCE then
+      begin
+        if aValue = 0 then
+        begin
+//          TMCEElement(aElement).StateValueValid := svValid;
+//          TMCEElement(aElement).StateSwitchNoFault := esNoFault;
+          TMCEElement(aElement).StateSwitchRemote := esLocal;
+//          TMCEElement(aElement).StateSwitchRunning := esRunning;
+//          TMCEElement(aElement).StateElementDisabled := sdEnabled;
+        end
+        else if aValue = 1 then
+        begin
+//          TMCEElement(aElement).StateValueValid := svValid;
+//          TMCEElement(aElement).StateSwitchNoFault := esNoFault;
+          TMCEElement(aElement).StateSwitchRemote := esRemote;
+//          TMCEElement(aElement).StateSwitchRunning := esNotRunning;
+//          TMCEElement(aElement).StateElementDisabled := sdEnabled;
         end
       end;
     end;
@@ -1445,6 +1476,12 @@ begin
     case rec.CommandPropsID of
       epAuxEngineRun : setAUXMCEElementID(rec.PumpID, rec.ValueBool, rec.CommandPropsID);
       epAuxPowerSupply : setAUXMCEElementID(rec.PumpID, rec.ValueBool, rec.CommandPropsID);
+    end;
+  end
+  else if rec.ValueKind = 'integer' then
+  begin
+    case rec.CommandPropsID of
+      epAuxMode : setAUXMCEModeElementID(rec.PumpID, rec.ValueInt, rec.CommandPropsID);
     end;
   end
 end;
@@ -2269,6 +2306,19 @@ begin
 end;
 
 procedure TControllerManager.setAUXMCEElementID(aPumpID: string; aValue: Boolean; Order : E_PropsID);
+var
+  ElementID : string;
+  elmnt     : TElement;
+begin
+  elmnt := nil;
+  if SearchAUXElementID.getMCEElementID(aPumpID, ElementID, Ord(Order)) then
+    elmnt := getElement(ElementID);
+
+  if Assigned(elmnt) then
+    MappingAUXStateToElement(elmnt, Order, aValue);
+end;
+
+procedure TControllerManager.setAUXMCEModeElementID(aPumpID: string; aValue: Integer; Order: E_PropsID);
 var
   ElementID : string;
   elmnt     : TElement;

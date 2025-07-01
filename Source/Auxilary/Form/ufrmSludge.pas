@@ -21,6 +21,7 @@ type
     vrPowerSupply: TVrRotarySwitch;
     imgShadowStart: TImage;
     imgShadowStop: TImage;
+    img1: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure vrAcHeatingClick(Sender: TObject);
@@ -99,7 +100,7 @@ end;
 
 procedure TfrmSludge.vrAcHeatingClick(Sender: TObject);
 begin
-  imgACHeating.Visible := not (vrAcHeating.SwitchPosition = 1);
+  imgACHeating.Visible := (vrAcHeating.SwitchPosition = 1);
 end;
 
 procedure TfrmSludge.vrPowerSupplyClick(Sender: TObject);

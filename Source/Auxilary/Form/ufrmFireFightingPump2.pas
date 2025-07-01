@@ -23,7 +23,7 @@ type
     Image9: TImage;
     Image5: TImage;
     pnlV: TPanel;
-    VrAngularMeter4: TVrAngularMeter;
+    vraAmpherMeter: TVrAngularMeter;
     Label11: TLabel;
     Label14: TLabel;
     Label1: TLabel;
@@ -34,6 +34,7 @@ type
     vrPowerSupply: TVrRotarySwitch;
     imgShadowStop: TImage;
     imgShadowStart: TImage;
+    img1: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure vrAcHeatingClick(Sender: TObject);
@@ -114,7 +115,7 @@ end;
 
 procedure TfrmFireFightingPump2.vrAcHeatingClick(Sender: TObject);
 begin
-  imgACHeating.Visible := not (vrAcHeating.SwitchPosition = 1);
+  imgACHeating.Visible := (vrAcHeating.SwitchPosition = 1);
 end;
 
 procedure TfrmFireFightingPump2.vrPowerSupplyClick(Sender: TObject);
@@ -127,7 +128,10 @@ end;
 
 procedure TfrmFireFightingPump2.vrRemoteClick(Sender: TObject);
 begin
-  //
+  if vrRemote.SwitchPosition = 0 then
+    AuxiliarySystem.Mode(C_PUMP_ID[3], 0)
+  else if vrRemote.SwitchPosition = 2 then
+    AuxiliarySystem.Mode(C_PUMP_ID[3], 1)
 end;
 
 {$ENDREGION}

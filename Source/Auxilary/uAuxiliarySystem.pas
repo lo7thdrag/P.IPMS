@@ -35,6 +35,7 @@ type
 
     procedure EngineRun(aIdentifier : string; aValue : Boolean);
     procedure PowerSupply(aIdentifier : string; aValue : Boolean);
+    procedure Mode(aIdentifier : string; aValue : Integer);
 
     constructor Create;
     destructor Destroy;override;
@@ -100,6 +101,17 @@ begin
   inifile.Free;
   tempstring.Free;
 end;
+
+procedure TAuxiliarySystem.Mode(aIdentifier: string; aValue: Integer);
+var
+  recCmd : R_Common_AUX_Command;
+begin
+  recCmd.PumpID := aIdentifier;
+  recCmd.CommandPropsID := epAuxMode;
+  recCmd.ValueInt := aValue;
+
+  Network.AuxiliaryControllerSocket.SendData(C_AUX_COMMAND,@recCmd);
+end;
 
 procedure TAuxiliarySystem.SetFreezed(const Value: boolean);
 var

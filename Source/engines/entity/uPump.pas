@@ -11,10 +11,12 @@ type
     FPressure: double;
     FIsEngineRun : Boolean;
     FIsPowerSupply : Boolean;
+    FMode : Integer;
 
     procedure SetPressure(const Value: double);
     procedure SetEngineRun(const Value: Boolean);
     procedure SetPowerSupply(const Value: Boolean);
+    procedure SetMode(const Value: Integer);
 
   public
     constructor Create;override;
@@ -28,6 +30,7 @@ type
     property Pressure : double read FPressure write SetPressure;  // MPa??
     property EngineRun : Boolean read FIsEngineRun write SetEngineRun;
     property PowerSupply : Boolean read FIsPowerSupply write SetPowerSupply;
+    property Mode : Integer read FMode write SetMode;
 
   end;
 
@@ -60,6 +63,15 @@ begin
 
   FIsEngineRun := Value;
   Listener.TriggerEvents(Self,epAuxEngineRun,Value);
+end;
+
+procedure TPump.SetMode(const Value: Integer);
+begin
+  if FMode = Value then
+    exit;
+
+  FMode := Value;
+  Listener.TriggerEvents(Self,epAuxMode,Value);
 end;
 
 procedure TPump.SetPowerSupply(const Value: Boolean);

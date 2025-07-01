@@ -573,7 +573,7 @@ type
       epTankLevel, epTankValueSensor, epElementParamChange,
 
       {use in Aux System}
-      epAuxEngineRun, epAuxPowerSupply,
+      epAuxEngineRun, epAuxPowerSupply, epAuxMode,
 
       {use in ACS}
       epFaultStatus

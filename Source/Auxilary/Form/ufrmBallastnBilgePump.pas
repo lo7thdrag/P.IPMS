@@ -22,6 +22,7 @@ type
     vrPowerSupply: TVrRotarySwitch;
     imgShadowStart: TImage;
     imgShadowStop: TImage;
+    img1: TImage;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure vrAcHeatingClick(Sender: TObject);
@@ -91,7 +92,6 @@ procedure TfrmBallastnBilgePump.imgShadowStartClick(Sender: TObject);
 begin
   if frmMainForm.pumpTemp[0].PowerSupply then
     AuxiliarySystem.EngineRun(C_PUMP_ID[0], True);
-
 end;
 
 procedure TfrmBallastnBilgePump.imgShadowStopClick(Sender: TObject);
@@ -102,7 +102,7 @@ end;
 
 procedure TfrmBallastnBilgePump.vrAcHeatingClick(Sender: TObject);
 begin
-  imgACHeating.Visible := not (vrAcHeating.SwitchPosition = 1);
+  imgACHeating.Visible := vrAcHeating.SwitchPosition = 1;
 end;
 
 procedure TfrmBallastnBilgePump.vrPowerSupplyClick(Sender: TObject);
