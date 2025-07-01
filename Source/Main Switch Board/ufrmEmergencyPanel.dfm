@@ -91056,6 +91056,7 @@ object frmEmergencyPanel: TfrmEmergencyPanel
         Top = 81
         Width = 78
         Height = 52
+        OnClick = ImgHOClick
       end
       object ImgF5: TImage
         Left = 357
@@ -100759,6 +100760,29 @@ object frmEmergencyPanel: TfrmEmergencyPanel
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
             000000000000}
+        end
+      end
+      object pnlPage: TPanel
+        Left = 88
+        Top = 92
+        Width = 81
+        Height = 14
+        BevelOuter = bvNone
+        ParentColor = True
+        TabOrder = 18
+        Visible = False
+        object lblPage: TLabel
+          Left = 3
+          Top = -2
+          Width = 28
+          Height = 15
+          Caption = 'Page'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Courier New'
+          Font.Style = []
+          ParentFont = False
         end
       end
     end

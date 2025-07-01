@@ -197,6 +197,8 @@ type
     Image36: TImage;
     Image37: TImage;
     Image38: TImage;
+    pnlPage: TPanel;
+    lblPage: TLabel;
     procedure ImgStartClick(Sender: TObject);
     procedure ImgStopClick(Sender: TObject);
     procedure ImgOIClick(Sender: TObject);
@@ -226,6 +228,7 @@ type
     procedure ImgFPClick(Sender: TObject);
     procedure ImgAPClick(Sender: TObject);
     procedure ImgIPClick(Sender: TObject);
+    procedure ImgHOClick(Sender: TObject);
   private
     Led  : array of TImage;
     LedStatus  : array of Boolean;
@@ -259,6 +262,8 @@ type
     OrderAmpere : Double;
 
     procedure UpdateForm(Generator : TGenerator);
+    procedure AddAlarmToLog(const AText: string);
+    procedure AddFaultToLog(const AText: string);
   end;
 
 var
@@ -486,6 +491,7 @@ begin
     lstInfoPage.Visible := False;
 
     lstMenu.Visible := True;
+    pnlPage.Visible := False;
 
     InitMenu;
     CurrentMenuIndex := 0;
@@ -649,14 +655,15 @@ end;
 
 procedure TfrmEmergencyPanel.ImgAPClick(Sender: TObject);
 begin
-  MenuAlarmPage;
-
   pnlPassword.Visible := False;
   lstMenu.Visible := False;
   lstFaultPage.Visible := False;
   lstAlarmPage.Visible := True;
   lstInfoPage.Visible := False;
 
+  pnlPage.Visible:= True;
+  lblPage.Caption := 'Alarms 1/2';
+
   pnlLeft.Visible := True;
   pnlRight.Visible := True;
   pnlRefresh.Visible := True;
@@ -668,22 +675,19 @@ begin
   pnlRefresh.BringToFront;
   pnlReset.BringToFront;
   pnlBlack3.BringToFront;
-
-  CurrentMenuIndex := 0;
-
-  LoadMainMenu(CurrentMenuIndex);
 end;
 
 procedure TfrmEmergencyPanel.ImgFPClick(Sender: TObject);
 begin
-  MenuFaultPage;
-
   pnlPassword.Visible := False;
   lstMenu.Visible := False;
   lstFaultPage.Visible := True;
   lstAlarmPage.Visible := False;
   lstInfoPage.Visible := False;
 
+  pnlPage.Visible:= True;
+  lblPage.Caption := 'Faults 1/2';
+
   pnlLeft.Visible := True;
   pnlRight.Visible := True;
   pnlRefresh.Visible := True;
@@ -695,14 +699,18 @@ begin
   pnlRefresh.BringToFront;
   pnlReset.BringToFront;
   pnlBlack3.BringToFront;
+end;
 
-  CurrentMenuIndex := 0;
-
-  LoadMainMenu(CurrentMenuIndex);
+procedure TfrmEmergencyPanel.ImgHOClick(Sender: TObject);
+begin
+  ImgIndicatorHO.Visible := False;
+  ImgIndicatorFP.Visible := False;
+  ImgIndicatorAP.Visible := False;
 end;
 
 procedure TfrmEmergencyPanel.ImgIPClick(Sender: TObject);
 begin
+  pnlPage.Visible := False;
   MenuInfoPage;
 
   pnlPassword.Visible := False;
@@ -794,6 +802,35 @@ end;
 
 {$REGION ' Additional Procedure '}
 
+procedure TfrmEmergencyPanel.AddAlarmToLog(const AText: string);
+var
+  LogEntry : String;
+begin
+  LogEntry:= FormatDateTime('dd"/"mm"/"yyyy', Now) + ' ' +
+             FormatDateTime('hh:nn:ss AM/PM', Now) + ' ' +
+             AText;
+
+  if lstAlarmPage.Items.Count = 0 then
+    lstAlarmPage.Items.Add(' ');
+
+  lstAlarmPage.Items.Insert(1, LogEntry)
+end;
+
+procedure TfrmEmergencyPanel.AddFaultToLog(const AText: string);
+var
+  LogEntry : String;
+begin
+  LogEntry:= FormatDateTime('dd"/"mm"/"yyyy', Now) + ' ' +
+             FormatDateTime('hh:nn:ss AM/PM', Now) + ' ' +
+             AText;
+
+  if lstFaultPage.Items.Count = 0 then
+    lstFaultPage.Items.Add(' ');
+
+
+  lstFaultPage.Items.Insert(1, LogEntry)
+end;
+
 function TfrmEmergencyPanel.CekGeneratorCondition: Boolean;
 begin
   Result := False;
@@ -842,9 +879,15 @@ begin
     Inc(x, labelWidth + spaceX);
 
     // Pindah baris setelah huruf besar, huruf kecil
-    if (i = 25) or (i = 51) then
+    if (i = 25) then
     begin
       x := 7;
+      Inc(y, labelHeight + spaceY);
+    end;
+
+    if (i = 51) then
+    begin
+      x := 100;
       Inc(y, labelHeight + spaceY);
     end;
   end;
@@ -1612,18 +1655,18 @@ end;
 
 procedure TfrmEmergencyPanel.MenuAlarmPage;
 begin
-  MainMenu[0]:= TStringList.Create;
-  MainMenu[0].AddStrings([
-    'Alarm 1/2',
-    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now) + ' ' ]);
+//  MainMenu[0]:= TStringList.Create;
+//  MainMenu[0].AddStrings([
+//    'Alarm 1/2',
+//    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now) + ' ' ]);
 end;
 
 procedure TfrmEmergencyPanel.MenuFaultPage;
 begin
-  MainMenu[0]:= TStringList.Create;
-  MainMenu[0].AddStrings([
-    'Faults 1/2',
-    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now)+ '  ']);
+//  MainMenu[0]:= TStringList.Create;
+//  MainMenu[0].AddStrings([
+//    'Faults 1/2',
+//    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now)+ '  ']);
 end;
 
 procedure TfrmEmergencyPanel.MenuInfoPage;

@@ -248,12 +248,11 @@ type
     procedure UnhighlightLabel(index : Integer);
     procedure ClearAllHighlight;
 
-    procedure SetLCDLook;
-
     function CekGeneratorCondition : Boolean;
   public
     OrderFrequency : Double;
     OrderAmpere : Double;
+    Generator : TGenerator;
 
     procedure UpdateForm(Generator : TGenerator);
     procedure AddAlarmToLog(const AText: string);
@@ -462,6 +461,7 @@ begin
     lstInfoPage.Visible := False;
 
     lstMenu.Visible := True;
+    pnlPage.Visible := False;
 
     InitMenu;
     CurrentMenuIndex := 0;
@@ -644,8 +644,6 @@ end;
 
 procedure TfrmGeneratorPanel.ImgFPClick(Sender: TObject);
 begin
-//  MenuFaultPage;
-
   pnlPassword.Visible := False;
   lstMenu.Visible := False;
   lstFaultPage.Visible := True;
@@ -666,17 +664,10 @@ begin
   pnlRefresh.BringToFront;
   pnlReset.BringToFront;
   pnlBlack3.BringToFront;
-
-//  CurrentMenuIndex := 0;
-
-//  LoadMainMenu(CurrentMenuIndex);
 end;
 
 procedure TfrmGeneratorPanel.ImgAPClick(Sender: TObject);
 begin
-//  MenuAlarmPage;
-
-
   pnlPassword.Visible := False;
   lstMenu.Visible := False;
   lstFaultPage.Visible := False;
@@ -697,14 +688,11 @@ begin
   pnlRefresh.BringToFront;
   pnlReset.BringToFront;
   pnlBlack3.BringToFront;
-
-//  CurrentMenuIndex := 0;
-
-//  LoadMainMenu(CurrentMenuIndex);
 end;
 
 procedure TfrmGeneratorPanel.ImgIPClick(Sender: TObject);
 begin
+  pnlPage.Visible := False;
   MenuInfoPage;
 
   pnlPassword.Visible := False;
@@ -712,8 +700,6 @@ begin
   lstFaultPage.Visible := False;
   lstAlarmPage.Visible := False;
   lstInfoPage.Visible := True;
-
-//  SetLCDLook;
 
   pnlLeft.Visible := True;
   pnlRight.Visible := True;
@@ -734,7 +720,9 @@ end;
 
 procedure TfrmGeneratorPanel.ImgHOClick(Sender: TObject);
 begin
-//
+  ImgIndicatorHO.Visible := False;
+  ImgIndicatorFP.Visible := False;
+  ImgIndicatorAP.Visible := False;
 end;
 
 procedure TfrmGeneratorPanel.ImgOIClick(Sender: TObject);
@@ -890,9 +878,15 @@ begin
     Inc(x, labelWidth + spaceX);
 
     // Pindah baris setelah huruf besar, huruf kecil
-    if (i = 25) or (i = 51) then
+    if (i = 25) then
     begin
       x := 7;
+      Inc(y, labelHeight + spaceY);
+    end;
+
+    if (i = 51) then
+    begin
+      x := 100;
       Inc(y, labelHeight + spaceY);
     end;
   end;
@@ -950,8 +944,6 @@ begin
 end;
 
 procedure TfrmGeneratorPanel.InitMenu;
-var
-  Generator : TGenerator;
 begin
   SetLength(MainMenu, 3);
 
@@ -980,13 +972,13 @@ begin
   SetLength(SubSubMenu1[0], 9);
   SubSubMenu1[0][0] := TStringList.Create;
   SubSubMenu1[0][0].Add('Generator Phase-Neutral Volt');
-  SubSubMenu1[0][0].Add('V1 = ' + FormatFloat('0.0', Generator.V) +' V');
+  SubSubMenu1[0][0].Add('V1 = 00000 V');
   SubSubMenu1[0][0].Add('V2 = 00000 V');
   SubSubMenu1[0][0].Add('V3 = 00000 V');
 
   SubSubMenu1[0][1] := TStringList.Create;
   SubSubMenu1[0][1].Add('Generator Phase-Phase Volt');
-  SubSubMenu1[0][1].Add('U31 = ' + FormatFloat('0.0', Generator.Voltage) +' V');
+  SubSubMenu1[0][1].Add('U31 = 00000 V');
   SubSubMenu1[0][1].Add('U23 = 00000 V');
   SubSubMenu1[0][1].Add('U12 = 00000 V');
 
@@ -1035,7 +1027,7 @@ begin
   SubSubMenu1[0][8].Add('P1 = 00000 kW  Q1 = 00000 kVAR  cos(1) = 1.00I');
   SubSubMenu1[0][8].Add('P2 = 00000 kW  Q2 = 00000 kVAR  cos(2) = 1.00I');
   SubSubMenu1[0][8].Add('P3 = 00000 kW  Q3 = 00000 kVAR  cos(3) = 1.00I');
-  SubSubMenu1[0][8].Add('P = 00000 kW     F = 50.09 Hz');
+  SubSubMenu1[0][8].Add('P = 000 kW     F = 50.0 Hz');
   SubSubMenu1[0][8].Add('Q = 00000 kVAR   cos(1) = 0.791');
 
   // SubSubMenu Mains/bus electrical meter (index = 1)
@@ -1530,8 +1522,6 @@ end;
 
 procedure TfrmGeneratorPanel.MenuAlarmPage;
 begin
-
-
 //  MainMenu[0]:= TStringList.Create;
 //  MainMenu[0].AddStrings([
 //    'Alarm 1/2',
@@ -1540,10 +1530,10 @@ end;
 
 procedure TfrmGeneratorPanel.MenuFaultPage;
 begin
-  MainMenu[0]:= TStringList.Create;
-  MainMenu[0].AddStrings([
-    'Faults 1/2',
-    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now)+ '  ']);
+//  MainMenu[0]:= TStringList.Create;
+//  MainMenu[0].AddStrings([
+//    'Faults 1/2',
+//    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now)+ '  ']);
 end;
 
 procedure TfrmGeneratorPanel.MenuInfoPage;
@@ -1709,26 +1699,6 @@ begin
   end;
 end;
 
-procedure TfrmGeneratorPanel.SetLCDLook;
-var
-  ActiveListBox : TListBox;
-begin
-  if lstMenu.Visible then
-    ActiveListBox := lstMenu
-  else if lstFaultPage.Visible then
-    ActiveListBox := lstFaultPage
-  else if lstAlarmPage.Visible then
-    ActiveListBox := lstAlarmPage
-  else if lstInfoPage.Visible then
-    ActiveListBox := lstInfoPage;
-
-  ActiveListBox.Style := lbOwnerDrawFixed;
-  ActiveListBox.Font.Name := 'Courier New';
-  ActiveListBox.Font.Color := clBlack;
-  ActiveListBox.Color := clLime;
-end;
-
-
 procedure TfrmGeneratorPanel.updateForm(Generator : TGenerator);
 begin
   ImgIndicatorMan.Visible := Generator.GeneratorMode = 1;
@@ -1742,10 +1712,10 @@ begin
   ImgIndicatorPreference.Visible := Generator.Preference;
   ImgIndicatorBS.Visible := Generator.Busbar;
 
-  ImgIndicatorFP.Visible := Generator.MeasPowFailure;
+//  ImgIndicatorFP.Visible := Generator.MeasPowFailure;
 //  ImgIndicatorFP.Visible := Generator.AutStartFailure;
-
-  ImgIndicatorAP.Visible := Generator.NotStandby;
+//
+//  ImgIndicatorAP.Visible := Generator.NotStandby;
 end;
 
 {$ENDREGION}

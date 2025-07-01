@@ -81915,9 +81915,9 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         object lblPage: TLabel
           Left = 3
           Top = -2
-          Width = 49
+          Width = 28
           Height = 15
-          Caption = 'lblPage'
+          Caption = 'Page'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -12

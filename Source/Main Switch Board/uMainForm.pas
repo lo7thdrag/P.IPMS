@@ -225,7 +225,21 @@ begin
       GeneratorTemp.NotStandby := Value;
 
       if Value then
-        frmGeneratorPanel.AddAlarmToLog('DG not standby');
+      begin
+        if Assigned(frmGeneratorPanel) then
+        begin
+          frmGeneratorPanel.AddAlarmToLog('DG not standby');
+          frmGeneratorPanel.ImgIndicatorAP.Visible := Value;
+          frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+        end;
+
+        if Assigned(frmEmergencyPanel) then
+        begin
+          frmEmergencyPanel.AddAlarmToLog('DG not standby');
+          frmEmergencyPanel.ImgIndicatorAP.Visible := Value;
+          frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+        end;
+      end;
     end;
     epPMSGeneratorFuelRunsOut : GeneratorTemp.FuelRunsOut := Value;
     epPMSGeneratorEmergencyStop : GeneratorTemp.EmergencyStop := Value;
@@ -236,13 +250,39 @@ begin
     begin
       GeneratorTemp.MeasPowFailure := Value;
       if Value then
-        frmGeneratorPanel.AddFaultToLog('Supply Voltage Low');
+      begin
+        if Assigned(frmGeneratorPanel) then
+        begin
+          frmGeneratorPanel.AddFaultToLog('Supply Voltage Low');
+          frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
+        frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+        end;
+
+        if Assigned(frmEmergencyPanel) then
+        begin
+          frmEmergencyPanel.AddFaultToLog('Supply Voltage Low');
+          frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
+          frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+        end;
+      end;
     end;
     epPMSAutStartFailure:
     begin
       GeneratorTemp.AutStartFailure := Value;
       if Value then
-        frmGeneratorPanel.AddFaultToLog('Automatic Start Failed');
+      begin
+        if Assigned(frmGeneratorPanel) then
+        begin
+          frmGeneratorPanel.AddFaultToLog('Automatic Start Failed');
+          frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
+        end;
+
+        if Assigned(frmEmergencyPanel) then
+        begin
+          frmEmergencyPanel.AddFaultToLog('Automatic Start Failed');
+          frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
+        end;
+      end;
     end;
   end;
 
@@ -281,6 +321,7 @@ begin
       if Assigned(frmGeneratorPanel) then
       begin
         frmGeneratorPanel.OrderFrequency := Value;
+        frmGeneratorPanel.VraFrequency.Position := Value;
       end;
     end;
     epPMSVoltage:
@@ -296,6 +337,7 @@ begin
       if Assigned(frmGeneratorPanel) then
       begin
         frmGeneratorPanel.OrderAmpere := Value;
+        frmGeneratorPanel.vraAmpere1.Position := Value;
       end;
 
       if Assigned(frmEmergencyPanel) then
