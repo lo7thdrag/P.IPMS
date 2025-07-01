@@ -143,12 +143,12 @@ begin
 
   SetLength(LampStatus, Length(Lamps));
 
-  if not FileExists(ExtractFilePath(Application.Exename) + 'ACS_ALARM.mp3') then
+  if not FileExists(ExtractFilePath(Application.Exename) + 'IPMS_ALARM.wav') then
   begin
-    raise Exception.Create('ACS_ALARM.mp3 Not found');
+    raise Exception.Create('IPMS_ALARM.wav Not found');
   end
   else
-    mpAlarm.FileName:= ExtractFilePath(Application.Exename) + 'ACS_ALARM.mp3';
+    mpAlarm.FileName:= ExtractFilePath(Application.Exename) + 'IPMS_ALARM.wav';
 
   silence := False;
 
@@ -177,6 +177,16 @@ begin
     Left := Screen.Monitors[1].Left;
     Top := Screen.Monitors[1].Top;
   end;
+
+  if GeneratorTemp.Identifier = 'Generator 1' then
+    lblRunningHours.Caption := '14405'
+  else if GeneratorTemp.Identifier = 'Generator 2' then
+    lblRunningHours.Caption := '14048'
+  else if GeneratorTemp.Identifier = 'Generator 3' then
+    lblRunningHours.Caption := '13243'
+  else if GeneratorTemp.Identifier = 'Generator 4' then
+    lblRunningHours.Caption := '14598';
+
 end;
 
 {$ENDREGION}
@@ -194,6 +204,7 @@ begin
       tmrRunningHours.Enabled := Value;
 
       imgRunning.Visible := Value;
+      VrMainSwitch.SwitchPosition := 0;
     end;
 
     epPMSGeneratorSupplied : GeneratorTemp.GeneratorSupplied := Value;
@@ -203,6 +214,7 @@ begin
     epPMSGeneratorFuelRunsOut : GeneratorTemp.FuelRunsOut := Value;
     epPMSGeneratorEmergencyStop : GeneratorTemp.EmergencyStop := Value;
     epPMSShutDown : GeneratorTemp.ShutDown := Value;
+
     epPMSFailureCBClosed : GeneratorTemp.FailureCBClosed := Value;
 
     epPMSNotStandby :
@@ -412,6 +424,7 @@ end;
 procedure TMainForm.btnStopClick(Sender: TObject);
 begin
   DieselGeneratorSystem.EngineStop(True);
+  imgStop.Visible := True;
   tmrStop.Enabled := True;
 end;
 
@@ -504,13 +517,16 @@ begin
       mpAlarm.Open;
       mpAlarm.Play;
     end;
+
   end
   else
   begin
     mpAlarm.Notify := False;
     mpAlarm.OnNotify := nil;
+    mpAlarm.Open;
     mpAlarm.Stop;
   end;
+
 end;
 
 procedure TMainForm.mpAlarmNotify(Sender: TObject);
@@ -529,17 +545,16 @@ begin
 end;
 
 procedure TMainForm.tmrRunningHoursTimer(Sender: TObject);
+var
+  valint : Integer;
 begin
   if DieselGeneratorSystem.Freezed then
     Exit;
 
-  FRunningHourTemp := FRunningHourTemp + 1;
-  if FRunningHourTemp > 25 then
-  begin
-    FRunningHourTemp := 0;
-    FRunningHour := FRunningHour + 1;
-    lblRunningHours.Caption := IntToStr(FRunningHour);
-  end;
+  valint := StrToInt(lblRunningHours.Caption);
+  valint := valint + 1;
+
+  lblRunningHours.Caption := IntToStr(valint);
 end;
 
 procedure TMainForm.tmrStopTimer(Sender: TObject);
