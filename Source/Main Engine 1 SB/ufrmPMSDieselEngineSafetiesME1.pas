@@ -210,11 +210,11 @@ begin
   begin
     imgLedGreenTH1SE.Visible := False;
   end
-  else if ptSE1.Value < 400 then
+  else if ptSE1.Value >= 80 then
   begin
     imgLedGreenTH1SE.Visible := True;
   end
-  else if ptSE1.Value > 400 then
+  else if ptSE1.Value <= 80 then
   begin
     imgLedGreenTH1SE.Visible := False;
   end;
@@ -228,11 +228,11 @@ begin
   begin
     imgLedGreenTH2SE.Visible := False;
   end
-  else if ptSE2.Value < 400 then
+  else if ptSE2.Value >= 80 then
   begin
     imgLedGreenTH2SE.Visible := True;
   end
-  else if ptSE2.Value > 400 then
+  else if ptSE2.Value <= 80 then
   begin
     imgLedGreenTH2SE.Visible := False;
   end
@@ -246,11 +246,11 @@ begin
   begin
     imgLedGreenTH3SE.Visible := False;
   end
-  else if ptSE3.Value > 405 then
+  else if ptSE3.Value >= 405 then
   begin
     imgLedGreenTH3SE.Visible := True;
   end
-  else if ptSE3.Value < 405 then
+  else if ptSE3.Value <= 405 then
   begin
     imgLedGreenTH3SE.Visible := False;
   end
@@ -264,11 +264,11 @@ begin
   begin
     imgLedGreenTH4SE.Visible := False;
   end
-  else if ptSE4.Value > 500 then
+  else if ptSE4.Value >= 500 then
   begin
     imgLedGreenTH4SE.Visible := True;
   end
-  else if ptSE4.Value < 500 then
+  else if ptSE4.Value <= 500 then
   begin
     imgLedGreenTH4SE.Visible := False;
   end
@@ -290,9 +290,13 @@ procedure TfrmPMSDieselEngineSafetiesME1.ptSVAEChange(Sender: TObject);
 begin
   EngineSpeedMeter.Position := ptSVAE.Value;
 
-  if ptSVAE.Value > 1085 then
+  if ptSVAE.Value >= 1085 then
   begin
     imgLedRedOverspeedSVAE.Visible := True;
+  end
+  else if ptSVAE.Value < 1085 then
+  begin
+    imgLedRedOverspeedSVAE.Visible := False;
   end;
 end;
 

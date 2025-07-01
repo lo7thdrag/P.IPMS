@@ -36,7 +36,7 @@ type
     lblAirValveClosed: TVrDemoButton;
     lblGazValveClosed: TVrDemoButton;
     lblByPassClosed: TVrDemoButton;
-    VrDemoButton3: TVrDemoButton;
+    LB1TCRunning: TVrDemoButton;
     lblSTCInAutoMode: TVrDemoButton;
     lblSTCAlarm: TVrDemoButton;
     lblSTCFailure: TVrDemoButton;

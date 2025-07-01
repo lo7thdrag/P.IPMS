@@ -68,7 +68,6 @@ type
     procedure btnByPassP2P4OpenClick(Sender: TObject);
     procedure btnByPassP2P4CloseClick(Sender: TObject);
     procedure imgSafetiesorECResetME1Click(Sender: TObject);
-    procedure imgSafetiesorECResetME1Click(Sender: TObject);
   private
     FListener : TListeners;
     FIsBlinkState : Boolean;
@@ -128,16 +127,10 @@ end;
 
 procedure TfrmSignalingLightME1.btnStartClick(Sender: TObject);
 begin
- procedure TfrmSignalingLightME1.imgSafetiesorECResetME1Click(Sender: TObject);
-begin
-
+  MainEngine1System.RunningStart(C_PCS_ME_STARBOARD);
 end;
 
- MainEngine1System.RunningStart(C_PCS_ME_STARBOARD);
-end;
-
-procedure TfrmSignalingLightME1.imgSafetiesorECResetME1Click(
-  Sender: TObject);
+procedure TfrmSignalingLightME1.imgSafetiesorECResetME1Click(Sender: TObject);
 begin
   MainEngine1System.SafetiesReset(C_PCS_ME_STARBOARD);
 end;

@@ -7489,7 +7489,7 @@ object frmClutchingAssistance: TfrmClutchingAssistance
         Color = 12032000
         TabOrder = 0
       end
-      object VrDemoButton1: TVrDemoButton
+      object lblEngineDeclutched: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 28

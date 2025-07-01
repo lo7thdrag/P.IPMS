@@ -392,51 +392,65 @@ begin
     end;
     epPCSMEOverspeedAlarm :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
     epPCSMELOPressVeryLow :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
     epPCSMERedGearSafetyStop :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
     epPCSMEFwHtExpTkLevelVeryLow :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
     epPCSMEFwTempVeryHigh :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
     epPCSMEConRodBearingTempVeryHigh :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
     epPCSMEOilMistDetAlarm :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMETempFWHTInlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
+      end;
+    end;
+    epPCSMETempFWHTOutlet :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
       end;
     end;
   end;
@@ -535,8 +549,7 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStaboard;
-  recCmd.CommandPropsID := epPCSMELocalEmergencyStop;
-  recCmd.CommandID      := C_ORD_LEVER_EMERGENCYSTOP;
+  recCmd.CommandPropsID := epPCSMELocalEmergencyStop;         //awalnya menggunakan epPCSLeverEmergencyStop  diganti epPCSMELocalEmergencyStop
   recCmd.ValueBool      := True;
 
   Network.MainEngine1ControllerSocket.SendData(C_PCS_COMMAND,@recCmd);

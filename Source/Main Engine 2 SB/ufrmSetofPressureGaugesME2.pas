@@ -15,7 +15,6 @@ type
     EngineInletAirPressureMeter: TVrAngularMeter;
     btnAlarm: TRzBmpButton;
     imgFlashLighting: TRzBmpButton;
-    mpAlarmGauges: TMediaPlayer;
     Label10: TLabel;
     Label6: TLabel;
     Label7: TLabel;
@@ -27,11 +26,9 @@ type
     Label1: TLabel;
     Label5: TLabel;
     Label4: TLabel;
-    procedure mpAlarmGaugesNotify(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure Alarm(Value: Boolean);
+
   private
-    Silence : Boolean;
+
   public
     { Public declarations }
   end;
@@ -46,45 +43,5 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmSetofPressureGaugesME2.FormCreate(Sender: TObject);
-begin
-  if not FileExists(ExtractFilePath(Application.Exename) + 'Alarm08.wav') then
-  begin
-    raise Exception.Create('Alarm08.wav Not found');
-  end
-  else
-    mpAlarmGauges.FileName:= ExtractFilePath(Application.Exename) + 'Alarm08.wav';
-
-  Silence := False;
-end;
-
-procedure TfrmSetofPressureGaugesME2.mpAlarmGaugesNotify(Sender: TObject);
-begin
-  if (mpAlarmGauges.NotifyValue = nvSuccessful) and Silence then
-  begin
-    mpAlarmGauges.Play;
-    mpAlarmGauges.Notify := True;
-  end;
-end;
-
-procedure TfrmSetofPressureGaugesME2.Alarm(Value: Boolean);
-begin
-  if Value then
-  begin
-    Silence := True;
-    mpAlarmGauges.OnNotify := mpAlarmGaugesNotify;
-    if not (mpAlarmGauges.Mode = mpPlaying) then
-    begin
-      mpAlarmGauges.Open;
-      mpAlarmGauges.Play;
-    end;
-  end
-  else
-  begin
-    mpAlarmGauges.Open;
-    mpAlarmGauges.Stop;
-    mpAlarmGauges.Notify := False;
-  end;
-end;
 
 end.

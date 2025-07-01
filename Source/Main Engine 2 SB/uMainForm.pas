@@ -224,14 +224,14 @@ begin
 
       if Assigned(frmAirGasCircuit) then
       begin
-        frmSignalingLightME2.vrtryswtchSTC_PS.SwitchPosition := 1;
+        frmSignalingLightME2.vrtryswtchSTC_SB.SwitchPosition := 1;
         frmAirGasCircuit.lblSTCInAutoMode.Color              := clGreen;
         frmAirGasCircuit.lblSTCInAutoMode.FontLeave.Color    := clBlack;
       end
       else
       begin
-        frmAirGasCircuit.lblSTCInAutoMode.Color            := clAqua;
-        frmAirGasCircuit.lblSTCInAutoMode.FontLeave.Color  := clWhite;
+        frmAirGasCircuit.lblSTCInAutoMode.Color              := clGray;
+        frmAirGasCircuit.lblSTCInAutoMode.FontLeave.Color    := clYellow;
       end;
     end
   end;
@@ -281,8 +281,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color := clAqua;
-          frmSafetiesStop.lblSafetiesStop.Color            := clAqua;
+          frmSafetiesStop.btnPS_SS_EmergencyShutdown.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_EmergencyShutdown.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblSafetiesStop.Color                      := clGray;
+          frmSafetiesStop.lblSafetiesStop.FontLeave.Color            := clYellow;
           frmAlarms.Alarm(False);
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
@@ -305,8 +307,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_Overspeed.Color := clAqua;
-          frmSafetiesStop.lblSafetiesStop.Color    := clAqua;
+          frmSafetiesStop.btnPS_SS_Overspeed.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_Overspeed.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblSafetiesStop.Color              := clGray;
+          frmSafetiesStop.lblSafetiesStop.FontLeave.Color    := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -332,8 +336,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color := clAqua;
-          frmSafetiesStop.lblSafetiesStop.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHigh.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblSafetiesStop.Color                           := clGray;
+          frmSafetiesStop.lblSafetiesStop.FontLeave.Color                 := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -359,8 +365,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color := clAqua;
-          frmSafetiesStop.lblSafetiesStop.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_RedGearSafetyStop.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_RedGearSafetyStop.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblSafetiesStop.Color                      := clGray;
+          frmSafetiesStop.lblSafetiesStop.FontLeave.Color            := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -385,7 +393,8 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_FwHtExpTkLevelVeryLow.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -410,7 +419,8 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_FwTempVeryHigh.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_FwTempVeryHigh.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -435,7 +445,8 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_ConRodBearTempVeryHigh.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -460,7 +471,8 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_EngInletLubOilVeryHighTemperature.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -485,7 +497,8 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color := clAqua;
+          frmSafetiesStop.btnPS_SS_OilMistDetHigh.Color           := clGray;
+          frmSafetiesStop.btnPS_SS_OilMistDetHigh.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -511,8 +524,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+          frmSafetiesStop.btnPS_SI_TurningGearDisengaged.Color           := clGray;
+          frmSafetiesStop.btnPS_SI_TurningGearDisengaged.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color                    := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color          := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -538,8 +553,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color    := clAqua;
+          frmSafetiesStop.btnPS_SI_ManHandleAtStop.Color           := clGray;
+          frmSafetiesStop.btnPS_SI_ManHandleAtStop.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color              := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color    := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -565,8 +582,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color   := clAqua;
+          frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clGray;
+          frmSafetiesStop.btnPS_SI_FuelRackAtStop.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color   := clGray;
+          frmSafetiesStop.lblStartingInterlocks.Color   := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -587,8 +606,24 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btn_Engine_Declutch.Color   := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+          frmSafetiesStop.btn_Engine_Declutch.Color             := clGray;
+          frmSafetiesStop.btn_Engine_Declutch.FontLeave.Color   := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color           := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color := clYellow;
+        end;
+      end;
+
+      if Assigned(frmClutchingAssistance) then
+      begin
+        if Value then
+        begin
+          frmClutchingAssistance.lblEngineDeclutched.Color           := clGreen;
+          frmClutchingAssistance.lblEngineDeclutched.FontLeave.Color := clBlack;
+        end
+        else
+        begin
+          frmClutchingAssistance.lblEngineDeclutched.Color           := clGray;
+          frmClutchingAssistance.lblEngineDeclutched.FontLeave.Color := clYellow;
         end;
       end;
     end;
@@ -604,8 +639,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btn_Engine_Declutch.Color   := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+          frmSafetiesStop.btn_Engine_Declutch.Color             := clGray;
+          frmSafetiesStop.btn_Engine_Declutch.FontLeave.Color   := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color           := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color := clYellow;
         end;
       end;
 
@@ -613,11 +650,13 @@ begin
       begin
         if not Value then
         begin
-          frmAirGasCircuit.lblByPassClosed.Color      := clGray;
+          frmAirGasCircuit.lblByPassClosed.Color            := clGreen;
+          frmAirGasCircuit.lblByPassClosed.FontLeave.Color  := clBlack;
         end
         else
         begin
-          frmAirGasCircuit.lblByPassClosed.Color      := clAqua;
+          frmAirGasCircuit.lblByPassClosed.Color            := clGray;
+          frmAirGasCircuit.lblByPassClosed.FontLeave.Color  := clYellow;
         end;
       end;
     end;
@@ -638,8 +677,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color      := clAqua;
+          frmSafetiesStop.btnPS_SI_PrelubeInProgress.Color           := clGray;
+          frmSafetiesStop.btnPS_SI_PrelubeInProgress.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color                := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color      := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -665,8 +706,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_PrelubeFailure.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color   := clAqua;
+          frmSafetiesStop.btnPS_SI_PrelubeFailure.Color           := clGray;
+          frmSafetiesStop.btnPS_SI_PrelubeFailure.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color             := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color   := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -693,9 +736,12 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_StartingFailure.Color  := clAqua;
-          frmGeneralScreen.btnPS_SI_StartingFailure.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color     := clAqua;
+          frmSafetiesStop.btnPS_SI_StartingFailure.Color            := clGray;
+          frmSafetiesStop.btnPS_SI_StartingFailure.FontLeave.Color  := clYellow;
+          frmGeneralScreen.btnPS_SI_StartingFailure.Color           := clGray;
+          frmGeneralScreen.btnPS_SI_StartingFailure.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color               := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color     := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -721,8 +767,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_STCSequenceFail.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color    := clAqua;
+          frmSafetiesStop.btnPS_SI_STCSequenceFail.Color           := clGray;
+          frmSafetiesStop.btnPS_SI_STCSequenceFail.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color              := clGray;
+          frmSafetiesStop.btnPS_SI_STCSequenceFail.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -749,9 +797,12 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color := clAqua;
-          frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+          frmSafetiesStop.btnPS_SI_SlowTurningFailure.Color            := clGray;
+          frmSafetiesStop.btnPS_SI_SlowTurningFailure.FontLeave.Color  := clYellow;
+          frmGeneralScreen.btnPS_SI_SlowTurningFailure.Color           := clGray;
+          frmGeneralScreen.btnPS_SI_SlowTurningFailure.FontLeave.Color := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color                  := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color        := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -777,8 +828,10 @@ begin
         end
         else
         begin
-          frmSafetiesStop.btnPS_SI_SafetyStop.Color   := clAqua;
-          frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+          frmSafetiesStop.btnPS_SI_SafetyStop.Color             := clGray;
+          frmSafetiesStop.btnPS_SI_SafetyStop.FontLeave.Color   := clYellow;
+          frmSafetiesStop.lblStartingInterlocks.Color           := clGray;
+          frmSafetiesStop.lblStartingInterlocks.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -803,7 +856,8 @@ begin
         end
         else
         begin
-          frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color := clAqua;
+          frmGeneralScreen.btnPS_SS_ClutcInterlocks.Color           := clGray;
+          frmGeneralScreen.btnPS_SS_ClutcInterlocks.FontLeave.Color := clYellow;
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
@@ -820,13 +874,13 @@ begin
       begin
         if not Value then
         begin
-          frmAirGasCircuit.lblAirValveClosed.Color            := clGray;
-          frmAirGasCircuit.lblAirValveClosed.FontLeave.Color  := clYellow;
+          frmAirGasCircuit.lblAirValveClosed.Color            := clGreen;
+          frmAirGasCircuit.lblAirValveClosed.FontLeave.Color  := clBlack;
         end
         else
         begin
-          frmAirGasCircuit.lblAirValveClosed.Color            := clAqua;
-          frmAirGasCircuit.lblAirValveClosed.FontLeave.Color  := clWhite;
+          frmAirGasCircuit.lblAirValveClosed.Color            := clGray;
+          frmAirGasCircuit.lblAirValveClosed.FontLeave.Color  := clYellow;
         end;
       end;
     end;
@@ -836,14 +890,52 @@ begin
       begin
         if not Value then
         begin
-          frmAirGasCircuit.lblGazValveClosed.Color            := clGray;
-          frmAirGasCircuit.lblGazValveClosed.FontLeave.Color  := clYellow;
+          frmAirGasCircuit.lblGazValveClosed.Color            := clGreen;
+          frmAirGasCircuit.lblGazValveClosed.FontLeave.Color  := clBlack;
         end
         else
         begin
-          frmAirGasCircuit.lblGazValveClosed.Color            := clAqua;
-          frmAirGasCircuit.lblGazValveClosed.FontLeave.Color  := clWhite;
+          frmAirGasCircuit.lblGazValveClosed.Color            := clGray;
+          frmAirGasCircuit.lblGazValveClosed.FontLeave.Color  := clYellow;
         end;
+      end;
+    end;
+
+    // Alarm Emergency
+    epPCSMESafetyStopsOverriden :
+    begin
+      if Value then
+      begin
+        frmAlarms.AddAlarmToLog('SAFETY STOP OVERRIDEN');
+        frmAlarms.Alarm(True);
+      end
+      else
+      begin
+        frmAlarms.Alarm(False);
+      end;
+    end;
+    epPCSMELocalEmergencyStop :
+    begin
+      if Value then
+      begin
+        frmAlarms.AddAlarmToLog('EMERGECY STOP');
+        frmAlarms.Alarm(True);
+      end
+      else
+      begin
+        frmAlarms.Alarm(False);
+      end;
+    end;
+    epPCSMEResetSafetyStopPossible :
+    begin
+      if Value then
+      begin
+        frmAlarms.AddAlarmToLog('RESET SAFETY STOP POSSIBLE');
+        frmAlarms.Alarm(True);
+      end
+      else
+      begin
+        frmAlarms.Alarm(False);
       end;
     end;
   end;
@@ -857,15 +949,26 @@ const
   MaxDeviasi = 80;
   MaxHeight  = 100;
 
+  TopZeroPCOT    = 546;
+  TopMinPCOT     = 795;
+  TopMaxPCOT     = 320;
+  MaxDeviasiPCOT = 8;
+  MaxHeightPCOT  = 10;
+
   // Engine Bearing
   TopMinTemp = 332;
   TopMaxTemp = 872;
   MaxTemp    = 150;
 var
   deviasi: Integer;
+  dev : Double;
   offset: Integer;
   suhu : Double;
   grafikHeight, grafikTop: Integer;
+
+  // PCOT dan Crankin
+  ValueAverage, ValueDev : Double;
+  Temp1, Temp2, Temp3, Temp4, Temp5, Temp6, Temp7, Temp8, Temp9, Temp10 : Double;
 begin
   case PropsID of
     epPCSMEPressFWHTInlet :
@@ -917,8 +1020,6 @@ begin
       if Assigned(frmCurves) then
       begin
         frmCurves.lblTC1Speed.Caption := FloatToStr(Value);
-        frmCurves.TC1Speed.AddXY(frmCurves.FXCounterTC1Speed, Value);
-        Inc(frmCurves.FXCounterTC1Speed);
       end;
     end;
     epPCSMETurboChargerSpeedA :
@@ -938,8 +1039,6 @@ begin
       if Assigned(frmCurves) then
       begin
         frmCurves.lblTC2Speed.Caption := FloatToStr(Value);
-        frmCurves.TC2Speed.AddXY(frmCurves.FXCounterTC2Speed, Value);
-        Inc(frmCurves.FXCounterTC2Speed);
       end;
     end;
     epPCSMESpeed :
@@ -971,16 +1070,16 @@ begin
         end
         else
         begin
-           frmSafetiesStop.btnEngineSpeed80Rpm.Color   := clAqua;
-           frmSafetiesStop.lblStartingInterlocks.Color := clAqua;
+           frmSafetiesStop.btnEngineSpeed80Rpm.Color             := clGray;
+           frmSafetiesStop.btnEngineSpeed80Rpm.FontLeave.Color   := clYellow;
+           frmSafetiesStop.lblStartingInterlocks.Color           := clGray;
+           frmSafetiesStop.lblStartingInterlocks.FontLeave.Color := clYellow;
         end;
       end;
 
       if Assigned(frmCurves) then
       begin
         frmCurves.lblEngineSpeed.Caption := FloatToStr(Value);
-        frmCurves.EngineSpeed.AddXY(frmCurves.FXCounterEngineSpeed, Value);
-        Inc(frmCurves.FXCounterEngineSpeed);
       end;
     end;
     epPCSCPPSetPointPitch :
@@ -988,8 +1087,6 @@ begin
       if Assigned(frmCurves) then
       begin
         frmCurves.lblPitch.Caption := FloatToStr(Value);
-        frmCurves.Pitch.AddXY(frmCurves.FXCounterPitch, Value);
-        Inc(frmCurves.FXCounterPitch);
       end;
     end;
     epPCSMEFuelRack :
@@ -1003,8 +1100,6 @@ begin
       if Assigned(frmCurves) then
       begin
         frmCurves.lblFuelRack.Caption := FloatToStr(Value);
-        frmCurves.FuelRack.AddXY(frmCurves.FXCounterFuelRack, Value);
-        Inc(frmCurves.FXCounterFuelRack);
       end;
     end;
     epPCSMESetPointSpeed :
@@ -1031,6 +1126,9 @@ begin
         frmLubOilCircuit.VrEngineInletLubOilTemp.Position := Value /10;
         frmLubOilCircuit.lblEngineInletLubOilTemp.Caption := FloatToStr(Value /10);
       end;
+
+      if Assigned(frmPCOTValueHistory) then
+         frmPCOTValueHistory.lblTOil.Caption := FloatToStr(Value /10);
     end;
     epPCSMETempFWHTOutlet :
     begin
@@ -1966,23 +2064,42 @@ begin
       if Assigned(frmCrankpinOilTemperature) then
         frmCrankpinOilTemperature.lblB1Crankpin.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmCrankpinOilTemperature.lblB1Crankpin.Caption, 0);
+      Temp1 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmCrankpinOilTemperature.lblB1Crankpin.Caption, Temp1);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB2Crankpin.Caption, Temp2);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB3Crankpin.Caption, Temp3);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB4Crankpin.Caption, Temp4);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB5Crankpin.Caption, Temp5);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB6Crankpin.Caption, Temp6);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB7Crankpin.Caption, Temp7);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB8Crankpin.Caption, Temp8);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB9Crankpin.Caption, Temp9);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB10Crankpin.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmCrankpinOilTemperature.lblAverageTempPCOT.Caption := FloatToStr(ValueDev);
+
+      ValueDev := Temp1 - ValueAverage;
+      frmCrankpinOilTemperature.lblA1Crankpin.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmCrankpinOilTemperature.lblA1Crankpin.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmCrankpinOilTemperature.pnlGrafik1.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmCrankpinOilTemperature.pnlGrafik1.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
-      else if deviasi > 0 then
+      else if dev > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmCrankpinOilTemperature.pnlGrafik1.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmCrankpinOilTemperature.pnlGrafik1.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmCrankpinOilTemperature.pnlGrafik1.Top := TopZero;
+        frmCrankpinOilTemperature.pnlGrafik1.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik1.Height := Max(grafikHeight, 1);
@@ -1991,23 +2108,42 @@ begin
       if Assigned(frmPCOTFilteringDeviations) then
         frmPCOTFilteringDeviations.lblB1PCOT.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB1PCOT.Caption, 0);
+      Temp1 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB1PCOT.Caption, Temp1);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB2PCOT.Caption, Temp2);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB3PCOT.Caption, Temp3);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB4PCOT.Caption, Temp4);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB5PCOT.Caption, Temp5);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB6PCOT.Caption, Temp6);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB7PCOT.Caption, Temp7);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB8PCOT.Caption, Temp8);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB9PCOT.Caption, Temp9);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB10PCOT.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmPCOTFilteringDeviations.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp1 - ValueAverage;
+      frmPCOTFilteringDeviations.lblA1PCOT.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmPCOTFilteringDeviations.lblA1PCOT.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmPCOTFilteringDeviations.pnlGrafik1.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik1.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
-      else if deviasi > 0 then
+      else if dev > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmPCOTFilteringDeviations.pnlGrafik1.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik1.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmPCOTFilteringDeviations.pnlGrafik1.Top := TopZero;
+        frmPCOTFilteringDeviations.pnlGrafik1.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmPCOTFilteringDeviations.pnlGrafik1.Height := Max(grafikHeight, 1);
@@ -2021,23 +2157,42 @@ begin
       if Assigned(frmCrankpinOilTemperature) then
         frmCrankpinOilTemperature.lblB2Crankpin.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmCrankpinOilTemperature.lblB2Crankpin.Caption, 0);
+      Temp2 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmCrankpinOilTemperature.lblB1Crankpin.Caption, Temp1);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB2Crankpin.Caption, Temp2);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB3Crankpin.Caption, Temp3);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB4Crankpin.Caption, Temp4);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB5Crankpin.Caption, Temp5);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB6Crankpin.Caption, Temp6);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB7Crankpin.Caption, Temp7);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB8Crankpin.Caption, Temp8);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB9Crankpin.Caption, Temp9);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB10Crankpin.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmCrankpinOilTemperature.lblAverageTempPCOT.Caption := FloatToStr(ValueDev);
+
+      ValueDev := Temp2 - ValueAverage;
+      frmCrankpinOilTemperature.lblA2Crankpin.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmCrankpinOilTemperature.lblA2Crankpin.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmCrankpinOilTemperature.pnlGrafik2.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmCrankpinOilTemperature.pnlGrafik2.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
-      else if deviasi > 0 then
+      else if dev > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmCrankpinOilTemperature.pnlGrafik2.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmCrankpinOilTemperature.pnlGrafik2.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmCrankpinOilTemperature.pnlGrafik2.Top := TopZero;
+        frmCrankpinOilTemperature.pnlGrafik2.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik2.Height := Max(grafikHeight, 1);
@@ -2046,23 +2201,42 @@ begin
       if Assigned(frmPCOTFilteringDeviations) then
         frmPCOTFilteringDeviations.lblB2PCOT.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB2PCOT.Caption, 0);
+      Temp2 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB1PCOT.Caption, Temp1);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB2PCOT.Caption, Temp2);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB3PCOT.Caption, Temp3);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB4PCOT.Caption, Temp4);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB5PCOT.Caption, Temp5);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB6PCOT.Caption, Temp6);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB7PCOT.Caption, Temp7);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB8PCOT.Caption, Temp8);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB9PCOT.Caption, Temp9);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB10PCOT.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmPCOTFilteringDeviations.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp2 - ValueAverage;
+      frmPCOTFilteringDeviations.lblA2PCOT.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmPCOTFilteringDeviations.lblA2PCOT.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmPCOTFilteringDeviations.pnlGrafik2.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik2.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
-      else if deviasi > 0 then
+      else if dev > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmPCOTFilteringDeviations.pnlGrafik2.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasi) * (TopZero - TopMax));
+        frmPCOTFilteringDeviations.pnlGrafik2.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmPCOTFilteringDeviations.pnlGrafik2.Top := TopZero;
+        frmPCOTFilteringDeviations.pnlGrafik2.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmPCOTFilteringDeviations.pnlGrafik2.Height := Max(grafikHeight, 1);
@@ -2076,23 +2250,42 @@ begin
       if Assigned(frmCrankpinOilTemperature) then
         frmCrankpinOilTemperature.lblB3Crankpin.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmCrankpinOilTemperature.lblB3Crankpin.Caption, 0);
+      Temp3 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmCrankpinOilTemperature.lblB1Crankpin.Caption, Temp1);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB2Crankpin.Caption, Temp2);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB3Crankpin.Caption, Temp3);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB4Crankpin.Caption, Temp4);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB5Crankpin.Caption, Temp5);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB6Crankpin.Caption, Temp6);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB7Crankpin.Caption, Temp7);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB8Crankpin.Caption, Temp8);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB9Crankpin.Caption, Temp9);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB10Crankpin.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmCrankpinOilTemperature.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp3 - ValueAverage;
+      frmCrankpinOilTemperature.lblA3Crankpin.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmCrankpinOilTemperature.lblA3Crankpin.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmCrankpinOilTemperature.pnlGrafik3.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmCrankpinOilTemperature.pnlGrafik3.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasi) * MaxHeight);
       end
-      else if deviasi > 0 then
+      else if dev > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmCrankpinOilTemperature.pnlGrafik3.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmCrankpinOilTemperature.pnlGrafik3.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasi) * MaxHeight);
       end
       else
       begin
-        frmCrankpinOilTemperature.pnlGrafik3.Top := TopZero;
+        frmCrankpinOilTemperature.pnlGrafik3.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik3.Height := Max(grafikHeight, 1);
@@ -2101,23 +2294,42 @@ begin
       if Assigned(frmPCOTFilteringDeviations) then
         frmPCOTFilteringDeviations.lblB3PCOT.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB3PCOT.Caption, 0);
+      Temp3 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB1PCOT.Caption, Temp1);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB2PCOT.Caption, Temp2);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB3PCOT.Caption, Temp3);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB4PCOT.Caption, Temp4);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB5PCOT.Caption, Temp5);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB6PCOT.Caption, Temp6);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB7PCOT.Caption, Temp7);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB8PCOT.Caption, Temp8);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB9PCOT.Caption, Temp9);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB10PCOT.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmPCOTFilteringDeviations.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp3 - ValueAverage;
+      frmPCOTFilteringDeviations.lblA3PCOT.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmPCOTFilteringDeviations.lblA3PCOT.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmPCOTFilteringDeviations.pnlGrafik3.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik3.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
-      else if deviasi > 0 then
+      else if dev > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmPCOTFilteringDeviations.pnlGrafik3.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik3.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmPCOTFilteringDeviations.pnlGrafik3.Top := TopZero;
+        frmPCOTFilteringDeviations.pnlGrafik3.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmPCOTFilteringDeviations.pnlGrafik3.Height := Max(grafikHeight, 1);
@@ -2131,23 +2343,42 @@ begin
       if Assigned(frmCrankpinOilTemperature) then
         frmCrankpinOilTemperature.lblB4Crankpin.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmCrankpinOilTemperature.lblB4Crankpin.Caption, 0);
+      Temp4 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmCrankpinOilTemperature.lblB1Crankpin.Caption, Temp1);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB2Crankpin.Caption, Temp2);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB3Crankpin.Caption, Temp3);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB4Crankpin.Caption, Temp4);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB5Crankpin.Caption, Temp5);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB6Crankpin.Caption, Temp6);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB7Crankpin.Caption, Temp7);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB8Crankpin.Caption, Temp8);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB9Crankpin.Caption, Temp9);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB10Crankpin.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmCrankpinOilTemperature.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp4 - ValueAverage;
+      frmCrankpinOilTemperature.lblA4Crankpin.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmCrankpinOilTemperature.lblA4Crankpin.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmCrankpinOilTemperature.pnlGrafik4.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmCrankpinOilTemperature.pnlGrafik4.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
-      else if deviasi > 0 then
+      else if dev > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmCrankpinOilTemperature.pnlGrafik4.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasi) * (TopZero - TopMax));
+        frmCrankpinOilTemperature.pnlGrafik4.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmCrankpinOilTemperature.pnlGrafik4.Top := TopZero;
+        frmCrankpinOilTemperature.pnlGrafik4.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik4.Height := Max(grafikHeight, 1);
@@ -2156,23 +2387,42 @@ begin
       if Assigned(frmPCOTFilteringDeviations) then
         frmPCOTFilteringDeviations.lblB4PCOT.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB4PCOT.Caption, 0);
+      Temp4 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB1PCOT.Caption, Temp1);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB2PCOT.Caption, Temp2);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB3PCOT.Caption, Temp3);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB4PCOT.Caption, Temp4);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB5PCOT.Caption, Temp5);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB6PCOT.Caption, Temp6);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB7PCOT.Caption, Temp7);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB8PCOT.Caption, Temp8);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB9PCOT.Caption, Temp9);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB10PCOT.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmPCOTFilteringDeviations.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp4 - ValueAverage;
+      frmPCOTFilteringDeviations.lblA4PCOT.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmPCOTFilteringDeviations.lblA4PCOT.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmPCOTFilteringDeviations.pnlGrafik4.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik4.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
-      else if deviasi > 0 then
+      else if dev > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
         frmPCOTFilteringDeviations.pnlGrafik4.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmPCOTFilteringDeviations.pnlGrafik4.Top := TopZero;
+        frmPCOTFilteringDeviations.pnlGrafik4.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmPCOTFilteringDeviations.pnlGrafik4.Height := Max(grafikHeight, 1);
@@ -2186,23 +2436,42 @@ begin
       if Assigned(frmCrankpinOilTemperature) then
         frmCrankpinOilTemperature.lblB5Crankpin.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmCrankpinOilTemperature.lblB5Crankpin.Caption, 0);
+      Temp5 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmCrankpinOilTemperature.lblB1Crankpin.Caption, Temp1);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB2Crankpin.Caption, Temp2);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB3Crankpin.Caption, Temp3);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB4Crankpin.Caption, Temp4);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB5Crankpin.Caption, Temp5);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB6Crankpin.Caption, Temp6);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB7Crankpin.Caption, Temp7);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB8Crankpin.Caption, Temp8);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB9Crankpin.Caption, Temp9);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB10Crankpin.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmCrankpinOilTemperature.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp5 - ValueAverage;
+      frmCrankpinOilTemperature.lblA5Crankpin.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToIntDef(frmCrankpinOilTemperature.lblA5Crankpin.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmCrankpinOilTemperature.pnlGrafik5.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmCrankpinOilTemperature.pnlGrafik5.Top := TopMinPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasi) * MaxHeight);
       end
-      else if deviasi > 0 then
+      else if dev > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmCrankpinOilTemperature.pnlGrafik5.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmCrankpinOilTemperature.pnlGrafik5.Top := TopMinPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmCrankpinOilTemperature.pnlGrafik5.Top := TopZero;
+        frmCrankpinOilTemperature.pnlGrafik5.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik5.Height := Max(grafikHeight, 1);
@@ -2211,23 +2480,42 @@ begin
       if Assigned(frmPCOTFilteringDeviations) then
         frmPCOTFilteringDeviations.lblB5PCOT.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB5PCOT.Caption, 0);
+      Temp5 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB1PCOT.Caption, Temp1);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB2PCOT.Caption, Temp2);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB3PCOT.Caption, Temp3);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB4PCOT.Caption, Temp4);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB5PCOT.Caption, Temp5);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB6PCOT.Caption, Temp6);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB7PCOT.Caption, Temp7);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB8PCOT.Caption, Temp8);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB9PCOT.Caption, Temp9);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB10PCOT.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmPCOTFilteringDeviations.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp5 - ValueAverage;
+      frmPCOTFilteringDeviations.lblA5PCOT.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmPCOTFilteringDeviations.lblA5PCOT.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmPCOTFilteringDeviations.pnlGrafik5.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik5.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else if deviasi > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmPCOTFilteringDeviations.pnlGrafik5.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik5.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmPCOTFilteringDeviations.pnlGrafik5.Top := TopZero;
+        frmPCOTFilteringDeviations.pnlGrafik5.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmPCOTFilteringDeviations.pnlGrafik5.Height := Max(grafikHeight, 1);
@@ -2241,23 +2529,42 @@ begin
       if Assigned(frmCrankpinOilTemperature) then
         frmCrankpinOilTemperature.lblB6Crankpin.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmCrankpinOilTemperature.lblB6Crankpin.Caption, 0);
+      Temp6 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmCrankpinOilTemperature.lblB1Crankpin.Caption, Temp1);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB2Crankpin.Caption, Temp2);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB3Crankpin.Caption, Temp3);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB4Crankpin.Caption, Temp4);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB5Crankpin.Caption, Temp5);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB6Crankpin.Caption, Temp6);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB7Crankpin.Caption, Temp7);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB8Crankpin.Caption, Temp8);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB9Crankpin.Caption, Temp9);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB10Crankpin.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmCrankpinOilTemperature.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp6 - ValueAverage;
+      frmCrankpinOilTemperature.lblA6Crankpin.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmCrankpinOilTemperature.lblA6Crankpin.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmCrankpinOilTemperature.pnlGrafik6.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmCrankpinOilTemperature.pnlGrafik6.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else if deviasi > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmCrankpinOilTemperature.pnlGrafik6.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmCrankpinOilTemperature.pnlGrafik6.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmCrankpinOilTemperature.pnlGrafik6.Top := TopZero;
+        frmCrankpinOilTemperature.pnlGrafik6.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik6.Height := Max(grafikHeight, 1);
@@ -2266,23 +2573,42 @@ begin
       if Assigned(frmPCOTFilteringDeviations) then
         frmPCOTFilteringDeviations.lblB6PCOT.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB6PCOT.Caption, 0);
+      Temp6 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB1PCOT.Caption, Temp1);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB2PCOT.Caption, Temp2);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB3PCOT.Caption, Temp3);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB4PCOT.Caption, Temp4);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB5PCOT.Caption, Temp5);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB6PCOT.Caption, Temp6);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB7PCOT.Caption, Temp7);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB8PCOT.Caption, Temp8);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB9PCOT.Caption, Temp9);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB10PCOT.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmPCOTFilteringDeviations.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp6 - ValueAverage;
+      frmPCOTFilteringDeviations.lblA6PCOT.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmPCOTFilteringDeviations.lblA6PCOT.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmPCOTFilteringDeviations.pnlGrafik6.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik6.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else if deviasi > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmPCOTFilteringDeviations.pnlGrafik6.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik6.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmPCOTFilteringDeviations.pnlGrafik6.Top := TopZero;
+        frmPCOTFilteringDeviations.pnlGrafik6.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmPCOTFilteringDeviations.pnlGrafik6.Height := Max(grafikHeight, 1);
@@ -2296,23 +2622,42 @@ begin
       if Assigned(frmCrankpinOilTemperature) then
         frmCrankpinOilTemperature.lblB7Crankpin.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmCrankpinOilTemperature.lblB7Crankpin.Caption, 0);
+      Temp7 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmCrankpinOilTemperature.lblB1Crankpin.Caption, Temp1);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB2Crankpin.Caption, Temp2);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB3Crankpin.Caption, Temp3);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB4Crankpin.Caption, Temp4);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB5Crankpin.Caption, Temp5);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB6Crankpin.Caption, Temp6);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB7Crankpin.Caption, Temp7);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB8Crankpin.Caption, Temp8);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB9Crankpin.Caption, Temp9);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB10Crankpin.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmCrankpinOilTemperature.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp7 - ValueAverage;
+      frmCrankpinOilTemperature.lblA7Crankpin.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmCrankpinOilTemperature.lblA7Crankpin.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmCrankpinOilTemperature.pnlGrafik7.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmCrankpinOilTemperature.pnlGrafik7.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else if deviasi > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmCrankpinOilTemperature.pnlGrafik7.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmCrankpinOilTemperature.pnlGrafik7.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmCrankpinOilTemperature.pnlGrafik7.Top := TopZero;
+        frmCrankpinOilTemperature.pnlGrafik7.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik7.Height := Max(grafikHeight, 1);
@@ -2321,23 +2666,42 @@ begin
       if Assigned(frmPCOTFilteringDeviations) then
         frmPCOTFilteringDeviations.lblB7PCOT.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB7PCOT.Caption, 0);
+      Temp7 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB1PCOT.Caption, Temp1);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB2PCOT.Caption, Temp2);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB3PCOT.Caption, Temp3);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB4PCOT.Caption, Temp4);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB5PCOT.Caption, Temp5);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB6PCOT.Caption, Temp6);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB7PCOT.Caption, Temp7);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB8PCOT.Caption, Temp8);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB9PCOT.Caption, Temp9);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB10PCOT.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmPCOTFilteringDeviations.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp7 - ValueAverage;
+      frmPCOTFilteringDeviations.lblA7PCOT.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmPCOTFilteringDeviations.lblA7PCOT.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmPCOTFilteringDeviations.pnlGrafik7.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik7.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else if deviasi > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmPCOTFilteringDeviations.pnlGrafik7.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik7.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmPCOTFilteringDeviations.pnlGrafik7.Top := TopZero;
+        frmPCOTFilteringDeviations.pnlGrafik7.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmPCOTFilteringDeviations.pnlGrafik7.Height := Max(grafikHeight, 1);
@@ -2351,23 +2715,42 @@ begin
       if Assigned(frmCrankpinOilTemperature) then
         frmCrankpinOilTemperature.lblB8Crankpin.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmCrankpinOilTemperature.lblB8Crankpin.Caption, 0);
+      Temp8 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmCrankpinOilTemperature.lblB1Crankpin.Caption, Temp1);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB2Crankpin.Caption, Temp2);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB3Crankpin.Caption, Temp3);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB4Crankpin.Caption, Temp4);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB5Crankpin.Caption, Temp5);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB6Crankpin.Caption, Temp6);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB7Crankpin.Caption, Temp7);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB8Crankpin.Caption, Temp8);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB9Crankpin.Caption, Temp9);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB10Crankpin.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmCrankpinOilTemperature.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp8 - ValueAverage;
+      frmCrankpinOilTemperature.lblA8Crankpin.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmCrankpinOilTemperature.lblA8Crankpin.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmCrankpinOilTemperature.pnlGrafik8.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmCrankpinOilTemperature.pnlGrafik8.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else if deviasi > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmCrankpinOilTemperature.pnlGrafik8.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmCrankpinOilTemperature.pnlGrafik8.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmCrankpinOilTemperature.pnlGrafik8.Top := TopZero;
+        frmCrankpinOilTemperature.pnlGrafik8.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik8.Height := Max(grafikHeight, 1);
@@ -2376,23 +2759,42 @@ begin
       if Assigned(frmPCOTFilteringDeviations) then
         frmPCOTFilteringDeviations.lblB8PCOT.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB8PCOT.Caption, 0);
+      Temp8 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB1PCOT.Caption, Temp1);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB2PCOT.Caption, Temp2);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB3PCOT.Caption, Temp3);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB4PCOT.Caption, Temp4);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB5PCOT.Caption, Temp5);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB6PCOT.Caption, Temp6);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB7PCOT.Caption, Temp7);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB8PCOT.Caption, Temp8);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB9PCOT.Caption, Temp9);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB10PCOT.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmPCOTFilteringDeviations.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp8 - ValueAverage;
+      frmPCOTFilteringDeviations.lblA8PCOT.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmPCOTFilteringDeviations.lblA8PCOT.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmPCOTFilteringDeviations.pnlGrafik8.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik8.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else if deviasi > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmPCOTFilteringDeviations.pnlGrafik8.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik8.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmPCOTFilteringDeviations.pnlGrafik8.Top := TopZero;
+        frmPCOTFilteringDeviations.pnlGrafik8.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmPCOTFilteringDeviations.pnlGrafik8.Height := Max(grafikHeight, 1);
@@ -2406,23 +2808,42 @@ begin
       if Assigned(frmCrankpinOilTemperature) then
         frmCrankpinOilTemperature.lblB9Crankpin.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmCrankpinOilTemperature.lblB9Crankpin.Caption, 0);
+      Temp9 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmCrankpinOilTemperature.lblB1Crankpin.Caption, Temp1);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB2Crankpin.Caption, Temp2);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB3Crankpin.Caption, Temp3);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB4Crankpin.Caption, Temp4);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB5Crankpin.Caption, Temp5);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB6Crankpin.Caption, Temp6);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB7Crankpin.Caption, Temp7);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB8Crankpin.Caption, Temp8);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB9Crankpin.Caption, Temp9);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB10Crankpin.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmCrankpinOilTemperature.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp9 - ValueAverage;
+      frmCrankpinOilTemperature.lblA9Crankpin.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmCrankpinOilTemperature.lblA9Crankpin.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmCrankpinOilTemperature.pnlGrafik9.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmCrankpinOilTemperature.pnlGrafik9.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else if deviasi > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmCrankpinOilTemperature.pnlGrafik9.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmCrankpinOilTemperature.pnlGrafik9.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmCrankpinOilTemperature.pnlGrafik9.Top := TopZero;
+        frmCrankpinOilTemperature.pnlGrafik9.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik9.Height := Max(grafikHeight, 1);
@@ -2431,23 +2852,42 @@ begin
       if Assigned(frmPCOTFilteringDeviations) then
         frmPCOTFilteringDeviations.lblB9PCOT.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB9PCOT.Caption, 0);
+      Temp9 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB1PCOT.Caption, Temp1);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB2PCOT.Caption, Temp2);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB3PCOT.Caption, Temp3);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB4PCOT.Caption, Temp4);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB5PCOT.Caption, Temp5);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB6PCOT.Caption, Temp6);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB7PCOT.Caption, Temp7);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB8PCOT.Caption, Temp8);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB9PCOT.Caption, Temp9);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB10PCOT.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmPCOTFilteringDeviations.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp9 - ValueAverage;
+      frmPCOTFilteringDeviations.lblA9PCOT.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmPCOTFilteringDeviations.lblA9PCOT.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmPCOTFilteringDeviations.pnlGrafik9.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik9.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else if deviasi > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmPCOTFilteringDeviations.pnlGrafik9.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik9.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmPCOTFilteringDeviations.pnlGrafik9.Top := TopZero;
+        frmPCOTFilteringDeviations.pnlGrafik9.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmPCOTFilteringDeviations.pnlGrafik9.Height := Max(grafikHeight, 1);
@@ -2461,23 +2901,42 @@ begin
       if Assigned(frmCrankpinOilTemperature) then
         frmCrankpinOilTemperature.lblB10Crankpin.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmCrankpinOilTemperature.lblB10Crankpin.Caption, 0);
+      Temp10 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmCrankpinOilTemperature.lblB1Crankpin.Caption, Temp1);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB2Crankpin.Caption, Temp2);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB3Crankpin.Caption, Temp3);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB4Crankpin.Caption, Temp4);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB5Crankpin.Caption, Temp5);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB6Crankpin.Caption, Temp6);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB7Crankpin.Caption, Temp7);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB8Crankpin.Caption, Temp8);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB9Crankpin.Caption, Temp9);
+      TryStrToFloat(frmCrankpinOilTemperature.lblB10Crankpin.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmCrankpinOilTemperature.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp10 - ValueAverage;
+      frmCrankpinOilTemperature.lblA10Crankpin.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmCrankpinOilTemperature.lblA10Crankpin.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmCrankpinOilTemperature.pnlGrafik10.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmCrankpinOilTemperature.pnlGrafik10.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else if deviasi > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmCrankpinOilTemperature.pnlGrafik10.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmCrankpinOilTemperature.pnlGrafik10.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
       else
       begin
-        frmCrankpinOilTemperature.pnlGrafik10.Top := TopZero;
+        frmCrankpinOilTemperature.pnlGrafik10.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmCrankpinOilTemperature.pnlGrafik10.Height := Max(grafikHeight, 1);
@@ -2486,23 +2945,42 @@ begin
       if Assigned(frmPCOTFilteringDeviations) then
         frmPCOTFilteringDeviations.lblB10PCOT.Caption := FloatToStr(Value /10);
 
-      deviasi := StrToIntDef(frmPCOTFilteringDeviations.lblB10PCOT.Caption, 0);
+      Temp10 := Value /10;
 
-      if deviasi < 0 then
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB1PCOT.Caption, Temp1);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB2PCOT.Caption, Temp2);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB3PCOT.Caption, Temp3);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB4PCOT.Caption, Temp4);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB5PCOT.Caption, Temp5);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB6PCOT.Caption, Temp6);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB7PCOT.Caption, Temp7);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB8PCOT.Caption, Temp8);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB9PCOT.Caption, Temp9);
+      TryStrToFloat(frmPCOTFilteringDeviations.lblB10PCOT.Caption, Temp10);
+
+      ValueAverage := (Temp1 + Temp2 + Temp3 + Temp4 + Temp5 + Temp6 + Temp7 + Temp8 + Temp9 + Temp10) / 10;
+      frmPCOTFilteringDeviations.lblAverageTempPCOT.Caption := FloatToStr(ValueAverage);
+
+      ValueDev := Temp10 - ValueAverage;
+      frmPCOTFilteringDeviations.lblA10PCOT.Caption := FormatFloat('0.0', ValueDev);
+
+      dev := StrToFloatDef(frmPCOTFilteringDeviations.lblA10PCOT.Caption, 0);
+
+      if dev < 0 then
       begin
-        offset := Round((Abs(deviasi) / MaxDeviasi) * (TopMin - TopZero));
-        frmPCOTFilteringDeviations.pnlGrafik10.Top := TopZero + offset;
-        grafikHeight := Round((Abs(deviasi) / MaxDeviasi) * MaxHeight);
+        offset := Round((Abs(dev) / MaxDeviasiPCOT) * (TopMinPCOT - TopZeroPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik10.Top := TopZeroPCOT + offset;
+        grafikHeight := Round((Abs(dev) / MaxDeviasiPCOT) * MaxHeightPCOT);
       end
-      else if deviasi > 0 then
+      else if dev > 0 then
       begin
-        offset := Round((deviasi / MaxDeviasi) * (TopZero - TopMax));
-        frmPCOTFilteringDeviations.pnlGrafik10.Top := TopZero - offset;
-        grafikHeight := Round((deviasi / MaxDeviasi) * MaxHeight);
+        offset := Round((dev / MaxDeviasiPCOT) * (TopZeroPCOT - TopMaxPCOT));
+        frmPCOTFilteringDeviations.pnlGrafik10.Top := TopZeroPCOT - offset;
+        grafikHeight := Round((dev / MaxDeviasiPCOT) * MaxHeight);
       end
       else
       begin
-        frmPCOTFilteringDeviations.pnlGrafik10.Top := TopZero;
+        frmPCOTFilteringDeviations.pnlGrafik10.Top := TopZeroPCOT;
         grafikHeight := 1;
       end;
         frmPCOTFilteringDeviations.pnlGrafik10.Height := Max(grafikHeight, 1);

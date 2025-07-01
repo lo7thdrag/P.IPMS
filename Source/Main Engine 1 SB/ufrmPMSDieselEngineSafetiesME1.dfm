@@ -26203,6 +26203,7 @@ object frmPMSDieselEngineSafetiesME1: TfrmPMSDieselEngineSafetiesME1
       MinValue = 0
       TabOrder = 13
       Value = 0
+      OnChange = ptSVAEChange
     end
     object switchATPChannel: TVrRotarySwitch
       Left = 156

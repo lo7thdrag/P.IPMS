@@ -41,7 +41,7 @@ type
     lblA8PCOT: TLabel;
     lblB8PCOT: TLabel;
     lblB9PCOT: TLabel;
-    Label30: TLabel;
+    lblA9PCOT: TLabel;
     lblA10PCOT: TLabel;
     lblB10PCOT: TLabel;
     Label33: TLabel;

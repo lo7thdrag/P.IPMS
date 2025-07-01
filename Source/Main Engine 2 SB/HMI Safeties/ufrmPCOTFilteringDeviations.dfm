@@ -3441,7 +3441,7 @@ object frmPCOTFilteringDeviations: TfrmPCOTFilteringDeviations
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Label30: TLabel
+    object lblA9PCOT: TLabel
       Left = 1036
       Top = 910
       Width = 26

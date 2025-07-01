@@ -130,8 +130,7 @@ begin
   MainEngine1System.RunningStart(C_PCS_ME_PORTS);
 end;
 
-procedure TfrmSignalingLightME1.imgSafetiesorECResetME1Click(
-  Sender: TObject);
+procedure TfrmSignalingLightME1.imgSafetiesorECResetME1Click(Sender: TObject);
 begin
   MainEngine1System.SafetiesReset(C_PCS_ME_PORTS);
 end;
@@ -145,4 +144,5 @@ procedure TfrmSignalingLightME1.btnSafetiesStopClick(Sender: TObject);
 begin
   MainEngine1System.SafetiesStop(C_PCS_ME_PORTS);
 end;
+
 end.

@@ -466,7 +466,9 @@ begin
       begin
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible := True;
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible := True;
-
+      end
+      else if Value < 80 then
+      begin
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH1SE.Visible := False;
          frmPMSDieselEngineSafetiesME1.imgLedGreenTH2SE.Visible := False;
       end;
@@ -483,7 +485,7 @@ begin
 
       if Value > 1085 then
          frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := True
-      else
+      else if Value < 1085 then
          frmPMSDieselEngineSafetiesME1.imgLedRedOverspeedSVAE.Visible := False
     end;
     // PMS ATP

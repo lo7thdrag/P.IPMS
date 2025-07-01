@@ -783,7 +783,7 @@ begin
   if aRPM < 400 then
   begin
     StartingAir := Random(30)/10;
-    ControlAir := RandomRange(60,70)/10;
+    ControlAir := RandomRange(68,70)/10;            // nilai awal (60,70)
     TCAirSeal := 0;
 //    TCLOPressInlet := 0;
     PressAirInlet := 0;
@@ -792,10 +792,10 @@ begin
     LOPressInlet := -0.1;
     PressFOInlet := 0.1;
   end
-  else if aRPM >= 400 then
+  else if aRPM >= 400 then                     // nilai awal (60,70)
   begin
     StartingAir := RandomRange(250,350)/10;
-    ControlAir := RandomRange(60,70)/10;
+    ControlAir := RandomRange(68,70)/10;
     TCAirSeal := 0;
 //    TCLOPressInlet := (30)/10;
     PressAirInlet := 0;
