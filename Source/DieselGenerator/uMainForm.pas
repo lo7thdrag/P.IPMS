@@ -200,8 +200,16 @@ begin
     begin
       GeneratorTemp.EngineRun := Value;
       imgStart.Visible := Value;
-      imgStop.Visible := not Value;
       tmrRunningHours.Enabled := Value;
+
+      if not GeneratorTemp.EngineRun then
+      begin
+        imgStop.Visible := True;
+        tmrStop.Enabled := True;
+        imgRunning.Visible := False;
+        VrMainSwitch.SwitchPosition := 1;
+        Exit;
+      end;
 
       imgRunning.Visible := Value;
       VrMainSwitch.SwitchPosition := 0;
@@ -424,8 +432,6 @@ end;
 procedure TMainForm.btnStopClick(Sender: TObject);
 begin
   DieselGeneratorSystem.EngineStop(True);
-  imgStop.Visible := True;
-  tmrStop.Enabled := True;
 end;
 
 procedure TMainForm.btnStandbyClick(Sender: TObject);
