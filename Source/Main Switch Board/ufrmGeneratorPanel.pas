@@ -244,6 +244,7 @@ type
     procedure MenuInfoPage;
 
     procedure createlabels;
+    procedure ClearKeyboardLabel;
     procedure HighlightLabel(index : Integer);
     procedure UnhighlightLabel(index : Integer);
     procedure ClearAllHighlight;
@@ -431,6 +432,13 @@ end;
 
 procedure TfrmGeneratorPanel.ImgEscClick(Sender: TObject);
 begin
+  if pnlPassword.Visible then
+  begin
+    pnlPassword.Visible := False;
+    imgMenu.Visible := True;
+    Exit;
+  end;
+
   if InSubSubMenu then
   begin
     InSubSubMenu := False;
@@ -450,7 +458,6 @@ begin
 
       LoadSubMenu(CurrentMenuIndex);
     end;
-
     Exit;
   end;
 
@@ -469,9 +476,23 @@ begin
     Exit;
   end;
 
-  createlabels;
+
   pnlPassword.Visible := True;
+  ClearKeyboardLabel;
+  createlabels;
   lstMenu.Visible := False;
+
+  pnlUp1.Visible := False;
+  pnlDown1.Visible := False;
+  pnlUp2.Visible := False;
+  pnlDown2.Visible := False;
+  pnlLeft.Visible := False;
+  pnlRight.Visible := False;
+  pnlRefresh.Visible := False;
+  pnlReset.Visible := False;
+  pnlBlack1.Visible := False;
+  pnlBlack2.Visible := False;
+  pnlBlack3.Visible := False;
 end;
 
 procedure TfrmGeneratorPanel.ImgF1Click(Sender: TObject);
@@ -919,6 +940,17 @@ begin
     Labels[i].Color := pnlPassword.Color;
     Labels[i].Font.Color := clBlack;
     Labels[i].Transparent := True;
+  end;
+end;
+
+procedure TfrmGeneratorPanel.ClearKeyboardLabel;
+var
+  i : Integer;
+begin
+  for i := pnlPassword.ControlCount - 1 downto 2 do
+  begin
+    if pnlPassword.Controls[i] is TLabel then
+      pnlPassword.Controls[i].Free;
   end;
 end;
 

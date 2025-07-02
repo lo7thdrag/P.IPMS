@@ -255,7 +255,10 @@ begin
         begin
           frmGeneratorPanel.AddFaultToLog('Supply Voltage Low');
           frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
-        frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+          frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+
+          frmGeneratorPanel.AddAlarmToLog('Supply Voltage Low');
+          frmGeneratorPanel.ImgIndicatorAP.Visible := Value;
         end;
 
         if Assigned(frmEmergencyPanel) then
@@ -263,9 +266,13 @@ begin
           frmEmergencyPanel.AddFaultToLog('Supply Voltage Low');
           frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
           frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+
+          frmEmergencyPanel.AddAlarmToLog('Supply Voltage Low');
+          frmEmergencyPanel.ImgIndicatorAP.Visible := Value;
         end;
       end;
     end;
+
     epPMSAutStartFailure:
     begin
       GeneratorTemp.AutStartFailure := Value;
@@ -275,12 +282,263 @@ begin
         begin
           frmGeneratorPanel.AddFaultToLog('Automatic Start Failed');
           frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
+          frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+
+          frmGeneratorPanel.AddAlarmToLog('Automatic Start Failed');
+          frmGeneratorPanel.ImgIndicatorAP.Visible := Value;
         end;
 
         if Assigned(frmEmergencyPanel) then
         begin
           frmEmergencyPanel.AddFaultToLog('Automatic Start Failed');
           frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
+          frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+
+          frmEmergencyPanel.AddAlarmToLog('Automatic Start Failed');
+          frmEmergencyPanel.ImgIndicatorAP.Visible := Value;
+        end;
+      end;
+    end;
+
+    epPMSSpeedSensorFailureAlrm:
+    begin
+      GeneratorTemp.SpeedSensorFailureAlrm := Value;
+      if Value then
+      begin
+        if Assigned(frmGeneratorPanel) then
+        begin
+          frmGeneratorPanel.AddFaultToLog('Speed sensor failure');
+          frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
+          frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+
+          frmGeneratorPanel.AddAlarmToLog('Speed sensor failure');
+          frmGeneratorPanel.ImgIndicatorAP.Visible := Value;
+        end;
+
+        if Assigned(frmEmergencyPanel) then
+        begin
+          frmEmergencyPanel.AddFaultToLog('Speed sensor failure');
+          frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
+          frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+
+          frmEmergencyPanel.AddAlarmToLog('Speed sensor failure');
+          frmEmergencyPanel.ImgIndicatorAP.Visible := Value;
+        end;
+      end;
+    end;
+
+    epPMSLubOilPressLowAlrm:
+    begin
+      GeneratorTemp.LubOilPressLowAlrm := Value;
+      if Value then
+      begin
+        if Assigned(frmGeneratorPanel) then
+        begin
+          frmGeneratorPanel.AddFaultToLog('Lub oil press low');
+          frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
+          frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+
+          frmGeneratorPanel.AddAlarmToLog('Lub oil press low');
+          frmGeneratorPanel.ImgIndicatorAP.Visible := Value;
+        end;
+
+        if Assigned(frmEmergencyPanel) then
+        begin
+          frmEmergencyPanel.AddFaultToLog('Lub oil press low');
+          frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
+          frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+
+          frmEmergencyPanel.AddAlarmToLog('Lub oil press low');
+          frmEmergencyPanel.ImgIndicatorAP.Visible := Value;
+        end;
+      end;
+    end;
+
+    epPMSLubOilTempHigh:
+    begin
+      GeneratorTemp.LubOilTempHigh := Value;
+      if Value then
+      begin
+        if Assigned(frmGeneratorPanel) then
+        begin
+          frmGeneratorPanel.AddFaultToLog('Lub oil temp high');
+          frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
+          frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+
+          frmGeneratorPanel.AddAlarmToLog('Lub oil temp high');
+          frmGeneratorPanel.ImgIndicatorAP.Visible := Value;
+        end;
+
+        if Assigned(frmEmergencyPanel) then
+        begin
+          frmEmergencyPanel.AddFaultToLog('Lub oil temp high');
+          frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
+          frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+
+          frmEmergencyPanel.AddAlarmToLog('Lub oil temp high');
+          frmEmergencyPanel.ImgIndicatorAP.Visible := Value;
+        end;
+      end;
+    end;
+
+    epPMSCoolWaterTempHighAlrm:
+    begin
+      GeneratorTemp.CoolWaterTempHighAlrm := Value;
+      if Value then
+      begin
+        if Assigned(frmGeneratorPanel) then
+        begin
+          frmGeneratorPanel.AddFaultToLog('Cooling water temp high');
+          frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
+          frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+
+          frmGeneratorPanel.AddAlarmToLog('Cooling water temp high');
+          frmGeneratorPanel.ImgIndicatorAP.Visible := Value;
+        end;
+
+        if Assigned(frmEmergencyPanel) then
+        begin
+          frmEmergencyPanel.AddFaultToLog('Cooling water temp high');
+          frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
+          frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+
+          frmEmergencyPanel.AddAlarmToLog('Cooling water temp high');
+          frmEmergencyPanel.ImgIndicatorAP.Visible := Value;
+        end;
+      end;
+    end;
+
+    epPMSCoolWaterLevelLow:
+    begin
+      GeneratorTemp.CoolWaterLevelLow := Value;
+      if Value then
+      begin
+        if Assigned(frmGeneratorPanel) then
+        begin
+          frmGeneratorPanel.AddFaultToLog('Cooling water level low');
+          frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
+          frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+
+          frmGeneratorPanel.AddAlarmToLog('Cooling water level low');
+          frmGeneratorPanel.ImgIndicatorAP.Visible := Value;
+        end;
+
+        if Assigned(frmEmergencyPanel) then
+        begin
+          frmEmergencyPanel.AddFaultToLog('Cooling water level low');
+          frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
+          frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+
+          frmEmergencyPanel.AddAlarmToLog('Cooling water level low');
+          frmEmergencyPanel.ImgIndicatorAP.Visible := Value;
+        end;
+      end;
+    end;
+
+    epPMSFuelOilLeakage:
+    begin
+      GeneratorTemp.FuelOilLeakage := Value;
+      if Value then
+      begin
+        if Assigned(frmGeneratorPanel) then
+        begin
+          frmGeneratorPanel.AddFaultToLog('Fuel oil leakage');
+          frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
+          frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+
+          frmGeneratorPanel.AddFaultToLog('Fuel oil leakage');
+          frmGeneratorPanel.ImgIndicatorAP.Visible := Value;
+        end;
+
+        if Assigned(frmEmergencyPanel) then
+        begin
+          frmEmergencyPanel.AddFaultToLog('Fuel oil leakage');
+          frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
+          frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+
+          frmEmergencyPanel.AddAlarmToLog('Fuel oil leakage');
+          frmEmergencyPanel.ImgIndicatorAP.Visible := Value;
+        end;
+      end;
+    end;
+
+    epPMSSpeedSensorFailureShutdown:
+    begin
+      GeneratorTemp.SpeedSensorFailureShutdown := Value;
+      if Value then
+      begin
+        if Assigned(frmGeneratorPanel) then
+        begin
+          frmGeneratorPanel.AddFaultToLog('Speed sensor failure shutdown');
+          frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
+          frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+
+          frmGeneratorPanel.AddAlarmToLog('Speed sensor failure shutdown');
+          frmGeneratorPanel.ImgIndicatorAP.Visible := Value;
+        end;
+
+        if Assigned(frmEmergencyPanel) then
+        begin
+          frmEmergencyPanel.AddFaultToLog('Speed sensor failure shutdown');
+          frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
+          frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+
+          frmEmergencyPanel.AddAlarmToLog('Speed sensor failure shutdown');
+          frmEmergencyPanel.ImgIndicatorAP.Visible := Value;
+        end;
+      end;
+    end;
+
+    epPMSLubOilPressLowShutdown:
+    begin
+      GeneratorTemp.LubOilPressLowShutdown := Value;
+      if Value then
+      begin
+        if Assigned(frmGeneratorPanel) then
+        begin
+          frmGeneratorPanel.AddFaultToLog('Lub oil press low shutdown');
+          frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
+          frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+
+          frmGeneratorPanel.AddAlarmToLog('Lub oil press low shutdown');
+          frmGeneratorPanel.ImgIndicatorAP.Visible := Value;
+        end;
+
+        if Assigned(frmEmergencyPanel) then
+        begin
+          frmEmergencyPanel.AddFaultToLog('Lub oil press low shutdown');
+          frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
+          frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+
+          frmEmergencyPanel.AddAlarmToLog('Lub oil press low shutdown');
+          frmEmergencyPanel.ImgIndicatorAP.Visible := Value;
+        end;
+      end;
+    end;
+
+    epPMSCoolWaterTempHighShutdown:
+    begin
+      GeneratorTemp.CoolWaterTempHighShutdown := Value;
+      if Value then
+      begin
+        if Assigned(frmGeneratorPanel) then
+        begin
+          frmGeneratorPanel.AddFaultToLog('Cooling water temp high shutdown');
+          frmGeneratorPanel.ImgIndicatorFP.Visible := Value;
+          frmGeneratorPanel.ImgIndicatorHO.Visible := Value;
+
+          frmGeneratorPanel.AddAlarmToLog('Cooling water temp high shutdown');
+          frmGeneratorPanel.ImgIndicatorAP.Visible := Value;
+        end;
+
+        if Assigned(frmEmergencyPanel) then
+        begin
+          frmEmergencyPanel.AddFaultToLog('Cooling water temp high shutdown');
+          frmEmergencyPanel.ImgIndicatorFP.Visible := Value;
+          frmEmergencyPanel.ImgIndicatorHO.Visible := Value;
+
+          frmEmergencyPanel.AddAlarmToLog('Cooling water temp high shutdown');
+          frmEmergencyPanel.ImgIndicatorAP.Visible := Value;
         end;
       end;
     end;

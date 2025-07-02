@@ -249,7 +249,9 @@ begin
     epPMSGeneratorPreference, epPMSGeneratorBusbar, epPMSNotStandby,
     epPMSGeneratorFuelRunsOut, epPMSGeneratorEmergencyStop, epPMSShutDown,
     epPMSFailureCBClosed,
-    epPMSMeasPowFailure, epPMSAutStartFailure :
+    epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm,
+    epPMSLubOilTempHigh, epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage,
+    epPMSSpeedSensorFailureShutdown, epPMSLubOilPressLowShutdown, epPMSCoolWaterTempHighShutdown :
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
