@@ -18312,7 +18312,6 @@ object frmInstructorPanel: TfrmInstructorPanel
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        ExplicitTop = 374
         ExpandedHeight = 78
         object btnClose: TFlatSpeedButton
           Tag = 20
@@ -18362,7 +18361,6 @@ object frmInstructorPanel: TfrmInstructorPanel
         Font.Style = []
         ParentFont = False
         TabOrder = 1
-        ExplicitTop = 342
         ExpandedHeight = 115
         object btnHardwareCatalogue: TFlatSpeedButton
           Tag = 5
@@ -18439,7 +18437,6 @@ object frmInstructorPanel: TfrmInstructorPanel
         Collapsed = True
         Enabled = False
         TabOrder = 2
-        ExplicitTop = 310
         ExpandedHeight = 80
         object btnACSControl: TFlatSpeedButton
           Tag = 30
@@ -18484,7 +18481,6 @@ object frmInstructorPanel: TfrmInstructorPanel
         Collapsed = True
         Enabled = False
         TabOrder = 3
-        ExplicitTop = 278
         ExpandedHeight = 258
         object btnTanksOverview: TFlatSpeedButton
           Tag = 23
@@ -18689,7 +18685,6 @@ object frmInstructorPanel: TfrmInstructorPanel
         Collapsed = True
         Enabled = False
         TabOrder = 4
-        ExplicitTop = 246
         ExpandedHeight = 115
         object btnRudder1: TFlatSpeedButton
           Tag = 31
@@ -18766,7 +18761,6 @@ object frmInstructorPanel: TfrmInstructorPanel
         Collapsed = True
         Enabled = False
         TabOrder = 5
-        ExplicitTop = 214
         ExpandedHeight = 114
         object btnPCSConditions: TFlatSpeedButton
           Tag = 27
@@ -18843,7 +18837,6 @@ object frmInstructorPanel: TfrmInstructorPanel
         Collapsed = True
         Enabled = False
         TabOrder = 6
-        ExplicitTop = 182
         ExpandedHeight = 185
         object btnFF: TFlatSpeedButton
           Tag = 7
@@ -18983,7 +18976,6 @@ object frmInstructorPanel: TfrmInstructorPanel
         Color = 3749426
         Enabled = False
         TabOrder = 7
-        ExplicitWidth = 213
         object btnNav_ComSystem: TFlatSpeedButton
           Tag = 22
           Left = 17

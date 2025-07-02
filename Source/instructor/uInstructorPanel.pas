@@ -400,6 +400,8 @@ begin
           lblSimState.Caption := 'Running';
           lblSimState.Font.Color := clLime;
 
+          Screen.Cursor := crDefault;
+
 //          ctgrypnlControlPanel.Enabled := True;
           ctgrypnlGeneral.Enabled := True;
           ctgrypnlSafety.Enabled := True;
@@ -459,6 +461,7 @@ begin
           btnStartSim.Enabled := False;
 
           SaveRunningScenario;
+          Screen.Cursor := crDefault;
 
           btnStartSim.Enabled := True;
 

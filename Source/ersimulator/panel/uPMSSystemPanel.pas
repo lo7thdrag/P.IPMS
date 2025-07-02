@@ -186,6 +186,13 @@ type
     edt1: TEdit;
     btnabc: TButton;
     lbl6: TLabel;
+    pnl3: TPanel;
+    lbl8: TLabel;
+    btnStartGenShore: TButton;
+    btnStopGenShore: TButton;
+    lblEngineRunGenShore: TLabel;
+    lbl9: TLabel;
+    pnl4: TPanel;
 
     procedure Gen1ModeClick(Sender: TObject);
     procedure Gen2ModeClick(Sender: TObject);
@@ -413,6 +420,8 @@ begin
       SetValueBool(C_GENERATOR, 3, True, epPMSGeneratorEngineRun)
     else if TButton(Sender).Name = 'btnStartGenE' then
       SetValueBool(C_GENERATOR, 4, True, epPMSGeneratorEngineRun)
+    else if TButton(Sender).Name = 'btnStartGenShore' then
+      SetValueBool(C_GENERATOR, 5, True, epPMSGeneratorEngineRun)
   end;
 end;
 
@@ -433,6 +442,8 @@ begin
       SetValueBool(C_GENERATOR, 3, False, epPMSGeneratorStop)
     else if TButton(Sender).Name = 'btnStopGenE' then
       SetValueBool(C_GENERATOR, 4, False, epPMSGeneratorStop)
+    else if TButton(Sender).Name = 'btnStopGenShore' then
+      SetValueBool(C_GENERATOR, 5, True, epPMSGeneratorStop)
   end;
 end;
 
@@ -613,7 +624,7 @@ begin
         if (generator.GeneratorMode = 3) then
           exit;
 
-        if generator.GeneratorState = Ord(gsWaiting){1} then
+        if (generator.GeneratorState = Ord(gsWaiting){1}) or (IdObj = 5) then
           generator.EngineRun := value;
 
       end;
@@ -858,7 +869,9 @@ begin
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[3] then
           lblEngineRunGen4.Color := toLblWarnaEngine(Value)
         else if TGenerator(Sender).Identifier = C_GENERATOR_ID[4] then
-          lblEngineRunGene.Color := toLblWarnaEngine(Value);
+          lblEngineRunGene.Color := toLblWarnaEngine(Value)
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[5] then
+          lblEngineRunGenShore.Color := toLblWarna(Value);
       end;
 
       epPMSGeneratorSupplied :
@@ -1053,6 +1066,10 @@ begin
   begin
     if rbManGenE.Checked or rbSemGenE.Checked or rbAutGenE.Checked then
       result := True;
+  end
+  else if (val = 'btnStartGenShore') or (val = 'btnStopGenShore') or (val = 'btnCBOpenShore') or (val = 'btnCBCloseShore')then
+  begin
+    result := True;
   end
 end;
 

@@ -228,7 +228,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = btnStopClick
       end
       object lbl2: TPanel
-        Left = 36
+        Left = 27
         Top = 149
         Width = 254
         Height = 1
@@ -755,7 +755,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = btnPrefClick
       end
       object Panel12: TPanel
-        Left = 28
+        Left = 27
         Top = 87
         Width = 254
         Height = 1
@@ -765,7 +765,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         TabOrder = 6
       end
       object Panel13: TPanel
-        Left = 28
+        Left = 27
         Top = 183
         Width = 254
         Height = 1
@@ -1257,7 +1257,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         TabOrder = 6
       end
       object Panel15: TPanel
-        Left = 28
+        Left = 27
         Top = 183
         Width = 254
         Height = 1
@@ -1502,7 +1502,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = btnPrefClick
       end
       object Panel16: TPanel
-        Left = 28
+        Left = 27
         Top = 87
         Width = 254
         Height = 1
@@ -1512,7 +1512,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         TabOrder = 6
       end
       object Panel17: TPanel
-        Left = 28
+        Left = 27
         Top = 183
         Width = 254
         Height = 1
@@ -1525,14 +1525,14 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
     object pnlShoreInter: TPanel
       Left = 30
       Top = 663
-      Width = 307
+      Width = 265
       Height = 162
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
       TabOrder = 8
       object Label32: TLabel
-        Left = 46
+        Left = 33
         Top = 33
         Width = 41
         Height = 16
@@ -1545,7 +1545,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentFont = False
       end
       object Label39: TLabel
-        Left = 132
+        Left = 106
         Top = 33
         Width = 17
         Height = 16
@@ -1558,7 +1558,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentFont = False
       end
       object Label40: TLabel
-        Left = 190
+        Left = 157
         Top = 33
         Width = 89
         Height = 16
@@ -1591,7 +1591,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentColor = False
       end
       object rbManShore: TRadioButton
-        Left = 28
+        Left = 15
         Top = 33
         Width = 15
         Height = 17
@@ -1605,7 +1605,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = InterShoreModeClick
       end
       object rbOffShore: TRadioButton
-        Left = 113
+        Left = 87
         Top = 33
         Width = 15
         Height = 17
@@ -1621,7 +1621,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = InterShoreModeClick
       end
       object rbAutShore: TRadioButton
-        Left = 171
+        Left = 138
         Top = 33
         Width = 15
         Height = 17
@@ -1636,7 +1636,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
       object btnCBOpenShore: TButton
         Tag = 10
-        Left = 28
+        Left = 26
         Top = 101
         Width = 95
         Height = 31
@@ -1652,7 +1652,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
       object btnCBCloseShore: TButton
         Tag = 10
-        Left = 184
+        Left = 145
         Top = 101
         Width = 95
         Height = 31
@@ -1667,9 +1667,9 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = btnInnCBCloseOpenClick
       end
       object Panel18: TPanel
-        Left = 28
+        Left = 17
         Top = 78
-        Width = 254
+        Width = 230
         Height = 1
         BevelOuter = bvNone
         Color = clBtnHighlight
@@ -2300,14 +2300,14 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
     object Panel5: TPanel
       Left = 30
       Top = 616
-      Width = 307
+      Width = 403
       Height = 32
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
       TabOrder = 19
       object Label27: TLabel
-        Left = 42
+        Left = 90
         Top = 7
         Width = 223
         Height = 19
@@ -2432,6 +2432,94 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         TabOrder = 2
         Visible = False
         OnClick = emergency
+      end
+    end
+    object pnl3: TPanel
+      Left = 301
+      Top = 663
+      Width = 132
+      Height = 162
+      BevelOuter = bvNone
+      Color = 3749426
+      ParentBackground = False
+      TabOrder = 23
+      object lbl8: TLabel
+        Left = 246
+        Top = -7
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clWindow
+        ParentColor = False
+      end
+      object lblEngineRunGenShore: TLabel
+        Left = 18
+        Top = 35
+        Width = 9
+        Height = 13
+        Alignment = taCenter
+        Caption = '   '
+        Color = clSilver
+        ParentColor = False
+        Transparent = False
+      end
+      object lbl9: TLabel
+        Left = 33
+        Top = 33
+        Width = 81
+        Height = 16
+        Caption = 'Busbar Supply'
+        Color = clInactiveBorder
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object btnStartGenShore: TButton
+        Tag = 10
+        Left = 9
+        Top = 103
+        Width = 53
+        Height = 31
+        Caption = 'START'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        OnClick = btnStartClick
+      end
+      object btnStopGenShore: TButton
+        Tag = 10
+        Left = 68
+        Top = 103
+        Width = 53
+        Height = 31
+        Caption = 'STOP'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+        OnClick = btnStopClick
+      end
+      object pnl4: TPanel
+        Left = 16
+        Top = 78
+        Width = 100
+        Height = 1
+        BevelOuter = bvNone
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 2
       end
     end
   end
