@@ -251,6 +251,7 @@ type
     procedure MenuInfoPage;
 
     procedure createlabels;
+    procedure ClearKeyboardLabel;
     procedure HighlightLabel(index : Integer);
     procedure UnhighlightLabel(index : Integer);
     procedure ClearAllHighlight;
@@ -260,6 +261,7 @@ type
 
   public
     OrderAmpere : Double;
+    Generator : TGenerator;
 
     procedure UpdateForm(Generator : TGenerator);
     procedure AddAlarmToLog(const AText: string);
@@ -461,6 +463,13 @@ end;
 
 procedure TfrmEmergencyPanel.ImgEscClick(Sender: TObject);
 begin
+  if pnlPassword.Visible then
+  begin
+    pnlPassword.Visible := False;
+    imgMenu.Visible := True;
+    Exit;
+  end;
+
   if InSubSubMenu then
   begin
     InSubSubMenu := False;
@@ -499,9 +508,23 @@ begin
     Exit;
   end;
 
-  createlabels;
+
   pnlPassword.Visible := True;
+  ClearKeyboardLabel;
+  createlabels;
   lstMenu.Visible := False;
+
+  pnlUp1.Visible := False;
+  pnlDown1.Visible := False;
+  pnlUp2.Visible := False;
+  pnlDown2.Visible := False;
+  pnlLeft.Visible := False;
+  pnlRight.Visible := False;
+  pnlRefresh.Visible := False;
+  pnlReset.Visible := False;
+  pnlBlack1.Visible := False;
+  pnlBlack2.Visible := False;
+  pnlBlack3.Visible := False;
 end;
 
 procedure TfrmEmergencyPanel.ImgF1Click(Sender: TObject);
@@ -621,6 +644,8 @@ begin
 end;
 
 procedure TfrmEmergencyPanel.ImgF4Click(Sender: TObject);
+var
+  i : Integer;
 begin
   if CurrentIndex < High(Labels) then
   begin
@@ -632,6 +657,23 @@ begin
 
   if lstMenu.ItemIndex < lstMenu.Items.Count -1 then
     lstMenu.ItemIndex := lstMenu.ItemIndex + 1;
+
+  if lstAlarmPage.Visible then
+  begin
+    if Assigned(MainMenu[0]) then
+    begin
+      // Mulai dari index terakhir sampai index 1
+      for i := MainMenu[0].Count - 1 downto 1 do
+        MainMenu[0].Delete(i);
+    end;
+    Exit;
+  end
+  else if lstFaultPage.Visible then
+  begin
+    lstFaultPage.Clear;
+    lstFaultPage.ItemIndex := -1;
+    Exit;
+  end;
 end;
 
 procedure TfrmEmergencyPanel.ImgF5Click(Sender: TObject);
@@ -941,6 +983,17 @@ begin
     Labels[i].Color := pnlPassword.Color;
     Labels[i].Font.Color := clBlack;
     Labels[i].Transparent := True;
+  end;
+end;
+
+procedure TfrmEmergencyPanel.ClearKeyboardLabel;
+var
+  i : Integer;
+begin
+  for i := pnlPassword.ControlCount - 1 downto 2 do
+  begin
+    if pnlPassword.Controls[i] is TLabel then
+      pnlPassword.Controls[i].Free;
   end;
 end;
 

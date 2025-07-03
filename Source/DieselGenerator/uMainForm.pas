@@ -143,12 +143,12 @@ begin
 
   SetLength(LampStatus, Length(Lamps));
 
-  if not FileExists(ExtractFilePath(Application.Exename) + 'IPMS_ALARM.wav') then
+  if not FileExists(ExtractFilePath(Application.Exename) + 'ACS_ALARM.mp3') then
   begin
-    raise Exception.Create('IPMS_ALARM.wav Not found');
+    raise Exception.Create('ACS_ALARM.mp3 Not found');
   end
   else
-    mpAlarm.FileName:= ExtractFilePath(Application.Exename) + 'IPMS_ALARM.wav';
+    mpAlarm.FileName:= ExtractFilePath(Application.Exename) + 'ACS_ALARM.mp3';
 
   silence := False;
 
