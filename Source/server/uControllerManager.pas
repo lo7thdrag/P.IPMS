@@ -988,7 +988,7 @@ begin
 
         if (aElement.ElementID =  '3241E50031H') or (aElement.ElementID =  '3241E50031G') or
            (aElement.ElementID =  '3241E50031F') or (aElement.ElementID =  '3243E5005B') or
-           (aElement.ElementID =  '3243E5005C')then
+           (aElement.ElementID =  '3243E5005C') or (aElement.ElementID =  '3241E50014Z')then
         begin
           TCBEElement(aElement).StateRFC := srfReadyForClose;
           TCBEElement(aElement).StateRFO := sroReadyForOpen;
@@ -1646,7 +1646,7 @@ begin
 
       epPMSMsbCBShore:
       begin
-
+        setPMSCBEElementID(rec.GenSwitchID, rec.ValueBool, C_CBE_INT);
       end;
 
       epPMSMsbCBNavNaut:

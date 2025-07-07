@@ -576,9 +576,9 @@ begin
 //    else if TButton(Sender).Name = 'btnAftCBCloseEmergency' then
 //      SetValueBool(C_SWITCHBOARD, 3, True, epPMSEsbCBIntr)
     else if TButton(Sender).Name = 'btnCBOpenShore' then
-      SetValueBool(C_SWITCHBOARD, 4, False, epPMSMsbCBShore)
+      SetValueBool(C_SWITCHBOARD, 3, False, epPMSMsbCBShore)
     else if TButton(Sender).Name = 'btnCBCloseShore' then
-      SetValueBool(C_SWITCHBOARD, 4, True, epPMSMsbCBShore)
+      SetValueBool(C_SWITCHBOARD, 3, True, epPMSMsbCBShore)
   end;
 end;
 
