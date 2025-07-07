@@ -253,16 +253,9 @@ begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
-    epPCSMESafetyShutdown :
-    begin
-      if rec.PortStaboardID = C_PCS_GB_STARBOARD then
-      begin
-        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
-      end;
-    end;
     epPCSMEManHandleAtStop :
     begin
-      if rec.PortStaboardID = C_PCS_GB_STARBOARD then
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;

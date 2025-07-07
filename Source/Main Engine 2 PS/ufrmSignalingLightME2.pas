@@ -29,7 +29,6 @@ type
     Label2: TLabel;
     Panel1: TPanel;
     lblHoorCounter: TLabel;
-    tmrRunningMETimer1: TTimer;
 
 
     procedure vrtryswtchRemotePSClick(Sender: TObject);

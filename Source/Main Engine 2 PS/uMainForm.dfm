@@ -37,6 +37,7 @@ object frmMainForm: TfrmMainForm
     WordWrap = False
   end
   object tmrRunningMETimer1: TTimer
+    Interval = 3600000
     OnTimer = tmrRunningMETimer1Timer
     Left = 344
     Top = 424

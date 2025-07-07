@@ -253,13 +253,6 @@ begin
         FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
-    epPCSMESafetyShutdown :
-    begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
-      begin
-        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
-      end;
-    end;
     epPCSMEManHandleAtStop :
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then

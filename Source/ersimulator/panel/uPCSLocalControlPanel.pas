@@ -313,7 +313,12 @@ type
 
     FStopDecrease: Boolean;
     FStopIncrease: Boolean;
+
+    {Proses Prelube}
     PrelubeCounter : Integer;
+    RunningCounter : Integer;
+    FIsStarting : Boolean;
+    FWaitToRunEngine : Boolean;
 
     cppHydraulicPumpID, cppConditionStatus : string;
     cppConditionStatusTag,counter : Integer;
@@ -771,32 +776,71 @@ begin
   begin
     if main_engine_PS.ReadyForUse and main_engine_PS.LocalControl then
     begin
+      FIsStarting      := True;
+      FWaitToRunEngine := True;
+      FFlashingStopPS  := False;
+
       ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(C_PCS_ME_PORTS);
+
       FFlashingStartPS := True;
 
-      // bagian pump dan proses prelub
-      main_engine.PrelubeInProgress  := False;
-      PrelubTimer.Enabled := False;
+      if not Assigned(main_engine) then
+         Exit;
 
-      main_engine.PrimLOPumpAuto     := False;
-      main_engine.PreHeatingPumpAuto := False;
-      main_engine.HeaterAuto         := False;
+      main_engine.EngineRun := False;
+
+      // bagian pump dan proses prelub
+      main_engine.PrelubeInProgress  := True;
+      PrelubeCounter := 0;
+
+      PrelubTimer.Interval := 1000;
+      PrelubTimer.Enabled  := True;
+
+      // Gaz Valve, Air Valve dan By Pass P2-P4
+      main_engine.BypassP2P4 := False;
+      main_engine.AirValve   := False;
+      main_engine.GasValve   := False;
+
+      main_engine.PrimLOPumpAuto     := True;
+      main_engine.PreHeatingPumpAuto := True;
+      main_engine.HeaterAuto         := True;
+
+      gearbox.ClutchEngaged := True;
     end;
   end
   else if TButton(Sender).Tag = 1 then
   begin
     if main_engine_SB.ReadyForUse and main_engine_SB.LocalControl then
     begin
+      FIsStarting      := True;
+      FWaitToRunEngine := True;
+      FFlashingStopSB  := False;
+
       ERSystem.ERManager.EngineRoom.getPCSSystem.RunningStart(C_PCS_ME_STARBOARD);
       FFlashingStartSB := True;
 
-      // bagian pump dan proses prelub
-      main_engine.PrelubeInProgress  := False;
-      PrelubTimer.Enabled := False;
+      if not Assigned(main_engine) then
+         Exit;
 
-      main_engine.PrimLOPumpAuto     := False;
-      main_engine.PreHeatingPumpAuto := False;
-      main_engine.HeaterAuto         := False
+      main_engine.EngineRun := False;
+
+      // bagian pump dan proses prelub
+      main_engine.PrelubeInProgress  := True;
+      PrelubeCounter := 0;
+
+      PrelubTimer.Interval := 1000;
+      PrelubTimer.Enabled := True;
+
+      // Gaz Valve, Air Valve dan By Pass P2-P4
+      main_engine.BypassP2P4 := False;
+      main_engine.AirValve   := False;
+      main_engine.GasValve   := False;
+
+      main_engine.PrimLOPumpAuto     := True;
+      main_engine.PreHeatingPumpAuto := True;
+      main_engine.HeaterAuto         := True;
+
+      gearbox.ClutchEngaged := True;
     end;
   end;
 end;
@@ -807,6 +851,9 @@ begin
   begin
     if main_engine_PS.EngineRun and main_engine_PS.LocalControl then
     begin
+      if FIsStarting then
+        Exit;
+
       ERSystem.ERManager.EngineRoom.getPCSSystem.StoppedStop(C_PCS_ME_PORTS);
       FFlashingStopPS := True;
 
@@ -820,6 +867,9 @@ begin
   begin
     if main_engine_SB.EngineRun and main_engine_SB.LocalControl then
     begin
+      if FIsStarting then
+        Exit;
+
       ERSystem.ERManager.EngineRoom.getPCSSystem.StoppedStop(C_PCS_ME_STARBOARD);
       FFlashingStopSB := True;
 
@@ -1045,6 +1095,7 @@ begin
           begin
             FFlashingStartPS := True;
             FFlashingStopPS  := False;
+
             img18.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
           end
           else
@@ -1280,7 +1331,7 @@ begin
 
   Inc(CurrentCounter^);
 
-  if CurrentCounter^ < 5 then
+  if CurrentCounter^ < 60 then
   begin
     if SenderOn.Color = clGreen then
       SenderOn.Color := clLime
@@ -1288,7 +1339,7 @@ begin
       SenderOn.Color := clGreen;
   end;
 
-  if CurrentCounter^ > 5 then
+  if CurrentCounter^ > 60 then
   begin
     if aOnOff then
     begin
@@ -1297,6 +1348,23 @@ begin
     end
     else
       SenderOn.Color := clGreen;
+
+    if (SenderOn.Tag = 0) and FWaitToRunEngine then
+    begin
+      main_engine.EngineRun     := True;
+      main_engine.SetPointSpeed := 400;
+
+      FWaitToRunEngine := False;
+      FIsStarting      := False;
+    end
+    else if (SenderOn.Tag = 1) and FWaitToRunEngine  then
+    begin
+      main_engine.EngineRun     := True;
+      main_engine.SetPointSpeed := 400;
+
+      FWaitToRunEngine := False;
+      FIsStarting      := False;
+    end;
 
     CurrentCounter^ := 0;
     if SenderOn.Tag = 0 then
@@ -1444,14 +1512,34 @@ begin
 //    imgStandByPumpGBON_SB.Picture.LoadFromFile(fIndicatorOff);
 
   if main_engine_PS.ReadyForUse then
+  begin
+    img3.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
+    img6.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
+  end
+  else
+  begin
+    img3.Picture.LoadFromFile(fAlarmIndicatorWhiteOff);
+  end;
+
+  if main_engine_SB.ReadyForUse then
+  begin
+    img34.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
+    img37.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
+  end
+  else
+  begin
+    img34.Picture.LoadFromFile(fAlarmIndicatorWhiteOff);
+  end;
+
+  if main_engine_PS.EngineRun then
     img18.Picture.LoadFromFile(fAlarmIndicatorGreenOn)
   else
     img18.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
 
-  if main_engine_SB.ReadyForUse then
-    img30.Picture.LoadFromFile(fAlarmIndicatorGreenOn)
+  if main_engine_SB.EngineRun then
+     img30.Picture.LoadFromFile(fAlarmIndicatorGreenOn)
   else
-    img30.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
+     img30.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
 
   if gearbox_PS.ClutchAllowed then
     img21.Picture.LoadFromFile(fAlarmIndicatorGreenOn)
@@ -1464,14 +1552,48 @@ begin
     img31.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
 
   if main_engine_PS.AirValve then
-    img1.Picture.LoadFromFile(fAlarmIndicatorBlueOn)
+  begin
+    img1.Picture.LoadFromFile(fAlarmIndicatorBlueOn);
+    img4.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+  end
   else
+  begin
     img1.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+    img4.Picture.LoadFromFile(fAlarmIndicatorBlueOn);
+  end;
 
   if main_engine_PS.GasValve then
-    img2.Picture.LoadFromFile(fAlarmIndicatorBlueOn)
+  begin
+    img2.Picture.LoadFromFile(fAlarmIndicatorBlueOn);
+    img5.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+  end
   else
+  begin
     img2.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+    img5.Picture.LoadFromFile(fAlarmIndicatorBlueOn);
+  end;
+
+  if main_engine_SB.AirValve then
+  begin
+    img32.Picture.LoadFromFile(fAlarmIndicatorBlueOn);
+    img35.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+  end
+  else
+  begin
+    img32.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+    img35.Picture.LoadFromFile(fAlarmIndicatorBlueOn);
+  end;
+
+  if main_engine_SB.GasValve then
+  begin
+    img33.Picture.LoadFromFile(fAlarmIndicatorBlueOn);
+    img36.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+  end
+  else
+  begin
+    img33.Picture.LoadFromFile(fAlarmIndicatorBlueOff);
+    img36.Picture.LoadFromFile(fAlarmIndicatorBlueOn);
+  end;
 
   if main_engine_PS.LocalControl then
   begin
@@ -1495,6 +1617,35 @@ begin
     img29.Picture.LoadFromFile(fAlarmIndicatorWhiteOn);
   end;
 
+  if main_engine_PS.SafetyStopsOverriden then
+    img10.Picture.LoadFromFile(fAlarmIndicatorRedOn)
+  else
+    img10.Picture.LoadFromFile(fAlarmIndicatorRedOff);
+
+  if main_engine_SB.SafetyStopsOverriden then
+    img41.Picture.LoadFromFile(fAlarmIndicatorRedOn)
+  else
+    img41.Picture.LoadFromFile(fAlarmIndicatorRedOff);
+
+  if main_engine_PS.ManHandleAtStop then
+    img9.Picture.LoadFromFile(fAlarmIndicatorRedOn)
+  else
+    img9.Picture.LoadFromFile(fAlarmIndicatorRedOff);
+
+  if main_engine_SB.ManHandleAtStop then
+    img40.Picture.LoadFromFile(fAlarmIndicatorRedOn)
+  else
+    img40.Picture.LoadFromFile(fAlarmIndicatorRedOff);
+
+  if main_engine_PS.STCSequenceFail then
+    img12.Picture.LoadFromFile(fAlarmIndicatorRedOn)
+  else
+    img12.Picture.LoadFromFile(fAlarmIndicatorRedOff);
+
+  if main_engine_SB.STCSequenceFail then
+    img43.Picture.LoadFromFile(fAlarmIndicatorRedOn)
+  else
+    img43.Picture.LoadFromFile(fAlarmIndicatorRedOff);
 end;
 
 procedure TfrmPCSLocalControlPanel.LoadSessionSynchronize;
@@ -1545,17 +1696,35 @@ end;
 procedure TfrmPCSLocalControlPanel.PrelubTimerTimer(Sender: TObject);
 begin
   if Assigned(main_engine) then
-      main_engine.PrelubeInProgress := not main_engine.PrelubeInProgress;
+    main_engine.PrelubeInProgress := not main_engine.PrelubeInProgress;
 
   Inc(PrelubeCounter);
 
-  if PrelubeCounter >= 57 then
-  begin
     if Assigned(main_engine) then
-    begin
-      main_engine.BypassP2P4 := True;
-      main_engine.AirValve   := True;
-      main_engine.GasValve   := True;
+  begin
+    case PrelubeCounter of
+      54:
+        begin
+          main_engine.BypassP2P4 := True;
+          main_engine.AirValve   := True;
+          main_engine.GasValve   := True;
+          main_engine.EngineRun  := True;
+
+          main_engine.PrimLOPumpAuto     := False;
+          main_engine.PreHeatingPumpAuto := False;
+          main_engine.HeaterAuto         := False;
+
+          main_engine.PrelubeInProgress := False;
+        end;
+      57:
+        begin
+          main_engine.BypassP2P4 := False;
+          main_engine.AirValve   := False;
+          main_engine.GasValve   := False;
+
+          PrelubTimer.Enabled := False;
+          main_engine.PrelubeInProgress := False;
+        end;
     end;
   end;
 end;
@@ -1598,17 +1767,14 @@ begin
   if FFlashingStartSB then
     FlashingIndicatorStart(btnStartSB,btnStopSB,True);
 
-//  if not main_engine_PS.EngineRun then
-//    FlashingIndicatorStart(btnStartPS,btnStopPS,False);
-//
-//  if not main_engine_SB.EngineRun then
-//    FlashingIndicatorStart(btnStartSB,btnStartSB);
-
-  if FFlashingStopPS then
+  if not FIsStarting then
+  begin
+    if FFlashingStopPS then
     FlashingIndicatorStop(btnStopPS,btnStartPS,True);
 
-  if FFlashingStopSB then
+    if FFlashingStopSB then
     FlashingIndicatorStop(btnStopSB,btnStartSB,True);
+  end;
 
   if FFlashingClutchPS then
     FlashingIndicatorClutch(btnClutchPS,btnDeclutchPS,True);
@@ -1646,30 +1812,10 @@ begin
     begin
       main_engine.PrimLOPump     := False;
       main_engine.PrimLOPumpAuto := False;
-
-      // Prelub In Progress
-      main_engine.PrelubeInProgress := False;
-      PrelubTimer.Enabled := False;
-
-      // Gaz Valve, Air Valve dan By Pass P2-P4 tutup otomatis
-      main_engine.BypassP2P4 := False;
-      main_engine.AirValve   := False;
-      main_engine.GasValve   := False;
     end
     else if TVrRotarySwitch(Sender).SwitchPosition = 2 then
     begin
       main_engine.PrimLOPumpAuto    := True;
-
-      // Gaz Valve, Air Valve dan By Pass P2-P4 buka otomatis
-      main_engine.BypassP2P4 := False;
-      main_engine.AirValve   := False;
-      main_engine.GasValve   := False;
-
-      // Prelub In Progress
-      main_engine.PrelubeInProgress := True;
-      PrelubeCounter := 0;
-      PrelubTimer.Interval := 1000;
-      PrelubTimer.Enabled := True;
     end;
   end
   else if TVrRotarySwitch(Sender).Hint = 'Preheating Pump' then
@@ -1686,6 +1832,10 @@ begin
     else if TVrRotarySwitch(Sender).SwitchPosition = 2 then
     begin
       main_engine.PreHeatingPumpAuto := True;
+
+      // bagian pump dan proses prelub
+      main_engine.PrelubeInProgress  := False;
+      PrelubTimer.Enabled := False;
     end;
   end
   else if TVrRotarySwitch(Sender).Hint = 'Heater' then

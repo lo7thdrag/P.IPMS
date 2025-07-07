@@ -202,7 +202,7 @@ begin
   case PropsID of
     epPCSMERunning :
     begin
-      FIsRunning := Value;
+      FIsRunning    := Value;
       FIsStartBlink := Value;
       FIsStopBlink  := not Value;
       tmrBlinkTimer.Enabled := FIsStartBlink or FIsStopBlink;
@@ -270,6 +270,14 @@ begin
     epPCSMESafetyStopsOverriden : // Safeties Stop  (epPCSLeverEmergencyStop)
     begin
       frmSignalingLightME1.imgSafetiesStopOverbiddenME1.Visible := True;
+
+      if Assigned(frmSignalingLightME1) then
+      begin
+        if Value then
+          frmSignalingLightME1.imgSafetyStopME1.Visible := True
+        else
+          frmSignalingLightME1.imgSafetyStopME1.Visible := False
+      end;
     end;
     epPCSMELocalEmergencyStop :
     begin
@@ -318,16 +326,6 @@ begin
       begin
         frmSignalingLightME1.imgByPassClosedME1.Visible  := True;
         frmSignalingLightME1.imgByPassOpenME1.Visible    := False;
-      end;
-    end;
-    epPCSMESafetyShutdown :
-    begin
-      if Assigned(frmSignalingLightME1) then
-      begin
-        if Value then
-          frmSignalingLightME1.imgSafetyStopME1.Visible := True
-        else
-          frmSignalingLightME1.imgSafetyStopME1.Visible := False
       end;
     end;
     epPCSMEManHandleAtStop :
@@ -583,7 +581,7 @@ begin
   else
     frmSignalingLightME1.imgDeclutchME1.Visible := False;
 
-  if FBlinkCounter >= 8000 then
+  if FBlinkCounter >= 60000 then
   begin
     tmrBlinkTimer.Enabled := False;
     FBlinkCounter := 0;

@@ -530,14 +530,14 @@ begin
 
     if IncreaseSpeed then
     begin
-      SetSpeedInManual(1);
+      SetSpeedInManual(10);
       SpeedState := 2;
       SpeedState := 1;
       IncreaseSpeed := False;
     end
     else if DecreaseSpeed then
     begin
-      SetSpeedInManual(-1);
+      SetSpeedInManual(-10);
       SpeedState := 0;
       SpeedState := 1;
       DecreaseSpeed := False;
@@ -599,7 +599,7 @@ begin
     else
     if ActualSpeed > SetPointSpeed then
       ActualSpeed := ActualSpeed - 1;
-    end;
+  end;
 end;
 
 procedure TMainEngine.SetSpeedInManual(aValue: Double);
@@ -608,7 +608,7 @@ begin
   begin
     if aValue > 0 then
     begin
-      if SetPointSpeed < 1050 then         // dibuat 100%
+      if SetPointSpeed < 1200 then         // awalnya 1050 dibuat 100%
         SetPointSpeed := SetPointSpeed + aValue
       else
         SetPointSpeed := 1050;
@@ -666,7 +666,7 @@ end;
 procedure TMainEngine.calcExhaustGasTemp(aTemp: Double);
 var
   i : Integer;
-  ValueAvgTempA, ValueAvgTempB: Double;
+  ValueAvgTempA, ValueAvgTempB, ValueComProbA, ValueComProbB, TotalDevA, TotalDevB : Double;
 begin
   ValueAvgTempA := 0;
   ValueAvgTempB := 0;
@@ -683,11 +683,23 @@ begin
   AvgTempA := Round(ValueAvgTempA/10);
   AvgTempB := Round(ValueAvgTempB/10);
 
+  TotalDevA := 0;
+  TotalDevB := 0;
+
   for i := 0 to 9 do
   begin
     DevTempExhCylA[i] := (TempExhCylA[i] - AvgTempA)*10;
     DevTempExhCylB[i] := (TempExhCylB[i] - AvgTempB)*10;
+
+    TotalDevA := TotalDevA + Abs(DevTempExhCylA[i]);
+    TotalDevB := TotalDevB + Abs(DevTempExhCylB[i]);
   end;
+
+  ValueComProbA := TotalDevA /10;
+  ValueComProbB := TotalDevB /10;
+
+  CompProbA := Min(100, Round(35 + (ValueComProbA / 5)));
+  CompProbB := Min(100, Round(35 + (ValueComProbB / 5)));
 end;
 
 procedure TMainEngine.calcFuelMainEngine(aRPM: Double);
@@ -785,7 +797,7 @@ begin
     StartingAir := Random(30)/10;
     ControlAir := RandomRange(68,70)/10;            // nilai awal (60,70)
     TCAirSeal := 0;
-//    TCLOPressInlet := 0;
+    TCLOPressInlet := 0;         // awalnya di comment
     PressAirInlet := 0;
     PressFWHTInlet := RandomRange(1,25)/10;
     PressSeaWaterOutlet := 0.1;
@@ -797,7 +809,7 @@ begin
     StartingAir := RandomRange(250,350)/10;
     ControlAir := RandomRange(68,70)/10;
     TCAirSeal := 0;
-//    TCLOPressInlet := (30)/10;
+    TCLOPressInlet := (30)/10;
     PressAirInlet := 0;
     PressFWHTInlet := RandomRange(25,35)/10;
     PressSeaWaterOutlet := Random(7)/10 + 1;

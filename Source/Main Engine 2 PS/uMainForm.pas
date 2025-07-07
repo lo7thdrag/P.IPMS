@@ -190,19 +190,20 @@ begin
     begin
       if Trunc(Value) > Trunc(CurrentHourCounter) then
       begin
-        CurrentHourCounter := Value;
-        frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Value);
+        CurrentHourCounter := 7670;
+        frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Trunc(CurrentHourCounter));
 
         if not FIsRunningHours then
         begin
-          tmrRunningMETimer1.Enabled := True;
+          tmrRunningMETimer1.Interval := 3600000;
+          tmrRunningMETimer1.Enabled  := True;
           FIsRunningHours := True;
         end;
       end
       else if Trunc(Value) < Trunc(CurrentHourCounter) then
       begin
-        CurrentHourCounter := Value;
-        frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Value);
+        CurrentHourCounter := 7670;
+        frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Trunc(CurrentHourCounter));
 
         if FIsRunningHours then
         begin
@@ -631,8 +632,8 @@ begin
       begin
         if Value then
         begin
-          frmSafetiesStop.Vr7BarControlAirLowPressure.Color := clWebOrange;
-          frmSafetiesStop.lblStartingInterlocks.Color       := clWebOrange;
+          frmSafetiesStop.Vr7BarControlAirLowPressure.Color := clGreen;
+          frmSafetiesStop.lblStartingInterlocks.Color       := clGreen;
           frmAlarms.AddAlarmToLog('7 BAR CONTROL AIR LOW PRESSURE');
         end
         else
