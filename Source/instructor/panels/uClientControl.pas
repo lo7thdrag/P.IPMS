@@ -884,10 +884,12 @@ begin
     begin
       if aStatus = 'LOADED' then
       begin
+        lvStatusConsole.Items[i].SubItems[0] := aStatus;
         LoadImageLight(aAddress,LoadLightOnline);
       end
       else if aStatus = 'UNLOADED' then
       begin
+        lvStatusConsole.Items[i].SubItems[0] := aStatus;
         if lvStatusConsole.Items[i].StateIndex = 0 then
           LoadImageLight(aAddress,LoadLightOffline)
         else

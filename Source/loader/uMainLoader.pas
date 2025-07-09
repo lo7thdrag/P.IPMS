@@ -348,28 +348,28 @@ begin
   if FileExists(Setting.ExecutedApp) then
   begin
     fName := ExtractFileName(Setting.ExecutedApp);
-    if not processExists(fName) then
+    if processExists(fName) then
       flag := True;
   end;
 
   if FileExists(Setting.ExecutedApp2) then
   begin
     fName := ExtractFileName(Setting.ExecutedApp2);
-    if not processExists(fName) then
+    if processExists(fName) then
       flag := True;
   end;
 
   if FileExists(Setting.ExecutedApp3) then
   begin
     fName := ExtractFileName(Setting.ExecutedApp3);
-    if not processExists(fName) then
+    if processExists(fName) then
       flag := True;
   end;
 
   if flag then
     aRec.CommandID := C_ORD_STATUS_LOAD
   else
-    aRec.CommandID := C_ORD_UNLOAD_APP;
+    aRec.CommandID := C_ORD_STATUS_UNLOAD;
 
   aRec.ValueString := LongIp_To_StrIp(FNetwork.InstructorSocket.MyLongIP);
   FNetwork.InstructorSocket.SendData(C_INSTRUCTOR_COMMAND,@aRec);
