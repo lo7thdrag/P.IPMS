@@ -59,6 +59,8 @@ type
     procedure NetEvent(apRec: PAnsiChar; aSize: Word);
   public
     { Public declarations }
+    procedure RefreshConnection;
+    procedure RefreshApplication;
   end;
 
 var
@@ -322,8 +324,63 @@ begin
       if LocalIPList[0] <> '192.168.1.1' then
         MyExitWindows(EWX_POWEROFF or EWX_FORCE);
     end;
+    C_ORD_REFRESH_CON :
+    begin
+      RefreshConnection;
+    end;
+    C_ORD_REFRESH_APP :
+    begin
+      RefreshApplication;
+    end;
   end;
 
+end;
+
+procedure TfrrmLoader.RefreshApplication;
+var
+  fName : String;
+  flag : Boolean;
+  aRec : R_Common_Instr_Command;
+
+begin
+  flag := False;
+
+  if FileExists(Setting.ExecutedApp) then
+  begin
+    fName := ExtractFileName(Setting.ExecutedApp);
+    if not processExists(fName) then
+      flag := True;
+  end;
+
+  if FileExists(Setting.ExecutedApp2) then
+  begin
+    fName := ExtractFileName(Setting.ExecutedApp2);
+    if not processExists(fName) then
+      flag := True;
+  end;
+
+  if FileExists(Setting.ExecutedApp3) then
+  begin
+    fName := ExtractFileName(Setting.ExecutedApp3);
+    if not processExists(fName) then
+      flag := True;
+  end;
+
+  if flag then
+    aRec.CommandID := C_ORD_STATUS_LOAD
+  else
+    aRec.CommandID := C_ORD_UNLOAD_APP;
+
+  aRec.ValueString := LongIp_To_StrIp(FNetwork.InstructorSocket.MyLongIP);
+  FNetwork.InstructorSocket.SendData(C_INSTRUCTOR_COMMAND,@aRec);
+end;
+
+procedure TfrrmLoader.RefreshConnection;
+begin
+  FNetwork.StopNetwork;
+  FNetwork.InstructorSocket.ServerAddress := edtInsServer.Text;
+  FNetwork.InstructorSocket.ServerPort    := edtInsPort.Text;
+  FNetwork.StartNetwork;
 end;
 
 procedure TfrrmLoader.ShowPanel;

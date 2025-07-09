@@ -141,18 +141,18 @@ begin
     C_ORD_ACK :
     begin
 
-      if rec.ValueByte = 1 then
-        frmClientControl.UpdateClientList(rec.ValueString)
-      else
-        frmClientControl.UpdateClientList(rec.ValueString,True)
+//      if rec.ValueByte = 1 then
+//        frmClientControl.UpdateClientList(rec.ValueString)
+//      else
+//        frmClientControl.UpdateClientList(rec.ValueString,True)
     end;
     C_ORD_STATUS_LOAD :
     begin
-      frmClientControl.UpdateClientStatus(rec.ValueString, 'ONLINE')
+      frmClientControl.UpdateClientStatus(rec.ValueString, 'LOADED')
     end;
     C_ORD_STATUS_UNLOAD :
     begin
-      frmClientControl.UpdateClientStatus(rec.ValueString, 'READY')
+      frmClientControl.UpdateClientStatus(rec.ValueString, 'UNLOADED')
     end
 
   end;

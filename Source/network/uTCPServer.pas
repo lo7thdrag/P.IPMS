@@ -103,7 +103,6 @@ begin
   WSockServer := TWSocketServer.Create(nil);
   WSocket     := WSockServer;
 
-
 //  WSockServer.MultiThreaded := True;
   WSockServer.MultiThreaded := False;
   WSockServer.OnChangeState := WSockServer_OnChangeState;

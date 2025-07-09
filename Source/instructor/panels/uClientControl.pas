@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, TFlatSpeedButtonUnit, Buttons, Mask, uDataType, ComCtrls,
-  jpeg, ExtCtrls, Menus, uTCPServer, TypInfo,IniFiles;
+  jpeg, ExtCtrls, Menus, uTCPServer, TypInfo,IniFiles, System.ImageList,
+  Vcl.ImgList;
 
 type
   TfrmClientControl = class(TForm)
@@ -141,6 +142,10 @@ type
     mmoEvntLog: TMemo;
     lbl16: TLabel;
     mmoErrorLog: TMemo;
+    btnRefreshConn: TFlatSpeedButton;
+    tmrClient: TTimer;
+    ilClientStateColor: TImageList;
+    FlatSpeedButton1: TFlatSpeedButton;
 //    procedure btn3Click(Sender: TObject);
 //    procedure btn4Click(Sender: TObject);
 //    procedure btn1Click(Sender: TObject);
@@ -154,6 +159,7 @@ type
     procedure mniRestart1Click(Sender: TObject);
     procedure mniLoadClick(Sender: TObject);
     procedure chkDataLoggerClick(Sender: TObject);
+    procedure tmrClientTimer(Sender: TObject);
   private
     Gedung : string;
 
@@ -179,6 +185,7 @@ type
     { Public declarations }
     procedure UpdateClientList(aAddress : string; aRemove : boolean = false);
     procedure UpdateClientStatus(aAddress, aStatus : string);
+    procedure UpdateConsoleStatus(aAddress, aStatus : string);
   end;
 
 const
@@ -192,6 +199,7 @@ var
 implementation
 
 uses
+  OverbyteIcsWSocket,
   uInstructorSystem, uListener, uSetting,
   uNetworkManager, uERSystem,
   uControllerSystem,
@@ -625,7 +633,7 @@ begin
     if Item.SubItems[0] = 'READY' then begin
       Sender.Canvas.Brush.Color := clYellow;
     end
-    else if Item.SubItems[0] = 'ONLINE' then begin
+    else if Item.SubItems[0] = 'LOADED' then begin
       Sender.Canvas.Brush.Color := clLime;
     end
     else begin
@@ -635,9 +643,9 @@ begin
     {Prince}
     if Gedung = 'Kantor' then
     begin
-      if (Item.Caption = 'SERVER') and (Item.SubItems[0] <> 'ONLINE') then
+      if (Item.Caption = 'SERVER') and (Item.SubItems[0] <> 'LOADED') then
       begin
-        Item.SubItems[0] := 'ONLINE';
+        Item.SubItems[0] := 'LOADED';
         Sender.Canvas.Brush.Color := clLime;
       end;
     end;
@@ -679,7 +687,7 @@ begin
   if lvStatusConsole.Selected = nil then
     exit;
 
-  if lvStatusConsole.Selected.SubItems[0] = 'OFFLINE' then
+  if lvStatusConsole.Selected.SubItems[0] = 'UNLOADED' then
     exit;
 
   {Prince}
@@ -698,8 +706,9 @@ end;
 
 procedure TfrmClientControl.mniLoadClick(Sender: TObject);
 var
+  i : Integer;
   rec : R_Common_Instr_Command;
-  IpNumber : string;
+  IpNumber, ConsoleName, IPConsole : string;
 begin
   case TComponent(sender).Tag of
     1 : //Load Selected
@@ -733,6 +742,34 @@ begin
       Sleep(5000);
 
       rec.CommandID := C_ORD_UNLOAD_APP;
+      InstructorSys.Network.AsServer.SendData(C_INSTRUCTOR_COMMAND,@rec);
+    end;
+    5 : //Refresh Connection
+    begin
+      for I := 0 to lvStatusConsole.Items.Count - 1 do
+      begin
+        ConsoleName := lvStatusConsole.Items[i].Caption;
+        IPConsole := GetIPFromConsoleName(ConsoleName);
+
+        lvStatusConsole.Items[i].StateIndex:= 0;
+        LoadImageLight(IPConsole,LoadLightOffline);
+      end;
+
+      rec.CommandID := C_ORD_REFRESH_CON;
+      InstructorSys.Network.AsServer.SendData(C_INSTRUCTOR_COMMAND,@rec);
+    end;
+    6 : //Refresh Application
+    begin
+      for I := 0 to lvStatusConsole.Items.Count - 1 do
+      begin
+        ConsoleName := lvStatusConsole.Items[i].Caption;
+        IPConsole := GetIPFromConsoleName(ConsoleName);
+
+        lvStatusConsole.Items[i].SubItems[0] := 'UNLOADED';
+        LoadImageLight(IPConsole,LoadLightOffline);
+      end;
+
+      rec.CommandID := C_ORD_REFRESH_APP;
       InstructorSys.Network.AsServer.SendData(C_INSTRUCTOR_COMMAND,@rec);
     end;
   end;
@@ -778,8 +815,89 @@ begin
   mmoErrorLog.Lines.Add(aException);
 end;
 
-procedure TfrmClientControl.UpdateClientList(aAddress: string;
-  aRemove: boolean = false);
+procedure TfrmClientControl.tmrClientTimer(Sender: TObject);
+var
+  i,j, c: Integer;
+  cl: TClientConnected;
+  aAddress, ConsoleName, IPConsole : String;
+begin
+  c:= InstructorSys.Network.AsServer.ClientCount;
+  for i := 0 to c-1 do begin
+    cl:= InstructorSys.Network.AsServer.Clients[i];
+    if cl.State=wsConnected then begin
+      aAddress := cl.ConnectedIP;
+//      UpdateClientStatus(aAddress, 'READY');
+      UpdateConsoleStatus(aAddress, 'ONLINE');
+    end
+    else
+    begin
+      aAddress := cl.ConnectedIP;
+//      UpdateClientStatus(aAddress, 'OFFLINE');
+      UpdateConsoleStatus(aAddress, 'OFFLINE');
+    end;
+
+  end;
+end;
+
+procedure TfrmClientControl.UpdateClientsInfo(aServer: TTCPServer);
+var
+  i : integer;
+begin
+  with TTCPServer(aServer) do begin
+
+    if SocketIdentifier = 'AsInstructorServer' then begin
+      mmoInstructor.Lines.Clear;
+      for i := 0 to ClientCount - 1 do begin
+        mmoInstructor.Lines.Add(Clients[i].ConnectedIP);
+      end;
+    end;
+    if SocketIdentifier = 'AsSimulatorServer' then begin
+      mmoER.Lines.Clear;
+      for i := 0 to ClientCount - 1 do begin
+        mmoER.Lines.Add(Clients[i].ConnectedIP);
+      end;
+    end;
+    if SocketIdentifier = 'AsControllerServer' then begin
+      mmoCtrl.Lines.Clear;
+      for i := 0 to ClientCount - 1 do begin
+        mmoCtrl.Lines.Add(Clients[i].ConnectedIP);
+      end;
+    end;
+  end;
+
+end;
+
+procedure TfrmClientControl.UpdateClientStatus(aAddress, aStatus: string);
+var
+  i : integer;
+  ConsoleName, IPConsole : String;
+begin
+  if lvStatusConsole.Items.Count <= 0 then
+  exit;
+
+  for I := 0 to lvStatusConsole.Items.Count - 1 do
+  begin
+    ConsoleName := lvStatusConsole.Items[i].Caption;
+    IPConsole := GetIPFromConsoleName(ConsoleName);
+
+    if IPConsole = aAddress then
+    begin
+      if aStatus = 'LOADED' then
+      begin
+        LoadImageLight(aAddress,LoadLightOnline);
+      end
+      else if aStatus = 'UNLOADED' then
+      begin
+        if lvStatusConsole.Items[i].StateIndex = 0 then
+          LoadImageLight(aAddress,LoadLightOffline)
+        else
+          LoadImageLight(aAddress,LoadLightReady)
+      end;
+    end;
+  end;
+end;
+
+procedure TfrmClientControl.UpdateClientList(aAddress: string; aRemove: boolean = false);
 var
   i : integer;
   s, ConsoleName, IPConsole : String;
@@ -857,41 +975,13 @@ begin
   end;
 end;
 
-procedure TfrmClientControl.UpdateClientsInfo(aServer: TTCPServer);
-var
-  i : integer;
-begin
-  with TTCPServer(aServer) do begin
-
-    if SocketIdentifier = 'AsInstructorServer' then begin
-      mmoInstructor.Lines.Clear;
-      for i := 0 to ClientCount - 1 do begin
-        mmoInstructor.Lines.Add(Clients[i].ConnectedIP);
-      end;
-    end;
-    if SocketIdentifier = 'AsSimulatorServer' then begin
-      mmoER.Lines.Clear;
-      for i := 0 to ClientCount - 1 do begin
-        mmoER.Lines.Add(Clients[i].ConnectedIP);
-      end;
-    end;
-    if SocketIdentifier = 'AsControllerServer' then begin
-      mmoCtrl.Lines.Clear;
-      for i := 0 to ClientCount - 1 do begin
-        mmoCtrl.Lines.Add(Clients[i].ConnectedIP);
-      end;
-    end;
-  end;
-
-end;
-
-procedure TfrmClientControl.UpdateClientStatus(aAddress, aStatus: string);
+procedure TfrmClientControl.UpdateConsoleStatus(aAddress, aStatus: string);
 var
   i : integer;
   ConsoleName, IPConsole : String;
 begin
   if lvStatusConsole.Items.Count <= 0 then
-  exit;
+    exit;
 
   for I := 0 to lvStatusConsole.Items.Count - 1 do
   begin
@@ -899,16 +989,23 @@ begin
     IPConsole := GetIPFromConsoleName(ConsoleName);
 
     if IPConsole = aAddress then
-      lvStatusConsole.Items[i].SubItems[0] := aStatus;
+    begin
+      if aStatus = 'ONLINE' then
+      begin
+        lvStatusConsole.Items[i].StateIndex := 1;
+
+        if lvStatusConsole.Items[i].SubItems[0] = 'LOADED' then
+          LoadImageLight(aAddress,LoadLightOnline)
+        else
+          LoadImageLight(aAddress,LoadLightReady)
+      end
+      else if aStatus = 'OFFLINE' then
+      begin
+        lvStatusConsole.Items[i].StateIndex := 0;
+        LoadImageLight(aAddress,LoadLightOffline);
+      end;
+    end;
   end;
-
-  if aStatus = 'READY' then
-    LoadImageLight(aAddress,LoadLightReady)
-  else if aStatus = 'ONLINE' then
-    LoadImageLight(aAddress,LoadLightOnline)
-  else if aStatus = 'OFFLINE' then
-    LoadImageLight(aAddress,LoadLightOffline);
-
 end;
 
 end.
