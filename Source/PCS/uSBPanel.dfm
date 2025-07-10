@@ -5305,9 +5305,9 @@ object frmSBPanel: TfrmSBPanel
       Width = 95
       Height = 95
       Hint = 'Increase Speed'
+      Caption = ''
       Flat = True
-      OnMouseDown = btnSBMouseDown
-      OnMouseUp = btnSBMouseUp
+      OnClick = btnIncr_SpeedSBClick
       ImageList = ilButton_SB
       Color = clBlack
     end
@@ -5316,6 +5316,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 114
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5325,6 +5326,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 114
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnClick = btnRunning_Start_ME_SBClick
       ImageList = ilButton_SB
@@ -5336,6 +5338,7 @@ object frmSBPanel: TfrmSBPanel
       Width = 95
       Height = 95
       Hint = 'Main Engine'
+      Caption = ''
       Flat = True
       OnClick = btnRemote_Auto_SBClick
       ImageList = ilButton_SB
@@ -5348,9 +5351,9 @@ object frmSBPanel: TfrmSBPanel
       Width = 95
       Height = 95
       Hint = 'Decrease Speed'
+      Caption = ''
       Flat = True
-      OnMouseDown = btnSBMouseDown
-      OnMouseUp = btnSBMouseUp
+      OnClick = btnDecr_SpeedSBClick
       ImageList = ilButton_SB
       Color = clBlack
     end
@@ -5359,6 +5362,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5368,6 +5372,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnClick = btnStopped_StopSBClick
       ImageList = ilButton_SB
@@ -5379,6 +5384,7 @@ object frmSBPanel: TfrmSBPanel
       Width = 95
       Height = 95
       Hint = 'Main Engine'
+      Caption = ''
       Flat = True
       OnClick = btnRemote_Manual_SBClick
       ImageList = ilButton_SB
@@ -5391,6 +5397,7 @@ object frmSBPanel: TfrmSBPanel
       Width = 95
       Height = 95
       Hint = 'Pitch AH'
+      Caption = ''
       Flat = True
       OnMouseDown = btnSBMouseDown
       OnMouseUp = btnSBMouseUp
@@ -5402,6 +5409,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 481
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5412,6 +5420,7 @@ object frmSBPanel: TfrmSBPanel
       Width = 95
       Height = 95
       Hint = 'CPP'
+      Caption = ''
       Flat = True
       OnClick = btnRemote_Auto_SBClick
       ImageList = ilButton_SB
@@ -5424,6 +5433,7 @@ object frmSBPanel: TfrmSBPanel
       Width = 95
       Height = 95
       Hint = 'Pitch AS'
+      Caption = ''
       Flat = True
       OnMouseDown = btnSBMouseDown
       OnMouseUp = btnSBMouseUp
@@ -5435,6 +5445,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5445,6 +5456,7 @@ object frmSBPanel: TfrmSBPanel
       Width = 95
       Height = 95
       Hint = 'CPP'
+      Caption = ''
       Flat = True
       OnClick = btnRemote_Manual_SBClick
       ImageList = ilButton_SB
@@ -5455,6 +5467,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 114
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5464,6 +5477,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 114
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5473,6 +5487,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 114
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5482,6 +5497,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5491,6 +5507,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5500,6 +5517,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5510,6 +5528,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 481
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnClick = btnClutch_SBClick
       ImageList = ilButton_SB
@@ -5520,6 +5539,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 481
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5529,6 +5549,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 481
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5539,6 +5560,7 @@ object frmSBPanel: TfrmSBPanel
       Width = 95
       Height = 95
       Hint = 'Gearbox'
+      Caption = ''
       Flat = True
       OnClick = btnRemote_Auto_SBClick
       ImageList = ilButton_SB
@@ -5550,6 +5572,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnClick = btnClutch_SBClick
       ImageList = ilButton_SB
@@ -5560,6 +5583,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_SB
       Color = clBlack
@@ -5570,6 +5594,7 @@ object frmSBPanel: TfrmSBPanel
       Width = 95
       Height = 95
       Hint = 'Gearbox'
+      Caption = ''
       Flat = True
       OnClick = btnRemote_Manual_SBClick
       ImageList = ilButton_SB
@@ -5581,6 +5606,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 481
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5593,6 +5619,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       Margin = 365
       OnMouseDown = btnNoneMouseDown
@@ -5606,6 +5633,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 114
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5618,6 +5646,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5630,6 +5659,7 @@ object frmSBPanel: TfrmSBPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp

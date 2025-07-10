@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, jpeg, ImgList, Buttons, SpeedButtonImage, uDataType,
-  uListener, uFreezeFrom;
+  uListener, uFreezeFrom, System.ImageList;
 
 type
   TfrmPSPanel = class(TForm)
@@ -123,6 +123,8 @@ type
     procedure FormCreate(Sender : TObject);
     procedure FlashingIndicatorTimerTimer(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure btnIncr_SpeedPSClick(Sender: TObject);
+    procedure btnDecr_SpeedPSClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -134,6 +136,8 @@ type
     FFlashing_RunningStart, FFlashing_StoppedStop : Boolean;
 
     counterStart, counterClutch, counterRemote : Integer;
+
+    FSpeedPS, FSpeedSB : Double;
 
     FAlarmAccept : array[0..5] of Boolean;
 
@@ -149,6 +153,7 @@ type
     FListener : TListeners;
     procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
+    procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Double);overload;
 
     procedure RemoteIndicatorLamp(aAutoManual : string; aOnOff: Boolean);
     procedure LocalMCRIndicator(aLocalMCR : string; aOnOff: Boolean);
@@ -257,6 +262,26 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TfrmPSPanel.btnDecr_SpeedPSClick(Sender: TObject);
+begin
+  if TSpeedButtonImage(Sender).Hint = 'Decrease Speed' then
+  begin
+    imgDecr_SpeedPS.Picture.LoadFromFile(fIndikatorOn);
+    imgIncr_SpeedPS.Picture.LoadFromFile(fIndikatorOff);
+    SpeedInChange(-10,False);
+  end
+end;
+
+procedure TfrmPSPanel.btnIncr_SpeedPSClick(Sender: TObject);
+begin
+  if TSpeedButtonImage(Sender).Hint = 'Increase Speed' then
+  begin
+    imgIncr_SpeedPS.Picture.LoadFromFile(fIndikatorOn);
+    imgDecr_SpeedPS.Picture.LoadFromFile(fIndikatorOff);
+    SpeedInChange(10,True);
+  end
 end;
 
 procedure TfrmPSPanel.btnPSMouseDown(Sender: TObject;
@@ -420,6 +445,7 @@ begin
   if FReadyForUse_ME and PCSSystem.ControlRemotePS then
   begin
     imgRunning_StartPS.Picture.LoadFromFile(fIndikatorOn);
+    imgStoped_StopPS.Picture.LoadFromFile(fIndikatorOff);
     FFlashing_RunningStart := True;
     PCSSystem.RunningStart(C_PCS_ME_PORTS, True);
   end;
@@ -430,8 +456,9 @@ begin
   if FReadyForUse_ME and FRunningStart and FRemoteManual and PCSSystem.ControlRemotePS then
   begin
     imgStoped_StopPS.Picture.LoadFromFile(fIndikatorOn);
-    FFlashing_StoppedStop := True;
-    PCSSystem.StoppedStop(C_PCS_ME_PORTS);
+    imgRunning_StartPS.Picture.LoadFromFile(fIndikatorOff);
+    FFlashing_StoppedStop := False;
+    PCSSystem.StoppedStop(C_PCS_ME_PORTS, False);
   end;
 end;
 
@@ -1159,4 +1186,14 @@ begin
       LampTestIndicator(Value);
   end;
 end;
+procedure TfrmPSPanel.PCSSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
+begin
+  case PropsID of
+    epPCSMESpeed :
+    begin
+
+    end;
+  end;
+end;
+
 end.

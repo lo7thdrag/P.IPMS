@@ -57,7 +57,6 @@ begin
     ServerPort    := Setting.SimEnginePort;
     AutoReconnect := True;
   end;
-  FVREngineSocket := AsClients.Get('AsSimEngineClient');
 
   with CreateClientSocket('AsInstructorClient') do
   begin
@@ -73,6 +72,7 @@ begin
     AutoReconnect := True;
   end;
 
+  FVREngineSocket := AsClients.Get('AsSimEngineClient');
   FPCSControllerSocket := AsClients.Get('AsControllerClient');
 
   FservoLampSocket := AsClients.Get('AsInstructorClient');
@@ -97,8 +97,7 @@ procedure TPCSNetwork.OnDisconnected(Sender: TObject);
 begin
   inherited;
 
-  Listeners.TriggerEvents(Self, epNetworkDebugInfo,
-    'PCS disconnected from ' +  (Sender as TTCPClient).ServerAddress);
+  Listeners.TriggerEvents(Self, epNetworkDebugInfo,'PCS disconnected from ' +  (Sender as TTCPClient).ServerAddress);
 end;
 
 procedure TPCSNetwork.StartNetwork;

@@ -27,7 +27,7 @@ type
     FLeverInServiceSB,
     FTransferOverrideSB,
     FRunningStartPS,
-    FRunningStartSB : Boolean;
+    FRunningStartSB, FStoppedStopPS, FStoppedStopSB: Boolean;
     FLampTest : Integer;
 
     procedure NetworkEventAssignment;
@@ -66,10 +66,10 @@ type
     destructor Destroy;override;
 
     {Prosedur untuk mengirimkan paket data dari inputan PCS Panel Touch Screen ke Engine}
-    procedure Speed(aPortStarboard : String; aValue : Integer; aOnOff : Boolean);
+    procedure Speed(aPortStarboard : String; aValue : Double; aOnOff : Boolean);
     procedure RunningStart(aPortStarboard : String; aValue : Boolean);
     procedure Remote(aPortStarboard: string; aVariant : Byte; aOnOff : Boolean);
-    procedure StoppedStop(aPortStarboard : String);
+    procedure StoppedStop(aPortStarboard : String; aValue : Boolean);
     procedure Pitch(aPortStarboard : String; aValue: Integer; aOnOff : Boolean);
     procedure Clutch(aPortStarboard : String; aValue : Boolean);
 
@@ -135,10 +135,11 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
-  recCmd.CommandID := C_ORD_GB_CLUTCH_ENGAGED;
-  recCmd.ValueBool := aValue;
+  recCmd.CommandID      := C_ORD_GB_CLUTCH_ENGAGED;
+  recCmd.CommandPropsID := epPCSGBClutchEngaged;
+  recCmd.ValueBool      := aValue;
 
-  Network.VREngineSocket.SendData(C_PCS_COMMAND,@recCmd);
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND, @recCmd);
 end;
 
 procedure TPCSSystem.ControlThrottleIndicator(aIDPanel: Byte; aValue: Boolean);
@@ -167,16 +168,17 @@ begin
 
 end;
 
-procedure TPCSSystem.Speed(aPortStarboard: String; aValue : Integer; aOnOff : Boolean);
+procedure TPCSSystem.Speed(aPortStarboard: String; aValue : Double; aOnOff : Boolean);
 var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
-  recCmd.CommandID := C_ORD_ME_SPEED;
-  recCmd.ValueInt  := aValue;
-  recCmd.ValueBool := aOnOff;
+  recCmd.CommandID      := C_ORD_ME_SPEED;
+  recCmd.CommandPropsID := epPCSMESpeed;
+  recCmd.ValueDouble    := aValue;
+  recCmd.ValueBool      := aOnOff;
 
-  Network.VREngineSocket.SendData(C_PCS_COMMAND,@recCmd);
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
 destructor TPCSSystem.Destroy;
@@ -206,10 +208,10 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
-  recCMD.CommandID := aVariant;
-  recCmd.ValueBool := aOnOff;
+  recCMD.CommandID      := aVariant;
+  recCmd.ValueBool      := aOnOff;
 
-  Network.VREngineSocket.SendData(C_PCS_COMMAND,@recCmd);
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
 procedure TPCSSystem.RunningStart(aPortStarboard: String; aValue: Boolean);
@@ -217,10 +219,11 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
-  recCmd.CommandID := C_ORD_ME_RUNSTART;
-  recCmd.ValueBool := aValue;
+  recCmd.CommandPropsID := epPCSMERunning;
+  recCmd.CommandID      := C_ORD_ME_RUNSTART;
+  recCmd.ValueBool      := aValue;
 
-  Network.VREngineSocket.SendData(C_PCS_COMMAND,@recCmd);
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
 procedure TPCSSystem.sendServoLampStatus(nameID: Integer; status: Boolean);
@@ -233,14 +236,16 @@ begin
   Network.servoLampSocket.SendData(C_Servo_COMMAND , @recCmd);
 end;
 
-procedure TPCSSystem.StoppedStop(aPortStarboard: String);
+procedure TPCSSystem.StoppedStop(aPortStarboard: String; aValue : Boolean);
 var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
-  recCmd.CommandID := C_ORD_ME_STOP;
+  recCmd.CommandPropsID := epPCSMERunning;
+  recCmd.CommandID      := C_ORD_ME_STOP;
+  recCmd.ValueBool      := not aValue;
 
-  Network.VREngineSocket.SendData(C_PCS_COMMAND,@recCmd);
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
 
@@ -589,6 +594,15 @@ begin
         FLIstener.TriggerEvents(Self,epPCSCPPActualPitchSB,Round(rec.ValueDouble));
     end;
 
+    epPCSMESpeed :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSMESpeedPS,Round(rec.ValueDouble))
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSMESpeedSB,Round(rec.ValueDouble));
+    end;
+
     epPCSMERunning:
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then
@@ -596,6 +610,7 @@ begin
         FLIstener.TriggerEvents(Self,epPCSMEPSRunStart,rec.ValueBool);
         EmergencyStopPS := not rec.ValueBool;
         FRunningStartPS := rec.ValueBool;
+        FStoppedStopPS  := not rec.ValueBool;
       end
       else
       if rec.PortStaboardID = C_PCS_ME_STARBOARD then
@@ -603,6 +618,7 @@ begin
         FLIstener.TriggerEvents(Self,epPCSMESBRunStart,rec.ValueBool);
         EmergencyStopSB := not rec.ValueBool;
         FRunningStartSB := rec.ValueBool;
+        FStoppedStopSB  := not rec.ValueBool;
       end;
     end;
 
@@ -1153,27 +1169,27 @@ begin
   { set all network event here.. as simengine client }
   client := FPCSNetwork.AsClients.Get('AsSimEngineClient');
   if Assigned(client) then
-    with  client do
-    begin
-      RegisterProcedure(C_PCS_COMMAND, NetEventPCSCommand, SizeOf(R_Common_PCS_Command));
-    end;
+  begin
+    client.RegisterProcedure(C_PCS_COMMAND, NetEventPCSCommand, SizeOf(R_Common_PCS_Command));
+  end;
 
   { set all network event here.. as instructor client}
   client := FPCSNetwork.AsClients.Get('AsInstructorClient');
   if Assigned(client) then
-    with  client do
-    begin
-      RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
-      //yoga
-      RegisterProcedure(C_Servo_COMMAND, nil, SizeOf(R_ServoAndLamp_Command));
-    end;
+  begin
+    client.RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
+    //yoga
+//    client.RegisterProcedure(C_Servo_COMMAND, nil, SizeOf(R_ServoAndLamp_Command));
+  end;
 
-   client := FPCSNetwork.AsClients.Get('AsControllerClient');
-   if Assigned(client) then
-     with client do
-     begin
-       RegisterProcedure(C_PANELTHROTTLE_COMMAND, NetEventStatusThrottleCommand, SizeOf(R_Common_PanelThrottle_Command));
-       RegisterProcedure(C_PANELTHROTTLE_COMMAND2, nil, SizeOf(R_Common_PanelThrottle_Command));
-     end;
+  client := FPCSNetwork.AsClients.Get('AsControllerClient');
+  if Assigned(client) then
+  begin
+   client.RegisterProcedure(C_PANELTHROTTLE_COMMAND, NetEventStatusThrottleCommand, SizeOf(R_Common_PanelThrottle_Command));
+   client.RegisterProcedure(C_PANELTHROTTLE_COMMAND2, nil, SizeOf(R_Common_PanelThrottle_Command));
+
+   {kirim paket dari PCS ke Controller}
+   client.RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
+  end;
 end;
 end.

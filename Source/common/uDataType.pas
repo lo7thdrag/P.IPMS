@@ -423,7 +423,7 @@ type
       epPCSMEFsrTimerExpired, epPCSMEMaxFsrKeySwitch, epPCSMEStopIncrease, epPCSMEStopDecrease,
       epPCSMEPSRunStart, epPCSMEPSRemoteAuto, epPCSMEPSRemoteManual,
       epPCSMESBRunStart, epPCSMESBRemoteAuto, epPCSMESBRemoteManual,
-      epPCSMEStartingAir, epPCSMEControlAir, epPCSMETCAirSeal, epPCSMESpeed, epPCSMETurboChargerSpeedA,
+      epPCSMEStartingAir, epPCSMEControlAir, epPCSMETCAirSeal, epPCSMESpeed, epPCSMESpeedPS, epPCSMESpeedSB, epPCSMETurboChargerSpeedA,
       epPCSMETurboChargerSpeedB, epPCSMETCOutlLOTempA, epPCSMETCOutlLOTempB, epPCSMETCLOPressInlet,
       epPCSMETempTCInletA, epPCSMETempTCInletB, epPCSMETempTCOutletA, epPCSMETempTCOutletB,
       epPCSMEPressAirInlet, epPCSMETempSuperChargAir, epPCSMEPressFOInlet, epPCSMETempFWHTOutlet,

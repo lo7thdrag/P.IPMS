@@ -42,7 +42,7 @@ object frmMainForm: TfrmMainForm
     Top = 424
   end
   object tmr1: TTimer
-    Enabled = False
+    OnTimer = tmr1Timer
     Left = 248
     Top = 144
   end

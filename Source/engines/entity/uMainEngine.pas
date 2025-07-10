@@ -1495,7 +1495,7 @@ begin
     Exit;
 
   FDecreaseSpeed := Value;
-  Listener.TriggerEvents(Self,epPCSMEStopDecrease,Value);{tambahan sendiri}
+//  Listener.TriggerEvents(Self,epPCSMEStopDecrease,Value);{tambahan sendiri}
 end;
 
 procedure TMainEngine.SetDelayActualSpeed(const Value: Double);

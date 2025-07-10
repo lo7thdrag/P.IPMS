@@ -1119,7 +1119,8 @@ procedure TControllerManager.MappingPCSStateToElement(aElement: TElement;
   Order: E_PropsID; aValue: Boolean);
 begin
   case Order of
-    epPCSMERemoteAuto, epPCSMERemoteManual, epPCSMERunning,
+    epPCSMERemoteAuto, epPCSMEPSRemoteAuto, epPCSMESBRemoteAuto, epPCSMERemoteManual, epPCSMEPSRemoteManual,
+    epPCSMESBRemoteManual, epPCSMERunning, epPCSMEPSRunStart, epPCSMESBRunStart,
     epPCSMESafetyShutdown, epPCSMERemoteCtrl, epPCSMELowLoad, epPCSMEVeryLowLoad,
     epPCSMEFsrTimerExpired, epPCSMEMaxFsrKeySwitch, epPCSMEStopIncrease, epPCSMEStopDecrease,
     epPCSMEOverspeed, epPCSMEConRodBearingTempHigh, epPCSMEConRodBearingTempVeryHigh, epPCSMEBearingTempHigh,
@@ -1131,6 +1132,9 @@ begin
     epPCSCPPRemoteAuto, epPCSCPPRemoteManual, epPCSCPPPumpStandby1, epPCSCPPPumpStandby2, epPCSCPPPumpAuto3,
     epPCSCPPOilFilterClogged, epPCSCPPPitchNotZero, epPCSCPPHPPOilLevel, epPCSCPPOilLevel, epPCSCPPLocal,
     epPCSGBRemoteAuto, epPCSGBRemoteManual, epPCSGBClutchAllowed, epPCSGBClutchEngaged,
+    // bagian PCSUI
+    epPCSGBClutchEngagedPS, epPCSGBClutchEngagedSB,
+
     epPCSGBSWFlowBearing, epPCSGBPumpNotAuto,
     epPCSGBPumpStandbyStart, epPCSGBOilLevel, epPCSGBFilter11, epPCSGBFilter12,
     epPCSGBLOPressInletLow,
@@ -1148,7 +1152,7 @@ begin
 
     //Main Engine 2
     epPCSMERemoteControl, epPCSMESTCInManualMode, epPCSMEPreStart, epPCSMEActualSpeed, epPCSMESTCInManual,
-
+    epPCSMEActualSpeedPS, epPCSMEActualSpeedSB,
     epPCSMEFanExhSupply, epPCSMEFanSupply1, epPCSMEFanSupply2:
     begin
       if aElement.ElementType = eltSWE then
@@ -1402,7 +1406,7 @@ begin
       end;
     end;
 
-    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSMESpeed, epPCSMETCLOPressInlet,
+    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSMESpeed, epPCSMESpeedPS, epPCSMESpeedSB, epPCSMETCLOPressInlet,
     epPCSMEPressAirInlet, epPCSMETurboChargerSpeedA, epPCSMETurboChargerSpeedB, epPCSMETCOutlLOTempA,
     epPCSMETCOutlLOTempB, epPCSMETempTCInletA, epPCSMETempTCInletB, epPCSMETempTCOutletA,
     epPCSMETempTCOutletB, epPCSMETempSuperChargAir,  epPCSMETempFWHTOutlet, epPCSMETempFWHTInlet,
@@ -1524,6 +1528,9 @@ begin
     epPCSCPPOilFilterClogged, epPCSCPPPitchNotZero, epPCSCPPCLSControl, epPCSCPPBackupSupplyFail,
     epPCSCPPFollowUpError, epPCSCPPHPPOilLevel, epPCSCPPOilLevel, epPCSCPPLocal,
     epPCSGBRemoteAuto, epPCSGBRemoteManual, epPCSGBClutchAllowed, epPCSGBClutchEngaged,
+    //bagian PCSUI
+    epPCSGBClutchEngagedPS, epPCSGBClutchEngagedSB,
+
     epPCSGBShaftLocked, epPCSGBSWFlowBearing, epPCSGBPumpNotAuto,
     epPCSGBPumpStandbyStart, epPCSGBOilLevel, epPCSGBFilter11, epPCSGBFilter12,
     epPCSGBLOPressInletLow,
@@ -1533,9 +1540,14 @@ begin
 
     //Main Engine 2
     epPCSMERemoteControl, epPCSMESTCInManualMode, epPCSMEPreStart, epPCSMEActualSpeed, epPCSMESTCInManual,
-
+    epPCSMEActualSpeedPS, epPCSMEActualSpeedSB,
     epPCSMERemoteControlProposed, epPCSMEStartingInProgress, epPCSME2TCMode, epPCSGBClutched,
     epPCSGBDeclutched, epPCSGBSafetyDeclutch:
+    begin
+      setPCSSWEElementID(recCmd.PortStaboardID, recCmd.ValueBool, recCmd.CommandPropsID);
+    end;
+
+    epPCSMEPSRunStart, epPCSMESBRunStart :
     begin
       setPCSSWEElementID(recCmd.PortStaboardID, recCmd.ValueBool, recCmd.CommandPropsID);
     end;
@@ -1550,7 +1562,7 @@ begin
       setPCSSSEElementID(recCmd.PortStaboardID, recCmd.ValueDouble, recCmd.CommandPropsID);
     end;
 
-    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSMESpeed, epPCSMETCLOPressInlet,
+    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSMETCLOPressInlet, epPCSMESpeed,
     epPCSMEPressAirInlet, epPCSMETurboChargerSpeedA, epPCSMETurboChargerSpeedB, epPCSMETCOutlLOTempA,
     epPCSMETCOutlLOTempB, epPCSMETempTCInletA, epPCSMETempTCInletB, epPCSMETempTCOutletA,
     epPCSMETempTCOutletB, epPCSMETempSuperChargAir,  epPCSMETempFWHTOutlet, epPCSMETempFWHTInlet,
@@ -1569,6 +1581,11 @@ begin
     epPCSMETempBear1, epPCSMETempBear2, epPCSMETempBear3, epPCSMETempBear4, epPCSMETempBear5,
     epPCSMETempBear6, epPCSMETempBear7, epPCSMETempBear8, epPCSMETempBear9, epPCSMETempBear10, epPCSMETempBear11,
     epPCSCPPLeverPitch,  epPCSCPPSetPointPitch:
+    begin
+      setPCSAAEElementID(recCmd.PortStaboardID, recCmd.ValueDouble, recCmd.CommandPropsID);
+    end;
+
+    epPCSMESpeedPS, epPCSMESpeedSB :
     begin
       setPCSAAEElementID(recCmd.PortStaboardID, recCmd.ValueDouble, recCmd.CommandPropsID);
     end;

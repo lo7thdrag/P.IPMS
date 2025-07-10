@@ -92,7 +92,6 @@ type
 
      procedure NetEventStatusThrottleCommand(apRec: PAnsiChar; aSize: Word);
      procedure NetEventStatusThrottleCommand2(apRec: PAnsiChar; aSize: Word);
-
     //choco
     procedure NetEvent_FuncAllocCommand(apRec: PAnsiChar; aSize: Word);
 
@@ -675,11 +674,11 @@ begin
   recCmd := @apRec^;
 
   recER.PortStaboardID := recCmd.PortStaboardID;
-  recER.CommandID := recCmd.CommandID;
+  recER.CommandID      := recCmd.CommandID;
   recER.CommandPropsID := recCmd.CommandPropsID;
-  recER.ValueBool := recCmd.ValueBool;
-  recER.ValueInt := recCmd.ValueInt;
-  recER.ValueDouble := recCmd.ValueDouble;
+  recER.ValueBool      := recCmd.ValueBool;
+  recER.ValueInt       := recCmd.ValueInt;
+  recER.ValueDouble    := recCmd.ValueDouble;
 
   Network.SimEngineSocket.SendData(C_MIMICS_COMMAND,@recER);
 end;
@@ -1193,7 +1192,7 @@ begin
   if Assigned(client) then
   begin
 //    client.RegisterProcedure(C_PMS_COMMAND, Controller.NetEvent_PMSElmtCommonCmd, SizeOf(R_Common_PMS_Command));
-//    client.RegisterProcedure(C_PCS_COMMAND, nl, SizeOf(R_Common_PCS_Command));
+//    client.RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
 //    client.RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEvent_InstructorCommand, SizeOf(R_Common_Instr_Command));
 
     {Kirim paket dari controller ke ER}

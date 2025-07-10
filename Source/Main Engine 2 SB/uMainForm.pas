@@ -18,6 +18,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure tmrRunningMETimer1Timer(Sender: TObject);
+    procedure tmr1Timer(Sender: TObject);
 
   private
 //    FListener : TListeners;
@@ -276,7 +277,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -286,6 +287,7 @@ begin
           frmSafetiesStop.lblSafetiesStop.Color                      := clGray;
           frmSafetiesStop.lblSafetiesStop.FontLeave.Color            := clYellow;
           frmAlarms.Alarm(False);
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -302,7 +304,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -314,7 +316,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -331,7 +333,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -343,7 +345,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -360,7 +362,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -372,7 +374,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -388,7 +390,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -398,7 +400,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -414,7 +416,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -424,7 +426,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -440,7 +442,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -450,7 +452,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -466,7 +468,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -476,7 +478,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -492,7 +494,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -502,7 +504,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -519,7 +521,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -531,7 +533,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -548,7 +550,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -560,7 +562,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -577,7 +579,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -589,7 +591,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -672,7 +674,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -684,7 +686,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -701,7 +703,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -713,7 +715,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -731,7 +733,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -745,7 +747,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -762,7 +764,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -774,7 +776,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -792,7 +794,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -806,7 +808,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -823,7 +825,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -835,7 +837,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -851,7 +853,7 @@ begin
           frmAlarms.Alarm(True);
 
           FIsImageBlink := Value;
-          tmrRunningMETimer1.Enabled := FIsImageBlink;
+          tmr1.Enabled := FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := True;
         end
         else
@@ -861,7 +863,7 @@ begin
           frmAlarms.Alarm(False);
 
           FIsImageBlink := not Value;
-          tmrRunningMETimer1.Enabled := not FIsImageBlink;
+          tmr1.Enabled := not FIsImageBlink;
           frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
         end;
       end;
@@ -2992,6 +2994,17 @@ begin
   end;
 end;
 
+procedure TfrmMainForm.tmr1Timer(Sender: TObject);
+begin
+  FBlinkCounter := FBlinkCounter + tmrRunningMETimer1.Interval;
+  FIsBlinkState := not FIsBlinkState;
+
+  if FIsImageBlink then
+     frmSetofPressureGaugesME2.imgFlashLighting.Visible := FIsBlinkState
+  else
+     frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
+end;
+
 procedure TfrmMainForm.tmrRunningMETimer1Timer(Sender: TObject);
 begin
   if Assigned(frmSignalingLightME2) then
@@ -3002,13 +3015,5 @@ begin
       frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(CurrentHourCounter);
     end;
   end;
-
-  FBlinkCounter := FBlinkCounter + tmrRunningMETimer1.Interval;
-  FIsBlinkState := not FIsBlinkState;
-
-  if FIsImageBlink then
-     frmSetofPressureGaugesME2.imgFlashLighting.Visible := FIsBlinkState
-  else
-     frmSetofPressureGaugesME2.imgFlashLighting.Visible := False;
 end;
 end.

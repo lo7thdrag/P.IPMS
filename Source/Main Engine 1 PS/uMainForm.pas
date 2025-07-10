@@ -564,7 +564,7 @@ begin
   if FIsStartBlink then
     frmSignalingLightME1.imgStartME1.Visible := FIsBlinkState
   else
-    frmSignalingLightME1.imgStartME1.Visible := FIsRunning;
+    frmSignalingLightME1.imgStartME1.Visible := False;
 
   if FIsStopBlink then
     frmSignalingLightME1.imgStopME1.Visible := FIsBlinkState

@@ -467,12 +467,12 @@ begin
     client.RegisterProcedure(C_INSTRUCTOR_COMMAND, NetEventInstructorCommonCmd, SizeOf(R_Common_Instr_Command));
   end;
 
-   client := FMainEngine1Network.AsClients.Get('AsControllerClient');
-   if Assigned(client) then
-   begin
+  client := FMainEngine1Network.AsClients.Get('AsControllerClient');
+  if Assigned(client) then
+  begin
     {kirim paket dari ME ke controller}
     client.RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
-   end;
+  end;
 end;
 
 procedure TMainEngine1System.RunningStart(aPortStaboard: String);

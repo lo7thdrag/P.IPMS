@@ -5303,6 +5303,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 114
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5312,6 +5313,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 114
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5321,6 +5323,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 114
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5330,6 +5333,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5339,6 +5343,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5348,6 +5353,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5358,6 +5364,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 481
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnClick = btnClutch_PSClick
       ImageList = ilButton_PS
@@ -5369,6 +5376,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnClick = btnClutch_PSClick
       ImageList = ilButton_PS
@@ -5379,6 +5387,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 481
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5388,6 +5397,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 481
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5398,6 +5408,7 @@ object frmPSPanel: TfrmPSPanel
       Width = 95
       Height = 95
       Hint = 'Gearbox'
+      Caption = ''
       Flat = True
       OnClick = btnRemote_Auto_PSClick
       ImageList = ilButton_PS
@@ -5408,6 +5419,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5418,6 +5430,7 @@ object frmPSPanel: TfrmPSPanel
       Width = 95
       Height = 95
       Hint = 'Gearbox'
+      Caption = ''
       Flat = True
       OnClick = btnRemote_Manual_PSClick
       ImageList = ilButton_PS
@@ -5430,9 +5443,9 @@ object frmPSPanel: TfrmPSPanel
       Width = 95
       Height = 95
       Hint = 'Increase Speed'
+      Caption = ''
       Flat = True
-      OnMouseDown = btnPSMouseDown
-      OnMouseUp = btnPSMouseUp
+      OnClick = btnIncr_SpeedPSClick
       ImageList = ilButton_PS
       Color = clBlack
     end
@@ -5441,6 +5454,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 114
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5450,6 +5464,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 114
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnClick = btnRunning_StartPSClick
       ImageList = ilButton_PS
@@ -5461,6 +5476,7 @@ object frmPSPanel: TfrmPSPanel
       Width = 95
       Height = 95
       Hint = 'Main Engine'
+      Caption = ''
       Flat = True
       OnClick = btnRemote_Auto_PSClick
       ImageList = ilButton_PS
@@ -5473,9 +5489,9 @@ object frmPSPanel: TfrmPSPanel
       Width = 95
       Height = 95
       Hint = 'Decrease Speed'
+      Caption = ''
       Flat = True
-      OnMouseDown = btnPSMouseDown
-      OnMouseUp = btnPSMouseUp
+      OnClick = btnDecr_SpeedPSClick
       ImageList = ilButton_PS
       Color = clBlack
     end
@@ -5484,6 +5500,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5493,6 +5510,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnClick = btnStopped_StopPSClick
       ImageList = ilButton_PS
@@ -5504,6 +5522,7 @@ object frmPSPanel: TfrmPSPanel
       Width = 95
       Height = 95
       Hint = 'Main Engine'
+      Caption = ''
       Flat = True
       OnClick = btnRemote_Manual_PSClick
       ImageList = ilButton_PS
@@ -5516,6 +5535,7 @@ object frmPSPanel: TfrmPSPanel
       Width = 95
       Height = 95
       Hint = 'Pitch AH'
+      Caption = ''
       Flat = True
       OnMouseDown = btnPSMouseDown
       OnMouseUp = btnPSMouseUp
@@ -5527,6 +5547,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 481
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5537,6 +5558,7 @@ object frmPSPanel: TfrmPSPanel
       Width = 95
       Height = 95
       Hint = 'CPP'
+      Caption = ''
       Flat = True
       OnClick = btnRemote_Auto_PSClick
       ImageList = ilButton_PS
@@ -5549,6 +5571,7 @@ object frmPSPanel: TfrmPSPanel
       Width = 95
       Height = 95
       Hint = 'Pitch AS'
+      Caption = ''
       Flat = True
       OnMouseDown = btnPSMouseDown
       OnMouseUp = btnPSMouseUp
@@ -5560,6 +5583,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       ImageList = ilButton_PS
       Color = clBlack
@@ -5570,6 +5594,7 @@ object frmPSPanel: TfrmPSPanel
       Width = 95
       Height = 95
       Hint = 'CPP'
+      Caption = ''
       Flat = True
       OnClick = btnRemote_Manual_PSClick
       ImageList = ilButton_PS
@@ -5581,6 +5606,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 114
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5593,6 +5619,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 237
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5605,6 +5632,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5617,6 +5645,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 481
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp
@@ -5629,6 +5658,7 @@ object frmPSPanel: TfrmPSPanel
       Top = 604
       Width = 95
       Height = 95
+      Caption = ''
       Flat = True
       OnMouseDown = btnNoneMouseDown
       OnMouseUp = btnNoneMouseUp

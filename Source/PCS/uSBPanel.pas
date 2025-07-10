@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, jpeg, ExtCtrls, StdCtrls, ImgList, Buttons, SpeedButtonImage,
-  uDataType, uListener, uFreezeFrom;
+  uDataType, uListener, uFreezeFrom, System.ImageList;
 
 type
   TfrmSBPanel = class(TForm)
@@ -121,6 +121,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FlasingIndicatorTimerTimer(Sender: TObject);
+    procedure btnIncr_SpeedSBClick(Sender: TObject);
+    procedure btnDecr_SpeedSBClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -254,6 +256,26 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TfrmSBPanel.btnDecr_SpeedSBClick(Sender: TObject);
+begin
+  if TSpeedButtonImage(Sender).Hint = 'Decrease Speed' then
+  begin
+    imgDecr_SpeedSB.Picture.LoadFromFile(fIndikatorOn);
+    imgIncr_SpeedSB.Picture.LoadFromFile(fIndikatorOff);
+    SpeedInChange(-10,False);
+  end
+end;
+
+procedure TfrmSBPanel.btnIncr_SpeedSBClick(Sender: TObject);
+begin
+  if TSpeedButtonImage(Sender).Hint = 'Increase Speed' then
+  begin
+    imgIncr_SpeedSB.Picture.LoadFromFile(fIndikatorOn);
+    imgDecr_SpeedSB.Picture.LoadFromFile(fIndikatorOff);
+    SpeedInChange(10,True);
+  end
 end;
 
 procedure TfrmSBPanel.btnSBMouseDown(Sender: TObject;
@@ -417,6 +439,7 @@ begin
   if FReadyForUse_ME and PCSSystem.ControlRemoteSB then
   begin
     imgRunning_StartSB.Picture.LoadFromFile(fIndikatorOn);
+    imgStoped_StopSB.Picture.LoadFromFile(fIndikatorOff);
     FFlashing_RunningStart := True;
     PCSSystem.RunningStart(C_PCS_ME_STARBOARD, True);
   end;
@@ -427,8 +450,9 @@ begin
   if FReadyForUse_ME and FRunningStart and FRemoteManual and PCSSystem.ControlRemoteSB then
   begin
     imgStoped_StopSB.Picture.LoadFromFile(fIndikatorOn);
-    FFlashing_StoppedStop := True;
-    PCSSystem.StoppedStop(C_PCS_ME_STARBOARD);
+    imgRunning_StartSB.Picture.LoadFromFile(fIndikatorOff);
+    FFlashing_StoppedStop := False;
+    PCSSystem.StoppedStop(C_PCS_ME_STARBOARD, False);
   end
   else
     Exit;
@@ -961,7 +985,7 @@ begin
         //Off
         imgRunning_StartSB.Picture.LoadFromFile(fIndikatorOff);
         FRunningStart := not Value;
-        FStoppedStop := Value;
+        FStoppedStop  := Value;
       end;
 
     epPCSMESBRemoteAuto, epPCSGBRemoteAutoSB:

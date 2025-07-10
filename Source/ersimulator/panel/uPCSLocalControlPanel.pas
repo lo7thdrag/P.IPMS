@@ -861,6 +861,9 @@ begin
       main_engine.PrimLOPumpAuto     := True;
       main_engine.PreHeatingPumpAuto := True;
       main_engine.HeaterAuto         := True;
+
+      main_engine.StopIncrease := True;
+      main_engine.Decrease     := True;
     end
   end
   else if TButton(Sender).Tag = 1 then
@@ -877,6 +880,9 @@ begin
       main_engine.PrimLOPumpAuto     := True;
       main_engine.PreHeatingPumpAuto := True;
       main_engine.HeaterAuto         := True;
+
+      main_engine.StopIncrease := True;
+      main_engine.Decrease     := True;
     end;
   end;
 end;
@@ -1141,7 +1147,7 @@ begin
         end;
         epPCSMESafetyStopsOverriden :
         begin
-           main_engine_PS.EmergencyStop := True;
+          main_engine_PS.EmergencyStop := True;
         end;
         epPCSMELocalEmergencyStop :
         begin
@@ -1901,9 +1907,15 @@ begin
   if TVrRotarySwitch(Sender).Tag = 0 then
   begin
     if vrtryswtchRemotePS.SwitchPosition = 0 then
-      ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(C_PCS_ME_PORTS, False)
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(C_PCS_ME_PORTS, False);
+//      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(C_PCS_ME_PORTS, False);
+    end
     else if vrtryswtchRemotePS.SwitchPosition = 1 then
+    begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(C_PCS_ME_PORTS, True);
+//      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(C_PCS_ME_PORTS, True);
+    end;
   end
   else if TVrRotarySwitch(Sender).Tag = 1 then
   begin

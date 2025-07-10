@@ -32,6 +32,9 @@ type
     FFlashingDeclutchPS : Boolean;
     FFlashingDeclutchSB : Boolean;
 
+    FIsStarting      : Boolean;
+    FWaitToRunEngine : Boolean;
+
     procedure OnNetworkLogger(const Value : string);
     procedure NetworkEventAssignment;
     procedure CreateCommon;
@@ -272,6 +275,9 @@ begin
     epPCSMERunning, epPCSMERemoteAuto, epPCSMERemoteManual, epPCSMEReadyForUse,
     epPCSCPPRemoteAuto, epPCSCPPRemoteManual, epPCSCPPRemote, epPCSCPPReadyForUse,
     epPCSGBRemoteAuto, epPCSGBRemoteManual, epPCSGBClutchAllowed, epPCSGBClutchEngaged,
+    // bagian PCSUI
+    epPCSGBClutchEngagedPS, epPCSGBClutchEngagedSB, epPCSMEPSRemoteAuto, epPCSMESBRemoteAuto,
+    epPCSMEPSRemoteManual, epPCSMESBRemoteManual,
     epPCSGBReadyForUse, epPCSMETransitMode, epPCSMEManouveringMode,
     epPCSCPPPumpStop1,epPCSCPPPumpStop2, epPCSCPPPumpStop3,
     epPCSCPPPumpStart1,epPCSCPPPumpStart2, epPCSCPPPumpStart3,
@@ -280,6 +286,28 @@ begin
     epPCSLeverTransferOverride, epPCSCtrlLocal, epPCSCtrlMCR, epPCSCtrlBridge,
     epPCSMEFailure, epPCSGBFailure, epPCSCPPFailure, epPCSGBShaftLocked,
     epPCSGBShaftPowerLimited, epPCSAlarms:
+    begin
+      if Sender is TMainEngine then
+        rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
+      else
+      if Sender is TCPP then
+        rPCSCmd.PortStaboardID := TCPP(Sender).Identifier
+      else
+      if Sender is TGearBox then
+        rPCSCmd.PortStaboardID := TGearBox(Sender).Identifier;
+      rPCSCmd.CommandPropsID := PropsID;
+      rPCSCmd.ValueBool := Value;
+      if Value then
+        rPCSCmd.ValueInt := 1
+      else
+        rPCSCmd.ValueInt := 0;
+
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+      if Assigned(FOnPCSCommand) then
+        FOnPCSCommand(rPCSCmd);
+    end;
+
+    epPCSMEPSRunStart, epPCSMESBRunStart:
     begin
       if Sender is TMainEngine then
         rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
@@ -521,7 +549,7 @@ begin
          FOnPCSCommand(rPCSCmd);
     end;
 
-    epPCSSpeedState :
+    epPCSSpeedState:
     begin
       if Sender is TMainEngine then
       begin
@@ -724,6 +752,24 @@ begin
     epPCSGBCtrlOilPressOut, epPCSGBLOPressInlet, epPCSGBLOTempInlet,
     epPCSGBPLB1, epPCSGBPLB2,
     epPCSGBThrAH, epPCSGBTHrAS:
+    begin
+      if Sender is TMainEngine then
+        rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
+      else if Sender is TCPP then
+        rPCSCmd.PortStaboardID := TCPP(Sender).Identifier
+      else if Sender is TGearBox then
+        rPCSCmd.PortStaboardID := TGearBox(Sender).Identifier;
+
+      rPCSCmd.CommandPropsID  := PropsID;
+      rPCSCmd.ValueDouble     := Value;
+
+      Network.AsServer.SendData(C_PCS_COMMAND,@rPCSCmd);
+
+      if Assigned(FOnPCSCommand) then
+        FOnPCSCommand(rPCSCmd);
+    end;
+
+    epPCSMESpeedPS, epPCSMESpeedSB, epPCSMEActualSpeedPS, epPCSMEActualSpeedSB :
     begin
       if Sender is TMainEngine then
         rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
@@ -1142,7 +1188,8 @@ begin
     //Signaling
     epPCSMERemoteControl:
     begin
-      ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, recERPCS.ValueBool)
+      ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, recERPCS.ValueBool);
+//      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool)
     end;
 
     epPCSSpeedState :
@@ -1197,6 +1244,31 @@ begin
         end;
       end;
     end;
+
+    epPCSMESpeed :
+    begin
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      if recERPCS.ValueBool = True then
+      begin
+        main_engine.IncreaseSpeed := True;
+        main_engine.DecreaseSpeed := False;
+      end
+      else if recERPCS.ValueBool = False then
+      begin
+        main_engine.DecreaseSpeed := True;
+        main_engine.IncreaseSpeed := False;
+      end;
+    end;
+
+   epPCSMERemoteAuto :
+   begin
+    ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool)
+   end;
+
+   epPCSMERemoteManual :
+   begin
+    ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool)
+   end;
   end;
 
   case recERPCS.CommandID of
