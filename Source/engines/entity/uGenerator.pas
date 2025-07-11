@@ -716,6 +716,14 @@ begin
           FFlagStart := 1;
         end;
       end
+      else
+      begin
+        GeneratorState := Ord(gsWaiting);{Waiting}
+        GeneratorSupplied := False;
+        SetUVW(53, 55, 56);
+        FIdleState := 0;
+        FFlagStart := 1;
+      end;
     end;
   end;
 end;

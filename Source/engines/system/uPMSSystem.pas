@@ -23,6 +23,8 @@ type
     FFwdBusbarDelay : Integer;
     FAftBusbarDelay : Integer;
     FEsbBusbarDelay : Integer;
+    FTimeParalelEmergency : Integer;
+    FTimeParalelShore : Integer;
 
     FBebanTotal : Double;
 
@@ -34,6 +36,7 @@ type
     procedure calcLoadConsumer(IdMode : E_ModeID); {k pake}
     procedure calcEmergencyConsumer(IdMode : E_ModeID); {k pake}
     procedure calcUPSConsumer(IdMode : E_ModeID); {k pake}
+    procedure calcShoreConsumer(IdMode : E_ModeID); {k pake}
     procedure setBlackOut(IdMode : E_ModeID; DGUpLimit, DGLowLimit, MSBUpLimit, MSBLowLimit: Integer); {k pake}
     procedure SetUpperLowerLimit(IdMode: E_ModeID; var DGUpLimit, DGLowLimit, MSBUpLimit, MSBLowLimit: Integer); {k pake}
     procedure SetPreAlarmActive(IdMode: E_ModeID; var SumDGOn: Integer; DGUpLimit, DGLowLimit: Integer); {k pake}
@@ -53,10 +56,9 @@ type
     function CekIsFirstLoadFromScenario(): Boolean;
     function SetDelayConnection(IdBuskopler: integer):Boolean;
 
-
   public
-    Gen : array [0..6] of TGenerator;
-    Msb : array [0..2] of TSwitchboard;
+    Gen : array [0..5] of TGenerator;
+    Msb : array [0..3] of TSwitchboard;
     Pwr : array [0..1] of TPower;
 
     constructor Create;override;
@@ -251,7 +253,7 @@ begin
     {Syarat DG Om dset standby, emergency stop normal, dlm mode auto, belum menyala/ load skenario awal, tdk failure}
     if (not Gen[i].NotStandby) and (not Gen[i].EmergencyStop) and (Gen[i].GeneratorMode = 3) and (not Gen[i].EngineAlarm) and
        (not Gen[i].CanBusFailure) and (not Gen[i].MeasPowFailure) and (not Gen[i].DCPowFailure) and (not Gen[i].ShutDown) and
-       (not Gen[i].FuelRunsOut) and ((Gen[i].GeneratorState = Ord(gsWaiting){1}) or (Gen[i].GeneratorState = 9)) then
+       (not Gen[i].FuelRunsOut) and (not Gen[i].FailureCBClosed) and ((Gen[i].GeneratorState = Ord(gsWaiting){1}) or (Gen[i].GeneratorState = 9)) then
     begin
       Gen[i].EmergencyStart := True;
       Gen[i].EngineRun := True;
@@ -343,14 +345,15 @@ begin
     case FStateRunFull of
       1: calcLoadConsumer(emFull);{Normal State}
       2: calcEmergencyConsumer(emFull);{Emergency state}
-      3: calcUpsConsumer(emFull){UPS state}
+      3: calcUpsConsumer(emFull);{UPS state}
+      4: calcShoreConsumer(emFull){Shore state}
     end;
   end
   {Jk Bus Kopler terbuka}
   else
   begin
     case FStateRunFwd of
-      1: calcLoadConsumer(emFwd);{Normal State}
+      1,4: calcLoadConsumer(emFwd);{Normal State}
       2: calcEmergencyConsumer(emFwd);{Emergency state}
       3: calcUpsConsumer(emFwd){UPS state}
     end;
@@ -358,7 +361,8 @@ begin
     case FStateRunAft of
       1: calcLoadConsumer(emAft);{Normal State}
       2: calcEmergencyConsumer(emAft);{Emergency state}
-      3: calcUpsConsumer(emAft){UPS state}
+      3: calcUpsConsumer(emAft);{UPS state}
+      4: calcShoreConsumer(emAft){Shore state}
     end;
   end;
 end;
@@ -387,6 +391,8 @@ begin
 
   if SumDGOn = 0 then
   begin
+    FTimeParalelEmergency := 500;
+
     {EG mati jk persentase pemakaian diatas 85% kemampuan}
     if (Pemakaian > 85) then
     begin
@@ -407,12 +413,35 @@ begin
   end
   else
   begin
-    {EG mati jk DG sdh menyala normal}
-    Gen[4].GeneratorState := Ord(gsCoolDown);//6;
+    FTimeParalelEmergency := FTimeParalelEmergency - 1;
+    {$REGION ' Paralel Dulu '}
+    if Round(FBebanTotal/SumDGOn) < 30 then
+    begin
+      for i := 0 to SumDGOn-1 do
+        Gen[FGenOn[i]].PowerState := 30;
 
-    {state diubah k normal}
-    Msb[2].EmergencyCon := False;
-    SetStateRun(IdMode, 1);
+      Gen[4].PowerState := 30
+    end
+    else
+    begin
+      for i := 0 to SumDGOn-1 do
+        Gen[FGenOn[i]].PowerState := Round(FBebanTotal/(SumDGOn+1) );
+
+      Gen[4].PowerState := Round(FBebanTotal/(SumDGOn+1) );
+    end;
+    {$ENDREGION}
+
+    {$REGION ' Jk syarat terpenuhi DG emergency mati '}
+    if FTimeParalelEmergency < 1 then
+    begin
+      {EG mati jk DG sdh menyala normal}
+      Gen[4].GeneratorState := Ord(gsCoolDown);//6;
+
+      {state diubah k normal}
+      Msb[2].EmergencyCon := False;
+      SetStateRun(IdMode, 1);
+    end;
+    {$ENDREGION}
   end;
 
   {DG dinyalakan ketika power EG sdh stabil}
@@ -468,7 +497,7 @@ begin
   else
     Pemakaian := (FBebanTotal/ (SumDGOn * 320)) * 100;
 
-  {Meminta bantuan DG lain. Syarat jk persentase pemakaian diatas 85% kemampuan total Dg yg nyala}
+  {$REGION ' Meminta bantuan DG lain. Syarat jk persentase pemakaian diatas 85% kemampuan total Dg yg nyala '}
   if (Pemakaian > 85) then
   begin
     {DG yg sdh nyala dset over maksimum dulu}
@@ -491,6 +520,12 @@ begin
     {jk tdk ada DG pre alaram maka blackout}
     else
     begin
+      for j := 0 to SumDGOn - 1 do
+      begin
+        if Gen[FGenOn[j]].Power < 285 then
+          Exit;
+      end;
+
       if (Msb[0].Voltage > 0) or (Msb[1].Voltage > 0) then
       begin
         for i := DGLowLimit to DGUpLimit do
@@ -503,8 +538,9 @@ begin
       setBlackOut(IdMode, DGUpLimit, DGLowLimit, MSBUpLimit, MSBLowLimit);
     end;
   end
+  {$ENDREGION}
 
-  {Mematikan DG lain. Syarat jk persentase pemakaian dibawah 38%, 50%, 56% kemampuan total Dg yg nyala}
+  {$REGION ' Mematikan DG lain. Syarat jk persentase pemakaian dibawah 38%, 50%, 56% kemampuan total Dg yg nyala ' }
   else if (SumDGOn = 2) and (Pemakaian < 38) and (GetPreAlarmStop(IdGenStop, DGUpLimit, DGLowLimit)) then
   begin
     {menghindari proses looping agar tidak mematikan semua DG}
@@ -564,8 +600,9 @@ begin
         Gen[IdGenStop].GeneratorState := Ord(gsCoolDown);//6
     end;
   end
+  {$ENDREGION}
 
-  {Jk persentase didalam range stabil kemampuan total Dg yg nyala}
+  {$REGION ' Jk persentase didalam range stabil kemampuan total Dg yg nyala '}
   else if (Pemakaian <= 85) then
   begin
     {jk Can Bus Failure, DG sequen pertama diset maks }
@@ -588,6 +625,95 @@ begin
       end;
     end;
   end;
+  {$ENDREGION}
+
+end;
+
+procedure TPMSSystem.calcShoreConsumer(IdMode: E_ModeID);
+var
+  i : Integer;                        {digunakan u/ iterasi}
+  SumDGOn : Integer;                  {digunakan u/ penampung}
+  DGUpLimit, DGLowLimit,
+  MSBUpLimit, MSBLowLimit : Integer;  {digunakan u/ batas iterasi}
+  Pemakaian : Double;                 {digunakan u/ perhitungan}
+
+begin
+  {Cek batas tiap IdMode}
+  SetUpperLowerLimit(IdMode, DGUpLimit, DGLowLimit, MSBUpLimit, MSBLowLimit);
+
+  {Set beban total yg hrs dihandle EG}
+  FBebanTotal := 0;
+  for i := MSBLowLimit to MSBUpLimit do
+    FBebanTotal := FBebanTotal + Pwr[i].PowerConsmr;
+
+  {Cek DG yg nyala dan Set pre alarm DG ke dalam list}
+  SetPreAlarmActive(IdMode, SumDGOn, DGUpLimit, DGLowLimit);
+
+  Pemakaian := (FBebanTotal/ 320) * 100;
+
+  if SumDGOn = 0 then
+  begin
+    FTimeParalelShore := 500;
+
+    {EG mati jk persentase pemakaian diatas 85% kemampuan}
+    if (Pemakaian > 85) then
+    begin
+      Gen[5].GeneratorState := Ord(gsCoolDown);//6;
+
+      {state diubah k emergency}
+      SetStateRun(IdMode, 2);
+    end
+
+    {Power EG menyesuaikan jk persentase beban didalam range stabil}
+    else if (Pemakaian <= 85) then
+    begin
+//      if Gen[5].GeneratorState <> ord(gsGenReady){5} then
+//        setBlackOut(IdMode, DGUpLimit, DGLowLimit, MSBUpLimit, MSBLowLimit)
+//      else
+        Gen[5].PowerState := FBebanTotal
+    end;
+  end
+  else
+  begin
+    FTimeParalelShore := FTimeParalelShore - 1;
+    {$REGION ' Paralel Dulu '}
+    if Round(FBebanTotal/SumDGOn) < 30 then
+    begin
+      for i := 0 to SumDGOn-1 do
+        Gen[FGenOn[i]].PowerState := 30;
+
+      Gen[4].PowerState := 30
+    end
+    else
+    begin
+      for i := 0 to SumDGOn-1 do
+        Gen[FGenOn[i]].PowerState := Round(FBebanTotal/(SumDGOn+1) );
+
+      Gen[4].PowerState := Round(FBebanTotal/(SumDGOn+1) );
+    end;
+    {$ENDREGION}
+
+    {$REGION ' Jk syarat terpenuhi DG emergency mati '}
+//    if FTimeParalelEmergency < 1 then
+//    begin
+//      {EG mati jk DG sdh menyala normal}
+//      Gen[4].GeneratorState := Ord(gsCoolDown);//6;
+//
+//      {state diubah k normal}
+//      Msb[2].EmergencyCon := False;
+//      SetStateRun(IdMode, 1);
+//    end;
+    {$ENDREGION}
+  end;
+
+//  {DG dinyalakan ketika power EG sdh stabil}
+//  if (Gen[4].Power > 40) then
+//  begin
+//    if SetDGStartHandle(DGUpLimit, DGLowLimit) then
+//    begin
+//      CekBusKoplerHandle(2,MSBLowLimit)
+//    end;
+//  end;
 
 end;
 
@@ -649,16 +775,22 @@ begin
 
   {Menyalakan Emergency Generator}
   if (Gen[4].GeneratorMode = 3) and (not Gen[4].NotStandby) and (not Gen[4].EngineAlarm) and (not Gen[4].CanBusFailure) and
-     (not Gen[4].MeasPowFailure) and (not Gen[4].DCPowFailure) and (not Gen[4].ShutDown) then
+     (not Gen[4].MeasPowFailure) and (not Gen[4].DCPowFailure) and (not Gen[4].ShutDown) and (not Gen[4].FailureCBClosed) then
   begin
     CekBusKoplerHandle(2, 4);
 
     {jk generator msh dlm keadaan mati, nyalakan}
-    if Gen[4].GeneratorState = Ord(gsWaiting){1} then
+    if not Gen[4].EngineRun then
     begin
       Gen[4].EmergencyStart := True;
       Gen[4].EngineRun := True;
     end;
+
+//    if Gen[4].GeneratorState = Ord(gsWaiting){1} then
+//    begin
+//      Gen[4].EmergencyStart := True;
+//      Gen[4].EngineRun := True;
+//    end;
 
     {state diubah k emergency}
     Msb[2].EmergencyCon := True;
@@ -690,9 +822,6 @@ begin
     begin
       FGenOn[a]:= j;
       a:= a+1;
-
-      {sebaiknya disini dikasih coding untuk menghitung jumlah power di msb}
-//      SetMSBConnection(IdMode, j)
     end
   end;
 
@@ -702,7 +831,7 @@ begin
     {Syarat pre alarm active: dset standby, emergency stop normal, dlm mode auto, belum menyala/ load skenario awal, tdk failure}
     if (not Gen[k].NotStandby) and (not Gen[k].EmergencyStop) and (Gen[k].GeneratorMode = 3) and (not Gen[k].EngineAlarm) and
        (not Gen[k].CanBusFailure) and (not Gen[k].MeasPowFailure) and (not Gen[k].DCPowFailure) and (not Gen[k].ShutDown) and
-       (not Gen[k].FuelRunsOut) and ((Gen[k].GeneratorState = Ord(gsWaiting){1}) or (Gen[k].GeneratorState = 9)) then
+       (not Gen[k].FuelRunsOut) and (not Gen[k].FailureCBClosed) and ((Gen[k].GeneratorState = Ord(gsWaiting){1}) or (Gen[k].GeneratorState = 9)) then
     begin
       FPreAlarm[b]:= k;
       b:= b+1;
@@ -863,16 +992,18 @@ end;
 procedure TPMSSystem.setConnection;
 var
   i : Integer;
-  {CbBuskopler, }FwdBusbar, AftBusbar, EsbBusbar,
+  FwdBusbar, AftBusbar, ShoreBusbar, EsbBusbar,
   AftToEsb, FwdToEsb : Boolean;
   FwdFreq, FwdVolt, AftFreq, AftVolt, EsbFreq, EsbVolt: Double;
+  calcModeTemp: E_ModeID;
+
 begin
   FwdFreq := 0; FwdVolt := 0; AftFreq := 0; AftVolt := 0;
   EsbFreq := 0; EsbVolt := 0;
   FwdBusbar := False; AftBusbar := False; EsbBusbar := False;
   AftToEsb := False;  FwdToEsb:= False;
 
-  for i := 0 to 4 do
+  for i := 0 to Length(C_GENERATOR_ID) - 1 do
   begin
     {DG yg terhubung dianggap menambah daya ke Msb}
     if Gen[i].GeneratorSupplied and Gen[i].CBClosed then
@@ -897,6 +1028,12 @@ begin
           EsbBusbar := True;
           EsbFreq := Gen[i].Frequency;
           EsbVolt := Gen[i].Voltage;
+        end;
+        5 :
+        begin
+          AftBusbar := True;
+          AftFreq := Gen[i].Frequency;
+          AftVolt := Gen[i].Voltage;
         end;
       end;
     end
@@ -929,6 +1066,9 @@ begin
       Msb[1].Voltage := EsbVolt;
 
       SetSwitchFreqValue(1, 2, 3, True);
+
+      calcModeTemp := emFull;
+//      SetStateRun(emFull, 2)
       {$ENDREGION}
     end
     else if CekBusKoplerHandle(3,1) then
@@ -947,7 +1087,13 @@ begin
         Msb[0].Voltage := EsbVolt;
 
         SetSwitchFreqValue(0, 0, 1, True);
-      end;
+
+        calcModeTemp := emFull;
+//        SetStateRun(emFull, 2);
+      end
+      else
+        calcModeTemp := emAft;
+//        SetStateRun(emAft, 2);
 
       {$ENDREGION}
     end
@@ -968,7 +1114,13 @@ begin
         Msb[1].Voltage := EsbVolt;
 
         SetSwitchFreqValue(1, 2, 3, True);
-      end;
+
+        calcModeTemp := emFull;
+//        SetStateRun(emFull, 2);
+      end
+      else
+        calcModeTemp := emFwd;
+//        SetStateRun(emFwd, 2);
       {$ENDREGION}
     end
     else {mati}
@@ -987,6 +1139,8 @@ begin
     end;
 
     SetSwitchFreqValue(2, 4, 4, True);
+
+    SetStateRun(calcModeTemp, 2);
 
     {$ENDREGION}
   end
@@ -1028,6 +1182,8 @@ begin
 
           SetSwitchFreqValue(2, 4, 4, False);
         end;
+
+        calcModeTemp := emFull;
         {$ENDREGION}
       end
       else if FwdBusbar then
@@ -1052,7 +1208,11 @@ begin
 
             SetSwitchFreqValue(1, 2, 3, True);
             AftToEsb := CekBusKoplerHandle(3,1);
-          end;
+
+            calcModeTemp := emFull;
+          end
+          else
+            calcModeTemp := emFwd;
         end;
 
         FwdToEsb := CekBusKoplerHandle(3,3);
@@ -1099,7 +1259,11 @@ begin
             SetSwitchFreqValue(0, 0, 1, True);
 
             FwdToEsb := CekBusKoplerHandle(3,3);
-          end;
+
+            calcModeTemp := emFull;
+          end
+          else
+            calcModeTemp := emAft;
         end;
 
         AftToEsb := CekBusKoplerHandle(3,1);
@@ -1143,6 +1307,12 @@ begin
         SetSwitchFreqValue(2, 4, 4, False);
         {$ENDREGION}
       end;
+
+      if Gen[5].GeneratorSupplied and Gen[5].CBClosed then
+        SetStateRun(calcModeTemp, 4)
+      else
+        SetStateRun(calcModeTemp, 1);
+
       {$ENDREGION}
     end
     else
@@ -1176,6 +1346,11 @@ begin
         Msb[1].Voltage := AftVolt;
 
         AftToEsb := CekBusKoplerHandle(3,1);
+
+        if Gen[5].GeneratorSupplied and Gen[5].CBClosed then
+          SetStateRun(emAft, 4)
+        else
+          SetStateRun(emAft, 1);
       end
       else
       begin
