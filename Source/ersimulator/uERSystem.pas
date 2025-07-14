@@ -285,7 +285,7 @@ begin
     epPCSLeverShaftDriven, epPCSLeverShaftStop, epPCSLeverShaftTrailing, epPCSLeverEmergencyStop,
     epPCSLeverTransferOverride, epPCSCtrlLocal, epPCSCtrlMCR, epPCSCtrlBridge,
     epPCSMEFailure, epPCSGBFailure, epPCSCPPFailure, epPCSGBShaftLocked,
-    epPCSGBShaftPowerLimited, epPCSAlarms:
+    epPCSGBShaftPowerLimited, epPCSAlarms, epPCSAlarmsPS, epPCSAlarmsSB:
     begin
       if Sender is TMainEngine then
         rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
@@ -690,7 +690,7 @@ begin
 
     {$REGION ' PCS Section '}
     {Paket data dikirimkan ke Mimic dan PCS Panel}
-    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSCPPSetPointPitch, epPCSGBSetpShaftSpeed:
+    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSCPPSetPointPitch, epPCSCPPActualPitchPS, epPCSCPPActualPitchSB, epPCSGBSetpShaftSpeed:
     begin
       if Sender is TMainEngine then
         rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
@@ -1069,9 +1069,10 @@ end;
 
 procedure TERSystem.NetEvent_PCSCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
-  recERPCS : ^R_Common_PCS_Command;
+  recERPCS    : ^R_Common_PCS_Command;
   main_engine : TMainEngine;
-  gearbox : TGearBox;
+  gearbox     : TGearBox;
+  cpp         : TCPP;
 begin
   recERPCS := @apRec^;
 
@@ -1189,7 +1190,6 @@ begin
     epPCSMERemoteControl:
     begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, recERPCS.ValueBool);
-//      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool)
     end;
 
     epPCSSpeedState :
@@ -1245,6 +1245,7 @@ begin
       end;
     end;
 
+    {Bagian PCS UI}
     epPCSMESpeed :
     begin
       main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
@@ -1260,15 +1261,70 @@ begin
       end;
     end;
 
-   epPCSMERemoteAuto :
-   begin
-    ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool)
-   end;
+    epPCSMERemoteAuto :
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool)
+    end;
 
-   epPCSMERemoteManual :
-   begin
-    ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool)
-   end;
+    epPCSMERemoteManual :
+    begin
+      if recERPCS.ValueBool = True then
+      begin
+        ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, recERPCS.ValueBool);
+      end;
+    end;
+
+    epPCSCtrlMCR :
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.MCRBridge(recERPCS.PortStaboardID, recERPCS.ValueBool);
+    end;
+
+    epPCSCtrlBridge :
+    begin
+      if recERPCS.ValueBool = False then
+      begin
+        ERSystem.ERManager.EngineRoom.getPCSSystem.MCRBridge(recERPCS.PortStaboardID, recERPCS.ValueBool);
+      end;
+    end;
+
+    epPCSCtrlAlarmAccept :
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.GeneralControl(recERPCS.CommandID, recERPCS.ValueBool);
+      recERPCS.CommandID := C_ORD_CTRL_ALARMACCEPT
+    end;
+
+    epPCSCtrlStopHorn :
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.GeneralControl(recERPCS.CommandID, recERPCS.ValueBool);
+      recERPCS.CommandID := C_ORD_CTRL_STOPHORN
+    end;
+
+    epPCSCtrlLamptTest:
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.GeneralControl(recERPCS.CommandID, recERPCS.ValueBool);
+      recERPCS.CommandID := C_ORD_CTRL_LAMPTEST
+    end;
+
+    epPCSCtrlBackgroundLamp :
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.GeneralControl(recERPCS.CommandID, recERPCS.ValueBool);
+      recERPCS.CommandID := C_ORD_CTRL_BACKGROUND_LAMP
+    end;
+
+    epPCSCPPSetPointPitch :
+    begin
+      cpp := ERSystem.ERManager.EngineRoom.getPCSSystem.getCPP(recERPCS.PortStaboardID);
+      if recERPCS.ValueBool = True then
+      begin
+        cpp.AheadPitch  := True;
+        cpp.AsternPitch := False;
+      end
+      else if recERPCS.ValueBool = False then
+      begin
+        cpp.AsternPitch := True;
+        cpp.AheadPitch  := False;
+      end;
+    end;
   end;
 
   case recERPCS.CommandID of

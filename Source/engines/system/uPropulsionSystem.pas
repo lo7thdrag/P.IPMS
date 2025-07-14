@@ -959,13 +959,13 @@ procedure TPropulsionSystem.MCRBridge(aPortStarboard: string;
 begin
   if aPortStarboard = C_PCS_ME_PORTS then
   begin
-//    ME[0].MCRControl := aControl;
-//    ME[0].BridgeControl := not aControl;
+    ME[0].MCRControl    := aControl;
+    ME[0].BridgeControl := not aControl;
   end
   else if aPortStarboard = C_PCS_ME_STARBOARD then
   begin
-//    ME[1].MCRControl := aControl;
-//    ME[1].BridgeControl := not aControl;
+    ME[1].MCRControl    := aControl;
+    ME[1].BridgeControl := not aControl;
   end;
 end;
 

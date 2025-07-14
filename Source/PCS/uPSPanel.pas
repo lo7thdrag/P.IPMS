@@ -125,6 +125,8 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure btnIncr_SpeedPSClick(Sender: TObject);
     procedure btnDecr_SpeedPSClick(Sender: TObject);
+    procedure btnPitch_AH_PSClick(Sender: TObject);
+    procedure btnPitch_AS_PSClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -284,6 +286,26 @@ begin
   end
 end;
 
+procedure TfrmPSPanel.btnPitch_AH_PSClick(Sender: TObject);
+begin
+  if TSpeedButtonImage(Sender).Hint = 'Pitch AH' then
+  begin
+    imgPitch_AHPS.Picture.LoadFromFile(fIndikatorOn);
+    imgPitch_ASPS.Picture.LoadFromFile(fIndikatorOff);
+    PitchInChange(1,True);
+  end
+end;
+
+procedure TfrmPSPanel.btnPitch_AS_PSClick(Sender: TObject);
+begin
+  if TSpeedButtonImage(Sender).Hint = 'Pitch AS' then
+  begin
+    imgPitch_ASPS.Picture.LoadFromFile(fIndikatorOn);
+    imgPitch_AHPS.Picture.LoadFromFile(fIndikatorOff);
+    PitchInChange(-1,False);
+  end;
+end;
+
 procedure TfrmPSPanel.btnPSMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
@@ -414,7 +436,7 @@ begin
       begin
         imgRemote_Manual_Clutch_PS.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteManual := True;
-        PCSSystem.Remote(C_PCS_GB_PORTS, C_ORD_GB_REMOTEMAN, False);
+        PCSSystem.RemoteManual(C_PCS_GB_PORTS, C_ORD_GB_REMOTEMAN, True);
       end;
     end
     else
@@ -424,7 +446,7 @@ begin
       begin
         imgRemote_Manual_CPP_PS.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteManual := True;
-        PCSSystem.Remote(C_PCS_CPP_PORTS, C_ORD_CPP_REMOTEMAN, False);
+        PCSSystem.RemoteManual(C_PCS_CPP_PORTS, C_ORD_CPP_REMOTEMAN, True);
       end;
     end
     else
@@ -434,7 +456,7 @@ begin
       begin
         imgRemote_Manual_ME_PS.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteManual := True;
-        PCSSystem.Remote(C_PCS_ME_PORTS, C_ORD_ME_REMOTEMAN, False);
+        PCSSystem.RemoteManual(C_PCS_ME_PORTS, C_ORD_ME_REMOTEMAN, True);
       end;
     end;
   end;
