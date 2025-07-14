@@ -161,7 +161,7 @@ begin
 
   IndSync[CurrentIndex].Visible := True;
 
-  if (CurrentIndex = StopIndex) and (Loop >= 2) then
+  if (CurrentIndex = StopIndex) {and (Loop >= 2)} then
   begin
     tmrSync.Enabled := False;
 
@@ -206,9 +206,15 @@ begin
   end;
 
   if Switchboard.ShoresbCircuitBreaker = True then
-    ImgIndicatorCBClose.Visible := False
+  begin
+    ImgIndicatorCBClose.Visible := False;
+    ImgIndicatorCBOpen.Visible := True;
+  end
   else
+  begin
+    ImgIndicatorCBClose.Visible := True;
     ImgIndicatorCBOpen.Visible := False;
+  end;
 
 end;
 

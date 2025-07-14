@@ -154630,7 +154630,7 @@ object frmShorePanel: TfrmShorePanel
     Top = 290
   end
   object tmrSync: TTimer
-    Interval = 100
+    Interval = 200
     OnTimer = tmrSyncTimer
     Left = 1192
     Top = 192
