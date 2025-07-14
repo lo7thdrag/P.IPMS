@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, VrControls, VrSystem, VrDesign, ImgList, Buttons,
   SpeedButtonImage, StdCtrls, Menus, pngimage, TFlatListBoxUnit, MPlayer,
-  uDataACS, TFlatRadioButtonUnit, ComCtrls, RzDTP;
+  uDataACS, TFlatRadioButtonUnit, ComCtrls, RzDTP, System.ImageList;
 
 type
 
@@ -1166,6 +1166,8 @@ begin
     tmrFlashing.Enabled := False;
     imgFire.BitmapIndex := 0;
     imgFault.BitmapIndex := 0;
+    flag := 0;
+    lblDisplayMsg.Caption := '';
 
     SysAlarm.sendStatusACS(epFaultStatus, 1);
   end

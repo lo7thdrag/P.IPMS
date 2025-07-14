@@ -168,6 +168,7 @@ begin
   if rec.CommandID = epFaultStatus then
   begin
     frmACSControl.faultStatus := rec.Status;
+    frmACSControl.UpdateAlarmStatusFromClient;
   end;
 
 end;
