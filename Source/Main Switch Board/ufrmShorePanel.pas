@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RzBmpBtn, VrControls, VrRotarySwitch,
   Vcl.StdCtrls, VrAngularMeter, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
 
-  uGenerator;
+  uGenerator, uSwitchboard;
 
 type
   TfrmShorePanel = class(TForm)
@@ -77,6 +77,7 @@ type
     procedure tmrAmpereTimer(Sender: TObject);
     procedure VrShoreModeChange(Sender: TObject);
     procedure tmrSyncTimer(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     IndSync : array of TImage;
     CurrentIndex : Integer;
@@ -87,7 +88,7 @@ type
   public
     OrderAmpere : Double;
 
-    procedure UpdateForm(Generator : TGenerator);
+    procedure UpdateForm(Switchboard : TSwitchboard);
   end;
 
 var
@@ -99,6 +100,11 @@ uses
   uMainSwitchBoardSystem;
 
 {$R *.dfm}
+
+procedure TfrmShorePanel.FormCreate(Sender: TObject);
+begin
+  IndicatorSync;
+end;
 
 procedure TfrmShorePanel.ImgIndicatorCBCloseClick(Sender: TObject);
 begin
@@ -116,12 +122,15 @@ end;
 
 procedure TfrmShorePanel.IndicatorSync;
 begin
+  if MainSwitchBoardSystem.Freezed then
+    Exit;
+
   IndSync := [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10,
               img11, img12, img13, img14, img15, img16, img17, img18, img19, img20,
-              img21, img22, img23, img24];
+              img21, img22, img23, img24, imgSync];
 
   CurrentIndex := 0;
-  StopIndex := 24;
+  StopIndex := 25;
   Loop := 0;
   tmrSync.Enabled := True;
 
@@ -147,46 +156,74 @@ procedure TfrmShorePanel.tmrSyncTimer(Sender: TObject);
 var
   i : Integer;
 begin
-//  for i := 0 to High(IndSync) do
-//    IndSync[i].Visible := False;
-//
-//  IndSync[CurrentIndex].Visible := True;
-//
-//  if (CurrentIndex = StopIndex) and (Loop >= 2) then
-//  begin
-//    tmrSync.Enabled := False;
-//
-//    img24.Visible := True;
-//    imgSync.Visible := True;
-//  end
-//  else
-//  begin
-//    Inc(currentIndex);
-//    if CurrentIndex > High(IndSync) then
-//    begin
-//      CurrentIndex := 0;
-//      inc(Loop);
-//    end;
-//  end;
+  if MainSwitchBoardSystem.Freezed then
+    Exit;
+
+  IndSync[CurrentIndex].Visible := True;
+
+  if (CurrentIndex = StopIndex) and (Loop >= 2) then
+  begin
+    tmrSync.Enabled := False;
+
+    img24.Visible := True;
+    imgSync.Visible := True;
+
+  end
+  else
+  begin
+    Inc(currentIndex);
+    if CurrentIndex > High(IndSync) then
+    begin
+      for i := 0 to High(IndSync) do
+        IndSync[i].Visible := False;
+
+      CurrentIndex := 0;
+      inc(Loop);
+    end;
+  end;
 end;
 
-procedure TfrmShorePanel.UpdateForm(Generator: TGenerator);
+procedure TfrmShorePanel.UpdateForm(Switchboard : TSwitchboard);
 begin
-//
+  if Switchboard.ShoreInterconnectionMode = 1 then
+  begin
+    VrShoreMode.SwitchPosition := 0;
+//    ImgIndicatorCBClose.Visible := True;
+//    ImgIndicatorCBOpen.Visible := True;
+  end
+  else if Switchboard.ShoreInterconnectionMode = 2 then
+  begin
+    VrShoreMode.SwitchPosition := 1;
+//    ImgIndicatorCBClose.Visible := True;
+//    ImgIndicatorCBOpen.Visible := True;
+  end
+  else
+  begin
+    VrShoreMode.SwitchPosition := 2;
+    MainSwitchBoardSystem.CBShore(True);
+//    ImgIndicatorCBClose.Visible := False;
+//    ImgIndicatorCBOpen.Visible := True;
+  end;
+
+  if Switchboard.ShoresbCircuitBreaker = True then
+    ImgIndicatorCBClose.Visible := False
+  else
+    ImgIndicatorCBOpen.Visible := False;
+
 end;
 
 procedure TfrmShorePanel.VrShoreModeChange(Sender: TObject);
 begin
   if VrShoreMode.SwitchPosition = 0 then
   begin
-    MainSwitchBoardSystem.ShoreMode(2);
+    MainSwitchBoardSystem.ShoreMode(1);
   end
   else if VrShoreMode.SwitchPosition = 1 then
   begin
-    MainSwitchBoardSystem.ShoreMode(3);
+    MainSwitchBoardSystem.ShoreMode(2);
   end
   else
-    MainSwitchBoardSystem.ShoreMode(1);
+    MainSwitchBoardSystem.ShoreMode(3);
 
 end;
 

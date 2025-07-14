@@ -480,7 +480,7 @@ begin
   case PropsID of
 
     {$REGION ' PMS Section '}
-    epPMSGeneratorMode, epPMSGeneratorState{, epPMSGeneratorRunningHours}:
+    epPMSGeneratorMode, epPMSGeneratorState, epPMSMsbShoreMode{, epPMSGeneratorRunningHours}:
     begin
       rPmsCmd.GenSwitchID := '';
 
@@ -1033,7 +1033,7 @@ begin
     epPMSMsbShoreMode:
     begin
       switchboard := ERManager.EngineRoom.getPMSSystem.getSwitchboard(recER.GenSwitchID);
-      switchboard.MsbInterconnectionMode := recER.ValueInt;
+      switchboard.ShoreInterconnectionMode := recER.ValueInt;
     end;
   end;
 end;
