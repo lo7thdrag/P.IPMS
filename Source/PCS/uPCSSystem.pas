@@ -69,12 +69,15 @@ type
     procedure Speed(aPortStarboard : String; aValue : Double; aOnOff : Boolean);
     procedure RunningStart(aPortStarboard : String; aValue : Boolean);
     procedure Remote(aPortStarboard: string; aVariant : Byte; aOnOff : Boolean);
+    procedure RemoteManual(aPortStarboard: string; aVariant : Byte; aOnOff : Boolean);
     procedure StoppedStop(aPortStarboard : String; aValue : Boolean);
     procedure Pitch(aPortStarboard : String; aValue: Integer; aOnOff : Boolean);
     procedure Clutch(aPortStarboard : String; aValue : Boolean);
 
     procedure MCRBridge(aPortStarboard : string; aControl : Boolean);
+    procedure Bridge(aPortStarboard : string; aControl : Boolean);
     procedure GeneralControl(aControl: Byte; aOnOff : Boolean);
+    procedure StopHorn(aControl: Byte; aOnOff : Boolean);
     procedure Mode(aMode : Boolean);
     procedure BackgroundLamp(aValue : Boolean);
     {--}
@@ -128,7 +131,6 @@ var
 implementation
 
 { TPCSSystem }
-
 
 procedure TPCSSystem.Clutch(aPortStarboard: String; aValue : Boolean);
 var
@@ -197,10 +199,22 @@ procedure TPCSSystem.GeneralControl(aControl: Byte; aOnOff: Boolean);
 var
   recCmd : R_Common_PCS_Command;
 begin
-  recCmd.CommandID := aControl;
-  recCmd.ValueBool := aOnOff;
+  recCmd.CommandID      := aControl;
+  recCmd.CommandPropsID := epPCSCtrlAlarmAccept;
+  recCmd.ValueBool      := aOnOff;
 
-  Network.VREngineSocket.SendData(C_PCS_COMMAND,@recCmd);
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.StopHorn(aControl: Byte; aOnOff: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.CommandID      := aControl;
+  recCmd.CommandPropsID := epPCSCtrlStopHorn;
+  recCmd.ValueBool      := aOnOff;
+
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
 procedure TPCSSystem.Remote(aPortStarboard : string; aVariant: Byte; aOnOff: Boolean);
@@ -208,6 +222,19 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSMERemoteAuto;
+  recCMD.CommandID      := aVariant;
+  recCmd.ValueBool      := aOnOff;
+
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.RemoteManual(aPortStarboard: string; aVariant: Byte; aOnOff: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSMERemoteManual;
   recCMD.CommandID      := aVariant;
   recCmd.ValueBool      := aOnOff;
 
@@ -254,11 +281,12 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
-  recCmd.CommandID := C_ORD_CPP_PITCH;
-  recCmd.ValueInt := aValue;
-  recCmd.ValueBool := aOnOff;
+  recCmd.CommandPropsID := epPCSCPPSetPointPitch;
+  recCmd.CommandID      := C_ORD_CPP_PITCH;
+  recCmd.ValueInt       := aValue;
+  recCmd.ValueBool      := aOnOff;
 
-  Network.VREngineSocket.SendData(C_PCS_COMMAND,@recCmd);
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
 procedure TPCSSystem.BackgroundLamp(aValue: Boolean);
@@ -369,10 +397,23 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
-  recCmd.CommandID := C_ORD_CTRL_MCR_BRIDGE;
-  recCmd.ValueBool := aControl;
+  recCmd.CommandPropsID := epPCSCtrlMCR;
+  recCmd.CommandID      := C_ORD_CTRL_MCR_BRIDGE;
+  recCmd.ValueBool      := aControl;
 
-  Network.VREngineSocket.SendData(C_PCS_COMMAND,@recCmd);
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.Bridge(aPortStarboard: string; aControl: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSCtrlBridge;
+  recCmd.CommandID      := C_ORD_CTRL_MCR_BRIDGE;
+  recCmd.ValueBool      := aControl;
+
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
 procedure TPCSSystem.Mode(aMode: Boolean);
@@ -1171,6 +1212,8 @@ begin
   if Assigned(client) then
   begin
     client.RegisterProcedure(C_PCS_COMMAND, NetEventPCSCommand, SizeOf(R_Common_PCS_Command));
+
+//    client.RegisterProcedure(C_PCS_COMMAND, nil, SizeOf(R_Common_PCS_Command));
   end;
 
   { set all network event here.. as instructor client}

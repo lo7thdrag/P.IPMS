@@ -244,13 +244,17 @@ begin
     FDelayer := FDelayer + aDt;
     FDelayerActualPitch := FDelayerActualPitch + aDt;
 
+    if FDelayer > 0.5 then
+    begin
+      if AheadPitch then
+        SetPitchInManual(1)
+      else if AsternPitch then
+        SetPitchInManual(-1);
+
+      FDelayer := 0;
+    end;
+
     calcActualPitch;
-
-    if AheadPitch then
-      SetPitchInManual(0.1)
-    else if AsternPitch then
-      SetPitchInManual(-0.1);
-
     calcDelayActualPitch;
   end;
 
@@ -573,18 +577,18 @@ begin
 //  begin
     if aValue > 0 then
     begin
-      if SetpointPitch < 100 then
+      if SetpointPitch < 95 then
         SetpointPitch := SetpointPitch + aValue
       else
-        SetpointPitch := 100;
+        SetpointPitch := 95;
     end
     else
     if aValue < 0 then
     begin
-      if SetpointPitch > -100 then
+      if SetpointPitch > -95 then
         SetpointPitch := SetpointPitch + aValue
       else
-        SetpointPitch := -100;
+        SetpointPitch := -95;
     end;
 //  end;
 end;
