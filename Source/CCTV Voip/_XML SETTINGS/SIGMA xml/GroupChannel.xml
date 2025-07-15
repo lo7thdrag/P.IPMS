@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<fsgroups>
+  <roles id="Role" name="Role Group">
+    <console name="INSTR"></console>
+    <console name="OOW"></console>
+    <console name="ECHOSNDR"></console>
+    <console name="INMARSAT"></console>
+  </roles>
+
+  <external id="External" name="External Room">
+
+    <console name="HF"></console>
+    <console name="VHF"></console>
+    <console name="UHF"></console>
+	
+  </external>
+</fsgroups>
+   

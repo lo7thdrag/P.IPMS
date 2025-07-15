@@ -1,0 +1,717 @@
+unit uMainIPMS;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls,  Menus, ImgList,
+  uSocketHandle, uProgressBar, uLoadGroupFromXML, uDataVoipRecord;
+
+const
+  C_IMG_DOWN = 'Down';
+  C_IMG_UP = 'Up';
+
+  C_TAG_MENU_DOWN = 20;
+  C_TAG_MENU_UP = 21;
+
+type
+  TPhoneMode = (pmIdle, pmOpen);
+  TChannelMap = class
+    aUser,
+    aChannel,
+    aChannelName,
+    aPass : string;
+
+    aMode : TPhoneMode;
+  end;
+
+  TfrmMainIPMS = class(TForm)
+    imgBg: TImage;
+    imgCO_Cabin: TImage;
+    imgCO_OPSRm: TImage;
+    imgC_Tac: TImage;
+    imgC_Ras: TImage;
+    imgC_Mc: TImage;
+    imgC_Manvr: TImage;
+    imgC_Hc: TImage;
+    imgC_Oc: TImage;
+    imgBlank1: TImage;
+    imgBlank2: TImage;
+    imgSonar: TImage;
+    imgOPRSm_Gen: TImage;
+    imgBlank3: TImage;
+    imgEng_Room: TImage;
+    imgBR_Owtw: TImage;
+    imgBR_Coms: TImage;
+    imgPTT: TImage;
+    imgSound: TImage;
+    imgBell: TImage;
+    imgMenu: TImage;
+    imgMenu_Min: TImage;
+    imgMenu_Plus: TImage;
+    ilDown: TImageList;
+    ilUp: TImageList;
+    pnlConnector: TPanel;
+    pnlControl: TPanel;
+    pnlSesVoip: TPanel;
+    pmRestart: TPopupMenu;
+    RunConsole1: TMenuItem;
+    RestartConnector1: TMenuItem;
+    Restart1: TMenuItem;
+    RestartPhoneConnector1: TMenuItem;
+    ShowConector1: TMenuItem;
+    HideConnector1: TMenuItem;
+    N1: TMenuItem;
+    Reconnect1: TMenuItem;
+    Close1: TMenuItem;
+    CloseApplication1: TMenuItem;
+    N2: TMenuItem;
+    Shutdown1: TMenuItem;
+    Restart2: TMenuItem;
+    N3: TMenuItem;
+    Shutdown2: TMenuItem;
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure RunConsole1Click(Sender: TObject);
+    procedure imgBgDblClick(Sender: TObject);
+  private
+    { Private declarations }
+    { List Group }
+    FListInternal : TList;
+    FListExternal : Tlist;
+
+    { Change Button Image }
+    FBitMap : TBitmap;
+    FSelfImageRole : TImage;
+
+    { Change Button Image }
+    procedure LoadFromImageListUp(AIndex: Integer; AImage: TImage; ABitmap: TBitmap);
+    procedure LoadFromImageListDown(AIndex: Integer; AImage: TImage; ABitmap: TBitmap);
+
+    { MouseDown }
+    procedure ButtonDown(Sender: TObject; Button: TMouseButton;
+              Shift: TShiftState; X, Y: Integer);
+    procedure ButtonUp(Sender: TObject; Button: TMouseButton;
+              Shift: TShiftState; X, Y: Integer);
+
+    { Visible/Hide Connector}
+    procedure SetPnlStatusConnect(aVisible: Boolean);
+
+    { Maintenance }
+    {
+      1: ClosePhone ; 2: RestartPhone; 3: RestartPhone&Connector;
+      4: RestartPC; 5: ShutdownPC
+    }
+    procedure PhoneMaintenence(aId : integer);
+
+    procedure RunPhone;
+    procedure StopPhone;
+
+    function GetRoleInternal(aId : integer): string;
+    procedure InternalActivity(aId : integer);
+    function GetRoleExternal(aId : integer):string;
+    procedure ExternalActivity(aId : integer);
+  public
+    { Public declarations }
+    isRunSimulation : Boolean;
+    procedure RunSimulation;
+    procedure RecvICSData(rec: TICSData);
+  end;
+
+var
+  frmMainIPMS: TfrmMainIPMS;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmMainIPMS.RecvICSData(rec: TICSData);
+begin
+  if VoipManager.SetConfig.idSkin <> 2 then Exit;
+
+  { Maintenance }
+  {
+    1: ClosePhone ; 2: RestartPhone; 3: RestartPhone&Connector;
+    4: RestartPC; 5: ShutdownPC
+  }
+
+  if rec.Mode = 10 then
+  begin
+    if not VoipManager.isOut and isRunSimulation then
+    begin
+      PhoneMaintenence(4);
+    end;
+  end
+  else
+  if rec.Mode = 11 then
+  begin
+    if not VoipManager.isOut then
+    begin
+      PhoneMaintenence(2);
+    end;
+  end
+  else
+  if rec.Mode = 12 then
+  begin
+    if not VoipManager.isOut then
+    begin
+      PhoneMaintenence(5);
+    end;
+  end
+  else
+  if rec.Mode = 13 then
+  begin
+    if not VoipManager.isOut then
+    begin
+      PhoneMaintenence(1);
+    end;
+  end;
+end;
+
+procedure TfrmMainIPMS.ButtonDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+  aTag : Integer;
+  aTImage : TImage;
+begin
+  if not isRunSimulation then Exit;
+
+  aTag := TImage(sender).Tag;
+  aTImage := TImage(sender);
+
+  if Assigned(FSelfImageRole) then
+  begin
+    if aTImage = FSelfImageRole then
+      Exit;
+  end;
+
+  if aTImage.Hint = C_IMG_DOWN then
+  begin
+    LoadFromImageListDown(aTag, aTImage, FBitMap);
+    aTImage.Hint := C_IMG_UP;
+  end
+  else
+  begin
+    LoadFromImageListUp(aTag, aTImage, FBitMap);
+    aTImage.Hint := C_IMG_DOWN;
+  end;
+
+  { External Call }
+  if (Tag >=8) and (Tag<=15) then
+  begin
+    ExternalActivity(aTImage.Tag);
+  end;
+  { Internal Call }
+  if (Tag>=0) and (Tag<=7) then
+  begin
+    InternalActivity(aTImage.Tag);
+  end;
+end;
+
+procedure TfrmMainIPMS.ButtonUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+  aTag : Integer;
+  aTImage : TImage;
+begin
+  if not isRunSimulation then Exit;
+
+  aTag := TImage(sender).Tag;
+  aTImage := TImage(sender);
+
+  aTImage.Hint := C_IMG_DOWN;
+  LoadFromImageListUp(aTag, aTImage, FBitMap);
+end;
+
+procedure TfrmMainIPMS.ExternalActivity(aId: integer);
+var
+  i : integer;
+  aStringRole : string;
+  aChanelMap : TChannelMap;
+begin
+  aStringRole := GetRoleExternal(aId);
+
+  for i := 0 to FListExternal.Count - 1 do
+  begin
+    aChanelMap := TChannelMap(FListExternal.Items[i]);
+    if aChanelMap.aChannelName = aStringRole then
+    begin
+      case aChanelMap.aMode of
+        pmIdle :
+        begin
+          aChanelMap.aMode := pmOpen;
+
+          VoipManager.SetToMode_Receiver(VoipManager.SetConfig.ExternalStartPort_VOIP + i);
+          VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.ExternalStartPort_VOIP + i);
+          VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.ExternalStartPort_VOIP + i);
+        end;
+
+        pmOpen :
+        begin
+          aChanelMap.aMode := pmIdle;
+
+          VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.ExternalStartPort_VOIP + i);
+          VoipManager.SetToMode_Off(VoipManager.SetConfig.ExternalStartPort_VOIP + i);
+        end;
+      end;
+    end;
+  end;
+end;
+
+procedure TfrmMainIPMS.FormCreate(Sender: TObject);
+var
+  i : Integer;
+  xmlPath : string;
+  aStringRole : string;
+  aGroupList : TFsGroupList;
+  aChannelMap : TChannelMap;
+begin
+  isRunSimulation := False;
+  FListInternal := TList.Create;
+  FListExternal := TList.Create;
+
+  { Load Group }
+  try
+    aGroupList := TFsGroupList.Create;
+    xmlPath := ExtractFilePath(Application.ExeName);
+    xmlPath := xmlPath + 'GroupChannel.xml';
+
+    if FileExists(xmlPath) then
+    begin
+      aGroupList.LoadFromFile(xmlPath);
+
+      { internal role }
+      for i := 0 to aGroupList.RoleList.Count - 1 do
+      begin
+        aChannelMap := TChannelMap.Create;
+        aChannelMap.aUser := IntToStr(1001 + i);
+        aChannelMap.aPass := '1234';
+        aChannelMap.aChannelName := aGroupList.RoleList[i];
+        aChannelMap.aChannel := IntToStr(VoipManager.SetConfig.aRoomInternal + i);
+        aChannelMap.aMode := pmIdle;
+        FListInternal.Add(aChannelMap);
+      end;
+      { external role }
+      for i := 0 to aGroupList.ExternalList.Count - 1 do
+      begin
+        aChannelMap := TChannelMap.Create;
+        aChannelMap.aUser := IntToStr(1001 + i);
+        aChannelMap.aPass := '1234';
+        aChannelMap.aChannelName := aGroupList.ExternalList[i];
+        aChannelMap.aChannel := IntToStr(VoipManager.SetConfig.aRoomExternal + i);
+        aChannelMap.aMode := pmIdle;
+        FListExternal.Add(aChannelMap);
+      end;
+    end;
+  finally
+    aGroupList.Free;
+  end;
+
+  FBitMap := TBitmap.Create;
+
+  for i := 0 to ComponentCount - 1 do
+  begin
+    if Components[i].ClassType <> TImage then Continue;
+    if (Components[i] as TImage).Tag = -1 then Continue;
+
+    (Components[i] as TImage).Hint := C_IMG_DOWN;
+    (Components[i] as TImage).OnMouseDown := ButtonDown;
+
+    if ((Components[i] as TImage).Tag = C_TAG_MENU_DOWN) or
+       ((Components[i] as TImage).Tag = C_TAG_MENU_UP)
+    then
+      (Components[i] as TImage).OnMouseUp := ButtonUp;
+
+    { Check Role Internal }
+    aStringRole := GetRoleInternal((Components[i] as TImage).Tag);
+    if aStringRole = VoipManager.SetConfig.aRole then
+    begin
+      FSelfImageRole := (Components[i] as TImage);
+      LoadFromImageListDown(9, FSelfImageRole, FBitMap);
+      FSelfImageRole.Hint := C_IMG_DOWN;
+    end;
+  end;
+end;
+
+procedure TfrmMainIPMS.FormDestroy(Sender: TObject);
+var
+  i : Integer;
+begin
+  for i:= FListInternal.Count -1 downto 0 do
+  begin
+    FListInternal.Delete(i);
+  end;
+  FListInternal.Clear;
+  FListInternal.Free;
+
+  for i:= FListExternal.Count -1 downto 0 do
+  begin
+    FListExternal.Delete(i);
+  end;
+  FListExternal.Clear;
+  FListExternal.Free;
+
+  FBitMap.Free;
+end;
+
+procedure TfrmMainIPMS.FormShow(Sender: TObject);
+begin
+  if VoipManager.SetConfig.Monitor < Screen.MonitorCount then
+  begin
+    Top := Screen.Monitors[VoipManager.SetConfig.Monitor].Top + VoipManager.SetConfig.PhoneTop;
+    Left := Screen.Monitors[VoipManager.SetConfig.Monitor].Left + VoipManager.SetConfig.PhoneLeft;
+  end
+  else
+  begin
+    Top := VoipManager.SetConfig.PhoneTop;
+    Left := VoipManager.SetConfig.PhoneLeft;
+  end;
+end;
+
+function TfrmMainIPMS.GetRoleExternal(aId: integer): string;
+begin
+  Result := '';
+  case aId of
+    { C*TACT}
+    8 :
+    begin
+      Result := 'C*TACT';
+    end;
+    { C*RAS}
+    11 :
+    begin
+      Result := 'C*RAS';
+    end;
+    { C*MC }
+    12 :
+    begin
+      Result := 'C*MC';
+    end;
+    { C*Manvr }
+    13 :
+    begin
+      Result := 'C*Manvr';
+    end;
+    { C*HC }
+    14 :
+    begin
+      Result := 'C*HC';
+    end;
+    { C*OC }
+    15 :
+    begin
+      Result := 'C*OC';
+    end;
+  end;
+end;
+
+function TfrmMainIPMS.GetRoleInternal(aId: integer): string;
+begin
+  Result := '';
+  case aId of
+    { CO_OPSRm }
+    0 :
+    begin
+      Result := 'CO_OPSRm';
+    end;
+    { SONAR }
+    1 :
+    begin
+      Result := 'SONAR';
+    end;
+    { CO_Cabin }
+    2 :
+    begin
+      Result := 'CO_Cabin';
+    end;
+    { OPSRm_Gen }
+    3 :
+    begin
+      Result := 'OPSRm_Gen';
+    end;
+    { MCR1 }
+    4 :
+    begin
+      Result := 'MCR1';
+    end;
+    { MCR2 }
+    5 :
+    begin
+      Result := 'MCR2';
+    end;
+    { MCR3 }
+    6 :
+    begin
+      Result := 'MCR3';
+    end;
+    { MCR4 }
+    7 :
+    begin
+      Result := 'MCR4';
+    end;
+  end;
+end;
+
+procedure TfrmMainIPMS.imgBgDblClick(Sender: TObject);
+var
+  pt : TPoint;
+begin
+  GetCursorPos(pt);
+  pmRestart.Popup(pt.X, pt.Y);
+end;
+
+procedure TfrmMainIPMS.InternalActivity(aId: integer);
+var
+  i : integer;
+  aStringRole : string;
+  aChanelMap : TChannelMap;
+begin
+  aStringRole := GetRoleInternal(aId);
+
+  for i := 0 to FListInternal.Count - 1 do
+  begin
+    aChanelMap := TChannelMap(FListInternal.Items[i]);
+    if aChanelMap.aChannelName = VoipManager.SetConfig.aRole then
+      Continue;
+
+    if aChanelMap.aChannelName = aStringRole then
+    begin
+      case aChanelMap.aMode of
+        pmIdle :
+        begin
+          aChanelMap.aMode := pmOpen;
+
+          VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + i);
+          VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + i);
+          VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + i);
+        end;
+
+        pmOpen :
+        begin
+          aChanelMap.aMode := pmIdle;
+
+          VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + i);
+          VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + i);
+        end;
+      end;
+    end;
+  end;
+end;
+
+procedure TfrmMainIPMS.LoadFromImageListDown(AIndex: Integer; AImage: TImage;
+  ABitmap: TBitmap);
+begin
+  ilDown.GetBitmap(AIndex, ABitmap);
+  AImage.Picture.Assign(ABitmap);
+end;
+
+procedure TfrmMainIPMS.LoadFromImageListUp(AIndex: Integer; AImage: TImage;
+  ABitmap: TBitmap);
+begin
+  ilUp.GetBitmap(AIndex, ABitmap);
+  AImage.Picture.Assign(ABitmap);
+end;
+
+procedure TfrmMainIPMS.RunConsole1Click(Sender: TObject);
+var
+  i, id , aTag : Integer;
+  sExeRestart : string;
+
+  DiffTop, DiffLeft : Integer;
+  ChMap : TChannelMap;
+begin
+  {
+    1: ClosePhone ; 2: RestartPhone; 3: RestartPhone&Connector;
+    4: RestartPC; 5: ShutdownPC
+  }
+
+  aTag := (Sender as TComponent).Tag;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  case aTag of
+    { Run Console Putty }
+    1 :
+    begin
+      VoipManager.RunConsole;
+    end;
+    { Restart Connector }
+    2 :
+    begin
+      frmProgress.aMode := 1;
+      frmProgress.Left := Left + DiffLeft;
+      frmProgress.Top  := Top + DiffTop;
+      frmProgress.Show;
+    end;
+    { Restart Phone }
+    3 :
+    begin
+      PhoneMaintenence(2);
+    end;
+    { Restart Phone&Connector }
+    4 :
+    begin
+      PhoneMaintenence(3);
+    end;
+    { Visible/Hide Connector }
+    5 :
+    begin
+      SetPnlStatusConnect(true);
+    end;
+    6 :
+    begin
+      SetPnlStatusConnect(false);
+    end;
+    { Reconnect }
+    7 :
+    begin
+
+    end;
+    { Close Phone }
+    8 :
+    begin
+      PhoneMaintenence(1);
+    end;
+    { Restart PC }
+    9 :
+    begin
+      PhoneMaintenence(4);
+    end;
+    { Shutdown PC}
+    10 :
+    begin
+      PhoneMaintenence(5);
+    end;
+  end;
+end;
+
+procedure TfrmMainIPMS.SetPnlStatusConnect(aVisible: Boolean);
+begin
+  pnlConnector.Visible := aVisible;
+  pnlSesVoip.Visible   := aVisible;
+  pnlControl.Visible   := aVisible;
+end;
+
+procedure TfrmMainIPMS.RunPhone;
+var
+  i : integer;
+  aChannelMap : TChannelMap;
+
+  aParamPhone, aParamJam    : string;
+  SIPPort, RTPport, ICSPort : Integer;
+begin
+  for i := 0 to FListExternal.Count - 1 do
+  begin
+    SIPPort := VoipManager.SetConfig.ExternalStartPort_SIP + (i*3);
+    RTPport := SIPPort + 1;
+    ICSPort := VoipManager.SetConfig.ExternalStartPort_VOIP + i;
+
+    aChannelMap := TChannelMap(FListExternal.Items[i]);
+
+    aParamPhone := '-id ' + IntToStr(ICSPort)
+      + ' -u ' + aChannelMap.aUser + ' -p ' + '1234' + ' -sipport ' + IntToStr(SIPPort)
+      + ' -rtpport ' + IntToStr(RTPport) + ' -ch ' + aChannelMap.aChannel
+      + ' -auto -nodial -silent -log -chcode '
+      + aChannelMap.aChannelName + ' -chband ' + IntToStr(0);
+
+    aParamJam := '';
+
+    VoipManager.RunPhone(1, aParamPhone, aParamJam);
+  end;
+
+  for i := 0 to FListInternal.Count - 1 do
+  begin
+    SIPPort := VoipManager.SetConfig.InternalStartPort_SIP + (i*3);
+    RTPport := SIPPort + 1;
+    ICSPort := VoipManager.SetConfig.InternalStartPort_VOIP + i;
+
+    aChannelMap := TChannelMap(FListInternal.Items[i]);
+
+    if aChannelMap.aChannelName = VoipManager.SetConfig.aRole then
+    begin
+      aParamPhone := '-id ' + IntToStr(ICSPort)
+      + ' -u ' + IntToStr(1001 + i) + ' -p ' + '1234' + ' -sipport ' + IntToStr(SIPPort)
+      + ' -rtpport ' + IntToStr(RTPport)
+      + ' -ch ' + aChannelMap.aChannel
+      + ' -auto -dial -silent -log -chcode '
+      + aChannelMap.aChannelName + ' -chband ' + IntToStr(0);
+
+      aParamJam := '';
+
+      VoipManager.RunPhone(2, aParamPhone, aParamJam);
+    end
+    else
+    begin
+      aParamPhone := '-id ' + IntToStr(ICSPort)
+      + ' -u ' + IntToStr(1001 + i) + ' -p ' + '1234' + ' -sipport ' + IntToStr(SIPPort)
+      + ' -rtpport ' + IntToStr(RTPport)
+      + ' -ch ' + aChannelMap.aChannel
+      + ' -auto -nodial -silent -log -chcode '
+      + aChannelMap.aChannelName + ' -chband ' + IntToStr(0);
+
+      aParamJam := '';
+
+      VoipManager.RunPhone(5, aParamPhone, aParamJam);
+    end;
+  end;
+end;
+
+procedure TfrmMainIPMS.StopPhone;
+var
+  i : Integer;
+begin
+  { Exit External Phone }
+  for i := 0 to FListExternal.Count - 1 do
+  begin
+    VoipManager.SetToMode_ExitPhone(VoipManager.SetConfig.ExternalStartPort_VOIP + i);
+  end;
+
+  { Exit Internal Phone }
+  for i := 0 to FListInternal.Count - 1 do
+  begin
+    VoipManager.SetToMode_ExitPhone(VoipManager.SetConfig.InternalStartPort_VOIP + i);
+  end;
+end;
+
+procedure TfrmMainIPMS.RunSimulation;
+begin
+  if VoipManager.SetConfig.idSkin <> 2 then Exit;
+
+  isRunSimulation := True;
+
+  RunPhone;
+end;
+
+{
+  1: ClosePhone ; 2: RestartPhone; 3: RestartPhone&Connector;
+  4: RestartPC; 5: ShutdownPC
+}
+procedure TfrmMainIPMS.PhoneMaintenence(aId: integer);
+var
+  DiffLeft,
+  DiffTop : integer;
+begin
+  VoipManager.isOut := True;
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  StopPhone;
+
+  case aId of
+    1 : frmProgress.aMode := 6;
+    2 : frmProgress.aMode := 2;
+    3 : frmProgress.aMode := 3;
+    4 : frmProgress.aMode := 7;
+    5 : frmProgress.aMode := 8;
+  end;
+
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+end;
+
+end.

@@ -1,0 +1,1033 @@
+unit uMain;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ComCtrls, ExtCtrls,
+
+  uLoadSetting, uTCPDatatype, uTCPServer, uTCPClient, MSThreadTimer,
+  uLoadConsoleIP, OverbyteIcsWndControl, OverbyteIcsWSocket, OverbyteIcsWSocketS,
+  Menus;
+
+const
+  C_CHECK = 'check';
+  C_RUN = 'run';
+  C_KILL = 'kill';
+  C_RESTART = 'restart';
+  C_SHUTDOWN_PC = 'shutdownpc';
+  C_RESTART_PC = 'restartpc';
+  C_SERVERDOWN = 'ServerDown';
+  C_SERVERRUN = 'ServerRun';
+
+  SockStateS: array[TSocketState] of string
+  = (' InvalidState',
+    ' Opened', ' Bound',
+    ' Connecting', 'SocksConnected', ' Connected',
+    ' Accepting', ' Listening',
+    ' Closed',
+    'DnsLookup');
+
+type
+  TCubicleMap = class
+    GroupID  : Integer;
+    Name     : string;
+    TabSheet : TTabSheet;
+    Memo     : TMemo;
+    ListCom  : TStrings;
+  end;
+
+  TfrmMain = class(TForm)
+    pnlUp: TPanel;
+    pnlBody: TPanel;
+    pnlBottom: TPanel;
+    pgCubicle: TPageControl;
+    mmoConnection: TMemo;
+    pnlRight: TPanel;
+    btnListen: TButton;
+    cbbMode: TComboBox;
+    lvMember: TListView;
+    lblStatusServer: TLabel;
+    lblStatusConnect: TLabel;
+    TCPClientServer1: TWSocket;
+    lbl1: TLabel;
+    lblBridgeStatus: TLabel;
+    pmClient: TPopupMenu;
+    CloseAllCommunication1: TMenuItem;
+    RestartAllCommunication1: TMenuItem;
+    ShutdownSystem1: TMenuItem;
+    lbl2: TLabel;
+    grpServer: TGroupBox;
+    btnServerStart: TButton;
+    btnServerCheck: TButton;
+    btnServerStop: TButton;
+    btnPCShutdown: TButton;
+    btnPCRestart: TButton;
+    btnServerRestart: TButton;
+    grpClient: TGroupBox;
+    btnClienthandle: TButton;
+    StartAllCommunication1: TMenuItem;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnListenClick(Sender: TObject);
+    procedure TCPClientServer1SessionClosed(Sender: TObject; ErrCode: Word);
+    procedure TCPClientServer1DataAvailable(Sender: TObject; ErrCode: Word);
+    procedure CloseAllCommunication1Click(Sender: TObject);
+    procedure btnClienthandleClick(Sender: TObject);
+  private
+    { Private declarations }
+    //Control Server
+    FTmr_Connect : TTimer;
+    FTmr_CheckServer : TTimer;
+    FTmr_WaitToPlay : TTimer;
+    FTmr_Preplay : TTimer;
+    FStateServer : Byte;
+
+    FThread : TMSTimer;
+
+    //Bridge Server
+    FTmr_ConnectToBridge : TTimer;
+
+    isAutomaticCall : Boolean;
+
+    SetConfig   : TIniSet;
+    ListCubicle : TList;
+    TCP_Server  : TTCPServer;
+    TCP_Client  : TTCPClient;
+
+    GroupIP     : TFsGroupIP;
+
+    procedure PrepareFormForCub;
+    procedure ObjectCreate;
+
+    procedure SetEmptyList;
+
+    //Client or Cubicle Connect/Disconnect
+    procedure ClientConnect(const Cmd : string);
+    procedure ClientDisconnect(Const Cmd : string);
+
+    procedure threadOnRunning(const dt: double);
+
+    //Connect or Disconnect from Bridge
+    procedure OnTCPChangeState( Sender: TObject; OldState, NewState: TSocketState );
+    procedure OnTimerConnectBridgeOnTime(Sender : TObject);
+    procedure ConnectToBridge;
+    procedure ClientRecv_ClientManagement(apRec: PAnsiChar; aSize: word);
+
+    //TCP Server
+    procedure CubicleActivity(apRec: PAnsiChar; aSize: Word);
+    procedure ReqStudentLogin(apRec: PAnsiChar; aSize: Word);
+
+    //Control Server Voip
+    procedure OnControlServerClick(Sender : TObject);
+    procedure OnTimerConnectOnTime(Sender : TObject);
+    procedure OnTimerCheckServerOnTime(Sender : TObject);
+    procedure OnTimerWaitPlayRun(Sender : TObject);
+    procedure OnTimerPreplayRun(Sender : Tobject);
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMain: TfrmMain;
+
+implementation
+
+uses uDataVoipRecord;
+
+{$R *.dfm}
+
+procedure TfrmMain.btnClienthandleClick(Sender: TObject);
+var
+  p : TPoint;
+begin
+  GetCursorPos(p);
+  pmClient.Popup(p.X, p.Y);
+end;
+
+procedure TfrmMain.btnListenClick(Sender: TObject);
+var
+  i : Integer;
+
+  CubMap : TCubicleMap;
+begin
+  case TComponent(sender).Tag of
+    0 : begin
+          TCP_Server.Listen(SetConfig.portListenSessionVoip);
+
+          btnListen.Tag := 1;
+          btnListen.Caption := 'Stop';
+
+          pnlUp.Caption := 'Listening @' + SetConfig.portListenSessionVoip;
+          mmoConnection.Lines.Add('Server Start');
+
+          for i := 0 to ListCubicle.Count - 1 do
+          begin
+            CubMap := TCubicleMap(ListCubicle.Items[i]);
+            CubMap.Memo.Lines.Add('Waiting For Client of ' + CubMap.Name);
+          end;
+
+          case cbbMode.ItemIndex of
+            0 : begin
+                  isAutomaticCall := True;
+                  mmoConnection.Lines.Add('Automatic Call Mode');
+                end;
+            1 : begin
+                  isAutomaticCall := False;
+                  mmoConnection.Lines.Add('Manual Call Mode');
+                end;
+          end;
+        end;
+    1 : begin
+          TCP_Server.Stop;
+
+          btnListen.Tag := 0;
+          btnListen.Caption := 'Start';
+
+          pnlUp.Caption := 'Listening @null';
+          mmoConnection.Lines.Add('Server Stop');
+
+          for i := 0 to ListCubicle.Count - 1 do
+          begin
+            CubMap := TCubicleMap(ListCubicle.Items[i]);
+            CubMap.Memo.Lines.Add('Stop For Client of ' + CubMap.Name);
+          end;
+
+          SetEmptyList;
+        end;
+  end;
+end;
+
+procedure TfrmMain.ClientConnect(const Cmd: string);
+var
+  RecSend : TRecCallMode;
+begin
+  mmoConnection.Lines.Add(Cmd + ' Connected');
+
+  RecSend.IsAutoCall := isAutomaticCall;
+  TCP_Server.SendDataToIPAddress(CPID_MODECALL, @RecSend, Cmd);
+end;
+
+procedure TfrmMain.ClientDisconnect(const Cmd: string);
+var
+  i,j : integer;
+  idList : Integer;
+
+  Con    : TConsoleIP;
+  CubMap : TCubicleMap;
+
+  isFound : Boolean;
+begin
+  idList  := -1;
+  isFound := false;
+
+  mmoConnection.Lines.Add(Cmd + ' Disonnected');
+
+  for i := 0 to ListCubicle.Count - 1 do
+  begin
+    CubMap := TCubicleMap(ListCubicle.Items[i]);
+
+    for j := 0 to GroupIP.ListIP.Count - 1 do
+    begin
+      Con := TConsoleIP(GroupIP.ListIP.Items[j]);
+      if Cmd = Con.ConsoleIP then
+      begin
+        IdList := CubMap.ListCom.IndexOf(Con.ConsoleName);
+        if IdList > -1 then
+        begin
+          CubMap.ListCom.Delete(IdList);
+          CubMap.Memo.Lines.Add(Con.ConsoleName + ' Logout As ' +  Con.ConsoleName);
+        end;
+
+        Break;
+      end;
+    end;
+
+    if isFound then Break;
+  end;
+end;
+
+
+procedure TfrmMain.CloseAllCommunication1Click(Sender: TObject);
+var
+  RecSend : TICSData;
+  RecSendStartStopPhone : TRecServerStat;
+begin
+  case TComponent(sender).Tag of
+    0 :
+    begin
+      mmoConnection.Lines.Add('Receive Close All Communication');
+
+      RecSend.Mode := 13;
+      RecSend.ParamPhone := '';
+      RecSend.ParamJam := '';
+      TCP_Server.SendData(CPID_ICSData, @RecSend);
+    end;
+
+    1 :
+    begin
+      mmoConnection.Lines.Add('Receive Restart All Communication');
+
+      RecSend.Mode := 11;
+      RecSend.ParamPhone := '';
+      RecSend.ParamJam := '';
+      TCP_Server.SendData(CPID_ICSData, @RecSend);
+    end;
+
+    2 :
+    begin
+      mmoConnection.Lines.Add('Receive Shutdown All System');
+
+      RecSend.Mode := 12;
+      RecSend.ParamPhone := '';
+      RecSend.ParamJam := '';
+      TCP_Server.SendData(CPID_ICSData, @RecSend);
+    end;
+
+    3 :
+    begin
+        RecSendStartStopPhone.Mode := 2;
+        RecSendStartStopPhone.StateServer1 := 1;
+        RecSendStartStopPhone.StateServer2 := 1;
+
+        TCP_Server.SendData(CPID_Server_Stat, @RecSendStartStopPhone);
+    end;
+
+  end;
+end;
+
+
+procedure TfrmMain.ClientRecv_ClientManagement(apRec: PAnsiChar;
+  aSize: word);
+var
+  RecRecv : ^TRecData2DOrder;
+  RecSend : TICSData;
+begin
+  RecRecv := @apRec^;
+
+  case RecRecv^.orderID of
+    _CM_CLIENT_MANAGE :
+    begin
+      case RecRecv^.numValue of
+
+        __CM_CLIENT_RESTARTALLCOMM :
+        begin
+          mmoConnection.Lines.Add('Receive Restart All Communication');
+
+          RecSend.Mode := 11;
+          RecSend.ParamPhone := '';
+          RecSend.ParamJam := '';
+          TCP_Server.SendData(CPID_ICSData, @RecSend);
+        end;
+
+        __CM_CLIENT_SHUTDOWNALLCOM :
+        begin
+          mmoConnection.Lines.Add('Receive Shutdown All System');
+
+          RecSend.Mode := 12;
+          RecSend.ParamPhone := '';
+          RecSend.ParamJam := '';
+          TCP_Server.SendData(CPID_ICSData, @RecSend);
+        end;
+
+        __CM_CLIENT_CLOSEALLCOM :
+        begin
+          mmoConnection.Lines.Add('Receive Close All Communication');
+
+          RecSend.Mode := 13;
+          RecSend.ParamPhone := '';
+          RecSend.ParamJam := '';
+          TCP_Server.SendData(CPID_ICSData, @RecSend);
+        end;
+
+        __CM_CLIENT_RESTARTSERVERCOMM :
+        begin
+          mmoConnection.Lines.Add('Receive Restart Server Communication');
+
+          if TCPClientServer1.State = wsConnected then
+          begin
+            mmoConnection.Lines.Add('Receive Restart All Communication & Server');
+
+//            TCPClientServer1.SendLine(C_RESTART);
+            TCPClientServer1.SendLine(C_KILL);
+            TCPClientServer1.SendLine(C_RUN);
+
+            RecSend.Mode := 11;
+            RecSend.ParamPhone := '';
+            RecSend.ParamJam := '';
+            TCP_Server.SendData(CPID_ICSData, @RecSend);
+          end
+          else
+            FTmr_Connect.Enabled := true;
+        end;
+
+        __CM_CLIENT_SHUTDOWNSERVERCOMM :
+        begin
+          mmoConnection.Lines.Add('Receive Shutdown Server Communication');
+
+          if TCPClientServer1.State = wsConnected then
+            TCPClientServer1.SendLine(C_SHUTDOWN_PC)
+          else
+            FTmr_Connect.Enabled := true;
+        end;
+
+      end;
+    end;
+  end;
+end;
+
+procedure TfrmMain.ConnectToBridge;
+begin
+  if SetConfig.isEnableBridge then
+    FTmr_ConnectToBridge.Enabled := true;
+end;
+
+procedure TfrmMain.CubicleActivity(apRec: PAnsiChar; aSize: Word);
+var
+  RecRecv : ^TRecInternal;
+
+  i,IdList : Integer;
+  CubMap : TCubicleMap;
+  RecSend : TRecInternal;
+begin
+  RecRecv := @apRec^;
+  IdList  := -1;
+
+  for i := 0 to ListCubicle.Count - 1 do
+  begin
+    CubMap := TCubicleMap(ListCubicle.Items[i]);
+    if CubMap.Memo.Lines.Count > 100 then CubMap.Memo.Lines.Clear;
+
+    if LowerCase(CubMap.Name) <> LowerCase(RecRecv^.RoleCub) then Continue;
+
+    case RecRecv^.Mode of
+      //Login
+      1 : begin
+            CubMap.Memo.Lines.Add(RecRecv^.RoleAs + ' Trying To Login');
+
+            IdList := CubMap.ListCom.IndexOf(RecRecv^.Login);
+            if IdList = -1 then
+            begin
+              CubMap.Memo.Lines.Add(RecRecv^.RoleAs + ' Login As ' +  RecRecv^.Login);
+              CubMap.ListCom.Add(RecRecv^.Login);
+            end
+            else
+            begin
+              CubMap.Memo.Lines.Add(RecRecv^.RoleAs + ' Failed To Login')
+            end;
+          end;
+      //Logout
+      2 : begin
+            IdList := CubMap.ListCom.IndexOf(RecRecv^.Logout);
+            if IdList > -1 then
+            begin
+              CubMap.ListCom.Delete(IdList);
+              CubMap.Memo.Lines.Add(RecRecv^.RoleAs + ' Logout As ' +  RecRecv^.Logout);
+            end
+            else
+            begin
+              CubMap.Memo.Lines.Add(RecRecv^.RoleAs + ' Failed To Logout');
+            end;
+          end;
+      //Call
+      3 : begin
+            CubMap.Memo.Lines.Add(RecRecv^.CallFrom + ' Trying To Call '+ RecRecv^.CallTo);
+            CubMap.Memo.Lines.Add('Check ' +  RecRecv^.CallTo + ' Online Or Not');
+
+            IdList := CubMap.ListCom.IndexOf(RecRecv^.CallTo);
+            if IdList > -1 then
+            begin
+              CubMap.Memo.Lines.Add(RecRecv^.CallTo + ' Online');
+              CubMap.Memo.Lines.Add(RecRecv^.CallFrom + ' Call To ' +  RecRecv^.CallTo);
+
+              RecSend.Mode            := 3;
+              RecSend.RoleCub         := CubMap.Name;
+              RecSend.Login           := '';
+              RecSend.RoleAs          := RecRecv^.RoleAs;
+              RecSend.Logout          := '';
+              RecSend.CallFrom        := RecRecv^.CallFrom;
+              RecSend.CallTo          := RecRecv^.CallTo;
+              RecSend.DisConnectFrom  := '';
+              RecSend.DisConnectTo    := '';
+
+              TCP_Server.SendData(CPID_Internal, @RecSend);
+            end
+            else
+            begin
+              CubMap.Memo.Lines.Add(RecRecv^.CallTo + ' Offline');
+              CubMap.Memo.Lines.Add('Send HangUp To' + RecRecv^.CallFrom);
+
+              RecSend.Mode            := 6;
+              RecSend.RoleCub         := CubMap.Name;
+              RecSend.Login           := '';
+              RecSend.RoleAs          := RecRecv^.RoleAs;
+              RecSend.Logout          := '';
+              RecSend.CallFrom        := '';
+              RecSend.CallTo          := '';
+              RecSend.DisConnectFrom  := RecRecv^.CallTo;
+              RecSend.DisConnectTo    := RecRecv^.CallFrom;
+
+              TCP_Server.SendData(CPID_Internal, @RecSend);
+            end;
+          end;
+      //Hangup
+      4 : begin
+            CubMap.Memo.Lines.Add('Check ' +  RecRecv^.DisConnectTo + ' Online Or Not');
+
+            IdList := CubMap.ListCom.IndexOf(RecRecv^.DisConnectTo);
+            if IdList > -1 then
+            begin
+              CubMap.Memo.Lines.Add(RecRecv^.DisConnectTo + ' Online');
+              CubMap.Memo.Lines.Add(RecRecv^.DisConnectFrom + ' HangUp To ' +  RecRecv^.DisConnectTo);
+
+              RecSend.Mode            := 4;
+              RecSend.RoleCub         := CubMap.Name;
+              RecSend.Login           := '';
+              RecSend.RoleAs          := RecRecv^.RoleAs;
+              RecSend.Logout          := '';
+              RecSend.CallFrom        := '';
+              RecSend.CallTo          := '';
+              RecSend.DisConnectFrom  := RecRecv^.DisConnectFrom;
+              RecSend.DisConnectTo    := RecRecv^.DisConnectTo;
+
+              TCP_Server.SendData(CPID_Internal, @RecSend);
+            end
+            else
+            begin
+              CubMap.Memo.Lines.Add(RecRecv^.DisConnectTo + ' Offline');
+              CubMap.Memo.Lines.Add('Send Failed HangUp To' + RecRecv^.CallFrom);
+
+              RecSend.Mode            := 7;
+              RecSend.RoleCub         := CubMap.Name;
+              RecSend.Login           := '';
+              RecSend.RoleAs          := RecRecv^.RoleAs;
+              RecSend.Logout          := '';
+              RecSend.CallFrom        := '';
+              RecSend.CallTo          := '';
+              RecSend.DisConnectFrom  := RecRecv^.CallTo;
+              RecSend.DisConnectTo    := RecRecv^.CallFrom;
+
+              TCP_Server.SendData(CPID_Internal, @RecSend);
+            end;
+          end;
+      5 : begin
+            CubMap.Memo.Lines.Add(RecRecv^.CallFrom + ' Receive Call From ' +  RecRecv^.CallTo);
+
+            RecSend.Mode            := 5;
+            RecSend.RoleCub         := CubMap.Name;
+            RecSend.Login           := '';
+            RecSend.RoleAs          := RecRecv^.RoleAs;
+            RecSend.Logout          := '';
+            RecSend.CallFrom        := RecRecv^.CallFrom;
+            RecSend.CallTo          := RecRecv^.CallTo;
+            RecSend.DisConnectFrom  := '';
+            RecSend.DisConnectTo    := '';
+
+            TCP_Server.SendData(CPID_Internal, @RecSend);
+          end;
+    end;
+  end;
+end;
+
+procedure TfrmMain.FormCreate(Sender: TObject);
+begin
+  cbbMode.ItemIndex := 0;
+  btnListen.Tag := 0;
+
+  ObjectCreate;
+  PrepareFormForCub;
+
+
+    lblStatusServer.Caption := 'Server Run';
+    lblStatusServer.Color := clGreen;
+    lblStatusConnect.Caption := 'Connected';
+    lblStatusConnect.Color := clGreen;
+    lblBridgeStatus.Caption := 'Connected';
+    lblBridgeStatus.Color := clGreen;
+
+end;
+
+procedure TfrmMain.FormDestroy(Sender: TObject);
+var
+  i : Integer;
+begin
+  TCP_Server.Free;
+//  TCP_Client.Socket.OnChangeState := nil;
+  TCP_Client.OnStateChange := nil;
+  TCP_Client.Free;
+
+  for i := ListCubicle.Count -1 downto 0 do
+  begin
+    ListCubicle.Delete(i);
+  end;
+  ListCubicle.Clear;
+  ListCubicle.Free;
+
+  SetConfig.Free;
+  GroupIP.Free;
+
+  FTmr_Connect.Enabled := False;
+  FTmr_CheckServer.Enabled := false;
+  FTmr_WaitToPlay.Enabled := false;
+  FTmr_Preplay.Enabled := false;
+  FTmr_Connect.Free;
+  FTmr_CheckServer.Free;
+  FTmr_WaitToPlay.Free;
+  FTmr_Preplay.Free;
+
+  FTmr_ConnectToBridge.Enabled := false;
+  FTmr_ConnectToBridge.Free;
+end;
+
+procedure TfrmMain.ObjectCreate;
+var
+  iniPath : string;
+  wOrder, wRecSize: Word;
+begin
+  FStateServer := 0;
+  SetConfig := TIniSet.create;
+  IniPath := ExtractFileDir(Application.ExeName);
+  IniPath := IniPath + '\' + 'SettingPhone.ini';
+
+  SetConfig.LoadSet(IniPath);
+
+  TCP_Server          := TTCPServer.Create;
+  TCP_Server.OnClient_Connect     := ClientConnect;
+  TCP_Server.OnClient_DisConnect  := ClientDisconnect;
+  TCP_Server.RegisterProcedure(CPID_Internal, CubicleActivity, sizeof(TRecInternal));
+  TCP_Server.RegisterProcedure(CPID_ReqLogin, ReqStudentLogin, SizeOf(TRecReqLogin));
+  TCP_Server.RegisterProcedure(CPID_MODECALL, nil, SizeOf(TRecCallMode));
+  TCP_Server.RegisterProcedure(CPID_ICSData, nil, SizeOf(TICSData));
+  TCP_Server.RegisterProcedure(CPID_Server_Stat, nil, sizeof(TRecServerStat));
+
+  TCP_Client := TTCPClient.Create;
+  TCP_Client.OnStateChange := OnTCPChangeState;
+
+  TCP_Client.RegisterProcedure(REC_2D_ORDER, ClientRecv_ClientManagement , Sizeof(TRecData2DOrder));
+
+  GroupIP := TFsGroupIP.Create;
+
+  //Create Timer For Control Server
+  FTmr_Connect := TTimer.Create(nil);
+  FTmr_Connect.Enabled := false;
+  FTmr_Connect.Interval := 2000;
+  FTmr_Connect.OnTimer := OnTimerConnectOnTime;
+  FTmr_CheckServer := TTimer.Create(nil);
+  FTmr_CheckServer.Enabled := True;
+  FTmr_CheckServer.Interval := 10000;
+  FTmr_CheckServer.OnTimer := OnTimerCheckServerOnTime;
+  FTmr_WaitToPlay := TTimer.Create(nil);
+  FTmr_WaitToPlay.Interval := SetConfig.TimeWaitRun * 1000;
+  FTmr_WaitToPlay.OnTimer := OnTimerWaitPlayRun;
+  FTmr_WaitToPlay.Enabled := false;
+  FTmr_Preplay := TTimer.Create(nil);
+  FTmr_Preplay.Interval := SetConfig.TimeWaitPreplay * 1000;
+  FTmr_Preplay.OnTimer := OnTimerPreplayRun;
+  FTmr_Preplay.Enabled := False;
+
+  //Create Timer For Bridge
+  FTmr_ConnectToBridge := TTimer.Create(nil);
+  FTmr_ConnectToBridge.Enabled := false;
+  FTmr_ConnectToBridge.Interval := 2000;
+  FTmr_ConnectToBridge.OnTimer := OnTimerConnectBridgeOnTime;
+
+  //Set Event Server
+  btnServerStart.OnClick := OnControlServerClick;
+  btnServerStop.OnClick := OnControlServerClick;
+  btnServerRestart.OnClick := OnControlServerClick;
+  btnServerCheck.OnClick := OnControlServerClick;
+  btnPCRestart.OnClick := OnControlServerClick;
+  btnPCShutdown.OnClick := OnControlServerClick;
+
+  TCPClientServer1.LineMode := true;
+
+  mmoConnection.Lines.Add('Wait Preplay ' + IntToStr(SetConfig.TimeWaitPreplay) + ' Seconds');
+  mmoConnection.Lines.Add('Wait ToRun ' + IntToStr(SetConfig.TimeWaitRun) + ' Seconds');
+  mmoConnection.Lines.Add('Server Voip ' + SetConfig.addrControlServer + ' @' + SetConfig.portControlServer);
+
+  if SetConfig.isEnableBridge then
+    mmoConnection.Lines.Add('Enable Connect to Bridge')
+  else
+    mmoConnection.Lines.Add('Disable Connect to Bridge');
+
+  if SetConfig.isEnableLinux then
+  begin
+    FTmr_Connect.Enabled := True;
+    mmoConnection.Lines.Add('Enable Connect to Linux');
+  end
+  else
+  begin
+    FTmr_Connect.Enabled := false;
+    FStateServer := 1;
+    FTmr_Preplay.Enabled := True;
+    mmoConnection.Lines.Add('Disable Connect to Linux')
+  end;
+
+  ConnectToBridge;
+
+  // data collector
+  FThread := TMSTimer.Create;
+  FThread.Interval := 1;
+  FThread.OnRunning := threadOnRunning;
+  FThread.Enabled := True;
+
+end;
+
+procedure TfrmMain.OnControlServerClick(Sender: TObject);
+var
+  RecSend : TICSData;
+begin
+  if not (TCPClientServer1.State = wsConnected) then
+  begin
+    mmoConnection.Lines.Add('Not Connected To Server');
+    Exit;
+  end;
+
+  case TComponent(Sender).Tag of
+    1 :
+    begin
+      TCPClientServer1.SendLine(C_CHECK);
+    end;
+
+    2 :
+    begin
+      TCPClientServer1.SendLine(C_RUN);
+
+      //Send Restart
+      //Send to Client to Terminate Scenario
+      RecSend.Mode        := 11;
+      RecSend.ParamPhone  := '';
+      RecSend.ParamJam    := '';
+      TCP_Server.SendData(CPID_ICSData, @RecSend);
+    end;
+
+    3 :
+    begin
+      TCPClientServer1.SendLine(C_KILL);
+
+      //Send Restart
+      //Send to Client to Terminate Scenario
+      RecSend.Mode        := 11;
+      RecSend.ParamPhone  := '';
+      RecSend.ParamJam    := '';
+      TCP_Server.SendData(CPID_ICSData, @RecSend);
+    end;
+
+    4 :
+    begin
+//      TCPClientServer1.SendLine(C_RESTART);
+      TCPClientServer1.SendLine(C_KILL);
+      TCPClientServer1.SendLine(C_RUN);
+
+      //Send Restart
+      //Send to Client to Terminate Scenario
+      RecSend.Mode        := 11;
+      RecSend.ParamPhone  := '';
+      RecSend.ParamJam    := '';
+      TCP_Server.SendData(CPID_ICSData, @RecSend);
+    end;
+
+    5 :
+    begin
+      TCPClientServer1.SendLine(C_SHUTDOWN_PC);
+    end;
+
+    6 :
+    begin
+      TCPClientServer1.SendLine(C_RESTART_PC);
+    end;
+  end;
+end;
+
+procedure TfrmMain.OnTCPChangeState(Sender: TObject; OldState,
+  NewState: TSocketState);
+begin
+  if (OldState = wsConnected) and (NewState = wsClosed) then
+  begin
+    ConnectToBridge;
+  end;
+end;
+
+procedure TfrmMain.onTimerCheckServerOnTime(Sender: TObject);
+begin
+  if TCPClientServer1.State = wsConnected then
+  begin
+    TCPClientServer1.SendLine(C_CHECK);
+  end;
+end;
+
+procedure TfrmMain.TCPClientServer1DataAvailable(Sender: TObject;
+  ErrCode: Word);
+var
+  str : string;
+  RecSend : TICSData;
+  RecSendReady : TRecServerStat;
+begin
+  str := TCPClientServer1.ReceiveStr;
+  while (Length(str) > 0) and
+        ((str[Length(str)] = #13) or
+        (str[Length(str)] = #10)) do
+  begin
+    str := Copy(str, 1, Length(str) - 1);
+  end;
+  mmoConnection.Lines.Add(str + ' at time ' + TimeToStr(now) + ' -Server');
+
+  if LowerCase(str) = LowerCase(C_SERVERDOWN) then
+  begin
+    FStateServer := 0;
+    lblStatusServer.Caption := 'Server Down';
+    lblStatusServer.Color := clRed;
+
+    //Send Restart
+    //Send to Client to Terminate Scenario
+    RecSend.Mode        := 10;
+    RecSend.ParamPhone  := '';
+    RecSend.ParamJam    := '';
+    TCP_Server.SendData(CPID_ICSData, @RecSend);
+
+    mmoConnection.Lines.Add('Server Voip Down When Play, Send Restart');
+
+    FTmr_WaitToPlay.Interval := SetConfig.TimeWaitRun * 1000;
+    FTmr_WaitToPlay.Enabled := false;
+    FTmr_Preplay.Interval := SetConfig.TimeWaitPreplay * 1000;
+    FTmr_Preplay.Enabled := false;
+
+    TCPClientServer1.SendLine(C_RUN);
+    if (TCPClientServer1.State = wsConnected) then
+    begin
+//      TCPClientServer1.SendLine(C_RESTART);
+      { //cok
+      TCPClientServer1.SendLine(C_KILL);
+      TCPClientServer1.SendLine(C_RUN);
+      }
+    end
+    else
+      FTmr_Connect.Enabled := true;
+  end
+  else
+  if LowerCase(str) = LowerCase(C_SERVERRUN) then
+  begin
+    FStateServer := 1;
+    lblStatusServer.Caption := 'Server Run';
+    lblStatusServer.Color := clGreen;
+
+    //SendReady
+    FTmr_Preplay.Enabled := True;
+  end;
+end;
+
+procedure TfrmMain.TCPClientServer1SessionClosed(Sender: TObject;
+  ErrCode: Word);
+begin
+  FTmr_Connect.Enabled := true;
+end;
+
+procedure TfrmMain.threadOnRunning(const dt: double);
+begin
+
+  if ((TCP_Server <> nil) and (TCP_Server.State = wsListening)) then
+    TCP_Server.getPacket;
+
+  if ((TCP_Client <> nil) and (TCP_Client.State = wsConnected)) then
+    TCP_Client.getPacket;
+
+end;
+
+procedure TfrmMain.OnTimerConnectBridgeOnTime(Sender: TObject);
+begin
+  if (TCP_Client.State <> wsConnected) and
+     (TCP_Client.State <> wsConnecting) then
+  begin
+    lblBridgeStatus.Caption := 'Disconnect';
+    lblBridgeStatus.Color := clRed;
+
+    TCP_Client.Connect(SetConfig.addrBridge, SetConfig.portBridge);
+  end
+  else
+  if TCP_Client.State = wsConnected then
+  begin
+    lblBridgeStatus.Caption := 'Connected';
+    lblBridgeStatus.Color := clGreen;
+
+    FTmr_ConnectToBridge.Enabled := false;
+  end;
+end;
+
+procedure TfrmMain.OnTimerConnectOnTime(Sender: Tobject);
+begin
+  FStateServer := 0;
+
+  if (TCPClientServer1.State <> wsConnected) and
+     (TCPClientServer1.State <> wsConnecting) then
+  begin
+    TCPClientServer1.Addr := SetConfig.addrControlServer;
+    TCPClientServer1.Port := SetConfig.portControlServer;
+    TCPClientServer1.Connect;
+    lblStatusConnect.Caption := 'Disconnect';
+    lblStatusConnect.Color := clRed;
+  end
+  else
+  if TCPClientServer1.State = wsConnected then
+  begin
+    lblStatusConnect.Caption := 'Connected';
+    lblStatusConnect.Color := clGreen;
+
+//    TCPClientServer1.SendLine(C_RESTART);
+    TCPClientServer1.SendLine(C_KILL);
+    TCPClientServer1.SendLine(C_RUN);
+
+    FTmr_Connect.Enabled := false;
+  end;
+end;
+
+procedure TfrmMain.OnTimerPreplayRun(Sender: Tobject);
+begin
+  FTmr_Preplay.Interval := SetConfig.TimeWaitPreplay * 1000;
+  FTmr_Preplay.Enabled := false;
+  FTmr_WaitToPlay.Enabled := true;
+
+  mmoConnection.Lines.Add('Waiting For Server Ready');
+end;
+
+procedure TfrmMain.OnTimerWaitPlayRun(Sender: TObject);
+var
+  RecSend : TRecServerStat;
+begin
+  RecSend.Mode := 2;
+  RecSend.StateServer1 := FStateServer;
+  RecSend.StateServer2 := 0;
+
+  TCP_Server.SendData(CPID_Server_Stat, @RecSend);
+  FTmr_WaitToPlay.Interval := SetConfig.TimeWaitRun * 1000;
+
+  if SetConfig.isEnableLinux then
+  begin
+    FTmr_WaitToPlay.Enabled := false;
+  end
+  else
+  begin
+    FTmr_WaitToPlay.Interval := SetConfig.TimeWaitRun * 1000;
+    FTmr_WaitToPlay.Enabled := false;
+    FTmr_Preplay.Interval := SetConfig.TimeWaitPreplay * 1000;
+    FTmr_Preplay.Enabled := true;
+  end;
+
+  mmoConnection.Lines.Add('Send Voip Server is Ready');
+end;
+
+procedure TfrmMain.PrepareFormForCub;
+var
+  i : Integer;
+  XmlPath : string;
+  CubMap : TCubicleMap;
+
+  aTbSheet : TTabSheet;
+  aMemo    : TMemo;
+  aStrList : TStrings;
+
+  Con : TConsoleIP;
+begin
+  ListCubicle := TList.Create;
+
+  for i := 1 to SetConfig.TotalCub do
+  begin
+    CubMap      := TCubicleMap.Create;
+    CubMap.Name := 'Cubicle' + IntToStr(i);
+
+    aTbSheet              := TTabSheet.Create(nil);
+    aTbSheet.PageControl  := pgCubicle;
+    aTbSheet.Caption      := CubMap.Name;
+    aTbSheet.Tag          := 0;
+
+    aMemo             := TMemo.Create(nil);
+    aMemo.Tag         := 0;
+    aMemo.ScrollBars  := ssBoth;
+    aMemo.Parent      := aTbSheet;
+    aMemo.Align       := alClient;
+    aMemo.Lines.Add('Waiting For ' + CubMap.Name);
+
+    aStrList := TStringList.Create;
+
+    CubMap.TabSheet := aTbSheet;
+    CubMap.Memo     := aMemo;
+    CubMap.ListCom  := aStrList;
+    CubMap.GroupID  := 0;
+
+    ListCubicle.Add(CubMap);
+  end;
+
+  if SetConfig.AutoStart = 1 then
+  begin
+    cbbMode.ItemIndex := SetConfig.StartMode;
+    btnListen.Click;
+  end;
+
+  XmlPath := ExtractFilePath(Application.ExeName);
+  XmlPath := XmlPath + 'ConsoleIP.xml';
+  GroupIP.LoadFromFile(XmlPath);
+
+  lvMember.Items.Clear;
+
+  for i := 0 to GroupIP.ListIP.Count - 1 do
+  begin
+    Con := TConsoleIP(GroupIP.ListIP.Items[i]);
+
+    with lvMember.Items.Add do
+    begin
+      Caption := Con.ConsoleIP;
+      SubItems.Add(Con.ConsoleName);
+    end;
+  end;
+end;
+
+procedure TfrmMain.ReqStudentLogin(apRec: PAnsiChar; aSize: Word);
+var
+  RecRecv : ^TRecReqLogin;
+
+  i,j : Integer;
+  CubMap : TCubicleMap;
+  ipSender : string;
+
+  RecSend : TRecInternal;
+begin
+  RecRecv := @aprec^;
+  ipSender := LongIp_To_StrIp(RecRecv^.PacketID.ipSender);
+
+  for i := 0 to ListCubicle.Count - 1 do
+  begin
+    CubMap := TCubicleMap(ListCubicle.Items[i]);
+
+    if CubMap.Name = RecRecv^.Cubicle then
+    begin
+      CubMap.Memo.Lines.Add('Receive Request Login From ' + IpSender);
+
+      for j := 0 to CubMap.ListCom.Count - 1 do
+      begin
+        RecSend.Mode    := 1;
+        RecSend.RoleCub := CubMap.Name;
+        RecSend.Login   := CubMap.ListCom[j];
+
+        CubMap.Memo.Lines.Add('Send Login ' + CubMap.ListCom[i] + ' To ' + ipSender);
+        TCP_Server.SendDataToIPAddress(CPID_Internal, @RecSend, ipSender);
+        Sleep(10);
+      end;
+
+      Break;
+    end;
+  end;
+end;
+
+procedure TfrmMain.SetEmptyList;
+var
+  i: Integer;
+  CubMap : TCubicleMap;
+begin
+  for i := 0 to ListCubicle.Count - 1 do
+  begin
+    CubMap := TCubicleMap(ListCubicle.Items[i]);
+    CubMap.GroupID := 0;
+    CubMap.ListCom.Clear;
+  end;
+end;
+
+end.

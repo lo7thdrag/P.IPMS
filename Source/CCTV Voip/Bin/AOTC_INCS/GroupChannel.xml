@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<fsgroups>
+  <roles id="Role" name="Role Group">
+    <console name="INSTR1"></console>
+    <console name="INSTR2"></console>
+    <console name="INSTR3"></console>
+    <console name="OPR1"></console>
+	<console name="OPR2"></console>
+	<console name="OPR3"></console>
+  </roles>
+
+  <external id="External" name="External Room">
+
+    <console name="HF"></console>
+    <console name="VHF"></console>
+    <console name="UHF"></console>
+	
+  </external>
+</fsgroups>
+   

@@ -1,0 +1,161 @@
+program clVoip;
+
+uses
+  SysUtils,
+  Dialogs,
+  Forms,
+  U_Main in 'U_Main.pas' {MainFrm},
+  InfoDialog in 'InfoDialog.pas' {InfoDlg},
+  U_Options in 'U_Options.pas' {Options},
+  SoudTest in 'SoudTest.pas' {SoundTest},
+  uDataVoipRecord in '..\DataRecordType\uDataVoipRecord.pas',
+  uNetUDPnode in '..\NetComponent\uNetUDPnode.pas',
+  uTCPDatatype in '..\NetComponent\uTCPDatatype.pas',
+  uPacketRegister in '..\NetComponent\uPacketRegister.pas';
+
+{$R *.res}
+
+var session, registrar, user, pass, wavein, waveout: string;
+    SIP_Port, RTP_Port, Channel: Integer;
+    autoconnect, autodial, issilent, islogged: Boolean;
+
+function ParseParam: Boolean;
+var i, cnt: Integer;
+    s: string;
+    isValid: Boolean;
+begin
+  Result:= False;
+  isValid:= True;
+  cnt:= ParamCount;
+  i:= 1;
+  issilent:= False;
+  while i<=cnt do begin
+    s:= LowerCase(Trim(ParamStr(i)));
+    if s='-id' then begin
+      i:= i + 1;
+      s:= LowerCase(Trim(ParamStr(i)));
+      if s='' then begin
+        isValid:= False;
+        Break;
+      end;
+      session:= s;
+    end else
+    if s='-s' then begin
+      i:= i + 1;
+      s:= LowerCase(Trim(ParamStr(i)));
+      if s='' then begin
+        isValid:= False;
+        Break;
+      end;
+      registrar:= s;
+    end else
+    if s='-u' then begin
+      i:= i + 1;
+      s:= LowerCase(Trim(ParamStr(i)));
+      if s='' then begin
+        isValid:= False;
+        Break;
+      end;
+      user:= s;
+    end else
+    if s='-p' then begin
+      i:= i + 1;
+      s:= LowerCase(Trim(ParamStr(i)));
+      if s='' then begin
+        isValid:= False;
+        Break;
+      end;
+      pass:= s;
+    end else
+    if s='-in' then begin
+      i:= i + 1;
+      s:= LowerCase(Trim(ParamStr(i)));
+      if s='' then begin
+        isValid:= False;
+        Break;
+      end;
+      wavein:= s;
+    end else
+    if s='-out' then begin
+      i:= i + 1;
+      s:= LowerCase(Trim(ParamStr(i)));
+      if s='' then begin
+        isValid:= False;
+        Break;
+      end;
+      waveout:= s;
+    end else
+    if s='-sipport' then begin
+      i:= i + 1;
+      s:= LowerCase(Trim(ParamStr(i)));
+      if s='' then begin
+        isValid:= False;
+        Break;
+      end;
+      SIP_Port:= StrToInt(s);
+    end else
+    if s='-rtpport' then begin
+      i:= i + 1;
+      s:= LowerCase(Trim(ParamStr(i)));
+      if s='' then begin
+        isValid:= False;
+        Break;
+      end;
+      RTP_Port:= StrToInt(s);
+    end else
+    if s='-ch' then begin
+      i:= i + 1;
+      s:= LowerCase(Trim(ParamStr(i)));
+      if s='' then begin
+        isValid:= False;
+        Break;
+      end;
+      Channel:= StrToInt(s);
+    end else
+    if s='-auto' then begin
+      autoconnect:= True;
+      isValid:= True
+    end else
+    if s='-manual' then begin
+      autoconnect:= False;
+      isValid:= True
+    end else
+    if s='-dial' then begin
+      autodial:= True;
+      isValid:= True
+    end else
+    if s='-nodial' then begin
+      autodial:= False;
+      isValid:= True
+    end else
+    if s='-silent' then begin
+      issilent:= True;
+      isValid:= True
+    end else
+    if s='-log' then begin
+      islogged:= True;
+      isValid:= True
+    end else
+    if s='-nolog' then begin
+      islogged:= False;
+      isValid:= True
+    end;
+
+    i:= i + 1
+  end;
+  Result:= isValid
+end;
+
+begin
+
+  if not ParseParam then
+    Exit;
+
+  Application.Initialize;
+  Application.ShowMainForm:= False;
+  Application.CreateForm(TMainFrm, MainFrm);
+  MainFrm.GetParameter(session,registrar,user,pass,wavein,waveout,SIP_Port,RTP_Port,Channel,autoconnect,autodial,issilent,islogged);
+  MainFrm.Initialize;
+
+  Application.Run;
+end.

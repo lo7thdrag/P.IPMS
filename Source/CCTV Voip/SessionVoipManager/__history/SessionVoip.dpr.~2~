@@ -1,0 +1,38 @@
+program SessionVoip;
+
+uses
+  Forms,
+  SysUtils,
+  Dialogs,
+  uMain in 'uMain.pas' {frmMain},
+  uLoadSetting in '..\LibUnit\uLoadSetting.pas',
+  uDataVoipRecord in '..\DataRecordType\uDataVoipRecord.pas' {$R *.res},
+  uLoadConsoleIP in '..\LibUnit\uLoadConsoleIP.pas',
+  GmXml in '..\XMLReader\GmXml.pas',
+  GmXMLInterface in '..\XMLReader\GmXMLInterface.pas',
+  uStringFunc in '..\XMLReader\uStringFunc.pas',
+  uDataBuffer in '..\..\SharedNetworkLib\uDataBuffer.pas',
+  uNetBaseSocket in '..\..\SharedNetworkLib\uNetBaseSocket.pas',
+  uNetUDPnode in '..\..\SharedNetworkLib\uNetUDPnode.pas',
+  uPacketBuffer in '..\..\SharedNetworkLib\uPacketBuffer.pas',
+  uPacketRegister in '..\..\SharedNetworkLib\uPacketRegister.pas',
+  uSockDatatype in '..\..\SharedNetworkLib\uSockDatatype.pas',
+  uTCPClient in '..\..\SharedNetworkLib\uTCPClient.pas',
+  uTCPDatatype in '..\..\SharedNetworkLib\uTCPDatatype.pas',
+  uTCPServer in '..\..\SharedNetworkLib\uTCPServer.pas',
+  MSThreadTimer in '..\LibUnit\MSThreadTimer.pas';
+
+{$R *.res}
+
+var
+  iniPath : String;
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmMain, frmMain);
+  iniPath := ExtractFileDir(Application.ExeName);
+  iniPath := iniPath + '\' + 'SettingPhone.ini';
+
+  Application.Run;
+end.
+

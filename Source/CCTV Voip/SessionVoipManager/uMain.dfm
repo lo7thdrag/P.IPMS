@@ -1,0 +1,300 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = 'Session Voip'
+  ClientHeight = 527
+  ClientWidth = 848
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlUp: TPanel
+    Left = 0
+    Top = 0
+    Width = 848
+    Height = 73
+    Align = alTop
+    Alignment = taRightJustify
+    Caption = 'Listening @Null'
+    Color = clGray
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 0
+  end
+  object pnlBody: TPanel
+    Left = 0
+    Top = 73
+    Width = 848
+    Height = 303
+    Align = alClient
+    TabOrder = 1
+    object mmoConnection: TMemo
+      Left = 1
+      Top = 1
+      Width = 272
+      Height = 301
+      Align = alLeft
+      ScrollBars = ssBoth
+      TabOrder = 0
+    end
+    object pnlRight: TPanel
+      Left = 592
+      Top = 1
+      Width = 255
+      Height = 301
+      Align = alRight
+      TabOrder = 1
+      object lblStatusServer: TLabel
+        Left = 17
+        Top = 71
+        Width = 109
+        Height = 13
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Server Down'
+        Color = clRed
+        ParentColor = False
+      end
+      object lblStatusConnect: TLabel
+        Left = 17
+        Top = 55
+        Width = 109
+        Height = 13
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Disconnect'
+        Color = clRed
+        ParentColor = False
+      end
+      object lbl1: TLabel
+        Left = 132
+        Top = 39
+        Width = 109
+        Height = 13
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Bridge Server'
+        Color = clGreen
+        ParentColor = False
+      end
+      object lblBridgeStatus: TLabel
+        Left = 132
+        Top = 55
+        Width = 109
+        Height = 13
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Disconnect'
+        Color = clRed
+        ParentColor = False
+      end
+      object lbl2: TLabel
+        Left = 17
+        Top = 39
+        Width = 109
+        Height = 13
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Voip Server'
+        Color = clGreen
+        ParentColor = False
+      end
+      object btnListen: TButton
+        Left = 132
+        Top = 8
+        Width = 109
+        Height = 25
+        Caption = 'Start'
+        TabOrder = 0
+        OnClick = btnListenClick
+      end
+      object cbbMode: TComboBox
+        Left = 17
+        Top = 10
+        Width = 109
+        Height = 21
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ItemIndex = 0
+        ParentFont = False
+        TabOrder = 1
+        Text = 'Automatic Call'
+        Items.Strings = (
+          'Automatic Call'
+          'Manual Call')
+      end
+      object grpServer: TGroupBox
+        Left = 12
+        Top = 92
+        Width = 237
+        Height = 128
+        Caption = 'Server Control'
+        TabOrder = 2
+        object btnServerStart: TButton
+          Tag = 2
+          Left = 6
+          Top = 52
+          Width = 109
+          Height = 33
+          Caption = 'Start Server'
+          TabOrder = 0
+        end
+        object btnServerCheck: TButton
+          Tag = 1
+          Left = 6
+          Top = 18
+          Width = 109
+          Height = 33
+          Caption = 'Check Server'
+          TabOrder = 1
+        end
+        object btnServerStop: TButton
+          Tag = 3
+          Left = 6
+          Top = 86
+          Width = 109
+          Height = 33
+          Caption = 'Stop Server'
+          TabOrder = 2
+        end
+        object btnPCShutdown: TButton
+          Tag = 5
+          Left = 121
+          Top = 86
+          Width = 109
+          Height = 33
+          Caption = 'Shutdown PC'
+          TabOrder = 3
+        end
+        object btnPCRestart: TButton
+          Tag = 4
+          Left = 121
+          Top = 52
+          Width = 109
+          Height = 33
+          Caption = 'Restart PC'
+          TabOrder = 4
+        end
+        object btnServerRestart: TButton
+          Tag = 4
+          Left = 121
+          Top = 18
+          Width = 109
+          Height = 33
+          Caption = 'Restart Server'
+          TabOrder = 5
+        end
+      end
+      object grpClient: TGroupBox
+        Left = 12
+        Top = 226
+        Width = 237
+        Height = 59
+        Caption = 'Client Control'
+        TabOrder = 3
+        object btnClienthandle: TButton
+          Left = 7
+          Top = 18
+          Width = 223
+          Height = 33
+          Caption = 'Client Handle'
+          PopupMenu = pmClient
+          TabOrder = 0
+          OnClick = btnClienthandleClick
+        end
+      end
+    end
+    object lvMember: TListView
+      Left = 273
+      Top = 1
+      Width = 319
+      Height = 301
+      Align = alClient
+      Columns = <
+        item
+          Caption = 'Console IP'
+          Width = 200
+        end
+        item
+          Caption = 'Console Name'
+          Width = 100
+        end>
+      GridLines = True
+      RowSelect = True
+      TabOrder = 2
+      ViewStyle = vsReport
+    end
+  end
+  object pnlBottom: TPanel
+    Left = 0
+    Top = 376
+    Width = 848
+    Height = 151
+    Align = alBottom
+    TabOrder = 2
+    object pgCubicle: TPageControl
+      Left = 1
+      Top = 1
+      Width = 846
+      Height = 149
+      Align = alClient
+      TabOrder = 0
+    end
+  end
+  object TCPClientServer1: TWSocket
+    LineEnd = #13#10
+    Proto = 'tcp'
+    LocalAddr = '0.0.0.0'
+    LocalAddr6 = '::'
+    LocalPort = '0'
+    SocksLevel = '5'
+    ExclusiveAddr = False
+    ComponentOptions = []
+    ListenBacklog = 15
+    ReqVerLow = 1
+    ReqVerHigh = 1
+    OnDataAvailable = TCPClientServer1DataAvailable
+    OnSessionClosed = TCPClientServer1SessionClosed
+    SocketErrs = wsErrTech
+    Left = 48
+    Top = 24
+  end
+  object pmClient: TPopupMenu
+    Left = 520
+    Top = 368
+    object CloseAllCommunication1: TMenuItem
+      Caption = 'Close All Communication'
+      OnClick = CloseAllCommunication1Click
+    end
+    object RestartAllCommunication1: TMenuItem
+      Tag = 1
+      Caption = 'Restart All Communication'
+      OnClick = CloseAllCommunication1Click
+    end
+    object ShutdownSystem1: TMenuItem
+      Tag = 2
+      Caption = 'Shutdown All System'
+      OnClick = CloseAllCommunication1Click
+    end
+    object StartAllCommunication1: TMenuItem
+      Tag = 3
+      Caption = 'Start All Communication'
+      OnClick = CloseAllCommunication1Click
+    end
+  end
+end

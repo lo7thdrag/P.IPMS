@@ -1,0 +1,427 @@
+unit uEventConnector;
+
+interface
+
+uses
+  Classes, Graphics,
+
+  uMain,
+  uMainIPMS,
+  uMainIPMS800x600,
+  uMainTCMS1440x900,
+  uMainTCMS800x600,
+  uMainINCS4X5BigVert,
+  uMainINCS4X5BigVert0812,
+  uMainINCS4X5BigVert710,
+  uMainINCS4X3Horz086,
+  uMainINCS4X3Horz710,
+  uMainApvcVert768x1024,
+  uMainINCSInstr,
+
+  uDataVoipRecord;
+
+  procedure setPanelConnector(Color : TColor);
+  procedure setPanelSessionVoip(Color : TColor);
+  procedure setPanelControl(Color : TColor);
+
+  procedure On_ReceiveCallMode(rec : TrecCallMode);
+  procedure On_ReceiveInternalAct(rec : TrecInternal);
+
+  procedure On_StartSimulation;
+
+  procedure On_RcvCloseCommand(rec : TRecData2DOrder);
+
+  procedure RecvICSData(rec : TICSData);
+  procedure RecvICSOrder(rec: TRecOrder);
+
+implementation
+
+
+procedure On_RcvCloseCommand(rec : TRecData2DOrder);
+begin
+
+  if Assigned(frmLenBigVert) then
+    frmLenBigVert.ReceiveCloseOrder(Rec);
+
+  if Assigned(frmMainTCMS800x600) then
+    frmMainTCMS800x600.ReceiveCloseOrder(Rec);
+
+  if Assigned(frmLenBigVert0812) then
+    frmLenBigVert0812.ReceiveCloseOrder(Rec);
+
+  if Assigned(frmLenBigVert0710) then
+    frmLenBigVert0710.ReceiveCloseOrder(Rec);
+
+  if Assigned(frmLenHorz086) then
+    frmLenHorz086.ReceiveCloseOrder(Rec);
+
+  if Assigned(frmLenHorz710) then
+    frmLenHorz710.ReceiveCloseOrder(Rec);
+
+  if Assigned(frmLenBigVertApvc768) then
+    frmLenBigVertApvc768.ReceiveCloseOrder(Rec);
+
+  if Assigned(frmMainINCSInstr) then
+    frmMainINCSInstr.ReceiveCloseOrder(Rec);
+
+end;
+
+procedure RecvICSOrder(rec: TRecOrder);
+begin
+
+  if Assigned(frmLenBigVert) then
+    frmLenBigVert.RecvICSOrder(Rec);
+
+  if Assigned(frmMainTCMS800x600) then
+    frmMainTCMS800x600.RecvICSOrder(Rec);
+
+  if Assigned(frmLenBigVert0812) then
+    frmLenBigVert0812.RecvICSOrder(Rec);
+
+  if Assigned(frmLenBigVert0710) then
+    frmLenBigVert0710.RecvICSOrder(Rec);
+
+  if Assigned(frmLenHorz086) then
+    frmLenHorz086.RecvICSOrder(Rec);
+
+  if Assigned(frmLenHorz710) then
+    frmLenHorz710.RecvICSOrder(Rec);
+
+  if Assigned(frmLenBigVertApvc768) then
+    frmLenBigVertApvc768.RecvICSOrder(Rec);
+
+  if Assigned(frmMainINCSInstr) then
+    frmMainINCSInstr.RecvICSOrder(Rec);
+
+end;
+
+procedure RecvICSData(rec : TICSData);
+begin
+  if Assigned(frmMain) then
+    frmMain.RecvICSData(rec);
+
+  if Assigned(frmMainIPMS800x600) then
+    frmMainIPMS800x600.RecvICSData(rec);
+
+  if Assigned(frmMainIPMS) then
+    frmMainIPMS.RecvICSData(rec);
+
+  if Assigned(frmMainTCMS1440x900) then
+    frmMainTCMS1440x900.RecvICSData(rec);
+
+  if Assigned(frmMainTCMS800x600) then
+    frmMainTCMS800x600.RecvICSData(Rec);
+
+  if Assigned(frmLenBigVert) then
+    frmLenBigVert.RecvICSData(Rec);
+
+  if Assigned(frmLenBigVert0812) then
+    frmLenBigVert0812.RecvICSData(Rec);
+
+  if Assigned(frmLenBigVert0710) then
+    frmLenBigVert0710.RecvICSData(Rec);
+
+  if Assigned(frmLenHorz086) then
+    frmLenHorz086.RecvICSData(Rec);
+
+  if Assigned(frmLenHorz710) then
+    frmLenHorz710.RecvICSData(Rec);
+
+  if Assigned(frmLenBigVertApvc768) then
+    frmLenBigVertApvc768.RecvICSData(Rec);
+
+  if Assigned(frmMainINCSInstr) then
+    frmMainINCSInstr.RecvICSData(Rec);
+
+end;
+
+procedure setPanelConnector(Color : TColor);
+begin
+  if Assigned(frmMain) then
+    frmMain.pnlConnector.Color := Color;
+
+  if Assigned(frmMainIPMS) then
+    frmMainIPMS.pnlConnector.Color := Color;
+
+  if Assigned(frmMainIPMS800x600) then
+    frmMainIPMS800x600.pnlConnector.Color := Color;
+
+  if Assigned(frmMainTCMS1440x900) then
+    frmMainTCMS1440x900.pnlConnector.Color := Color;
+
+  if Assigned(frmMainTCMS800x600) then
+    frmMainTCMS800x600.pnlConnector.Color := Color;
+
+  if Assigned(frmLenBigVert) then
+    frmLenBigVert.pnlConnector.Color := Color;
+
+  if Assigned(frmLenBigVert0812) then
+    frmLenBigVert0812.pnlConnector.Color := Color;
+
+  if Assigned(frmLenBigVert0710) then
+    frmLenBigVert0710.pnlConnector.Color := Color;
+
+  if Assigned(frmLenHorz086) then
+    frmLenHorz086.pnlConnector.Color := Color;
+
+  if Assigned(frmLenHorz710) then
+    frmLenHorz710.pnlConnector.Color := Color;
+
+  if Assigned(frmLenBigVertApvc768) then
+    frmLenBigVertApvc768.pnlConnector.Color := Color;
+
+  if Assigned(frmMainINCSInstr) then
+    frmMainINCSInstr.pnlConnector.Color := Color;
+
+end;
+
+procedure setPanelSessionVoip(Color : TColor);
+begin
+  if Assigned(frmMain) then
+    frmMain.pnlSesVoip.Color := Color;
+
+  if Assigned(frmMainIPMS) then
+    frmMainIPMS.pnlSesVoip.Color := Color;
+
+  if Assigned(frmMainIPMS800x600) then
+    frmMainIPMS800x600.pnlSesVoip.Color := Color;
+
+  if Assigned(frmMainTCMS1440x900) then
+    frmMainTCMS1440x900.pnlSesVoip.Color := Color;
+
+  if Assigned(frmMainTCMS800x600) then
+    frmMainTCMS800x600.pnlSesVoip.Color := Color;
+
+  if Assigned(frmLenBigVert) then
+    frmLenBigVert.pnlSesVoip.Color := Color;
+
+  if Assigned(frmLenBigVert0812) then
+    frmLenBigVert0812.pnlSesVoip.Color := Color;
+
+  if Assigned(frmLenBigVert0710) then
+    frmLenBigVert0710.pnlSesVoip.Color := Color;
+
+  if Assigned(frmLenHorz086) then
+    frmLenHorz086.pnlSesVoip.Color := Color;
+
+  if Assigned(frmLenHorz710) then
+    frmLenHorz710.pnlSesVoip.Color := Color;
+
+  if Assigned(frmLenBigVertApvc768) then
+    frmLenBigVertApvc768.pnlSesVoip.Color := Color;
+
+  if Assigned(frmMainINCSInstr) then
+    frmMainINCSInstr.pnlSesVoip.Color := Color;
+
+
+end;
+
+procedure setPanelControl(Color : TColor);
+begin
+  if Assigned(frmMain) then
+    frmMain.pnlControl.Color := Color;
+
+  if Assigned(frmMainIPMS) then
+    frmMainIPMS.pnlControl.Color := Color;
+
+  if Assigned(frmMainIPMS800x600) then
+    frmMainIPMS800x600.pnlControl.Color := Color;
+
+  if Assigned(frmMainTCMS1440x900) then
+    frmMainTCMS1440x900.pnlControl.Color := Color;
+
+  if Assigned(frmMainTCMS800x600) then
+    frmMainTCMS800x600.pnlControl.Color := Color;
+
+  if Assigned(frmLenBigVert) then
+    frmLenBigVert.pnlControl.Color := Color;
+
+  if Assigned(frmLenBigVert0812) then
+    frmLenBigVert0812.pnlControl.Color := Color;
+
+  if Assigned(frmLenBigVert0710) then
+    frmLenBigVert0710.pnlControl.Color := Color;
+
+  if Assigned(frmLenHorz086) then
+    frmLenHorz086.pnlControl.Color := Color;
+
+  if Assigned(frmLenHorz710) then
+    frmLenHorz710.pnlControl.Color := Color;
+
+  if Assigned(frmLenBigVertApvc768) then
+    frmLenBigVertApvc768.pnlControl.Color := Color;
+
+  if Assigned(frmMainINCSInstr) then
+    frmMainINCSInstr.pnlControl.Color := Color;
+
+end;
+
+procedure On_ReceiveCallMode(rec : TrecCallMode);
+begin
+  if Assigned(frmMain) then
+    frmMain.ReceiveModeCall(rec);
+
+  if Assigned(frmMainTCMS1440x900) then
+    frmMainTCMS1440x900.ReceiveModeCall(rec);
+
+  if Assigned(frmMainTCMS800x600) then
+    frmMainTCMS800x600.ReceiveModeCall(rec);
+
+  if Assigned(frmLenBigVert) then
+    frmLenBigVert.ReceiveModeCall(rec);
+
+  if Assigned(frmLenBigVert0812) then
+    frmLenBigVert0812.ReceiveModeCall(rec);
+
+  if Assigned(frmLenBigVert0710) then
+    frmLenBigVert0710.ReceiveModeCall(rec);
+
+  if Assigned(frmLenHorz086) then
+    frmLenHorz086.ReceiveModeCall(rec);
+
+  if Assigned(frmLenHorz710) then
+    frmLenHorz710.ReceiveModeCall(rec);
+
+  if Assigned(frmLenBigVertApvc768) then
+    frmLenBigVertApvc768.ReceiveModeCall(Rec);
+
+  if Assigned(frmMainINCSInstr) then
+    frmMainINCSInstr.ReceiveModeCall(rec);
+
+end;
+
+procedure On_ReceiveInternalAct(rec : TrecInternal);
+begin
+  if Assigned(frmMain) then
+    frmMain.ReceiveInternalActivity(rec);
+
+  if Assigned(frmMainTCMS1440x900) then
+    frmMainTCMS1440x900.ReceiveInternalActivity(rec);
+
+  if Assigned(frmMainTCMS800x600) then
+    frmMainTCMS800x600.ReceiveInternalActivity(rec);
+
+  if Assigned(frmLenBigVert) then
+    frmLenBigVert.ReceiveInternalActivity(rec);
+
+  if Assigned(frmLenBigVert0812) then
+    frmLenBigVert0812.ReceiveInternalActivity(rec);
+
+  if Assigned(frmLenBigVert0710) then
+    frmLenBigVert0710.ReceiveInternalActivity(rec);
+
+  if Assigned(frmLenHorz086) then
+    frmLenHorz086.ReceiveInternalActivity(rec);
+
+  if Assigned(frmLenHorz710) then
+    frmLenHorz710.ReceiveInternalActivity(rec);
+
+  if Assigned(frmLenBigVertApvc768) then
+    frmLenBigVertApvc768.ReceiveInternalActivity(Rec);
+
+  if Assigned(frmMainINCSInstr) then
+    frmMainINCSInstr.ReceiveInternalActivity(rec);
+
+end;
+
+procedure On_StartSimulation;
+begin
+  if Assigned(frmMain) then
+  begin
+    if not frmMain.isRunSimulation then
+    begin
+      frmMain.RunSimulation;
+    end;
+  end;
+
+  if Assigned(frmMainTCMS1440x900) then
+  begin
+    if not frmMainTCMS1440x900.isRunSimulation then
+    begin
+      frmMainTCMS1440x900.RunSimulation;
+    end;
+  end;
+
+  if Assigned(frmMainTCMS800x600) then
+  begin
+    if not frmMainTCMS800x600.isRunSimulation then
+    begin
+      frmMainTCMS800x600.RunSimulation;
+    end;
+  end;
+
+  if Assigned(frmMainIPMS) then
+  begin
+    if not frmMainIPMS.isRunSimulation then
+    begin
+      frmMainIPMS.RunSimulation;
+    end;
+  end;
+
+  if Assigned(frmMainIPMS800x600) then
+  begin
+    if not frmMainIPMS800x600.isRunSimulation then
+    begin
+      frmMainIPMS800x600.RunSimulation;
+    end;
+  end;
+
+  if Assigned(frmLenBigVert) then
+  begin
+    if not frmLenBigVert.isRunSimulation then
+    begin
+      frmLenBigVert.RunSimulation;
+    end;
+  end;
+
+  if Assigned(frmLenBigVert0812) then
+  begin
+    if not frmLenBigVert0812.isRunSimulation then
+    begin
+      frmLenBigVert0812.RunSimulation;
+    end;
+  end;
+
+  if Assigned(frmLenBigVert0710) then
+  begin
+    if not frmLenBigVert0710.isRunSimulation then
+    begin
+      frmLenBigVert0710.RunSimulation;
+    end;
+  end;
+
+  if Assigned(frmLenHorz086) then
+  begin
+    if not frmLenHorz086.isRunSimulation then
+    begin
+      frmLenHorz086.RunSimulation;
+    end;
+  end;
+
+  if Assigned(frmLenHorz710) then
+  begin
+    if not frmLenHorz710.isRunSimulation then
+    begin
+      frmLenHorz710.RunSimulation;
+    end;
+  end;
+
+  if Assigned(frmLenBigVertApvc768) then
+  begin
+    if not frmLenBigVertApvc768.isRunSimulation then
+    begin
+      frmLenBigVertApvc768.RunSimulation;
+    end;
+  end;
+
+  if Assigned(frmMainINCSInstr) then
+  begin
+    if not frmMainINCSInstr.isRunSimulation then
+    begin
+      frmMainINCSInstr.RunSimulation;
+    end;
+  end;
+
+end;
+
+end.

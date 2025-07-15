@@ -3,7 +3,8 @@ unit uCCTV;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
   Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.MPlayer, Vcl.Mask, RzEdit,
   RzSpnEdt, Vcl.Buttons, SpeedButtonImage;
@@ -99,8 +100,8 @@ type
     procedure ZoomCam6Click(Sender: TObject);
     procedure ZoomCam7Click(Sender: TObject);
     procedure ZoomCam8Click(Sender: TObject);
-//    procedure btnKiriClick(Sender: TObject);
-//    procedure btnKananClick(Sender: TObject);
+    // procedure btnKiriClick(Sender: TObject);
+    // procedure btnKananClick(Sender: TObject);
     procedure btnKananMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnKiriMouseDown(Sender: TObject; Button: TMouseButton;
@@ -131,9 +132,9 @@ type
     procedure tmrCam6Timer(Sender: TObject);
 
   private
-    stateButton: Integer; {0: Kiri; 1:Kanan}
-    valtemp : Integer;
-    isMouseDown : Boolean;
+    stateButton: Integer; { 0: Kiri; 1:Kanan }
+    valtemp: Integer;
+    isMouseDown: Boolean;
   public
     { Public declarations }
   end;
@@ -147,1494 +148,1430 @@ implementation
 
 procedure TuMainForm.ZoomCam1Click(Sender: TObject);
 begin
-  {$REGION ' Camera 1 Besar ' }
-  pnlVid1.Top     := 8;
-  pnlVid1.Left    := 168;
-  pnlVid1.Height  := 753;
-  pnlVid1.Width   := 848;
+{$REGION ' Camera 1 Besar ' }
+  pnlVid1.Top := 8;
+  pnlVid1.Left := 168;
+  pnlVid1.Height := 753;
+  pnlVid1.Width := 848;
 
-  lblCam1.Left    := 725;
-  lblCam1.Top     := 724;
+  lblCam1.Left := 725;
+  lblCam1.Top := 724;
 
-  pnlLonceng1.Height  := 30;
-  pnlLonceng1.Width   := 30;
-  pnlLonceng1.Left    := 779;
-  pnlLonceng1.Top     := 717;
+  pnlLonceng1.Height := 30;
+  pnlLonceng1.Width := 30;
+  pnlLonceng1.Left := 779;
+  pnlLonceng1.Top := 717;
 
-  pnlRec1.Height  := 30;
-  pnlRec1.Width   := 30;
-  pnlRec1.Left    := 811;
-  pnlRec1.Top     := 717;
+  pnlRec1.Height := 30;
+  pnlRec1.Width := 30;
+  pnlRec1.Left := 811;
+  pnlRec1.Top := 717;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 2 ' }
+  pnlVid2.Top := 8;
+  pnlVid2.Left := 8;
+  pnlVid2.Height := 100;
+  pnlVid2.Width := 154;
 
-  {$REGION ' Camera 2 ' }
-  pnlVid2.Top     := 8;
-  pnlVid2.Left    := 8;
-  pnlVid2.Height  := 100;
-  pnlVid2.Width   := 154;
+  lblCam2.Left := 56;
+  lblCam2.Top := 78;
 
-  lblCam2.Left    := 56;
-  lblCam2.Top     := 78;
+  pnlLonceng2.Height := 20;
+  pnlLonceng2.Width := 20;
+  pnlLonceng2.Left := 108;
+  pnlLonceng2.Top := 76;
 
-  pnlLonceng2.Height  := 20;
-  pnlLonceng2.Width   := 20;
-  pnlLonceng2.Left    := 108;
-  pnlLonceng2.Top     := 76;
-
-  pnlRec2.Height  := 20;
-  pnlRec2.Width   := 20;
-  pnlRec2.Left    := 130;
-  pnlRec2.Top     := 76;
+  pnlRec2.Height := 20;
+  pnlRec2.Width := 20;
+  pnlRec2.Left := 130;
+  pnlRec2.Top := 76;
 
   imgBackLittle2.BringToFront;
   lblVid2.BringToFront;
   lblCam2.BringToFront;
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 3 ' }
+  pnlVid3.Top := 117;
+  pnlVid3.Left := 8;
+  pnlVid3.Height := 100;
+  pnlVid3.Width := 154;
 
-  {$REGION ' Camera 3 ' }
-  pnlVid3.Top     := 117;
-  pnlVid3.Left    := 8;
-  pnlVid3.Height  := 100;
-  pnlVid3.Width   := 154;
+  lblCam3.Left := 56;
+  lblCam3.Top := 78;
 
-  lblCam3.Left    := 56;
-  lblCam3.Top     := 78;
+  pnlLonceng3.Height := 20;
+  pnlLonceng3.Width := 20;
+  pnlLonceng3.Left := 108;
+  pnlLonceng3.Top := 76;
 
-  pnlLonceng3.Height  := 20;
-  pnlLonceng3.Width   := 20;
-  pnlLonceng3.Left    := 108;
-  pnlLonceng3.Top     := 76;
+  pnlRec3.Height := 20;
+  pnlRec3.Width := 20;
+  pnlRec3.Left := 130;
+  pnlRec3.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 4 ' }
+  pnlVid4.Top := 225;
+  pnlVid4.Left := 8;
+  pnlVid4.Height := 100;
+  pnlVid4.Width := 154;
 
-  pnlRec3.Height  := 20;
-  pnlRec3.Width   := 20;
-  pnlRec3.Left    := 130;
-  pnlRec3.Top     := 76;
-  {$ENDREGION}
+  lblCam4.Left := 56;
+  lblCam4.Top := 78;
 
-  {$REGION ' Camera 4 ' }
-  pnlVid4.Top     := 225;
-  pnlVid4.Left    := 8;
-  pnlVid4.Height  := 100;
-  pnlVid4.Width   := 154;
+  pnlLonceng4.Height := 20;
+  pnlLonceng4.Width := 20;
+  pnlLonceng4.Left := 108;
+  pnlLonceng4.Top := 76;
 
-  lblCam4.Left    := 56;
-  lblCam4.Top     := 78;
+  pnlRec4.Height := 20;
+  pnlRec4.Width := 20;
+  pnlRec4.Left := 130;
+  pnlRec4.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 5 ' }
+  pnlVid5.Top := 334;
+  pnlVid5.Left := 8;
+  pnlVid5.Height := 100;
+  pnlVid5.Width := 154;
 
-  pnlLonceng4.Height  := 20;
-  pnlLonceng4.Width   := 20;
-  pnlLonceng4.Left    := 108;
-  pnlLonceng4.Top     := 76;
+  lblCam5.Left := 56;
+  lblCam5.Top := 78;
 
-  pnlRec4.Height  := 20;
-  pnlRec4.Width   := 20;
-  pnlRec4.Left    := 130;
-  pnlRec4.Top     := 76;
-  {$ENDREGION}
+  pnlLonceng5.Height := 20;
+  pnlLonceng5.Width := 20;
+  pnlLonceng5.Left := 108;
+  pnlLonceng5.Top := 76;
 
-  {$REGION ' Camera 5 ' }
-  pnlVid5.Top     := 334;
-  pnlVid5.Left    := 8;
-  pnlVid5.Height  := 100;
-  pnlVid5.Width   := 154;
+  pnlRec5.Height := 20;
+  pnlRec5.Width := 20;
+  pnlRec5.Left := 130;
+  pnlRec5.Top := 76;
 
-  lblCam5.Left    := 56;
-  lblCam5.Top     := 78;
+{$ENDREGION}
+{$REGION ' Camera 6 ' }
+  pnlVid6.Top := 443;
+  pnlVid6.Left := 8;
+  pnlVid6.Height := 100;
+  pnlVid6.Width := 154;
 
-  pnlLonceng5.Height  := 20;
-  pnlLonceng5.Width   := 20;
-  pnlLonceng5.Left    := 108;
-  pnlLonceng5.Top     := 76;
+  lblCam6.Left := 56;
+  lblCam6.Top := 78;
 
-  pnlRec5.Height  := 20;
-  pnlRec5.Width   := 20;
-  pnlRec5.Left    := 130;
-  pnlRec5.Top     := 76;
+  pnlLonceng6.Height := 20;
+  pnlLonceng6.Width := 20;
+  pnlLonceng6.Left := 108;
+  pnlLonceng6.Top := 76;
 
-  {$ENDREGION}
-
-  {$REGION ' Camera 6 ' }
-  pnlVid6.Top     := 443;
-  pnlVid6.Left    := 8;
-  pnlVid6.Height  := 100;
-  pnlVid6.Width   := 154;
-
-  lblCam6.Left    := 56;
-  lblCam6.Top     := 78;
-
-  pnlLonceng6.Height  := 20;
-  pnlLonceng6.Width   := 20;
-  pnlLonceng6.Left    := 108;
-  pnlLonceng6.Top     := 76;
-
-  pnlRec6.Height  := 20;
-  pnlRec6.Width   := 20;
-  pnlRec6.Left    := 130;
-  pnlRec6.Top     := 76;
+  pnlRec6.Height := 20;
+  pnlRec6.Width := 20;
+  pnlRec6.Left := 130;
+  pnlRec6.Top := 76;
 
   imgBackLittle6.BringToFront;
   lblVid6.BringToFront;
   lblCam6.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 7 ' }
+  pnlVid7.Top := 551;
+  pnlVid7.Left := 8;
+  pnlVid7.Height := 100;
+  pnlVid7.Width := 154;
 
-  {$REGION ' Camera 7 ' }
-  pnlVid7.Top     := 551;
-  pnlVid7.Left    := 8;
-  pnlVid7.Height  := 100;
-  pnlVid7.Width   := 154;
+  lblCam7.Left := 56;
+  lblCam7.Top := 78;
 
-  lblCam7.Left    := 56;
-  lblCam7.Top     := 78;
+  pnlLonceng7.Height := 20;
+  pnlLonceng7.Width := 20;
+  pnlLonceng7.Left := 108;
+  pnlLonceng7.Top := 76;
 
-  pnlLonceng7.Height  := 20;
-  pnlLonceng7.Width   := 20;
-  pnlLonceng7.Left    := 108;
-  pnlLonceng7.Top     := 76;
-
-  pnlRec7.Height  := 20;
-  pnlRec7.Width   := 20;
-  pnlRec7.Left    := 130;
-  pnlRec7.Top     := 76;
+  pnlRec7.Height := 20;
+  pnlRec7.Width := 20;
+  pnlRec7.Left := 130;
+  pnlRec7.Top := 76;
 
   lblNoVideo7.Font.Size := 10;
   lblNoVideo7.Left := 43;
   lblNoVideo7.Top := 42;
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 8 ' }
+  pnlVid8.Top := 660;
+  pnlVid8.Left := 8;
+  pnlVid8.Height := 100;
+  pnlVid8.Width := 154;
 
-  {$REGION ' Camera 8 ' }
-  pnlVid8.Top     := 660;
-  pnlVid8.Left    := 8;
-  pnlVid8.Height  := 100;
-  pnlVid8.Width   := 154;
+  lblCam8.Left := 56;
+  lblCam8.Top := 78;
 
-  lblCam8.Left    := 56;
-  lblCam8.Top     := 78;
+  pnlLonceng8.Height := 20;
+  pnlLonceng8.Width := 20;
+  pnlLonceng8.Left := 108;
+  pnlLonceng8.Top := 76;
 
-  pnlLonceng8.Height  := 20;
-  pnlLonceng8.Width   := 20;
-  pnlLonceng8.Left    := 108;
-  pnlLonceng8.Top     := 76;
-
-  pnlRec8.Height  := 20;
-  pnlRec8.Width   := 20;
-  pnlRec8.Left    := 130;
-  pnlRec8.Top     := 76;
+  pnlRec8.Height := 20;
+  pnlRec8.Width := 20;
+  pnlRec8.Left := 130;
+  pnlRec8.Top := 76;
 
   lblNoVideo8.Font.Size := 10;
   lblNoVideo8.Left := 43;
   lblNoVideo8.Top := 42;
-  {$ENDREGION}
-
+{$ENDREGION}
 end;
 
 procedure TuMainForm.ZoomCam2Click(Sender: TObject);
 begin
-  {$REGION ' Camera 2 Besar ' }
-  pnlVid2.Top     := 8;
-  pnlVid2.Left    := 168;
-  pnlVid2.Height  := 753;
-  pnlVid2.Width   := 848;
+{$REGION ' Camera 2 Besar ' }
+  pnlVid2.Top := 8;
+  pnlVid2.Left := 168;
+  pnlVid2.Height := 753;
+  pnlVid2.Width := 848;
 
-  lblCam2.Left    := 725;
-  lblCam2.Top     := 724;
+  lblCam2.Left := 725;
+  lblCam2.Top := 724;
 
-  pnlLonceng2.Height  := 30;
-  pnlLonceng2.Width   := 30;
-  pnlLonceng2.Left    := 779;
-  pnlLonceng2.Top     := 717;
+  pnlLonceng2.Height := 30;
+  pnlLonceng2.Width := 30;
+  pnlLonceng2.Left := 779;
+  pnlLonceng2.Top := 717;
 
-  pnlRec2.Height  := 30;
-  pnlRec2.Width   := 30;
-  pnlRec2.Left    := 811;
-  pnlRec2.Top     := 717;
+  pnlRec2.Height := 30;
+  pnlRec2.Width := 30;
+  pnlRec2.Left := 811;
+  pnlRec2.Top := 717;
 
   imgBackLittle2.SendToBack;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 1 ' }
+  pnlVid1.Top := 8;
+  pnlVid1.Left := 8;
+  pnlVid1.Height := 100;
+  pnlVid1.Width := 154;
 
-  {$REGION ' Camera 1 ' }
-  pnlVid1.Top     := 8;
-  pnlVid1.Left    := 8;
-  pnlVid1.Height  := 100;
-  pnlVid1.Width   := 154;
+  lblCam1.Left := 56;
+  lblCam1.Top := 78;
 
-  lblCam1.Left    := 56;
-  lblCam1.Top     := 78;
+  pnlLonceng1.Height := 20;
+  pnlLonceng1.Width := 20;
+  pnlLonceng1.Left := 108;
+  pnlLonceng1.Top := 76;
 
-  pnlLonceng1.Height  := 20;
-  pnlLonceng1.Width   := 20;
-  pnlLonceng1.Left    := 108;
-  pnlLonceng1.Top     := 76;
+  pnlRec1.Height := 20;
+  pnlRec1.Width := 20;
+  pnlRec1.Left := 130;
+  pnlRec1.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 3 ' }
+  pnlVid3.Top := 117;
+  pnlVid3.Left := 8;
+  pnlVid3.Height := 100;
+  pnlVid3.Width := 154;
 
-  pnlRec1.Height  := 20;
-  pnlRec1.Width   := 20;
-  pnlRec1.Left    := 130;
-  pnlRec1.Top     := 76;
-  {$ENDREGION}
+  lblCam3.Left := 56;
+  lblCam3.Top := 78;
 
-  {$REGION ' Camera 3 ' }
-  pnlVid3.Top     := 117;
-  pnlVid3.Left    := 8;
-  pnlVid3.Height  := 100;
-  pnlVid3.Width   := 154;
+  pnlLonceng3.Height := 20;
+  pnlLonceng3.Width := 20;
+  pnlLonceng3.Left := 108;
+  pnlLonceng3.Top := 76;
 
-  lblCam3.Left    := 56;
-  lblCam3.Top     := 78;
+  pnlRec3.Height := 20;
+  pnlRec3.Width := 20;
+  pnlRec3.Left := 130;
+  pnlRec3.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 4 ' }
+  pnlVid4.Top := 225;
+  pnlVid4.Left := 8;
+  pnlVid4.Height := 100;
+  pnlVid4.Width := 154;
 
-  pnlLonceng3.Height  := 20;
-  pnlLonceng3.Width   := 20;
-  pnlLonceng3.Left    := 108;
-  pnlLonceng3.Top     := 76;
+  lblCam4.Left := 56;
+  lblCam4.Top := 78;
 
-  pnlRec3.Height  := 20;
-  pnlRec3.Width   := 20;
-  pnlRec3.Left    := 130;
-  pnlRec3.Top     := 76;
-  {$ENDREGION}
+  pnlLonceng4.Height := 20;
+  pnlLonceng4.Width := 20;
+  pnlLonceng4.Left := 108;
+  pnlLonceng4.Top := 76;
 
-  {$REGION ' Camera 4 ' }
-  pnlVid4.Top     := 225;
-  pnlVid4.Left    := 8;
-  pnlVid4.Height  := 100;
-  pnlVid4.Width   := 154;
+  pnlRec4.Height := 20;
+  pnlRec4.Width := 20;
+  pnlRec4.Left := 130;
+  pnlRec4.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 5 ' }
+  pnlVid5.Top := 334;
+  pnlVid5.Left := 8;
+  pnlVid5.Height := 100;
+  pnlVid5.Width := 154;
 
-  lblCam4.Left    := 56;
-  lblCam4.Top     := 78;
+  lblCam5.Left := 56;
+  lblCam5.Top := 78;
 
-  pnlLonceng4.Height  := 20;
-  pnlLonceng4.Width   := 20;
-  pnlLonceng4.Left    := 108;
-  pnlLonceng4.Top     := 76;
+  pnlLonceng5.Height := 20;
+  pnlLonceng5.Width := 20;
+  pnlLonceng5.Left := 108;
+  pnlLonceng5.Top := 76;
 
-  pnlRec4.Height  := 20;
-  pnlRec4.Width   := 20;
-  pnlRec4.Left    := 130;
-  pnlRec4.Top     := 76;
-  {$ENDREGION}
+  pnlRec5.Height := 20;
+  pnlRec5.Width := 20;
+  pnlRec5.Left := 130;
+  pnlRec5.Top := 76;
 
-  {$REGION ' Camera 5 ' }
-  pnlVid5.Top     := 334;
-  pnlVid5.Left    := 8;
-  pnlVid5.Height  := 100;
-  pnlVid5.Width   := 154;
+{$ENDREGION}
+{$REGION ' Camera 6 ' }
+  pnlVid6.Top := 443;
+  pnlVid6.Left := 8;
+  pnlVid6.Height := 100;
+  pnlVid6.Width := 154;
 
-  lblCam5.Left    := 56;
-  lblCam5.Top     := 78;
+  lblCam6.Left := 56;
+  lblCam6.Top := 78;
 
-  pnlLonceng5.Height  := 20;
-  pnlLonceng5.Width   := 20;
-  pnlLonceng5.Left    := 108;
-  pnlLonceng5.Top     := 76;
+  pnlLonceng6.Height := 20;
+  pnlLonceng6.Width := 20;
+  pnlLonceng6.Left := 108;
+  pnlLonceng6.Top := 76;
 
-  pnlRec5.Height  := 20;
-  pnlRec5.Width   := 20;
-  pnlRec5.Left    := 130;
-  pnlRec5.Top     := 76;
-
-  {$ENDREGION}
-
-  {$REGION ' Camera 6 ' }
-  pnlVid6.Top     := 443;
-  pnlVid6.Left    := 8;
-  pnlVid6.Height  := 100;
-  pnlVid6.Width   := 154;
-
-  lblCam6.Left    := 56;
-  lblCam6.Top     := 78;
-
-  pnlLonceng6.Height  := 20;
-  pnlLonceng6.Width   := 20;
-  pnlLonceng6.Left    := 108;
-  pnlLonceng6.Top     := 76;
-
-  pnlRec6.Height  := 20;
-  pnlRec6.Width   := 20;
-  pnlRec6.Left    := 130;
-  pnlRec6.Top     := 76;
+  pnlRec6.Height := 20;
+  pnlRec6.Width := 20;
+  pnlRec6.Left := 130;
+  pnlRec6.Top := 76;
 
   imgBackLittle6.BringToFront;
   lblVid6.BringToFront;
   lblCam6.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 7 ' }
+  pnlVid7.Top := 551;
+  pnlVid7.Left := 8;
+  pnlVid7.Height := 100;
+  pnlVid7.Width := 154;
 
-  {$REGION ' Camera 7 ' }
-  pnlVid7.Top     := 551;
-  pnlVid7.Left    := 8;
-  pnlVid7.Height  := 100;
-  pnlVid7.Width   := 154;
+  lblCam7.Left := 56;
+  lblCam7.Top := 78;
 
-  lblCam7.Left    := 56;
-  lblCam7.Top     := 78;
+  pnlLonceng7.Height := 20;
+  pnlLonceng7.Width := 20;
+  pnlLonceng7.Left := 108;
+  pnlLonceng7.Top := 76;
 
-  pnlLonceng7.Height  := 20;
-  pnlLonceng7.Width   := 20;
-  pnlLonceng7.Left    := 108;
-  pnlLonceng7.Top     := 76;
-
-  pnlRec7.Height  := 20;
-  pnlRec7.Width   := 20;
-  pnlRec7.Left    := 130;
-  pnlRec7.Top     := 76;
+  pnlRec7.Height := 20;
+  pnlRec7.Width := 20;
+  pnlRec7.Left := 130;
+  pnlRec7.Top := 76;
 
   lblNoVideo7.Font.Size := 10;
   lblNoVideo7.Left := 43;
   lblNoVideo7.Top := 42;
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 8 ' }
+  pnlVid8.Top := 660;
+  pnlVid8.Left := 8;
+  pnlVid8.Height := 100;
+  pnlVid8.Width := 154;
 
-  {$REGION ' Camera 8 ' }
-  pnlVid8.Top     := 660;
-  pnlVid8.Left    := 8;
-  pnlVid8.Height  := 100;
-  pnlVid8.Width   := 154;
+  lblCam8.Left := 56;
+  lblCam8.Top := 78;
 
-  lblCam8.Left    := 56;
-  lblCam8.Top     := 78;
+  pnlLonceng8.Height := 20;
+  pnlLonceng8.Width := 20;
+  pnlLonceng8.Left := 108;
+  pnlLonceng8.Top := 76;
 
-  pnlLonceng8.Height  := 20;
-  pnlLonceng8.Width   := 20;
-  pnlLonceng8.Left    := 108;
-  pnlLonceng8.Top     := 76;
-
-  pnlRec8.Height  := 20;
-  pnlRec8.Width   := 20;
-  pnlRec8.Left    := 130;
-  pnlRec8.Top     := 76;
+  pnlRec8.Height := 20;
+  pnlRec8.Width := 20;
+  pnlRec8.Left := 130;
+  pnlRec8.Top := 76;
 
   lblNoVideo8.Font.Size := 10;
   lblNoVideo8.Left := 43;
   lblNoVideo8.Top := 42;
-  {$ENDREGION}
-
+{$ENDREGION}
 end;
 
 procedure TuMainForm.ZoomCam3Click(Sender: TObject);
 begin
-  {$REGION ' Camera 3 Besar ' }
-  pnlVid3.Top     := 8;
-  pnlVid3.Left    := 168;
-  pnlVid3.Height  := 753;
-  pnlVid3.Width   := 848;
+{$REGION ' Camera 3 Besar ' }
+  pnlVid3.Top := 8;
+  pnlVid3.Left := 168;
+  pnlVid3.Height := 753;
+  pnlVid3.Width := 848;
 
-  lblCam3.Left    := 725;
-  lblCam3.Top     := 724;
+  lblCam3.Left := 725;
+  lblCam3.Top := 724;
 
-  pnlLonceng3.Height  := 30;
-  pnlLonceng3.Width   := 30;
-  pnlLonceng3.Left    := 779;
-  pnlLonceng3.Top     := 717;
+  pnlLonceng3.Height := 30;
+  pnlLonceng3.Width := 30;
+  pnlLonceng3.Left := 779;
+  pnlLonceng3.Top := 717;
 
-  pnlRec3.Height  := 30;
-  pnlRec3.Width   := 30;
-  pnlRec3.Left    := 811;
-  pnlRec3.Top     := 717;
-  {$ENDREGION}
+  pnlRec3.Height := 30;
+  pnlRec3.Width := 30;
+  pnlRec3.Left := 811;
+  pnlRec3.Top := 717;
+{$ENDREGION}
+{$REGION ' Camera 1 ' }
+  pnlVid1.Top := 8;
+  pnlVid1.Left := 8;
+  pnlVid1.Height := 100;
+  pnlVid1.Width := 154;
 
-  {$REGION ' Camera 1 ' }
-  pnlVid1.Top     := 8;
-  pnlVid1.Left    := 8;
-  pnlVid1.Height  := 100;
-  pnlVid1.Width   := 154;
+  lblCam1.Left := 56;
+  lblCam1.Top := 78;
 
-  lblCam1.Left    := 56;
-  lblCam1.Top     := 78;
+  pnlLonceng1.Height := 20;
+  pnlLonceng1.Width := 20;
+  pnlLonceng1.Left := 108;
+  pnlLonceng1.Top := 76;
 
-  pnlLonceng1.Height  := 20;
-  pnlLonceng1.Width   := 20;
-  pnlLonceng1.Left    := 108;
-  pnlLonceng1.Top     := 76;
+  pnlRec1.Height := 20;
+  pnlRec1.Width := 20;
+  pnlRec1.Left := 130;
+  pnlRec1.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 2 ' }
+  pnlVid2.Top := 117;
+  pnlVid2.Left := 8;
+  pnlVid2.Height := 100;
+  pnlVid2.Width := 154;
 
-  pnlRec1.Height  := 20;
-  pnlRec1.Width   := 20;
-  pnlRec1.Left    := 130;
-  pnlRec1.Top     := 76;
-  {$ENDREGION}
+  lblCam2.Left := 56;
+  lblCam2.Top := 78;
 
-  {$REGION ' Camera 2 ' }
-  pnlVid2.Top     := 117;
-  pnlVid2.Left    := 8;
-  pnlVid2.Height  := 100;
-  pnlVid2.Width   := 154;
+  pnlLonceng2.Height := 20;
+  pnlLonceng2.Width := 20;
+  pnlLonceng2.Left := 108;
+  pnlLonceng2.Top := 76;
 
-  lblCam2.Left    := 56;
-  lblCam2.Top     := 78;
-
-  pnlLonceng2.Height  := 20;
-  pnlLonceng2.Width   := 20;
-  pnlLonceng2.Left    := 108;
-  pnlLonceng2.Top     := 76;
-
-  pnlRec2.Height  := 20;
-  pnlRec2.Width   := 20;
-  pnlRec2.Left    := 130;
-  pnlRec2.Top     := 76;
+  pnlRec2.Height := 20;
+  pnlRec2.Width := 20;
+  pnlRec2.Left := 130;
+  pnlRec2.Top := 76;
 
   imgBackLittle2.BringToFront;
   lblVid2.BringToFront;
   lblCam2.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 4 ' }
+  pnlVid4.Top := 225;
+  pnlVid4.Left := 8;
+  pnlVid4.Height := 100;
+  pnlVid4.Width := 154;
 
-  {$REGION ' Camera 4 ' }
-  pnlVid4.Top     := 225;
-  pnlVid4.Left    := 8;
-  pnlVid4.Height  := 100;
-  pnlVid4.Width   := 154;
+  lblCam4.Left := 56;
+  lblCam4.Top := 78;
 
-  lblCam4.Left    := 56;
-  lblCam4.Top     := 78;
+  pnlLonceng4.Height := 20;
+  pnlLonceng4.Width := 20;
+  pnlLonceng4.Left := 108;
+  pnlLonceng4.Top := 76;
 
-  pnlLonceng4.Height  := 20;
-  pnlLonceng4.Width   := 20;
-  pnlLonceng4.Left    := 108;
-  pnlLonceng4.Top     := 76;
+  pnlRec4.Height := 20;
+  pnlRec4.Width := 20;
+  pnlRec4.Left := 130;
+  pnlRec4.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 5 ' }
+  pnlVid5.Top := 334;
+  pnlVid5.Left := 8;
+  pnlVid5.Height := 100;
+  pnlVid5.Width := 154;
 
-  pnlRec4.Height  := 20;
-  pnlRec4.Width   := 20;
-  pnlRec4.Left    := 130;
-  pnlRec4.Top     := 76;
-  {$ENDREGION}
+  lblCam5.Left := 56;
+  lblCam5.Top := 78;
 
-  {$REGION ' Camera 5 ' }
-  pnlVid5.Top     := 334;
-  pnlVid5.Left    := 8;
-  pnlVid5.Height  := 100;
-  pnlVid5.Width   := 154;
+  pnlLonceng5.Height := 20;
+  pnlLonceng5.Width := 20;
+  pnlLonceng5.Left := 108;
+  pnlLonceng5.Top := 76;
 
-  lblCam5.Left    := 56;
-  lblCam5.Top     := 78;
+  pnlRec5.Height := 20;
+  pnlRec5.Width := 20;
+  pnlRec5.Left := 130;
+  pnlRec5.Top := 76;
 
-  pnlLonceng5.Height  := 20;
-  pnlLonceng5.Width   := 20;
-  pnlLonceng5.Left    := 108;
-  pnlLonceng5.Top     := 76;
+{$ENDREGION}
+{$REGION ' Camera 6 ' }
+  pnlVid6.Top := 443;
+  pnlVid6.Left := 8;
+  pnlVid6.Height := 100;
+  pnlVid6.Width := 154;
 
-  pnlRec5.Height  := 20;
-  pnlRec5.Width   := 20;
-  pnlRec5.Left    := 130;
-  pnlRec5.Top     := 76;
+  lblCam6.Left := 56;
+  lblCam6.Top := 78;
 
-  {$ENDREGION}
+  pnlLonceng6.Height := 20;
+  pnlLonceng6.Width := 20;
+  pnlLonceng6.Left := 108;
+  pnlLonceng6.Top := 76;
 
-  {$REGION ' Camera 6 ' }
-  pnlVid6.Top     := 443;
-  pnlVid6.Left    := 8;
-  pnlVid6.Height  := 100;
-  pnlVid6.Width   := 154;
-
-  lblCam6.Left    := 56;
-  lblCam6.Top     := 78;
-
-  pnlLonceng6.Height  := 20;
-  pnlLonceng6.Width   := 20;
-  pnlLonceng6.Left    := 108;
-  pnlLonceng6.Top     := 76;
-
-  pnlRec6.Height  := 20;
-  pnlRec6.Width   := 20;
-  pnlRec6.Left    := 130;
-  pnlRec6.Top     := 76;
+  pnlRec6.Height := 20;
+  pnlRec6.Width := 20;
+  pnlRec6.Left := 130;
+  pnlRec6.Top := 76;
 
   imgBackLittle6.BringToFront;
   lblVid6.BringToFront;
   lblCam6.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 7 ' }
+  pnlVid7.Top := 551;
+  pnlVid7.Left := 8;
+  pnlVid7.Height := 100;
+  pnlVid7.Width := 154;
 
-  {$REGION ' Camera 7 ' }
-  pnlVid7.Top     := 551;
-  pnlVid7.Left    := 8;
-  pnlVid7.Height  := 100;
-  pnlVid7.Width   := 154;
+  lblCam7.Left := 56;
+  lblCam7.Top := 78;
 
-  lblCam7.Left    := 56;
-  lblCam7.Top     := 78;
+  pnlLonceng7.Height := 20;
+  pnlLonceng7.Width := 20;
+  pnlLonceng7.Left := 108;
+  pnlLonceng7.Top := 76;
 
-  pnlLonceng7.Height  := 20;
-  pnlLonceng7.Width   := 20;
-  pnlLonceng7.Left    := 108;
-  pnlLonceng7.Top     := 76;
-
-  pnlRec7.Height  := 20;
-  pnlRec7.Width   := 20;
-  pnlRec7.Left    := 130;
-  pnlRec7.Top     := 76;
+  pnlRec7.Height := 20;
+  pnlRec7.Width := 20;
+  pnlRec7.Left := 130;
+  pnlRec7.Top := 76;
 
   lblNoVideo7.Font.Size := 10;
   lblNoVideo7.Left := 43;
   lblNoVideo7.Top := 42;
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 8 ' }
+  pnlVid8.Top := 660;
+  pnlVid8.Left := 8;
+  pnlVid8.Height := 100;
+  pnlVid8.Width := 154;
 
-  {$REGION ' Camera 8 ' }
-  pnlVid8.Top     := 660;
-  pnlVid8.Left    := 8;
-  pnlVid8.Height  := 100;
-  pnlVid8.Width   := 154;
+  lblCam8.Left := 56;
+  lblCam8.Top := 78;
 
-  lblCam8.Left    := 56;
-  lblCam8.Top     := 78;
+  pnlLonceng8.Height := 20;
+  pnlLonceng8.Width := 20;
+  pnlLonceng8.Left := 108;
+  pnlLonceng8.Top := 76;
 
-  pnlLonceng8.Height  := 20;
-  pnlLonceng8.Width   := 20;
-  pnlLonceng8.Left    := 108;
-  pnlLonceng8.Top     := 76;
-
-  pnlRec8.Height  := 20;
-  pnlRec8.Width   := 20;
-  pnlRec8.Left    := 130;
-  pnlRec8.Top     := 76;
+  pnlRec8.Height := 20;
+  pnlRec8.Width := 20;
+  pnlRec8.Left := 130;
+  pnlRec8.Top := 76;
 
   lblNoVideo8.Font.Size := 10;
   lblNoVideo8.Left := 43;
   lblNoVideo8.Top := 42;
-  {$ENDREGION}
-
+{$ENDREGION}
 end;
 
 procedure TuMainForm.ZoomCam4Click(Sender: TObject);
 begin
-  {$REGION ' Camera 4 Besar ' }
-  pnlVid4.Top     := 8;
-  pnlVid4.Left    := 168;
-  pnlVid4.Height  := 753;
-  pnlVid4.Width   := 848;
+{$REGION ' Camera 4 Besar ' }
+  pnlVid4.Top := 8;
+  pnlVid4.Left := 168;
+  pnlVid4.Height := 753;
+  pnlVid4.Width := 848;
 
-  lblCam4.Left    := 725;
-  lblCam4.Top     := 724;
+  lblCam4.Left := 725;
+  lblCam4.Top := 724;
 
-  pnlLonceng4.Height  := 30;
-  pnlLonceng4.Width   := 30;
-  pnlLonceng4.Left    := 779;
-  pnlLonceng4.Top     := 717;
+  pnlLonceng4.Height := 30;
+  pnlLonceng4.Width := 30;
+  pnlLonceng4.Left := 779;
+  pnlLonceng4.Top := 717;
 
-  pnlRec4.Height  := 30;
-  pnlRec4.Width   := 30;
-  pnlRec4.Left    := 811;
-  pnlRec4.Top     := 717;
-  {$ENDREGION}
+  pnlRec4.Height := 30;
+  pnlRec4.Width := 30;
+  pnlRec4.Left := 811;
+  pnlRec4.Top := 717;
+{$ENDREGION}
+{$REGION ' Camera 1 ' }
+  pnlVid1.Top := 8;
+  pnlVid1.Left := 8;
+  pnlVid1.Height := 100;
+  pnlVid1.Width := 154;
 
-  {$REGION ' Camera 1 ' }
-  pnlVid1.Top     := 8;
-  pnlVid1.Left    := 8;
-  pnlVid1.Height  := 100;
-  pnlVid1.Width   := 154;
+  lblCam1.Left := 56;
+  lblCam1.Top := 78;
 
-  lblCam1.Left    := 56;
-  lblCam1.Top     := 78;
+  pnlLonceng1.Height := 20;
+  pnlLonceng1.Width := 20;
+  pnlLonceng1.Left := 108;
+  pnlLonceng1.Top := 76;
 
-  pnlLonceng1.Height  := 20;
-  pnlLonceng1.Width   := 20;
-  pnlLonceng1.Left    := 108;
-  pnlLonceng1.Top     := 76;
+  pnlRec1.Height := 20;
+  pnlRec1.Width := 20;
+  pnlRec1.Left := 130;
+  pnlRec1.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 2 ' }
+  pnlVid2.Top := 117;
+  pnlVid2.Left := 8;
+  pnlVid2.Height := 100;
+  pnlVid2.Width := 154;
 
-  pnlRec1.Height  := 20;
-  pnlRec1.Width   := 20;
-  pnlRec1.Left    := 130;
-  pnlRec1.Top     := 76;
-  {$ENDREGION}
+  lblCam2.Left := 56;
+  lblCam2.Top := 78;
 
-  {$REGION ' Camera 2 ' }
-  pnlVid2.Top     := 117;
-  pnlVid2.Left    := 8;
-  pnlVid2.Height  := 100;
-  pnlVid2.Width   := 154;
+  pnlLonceng2.Height := 20;
+  pnlLonceng2.Width := 20;
+  pnlLonceng2.Left := 108;
+  pnlLonceng2.Top := 76;
 
-  lblCam2.Left    := 56;
-  lblCam2.Top     := 78;
-
-  pnlLonceng2.Height  := 20;
-  pnlLonceng2.Width   := 20;
-  pnlLonceng2.Left    := 108;
-  pnlLonceng2.Top     := 76;
-
-  pnlRec2.Height  := 20;
-  pnlRec2.Width   := 20;
-  pnlRec2.Left    := 130;
-  pnlRec2.Top     := 76;
+  pnlRec2.Height := 20;
+  pnlRec2.Width := 20;
+  pnlRec2.Left := 130;
+  pnlRec2.Top := 76;
 
   imgBackLittle2.BringToFront;
   lblVid2.BringToFront;
   lblCam2.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 3 ' }
+  pnlVid3.Top := 225;
+  pnlVid3.Left := 8;
+  pnlVid3.Height := 100;
+  pnlVid3.Width := 154;
 
-  {$REGION ' Camera 3 ' }
-  pnlVid3.Top     := 225;
-  pnlVid3.Left    := 8;
-  pnlVid3.Height  := 100;
-  pnlVid3.Width   := 154;
+  lblCam3.Left := 56;
+  lblCam3.Top := 78;
 
-  lblCam3.Left    := 56;
-  lblCam3.Top     := 78;
+  pnlLonceng3.Height := 20;
+  pnlLonceng3.Width := 20;
+  pnlLonceng3.Left := 108;
+  pnlLonceng3.Top := 76;
 
-  pnlLonceng3.Height  := 20;
-  pnlLonceng3.Width   := 20;
-  pnlLonceng3.Left    := 108;
-  pnlLonceng3.Top     := 76;
+  pnlRec3.Height := 20;
+  pnlRec3.Width := 20;
+  pnlRec3.Left := 130;
+  pnlRec3.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 5 ' }
+  pnlVid5.Top := 334;
+  pnlVid5.Left := 8;
+  pnlVid5.Height := 100;
+  pnlVid5.Width := 154;
 
-  pnlRec3.Height  := 20;
-  pnlRec3.Width   := 20;
-  pnlRec3.Left    := 130;
-  pnlRec3.Top     := 76;
-  {$ENDREGION}
+  lblCam5.Left := 56;
+  lblCam5.Top := 78;
 
-  {$REGION ' Camera 5 ' }
-  pnlVid5.Top     := 334;
-  pnlVid5.Left    := 8;
-  pnlVid5.Height  := 100;
-  pnlVid5.Width   := 154;
+  pnlLonceng5.Height := 20;
+  pnlLonceng5.Width := 20;
+  pnlLonceng5.Left := 108;
+  pnlLonceng5.Top := 76;
 
-  lblCam5.Left    := 56;
-  lblCam5.Top     := 78;
+  pnlRec5.Height := 20;
+  pnlRec5.Width := 20;
+  pnlRec5.Left := 130;
+  pnlRec5.Top := 76;
 
-  pnlLonceng5.Height  := 20;
-  pnlLonceng5.Width   := 20;
-  pnlLonceng5.Left    := 108;
-  pnlLonceng5.Top     := 76;
+{$ENDREGION}
+{$REGION ' Camera 6 ' }
+  pnlVid6.Top := 443;
+  pnlVid6.Left := 8;
+  pnlVid6.Height := 100;
+  pnlVid6.Width := 154;
 
-  pnlRec5.Height  := 20;
-  pnlRec5.Width   := 20;
-  pnlRec5.Left    := 130;
-  pnlRec5.Top     := 76;
+  lblCam6.Left := 56;
+  lblCam6.Top := 78;
 
-  {$ENDREGION}
+  pnlLonceng6.Height := 20;
+  pnlLonceng6.Width := 20;
+  pnlLonceng6.Left := 108;
+  pnlLonceng6.Top := 76;
 
-  {$REGION ' Camera 6 ' }
-  pnlVid6.Top     := 443;
-  pnlVid6.Left    := 8;
-  pnlVid6.Height  := 100;
-  pnlVid6.Width   := 154;
-
-  lblCam6.Left    := 56;
-  lblCam6.Top     := 78;
-
-  pnlLonceng6.Height  := 20;
-  pnlLonceng6.Width   := 20;
-  pnlLonceng6.Left    := 108;
-  pnlLonceng6.Top     := 76;
-
-  pnlRec6.Height  := 20;
-  pnlRec6.Width   := 20;
-  pnlRec6.Left    := 130;
-  pnlRec6.Top     := 76;
+  pnlRec6.Height := 20;
+  pnlRec6.Width := 20;
+  pnlRec6.Left := 130;
+  pnlRec6.Top := 76;
 
   imgBackLittle6.BringToFront;
   lblVid6.BringToFront;
   lblCam6.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 7 ' }
+  pnlVid7.Top := 551;
+  pnlVid7.Left := 8;
+  pnlVid7.Height := 100;
+  pnlVid7.Width := 154;
 
-  {$REGION ' Camera 7 ' }
-  pnlVid7.Top     := 551;
-  pnlVid7.Left    := 8;
-  pnlVid7.Height  := 100;
-  pnlVid7.Width   := 154;
+  lblCam7.Left := 56;
+  lblCam7.Top := 78;
 
-  lblCam7.Left    := 56;
-  lblCam7.Top     := 78;
+  pnlLonceng7.Height := 20;
+  pnlLonceng7.Width := 20;
+  pnlLonceng7.Left := 108;
+  pnlLonceng7.Top := 76;
 
-  pnlLonceng7.Height  := 20;
-  pnlLonceng7.Width   := 20;
-  pnlLonceng7.Left    := 108;
-  pnlLonceng7.Top     := 76;
-
-  pnlRec7.Height  := 20;
-  pnlRec7.Width   := 20;
-  pnlRec7.Left    := 130;
-  pnlRec7.Top     := 76;
+  pnlRec7.Height := 20;
+  pnlRec7.Width := 20;
+  pnlRec7.Left := 130;
+  pnlRec7.Top := 76;
 
   lblNoVideo7.Font.Size := 10;
   lblNoVideo7.Left := 43;
   lblNoVideo7.Top := 42;
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 8 ' }
+  pnlVid8.Top := 660;
+  pnlVid8.Left := 8;
+  pnlVid8.Height := 100;
+  pnlVid8.Width := 154;
 
-  {$REGION ' Camera 8 ' }
-  pnlVid8.Top     := 660;
-  pnlVid8.Left    := 8;
-  pnlVid8.Height  := 100;
-  pnlVid8.Width   := 154;
+  lblCam8.Left := 56;
+  lblCam8.Top := 78;
 
-  lblCam8.Left    := 56;
-  lblCam8.Top     := 78;
+  pnlLonceng8.Height := 20;
+  pnlLonceng8.Width := 20;
+  pnlLonceng8.Left := 108;
+  pnlLonceng8.Top := 76;
 
-  pnlLonceng8.Height  := 20;
-  pnlLonceng8.Width   := 20;
-  pnlLonceng8.Left    := 108;
-  pnlLonceng8.Top     := 76;
-
-  pnlRec8.Height  := 20;
-  pnlRec8.Width   := 20;
-  pnlRec8.Left    := 130;
-  pnlRec8.Top     := 76;
+  pnlRec8.Height := 20;
+  pnlRec8.Width := 20;
+  pnlRec8.Left := 130;
+  pnlRec8.Top := 76;
 
   lblNoVideo8.Font.Size := 10;
   lblNoVideo8.Left := 43;
   lblNoVideo8.Top := 42;
-  {$ENDREGION}
-
+{$ENDREGION}
 end;
 
 procedure TuMainForm.ZoomCam5Click(Sender: TObject);
 begin
-  {$REGION ' Camera 5 Besar ' }
-  pnlVid5.Top     := 8;
-  pnlVid5.Left    := 168;
-  pnlVid5.Height  := 753;
-  pnlVid5.Width   := 848;
+{$REGION ' Camera 5 Besar ' }
+  pnlVid5.Top := 8;
+  pnlVid5.Left := 168;
+  pnlVid5.Height := 753;
+  pnlVid5.Width := 848;
 
-  lblCam5.Left    := 725;
-  lblCam5.Top     := 724;
+  lblCam5.Left := 725;
+  lblCam5.Top := 724;
 
-  pnlLonceng5.Height  := 30;
-  pnlLonceng5.Width   := 30;
-  pnlLonceng5.Left    := 779;
-  pnlLonceng5.Top     := 717;
+  pnlLonceng5.Height := 30;
+  pnlLonceng5.Width := 30;
+  pnlLonceng5.Left := 779;
+  pnlLonceng5.Top := 717;
 
-  pnlRec5.Height  := 30;
-  pnlRec5.Width   := 30;
-  pnlRec5.Left    := 811;
-  pnlRec5.Top     := 717;
-  {$ENDREGION}
+  pnlRec5.Height := 30;
+  pnlRec5.Width := 30;
+  pnlRec5.Left := 811;
+  pnlRec5.Top := 717;
+{$ENDREGION}
+{$REGION ' Camera 1 ' }
+  pnlVid1.Top := 8;
+  pnlVid1.Left := 8;
+  pnlVid1.Height := 100;
+  pnlVid1.Width := 154;
 
-  {$REGION ' Camera 1 ' }
-  pnlVid1.Top     := 8;
-  pnlVid1.Left    := 8;
-  pnlVid1.Height  := 100;
-  pnlVid1.Width   := 154;
+  lblCam1.Left := 56;
+  lblCam1.Top := 78;
 
-  lblCam1.Left    := 56;
-  lblCam1.Top     := 78;
+  pnlLonceng1.Height := 20;
+  pnlLonceng1.Width := 20;
+  pnlLonceng1.Left := 108;
+  pnlLonceng1.Top := 76;
 
-  pnlLonceng1.Height  := 20;
-  pnlLonceng1.Width   := 20;
-  pnlLonceng1.Left    := 108;
-  pnlLonceng1.Top     := 76;
+  pnlRec1.Height := 20;
+  pnlRec1.Width := 20;
+  pnlRec1.Left := 130;
+  pnlRec1.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 2 ' }
+  pnlVid2.Top := 117;
+  pnlVid2.Left := 8;
+  pnlVid2.Height := 100;
+  pnlVid2.Width := 154;
 
-  pnlRec1.Height  := 20;
-  pnlRec1.Width   := 20;
-  pnlRec1.Left    := 130;
-  pnlRec1.Top     := 76;
-  {$ENDREGION}
+  lblCam2.Left := 56;
+  lblCam2.Top := 78;
 
-  {$REGION ' Camera 2 ' }
-  pnlVid2.Top     := 117;
-  pnlVid2.Left    := 8;
-  pnlVid2.Height  := 100;
-  pnlVid2.Width   := 154;
+  pnlLonceng2.Height := 20;
+  pnlLonceng2.Width := 20;
+  pnlLonceng2.Left := 108;
+  pnlLonceng2.Top := 76;
 
-  lblCam2.Left    := 56;
-  lblCam2.Top     := 78;
-
-  pnlLonceng2.Height  := 20;
-  pnlLonceng2.Width   := 20;
-  pnlLonceng2.Left    := 108;
-  pnlLonceng2.Top     := 76;
-
-  pnlRec2.Height  := 20;
-  pnlRec2.Width   := 20;
-  pnlRec2.Left    := 130;
-  pnlRec2.Top     := 76;
+  pnlRec2.Height := 20;
+  pnlRec2.Width := 20;
+  pnlRec2.Left := 130;
+  pnlRec2.Top := 76;
 
   imgBackLittle2.BringToFront;
   lblVid2.BringToFront;
   lblCam2.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 3 ' }
+  pnlVid3.Top := 225;
+  pnlVid3.Left := 8;
+  pnlVid3.Height := 100;
+  pnlVid3.Width := 154;
 
-  {$REGION ' Camera 3 ' }
-  pnlVid3.Top     := 225;
-  pnlVid3.Left    := 8;
-  pnlVid3.Height  := 100;
-  pnlVid3.Width   := 154;
+  lblCam3.Left := 56;
+  lblCam3.Top := 78;
 
-  lblCam3.Left    := 56;
-  lblCam3.Top     := 78;
+  pnlLonceng3.Height := 20;
+  pnlLonceng3.Width := 20;
+  pnlLonceng3.Left := 108;
+  pnlLonceng3.Top := 76;
 
-  pnlLonceng3.Height  := 20;
-  pnlLonceng3.Width   := 20;
-  pnlLonceng3.Left    := 108;
-  pnlLonceng3.Top     := 76;
+  pnlRec3.Height := 20;
+  pnlRec3.Width := 20;
+  pnlRec3.Left := 130;
+  pnlRec3.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 4 ' }
+  pnlVid4.Top := 334;
+  pnlVid4.Left := 8;
+  pnlVid4.Height := 100;
+  pnlVid4.Width := 154;
 
-  pnlRec3.Height  := 20;
-  pnlRec3.Width   := 20;
-  pnlRec3.Left    := 130;
-  pnlRec3.Top     := 76;
-  {$ENDREGION}
+  lblCam4.Left := 56;
+  lblCam4.Top := 78;
 
-  {$REGION ' Camera 4 ' }
-  pnlVid4.Top     := 334;
-  pnlVid4.Left    := 8;
-  pnlVid4.Height  := 100;
-  pnlVid4.Width   := 154;
+  pnlLonceng4.Height := 20;
+  pnlLonceng4.Width := 20;
+  pnlLonceng4.Left := 108;
+  pnlLonceng4.Top := 76;
 
-  lblCam4.Left    := 56;
-  lblCam4.Top     := 78;
+  pnlRec4.Height := 20;
+  pnlRec4.Width := 20;
+  pnlRec4.Left := 130;
+  pnlRec4.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 6 ' }
+  pnlVid6.Top := 443;
+  pnlVid6.Left := 8;
+  pnlVid6.Height := 100;
+  pnlVid6.Width := 154;
 
-  pnlLonceng4.Height  := 20;
-  pnlLonceng4.Width   := 20;
-  pnlLonceng4.Left    := 108;
-  pnlLonceng4.Top     := 76;
+  lblCam6.Left := 56;
+  lblCam6.Top := 78;
 
-  pnlRec4.Height  := 20;
-  pnlRec4.Width   := 20;
-  pnlRec4.Left    := 130;
-  pnlRec4.Top     := 76;
-  {$ENDREGION}
+  pnlLonceng6.Height := 20;
+  pnlLonceng6.Width := 20;
+  pnlLonceng6.Left := 108;
+  pnlLonceng6.Top := 76;
 
-  {$REGION ' Camera 6 ' }
-  pnlVid6.Top     := 443;
-  pnlVid6.Left    := 8;
-  pnlVid6.Height  := 100;
-  pnlVid6.Width   := 154;
-
-  lblCam6.Left    := 56;
-  lblCam6.Top     := 78;
-
-  pnlLonceng6.Height  := 20;
-  pnlLonceng6.Width   := 20;
-  pnlLonceng6.Left    := 108;
-  pnlLonceng6.Top     := 76;
-
-  pnlRec6.Height  := 20;
-  pnlRec6.Width   := 20;
-  pnlRec6.Left    := 130;
-  pnlRec6.Top     := 76;
+  pnlRec6.Height := 20;
+  pnlRec6.Width := 20;
+  pnlRec6.Left := 130;
+  pnlRec6.Top := 76;
 
   imgBackLittle6.BringToFront;
   lblVid6.BringToFront;
   lblCam6.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 7 ' }
+  pnlVid7.Top := 551;
+  pnlVid7.Left := 8;
+  pnlVid7.Height := 100;
+  pnlVid7.Width := 154;
 
-  {$REGION ' Camera 7 ' }
-  pnlVid7.Top     := 551;
-  pnlVid7.Left    := 8;
-  pnlVid7.Height  := 100;
-  pnlVid7.Width   := 154;
+  lblCam7.Left := 56;
+  lblCam7.Top := 78;
 
-  lblCam7.Left    := 56;
-  lblCam7.Top     := 78;
+  pnlLonceng7.Height := 20;
+  pnlLonceng7.Width := 20;
+  pnlLonceng7.Left := 108;
+  pnlLonceng7.Top := 76;
 
-  pnlLonceng7.Height  := 20;
-  pnlLonceng7.Width   := 20;
-  pnlLonceng7.Left    := 108;
-  pnlLonceng7.Top     := 76;
-
-  pnlRec7.Height  := 20;
-  pnlRec7.Width   := 20;
-  pnlRec7.Left    := 130;
-  pnlRec7.Top     := 76;
+  pnlRec7.Height := 20;
+  pnlRec7.Width := 20;
+  pnlRec7.Left := 130;
+  pnlRec7.Top := 76;
 
   lblNoVideo7.Font.Size := 10;
   lblNoVideo7.Left := 43;
   lblNoVideo7.Top := 42;
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 8 ' }
+  pnlVid8.Top := 660;
+  pnlVid8.Left := 8;
+  pnlVid8.Height := 100;
+  pnlVid8.Width := 154;
 
-  {$REGION ' Camera 8 ' }
-  pnlVid8.Top     := 660;
-  pnlVid8.Left    := 8;
-  pnlVid8.Height  := 100;
-  pnlVid8.Width   := 154;
+  lblCam8.Left := 56;
+  lblCam8.Top := 78;
 
-  lblCam8.Left    := 56;
-  lblCam8.Top     := 78;
+  pnlLonceng8.Height := 20;
+  pnlLonceng8.Width := 20;
+  pnlLonceng8.Left := 108;
+  pnlLonceng8.Top := 76;
 
-  pnlLonceng8.Height  := 20;
-  pnlLonceng8.Width   := 20;
-  pnlLonceng8.Left    := 108;
-  pnlLonceng8.Top     := 76;
-
-  pnlRec8.Height  := 20;
-  pnlRec8.Width   := 20;
-  pnlRec8.Left    := 130;
-  pnlRec8.Top     := 76;
+  pnlRec8.Height := 20;
+  pnlRec8.Width := 20;
+  pnlRec8.Left := 130;
+  pnlRec8.Top := 76;
 
   lblNoVideo8.Font.Size := 10;
   lblNoVideo8.Left := 43;
   lblNoVideo8.Top := 42;
-  {$ENDREGION}
-
+{$ENDREGION}
 end;
 
 procedure TuMainForm.ZoomCam6Click(Sender: TObject);
 begin
-  {$REGION ' Camera 6 Besar' }
-  pnlVid6.Top     := 8;
-  pnlVid6.Left    := 168;
-  pnlVid6.Height  := 753;
-  pnlVid6.Width   := 848;
+{$REGION ' Camera 6 Besar' }
+  pnlVid6.Top := 8;
+  pnlVid6.Left := 168;
+  pnlVid6.Height := 753;
+  pnlVid6.Width := 848;
 
-  lblCam6.Left    := 725;
-  lblCam6.Top     := 724;
+  lblCam6.Left := 725;
+  lblCam6.Top := 724;
 
-  pnlLonceng6.Height  := 30;
-  pnlLonceng6.Width   := 30;
-  pnlLonceng6.Left    := 779;
-  pnlLonceng6.Top     := 717;
+  pnlLonceng6.Height := 30;
+  pnlLonceng6.Width := 30;
+  pnlLonceng6.Left := 779;
+  pnlLonceng6.Top := 717;
 
-  pnlRec6.Height  := 30;
-  pnlRec6.Width   := 30;
-  pnlRec6.Left    := 811;
-  pnlRec6.Top     := 717;
+  pnlRec6.Height := 30;
+  pnlRec6.Width := 30;
+  pnlRec6.Left := 811;
+  pnlRec6.Top := 717;
 
   imgBackLittle6.SendToBack;
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 1 ' }
+  pnlVid1.Top := 8;
+  pnlVid1.Left := 8;
+  pnlVid1.Height := 100;
+  pnlVid1.Width := 154;
 
-  {$REGION ' Camera 1 ' }
-  pnlVid1.Top     := 8;
-  pnlVid1.Left    := 8;
-  pnlVid1.Height  := 100;
-  pnlVid1.Width   := 154;
+  lblCam1.Left := 56;
+  lblCam1.Top := 78;
 
-  lblCam1.Left    := 56;
-  lblCam1.Top     := 78;
+  pnlLonceng1.Height := 20;
+  pnlLonceng1.Width := 20;
+  pnlLonceng1.Left := 108;
+  pnlLonceng1.Top := 76;
 
-  pnlLonceng1.Height  := 20;
-  pnlLonceng1.Width   := 20;
-  pnlLonceng1.Left    := 108;
-  pnlLonceng1.Top     := 76;
+  pnlRec1.Height := 20;
+  pnlRec1.Width := 20;
+  pnlRec1.Left := 130;
+  pnlRec1.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 2 ' }
+  pnlVid2.Top := 117;
+  pnlVid2.Left := 8;
+  pnlVid2.Height := 100;
+  pnlVid2.Width := 154;
 
-  pnlRec1.Height  := 20;
-  pnlRec1.Width   := 20;
-  pnlRec1.Left    := 130;
-  pnlRec1.Top     := 76;
-  {$ENDREGION}
+  lblCam2.Left := 56;
+  lblCam2.Top := 78;
 
-  {$REGION ' Camera 2 ' }
-  pnlVid2.Top     := 117;
-  pnlVid2.Left    := 8;
-  pnlVid2.Height  := 100;
-  pnlVid2.Width   := 154;
+  pnlLonceng2.Height := 20;
+  pnlLonceng2.Width := 20;
+  pnlLonceng2.Left := 108;
+  pnlLonceng2.Top := 76;
 
-  lblCam2.Left    := 56;
-  lblCam2.Top     := 78;
-
-  pnlLonceng2.Height  := 20;
-  pnlLonceng2.Width   := 20;
-  pnlLonceng2.Left    := 108;
-  pnlLonceng2.Top     := 76;
-
-  pnlRec2.Height  := 20;
-  pnlRec2.Width   := 20;
-  pnlRec2.Left    := 130;
-  pnlRec2.Top     := 76;
+  pnlRec2.Height := 20;
+  pnlRec2.Width := 20;
+  pnlRec2.Left := 130;
+  pnlRec2.Top := 76;
 
   imgBackLittle2.BringToFront;
   lblVid2.BringToFront;
   lblCam2.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 3 ' }
+  pnlVid3.Top := 225;
+  pnlVid3.Left := 8;
+  pnlVid3.Height := 100;
+  pnlVid3.Width := 154;
 
-  {$REGION ' Camera 3 ' }
-  pnlVid3.Top     := 225;
-  pnlVid3.Left    := 8;
-  pnlVid3.Height  := 100;
-  pnlVid3.Width   := 154;
+  lblCam3.Left := 56;
+  lblCam3.Top := 78;
 
-  lblCam3.Left    := 56;
-  lblCam3.Top     := 78;
+  pnlLonceng3.Height := 20;
+  pnlLonceng3.Width := 20;
+  pnlLonceng3.Left := 108;
+  pnlLonceng3.Top := 76;
 
-  pnlLonceng3.Height  := 20;
-  pnlLonceng3.Width   := 20;
-  pnlLonceng3.Left    := 108;
-  pnlLonceng3.Top     := 76;
+  pnlRec3.Height := 20;
+  pnlRec3.Width := 20;
+  pnlRec3.Left := 130;
+  pnlRec3.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 4 ' }
+  pnlVid4.Top := 334;
+  pnlVid4.Left := 8;
+  pnlVid4.Height := 100;
+  pnlVid4.Width := 154;
 
-  pnlRec3.Height  := 20;
-  pnlRec3.Width   := 20;
-  pnlRec3.Left    := 130;
-  pnlRec3.Top     := 76;
-  {$ENDREGION}
+  lblCam4.Left := 56;
+  lblCam4.Top := 78;
 
-  {$REGION ' Camera 4 ' }
-  pnlVid4.Top     := 334;
-  pnlVid4.Left    := 8;
-  pnlVid4.Height  := 100;
-  pnlVid4.Width   := 154;
+  pnlLonceng4.Height := 20;
+  pnlLonceng4.Width := 20;
+  pnlLonceng4.Left := 108;
+  pnlLonceng4.Top := 76;
 
-  lblCam4.Left    := 56;
-  lblCam4.Top     := 78;
+  pnlRec4.Height := 20;
+  pnlRec4.Width := 20;
+  pnlRec4.Left := 130;
+  pnlRec4.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 5 ' }
+  pnlVid5.Top := 443;
+  pnlVid5.Left := 8;
+  pnlVid5.Height := 100;
+  pnlVid5.Width := 154;
 
-  pnlLonceng4.Height  := 20;
-  pnlLonceng4.Width   := 20;
-  pnlLonceng4.Left    := 108;
-  pnlLonceng4.Top     := 76;
+  lblCam5.Left := 56;
+  lblCam5.Top := 78;
 
-  pnlRec4.Height  := 20;
-  pnlRec4.Width   := 20;
-  pnlRec4.Left    := 130;
-  pnlRec4.Top     := 76;
-  {$ENDREGION}
+  pnlLonceng5.Height := 20;
+  pnlLonceng5.Width := 20;
+  pnlLonceng5.Left := 108;
+  pnlLonceng5.Top := 76;
 
-  {$REGION ' Camera 5 ' }
-  pnlVid5.Top     := 443;
-  pnlVid5.Left    := 8;
-  pnlVid5.Height  := 100;
-  pnlVid5.Width   := 154;
+  pnlRec5.Height := 20;
+  pnlRec5.Width := 20;
+  pnlRec5.Left := 130;
+  pnlRec5.Top := 76;
 
-  lblCam5.Left    := 56;
-  lblCam5.Top     := 78;
+  // ImgPercobaan.Visible := False;
+  // Image22.SendToBack;
 
-  pnlLonceng5.Height  := 20;
-  pnlLonceng5.Width   := 20;
-  pnlLonceng5.Left    := 108;
-  pnlLonceng5.Top     := 76;
+{$ENDREGION}
+{$REGION ' Camera 7 ' }
+  pnlVid7.Top := 551;
+  pnlVid7.Left := 8;
+  pnlVid7.Height := 100;
+  pnlVid7.Width := 154;
 
-  pnlRec5.Height  := 20;
-  pnlRec5.Width   := 20;
-  pnlRec5.Left    := 130;
-  pnlRec5.Top     := 76;
+  lblCam7.Left := 56;
+  lblCam7.Top := 78;
 
-//  ImgPercobaan.Visible := False;
-//  Image22.SendToBack;
+  pnlLonceng7.Height := 20;
+  pnlLonceng7.Width := 20;
+  pnlLonceng7.Left := 108;
+  pnlLonceng7.Top := 76;
 
-  {$ENDREGION}
-
-  {$REGION ' Camera 7 ' }
-  pnlVid7.Top     := 551;
-  pnlVid7.Left    := 8;
-  pnlVid7.Height  := 100;
-  pnlVid7.Width   := 154;
-
-  lblCam7.Left    := 56;
-  lblCam7.Top     := 78;
-
-  pnlLonceng7.Height  := 20;
-  pnlLonceng7.Width   := 20;
-  pnlLonceng7.Left    := 108;
-  pnlLonceng7.Top     := 76;
-
-  pnlRec7.Height  := 20;
-  pnlRec7.Width   := 20;
-  pnlRec7.Left    := 130;
-  pnlRec7.Top     := 76;
+  pnlRec7.Height := 20;
+  pnlRec7.Width := 20;
+  pnlRec7.Left := 130;
+  pnlRec7.Top := 76;
 
   lblNoVideo7.Font.Size := 10;
   lblNoVideo7.Left := 43;
   lblNoVideo7.Top := 42;
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 8 ' }
+  pnlVid8.Top := 660;
+  pnlVid8.Left := 8;
+  pnlVid8.Height := 100;
+  pnlVid8.Width := 154;
 
-  {$REGION ' Camera 8 ' }
-  pnlVid8.Top     := 660;
-  pnlVid8.Left    := 8;
-  pnlVid8.Height  := 100;
-  pnlVid8.Width   := 154;
+  lblCam8.Left := 56;
+  lblCam8.Top := 78;
 
-  lblCam8.Left    := 56;
-  lblCam8.Top     := 78;
+  pnlLonceng8.Height := 20;
+  pnlLonceng8.Width := 20;
+  pnlLonceng8.Left := 108;
+  pnlLonceng8.Top := 76;
 
-  pnlLonceng8.Height  := 20;
-  pnlLonceng8.Width   := 20;
-  pnlLonceng8.Left    := 108;
-  pnlLonceng8.Top     := 76;
-
-  pnlRec8.Height  := 20;
-  pnlRec8.Width   := 20;
-  pnlRec8.Left    := 130;
-  pnlRec8.Top     := 76;
+  pnlRec8.Height := 20;
+  pnlRec8.Width := 20;
+  pnlRec8.Left := 130;
+  pnlRec8.Top := 76;
 
   lblNoVideo8.Font.Size := 10;
   lblNoVideo8.Left := 43;
   lblNoVideo8.Top := 42;
-  {$ENDREGION}
-
+{$ENDREGION}
 end;
 
 procedure TuMainForm.ZoomCam7Click(Sender: TObject);
 begin
-  {$REGION ' Camera 7 Besar' }
-  pnlVid7.Top     := 8;
-  pnlVid7.Left    := 168;
-  pnlVid7.Height  := 753;
-  pnlVid7.Width   := 848;
+{$REGION ' Camera 7 Besar' }
+  pnlVid7.Top := 8;
+  pnlVid7.Left := 168;
+  pnlVid7.Height := 753;
+  pnlVid7.Width := 848;
 
-  lblCam7.Left    := 725;
-  lblCam7.Top     := 724;
+  lblCam7.Left := 725;
+  lblCam7.Top := 724;
 
-  pnlLonceng7.Height  := 30;
-  pnlLonceng7.Width   := 30;
-  pnlLonceng7.Left    := 779;
-  pnlLonceng7.Top     := 717;
+  pnlLonceng7.Height := 30;
+  pnlLonceng7.Width := 30;
+  pnlLonceng7.Left := 779;
+  pnlLonceng7.Top := 717;
 
-  pnlRec7.Height  := 30;
-  pnlRec7.Width   := 30;
-  pnlRec7.Left    := 811;
-  pnlRec7.Top     := 717;
+  pnlRec7.Height := 30;
+  pnlRec7.Width := 30;
+  pnlRec7.Left := 811;
+  pnlRec7.Top := 717;
 
   lblNoVideo7.Font.Size := 48;
   lblNoVideo7.Left := 241;
   lblNoVideo7.Top := 338;
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 1 ' }
+  pnlVid1.Top := 8;
+  pnlVid1.Left := 8;
+  pnlVid1.Height := 100;
+  pnlVid1.Width := 154;
 
-  {$REGION ' Camera 1 ' }
-  pnlVid1.Top     := 8;
-  pnlVid1.Left    := 8;
-  pnlVid1.Height  := 100;
-  pnlVid1.Width   := 154;
+  lblCam1.Left := 56;
+  lblCam1.Top := 78;
 
-  lblCam1.Left    := 56;
-  lblCam1.Top     := 78;
+  pnlLonceng1.Height := 20;
+  pnlLonceng1.Width := 20;
+  pnlLonceng1.Left := 108;
+  pnlLonceng1.Top := 76;
 
-  pnlLonceng1.Height  := 20;
-  pnlLonceng1.Width   := 20;
-  pnlLonceng1.Left    := 108;
-  pnlLonceng1.Top     := 76;
+  pnlRec1.Height := 20;
+  pnlRec1.Width := 20;
+  pnlRec1.Left := 130;
+  pnlRec1.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 2 ' }
+  pnlVid2.Top := 117;
+  pnlVid2.Left := 8;
+  pnlVid2.Height := 100;
+  pnlVid2.Width := 154;
 
-  pnlRec1.Height  := 20;
-  pnlRec1.Width   := 20;
-  pnlRec1.Left    := 130;
-  pnlRec1.Top     := 76;
-  {$ENDREGION}
+  lblCam2.Left := 56;
+  lblCam2.Top := 78;
 
-  {$REGION ' Camera 2 ' }
-  pnlVid2.Top     := 117;
-  pnlVid2.Left    := 8;
-  pnlVid2.Height  := 100;
-  pnlVid2.Width   := 154;
+  pnlLonceng2.Height := 20;
+  pnlLonceng2.Width := 20;
+  pnlLonceng2.Left := 108;
+  pnlLonceng2.Top := 76;
 
-  lblCam2.Left    := 56;
-  lblCam2.Top     := 78;
-
-  pnlLonceng2.Height  := 20;
-  pnlLonceng2.Width   := 20;
-  pnlLonceng2.Left    := 108;
-  pnlLonceng2.Top     := 76;
-
-  pnlRec2.Height  := 20;
-  pnlRec2.Width   := 20;
-  pnlRec2.Left    := 130;
-  pnlRec2.Top     := 76;
+  pnlRec2.Height := 20;
+  pnlRec2.Width := 20;
+  pnlRec2.Left := 130;
+  pnlRec2.Top := 76;
 
   imgBackLittle2.BringToFront;
   lblVid2.BringToFront;
   lblCam2.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 3 ' }
+  pnlVid3.Top := 225;
+  pnlVid3.Left := 8;
+  pnlVid3.Height := 100;
+  pnlVid3.Width := 154;
 
-  {$REGION ' Camera 3 ' }
-  pnlVid3.Top     := 225;
-  pnlVid3.Left    := 8;
-  pnlVid3.Height  := 100;
-  pnlVid3.Width   := 154;
+  lblCam3.Left := 56;
+  lblCam3.Top := 78;
 
-  lblCam3.Left    := 56;
-  lblCam3.Top     := 78;
+  pnlLonceng3.Height := 20;
+  pnlLonceng3.Width := 20;
+  pnlLonceng3.Left := 108;
+  pnlLonceng3.Top := 76;
 
-  pnlLonceng3.Height  := 20;
-  pnlLonceng3.Width   := 20;
-  pnlLonceng3.Left    := 108;
-  pnlLonceng3.Top     := 76;
+  pnlRec3.Height := 20;
+  pnlRec3.Width := 20;
+  pnlRec3.Left := 130;
+  pnlRec3.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 4 ' }
+  pnlVid4.Top := 334;
+  pnlVid4.Left := 8;
+  pnlVid4.Height := 100;
+  pnlVid4.Width := 154;
 
-  pnlRec3.Height  := 20;
-  pnlRec3.Width   := 20;
-  pnlRec3.Left    := 130;
-  pnlRec3.Top     := 76;
-  {$ENDREGION}
+  lblCam4.Left := 56;
+  lblCam4.Top := 78;
 
-  {$REGION ' Camera 4 ' }
-  pnlVid4.Top     := 334;
-  pnlVid4.Left    := 8;
-  pnlVid4.Height  := 100;
-  pnlVid4.Width   := 154;
+  pnlLonceng4.Height := 20;
+  pnlLonceng4.Width := 20;
+  pnlLonceng4.Left := 108;
+  pnlLonceng4.Top := 76;
 
-  lblCam4.Left    := 56;
-  lblCam4.Top     := 78;
+  pnlRec4.Height := 20;
+  pnlRec4.Width := 20;
+  pnlRec4.Left := 130;
+  pnlRec4.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 5 ' }
+  pnlVid5.Top := 443;
+  pnlVid5.Left := 8;
+  pnlVid5.Height := 100;
+  pnlVid5.Width := 154;
 
-  pnlLonceng4.Height  := 20;
-  pnlLonceng4.Width   := 20;
-  pnlLonceng4.Left    := 108;
-  pnlLonceng4.Top     := 76;
+  lblCam5.Left := 56;
+  lblCam5.Top := 78;
 
-  pnlRec4.Height  := 20;
-  pnlRec4.Width   := 20;
-  pnlRec4.Left    := 130;
-  pnlRec4.Top     := 76;
-  {$ENDREGION}
+  pnlLonceng5.Height := 20;
+  pnlLonceng5.Width := 20;
+  pnlLonceng5.Left := 108;
+  pnlLonceng5.Top := 76;
 
-  {$REGION ' Camera 5 ' }
-  pnlVid5.Top     := 443;
-  pnlVid5.Left    := 8;
-  pnlVid5.Height  := 100;
-  pnlVid5.Width   := 154;
+  pnlRec5.Height := 20;
+  pnlRec5.Width := 20;
+  pnlRec5.Left := 130;
+  pnlRec5.Top := 76;
 
-  lblCam5.Left    := 56;
-  lblCam5.Top     := 78;
+{$ENDREGION}
+{$REGION ' Camera 6 ' }
+  pnlVid6.Top := 551;
+  pnlVid6.Left := 8;
+  pnlVid6.Height := 100;
+  pnlVid6.Width := 154;
 
-  pnlLonceng5.Height  := 20;
-  pnlLonceng5.Width   := 20;
-  pnlLonceng5.Left    := 108;
-  pnlLonceng5.Top     := 76;
+  lblCam6.Left := 56;
+  lblCam6.Top := 78;
 
-  pnlRec5.Height  := 20;
-  pnlRec5.Width   := 20;
-  pnlRec5.Left    := 130;
-  pnlRec5.Top     := 76;
+  pnlLonceng6.Height := 20;
+  pnlLonceng6.Width := 20;
+  pnlLonceng6.Left := 108;
+  pnlLonceng6.Top := 76;
 
-  {$ENDREGION}
-
-  {$REGION ' Camera 6 ' }
-  pnlVid6.Top     := 551;
-  pnlVid6.Left    := 8;
-  pnlVid6.Height  := 100;
-  pnlVid6.Width   := 154;
-
-  lblCam6.Left    := 56;
-  lblCam6.Top     := 78;
-
-  pnlLonceng6.Height  := 20;
-  pnlLonceng6.Width   := 20;
-  pnlLonceng6.Left    := 108;
-  pnlLonceng6.Top     := 76;
-
-  pnlRec6.Height  := 20;
-  pnlRec6.Width   := 20;
-  pnlRec6.Left    := 130;
-  pnlRec6.Top     := 76;
+  pnlRec6.Height := 20;
+  pnlRec6.Width := 20;
+  pnlRec6.Left := 130;
+  pnlRec6.Top := 76;
 
   imgBackLittle6.BringToFront;
   lblVid6.BringToFront;
   lblCam6.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 8 ' }
+  pnlVid8.Top := 660;
+  pnlVid8.Left := 8;
+  pnlVid8.Height := 100;
+  pnlVid8.Width := 154;
 
-  {$REGION ' Camera 8 ' }
-  pnlVid8.Top     := 660;
-  pnlVid8.Left    := 8;
-  pnlVid8.Height  := 100;
-  pnlVid8.Width   := 154;
+  lblCam8.Left := 56;
+  lblCam8.Top := 78;
 
-  lblCam8.Left    := 56;
-  lblCam8.Top     := 78;
+  pnlLonceng8.Height := 20;
+  pnlLonceng8.Width := 20;
+  pnlLonceng8.Left := 108;
+  pnlLonceng8.Top := 76;
 
-  pnlLonceng8.Height  := 20;
-  pnlLonceng8.Width   := 20;
-  pnlLonceng8.Left    := 108;
-  pnlLonceng8.Top     := 76;
-
-  pnlRec8.Height  := 20;
-  pnlRec8.Width   := 20;
-  pnlRec8.Left    := 130;
-  pnlRec8.Top     := 76;
+  pnlRec8.Height := 20;
+  pnlRec8.Width := 20;
+  pnlRec8.Left := 130;
+  pnlRec8.Top := 76;
 
   lblNoVideo8.Font.Size := 10;
   lblNoVideo8.Left := 43;
   lblNoVideo8.Top := 42;
-  {$ENDREGION}
-
+{$ENDREGION}
 end;
 
 procedure TuMainForm.ZoomCam8Click(Sender: TObject);
 begin
-  {$REGION ' Camera 8 Besar' }
-  pnlVid8.Top     := 8;
-  pnlVid8.Left    := 168;
-  pnlVid8.Height  := 753;
-  pnlVid8.Width   := 848;
+{$REGION ' Camera 8 Besar' }
+  pnlVid8.Top := 8;
+  pnlVid8.Left := 168;
+  pnlVid8.Height := 753;
+  pnlVid8.Width := 848;
 
-  lblCam8.Left    := 725;
-  lblCam8.Top     := 724;
+  lblCam8.Left := 725;
+  lblCam8.Top := 724;
 
-  pnlLonceng8.Height  := 30;
-  pnlLonceng8.Width   := 30;
-  pnlLonceng8.Left    := 779;
-  pnlLonceng8.Top     := 717;
+  pnlLonceng8.Height := 30;
+  pnlLonceng8.Width := 30;
+  pnlLonceng8.Left := 779;
+  pnlLonceng8.Top := 717;
 
-  pnlRec8.Height  := 30;
-  pnlRec8.Width   := 30;
-  pnlRec8.Left    := 811;
-  pnlRec8.Top     := 717;
+  pnlRec8.Height := 30;
+  pnlRec8.Width := 30;
+  pnlRec8.Left := 811;
+  pnlRec8.Top := 717;
 
   lblNoVideo8.Font.Size := 48;
   lblNoVideo8.Left := 241;
   lblNoVideo8.Top := 338;
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 1 ' }
+  pnlVid1.Top := 8;
+  pnlVid1.Left := 8;
+  pnlVid1.Height := 100;
+  pnlVid1.Width := 154;
 
-  {$REGION ' Camera 1 ' }
-  pnlVid1.Top     := 8;
-  pnlVid1.Left    := 8;
-  pnlVid1.Height  := 100;
-  pnlVid1.Width   := 154;
+  lblCam1.Left := 56;
+  lblCam1.Top := 78;
 
-  lblCam1.Left    := 56;
-  lblCam1.Top     := 78;
+  pnlLonceng1.Height := 20;
+  pnlLonceng1.Width := 20;
+  pnlLonceng1.Left := 108;
+  pnlLonceng1.Top := 76;
 
-  pnlLonceng1.Height  := 20;
-  pnlLonceng1.Width   := 20;
-  pnlLonceng1.Left    := 108;
-  pnlLonceng1.Top     := 76;
+  pnlRec1.Height := 20;
+  pnlRec1.Width := 20;
+  pnlRec1.Left := 130;
+  pnlRec1.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 2 ' }
+  pnlVid2.Top := 117;
+  pnlVid2.Left := 8;
+  pnlVid2.Height := 100;
+  pnlVid2.Width := 154;
 
-  pnlRec1.Height  := 20;
-  pnlRec1.Width   := 20;
-  pnlRec1.Left    := 130;
-  pnlRec1.Top     := 76;
-  {$ENDREGION}
+  lblCam2.Left := 56;
+  lblCam2.Top := 78;
 
-  {$REGION ' Camera 2 ' }
-  pnlVid2.Top     := 117;
-  pnlVid2.Left    := 8;
-  pnlVid2.Height  := 100;
-  pnlVid2.Width   := 154;
+  pnlLonceng2.Height := 20;
+  pnlLonceng2.Width := 20;
+  pnlLonceng2.Left := 108;
+  pnlLonceng2.Top := 76;
 
-  lblCam2.Left    := 56;
-  lblCam2.Top     := 78;
-
-  pnlLonceng2.Height  := 20;
-  pnlLonceng2.Width   := 20;
-  pnlLonceng2.Left    := 108;
-  pnlLonceng2.Top     := 76;
-
-  pnlRec2.Height  := 20;
-  pnlRec2.Width   := 20;
-  pnlRec2.Left    := 130;
-  pnlRec2.Top     := 76;
+  pnlRec2.Height := 20;
+  pnlRec2.Width := 20;
+  pnlRec2.Left := 130;
+  pnlRec2.Top := 76;
 
   imgBackLittle2.BringToFront;
   lblVid2.BringToFront;
   lblCam2.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 3 ' }
+  pnlVid3.Top := 225;
+  pnlVid3.Left := 8;
+  pnlVid3.Height := 100;
+  pnlVid3.Width := 154;
 
-  {$REGION ' Camera 3 ' }
-  pnlVid3.Top     := 225;
-  pnlVid3.Left    := 8;
-  pnlVid3.Height  := 100;
-  pnlVid3.Width   := 154;
+  lblCam3.Left := 56;
+  lblCam3.Top := 78;
 
-  lblCam3.Left    := 56;
-  lblCam3.Top     := 78;
+  pnlLonceng3.Height := 20;
+  pnlLonceng3.Width := 20;
+  pnlLonceng3.Left := 108;
+  pnlLonceng3.Top := 76;
 
-  pnlLonceng3.Height  := 20;
-  pnlLonceng3.Width   := 20;
-  pnlLonceng3.Left    := 108;
-  pnlLonceng3.Top     := 76;
+  pnlRec3.Height := 20;
+  pnlRec3.Width := 20;
+  pnlRec3.Left := 130;
+  pnlRec3.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 4 ' }
+  pnlVid4.Top := 334;
+  pnlVid4.Left := 8;
+  pnlVid4.Height := 100;
+  pnlVid4.Width := 154;
 
-  pnlRec3.Height  := 20;
-  pnlRec3.Width   := 20;
-  pnlRec3.Left    := 130;
-  pnlRec3.Top     := 76;
-  {$ENDREGION}
+  lblCam4.Left := 56;
+  lblCam4.Top := 78;
 
-  {$REGION ' Camera 4 ' }
-  pnlVid4.Top     := 334;
-  pnlVid4.Left    := 8;
-  pnlVid4.Height  := 100;
-  pnlVid4.Width   := 154;
+  pnlLonceng4.Height := 20;
+  pnlLonceng4.Width := 20;
+  pnlLonceng4.Left := 108;
+  pnlLonceng4.Top := 76;
 
-  lblCam4.Left    := 56;
-  lblCam4.Top     := 78;
+  pnlRec4.Height := 20;
+  pnlRec4.Width := 20;
+  pnlRec4.Left := 130;
+  pnlRec4.Top := 76;
+{$ENDREGION}
+{$REGION ' Camera 5 ' }
+  pnlVid5.Top := 443;
+  pnlVid5.Left := 8;
+  pnlVid5.Height := 100;
+  pnlVid5.Width := 154;
 
-  pnlLonceng4.Height  := 20;
-  pnlLonceng4.Width   := 20;
-  pnlLonceng4.Left    := 108;
-  pnlLonceng4.Top     := 76;
+  lblCam5.Left := 56;
+  lblCam5.Top := 78;
 
-  pnlRec4.Height  := 20;
-  pnlRec4.Width   := 20;
-  pnlRec4.Left    := 130;
-  pnlRec4.Top     := 76;
-  {$ENDREGION}
+  pnlLonceng5.Height := 20;
+  pnlLonceng5.Width := 20;
+  pnlLonceng5.Left := 108;
+  pnlLonceng5.Top := 76;
 
-  {$REGION ' Camera 5 ' }
-  pnlVid5.Top     := 443;
-  pnlVid5.Left    := 8;
-  pnlVid5.Height  := 100;
-  pnlVid5.Width   := 154;
+  pnlRec5.Height := 20;
+  pnlRec5.Width := 20;
+  pnlRec5.Left := 130;
+  pnlRec5.Top := 76;
 
-  lblCam5.Left    := 56;
-  lblCam5.Top     := 78;
+{$ENDREGION}
+{$REGION ' Camera 6 ' }
+  pnlVid6.Top := 551;
+  pnlVid6.Left := 8;
+  pnlVid6.Height := 100;
+  pnlVid6.Width := 154;
 
-  pnlLonceng5.Height  := 20;
-  pnlLonceng5.Width   := 20;
-  pnlLonceng5.Left    := 108;
-  pnlLonceng5.Top     := 76;
+  lblCam6.Left := 56;
+  lblCam6.Top := 78;
 
-  pnlRec5.Height  := 20;
-  pnlRec5.Width   := 20;
-  pnlRec5.Left    := 130;
-  pnlRec5.Top     := 76;
+  pnlLonceng6.Height := 20;
+  pnlLonceng6.Width := 20;
+  pnlLonceng6.Left := 108;
+  pnlLonceng6.Top := 76;
 
-  {$ENDREGION}
-
-  {$REGION ' Camera 6 ' }
-  pnlVid6.Top     := 551;
-  pnlVid6.Left    := 8;
-  pnlVid6.Height  := 100;
-  pnlVid6.Width   := 154;
-
-  lblCam6.Left    := 56;
-  lblCam6.Top     := 78;
-
-  pnlLonceng6.Height  := 20;
-  pnlLonceng6.Width   := 20;
-  pnlLonceng6.Left    := 108;
-  pnlLonceng6.Top     := 76;
-
-  pnlRec6.Height  := 20;
-  pnlRec6.Width   := 20;
-  pnlRec6.Left    := 130;
-  pnlRec6.Top     := 76;
+  pnlRec6.Height := 20;
+  pnlRec6.Width := 20;
+  pnlRec6.Left := 130;
+  pnlRec6.Top := 76;
 
   imgBackLittle6.BringToFront;
   lblVid6.BringToFront;
   lblCam6.BringToFront;
 
-  {$ENDREGION}
+{$ENDREGION}
+{$REGION ' Camera 7 ' }
+  pnlVid7.Top := 660;
+  pnlVid7.Left := 8;
+  pnlVid7.Height := 100;
+  pnlVid7.Width := 154;
 
-  {$REGION ' Camera 7 ' }
-  pnlVid7.Top     := 660;
-  pnlVid7.Left    := 8;
-  pnlVid7.Height  := 100;
-  pnlVid7.Width   := 154;
+  lblCam7.Left := 56;
+  lblCam7.Top := 78;
 
-  lblCam7.Left    := 56;
-  lblCam7.Top     := 78;
+  pnlLonceng7.Height := 20;
+  pnlLonceng7.Width := 20;
+  pnlLonceng7.Left := 108;
+  pnlLonceng7.Top := 76;
 
-  pnlLonceng7.Height  := 20;
-  pnlLonceng7.Width   := 20;
-  pnlLonceng7.Left    := 108;
-  pnlLonceng7.Top     := 76;
-
-  pnlRec7.Height  := 20;
-  pnlRec7.Width   := 20;
-  pnlRec7.Left    := 130;
-  pnlRec7.Top     := 76;
+  pnlRec7.Height := 20;
+  pnlRec7.Width := 20;
+  pnlRec7.Left := 130;
+  pnlRec7.Top := 76;
 
   lblNoVideo7.Font.Size := 10;
   lblNoVideo7.Left := 43;
   lblNoVideo7.Top := 42;
-  {$ENDREGION}
+{$ENDREGION}
+end;
 
- end;
-
-//procedure TuMainForm.Button1Click(Sender: TObject);
-//begin
-////  ShowMessage('lebar : '+FloatToStr(uMainForm.Width)+ '' + 'Tinggi : '+Floattostr(uMainForm.Height));
-//  MDSound.Open;
-//  MDSound.Play;
-//end;
+// procedure TuMainForm.Button1Click(Sender: TObject);
+// begin
+/// /  ShowMessage('lebar : '+FloatToStr(uMainForm.Width)+ '' + 'Tinggi : '+Floattostr(uMainForm.Height));
+// MDSound.Open;
+// MDSound.Play;
+// end;
 //
-//procedure TuMainForm.MDSoundClick(Sender: TObject; Button: TMPBtnType;
-//  var DoDefault: Boolean);
-//begin
-////  MDSound.FileName := 'D:\CAECILIA MC\P.IPMS';
-//  MDSound.Open;
-//  MDSound.Play;
-//end;
+// procedure TuMainForm.MDSoundClick(Sender: TObject; Button: TMPBtnType;
+// var DoDefault: Boolean);
+// begin
+/// /  MDSound.FileName := 'D:\CAECILIA MC\P.IPMS';
+// MDSound.Open;
+// MDSound.Play;
+// end;
 //
-//procedure TuMainForm.MDSoundNotify(Sender: TObject);
-//begin
-//  MDSound.Open;
-//  MDSound.Play;
-//end;
+// procedure TuMainForm.MDSoundNotify(Sender: TObject);
+// begin
+// MDSound.Open;
+// MDSound.Play;
+// end;
 
 procedure TuMainForm.btnKananClick(Sender: TObject);
 begin
-//    if (Image2.Left < -1543) or ((Image2.Left > 0)) then
-//    Exit;
-//
-//  Image2.Left := Image2.Left + Round(RzPSRudderAngle.Value);
-//
-//  valtemp := Round(RzPSRudderAngle.Value);
+  // if (Image2.Left < -1543) or ((Image2.Left > 0)) then
+  // Exit;
+  //
+  // Image2.Left := Image2.Left + Round(RzPSRudderAngle.Value);
+  //
+  // valtemp := Round(RzPSRudderAngle.Value);
 end;
 
 procedure TuMainForm.btnKananMouseDown(Sender: TObject; Button: TMouseButton;
@@ -1642,14 +1579,15 @@ procedure TuMainForm.btnKananMouseDown(Sender: TObject; Button: TMouseButton;
 
 begin
   isMouseDown := True;
-  stateButton := 1; {Kanan}
+  stateButton := 0; { Kiri }
   tmrCam2.Enabled := True;
 end;
+
 procedure TuMainForm.btnKiriMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   isMouseDown := True;
-  stateButton := 0; {Kiri}
+  stateButton := 1; { Kanan }
   tmrCam2.Enabled := True;
 
 end;
@@ -1657,7 +1595,7 @@ end;
 procedure TuMainForm.imgAtas6MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  if (Image22.Top <0) or ((Image22.Top > 0)) then
+  if (Image22.Top < 0) or ((Image22.Top > 0)) then
     Exit;
 
   Image22.Top := Image22.Top - 10;
@@ -1666,7 +1604,7 @@ end;
 procedure TuMainForm.imgAtasMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  if (Image2.Top <0) or ((Image2.Top > 0)) then
+  if (Image2.Top < 0) or ((Image2.Top > 0)) then
     Exit;
 
   Image2.Top := Image2.Top - 10;
@@ -1675,7 +1613,7 @@ end;
 procedure TuMainForm.imgBawah6MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  if (Image22.Top <0) or ((Image22.Top > 0)) then
+  if (Image22.Top < 0) or ((Image22.Top > 0)) then
     Exit;
 
   Image22.Top := Image22.Top + 10;
@@ -1684,7 +1622,7 @@ end;
 procedure TuMainForm.imgBawahMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  if (Image2.Top <0) or ((Image2.Top > 0)) then
+  if (Image2.Top < 0) or ((Image2.Top > 0)) then
     Exit;
 
   Image2.Top := Image2.Top + 10;
@@ -1694,7 +1632,7 @@ procedure TuMainForm.imgKanan6MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   isMouseDown := True;
-  stateButton := 1; {Kanan}
+  stateButton := 0; { Kanan}
   tmrCam6.Enabled := True;
 end;
 
@@ -1705,7 +1643,8 @@ begin
   tmrCam6.Enabled := False;
 end;
 
-procedure TuMainForm.imgKananMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TuMainForm.imgKananMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
 begin
   isMouseDown := False;
   tmrCam2.Enabled := False;
@@ -1721,17 +1660,20 @@ end;
 procedure TuMainForm.imgKiri6Click(Sender: TObject);
 begin
   isMouseDown := True;
-  stateButton := 0; {Kiri}
-  tmrCam2.Enabled := True;
+  stateButton := 0; { Kiri }
+  tmrCam6.Enabled := True;
 end;
 
 procedure TuMainForm.imgKiri6MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  if Image22.Left < -2550 then
-    Exit;
-
-  Image22.Left := Image22.Left - 10;
+  isMouseDown := True;
+  stateButton := 1; { Kanan }
+  tmrCam6.Enabled := True;
+  // if Image22.Left < -2550 then
+  // Exit;
+  //
+  // Image22.Left := Image22.Left - 10;
 end;
 
 procedure TuMainForm.imgKiri6MouseUp(Sender: TObject; Button: TMouseButton;
@@ -1799,14 +1741,14 @@ end;
 
 procedure TuMainForm.tmr1Timer(Sender: TObject);
 begin
-  lblVid1.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
-  lblVid2.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
-  lblVid3.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
-  lblVid4.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
-  lblVid5.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
-  lblVid6.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
-  lblVid7.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
-  lblVid8.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
+  lblVid1.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss', now);
+  lblVid2.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss', now);
+  lblVid3.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss', now);
+  lblVid4.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss', now);
+  lblVid5.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss', now);
+  lblVid6.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss', now);
+  lblVid7.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss', now);
+  lblVid8.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss', now);
 end;
 
 end.

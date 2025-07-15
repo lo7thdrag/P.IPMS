@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<fsgroups>
+  <roles id="Role" name="Role Group">
+	<console name="CCTV2"></console>
+	<console name="INS"></console>
+  </roles>
+
+  <external id="External" name="External Room">
+  </external>
+</fsgroups>
+   

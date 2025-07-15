@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<fsgroups>
+  <roles id="Role" name="Role Group">
+    <console name="INSTR"></console>
+    <console name="OOW"></console>    
+    <console name="ECHOSNDR"></console>
+    <console name="INMARSAT"></console>
+
+    <console name="QM/OOW"></console> 
+    <console name="BM/TCO"></console>
+    <console name="ENG/DCHQ2"></console>
+    <console name="OPS R C DESK"></console>
+    <console name="CMD"></console>
+    <console name="BRG PELORUS"></console> 
+  </roles>
+
+  <external id="External" name="External Room">
+
+    <console name="HF"></console>
+    <console name="VHF"></console>
+    <console name="UHF"></console>
+
+    <console name="RADIO 4"></console>
+    <console name="RADIO 5"></console>
+    <console name="Action"></console>
+    <console name="Emergency"></console>
+    <console name="Fireball"></console>
+    <console name="Man Overboard"></console>
+    <console name="Special"></console>
+	
+  </external>
+</fsgroups>
+   

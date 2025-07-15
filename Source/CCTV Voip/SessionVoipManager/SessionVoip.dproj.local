@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2012/03/11 23:33:13.769.dfm,C:\Users\Nando\Documents\RAD Studio\Projects\Unit2.dfm=E:\Document\Project DID\VoipTTT_New\SessionVoipManager\uMain.dfm</Transaction>
+    <Transaction>2012/03/11 23:33:13.769.pas,C:\Users\Nando\Documents\RAD Studio\Projects\Unit2.pas=E:\Document\Project DID\VoipTTT_New\SessionVoipManager\uMain.pas</Transaction>
+    <Transaction>2012/03/11 23:33:18.733.dproj,C:\Users\Nando\Documents\RAD Studio\Projects\Project3.dproj=E:\Document\Project DID\VoipTTT_New\SessionVoipManager\SessionVoip.dproj</Transaction>
+    <Transaction>2012/09/15 18:43:13.291.pas,E:\Document\Project DID\VoipFS\SessionVoipManager\Unit1.pas=E:\Document\Project DID\VoipFS\LibUnit\uLoadConsoleIP.pas</Transaction>
+    <Transaction>2016/10/06 11:57:45.513.pas,F:\DID PROJECTS\INCSNewMap_201511261721\_INCS_2D_\INCS COMM\NetComponent\uNetBaseSocket.pas=</Transaction>
+    <Transaction>2016/10/06 11:57:45.539.pas,F:\DID PROJECTS\INCSNewMap_201511261721\_INCS_2D_\INCS COMM\NetComponent\uTCPServer.pas=</Transaction>
+  </Transactions>
+</BorlandProject>

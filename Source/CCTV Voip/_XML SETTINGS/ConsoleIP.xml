@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<fsgroups>
+  <roles id="Role" name="Role Group">
+	<console ip="192.168.2.102" name="INSTR" ></console>
+	<console ip="192.168.2.101" name="ECHOSNDR"></console>
+	<console ip="192.168.1.178" name="OOW"></console>
+	<console ip="192.168.2.111" name="INMARSAT"></console>
+  </roles>
+</fsgroups>
+   

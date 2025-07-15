@@ -1,0 +1,766 @@
+unit uSocketHandle;
+
+interface
+
+uses
+  Classes, ExtCtrls, Graphics, SysUtils, Winsock,
+
+  uTCPClient, uTCPServer, uTCPDatatype, uLoadSetting, Logger,
+  uDataVoipRecord, uThreadTimer, uPacketBuffer, Windows, MMSystem, MSThreadTimer;
+
+const
+  S1W = 13;
+  S2W = 9;
+  S3W = 9;
+  S4W = 9;
+
+//  typedef struct {
+//  WORD      wMid;
+//  WORD      wPid;
+//  MMVERSION vDriverVersion;
+//  TCHAR     szPname[MAXPNAMELEN];
+//  DWORD     dwFormats;
+//  WORD      wChannels;
+//  WORD      wReserved1;
+//  DWORD     dwSupport;
+//} WAVEOUTCAPS;
+
+
+
+type
+
+  TRecWaveOutCaps = record
+    wMid, wPid: word;
+    vDriverVersion: Integer;
+    szPname: string;
+    dwFormat,
+    dwSupport: Cardinal;
+    wChannel,
+    wReserved: word
+  end;
+
+  String40 = string[40];
+  TChannelMap = class
+    aUser,
+    aChannel,
+    aChannelName,
+    aPass         : string;
+    aPageID       : Double;
+    aColSection,
+    aChaGroup     : Integer;
+    aRowSection   : Integer;
+    isOnline      : Boolean;
+    aMode         : Integer;
+    aIdTimer      : Integer;
+    isEnableTimer : Boolean;
+    isCall        : Boolean;
+    isReceive     : Boolean;
+  end;
+
+  TVoipSock = class
+    private
+      //Timer To Reconnect
+      Tmr_TCP_Client : TPrecisseTimer;
+      FThread : TMSTimer;
+
+      procedure OnTCP_Client_Disconnect(sender : TObject);
+      procedure OnTimerRunning(const dt : double);
+      procedure threadOnRunning(const dt: double);
+
+    public
+      MyIpAddress : string;
+      isOut : Boolean;
+
+      //TCP Client
+      //For Archos Connector
+      TCP_ClientConnector : TTCPClient;
+
+      //For Session Voip
+      TCP_ClientSessionVoip : TTCPClient;
+
+      //For Control
+      TCP_ClientControl : TTCPClient;
+
+      // for Launcher control
+      TCP_CommControl: TTCPServer;
+
+      isConnectWith_Connector,
+      isConnectWith_SessionVoip,
+      isConnectWith_Control : Boolean;
+
+      //Setting .Ini
+      SetConfig : TIniSet;
+
+      //logger
+      aLoggerFile    : TLogFile;
+
+      procedure Connect_TCPServer;
+
+      constructor create;
+      destructor Destroy; override;
+
+      //TCP Control
+      procedure RestartConnector;
+      procedure RestartConnector_EngineVoip;
+      procedure CloseEngineVoip;
+      procedure RunConsole;
+      procedure RestartPC;
+      procedure ShutdownPC;
+      procedure PlaySound;
+
+      procedure SendClearLaunchSignToLauncher;
+
+      //TCP Session Voip
+      procedure SendRoleLogin(aNameCub, aNameCom, aNameLogin : string);
+      procedure SendRoleLogOut(aNameCub, aNameCom, aNameLogOut : string);
+      procedure SendCallTo(aNameCub, aNameCom, aCallFrom, aCallTo : string);
+      procedure SendReceiveCall(aNameCub, aNameCom, aCallFrom, aCallTo: string);
+      procedure SendHangUpTo(aNameCub, aNameCom, aHangUpFrom, aHangUpTo : string);
+      procedure ReqLogin(aCubID: string);
+      procedure ReceiveModeCall(apRec: PAnsiChar; aSize: Word);
+      procedure ReceiveInternalAct(apRec: PAnsiChar; aSize: Word);
+      procedure Recv_ReqServerState(apRec: PAnsiChar; aSize: Word);
+      procedure Recv_ICSData(apRec: PAnsiChar; aSize: Word);
+      procedure Recv_Order(apRec: PAnsiChar; aSize: Word);
+      procedure Recv_CloseOrder(apRec: PAnsiChar; aSize: word);
+
+      //TCP Connector
+      procedure RunPhone(aMode : Integer; aParamPhone, aParamJam : string);
+      procedure SetToMode_Receiver(const aPhoneId : integer);
+      procedure SetToMode_Transeiver(const aPhoneId : integer);
+      procedure SetToMode_Off(const aPhoneId : integer);
+      procedure SetToMode_OnPTT(const aPhoneId : integer);
+      procedure SetToMode_OffPTT(const aPhoneId : integer);
+      procedure SetToMode_ExitPhone(const aPhoneId : integer);
+
+      function CheckValidSoundDevice(IntwvIn, IntwvOut, ExtwvIn, ExtwvOut: Integer; var ErrMsg: string): Boolean;
+//      function CheckSoundDevicePresent: Boolean;
+
+    published
+  end;
+
+var
+  VoipManager : TVoipSock;
+
+implementation
+
+uses uEventConnector, OverbyteIcsWSocket;
+
+{ TVoipSock }
+
+procedure TVoipSock.Connect_TCPServer;
+begin
+  Tmr_TCP_Client.Enabled := True;
+end;
+
+procedure TVoipSock.OnTCP_Client_Disconnect(sender: TObject);
+begin
+  Connect_TCPServer;
+end;
+
+procedure TVoipSock.OnTimerRunning(const dt : double);
+begin
+  isConnectWith_Connector     := False;
+  isConnectWith_SessionVoip   := False;
+  isConnectWith_Control       := False;
+
+  {
+  // connect to launcher
+  TCP_CommControl.Listen('1308');
+  aLoggerFile.Log('TCP CommControl', 'Listening for -> Launcher');
+  }
+  if not TCP_ClientConnector.Connected  then
+  begin
+    TCP_ClientConnector.Connect(SetConfig.addrTCPConnector, SetConfig.portTCPConnector);
+
+    isConnectWith_Connector := False;
+    setPanelConnector(clRed);
+
+    aLoggerFile.Log('TCP Connection', 'Trying To Connect -> Connector');
+  end
+  else
+  begin
+    isConnectWith_Connector := True;
+    setPanelConnector(clGreen);
+  end;
+
+  if isConnectWith_Connector then
+  begin
+    if not TCP_ClientControl.Connected then
+    begin
+      TCP_ClientControl.Connect(SetConfig.addrTCPControl, SetConfig.portTCPControl);
+
+      isConnectWith_Control := False;
+      setPanelControl(clRed);
+
+      aLoggerFile.Log('TCP Connection', 'Trying To Connect -> Control');
+    end
+    else
+    begin
+      isConnectWith_Control := True;
+      setPanelControl(clGreen);
+    end;
+  end;
+
+  if isConnectWith_Connector and isConnectWith_Control then
+  begin
+    if not TCP_ClientSessionVoip.Connected then
+    begin
+      TCP_ClientSessionVoip.Connect(SetConfig.addrTCPSessionVoip, SetConfig.portTCPSessionVoip);
+
+      isConnectWith_SessionVoip := False;
+      setPanelSessionVoip(clRed);
+
+      aLoggerFile.Log('TCP Connection', 'Trying To Connect -> Session Voip');
+    end
+    else
+    begin
+      isConnectWith_SessionVoip := True;
+      setPanelSessionVoip(clGreen);
+
+      if not isOut then
+      begin
+        VoipManager.SendRoleLogin(VoipManager.SetConfig.aStrCub,
+                                  VoipManager.SetConfig.aRole,
+                                  VoipManager.SetConfig.aRole);
+      end;
+
+      Tmr_TCP_Client.Enabled := false;
+    end;
+  end;
+end;
+
+procedure TVoipSock.PlaySound;
+var
+  RecSend : TRecArchos;
+begin
+  RecSend.Mode := 5;
+  RecSend.Id   := 5;
+
+  TCP_ClientControl.SendData(CPID_RecArchos, @RecSend);
+end;
+
+procedure TVoipSock.ReceiveInternalAct(apRec: PAnsiChar; aSize: Word);
+var
+  RecRecv : ^TRecInternal;
+begin
+  RecRecv := @apRec^;
+  On_ReceiveInternalAct(RecRecv^);
+end;
+
+procedure TVoipSock.ReceiveModeCall(apRec: PAnsiChar; aSize: Word);
+var
+  RecRecv : ^TRecCallMode;
+begin
+  RecRecv := @apRec^;
+  On_ReceiveCallMode(RecRecv^);
+end;
+
+procedure TVoipSock.Recv_CloseOrder(apRec: PAnsiChar; aSize: word);
+var
+  RecRecv: ^TRecData2DOrder;
+begin
+
+  RecRecv := @apRec^;
+  On_RcvCloseCommand(RecRecv^);
+
+end;
+
+procedure TVoipSock.Recv_ICSData(apRec: PAnsiChar; aSize: Word);
+var
+  RecRecv : ^TICSData;
+begin
+  RecRecv := @apRec^;
+  RecvICSData(RecRecv^);
+end;
+
+procedure TVoipSock.Recv_Order(apRec: PAnsiChar; aSize: Word);
+var
+  RecRecv : ^TRecOrder;
+begin
+  RecRecv := @apRec^;
+  RecvICSOrder(RecRecv^);
+end;
+
+procedure TVoipSock.Recv_ReqServerState(apRec: PAnsiChar; aSize: Word);
+var
+  RecRecv : ^TRecServerStat;
+begin
+  RecRecv := @apRec^;
+  if RecRecv^.Mode = 2 then
+  begin
+    if RecRecv.StateServer1 = 1 then
+    begin
+      On_StartSimulation;
+    end;
+  end;
+end;
+
+procedure TVoipSock.ReqLogin(aCubID: string);
+var
+  CubRoleLogin : TRecReqLogin;
+begin
+  CubRoleLogin.Cubicle := aCubID;
+  CubRoleLogin.Mode := 1;
+
+  TCP_ClientSessionVoip.SendData(CPID_ReqLogin, @CubRoleLogin);
+end;
+
+procedure TVoipSock.RestartConnector;
+var
+  RecSend : TRecArchos;
+begin
+  RecSend.Mode := 1;
+  RecSend.Id   := 1;
+
+  TCP_ClientControl.SendData(CPID_RecArchos, @RecSend);
+end;
+
+procedure TVoipSock.RestartConnector_EngineVoip;
+var
+  RecSend : TRecArchos;
+begin
+  RecSend.Mode := 3;
+  RecSend.Id   := 3;
+
+  TCP_ClientControl.SendData(CPID_RecArchos, @RecSend);
+end;
+
+procedure TVoipSock.RestartPC;
+var
+  RecSend : TRecArchos;
+begin
+  RecSend.Mode := 6;
+  RecSend.Id   := 6;
+
+  TCP_ClientControl.SendData(CPID_RecArchos, @RecSend);
+end;
+
+procedure TVoipSock.RunConsole;
+var
+  RecSend : TRecArchos;
+begin
+  RecSend.Mode := 2;
+  RecSend.Id   := 2;
+
+  TCP_ClientControl.SendData(CPID_RecArchos, @RecSend);
+end;
+
+procedure TVoipSock.RunPhone(aMode: Integer; aParamPhone, aParamJam: string);
+var
+  RecSend : TICSData;
+begin
+  RecSend.Mode        := aMode;
+  RecSend.ParamPhone  := aParamPhone;
+  RecSend.ParamJam    := aParamJam;
+
+  TCP_ClientConnector.SendData(CPID_ICSData, @RecSend);
+
+  aLoggerFile.Log('Run Phone', IntToStr(aMode) + ' With PPhone ' + aParamPhone +
+                  ' And PJam ' + aParamJam);
+end;
+
+
+procedure TVoipSock.SendHangUpTo(aNameCub, aNameCom, aHangUpFrom,
+  aHangUpTo: string);
+var
+  RecSend : TRecInternal;
+begin
+  RecSend.RoleCub := aNameCub;
+  RecSend.RoleAs  := aNameCom;
+  RecSend.Login   := '';
+  RecSend.Mode    := 4;
+
+  RecSend.Logout          := '';
+  RecSend.CallFrom        := '';
+  RecSend.CallTo          := '';
+  RecSend.DisConnectFrom  := aHangUpFrom;
+  RecSend.DisConnectTo    := aHangUpTo;
+
+  aLoggerFile.Log('Send Hang up', 'Mode: ' + IntToStr(RecSend.Mode) +
+                  ', Disc From: ' + RecSend.DisConnectFrom + ', Disc To: ' + RecSend.DisConnectTo);
+
+  TCP_ClientSessionVoip.SendData(CPID_Internal, @RecSend);
+end;
+
+procedure TVoipSock.SendCallTo(aNameCub, aNameCom, aCallFrom, aCallTo: string);
+var
+  RecSend : TRecInternal;
+begin
+  RecSend.RoleCub := aNameCub;
+  RecSend.RoleAs  := aNameCom;
+  RecSend.Login   := '';
+  RecSend.Mode    := 3;
+
+  RecSend.Logout          := '';
+  RecSend.CallFrom        := aCallFrom;
+  RecSend.CallTo          := aCallTo;
+  RecSend.DisConnectFrom  := '';
+  RecSend.DisConnectTo    := '';
+
+  TCP_ClientSessionVoip.SendData(CPID_Internal, @RecSend);
+end;
+
+procedure TVoipSock.SendClearLaunchSignToLauncher;
+var
+  aRec: TRecData2DOrder;
+begin
+  aRec.orderID := 0;
+  aRec.strValue := '';
+  aRec.strValue2 := '';
+  aRec.strValue3 := '';
+  aRec.ipConsole := '';
+  aRec.numValue := 1308;
+  TCP_CommControl.SendData(REC_2D_ORDER, @aRec);
+end;
+
+
+procedure TVoipSock.SendReceiveCall(aNameCub, aNameCom, aCallFrom, aCallTo: string);
+var
+  RecSend : TRecInternal;
+begin
+  RecSend.RoleCub := aNameCub;
+  RecSend.RoleAs  := aNameCom;
+  RecSend.Login   := '';
+  RecSend.Mode    := 5;
+
+  RecSend.Logout          := '';
+  RecSend.CallFrom        := aCallFrom;
+  RecSend.CallTo          := aCallTo;
+  RecSend.DisConnectFrom  := '';
+  RecSend.DisConnectTo    := '';
+
+  TCP_ClientSessionVoip.SendData(CPID_Internal, @RecSend);
+end;
+
+procedure TVoipSock.SendRoleLogin(aNameCub, aNameCom, aNameLogin: string);
+var
+  RecSend : TRecInternal;
+begin
+  RecSend.RoleCub := aNameCub;
+  RecSend.RoleAs  := aNameCom;
+  RecSend.Login   := aNameLogin;
+  RecSend.Mode    := 1;
+
+  RecSend.Logout          := '';
+  RecSend.CallFrom        := '';
+  RecSend.CallTo          := '';
+  RecSend.DisConnectFrom  := '';
+  RecSend.DisConnectTo    := '';
+
+  TCP_ClientSessionVoip.SendData(CPID_Internal, @RecSend);
+end;
+
+procedure TVoipSock.SendRoleLogOut(aNameCub, aNameCom, aNameLogOut: string);
+var
+  RecSend : TRecInternal;
+begin
+  RecSend.RoleCub := aNameCub;
+  RecSend.RoleAs  := aNameCom;
+  RecSend.Login   := '';
+  RecSend.Mode    := 2;
+
+  RecSend.Logout          := aNameLogOut;
+  RecSend.CallFrom        := '';
+  RecSend.CallTo          := '';
+  RecSend.DisConnectFrom  := '';
+  RecSend.DisConnectTo    := '';
+
+  TCP_ClientSessionVoip.SendData(CPID_Internal, @RecSend);
+end;
+
+procedure TVoipSock.SetToMode_ExitPhone(const aPhoneId: integer);
+var
+  RecSend : TICSDataPhone;
+begin
+  //Off Before Exit
+  SetToMode_Off(aPhoneId);
+
+  with RecSend do
+  begin
+    cmd   := 'quit';
+    Mode  := 1;
+    id    := aPhoneId;
+  end;
+
+  TCP_ClientConnector.SendData(CPID_ICSDataPhone, @RecSend);
+  Sleep(10);
+
+  aLoggerFile.Log('Mode', 'Set Mode to Exit')
+end;
+
+procedure TVoipSock.SetToMode_Off(const aPhoneId: integer);
+var
+  RecSend : TICSDataPhone;
+begin
+  with RecSend do
+  begin
+    cmd   := 'mode';
+    Mode  := 1;
+    id    := aPhoneId;
+  end;
+
+  TCP_ClientConnector.SendData(CPID_ICSDataPhone, @RecSend);
+  Sleep(10);
+
+  aLoggerFile.Log('Mode', 'Set Mode to Off')
+end;
+
+procedure TVoipSock.SetToMode_OffPTT(const aPhoneId: integer);
+var
+  RecSend : TICSDataPhone;
+begin
+  with RecSend do
+  begin
+    cmd   := 'mode';
+    Mode  := 5;
+    id    := aPhoneId;
+  end;
+
+  TCP_ClientConnector.SendData(CPID_ICSDataPhone, @RecSend);
+  Sleep(10);
+
+  aLoggerFile.Log('Mode', 'Set Mode to PTT_Off');
+end;
+
+procedure TVoipSock.SetToMode_OnPTT(const aPhoneId: integer);
+var
+  RecSend : TICSDataPhone;
+begin
+  with RecSend do
+  begin
+    cmd   := 'mode';
+    Mode  := 4;
+    id    := aPhoneId;
+  end;
+
+  TCP_ClientConnector.SendData(CPID_ICSDataPhone, @RecSend);
+  Sleep(10);
+
+  aLoggerFile.Log('Mode', 'Set Mode to PTT_On');
+end;
+
+procedure TVoipSock.SetToMode_Receiver(const aPhoneId: integer);
+var
+  RecSend : TICSDataPhone;
+begin
+  with RecSend do
+  begin
+    cmd   := 'mode';
+    Mode  := 2;
+    id    := aPhoneId;
+  end;
+
+  TCP_ClientConnector.SendData(CPID_ICSDataPhone, @RecSend);
+  Sleep(10);
+
+  aLoggerFile.Log('Mode', 'Set Mode to Reciver');
+end;
+
+procedure TVoipSock.SetToMode_Transeiver(const aPhoneId: integer);
+var
+  RecSend : TICSDataPhone;
+begin
+  with RecSend do
+  begin
+    cmd   := 'mode';
+    Mode  := 3;
+    id    := aPhoneId;
+  end;
+
+  TCP_ClientConnector.SendData(CPID_ICSDataPhone, @RecSend);
+  Sleep(10);
+
+  aLoggerFile.Log('Mode', 'Set Mode to Transeiver');
+end;
+
+procedure TVoipSock.ShutdownPC;
+var
+  RecSend : TRecArchos;
+begin
+  RecSend.Mode := 7;
+  RecSend.Id   := 7;
+
+  TCP_ClientControl.SendData(CPID_RecArchos, @RecSend);
+end;
+
+procedure TVoipSock.threadOnRunning(const dt: double);
+begin
+
+  if ((TCP_ClientConnector <> nil) and (TCP_ClientConnector.State = wsConnected)) then
+    TCP_ClientConnector.getPacket;
+
+  if ((TCP_ClientSessionVoip <> nil) and (TCP_ClientSessionVoip.State = wsConnected)) then
+    TCP_ClientSessionVoip.getPacket;
+
+  if ((TCP_ClientControl <> nil) and (TCP_ClientControl.State = wsConnected)) then
+    TCP_ClientControl.getPacket;
+
+  if ((TCP_CommControl <> nil) and (TCP_CommControl.State = wsListening)) then
+    TCP_CommControl.getPacket;
+
+end;
+
+function TVoipSock.CheckValidSoundDevice(IntwvIn, IntwvOut, ExtwvIn,
+  ExtwvOut: Integer; var ErrMsg: string): Boolean;
+
+const
+  C_ERR_NO_DEV = 'No soundcard present or driver error';
+  C_ERR_DEV_ID_FAULT = 'Specified device ID not exists or no headset plugged in.';
+
+var
+  woCap: TRecWaveOutCaps;
+  isValid: Boolean;
+begin
+  Result := False;
+
+  isValid := True;
+  ErrMsg := '';
+
+  // internal wavein
+  case (waveInGetDevCaps(IntwvIn, @woCap, SizeOf(woCap))) of
+
+    MMSYSERR_NODRIVER: begin
+      isValid := False;
+      ErrMsg := C_ERR_NO_DEV;
+    end;
+
+    MMSYSERR_BADDEVICEID: begin
+      isValid := False;
+      ErrMsg := C_ERR_DEV_ID_FAULT;
+    end;
+
+  end;
+  // internal waveout
+  case (waveOutGetDevCaps(IntwvOut, @woCap, SizeOf(woCap))) of
+
+    MMSYSERR_NODRIVER: begin
+      isValid := False;
+      ErrMsg := C_ERR_NO_DEV;
+    end;
+
+    MMSYSERR_BADDEVICEID: begin
+      isValid := False;
+      ErrMsg := C_ERR_DEV_ID_FAULT;
+    end;
+
+  end;
+
+  // external wavein
+  case (waveInGetDevCaps(ExtwvIn, @woCap, SizeOf(woCap))) of
+
+    MMSYSERR_NODRIVER: begin
+      isValid := False;
+      ErrMsg := C_ERR_NO_DEV;
+    end;
+
+    MMSYSERR_BADDEVICEID: begin
+      isValid := False;
+      ErrMsg := C_ERR_DEV_ID_FAULT;
+    end;
+
+  end;
+  // external waveout
+  case (waveInGetDevCaps(ExtwvOut, @woCap, SizeOf(woCap))) of
+
+    MMSYSERR_NODRIVER: begin
+      isValid := False;
+      ErrMsg := C_ERR_NO_DEV;
+    end;
+
+    MMSYSERR_BADDEVICEID: begin
+      isValid := False;
+      ErrMsg := C_ERR_DEV_ID_FAULT;
+    end;
+
+  end;
+
+  Result := isValid;
+
+end;
+
+//function TVoipSock.CheckSoundDevicePresent: Boolean;
+//begin
+//  if WaveOutGetNumDevs <> 0 then
+//    Result := True
+//  else
+//    Result := False;
+//
+//end;
+
+procedure TVoipSock.CloseEngineVoip;
+var
+  RecSend : TRecArchos;
+begin
+  RecSend.Mode := 4;
+  RecSend.Id   := 4;
+
+  TCP_ClientControl.SendData(CPID_RecArchos, @RecSend);
+end;
+
+constructor TVoipSock.create;
+begin
+  isOut := False;
+
+  TCP_ClientConnector := TTCPClient.Create;
+  TCP_ClientSessionVoip := TTCPClient.Create;
+  TCP_ClientControl := TTCPClient.Create;
+  TCP_CommControl := TTCPServer.Create;
+
+
+  TCP_ClientConnector.OnDisConnected     := OnTCP_Client_Disconnect;
+  TCP_ClientSessionVoip.OnDisConnected   := OnTCP_Client_Disconnect;
+  TCP_ClientControl.OnDisConnected       := OnTCP_Client_Disconnect;
+
+  TCP_ClientControl.RegisterProcedure(CPID_RecArchos, nil, SizeOf(TRecArchos));
+
+  TCP_ClientConnector.RegisterProcedure(CPID_ICSData, nil, SizeOf(TICSData));
+  TCP_ClientConnector.RegisterProcedure(CPID_ICSDataPhone, nil, SizeOf(TICSDataPhone));
+
+  TCP_ClientSessionVoip.RegisterProcedure(CPID_ReqGroup, nil, sizeof(TRecReqGroupID));
+  TCP_ClientSessionVoip.RegisterProcedure(CPID_ReqLogin, nil, SizeOf(TRecReqLogin));
+  TCP_ClientSessionVoip.RegisterProcedure(CPID_MODECALL, ReceiveModeCall, SizeOf(TRecCallMode));
+  TCP_ClientSessionVoip.RegisterProcedure(CPID_Internal, ReceiveInternalAct, SizeOf(TrecInternal));
+  TCP_ClientSessionVoip.RegisterProcedure(CPID_Server_Stat,  Recv_ReqServerState, sizeof(TRecServerStat));
+  TCP_ClientSessionVoip.RegisterProcedure(CPID_ICSData,  Recv_ICSData, SizeOf(TICSData));
+
+  TCP_ClientConnector.RegisterProcedure(CPID_Termination_Option, Recv_Order, SizeOf(TRecOrder));
+
+  TCP_CommControl.RegisterProcedure(REC_2D_ORDER, Recv_CloseOrder, SizeOf(TRecData2DOrder));
+
+  // reconnect
+  Tmr_TCP_Client := TPrecisseTimer.Create;
+  Tmr_TCP_Client.Enabled := False;
+  Tmr_TCP_Client.OnRunning := OnTimerRunning;
+  Tmr_TCP_Client.Interval := 2000;
+
+  // data collector
+  FThread := TMSTimer.Create;
+  FThread.Interval := 1;
+  FThread.OnRunning := threadOnRunning;
+  FThread.Enabled := True;
+
+  SetConfig := TIniSet.create;
+
+  aLoggerFile:= TLogFile.Create;
+  aLoggerFile.FileName:= 'PhoneLogging.log';
+  aLoggerFile.IsLog:= True;
+  aLoggerFile.Init;
+end;
+
+destructor TVoipSock.Destroy;
+begin
+  TCP_ClientConnector.Disconnect;
+  TCP_ClientSessionVoip.Disconnect;
+  TCP_ClientControl.Disconnect;
+
+  Tmr_TCP_Client.OnRunning := nil;
+  Tmr_TCP_Client.Enabled := false;
+  Tmr_TCP_Client.Free;
+  SetConfig.Free;
+
+  inherited;
+end;
+
+
+end.

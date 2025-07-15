@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<fsgroups>
+  <roles id="Role" name="Role Group">
+
+	<console ip="192.168.2.10" name="INSTR1" ></console>
+	<console ip="192.168.2.20" name="INSTR2"></console>
+	<console ip="192.168.2.30" name="INSTR3"></console>
+	<console ip="192.168.2.111" name="OPR1"></console>
+	<console ip="192.168.2.112" name="OPR2"></console>
+	<console ip="192.168.2.113" name="OPR3"></console>
+
+  </roles>
+</fsgroups>
+   

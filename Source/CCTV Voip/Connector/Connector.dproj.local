@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2017/03/24 13:10:41.683.pas,F:\DID PROJECTS\INCSNewMap_201511261721\_INCS_2D_\INCS COMM\NetComponent\uNetBaseSocket.pas=</Transaction>
+    <Transaction>2017/03/24 13:10:41.725.pas,F:\DID PROJECTS\INCSNewMap_201511261721\_INCS_2D_\INCS COMM\NetComponent\uTCPServer.pas=</Transaction>
+    <Transaction>2017/05/10 13:40:01.868.pas,F:\DID PROJECTS\INCSNewMap_201511261721\_INCS_2D_\INCS COMM\Connector\uDevErrMsg.pas=F:\DID PROJECTS\INCSNewMap_201511261721\_INCS_2D_\INCS COMM\Connector\Unit1.pas</Transaction>
+    <Transaction>2017/05/10 13:40:01.868.dfm,F:\DID PROJECTS\INCSNewMap_201511261721\_INCS_2D_\INCS COMM\Connector\uDevErrMsg.dfm=F:\DID PROJECTS\INCSNewMap_201511261721\_INCS_2D_\INCS COMM\Connector\Unit1.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

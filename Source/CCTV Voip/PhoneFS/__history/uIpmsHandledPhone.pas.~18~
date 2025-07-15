@@ -1,0 +1,1172 @@
+unit uIpmsHandledPhone;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.MPlayer, Vcl.Mask, RzEdit,
+  RzSpnEdt, Vcl.Buttons, SpeedButtonImage, uLoadGroupFromXML, uDataVoipRecord,
+  Vcl.Menus, Winapi.ShellAPI;
+
+type
+
+  TfrmIpmsHandledPhone = class(TForm)
+    pnlComCctv: TPanel;
+    pnlConnector: TPanel;
+    pnlControl: TPanel;
+    pnlSesVoip: TPanel;
+    lblIncoming: TLabel;
+    imgCallBtn: TImage;
+    mmo1: TMemo;
+    tmrIncomingBlinker: TTimer;
+    pmRestart: TPopupMenu;
+    RunConsole1: TMenuItem;
+    RestartConnector1: TMenuItem;
+    Restart1: TMenuItem;
+    RestartPhoneConnector1: TMenuItem;
+    ShowConector1: TMenuItem;
+    HideConnector1: TMenuItem;
+    N1: TMenuItem;
+    Reconnect1: TMenuItem;
+    MenuItem1: TMenuItem;
+    CloseApplication1: TMenuItem;
+    N2: TMenuItem;
+    Shutdown1: TMenuItem;
+    Restart2: TMenuItem;
+    N3: TMenuItem;
+    Shutdown2: TMenuItem;
+    pmTrayMenu: TPopupMenu;
+    ShowPhone1: TMenuItem;
+    HidePhone1: TMenuItem;
+    N4: TMenuItem;
+    erminatePhone1: TMenuItem;
+  {$ENDREGION}
+
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure ProcessMenuSelection(Sender: TObject);
+    procedure imgCallBtnClick(Sender: TObject);
+    procedure lblIncomingMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure tmrIncomingBlinkerTimer(Sender: TObject);
+    procedure pnlSesVoipClick(Sender: TObject);
+    procedure pnlControlClick(Sender: TObject);
+
+  private
+    // VOIP
+    FBlinkerCounter: Integer;
+    isAutoCall : Boolean;
+    ListInternal : TList;
+    GroupList : TFsGroupList;
+    GroupInternal : TFsGroupList;
+    ssGroupList : TFsGroupList;
+    FTimer : TTimer;
+    TrayIconData: TNotifyIconData;
+
+    procedure ClearAndDelList(aList: TList);
+    procedure OnTimerCall(Sender : TObject);
+    function SetCallInternal(ChName : string):Integer;
+    procedure RunPhone;
+    procedure StopPhone;
+    procedure SetPnlStatusConnect(aVisible : Boolean);
+    //Restart n Shutdown
+    procedure ClosePhone;
+    procedure RestartPhone;
+    procedure RestartPhoneNConnector;
+    procedure RestartPC;
+    procedure ShutdownPC;
+
+    procedure SetIconTray;
+    procedure TrayMessage(var Msg: TMessage); message WM_ICONTRAY_IPMS;
+
+  public
+    { Public declarations }
+    isRunSimulation : Boolean;
+    procedure RunSimulation;
+    procedure RecvICSData(rec: TICSData);
+    procedure RecvICSOrder(rec: TRecOrder);
+    procedure ReceiveModeCall(Rec : TRecCallMode);
+    procedure ReceiveInternalActivity(Rec : TRecInternal);
+    procedure ReceiveCloseOrder(Rec: TRecData2DOrder);
+    procedure StationCallButtonSel(aBtnTag: Integer);
+  end;
+
+var
+  frmIpmsHandledPhone: TfrmIpmsHandledPhone;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  uSocketHandle, uProgressBar, MMSystem;
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ VOIP ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>>
+
+procedure TfrmIpmsHandledPhone.FormCreate(Sender: TObject);
+begin
+  ListInternal  := TList.Create;
+
+  isAutoCall := False;
+
+  //init incoming call blinker
+  FBlinkerCounter := 0;
+  tmrIncomingBlinker.Tag := 0;
+  tmrIncomingBlinker.Enabled := False;
+  lblIncoming.Font.Color := clWhite;
+
+  GroupList     := TFsGroupList.Create;
+  GroupInternal := TFsGroupList.Create;
+  ssGroupList     := TFsGroupList.Create;
+  isRunSimulation := False;
+
+  mmo1.Lines.Clear;
+
+  SetIconTray;
+//  if VoipManager.SetConfig.TrayMode = 1 then begin
+//    Self.WindowState := wsMinimized;
+//  end;
+
+end;
+
+
+procedure TfrmIpmsHandledPhone.FormDestroy(Sender: TObject);
+begin
+  ClearAndDelList(ListInternal);
+end;
+
+
+procedure TfrmIpmsHandledPhone.ClearAndDelList(aList: TList);
+var
+  aObj: TObject;
+  I: Integer;
+begin
+
+  for i := aList.Count-1 downto 0  do begin
+    aObj := aList[i];
+    FreeAndNil(aObj);
+    aList.Delete(i);
+  end;
+
+end;
+
+procedure TfrmIpmsHandledPhone.ClosePhone;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+    end;
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 6;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmIpmsHandledPhone.OnTimerCall(Sender: TObject);
+var
+  i : integer;
+  ChMap : TChannelMap;
+begin
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+    if not ChMap.isEnableTimer then Continue;
+
+    ChMap.aIdTimer := ChMap.aIdTimer + 1;
+    if ChMap.aIdTimer > 10 then
+    begin
+      ChMap.isEnableTimer := False;
+      ChMap.aIdTimer := 0;
+
+      if ChMap.aMode = 1 then
+      begin
+        ChMap.aMode := 0;
+        ChMap.isReceive := False;
+        VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+      end;
+    end;
+
+  end;
+
+end;
+
+procedure TfrmIpmsHandledPhone.ProcessMenuSelection(Sender: TObject);
+var
+  i, id , aTag : Integer;
+  sExeRestart : string;
+
+  DiffTop, DiffLeft : Integer;
+  ChMap : TChannelMap;
+begin
+  aTag := (Sender as TComponent).Tag;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  case aTag of
+    1 : begin
+          VoipManager.RunConsole;
+        end;
+    2 : begin
+          frmProgress.aMode := 1;
+          frmProgress.Left := Left + DiffLeft;
+          frmProgress.Top  := Top + DiffTop;
+          frmProgress.Show;
+        end;
+    3 : begin
+          RestartPhone;
+        end;
+    4 : begin
+          RestartPhoneNConnector;
+        end;
+    5 : begin
+          SetPnlStatusConnect(true);
+        end;
+    6 : begin
+          SetPnlStatusConnect(false);
+        end;
+    7 : begin
+          id := SetCallInternal(VoipManager.SetConfig.aRole);
+          if id <> -1 then begin
+            VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+            Sleep(100);
+            VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+          end;
+        end;
+    8 : begin
+//          Application.Terminate;
+          ClosePhone;
+        end;
+    9 : begin
+          RestartPC;
+        end;
+    10 : begin
+            ShutdownPC;
+         end;
+  end;
+
+end;
+
+procedure TfrmIpmsHandledPhone.ReceiveCloseOrder(Rec: TRecData2DOrder);
+begin
+  ClosePhone;
+end;
+
+procedure TfrmIpmsHandledPhone.ReceiveInternalActivity(Rec: TRecInternal);
+var
+  i : Integer;
+  ChMap : TChannelMap;
+
+  strSound : string;
+  id : integer;
+begin
+
+  if VoipManager.SetConfig.idSkin <> 101 then Exit;
+  if Rec.RoleCub <> VoipManager.SetConfig.aStrCub then Exit;
+
+  //For Caller
+  if Rec.Mode = 3 then
+  begin
+    if isAutoCall then
+    begin
+      if (Rec.CallFrom = VoipManager.SetConfig.aRole) then
+      begin
+        for i := 0 to ListInternal.Count - 1 do
+        begin
+          ChMap := TChannelMap(ListInternal.Items[i]);
+
+          if ChMap.aChannelName = Rec.CallTo then
+          begin
+            id := SetCallInternal(ChMap.aChannelName);
+            if id <> -1 then
+            begin
+              VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+              VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+              VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+              mmo1.Lines.Add('Setup caller for a call. Chan ID is ' + IntToStr(VoipManager.SetConfig.InternalStartPort_VOIP + id));
+            end;
+          end;
+        end;
+      end;
+    end;
+  end;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    case Rec.Mode of
+      //Set Login
+      1 : begin
+            if Rec.Login = ChMap.aChannelName then
+            begin
+              ChMap.isOnline := True;
+
+              Break;
+            end;
+          end;
+      //Set Logout
+      2 : begin
+            if Rec.Logout = ChMap.aChannelName then
+            begin
+              ChMap.isOnline := False;
+
+              Break;
+            end;
+          end;
+      //Call
+      3 : begin
+            if isAutoCall then
+            begin
+              //For Receiver
+              if (Rec.CallFrom = ChMap.aChannelName)
+              and (rec.CallTo = VoipManager.SetConfig.aRole) then
+              begin
+                ChMap.aMode := 2;
+
+                // update receiver ui here!
+                //SetButtonImgSelected(Trim(Rec.CallFrom), True);
+                imgCallBtn.Picture.LoadFromFile('call_on.png');
+
+                id := SetCallInternal(ChMap.aChannelName);
+                if id <> -1 then
+                begin
+                  VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  mmo1.Lines.Add('Setup receiver for a call. Phone ID is ' + IntToStr(VoipManager.SetConfig.InternalStartPort_VOIP + id));
+                end;
+
+                // turn incoming call blinker on
+                FBlinkerCounter := 0;
+                tmrIncomingBlinker.Tag := 0;
+                tmrIncomingBlinker.Enabled := True;
+
+                Break;
+              end;
+            end
+            else
+            begin
+              if (Rec.CallFrom = ChMap.aChannelName)
+              and (rec.CallTo = VoipManager.SetConfig.aRole) then
+              begin
+                ChMap.aMode := 1;
+                ChMap.isReceive := True;
+                ChMap.aIdTimer  := 0;
+                ChMap.isEnableTimer := True;
+
+                strSound := ExtractFileDir(Application.ExeName);
+                strSound := strSound + '\' + 'Ring.wav';
+                sndPlaySound(PChar(strSound), SND_ASYNC);
+
+                VoipManager.PlaySound;
+
+                // turn incoming call blinker on
+                FBlinkerCounter := 0;
+                tmrIncomingBlinker.Tag := 0;
+                tmrIncomingBlinker.Enabled := True;
+
+                imgCallBtn.Picture.LoadFromFile('call_on.png');
+
+                Break;
+              end;
+            end;
+          end;
+      //Hangup
+      4 : begin
+
+            VoipManager.aLoggerFile.Log('<Internal>', 'Received hangup msg from someone..');
+            if isAutoCall then
+            begin
+
+              if (Rec.DisConnectFrom = ChMap.aChannelName)
+              and (rec.DisConnectTo = VoipManager.SetConfig.aRole) then
+              begin
+                mmo1.Lines.Add('ChMap.ChannelName: ' + ChMap.aChannelName + ', RecDiscFr: ' + Rec.DisConnectFrom);
+                mmo1.Lines.Add('RecDiscTo: ' + Rec.DisConnectTo + ', VoipMgr.aRole: ' +  VoipManager.SetConfig.aRole);
+                mmo1.Lines.Add('Hanging up process..');
+                ChMap.aMode := 0;
+                // Update button image
+                //SetButtonImgSelected(Trim(Rec.DisConnectFrom), False);
+                imgCallBtn.Picture.LoadFromFile('call_off.png');
+
+                id := SetCallInternal(ChMap.aChannelName);
+                if id <> -1 then
+                begin
+                  VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  mmo1.Lines.Add('Set channel ' + IntToStr(id) + ' mode to off');
+                end;
+
+                Break;
+              end;
+            end
+            else
+            begin
+              if (Rec.DisConnectFrom = ChMap.aChannelName)
+              and (rec.DisConnectTo = VoipManager.SetConfig.aRole) then
+              begin
+                if ChMap.aMode = 2 then
+                begin
+                  id := SetCallInternal(ChMap.aChannelName);
+                  if id <> -1 then
+                  begin
+                    VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                    VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  end;
+                end;
+
+                ChMap.aMode := 0;
+                ChMap.isReceive := False;
+                ChMap.isCall    := False;
+                ChMap.aIdTimer  := 0;
+                ChMap.isEnableTimer := False;
+
+                Break;
+              end;
+            end;
+
+            // turn incoming call blinker off
+            FBlinkerCounter := 0;
+            tmrIncomingBlinker.Tag := 0;
+            tmrIncomingBlinker.Enabled := False;
+            lblIncoming.Font.Color := clWhite;
+
+            imgCallBtn.Picture.LoadFromFile('call_off.png');
+
+          end;
+      //Accept Call
+      5 : begin
+            if (Rec.CallFrom = ChMap.aChannelName)
+            and (rec.CallTo = VoipManager.SetConfig.aRole) then
+            begin
+              ChMap.aMode := 2;
+              ChMap.isReceive := True;
+              ChMap.aIdTimer  := 0;
+              ChMap.isEnableTimer := False;
+
+              id := SetCallInternal(ChMap.aChannelName);
+              if id <> -1 then
+              begin
+                VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+              end;
+
+              // turn incoming call blinker off
+              FBlinkerCounter := 0;
+              tmrIncomingBlinker.Tag := 0;
+              tmrIncomingBlinker.Enabled := False;
+              lblIncoming.Font.Color := clWhite;
+
+              imgCallBtn.Picture.LoadFromFile('call_off.png');
+
+              Break;
+            end;
+          end;
+      //Cannot Call Because Because Console is Offline
+      6 : begin
+            if isAutoCall then
+            begin
+              if (Rec.DisConnectFrom = ChMap.aChannelName)
+              and (rec.DisConnectTo = VoipManager.SetConfig.aRole) then
+              begin
+                ChMap.aMode := 0;
+                // Update button image
+                //SetButtonImgSelected(Trim(Rec.DisConnectFrom), False);
+
+                Break;
+              end;
+            end
+            else
+            begin
+              if (Rec.DisConnectFrom = ChMap.aChannelName)
+              and (rec.DisConnectTo = VoipManager.SetConfig.aRole) then
+              begin
+                if ChMap.aMode = 2 then
+                begin
+                  id := SetCallInternal(ChMap.aChannelName);
+                  if id <> -1 then
+                  begin
+                    VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                    VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  end;
+                end;
+
+                ChMap.aMode := 0;
+                ChMap.isReceive := False;
+                ChMap.isCall    := False;
+                ChMap.aIdTimer  := 0;
+                ChMap.isEnableTimer := False;
+
+                Break;
+              end;
+            end;
+
+            imgCallBtn.Picture.LoadFromFile('call_off.png');
+          end;
+    end;
+  end;
+end;
+
+procedure TfrmIpmsHandledPhone.ReceiveModeCall(Rec: TRecCallMode);
+begin
+  if VoipManager.SetConfig.idSkin <> 101 then Exit;
+  isAutoCall := Rec.IsAutoCall;
+end;
+
+procedure TfrmIpmsHandledPhone.RecvICSData(rec: TICSData);
+begin
+
+  if VoipManager.SetConfig.idSkin <> 101 then Exit;
+
+  if rec.Mode = 10 then
+  begin
+    if not VoipManager.isOut and isRunSimulation then
+    begin
+      RestartPhone;
+    end;
+  end
+  else
+  if rec.Mode = 11 then
+  begin
+    if not VoipManager.isOut then
+    begin
+      RestartPhone;
+    end;
+  end
+  else
+  if rec.Mode = 12 then
+  begin
+    if not VoipManager.isOut then
+    begin
+      ShutdownPC;
+    end;
+  end
+  else
+  if rec.Mode = 13 then
+  begin
+    if not VoipManager.isOut then
+    begin
+      ClosePhone;
+    end;
+  end;
+
+end;
+
+procedure TfrmIpmsHandledPhone.RecvICSOrder(rec: TRecOrder);
+var
+  px, py: Integer;
+begin
+
+  px := frmIpmsHandledPhone.Left;
+  py := frmIpmsHandledPhone.Top + (frmIpmsHandledPhone.Height div 2);
+
+  case rec.OrderVal of
+
+    0: begin // terminates phone
+      MessageDlgPos(rec.OrderMsg, mtError, [mbOK], 0, px, py);
+      ProcessMenuSelection(CloseApplication1);
+    end;
+
+    1: begin // offers option whether to restart or terminate
+
+      if (MessageDlgPos(rec.OrderMsg, mtError, [mbOK, mbCancel], 0, px, py) = mrOk) then begin
+        // restart phone
+        ProcessMenuSelection(Restart1);
+      end
+      else begin
+        // close phone
+        ProcessMenuSelection(CloseApplication1);
+
+      end;
+
+    end;
+
+  end;
+
+end;
+
+procedure TfrmIpmsHandledPhone.RestartPC;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+    end;
+
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 7;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmIpmsHandledPhone.RestartPhone;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+    end;
+
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 2;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmIpmsHandledPhone.RestartPhoneNConnector;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    // disconnect all connected comms
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+      VoipManager.aLoggerFile.Log('<RestartPhoneNConnector>', 'Sent hangup to ' + ChMap.aChannelName);
+    end;
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 3;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmIpmsHandledPhone.RunPhone;
+var
+  i : Integer;
+  ChMap : TChannelMap;
+
+  aParamPhone, aParamJam    : string;
+  SIPPort, RTPport, ICSPort : Integer;
+begin
+
+  for i := 0 to GroupInternal.RoleList.Count - 1 do
+  begin
+    SIPPort := VoipManager.SetConfig.InternalStartPort_SIP + (i*3);
+    RTPport := SIPPort + 1;
+    ICSPort := VoipManager.SetConfig.InternalStartPort_VOIP + i;
+
+    if GroupInternal.RoleList[i] = VoipManager.SetConfig.aRole then
+    begin
+      aParamPhone := '-id ' + IntToStr(ICSPort)
+      + ' -u ' + IntToStr(1001 + i) + ' -p ' + '1234' + ' -sipport ' + IntToStr(SIPPort)
+      + ' -rtpport ' + IntToStr(RTPport)
+      + ' -ch ' + IntToStr(VoipManager.SetConfig.aRoomInternal + VoipManager.SetConfig.aCub * 10 + i)
+      + ' -auto -dial -silent -log -chcode '
+      + GroupInternal.RoleList[i] + ' -chband ' + IntToStr(0);
+
+      aParamJam := '';
+
+      VoipManager.RunPhone(2, aParamPhone, aParamJam);
+    end
+    else
+    begin
+      aParamPhone := '-id ' + IntToStr(ICSPort)
+      + ' -u ' + IntToStr(1001 + i) + ' -p ' + '1234' + ' -sipport ' + IntToStr(SIPPort)
+      + ' -rtpport ' + IntToStr(RTPport)
+      + ' -ch ' + IntToStr(VoipManager.SetConfig.aRoomInternal + VoipManager.SetConfig.aCub * 10 + i)
+      + ' -auto -nodial -silent -log -chcode '
+      + GroupInternal.RoleList[i] + ' -chband ' + IntToStr(0);
+
+      aParamJam := '';
+
+      VoipManager.RunPhone(5, aParamPhone, aParamJam);
+    end;
+  end;
+end;
+
+procedure TfrmIpmsHandledPhone.RunSimulation;
+var
+  i : Integer;
+  strXML, ssStrXml : string;
+  aChannelMap : TChannelMap;
+  aColSection,
+  aRowSection : Double;
+begin
+  if VoipManager.SetConfig.idSkin <> 101 then Exit;
+
+  isRunSimulation := True;
+  strXML := ExtractFileDir(Application.ExeName);
+  strXML := strXML+ '\' + 'GroupChannel.xml';
+
+  ssStrXml := ExtractFileDir(Application.ExeName);
+  ssStrXml := ssStrXml+ '\' + 'ssGroupChannel.xml';
+
+  GroupList.LoadFromFile(strXML);
+  GroupInternal.LoadFromFile(strXML);
+  ssGroupList.LoadFromFile(ssStrXml);
+
+  // internal
+  for i := 0 to GroupList.RoleList.Count - 1 do
+  begin
+    if GroupList.RoleList[i] = VoipManager.SetConfig.aRole then
+    begin
+      GroupList.RoleList.Delete(i);
+      Break;
+    end;
+  end;
+  // !addition!
+  for i := 0 to ssGroupList.RoleList.Count - 1 do
+  begin
+    if ssGroupList.RoleList[i] = VoipManager.SetConfig.aRole then
+    begin
+      ssGroupList.RoleList.Delete(i);
+      Break;
+    end;
+  end;
+
+  for i := 0 to ssGroupList.RoleList.Count - 1 do
+  begin
+    aChannelMap := TChannelMap.Create;
+    aChannelMap.aUser         := IntToStr(1001 + i);
+    aChannelMap.aChannel      := IntToStr(VoipManager.SetConfig.aRoomInternal +
+                                          VoipManager.SetConfig.aCub * 10 + i);
+
+    aChannelMap.aChannelName  := ssGroupList.RoleList[i];
+    aChannelMap.aPass         := '1234';
+
+    aChannelMap.aMode     := 0;
+    aChannelMap.aIdTimer  := 0;
+
+    aChannelMap.isEnableTimer   := False;
+    aChannelMap.isCall          := False;
+    aChannelMap.isReceive       := False;
+
+    aChannelMap.isOnline        := False;
+
+
+    aRowSection             := 1;
+    aChannelMap.aRowSection := 1;
+
+    aColSection := 1;
+    aChannelMap.aColSection := 1;
+
+    ListInternal.Add(aChannelMap);
+  end;
+
+  FTimer := TTimer.Create(nil);
+  FTimer.Enabled  := True;
+  FTimer.Interval := 1000;
+  FTimer.OnTimer  := OnTimerCall;
+
+  RunPhone;
+
+  // test only!!!!
+  lblIncoming.Caption := VoipManager.SetConfig.aRole;
+
+end;
+
+function TfrmIpmsHandledPhone.SetCallInternal(ChName: string): Integer;
+begin
+  Result := -1;
+  Result := GroupInternal.RoleList.IndexOf(ChName);
+end;
+
+procedure TfrmIpmsHandledPhone.SetPnlStatusConnect(aVisible: Boolean);
+begin
+  pnlConnector.Visible := aVisible;
+  pnlSesVoip.Visible   := aVisible;
+  pnlControl.Visible   := aVisible;
+end;
+
+procedure TfrmIpmsHandledPhone.ShutdownPC;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+    end;
+
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 8;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmIpmsHandledPhone.StationCallButtonSel(aBtnTag: Integer);
+var
+  i, id : integer;
+  ChMap : TChannelMap;
+
+  Section : Double;
+  ChSectionName: string;
+  RecSend : TRecInternal;
+  SelStationName: string;
+begin
+  //Point To Point
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    //Auto Call
+    if isAutoCall then
+    begin
+      if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+      begin
+         //Hangup
+         mmo1.Lines.Add('VoipManager.SetConfig.aRole' + ' hang up from ' + ChMap.aChannelName);
+
+         ChMap.aMode := 0;
+         VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                  VoipManager.SetConfig.aRole, ChMap.aChannelName);
+
+         id := SetCallInternal(ChMap.aChannelName);
+         if id <> -1 then
+         begin
+           VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+           VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+         end;
+      end
+      else
+      if ChMap.aMode = 0 then
+      begin
+        mmo1.Lines.Add(VoipManager.SetConfig.aRole + ' calling ' + ChMap.aChannelName);
+
+         //Call
+         ChMap.aMode := 2;
+         VoipManager.SendCallTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+
+      end;
+    end
+    //Manual Call
+    else
+    begin
+      //Calling
+      if ChMap.aMode = 0 then
+      begin
+        ChMap.aMode := 1;
+        ChMap.isCall := True;
+
+        VoipManager.SendCallTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+      end
+      //HangUp From Caller
+      else
+      if (ChMap.aMode = 1) and ChMap.isCall and not ChMap.isReceive then
+      begin
+        ChMap.aMode := 0;
+        ChMap.isCall := False;
+        ChMap.aIdTimer := 0;
+        ChMap.isEnableTimer := False;
+
+        // turn off incoming call blinker
+        tmrIncomingBlinker.Tag := 0;
+        FBlinkerCounter := 0;
+        tmrIncomingBlinker.Enabled := False;
+        lblIncoming.Font.Color := clWhite;
+
+        VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+      end
+      //Accept Call
+      else
+      if (ChMap.aMode = 1) and ChMap.isReceive and not ChMap.isCall then
+      begin
+        ChMap.aMode := 2;
+        ChMap.aIdTimer := 0;
+        ChMap.isEnableTimer := False;
+
+        VoipManager.SendReceiveCall(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+
+        // turn off incoming call blinker
+//        LoadFromImageListUp(22, imgCal, FBitMap);
+        tmrIncomingBlinker.Tag := 0;
+        FBlinkerCounter := 0;
+        tmrIncomingBlinker.Enabled := False;
+        lblIncoming.Font.Color := clWhite;
+
+        id := SetCallInternal(ChMap.aChannelName);
+        if id <> -1 then
+        begin
+          VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+          VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+          VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+        end;
+      end
+      //HangUp From Caller or Receiver
+      else
+      if ChMap.aMode = 2 then
+      begin
+        ChMap.aMode := 0;
+        ChMap.aIdTimer := 0;
+        ChMap.isEnableTimer := False;
+        ChMap.isReceive := False;
+        ChMap.isCall := False;
+
+        VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+
+
+        // turn off incoming call blinker
+//        LoadFromImageListUp(22, imgCal, FBitMap);
+        tmrIncomingBlinker.Tag := 0;
+        FBlinkerCounter := 0;
+        tmrIncomingBlinker.Enabled := False;
+        lblIncoming.Font.Color := clWhite;
+
+        id := SetCallInternal(ChMap.aChannelName);
+        if id <> -1 then
+        begin
+          VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+          VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+        end;
+      end;
+    end;
+
+  end;
+
+end;
+
+procedure TfrmIpmsHandledPhone.StopPhone;
+var
+  i : Integer;
+begin
+  //Exit Internal Phone
+  for i := 0 to GroupInternal.RoleList.Count - 1 do
+  begin
+    VoipManager.SetToMode_ExitPhone(VoipManager.SetConfig.InternalStartPort_VOIP + i);
+  end;
+end;
+
+procedure TfrmIpmsHandledPhone.lblIncomingMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if (ssShift in Shift) then begin
+    mmo1.Visible := not mmo1.Visible;
+  end;
+end;
+
+procedure TfrmIpmsHandledPhone.pnlControlClick(Sender: TObject);
+begin
+  if not tmrIncomingBlinker.Enabled then begin
+    FBlinkerCounter := 0;
+    tmrIncomingBlinker.Tag := 0;
+    tmrIncomingBlinker.Enabled := True;
+  end
+  else begin
+    FBlinkerCounter := 0;
+    tmrIncomingBlinker.Tag := 0;
+    tmrIncomingBlinker.Enabled := False;
+    lblIncoming.Font.Color := clWhite;
+  end;
+end;
+
+procedure TfrmIpmsHandledPhone.tmrIncomingBlinkerTimer(Sender: TObject);
+begin
+  if (tmrIncomingBlinker.Tag = 0) then begin
+    //LoadFromImageListUp(22, imgCal, FBitMap);
+    lblIncoming.Font.Color := clWhite;
+    tmrIncomingBlinker.Tag := 1;
+  end
+  else if (tmrIncomingBlinker.Tag = 1) then begin
+    //LoadFromImageListDown(22, imgCal, FBitMap);
+    lblIncoming.Font.Color := clRed;
+    tmrIncomingBlinker.Tag := 0;
+  end;
+  Inc(FBlinkerCounter);
+
+  // if autocall, turnoff blinker after 20 sec. if not already turned off
+  if (FBlinkerCounter > 40) then begin // 40 since interval is half a sec
+    lblIncoming.Font.Color := clWhite;
+    tmrIncomingBlinker.Tag := 0;
+    FBlinkerCounter := 0;
+    tmrIncomingBlinker.Enabled := False;
+  end;
+end;
+
+procedure TfrmIpmsHandledPhone.SetIconTray;
+var
+  hMenuHandle: Integer;
+begin
+  hMenuHandle := GetSystemMenu(Handle, False);
+  if (hMenuHandle <> 0) then
+  begin
+//    DeleteMenu(hMenuHandle, SC_CLOSE, MF_BYCOMMAND);
+//    DeleteMenu(hMenuHandle, SC_MINIMIZE, MF_BYCOMMAND);
+//    DeleteMenu(hMenuHandle, SC_MAXIMIZE, MF_BYCOMMAND);
+  end;
+
+  with TrayIconData do
+  begin
+//    cbSize := SizeOf(TrayIconData);
+    Wnd := Handle;
+    uID := 0;
+    uFlags := NIF_MESSAGE + NIF_ICON + NIF_TIP;
+    uCallbackMessage := WM_ICONTRAY_IPMS;
+    hIcon := Application.Icon.Handle;
+    StrPCopy(szTip, Application.Title);
+  end;
+
+  Shell_NotifyIcon(NIM_ADD, @TrayIconData);
+end;
+
+procedure TfrmIpmsHandledPhone.TrayMessage(var Msg: TMessage);
+var
+  P : Tpoint;
+begin
+  case Msg.lParam of
+    WM_RBUTTONDOWN:
+    begin
+      SetForegroundWindow(Handle);
+      GetCursorPos(p);
+      pmTrayMenu.Popup(p.x, p.y);
+      PostMessage(Handle, WM_NULL, 0, 0);
+    end;
+  end;
+end;
+
+procedure TfrmIpmsHandledPhone.pnlSesVoipClick(Sender: TObject);
+begin
+  if ((Sender as TPanel).Color = clGreen) then begin
+    RunSimulation;
+    mmo1.Lines.Add('Simulated running....');
+  end;
+
+end;
+
+procedure TfrmIpmsHandledPhone.imgCallBtnClick(Sender: TObject);
+begin
+  StationCallButtonSel(0);
+end;
+
+end.

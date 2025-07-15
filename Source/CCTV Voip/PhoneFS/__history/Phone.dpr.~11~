@@ -1,0 +1,89 @@
+program Phone;
+
+uses
+  Forms,
+  SysUtils,
+  Dialogs,
+  uMain in 'uMain.pas' {frmMain},
+  Logger in '..\LibUnit\Logger.pas',
+  uLoadSetting in '..\LibUnit\uLoadSetting.pas',
+  uScriptHandle in '..\LibUnit\uScriptHandle.pas',
+  uSocketHandle in '..\LibUnit\uSocketHandle.pas',
+  uDataVoipRecord in '..\DataRecordType\uDataVoipRecord.pas',
+  uEventConnector in '..\LibUnit\uEventConnector.pas',
+  uProgressBar in '..\LibForm\uProgressBar.pas' {frmProgress},
+  uLoadGroupFromXML in '..\LibUnit\uLoadGroupFromXML.pas',
+  GmXml in '..\XMLReader\GmXml.pas',
+  GmXMLInterface in '..\XMLReader\GmXMLInterface.pas',
+  uStringFunc in '..\XMLReader\uStringFunc.pas',
+  xmlInterface in '..\XMLReader\xmlInterface.pas',
+  uMainIPMS in 'uMainIPMS.pas' {frmMainIPMS},
+  uThreadTimer in '..\LibUnit\uThreadTimer.pas',
+  uMainIPMS800x600 in 'uMainIPMS800x600.pas' {frmMainIPMS800x600},
+  uMainTCMS1440x900 in 'uMainTCMS1440x900.pas' {frmMainTCMS1440x900},
+  uMainTCMS800x600 in 'uMainTCMS800x600.pas' {frmMainTCMS800x600},
+  uMainINCS4X3SmallHorz in 'uMainINCS4X3SmallHorz.pas' {frmLenSmallHorz},
+  uMainINCS4X5BigVert in 'uMainINCS4X5BigVert.pas' {frmLenBigVert},
+  MSThreadTimer in '..\LibUnit\MSThreadTimer.pas',
+  uMainINCS4X5BigVert0812 in 'uMainINCS4X5BigVert0812.pas' {frmLenBigVert0812},
+  uMainINCS4X5BigVert710 in 'uMainINCS4X5BigVert710.pas' {frmLenBigVert0710},
+  uMainINCS4X3Horz086 in 'uMainINCS4X3Horz086.pas' {frmLenHorz086},
+  uMainINCS4X3Horz710 in 'uMainINCS4X3Horz710.pas' {frmLenHorz710},
+  uMainINCSInstr in 'uMainINCSInstr.pas' {frmMainINCSInstr},
+  uMainApvcVert768x1024 in 'uMainApvcVert768x1024.pas' {frmLenBigVertApvc768},
+  uMainTcmsPkrHorz1024x768 in 'uMainTcmsPkrHorz1024x768.pas' {frmTcmsPkrHorz1024},
+  uDataBuffer in '..\SharedNetworkLib\uDataBuffer.pas',
+  uNetBaseSocket in '..\SharedNetworkLib\uNetBaseSocket.pas',
+  uNetUDPnode in '..\SharedNetworkLib\uNetUDPnode.pas',
+  uPacketBuffer in '..\SharedNetworkLib\uPacketBuffer.pas',
+  uPacketRegister in '..\SharedNetworkLib\uPacketRegister.pas',
+  uSockDatatype in '..\SharedNetworkLib\uSockDatatype.pas',
+  uTCPClient in '..\SharedNetworkLib\uTCPClient.pas',
+  uTCPDatatype in '..\SharedNetworkLib\uTCPDatatype.pas',
+  uTCPServer in '..\SharedNetworkLib\uTCPServer.pas',
+  uIpmsHandledPhone in 'uIpmsHandledPhone.pas' {frmIpmsHandledPhone},
+  SingleSwitch2Pos in 'no_ui_command\SingleSwitch2Pos.pas' {frmFIS_CO},
+  UBinaryPacketizer in 'no_ui_command\UBinaryPacketizer.pas';
+
+{$R *.res}
+
+var
+  str : string;
+begin
+  Application.Initialize;
+
+  str := ExtractFileDir(Application.ExeName);
+  str := str + '\' + 'SettingPhone.ini';
+
+  //ShowMessage(str);
+
+  uScriptHandle.BeginConnection(str);
+  Application.MainFormOnTaskbar := True;
+
+  //Application.CreateForm(TfrmFIS_CO, frmFIS_CO);
+
+  case VoipManager.SetConfig.idSkin of
+    1 : Application.CreateForm(TfrmMain, frmMain);
+    2 : Application.CreateForm(TfrmMainIPMS, frmMainIPMS);
+    3 : Application.CreateForm(TfrmMainIPMS800x600, frmMainIPMS800x600);
+    4 : Application.CreateForm(TfrmMainTCMS1440x900, frmMainTCMS1440x900);
+    5 : Application.CreateForm(TfrmMainTCMS800x600, frmMainTCMS800x600);
+    6 : Application.CreateForm(TfrmLenSmallHorz, frmLenSmallHorz);
+    7 : Application.CreateForm(TfrmLenBigVert, frmLenBigVert);
+    8 : Application.CreateForm(TfrmLenBigVert0812, frmLenBigVert0812);
+    9 : Application.CreateForm(TfrmLenBigVert0710, frmLenBigVert0710);
+    10: Application.CreateForm(TfrmLenHorz086, frmLenHorz086);
+    11: Application.CreateForm(TfrmLenHorz710, frmLenHorz710);
+    12: Application.CreateForm(TfrmLenBigVertApvc768, frmLenBigVertApvc768);
+    13: Application.CreateForm(TfrmTcmsPkrHorz1024, frmTcmsPkrHorz1024);
+    100: Application.CreateForm(TfrmMainINCSInstr, frmMainINCSInstr);
+    101: Application.CreateForm(TfrmIpmsHandledPhone, frmIpmsHandledPhone);
+  end;
+
+  Application.CreateForm(TfrmProgress, frmProgress);
+
+  if HidePhone then Application.ShowMainForm := False;
+
+  Application.Run;
+  uScriptHandle.EndConnection;
+end.

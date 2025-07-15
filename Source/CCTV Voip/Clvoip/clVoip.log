@@ -1,0 +1,2012 @@
+<07 Jan 2011 08:46:14> [SEND to 192.168.0.55:5060] 
+REGISTER sip:192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKCD3A8CD416B54A4DB4D1FF37FFCAEE02
+From: 1001 <sip:1001@192.168.0.55>;tag=31127968
+To: 1001 <sip:1001@192.168.0.55>
+Call-ID: B4BF1F2C1610BF40AE8EC975F18D18A8@192.168.0.55
+CSeq: 1 REGISTER
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Content-Length: 0
+
+
+<07 Jan 2011 08:46:14> [RECV from 192.168.0.55:5060] 
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKCD3A8CD416B54A4DB4D1FF37FFCAEE02
+From: 1001 <sip:1001@192.168.0.55>;tag=31127968
+To: 1001 <sip:1001@192.168.0.55>;tag=BFe0N8B5rycaa
+Call-ID: B4BF1F2C1610BF40AE8EC975F18D18A8@192.168.0.55
+CSeq: 1 REGISTER
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+WWW-Authenticate: Digest realm="192.168.0.55", nonce="4c351b67-f933-764d-b94f-b2598dee9617", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 08:46:14> [SEND to 192.168.0.55:5060] 
+REGISTER sip:192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKDA1D8DF8C4400C43AA33E97EB8AED097
+From: 1001 <sip:1001@192.168.0.55>;tag=31127968
+To: 1001 <sip:1001@192.168.0.55>
+Call-ID: B4BF1F2C1610BF40AE8EC975F18D18A8@192.168.0.55
+CSeq: 2 REGISTER
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Authorization: Digest username="1001",realm="192.168.0.55",nonce="4c351b67-f933-764d-b94f-b2598dee9617",response="1f5d6c9fe1c4c2c19a9e3eca05e9e734",uri="sip:192.168.0.55",algorithm=MD5,opaque=""
+Content-Length: 0
+
+
+<07 Jan 2011 08:46:14> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKDA1D8DF8C4400C43AA33E97EB8AED097
+From: 1001 <sip:1001@192.168.0.55>;tag=31127968
+To: 1001 <sip:1001@192.168.0.55>;tag=cr7rQ3v8N72vN
+Call-ID: B4BF1F2C1610BF40AE8EC975F18D18A8@192.168.0.55
+CSeq: 2 REGISTER
+Contact: 1001 <sip:1001@192.168.0.55>;expires=1800
+Date: Fri, 07 Jan 2011 01:46:14 GMT
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Content-Length: 0
+
+
+
+<07 Jan 2011 08:46:14> [SEND to 192.168.0.55:5060] 
+INVITE sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKE1D825A4600C0349A1A4EE7B1E973370
+From: 1001 <sip:1001@192.168.0.55>;tag=31127984
+To: <sip:3000@192.168.0.55>
+Call-ID: B4BF1F2C1610BF40AE8EC975F18D18A8@192.168.0.55
+CSeq: 3 INVITE
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Content-Type: application/sdp
+Content-Length: 167
+
+v=0
+o=SIPInside 31127859 31127875 IN IP4 192.168.0.55
+s=SIP Call
+c=IN IP4 192.168.0.55
+t=0 0
+m=audio 6001 RTP/AVP 8
+b=AS:64
+a=rtpmap:8 PCMA/8000/1
+a=ptime:30
+
+<07 Jan 2011 08:46:14> [RECV from 192.168.0.55:5060] 
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKE1D825A4600C0349A1A4EE7B1E973370
+From: 1001 <sip:1001@192.168.0.55>;tag=31127984
+To: <sip:3000@192.168.0.55>
+Call-ID: B4BF1F2C1610BF40AE8EC975F18D18A8@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Content-Length: 0
+
+
+
+<07 Jan 2011 08:46:14> [RECV from 192.168.0.55:5060] 
+SIP/2.0 407 Proxy Authentication Required
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKE1D825A4600C0349A1A4EE7B1E973370
+From: 1001 <sip:1001@192.168.0.55>;tag=31127984
+To: <sip:3000@192.168.0.55>;tag=D10HSyDcKgSFH
+Call-ID: B4BF1F2C1610BF40AE8EC975F18D18A8@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Proxy-Authenticate: Digest realm="192.168.0.55", nonce="6b41951e-42d6-1540-a9a8-57a8e74afc11", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 08:46:14> [SEND to 192.168.0.55:5060] 
+ACK sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKE1D825A4600C0349A1A4EE7B1E973370
+From: 1001 <sip:1001@192.168.0.55>;tag=31127984
+To: <sip:3000@192.168.0.55>;tag=D10HSyDcKgSFH
+Call-ID: B4BF1F2C1610BF40AE8EC975F18D18A8@192.168.0.55
+CSeq: 3 ACK
+Max-Forwards: 70
+Content-Length: 0
+
+
+<07 Jan 2011 08:46:14> [SEND to 192.168.0.55:5060] 
+INVITE sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKF77F625F66FF3A40A9A203DD06B721C9
+From: 1001 <sip:1001@192.168.0.55>;tag=31127984
+To: <sip:3000@192.168.0.55>
+Call-ID: B4BF1F2C1610BF40AE8EC975F18D18A8@192.168.0.55
+CSeq: 4 INVITE
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Proxy-Authorization: Digest username="1001",realm="192.168.0.55",nonce="6b41951e-42d6-1540-a9a8-57a8e74afc11",response="a6b4eeb8f8ebc55225f7670cf4401f98",uri="sip:3000@192.168.0.55",algorithm=MD5,opaque=""
+Content-Type: application/sdp
+Content-Length: 167
+
+v=0
+o=SIPInside 31127859 31127875 IN IP4 192.168.0.55
+s=SIP Call
+c=IN IP4 192.168.0.55
+t=0 0
+m=audio 6001 RTP/AVP 8
+b=AS:64
+a=rtpmap:8 PCMA/8000/1
+a=ptime:30
+
+<07 Jan 2011 08:46:14> [RECV from 192.168.0.55:5060] 
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKF77F625F66FF3A40A9A203DD06B721C9
+From: 1001 <sip:1001@192.168.0.55>;tag=31127984
+To: <sip:3000@192.168.0.55>
+Call-ID: B4BF1F2C1610BF40AE8EC975F18D18A8@192.168.0.55
+CSeq: 4 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Content-Length: 0
+
+
+
+<07 Jan 2011 08:46:14> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKF77F625F66FF3A40A9A203DD06B721C9
+From: 1001 <sip:1001@192.168.0.55>;tag=31127984
+To: <sip:3000@192.168.0.55>;tag=eataUSyFgSF2c
+Call-ID: B4BF1F2C1610BF40AE8EC975F18D18A8@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294339488 1294339489 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 25286 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 08:46:14> [SEND to 192.168.0.55:5060] 
+ACK sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKF77F625F66FF3A40A9A203DD06B721C9
+From: 1001 <sip:1001@192.168.0.55>;tag=31127984
+To: <sip:3000@192.168.0.55>;tag=eataUSyFgSF2c
+Call-ID: B4BF1F2C1610BF40AE8EC975F18D18A8@192.168.0.55
+CSeq: 4 ACK
+Max-Forwards: 70
+Content-Length: 0
+
+
+<07 Jan 2011 08:46:14> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKBFjya34cHrHrB
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=FKK3vmFKD25mr
+To: <sip:1001@10.188.85.53>
+Call-ID: c0b58862-94a2-122e-1389-e9e39800fc1a
+CSeq: 6846323 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 08:46:14> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKBFjya34cHrHrB;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=FKK3vmFKD25mr
+To: <sip:1001@10.188.85.53>
+Call-ID: c0b58862-94a2-122e-1389-e9e39800fc1a
+CSeq: 6846323 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:16:29> [SEND to 192.168.0.55:5060] 
+REGISTER sip:192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5DFD699C5D364F4AA129FB91D9285483
+From: 1001 <sip:1001@192.168.0.55>;tag=32930265
+To: 1001 <sip:1001@192.168.0.55>
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 1 REGISTER
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Content-Length: 0
+
+
+<07 Jan 2011 09:16:37> [RECV from 192.168.0.55:5060] 
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5DFD699C5D364F4AA129FB91D9285483
+From: 1001 <sip:1001@192.168.0.55>;tag=32930265
+To: 1001 <sip:1001@192.168.0.55>;tag=4Xgm3SXHH7m1p
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 1 REGISTER
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+WWW-Authenticate: Digest realm="192.168.0.55", nonce="974e4c7b-2971-8245-a0e8-7748b57dea09", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:16:44> [SEND to 192.168.0.55:5060] 
+REGISTER sip:192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK14CF3A41EBD7DA4EB1834951760FA206
+From: 1001 <sip:1001@192.168.0.55>;tag=32930265
+To: 1001 <sip:1001@192.168.0.55>
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 2 REGISTER
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Authorization: Digest username="1001",realm="192.168.0.55",nonce="974e4c7b-2971-8245-a0e8-7748b57dea09",response="80b8ffa47f05dd3f6cdc8c1534dc59fe",uri="sip:192.168.0.55",algorithm=MD5,opaque=""
+Content-Length: 0
+
+
+<07 Jan 2011 09:16:47> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK14CF3A41EBD7DA4EB1834951760FA206
+From: 1001 <sip:1001@192.168.0.55>;tag=32930265
+To: 1001 <sip:1001@192.168.0.55>;tag=569c5meNegBmj
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 2 REGISTER
+Contact: 1001 <sip:1001@192.168.0.55>;expires=1800
+Date: Fri, 07 Jan 2011 02:16:44 GMT
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:16:58> [SEND to 192.168.0.55:5060] 
+INVITE sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2E7D00DFEC36DB4DAE081A1624EE164B
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 3 INVITE
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Content-Type: application/sdp
+Content-Length: 167
+
+v=0
+o=SIPInside 32833234 32839375 IN IP4 192.168.0.55
+s=SIP Call
+c=IN IP4 192.168.0.55
+t=0 0
+m=audio 6001 RTP/AVP 8
+b=AS:64
+a=rtpmap:8 PCMA/8000/1
+a=ptime:30
+
+<07 Jan 2011 09:17:07> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 09:17:09> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:17:10> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 09:17:14> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:17:25> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 09:17:25> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:17:27> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 09:17:27> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:17:27> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 09:17:27> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:17:30> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 09:17:30> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:17:31> [RECV from 192.168.0.55:5060] 
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2E7D00DFEC36DB4DAE081A1624EE164B
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:17:36> [RECV from 192.168.0.55:5060] 
+SIP/2.0 407 Proxy Authentication Required
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2E7D00DFEC36DB4DAE081A1624EE164B
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=7rvy8agv81QSS
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Proxy-Authenticate: Digest realm="192.168.0.55", nonce="d3cd504a-cacc-d94d-a65f-b2e041ec004a", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:17:36> [SEND to 192.168.0.55:5060] 
+ACK sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2E7D00DFEC36DB4DAE081A1624EE164B
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=7rvy8agv81QSS
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 3 ACK
+Max-Forwards: 70
+Content-Length: 0
+
+
+<07 Jan 2011 09:17:36> [SEND to 192.168.0.55:5060] 
+INVITE sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK48EBB33E9E83EC4F8B7E972ADA7259BE
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 4 INVITE
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Proxy-Authorization: Digest username="1001",realm="192.168.0.55",nonce="d3cd504a-cacc-d94d-a65f-b2e041ec004a",response="3b4104b6d39ed3ebfec396df809488f2",uri="sip:3000@192.168.0.55",algorithm=MD5,opaque=""
+Content-Type: application/sdp
+Content-Length: 167
+
+v=0
+o=SIPInside 32833234 32839375 IN IP4 192.168.0.55
+s=SIP Call
+c=IN IP4 192.168.0.55
+t=0 0
+m=audio 6001 RTP/AVP 8
+b=AS:64
+a=rtpmap:8 PCMA/8000/1
+a=ptime:30
+
+<07 Jan 2011 09:17:36> [RECV from 192.168.0.55:5060] 
+SIP/2.0 407 Proxy Authentication Required
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2E7D00DFEC36DB4DAE081A1624EE164B
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=7rvy8agv81QSS
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Proxy-Authenticate: Digest realm="192.168.0.55", nonce="d3cd504a-cacc-d94d-a65f-b2e041ec004a", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:17:36> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 09:17:36> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bK55r5jKFSvX9ND;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=6F356FZrBS16D
+To: <sip:1001@10.188.85.53>
+Call-ID: 03664c92-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847238 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:17:36> [RECV from 192.168.0.55:5060] 
+SIP/2.0 407 Proxy Authentication Required
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2E7D00DFEC36DB4DAE081A1624EE164B
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=7rvy8agv81QSS
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Proxy-Authenticate: Digest realm="192.168.0.55", nonce="d3cd504a-cacc-d94d-a65f-b2e041ec004a", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:17:36> [RECV from 192.168.0.55:5060] 
+SIP/2.0 407 Proxy Authentication Required
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2E7D00DFEC36DB4DAE081A1624EE164B
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=7rvy8agv81QSS
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Proxy-Authenticate: Digest realm="192.168.0.55", nonce="d3cd504a-cacc-d94d-a65f-b2e041ec004a", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:17:36> [RECV from 192.168.0.55:5060] 
+SIP/2.0 407 Proxy Authentication Required
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2E7D00DFEC36DB4DAE081A1624EE164B
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=7rvy8agv81QSS
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Proxy-Authenticate: Digest realm="192.168.0.55", nonce="d3cd504a-cacc-d94d-a65f-b2e041ec004a", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:17:36> [RECV from 192.168.0.55:5060] 
+SIP/2.0 407 Proxy Authentication Required
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2E7D00DFEC36DB4DAE081A1624EE164B
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=7rvy8agv81QSS
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Proxy-Authenticate: Digest realm="192.168.0.55", nonce="d3cd504a-cacc-d94d-a65f-b2e041ec004a", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:17:36> [RECV from 192.168.0.55:5060] 
+SIP/2.0 407 Proxy Authentication Required
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2E7D00DFEC36DB4DAE081A1624EE164B
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=7rvy8agv81QSS
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Proxy-Authenticate: Digest realm="192.168.0.55", nonce="d3cd504a-cacc-d94d-a65f-b2e041ec004a", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:17:36> [RECV from 192.168.0.55:5060] 
+SIP/2.0 407 Proxy Authentication Required
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2E7D00DFEC36DB4DAE081A1624EE164B
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=7rvy8agv81QSS
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Proxy-Authenticate: Digest realm="192.168.0.55", nonce="d3cd504a-cacc-d94d-a65f-b2e041ec004a", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:17:36> [RECV from 192.168.0.55:5060] 
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK48EBB33E9E83EC4F8B7E972ADA7259BE
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 4 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:17:36> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK48EBB33E9E83EC4F8B7E972ADA7259BE
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=81NQa60Z5aecN
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294334070 1294334071 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 32586 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:17:52> [SEND to 192.168.0.55:5060] 
+ACK sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK48EBB33E9E83EC4F8B7E972ADA7259BE
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=81NQa60Z5aecN
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 4 ACK
+Max-Forwards: 70
+Content-Length: 0
+
+
+<07 Jan 2011 09:17:54> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK48EBB33E9E83EC4F8B7E972ADA7259BE
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=81NQa60Z5aecN
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294334070 1294334071 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 32586 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:17:56> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK48EBB33E9E83EC4F8B7E972ADA7259BE
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=81NQa60Z5aecN
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294334070 1294334071 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 32586 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:17:56> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK48EBB33E9E83EC4F8B7E972ADA7259BE
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=81NQa60Z5aecN
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294334070 1294334071 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 32586 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:17:56> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK48EBB33E9E83EC4F8B7E972ADA7259BE
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=81NQa60Z5aecN
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294334070 1294334071 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 32586 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:17:56> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK48EBB33E9E83EC4F8B7E972ADA7259BE
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=81NQa60Z5aecN
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294334070 1294334071 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 32586 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:17:56> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK48EBB33E9E83EC4F8B7E972ADA7259BE
+From: 1001 <sip:1001@192.168.0.55>;tag=32969625
+To: <sip:3000@192.168.0.55>;tag=81NQa60Z5aecN
+Call-ID: 6E2E8DCF3128C04E80A6D6DDA7A0952E@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294334070 1294334071 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 32586 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:20:14> [SEND to 192.168.0.55:5060] 
+REGISTER sip:192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK4329F760741D2543A0DC25F32EC11695
+From: 1001 <sip:1001@192.168.0.55>;tag=33168343
+To: 1001 <sip:1001@192.168.0.55>
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 1 REGISTER
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Content-Length: 0
+
+
+<07 Jan 2011 09:20:14> [RECV from 192.168.0.55:5060] 
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK4329F760741D2543A0DC25F32EC11695
+From: 1001 <sip:1001@192.168.0.55>;tag=33168343
+To: 1001 <sip:1001@192.168.0.55>;tag=me50ZaBa3NScg
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 1 REGISTER
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+WWW-Authenticate: Digest realm="192.168.0.55", nonce="ff6a56f6-1520-2d44-86d7-3a9b2a3a1342", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:20:14> [SEND to 192.168.0.55:5060] 
+REGISTER sip:192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2B9706A8B5E3D94AB36591FC565C66BE
+From: 1001 <sip:1001@192.168.0.55>;tag=33168343
+To: 1001 <sip:1001@192.168.0.55>
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 2 REGISTER
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Authorization: Digest username="1001",realm="192.168.0.55",nonce="ff6a56f6-1520-2d44-86d7-3a9b2a3a1342",response="13b6b4b086220324d421506d082b9731",uri="sip:192.168.0.55",algorithm=MD5,opaque=""
+Content-Length: 0
+
+
+<07 Jan 2011 09:20:14> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK2B9706A8B5E3D94AB36591FC565C66BE
+From: 1001 <sip:1001@192.168.0.55>;tag=33168343
+To: 1001 <sip:1001@192.168.0.55>;tag=NQyS15UD0yFZB
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 2 REGISTER
+Contact: 1001 <sip:1001@192.168.0.55>;expires=1800
+Date: Fri, 07 Jan 2011 02:20:14 GMT
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:20:18> [SEND to 192.168.0.55:5060] 
+INVITE sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKF42724083D37794B90BC403AAAD9CC3A
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 3 INVITE
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Content-Type: application/sdp
+Content-Length: 167
+
+v=0
+o=SIPInside 33168140 33168171 IN IP4 192.168.0.55
+s=SIP Call
+c=IN IP4 192.168.0.55
+t=0 0
+m=audio 6001 RTP/AVP 8
+b=AS:64
+a=rtpmap:8 PCMA/8000/1
+a=ptime:30
+
+<07 Jan 2011 09:20:18> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKBvgtXNmeBKF6j
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=p0Qj30cHX75HQ
+To: <sip:1001@10.188.85.53>
+Call-ID: 80e06f2c-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847343 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 09:20:18> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKBvgtXNmeBKF6j;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=p0Qj30cHX75HQ
+To: <sip:1001@10.188.85.53>
+Call-ID: 80e06f2c-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847343 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:20:18> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKBvgtXNmeBKF6j
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=p0Qj30cHX75HQ
+To: <sip:1001@10.188.85.53>
+Call-ID: 80e06f2c-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847343 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 09:20:18> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKBvgtXNmeBKF6j;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=p0Qj30cHX75HQ
+To: <sip:1001@10.188.85.53>
+Call-ID: 80e06f2c-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847343 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:20:18> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKBvgtXNmeBKF6j
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=p0Qj30cHX75HQ
+To: <sip:1001@10.188.85.53>
+Call-ID: 80e06f2c-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847343 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 09:20:18> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKBvgtXNmeBKF6j;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=p0Qj30cHX75HQ
+To: <sip:1001@10.188.85.53>
+Call-ID: 80e06f2c-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847343 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:20:18> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKBvgtXNmeBKF6j
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=p0Qj30cHX75HQ
+To: <sip:1001@10.188.85.53>
+Call-ID: 80e06f2c-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847343 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 09:20:18> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKBvgtXNmeBKF6j;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=p0Qj30cHX75HQ
+To: <sip:1001@10.188.85.53>
+Call-ID: 80e06f2c-94a7-122e-1c82-7f7a90de9792
+CSeq: 6847343 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:20:18> [RECV from 192.168.0.55:5060] 
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKF42724083D37794B90BC403AAAD9CC3A
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:20:18> [RECV from 192.168.0.55:5060] 
+SIP/2.0 407 Proxy Authentication Required
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKF42724083D37794B90BC403AAAD9CC3A
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>;tag=Q9gB5UXmtgv4j
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Proxy-Authenticate: Digest realm="192.168.0.55", nonce="e68b8af6-3cd9-204b-b094-673cd8c7addf", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:20:18> [SEND to 192.168.0.55:5060] 
+ACK sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKF42724083D37794B90BC403AAAD9CC3A
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>;tag=Q9gB5UXmtgv4j
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 3 ACK
+Max-Forwards: 70
+Content-Length: 0
+
+
+<07 Jan 2011 09:20:18> [SEND to 192.168.0.55:5060] 
+INVITE sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5D1395D1F21C694DA21525CC918CA624
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 4 INVITE
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Proxy-Authorization: Digest username="1001",realm="192.168.0.55",nonce="e68b8af6-3cd9-204b-b094-673cd8c7addf",response="dadc3c87f5a643f4b530736f0d10726d",uri="sip:3000@192.168.0.55",algorithm=MD5,opaque=""
+Content-Type: application/sdp
+Content-Length: 167
+
+v=0
+o=SIPInside 33168140 33168171 IN IP4 192.168.0.55
+s=SIP Call
+c=IN IP4 192.168.0.55
+t=0 0
+m=audio 6001 RTP/AVP 8
+b=AS:64
+a=rtpmap:8 PCMA/8000/1
+a=ptime:30
+
+<07 Jan 2011 09:20:18> [RECV from 192.168.0.55:5060] 
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5D1395D1F21C694DA21525CC918CA624
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 4 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:20:18> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5D1395D1F21C694DA21525CC918CA624
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>;tag=rja46perQSjQe
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294338574 1294338575 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 28244 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:20:44> [SEND to 192.168.0.55:5060] 
+ACK sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5D1395D1F21C694DA21525CC918CA624
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>;tag=rja46perQSjQe
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 4 ACK
+Max-Forwards: 70
+Content-Length: 0
+
+
+<07 Jan 2011 09:20:44> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5D1395D1F21C694DA21525CC918CA624
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>;tag=rja46perQSjQe
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294338574 1294338575 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 28244 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:20:44> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5D1395D1F21C694DA21525CC918CA624
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>;tag=rja46perQSjQe
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294338574 1294338575 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 28244 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:20:44> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5D1395D1F21C694DA21525CC918CA624
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>;tag=rja46perQSjQe
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294338574 1294338575 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 28244 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:20:44> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5D1395D1F21C694DA21525CC918CA624
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>;tag=rja46perQSjQe
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294338574 1294338575 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 28244 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:20:44> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5D1395D1F21C694DA21525CC918CA624
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>;tag=rja46perQSjQe
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294338574 1294338575 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 28244 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:20:44> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5D1395D1F21C694DA21525CC918CA624
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>;tag=rja46perQSjQe
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294338574 1294338575 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 28244 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:20:44> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5D1395D1F21C694DA21525CC918CA624
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>;tag=rja46perQSjQe
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294338574 1294338575 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 28244 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:20:44> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK5D1395D1F21C694DA21525CC918CA624
+From: 1001 <sip:1001@192.168.0.55>;tag=33172328
+To: <sip:3000@192.168.0.55>;tag=rja46perQSjQe
+Call-ID: 69A66BC5CA9AAE40BCD32DC000CC89DC@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294338574 1294338575 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 28244 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:23:48> [SEND to 192.168.0.55:5060] 
+REGISTER sip:192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK432B3289A8EE7E48AD12DB17E95E18DE
+From: 1001 <sip:1001@192.168.0.55>;tag=33382046
+To: 1001 <sip:1001@192.168.0.55>
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 1 REGISTER
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Content-Length: 0
+
+
+<07 Jan 2011 09:23:48> [RECV from 192.168.0.55:5060] 
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bK432B3289A8EE7E48AD12DB17E95E18DE
+From: 1001 <sip:1001@192.168.0.55>;tag=33382046
+To: 1001 <sip:1001@192.168.0.55>;tag=57j6Xp95HDmaN
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 1 REGISTER
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+WWW-Authenticate: Digest realm="192.168.0.55", nonce="ed764cb9-a513-e34a-87ba-e98cda89ab34", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:23:48> [SEND to 192.168.0.55:5060] 
+REGISTER sip:192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKC490BE037BC3E34690A45591CAF181E9
+From: 1001 <sip:1001@192.168.0.55>;tag=33382046
+To: 1001 <sip:1001@192.168.0.55>
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 2 REGISTER
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Authorization: Digest username="1001",realm="192.168.0.55",nonce="ed764cb9-a513-e34a-87ba-e98cda89ab34",response="d278ba30fa6bab6be37ed05c52d0cce4",uri="sip:192.168.0.55",algorithm=MD5,opaque=""
+Content-Length: 0
+
+
+<07 Jan 2011 09:23:48> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKC490BE037BC3E34690A45591CAF181E9
+From: 1001 <sip:1001@192.168.0.55>;tag=33382046
+To: 1001 <sip:1001@192.168.0.55>;tag=6gcZZHt9epaXg
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 2 REGISTER
+Contact: 1001 <sip:1001@192.168.0.55>;expires=1800
+Date: Fri, 07 Jan 2011 02:23:48 GMT
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:23:48> [SEND to 192.168.0.55:5060] 
+INVITE sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKC7BA81831B838747AA18DED52CF9B895
+From: 1001 <sip:1001@192.168.0.55>;tag=33382062
+To: <sip:3000@192.168.0.55>
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 3 INVITE
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Content-Type: application/sdp
+Content-Length: 167
+
+v=0
+o=SIPInside 33381859 33381890 IN IP4 192.168.0.55
+s=SIP Call
+c=IN IP4 192.168.0.55
+t=0 0
+m=audio 6001 RTP/AVP 8
+b=AS:64
+a=rtpmap:8 PCMA/8000/1
+a=ptime:30
+
+<07 Jan 2011 09:23:48> [RECV from 192.168.0.55:5060] 
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKC7BA81831B838747AA18DED52CF9B895
+From: 1001 <sip:1001@192.168.0.55>;tag=33382062
+To: <sip:3000@192.168.0.55>
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:23:48> [RECV from 192.168.0.55:5060] 
+SIP/2.0 407 Proxy Authentication Required
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKC7BA81831B838747AA18DED52CF9B895
+From: 1001 <sip:1001@192.168.0.55>;tag=33382062
+To: <sip:3000@192.168.0.55>;tag=7S5Q1cBDcZ0Fc
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 3 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Proxy-Authenticate: Digest realm="192.168.0.55", nonce="0d540aab-c984-4f48-8a3e-029f236a3fbc", algorithm=MD5, qop="auth"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:23:48> [SEND to 192.168.0.55:5060] 
+ACK sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKC7BA81831B838747AA18DED52CF9B895
+From: 1001 <sip:1001@192.168.0.55>;tag=33382062
+To: <sip:3000@192.168.0.55>;tag=7S5Q1cBDcZ0Fc
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 3 ACK
+Max-Forwards: 70
+Content-Length: 0
+
+
+<07 Jan 2011 09:23:48> [SEND to 192.168.0.55:5060] 
+INVITE sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKDCA3452870C08544A46047A311454A6D
+From: 1001 <sip:1001@192.168.0.55>;tag=33382062
+To: <sip:3000@192.168.0.55>
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 4 INVITE
+Max-Forwards: 70
+Contact: 1001 <sip:1001@192.168.0.55>
+Expires: 1800
+User-Agent: SIPInside 0.4.9 (2007-08-04)
+Proxy-Authorization: Digest username="1001",realm="192.168.0.55",nonce="0d540aab-c984-4f48-8a3e-029f236a3fbc",response="6013bbea7ced1e2d0f9ab1acc5de1803",uri="sip:3000@192.168.0.55",algorithm=MD5,opaque=""
+Content-Type: application/sdp
+Content-Length: 167
+
+v=0
+o=SIPInside 33381859 33381890 IN IP4 192.168.0.55
+s=SIP Call
+c=IN IP4 192.168.0.55
+t=0 0
+m=audio 6001 RTP/AVP 8
+b=AS:64
+a=rtpmap:8 PCMA/8000/1
+a=ptime:30
+
+<07 Jan 2011 09:23:48> [RECV from 192.168.0.55:5060] 
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKDCA3452870C08544A46047A311454A6D
+From: 1001 <sip:1001@192.168.0.55>;tag=33382062
+To: <sip:3000@192.168.0.55>
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 4 INVITE
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:23:48> [RECV from 192.168.0.55:5060] 
+NOTIFY sip:1001@192.168.0.55;fs_nat=yes;fs_path=sip:1001%40192.168.0.55:6000 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKNpDjF4vHece1p
+Route: <sip:1001@192.168.0.55:6000>
+Max-Forwards: 70
+From: <sip:1001@10.188.85.53>;tag=9Br942cm6gDNK
+To: <sip:1001@10.188.85.53>
+Call-ID: 003c2cca-94a8-122e-1c82-7f7a90de9792
+CSeq: 6847450 NOTIFY
+Contact: <sip:mod_sofia@10.188.85.53:5060>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Event: message-summary
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Subscription-State: terminated;reason=timeout
+Content-Type: application/simple-message-summary
+Content-Length: 64
+
+Messages-Waiting: no
+Message-Account: sip:1001@192.168.0.55
+
+
+
+<07 Jan 2011 09:23:48> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKNpDjF4vHece1p;received=192.168.0.55
+From: <sip:1001@10.188.85.53>;tag=9Br942cm6gDNK
+To: <sip:1001@10.188.85.53>
+Call-ID: 003c2cca-94a8-122e-1c82-7f7a90de9792
+CSeq: 6847450 NOTIFY
+Content-Length: 0
+
+
+<07 Jan 2011 09:23:48> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKDCA3452870C08544A46047A311454A6D
+From: 1001 <sip:1001@192.168.0.55>;tag=33382062
+To: <sip:3000@192.168.0.55>;tag=82yg37Ug97p2Q
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294347626 1294347627 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 19402 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:23:53> [SEND to 192.168.0.55:5060] 
+ACK sip:3000@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKDCA3452870C08544A46047A311454A6D
+From: 1001 <sip:1001@192.168.0.55>;tag=33382062
+To: <sip:3000@192.168.0.55>;tag=82yg37Ug97p2Q
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 4 ACK
+Max-Forwards: 70
+Content-Length: 0
+
+
+<07 Jan 2011 09:23:53> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKDCA3452870C08544A46047A311454A6D
+From: 1001 <sip:1001@192.168.0.55>;tag=33382062
+To: <sip:3000@192.168.0.55>;tag=82yg37Ug97p2Q
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294347626 1294347627 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 19402 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:23:53> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKDCA3452870C08544A46047A311454A6D
+From: 1001 <sip:1001@192.168.0.55>;tag=33382062
+To: <sip:3000@192.168.0.55>;tag=82yg37Ug97p2Q
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294347626 1294347627 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 19402 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:23:53> [RECV from 192.168.0.55:5060] 
+BYE sip:1001@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKK4t0BeUamt1UF
+Max-Forwards: 70
+From: <sip:3001@192.168.0.55>;tag=XZ8ZFy29851mr
+To: 1001 <sip:1001@192.168.0.55>;tag=33323359
+Call-ID: 79FBA73B1F9F974586B07D476FCB0AA1@192.168.0.55
+CSeq: 6847442 BYE
+Contact: <sip:3001@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Reason: Q.850;cause=16;text="NORMAL_CLEARING"
+Content-Length: 0
+
+
+
+<07 Jan 2011 09:23:53> [SEND to 192.168.0.55:5060] 
+SIP/2.0 481 Call/Transaction Does Not Exist
+Via: SIP/2.0/UDP 10.188.85.53;rport;branch=z9hG4bKK4t0BeUamt1UF;received=192.168.0.55
+From: <sip:3001@192.168.0.55>;tag=XZ8ZFy29851mr
+To: 1001 <sip:1001@192.168.0.55>;tag=33323359
+Call-ID: 79FBA73B1F9F974586B07D476FCB0AA1@192.168.0.55
+CSeq: 6847442 BYE
+Content-Length: 0
+
+
+<07 Jan 2011 09:23:53> [RECV from 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.55;rport=6000;branch=z9hG4bKDCA3452870C08544A46047A311454A6D
+From: 1001 <sip:1001@192.168.0.55>;tag=33382062
+To: <sip:3000@192.168.0.55>;tag=82yg37Ug97p2Q
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 4 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Accept: application/sdp
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Allow-Events: talk, presence, dialog, call-info, sla, include-session-description, presence.winfo, message-summary, refer
+Session-Expires: 120;refresher=uas
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294347626 1294347627 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 19402 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:24:50> [RECV from 192.168.0.55:5060] 
+INVITE sip:1001@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport;branch=z9hG4bKrHSvmNFv56gSS
+Max-Forwards: 70
+From: <sip:3000@192.168.0.55>;tag=82yg37Ug97p2Q
+To: 1001 <sip:1001@192.168.0.55>;tag=33382062
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 6847481 INVITE
+Contact: <sip:3000@10.188.85.53:5060;transport=udp>
+User-Agent: FreeSWITCH-mod_sofia/1.0.4-14460
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE, REGISTER, INFO, PUBLISH
+Supported: timer, precondition, path, replaces
+Session-Expires: 120;refresher=uac
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: 247
+
+v=0
+o=FreeSWITCH 1294347626 1294347627 IN IP4 10.188.85.53
+s=FreeSWITCH
+c=IN IP4 10.188.85.53
+t=0 0
+m=audio 19402 RTP/AVP 8 101
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=silenceSupp:off - - - -
+a=ptime:30
+
+
+<07 Jan 2011 09:24:50> [SEND to 192.168.0.55:5060] 
+SIP/2.0 200 OK
+Via:SIP/2.0/UDP 192.168.0.55;rport;branch=z9hG4bKrHSvmNFv56gSS;received=192.168.0.55
+From:<sip:3000@192.168.0.55>;tag=82yg37Ug97p2Q
+To:1001 <sip:1001@192.168.0.55>;tag=33382062
+Call-ID:F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq:6847481 INVITE
+Contact: 1001 <sip:1001@192.168.0.55>
+Content-Type: application/sdp
+Content-Length: 167
+
+v=0
+o=SIPInside 33381859 33381890 IN IP4 192.168.0.55
+s=SIP Call
+c=IN IP4 192.168.0.55
+t=0 0
+m=audio 6001 RTP/AVP 8
+b=AS:64
+a=rtpmap:8 PCMA/8000/1
+a=ptime:30
+
+<07 Jan 2011 09:24:50> [RECV from 192.168.0.55:5060] 
+ACK sip:1001@192.168.0.55 SIP/2.0
+Via: SIP/2.0/UDP 192.168.0.55;rport;branch=z9hG4bKStjNpg0Z2F7BN
+Max-Forwards: 70
+From: <sip:3000@192.168.0.55>;tag=82yg37Ug97p2Q
+To: 1001 <sip:1001@192.168.0.55>;tag=33382062
+Call-ID: F575FFB822AE954AB87308690DCA1A2D@192.168.0.55
+CSeq: 6847481 ACK
+Content-Length: 0
+
+
+

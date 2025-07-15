@@ -1,0 +1,28 @@
+program RestartArchos;
+
+uses
+  Forms,
+  uMain in 'uMain.pas' {fRestartArc},
+  uDataVoipRecord in '..\DataRecordType\uDataVoipRecord.pas',
+  uLoadSetting in '..\LibUnit\uLoadSetting.pas',
+  uDataBuffer in '..\SharedNetworkLib\uDataBuffer.pas',
+  uNetBaseSocket in '..\SharedNetworkLib\uNetBaseSocket.pas',
+  uNetUDPnode in '..\SharedNetworkLib\uNetUDPnode.pas',
+  uPacketBuffer in '..\SharedNetworkLib\uPacketBuffer.pas',
+  uPacketRegister in '..\SharedNetworkLib\uPacketRegister.pas',
+  uSockDatatype in '..\SharedNetworkLib\uSockDatatype.pas',
+  uTCPClient in '..\SharedNetworkLib\uTCPClient.pas',
+  uTCPDatatype in '..\SharedNetworkLib\uTCPDatatype.pas',
+  uTCPServer in '..\SharedNetworkLib\uTCPServer.pas',
+  MSThreadTimer in '..\LibUnit\MSThreadTimer.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.ShowMainForm := False;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfRestartArc, fRestartArc);
+  Application.Run;
+end.
+

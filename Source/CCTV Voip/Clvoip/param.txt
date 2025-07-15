@@ -1,0 +1,1 @@
+-id p_1 -s 192.168.1.222 -u 1001 -p 1234 -in "Logitech USB Headset" -out "Logitech USB Headset" -sipport 6000 -rtpport 6001 -ch 3000 -auto -silent -log

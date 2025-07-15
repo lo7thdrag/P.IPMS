@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<fsgroups>
+  <roles id="Role" name="Role Group">
+    <console name="MOC 1"></console>
+    <console name="MOC 2"></console>
+	<console name="MOC 3"></console>
+    <console name="MOC 4"></console>
+	<console name="MOC 5"></console>
+    <console name="MOC 6"></console>
+	<console name="MOC 7"></console>
+    <console name="MOC 8"></console>
+	<console name="MOC 9"></console>
+    <console name="MOC 10"></console>
+  </roles>
+
+  <external id="External" name="External Room">
+	<console name="C*AAW"></console>
+    <console name="C*ASUW"></console>
+    <console name="C*ASW"></console>
+    <console name="HF"></console>
+    <console name="VHF"></console>
+    <console name="UHF"></console>	
+  </external>
+</fsgroups>
+   

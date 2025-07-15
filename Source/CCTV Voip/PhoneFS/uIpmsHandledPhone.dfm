@@ -1,0 +1,260 @@
+object frmIpmsHandledPhone: TfrmIpmsHandledPhone
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'IPMS Handheld Phone'
+  ClientHeight = 136
+  ClientWidth = 587
+  Color = clBlack
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlComCctv: TPanel
+    Left = 8
+    Top = 8
+    Width = 117
+    Height = 118
+    Caption = 'pnlComCctv'
+    PopupMenu = pmRestart
+    TabOrder = 0
+    object lblIncoming: TLabel
+      Left = 10
+      Top = 5
+      Width = 96
+      Height = 16
+      Caption = '*** Phone ***'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnMouseDown = lblIncomingMouseDown
+    end
+    object imgCallBtn: TImage
+      Left = 29
+      Top = 27
+      Width = 59
+      Height = 59
+      Cursor = crHandPoint
+      AutoSize = True
+      Picture.Data = {
+        0954506E67496D61676589504E470D0A1A0A0000000D494844520000003B0000
+        003B0806000000C525F2B3000000097048597300006EBA00006EBA01D6DEB117
+        000004BE4944415478DAED9B7F50D3651CC7DFDBC08180E3B71368CA8F246CA5
+        D09141A7A957EA3210E92C8232D0EAD2ABEB2C3BC94EDD51337F2D3045FF504F
+        B1048E9393844A71E5542A40FC11E224230E1C8A9808C44F37D87A9E5DF3E08E
+        EF0A187CF9EEF6BA7BEEBB7D9FCFB6E775BBEF9ECFF3D9F7E1DD3E228719BF15
+        720139CC234D4A9A13B88B91342D69C5C4AFD97C92679625A2B3C8E1684470C0
+        8C889000081D1DD81EF0F04D8D46D435DDC74F95351D3D3AFD66E2F8E5435922
+        1AECE820B8B8E7DD7851CCD38FB33D56ABA1BDD78AE4F41C5CD736AD239E4AB3
+        6CBE3C7151FC3B8BA3D81E9FD56920C2CFA5667675EBF4413CF25CE82810B469
+        F6AD17BA384D607B6CA3C2EABDC7F06D69550A950DF0F314692B32D6B23DA651
+        43795C4D9B9CCA4AFCBD44F517D26D57764F5109B6E4A9B6DA656D0DBBACAD62
+        97B555ECB2B68AD565EBEEB6A04A7B078F4EF146A89F0FDB7EA3277B4E538B4D
+        B9C5E83318C023EF983C3F122B1744B2ED687DD91E7D2F12D38FE2AFBF3B079C
+        7F257A26DE933D6B92671BABC9165668B0BD403D685FFC6C29D6C6CC65DBD57A
+        B26BF61FC7D5FA46C6FE2D4932CC090BE4BE6C8F4E0F99E2207AFB0C8C31E181
+        FEF86AD552EECBDEBCD78AA48C6C8B31A2894E28DAB092FBB2D5B7EEE2ED7DC7
+        2CC6B8BB38A3F09314EECB36B777216EDB618B31D1A1D3B0ED8D17B92F6B301A
+        11FBC521B475F50CDA4FA79D8C94A58808F2E7BE2C4579E22C0ACAAF0DDA1734
+        D90B07D62C87A3806F1BB20DCD6D787D578E297B1A8C67A64BF0D96B8BE1C462
+        D1DDAAE9E27E55198EA82F32F6CF9CE667BA6E5D84EC946AAD2A4BE7D98FB20A
+        71A9F61663CC63FEBED8F9E64BA6A988D3B294CE1E1D3E3C5C084D4313634CA0
+        AF27D25362E1E53691DBB226E1073AACFFFA7BFC56779B31C6DF53447EA16321
+        F670E3B62C85AE8236E69C44E98D9B8C313E935CC9371C83A93E1EDC96A5E8C9
+        359C96771AEA6B7F32C67890CC4A991C635AEC735A96623018B1B5E00C7EB854
+        CD18E3EA24C48E154B209588079C6FE9EC8680CFC724672137642924C1C2AEEF
+        CE23BFF42A630C9D7F15641918415647D9E72F9304A5EA612140E2ED8EC439E1
+        58F254D8F897357340558E2C7505633FCDB042C4DEB84E161683210B0F45EAB2
+        05E0F38757F618F3EA626EC915EC3DF58BE9DB1E0E73670441FEEAC261A59EAC
+        94524F5CD0405978D6743D0F075AF15024CA865CD762AD6EACAAFC038AFC1F2D
+        56372CB17B551C6605FA714396F273751D36E59E82AEB76FC8AF4D4B5884F9D2
+        60EEC85268916E43F649B49269E6FF32D9DD1559EF270C7941C1BA2C854E313B
+        0AD4F8F546FD7FC6464D9F8A8FE3E691ECCB65C89F332E64CD94D7684D3F5E65
+        449AA69B66E88D6791218F6079D49323AA768C2B59330F8868634B3BEE7774C1
+        8D644F34A9B0C69D76E35276B4B0CBDA2A76595BC52E6BABD8656D95FEB2625F
+        916BE395DDEBD81ED3A8A1C85321B3A82495CAD2A57F63A9F2035FC9189536C7
+        9A78C52194FE5E1F67DE23F0F9B2A8273ECD5CFD32DBE3B23A672A6B90B4F39B
+        5AF230CC2C4BFF8F381D3B5B1ABD31E105906B98ED318E18BAA8C83D77196939
+        C51DDD3AFDF3C4B3ACFFBE1E6772D8CCE3F1DE127BB8794D7010B03DDE1171A7
+        A5BD9708ABC843BACDC5F40732AFFF8EAD7FA5A9E514D2B8BE15A489B80DB813
+        ED1F6899EA15AAA73B860000000049454E44AE426082}
+      OnClick = imgCallBtnClick
+    end
+    object pnlConnector: TPanel
+      Left = 7
+      Top = 94
+      Width = 30
+      Height = 17
+      Caption = 'Ct'
+      Color = clRed
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 0
+    end
+    object pnlControl: TPanel
+      Left = 41
+      Top = 94
+      Width = 30
+      Height = 17
+      Caption = 'Cn'
+      Color = clRed
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 1
+      OnClick = pnlControlClick
+    end
+    object pnlSesVoip: TPanel
+      Left = 76
+      Top = 94
+      Width = 30
+      Height = 17
+      Caption = 'Sv'
+      Color = clRed
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 2
+      OnClick = pnlSesVoipClick
+    end
+  end
+  object mmo1: TMemo
+    Left = 131
+    Top = 8
+    Width = 446
+    Height = 118
+    Color = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clLime
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Lines.Strings = (
+      'mmo1')
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 1
+    WordWrap = False
+  end
+  object tmrIncomingBlinker: TTimer
+    Enabled = False
+    Interval = 500
+    OnTimer = tmrIncomingBlinkerTimer
+    Left = 168
+    Top = 40
+  end
+  object pmRestart: TPopupMenu
+    Left = 248
+    Top = 40
+    object RunConsole1: TMenuItem
+      Tag = 1
+      Caption = 'Run Console'
+      OnClick = ProcessMenuSelection
+    end
+    object RestartConnector1: TMenuItem
+      Tag = 2
+      Caption = 'Restart Connector'
+      OnClick = ProcessMenuSelection
+    end
+    object Restart1: TMenuItem
+      Tag = 3
+      Caption = 'Restart Phone'
+      OnClick = ProcessMenuSelection
+    end
+    object RestartPhoneConnector1: TMenuItem
+      Tag = 4
+      Caption = 'Restart Phone and Connector'
+      OnClick = ProcessMenuSelection
+    end
+    object ShowConector1: TMenuItem
+      Tag = 5
+      Caption = 'Show Conector'
+      OnClick = ProcessMenuSelection
+    end
+    object HideConnector1: TMenuItem
+      Tag = 6
+      Caption = 'Hide Connector'
+      OnClick = ProcessMenuSelection
+    end
+    object N1: TMenuItem
+      Caption = '------------------------'
+    end
+    object Reconnect1: TMenuItem
+      Tag = 7
+      Caption = 'Reconnect'
+      OnClick = ProcessMenuSelection
+    end
+    object MenuItem1: TMenuItem
+      Caption = 'Close'
+      object CloseApplication1: TMenuItem
+        Tag = 8
+        Caption = 'Close Application'
+        OnClick = ProcessMenuSelection
+      end
+    end
+    object N2: TMenuItem
+      Caption = '------------------------'
+    end
+    object Shutdown1: TMenuItem
+      Caption = 'Shutdown'
+      object Restart2: TMenuItem
+        Tag = 9
+        Caption = 'Restart'
+        OnClick = ProcessMenuSelection
+      end
+      object N3: TMenuItem
+        Caption = '----------------'
+      end
+      object Shutdown2: TMenuItem
+        Tag = 10
+        Caption = 'Shutdown'
+        OnClick = ProcessMenuSelection
+      end
+    end
+  end
+  object pmTrayMenu: TPopupMenu
+    Left = 304
+    Top = 40
+    object ShowPhone1: TMenuItem
+      Tag = 1
+      Caption = 'Show Phone'
+      OnClick = ShowPhone1Click
+    end
+    object HidePhone1: TMenuItem
+      Caption = 'Hide Phone'
+      OnClick = ShowPhone1Click
+    end
+    object N4: TMenuItem
+      Caption = '-'
+    end
+    object erminatePhone1: TMenuItem
+      Tag = 2
+      Caption = 'Terminate Phone'
+      OnClick = ShowPhone1Click
+    end
+  end
+end

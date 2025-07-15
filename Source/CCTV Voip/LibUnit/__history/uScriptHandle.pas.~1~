@@ -1,0 +1,47 @@
+unit uScriptHandle;
+
+interface
+
+uses
+  Classes,
+
+  uSocketHandle;
+
+  procedure BeginConnection(iniPath : string);
+  procedure EndConnection;
+
+  function HidePhone: Boolean;
+
+implementation
+
+procedure BeginConnection(iniPath : string);
+var
+  s: string;
+begin
+  VoipManager := TVoipSock.create;
+  VoipManager.SetConfig.LoadSet(iniPath);
+  VoipManager.Connect_TCPServer;
+
+  // connect to launcher
+  // special for IPMS dual comm
+  if VoipManager.SetConfig.idSkin = 11 then
+    VoipManager.SetConfig.IncsLauncherPort := '1309';
+
+  VoipManager.TCP_CommControl.Listen(VoipManager.SetConfig.IncsLauncherPort);// ('1308');
+  s := 'Listening for -> Launcher @' + VoipManager.SetConfig.IncsLauncherPort;
+  VoipManager.aLoggerFile.Log('TCP CommControl', s);
+
+end;
+
+function HidePhone: Boolean;
+begin
+  Result := false;
+  if VoipManager.SetConfig.TrayMode = 1 then Result := True;
+end;
+
+procedure EndConnection;
+begin
+  VoipManager.Free;
+end;
+
+end.

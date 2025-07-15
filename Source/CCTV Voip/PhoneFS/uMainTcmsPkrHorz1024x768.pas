@@ -1,0 +1,2436 @@
+unit uMainTcmsPkrHorz1024x768;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, jpeg, ExtCtrls, Menus, uSocketHandle, StdCtrls,uLoadGroupFromXML,
+  uDataVoipRecord, ShellAPI, ImgList, Math, MMSystem, uLoadSetting,
+  System.ImageList;//, dxGDIPlusClasses;
+
+const
+  C_Const_Max_Col = 2;
+  C_Const_Max_Row = 7;
+  C_Stations_Btn_Offset_Left = 273;
+  C_Stations_Btn_Offset_Top = 136;
+  C_Stations_Btn_Width = 120;
+  C_Stations_Btn_Height = 50;
+  C_Stations_Btn_Col_Spacing = 125;
+  C_Stations_Btn_Spacing = 8;
+  C_GroupSel_Btn_Offset_Left = 154;
+  C_GroupSel_Btn_Offset_Top = 152;
+  C_GroupSel_Btn_Width = 92;
+  C_GroupSel_Btn_Height = 60;
+  C_GroupSel_Btn_Spacing = 4;
+  C_ConsoleLabel_Left = 146;
+  C_ConsoleLabel_Top = 29;
+  C_ConsoleLanel_Width = 145;
+  C_ConsoleLanel_Height = 45;
+
+type
+
+  TGridPosition = record
+    GroupIndex: Integer;
+    RowIndex: Integer;
+    ColumnIndex: Integer;
+  end;
+
+  TRecBtnImageProperties = record
+    BtnCaption: string;
+    BtnImage: TImage;
+    ImageIcon: TImage;
+    BtnImageTag,
+    BtnImageTop, BtnImageLeft: Integer;
+  end;
+
+  EButtonType = (eDummyButton, eGroupButton, eStationButton);
+  EGroupPage = (pIntercom, pExternal);
+  EChannelScope = (csDummy, csIntercom, csExternal);
+
+  TObjButtonImage = class
+    private
+      FVisible: Boolean;
+      FRectIconFrame: TRect;
+      procedure LoadIconFromImageList(AIndex: Integer);
+    public
+      GroupIndex,
+      RowSection, ColSection: Integer;
+      ButtonType : EButtonType;
+      ChannelScope: EChannelScope;
+      IsSelected: Boolean;
+      StationName: string;
+      ButtonProperties: TRecBtnImageProperties;
+      GroupBtnActColor, GroupBtnPsvColor,
+      ActBtnColor, PsvBtnColor, StationBtnFrameColor, GroupBtnFrameColor: TColor;
+
+      IconImageList: TImageList;
+
+      constructor create; overload;
+      constructor create(const aType: word); overload;
+      destructor destroy;
+
+      procedure SetImageProperties;
+      procedure DrawButton;
+      procedure DeleteBtnImages;
+
+      procedure SetVisible(IsVisible: Boolean);
+      procedure OnBtnImageClick(Sender: TObject);
+
+      procedure SetButtonCaption(aCaption: string);
+
+      property Visible: Boolean read FVisible write SetVisible;
+
+  end;
+
+
+  TfrmTcmsPkrHorz1024 = class(TForm)
+    imgBgk: TImage;
+    pmPopUpBigHorz: TPopupMenu;
+    Close1: TMenuItem;
+    lblStationName: TLabel;
+    tmrIncomingBlinker: TTimer;
+    pnlConnector: TPanel;
+    pnlControl: TPanel;
+    pnlSesVoip: TPanel;
+    pmRestart: TPopupMenu;
+    RunConsole1: TMenuItem;
+    RestartConnector1: TMenuItem;
+    Restart1: TMenuItem;
+    RestartPhoneConnector1: TMenuItem;
+    ShowConector1: TMenuItem;
+    HideConnector1: TMenuItem;
+    N1: TMenuItem;
+    Reconnect1: TMenuItem;
+    MenuItem1: TMenuItem;
+    CloseApplication1: TMenuItem;
+    N2: TMenuItem;
+    Shutdown1: TMenuItem;
+    Restart2: TMenuItem;
+    N3: TMenuItem;
+    Shutdown2: TMenuItem;
+    lblRoleName: TLabel;
+    tmrInternalRunChk: TTimer;
+    mmo1: TMemo;
+    imgDebug: TImage;
+    imgCal: TImage;
+    ilImageDown: TImageList;
+    ilImageUp: TImageList;
+    imgTelp: TImage;
+    imgTelp1: TImage;
+    imgF1: TImage;
+    imgF2: TImage;
+    imgF3: TImage;
+    imgF4: TImage;
+    imgF5: TImage;
+    imgF6: TImage;
+    imgF7: TImage;
+    imgF8: TImage;
+    imgF9: TImage;
+    imgF10: TImage;
+    imgF11: TImage;
+    imgF12: TImage;
+    imgF13: TImage;
+    imgF14: TImage;
+    imgTelp2: TImage;
+    imgTelp3: TImage;
+    imgUp: TImage;
+    imgDown: TImage;
+    imgLeft: TImage;
+    imgRight: TImage;
+    imgP1: TImage;
+    imgP2: TImage;
+    imgP3: TImage;
+    imgP4: TImage;
+    imgC1: TImage;
+    imgC2: TImage;
+    imgC3: TImage;
+    imgC4: TImage;
+    imgC5: TImage;
+    imgC6: TImage;
+    imgC7: TImage;
+    imgC8: TImage;
+    imgC9: TImage;
+    imgC10: TImage;
+    imgC11: TImage;
+    imgC12: TImage;
+    imgDebug1: TImage;
+    ilBtnUp: TImageList;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+
+    procedure ProcessMenuSelection(Sender: TObject);
+
+    procedure Close1Click(Sender: TObject);
+    procedure tmrIncomingBlinkerTimer(Sender: TObject);
+    procedure pnlConnectorClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure tmrInternalRunChkTimer(Sender: TObject);
+    procedure imgBgkMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgDebugClick(Sender: TObject);
+    procedure imgDebug1Click(Sender: TObject);
+  private
+    { Private declarations }
+    //List Group
+//    ActivePage: Integer; //0: Internal, 1: External
+
+    GroupList : TFsGroupList;
+    GroupInternal : TFsGroupList;
+    ssGroupList : TFsGroupList;
+
+    ActiveGroupPage: EGroupPage;
+
+    FBitMap : TBitmap;
+    FImage: TImage;
+    FisPTT_Ext : Boolean;
+
+    DummyMaskList: TList;
+    ListInternal : TList;
+    ListExternal : Tlist;
+
+    DummyMaskButtonsList,
+//    DummyGroupButtonsList,
+    InternalButtonsList,
+    ExternalButtonsList: TList;
+
+    TrayIconData: TNotifyIconData;
+    // for blinker
+    FBlinkerCounter: Integer;
+    isAutoCall : Boolean;
+
+    FTimer : TTimer;
+
+    FGroupBtnInternal, FGroupBtnExternal: TImage;
+
+    FEventOnButtonClicked: TNotifyEvent;
+
+    DelLogsBatPath, InternalLogFilePath: string;
+
+    procedure OnButtonClickedEvent(Sender: TObject);
+    procedure StationCallButtonSel(aBtnTag: Integer);
+    procedure ClearAndDelList(aList: TList);
+
+    //Tray Icon
+    procedure SetIconTray;
+
+    function GetGridPosition(itemIndex: Integer): TGridPosition;
+
+    // init buttons
+    procedure InitAllCommButtons;
+    
+    procedure DrawAllButtons;
+
+    //MouseUpDown
+    procedure ButtonDown(Sender: TObject; Button: TMouseButton;
+              Shift: TShiftState; X, Y: Integer);
+    procedure ButtonUp(Sender: TObject; Button: TMouseButton;
+              Shift: TShiftState; X, Y: Integer);
+
+    procedure SetPnlStatusConnect(aVisible : Boolean);
+
+    //Restart n Shutdown
+    procedure ClosePhone;
+    procedure RestartPhone;
+    procedure RestartPhoneNConnector;
+    procedure RestartPC;
+    procedure ShutdownPC;
+
+    procedure RunPhone;
+    procedure StopPhone;
+
+    procedure OnTimerCall(Sender : TObject);
+
+    //Change Button Image
+    procedure LoadFromImageListUp(AIndex: Integer);
+    procedure LoadFromImageListDown(AIndex: Integer);
+    function GetTImageByTag(aTag: Integer): TImage;
+    procedure InitAllButtonImages;
+    procedure InitButtonsByGroup(aGrpIdx: Integer);
+
+    //voip ops
+    function SetCallInternal(ChName : string):Integer;
+
+    function GetChNameFromTag(aBtnTag: Integer): string;
+    function GetButtonImgObjFromChName(aName: String): TObjButtonImage;
+
+    procedure SetButtonImgSelected(aStationName: string; SelectedState: Boolean);
+
+  public
+    { Public declarations }
+    isRunSimulation : Boolean;
+    procedure RecvICSData(rec: TICSData);
+    procedure RecvICSOrder(rec: TRecOrder);
+    procedure ReceiveModeCall(Rec : TRecCallMode);
+    procedure ReceiveInternalActivity(Rec : TRecInternal);
+    procedure ReceiveCloseOrder(Rec: TRecData2DOrder);
+
+    procedure RunSimulation;
+    
+    property EventOnButtonClicked: TNotifyEvent read FEventOnButtonClicked
+                                                write FEventOnButtonClicked;
+
+  end;
+
+var
+  frmTcmsPkrHorz1024: TfrmTcmsPkrHorz1024;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  uProgressBar;
+
+procedure TfrmTcmsPkrHorz1024.ButtonDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+  aTag : Integer;
+begin
+  aTag    := TImage(sender).Tag;
+  LoadFromImageListDown(aTag);
+
+  case aTag of
+    34: begin
+      InitButtonsByGroup(0);
+    end;
+    35: begin
+      InitButtonsByGroup(1);
+    end;
+    36: begin
+      InitButtonsByGroup(2);
+    end;
+    37: begin
+      InitButtonsByGroup(3);
+    end;
+  end;
+
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.ButtonUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+  aTag : Integer;
+begin
+  aTag    := TImage(sender).Tag;
+
+  // blinker
+  if (aTag = 38) then begin
+    tmrIncomingBlinker.Tag := 0;
+    FBlinkerCounter := 0;
+    tmrIncomingBlinker.Enabled := False;
+  end;
+
+  LoadFromImageListUp(aTag);
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.ClearAndDelList(aList: TList);
+var
+  aObj: TObject;
+  I: Integer;
+begin
+
+  for i := aList.Count-1 downto 0  do begin
+    aObj := aList[i];
+    FreeAndNil(aObj);
+    aList.Delete(i);
+  end;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.Close1Click(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmTcmsPkrHorz1024.ClosePhone;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+    end;
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 6;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.DrawAllButtons;
+var
+  I: Integer;
+  aRole: TObjButtonImage;
+begin
+
+  // Draw all buttons
+  for I := 0 to DummyMaskButtonsList.Count - 1 do begin
+    aRole := TObjButtonImage(DummyMaskButtonsList[I]);
+    aRole.DrawButton;
+  end;
+
+//  for I := 0 to DummyGroupButtonsList.Count - 1 do begin
+//    aRole := TObjButtonImage(DummyGroupButtonsList[I]);
+//    aRole.DrawButton;
+//  end;
+
+  for I := 0 to InternalButtonsList.Count - 1 do begin
+    aRole := TObjButtonImage(InternalButtonsList[I]);
+    aRole.DrawButton;
+  end;
+
+  for I := 0 to ExternalButtonsList.Count - 1 do begin
+    aRole := TObjButtonImage(ExternalButtonsList[I]);
+    aRole.DrawButton;
+  end;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.FormCreate(Sender: TObject);
+var
+  i : Integer;
+  hMenuHandle: Integer;
+
+  IntwvIn, IntwvOut,
+  ExtwvIn, ExtwvOut: Integer;
+  s,
+  ClVoipIntIniPath, ClVoipExtIniPath: string;
+
+begin
+
+  { //=> Now handled by connector
+
+  ClVoipIntIniPath := '..\Phone\clVoip_internal.ini';
+  ClVoipExtIniPath := '..\Phone\clVoip_external.ini';
+  DelLogsBatPath := '/c del_log.bat';// '..\Phone\del_log.bat';
+  InternalLogFilePath := '..\Phone\clVoip_internal*.log';
+
+  // clear previous clvoip logs
+  ShellExecute (application.handle, 'open', 'cmd', PChar(DelLogsBatPath), nil, SW_MINIMIZE);
+
+  GetWavesDevIDSettings(ClVoipIntIniPath, IntwvIn, IntwvOut);
+  s:= 'Internals: WaveInID: ' + IntToStr(IntwvIn) + ', WaveOutID: ' + IntToStr(IntwvOut);
+//  ShowMessage(s);
+  GetWavesDevIDSettings(ClVoipExtIniPath, ExtwvIn, ExtwvOut);
+  s:= 'Externals: WaveInID: ' + IntToStr(ExtwvIn) + ', WaveOutID: ' + IntToStr(ExtwvOut);
+//  ShowMessage(s);
+
+  if not VoipManager.CheckValidSoundDevice(IntwvIn, IntwvOut, ExtwvIn, ExtwvOut, s) then begin
+    MessageDlg(s, mtError, [mbOK], 0);
+    Application.Terminate;
+  end;
+  }
+
+  SetIconTray;
+
+  //init incoming call blinker
+  FBlinkerCounter := 0;
+  tmrIncomingBlinker.Tag := 0;
+  tmrIncomingBlinker.Enabled := False;
+
+  hMenuHandle := GetSystemMenu(Handle, False);
+  if (hMenuHandle <> 0) then
+  begin
+    DeleteMenu(hMenuHandle, SC_CLOSE, MF_BYCOMMAND);
+    DeleteMenu(hMenuHandle, SC_MINIMIZE, MF_BYCOMMAND);
+    DeleteMenu(hMenuHandle, SC_MAXIMIZE, MF_BYCOMMAND);
+  end;
+
+  FBitmap     := TBitmap.Create;
+  FBitMap.Transparent := True;
+
+  FisPTT_Ext  := True;
+
+  isAutoCall := False;
+
+  for i := 0 to ComponentCount - 1 do
+  begin
+    if Components[i].ClassType <> TImage then Continue;
+    if Components[i].Tag >= 50 then Continue;
+
+    (Components[i] as TImage).OnMouseDown := ButtonDown;
+    (Components[i] as TImage).OnMouseUp   := ButtonUp;
+    (Components[i] as TImage).AutoSize := False;
+    (Components[i] as TImage).Stretch := True;
+    (Components[i] as TImage).Picture.Bitmap.TransparentColor := clFuchsia;
+    (Components[i] as TImage).Transparent := True;
+  end;
+  InitAllButtonImages;
+
+  SetPnlStatusConnect(false);
+
+  DummyMaskList := TList.Create;
+  ListInternal  := TList.Create;
+  ListExternal  := TList.Create;
+
+  DummyMaskButtonsList := TList.Create;
+//  DummyGroupButtonsList := TList.Create;
+  InternalButtonsList := TList.Create;
+  ExternalButtonsList := TList.Create;
+
+  GroupList     := TFsGroupList.Create;
+  GroupInternal := TFsGroupList.Create;
+
+  ssGroupList     := TFsGroupList.Create;
+
+  isRunSimulation := False;
+
+  FEventOnButtonClicked := OnButtonClickedEvent;
+
+  lblStationName.Caption := VoipManager.SetConfig.aRole;
+
+  SetPnlStatusConnect(False);
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.FormDestroy(Sender: TObject);
+begin
+  ClearAndDelList(DummyMaskList);
+  ClearAndDelList(ListInternal);
+  ClearAndDelList(ListExternal);
+
+  ClearAndDelList(DummyMaskButtonsList);
+//  ClearAndDelList(DummyGroupButtonsList);
+  ClearAndDelList(InternalButtonsList);
+  ClearAndDelList(ExternalButtonsList);
+
+  FreeAndNil(GroupList);
+  FreeAndNil(GroupInternal);
+
+  FreeAndNil(ssGroupList);
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.FormShow(Sender: TObject);
+begin
+  if VoipManager.SetConfig.Monitor < Screen.MonitorCount then
+  begin
+    Top := Screen.Monitors[VoipManager.SetConfig.Monitor].Top + VoipManager.SetConfig.PhoneTop;
+    Left := Screen.Monitors[VoipManager.SetConfig.Monitor].Left + VoipManager.SetConfig.PhoneLeft;
+  end
+  else
+  begin
+    Top := VoipManager.SetConfig.PhoneTop;
+    Left := VoipManager.SetConfig.PhoneLeft;
+  end;
+
+end;
+
+
+
+function TfrmTcmsPkrHorz1024.GetButtonImgObjFromChName(aName: String): TObjButtonImage;
+var
+  I: Integer;
+  aRole: TObjButtonImage;
+  isFound: Boolean;
+begin
+
+  isFound := False;
+
+  for I := 0 to InternalButtonsList.Count - 1 do begin
+    aRole := TObjButtonImage(InternalButtonsList[I]);
+    if (aRole.StationName = aName) then begin
+      Result := aRole;
+      isFound := True;
+      Break;
+    end;
+  end;
+
+  if not isFound then
+    for I := 0 to ExternalButtonsList.Count - 1 do begin
+      aRole := TObjButtonImage(ExternalButtonsList[I]);
+      if (aRole.StationName = aName) then begin
+        Result := aRole;
+        isFound := True;
+        Break;
+      end;
+    end;
+
+
+end;
+
+//function TfrmTcmsPkrHorz1024.GetChNameFromTag(aBtnTag: Integer): string;
+//var
+//  I: Integer;
+//  aRole: TObjButtonImage;
+//begin
+//
+//  if (ActiveGroupPage = pIntercom) then begin
+//
+//    for I := 0 to InternalButtonsList.Count - 1 do begin
+//      aRole := TObjButtonImage(InternalButtonsList[I]);
+//      if (aRole.ButtonProperties.BtnImageTag = aBtnTag) then begin
+//        Result := Trim(aRole.StationName);
+//        Break;
+//      end;
+//    end;
+//
+//  end
+//  else begin
+//
+//    for I := 0 to ExternalButtonsList.Count - 1 do begin
+//      aRole := TObjButtonImage(ExternalButtonsList[I]);
+//      if (aRole.ButtonProperties.BtnImageTag = aBtnTag) then begin
+//        Result := Trim(aRole.StationName);
+//        Break;
+//      end;
+//    end;
+//
+//  end;
+//
+//end;
+function TfrmTcmsPkrHorz1024.GetChNameFromTag(aBtnTag: Integer): string;
+var
+  I: Integer;
+  aRole: TObjButtonImage;
+begin
+
+  if (ActiveGroupPage = pIntercom) then begin
+
+    for I := 0 to InternalButtonsList.Count - 1 do begin
+      aRole := TObjButtonImage(InternalButtonsList[I]);
+      if (aRole.ButtonProperties.BtnImageTag = aBtnTag) then begin
+        Result := Trim(aRole.StationName);
+        Break;
+      end;
+    end;
+
+  end
+  else begin
+
+    for I := 0 to ExternalButtonsList.Count - 1 do begin
+      aRole := TObjButtonImage(ExternalButtonsList[I]);
+      if (aRole.ButtonProperties.BtnImageTag = aBtnTag) then begin
+        Result := Trim(aRole.StationName);
+        Break;
+      end;
+    end;
+
+  end;
+
+end;
+
+function TfrmTcmsPkrHorz1024.GetTImageByTag(aTag: Integer): TImage;
+var
+  i: Integer;
+begin
+
+  Result := nil;
+  for i := 0 to Self.ComponentCount-1 do begin
+
+    if Self.Components[i] is TImage then
+      if (Self.Components[i] as TImage).Tag = aTag then begin
+        Result := (Self.Components[i] as TImage);
+        Break;
+      end;
+  end;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.imgBgkMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var
+  I: Integer;
+  ChMap : TChannelMap;
+begin
+  if (ssShift in Shift) then begin
+    mmo1.Visible := not mmo1.Visible;
+  end;
+
+  if (ssCtrl in Shift) then begin
+
+    mmo1.Lines.Clear;
+    for i := 0 to ListInternal.Count - 1 do
+    begin
+      ChMap := TChannelMap(ListInternal.Items[i]);
+      mmo1.Lines.Add('Internal ' + IntToStr(i) + ': ' + ChMap.aChannelName)
+    end;
+
+  end;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.imgDebug1Click(Sender: TObject);
+begin
+  RunSimulation;
+end;
+
+procedure TfrmTcmsPkrHorz1024.imgDebugClick(Sender: TObject);
+begin
+  //RunSimulation;
+end;
+
+
+procedure TfrmTcmsPkrHorz1024.InitAllButtonImages;
+var
+  i: Integer;
+begin
+
+  for i := 0 to Self.ComponentCount-1 do begin
+
+    if Self.Components[i] is TImage then begin
+      if (Self.Components[i] as TImage).Tag < 1000 then
+        LoadFromImageListUp( (Self.Components[i] as TImage).Tag );
+    end;
+
+  end;
+
+end;
+
+
+procedure TfrmTcmsPkrHorz1024.InitAllCommButtons;
+var
+  I, aRow, aCol: Integer;
+  aCh : TChannelMap;
+  aRole: TObjButtonImage;
+  totExt: Integer;
+begin
+
+  // Masking
+  for i := 0 to DummyMaskList.Count - 1 do begin
+
+    aCh := TChannelMap(DummyMaskList[i]);
+    aRole := TObjButtonImage.create(0);
+    aRole.GroupIndex := aCh.aChaGroup;
+    aRole.ChannelScope := csDummy;
+
+    aRow := aCh.aRowSection;
+    aCol := aCh.aColSection;
+
+    if (aCol = 0) then
+      aRole.ButtonProperties.BtnImageLeft := C_Stations_Btn_Offset_Left
+    else
+      aRole.ButtonProperties.BtnImageLeft := C_Stations_Btn_Offset_Left + C_Stations_Btn_Width + C_Stations_Btn_Col_Spacing;
+
+    if (aRow = 0) then
+      aRole.ButtonProperties.BtnImageTop  := C_Stations_Btn_Offset_Top
+    else
+      aRole.ButtonProperties.BtnImageTop := (C_Stations_Btn_Offset_Top + (C_Stations_Btn_Spacing*(aRow)) + (C_Stations_Btn_Height*(aRow)));
+
+//    if (aCol = 1) then
+//      aRole.ButtonProperties.BtnImageLeft := C_Stations_Btn_Offset_Left * aCol
+//    else
+//      aRole.ButtonProperties.BtnImageLeft := (C_Stations_Btn_Offset_Left + (C_Stations_Btn_Spacing*(aCol-1)) + (C_Stations_Btn_Width*(aCol-1)));
+//
+//    if (aRow = 1) then
+//      aRole.ButtonProperties.BtnImageTop  := C_Stations_Btn_Offset_Top * aRow
+//    else
+//      aRole.ButtonProperties.BtnImageTop := (C_Stations_Btn_Offset_Top + (C_Stations_Btn_Spacing*(aRow-1)) + (C_Stations_Btn_Height*(aRow-1)));
+
+
+    aRole.SetImageProperties;
+
+    DummyMaskButtonsList.Add(aRole);
+
+  end;
+
+
+  // real buttons
+  for i := 0 to ListInternal.Count - 1 do begin
+
+    aCh := TChannelMap(ListInternal[i]);
+    aRole := TObjButtonImage.create(2);
+    aRole.GroupIndex := aCh.aChaGroup;
+    aRole.ChannelScope := csIntercom;
+    aRole.IconImageList := ilImageUp;
+    aRole.StationName := aCh.aChannelName;
+    aRole.RowSection := aCh.aRowSection;
+    aRole.ColSection := aCh.aColSection;
+    aRole.ButtonProperties.BtnCaption := aCh.aChannelName;
+    aRole.ButtonProperties.BtnImageTag := i;
+
+    aRole.SetButtonCaption(aRole.StationName);
+
+    aRole.ButtonProperties.BtnImageTag := i;
+    aRow := aCh.aRowSection;
+    aCol := aCh.aColSection;
+
+//    if (aCol = 1) then
+//      aRole.ButtonProperties.BtnImageLeft := C_Stations_Btn_Offset_Left * aCol
+//    else
+//      aRole.ButtonProperties.BtnImageLeft := (C_Stations_Btn_Offset_Left + (C_Stations_Btn_Spacing*(aCol-1)) + (C_Stations_Btn_Width*(aCol-1)));
+//
+//    if (aRow = 1) then
+//      aRole.ButtonProperties.BtnImageTop  := C_Stations_Btn_Offset_Top * aRow
+//    else
+//      aRole.ButtonProperties.BtnImageTop := (C_Stations_Btn_Offset_Top + (C_Stations_Btn_Spacing*(aRow-1)) + (C_Stations_Btn_Height*(aRow-1)));
+//
+//
+//    aRole.SetImageProperties;
+    aRole.IsSelected := False;
+
+    InternalButtonsList.Add(aRole);
+
+  end;
+
+  // External
+  for i := 0 to ListExternal.Count-1 do begin
+
+    aCh := TChannelMap(ListExternal[i]);
+    aRole := TObjButtonImage.create(2);
+    aRole.GroupIndex := aCh.aChaGroup;
+    aRole.ChannelScope := csExternal;
+    aRole.IconImageList := ilImageUp;
+    aRole.RowSection := aCh.aRowSection;
+    aRole.ColSection := aCh.aColSection;
+    aRole.StationName := aCh.aChannelName;
+    aRole.ButtonProperties.BtnCaption := aCh.aChannelName;
+    aRole.ButtonProperties.BtnImageTag := i;
+
+    aRole.SetButtonCaption(aRole.StationName);
+
+    aRole.ButtonProperties.BtnImageTag := i;
+    aRow := aCh.aRowSection;
+    aCol := aCh.aColSection;
+
+//    if (aCol = 1) then
+//      aRole.ButtonProperties.BtnImageLeft := C_Stations_Btn_Offset_Left * aCol
+//    else
+//      aRole.ButtonProperties.BtnImageLeft := (C_Stations_Btn_Offset_Left + (C_Stations_Btn_Spacing*(aCol-1)) + (C_Stations_Btn_Width*(aCol-1)));
+//
+//    if (aRow = 1) then
+//      aRole.ButtonProperties.BtnImageTop  := C_Stations_Btn_Offset_Top * aRow
+//    else
+//      aRole.ButtonProperties.BtnImageTop := (C_Stations_Btn_Offset_Top + (C_Stations_Btn_Spacing*(aRow-1)) + (C_Stations_Btn_Height*(aRow-1)));
+//
+//
+//    aRole.SetImageProperties;
+    aRole.IsSelected := False;
+
+    ExternalButtonsList.Add(aRole);
+
+  end;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.InitButtonsByGroup(aGrpIdx: Integer);
+var
+  I, aRow, aCol: Integer;
+  aRole: TObjButtonImage;
+  totExt: Integer;
+begin
+
+  // real buttons
+  for i := 0 to InternalButtonsList.Count - 1 do begin
+
+    aRole := TObjButtonImage(InternalButtonsList[i]);
+
+    if aRole.GroupIndex = aGrpIdx then begin
+
+      aRole.SetVisible(True);
+
+      aRow := aRole.RowSection;
+      aCol := aRole.ColSection;
+
+      if (aCol = 0) then
+        aRole.ButtonProperties.BtnImageLeft := C_Stations_Btn_Offset_Left
+      else
+        aRole.ButtonProperties.BtnImageLeft := C_Stations_Btn_Offset_Left + C_Stations_Btn_Width + C_Stations_Btn_Col_Spacing;
+
+      if (aRow = 0) then
+        aRole.ButtonProperties.BtnImageTop  := C_Stations_Btn_Offset_Top
+      else
+        aRole.ButtonProperties.BtnImageTop := (C_Stations_Btn_Offset_Top + (C_Stations_Btn_Spacing*(aRow)) + (C_Stations_Btn_Height*(aRow)));
+
+      {
+      if (aCol = 1) then
+        aRole.ButtonProperties.BtnImageLeft := C_Stations_Btn_Offset_Left * aCol
+      else
+        aRole.ButtonProperties.BtnImageLeft := (C_Stations_Btn_Offset_Left + (C_Stations_Btn_Spacing*(aCol-1)) + (C_Stations_Btn_Width*(aCol-1)));
+
+      if (aRow = 1) then
+        aRole.ButtonProperties.BtnImageTop  := C_Stations_Btn_Offset_Top * aRow
+      else
+        aRole.ButtonProperties.BtnImageTop := (C_Stations_Btn_Offset_Top + (C_Stations_Btn_Spacing*(aRow-1)) + (C_Stations_Btn_Height*(aRow-1)));
+      }
+      aRole.SetImageProperties;
+
+    end
+    else begin
+      aRole.SetVisible(False);
+    end;
+
+  end;
+
+  // External
+  for i := 0 to ExternalButtonsList.Count-1 do begin
+
+    aRole := TObjButtonImage(ExternalButtonsList[i]);
+
+    if aRole.GroupIndex = aGrpIdx then begin
+
+      aRole.SetVisible(True);
+
+      aRow := aRole.RowSection;
+      aCol := aRole.ColSection;
+
+      if (aCol = 0) then
+        aRole.ButtonProperties.BtnImageLeft := C_Stations_Btn_Offset_Left
+      else
+        aRole.ButtonProperties.BtnImageLeft := C_Stations_Btn_Offset_Left + C_Stations_Btn_Width + C_Stations_Btn_Col_Spacing;
+
+      if (aRow = 0) then
+        aRole.ButtonProperties.BtnImageTop  := C_Stations_Btn_Offset_Top
+      else
+        aRole.ButtonProperties.BtnImageTop := (C_Stations_Btn_Offset_Top + (C_Stations_Btn_Spacing*(aRow)) + (C_Stations_Btn_Height*(aRow)));
+
+      {
+      if (aCol = 1) then
+        aRole.ButtonProperties.BtnImageLeft := C_Stations_Btn_Offset_Left * aCol
+      else
+        aRole.ButtonProperties.BtnImageLeft := (C_Stations_Btn_Offset_Left + (C_Stations_Btn_Spacing*(aCol-1)) + (C_Stations_Btn_Width*(aCol-1)));
+
+      if (aRow = 1) then
+        aRole.ButtonProperties.BtnImageTop  := C_Stations_Btn_Offset_Top * aRow
+      else
+        aRole.ButtonProperties.BtnImageTop := (C_Stations_Btn_Offset_Top + (C_Stations_Btn_Spacing*(aRow-1)) + (C_Stations_Btn_Height*(aRow-1)));
+      }
+      aRole.SetImageProperties;
+
+    end
+    else begin
+      aRole.SetVisible(False);
+    end;
+
+  end;
+
+  DrawAllButtons;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.LoadFromImageListDown(AIndex: Integer);
+begin
+  ilImageDown.GetBitmap(AIndex, FBitmap);
+  FImage := GetTImageByTag(AIndex);
+  if FImage <> nil then begin
+    FImage.Picture.Assign(FBitmap);
+  end;
+end;
+
+//procedure TfrmTcmsPkrHorz1024.LoadFromImageListUp(AIndex: Integer);
+//begin
+//  ilImageUp.GetBitmap(AIndex, FBitmap);
+//  FImage := GetTImageByTag(AIndex);
+//  if FImage <> nil then begin
+//    FImage.Picture.Assign(FBitmap);
+//  end;
+//end;
+procedure TfrmTcmsPkrHorz1024.LoadFromImageListUp(AIndex: Integer);
+begin
+
+  FBitMap.TransparentColor := clFuchsia;
+  FBitMap.TransparentMode := tmFixed;
+  FBitMap.Transparent := True;
+
+  ilBtnUp.GetBitmap(AIndex, FBitmap);
+
+  FImage := GetTImageByTag(AIndex);
+  if FImage <> nil then begin
+    FImage.Picture.Bitmap.Assign(FBitMap);
+  end;
+
+end;
+
+function TfrmTcmsPkrHorz1024.GetGridPosition(itemIndex: Integer): TGridPosition;
+var
+  position: TGridPosition;
+begin
+  position.GroupIndex := (itemIndex - 1) div 14;
+  position.RowIndex := ((itemIndex - 1) mod 14) div 2;
+  position.ColumnIndex := ((itemIndex - 1) mod 14) mod 2;
+  Result := position;
+end;
+
+procedure TfrmTcmsPkrHorz1024.OnButtonClickedEvent(Sender: TObject);
+var
+  anImgObj, tmpObj: TObjButtonImage;
+  I: Integer;
+begin
+
+  if (Sender is TObjButtonImage) then begin
+
+    anImgObj := Sender as TObjButtonImage;
+
+    case anImgObj.ButtonType of
+
+      eGroupButton: begin
+
+//        for I := 0 to 1 do begin
+//          tmpObj := TObjButtonImage(DummyGroupButtonsList[I]);
+//          tmpObj.IsSelected := False;
+//        end;
+//        anImgObj.IsSelected := True;
+
+        // Intercom selected
+        if (anImgObj.ButtonProperties.BtnImageTag = 0) then begin
+
+          // show all intercom buttons
+          for I := 0 to InternalButtonsList.Count-1 do begin
+            tmpObj := TObjButtonImage(InternalButtonsList[I]);
+            tmpObj.Visible:= True;
+          end;
+
+          // hide all ext buttons
+          for I := 0 to ExternalButtonsList.Count-1 do begin
+            tmpObj := TObjButtonImage(ExternalButtonsList[I]);
+            tmpObj.Visible:= False;
+          end;
+
+          ActiveGroupPage := pIntercom;
+
+        end
+        // External selected
+        else begin
+
+          // hide all intercom buttons
+          for I := 0 to InternalButtonsList.Count-1 do begin
+            tmpObj := TObjButtonImage(InternalButtonsList[I]);
+            tmpObj.Visible:= False;
+          end;
+
+          // show all ext buttons
+          for I := 0 to ExternalButtonsList.Count-1 do begin
+            tmpObj := TObjButtonImage(ExternalButtonsList[I]);
+            tmpObj.Visible:= True;
+          end;
+
+          ActiveGroupPage := pExternal;
+
+        end;
+
+      end;
+
+      eStationButton: begin
+
+        if (Sender as TObjButtonImage).ChannelScope = csIntercom then
+          ActiveGroupPage := pIntercom
+        else if (Sender as TObjButtonImage).ChannelScope = csExternal then
+          ActiveGroupPage := pExternal;
+
+        StationCallButtonSel((Sender as TObjButtonImage).ButtonProperties.BtnImageTag);
+
+      end;
+
+    end;
+
+
+    DrawAllButtons;
+
+  end;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.OnTimerCall(Sender: TObject);
+var
+  i : integer;
+  ChMap : TChannelMap;
+begin
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+    if not ChMap.isEnableTimer then Continue;
+
+    ChMap.aIdTimer := ChMap.aIdTimer + 1;
+    if ChMap.aIdTimer > 10 then
+    begin
+      ChMap.isEnableTimer := False;
+      ChMap.aIdTimer := 0;
+
+      if ChMap.aMode = 1 then
+      begin
+        ChMap.aMode := 0;
+        ChMap.isReceive := False;
+        VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+      end;
+    end;
+
+  end;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.pnlConnectorClick(Sender: TObject);
+begin
+//  RunSimulation;
+end;
+
+procedure TfrmTcmsPkrHorz1024.ProcessMenuSelection(Sender: TObject);
+var
+  i, id , aTag : Integer;
+  sExeRestart : string;
+
+  DiffTop, DiffLeft : Integer;
+  ChMap : TChannelMap;
+begin
+  aTag := (Sender as TComponent).Tag;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  case aTag of
+    1 : begin
+          VoipManager.RunConsole;
+        end;
+    2 : begin
+          frmProgress.aMode := 1;
+          frmProgress.Left := Left + DiffLeft;
+          frmProgress.Top  := Top + DiffTop;
+          frmProgress.Show;
+        end;
+    3 : begin
+          RestartPhone;
+        end;
+    4 : begin
+          RestartPhoneNConnector;
+        end;
+    5 : begin
+          SetPnlStatusConnect(true);
+        end;
+    6 : begin
+          SetPnlStatusConnect(false);
+        end;
+    7 : begin
+          id := SetCallInternal(VoipManager.SetConfig.aRole);
+          if id <> -1 then begin
+            VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+            Sleep(100);
+            VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+          end;
+        end;
+    8 : begin
+//          Application.Terminate;
+          ClosePhone;
+        end;
+    9 : begin
+          RestartPC;
+        end;
+    10 : begin
+            ShutdownPC;
+         end;
+  end;
+
+end;
+
+
+procedure TfrmTcmsPkrHorz1024.ReceiveCloseOrder(Rec: TRecData2DOrder);
+begin
+  ClosePhone;
+end;
+
+procedure TfrmTcmsPkrHorz1024.ReceiveInternalActivity(Rec: TRecInternal);
+var
+  i : Integer;
+  ChMap : TChannelMap;
+
+  strSound : string;
+  id : integer;
+begin
+
+  if VoipManager.SetConfig.idSkin <> 12 then Exit;
+  if Rec.RoleCub <> VoipManager.SetConfig.aStrCub then Exit;
+
+  //For Caller
+  if Rec.Mode = 3 then
+  begin
+    if isAutoCall then
+    begin
+      if (Rec.CallFrom = VoipManager.SetConfig.aRole) then
+      begin
+        for i := 0 to ListInternal.Count - 1 do
+        begin
+          ChMap := TChannelMap(ListInternal.Items[i]);
+
+          if ChMap.aChannelName = Rec.CallTo then
+          begin
+            id := SetCallInternal(ChMap.aChannelName);
+            if id <> -1 then
+            begin
+              VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+              VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+              VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+              mmo1.Lines.Add('Setup caller for a call. Chan ID is ' + IntToStr(VoipManager.SetConfig.InternalStartPort_VOIP + id));
+            end;
+          end;
+        end;
+      end;
+    end;
+  end;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    case Rec.Mode of
+      //Set Login
+      1 : begin
+            if Rec.Login = ChMap.aChannelName then
+            begin
+              ChMap.isOnline := True;
+
+              Break;
+            end;
+          end;
+      //Set Logout
+      2 : begin
+            if Rec.Logout = ChMap.aChannelName then
+            begin
+              ChMap.isOnline := False;
+
+              Break;
+            end;
+          end;
+      //Call
+      3 : begin
+            if isAutoCall then
+            begin
+              //For Receiver
+              if (Rec.CallFrom = ChMap.aChannelName)
+              and (rec.CallTo = VoipManager.SetConfig.aRole) then
+              begin
+                ChMap.aMode := 2;
+                // update receiver ui here!
+                SetButtonImgSelected(Trim(Rec.CallFrom), True);
+
+                id := SetCallInternal(ChMap.aChannelName);
+                if id <> -1 then
+                begin
+                  VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  mmo1.Lines.Add('Setup receiver for a call. Phone ID is ' + IntToStr(VoipManager.SetConfig.InternalStartPort_VOIP + id));
+                end;
+
+                // turn incoming call blinker on
+                FBlinkerCounter := 0;
+                tmrIncomingBlinker.Tag := 0;
+                tmrIncomingBlinker.Enabled := True;
+
+                Break;
+              end;
+            end
+            else
+            begin
+              if (Rec.CallFrom = ChMap.aChannelName)
+              and (rec.CallTo = VoipManager.SetConfig.aRole) then
+              begin
+                ChMap.aMode := 1;
+                ChMap.isReceive := True;
+                ChMap.aIdTimer  := 0;
+                ChMap.isEnableTimer := True;
+
+                strSound := ExtractFileDir(Application.ExeName);
+                strSound := strSound + '\' + 'Ring.wav';
+                sndPlaySound(PChar(strSound), SND_ASYNC);
+
+                VoipManager.PlaySound;
+
+                // turn incoming call blinker on
+                FBlinkerCounter := 0;
+                tmrIncomingBlinker.Tag := 0;
+                tmrIncomingBlinker.Enabled := True;
+
+                Break;
+              end;
+            end;
+          end;
+      //Hangup
+      4 : begin
+
+            VoipManager.aLoggerFile.Log('<Internal>', 'Received hangup msg from someone..');
+            if isAutoCall then
+            begin
+
+              if (Rec.DisConnectFrom = ChMap.aChannelName)
+              and (rec.DisConnectTo = VoipManager.SetConfig.aRole) then
+              begin
+                mmo1.Lines.Add('ChMap.ChannelName: ' + ChMap.aChannelName + ', RecDiscFr: ' + Rec.DisConnectFrom);
+                mmo1.Lines.Add('RecDiscTo: ' + Rec.DisConnectTo + ', VoipMgr.aRole: ' +  VoipManager.SetConfig.aRole);
+                mmo1.Lines.Add('Hanging up process..');
+                ChMap.aMode := 0;
+                SetButtonImgSelected(Trim(Rec.DisConnectFrom), False);
+
+                id := SetCallInternal(ChMap.aChannelName);
+                if id <> -1 then
+                begin
+                  VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  mmo1.Lines.Add('Set channel ' + IntToStr(id) + ' mode to off');
+                end;
+
+                Break;
+              end;
+            end
+            else
+            begin
+              if (Rec.DisConnectFrom = ChMap.aChannelName)
+              and (rec.DisConnectTo = VoipManager.SetConfig.aRole) then
+              begin
+                if ChMap.aMode = 2 then
+                begin
+                  id := SetCallInternal(ChMap.aChannelName);
+                  if id <> -1 then
+                  begin
+                    VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                    VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  end;
+                end;
+
+                ChMap.aMode := 0;
+                ChMap.isReceive := False;
+                ChMap.isCall    := False;
+                ChMap.aIdTimer  := 0;
+                ChMap.isEnableTimer := False;
+
+                Break;
+              end;
+            end;
+          end;
+      //Accept Call
+      5 : begin
+            if (Rec.CallFrom = ChMap.aChannelName)
+            and (rec.CallTo = VoipManager.SetConfig.aRole) then
+            begin
+              ChMap.aMode := 2;
+              ChMap.isReceive := True;
+              ChMap.aIdTimer  := 0;
+              ChMap.isEnableTimer := False;
+
+              id := SetCallInternal(ChMap.aChannelName);
+              if id <> -1 then
+              begin
+                VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+              end;
+
+              Break;
+            end;
+          end;
+      //Cannot Call Because Because Console is Offline
+      6 : begin
+            if isAutoCall then
+            begin
+              if (Rec.DisConnectFrom = ChMap.aChannelName)
+              and (rec.DisConnectTo = VoipManager.SetConfig.aRole) then
+              begin
+                ChMap.aMode := 0;
+                SetButtonImgSelected(Trim(Rec.DisConnectFrom), False);
+
+                Break;
+              end;
+            end
+            else
+            begin
+              if (Rec.DisConnectFrom = ChMap.aChannelName)
+              and (rec.DisConnectTo = VoipManager.SetConfig.aRole) then
+              begin
+                if ChMap.aMode = 2 then
+                begin
+                  id := SetCallInternal(ChMap.aChannelName);
+                  if id <> -1 then
+                  begin
+                    VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                    VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  end;
+                end;
+
+                ChMap.aMode := 0;
+                ChMap.isReceive := False;
+                ChMap.isCall    := False;
+                ChMap.aIdTimer  := 0;
+                ChMap.isEnableTimer := False;
+
+                Break;
+              end;
+            end;
+          end;
+    end;
+  end;
+end;
+
+
+procedure TfrmTcmsPkrHorz1024.ReceiveModeCall(Rec: TRecCallMode);
+begin
+  if VoipManager.SetConfig.idSkin <> 12 then Exit;
+  isAutoCall := Rec.IsAutoCall;
+end;
+
+procedure TfrmTcmsPkrHorz1024.RecvICSData(rec: TICSData);
+begin
+
+  if VoipManager.SetConfig.idSkin <> 12 then Exit;
+
+  if rec.Mode = 10 then
+  begin
+    if not VoipManager.isOut and isRunSimulation then
+    begin
+      RestartPhone;
+    end;
+  end
+  else
+  if rec.Mode = 11 then
+  begin
+    if not VoipManager.isOut then
+    begin
+      RestartPhone;
+    end;
+  end
+  else
+  if rec.Mode = 12 then
+  begin
+    if not VoipManager.isOut then
+    begin
+      ShutdownPC;
+    end;
+  end
+  else
+  if rec.Mode = 13 then
+  begin
+    if not VoipManager.isOut then
+    begin
+      ClosePhone;
+    end;
+  end;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.RecvICSOrder(rec: TRecOrder);
+var
+  px, py: Integer;
+begin
+
+
+//  lblStationName.Font.Color := clRed;
+//  lblStationName.Font.Style := [fsBold];
+
+  px := frmTcmsPkrHorz1024.Left;
+  py := frmTcmsPkrHorz1024.Top + (frmTcmsPkrHorz1024.Height div 2);
+
+  case rec.OrderVal of
+
+    0: begin // terminates phone
+      MessageDlgPos(rec.OrderMsg, mtError, [mbOK], 0, px, py);
+      ProcessMenuSelection(CloseApplication1);
+    end;
+
+    1: begin // offers option whether to restart or terminate
+
+      if (MessageDlgPos(rec.OrderMsg, mtError, [mbOK, mbCancel], 0, px, py) = mrOk) then begin
+        // restart phone
+        ProcessMenuSelection(Restart1);
+      end
+      else begin
+        // close phone
+        ProcessMenuSelection(CloseApplication1);
+
+      end;
+
+    end;
+
+  end;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.RestartPC;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+    end;
+
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 7;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.RestartPhone;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+    end;
+
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 2;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.RestartPhoneNConnector;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    // disconnect all connected comms
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+      VoipManager.aLoggerFile.Log('<RestartPhoneNConnector>', 'Sent hangup to ' + ChMap.aChannelName);
+    end;
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 3;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.RunPhone;
+var
+  i : Integer;
+  ChMap : TChannelMap;
+
+  aParamPhone, aParamJam    : string;
+  SIPPort, RTPport, ICSPort : Integer;
+begin
+  //External Phone
+  for i := 0 to ListExternal.Count - 1 do
+  begin
+    SIPPort := VoipManager.SetConfig.ExternalStartPort_SIP + (i*3);
+    RTPport := SIPPort + 1;
+    ICSPort := VoipManager.SetConfig.ExternalStartPort_VOIP + i;
+
+    ChMap := TChannelMap(ListExternal.Items[i]);
+
+    aParamPhone := '-id ' + IntToStr(ICSPort)
+      + ' -u ' + ChMap.aUser + ' -p ' + '1234' + ' -sipport ' + IntToStr(SIPPort)
+      + ' -rtpport ' + IntToStr(RTPport) + ' -ch ' + ChMap.aChannel
+      + ' -auto -nodial -silent -log -chcode '
+      + ChMap.aChannelName + ' -chband ' + IntToStr(0);
+
+    aParamJam := '';
+
+    VoipManager.RunPhone(1, aParamPhone, aParamJam);
+  end;
+
+  for i := 0 to GroupInternal.RoleList.Count - 1 do
+  begin
+    SIPPort := VoipManager.SetConfig.InternalStartPort_SIP + (i*3);
+    RTPport := SIPPort + 1;
+    ICSPort := VoipManager.SetConfig.InternalStartPort_VOIP + i;
+
+    if GroupInternal.RoleList[i] = VoipManager.SetConfig.aRole then
+    begin
+      aParamPhone := '-id ' + IntToStr(ICSPort)
+      + ' -u ' + IntToStr(1001 + i) + ' -p ' + '1234' + ' -sipport ' + IntToStr(SIPPort)
+      + ' -rtpport ' + IntToStr(RTPport)
+      + ' -ch ' + IntToStr(VoipManager.SetConfig.aRoomInternal + VoipManager.SetConfig.aCub * 10 + i)
+      + ' -auto -dial -silent -log -chcode '
+      + GroupInternal.RoleList[i] + ' -chband ' + IntToStr(0);
+
+      aParamJam := '';
+
+      VoipManager.RunPhone(2, aParamPhone, aParamJam);
+    end
+    else
+    begin
+      aParamPhone := '-id ' + IntToStr(ICSPort)
+      + ' -u ' + IntToStr(1001 + i) + ' -p ' + '1234' + ' -sipport ' + IntToStr(SIPPort)
+      + ' -rtpport ' + IntToStr(RTPport)
+      + ' -ch ' + IntToStr(VoipManager.SetConfig.aRoomInternal + VoipManager.SetConfig.aCub * 10 + i)
+      + ' -auto -nodial -silent -log -chcode '
+      + GroupInternal.RoleList[i] + ' -chband ' + IntToStr(0);
+
+      aParamJam := '';
+
+      VoipManager.RunPhone(5, aParamPhone, aParamJam);
+    end;
+  end;
+end;
+
+
+procedure TfrmTcmsPkrHorz1024.RunSimulation;
+var
+  i : Integer;
+  strXML, ssStrXml : string;
+
+  aChannelMap : TChannelMap;
+  aRole: TObjButtonImage;
+
+  aTotInternal,
+  aTotExternal : Double;
+
+  aPgID,
+  aColSection,
+  aRowSection : Double;
+  totalCha, LastIterator: Integer;
+  aGridPos: TGridPosition;
+begin
+  if VoipManager.SetConfig.idSkin <> 13 then Exit;
+
+  isRunSimulation := True;
+  strXML := ExtractFileDir(Application.ExeName);
+  strXML := strXML+ '\' + 'GroupChannel.xml';
+
+  ssStrXml := ExtractFileDir(Application.ExeName);
+  ssStrXml := ssStrXml+ '\' + 'ssGroupChannel.xml';
+
+  GroupList.LoadFromFile(strXML);
+  GroupInternal.LoadFromFile(strXML);
+  ssGroupList.LoadFromFile(ssStrXml);
+
+  // dummy for station buttons mask
+  totalCha := GroupList.RoleList.Count + GroupList.ExternalList.Count;
+  for I := 0 to totalCha-1 do begin
+    aChannelMap := TChannelMap.Create;
+
+    aGridPos := GetGridPosition(i+1);
+    aChannelMap.aChaGroup := aGridPos.GroupIndex;
+    aChannelMap.aRowSection := aGridPos.RowIndex;
+    aChannelMap.aColSection := aGridPos.ColumnIndex;
+
+    DummyMaskList.Add(aChannelMap);
+
+    mmo1.Lines.Add('i:' + i.ToString + ', Row:' + aChannelMap.aRowSection.ToString +
+                  ', Col:' + aChannelMap.aColSection.ToString)
+  end;
+
+  // internal
+  for i := 0 to GroupList.RoleList.Count - 1 do
+  begin
+    if GroupList.RoleList[i] = VoipManager.SetConfig.aRole then
+    begin
+      GroupList.RoleList.Delete(i);  // remove own station from visible list
+      Break;
+    end;
+  end;
+  // !addition!
+  for i := 0 to ssGroupList.RoleList.Count - 1 do
+  begin
+    if ssGroupList.RoleList[i] = VoipManager.SetConfig.aRole then
+    begin
+      ssGroupList.RoleList.Delete(i); // remove own station from visible list
+      Break;
+    end;
+  end;
+
+  for i := 0 to ssGroupList.RoleList.Count - 1 do
+  begin
+    aChannelMap := TChannelMap.Create;
+    aChannelMap.aUser         := IntToStr(1001 + i);
+    aChannelMap.aChannel      := IntToStr(VoipManager.SetConfig.aRoomInternal +
+                                          VoipManager.SetConfig.aCub * 10 + i);
+
+    aChannelMap.aChannelName  := ssGroupList.RoleList[i];
+    aChannelMap.aPass         := '1234';
+
+    aChannelMap.aMode     := 0;
+    aChannelMap.aIdTimer  := 0;
+
+    aChannelMap.isEnableTimer   := False;
+    aChannelMap.isCall          := False;
+    aChannelMap.isReceive       := False;
+
+    aChannelMap.isOnline        := False;
+
+    aGridPos := GetGridPosition(i+1);
+    aChannelMap.aChaGroup := aGridPos.GroupIndex;
+    aChannelMap.aRowSection := aGridPos.RowIndex;
+    aChannelMap.aColSection := aGridPos.ColumnIndex;
+
+    ListInternal.Add(aChannelMap);
+  end;
+  LastIterator := i;
+
+
+  // external
+  for i := 0 to ssGroupList.ExternalList.Count - 1 do
+  begin
+    aChannelMap := TChannelMap.Create;
+    aChannelMap.aUser         := IntToStr(1001 + i);
+    aChannelMap.aChannel      := IntToStr(VoipManager.SetConfig.aRoomExternal + i);
+
+    aChannelMap.aChannelName  := ssGroupList.ExternalList[i];
+    aChannelMap.aPass         := '1234';
+
+    aChannelMap.aMode     := 0;
+    aChannelMap.aIdTimer  := 0;
+
+    aChannelMap.isEnableTimer := False;
+    aChannelMap.isCall        := False;
+    aChannelMap.isReceive     := False;
+
+    aChannelMap.isOnline      := False;
+
+    aGridPos := GetGridPosition(LastIterator + (i+1));
+    aChannelMap.aChaGroup := aGridPos.GroupIndex;
+    aChannelMap.aRowSection := aGridPos.RowIndex;
+    aChannelMap.aColSection := aGridPos.ColumnIndex;
+
+    ListExternal.Add(aChannelMap);
+  end;
+
+
+  FTimer := TTimer.Create(nil);
+  FTimer.Enabled  := True;
+  FTimer.Interval := 1000;
+  FTimer.OnTimer  := OnTimerCall;
+
+  RunPhone;
+
+  //InitBaseGroupButtons;
+  InitAllCommButtons;
+  //InitBaseExternalButtons;
+
+  DrawAllButtons;
+
+  lblRoleName.Caption := VoipManager.SetConfig.aRole;
+
+  ActiveGroupPage := pIntercom;
+
+  InitButtonsByGroup(0);
+
+end;
+
+
+procedure TfrmTcmsPkrHorz1024.SetButtonImgSelected(aStationName: string; SelectedState: Boolean);
+var
+  I: Integer;
+  aRole: TObjButtonImage;
+begin
+
+  aRole := GetButtonImgObjFromChName(aStationName);
+
+  if (aRole <> nil) then begin
+    aRole.IsSelected := SelectedState;
+    DrawAllButtons;
+  end;
+
+end;
+
+function TfrmTcmsPkrHorz1024.SetCallInternal(ChName: string): Integer;
+begin
+  Result := -1;
+  Result := GroupInternal.RoleList.IndexOf(ChName);
+end;
+
+procedure TfrmTcmsPkrHorz1024.SetIconTray;
+var
+  hMenuHandle: Integer;
+begin
+  hMenuHandle := GetSystemMenu(Handle, False);
+  if (hMenuHandle <> 0) then
+  begin
+    DeleteMenu(hMenuHandle, SC_CLOSE, MF_BYCOMMAND);
+    DeleteMenu(hMenuHandle, SC_MINIMIZE, MF_BYCOMMAND);
+    DeleteMenu(hMenuHandle, SC_MAXIMIZE, MF_BYCOMMAND);
+  end;
+
+  with TrayIconData do
+  begin
+    //cbSize := SizeOf(TrayIconData);
+    Wnd := Handle;
+    uID := 0;
+    uFlags := NIF_MESSAGE + NIF_ICON + NIF_TIP;
+    uCallbackMessage := WM_ICONTRAY;
+    hIcon := Application.Icon.Handle;
+    StrPCopy(szTip, Application.Title);
+  end;
+
+  Shell_NotifyIcon(NIM_ADD, @TrayIconData);
+end;
+
+procedure TfrmTcmsPkrHorz1024.SetPnlStatusConnect(aVisible: Boolean);
+begin
+  pnlConnector.Visible := aVisible;
+  pnlSesVoip.Visible   := aVisible;
+  pnlControl.Visible   := aVisible;
+end;
+
+procedure TfrmTcmsPkrHorz1024.ShutdownPC;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+    end;
+
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 8;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmTcmsPkrHorz1024.StationCallButtonSel(aBtnTag: Integer);
+var
+  i, id : integer;
+  ChMap : TChannelMap;
+
+  Section : Double;
+  ChSectionName: string;
+  RecSend : TRecInternal;
+  SelStationName: string;
+begin
+  //Point To Point
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    SelStationName := GetChNameFromTag(aBtnTag);
+    ChSectionName := ChMap.aChannelName;
+    if (ChSectionName <> SelStationName) then begin
+      Continue;
+    end;
+
+
+    //Auto Call
+    if isAutoCall then
+    begin
+      if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+      begin
+         //Hangup
+         mmo1.Lines.Add('VoipManager.SetConfig.aRole' + ' auto hang up from ' + ChMap.aChannelName);
+
+         ChMap.aMode := 0;
+         VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                  VoipManager.SetConfig.aRole, ChMap.aChannelName);
+
+         id := SetCallInternal(ChMap.aChannelName);
+         if id <> -1 then
+         begin
+           VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+           VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+         end;
+      end
+      else
+      if ChMap.aMode = 0 then
+      begin
+        mmo1.Lines.Add(VoipManager.SetConfig.aRole + ' auto calling ' + ChMap.aChannelName);
+
+         //Call
+         ChMap.aMode := 2;
+         VoipManager.SendCallTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+
+      end;
+    end
+    //Manual Call
+    else
+    begin
+      //Calling
+      if ChMap.aMode = 0 then
+      begin
+        ChMap.aMode := 1;
+        ChMap.isCall := True;
+
+        mmo1.Lines.Add(VoipManager.SetConfig.aRole + ' man calling ' + ChMap.aChannelName);
+
+        VoipManager.SendCallTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+      end
+      //HangUp From Caller
+      else
+      if (ChMap.aMode = 1) and ChMap.isCall and not ChMap.isReceive then
+      begin
+        ChMap.aMode := 0;
+        ChMap.isCall := False;
+        ChMap.aIdTimer := 0;
+        ChMap.isEnableTimer := False;
+
+        // turn off incoming call blinker
+//        LoadFromImageListUp(22, imgCal, FBitMap);
+        tmrIncomingBlinker.Tag := 0;
+        FBlinkerCounter := 0;
+        tmrIncomingBlinker.Enabled := False;
+
+        mmo1.Lines.Add('VoipManager.SetConfig.aRole' + ' man hang up from ' + ChMap.aChannelName);
+
+        VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+      end
+      //Accept Call
+      else
+      if (ChMap.aMode = 1) and ChMap.isReceive and not ChMap.isCall then
+      begin
+        ChMap.aMode := 2;
+        ChMap.aIdTimer := 0;
+        ChMap.isEnableTimer := False;
+
+        VoipManager.SendReceiveCall(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+
+        // turn off incoming call blinker
+//        LoadFromImageListUp(22, imgCal, FBitMap);
+        tmrIncomingBlinker.Tag := 0;
+        FBlinkerCounter := 0;
+        tmrIncomingBlinker.Enabled := False;
+
+        id := SetCallInternal(ChMap.aChannelName);
+        if id <> -1 then
+        begin
+          VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+          VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+          VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+        end;
+      end
+      //HangUp From Caller or Receiver
+      else
+      if ChMap.aMode = 2 then
+      begin
+        ChMap.aMode := 0;
+        ChMap.aIdTimer := 0;
+        ChMap.isEnableTimer := False;
+        ChMap.isReceive := False;
+        ChMap.isCall := False;
+
+        VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+
+
+        // turn off incoming call blinker
+//        LoadFromImageListUp(22, imgCal, FBitMap);
+        tmrIncomingBlinker.Tag := 0;
+        FBlinkerCounter := 0;
+        tmrIncomingBlinker.Enabled := False;
+
+        id := SetCallInternal(ChMap.aChannelName);
+        if id <> -1 then
+        begin
+          VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+          VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+        end;
+      end;
+    end;
+
+  end;
+
+  //Conference
+  for i := 0 to ListExternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListExternal.Items[i]);
+
+    SelStationName := GetChNameFromTag(aBtnTag);
+    ChSectionName := ChMap.aChannelName;
+    if (ChSectionName <> SelStationName) then
+      Continue;
+
+//    Section := ChMap.aColSection + ((ChMap.aRowSection-1)*3);
+
+    if ChMap.aMode = 2 then
+    begin
+
+      mmo1.Lines.Add('Loggin off external channel ' + SelStationName);
+
+      ChMap.aMode := 0;
+
+      VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.ExternalStartPort_VOIP + i);
+      VoipManager.SetToMode_Off(VoipManager.SetConfig.ExternalStartPort_VOIP + i);
+    end
+    else
+    if ChMap.aMode = 0 then
+    begin
+
+      mmo1.Lines.Add('Loggin in on external channel ' + SelStationName);
+
+      ChMap.aMode := 2;
+
+      VoipManager.SetToMode_Receiver(VoipManager.SetConfig.ExternalStartPort_VOIP + i);
+      VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.ExternalStartPort_VOIP + i);
+      VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.ExternalStartPort_VOIP + i);
+    end;
+
+  end;
+
+end;
+
+
+procedure TfrmTcmsPkrHorz1024.StopPhone;
+var
+  i : Integer;
+begin
+  //Exit External Phone
+  for i := 0 to ListExternal.Count - 1 do
+  begin
+    VoipManager.SetToMode_ExitPhone(VoipManager.SetConfig.ExternalStartPort_VOIP + i);
+  end;
+
+  //Exit Internal Phone
+  for i := 0 to GroupInternal.RoleList.Count - 1 do
+  begin
+    VoipManager.SetToMode_ExitPhone(VoipManager.SetConfig.InternalStartPort_VOIP + i);
+  end;
+end;
+
+procedure TfrmTcmsPkrHorz1024.tmrIncomingBlinkerTimer(Sender: TObject);
+begin
+  {
+  if (tmrIncomingBlinker.Tag = 0) then begin
+
+    tmrIncomingBlinker.Tag := 1;
+  end
+  else if (tmrIncomingBlinker.Tag = 1) then begin
+
+    tmrIncomingBlinker.Tag := 0;
+  end;
+  Inc(FBlinkerCounter);
+
+  // if autocall, turnoff blinker after 20 sec. if not already turned off
+  if (FBlinkerCounter > 20) then begin
+
+    tmrIncomingBlinker.Tag := 0;
+    FBlinkerCounter := 0;
+    tmrIncomingBlinker.Enabled := False;
+  end;
+  }
+
+  if (tmrIncomingBlinker.Tag = 0) then begin
+    LoadFromImageListUp(38);
+    tmrIncomingBlinker.Tag := 1;
+  end
+  else if (tmrIncomingBlinker.Tag = 1) then begin
+    LoadFromImageListDown(38);
+    tmrIncomingBlinker.Tag := 0;
+  end;
+  Inc(FBlinkerCounter);
+
+  // if autocall, turnoff blinker after 10 sec. if not already turned off
+  if (FBlinkerCounter > 20) then begin
+    LoadFromImageListUp(38);
+    tmrIncomingBlinker.Tag := 0;
+    FBlinkerCounter := 0;
+    tmrIncomingBlinker.Enabled := False;
+  end;
+
+end;
+
+
+
+procedure TfrmTcmsPkrHorz1024.tmrInternalRunChkTimer(Sender: TObject);
+var
+  InternalRunsOK: Boolean;
+  searchResult : TSearchRec;
+  fcount: Integer;
+  s: String;
+begin
+
+{
+  fcount := 0;
+  if FindFirst(InternalLogFilePath, faAnyFile, searchResult) = 0 then begin
+    repeat
+      Inc(fcount);
+    until FindNext(searchResult) <> 0;
+
+    // Must free up resources used by these successful finds
+    FindClose(searchResult);
+  end;
+
+
+  InternalRunsOK := fcount > 0;
+
+  if InternalRunsOK then begin
+    tmrInternalRunChk.Enabled := False;
+  end
+  else begin
+    tmrInternalRunChk.Tag := tmrInternalRunChk.Tag + 1;
+
+    if (tmrInternalRunChk.Tag > 60) then begin
+      s := 'Problem running Phone. Click OK to restart, CANCEL to shutdown Phone.';
+
+      if (MessageDlg(s, mtError, [mbOK, mbCancel], 0) = mrOk) then begin
+        // restart phone
+        ProcessMenuSelection(Restart1);
+      end
+      else begin
+        // close phone
+        ProcessMenuSelection(CloseApplication1);
+
+      end;
+
+      tmrInternalRunChk.Enabled := False;
+
+    end;
+
+  end;
+
+    }
+end;
+
+//==============================================================================================================>>>
+
+{ TObjButtonImage }
+
+constructor TObjButtonImage.create;
+begin
+
+end;
+
+
+constructor TObjButtonImage.create(const aType: word);
+var
+  btnWidth, btnHeigh: Integer;
+  BtnFrameColor: TColor;
+begin
+
+  ButtonType := EButtonType(aType);
+
+  ButtonProperties.BtnImage := TImage.Create(frmTcmsPkrHorz1024.imgBgk);
+  ButtonProperties.BtnImage.Parent := frmTcmsPkrHorz1024;
+  ButtonProperties.BtnImage.OnClick := OnBtnImageClick;
+
+  ButtonProperties.ImageIcon := TImage.Create(ButtonProperties.BtnImage);
+  ButtonProperties.ImageIcon.Parent := frmTcmsPkrHorz1024;
+  ButtonProperties.ImageIcon.OnClick := ButtonProperties.BtnImage.OnClick;
+  ButtonProperties.ImageIcon.AutoSize := False;
+  ButtonProperties.ImageIcon.Stretch := True;
+
+  if (ButtonType = eGroupButton) then begin // group sel btn
+    btnWidth := C_GroupSel_Btn_Width;
+    btnHeigh := C_GroupSel_Btn_Height;
+  end
+  else begin
+    btnWidth := C_Stations_Btn_Width;
+    btnHeigh := C_Stations_Btn_Height;
+  end;
+
+  ButtonProperties.BtnImage.Width := btnWidth;
+  ButtonProperties.BtnImage.Height := btnHeigh;
+
+  //with draw shapes
+  GroupBtnFrameColor := clTeal;
+  StationBtnFrameColor := TColor(RGB(35,78,252));// $234EFC;
+  ActBtnColor       := TColor(RGB(11,41,101));// $0B2965;
+  GroupBtnActColor  := TColor(RGB(91,151,106));//$5B976A
+  PsvBtnColor       := TColor(RGB(112,159,205));// $709FCD;
+  GroupBtnPsvColor  := TColor(RGB(66,114,198));//$4272C6
+
+  if (ButtonType = eGroupButton) then
+    BtnFrameColor := GroupBtnFrameColor
+  else
+    BtnFrameColor := StationBtnFrameColor;
+
+  with ButtonProperties.BtnImage do begin
+
+    if (ButtonType <> eDummyButton) then begin
+      Cursor := crHandPoint;
+
+    end;
+
+    SetVisible(True);
+
+  end;
+
+end;
+
+procedure TObjButtonImage.DeleteBtnImages;
+begin
+  FreeAndNil(ButtonProperties.BtnImage);
+end;
+
+destructor TObjButtonImage.destroy;
+begin
+  FreeAndNil(ButtonProperties.BtnImage);
+end;
+
+
+procedure TObjButtonImage.DrawButton;
+var
+  aCanv: TCanvas;
+  aTxtWidth, aTxtHgt,x,y: Integer;
+  aPrefix: string;
+begin
+
+  if (not Visible) then Exit;
+  
+
+  with ButtonProperties.BtnImage do begin
+    Canvas.Pen.Width := 1;
+    Canvas.Pen.Color := StationBtnFrameColor; //BtnFrameColor;
+    Canvas.Brush.Style := bsSolid;
+
+    case ButtonType of
+      eDummyButton: begin
+        Canvas.Brush.Color := PsvBtnColor;
+      end;
+      eGroupButton: begin
+        if IsSelected then
+          Canvas.Brush.Color := GroupBtnActColor
+        else
+          Canvas.Brush.Color := GroupBtnPsvColor;
+      end;
+      eStationButton: begin
+        Canvas.Brush.Color := ActBtnColor;
+      end;
+    end;
+  end;
+
+  aCanv := ButtonProperties.BtnImage.Canvas;
+
+  if (ButtonType <> eGroupButton) then
+    aCanv.Rectangle(0,0,C_Stations_Btn_Width,C_Stations_Btn_Height)
+  else
+    aCanv.Rectangle(0,0,C_GroupSel_Btn_Width,C_GroupSel_Btn_Height);
+
+  if (IsSelected) then begin
+    aCanv.Pen.Width := 3;
+    aCanv.Pen.Color := clYellow;
+    aCanv.Brush.Style := bsClear;
+
+    if (ButtonType = eGroupButton) then
+      aCanv.Rectangle(0,0,C_GroupSel_Btn_Width,C_GroupSel_Btn_Height)
+    else
+      aCanv.Rectangle(0,0,C_Stations_Btn_Width,C_Stations_Btn_Height);
+
+  end;
+
+  SetButtonCaption(ButtonProperties.BtnCaption);
+
+  // set Icon
+  if IconImageList <> nil then begin
+    ButtonProperties.ImageIcon.Width := FRectIconFrame.Width - 10;
+    ButtonProperties.ImageIcon.Height := ButtonProperties.ImageIcon.Width;
+    ButtonProperties.ImageIcon.Left := ButtonProperties.BtnImage.Left + FRectIconFrame.Left +
+                                       (FRectIconFrame.Width div 2) -
+                                       (ButtonProperties.ImageIcon.Width div 2);
+    ButtonProperties.ImageIcon.Top :=  ButtonProperties.BtnImage.Top + FRectIconFrame.Top +
+                                       (FRectIconFrame.Height div 2) -
+                                       (ButtonProperties.ImageIcon.Height div 2);
+
+    aPrefix := Copy(ButtonProperties.BtnCaption, 1, 2);
+
+    if ChannelScope = csIntercom  then begin
+        LoadIconFromImageList(40);
+    end
+    else if ChannelScope = csExternal  then begin
+      if aPrefix <> 'C*' then
+        LoadIconFromImageList(39)
+      else
+        LoadIconFromImageList(41);
+    end;
+
+    ButtonProperties.ImageIcon.BringToFront;
+  end;
+
+end;
+
+
+procedure TObjButtonImage.LoadIconFromImageList(AIndex: Integer);
+var
+  FBitmap: TBitmap;
+begin
+  FBitmap     := TBitmap.Create;
+  IconImageList.GetBitmap(AIndex, FBitmap);
+  FBitMap.Transparent := True;
+  ButtonProperties.ImageIcon.Picture.Assign(FBitmap);
+  ButtonProperties.ImageIcon.Transparent := True;
+end;
+
+procedure TObjButtonImage.OnBtnImageClick(Sender: TObject);
+begin
+
+  if (ButtonType = eDummyButton) then
+    Exit;
+
+  //frmLenBigVert.lblRoleName.Caption := StationName;
+  IsSelected := not IsSelected;
+
+  if Assigned(frmTcmsPkrHorz1024.EventOnButtonClicked) then
+    frmTcmsPkrHorz1024.EventOnButtonClicked(Self);
+
+end;
+
+procedure TObjButtonImage.SetButtonCaption(aCaption: string);
+var
+  x,y,
+  aTxtWidth, aTxtHgt: Integer;
+  aImg: TImage;
+  aTpoint: TPoint;
+begin
+
+  aImg := ButtonProperties.BtnImage;
+  aImg.Canvas.Font.Name  := 'Arial';
+  aImg.Canvas.Font.Style := [fsBold];
+  aImg.Canvas.Font.Color := clWhite;
+  aImg.Canvas.Font.Size  := 8;
+
+  aTxtWidth := aImg.Canvas.TextWidth(aCaption);
+  aTxtHgt   := aImg.Canvas.TextHeight(aCaption);
+
+  x := 10;
+  y := 10;
+
+//  x := ((aImg.Width div 2)) - (aTxtWidth div 2);
+//  y := ((aImg.Height div 2)) - (aTxtHgt div 2);
+
+  aImg.Canvas.TextOut(x, y, aCaption);
+
+  // Icon
+  if ChannelScope <> csDummy then begin
+    FRectIconFrame.TopLeft.X := aImg.Width - 40;
+    FRectIconFrame.TopLeft.Y := 0;
+    FRectIconFrame.BottomRight.X := aImg.Width;
+    FRectIconFrame.BottomRight.Y := aImg.Height;
+    aImg.Canvas.Pen.Color := clWhite;
+    aImg.Canvas.Rectangle(FRectIconFrame.TopLeft.X, FRectIconFrame.TopLeft.Y,
+                          FRectIconFrame.BottomRight.X, FRectIconFrame.BottomRight.Y);
+  end;
+
+
+end;
+
+procedure TObjButtonImage.SetImageProperties;
+begin
+  ButtonProperties.BtnImage.Top := ButtonProperties.BtnImageTop;
+  ButtonProperties.BtnImage.Left := ButtonProperties.BtnImageLeft;
+  ButtonProperties.BtnImage.Tag := ButtonProperties.BtnImageTag;
+  ButtonProperties.BtnImage.Visible := True;
+
+  ButtonProperties.ImageIcon.Top := ButtonProperties.BtnImageTop;
+  ButtonProperties.ImageIcon.Left := ButtonProperties.BtnImageLeft;
+  ButtonProperties.ImageIcon.Visible := True;
+
+end;
+
+
+procedure TObjButtonImage.SetVisible(IsVisible: Boolean);
+begin
+  FVisible := IsVisible;
+  ButtonProperties.BtnImage.Visible := IsVisible;
+  ButtonProperties.ImageIcon.Visible := IsVisible;
+
+  if IsVisible then begin
+    ButtonProperties.BtnImage.BringToFront;
+    ButtonProperties.ImageIcon.BringToFront;
+  end
+  else begin
+    ButtonProperties.BtnImage.SendToBack;
+    ButtonProperties.ImageIcon.SendToBack;
+  end;
+
+end;
+
+end.

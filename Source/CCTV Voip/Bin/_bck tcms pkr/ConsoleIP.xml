@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<fsgroups>
+  <roles id="Role" name="Role Group">
+
+	<console ip="192.168.2.100" name="GSS"></console>
+	<console ip="192.168.2.101" name="CO"></console>
+	<console ip="192.168.2.102" name="MOC1"></console>
+	<console ip="192.168.2.103" name="MOC2"></console>
+	<console ip="192.168.2.104" name="MOC3"></console>
+	<console ip="192.168.2.105" name="MOC4"></console>
+	<console ip="192.168.2.106" name="MOC5"></console>
+	<console ip="192.168.2.107" name="MOC6"></console>
+	<console ip="192.168.2.108" name="MOC7"></console>
+	<console ip="192.168.2.109" name="MOC8"></console>
+	<console ip="192.168.2.110" name="MOC9"></console>
+	<console ip="192.168.2.111" name="MOC10"></console>
+
+  </roles>
+</fsgroups>
+   

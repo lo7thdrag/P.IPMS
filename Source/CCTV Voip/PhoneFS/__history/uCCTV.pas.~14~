@@ -1,0 +1,2863 @@
+unit uCCTV;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.MPlayer, Vcl.Mask, RzEdit,
+  RzSpnEdt, Vcl.Buttons, SpeedButtonImage, uLoadGroupFromXML, uDataVoipRecord,
+  Vcl.Menus;
+
+type
+
+  TfrmIpmsCCTV = class(TForm)
+  {$REGION 'GUI components'}
+    pnlVid1: TPanel;
+    Image1: TImage;
+    pnlVid3: TPanel;
+    pnlVid2: TPanel;
+    Image2: TImage;
+    Image3: TImage;
+    pnlVid4: TPanel;
+    Image4: TImage;
+    lblVid2: TLabel;
+    lblVid1: TLabel;
+    lblVid3: TLabel;
+    lblVid4: TLabel;
+    tmr1: TTimer;
+    pnlVid5: TPanel;
+    lblCam2: TLabel;
+    pnlRec2: TPanel;
+    Image12: TImage;
+    pnlLonceng2: TPanel;
+    Image11: TImage;
+    pnlLonceng1: TPanel;
+    Image6: TImage;
+    pnlRec1: TPanel;
+    Image7: TImage;
+    pnlLonceng3: TPanel;
+    Image8: TImage;
+    pnlRec3: TPanel;
+    Image10: TImage;
+    pnlLonceng4: TPanel;
+    Image13: TImage;
+    pnlRec4: TPanel;
+    Image14: TImage;
+    lblCam3: TLabel;
+    lblCam1: TLabel;
+    lblCam4: TLabel;
+    lblVid5: TLabel;
+    lblCam5: TLabel;
+    pnlLonceng5: TPanel;
+    Image5: TImage;
+    pnlRec5: TPanel;
+    Image9: TImage;
+    pnlVid6: TPanel;
+    lblVid6: TLabel;
+    lblCam6: TLabel;
+    pnlLonceng6: TPanel;
+    Image15: TImage;
+    pnlRec6: TPanel;
+    Image16: TImage;
+    pnlVid7: TPanel;
+    lblNoVideo7: TLabel;
+    lblVid7: TLabel;
+    lblCam7: TLabel;
+    pnlLonceng7: TPanel;
+    Image17: TImage;
+    pnlRec7: TPanel;
+    Image18: TImage;
+    pnlVid8: TPanel;
+    lblNoVideo8: TLabel;
+    lblVid8: TLabel;
+    lblCam8: TLabel;
+    pnlLonceng8: TPanel;
+    Image19: TImage;
+    pnlRec8: TPanel;
+    Image20: TImage;
+    Image21: TImage;
+    Image22: TImage;
+    imgKiri: TImage;
+    imgKanan: TImage;
+    Image25: TImage;
+    imgAtas: TImage;
+    imgBawah: TImage;
+    img1: TImage;
+    imgAtas6: TImage;
+    imgBawah6: TImage;
+    imgKanan6: TImage;
+    imgKiri6: TImage;
+    imgBackLittle6: TImage;
+    imgBackLittle2: TImage;
+    tmrCam2: TTimer;
+    tmrCam6: TTimer;
+    pnlComCctv: TPanel;
+    pnlConnector: TPanel;
+    pnlControl: TPanel;
+    pnlSesVoip: TPanel;
+    lblIncoming: TLabel;
+    imgCallBtn: TImage;
+    mmo1: TMemo;
+    tmrIncomingBlinker: TTimer;
+    pmRestart: TPopupMenu;
+    RunConsole1: TMenuItem;
+    RestartConnector1: TMenuItem;
+    Restart1: TMenuItem;
+    RestartPhoneConnector1: TMenuItem;
+    ShowConector1: TMenuItem;
+    HideConnector1: TMenuItem;
+    N1: TMenuItem;
+    Reconnect1: TMenuItem;
+    MenuItem1: TMenuItem;
+    CloseApplication1: TMenuItem;
+    N2: TMenuItem;
+    Shutdown1: TMenuItem;
+    Restart2: TMenuItem;
+    N3: TMenuItem;
+    Shutdown2: TMenuItem;
+  {$ENDREGION}
+
+  {$REGION 'GUI event handlers'}
+    procedure tmr1Timer(Sender: TObject);
+    procedure ZoomCam2Click(Sender: TObject);
+    procedure ZoomCam1Click(Sender: TObject);
+    procedure ZoomCam3Click(Sender: TObject);
+    procedure ZoomCam4Click(Sender: TObject);
+    procedure ZoomCam5Click(Sender: TObject);
+
+    procedure ZoomCam6Click(Sender: TObject);
+    procedure ZoomCam7Click(Sender: TObject);
+    procedure ZoomCam8Click(Sender: TObject);
+//    procedure btnKiriClick(Sender: TObject);
+//    procedure btnKananClick(Sender: TObject);
+    procedure btnKananMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure btnKiriMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure btnKananClick(Sender: TObject);
+    procedure imgAtasMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgBawahMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgAtas6MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgKanan6MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgBawah6MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgKiri6MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure tmrCam2Timer(Sender: TObject);
+    procedure imgKananMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgKiriMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgKanan6MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure imgKiri6Click(Sender: TObject);
+    procedure imgKiri6MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure tmrCam6Timer(Sender: TObject);
+    {$ENDREGION}
+
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure ProcessMenuSelection(Sender: TObject);
+    procedure imgCallBtnClick(Sender: TObject);
+    procedure lblIncomingMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure tmrIncomingBlinkerTimer(Sender: TObject);
+    procedure pnlSesVoipClick(Sender: TObject);
+
+  private
+    stateButton: Integer; {0: Kiri; 1:Kanan}
+    valtemp : Integer;
+    isMouseDown : Boolean;
+
+    // VOIP
+    FBlinkerCounter: Integer;
+    isAutoCall : Boolean;
+    ListInternal : TList;
+    GroupList : TFsGroupList;
+    GroupInternal : TFsGroupList;
+    ssGroupList : TFsGroupList;
+    FTimer : TTimer;
+    procedure ClearAndDelList(aList: TList);
+    procedure OnTimerCall(Sender : TObject);
+    function SetCallInternal(ChName : string):Integer;
+    procedure RunPhone;
+    procedure StopPhone;
+    procedure SetPnlStatusConnect(aVisible : Boolean);
+    //Restart n Shutdown
+    procedure ClosePhone;
+    procedure RestartPhone;
+    procedure RestartPhoneNConnector;
+    procedure RestartPC;
+    procedure ShutdownPC;
+
+  public
+    { Public declarations }
+    isRunSimulation : Boolean;
+    procedure RunSimulation;
+    procedure RecvICSData(rec: TICSData);
+    procedure RecvICSOrder(rec: TRecOrder);
+    procedure ReceiveModeCall(Rec : TRecCallMode);
+    procedure ReceiveInternalActivity(Rec : TRecInternal);
+    procedure ReceiveCloseOrder(Rec: TRecData2DOrder);
+    procedure StationCallButtonSel(aBtnTag: Integer);
+  end;
+
+var
+  frmIpmsCCTV: TfrmIpmsCCTV;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  uSocketHandle, uProgressBar, MMSystem;
+
+{$REGION 'IPMS CCTV Original UI Handlers'}
+
+procedure TfrmIpmsCCTV.ZoomCam1Click(Sender: TObject);
+begin
+  {$REGION ' Camera 1 Besar ' }
+  pnlVid1.Top     := 8;
+  pnlVid1.Left    := 168;
+  pnlVid1.Height  := 753;
+  pnlVid1.Width   := 848;
+
+  lblCam1.Left    := 725;
+  lblCam1.Top     := 724;
+
+  pnlLonceng1.Height  := 30;
+  pnlLonceng1.Width   := 30;
+  pnlLonceng1.Left    := 779;
+  pnlLonceng1.Top     := 717;
+
+  pnlRec1.Height  := 30;
+  pnlRec1.Width   := 30;
+  pnlRec1.Left    := 811;
+  pnlRec1.Top     := 717;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 2 ' }
+  pnlVid2.Top     := 8;
+  pnlVid2.Left    := 8;
+  pnlVid2.Height  := 100;
+  pnlVid2.Width   := 154;
+
+  lblCam2.Left    := 56;
+  lblCam2.Top     := 78;
+
+  pnlLonceng2.Height  := 20;
+  pnlLonceng2.Width   := 20;
+  pnlLonceng2.Left    := 108;
+  pnlLonceng2.Top     := 76;
+
+  pnlRec2.Height  := 20;
+  pnlRec2.Width   := 20;
+  pnlRec2.Left    := 130;
+  pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+  {$ENDREGION}
+
+  {$REGION ' Camera 3 ' }
+  pnlVid3.Top     := 117;
+  pnlVid3.Left    := 8;
+  pnlVid3.Height  := 100;
+  pnlVid3.Width   := 154;
+
+  lblCam3.Left    := 56;
+  lblCam3.Top     := 78;
+
+  pnlLonceng3.Height  := 20;
+  pnlLonceng3.Width   := 20;
+  pnlLonceng3.Left    := 108;
+  pnlLonceng3.Top     := 76;
+
+  pnlRec3.Height  := 20;
+  pnlRec3.Width   := 20;
+  pnlRec3.Left    := 130;
+  pnlRec3.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 4 ' }
+  pnlVid4.Top     := 225;
+  pnlVid4.Left    := 8;
+  pnlVid4.Height  := 100;
+  pnlVid4.Width   := 154;
+
+  lblCam4.Left    := 56;
+  lblCam4.Top     := 78;
+
+  pnlLonceng4.Height  := 20;
+  pnlLonceng4.Width   := 20;
+  pnlLonceng4.Left    := 108;
+  pnlLonceng4.Top     := 76;
+
+  pnlRec4.Height  := 20;
+  pnlRec4.Width   := 20;
+  pnlRec4.Left    := 130;
+  pnlRec4.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 5 ' }
+  pnlVid5.Top     := 334;
+  pnlVid5.Left    := 8;
+  pnlVid5.Height  := 100;
+  pnlVid5.Width   := 154;
+
+  lblCam5.Left    := 56;
+  lblCam5.Top     := 78;
+
+  pnlLonceng5.Height  := 20;
+  pnlLonceng5.Width   := 20;
+  pnlLonceng5.Left    := 108;
+  pnlLonceng5.Top     := 76;
+
+  pnlRec5.Height  := 20;
+  pnlRec5.Width   := 20;
+  pnlRec5.Left    := 130;
+  pnlRec5.Top     := 76;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 6 ' }
+  pnlVid6.Top     := 443;
+  pnlVid6.Left    := 8;
+  pnlVid6.Height  := 100;
+  pnlVid6.Width   := 154;
+
+  lblCam6.Left    := 56;
+  lblCam6.Top     := 78;
+
+  pnlLonceng6.Height  := 20;
+  pnlLonceng6.Width   := 20;
+  pnlLonceng6.Left    := 108;
+  pnlLonceng6.Top     := 76;
+
+  pnlRec6.Height  := 20;
+  pnlRec6.Width   := 20;
+  pnlRec6.Left    := 130;
+  pnlRec6.Top     := 76;
+
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 7 ' }
+  pnlVid7.Top     := 551;
+  pnlVid7.Left    := 8;
+  pnlVid7.Height  := 100;
+  pnlVid7.Width   := 154;
+
+  lblCam7.Left    := 56;
+  lblCam7.Top     := 78;
+
+  pnlLonceng7.Height  := 20;
+  pnlLonceng7.Width   := 20;
+  pnlLonceng7.Left    := 108;
+  pnlLonceng7.Top     := 76;
+
+  pnlRec7.Height  := 20;
+  pnlRec7.Width   := 20;
+  pnlRec7.Left    := 130;
+  pnlRec7.Top     := 76;
+
+  lblNoVideo7.Font.Size := 10;
+  lblNoVideo7.Left := 43;
+  lblNoVideo7.Top := 42;
+  {$ENDREGION}
+
+  {$REGION ' Camera 8 ' }
+  pnlVid8.Top     := 660;
+  pnlVid8.Left    := 8;
+  pnlVid8.Height  := 100;
+  pnlVid8.Width   := 154;
+
+  lblCam8.Left    := 56;
+  lblCam8.Top     := 78;
+
+  pnlLonceng8.Height  := 20;
+  pnlLonceng8.Width   := 20;
+  pnlLonceng8.Left    := 108;
+  pnlLonceng8.Top     := 76;
+
+  pnlRec8.Height  := 20;
+  pnlRec8.Width   := 20;
+  pnlRec8.Left    := 130;
+  pnlRec8.Top     := 76;
+
+  lblNoVideo8.Font.Size := 10;
+  lblNoVideo8.Left := 43;
+  lblNoVideo8.Top := 42;
+  {$ENDREGION}
+
+end;
+
+procedure TfrmIpmsCCTV.ZoomCam2Click(Sender: TObject);
+begin
+  {$REGION ' Camera 2 Besar ' }
+  pnlVid2.Top     := 8;
+  pnlVid2.Left    := 168;
+  pnlVid2.Height  := 753;
+  pnlVid2.Width   := 848;
+
+  lblCam2.Left    := 725;
+  lblCam2.Top     := 724;
+
+  pnlLonceng2.Height  := 30;
+  pnlLonceng2.Width   := 30;
+  pnlLonceng2.Left    := 779;
+  pnlLonceng2.Top     := 717;
+
+  pnlRec2.Height  := 30;
+  pnlRec2.Width   := 30;
+  pnlRec2.Left    := 811;
+  pnlRec2.Top     := 717;
+
+  imgBackLittle2.SendToBack;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 1 ' }
+  pnlVid1.Top     := 8;
+  pnlVid1.Left    := 8;
+  pnlVid1.Height  := 100;
+  pnlVid1.Width   := 154;
+
+  lblCam1.Left    := 56;
+  lblCam1.Top     := 78;
+
+  pnlLonceng1.Height  := 20;
+  pnlLonceng1.Width   := 20;
+  pnlLonceng1.Left    := 108;
+  pnlLonceng1.Top     := 76;
+
+  pnlRec1.Height  := 20;
+  pnlRec1.Width   := 20;
+  pnlRec1.Left    := 130;
+  pnlRec1.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 3 ' }
+  pnlVid3.Top     := 117;
+  pnlVid3.Left    := 8;
+  pnlVid3.Height  := 100;
+  pnlVid3.Width   := 154;
+
+  lblCam3.Left    := 56;
+  lblCam3.Top     := 78;
+
+  pnlLonceng3.Height  := 20;
+  pnlLonceng3.Width   := 20;
+  pnlLonceng3.Left    := 108;
+  pnlLonceng3.Top     := 76;
+
+  pnlRec3.Height  := 20;
+  pnlRec3.Width   := 20;
+  pnlRec3.Left    := 130;
+  pnlRec3.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 4 ' }
+  pnlVid4.Top     := 225;
+  pnlVid4.Left    := 8;
+  pnlVid4.Height  := 100;
+  pnlVid4.Width   := 154;
+
+  lblCam4.Left    := 56;
+  lblCam4.Top     := 78;
+
+  pnlLonceng4.Height  := 20;
+  pnlLonceng4.Width   := 20;
+  pnlLonceng4.Left    := 108;
+  pnlLonceng4.Top     := 76;
+
+  pnlRec4.Height  := 20;
+  pnlRec4.Width   := 20;
+  pnlRec4.Left    := 130;
+  pnlRec4.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 5 ' }
+  pnlVid5.Top     := 334;
+  pnlVid5.Left    := 8;
+  pnlVid5.Height  := 100;
+  pnlVid5.Width   := 154;
+
+  lblCam5.Left    := 56;
+  lblCam5.Top     := 78;
+
+  pnlLonceng5.Height  := 20;
+  pnlLonceng5.Width   := 20;
+  pnlLonceng5.Left    := 108;
+  pnlLonceng5.Top     := 76;
+
+  pnlRec5.Height  := 20;
+  pnlRec5.Width   := 20;
+  pnlRec5.Left    := 130;
+  pnlRec5.Top     := 76;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 6 ' }
+  pnlVid6.Top     := 443;
+  pnlVid6.Left    := 8;
+  pnlVid6.Height  := 100;
+  pnlVid6.Width   := 154;
+
+  lblCam6.Left    := 56;
+  lblCam6.Top     := 78;
+
+  pnlLonceng6.Height  := 20;
+  pnlLonceng6.Width   := 20;
+  pnlLonceng6.Left    := 108;
+  pnlLonceng6.Top     := 76;
+
+  pnlRec6.Height  := 20;
+  pnlRec6.Width   := 20;
+  pnlRec6.Left    := 130;
+  pnlRec6.Top     := 76;
+
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 7 ' }
+  pnlVid7.Top     := 551;
+  pnlVid7.Left    := 8;
+  pnlVid7.Height  := 100;
+  pnlVid7.Width   := 154;
+
+  lblCam7.Left    := 56;
+  lblCam7.Top     := 78;
+
+  pnlLonceng7.Height  := 20;
+  pnlLonceng7.Width   := 20;
+  pnlLonceng7.Left    := 108;
+  pnlLonceng7.Top     := 76;
+
+  pnlRec7.Height  := 20;
+  pnlRec7.Width   := 20;
+  pnlRec7.Left    := 130;
+  pnlRec7.Top     := 76;
+
+  lblNoVideo7.Font.Size := 10;
+  lblNoVideo7.Left := 43;
+  lblNoVideo7.Top := 42;
+  {$ENDREGION}
+
+  {$REGION ' Camera 8 ' }
+  pnlVid8.Top     := 660;
+  pnlVid8.Left    := 8;
+  pnlVid8.Height  := 100;
+  pnlVid8.Width   := 154;
+
+  lblCam8.Left    := 56;
+  lblCam8.Top     := 78;
+
+  pnlLonceng8.Height  := 20;
+  pnlLonceng8.Width   := 20;
+  pnlLonceng8.Left    := 108;
+  pnlLonceng8.Top     := 76;
+
+  pnlRec8.Height  := 20;
+  pnlRec8.Width   := 20;
+  pnlRec8.Left    := 130;
+  pnlRec8.Top     := 76;
+
+  lblNoVideo8.Font.Size := 10;
+  lblNoVideo8.Left := 43;
+  lblNoVideo8.Top := 42;
+  {$ENDREGION}
+
+end;
+
+procedure TfrmIpmsCCTV.ZoomCam3Click(Sender: TObject);
+begin
+  {$REGION ' Camera 3 Besar ' }
+  pnlVid3.Top     := 8;
+  pnlVid3.Left    := 168;
+  pnlVid3.Height  := 753;
+  pnlVid3.Width   := 848;
+
+  lblCam3.Left    := 725;
+  lblCam3.Top     := 724;
+
+  pnlLonceng3.Height  := 30;
+  pnlLonceng3.Width   := 30;
+  pnlLonceng3.Left    := 779;
+  pnlLonceng3.Top     := 717;
+
+  pnlRec3.Height  := 30;
+  pnlRec3.Width   := 30;
+  pnlRec3.Left    := 811;
+  pnlRec3.Top     := 717;
+  {$ENDREGION}
+
+  {$REGION ' Camera 1 ' }
+  pnlVid1.Top     := 8;
+  pnlVid1.Left    := 8;
+  pnlVid1.Height  := 100;
+  pnlVid1.Width   := 154;
+
+  lblCam1.Left    := 56;
+  lblCam1.Top     := 78;
+
+  pnlLonceng1.Height  := 20;
+  pnlLonceng1.Width   := 20;
+  pnlLonceng1.Left    := 108;
+  pnlLonceng1.Top     := 76;
+
+  pnlRec1.Height  := 20;
+  pnlRec1.Width   := 20;
+  pnlRec1.Left    := 130;
+  pnlRec1.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 2 ' }
+  pnlVid2.Top     := 117;
+  pnlVid2.Left    := 8;
+  pnlVid2.Height  := 100;
+  pnlVid2.Width   := 154;
+
+  lblCam2.Left    := 56;
+  lblCam2.Top     := 78;
+
+  pnlLonceng2.Height  := 20;
+  pnlLonceng2.Width   := 20;
+  pnlLonceng2.Left    := 108;
+  pnlLonceng2.Top     := 76;
+
+  pnlRec2.Height  := 20;
+  pnlRec2.Width   := 20;
+  pnlRec2.Left    := 130;
+  pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 4 ' }
+  pnlVid4.Top     := 225;
+  pnlVid4.Left    := 8;
+  pnlVid4.Height  := 100;
+  pnlVid4.Width   := 154;
+
+  lblCam4.Left    := 56;
+  lblCam4.Top     := 78;
+
+  pnlLonceng4.Height  := 20;
+  pnlLonceng4.Width   := 20;
+  pnlLonceng4.Left    := 108;
+  pnlLonceng4.Top     := 76;
+
+  pnlRec4.Height  := 20;
+  pnlRec4.Width   := 20;
+  pnlRec4.Left    := 130;
+  pnlRec4.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 5 ' }
+  pnlVid5.Top     := 334;
+  pnlVid5.Left    := 8;
+  pnlVid5.Height  := 100;
+  pnlVid5.Width   := 154;
+
+  lblCam5.Left    := 56;
+  lblCam5.Top     := 78;
+
+  pnlLonceng5.Height  := 20;
+  pnlLonceng5.Width   := 20;
+  pnlLonceng5.Left    := 108;
+  pnlLonceng5.Top     := 76;
+
+  pnlRec5.Height  := 20;
+  pnlRec5.Width   := 20;
+  pnlRec5.Left    := 130;
+  pnlRec5.Top     := 76;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 6 ' }
+  pnlVid6.Top     := 443;
+  pnlVid6.Left    := 8;
+  pnlVid6.Height  := 100;
+  pnlVid6.Width   := 154;
+
+  lblCam6.Left    := 56;
+  lblCam6.Top     := 78;
+
+  pnlLonceng6.Height  := 20;
+  pnlLonceng6.Width   := 20;
+  pnlLonceng6.Left    := 108;
+  pnlLonceng6.Top     := 76;
+
+  pnlRec6.Height  := 20;
+  pnlRec6.Width   := 20;
+  pnlRec6.Left    := 130;
+  pnlRec6.Top     := 76;
+
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 7 ' }
+  pnlVid7.Top     := 551;
+  pnlVid7.Left    := 8;
+  pnlVid7.Height  := 100;
+  pnlVid7.Width   := 154;
+
+  lblCam7.Left    := 56;
+  lblCam7.Top     := 78;
+
+  pnlLonceng7.Height  := 20;
+  pnlLonceng7.Width   := 20;
+  pnlLonceng7.Left    := 108;
+  pnlLonceng7.Top     := 76;
+
+  pnlRec7.Height  := 20;
+  pnlRec7.Width   := 20;
+  pnlRec7.Left    := 130;
+  pnlRec7.Top     := 76;
+
+  lblNoVideo7.Font.Size := 10;
+  lblNoVideo7.Left := 43;
+  lblNoVideo7.Top := 42;
+  {$ENDREGION}
+
+  {$REGION ' Camera 8 ' }
+  pnlVid8.Top     := 660;
+  pnlVid8.Left    := 8;
+  pnlVid8.Height  := 100;
+  pnlVid8.Width   := 154;
+
+  lblCam8.Left    := 56;
+  lblCam8.Top     := 78;
+
+  pnlLonceng8.Height  := 20;
+  pnlLonceng8.Width   := 20;
+  pnlLonceng8.Left    := 108;
+  pnlLonceng8.Top     := 76;
+
+  pnlRec8.Height  := 20;
+  pnlRec8.Width   := 20;
+  pnlRec8.Left    := 130;
+  pnlRec8.Top     := 76;
+
+  lblNoVideo8.Font.Size := 10;
+  lblNoVideo8.Left := 43;
+  lblNoVideo8.Top := 42;
+  {$ENDREGION}
+
+end;
+
+procedure TfrmIpmsCCTV.ZoomCam4Click(Sender: TObject);
+begin
+  {$REGION ' Camera 4 Besar ' }
+  pnlVid4.Top     := 8;
+  pnlVid4.Left    := 168;
+  pnlVid4.Height  := 753;
+  pnlVid4.Width   := 848;
+
+  lblCam4.Left    := 725;
+  lblCam4.Top     := 724;
+
+  pnlLonceng4.Height  := 30;
+  pnlLonceng4.Width   := 30;
+  pnlLonceng4.Left    := 779;
+  pnlLonceng4.Top     := 717;
+
+  pnlRec4.Height  := 30;
+  pnlRec4.Width   := 30;
+  pnlRec4.Left    := 811;
+  pnlRec4.Top     := 717;
+  {$ENDREGION}
+
+  {$REGION ' Camera 1 ' }
+  pnlVid1.Top     := 8;
+  pnlVid1.Left    := 8;
+  pnlVid1.Height  := 100;
+  pnlVid1.Width   := 154;
+
+  lblCam1.Left    := 56;
+  lblCam1.Top     := 78;
+
+  pnlLonceng1.Height  := 20;
+  pnlLonceng1.Width   := 20;
+  pnlLonceng1.Left    := 108;
+  pnlLonceng1.Top     := 76;
+
+  pnlRec1.Height  := 20;
+  pnlRec1.Width   := 20;
+  pnlRec1.Left    := 130;
+  pnlRec1.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 2 ' }
+  pnlVid2.Top     := 117;
+  pnlVid2.Left    := 8;
+  pnlVid2.Height  := 100;
+  pnlVid2.Width   := 154;
+
+  lblCam2.Left    := 56;
+  lblCam2.Top     := 78;
+
+  pnlLonceng2.Height  := 20;
+  pnlLonceng2.Width   := 20;
+  pnlLonceng2.Left    := 108;
+  pnlLonceng2.Top     := 76;
+
+  pnlRec2.Height  := 20;
+  pnlRec2.Width   := 20;
+  pnlRec2.Left    := 130;
+  pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 3 ' }
+  pnlVid3.Top     := 225;
+  pnlVid3.Left    := 8;
+  pnlVid3.Height  := 100;
+  pnlVid3.Width   := 154;
+
+  lblCam3.Left    := 56;
+  lblCam3.Top     := 78;
+
+  pnlLonceng3.Height  := 20;
+  pnlLonceng3.Width   := 20;
+  pnlLonceng3.Left    := 108;
+  pnlLonceng3.Top     := 76;
+
+  pnlRec3.Height  := 20;
+  pnlRec3.Width   := 20;
+  pnlRec3.Left    := 130;
+  pnlRec3.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 5 ' }
+  pnlVid5.Top     := 334;
+  pnlVid5.Left    := 8;
+  pnlVid5.Height  := 100;
+  pnlVid5.Width   := 154;
+
+  lblCam5.Left    := 56;
+  lblCam5.Top     := 78;
+
+  pnlLonceng5.Height  := 20;
+  pnlLonceng5.Width   := 20;
+  pnlLonceng5.Left    := 108;
+  pnlLonceng5.Top     := 76;
+
+  pnlRec5.Height  := 20;
+  pnlRec5.Width   := 20;
+  pnlRec5.Left    := 130;
+  pnlRec5.Top     := 76;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 6 ' }
+  pnlVid6.Top     := 443;
+  pnlVid6.Left    := 8;
+  pnlVid6.Height  := 100;
+  pnlVid6.Width   := 154;
+
+  lblCam6.Left    := 56;
+  lblCam6.Top     := 78;
+
+  pnlLonceng6.Height  := 20;
+  pnlLonceng6.Width   := 20;
+  pnlLonceng6.Left    := 108;
+  pnlLonceng6.Top     := 76;
+
+  pnlRec6.Height  := 20;
+  pnlRec6.Width   := 20;
+  pnlRec6.Left    := 130;
+  pnlRec6.Top     := 76;
+
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 7 ' }
+  pnlVid7.Top     := 551;
+  pnlVid7.Left    := 8;
+  pnlVid7.Height  := 100;
+  pnlVid7.Width   := 154;
+
+  lblCam7.Left    := 56;
+  lblCam7.Top     := 78;
+
+  pnlLonceng7.Height  := 20;
+  pnlLonceng7.Width   := 20;
+  pnlLonceng7.Left    := 108;
+  pnlLonceng7.Top     := 76;
+
+  pnlRec7.Height  := 20;
+  pnlRec7.Width   := 20;
+  pnlRec7.Left    := 130;
+  pnlRec7.Top     := 76;
+
+  lblNoVideo7.Font.Size := 10;
+  lblNoVideo7.Left := 43;
+  lblNoVideo7.Top := 42;
+  {$ENDREGION}
+
+  {$REGION ' Camera 8 ' }
+  pnlVid8.Top     := 660;
+  pnlVid8.Left    := 8;
+  pnlVid8.Height  := 100;
+  pnlVid8.Width   := 154;
+
+  lblCam8.Left    := 56;
+  lblCam8.Top     := 78;
+
+  pnlLonceng8.Height  := 20;
+  pnlLonceng8.Width   := 20;
+  pnlLonceng8.Left    := 108;
+  pnlLonceng8.Top     := 76;
+
+  pnlRec8.Height  := 20;
+  pnlRec8.Width   := 20;
+  pnlRec8.Left    := 130;
+  pnlRec8.Top     := 76;
+
+  lblNoVideo8.Font.Size := 10;
+  lblNoVideo8.Left := 43;
+  lblNoVideo8.Top := 42;
+  {$ENDREGION}
+
+end;
+
+procedure TfrmIpmsCCTV.ZoomCam5Click(Sender: TObject);
+begin
+  {$REGION ' Camera 5 Besar ' }
+  pnlVid5.Top     := 8;
+  pnlVid5.Left    := 168;
+  pnlVid5.Height  := 753;
+  pnlVid5.Width   := 848;
+
+  lblCam5.Left    := 725;
+  lblCam5.Top     := 724;
+
+  pnlLonceng5.Height  := 30;
+  pnlLonceng5.Width   := 30;
+  pnlLonceng5.Left    := 779;
+  pnlLonceng5.Top     := 717;
+
+  pnlRec5.Height  := 30;
+  pnlRec5.Width   := 30;
+  pnlRec5.Left    := 811;
+  pnlRec5.Top     := 717;
+  {$ENDREGION}
+
+  {$REGION ' Camera 1 ' }
+  pnlVid1.Top     := 8;
+  pnlVid1.Left    := 8;
+  pnlVid1.Height  := 100;
+  pnlVid1.Width   := 154;
+
+  lblCam1.Left    := 56;
+  lblCam1.Top     := 78;
+
+  pnlLonceng1.Height  := 20;
+  pnlLonceng1.Width   := 20;
+  pnlLonceng1.Left    := 108;
+  pnlLonceng1.Top     := 76;
+
+  pnlRec1.Height  := 20;
+  pnlRec1.Width   := 20;
+  pnlRec1.Left    := 130;
+  pnlRec1.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 2 ' }
+  pnlVid2.Top     := 117;
+  pnlVid2.Left    := 8;
+  pnlVid2.Height  := 100;
+  pnlVid2.Width   := 154;
+
+  lblCam2.Left    := 56;
+  lblCam2.Top     := 78;
+
+  pnlLonceng2.Height  := 20;
+  pnlLonceng2.Width   := 20;
+  pnlLonceng2.Left    := 108;
+  pnlLonceng2.Top     := 76;
+
+  pnlRec2.Height  := 20;
+  pnlRec2.Width   := 20;
+  pnlRec2.Left    := 130;
+  pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 3 ' }
+  pnlVid3.Top     := 225;
+  pnlVid3.Left    := 8;
+  pnlVid3.Height  := 100;
+  pnlVid3.Width   := 154;
+
+  lblCam3.Left    := 56;
+  lblCam3.Top     := 78;
+
+  pnlLonceng3.Height  := 20;
+  pnlLonceng3.Width   := 20;
+  pnlLonceng3.Left    := 108;
+  pnlLonceng3.Top     := 76;
+
+  pnlRec3.Height  := 20;
+  pnlRec3.Width   := 20;
+  pnlRec3.Left    := 130;
+  pnlRec3.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 4 ' }
+  pnlVid4.Top     := 334;
+  pnlVid4.Left    := 8;
+  pnlVid4.Height  := 100;
+  pnlVid4.Width   := 154;
+
+  lblCam4.Left    := 56;
+  lblCam4.Top     := 78;
+
+  pnlLonceng4.Height  := 20;
+  pnlLonceng4.Width   := 20;
+  pnlLonceng4.Left    := 108;
+  pnlLonceng4.Top     := 76;
+
+  pnlRec4.Height  := 20;
+  pnlRec4.Width   := 20;
+  pnlRec4.Left    := 130;
+  pnlRec4.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 6 ' }
+  pnlVid6.Top     := 443;
+  pnlVid6.Left    := 8;
+  pnlVid6.Height  := 100;
+  pnlVid6.Width   := 154;
+
+  lblCam6.Left    := 56;
+  lblCam6.Top     := 78;
+
+  pnlLonceng6.Height  := 20;
+  pnlLonceng6.Width   := 20;
+  pnlLonceng6.Left    := 108;
+  pnlLonceng6.Top     := 76;
+
+  pnlRec6.Height  := 20;
+  pnlRec6.Width   := 20;
+  pnlRec6.Left    := 130;
+  pnlRec6.Top     := 76;
+
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 7 ' }
+  pnlVid7.Top     := 551;
+  pnlVid7.Left    := 8;
+  pnlVid7.Height  := 100;
+  pnlVid7.Width   := 154;
+
+  lblCam7.Left    := 56;
+  lblCam7.Top     := 78;
+
+  pnlLonceng7.Height  := 20;
+  pnlLonceng7.Width   := 20;
+  pnlLonceng7.Left    := 108;
+  pnlLonceng7.Top     := 76;
+
+  pnlRec7.Height  := 20;
+  pnlRec7.Width   := 20;
+  pnlRec7.Left    := 130;
+  pnlRec7.Top     := 76;
+
+  lblNoVideo7.Font.Size := 10;
+  lblNoVideo7.Left := 43;
+  lblNoVideo7.Top := 42;
+  {$ENDREGION}
+
+  {$REGION ' Camera 8 ' }
+  pnlVid8.Top     := 660;
+  pnlVid8.Left    := 8;
+  pnlVid8.Height  := 100;
+  pnlVid8.Width   := 154;
+
+  lblCam8.Left    := 56;
+  lblCam8.Top     := 78;
+
+  pnlLonceng8.Height  := 20;
+  pnlLonceng8.Width   := 20;
+  pnlLonceng8.Left    := 108;
+  pnlLonceng8.Top     := 76;
+
+  pnlRec8.Height  := 20;
+  pnlRec8.Width   := 20;
+  pnlRec8.Left    := 130;
+  pnlRec8.Top     := 76;
+
+  lblNoVideo8.Font.Size := 10;
+  lblNoVideo8.Left := 43;
+  lblNoVideo8.Top := 42;
+  {$ENDREGION}
+
+end;
+
+procedure TfrmIpmsCCTV.ZoomCam6Click(Sender: TObject);
+begin
+  {$REGION ' Camera 6 Besar' }
+  pnlVid6.Top     := 8;
+  pnlVid6.Left    := 168;
+  pnlVid6.Height  := 753;
+  pnlVid6.Width   := 848;
+
+  lblCam6.Left    := 725;
+  lblCam6.Top     := 724;
+
+  pnlLonceng6.Height  := 30;
+  pnlLonceng6.Width   := 30;
+  pnlLonceng6.Left    := 779;
+  pnlLonceng6.Top     := 717;
+
+  pnlRec6.Height  := 30;
+  pnlRec6.Width   := 30;
+  pnlRec6.Left    := 811;
+  pnlRec6.Top     := 717;
+
+  imgBackLittle6.SendToBack;
+  {$ENDREGION}
+
+  {$REGION ' Camera 1 ' }
+  pnlVid1.Top     := 8;
+  pnlVid1.Left    := 8;
+  pnlVid1.Height  := 100;
+  pnlVid1.Width   := 154;
+
+  lblCam1.Left    := 56;
+  lblCam1.Top     := 78;
+
+  pnlLonceng1.Height  := 20;
+  pnlLonceng1.Width   := 20;
+  pnlLonceng1.Left    := 108;
+  pnlLonceng1.Top     := 76;
+
+  pnlRec1.Height  := 20;
+  pnlRec1.Width   := 20;
+  pnlRec1.Left    := 130;
+  pnlRec1.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 2 ' }
+  pnlVid2.Top     := 117;
+  pnlVid2.Left    := 8;
+  pnlVid2.Height  := 100;
+  pnlVid2.Width   := 154;
+
+  lblCam2.Left    := 56;
+  lblCam2.Top     := 78;
+
+  pnlLonceng2.Height  := 20;
+  pnlLonceng2.Width   := 20;
+  pnlLonceng2.Left    := 108;
+  pnlLonceng2.Top     := 76;
+
+  pnlRec2.Height  := 20;
+  pnlRec2.Width   := 20;
+  pnlRec2.Left    := 130;
+  pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 3 ' }
+  pnlVid3.Top     := 225;
+  pnlVid3.Left    := 8;
+  pnlVid3.Height  := 100;
+  pnlVid3.Width   := 154;
+
+  lblCam3.Left    := 56;
+  lblCam3.Top     := 78;
+
+  pnlLonceng3.Height  := 20;
+  pnlLonceng3.Width   := 20;
+  pnlLonceng3.Left    := 108;
+  pnlLonceng3.Top     := 76;
+
+  pnlRec3.Height  := 20;
+  pnlRec3.Width   := 20;
+  pnlRec3.Left    := 130;
+  pnlRec3.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 4 ' }
+  pnlVid4.Top     := 334;
+  pnlVid4.Left    := 8;
+  pnlVid4.Height  := 100;
+  pnlVid4.Width   := 154;
+
+  lblCam4.Left    := 56;
+  lblCam4.Top     := 78;
+
+  pnlLonceng4.Height  := 20;
+  pnlLonceng4.Width   := 20;
+  pnlLonceng4.Left    := 108;
+  pnlLonceng4.Top     := 76;
+
+  pnlRec4.Height  := 20;
+  pnlRec4.Width   := 20;
+  pnlRec4.Left    := 130;
+  pnlRec4.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 5 ' }
+  pnlVid5.Top     := 443;
+  pnlVid5.Left    := 8;
+  pnlVid5.Height  := 100;
+  pnlVid5.Width   := 154;
+
+  lblCam5.Left    := 56;
+  lblCam5.Top     := 78;
+
+  pnlLonceng5.Height  := 20;
+  pnlLonceng5.Width   := 20;
+  pnlLonceng5.Left    := 108;
+  pnlLonceng5.Top     := 76;
+
+  pnlRec5.Height  := 20;
+  pnlRec5.Width   := 20;
+  pnlRec5.Left    := 130;
+  pnlRec5.Top     := 76;
+
+//  ImgPercobaan.Visible := False;
+//  Image22.SendToBack;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 7 ' }
+  pnlVid7.Top     := 551;
+  pnlVid7.Left    := 8;
+  pnlVid7.Height  := 100;
+  pnlVid7.Width   := 154;
+
+  lblCam7.Left    := 56;
+  lblCam7.Top     := 78;
+
+  pnlLonceng7.Height  := 20;
+  pnlLonceng7.Width   := 20;
+  pnlLonceng7.Left    := 108;
+  pnlLonceng7.Top     := 76;
+
+  pnlRec7.Height  := 20;
+  pnlRec7.Width   := 20;
+  pnlRec7.Left    := 130;
+  pnlRec7.Top     := 76;
+
+  lblNoVideo7.Font.Size := 10;
+  lblNoVideo7.Left := 43;
+  lblNoVideo7.Top := 42;
+  {$ENDREGION}
+
+  {$REGION ' Camera 8 ' }
+  pnlVid8.Top     := 660;
+  pnlVid8.Left    := 8;
+  pnlVid8.Height  := 100;
+  pnlVid8.Width   := 154;
+
+  lblCam8.Left    := 56;
+  lblCam8.Top     := 78;
+
+  pnlLonceng8.Height  := 20;
+  pnlLonceng8.Width   := 20;
+  pnlLonceng8.Left    := 108;
+  pnlLonceng8.Top     := 76;
+
+  pnlRec8.Height  := 20;
+  pnlRec8.Width   := 20;
+  pnlRec8.Left    := 130;
+  pnlRec8.Top     := 76;
+
+  lblNoVideo8.Font.Size := 10;
+  lblNoVideo8.Left := 43;
+  lblNoVideo8.Top := 42;
+  {$ENDREGION}
+
+end;
+
+procedure TfrmIpmsCCTV.ZoomCam7Click(Sender: TObject);
+begin
+  {$REGION ' Camera 7 Besar' }
+  pnlVid7.Top     := 8;
+  pnlVid7.Left    := 168;
+  pnlVid7.Height  := 753;
+  pnlVid7.Width   := 848;
+
+  lblCam7.Left    := 725;
+  lblCam7.Top     := 724;
+
+  pnlLonceng7.Height  := 30;
+  pnlLonceng7.Width   := 30;
+  pnlLonceng7.Left    := 779;
+  pnlLonceng7.Top     := 717;
+
+  pnlRec7.Height  := 30;
+  pnlRec7.Width   := 30;
+  pnlRec7.Left    := 811;
+  pnlRec7.Top     := 717;
+
+  lblNoVideo7.Font.Size := 48;
+  lblNoVideo7.Left := 241;
+  lblNoVideo7.Top := 338;
+  {$ENDREGION}
+
+  {$REGION ' Camera 1 ' }
+  pnlVid1.Top     := 8;
+  pnlVid1.Left    := 8;
+  pnlVid1.Height  := 100;
+  pnlVid1.Width   := 154;
+
+  lblCam1.Left    := 56;
+  lblCam1.Top     := 78;
+
+  pnlLonceng1.Height  := 20;
+  pnlLonceng1.Width   := 20;
+  pnlLonceng1.Left    := 108;
+  pnlLonceng1.Top     := 76;
+
+  pnlRec1.Height  := 20;
+  pnlRec1.Width   := 20;
+  pnlRec1.Left    := 130;
+  pnlRec1.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 2 ' }
+  pnlVid2.Top     := 117;
+  pnlVid2.Left    := 8;
+  pnlVid2.Height  := 100;
+  pnlVid2.Width   := 154;
+
+  lblCam2.Left    := 56;
+  lblCam2.Top     := 78;
+
+  pnlLonceng2.Height  := 20;
+  pnlLonceng2.Width   := 20;
+  pnlLonceng2.Left    := 108;
+  pnlLonceng2.Top     := 76;
+
+  pnlRec2.Height  := 20;
+  pnlRec2.Width   := 20;
+  pnlRec2.Left    := 130;
+  pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 3 ' }
+  pnlVid3.Top     := 225;
+  pnlVid3.Left    := 8;
+  pnlVid3.Height  := 100;
+  pnlVid3.Width   := 154;
+
+  lblCam3.Left    := 56;
+  lblCam3.Top     := 78;
+
+  pnlLonceng3.Height  := 20;
+  pnlLonceng3.Width   := 20;
+  pnlLonceng3.Left    := 108;
+  pnlLonceng3.Top     := 76;
+
+  pnlRec3.Height  := 20;
+  pnlRec3.Width   := 20;
+  pnlRec3.Left    := 130;
+  pnlRec3.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 4 ' }
+  pnlVid4.Top     := 334;
+  pnlVid4.Left    := 8;
+  pnlVid4.Height  := 100;
+  pnlVid4.Width   := 154;
+
+  lblCam4.Left    := 56;
+  lblCam4.Top     := 78;
+
+  pnlLonceng4.Height  := 20;
+  pnlLonceng4.Width   := 20;
+  pnlLonceng4.Left    := 108;
+  pnlLonceng4.Top     := 76;
+
+  pnlRec4.Height  := 20;
+  pnlRec4.Width   := 20;
+  pnlRec4.Left    := 130;
+  pnlRec4.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 5 ' }
+  pnlVid5.Top     := 443;
+  pnlVid5.Left    := 8;
+  pnlVid5.Height  := 100;
+  pnlVid5.Width   := 154;
+
+  lblCam5.Left    := 56;
+  lblCam5.Top     := 78;
+
+  pnlLonceng5.Height  := 20;
+  pnlLonceng5.Width   := 20;
+  pnlLonceng5.Left    := 108;
+  pnlLonceng5.Top     := 76;
+
+  pnlRec5.Height  := 20;
+  pnlRec5.Width   := 20;
+  pnlRec5.Left    := 130;
+  pnlRec5.Top     := 76;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 6 ' }
+  pnlVid6.Top     := 551;
+  pnlVid6.Left    := 8;
+  pnlVid6.Height  := 100;
+  pnlVid6.Width   := 154;
+
+  lblCam6.Left    := 56;
+  lblCam6.Top     := 78;
+
+  pnlLonceng6.Height  := 20;
+  pnlLonceng6.Width   := 20;
+  pnlLonceng6.Left    := 108;
+  pnlLonceng6.Top     := 76;
+
+  pnlRec6.Height  := 20;
+  pnlRec6.Width   := 20;
+  pnlRec6.Left    := 130;
+  pnlRec6.Top     := 76;
+
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 8 ' }
+  pnlVid8.Top     := 660;
+  pnlVid8.Left    := 8;
+  pnlVid8.Height  := 100;
+  pnlVid8.Width   := 154;
+
+  lblCam8.Left    := 56;
+  lblCam8.Top     := 78;
+
+  pnlLonceng8.Height  := 20;
+  pnlLonceng8.Width   := 20;
+  pnlLonceng8.Left    := 108;
+  pnlLonceng8.Top     := 76;
+
+  pnlRec8.Height  := 20;
+  pnlRec8.Width   := 20;
+  pnlRec8.Left    := 130;
+  pnlRec8.Top     := 76;
+
+  lblNoVideo8.Font.Size := 10;
+  lblNoVideo8.Left := 43;
+  lblNoVideo8.Top := 42;
+  {$ENDREGION}
+
+end;
+
+procedure TfrmIpmsCCTV.ZoomCam8Click(Sender: TObject);
+begin
+  {$REGION ' Camera 8 Besar' }
+  pnlVid8.Top     := 8;
+  pnlVid8.Left    := 168;
+  pnlVid8.Height  := 753;
+  pnlVid8.Width   := 848;
+
+  lblCam8.Left    := 725;
+  lblCam8.Top     := 724;
+
+  pnlLonceng8.Height  := 30;
+  pnlLonceng8.Width   := 30;
+  pnlLonceng8.Left    := 779;
+  pnlLonceng8.Top     := 717;
+
+  pnlRec8.Height  := 30;
+  pnlRec8.Width   := 30;
+  pnlRec8.Left    := 811;
+  pnlRec8.Top     := 717;
+
+  lblNoVideo8.Font.Size := 48;
+  lblNoVideo8.Left := 241;
+  lblNoVideo8.Top := 338;
+  {$ENDREGION}
+
+  {$REGION ' Camera 1 ' }
+  pnlVid1.Top     := 8;
+  pnlVid1.Left    := 8;
+  pnlVid1.Height  := 100;
+  pnlVid1.Width   := 154;
+
+  lblCam1.Left    := 56;
+  lblCam1.Top     := 78;
+
+  pnlLonceng1.Height  := 20;
+  pnlLonceng1.Width   := 20;
+  pnlLonceng1.Left    := 108;
+  pnlLonceng1.Top     := 76;
+
+  pnlRec1.Height  := 20;
+  pnlRec1.Width   := 20;
+  pnlRec1.Left    := 130;
+  pnlRec1.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 2 ' }
+  pnlVid2.Top     := 117;
+  pnlVid2.Left    := 8;
+  pnlVid2.Height  := 100;
+  pnlVid2.Width   := 154;
+
+  lblCam2.Left    := 56;
+  lblCam2.Top     := 78;
+
+  pnlLonceng2.Height  := 20;
+  pnlLonceng2.Width   := 20;
+  pnlLonceng2.Left    := 108;
+  pnlLonceng2.Top     := 76;
+
+  pnlRec2.Height  := 20;
+  pnlRec2.Width   := 20;
+  pnlRec2.Left    := 130;
+  pnlRec2.Top     := 76;
+
+  imgBackLittle2.BringToFront;
+  lblVid2.BringToFront;
+  lblCam2.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 3 ' }
+  pnlVid3.Top     := 225;
+  pnlVid3.Left    := 8;
+  pnlVid3.Height  := 100;
+  pnlVid3.Width   := 154;
+
+  lblCam3.Left    := 56;
+  lblCam3.Top     := 78;
+
+  pnlLonceng3.Height  := 20;
+  pnlLonceng3.Width   := 20;
+  pnlLonceng3.Left    := 108;
+  pnlLonceng3.Top     := 76;
+
+  pnlRec3.Height  := 20;
+  pnlRec3.Width   := 20;
+  pnlRec3.Left    := 130;
+  pnlRec3.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 4 ' }
+  pnlVid4.Top     := 334;
+  pnlVid4.Left    := 8;
+  pnlVid4.Height  := 100;
+  pnlVid4.Width   := 154;
+
+  lblCam4.Left    := 56;
+  lblCam4.Top     := 78;
+
+  pnlLonceng4.Height  := 20;
+  pnlLonceng4.Width   := 20;
+  pnlLonceng4.Left    := 108;
+  pnlLonceng4.Top     := 76;
+
+  pnlRec4.Height  := 20;
+  pnlRec4.Width   := 20;
+  pnlRec4.Left    := 130;
+  pnlRec4.Top     := 76;
+  {$ENDREGION}
+
+  {$REGION ' Camera 5 ' }
+  pnlVid5.Top     := 443;
+  pnlVid5.Left    := 8;
+  pnlVid5.Height  := 100;
+  pnlVid5.Width   := 154;
+
+  lblCam5.Left    := 56;
+  lblCam5.Top     := 78;
+
+  pnlLonceng5.Height  := 20;
+  pnlLonceng5.Width   := 20;
+  pnlLonceng5.Left    := 108;
+  pnlLonceng5.Top     := 76;
+
+  pnlRec5.Height  := 20;
+  pnlRec5.Width   := 20;
+  pnlRec5.Left    := 130;
+  pnlRec5.Top     := 76;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 6 ' }
+  pnlVid6.Top     := 551;
+  pnlVid6.Left    := 8;
+  pnlVid6.Height  := 100;
+  pnlVid6.Width   := 154;
+
+  lblCam6.Left    := 56;
+  lblCam6.Top     := 78;
+
+  pnlLonceng6.Height  := 20;
+  pnlLonceng6.Width   := 20;
+  pnlLonceng6.Left    := 108;
+  pnlLonceng6.Top     := 76;
+
+  pnlRec6.Height  := 20;
+  pnlRec6.Width   := 20;
+  pnlRec6.Left    := 130;
+  pnlRec6.Top     := 76;
+
+  imgBackLittle6.BringToFront;
+  lblVid6.BringToFront;
+  lblCam6.BringToFront;
+
+  {$ENDREGION}
+
+  {$REGION ' Camera 7 ' }
+  pnlVid7.Top     := 660;
+  pnlVid7.Left    := 8;
+  pnlVid7.Height  := 100;
+  pnlVid7.Width   := 154;
+
+  lblCam7.Left    := 56;
+  lblCam7.Top     := 78;
+
+  pnlLonceng7.Height  := 20;
+  pnlLonceng7.Width   := 20;
+  pnlLonceng7.Left    := 108;
+  pnlLonceng7.Top     := 76;
+
+  pnlRec7.Height  := 20;
+  pnlRec7.Width   := 20;
+  pnlRec7.Left    := 130;
+  pnlRec7.Top     := 76;
+
+  lblNoVideo7.Font.Size := 10;
+  lblNoVideo7.Left := 43;
+  lblNoVideo7.Top := 42;
+  {$ENDREGION}
+
+ end;
+
+//procedure TuMainForm.Button1Click(Sender: TObject);
+//begin
+////  ShowMessage('lebar : '+FloatToStr(uMainForm.Width)+ '' + 'Tinggi : '+Floattostr(uMainForm.Height));
+//  MDSound.Open;
+//  MDSound.Play;
+//end;
+//
+//procedure TuMainForm.MDSoundClick(Sender: TObject; Button: TMPBtnType;
+//  var DoDefault: Boolean);
+//begin
+////  MDSound.FileName := 'D:\CAECILIA MC\P.IPMS';
+//  MDSound.Open;
+//  MDSound.Play;
+//end;
+//
+//procedure TuMainForm.MDSoundNotify(Sender: TObject);
+//begin
+//  MDSound.Open;
+//  MDSound.Play;
+//end;
+
+procedure TfrmIpmsCCTV.btnKananClick(Sender: TObject);
+begin
+//    if (Image2.Left < -1543) or ((Image2.Left > 0)) then
+//    Exit;
+//
+//  Image2.Left := Image2.Left + Round(RzPSRudderAngle.Value);
+//
+//  valtemp := Round(RzPSRudderAngle.Value);
+end;
+
+procedure TfrmIpmsCCTV.btnKananMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+
+begin
+  isMouseDown := True;
+  stateButton := 1; {Kanan}
+  tmrCam2.Enabled := True;
+end;
+procedure TfrmIpmsCCTV.btnKiriMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := True;
+  stateButton := 0; {Kiri}
+  tmrCam2.Enabled := True;
+
+end;
+
+procedure TfrmIpmsCCTV.imgAtas6MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if (Image22.Top <0) or ((Image22.Top > 0)) then
+    Exit;
+
+  Image22.Top := Image22.Top - 10;
+end;
+
+procedure TfrmIpmsCCTV.imgAtasMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if (Image2.Top <0) or ((Image2.Top > 0)) then
+    Exit;
+
+  Image2.Top := Image2.Top - 10;
+end;
+
+procedure TfrmIpmsCCTV.imgBawah6MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if (Image22.Top <0) or ((Image22.Top > 0)) then
+    Exit;
+
+  Image22.Top := Image22.Top + 10;
+end;
+
+procedure TfrmIpmsCCTV.imgBawahMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if (Image2.Top <0) or ((Image2.Top > 0)) then
+    Exit;
+
+  Image2.Top := Image2.Top + 10;
+end;
+
+procedure TfrmIpmsCCTV.imgCallBtnClick(Sender: TObject);
+begin
+  StationCallButtonSel(0);
+end;
+
+procedure TfrmIpmsCCTV.imgKanan6MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := True;
+  stateButton := 1; {Kanan}
+  tmrCam6.Enabled := True;
+end;
+
+procedure TfrmIpmsCCTV.imgKanan6MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := False;
+  tmrCam6.Enabled := False;
+end;
+
+procedure TfrmIpmsCCTV.imgKananMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := False;
+  tmrCam2.Enabled := False;
+end;
+
+procedure TfrmIpmsCCTV.imgKiriMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := False;
+  tmrCam2.Enabled := False;
+end;
+
+procedure TfrmIpmsCCTV.imgKiri6Click(Sender: TObject);
+begin
+  isMouseDown := True;
+  stateButton := 0; {Kiri}
+  tmrCam2.Enabled := True;
+end;
+
+procedure TfrmIpmsCCTV.imgKiri6MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if Image22.Left < -2550 then
+    Exit;
+
+  Image22.Left := Image22.Left - 10;
+end;
+
+procedure TfrmIpmsCCTV.imgKiri6MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := False;
+  tmrCam6.Enabled := False;
+end;
+
+procedure TfrmIpmsCCTV.tmrCam2Timer(Sender: TObject);
+begin
+  if stateButton = 0 then
+  begin
+    if Image2.Left < -2749 then
+    begin
+      tmrCam2.Enabled := False;
+      Exit;
+    end;
+
+    Image2.Left := Image2.Left - 10;
+  end
+  else if stateButton = 1 then
+  begin
+    if Image2.Left > 0 then
+    begin
+      tmrCam2.Enabled := False;
+      Exit;
+    end;
+
+    Image2.Left := Image2.Left + 10;
+  end
+  else
+  begin
+    tmrCam2.Enabled := False
+  end;
+end;
+
+procedure TfrmIpmsCCTV.tmrCam6Timer(Sender: TObject);
+begin
+  if stateButton = 0 then
+  begin
+    if Image22.Left < -2749 then
+    begin
+      tmrCam6.Enabled := False;
+      Exit;
+    end;
+
+    Image22.Left := Image22.Left - 10;
+  end
+  else if stateButton = 1 then
+  begin
+    if Image22.Left > 0 then
+    begin
+      tmrCam6.Enabled := False;
+      Exit;
+    end;
+
+    Image22.Left := Image22.Left + 10;
+  end
+  else
+  begin
+    tmrCam6.Enabled := False
+  end;
+end;
+
+procedure TfrmIpmsCCTV.tmrIncomingBlinkerTimer(Sender: TObject);
+begin
+  if (tmrIncomingBlinker.Tag = 0) then begin
+
+    tmrIncomingBlinker.Tag := 1;
+  end
+  else if (tmrIncomingBlinker.Tag = 1) then begin
+
+    tmrIncomingBlinker.Tag := 0;
+  end;
+  Inc(FBlinkerCounter);
+
+  // if autocall, turnoff blinker after 20 sec. if not already turned off
+  if (FBlinkerCounter > 20) then begin
+
+    tmrIncomingBlinker.Tag := 0;
+    FBlinkerCounter := 0;
+    tmrIncomingBlinker.Enabled := False;
+  end;
+end;
+
+procedure TfrmIpmsCCTV.tmr1Timer(Sender: TObject);
+begin
+  lblVid1.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
+  lblVid2.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
+  lblVid3.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
+  lblVid4.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
+  lblVid5.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
+  lblVid6.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
+  lblVid7.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
+  lblVid8.Caption := FormatDateTime('dddd, dd/mm/yyyy hh:nn:ss',now);
+end;
+
+{$ENDREGION}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ VOIP ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>>
+
+procedure TfrmIpmsCCTV.FormCreate(Sender: TObject);
+begin
+  ListInternal  := TList.Create;
+
+  isAutoCall := False;
+
+  //init incoming call blinker
+  FBlinkerCounter := 0;
+  tmrIncomingBlinker.Tag := 0;
+  tmrIncomingBlinker.Enabled := False;
+
+  GroupList     := TFsGroupList.Create;
+  GroupInternal := TFsGroupList.Create;
+  ssGroupList     := TFsGroupList.Create;
+  isRunSimulation := False;
+end;
+
+
+procedure TfrmIpmsCCTV.FormDestroy(Sender: TObject);
+begin
+  ClearAndDelList(ListInternal);
+end;
+
+
+procedure TfrmIpmsCCTV.ClearAndDelList(aList: TList);
+var
+  aObj: TObject;
+  I: Integer;
+begin
+
+  for i := aList.Count-1 downto 0  do begin
+    aObj := aList[i];
+    FreeAndNil(aObj);
+    aList.Delete(i);
+  end;
+
+end;
+
+procedure TfrmIpmsCCTV.ClosePhone;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+    end;
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 6;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmIpmsCCTV.OnTimerCall(Sender: TObject);
+var
+  i : integer;
+  ChMap : TChannelMap;
+begin
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+    if not ChMap.isEnableTimer then Continue;
+
+    ChMap.aIdTimer := ChMap.aIdTimer + 1;
+    if ChMap.aIdTimer > 10 then
+    begin
+      ChMap.isEnableTimer := False;
+      ChMap.aIdTimer := 0;
+
+      if ChMap.aMode = 1 then
+      begin
+        ChMap.aMode := 0;
+        ChMap.isReceive := False;
+        VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+      end;
+    end;
+
+  end;
+
+end;
+
+procedure TfrmIpmsCCTV.ProcessMenuSelection(Sender: TObject);
+var
+  i, id , aTag : Integer;
+  sExeRestart : string;
+
+  DiffTop, DiffLeft : Integer;
+  ChMap : TChannelMap;
+begin
+  aTag := (Sender as TComponent).Tag;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  case aTag of
+    1 : begin
+          VoipManager.RunConsole;
+        end;
+    2 : begin
+          frmProgress.aMode := 1;
+          frmProgress.Left := Left + DiffLeft;
+          frmProgress.Top  := Top + DiffTop;
+          frmProgress.Show;
+        end;
+    3 : begin
+          RestartPhone;
+        end;
+    4 : begin
+          RestartPhoneNConnector;
+        end;
+    5 : begin
+          SetPnlStatusConnect(true);
+        end;
+    6 : begin
+          SetPnlStatusConnect(false);
+        end;
+    7 : begin
+          id := SetCallInternal(VoipManager.SetConfig.aRole);
+          if id <> -1 then begin
+            VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+            Sleep(100);
+            VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+          end;
+        end;
+    8 : begin
+//          Application.Terminate;
+          ClosePhone;
+        end;
+    9 : begin
+          RestartPC;
+        end;
+    10 : begin
+            ShutdownPC;
+         end;
+  end;
+
+end;
+
+procedure TfrmIpmsCCTV.ReceiveCloseOrder(Rec: TRecData2DOrder);
+begin
+  ClosePhone;
+end;
+
+procedure TfrmIpmsCCTV.ReceiveInternalActivity(Rec: TRecInternal);
+var
+  i : Integer;
+  ChMap : TChannelMap;
+
+  strSound : string;
+  id : integer;
+begin
+
+  if VoipManager.SetConfig.idSkin <> 102 then Exit;
+  if Rec.RoleCub <> VoipManager.SetConfig.aStrCub then Exit;
+
+  //For Caller
+  if Rec.Mode = 3 then
+  begin
+    if isAutoCall then
+    begin
+      if (Rec.CallFrom = VoipManager.SetConfig.aRole) then
+      begin
+        for i := 0 to ListInternal.Count - 1 do
+        begin
+          ChMap := TChannelMap(ListInternal.Items[i]);
+
+          if ChMap.aChannelName = Rec.CallTo then
+          begin
+            id := SetCallInternal(ChMap.aChannelName);
+            if id <> -1 then
+            begin
+              VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+              VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+              VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+              mmo1.Lines.Add('Setup caller for a call. Chan ID is ' + IntToStr(VoipManager.SetConfig.InternalStartPort_VOIP + id));
+            end;
+          end;
+        end;
+      end;
+    end;
+  end;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    case Rec.Mode of
+      //Set Login
+      1 : begin
+            if Rec.Login = ChMap.aChannelName then
+            begin
+              ChMap.isOnline := True;
+
+              Break;
+            end;
+          end;
+      //Set Logout
+      2 : begin
+            if Rec.Logout = ChMap.aChannelName then
+            begin
+              ChMap.isOnline := False;
+
+              Break;
+            end;
+          end;
+      //Call
+      3 : begin
+            if isAutoCall then
+            begin
+              //For Receiver
+              if (Rec.CallFrom = ChMap.aChannelName)
+              and (rec.CallTo = VoipManager.SetConfig.aRole) then
+              begin
+                ChMap.aMode := 2;
+
+                // update receiver ui here!
+                //SetButtonImgSelected(Trim(Rec.CallFrom), True);
+
+                id := SetCallInternal(ChMap.aChannelName);
+                if id <> -1 then
+                begin
+                  VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  mmo1.Lines.Add('Setup receiver for a call. Phone ID is ' + IntToStr(VoipManager.SetConfig.InternalStartPort_VOIP + id));
+                end;
+
+                // turn incoming call blinker on
+                FBlinkerCounter := 0;
+                tmrIncomingBlinker.Tag := 0;
+                tmrIncomingBlinker.Enabled := True;
+
+                Break;
+              end;
+            end
+            else
+            begin
+              if (Rec.CallFrom = ChMap.aChannelName)
+              and (rec.CallTo = VoipManager.SetConfig.aRole) then
+              begin
+                ChMap.aMode := 1;
+                ChMap.isReceive := True;
+                ChMap.aIdTimer  := 0;
+                ChMap.isEnableTimer := True;
+
+                strSound := ExtractFileDir(Application.ExeName);
+                strSound := strSound + '\' + 'Ring.wav';
+                sndPlaySound(PChar(strSound), SND_ASYNC);
+
+                VoipManager.PlaySound;
+
+                // turn incoming call blinker on
+                FBlinkerCounter := 0;
+                tmrIncomingBlinker.Tag := 0;
+                tmrIncomingBlinker.Enabled := True;
+
+                Break;
+              end;
+            end;
+          end;
+      //Hangup
+      4 : begin
+
+            VoipManager.aLoggerFile.Log('<Internal>', 'Received hangup msg from someone..');
+            if isAutoCall then
+            begin
+
+              if (Rec.DisConnectFrom = ChMap.aChannelName)
+              and (rec.DisConnectTo = VoipManager.SetConfig.aRole) then
+              begin
+                mmo1.Lines.Add('ChMap.ChannelName: ' + ChMap.aChannelName + ', RecDiscFr: ' + Rec.DisConnectFrom);
+                mmo1.Lines.Add('RecDiscTo: ' + Rec.DisConnectTo + ', VoipMgr.aRole: ' +  VoipManager.SetConfig.aRole);
+                mmo1.Lines.Add('Hanging up process..');
+                ChMap.aMode := 0;
+                // Update button image
+                //SetButtonImgSelected(Trim(Rec.DisConnectFrom), False);
+
+                id := SetCallInternal(ChMap.aChannelName);
+                if id <> -1 then
+                begin
+                  VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  mmo1.Lines.Add('Set channel ' + IntToStr(id) + ' mode to off');
+                end;
+
+                Break;
+              end;
+            end
+            else
+            begin
+              if (Rec.DisConnectFrom = ChMap.aChannelName)
+              and (rec.DisConnectTo = VoipManager.SetConfig.aRole) then
+              begin
+                if ChMap.aMode = 2 then
+                begin
+                  id := SetCallInternal(ChMap.aChannelName);
+                  if id <> -1 then
+                  begin
+                    VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                    VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  end;
+                end;
+
+                ChMap.aMode := 0;
+                ChMap.isReceive := False;
+                ChMap.isCall    := False;
+                ChMap.aIdTimer  := 0;
+                ChMap.isEnableTimer := False;
+
+                Break;
+              end;
+            end;
+          end;
+      //Accept Call
+      5 : begin
+            if (Rec.CallFrom = ChMap.aChannelName)
+            and (rec.CallTo = VoipManager.SetConfig.aRole) then
+            begin
+              ChMap.aMode := 2;
+              ChMap.isReceive := True;
+              ChMap.aIdTimer  := 0;
+              ChMap.isEnableTimer := False;
+
+              id := SetCallInternal(ChMap.aChannelName);
+              if id <> -1 then
+              begin
+                VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+              end;
+
+              Break;
+            end;
+          end;
+      //Cannot Call Because Because Console is Offline
+      6 : begin
+            if isAutoCall then
+            begin
+              if (Rec.DisConnectFrom = ChMap.aChannelName)
+              and (rec.DisConnectTo = VoipManager.SetConfig.aRole) then
+              begin
+                ChMap.aMode := 0;
+                // Update button image
+                //SetButtonImgSelected(Trim(Rec.DisConnectFrom), False);
+
+                Break;
+              end;
+            end
+            else
+            begin
+              if (Rec.DisConnectFrom = ChMap.aChannelName)
+              and (rec.DisConnectTo = VoipManager.SetConfig.aRole) then
+              begin
+                if ChMap.aMode = 2 then
+                begin
+                  id := SetCallInternal(ChMap.aChannelName);
+                  if id <> -1 then
+                  begin
+                    VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                    VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+                  end;
+                end;
+
+                ChMap.aMode := 0;
+                ChMap.isReceive := False;
+                ChMap.isCall    := False;
+                ChMap.aIdTimer  := 0;
+                ChMap.isEnableTimer := False;
+
+                Break;
+              end;
+            end;
+          end;
+    end;
+  end;
+end;
+
+procedure TfrmIpmsCCTV.ReceiveModeCall(Rec: TRecCallMode);
+begin
+  if VoipManager.SetConfig.idSkin <> 102 then Exit;
+  isAutoCall := Rec.IsAutoCall;
+end;
+
+procedure TfrmIpmsCCTV.RecvICSData(rec: TICSData);
+begin
+
+  if VoipManager.SetConfig.idSkin <> 102 then Exit;
+
+  if rec.Mode = 10 then
+  begin
+    if not VoipManager.isOut and isRunSimulation then
+    begin
+      RestartPhone;
+    end;
+  end
+  else
+  if rec.Mode = 11 then
+  begin
+    if not VoipManager.isOut then
+    begin
+      RestartPhone;
+    end;
+  end
+  else
+  if rec.Mode = 12 then
+  begin
+    if not VoipManager.isOut then
+    begin
+      ShutdownPC;
+    end;
+  end
+  else
+  if rec.Mode = 13 then
+  begin
+    if not VoipManager.isOut then
+    begin
+      ClosePhone;
+    end;
+  end;
+
+end;
+
+procedure TfrmIpmsCCTV.RecvICSOrder(rec: TRecOrder);
+var
+  px, py: Integer;
+begin
+
+  px := frmIpmsCCTV.Left;
+  py := frmIpmsCCTV.Top + (frmIpmsCCTV.Height div 2);
+
+  case rec.OrderVal of
+
+    0: begin // terminates phone
+      MessageDlgPos(rec.OrderMsg, mtError, [mbOK], 0, px, py);
+      ProcessMenuSelection(CloseApplication1);
+    end;
+
+    1: begin // offers option whether to restart or terminate
+
+      if (MessageDlgPos(rec.OrderMsg, mtError, [mbOK, mbCancel], 0, px, py) = mrOk) then begin
+        // restart phone
+        ProcessMenuSelection(Restart1);
+      end
+      else begin
+        // close phone
+        ProcessMenuSelection(CloseApplication1);
+
+      end;
+
+    end;
+
+  end;
+
+end;
+
+procedure TfrmIpmsCCTV.RestartPC;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+    end;
+
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 7;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmIpmsCCTV.RestartPhone;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+    end;
+
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 2;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmIpmsCCTV.RestartPhoneNConnector;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    // disconnect all connected comms
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+      VoipManager.aLoggerFile.Log('<RestartPhoneNConnector>', 'Sent hangup to ' + ChMap.aChannelName);
+    end;
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 3;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmIpmsCCTV.RunPhone;
+var
+  i : Integer;
+  ChMap : TChannelMap;
+
+  aParamPhone, aParamJam    : string;
+  SIPPort, RTPport, ICSPort : Integer;
+begin
+
+  for i := 0 to GroupInternal.RoleList.Count - 1 do
+  begin
+    SIPPort := VoipManager.SetConfig.InternalStartPort_SIP + (i*3);
+    RTPport := SIPPort + 1;
+    ICSPort := VoipManager.SetConfig.InternalStartPort_VOIP + i;
+
+    if GroupInternal.RoleList[i] = VoipManager.SetConfig.aRole then
+    begin
+      aParamPhone := '-id ' + IntToStr(ICSPort)
+      + ' -u ' + IntToStr(1001 + i) + ' -p ' + '1234' + ' -sipport ' + IntToStr(SIPPort)
+      + ' -rtpport ' + IntToStr(RTPport)
+      + ' -ch ' + IntToStr(VoipManager.SetConfig.aRoomInternal + VoipManager.SetConfig.aCub * 10 + i)
+      + ' -auto -dial -silent -log -chcode '
+      + GroupInternal.RoleList[i] + ' -chband ' + IntToStr(0);
+
+      aParamJam := '';
+
+      VoipManager.RunPhone(2, aParamPhone, aParamJam);
+    end
+    else
+    begin
+      aParamPhone := '-id ' + IntToStr(ICSPort)
+      + ' -u ' + IntToStr(1001 + i) + ' -p ' + '1234' + ' -sipport ' + IntToStr(SIPPort)
+      + ' -rtpport ' + IntToStr(RTPport)
+      + ' -ch ' + IntToStr(VoipManager.SetConfig.aRoomInternal + VoipManager.SetConfig.aCub * 10 + i)
+      + ' -auto -nodial -silent -log -chcode '
+      + GroupInternal.RoleList[i] + ' -chband ' + IntToStr(0);
+
+      aParamJam := '';
+
+      VoipManager.RunPhone(5, aParamPhone, aParamJam);
+    end;
+  end;
+end;
+
+procedure TfrmIpmsCCTV.RunSimulation;
+var
+  i : Integer;
+  strXML, ssStrXml : string;
+  aChannelMap : TChannelMap;
+  aColSection,
+  aRowSection : Double;
+begin
+  if VoipManager.SetConfig.idSkin <> 102 then Exit;
+
+  isRunSimulation := True;
+  strXML := ExtractFileDir(Application.ExeName);
+  strXML := strXML+ '\' + 'GroupChannel.xml';
+
+  ssStrXml := ExtractFileDir(Application.ExeName);
+  ssStrXml := ssStrXml+ '\' + 'ssGroupChannel.xml';
+
+  GroupList.LoadFromFile(strXML);
+  GroupInternal.LoadFromFile(strXML);
+  ssGroupList.LoadFromFile(ssStrXml);
+
+  // internal
+  for i := 0 to GroupList.RoleList.Count - 1 do
+  begin
+    if GroupList.RoleList[i] = VoipManager.SetConfig.aRole then
+    begin
+      GroupList.RoleList.Delete(i);
+      Break;
+    end;
+  end;
+  // !addition!
+  for i := 0 to ssGroupList.RoleList.Count - 1 do
+  begin
+    if ssGroupList.RoleList[i] = VoipManager.SetConfig.aRole then
+    begin
+      ssGroupList.RoleList.Delete(i);
+      Break;
+    end;
+  end;
+
+  for i := 0 to ssGroupList.RoleList.Count - 1 do
+  begin
+    aChannelMap := TChannelMap.Create;
+    aChannelMap.aUser         := IntToStr(1001 + i);
+    aChannelMap.aChannel      := IntToStr(VoipManager.SetConfig.aRoomInternal +
+                                          VoipManager.SetConfig.aCub * 10 + i);
+
+    aChannelMap.aChannelName  := ssGroupList.RoleList[i];
+    aChannelMap.aPass         := '1234';
+
+    aChannelMap.aMode     := 0;
+    aChannelMap.aIdTimer  := 0;
+
+    aChannelMap.isEnableTimer   := False;
+    aChannelMap.isCall          := False;
+    aChannelMap.isReceive       := False;
+
+    aChannelMap.isOnline        := False;
+
+
+    aRowSection             := 1;
+    aChannelMap.aRowSection := 1;
+
+    aColSection := 1;
+    aChannelMap.aColSection := 1;
+
+    ListInternal.Add(aChannelMap);
+  end;
+
+  FTimer := TTimer.Create(nil);
+  FTimer.Enabled  := True;
+  FTimer.Interval := 1000;
+  FTimer.OnTimer  := OnTimerCall;
+
+  RunPhone;
+
+  // test only!!!!
+  lblIncoming.Caption := VoipManager.SetConfig.aRole;
+
+end;
+
+function TfrmIpmsCCTV.SetCallInternal(ChName: string): Integer;
+begin
+  Result := -1;
+  Result := GroupInternal.RoleList.IndexOf(ChName);
+end;
+
+procedure TfrmIpmsCCTV.SetPnlStatusConnect(aVisible: Boolean);
+begin
+  pnlConnector.Visible := aVisible;
+  pnlSesVoip.Visible   := aVisible;
+  pnlControl.Visible   := aVisible;
+end;
+
+procedure TfrmIpmsCCTV.ShutdownPC;
+var
+  i : integer;
+  DiffLeft,
+  DiffTop : integer;
+  ChMap : TChannelMap;
+begin
+  VoipManager.isOut := True;
+
+  DiffLeft := (Width - frmProgress.Width) div 2;
+  DiffTop  := (Height - frmProgress.Height) div 2;
+
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+    begin
+      VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub,
+                               VoipManager.SetConfig.aRole,
+                               VoipManager.SetConfig.aRole,
+                               ChMap.aChannelName);
+    end;
+
+  end;
+
+  VoipManager.SendRoleLogOut(VoipManager.SetConfig.aStrCub,
+                             VoipManager.SetConfig.aRole,
+                             VoipManager.SetConfig.aRole);
+
+  StopPhone;
+
+  frmProgress.aMode := 8;
+  frmProgress.Left := Left + DiffLeft;
+  frmProgress.Top  := Top + DiffTop;
+  frmProgress.Close;
+  frmProgress.Show;
+  frmProgress.BringToFront;
+
+end;
+
+procedure TfrmIpmsCCTV.StationCallButtonSel(aBtnTag: Integer);
+var
+  i, id : integer;
+  ChMap : TChannelMap;
+
+  Section : Double;
+  ChSectionName: string;
+  RecSend : TRecInternal;
+  SelStationName: string;
+begin
+  //Point To Point
+  for i := 0 to ListInternal.Count - 1 do
+  begin
+    ChMap := TChannelMap(ListInternal.Items[i]);
+
+    //Auto Call
+    if isAutoCall then
+    begin
+      if (ChMap.aMode = 2) or (ChMap.aMode = 1) then
+      begin
+         //Hangup
+         mmo1.Lines.Add('VoipManager.SetConfig.aRole' + ' hang up from ' + ChMap.aChannelName);
+
+         ChMap.aMode := 0;
+         VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                  VoipManager.SetConfig.aRole, ChMap.aChannelName);
+
+         id := SetCallInternal(ChMap.aChannelName);
+         if id <> -1 then
+         begin
+           VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+           VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+         end;
+      end
+      else
+      if ChMap.aMode = 0 then
+      begin
+        mmo1.Lines.Add(VoipManager.SetConfig.aRole + ' calling ' + ChMap.aChannelName);
+
+         //Call
+         ChMap.aMode := 2;
+         VoipManager.SendCallTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+
+      end;
+    end
+    //Manual Call
+    else
+    begin
+      //Calling
+      if ChMap.aMode = 0 then
+      begin
+        ChMap.aMode := 1;
+        ChMap.isCall := True;
+
+        VoipManager.SendCallTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+      end
+      //HangUp From Caller
+      else
+      if (ChMap.aMode = 1) and ChMap.isCall and not ChMap.isReceive then
+      begin
+        ChMap.aMode := 0;
+        ChMap.isCall := False;
+        ChMap.aIdTimer := 0;
+        ChMap.isEnableTimer := False;
+
+        // turn off incoming call blinker
+        tmrIncomingBlinker.Tag := 0;
+        FBlinkerCounter := 0;
+        tmrIncomingBlinker.Enabled := False;
+
+        VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+      end
+      //Accept Call
+      else
+      if (ChMap.aMode = 1) and ChMap.isReceive and not ChMap.isCall then
+      begin
+        ChMap.aMode := 2;
+        ChMap.aIdTimer := 0;
+        ChMap.isEnableTimer := False;
+
+        VoipManager.SendReceiveCall(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+
+        // turn off incoming call blinker
+//        LoadFromImageListUp(22, imgCal, FBitMap);
+        tmrIncomingBlinker.Tag := 0;
+        FBlinkerCounter := 0;
+        tmrIncomingBlinker.Enabled := False;
+
+        id := SetCallInternal(ChMap.aChannelName);
+        if id <> -1 then
+        begin
+          VoipManager.SetToMode_Receiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+          VoipManager.SetToMode_Transeiver(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+          VoipManager.SetToMode_OnPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+        end;
+      end
+      //HangUp From Caller or Receiver
+      else
+      if ChMap.aMode = 2 then
+      begin
+        ChMap.aMode := 0;
+        ChMap.aIdTimer := 0;
+        ChMap.isEnableTimer := False;
+        ChMap.isReceive := False;
+        ChMap.isCall := False;
+
+        VoipManager.SendHangUpTo(VoipManager.SetConfig.aStrCub, VoipManager.SetConfig.aRole,
+                                VoipManager.SetConfig.aRole, ChMap.aChannelName);
+
+
+        // turn off incoming call blinker
+//        LoadFromImageListUp(22, imgCal, FBitMap);
+        tmrIncomingBlinker.Tag := 0;
+        FBlinkerCounter := 0;
+        tmrIncomingBlinker.Enabled := False;
+
+        id := SetCallInternal(ChMap.aChannelName);
+        if id <> -1 then
+        begin
+          VoipManager.SetToMode_OffPTT(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+          VoipManager.SetToMode_Off(VoipManager.SetConfig.InternalStartPort_VOIP + id);
+        end;
+      end;
+    end;
+
+  end;
+
+end;
+
+procedure TfrmIpmsCCTV.StopPhone;
+var
+  i : Integer;
+begin
+  //Exit Internal Phone
+  for i := 0 to GroupInternal.RoleList.Count - 1 do
+  begin
+    VoipManager.SetToMode_ExitPhone(VoipManager.SetConfig.InternalStartPort_VOIP + i);
+  end;
+end;
+
+procedure TfrmIpmsCCTV.lblIncomingMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if (ssShift in Shift) then begin
+    mmo1.Visible := not mmo1.Visible;
+  end;
+end;
+
+procedure TfrmIpmsCCTV.pnlSesVoipClick(Sender: TObject);
+begin
+  if ((Sender as TPanel).Color = clGreen) then begin
+    RunSimulation;
+    mmo1.Lines.Add('Simulated running....');
+  end;
+
+end;
+
+end.

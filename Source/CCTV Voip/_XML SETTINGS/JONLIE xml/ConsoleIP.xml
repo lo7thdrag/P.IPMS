@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<fsgroups>
+  <roles id="Role" name="Role Group">
+
+	<console ip="192.168.2.202" name="INSTR" ></console>
+	<console ip="192.168.2.145" name="QM/OOW"></console>
+	<console ip="192.168.2.141" name="BM/TCO"></console>
+	<console ip="192.168.2.143" name="ENG/DCHQ2"></console>
+	<console ip="192.168.2.150" name="CMD"></console>
+	<console ip="192.168.2.150" name="OPS R C DESK"></console>
+	<console ip="192.168.2.159" name="BRG PELORUS"></console>
+
+  </roles>
+</fsgroups>
+   

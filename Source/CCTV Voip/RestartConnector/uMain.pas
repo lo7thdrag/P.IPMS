@@ -1,0 +1,638 @@
+unit uMain;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus , Tlhelp32, ShellAPI
+
+  , uNetUDPnode, uTCPServer, uDataVoipRecord , uLoadSetting, MSThreadTimer;
+
+type
+  TfRestartArc = class(TForm)
+    pnlDown: TPanel;
+    pbRestart: TProgressBar;
+    pnl2: TPanel;
+    mmoDisplay: TMemo;
+    pnlUp: TPanel;
+    tmrArchos: TTimer;
+    pmMenu: TPopupMenu;
+    Hide1: TMenuItem;
+    Show1: TMenuItem;
+    Exit1: TMenuItem;
+    procedure FormCreate(Sender: TObject);
+    procedure tmrArchosTimer(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure Hide1Click(Sender: TObject);
+    procedure Show1Click(Sender: TObject);
+    procedure mmoDisplayChange(Sender: TObject);
+    procedure Exit1Click(Sender: TObject);
+  private
+    RestartArc : TTCPServer;
+
+    //Tray Icon
+    TrayIconData: TNotifyIconData;
+
+    Config : TIniSet;
+
+    FThread : TMSTimer;
+
+    //Search n Kill Task
+    function KillTask(ExeFileName: string): Integer;
+    function processExists(exeFileName: string): Boolean;
+
+    Procedure OnClientConnect(Const Cmd : string);
+    procedure OnClientDisConnect(Const Cmd : string);
+
+    procedure ReceiveCommand(apRec: PAnsiChar; aSize: Word);
+    procedure RunConsole;
+    procedure threadOnRunning(const dt: double);
+
+    //Tray Icon
+    procedure SetIconTray;
+    procedure TrayMessage(var Msg: TMessage); message WM_ICONTRAY;
+     
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fRestartArc: TfRestartArc;
+
+implementation
+
+uses OverbyteIcsWSocket;
+
+{$R *.dfm}
+
+//===============================================================
+//===================Kill Task===================================
+function TfRestartArc.processExists(exeFileName: string): Boolean;
+var
+  ContinueLoop: BOOL;
+  FSnapshotHandle: THandle;
+  FProcessEntry32: TProcessEntry32;
+begin
+  FSnapshotHandle := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  FProcessEntry32.dwSize := SizeOf(FProcessEntry32);
+  ContinueLoop := Process32First(FSnapshotHandle, FProcessEntry32);
+  Result := False;
+  while Integer(ContinueLoop) <> 0 do
+  begin
+    if ((UpperCase(ExtractFileName(FProcessEntry32.szExeFile)) =
+      UpperCase(ExeFileName)) or (UpperCase(FProcessEntry32.szExeFile) =
+      UpperCase(ExeFileName))) then
+    begin
+      Result := True;
+    end;
+    ContinueLoop := Process32Next(FSnapshotHandle, FProcessEntry32);
+  end;
+  CloseHandle(FSnapshotHandle);
+end;
+
+function TfRestartArc.KillTask(ExeFileName: string): Integer;
+const
+  PROCESS_TERMINATE = $0001;
+var
+  ContinueLoop: BOOL;
+  FSnapshotHandle: THandle;
+  FProcessEntry32: TProcessEntry32;
+begin
+  Result := 0;
+  FSnapshotHandle := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  FProcessEntry32.dwSize := SizeOf(FProcessEntry32);
+  ContinueLoop := Process32First(FSnapshotHandle, FProcessEntry32);
+  while Integer(ContinueLoop) <> 0 do
+  begin
+    if ((UpperCase(ExtractFileName(FProcessEntry32.szExeFile)) =
+      UpperCase(ExeFileName)) or (UpperCase(FProcessEntry32.szExeFile) =
+      UpperCase(ExeFileName))) then
+      Result := Integer(TerminateProcess(
+                        OpenProcess(PROCESS_TERMINATE,
+                                    BOOL(0),
+                                    FProcessEntry32.th32ProcessID),
+                                    0));
+     ContinueLoop := Process32Next(FSnapshotHandle, FProcessEntry32);
+  end;
+  CloseHandle(FSnapshotHandle);
+end;
+
+procedure TfRestartArc.mmoDisplayChange(Sender: TObject);
+begin
+
+end;
+
+//===========================================================================
+
+//===========================================================================
+procedure TfRestartArc.OnClientConnect(const Cmd: string);
+begin
+  mmoDisplay.Lines.Add('Client ' + Cmd + ' Connected');
+end;
+
+procedure TfRestartArc.OnClientDisConnect(const Cmd: string);
+begin
+  mmoDisplay.Lines.Add('Client ' + Cmd + ' DIsConnected');
+end;
+
+procedure TfRestartArc.ReceiveCommand(apRec: PAnsiChar; aSize: Word);
+var
+  ReceiveCommandArc : ^TRecArchos;
+  RecSend           : TRecArchos;
+
+  Mode: Integer;
+  Id : Integer;
+begin
+  ReceiveCommandArc := @aprec^;
+
+  Mode := ReceiveCommandArc^.Mode;      // 1, Restart Archos, 2, Run Console
+  Id   := ReceiveCommandArc^.Id;
+
+  mmoDisplay.Lines.Add('Receive Mode :' + IntToStr(Mode));
+
+  if Mode = 1 then
+  begin
+    mmoDisplay.Lines.Add('Entering Mode 1 : Restart Archos');
+
+    if processExists('ArchosController.exe') then
+    begin
+      mmoDisplay.Lines.Add('Kill ArchosController.exe');
+      KillTask('ArchosController.exe');
+
+      pbRestart.Position := 0;
+      tmrArchos.Enabled := True;
+    end
+    else
+    begin
+      mmoDisplay.Lines.Add('ArchosController.exe Not Running');
+
+      pbRestart.Position := 0;
+      tmrArchos.Enabled := True;
+    end;
+  end
+  else
+  if Mode = 2 then
+  begin
+    mmoDisplay.Lines.Add('Entering Mode 2 : Run Console');
+    RunConsole;
+  end
+  else
+  if Mode = 3 then
+  begin
+    mmoDisplay.Lines.Add('Entering Mode 3 : Restart Archos, Phone, clVoip');
+
+    //Restarting Connector
+    if processExists('ArchosController.exe') then
+    begin
+      mmoDisplay.Lines.Add('Kill ArchosController.exe');
+      KillTask('ArchosController.exe');
+
+      pbRestart.Position := 0;
+      tmrArchos.Enabled := True;
+    end
+    else
+    begin
+      mmoDisplay.Lines.Add('ArchosController.exe Not Running');
+
+      pbRestart.Position := 0;
+      tmrArchos.Enabled := True;
+    end;
+
+    //Closing clvoip.exe & Jamming Player
+    if processExists('clVoip_external.exe') then
+    begin
+      KillTask('clVoip_external.exe');
+      mmoDisplay.Lines.Add('Kill Proses External.exe');
+    end;
+    if processExists('clVoip_internal.exe') then
+    begin
+      KillTask('clVoip_internal.exe');
+      mmoDisplay.Lines.Add('Kill Proses Internal.exe');
+    end;
+    if processExists('clVoip_noRx.exe') then
+    begin
+      KillTask('clVoip_noRx.exe');
+      mmoDisplay.Lines.Add('Kill Proses noRx.exe');
+    end;
+    if processExists('clVoip_nonHF.exe') then
+    begin
+      KillTask('clVoip_nonHF.exe');
+      mmoDisplay.Lines.Add('Kill Proses nonHF.exe');
+    end;
+    if processExists('clVoip_HF.exe') then
+    begin
+      KillTask('clVoip_HF.exe');
+      mmoDisplay.Lines.Add('Kill Proses HF.exe');
+    end;
+    if processExists('clVoip_UHF.exe') then
+    begin
+      KillTask('clVoip_UHF.exe');
+      mmoDisplay.Lines.Add('Kill Proses UHF.exe');
+    end;
+    if processExists('clVoip_UWT.exe') then
+    begin
+      KillTask('clVoip_UWT.exe');
+      mmoDisplay.Lines.Add('Kill Proses UWT.exe');
+    end;
+    if processExists('clVoip_FM.exe') then
+    begin
+      KillTask('clVoip_FM.exe');
+      mmoDisplay.Lines.Add('Kill Proses FM.exe');
+    end;
+
+    if processExists('JammingPlayer.exe') then
+    begin
+      KillTask('JammingPlayer.exe');
+      mmoDisplay.Lines.Add('Kill Proses Jamming Player.exe')
+    end;
+  end
+  else
+  if Mode = 4 then
+  begin
+    mmoDisplay.Lines.Add('Entering Mode 4 : Kill all clVoip');
+
+    //Closing clvoip.exe & Jamming Player
+    if processExists('clVoip_external.exe') then
+    begin
+      KillTask('clVoip_external.exe');
+      mmoDisplay.Lines.Add('Kill Proses External.exe')
+    end;
+    if processExists('clVoip_internal.exe') then
+    begin
+      KillTask('clVoip_internal.exe');
+      mmoDisplay.Lines.Add('Kill Proses Internal.exe')
+    end;
+    if processExists('JammingPlayer.exe') then
+    begin
+      KillTask('JammingPlayer.exe');
+      mmoDisplay.Lines.Add('Kill Proses Jamming Player.exe')
+    end;
+    if processExists('clVoip_noRx.exe') then
+    begin
+      KillTask('clVoip_noRx.exe');
+      mmoDisplay.Lines.Add('Kill Proses noRx.exe')
+    end;
+    if processExists('clVoip_nonHF.exe') then
+    begin
+      KillTask('clVoip_nonHF.exe');
+      mmoDisplay.Lines.Add('Kill Proses nonHF.exe')
+    end;
+    if processExists('clVoip_HF.exe') then
+    begin
+      KillTask('clVoip_HF.exe');
+      mmoDisplay.Lines.Add('Kill Proses HF.exe');
+    end;
+    if processExists('clVoip_UHF.exe') then
+    begin
+      KillTask('clVoip_UHF.exe');
+      mmoDisplay.Lines.Add('Kill Proses UHF.exe');
+    end;
+    if processExists('clVoip_UWT.exe') then
+    begin
+      KillTask('clVoip_UWT.exe');
+      mmoDisplay.Lines.Add('Kill Proses UWT.exe');
+    end;
+    if processExists('clVoip_FM.exe') then
+    begin
+      KillTask('clVoip_FM.exe');
+      mmoDisplay.Lines.Add('Kill Proses FM.exe');
+    end;
+  end
+  else
+  if Mode = 5 then
+  begin
+    if processExists('clVoip_nonHF.exe') then
+    begin
+      KillTask('clVoip_nonHF.exe');
+      mmoDisplay.Lines.Add('Kill Proses nonHF.exe');
+    end;
+  end
+  else
+  if Mode = 6 then
+  begin
+    mmoDisplay.Lines.Add('Receive Check Non HF (Change Teritory)');
+
+    if processExists('clVoip_nonHF.exe') then
+    begin
+      KillTask('clVoip_nonHF.exe');
+      mmoDisplay.Lines.Add('Kill Proses nonHF.exe');
+    end
+    else
+    begin
+      mmoDisplay.Lines.Add('Ready To Run nonHF Phone');
+
+      RecSend.Mode := 1;
+      RestartArc.SendData(CPID_RecArchos, @RecSend);
+    end;
+  end
+  else
+  if Mode = 7 then
+  begin
+    mmoDisplay.Lines.Add('Receive Check Communication (Change Platform)');
+
+    if processExists('clVoip_nonHF.exe') then
+    begin
+      KillTask('clVoip_nonHF.exe');
+      mmoDisplay.Lines.Add('Kill Proses nonHF.exe');
+    end;
+
+    if processExists('clVoip_HF.exe') then
+    begin
+      KillTask('clVoip_HF.exe');
+      mmoDisplay.Lines.Add('Kill Proses HF.exe');
+    end;
+
+    if processExists('clVoip_UHF.exe') then
+    begin
+      KillTask('clVoip_UHF.exe');
+      mmoDisplay.Lines.Add('Kill Proses UHF.exe');
+    end;
+
+    if processExists('clVoip_UWT.exe') then
+    begin
+      KillTask('clVoip_UWT.exe');
+      mmoDisplay.Lines.Add('Kill Proses UWT.exe');
+    end;
+
+    if processExists('clVoip_FM.exe') then
+    begin
+      KillTask('clVoip_FM.exe');
+      mmoDisplay.Lines.Add('Kill Proses FM.exe');
+    end;
+
+    if not processExists('clVoip_nonHF.exe')  and
+       not processExists('clVoip_HF.exe')     and
+       not processExists('clVoip_UHF.exe')    and
+       not processExists('clVoip_UWT.exe')    and
+       not processExists('clVoip_FM.exe')
+    then
+    begin
+      mmoDisplay.Lines.Add('Ready To Run Open Phone');
+
+      RecSend.Mode := 2;
+      RestartArc.SendData(CPID_RecArchos, @RecSend);
+    end;
+  end
+  else
+  if Mode = 8 then
+  begin
+    mmoDisplay.Lines.Add('Receive Mode to Kill ClVoip_HF');
+    if processExists('clVoip_HF.exe') then
+    begin
+      KillTask('clVoip_HF.exe');
+      mmoDisplay.Lines.Add('Kill Proses HF.exe');
+    end;
+  end
+  else
+  if Mode = 9 then
+  begin
+    mmoDisplay.Lines.Add('Receive Mode to Kill ClVoip_UHF');
+    if processExists('clVoip_UHF.exe') then
+    begin
+      KillTask('clVoip_UHF.exe');
+      mmoDisplay.Lines.Add('Kill Proses UHF.exe');
+    end;
+  end
+  else
+  if Mode = 10 then
+  begin
+    mmoDisplay.Lines.Add('Receive Mode to Kill ClVoip_UWT');
+    if processExists('clVoip_UWT.exe') then
+    begin
+      KillTask('clVoip_UWT.exe');
+      mmoDisplay.Lines.Add('Kill Proses UWT.exe');
+    end;
+  end
+  else
+  if Mode = 11 then
+  begin
+    mmoDisplay.Lines.Add('Receive Mode to Kill ClVoip_FM');
+    if processExists('clVoip_FM.exe') then
+    begin
+      KillTask('clVoip_FM.exe');
+      mmoDisplay.Lines.Add('Kill Proses FM.exe');
+    end;
+  end;
+  if Mode = 12 then
+  begin
+    mmoDisplay.Lines.Add('Receive Check HF (Change Teritory)');
+
+    if processExists('clVoip_HF.exe') then
+    begin
+      KillTask('clVoip_HF.exe');
+      mmoDisplay.Lines.Add('Kill Proses HF.exe');
+    end
+    else
+    begin
+      mmoDisplay.Lines.Add('Ready To Run HF Phone');
+
+      RecSend.Mode := 10;
+      RestartArc.SendData(CPID_RecArchos, @RecSend);
+    end;
+  end
+  else
+  if Mode = 13 then
+  begin
+    mmoDisplay.Lines.Add('Receive Check UHF (Change Teritory)');
+
+    if processExists('clVoip_UHF.exe') then
+    begin
+      KillTask('clVoip_UHF.exe');
+      mmoDisplay.Lines.Add('Kill Proses UHF.exe');
+    end
+    else
+    begin
+      mmoDisplay.Lines.Add('Ready To Run UHF Phone');
+
+      RecSend.Mode := 11;
+      RestartArc.SendData(CPID_RecArchos, @RecSend);
+    end;
+  end
+  else
+  if Mode = 14 then
+  begin
+    mmoDisplay.Lines.Add('Receive Check UWT (Change Teritory)');
+
+    if processExists('clVoip_UWT.exe') then
+    begin
+      KillTask('clVoip_UWT.exe');
+      mmoDisplay.Lines.Add('Kill Proses UWT.exe');
+    end
+    else
+    begin
+      mmoDisplay.Lines.Add('Ready To Run UWT Phone');
+
+      RecSend.Mode := 12;
+      RestartArc.SendData(CPID_RecArchos, @RecSend);
+    end;
+  end
+  else
+  if Mode = 15 then
+  begin
+     mmoDisplay.Lines.Add('Receive Check FM (Change Teritory)');
+
+    if processExists('clVoip_FM.exe') then
+    begin
+      KillTask('clVoip_FM.exe');
+      mmoDisplay.Lines.Add('Kill Proses FM.exe');
+    end
+    else
+    begin
+      mmoDisplay.Lines.Add('Ready To Run FM Phone');
+
+      RecSend.Mode := 13;
+      RestartArc.SendData(CPID_RecArchos, @RecSend);
+    end;
+  end;
+end;
+
+procedure TfRestartArc.RunConsole;
+var
+  sExe, sParam : string;
+begin
+  sExe := ExtractFilePath(Application.ExeName)+'putty.exe';
+  sParam := Config.ParamPutty;
+
+  //Open Phone external
+  ShellExecute(Handle,
+           nil,
+           PChar(sExe),
+           PChar(sParam),
+           nil,
+           SW_NORMAL);
+
+  mmoDisplay.Lines.Add('Run Console');         
+end;
+
+procedure TfRestartArc.threadOnRunning(const dt: double);
+begin
+  if ((RestartArc <> nil) and (RestartArc.State = wsListening)) then
+    RestartArc.getPacket;
+end;
+
+procedure TfRestartArc.tmrArchosTimer(Sender: TObject);
+var
+  sExe : string;
+begin
+  pbRestart.Position := pbRestart.Position + tmrArchos.Interval;
+  pnlDown.Caption := 'Restarting ArchosController.exe';
+
+  if pbRestart.Position = pbRestart.Max then
+  begin
+    sExe := ExtractFilePath(Application.ExeName)+'ArchosController.exe';
+  
+    //Open Phone external
+    ShellExecute(Handle,
+             nil,
+             PChar(sExe),
+             nil,
+             nil,
+             SW_NORMAL);
+
+    mmoDisplay.Lines.Add('Starting ArchosControlller.exe');
+    tmrArchos.Enabled := False;
+    pnlDown.Caption := '';
+    pbRestart.Position := 0;
+  end;
+end;
+
+procedure TfRestartArc.FormCreate(Sender: TObject);
+var
+  iniDir : string;
+begin
+  SetIconTray;
+
+  tmrArchos.Enabled := False;
+  tmrArchos.Interval := 1000;
+
+  pbRestart.Min := 0;
+  pbRestart.Max := 5000;
+
+  RestartArc := TTCPServer.Create;
+  RestartArc.OnClient_Connect := OnClientConnect;
+  RestartArc.OnClient_DisConnect := OnClientDisconnect;
+
+  RestartArc.RegisterProcedure(CPID_RecArchos, ReceiveCommand, SizeOf(TrecArchos));
+
+  Config := TIniSet.Create;
+  iniDir := ExtractFileDir(Application.ExeName) + '\'+ 'SettingPhone.ini';
+  Config.LoadSet(iniDir);
+
+  RestartArc.Listen(Config.portListenControl);
+  pnlUp.Caption := 'Listening @' + Config.portListenControl;
+
+  // data collector
+  FThread := TMSTimer.Create;
+  FThread.Interval := 1;
+  FThread.OnRunning := threadOnRunning;
+  FThread.Enabled := True;
+
+end;
+
+procedure TfRestartArc.SetIconTray;
+var
+  hMenuHandle: Integer;
+begin
+  hMenuHandle := GetSystemMenu(Handle, False);
+  if (hMenuHandle <> 0) then
+  begin
+    DeleteMenu(hMenuHandle, SC_CLOSE, MF_BYCOMMAND);
+    DeleteMenu(hMenuHandle, SC_MINIMIZE, MF_BYCOMMAND);
+    DeleteMenu(hMenuHandle, SC_MAXIMIZE, MF_BYCOMMAND);
+  end;
+
+  mmoDisplay.Lines.Add('Applicatin Running');
+
+  with TrayIconData do
+  begin
+    //cbSize := SizeOf(TrayIconData);
+    Wnd := Handle;
+    uID := 0;
+    uFlags := NIF_MESSAGE + NIF_ICON + NIF_TIP;
+    uCallbackMessage := WM_ICONTRAY;
+    hIcon := Application.Icon.Handle;
+    StrPCopy(szTip, Application.Title);
+  end;
+
+  Shell_NotifyIcon(NIM_ADD, @TrayIconData);
+end;
+
+procedure TfRestartArc.TrayMessage(var Msg: TMessage);
+var
+  P : Tpoint;
+begin
+  case Msg.lParam of
+    WM_RBUTTONDOWN:
+    begin
+      SetForegroundWindow(Handle);
+      GetCursorPos(p);
+      pmMenu.Popup(p.x, p.y);
+      PostMessage(Handle, WM_NULL, 0, 0);
+    end;
+  end;
+end;
+
+procedure TfRestartArc.FormDestroy(Sender: TObject);
+begin
+  RestartArc.Stop;
+  RestartArc.UnregisterAllProcedure;
+  RestartArc.Destroy;
+end;
+
+procedure TfRestartArc.Show1Click(Sender: TObject);
+begin
+  fRestartArc.Show;
+end;
+
+procedure TfRestartArc.Hide1Click(Sender: TObject);
+begin
+  fRestartArc.Hide;
+end;
+
+procedure TfRestartArc.Exit1Click(Sender: TObject);
+begin
+  Close;
+end;
+
+end.
