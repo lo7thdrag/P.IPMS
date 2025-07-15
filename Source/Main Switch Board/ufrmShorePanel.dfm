@@ -12,6 +12,7 @@ object frmShorePanel: TfrmShorePanel
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlShoreConnection: TPanel
@@ -126394,10 +126395,8 @@ object frmShorePanel: TfrmShorePanel
         BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA2
         80BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BDA280BD
         A280}
-      ExplicitLeft = -288
-      ExplicitTop = -160
-      ExplicitWidth = 105
-      ExplicitHeight = 105
+      ExplicitLeft = -2
+      ExplicitTop = -2
     end
     object Image2: TImage
       Left = 132
@@ -150405,7 +150404,7 @@ object frmShorePanel: TfrmShorePanel
       OnClick = ImgIndicatorCBOpenClick
     end
     object ImgIndicatorCBClose: TImage
-      Left = 1037
+      Left = 1039
       Top = 581
       Width = 70
       Height = 67
@@ -154533,6 +154532,7 @@ object frmShorePanel: TfrmShorePanel
         '2'
         '0'
         '1')
+      SwitchPosition = 1
       SwitchAngleStart = 130
       SwitchAngleEnd = 230
       WinchColor = clWhite
@@ -154630,7 +154630,7 @@ object frmShorePanel: TfrmShorePanel
     Top = 290
   end
   object tmrSync: TTimer
-    Interval = 100
+    Interval = 200
     OnTimer = tmrSyncTimer
     Left = 1192
     Top = 192

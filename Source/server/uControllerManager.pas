@@ -1145,7 +1145,7 @@ begin
 
     epPCSMEAirValve, epPCSMEGasValve, epPCSMEBypassP2P4,
 
-    epPCSCtrlLocal, epPCSCtrlMCR, epPCSCtrlBridge,
+    epPCSCtrlLocal, epPCSCtrlMCR, epPCSCtrlMCRPS, epPCSCtrlMCRSB, epPCSCtrlBridge, epPCSCtrlBridgePS, epPCSCtrlBridgeSB,
 
     epPCSMERemoteControlProposed, epPCSMEStartingInProgress, epPCSME2TCMode, epPCSGBClutched,
     epPCSGBDeclutched, epPCSGBSafetyDeclutch,
@@ -1424,7 +1424,7 @@ begin
     epPCSMETempConRodBear6, epPCSMETempConRodBear7, epPCSMETempConRodBear8, epPCSMETempConRodBear9, epPCSMETempConRodBear10,
     epPCSMETempBear1, epPCSMETempBear2, epPCSMETempBear3, epPCSMETempBear4, epPCSMETempBear5,
     epPCSMETempBear6, epPCSMETempBear7, epPCSMETempBear8, epPCSMETempBear9, epPCSMETempBear10, epPCSMETempBear11,
-    epPCSCPPLeverPitch,  epPCSCPPSetPointPitch:
+    epPCSCPPLeverPitch,  epPCSCPPSetPointPitch, epPCSCPPActualPitchPS, epPCSCPPActualPitchSB:
     begin
       if Order = epPCSMEAlarmPropulsionCheck then
       begin
@@ -1536,7 +1536,7 @@ begin
     epPCSGBLOPressInletLow,
     epPCSGBPitchNotZero, epPCSGBPCSClutchInterlock, epPCSGBClutchAllowedLOP,
 
-    epPCSCtrlLocal, epPCSCtrlMCR, epPCSCtrlBridge,
+    epPCSCtrlLocal, epPCSCtrlMCR, epPCSCtrlMCRPS, epPCSCtrlMCRSB, epPCSCtrlBridge, epPCSCtrlBridgePS, epPCSCtrlBridgeSB,
 
     //Main Engine 2
     epPCSMERemoteControl, epPCSMESTCInManualMode, epPCSMEPreStart, epPCSMEActualSpeed, epPCSMESTCInManual,
@@ -1580,7 +1580,7 @@ begin
     epPCSMETempConRodBear6, epPCSMETempConRodBear7, epPCSMETempConRodBear8, epPCSMETempConRodBear9, epPCSMETempConRodBear10,
     epPCSMETempBear1, epPCSMETempBear2, epPCSMETempBear3, epPCSMETempBear4, epPCSMETempBear5,
     epPCSMETempBear6, epPCSMETempBear7, epPCSMETempBear8, epPCSMETempBear9, epPCSMETempBear10, epPCSMETempBear11,
-    epPCSCPPLeverPitch,  epPCSCPPSetPointPitch:
+    epPCSCPPLeverPitch,  epPCSCPPSetPointPitch, epPCSCPPActualPitchPS, epPCSCPPActualPitchSB:
     begin
       setPCSAAEElementID(recCmd.PortStaboardID, recCmd.ValueDouble, recCmd.CommandPropsID);
     end;

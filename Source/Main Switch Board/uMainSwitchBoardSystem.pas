@@ -18,6 +18,7 @@ type
 
     FIdFormGensys : String;
     FIdGenerator : String;
+    FIdSwitchboard : string;
 
     procedure CreateLogFile;
 
@@ -52,6 +53,7 @@ type
 
     property IdFormGensys: String read FIdFormGensys write FIdFormGensys;
     property IdGenerator: String read FIdGenerator write FIdGenerator;
+    property IDSwitchboard: String read FIdSwitchboard write FIdSwitchboard;
 
   end;
 
@@ -140,7 +142,7 @@ procedure TMainSwitchBoardSystem.ShoreMode(aValue: Integer);
 var
   recCmd : R_Common_PMS_Command;
 begin
-  recCmd.GenSwitchID := IdGenerator;
+  recCmd.GenSwitchID := 'Switchboard Shore';
   recCmd.CommandPropsID := epPMSMsbShoreMode;
   recCmd.ValueInt := aValue;
 
@@ -206,7 +208,7 @@ procedure TMainSwitchBoardSystem.CBShore(aValue: Boolean);
 var
   recCmd : R_Common_PMS_Command;
 begin
-  recCmd.GenSwitchID := IdGenerator;
+  recCmd.GenSwitchID := 'Switchboard Shore';
   recCmd.CommandPropsID := epPMSMsbCBShore;
   recCmd.ValueBool := aValue;
 
@@ -241,7 +243,12 @@ begin
 
   rec := @apRec^;
 
-  if FIdGenerator <> rec.GenSwitchID then
+  if FIdGenerator = 'Shore Generator' then
+  begin
+    if (rec.GenSwitchID <> 'Shore Generator') and (rec.GenSwitchID <> 'Switchboard Shore') then
+      Exit
+  end
+  else if FIdGenerator <> rec.GenSwitchID then
     Exit;
 
   case rec.CommandPropsID of
@@ -251,11 +258,12 @@ begin
     epPMSFailureCBClosed,
     epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm,
     epPMSLubOilTempHigh, epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage,
-    epPMSSpeedSensorFailureShutdown, epPMSLubOilPressLowShutdown, epPMSCoolWaterTempHighShutdown :
+    epPMSSpeedSensorFailureShutdown, epPMSLubOilPressLowShutdown, epPMSCoolWaterTempHighShutdown,
+    epPMSMsbCBShore :
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;
-    epPMSGeneratorMode, epPMSGeneratorState:
+    epPMSGeneratorMode, epPMSGeneratorState, epPMSMsbShoreMode:
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueInt)
     end;

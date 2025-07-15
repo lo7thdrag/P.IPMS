@@ -531,11 +531,11 @@ begin
   begin
     {C_SWITCHBOARD: Objk Switchboard; 1:Aft; value: Mode Switchboard; epPMSMsbShoreMode: ProsID}
     if TRadioButton(Sender).Name = 'rbManShore' then
-      SetValueInt(C_SWITCHBOARD, 1, 1, epPMSMsbShoreMode)
+      SetValueInt(C_SWITCHBOARD, 3, 1, epPMSMsbShoreMode)
     else if TRadioButton(Sender).Name = 'rbOffShore' then
-      SetValueInt(C_SWITCHBOARD, 1, 2, epPMSMsbShoreMode)
+      SetValueInt(C_SWITCHBOARD, 3, 2, epPMSMsbShoreMode)
     else if TRadioButton(Sender).Name = 'rbAutShore' then
-      SetValueInt(C_SWITCHBOARD, 1, 3, epPMSMsbShoreMode)
+      SetValueInt(C_SWITCHBOARD, 3, 3, epPMSMsbShoreMode)
   end;
 end;
 
@@ -828,16 +828,16 @@ begin
       end;
       epPMSMsbShoreMode :
       begin
-        if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[1] then
+        if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[3] then
         begin
           rbManShore.Checked := toCheck(1, Value);
           rbOffShore.Checked := toCheck(2, Value);
           rbAutShore.Checked := toCheck(3, Value);
-          if value = 2  then
-          begin
-            lblCBOpenShore.Color := toLblWarna(False);
-            lblCBCloseShore.Color := toLblWarna(False)
-          end;
+//          if value = 2  then
+//          begin
+//            lblCBOpenShore.Color := toLblWarna(False);
+//            lblCBCloseShore.Color := toLblWarna(False)
+//          end;
         end;
       end;
       epPMSEsbIntrMode :

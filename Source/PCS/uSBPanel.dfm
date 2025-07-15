@@ -5308,6 +5308,8 @@ object frmSBPanel: TfrmSBPanel
       Caption = ''
       Flat = True
       OnClick = btnIncr_SpeedSBClick
+      OnMouseDown = btnSBMouseDown
+      OnMouseUp = btnSBMouseUp
       ImageList = ilButton_SB
       Color = clBlack
     end
@@ -5354,6 +5356,8 @@ object frmSBPanel: TfrmSBPanel
       Caption = ''
       Flat = True
       OnClick = btnDecr_SpeedSBClick
+      OnMouseDown = btnSBMouseDown
+      OnMouseUp = btnSBMouseUp
       ImageList = ilButton_SB
       Color = clBlack
     end
@@ -5399,8 +5403,7 @@ object frmSBPanel: TfrmSBPanel
       Hint = 'Pitch AH'
       Caption = ''
       Flat = True
-      OnMouseDown = btnSBMouseDown
-      OnMouseUp = btnSBMouseUp
+      OnClick = btnPitch_AH_SBClick
       ImageList = ilButton_SB
       Color = clBlack
     end
@@ -5435,6 +5438,7 @@ object frmSBPanel: TfrmSBPanel
       Hint = 'Pitch AS'
       Caption = ''
       Flat = True
+      OnClick = btnPitch_AS_SBClick
       OnMouseDown = btnSBMouseDown
       OnMouseUp = btnSBMouseUp
       ImageList = ilButton_SB

@@ -70,6 +70,7 @@ type
 
     procedure SetAlarmStatus;
     procedure RefreshAlarmStatus;
+    procedure UpdateAlarmStatusFromClient;
 
     property faultStatus: Byte read FFaultStatus write FFaultStatus;
   end;
@@ -208,6 +209,37 @@ begin
   mmoFault.Enabled := False;
 end;
 
+procedure TfrmACSControl.UpdateAlarmStatusFromClient;
+var
+  i : Integer;
+  li: TListItem;
+  FTempData : TACSData;
+
+begin
+  if lvAlarmStatus.Items.Count > 0 then
+  begin
+    for i := 0 to lvAlarmStatus.Items.Count - 1 do
+    begin
+      li := lvAlarmStatus.Items[i];
+
+      if Assigned(li.Data) then
+      begin
+        FTempData := TACSData(li.Data);
+
+        if FFaultStatus = 1 then
+        begin
+          FTempData.statusRec := 'Delete'
+        end
+        else if FFaultStatus = 2 then
+        begin
+          if FTempData.statusRec = 'Alarm' then
+            FTempData.statusRec := 'Ack'
+        end;
+      end;
+    end;
+  end;
+end;
+
 procedure TfrmACSControl.btnAckClick(Sender: TObject);
 var
   rec : R_Common_ACS_Command;
@@ -342,6 +374,7 @@ begin
   end;
 
   FTempData.statusRec := 'Alarm';
+//  FTempData.Status := rec.Status;
 
   FStateAlarm.Add(FTempData);
   SetAlarmStatus;
@@ -535,25 +568,33 @@ begin
             lvAlarmStatus.Canvas.Brush.Color := clRed;
             lvAlarmStatus.Canvas.Font.Color := clWhite;
 
-            if FFaultStatus = 1 then
-            begin
-              lvAlarmStatus.Canvas.Brush.Color := clSilver;
-              lvAlarmStatus.Canvas.Font.Color := clWhite;
-
-              FTempData.statusRec := 'Delete'
-            end
-            else if FFaultStatus = 2 then
-            begin
-              lvAlarmStatus.Canvas.Brush.Color := clBlack;
-              lvAlarmStatus.Canvas.Font.Color := clRed;
-
-              FTempData.statusRec := 'Ack'
-            end;
+//            if FFaultStatus = 1 then
+//            begin
+//              lvAlarmStatus.Canvas.Brush.Color := clSilver;
+//              lvAlarmStatus.Canvas.Font.Color := clWhite;
+//
+//              FTempData.statusRec := 'Delete'
+//            end
+//            else if FFaultStatus = 2 then
+//            begin
+//              lvAlarmStatus.Canvas.Brush.Color := clBlack;
+//              lvAlarmStatus.Canvas.Font.Color := clRed;
+//
+//              FTempData.statusRec := 'Ack'
+//            end;
           end
           else if FTempData.statusRec = 'Ack' then
           begin
             lvAlarmStatus.Canvas.Brush.Color := clBlack;
             lvAlarmStatus.Canvas.Font.Color := clRed;
+
+//            if FFaultStatus = 1 then
+//            begin
+//              lvAlarmStatus.Canvas.Brush.Color := clSilver;
+//              lvAlarmStatus.Canvas.Font.Color := clWhite;
+//
+//              FTempData.statusRec := 'Delete'
+//            end
           end;
         end;
       end;

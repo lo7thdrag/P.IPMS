@@ -123,6 +123,8 @@ type
     procedure FlasingIndicatorTimerTimer(Sender: TObject);
     procedure btnIncr_SpeedSBClick(Sender: TObject);
     procedure btnDecr_SpeedSBClick(Sender: TObject);
+    procedure btnPitch_AH_SBClick(Sender: TObject);
+    procedure btnPitch_AS_SBClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -278,6 +280,26 @@ begin
   end
 end;
 
+procedure TfrmSBPanel.btnPitch_AH_SBClick(Sender: TObject);
+begin
+  if TSpeedButtonImage(Sender).Hint = 'Pitch AH' then
+  begin
+    imgPitch_AH_SB.Picture.LoadFromFile(fIndikatorOn);
+    imgPitch_AS_SB.Picture.LoadFromFile(fIndikatorOff);
+    PitchInChange(1,True);
+  end
+end;
+
+procedure TfrmSBPanel.btnPitch_AS_SBClick(Sender: TObject);
+begin
+  if TSpeedButtonImage(Sender).Hint = 'Pitch AS' then
+  begin
+    imgPitch_AS_SB.Picture.LoadFromFile(fIndikatorOn);
+    imgPitch_AH_SB.Picture.LoadFromFile(fIndikatorOff);
+    PitchInChange(-1,True);
+  end;
+end;
+
 procedure TfrmSBPanel.btnSBMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
@@ -408,7 +430,7 @@ begin
       begin
         imgRemote_Manual_Clutch_SB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteManual := True;
-        PCSSystem.Remote(C_PCS_GB_STARBOARD, C_ORD_GB_REMOTEMAN, False);
+        PCSSystem.RemoteManual(C_PCS_GB_STARBOARD, C_ORD_GB_REMOTEMAN, True);
       end;
     end
     else
@@ -418,7 +440,7 @@ begin
       begin
         imgRemote_Manual_CPP_SB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteManual := True;
-        PCSSystem.Remote(C_PCS_CPP_STARBOARD, C_ORD_CPP_REMOTEMAN, False);
+        PCSSystem.RemoteManual(C_PCS_CPP_STARBOARD, C_ORD_CPP_REMOTEMAN, True);
       end;
     end
     else
@@ -428,7 +450,7 @@ begin
       begin
         imgRemote_Manual_ME_SB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteManual := True;
-        PCSSystem.Remote(C_PCS_ME_STARBOARD, C_ORD_ME_REMOTEMAN, False);
+        PCSSystem.RemoteManual(C_PCS_ME_STARBOARD, C_ORD_ME_REMOTEMAN, True);
       end;
     end;
   end;
