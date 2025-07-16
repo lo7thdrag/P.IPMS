@@ -10561,6 +10561,16 @@ object MainForm: TMainForm
       Visible = False
       WordWrap = False
     end
+    object mpDiesel: TMediaPlayer
+      Left = 728
+      Top = 208
+      Width = 253
+      Height = 30
+      FileName = 'D:\IPMS\P.IPMS\Source\bin\Suara_dieselgenerator.wav'
+      Visible = False
+      TabOrder = 2
+      OnNotify = mpDieselNotify
+    end
   end
   object VrMainSwitch: TVrRotarySwitch
     Left = 728

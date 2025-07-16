@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
-  VrControls, VrRotarySwitch, Vcl.StdCtrls,
+  VrControls, VrRotarySwitch, Vcl.StdCtrls, Winapi.MMSystem,
 
   uSetting, uListener, uFreezeFrom, uDataType, Vcl.MPlayer, uGenerator;
 
@@ -50,6 +50,7 @@ type
     btnStandby: TImage;
     btnStart: TImage;
     btnStop: TImage;
+    mpDiesel: TMediaPlayer;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -65,10 +66,13 @@ type
     procedure btnSirenOffClick(Sender: TObject);
     procedure mpAlarmNotify(Sender: TObject);
     procedure Alarm(Value: Boolean);
+    procedure EngineSound(Value: Boolean);
     procedure btnResetClick(Sender: TObject);
     procedure tmrRunningHoursTimer(Sender: TObject);
     procedure tmrResetTimer(Sender: TObject);
     procedure tmrStopTimer(Sender: TObject);
+    procedure mpDieselNotify(Sender: TObject);
+
 
   private
 //    FListener : TListeners;
@@ -77,6 +81,7 @@ type
     FRunningHourTemp : Integer;
     FRunningHour : Integer;
 
+    procedure WndProc(var Msg: TMessage); override;
     procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
     procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
     procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : string);overload;
@@ -85,6 +90,7 @@ type
   public
     { Public declarations }
     silence : Boolean;
+    IsFirstPlay : Boolean;
     GeneratorTemp : TGenerator;
 
   end;
@@ -150,6 +156,7 @@ begin
   else
     mpAlarm.FileName:= ExtractFilePath(Application.Exename) + 'ACS_ALARM.mp3';
 
+  IsFirstPlay := True;
   silence := False;
 
   {Create Generator Temporary}
@@ -198,9 +205,17 @@ begin
   case PropsID of
     epPMSGeneratorEngineRun :
     begin
+      if DieselGeneratorSystem.Freezed then
+        Exit;
+
       GeneratorTemp.EngineRun := Value;
       imgStart.Visible := Value;
       tmrRunningHours.Enabled := Value;
+      imgRunning.Visible := Value;
+      VrMainSwitch.SwitchPosition := 0;
+
+//      if not DieselGeneratorSystem.Freezed then
+        EngineSound(True);
 
       if not GeneratorTemp.EngineRun then
       begin
@@ -208,11 +223,9 @@ begin
         tmrStop.Enabled := True;
         imgRunning.Visible := False;
         VrMainSwitch.SwitchPosition := 1;
+        EngineSound(False);
         Exit;
       end;
-
-      imgRunning.Visible := Value;
-      VrMainSwitch.SwitchPosition := 0;
     end;
 
     epPMSGeneratorSupplied : GeneratorTemp.GeneratorSupplied := Value;
@@ -377,12 +390,10 @@ begin
         MainForm.Enabled := True;
         if Assigned(DieselGeneratorSystem.FFormFreezed[1]) then
           FreeAndNil(DieselGeneratorSystem.FFormFreezed[1]);
+
+        MainForm.DieselGeneratorSystemEvent(DieselGeneratorSystem, epPMSGeneratorEngineRun, True);
       end;
     end;
-//    epPMSGeneratorRunningHours:
-//    begin
-//      lblRunningHours.Caption := IntToStr(Value);
-//    end;
   end;
 end;
 
@@ -512,6 +523,45 @@ begin
 
 end;
 
+procedure TMainForm.WndProc(var Msg: TMessage);
+begin
+  if Msg.Msg = MM_MCINOTIFY then
+  begin
+    if silence then
+    begin
+      // Hanya pada loop ke-2 dan seterusnya: play dari 00:05 (5.000 ms)
+      if IsFirstPlay then
+        IsFirstPlay := False;
+
+      mciSendString('play diesel from 5000 notify', nil, 0, Handle);
+    end;
+  end;
+
+  inherited WndProc(Msg);
+end;
+
+procedure TMainForm.EngineSound(Value: Boolean);
+begin
+  if Value then
+  begin
+    silence := True;
+    IsFirstPlay:= True;
+
+    mciSendString('Close Diesel', nil, 0, 0);
+    mciSendString('open "Suara_dieselgenerator.wav" alias Diesel', nil, 0, 0);
+
+    mciSendString('Play Diesel notify', nil, 0, Handle);
+  end
+  else
+  begin
+    silence := False;
+
+    mciSendString('stop diesel', nil, 0, 0);
+    mciSendString('close diesel', nil, 0, 0);
+    IsFirstPlay := True;
+  end;
+end;
+
 procedure TMainForm.Alarm(Value: Boolean);
 begin
   if Value then
@@ -543,6 +593,21 @@ begin
     mpAlarm.Notify := True;
   end;
 end;
+
+procedure TMainForm.mpDieselNotify(Sender: TObject);
+begin
+  if (mpDiesel.NotifyValue = nvSuccessful) and silence then
+  begin
+   if mpDiesel.Mode = mpPlaying then
+      mpDiesel.Stop;
+    mpDiesel.Close;
+    mpDiesel.Notify := False;
+    mpDiesel.OnNotify := nil;
+
+    IsFirstPlay:= False;
+  end;
+end;
+
 
 procedure TMainForm.tmrResetTimer(Sender: TObject);
 begin
