@@ -238,9 +238,6 @@ type
     procedure LoadMainMenu(MainIndex : Integer);
     procedure LoadSubMenu(SubIndex : Integer);
     procedure LoadSubSubMenu(page : Integer);
-
-    procedure MenuFaultPage;
-    procedure MenuAlarmPage;
     procedure MenuInfoPage;
 
     procedure createlabels;
@@ -309,10 +306,15 @@ begin
   lstMenu.Visible := False;
   lstMenu.Style := lbOwnerDrawFixed;
 
+  {Create Generator Temporary}
+  Generator := TGenerator.Create;
+  Generator.Identifier := MainSwitchBoardSystem.IdGenerator;
+  Generator.GeneratorState := 1;
 end;
 
 procedure TfrmGeneratorPanel.FormDestroy(Sender: TObject);
 begin
+  Generator.Destroy;
 // FListener.Free;
 end;
 
@@ -356,7 +358,6 @@ begin
     begin
       pnlPassword.Visible := False;
       lstMenu.Visible := True;
-//      SetLCDLook;
       InitMenu;
       CurrentMenuIndex := 0;
       LoadMainMenu(CurrentMenuIndex);
@@ -1004,88 +1005,70 @@ begin
   SetLength(SubSubMenu1[0], 9);
   SubSubMenu1[0][0] := TStringList.Create;
   SubSubMenu1[0][0].Add('Generator Phase-Neutral Volt');
-  SubSubMenu1[0][0].Add('V1 = 00000 V');
-  SubSubMenu1[0][0].Add('V2 = 00000 V');
-  SubSubMenu1[0][0].Add('V3 = 00000 V');
+  SubSubMenu1[0][0].Add('V1 = ' + FloatToStr((Generator.Voltage)/2) +' V');
+  SubSubMenu1[0][0].Add('V2 = ' + FloatToStr(Generator.Voltage/2 - 1) +' V');
+  SubSubMenu1[0][0].Add('V3 = ' + FloatToStr(Generator.Voltage/2) +' V');
 
   SubSubMenu1[0][1] := TStringList.Create;
   SubSubMenu1[0][1].Add('Generator Phase-Phase Volt');
-  SubSubMenu1[0][1].Add('U31 = 00000 V');
-  SubSubMenu1[0][1].Add('U23 = 00000 V');
-  SubSubMenu1[0][1].Add('U12 = 00000 V');
+  SubSubMenu1[0][1].Add('U31 = ' + FloatToStr(Generator.Voltage) +' V');
+  SubSubMenu1[0][1].Add('U23 = ' + FloatToStr(Generator.Voltage -1 ) +' V');
+  SubSubMenu1[0][1].Add('U12 = ' + FloatToStr(Generator.Voltage) +' V');
 
   SubSubMenu1[0][2] := TStringList.Create;
   SubSubMenu1[0][2].Add('Generator amps');
-  SubSubMenu1[0][2].Add('I1 = 00000 A');
-  SubSubMenu1[0][2].Add('I2 = 00000 A');
-  SubSubMenu1[0][2].Add('I3 = 00000 A');
+  SubSubMenu1[0][2].Add('I1 = ' + FloatToStr(Generator.Current) +' A');
+  SubSubMenu1[0][2].Add('I2 = ' + FloatToStr(Generator.Current - 4) +' A');
+  SubSubMenu1[0][2].Add('I3 = ' + FloatToStr(Generator.Current - 2) +' A');
 
   SubSubMenu1[0][3] := TStringList.Create;
   SubSubMenu1[0][3].Add('Generator kW');
-  SubSubMenu1[0][3].Add('P1 = 00000 kW');
-  SubSubMenu1[0][3].Add('P2 = 00000 kW');
-  SubSubMenu1[0][3].Add('P3 = 00000 kW');
+  SubSubMenu1[0][3].Add('P1 = ' + FloatToStr(Generator.Power) +' kW');
+  SubSubMenu1[0][3].Add('P2 = ' + FloatToStr(Generator.Power - 2) +' kW');
+  SubSubMenu1[0][3].Add('P3 = ' + FloatToStr(Generator.Power - 1) +' kW');
 
   SubSubMenu1[0][4] := TStringList.Create;
   SubSubMenu1[0][4].Add('Generator kVAR');
-  SubSubMenu1[0][4].Add('Q1 = 00000 kVAR');
-  SubSubMenu1[0][4].Add('Q2 = 00000 kVAR');
-  SubSubMenu1[0][4].Add('Q3 = 00000 kVAR');
+  SubSubMenu1[0][4].Add('Q1 = ' + FloatToStr(Generator.Power) +' kVAR');
+  SubSubMenu1[0][4].Add('Q2 = ' + FloatToStr(Generator.Power) +' kVAR');
+  SubSubMenu1[0][4].Add('Q3 = ' + FloatToStr(Generator.Power) +' kVAR');
 
   SubSubMenu1[0][5] := TStringList.Create;
   SubSubMenu1[0][5].Add('Generator PF');
-  SubSubMenu1[0][5].Add('cos(1) = 1.00I');
-  SubSubMenu1[0][5].Add('cos(2) = 1.00I');
-  SubSubMenu1[0][5].Add('cos(3) = 1.00I');
+  SubSubMenu1[0][5].Add('cos(φ1) = ' + FormatFloat('0.000', Generator.CosPhi) +'I');
+  SubSubMenu1[0][5].Add('cos(φ2) = ' + FloatToStr(Generator.CosPhi) +'I');
+  SubSubMenu1[0][5].Add('cos(φ3) = ' + FloatToStr(Generator.CosPhi) +'I');
 
   SubSubMenu1[0][6] := TStringList.Create;
   SubSubMenu1[0][6].Add('Generator parameters');
-  SubSubMenu1[0][6].Add('P = 00000 kW');
-  SubSubMenu1[0][6].Add('Q = 00000 kVAR');
-  SubSubMenu1[0][6].Add('F = 00. 00 Hz');
-  SubSubMenu1[0][6].Add('cos() = 0. 00I');
+  SubSubMenu1[0][6].Add('P = ' + FloatToStr(Generator.Power) +' kW');
+  SubSubMenu1[0][6].Add('Q = ' + FloatToStr(Generator.Power) +' kVAR');
+  SubSubMenu1[0][6].Add('F = ' + FloatToStr(Generator.Frequency) +' Hz');
+  SubSubMenu1[0][6].Add('cos(φ) = ' + FloatToStr(Generator.CosPhi) +'I');
 
   SubSubMenu1[0][7] := TStringList.Create;
   SubSubMenu1[0][7].Add('KW meter');
-  SubSubMenu1[0][7].Add('0005339192kWh');
+  SubSubMenu1[0][7].Add(FloatToStr(Generator.Power) + ' kWh');
   SubSubMenu1[0][7].Add('kVAR meter');
-  SubSubMenu1[0][7].Add('0003989214kVARh');
+  SubSubMenu1[0][7].Add(FloatToStr(Generator.Power) +' kVARh');
 
   SubSubMenu1[0][8] := TStringList.Create;
   SubSubMenu1[0][8].Add('Global view');
-  SubSubMenu1[0][8].Add('V1 = 00000 V   U31 = 00000 V   I1 = 00000 A');
-  SubSubMenu1[0][8].Add('V2 = 00000 V   U23 = 00000 V   I2 = 00000 A');
-  SubSubMenu1[0][8].Add('V3 = 00000 V   U12 = 00000 V   I3 = 00000 A');
-  SubSubMenu1[0][8].Add('P1 = 00000 kW  Q1 = 00000 kVAR  cos(1) = 1.00I');
-  SubSubMenu1[0][8].Add('P2 = 00000 kW  Q2 = 00000 kVAR  cos(2) = 1.00I');
-  SubSubMenu1[0][8].Add('P3 = 00000 kW  Q3 = 00000 kVAR  cos(3) = 1.00I');
-  SubSubMenu1[0][8].Add('P = 000 kW     F = 50.0 Hz');
-  SubSubMenu1[0][8].Add('Q = 00000 kVAR   cos(1) = 0.791');
+  SubSubMenu1[0][8].Add('V1 = ' + FloatToStr((Generator.Voltage)/2)     +' V   U31 = ' + FloatToStr(Generator.Voltage)     +' V   I1 = ' + FloatToStr(Generator.Current) +' A');
+  SubSubMenu1[0][8].Add('V2 = ' + FloatToStr((Generator.Voltage)/2 - 1) +' V   U23 = ' + FloatToStr(Generator.Voltage - 1) +' V   I2 = ' + FloatToStr(Generator.Current - 4) +' A');
+  SubSubMenu1[0][8].Add('V3 = ' + FloatToStr((Generator.Voltage)/2)     +' V   U12 = ' + FloatToStr(Generator.Voltage)     +' V   I3 = ' + FloatToStr(Generator.Current - 2) +' A');
+  SubSubMenu1[0][8].Add('P1 = ' + FloatToStr(Generator.Power)     +' kW  Q1 = ' + FloatToStr(Generator.Power) +' kVAR  cos(φ1) = ' + FloatToStr(Generator.CosPhi) +'I');
+  SubSubMenu1[0][8].Add('P2 = ' + FloatToStr(Generator.Power - 2) +' kW  Q2 = ' + FloatToStr(Generator.Power) +' kVAR  cos(φ2) = ' + FloatToStr(Generator.CosPhi) +'I');
+  SubSubMenu1[0][8].Add('P3 = ' + FloatToStr(Generator.Power - 1) +' kW  Q3 = ' + FloatToStr(Generator.Power) +' kVAR  cos(φ3) = ' + FloatToStr(Generator.CosPhi) +'I');
+  SubSubMenu1[0][8].Add('P = ' + FloatToStr(Generator.Power)     +' kW     F = ' + FloatToStr(Generator.Frequency) +' Hz');
+  SubSubMenu1[0][8].Add('Q = ' + FloatToStr(Generator.Power)     +' kVAR   cos(φ1) = ' + FloatToStr(Generator.CosPhi));
 
   // SubSubMenu Mains/bus electrical meter (index = 1)
   SetLength(SubSubMenu1[1], 1);
   SubSubMenu1[1][0] := TStringList.Create;
   SubSubMenu1[1][0].Add('Mains/bus parameters');
-  SubSubMenu1[1][0].Add('U13 = 00439 V');
-  SubSubMenu1[1][0].Add('F = 60.06 Hz');
-
-  // SubSubMenu Engine meters (index = 2)
-//  SetLength(SubSubMenu1[2], 2);
-//  SubSubMenu1[2][0] := TStringList.Create;
-//  SubSubMenu1[2][0].Add('Engine meters');
-//  SubSubMenu1[2][0].Add('AI oil press.  : 0029-001000 mBa');
-//  SubSubMenu1[2][0].Add('AI water temp. : 0030-000046 C');
-//  SubSubMenu1[2][0].Add('Batt voltage   : 0041-024.1 V');
-//  SubSubMenu1[2][0].Add('Engine speed   : 0033-00000 rpm');
-//
-//  SubSubMenu1[2][1] := TStringList.Create;
-//  SubSubMenu1[2][1].Add('Engine meters');
-//  SubSubMenu1[2][1].Add('AI spare 1     : 0031-00601');
-//  SubSubMenu1[2][1].Add('AI spare 2     : 0032-00602');
-//  SubSubMenu1[2][1].Add('Nb of starts   : 2787');
-//  SubSubMenu1[2][1].Add('Hours run      : 0000038087h');
-//  SubSubMenu1[2][1].Add('User meter 1  : 0000000000');
-//  SubSubMenu1[2][1].Add('User meter 2  : 0000000000');
+  SubSubMenu1[1][0].Add('U13 = ' + FloatToStr(Generator.Voltage) +' V');
+  SubSubMenu1[1][0].Add('F = ' + FloatToStr(Generator.Frequency) +' Hz');
 
   // SubSubMenu Digital Inputs
   SetLength(SubSubMenu1[3], 3);
@@ -1552,22 +1535,6 @@ begin
   {$ENDREGION}
 end;
 
-procedure TfrmGeneratorPanel.MenuAlarmPage;
-begin
-//  MainMenu[0]:= TStringList.Create;
-//  MainMenu[0].AddStrings([
-//    'Alarm 1/2',
-//    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now) + ' ' ]);
-end;
-
-procedure TfrmGeneratorPanel.MenuFaultPage;
-begin
-//  MainMenu[0]:= TStringList.Create;
-//  MainMenu[0].AddStrings([
-//    'Faults 1/2',
-//    FormatDateTime('dd/mm/yyyy hh:nn:ss', Now)+ '  ']);
-end;
-
 procedure TfrmGeneratorPanel.MenuInfoPage;
 begin
   MainMenu[0]:= TStringList.Create;
@@ -1744,10 +1711,6 @@ begin
   ImgIndicatorPreference.Visible := Generator.Preference;
   ImgIndicatorBS.Visible := Generator.Busbar;
 
-//  ImgIndicatorFP.Visible := Generator.MeasPowFailure;
-//  ImgIndicatorFP.Visible := Generator.AutStartFailure;
-//
-//  ImgIndicatorAP.Visible := Generator.NotStandby;
 end;
 
 {$ENDREGION}

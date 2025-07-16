@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, VrControls,
   VrRotarySwitch, RzBmpBtn, VrAngularMeter, Vcl.ExtCtrls,
 
-  uSetting, uListener, uFreezeFrom, uDataType, uGenerator;
+  uSetting, uListener, uFreezeFrom, uDataType, uGenerator, uSwitchboard;
 
 type
   TfrmMainForm = class(TForm)
@@ -31,6 +31,7 @@ type
 
   public
     GeneratorTemp : TGenerator;
+    SwitchboardTemp : TSwitchboard;
 
   end;
 
@@ -69,6 +70,13 @@ begin
   GeneratorTemp := TGenerator.Create;
   GeneratorTemp.Identifier := MainSwitchBoardSystem.IdGenerator;
   GeneratorTemp.GeneratorState := 1;
+
+  if MainSwitchBoardSystem.IdGenerator = 'Shore Generator' then
+  begin
+    SwitchboardTemp := TSwitchboard.Create;
+    SwitchboardTemp.Identifier := 'Switchboard Shore';
+    SwitchboardTemp.ShoreInterconnectionMode := 1;
+  end;
 end;
 
 procedure TfrmMainForm.FormDestroy(Sender: TObject);
@@ -209,6 +217,17 @@ begin
         frmEmergencyPanel.UpdateForm(GeneratorTemp);
       end;
     end;
+    epPMSMsbShoreMode:
+    begin
+      if Assigned(SwitchboardTemp) then
+      begin
+        SwitchboardTemp.ShoreInterconnectionMode := Value;
+        if Assigned(frmShorePanel) then
+        begin
+          frmShorePanel.UpdateForm(SwitchboardTemp);
+        end;
+      end;
+    end;
   end;
 end;
 
@@ -245,6 +264,8 @@ begin
     epPMSGeneratorEmergencyStop : GeneratorTemp.EmergencyStop := Value;
     epPMSShutDown : GeneratorTemp.ShutDown := Value;
     epPMSFailureCBClosed : GeneratorTemp.FailureCBClosed := Value;
+
+    {$REGION 'log Alarm & Fault'}
 
     epPMSMeasPowFailure:
     begin
@@ -542,21 +563,35 @@ begin
         end;
       end;
     end;
+
+    {$ENDREGION}
+
+    epPMSMsbCBShore:
+    begin
+      if Assigned(SwitchboardTemp) then
+      begin
+        SwitchboardTemp.ShoresbCircuitBreaker := Value;
+      end;
+    end;
   end;
+
 
   if Assigned(frmGeneratorPanel) then
   begin
+    frmGeneratorPanel.Generator := GeneratorTemp;
     frmGeneratorPanel.UpdateForm(GeneratorTemp);
   end;
 
   if Assigned(frmEmergencyPanel) then
   begin
+    frmEmergencyPanel.Generator := GeneratorTemp;
     frmEmergencyPanel.UpdateForm(GeneratorTemp);
   end;
 
   if Assigned(frmShorePanel) then
   begin
-    frmShorePanel.UpdateForm(GeneratorTemp);
+//    frmShorePanel.Generator := GeneratorTemp;
+    frmShorePanel.UpdateForm(SwitchboardTemp);
   end;
 end;
 
@@ -566,10 +601,18 @@ begin
     epPMSPower:
     begin
       if Assigned(frmGeneratorPanel) then
+      begin
+        GeneratorTemp.Power := Value;
+        frmGeneratorPanel.Generator := GeneratorTemp;
         frmGeneratorPanel.VraPower.Position := Value;
+      end;
 
       if Assigned(frmEmergencyPanel) then
+      begin
+        GeneratorTemp.Power := Value;
+        frmEmergencyPanel.Generator := GeneratorTemp;
         frmEmergencyPanel.VraPower.Position := Value;
+      end;
 
       if Assigned(frmShorePanel) then
         frmShorePanel.VraPower.Position := Value;
@@ -578,28 +621,48 @@ begin
     begin
       if Assigned(frmGeneratorPanel) then
       begin
+        GeneratorTemp.Frequency := Value;
+        frmGeneratorPanel.Generator := GeneratorTemp;
         frmGeneratorPanel.OrderFrequency := Value;
         frmGeneratorPanel.VraFrequency.Position := Value;
       end;
+
+      if Assigned(frmShorePanel) then
+        frmShorePanel.lblFrequency.Caption := FloatToStr(value);
     end;
     epPMSVoltage:
     begin
       if Assigned(frmGeneratorPanel) then
+      begin
+        GeneratorTemp.Voltage := Value;
+        frmGeneratorPanel.Generator := GeneratorTemp;
         frmGeneratorPanel.VraV.Position := Value;
+      end;
 
       if Assigned(frmEmergencyPanel) then
+      begin
+        GeneratorTemp.Voltage := Value;
+        frmEmergencyPanel.Generator := GeneratorTemp;
         frmEmergencyPanel.VraV.Position := Value;
+      end;
+
+      if Assigned(frmShorePanel) then
+        frmShorePanel.lblVoltageBusbar.Caption := FloatToStr(value);
     end;
     epPMSCurrent:
     begin
       if Assigned(frmGeneratorPanel) then
       begin
+        GeneratorTemp.Current := Value;
+        frmGeneratorPanel.Generator := GeneratorTemp;
         frmGeneratorPanel.OrderAmpere := Value;
         frmGeneratorPanel.vraAmpere1.Position := Value;
       end;
 
       if Assigned(frmEmergencyPanel) then
       begin
+        GeneratorTemp.Current := Value;
+        frmEmergencyPanel.Generator := GeneratorTemp;
         frmEmergencyPanel.OrderAmpere := Value;
         frmEmergencyPanel.tmrAmpere.Enabled := True;
       end;
@@ -607,7 +670,22 @@ begin
       if Assigned(frmShorePanel) then
       begin
         frmShorePanel.OrderAmpere := Value;
+        frmShorePanel.vraAmpere1.Position := Value;
         frmShorePanel.tmrAmpere.Enabled := True;
+      end;
+    end;
+    epPMSCosPhi:
+    begin
+      if Assigned(frmGeneratorPanel) then
+      begin
+        GeneratorTemp.CosPhi := Value;
+        frmGeneratorPanel.Generator := GeneratorTemp;
+      end;
+
+      if Assigned(frmEmergencyPanel) then
+      begin
+        GeneratorTemp.CosPhi := Value;
+        frmEmergencyPanel.Generator := GeneratorTemp;
       end;
     end;
   end;
