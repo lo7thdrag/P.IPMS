@@ -1035,8 +1035,8 @@ begin
 
   SubSubMenu1[0][5] := TStringList.Create;
   SubSubMenu1[0][5].Add('Generator PF');
-  SubSubMenu1[0][5].Add('cos(φ1) = ' + FormatFloat('0.000', Generator.CosPhi) +'I');
-  SubSubMenu1[0][5].Add('cos(φ2) = ' + FloatToStr(Generator.CosPhi) +'I');
+  SubSubMenu1[0][5].Add('cos(φ1) = ' + FloatToStr(Generator.CosPhi) +'I');
+  SubSubMenu1[0][5].Add('cos(φ2) = ' + FloatToStr(Generator.CosPhi - 2) +'I');
   SubSubMenu1[0][5].Add('cos(φ3) = ' + FloatToStr(Generator.CosPhi) +'I');
 
   SubSubMenu1[0][6] := TStringList.Create;
@@ -1058,7 +1058,7 @@ begin
   SubSubMenu1[0][8].Add('V2 = ' + FloatToStr((Generator.Voltage)/2 - 1) +' V   U23 = ' + FloatToStr(Generator.Voltage - 1) +' V   I2 = ' + FloatToStr(Generator.Current - 4) +' A');
   SubSubMenu1[0][8].Add('V3 = ' + FloatToStr((Generator.Voltage)/2)     +' V   U12 = ' + FloatToStr(Generator.Voltage)     +' V   I3 = ' + FloatToStr(Generator.Current - 2) +' A');
   SubSubMenu1[0][8].Add('P1 = ' + FloatToStr(Generator.Power)     +' kW  Q1 = ' + FloatToStr(Generator.Power) +' kVAR  cos(φ1) = ' + FloatToStr(Generator.CosPhi) +'I');
-  SubSubMenu1[0][8].Add('P2 = ' + FloatToStr(Generator.Power - 2) +' kW  Q2 = ' + FloatToStr(Generator.Power) +' kVAR  cos(φ2) = ' + FloatToStr(Generator.CosPhi) +'I');
+  SubSubMenu1[0][8].Add('P2 = ' + FloatToStr(Generator.Power - 2) +' kW  Q2 = ' + FloatToStr(Generator.Power) +' kVAR  cos(φ2) = ' + FloatToStr(Generator.CosPhi - 2) +'I');
   SubSubMenu1[0][8].Add('P3 = ' + FloatToStr(Generator.Power - 1) +' kW  Q3 = ' + FloatToStr(Generator.Power) +' kVAR  cos(φ3) = ' + FloatToStr(Generator.CosPhi) +'I');
   SubSubMenu1[0][8].Add('P = ' + FloatToStr(Generator.Power)     +' kW     F = ' + FloatToStr(Generator.Frequency) +' Hz');
   SubSubMenu1[0][8].Add('Q = ' + FloatToStr(Generator.Power)     +' kVAR   cos(φ1) = ' + FloatToStr(Generator.CosPhi));
