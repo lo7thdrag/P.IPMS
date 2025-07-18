@@ -199,6 +199,7 @@ type
     procedure Gen3ModeClick(Sender: TObject);
     procedure Gen4ModeClick(Sender: TObject);
     procedure GenEModeClick(Sender: TObject);
+    procedure GenShoreModeClick(Sender: TObject);
 
     procedure InterCon1ModeClick(Sender: TObject);
     procedure InterCon2ModeClick(Sender: TObject);
@@ -403,6 +404,22 @@ begin
   end;
 end;
 
+procedure TfrmPMSSystemPanel.GenShoreModeClick(Sender: TObject);
+begin
+//  if rbManShore.Checked = true then
+//  begin
+//    SetValueInt(C_GENERATOR, 5, 1, epPMSGeneratorMode);
+//  end
+//  else if rbOffShore.Checked = true then
+//  begin
+//    SetValueInt(C_GENERATOR, 5, 2, epPMSGeneratorMode);
+//  end
+//  else if rbAutShore.Checked = true then
+//  begin
+//    SetValueInt(C_GENERATOR, 5, 3, epPMSGeneratorMode);
+//  end;
+end;
+
 procedure TfrmPMSSystemPanel.btnStartClick(Sender: TObject);
 begin
   if Sender is TButton then
@@ -473,6 +490,10 @@ begin
     SetValueBool(C_GENERATOR, 3, False, epPMSGeneratorCBClosed)
   else if TButton(Sender).Name = 'btnCBClosedGenE' then
     SetValueBool(C_GENERATOR, 4, False, epPMSGeneratorCBClosed)
+  else if TButton(Sender).Name = 'btnCBOpenShore' then
+    SetValueBool(C_GENERATOR, 5, True, epPMSGeneratorCBClosed)
+  else if TButton(Sender).Name = 'btnCBCloseShore' then
+    SetValueBool(C_GENERATOR, 5, False, epPMSGeneratorCBClosed);
 end;
 
 procedure TfrmPMSSystemPanel.btnPrefClick(Sender: TObject);
@@ -621,7 +642,7 @@ begin
     case PropsID of
       epPMSGeneratorEngineRun:
       begin
-        if (generator.GeneratorMode = 3) then
+        if (generator.GeneratorMode = 3) and (IdObj <> 5) then
           exit;
 
         if (generator.GeneratorState = Ord(gsWaiting){1}) or (IdObj = 5) then
@@ -804,6 +825,12 @@ begin
           rbManGenE.Checked := Value = 1;// toCheck(1, Value);
           rbSemGenE.Checked := Value = 2;// toCheck(2, Value);
           rbAutGenE.Checked := Value = 3;// toCheck(3, Value);
+        end
+        else if TGenerator(Sender).Identifier = C_GENERATOR_ID[5] then
+        begin
+          rbManShore.Checked := Value = 1;// toCheck(1, Value);
+          rbOffShore.Checked := Value = 2;// toCheck(2, Value);
+          rbAutShore.Checked := Value = 3;// toCheck(3, Value);
         end;
       end;
     end;

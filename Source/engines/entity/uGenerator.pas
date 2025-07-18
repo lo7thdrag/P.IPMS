@@ -300,7 +300,7 @@ begin
   FFlagOff := 1; // Ryu : second
   FFlagStart := 1;
 
-  FGeneratorMode := 0;
+  FGeneratorMode := 3;
   FRunHourState := False;
   IsConnectToMsb := False;
   FIsFuelRunsOut := False;

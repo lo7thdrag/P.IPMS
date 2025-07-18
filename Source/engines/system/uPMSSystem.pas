@@ -126,6 +126,11 @@ begin
       if (Msb[2].EsbCircuitBreaker) and (Msb[2].ESBInterconnectionMode = IdIntrMode) then
         Result := True
     end;
+    4: {U/ mengecek koneksi SSB dengan MSB}
+    begin
+      if (Msb[3].ShoresbCircuitBreaker) and (Msb[3].ShoreInterconnectionMode <> 2) then
+        Result := True
+    end;
   end;
 end;
 
@@ -992,15 +997,20 @@ end;
 procedure TPMSSystem.setConnection;
 var
   i : Integer;
-  FwdBusbar, AftBusbar, ShoreBusbar, EsbBusbar,
+  FwdBusbar, AftBusbar, ShrBusbar, EsbBusbar,
   AftToEsb, FwdToEsb : Boolean;
-  FwdFreq, FwdVolt, AftFreq, AftVolt, EsbFreq, EsbVolt: Double;
+  FwdFreq, FwdVolt, AftFreq, AftVolt,
+  ShrFreq, ShrVolt, EsbFreq, EsbVolt: Double;
   calcModeTemp: E_ModeID;
 
 begin
-  FwdFreq := 0; FwdVolt := 0; AftFreq := 0; AftVolt := 0;
+  FwdFreq := 0; FwdVolt := 0;
+  AftFreq := 0; AftVolt := 0;
   EsbFreq := 0; EsbVolt := 0;
-  FwdBusbar := False; AftBusbar := False; EsbBusbar := False;
+  ShrFreq := 0; ShrVolt := 0;
+
+  FwdBusbar := False; AftBusbar := False;
+  ShrBusbar := False; EsbBusbar := False;
   AftToEsb := False;  FwdToEsb:= False;
 
   for i := 0 to Length(C_GENERATOR_ID) - 1 do
@@ -1031,9 +1041,9 @@ begin
         end;
         5 :
         begin
-          AftBusbar := True;
-          AftFreq := Gen[i].Frequency;
-          AftVolt := Gen[i].Voltage;
+          ShrBusbar := True;
+          ShrFreq := Gen[i].Frequency;
+          ShrVolt := Gen[i].Voltage;
         end;
       end;
     end
@@ -1141,6 +1151,69 @@ begin
     SetSwitchFreqValue(2, 4, 4, True);
 
     SetStateRun(calcModeTemp, 2);
+
+    {$ENDREGION}
+  end
+  else if ShrBusbar then
+  begin
+    {$REGION ' Saat Emergency Switchboard yang menyuply listrik '}
+    Msb[3].Busbar := True;
+    Msb[3].Frequency := ShrFreq;
+    Msb[3].Voltage := ShrVolt;
+
+    if CekBusKoplerHandle(4,0) then
+    begin
+      {$REGION ' Cek apakah nyambung ke MSB After '}
+      {Set MSB After}
+      Msb[1].Busbar := True;
+      Msb[1].Frequency := ShrFreq;
+      Msb[1].Voltage := ShrVolt;
+
+      SetSwitchFreqValue(1, 2, 3, True);
+
+      if (Msb[1].Busbar) and (Msb[1].MsbCircuitBreaker) then
+      begin
+        SetDelayConnection(1);
+        if (Msb[0].MsbCircuitBreaker) then
+        begin
+          {Set MSB Forward}
+          Msb[0].Busbar := True;
+          Msb[0].Frequency := AftFreq;
+          Msb[0].Voltage := AftVolt;
+
+          SetSwitchFreqValue(0, 0, 1, True);
+
+          FwdToEsb := CekBusKoplerHandle(3,3);
+
+          calcModeTemp := emFull;
+        end
+        else
+          calcModeTemp := emAft;
+      end;
+
+      AftToEsb := CekBusKoplerHandle(3,1);
+
+      {Set MSB Emergency}
+      if (not AftToEsb) and (not FwdToEsb)  then
+      begin
+        Msb[2].Busbar := False;
+        Msb[2].Frequency := 0;
+        Msb[2].Voltage := 0;
+
+        SetSwitchFreqValue(2, 4, 4, False);
+      end
+      else
+      begin
+        Msb[2].Busbar := True;
+        Msb[2].Frequency := FwdFreq;
+        Msb[2].Voltage := FwdFreq;
+
+        SetSwitchFreqValue(2, 4, 4, True);
+      end;
+      {$ENDREGION}
+    end;
+
+    SetStateRun(calcModeTemp, 4);
 
     {$ENDREGION}
   end
