@@ -1513,6 +1513,21 @@ begin
   pmsListTemp.Add(pmsDataTemp);
   {$ENDREGION}
 
+  {$REGION ' Shore '}
+  pmsDataTemp := TPMSCond_Data.Create;
+  pmsDataTemp.PMS_Name := C_GENERATOR_ID[5];
+  pmsDataTemp.PMS_Type := 1;
+  pmsDataTemp.PMS_ID := FPmsIDBuffer[5];
+  pmsDataTemp.Condition_ID := FPMSConditionID;
+
+  pmsDataTemp.PMS_Mode := 3;
+  pmsDataTemp.PMS_State := 1;
+  pmsDataTemp.PMS_OnOff := 0;
+  pmsDataTemp.PMS_CB := 0;
+
+  pmsListTemp.Add(pmsDataTemp);
+  {$ENDREGION}
+
   {$REGION ' Switchboard Forward '}
   pmsDataTemp := TPMSCond_Data.Create;
   pmsDataTemp.PMS_Name := C_SWITCHBOARD_ID[0];
@@ -1563,6 +1578,17 @@ begin
 
 //  pmsDataTemp.PMS_SWB_MsbCBIntr := cbbCircuitBreakerEmFwd.ItemIndex;
 
+  pmsListTemp.Add(pmsDataTemp);
+  {$ENDREGION}
+
+  {$REGION ' Switchboard Emergency '}
+  pmsDataTemp := TPMSCond_Data.Create;
+  pmsDataTemp.PMS_Name := C_SWITCHBOARD_ID[3];
+  pmsDataTemp.PMS_Type := 2;
+  pmsDataTemp.PMS_ID := FPmsIDBuffer[7];
+  pmsDataTemp.Condition_ID := FPMSConditionID;
+
+  pmsDataTemp.PMS_SWB_ShoreIntrMode := 2;
   pmsListTemp.Add(pmsDataTemp);
   {$ENDREGION}
 

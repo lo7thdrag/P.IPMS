@@ -10,6 +10,7 @@ type
   private
 
     FDelay : Double;
+    FShoreDelay : Double;
     FVoltage: Double;
     FFrequency: Double;
     FPower : Double;
@@ -94,6 +95,7 @@ begin
   FTrafo230Volt := 0;
   FTrafo115Volt := 0;
   FDelay := 0;
+  FShoreDelay := 0;
 
   ShoreInterconnectionMode  := C_ModeOff;
   MsbInterconnectionMode := C_ModeOff;
@@ -114,10 +116,36 @@ end;
 procedure TSwitchboard.Run(const aDt: Double);
 begin
   inherited;
-  if ShoreInterconnectionMode = 2 then
-  begin
-    ShoresbCircuitBreaker := False;
+//  if ShoreInterconnectionMode = 2 then
+//  begin
+//    ShoresbCircuitBreaker := False;
+//  end;
+
+  case ShoreInterconnectionMode of
+    C_ModeOff:
+    begin
+      ShoresbCircuitBreaker := False;
+    end;
+    C_ModeAuto:
+    begin
+      if Busbar then
+      begin
+        if not ShoresbCircuitBreaker then
+        begin
+          if FShoreDelay < 60 then
+            FShoreDelay := FShoreDelay +1
+          else
+          begin
+            ShoresbCircuitBreaker := True;
+            FShoreDelay := 0;
+          end;
+        end;
+      end
+      else
+        ShoresbCircuitBreaker := False
+    end;
   end;
+
 
   case MsbInterconnectionMode of
     C_ModeOff:

@@ -281,8 +281,8 @@ begin
       pmsData.PMS_Type := 1;
 
       {Entity Element}
-      pmsData.PMS_Name := C_GENERATOR_ID[i];                            {-----> Nama Genarator}
-      pmsData.PMS_Mode := gen.GeneratorMode;                       {-----> Mode Genarator : 1:Man; 2:SemiMan; 3:Aut; 4:SemiAut}
+      pmsData.PMS_Name := C_GENERATOR_ID[i];                       {-----> Nama Genarator}
+      pmsData.PMS_Mode := gen.GeneratorMode;                       {-----> Mode Genarator : 1:Man; 2:Semi; 3:Aut;}
       pmsData.PMS_OnOff := setBooltoInt(gen.EngineRun);
       pmsData.PMS_GenSupplied := setBooltoInt(gen.GeneratorSupplied);
       pmsData.PMS_GenState := gen.GeneratorState;

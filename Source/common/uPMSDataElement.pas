@@ -378,13 +378,13 @@ begin
     else
       Result := False;
   end
-//  else if GenSwitchID = 'Switchboard Emergency' then
-//  begin
-//    if konstanta = C_CBNAVNAUT then
-//      value := '3243E5005B'
-//    else
-//      Result := False;
-//  end
+  else if GenSwitchID = 'Switchboard Shore' then
+  begin
+    if konstanta = C_CBE_INT then
+      value := '3241E50014Z'
+    else
+      Result := False;
+  end
   else
     Result := False;
 end;

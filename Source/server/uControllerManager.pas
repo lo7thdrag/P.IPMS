@@ -988,7 +988,23 @@ begin
 
         if (aElement.ElementID =  '3241E50031H') or (aElement.ElementID =  '3241E50031G') or
            (aElement.ElementID =  '3241E50031F') or (aElement.ElementID =  '3243E5005B') or
-           (aElement.ElementID =  '3243E5005C') or (aElement.ElementID =  '3241E50014Z')then
+           (aElement.ElementID =  '3243E5005C')then
+        begin
+          TCBEElement(aElement).StateRFC := srfReadyForClose;
+          TCBEElement(aElement).StateRFO := sroReadyForOpen;
+          TCBEElement(aElement).StateSwitchRemote := esLocal;
+          if aValue then
+          begin
+            TCBEElement(aElement).StateSwitchOpen := esNotOpen;
+            TCBEElement(aElement).StateSwitchClosed := esClosed;
+          end
+          else
+          begin
+            TCBEElement(aElement).StateSwitchClosed := esNotClosed;
+            TCBEElement(aElement).StateSwitchOpen := esOpen;
+          end;
+        end
+        else if (aElement.ElementID =  '3241E50014Z')then
         begin
           TCBEElement(aElement).StateRFC := srfReadyForClose;
           TCBEElement(aElement).StateRFO := sroReadyForOpen;

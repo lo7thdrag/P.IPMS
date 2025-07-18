@@ -1003,7 +1003,7 @@ begin
       end;
       epPMSMsbCBShore:
       begin
-        if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[1] then
+        if TSwitchboard(Sender).Identifier = C_SWITCHBOARD_ID[3] then
         begin
           if TSwitchboard(Sender).ShoreInterconnectionMode = 2 then
             exit;

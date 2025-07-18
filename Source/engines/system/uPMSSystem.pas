@@ -128,7 +128,7 @@ begin
     end;
     4: {U/ mengecek koneksi SSB dengan MSB}
     begin
-      if (Msb[3].ShoresbCircuitBreaker) and (Msb[3].ShoreInterconnectionMode <> 2) then
+      if (Msb[3].ShoresbCircuitBreaker) or (Msb[3].ShoreInterconnectionMode = C_ModeAuto) then
         Result := True
     end;
   end;
@@ -1041,7 +1041,11 @@ begin
         end;
         5 :
         begin
-          ShrBusbar := True;
+          if CekBusKoplerHandle(4,0) then
+            ShrBusbar := True
+          else
+            ShrBusbar := False;
+
           ShrFreq := Gen[i].Frequency;
           ShrVolt := Gen[i].Voltage;
         end;
@@ -1211,10 +1215,9 @@ begin
         SetSwitchFreqValue(2, 4, 4, True);
       end;
       {$ENDREGION}
+
+      SetStateRun(calcModeTemp, 4);
     end;
-
-    SetStateRun(calcModeTemp, 4);
-
     {$ENDREGION}
   end
   else
