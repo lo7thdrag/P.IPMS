@@ -404,7 +404,8 @@ begin
       Gen[4].GeneratorState := Ord(gsCoolDown);//6;
 
       {state diubah k normal}
-      SetStateRun(IdMode, 3);
+      Msb[2].EmergencyCon := False;
+      SetStateRun(IdMode, 1);
     end
 
     {Power EG menyesuaikan jk persentase beban didalam range stabil}
@@ -1384,9 +1385,9 @@ begin
         {$ENDREGION}
       end;
 
-      if Gen[5].GeneratorSupplied and Gen[5].CBClosed then
-        SetStateRun(calcModeTemp, 4)
-      else
+//      if Gen[5].GeneratorSupplied and Gen[5].CBClosed then
+//        SetStateRun(calcModeTemp, 4)
+//      else
         SetStateRun(calcModeTemp, 1);
 
       {$ENDREGION}

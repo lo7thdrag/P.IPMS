@@ -26,8 +26,8 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
     ParentBackground = False
     TabOrder = 0
     object Panel26: TPanel
-      Left = 555
-      Top = 561
+      Left = 1350
+      Top = 558
       Width = 307
       Height = 210
       BevelOuter = bvNone
@@ -248,13 +248,13 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       ParentBackground = False
       TabOrder = 0
       object Label2: TLabel
-        Left = 184
+        Left = 274
         Top = 6
-        Width = 266
+        Width = 85
         Height = 19
         Align = alCustom
         Alignment = taCenter
-        Caption = 'FORWARD MAIN SWITCHBOARD'
+        Caption = 'FORWARD'
         Color = clBlack
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
@@ -994,13 +994,13 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       ParentBackground = False
       TabOrder = 5
       object Label10: TLabel
-        Left = 199
+        Left = 290
         Top = 6
-        Width = 235
+        Width = 54
         Height = 19
         Align = alCustom
         Alignment = taCenter
-        Caption = 'AFTER MAIN SWITCHBOARD'
+        Caption = 'AFTER'
         Color = clBlack
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
@@ -1523,17 +1523,17 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
     end
     object pnlShoreInter: TPanel
-      Left = 30
-      Top = 663
-      Width = 265
+      Left = 357
+      Top = 558
+      Width = 307
       Height = 162
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
       TabOrder = 8
       object Label32: TLabel
-        Left = 33
-        Top = 33
+        Left = 46
+        Top = 56
         Width = 41
         Height = 16
         Caption = 'Manual'
@@ -1545,8 +1545,8 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentFont = False
       end
       object Label39: TLabel
-        Left = 106
-        Top = 33
+        Left = 128
+        Top = 56
         Width = 17
         Height = 16
         Caption = 'Off'
@@ -1558,8 +1558,8 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentFont = False
       end
       object Label40: TLabel
-        Left = 157
-        Top = 33
+        Left = 189
+        Top = 56
         Width = 89
         Height = 16
         Caption = 'Auto Take Over'
@@ -1590,9 +1590,26 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Color = clWindow
         ParentColor = False
       end
+      object lbl4: TLabel
+        Left = 72
+        Top = 14
+        Width = 162
+        Height = 19
+        Align = alCustom
+        Alignment = taCenter
+        Caption = 'INTERCONNECTION'
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
       object rbManShore: TRadioButton
-        Left = 15
-        Top = 33
+        Left = 28
+        Top = 55
         Width = 15
         Height = 17
         Font.Charset = DEFAULT_CHARSET
@@ -1605,8 +1622,8 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = InterShoreModeClick
       end
       object rbOffShore: TRadioButton
-        Left = 87
-        Top = 33
+        Left = 109
+        Top = 55
         Width = 15
         Height = 17
         Checked = True
@@ -1621,8 +1638,8 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = InterShoreModeClick
       end
       object rbAutShore: TRadioButton
-        Left = 138
-        Top = 33
+        Left = 170
+        Top = 55
         Width = 15
         Height = 17
         Font.Charset = DEFAULT_CHARSET
@@ -1636,8 +1653,8 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
       object btnCBOpenShore: TButton
         Tag = 10
-        Left = 26
-        Top = 101
+        Left = 157
+        Top = 110
         Width = 95
         Height = 31
         Caption = 'OPEN'
@@ -1652,8 +1669,8 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
       object btnCBCloseShore: TButton
         Tag = 10
-        Left = 145
-        Top = 101
+        Left = 56
+        Top = 110
         Width = 95
         Height = 31
         Caption = 'CLOSE'
@@ -1667,9 +1684,9 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = btnInnCBCloseOpenClick
       end
       object Panel18: TPanel
-        Left = 17
-        Top = 78
-        Width = 230
+        Left = 18
+        Top = 83
+        Width = 270
         Height = 1
         BevelOuter = bvNone
         Color = clBtnHighlight
@@ -2170,16 +2187,16 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
     end
     object Panel23: TPanel
-      Left = 888
-      Top = 561
-      Width = 244
+      Left = 1022
+      Top = 558
+      Width = 308
       Height = 108
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
       TabOrder = 17
       object Label4: TLabel
-        Left = 44
+        Left = 49
         Top = 56
         Width = 28
         Height = 16
@@ -2192,7 +2209,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentFont = False
       end
       object Label5: TLabel
-        Left = 113
+        Left = 147
         Top = 56
         Width = 17
         Height = 16
@@ -2205,7 +2222,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentFont = False
       end
       object Label6: TLabel
-        Left = 166
+        Left = 230
         Top = 56
         Width = 48
         Height = 16
@@ -2228,7 +2245,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentColor = False
       end
       object lbl6: TLabel
-        Left = 41
+        Left = 73
         Top = 14
         Width = 162
         Height = 19
@@ -2245,7 +2262,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentFont = False
       end
       object rbAftDistrE: TRadioButton
-        Left = 25
+        Left = 30
         Top = 56
         Width = 15
         Height = 17
@@ -2259,7 +2276,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = InterEmergencyModeClick
       end
       object rbOffDistrE: TRadioButton
-        Left = 94
+        Left = 128
         Top = 56
         Width = 15
         Height = 17
@@ -2273,7 +2290,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = InterEmergencyModeClick
       end
       object rbFwdDistrE: TRadioButton
-        Left = 147
+        Left = 211
         Top = 56
         Width = 15
         Height = 17
@@ -2287,9 +2304,9 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         OnClick = InterEmergencyModeClick
       end
       object Panel24: TPanel
-        Left = 23
-        Top = 78
-        Width = 197
+        Left = 19
+        Top = 83
+        Width = 270
         Height = 1
         BevelOuter = bvNone
         Color = clBtnHighlight
@@ -2299,21 +2316,21 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
     end
     object Panel5: TPanel
       Left = 30
-      Top = 616
-      Width = 403
+      Top = 521
+      Width = 634
       Height = 32
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
       TabOrder = 19
       object Label27: TLabel
-        Left = 90
+        Left = 289
         Top = 7
-        Width = 223
+        Width = 56
         Height = 19
         Align = alCustom
         Alignment = taCenter
-        Caption = 'SHORE INTERCONNECTION'
+        Caption = 'SHORE'
         Color = clBlack
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
@@ -2325,22 +2342,22 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
     end
     object Panel21: TPanel
-      Left = 554
-      Top = 524
-      Width = 578
+      Left = 1022
+      Top = 521
+      Width = 634
       Height = 32
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
       TabOrder = 20
       object Label13: TLabel
-        Left = 155
+        Left = 266
         Top = 7
-        Width = 233
+        Width = 102
         Height = 19
         Align = alCustom
         Alignment = taCenter
-        Caption = 'EMERGENCY SWITCHBOARD'
+        Caption = 'EMERGENCY'
         Color = clBlack
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
@@ -2352,8 +2369,8 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
     end
     object lbl1: TPanel
-      Left = 555
-      Top = 775
+      Left = 1350
+      Top = 772
       Width = 307
       Height = 50
       BevelOuter = bvNone
@@ -2384,8 +2401,8 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
     end
     object grp1: TGroupBox
-      Left = 1023
-      Top = 720
+      Left = 1022
+      Top = 672
       Width = 226
       Height = 105
       Caption = 'grp1'
@@ -2435,10 +2452,10 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
       end
     end
     object pnl3: TPanel
-      Left = 301
-      Top = 663
-      Width = 132
-      Height = 162
+      Left = 30
+      Top = 558
+      Width = 307
+      Height = 215
       BevelOuter = bvNone
       Color = 3749426
       ParentBackground = False
@@ -2453,68 +2470,229 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Color = clWindow
         ParentColor = False
       end
-      object lblEngineRunGenShore: TLabel
-        Left = 18
-        Top = 35
-        Width = 9
-        Height = 13
-        Alignment = taCenter
-        Caption = '   '
-        Color = clSilver
-        ParentColor = False
-        Transparent = False
-      end
-      object lbl9: TLabel
-        Left = 33
-        Top = 33
-        Width = 81
+      object lbl5: TLabel
+        Left = 71
+        Top = 57
+        Width = 38
         Height = 16
-        Caption = 'Busbar Supply'
-        Color = clInactiveBorder
+        Caption = 'Import'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
         Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = []
+        ParentFont = False
+      end
+      object lbl7: TLabel
+        Left = 190
+        Top = 57
+        Width = 36
+        Height = 16
+        Caption = 'Export'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl11: TLabel
+        Left = 126
+        Top = 14
+        Width = 56
+        Height = 19
+        Align = alCustom
+        Alignment = taCenter
+        Caption = 'SHORE'
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
       end
-      object btnStartGenShore: TButton
-        Tag = 10
-        Left = 9
-        Top = 103
-        Width = 53
-        Height = 31
-        Caption = 'START'
-        Font.Charset = ANSI_CHARSET
+      object pnlShoreImport: TPanel
+        Left = 12
+        Top = 89
+        Width = 284
+        Height = 121
+        BevelOuter = bvNone
+        Color = 3749426
+        ParentBackground = False
+        TabOrder = 3
+        object lblEngineRunGenShore: TLabel
+          Left = 16
+          Top = 23
+          Width = 9
+          Height = 13
+          Alignment = taCenter
+          Caption = '   '
+          Color = clSilver
+          ParentColor = False
+          Transparent = False
+        end
+        object lbl9: TLabel
+          Left = 35
+          Top = 22
+          Width = 81
+          Height = 16
+          Caption = 'Busbar Supply'
+          Color = clInactiveBorder
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
+        object pnl4: TPanel
+          Left = 15
+          Top = 60
+          Width = 254
+          Height = 1
+          BevelOuter = bvNone
+          Color = clBtnHighlight
+          ParentBackground = False
+          TabOrder = 0
+        end
+        object btnStartGenShore: TButton
+          Tag = 10
+          Left = 57
+          Top = 79
+          Width = 83
+          Height = 28
+          Caption = 'START'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+          OnClick = btnStartClick
+        end
+        object btnStopGenShore: TButton
+          Tag = 10
+          Left = 144
+          Top = 79
+          Width = 83
+          Height = 28
+          Caption = 'STOP'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+          OnClick = btnStopClick
+        end
+      end
+      object pnlShoreExport: TPanel
+        Left = 12
+        Top = 89
+        Width = 284
+        Height = 121
+        BevelOuter = bvNone
+        Color = 3749426
+        ParentBackground = False
+        TabOrder = 4
+        object lbl12: TLabel
+          Left = 121
+          Top = 5
+          Width = 42
+          Height = 39
+          Alignment = taCenter
+          AutoSize = False
+          Caption = '0'
+          Color = clBtnFace
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -32
+          Font.Name = 'Agency FB'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+        object lbl13: TLabel
+          Left = 167
+          Top = 23
+          Width = 16
+          Height = 13
+          Caption = 'Kw'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object TrackBar1: TTrackBar
+          Left = 16
+          Top = 45
+          Width = 249
+          Height = 41
+          Max = 250
+          Frequency = 50
+          TabOrder = 0
+          ThumbLength = 15
+          TickMarks = tmBoth
+          OnChange = trckbrBebanChange
+        end
+        object btn2: TButton
+          Tag = 10
+          Left = 72
+          Top = 89
+          Width = 141
+          Height = 25
+          Caption = 'Apply'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+          OnClick = btnApplyClick
+        end
+      end
+      object rb1: TRadioButton
+        Left = 53
+        Top = 57
+        Width = 15
+        Height = 17
+        Checked = True
+        Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial Narrow'
-        Font.Style = [fsBold]
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
         ParentFont = False
         TabOrder = 0
-        OnClick = btnStartClick
+        TabStop = True
+        OnClick = InterShoreModeClick
       end
-      object btnStopGenShore: TButton
-        Tag = 10
-        Left = 68
-        Top = 103
-        Width = 53
-        Height = 31
-        Caption = 'STOP'
-        Font.Charset = ANSI_CHARSET
+      object rb2: TRadioButton
+        Left = 172
+        Top = 57
+        Width = 15
+        Height = 17
+        Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial Narrow'
-        Font.Style = [fsBold]
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
         ParentFont = False
         TabOrder = 1
-        OnClick = btnStopClick
+        OnClick = InterShoreModeClick
       end
-      object pnl4: TPanel
-        Left = 16
-        Top = 78
-        Width = 100
+      object pnl5: TPanel
+        Left = 27
+        Top = 82
+        Width = 254
         Height = 1
         BevelOuter = bvNone
         Color = clBtnHighlight
