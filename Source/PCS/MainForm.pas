@@ -7,6 +7,9 @@ uses
   Dialogs, StdCtrls, ExtCtrls, uDataType, IniFiles, VrControls, VrTrackBar,
   ComCtrls, uListener;
 
+var
+  LeverValuesPosition: array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
+
 type
   TForm1 = class(TForm)
     btnGeneralPanelStart: TButton;
@@ -43,6 +46,8 @@ type
     btn2: TButton;
     mmoNetLogger: TMemo;
     mmoLogReceive: TMemo;
+    btnLeverInServicePS: TButton;
+    btnLeverInServiceSB: TButton;
     procedure btnGeneralPanelStartClick(Sender: TObject);
     procedure btnPSPanelStartClick(Sender: TObject);
     procedure btnSBPanelStartClick(Sender: TObject);
@@ -74,10 +79,15 @@ type
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnLeverInServicePSClick(Sender: TObject);
+    procedure btnLeverInServiceSBClick(Sender: TObject);
   private
     { Private declarations }
 
     FListener : TListeners;
+    LeverValuesPosition: array[0..18] of Double;
+    procedure LeverValuePosition;
+
     procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
     procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : string);overload;
     procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : TObject);overload;
@@ -85,6 +95,8 @@ type
     procedure EventLogStr(Sender :TObject; Props :E_PropsID; Value : string);
 
     procedure LoadSettingForm(filepath: string);
+
+    function TrackbarSpeed(Position: Integer): Double;
   public
     { Public declarations }
 
@@ -135,6 +147,16 @@ end;
 procedure TForm1.btnEmergencyStopSBClick(Sender: TObject);
 begin
   PCSSystem.PanelThrottleTesting(C_ORD_BTN_EMERGENCY_STOP_SB,True);
+end;
+
+procedure TForm1.btnLeverInServicePSClick(Sender: TObject);
+begin
+  PCSSystem.LeverInService(C_PCS_ME_PORTS, True);
+end;
+
+procedure TForm1.btnLeverInServiceSBClick(Sender: TObject);
+begin
+  PCSSystem.LeverInService(C_PCS_ME_STARBOARD,True);
 end;
 
 procedure TForm1.btnGeneralPanelStartClick(Sender: TObject);
@@ -209,32 +231,32 @@ end;
 
 procedure TForm1.btnShaftDrivenPSClick(Sender: TObject);
 begin
-  PCSSystem.PanelThrottleTesting(C_ORD_BTN_SHAFT_DRIVEN_PS,True);
+  PCSSystem.ShaftDriven(C_PCS_GB_PORTS, True);
 end;
 
 procedure TForm1.btnShaftDrivenSBClick(Sender: TObject);
 begin
-  PCSSystem.PanelThrottleTesting(C_ORD_BTN_SHAFT_DRIVEN_SB,True);
+  PCSSystem.ShaftDriven(C_PCS_GB_STARBOARD, True);
 end;
 
 procedure TForm1.btnShaftStopPSClick(Sender: TObject);
 begin
-  PCSSystem.PanelThrottleTesting(C_ORD_BTN_SHAFT_STOP_PS,True);
+  PCSSystem.ShaftDriven(C_PCS_GB_PORTS, False);
 end;
 
 procedure TForm1.btnShaftStopSBClick(Sender: TObject);
 begin
-  PCSSystem.PanelThrottleTesting(C_ORD_BTN_SHAFT_STOP_SB,True);
+  PCSSystem.ShaftDriven(C_PCS_GB_STARBOARD, False);
 end;
 
 procedure TForm1.btnShaftTrailingPSClick(Sender: TObject);
 begin
-  PCSSystem.PanelThrottleTesting(C_ORD_BTN_SHAFT_TRAILING_PS,True);
+  PCSSystem.ShaftTrailing(C_PCS_GB_PORTS, True);
 end;
 
 procedure TForm1.btnShaftTrailingSBClick(Sender: TObject);
 begin
-  PCSSystem.PanelThrottleTesting(C_ORD_BTN_SHAFT_TRAILING_SB,True);
+  PCSSystem.ShaftTrailing(C_PCS_GB_STARBOARD, True);
 end;
 
 procedure TForm1.btnThottlePanelTestClick(Sender: TObject);
@@ -304,6 +326,8 @@ begin
   LoadSettingForm('..\bin\setting.ini');
 
   counterCheck := 0;
+
+  LeverValuePosition;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -504,46 +528,88 @@ begin
   mmo1.Lines.Add('Buffer: '+ IntToStr(PCSSystem.Network.VREngineSocket.GetBufferCount));
 end;
 
-procedure TForm1.trckbrPSChange(Sender: TObject);
+function TForm1.TrackbarSpeed(Position: Integer): Double;
 begin
-  lblLeverPS.Caption := IntToStr(trckbrPS.Position*-1);
-  if trckbrPS.Position < 0 then
+  Result := LeverValuesPosition[Position];
+end;
+
+procedure TForm1.LeverValuePosition;
+begin
+  LeverValuesPosition[0]  := 10;
+  LeverValuesPosition[1]  := 9;
+  LeverValuesPosition[2]  := 8;
+  LeverValuesPosition[3]  := 7;
+  LeverValuesPosition[4]  := 6;
+  LeverValuesPosition[5]  := 5;
+  LeverValuesPosition[6]  := 4;
+  LeverValuesPosition[7]  := 3.5;
+  LeverValuesPosition[8]  := 3;
+  LeverValuesPosition[9]  := 2;
+  LeverValuesPosition[10] := 1;
+  LeverValuesPosition[11] := 0.5;
+  LeverValuesPosition[12] := 0;
+  LeverValuesPosition[13] := -0.5;
+  LeverValuesPosition[14] := -2;
+  LeverValuesPosition[15] := -4;
+  LeverValuesPosition[16] := -6;
+  LeverValuesPosition[17] := -8;
+  LeverValuesPosition[18] := -10;
+end;
+
+procedure TForm1.trckbrPSChange(Sender: TObject);
+var
+  LeverSpeed : Double;
+begin
+  LeverSpeed := LeverValuesPosition[trckbrPS.Position];
+
+  if LeverSpeed < 0 then
   begin
-    lblAheadPS.Color := clLime;
+    lblAheadPS.Color  := clLime;
     lblAsternPS.Color := clWindow;
   end
   else
-  if trckbrPS.Position > 0 then
+  if LeverSpeed > 0 then
   begin
     lblAsternPS.Color := clLime;
-    lblAheadPS.Color := clWindow;
+    lblAheadPS.Color  := clWindow;
   end
   else
   begin
-    lblAheadPS.Color := clWindow;
+    lblAheadPS.Color  := clWindow;
     lblAsternPS.Color := clWindow;
   end;
+
+  lblLeverPS.Caption := FloatToStr(LeverSpeed);
+  PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverSpeed, True);
+  PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverSpeed, True);
+  PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverSpeed, True);
 end;
 
 procedure TForm1.trckbrSBChange(Sender: TObject);
+var
+  LeverSpeed : Double;
 begin
-  lblLeverSB.Caption := IntToStr(trckbrSB.Position*-1);
-  if trckbrSB.Position < 0 then
+  LeverSpeed := LeverValuesPosition[trckbrPS.Position];
+
+  if LeverSpeed < 0 then
   begin
-    lblAheadSB.Color := clLime;
-    lblAsternSB.Color := clWindow;
+    lblAheadPS.Color  := clLime;
+    lblAsternPS.Color := clWindow;
   end
   else
-  if trckbrSB.Position > 0 then
+  if LeverSpeed > 0 then
   begin
-    lblAsternSB.Color := clLime;
-    lblAheadSB.Color := clWindow;
+    lblAsternPS.Color := clLime;
+    lblAheadPS.Color  := clWindow;
   end
   else
   begin
-    lblAheadSB.Color := clWindow;
-    lblAsternSB.Color := clWindow;
+    lblAheadPS.Color  := clWindow;
+    lblAsternPS.Color := clWindow;
   end;
+
+  lblLeverSB.Caption := FloatToStr(LeverSpeed);
+  PCSSystem.LeverSpeed(C_PCS_ME_STARBOARD, LeverSpeed, True);
 end;
 
 end.

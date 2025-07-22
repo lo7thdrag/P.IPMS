@@ -4,6 +4,14 @@ interface
 
 uses uEntity, Math;
 
+const
+  FPC_LeverValuesPositionManouver : array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
+  FPC_LeverSpeedValuesManouver    : array[0..18] of Double = (1000, 940, 880, 820, 760, 700, 656, 613, 570, 513,
+                                                  457, 400, 400, 400, 447, 510, 574, 637, 700);
+  FPC_LeverValuesPositionTransit : array[0..12] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0);
+  FPC_LeverSpeedValuesTransit    : array[0..12] of Double = (1050, 942, 833, 725, 617, 508, 400, 400, 400, 400,
+                                                          400, 400, 400);
+
 type
 
   TMainEngine = class(TEntity)
@@ -53,6 +61,7 @@ type
 
     FLeverControl : Integer;
     FSpeedState : Integer;
+    FLeverInService : Boolean;
 
     FSTCState : Integer;
     F2TCState : Boolean;
@@ -67,6 +76,11 @@ type
     FPC_StartingInterlocks : array[0..12] of Boolean;
     FPC_Alarms : array[0..17] of Boolean;
     FPC_SafetiesStop : array[0..12] of Boolean;
+
+    FPC_LeverValuesPositionManouver : array[0..18] of Double;
+    FPC_LeverSpeedValuesManouver    : array[0..18] of Double;
+    FPC_LeverValuesPositionTransit  : array[0..12] of Double;
+    FPC_LeverSpeedValuesTransit     : array[0..12] of Double;
 
     FEngineRun,
     FReadyForUse,
@@ -158,6 +172,8 @@ type
     FTankIsEmpty,
     FPreStartInhibition: Boolean;
 
+    FLeverAhead, FLeverAstern : Boolean;
+
     // Main Engine 2
     procedure SetRunningHours(const Value: Integer);
     procedure SetRemoteControl(const Value: Boolean);
@@ -199,6 +215,9 @@ type
     procedure SetAlarmPropulsionCheck(const Value : Double);
     procedure SetLeverControl(const Value : Integer);
     procedure SetSpeedState(const Value : Integer);
+
+    {Bagian Lever}
+    procedure SetLeverInService(const Value : Boolean);
 
     function GetTempExhCylA(i: Integer):Double;
     function GetTempExhCylB(i: Integer): Double;
@@ -341,6 +360,7 @@ type
   public
     constructor Create;override;
     destructor Destroy;override;
+    procedure LeverValuesManual;
 
     procedure Run(const aDt : Double); override;
 
@@ -392,7 +412,7 @@ type
     property AlarmPropulsionCheck : Double read FAlarmPropulsionCheck write SetAlarmPropulsionCheck;
 
     property LeverControl : Integer read FLeverControl write SetLeverControl;
-
+    property LeverInService : Boolean read FLeverInService write SetLeverInService;
     {0: Lower; 1: off; 2: Rise}
     property SpeedState : Integer read FSpeedState write SetSpeedState;
 
@@ -600,6 +620,7 @@ begin
     if ActualSpeed > SetPointSpeed then
       ActualSpeed := ActualSpeed - 1;
   end;
+
 end;
 
 procedure TMainEngine.SetSpeedInManual(aValue: Double);
@@ -924,6 +945,8 @@ begin
 //  FActualSpeed    := 0;
 //  FRemoteManual   := False;
   LeverControl := 0;
+
+  LeverValuesManual;
 end;
 
 destructor TMainEngine.Destroy;
@@ -975,7 +998,6 @@ function TMainEngine.GetTempExhCylB(i: Integer): Double;
 begin
   Result := FTempExhCylB[i];
 end;
-
 
 procedure TMainEngine.Set2TCMode(const Value: Boolean);
 begin
@@ -1761,13 +1783,79 @@ begin
   Listener.TriggerEvents(Self,epPCSCtrlLever, Value);
 end;
 
+procedure TMainEngine.SetLeverInService(const Value: Boolean);
+begin
+  if FLeverInService = Value then
+    Exit;
+
+  FLeverInService := Value;
+  Listener.TriggerEvents(Self,epPCSLeverInService, Value);
+end;
+
+procedure TMainEngine.LeverValuesManual;
+begin
+  // Mode Manouver
+  FPC_LeverValuesPositionManouver[0]  := 10;    FPC_LeverSpeedValuesManouver[0]  := 1000;
+  FPC_LeverValuesPositionManouver[1]  := 9;     FPC_LeverSpeedValuesManouver[1]  := 940;
+  FPC_LeverValuesPositionManouver[2]  := 8;     FPC_LeverSpeedValuesManouver[2]  := 880;
+  FPC_LeverValuesPositionManouver[3]  := 7;     FPC_LeverSpeedValuesManouver[3]  := 820;
+  FPC_LeverValuesPositionManouver[4]  := 6;     FPC_LeverSpeedValuesManouver[4]  := 760;
+  FPC_LeverValuesPositionManouver[5]  := 5;     FPC_LeverSpeedValuesManouver[5]  := 700;
+  FPC_LeverValuesPositionManouver[6]  := 4;     FPC_LeverSpeedValuesManouver[6]  := 656;
+  FPC_LeverValuesPositionManouver[7]  := 3.5;   FPC_LeverSpeedValuesManouver[7]  := 613;
+  FPC_LeverValuesPositionManouver[8]  := 3;     FPC_LeverSpeedValuesManouver[8]  := 570;
+  FPC_LeverValuesPositionManouver[9]  := 2;     FPC_LeverSpeedValuesManouver[9]  := 513;
+  FPC_LeverValuesPositionManouver[10] := 1;     FPC_LeverSpeedValuesManouver[10] := 457;
+  FPC_LeverValuesPositionManouver[11] := 0.5;   FPC_LeverSpeedValuesManouver[11] := 400;
+  FPC_LeverValuesPositionManouver[12] := 0;     FPC_LeverSpeedValuesManouver[12] := 400;
+  FPC_LeverValuesPositionManouver[13] := -0.5;  FPC_LeverSpeedValuesManouver[13] := 400;
+  FPC_LeverValuesPositionManouver[14] := -2;    FPC_LeverSpeedValuesManouver[14] := 447;
+  FPC_LeverValuesPositionManouver[15] := -4;    FPC_LeverSpeedValuesManouver[15] := 510;
+  FPC_LeverValuesPositionManouver[16] := -6;    FPC_LeverSpeedValuesManouver[16] := 574;
+  FPC_LeverValuesPositionManouver[17] := -8;    FPC_LeverSpeedValuesManouver[17] := 634;
+  FPC_LeverValuesPositionManouver[18] := -10;   FPC_LeverSpeedValuesManouver[18] := 700;
+
+  // Mode Transit
+  FPC_LeverValuesPositionTransit[0]  := 10;    FPC_LeverSpeedValuesTransit[0]  := 1050;
+  FPC_LeverValuesPositionTransit[1]  := 9;     FPC_LeverSpeedValuesTransit[1]  := 942;
+  FPC_LeverValuesPositionTransit[2]  := 8;     FPC_LeverSpeedValuesTransit[2]  := 833;
+  FPC_LeverValuesPositionTransit[3]  := 7;     FPC_LeverSpeedValuesTransit[3]  := 725;
+  FPC_LeverValuesPositionTransit[4]  := 6;     FPC_LeverSpeedValuesTransit[4]  := 617;
+  FPC_LeverValuesPositionTransit[5]  := 5;     FPC_LeverSpeedValuesTransit[5]  := 508;
+  FPC_LeverValuesPositionTransit[6]  := 4;     FPC_LeverSpeedValuesTransit[6]  := 400;
+  FPC_LeverValuesPositionTransit[7]  := 3.5;   FPC_LeverSpeedValuesTransit[7]  := 400;
+  FPC_LeverValuesPositionTransit[8]  := 3;     FPC_LeverSpeedValuesTransit[8]  := 400;
+  FPC_LeverValuesPositionTransit[9]  := 2;     FPC_LeverSpeedValuesTransit[9]  := 400;
+  FPC_LeverValuesPositionTransit[10] := 1;     FPC_LeverSpeedValuesTransit[10] := 400;
+  FPC_LeverValuesPositionTransit[11] := 0.5;   FPC_LeverSpeedValuesTransit[11] := 400;
+  FPC_LeverValuesPositionTransit[12] := 0;     FPC_LeverSpeedValuesTransit[12] := 400;
+end;
+
 procedure TMainEngine.SetLeverSpeed(const Value: Double);
+var
+  i : Integer;
+  epsilon : Double;
 begin
   if FLeverSpeed = Value then
     exit;
 
   FLeverSpeed := Value;
-  Listener.TriggerEvents(Self,epPCSMELeverSpeed, Value);
+
+  ActualSpeed   := 0;
+  SetPointSpeed := 0;
+  epsilon       := 0.01;
+
+  for i := 0 to High(FPC_LeverValuesPositionManouver) do
+  begin
+    if Abs(FPC_LeverValuesPositionManouver[i] - Value) < epsilon then
+    begin
+      ActualSpeed   := FPC_LeverSpeedValuesManouver[i];
+      SetPointSpeed := FPC_LeverSpeedValuesManouver[i];
+      Break;
+    end;
+  end;
+
+  Listener.TriggerEvents(Self,epPCSMELeverSpeed, ActualSpeed);
 end;
 
 procedure TMainEngine.SetLocalControl(const Value: Boolean);
@@ -2269,7 +2357,6 @@ begin
   FSetPointSpeed := Value;
   Listener.TriggerEvents(Self,epPCSMESetPointSpeed, Value);
 end;
-
 
 procedure TMainEngine.SetSlowTurningFault(const Value: Boolean);
 begin

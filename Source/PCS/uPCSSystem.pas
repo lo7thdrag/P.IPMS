@@ -72,7 +72,7 @@ type
     procedure RemoteManual(aPortStarboard: string; aVariant : Byte; aOnOff : Boolean);
     procedure StoppedStop(aPortStarboard : String; aValue : Boolean);
     procedure Pitch(aPortStarboard : String; aValue: Integer; aOnOff : Boolean);
-    procedure Clutch(aPortStarboard : String; aValue : Boolean);
+    procedure Clutch(aPortStarboard : String; aOnOff : Boolean);
 
     procedure MCRBridge(aPortStarboard : string; aControl : Boolean);
     procedure Bridge(aPortStarboard : string; aControl : Boolean);
@@ -80,6 +80,8 @@ type
     procedure StopHorn(aControl: Byte; aOnOff : Boolean);
     procedure Mode(aMode : Boolean);
     procedure BackgroundLamp(aValue : Boolean);
+    procedure ModeTransit(aPortStarboard : string; aControl : Boolean);
+    procedure ModeManouver(aPortStarboard : string; aControl : Boolean);
     {--}
 
     {Prosedur untuk mengirimkan nilai inputan dari Lever/Throttle ke Engine}
@@ -90,6 +92,15 @@ type
 
     {Untuk Testing fungsi Panel Throttle}
     procedure PanelThrottleTesting(IDPanel : Byte; Value : Boolean );
+
+    {Testing Throttle}
+    procedure LeverInService(aPortStarboard : string; aOnOff : Boolean);
+    procedure ShaftDriven(aPortStarboard : string; aOnOff : Boolean);
+    procedure StopShaftDriven(aPortStarboard : string; aOnOff : Boolean);
+    procedure ShaftTrailing(aPortStarboard: string; aOnOff: Boolean);
+    procedure LeverPitch(aPortStarboard : String; aValue: Double; aOnOff : Boolean);
+    procedure LeverSpeed(aPortStarboard : String; aValue: Double; aOnOff : Boolean);
+    procedure LeverShaft(aPortStarboard : String; aValue: Double; aOnOff : Boolean);
 
     property Network : TPCSNetwork read FPCSNetwork;
     property Listener :TListeners read FListener;
@@ -132,14 +143,14 @@ implementation
 
 { TPCSSystem }
 
-procedure TPCSSystem.Clutch(aPortStarboard: String; aValue : Boolean);
+procedure TPCSSystem.Clutch(aPortStarboard: String; aOnOff : Boolean);
 var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
   recCmd.CommandID      := C_ORD_GB_CLUTCH_ENGAGED;
   recCmd.CommandPropsID := epPCSGBClutchEngaged;
-  recCmd.ValueBool      := aValue;
+  recCmd.ValueBool      := aOnOff;
 
   Network.PCSControllerSocket.SendData(C_PCS_COMMAND, @recCmd);
 end;
@@ -275,7 +286,6 @@ begin
   Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
-
 procedure TPCSSystem.Pitch(aPortStarboard: String; aValue : Integer; aOnOff : Boolean);
 var
   recCmd : R_Common_PCS_Command;
@@ -284,6 +294,44 @@ begin
   recCmd.CommandPropsID := epPCSCPPSetPointPitch;
   recCmd.CommandID      := C_ORD_CPP_PITCH;
   recCmd.ValueInt       := aValue;
+  recCmd.ValueBool      := aOnOff;
+
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+{Untuk Throttle}
+
+procedure TPCSSystem.ShaftDriven(aPortStarboard: string; aOnOff: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSLeverShaftDriven;
+  recCmd.CommandID      := C_ORD_LEVER_SHAFTDRIVEN;
+  recCmd.ValueBool      := aOnOff;
+
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.StopShaftDriven(aPortStarboard: string; aOnOff: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSLeverShaftDriven;
+  recCmd.CommandID      := C_ORD_LEVER_SHAFTSTOP;
+  recCmd.ValueBool      := not aOnOff;
+
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.ShaftTrailing(aPortStarboard: string; aOnOff: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSLeverShaftTrailing;
+  recCmd.CommandID      := C_ORD_LEVER_SHAFTTRAILING;
   recCmd.ValueBool      := aOnOff;
 
   Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
@@ -424,6 +472,30 @@ begin
   recCmd.ValueBool := aMode;
 
   Network.VREngineSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.ModeManouver(aPortStarboard: string; aControl: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSCtrlManoeuvring;
+  recCmd.CommandID      := C_ORD_CTRL_MANOEUVRING;
+  recCmd.ValueBool      := aControl;
+
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.ModeTransit(aPortStarboard: string; aControl: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSCtrlTransit;
+  recCmd.CommandID      := C_ORD_CTRL_MODE;
+  recCmd.ValueBool      := aControl;
+
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
 procedure TPCSSystem.SetEmergencyStopPS(const aOnOff: Boolean);
@@ -642,6 +714,30 @@ begin
       else
       if rec.PortStaboardID = C_PCS_ME_STARBOARD then
         FLIstener.TriggerEvents(Self,epPCSMESpeedSB,Round(rec.ValueDouble));
+    end;
+
+    epPCSCPPLeverPitch :
+    begin
+      if rec.PortStaboardID = C_PCS_CPP_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSCPPLeverPitchPS,Round(rec.ValueDouble))
+      else if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSCPPLeverPitchSB,Round(rec.ValueDouble));
+    end;
+
+    epPCSMELeverSpeed :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSMELeverSpeedPS,Round(rec.ValueDouble))
+      else if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSMELeverSpeedSB,Round(rec.ValueDouble));
+    end;
+
+    epPCSGBDelayShaftSpeed :
+    begin
+      if rec.PortStaboardID = C_PCS_GB_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSGBDelayShaftSpeedPS,Round(rec.ValueDouble))
+      else if rec.PortStaboardID = C_PCS_GB_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSGBDelayShaftSpeedSB,Round(rec.ValueDouble));
     end;
 
     epPCSMERunning:
@@ -1028,6 +1124,14 @@ begin
 //      else if rec.PortStaboardID = C_PCS_ME_STARBOARD then
 //        SpeedLeverSB := rec.ValueInt;
     end;
+
+    epPCSLeverInService :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSLeverInServicePS,rec.ValueBool)
+      else if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSLeverInServiceSB,rec.ValueBool)
+    end;
   end;
 
   case rec.CommandID of
@@ -1194,13 +1298,67 @@ begin
 
       recCmd.CommandID := C_ORD_LEVER_TRANSFEROVERRIDE;
     end;
+
+    C_ORD_LEVER_IN_SERVICE_PS, C_ORD_LEVER_IN_SERVICE_SB :    // Lever In Service
+    begin
+      if (IDPanel = C_ORD_LEVER_IN_SERVICE_PS) and LeverInServicePS then
+        recCmd.PortStaboardID := C_PCS_ME_PORTS
+      else if (IDPanel = C_ORD_LEVER_IN_SERVICE_SB) and LeverInServiceSB then
+        recCmd.PortStaboardID := C_PCS_ME_STARBOARD;
+
+      recCmd.CommandID := C_ORD_LEVER_CONTROL;
+    end;
   end;
 
   if (((recCmd.PortStaboardID = C_PCS_ME_PORTS) or (recCmd.PortStaboardID = C_PCS_GB_PORTS))
     and ControlRemotePS) or
     (((recCmd.PortStaboardID = C_PCS_ME_STARBOARD) or (recCmd.PortStaboardID = C_PCS_GB_STARBOARD))
     and ControlRemoteSB) then
-    Network.VREngineSocket.SendData(C_PCS_COMMAND,@recCmd);
+    Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.LeverInService(aPortStarboard: string; aOnOff : Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSLeverInService;
+  recCmd.ValueBool      := aOnOff;
+
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.LeverPitch(aPortStarboard: String; aValue: Double; aOnOff: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSCPPLeverPitch;
+  recCmd.ValueDouble    := aValue;
+  recCmd.ValueBool      := aOnOff;
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.LeverShaft(aPortStarboard: String; aValue: Double; aOnOff: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSGBDelayShaftSpeed;
+  recCmd.ValueDouble    := aValue;
+  recCmd.ValueBool      := aOnOff;
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.LeverSpeed(aPortStarboard: String; aValue: Double; aOnOff: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSMELeverSpeed;
+  recCmd.ValueDouble    := aValue;
+  recCmd.ValueBool      := aOnOff;
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
 procedure TPCSSystem.NetworkEventAssignment;

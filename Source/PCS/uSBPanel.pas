@@ -248,13 +248,13 @@ begin
       begin
         imgClutch_InSB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_ClutchIn := True;
-        PCSSystem.Clutch(C_PCS_GB_STARBOARD,True);
+        PCSSystem.Clutch(C_PCS_GB_STARBOARD, True);
       end;
       2:
       begin
         imgClutch_OutSB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_ClutchOut := True;
-        PCSSystem.Clutch(C_PCS_GB_STARBOARD,False);
+        PCSSystem.Clutch(C_PCS_GB_STARBOARD, False);
       end;
     end;
   end;

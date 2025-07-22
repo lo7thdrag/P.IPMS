@@ -1210,12 +1210,7 @@ begin
 end;
 procedure TfrmPSPanel.PCSSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Double);
 begin
-  case PropsID of
-    epPCSMESpeed :
-    begin
 
-    end;
-  end;
 end;
 
 end.

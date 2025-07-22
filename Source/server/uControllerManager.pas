@@ -1422,7 +1422,8 @@ begin
       end;
     end;
 
-    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSMESpeed, epPCSMESpeedPS, epPCSMESpeedSB, epPCSMETCLOPressInlet,
+    epPCSMELeverSpeed, epPCSMELeverSpeedPS, epPCSMELeverSpeedSB, epPCSMESetPointSpeed,
+    epPCSMESpeed, epPCSMESpeedPS, epPCSMESpeedSB, epPCSMETCLOPressInlet,
     epPCSMEPressAirInlet, epPCSMETurboChargerSpeedA, epPCSMETurboChargerSpeedB, epPCSMETCOutlLOTempA,
     epPCSMETCOutlLOTempB, epPCSMETempTCInletA, epPCSMETempTCInletB, epPCSMETempTCOutletA,
     epPCSMETempTCOutletB, epPCSMETempSuperChargAir,  epPCSMETempFWHTOutlet, epPCSMETempFWHTInlet,
@@ -1440,7 +1441,7 @@ begin
     epPCSMETempConRodBear6, epPCSMETempConRodBear7, epPCSMETempConRodBear8, epPCSMETempConRodBear9, epPCSMETempConRodBear10,
     epPCSMETempBear1, epPCSMETempBear2, epPCSMETempBear3, epPCSMETempBear4, epPCSMETempBear5,
     epPCSMETempBear6, epPCSMETempBear7, epPCSMETempBear8, epPCSMETempBear9, epPCSMETempBear10, epPCSMETempBear11,
-    epPCSCPPLeverPitch,  epPCSCPPSetPointPitch, epPCSCPPActualPitchPS, epPCSCPPActualPitchSB:
+    epPCSCPPLeverPitch, epPCSCPPLeverPitchPS, epPCSCPPLeverPitchSB, epPCSCPPSetPointPitch, epPCSCPPActualPitchPS, epPCSCPPActualPitchSB:
     begin
       if Order = epPCSMEAlarmPropulsionCheck then
       begin
@@ -1596,12 +1597,12 @@ begin
     epPCSMETempConRodBear6, epPCSMETempConRodBear7, epPCSMETempConRodBear8, epPCSMETempConRodBear9, epPCSMETempConRodBear10,
     epPCSMETempBear1, epPCSMETempBear2, epPCSMETempBear3, epPCSMETempBear4, epPCSMETempBear5,
     epPCSMETempBear6, epPCSMETempBear7, epPCSMETempBear8, epPCSMETempBear9, epPCSMETempBear10, epPCSMETempBear11,
-    epPCSCPPLeverPitch,  epPCSCPPSetPointPitch, epPCSCPPActualPitchPS, epPCSCPPActualPitchSB:
+    epPCSCPPLeverPitch, epPCSCPPLeverPitchPS, epPCSCPPLeverPitchSB, epPCSCPPSetPointPitch, epPCSCPPActualPitchPS, epPCSCPPActualPitchSB:
     begin
       setPCSAAEElementID(recCmd.PortStaboardID, recCmd.ValueDouble, recCmd.CommandPropsID);
     end;
 
-    epPCSMESpeedPS, epPCSMESpeedSB :
+    epPCSMESpeedPS, epPCSMESpeedSB, epPCSMELeverSpeedPS, epPCSMELeverSpeedSB :
     begin
       setPCSAAEElementID(recCmd.PortStaboardID, recCmd.ValueDouble, recCmd.CommandPropsID);
     end;

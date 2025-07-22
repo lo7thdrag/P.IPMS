@@ -4,6 +4,14 @@ interface
 
 uses uEntity, Math;
 
+const
+  FPC_LeverShaftPositionManouver  : array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
+  FPC_LeverSpeedShaftManouver     : array[0..18] of Double = (1000, 940, 880, 820, 760, 700, 656, 613, 570, 513,
+                                                  457, 400, 400, 400, 447, 510, 574, 637, 700);
+  FPC_LeverShaftPositionTransit  : array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
+  FPC_LeverSpeedShaftTransit     : array[0..12] of Double = (1050, 942, 833, 725, 617, 508, 400, 400, 400, 400,
+                                                          400, 400, 400);
+
 type
 
   TGearBox = class(TEntity)
@@ -24,6 +32,8 @@ type
     FCtrlOilPressOut,
     FLOPressInlet,
     FLOTempInlet : Double;
+
+    FLeverShaft : Double;
 
     FReadyForUse,
     FRemoteManual,
@@ -53,6 +63,14 @@ type
     FClutchInterlocks : Boolean;
 
     FPC_ClutchInterlocks : array[0..4] of Boolean;
+
+    FPC_LeverShaftPositionManouver  : array[0..18] of Double;
+    FPC_LeverSpeedShaftManouver     : array[0..18] of Double;
+    FPC_LeverShaftPositionTransit   : array[0..12] of Double;
+    FPC_LeverSpeedShaftTransit      :  array[0..12] of Double;
+
+    procedure SetShaftValue;
+    procedure SetLeverShaft(const Value : Double);
 
     procedure SetShaftSpeed(const Value : Double);
     procedure SetSetpShaftSpeed(const Value : Double);
@@ -109,6 +127,8 @@ type
     destructor Destroy;override;
 
     procedure Run(const aDt : Double);override;
+
+    property LeverShaft : Double read FLeverShaft write SetLeverShaft;
 
     property ShaftSpeed : Double read FShaftSpeed write SetShaftSpeed;
     property SetpShaftSpeed : Double read FSetpShaftSpeed write SetSetpShaftSpeed;
@@ -201,6 +221,8 @@ begin
   FDelayerShaftSpeed := 0;
   FDelayerClutchIn := 0;
   FRemoteManual := True;
+
+  SetShaftValue;
 end;
 
 destructor TGearBox.Destroy;
@@ -309,6 +331,70 @@ begin
 
   FCtrlOilPressOut := Value;
   Listener.TriggerEvents(Self,epPCSGBCtrlOilPressOut,Value);
+end;
+
+procedure TGearBox.SetShaftValue;
+begin
+  // Mode Manouver
+  FPC_LeverShaftPositionManouver[0]  := 10;    FPC_LeverSpeedShaftManouver[0]  := 74.2;
+  FPC_LeverShaftPositionManouver[1]  := 9;     FPC_LeverSpeedShaftManouver[1]  := 74.2;
+  FPC_LeverShaftPositionManouver[2]  := 8;     FPC_LeverSpeedShaftManouver[2]  := 72.77;
+  FPC_LeverShaftPositionManouver[3]  := 7;     FPC_LeverSpeedShaftManouver[3]  := 71.07;
+  FPC_LeverShaftPositionManouver[4]  := 6;     FPC_LeverSpeedShaftManouver[4]  := 69.37;
+  FPC_LeverShaftPositionManouver[5]  := 5;     FPC_LeverSpeedShaftManouver[5]  := 67.67;
+  FPC_LeverShaftPositionManouver[6]  := 4;     FPC_LeverSpeedShaftManouver[6]  := 65.20;
+  FPC_LeverShaftPositionManouver[7]  := 3.5;   FPC_LeverSpeedShaftManouver[7]  := 62.72;
+  FPC_LeverShaftPositionManouver[8]  := 3;     FPC_LeverSpeedShaftManouver[8]  := 60.25;
+  FPC_LeverShaftPositionManouver[9]  := 2;     FPC_LeverSpeedShaftManouver[9]  := 40.17;
+  FPC_LeverShaftPositionManouver[10] := 1;     FPC_LeverSpeedShaftManouver[10] := 20.00;
+  FPC_LeverShaftPositionManouver[11] := 0.5;   FPC_LeverSpeedShaftManouver[11] := 00.0;
+  FPC_LeverShaftPositionManouver[12] := 0;     FPC_LeverSpeedShaftManouver[12] := 00.0;
+  FPC_LeverShaftPositionManouver[13] := -0.5;  FPC_LeverSpeedShaftManouver[13] := 00.0;
+  FPC_LeverShaftPositionManouver[14] := -2;    FPC_LeverSpeedShaftManouver[14] := -15.79;
+  FPC_LeverShaftPositionManouver[15] := -4;    FPC_LeverSpeedShaftManouver[15] := -36.84;
+  FPC_LeverShaftPositionManouver[16] := -6;    FPC_LeverSpeedShaftManouver[16] := -57.9;
+  FPC_LeverShaftPositionManouver[17] := -8;    FPC_LeverSpeedShaftManouver[17] := -78.95;
+  FPC_LeverShaftPositionManouver[18] := -10;   FPC_LeverSpeedShaftManouver[18] := -100;
+
+  // Mode Transit
+  FPC_LeverShaftPositionTransit[0]  := 10;    FPC_LeverSpeedShaftTransit[0]  := 74.2;
+  FPC_LeverShaftPositionTransit[1]  := 9;     FPC_LeverSpeedShaftTransit[1]  := 74.2;
+  FPC_LeverShaftPositionTransit[2]  := 8;     FPC_LeverSpeedShaftTransit[2]  := 72.77;
+  FPC_LeverShaftPositionTransit[3]  := 7;     FPC_LeverSpeedShaftTransit[3]  := 71.07;
+  FPC_LeverShaftPositionTransit[4]  := 6;     FPC_LeverSpeedShaftTransit[4]  := 69.37;
+  FPC_LeverShaftPositionTransit[5]  := 5;     FPC_LeverSpeedShaftTransit[5]  := 67.67;
+  FPC_LeverShaftPositionTransit[6]  := 4;     FPC_LeverSpeedShaftTransit[6]  := 65.20;
+  FPC_LeverShaftPositionTransit[7]  := 3.5;   FPC_LeverSpeedShaftTransit[7]  := 62.72;
+  FPC_LeverShaftPositionTransit[8]  := 3;     FPC_LeverSpeedShaftTransit[8]  := 60.25;
+  FPC_LeverShaftPositionTransit[9]  := 2;     FPC_LeverSpeedShaftTransit[9]  := 40.17;
+  FPC_LeverShaftPositionTransit[10] := 1;     FPC_LeverSpeedShaftTransit[10] := 20.00;
+  FPC_LeverShaftPositionTransit[11] := 0.5;   FPC_LeverSpeedShaftTransit[11] := 00.0;
+  FPC_LeverShaftPositionTransit[12] := 0;     FPC_LeverSpeedShaftTransit[12] := 00.0;
+end;
+
+procedure TGearBox.SetLeverShaft(const Value: Double);
+var
+  i : Integer;
+  epsilon : Double;
+begin
+  if FDelayShaftSpeed = Value then
+    Exit;
+
+  FDelayShaftSpeed := Value;
+
+  ShaftSpeed := 0;
+  epsilon    := 0.01;
+
+  for i := 0 to High(FPC_LeverShaftPositionManouver) do
+  begin
+    if Abs(FPC_LeverShaftPositionManouver[i] - Value) < epsilon then
+    begin
+      ShaftSpeed   := FPC_LeverSpeedShaftManouver[i];
+      Break;
+    end;
+  end;
+
+  Listener.TriggerEvents(Self,epPCSGBDelayShaftSpeed,ShaftSpeed);
 end;
 
 procedure TGearBox.SetDelayShaftSpeed(const Value: Double);

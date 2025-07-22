@@ -296,7 +296,7 @@ begin
     begin
       FBridge_PS_Flashing := True;
       imgBridge_PS.Picture.LoadFromFile(fIndikatorOn);
-      PCSSystem.MCRBridge(C_PCS_ME_PORTS,False);
+      PCSSystem.Bridge(C_PCS_ME_PORTS,False);
     end;
   end
   else if TSpeedButtonImage(Sender).Hint = 'SB' then
@@ -305,7 +305,7 @@ begin
     begin
       FBridge_SB_Flashing := True;
       imgBridge_SB.Picture.LoadFromFile(fIndikatorOn);
-      PCSSystem.MCRBridge(C_PCS_ME_STARBOARD,False);
+      PCSSystem.Bridge(C_PCS_ME_STARBOARD,False);
     end;
   end;
 end;
@@ -379,7 +379,7 @@ end;
 
 procedure Tfrm_GeneralPanel.btnStop_HornClick(Sender: TObject);
 begin
-  PCSSystem.GeneralControl(C_ORD_CTRL_STOPHORN,True);
+  PCSSystem.StopHorn(C_ORD_CTRL_STOPHORN,True);
 //  frmPCSAlarm.StopAlarmSound(True);
 end;
 

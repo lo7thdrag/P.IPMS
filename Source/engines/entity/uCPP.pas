@@ -5,6 +5,14 @@ interface
 
 uses uEntity;
 
+const
+  FPC_LeverPitchPositionManouver  : array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
+  FPC_LeverPitchValuesManouver    : array[0..18] of Double = (74.2, 74.2, 72.77, 71.07, 69.37, 67.67, 65.20, 62.72, 60.25, 40.17,
+                                                  20.00, 0.00, 0.00, 0.00, -15.79, -36.84, -57.9, -78.95, -100);
+  FPC_LeverPitchPositionTransit   : array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
+  FPC_LeverPitchValuesTransit     : array[0..12] of Double = (95.0, 95.0, 95.0, 95.0, 95.0, 95.0, 95.0, 79.51, 66.26, 39.75,
+                                                           13.25, 00.0, 00.0);
+
 type
 
   TCPP = class(TEntity)
@@ -49,6 +57,12 @@ type
     FPumpStandby : array[1..3] of Boolean;
     FPumpStop : array[1..3] of Boolean;
     FPumpStart : array[1..3] of Boolean;
+
+    FPC_LeverPitchPositionManouver  : array[0..18] of Double;
+    FPC_LeverPitchValuesManouver    : array[0..18] of Double;
+    FPC_LeverPitchPositionTransit   : array[0..12] of Double;
+    FPC_LeverPitchValuesTransit     : array[0..12] of Double;
+
 
     procedure SetSetpointPitch(const Value: Double);
     procedure SetLeverPitch(const Value: Double);
@@ -109,6 +123,7 @@ type
     destructor Destroy;override;
 
     procedure Run(const aDt : Double);override;
+    procedure LeverPitchValues;
 
     property SetpointPitch : Double read FSetpointPitch write SetSetpointPitch;
     property LeverPitch : Double read FLeverPitch write SetLeverPitch;
@@ -208,6 +223,8 @@ begin
   HydraulicPumpStart2 := False;
   HydraulicPumpStart3 := False;
 
+
+ LeverPitchValues;
 end;
 
 destructor TCPP.Destroy;
@@ -269,7 +286,7 @@ begin
     exit;
 
   FActualPitch := Value;
-//  Listener.TriggerEvents(Self,epPCSCPPActualPitch, Value);
+  Listener.TriggerEvents(Self,epPCSCPPActualPitch, Value);
 end;
 
 procedure TCPP.SetAheadPitch(const Value: Boolean);
@@ -536,13 +553,70 @@ begin
   Listener.TriggerEvents(Self,epPCSCPPHydrOil,Value);
 end;
 
+procedure TCPP.LeverPitchValues;
+begin
+  // Mode Manouver
+  FPC_LeverPitchPositionManouver[0]  := 10;    FPC_LeverPitchValuesManouver[0]  := 74.2;
+  FPC_LeverPitchPositionManouver[1]  := 9;     FPC_LeverPitchValuesManouver[1]  := 74.2;
+  FPC_LeverPitchPositionManouver[2]  := 8;     FPC_LeverPitchValuesManouver[2]  := 72.77;
+  FPC_LeverPitchPositionManouver[3]  := 7;     FPC_LeverPitchValuesManouver[3]  := 71.07;
+  FPC_LeverPitchPositionManouver[4]  := 6;     FPC_LeverPitchValuesManouver[4]  := 69.37;
+  FPC_LeverPitchPositionManouver[5]  := 5;     FPC_LeverPitchValuesManouver[5]  := 67.67;
+  FPC_LeverPitchPositionManouver[6]  := 4;     FPC_LeverPitchValuesManouver[6]  := 65.20;
+  FPC_LeverPitchPositionManouver[7]  := 3.5;   FPC_LeverPitchValuesManouver[7]  := 62.72;
+  FPC_LeverPitchPositionManouver[8]  := 3;     FPC_LeverPitchValuesManouver[8]  := 60.25;
+  FPC_LeverPitchPositionManouver[9]  := 2;     FPC_LeverPitchValuesManouver[9]  := 40.17;
+  FPC_LeverPitchPositionManouver[10] := 1;     FPC_LeverPitchValuesManouver[10] := 20.00;
+  FPC_LeverPitchPositionManouver[11] := 0.5;   FPC_LeverPitchValuesManouver[11] := 00.0;
+  FPC_LeverPitchPositionManouver[12] := 0;     FPC_LeverPitchValuesManouver[12] := 00.0;
+  FPC_LeverPitchPositionManouver[13] := -0.5;  FPC_LeverPitchValuesManouver[13] := 00.0;
+  FPC_LeverPitchPositionManouver[14] := -2;    FPC_LeverPitchValuesManouver[14] := -15.79;
+  FPC_LeverPitchPositionManouver[15] := -4;    FPC_LeverPitchValuesManouver[15] := -36.84;
+  FPC_LeverPitchPositionManouver[16] := -6;    FPC_LeverPitchValuesManouver[16] := -57.9;
+  FPC_LeverPitchPositionManouver[17] := -8;    FPC_LeverPitchValuesManouver[17] := -78.95;
+  FPC_LeverPitchPositionManouver[18] := -10;   FPC_LeverPitchValuesManouver[18] := -100;
+
+  // Mode Transit
+  FPC_LeverPitchPositionTransit[0]  := 10;    FPC_LeverPitchValuesTransit[0]  := 74.2;
+  FPC_LeverPitchPositionTransit[1]  := 9;     FPC_LeverPitchValuesTransit[1]  := 74.2;
+  FPC_LeverPitchPositionTransit[2]  := 8;     FPC_LeverPitchValuesTransit[2]  := 72.77;
+  FPC_LeverPitchPositionTransit[3]  := 7;     FPC_LeverPitchValuesTransit[3]  := 71.07;
+  FPC_LeverPitchPositionTransit[4]  := 6;     FPC_LeverPitchValuesTransit[4]  := 69.37;
+  FPC_LeverPitchPositionTransit[5]  := 5;     FPC_LeverPitchValuesTransit[5]  := 67.67;
+  FPC_LeverPitchPositionTransit[6]  := 4;     FPC_LeverPitchValuesTransit[6]  := 65.20;
+  FPC_LeverPitchPositionTransit[7]  := 3.5;   FPC_LeverPitchValuesTransit[7]  := 62.72;
+  FPC_LeverPitchPositionTransit[8]  := 3;     FPC_LeverPitchValuesTransit[8]  := 60.25;
+  FPC_LeverPitchPositionTransit[9]  := 2;     FPC_LeverPitchValuesTransit[9]  := 40.17;
+  FPC_LeverPitchPositionTransit[10] := 1;     FPC_LeverPitchValuesTransit[10] := 20.00;
+  FPC_LeverPitchPositionTransit[11] := 0.5;   FPC_LeverPitchValuesTransit[11] := 00.0;
+  FPC_LeverPitchPositionTransit[12] := 0;     FPC_LeverPitchValuesTransit[12] := 00.0;
+end;
+
 procedure TCPP.SetLeverPitch(const Value: Double);
+var
+  i : Integer;
+  epsilon : Double;
 begin
   if FLeverPitch = Value then
     exit;
 
   FLeverPitch := Value;
-  Listener.TriggerEvents(Self,epPCSCPPLeverPitch, Value);
+
+  ActualPitch   := 0;
+  SetpointPitch := 0;
+  epsilon       := 0.01;
+
+  for i := 0 to High(FPC_LeverPitchValuesManouver) do
+  begin
+    if Abs(FPC_LeverPitchPositionManouver[i] - Value) < epsilon then
+    begin
+      ActualPitch   := FPC_LeverPitchValuesManouver[i];
+      SetpointPitch := FPC_LeverPitchValuesManouver[i];
+      Break;
+    end;
+  end;
+
+  Listener.TriggerEvents(Self,epPCSCPPLeverPitch, ActualPitch);
 end;
 
 procedure TCPP.SetLocal(const Value: Boolean);

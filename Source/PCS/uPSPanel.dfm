@@ -5446,8 +5446,6 @@ object frmPSPanel: TfrmPSPanel
       Caption = ''
       Flat = True
       OnClick = btnIncr_SpeedPSClick
-      OnMouseDown = btnPSMouseDown
-      OnMouseUp = btnPSMouseUp
       ImageList = ilButton_PS
       Color = clBlack
     end
@@ -5494,7 +5492,6 @@ object frmPSPanel: TfrmPSPanel
       Caption = ''
       Flat = True
       OnClick = btnDecr_SpeedPSClick
-      OnMouseDown = btnPSMouseDown
       OnMouseUp = btnPSMouseUp
       ImageList = ilButton_PS
       Color = clBlack
@@ -5542,8 +5539,6 @@ object frmPSPanel: TfrmPSPanel
       Caption = ''
       Flat = True
       OnClick = btnPitch_AH_PSClick
-      OnMouseDown = btnPSMouseDown
-      OnMouseUp = btnPSMouseUp
       ImageList = ilButton_PS
       Color = clBlack
     end

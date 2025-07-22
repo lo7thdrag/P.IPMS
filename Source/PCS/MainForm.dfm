@@ -244,8 +244,9 @@ object Form1: TForm1
       Top = 32
       Width = 45
       Height = 241
-      Min = -10
+      Max = 18
       Orientation = trVertical
+      Position = 12
       TabOrder = 10
       OnChange = trckbrPSChange
     end
@@ -258,6 +259,24 @@ object Form1: TForm1
       Orientation = trVertical
       TabOrder = 11
       OnChange = trckbrSBChange
+    end
+    object btnLeverInServicePS: TButton
+      Left = 11
+      Top = 252
+      Width = 62
+      Height = 25
+      Caption = 'Service'
+      TabOrder = 12
+      OnClick = btnLeverInServicePSClick
+    end
+    object btnLeverInServiceSB: TButton
+      Left = 187
+      Top = 252
+      Width = 62
+      Height = 25
+      Caption = 'Service'
+      TabOrder = 13
+      OnClick = btnLeverInServiceSBClick
     end
   end
   object btnThottlePanelTest: TButton

@@ -5308,7 +5308,6 @@ object frmSBPanel: TfrmSBPanel
       Caption = ''
       Flat = True
       OnClick = btnIncr_SpeedSBClick
-      OnMouseDown = btnSBMouseDown
       OnMouseUp = btnSBMouseUp
       ImageList = ilButton_SB
       Color = clBlack
@@ -5356,7 +5355,6 @@ object frmSBPanel: TfrmSBPanel
       Caption = ''
       Flat = True
       OnClick = btnDecr_SpeedSBClick
-      OnMouseDown = btnSBMouseDown
       OnMouseUp = btnSBMouseUp
       ImageList = ilButton_SB
       Color = clBlack
@@ -5439,7 +5437,6 @@ object frmSBPanel: TfrmSBPanel
       Caption = ''
       Flat = True
       OnClick = btnPitch_AS_SBClick
-      OnMouseDown = btnSBMouseDown
       OnMouseUp = btnSBMouseUp
       ImageList = ilButton_SB
       Color = clBlack

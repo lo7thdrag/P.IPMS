@@ -282,8 +282,13 @@ begin
     epPCSCPPPumpStop1,epPCSCPPPumpStop2, epPCSCPPPumpStop3,
     epPCSCPPPumpStart1,epPCSCPPPumpStart2, epPCSCPPPumpStart3,
     epPCSCPPPumpStandby1, epPCSCPPPumpStandby2, epPCSCPPPumpAuto3,
-    epPCSLeverShaftDriven, epPCSLeverShaftStop, epPCSLeverShaftTrailing, epPCSLeverEmergencyStop,
-    epPCSLeverTransferOverride, epPCSCtrlLocal, epPCSCtrlMCR, epPCSCtrlBridge,
+    epPCSLeverShaftDriven, epPCSLeverShaftDrivenPS, epPCSLeverShaftDrivenSB,
+    epPCSLeverShaftStop, epPCSLeverShaftStopPS, epPCSLeverShaftStopSB,
+    epPCSLeverShaftTrailing, epPCSLeverShaftTrailingPS, epPCSLeverShaftTrailingSB,
+    epPCSLeverEmergencyStop, epPCSLeverEmergencyStopPS, epPCSLeverEmergencyStopSB,
+    epPCSLeverInService, epPCSLeverInServicePS, epPCSLeverInServiceSB,
+    epPCSLeverTransferOverride, epPCSLeverTransferOverridePS, epPCSLeverTransferOverrideSB,
+    epPCSCtrlLocal, epPCSCtrlMCR, epPCSCtrlBridge,
     epPCSMEFailure, epPCSGBFailure, epPCSCPPFailure, epPCSGBShaftLocked,
     epPCSGBShaftPowerLimited, epPCSAlarms, epPCSAlarmsPS, epPCSAlarmsSB:
     begin
@@ -690,7 +695,8 @@ begin
 
     {$REGION ' PCS Section '}
     {Paket data dikirimkan ke Mimic dan PCS Panel}
-    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSCPPSetPointPitch, epPCSCPPActualPitchPS, epPCSCPPActualPitchSB, epPCSGBSetpShaftSpeed:
+    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSCPPSetPointPitch, epPCSCPPActualPitchPS,
+    epPCSCPPActualPitchSB, epPCSGBSetpShaftSpeed:
     begin
       if Sender is TMainEngine then
         rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
@@ -742,7 +748,7 @@ begin
     epPCSMETempBear7, epPCSMETempBear8, epPCSMETempBear9, epPCSMETempBear10,
     epPCSMETempBear11,
 
-    epPCSCPPLeverPitch,
+    epPCSCPPLeverPitch, epPCSCPPLeverPitchPS, epPCSCPPLeverPitchSB,
     epPCSCPPActualPitch,
     epPCSCPPServoOil, epPCSCPPStaticHub, epPCSCPPHydrOil,
 
@@ -1318,6 +1324,7 @@ begin
       begin
         cpp.AheadPitch  := True;
         cpp.AsternPitch := False;
+        cpp.LeverPitch  := recERPCS.ValueDouble;
       end
       else if recERPCS.ValueBool = False then
       begin
@@ -1325,6 +1332,94 @@ begin
         cpp.AheadPitch  := False;
       end;
     end;
+
+    {Bagian Throttle}
+    epPCSLeverInService :
+    begin
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+
+      if recERPCS.ValueBool = True then
+      begin
+        main_engine.LeverInService := True;
+      end
+      else if recERPCS.ValueBool = False then
+      begin
+        main_engine.LeverInService := False;
+      end;
+    end;
+
+    epPCSLeverShaftDriven :
+    begin
+      gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Clutch(recERPCS.PortStaboardID, recERPCS.ValueBool);
+      if recERPCS.ValueBool = True then
+      begin
+        gearbox.ShaftDriven := True;
+        gearbox.ShaftStop   := False;
+
+        gearbox.ClutchEngagedDelay  := True;
+        gearbox.DelayShaftSpeed     := recERPCS.ValueDouble;
+      end
+      else if recERPCS.ValueBool = False then
+      begin
+        gearbox.ShaftStop   := True;
+        gearbox.ShaftDriven := False;
+
+        gearbox.ClutchEngagedDelay  := False;
+      end;
+    end;
+
+    epPCSLeverShaftTrailing :
+    begin
+      gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
+      if recERPCS.ValueBool = True then
+      begin
+        gearbox.ShaftTrailing       := True;
+        gearbox.ClutchEngagedDelay  := False;
+      end
+      else if recERPCS.ValueBool = False then
+      begin
+        gearbox.ShaftTrailing       := False;
+        gearbox.ClutchEngagedDelay  := False;
+      end;
+    end;
+
+    epPCSMELeverSpeed :
+    begin
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      if recERPCS.ValueBool then
+      begin
+        main_engine.LeverSpeed  := recERPCS.ValueDouble;
+      end;
+    end;
+
+    epPCSCPPLeverPitch :
+    begin
+      cpp := ERSystem.ERManager.EngineRoom.getPCSSystem.getCPP(recERPCS.PortStaboardID);
+      if recERPCS.ValueBool then
+      begin
+        cpp.LeverPitch  := recERPCS.ValueDouble;
+      end;
+    end;
+
+    epPCSGBDelayShaftSpeed :
+    begin
+      gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
+      if recERPCS.ValueBool then
+      begin
+        gearbox.LeverShaft  := recERPCS.ValueDouble;
+      end;
+    end;
+
+//    epPCSMETransitMode :
+//    begin
+//
+//    end;
+//
+//   epPCSMEManouveringMode :
+//   begin
+//
+//   end;
   end;
 
   case recERPCS.CommandID of

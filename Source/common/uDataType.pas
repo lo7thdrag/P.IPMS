@@ -479,7 +479,7 @@ type
       epPCSCPPRemote, epPCSCPPRemotePS, epPCSCPPRemoteSB,
       epPCSCPPRemoteManual, epPCSCPPRemoteManualPS, epPCSCPPRemoteManualSB,
       epPCSCPPRemoteAuto, epPCSCPPRemoteAutoPS, epPCSCPPRemoteAutoSB,
-      epPCSCPPSetPointPitch, epPCSCPPLeverPitch,
+      epPCSCPPSetPointPitch, epPCSCPPLeverPitch, epPCSCPPLeverPitchPS, epPCSCPPLeverPitchSB,
       epPCSCPPActualPitch, epPCSCPPDelayActualPitch, epPCSCPPActualPitchPS, epPCSCPPActualPitchSB,
       epPCSCPPServoOil, epPCSCPPStaticHub, epPCSCPPHydrOil,
       epPCSCPPHydraulicPumpHour1, epPCSCPPHydraulicPumpHour2, epPCSCPPHydraulicPumpHour3,
@@ -504,7 +504,8 @@ type
       epPCSGBClutchAllowed, epPCSGBClutchAllowedPS, epPCSGBClutchAllowedSB,
       epPCSGBClutchEngagedVCE, epPCSGBClutchEngaged, epPCSGBClutchEngagedPS, epPCSGBClutchEngagedSB,
       epPCSGBLOPumpHour,
-      epPCSGBSetpShaftSpeed, epPCSGBShaftSpeed, epPCSGBDelayShaftSpeed, epPCSGBShaftSpeedPS, epPCSGBShaftSpeedSB,
+      epPCSGBSetpShaftSpeed, epPCSGBShaftSpeed, epPCSGBShaftSpeedPS, epPCSGBShaftSpeedSB,
+      epPCSGBDelayShaftSpeed, epPCSGBDelayShaftSpeedPS, epPCSGBDelayShaftSpeedSB,
       epPCSGBShaftLocked, epPCSGBShaftLockedPS, epPCSGBShaftLockedSB,
       epPCSGBShaftTemp, epPCSGBLubOil, epPCSGBCtrlOilPressIn, epPCSGBCtrlOilPressOut,
       epPCSGBLOPressInlet, epPCSGBLOTempInlet,
@@ -537,6 +538,8 @@ type
       epPCSLeverEmergencyStopPS, epPCSLeverTransferOverridePS,
       epPCSLeverShaftDrivenSB, epPCSLeverShaftStopSB, epPCSLeverShaftTrailingSB,
       epPCSLeverEmergencyStopSB, epPCSLeverTransferOverrideSB,
+      epPCSLeverInService, epPCSLeverInServicePS, epPCSLeverInServiceSB,
+      epPCSMELeverSpeedPS, epPCSMELeverSpeedSB,
 
       epPCSFreezed,
 
