@@ -188,11 +188,24 @@ type
     lbl6: TLabel;
     pnl3: TPanel;
     lbl8: TLabel;
-    btnStartGenShore: TButton;
-    btnStopGenShore: TButton;
+    lbl4: TLabel;
+    rb1: TRadioButton;
+    lbl5: TLabel;
+    rb2: TRadioButton;
+    lbl7: TLabel;
+    lbl11: TLabel;
+    pnl5: TPanel;
+    pnlShoreImport: TPanel;
     lblEngineRunGenShore: TLabel;
     lbl9: TLabel;
     pnl4: TPanel;
+    btnStartGenShore: TButton;
+    btnStopGenShore: TButton;
+    pnlShoreExport: TPanel;
+    lbl12: TLabel;
+    lbl13: TLabel;
+    TrackBar1: TTrackBar;
+    btn2: TButton;
 
     procedure Gen1ModeClick(Sender: TObject);
     procedure Gen2ModeClick(Sender: TObject);
