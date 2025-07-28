@@ -30,6 +30,8 @@ type
     FRunningStartSB, FStoppedStopPS, FStoppedStopSB: Boolean;
     FLampTest : Integer;
 
+    FTransitMode, FManouverMode : Boolean;
+
     procedure NetworkEventAssignment;
 
     procedure LoadSettingForm(filepath: string);
@@ -59,6 +61,9 @@ type
     procedure SetLeverInServiceSB(const aOnOff : Boolean);
     procedure SetTransferOverrideSB(const aOnOff : Boolean);
     procedure ControlThrottleIndicator(aIDPanel : Byte; aValue : Boolean);
+
+    procedure SetTransitMode(const aOnOff : Boolean);
+    procedure SetManouverMode(const aOnOff : Boolean);
     {--}
 
   public
@@ -102,6 +107,9 @@ type
     procedure LeverSpeed(aPortStarboard : String; aValue: Double; aOnOff : Boolean);
     procedure LeverShaft(aPortStarboard : String; aValue: Double; aOnOff : Boolean);
 
+    procedure LeverSetPointSpeed(aPortStarboard : String; aValue: Double; aOnOff : Boolean);
+    procedure LeverActualSpeed(aPortStarboard : String; aValue: Double; aOnOff : Boolean);
+
     property Network : TPCSNetwork read FPCSNetwork;
     property Listener :TListeners read FListener;
     property Freezed : boolean read FFreezed write SetFreezed;
@@ -120,6 +128,9 @@ type
     property LeverInServiceSB: Boolean read FLeverInServiceSB write SetLeverInServiceSB;
     property TransferOverrideSB: Boolean read FTransferOverrideSB write SetTransferOverrideSB;
 
+    property Transit  : Boolean read FTransitMode write SetTransitMode;
+    property Manouver : Boolean read FManouverMode write SetManouverMode;
+
     public
       FFormFreezed : array[0..2] of TfrmFreeze;
 
@@ -129,8 +140,7 @@ type
       SpeedLeverPS, SpeedLeverSB : Integer;
       FClutchAllowedPS, FClutchAllowedSB,
       throttleTest, alarmAcceptControlPS, alarmAcceptControlSB,
-      ControlRemotePS, ControlRemoteSB: Boolean;
-
+      ControlRemotePS, ControlRemoteSB,
       FPrelubInProgressPS, FPrelubInProgressSB : Boolean;
 
 
@@ -479,8 +489,7 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
-  recCmd.CommandPropsID := epPCSCtrlManoeuvring;
-  recCmd.CommandID      := C_ORD_CTRL_MANOEUVRING;
+  recCmd.CommandPropsID := epPCSMEManouveringMode;
   recCmd.ValueBool      := aControl;
 
   Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
@@ -491,9 +500,8 @@ var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
-  recCmd.CommandPropsID := epPCSCtrlTransit;
-  recCmd.CommandID      := C_ORD_CTRL_MODE;
-  recCmd.ValueBool      := aControl;
+  recCmd.CommandPropsID := epPCSMETransitMode;
+  recCmd.ValueBool      := not aControl;
 
   Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
@@ -642,6 +650,25 @@ begin
   ControlThrottleIndicator(C_ORD_TRANSFER_OVERRIDE_SB,aOnOff);
 end;
 
+procedure TPCSSystem.SetTransitMode(const aOnOff: Boolean);
+begin
+  if FTransitMode = aOnOff then
+     Exit;
+
+  FTransitMode := aOnOff;
+  Listener.TriggerEvents(Self,epPCSMETransitMode, aOnOff);
+end;
+
+
+procedure TPCSSystem.SetManouverMode(const aOnOff: Boolean);
+begin
+  if FManouverMode = aOnOff then
+     Exit;
+
+  FManouverMode := aOnOff;
+  Listener.TriggerEvents(Self,epPCSMEManouveringMode, aOnOff);
+end;
+
 { fungsi untuk menangani event dari jaringan untuk PCSCommand }
 procedure TPCSSystem.NetEventInstructorCommonCmd(apRec: PAnsiChar; aSize: Word);
 var
@@ -689,6 +716,15 @@ begin
         FLIstener.TriggerEvents(Self,epPCSMEActualSpeedSB,rec.ValueDouble);
     end;
 
+    epPCSMEDelayActualSpeed:
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+        FLIstener.TriggerEvents(Self,epPCSMEDelayActualSpeedPS,rec.ValueDouble)
+      else
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+        FLIstener.TriggerEvents(Self,epPCSMEDelayActualSpeedSB,rec.ValueDouble);
+    end;
+
     epPCSGBSetpShaftSpeed:
     begin
       if rec.PortStaboardID = C_PCS_GB_PORTS then
@@ -701,10 +737,10 @@ begin
     epPCSCPPSetPointPitch:
     begin
       if rec.PortStaboardID = C_PCS_CPP_PORTS then
-        FLIstener.TriggerEvents(Self,epPCSCPPActualPitchPS,Round(rec.ValueDouble))
+        FLIstener.TriggerEvents(Self,epPCSCPPSetPointPitchPS,Round(rec.ValueDouble))
       else
       if rec.PortStaboardID = C_PCS_CPP_STARBOARD then
-        FLIstener.TriggerEvents(Self,epPCSCPPActualPitchSB,Round(rec.ValueDouble));
+        FLIstener.TriggerEvents(Self,epPCSCPPSetPointPitchSB,Round(rec.ValueDouble));
     end;
 
     epPCSMESpeed :
@@ -935,12 +971,26 @@ begin
 
     epPCSMETransitMode:
     begin
-      FLIstener.TriggerEvents(Self,epPCSMETransitMode,rec.ValueBool);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMETransitMode,rec.ValueBool);
+      end
+      else if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMETransitMode,rec.ValueBool);
+      end;
     end;
 
     epPCSMEManouveringMode:
     begin
-      FLIstener.TriggerEvents(Self,epPCSMEManouveringMode,rec.ValueBool);
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMEManouveringMode,rec.ValueBool);
+      end
+      else if rec.PortStaboardID = C_PCS_ME_STARBOARD then
+      begin
+        FLIstener.TriggerEvents(Self,epPCSMEManouveringMode,rec.ValueBool);
+      end;
     end;
 
     //Lever Control
@@ -1356,6 +1406,28 @@ var
 begin
   recCmd.PortStaboardID := aPortStarboard;
   recCmd.CommandPropsID := epPCSMELeverSpeed;
+  recCmd.ValueDouble    := aValue;
+  recCmd.ValueBool      := aOnOff;
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.LeverActualSpeed(aPortStarboard: String; aValue: Double; aOnOff: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSMEDelayActualSpeed;
+  recCmd.ValueDouble    := aValue;
+  recCmd.ValueBool      := aOnOff;
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.LeverSetPointSpeed(aPortStarboard: String; aValue: Double; aOnOff: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSMESetPointSpeed;
   recCmd.ValueDouble    := aValue;
   recCmd.ValueBool      := aOnOff;
   Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);

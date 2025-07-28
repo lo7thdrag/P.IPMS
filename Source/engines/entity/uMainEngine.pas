@@ -62,6 +62,7 @@ type
     FLeverControl : Integer;
     FSpeedState : Integer;
     FLeverInService : Boolean;
+    FLeverSpeedTransit : Double;
 
     FSTCState : Integer;
     F2TCState : Boolean;
@@ -77,10 +78,7 @@ type
     FPC_Alarms : array[0..17] of Boolean;
     FPC_SafetiesStop : array[0..12] of Boolean;
 
-    FPC_LeverValuesPositionManouver : array[0..18] of Double;
-    FPC_LeverSpeedValuesManouver    : array[0..18] of Double;
-    FPC_LeverValuesPositionTransit  : array[0..12] of Double;
-    FPC_LeverSpeedValuesTransit     : array[0..12] of Double;
+
 
     FEngineRun,
     FReadyForUse,
@@ -182,6 +180,7 @@ type
 
     procedure SetSetpointSpeed(const Value: Double);
     procedure SetLeverSpeed(const Value: Double);
+    procedure SetLeverSpeedTransit(const Value: Double);
     procedure SetActualSpeed(const Value: Double);
     procedure SetDelayActualSpeed(const Value : Double);
     procedure SetFuelRack(const Value: Double);
@@ -358,6 +357,11 @@ type
     {--}
 
   public
+    FPC_LeverValuesPositionManouver : array[0..18] of Double;
+    FPC_LeverSpeedValuesManouver    : array[0..18] of Double;
+    FPC_LeverValuesPositionTransit  : array[0..12] of Double;
+    FPC_LeverSpeedValuesTransit     : array[0..12] of Double;
+
     constructor Create;override;
     destructor Destroy;override;
     procedure LeverValuesManual;
@@ -382,6 +386,7 @@ type
 
     property SetPointSpeed : Double read FSetPointSpeed write SetSetPointSpeed;
     property LeverSpeed : Double read FLeverSpeed write SetLeverSpeed;
+    property LeverSpeedTransit : Double read FLeverSpeedTransit write SetLeverSpeedTransit;
     property ActualSpeed : Double read FActualSpeed write SetActualSpeed;
     property DelayActualSpeed : Double read FDelayActualSpeed write SetDelayActualSpeed;
     property FuelRack : Double read FFuelRack write SetFuelRack;
@@ -1526,6 +1531,7 @@ begin
     Exit;
 
   FDelayActualSpeed := Value;
+
   Listener.TriggerEvents(Self,epPCSMEDelayActualSpeed,Value);
 end;
 
@@ -1851,6 +1857,33 @@ begin
     begin
       ActualSpeed   := FPC_LeverSpeedValuesManouver[i];
       SetPointSpeed := FPC_LeverSpeedValuesManouver[i];
+      Break;
+    end;
+  end;
+
+  Listener.TriggerEvents(Self,epPCSMELeverSpeed, ActualSpeed);
+end;
+
+procedure TMainEngine.SetLeverSpeedTransit(const Value: Double);
+var
+  i : Integer;
+  epsilon : Double;
+begin
+  if FLeverSpeed = Value then
+    exit;
+
+  FLeverSpeed := Value;
+
+  ActualSpeed   := 0;
+  SetPointSpeed := 0;
+  epsilon       := 0.01;
+
+  for i := 0 to High(FPC_LeverValuesPositionTransit) do
+  begin
+    if Abs(FPC_LeverValuesPositionTransit[i] - Value) < epsilon then
+    begin
+      ActualSpeed   := FPC_LeverSpeedValuesTransit[i];
+      SetPointSpeed := FPC_LeverSpeedValuesTransit[i];
       Break;
     end;
   end;

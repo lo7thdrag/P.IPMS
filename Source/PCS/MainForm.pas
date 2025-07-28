@@ -9,6 +9,7 @@ uses
 
 var
   LeverValuesPosition: array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
+  LeverValuesPositionTransit : array[0..12] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0);
 
 type
   TForm1 = class(TForm)
@@ -85,8 +86,7 @@ type
     { Private declarations }
 
     FListener : TListeners;
-    LeverValuesPosition: array[0..18] of Double;
-    procedure LeverValuePosition;
+    FTransit, FManouvre : Boolean;
 
     procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
     procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : string);overload;
@@ -99,8 +99,10 @@ type
     function TrackbarSpeed(Position: Integer): Double;
   public
     { Public declarations }
-
+    LeverValuesPosition: array[0..18] of Double;
+    LeverValuesPositionTransit : array[0..12] of Double;
     counterCheck, idServoTest, idLeverTest : Integer;
+    procedure LeverValuePosition;
 
     property Listener : TListeners read FListener;
 
@@ -507,7 +509,6 @@ begin
       else
         btnEmergencyStopSB.Font.Size := 8;
     end;
-
   end;
 end;
 
@@ -531,10 +532,12 @@ end;
 function TForm1.TrackbarSpeed(Position: Integer): Double;
 begin
   Result := LeverValuesPosition[Position];
+  Result := LeverValuesPositionTransit[Position];
 end;
 
 procedure TForm1.LeverValuePosition;
 begin
+  // Mode Manouver
   LeverValuesPosition[0]  := 10;
   LeverValuesPosition[1]  := 9;
   LeverValuesPosition[2]  := 8;
@@ -554,42 +557,86 @@ begin
   LeverValuesPosition[16] := -6;
   LeverValuesPosition[17] := -8;
   LeverValuesPosition[18] := -10;
+
+  // Mode Transit
+  LeverValuesPositionTransit[0]  := 10;
+  LeverValuesPositionTransit[1]  := 9;
+  LeverValuesPositionTransit[2]  := 8;
+  LeverValuesPositionTransit[3]  := 7;
+  LeverValuesPositionTransit[4]  := 6;
+  LeverValuesPositionTransit[5]  := 5;
+  LeverValuesPositionTransit[6]  := 4;
+  LeverValuesPositionTransit[7]  := 3.5;
+  LeverValuesPositionTransit[8]  := 3;
+  LeverValuesPositionTransit[9]  := 2;
+  LeverValuesPositionTransit[10] := 1;
+  LeverValuesPositionTransit[11] := 0.5;
+  LeverValuesPositionTransit[12] := 0;
 end;
 
 procedure TForm1.trckbrPSChange(Sender: TObject);
 var
-  LeverSpeed : Double;
+  LeverSpeed, LeverSpeedTransit : Double;
 begin
-  LeverSpeed := LeverValuesPosition[trckbrPS.Position];
+  if PCSSystem.Manouver then
+  begin
+    LeverSpeed := LeverValuesPosition[trckbrPS.Position];
 
-  if LeverSpeed < 0 then
-  begin
-    lblAheadPS.Color  := clLime;
-    lblAsternPS.Color := clWindow;
+    if LeverSpeed < 0 then
+    begin
+      lblAheadPS.Color  := clLime;
+      lblAsternPS.Color := clWindow;
+    end
+    else
+    if LeverSpeed > 0 then
+    begin
+      lblAsternPS.Color := clLime;
+      lblAheadPS.Color  := clWindow;
+    end
+    else
+    begin
+      lblAheadPS.Color  := clWindow;
+      lblAsternPS.Color := clWindow;
+    end;
+
+    lblLeverPS.Caption := FloatToStr(LeverSpeed);
+    PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverSpeed, True);
+    PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverSpeed, True);
+    PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverSpeed, True);
   end
-  else
-  if LeverSpeed > 0 then
+  else if PCSSystem.Transit then
   begin
-    lblAsternPS.Color := clLime;
-    lblAheadPS.Color  := clWindow;
-  end
-  else
-  begin
-    lblAheadPS.Color  := clWindow;
-    lblAsternPS.Color := clWindow;
+    LeverSpeedTransit := LeverValuesPositionTransit[trckbrPS.Position];
+
+    if LeverSpeedTransit < 0 then
+    begin
+      lblAheadPS.Color  := clLime;
+      lblAsternPS.Color := clWindow;
+    end
+    else
+    if LeverSpeedTransit > 0 then
+    begin
+      lblAsternPS.Color := clLime;
+      lblAheadPS.Color  := clWindow;
+    end
+    else
+    begin
+      lblAheadPS.Color  := clWindow;
+      lblAsternPS.Color := clWindow;
+    end;
+
+    lblLeverPS.Caption := FloatToStr(LeverSpeedTransit);
+    PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverSpeedTransit, False);
+    PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverSpeedTransit, False);
+    PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverSpeedTransit, False);
   end;
-
-  lblLeverPS.Caption := FloatToStr(LeverSpeed);
-  PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverSpeed, True);
-  PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverSpeed, True);
-  PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverSpeed, True);
 end;
 
 procedure TForm1.trckbrSBChange(Sender: TObject);
 var
   LeverSpeed : Double;
 begin
-  LeverSpeed := LeverValuesPosition[trckbrPS.Position];
+  LeverSpeed := LeverValuesPosition[trckbrSB.Position];
 
   if LeverSpeed < 0 then
   begin
@@ -610,6 +657,8 @@ begin
 
   lblLeverSB.Caption := FloatToStr(LeverSpeed);
   PCSSystem.LeverSpeed(C_PCS_ME_STARBOARD, LeverSpeed, True);
+  PCSSystem.LeverPitch(C_PCS_CPP_STARBOARD, LeverSpeed, True);
+  PCSSystem.LeverShaft(C_PCS_GB_STARBOARD, LeverSpeed, True);
 end;
 
 end.

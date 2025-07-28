@@ -49,20 +49,12 @@ type
     procedure CPPHydraulicPump(aPortStaboard, PumpID, StateID: Integer; Value: Boolean);
 
   private
-    FDelayedRun, FDelayedRunPS, FDelayedRunSB : double;
+    FDelayedRun, FDelayedRunPS, FDelayedRunSB, FLeverPS, FLeverSB : double;
     FCrashStop, FTransitMode, FManouveringMode : Boolean;
     valueRudderPS, valueRudderSB : Integer;
 
     procedure SetTransitMode(const aValue : Boolean);
     procedure SetManouveringMode(const aValue : Boolean);
-
-    {Mode yang digunakan saat Remote Auto dan menggunakan Throttle}
-    procedure ModeManoeuvring(aPortStarboard: string; aValue : Integer);
-    procedure ModeTransit(aPortStarboard : String; aValue : Integer);
-    procedure ModeMaxFSR(aPortStarboard : string; aValue : Integer);
-    procedure ModeTrail(aPortStarboard : string; aValue : Integer);
-
-    procedure CrashStop; {Perubahan mode dari Transit ke Manouvering secara mendadak}
 
     {Set nilai random untuk value pada Propulsion (Temperature & Pressure)}
     procedure setPropulsionValue(aPortStarboard: string; aRPM : Double);
@@ -98,6 +90,14 @@ type
 
   public
     FEmergencyStopPS, FEmergencyStopSB : Boolean;
+
+    {Mode yang digunakan saat Remote Auto dan menggunakan Throttle}
+    procedure ModeManoeuvring(aPortStarboard: string; aValue : Integer);
+    procedure ModeTransit(aPortStarboard : String; aValue : Integer);
+    procedure ModeMaxFSR(aPortStarboard : string; aValue : Integer);
+    procedure ModeTrail(aPortStarboard : string; aValue : Integer);
+
+    procedure CrashStop; {Perubahan mode dari Transit ke Manouvering secara mendadak}
 
     property TransitMode : Boolean read FTransitMode write SetTransitMode;
     property ManouveringMode : Boolean read FManouveringMode write SetManouveringMode;
@@ -856,14 +856,14 @@ end;
 procedure TPropulsionSystem.ModeManoeuvring(aPortStarboard: string;
   aValue: Integer);
 var
-  i, LeverPS, LeverSB : Integer;
+  i : Integer;
 begin
   if (aPortStarboard = C_PCS_ME_PORTS) then
   begin
-    if LeverPS = aValue then
+    if FLeverPS = aValue then
       Exit;
 
-    LeverPS := aValue;
+    FLeverPS := aValue;
 
     if ME[0].RemoteAuto and ME[0].EngineRun and CPP[0].Remote then
     begin
@@ -905,10 +905,10 @@ begin
 
   if (aPortStarboard = C_PCS_ME_STARBOARD) then
   begin
-    if LeverSB = aValue then
+    if FLeverSB = aValue then
       Exit;
 
-    LeverSB := aValue;
+    FLeverSB := aValue;
 
     if ME[1].RemoteAuto and ME[1].EngineRun and CPP[1].Remote then
     begin
@@ -984,7 +984,7 @@ end;
 
 procedure TPropulsionSystem.ModeTransit(aPortStarboard: String; aValue : Integer);
 var
-  i, LeverPS, LeverSB: Integer;
+  i : Integer;
 begin
   if (aPortStarboard = C_PCS_ME_PORTS) then
   begin
@@ -994,10 +994,10 @@ begin
     begin
       if ME[0].RemoteAuto and ME[0].EngineRun and CPP[0].Remote then
       begin
-        if LeverPS = aValue then
+        if FLeverPS = aValue then
           Exit;
 
-        LeverPS := aValue;
+        FLeverPS := aValue;
 
         if aValue < 0 then
         begin
@@ -1026,10 +1026,10 @@ begin
     begin
       if ME[1].RemoteAuto and ME[1].EngineRun and CPP[1].Remote then
       begin
-        if LeverSB = aValue then
+        if FLeverSB = aValue then
           Exit;
 
-        LeverSB := aValue;
+        FLeverSB := aValue;
 
         if aValue < 0 then
         begin

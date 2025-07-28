@@ -4930,19 +4930,19 @@ object frm_GeneralPanel: Tfrm_GeneralPanel
       Hint = 'Transit'
       Caption = ''
       Flat = True
-      OnClick = btnModeClick
+      OnClick = btnTransitClick
       ImageList = ilButton_Image
       Color = clBlack
     end
     object btnManoeuvre: TSpeedButtonImage
-      Left = 774
+      Left = 782
       Top = 481
       Width = 95
       Height = 95
       Hint = 'Manouvre'
       Caption = ''
       Flat = True
-      OnClick = btnModeClick
+      OnClick = btnManoeuvreClick
       ImageList = ilButton_Image
       Color = clBlack
     end

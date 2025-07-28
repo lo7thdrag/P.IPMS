@@ -292,7 +292,7 @@ begin
   begin
     imgPitch_AHPS.Picture.LoadFromFile(fIndikatorOn);
     imgPitch_ASPS.Picture.LoadFromFile(fIndikatorOff);
-    PitchInChange(1,True);
+    PitchInChange(10,True);
   end
 end;
 
@@ -302,7 +302,7 @@ begin
   begin
     imgPitch_ASPS.Picture.LoadFromFile(fIndikatorOn);
     imgPitch_AHPS.Picture.LoadFromFile(fIndikatorOff);
-    PitchInChange(-1,False);
+    PitchInChange(-10,False);
   end;
 end;
 

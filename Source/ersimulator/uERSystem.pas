@@ -73,6 +73,8 @@ type
 
 
   public
+    FTransit, FManouver : Boolean;
+
     constructor Create; overload;
     constructor Create(aDatabase : TIPMSDatabase); overload;
     destructor  Destroy; override;
@@ -695,8 +697,8 @@ begin
 
     {$REGION ' PCS Section '}
     {Paket data dikirimkan ke Mimic dan PCS Panel}
-    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSCPPSetPointPitch, epPCSCPPActualPitchPS,
-    epPCSCPPActualPitchSB, epPCSGBSetpShaftSpeed:
+    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSCPPSetPointPitch, epPCSCPPSetPointPitchPS, epPCSCPPSetPointPitchSB,
+    epPCSCPPActualPitchPS, epPCSCPPActualPitchSB, epPCSGBSetpShaftSpeed:
     begin
       if Sender is TMainEngine then
         rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
@@ -775,7 +777,7 @@ begin
         FOnPCSCommand(rPCSCmd);
     end;
 
-    epPCSMESpeedPS, epPCSMESpeedSB, epPCSMEActualSpeedPS, epPCSMEActualSpeedSB :
+    epPCSMESpeedPS, epPCSMESpeedSB, epPCSMEActualSpeedPS, epPCSMEActualSpeedSB,  epPCSMEDelayActualSpeedPS, epPCSMEDelayActualSpeedSB:
     begin
       if Sender is TMainEngine then
         rPCSCmd.PortStaboardID := TMainEngine(Sender).Identifier
@@ -1269,15 +1271,12 @@ begin
 
     epPCSMERemoteAuto :
     begin
-      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool)
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool);
     end;
 
     epPCSMERemoteManual :
     begin
-      if recERPCS.ValueBool = True then
-      begin
-        ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, recERPCS.ValueBool);
-      end;
+      ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(recERPCS.PortStaboardID, recERPCS.ValueBool);
     end;
 
     epPCSCtrlMCR :
@@ -1324,7 +1323,6 @@ begin
       begin
         cpp.AheadPitch  := True;
         cpp.AsternPitch := False;
-        cpp.LeverPitch  := recERPCS.ValueDouble;
       end
       else if recERPCS.ValueBool = False then
       begin
@@ -1387,39 +1385,44 @@ begin
     epPCSMELeverSpeed :
     begin
       main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
-      if recERPCS.ValueBool then
-      begin
-        main_engine.LeverSpeed  := recERPCS.ValueDouble;
-      end;
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool);
+      if recERPCS.ValueBool = True then
+        main_engine.LeverSpeed := recERPCS.ValueDouble
+      else if recERPCS.ValueBool = False then
+        main_engine.LeverSpeedTransit := recERPCS.ValueDouble;
     end;
 
     epPCSCPPLeverPitch :
     begin
       cpp := ERSystem.ERManager.EngineRoom.getPCSSystem.getCPP(recERPCS.PortStaboardID);
-      if recERPCS.ValueBool then
-      begin
-        cpp.LeverPitch  := recERPCS.ValueDouble;
-      end;
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool);
+      if recERPCS.ValueBool = True then
+        cpp.LeverPitch  := recERPCS.ValueDouble
+      else if recERPCS.ValueBool = False then
+        cpp.LeverPitchTransit  := recERPCS.ValueDouble
     end;
 
     epPCSGBDelayShaftSpeed :
     begin
       gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
-      if recERPCS.ValueBool then
-      begin
-        gearbox.LeverShaft  := recERPCS.ValueDouble;
-      end;
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool);
+      if recERPCS.ValueBool = True then
+        gearbox.LeverShaft  := recERPCS.ValueDouble
+      else if recERPCS.ValueBool = False then
+        gearbox.LeverShaftTransit  := recERPCS.ValueDouble
     end;
 
-//    epPCSMETransitMode :
-//    begin
-//
-//    end;
-//
-//   epPCSMEManouveringMode :
-//   begin
-//
-//   end;
+    epPCSMETransitMode :
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool);
+      ERSystem.ERManager.EngineRoom.getPCSSystem.ModeTransit(recERPCS.PortStaboardID, recERPCS.ValueInt);
+    end;
+
+    epPCSMEManouveringMode :
+    begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool);
+      ERSystem.ERManager.EngineRoom.getPCSSystem.ModeManoeuvring(recERPCS.PortStaboardID, recERPCS.ValueInt);
+    end;
   end;
 
   case recERPCS.CommandID of

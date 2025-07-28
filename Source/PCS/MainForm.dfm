@@ -255,8 +255,9 @@ object Form1: TForm1
       Top = 32
       Width = 45
       Height = 241
-      Min = -10
+      Max = 18
       Orientation = trVertical
+      Position = 12
       TabOrder = 11
       OnChange = trckbrSBChange
     end

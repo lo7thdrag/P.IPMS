@@ -28,6 +28,8 @@ type
     FStaticHub,
     FHydrOil : Double;
 
+    FLeverPitchTransit : Double;
+
     FReadyForUse,
     FRemote,
     FRemoteManual,
@@ -58,14 +60,9 @@ type
     FPumpStop : array[1..3] of Boolean;
     FPumpStart : array[1..3] of Boolean;
 
-    FPC_LeverPitchPositionManouver  : array[0..18] of Double;
-    FPC_LeverPitchValuesManouver    : array[0..18] of Double;
-    FPC_LeverPitchPositionTransit   : array[0..12] of Double;
-    FPC_LeverPitchValuesTransit     : array[0..12] of Double;
-
-
     procedure SetSetpointPitch(const Value: Double);
     procedure SetLeverPitch(const Value: Double);
+    procedure SetLeverPitchTransit(const Value: Double);
     procedure SetActualPitch(const Value: Double);
     procedure SetDelayActualPitch(const Value: Double);
     procedure SetServoOil(const Value: Double);
@@ -119,6 +116,11 @@ type
     FHydraulicPumpID, FHydraulicPumpState : Integer;
     FHydraulicPumpOnOff : Boolean;
 
+    FPC_LeverPitchPositionManouver  : array[0..18] of Double;
+    FPC_LeverPitchValuesManouver    : array[0..18] of Double;
+    FPC_LeverPitchPositionTransit   : array[0..12] of Double;
+    FPC_LeverPitchValuesTransit     : array[0..12] of Double;
+
     constructor Create;override;
     destructor Destroy;override;
 
@@ -127,6 +129,7 @@ type
 
     property SetpointPitch : Double read FSetpointPitch write SetSetpointPitch;
     property LeverPitch : Double read FLeverPitch write SetLeverPitch;
+    property LeverPitchTransit : Double read FLeverPitchTransit write SetLeverPitchTransit;
     property ActualPitch : Double read FActualPitch write SetActualPitch;
     property DelayActualPitch : Double read FDelayActualPitch write SetDelayActualPitch;
     property ServoOil : Double read FServoOil write SetServoOil;
@@ -224,7 +227,7 @@ begin
   HydraulicPumpStart3 := False;
 
 
- LeverPitchValues;
+  LeverPitchValues;
 end;
 
 destructor TCPP.Destroy;
@@ -256,23 +259,30 @@ end;
 procedure TCPP.Run(const aDt: Double);
 begin
   inherited;
+  if FDelayer > 0.05 then
+  begin
+    FDelayer := 0;
+
+    calcActualPitch;
+    DelayActualPitch := SetpointPitch;
+  end;
+  calcDelayActualPitch;
+
   if ReadyForUse then
   begin
     FDelayer := FDelayer + aDt;
     FDelayerActualPitch := FDelayerActualPitch + aDt;
 
-    if FDelayer > 0.5 then
+    if AheadPitch then
     begin
-      if AheadPitch then
-        SetPitchInManual(1)
-      else if AsternPitch then
-        SetPitchInManual(-1);
-
-      FDelayer := 0;
+      SetPitchInManual(10);
+      AheadPitch := False;
+    end
+    else if AsternPitch then
+    begin
+      SetPitchInManual(-10);
+      AsternPitch := False;
     end;
-
-    calcActualPitch;
-    calcDelayActualPitch;
   end;
 
   setCPPHydraulicPump(FHydraulicPumpID,FHydraulicPumpState,FHydraulicPumpOnOff);
@@ -577,17 +587,17 @@ begin
   FPC_LeverPitchPositionManouver[18] := -10;   FPC_LeverPitchValuesManouver[18] := -100;
 
   // Mode Transit
-  FPC_LeverPitchPositionTransit[0]  := 10;    FPC_LeverPitchValuesTransit[0]  := 74.2;
-  FPC_LeverPitchPositionTransit[1]  := 9;     FPC_LeverPitchValuesTransit[1]  := 74.2;
-  FPC_LeverPitchPositionTransit[2]  := 8;     FPC_LeverPitchValuesTransit[2]  := 72.77;
-  FPC_LeverPitchPositionTransit[3]  := 7;     FPC_LeverPitchValuesTransit[3]  := 71.07;
-  FPC_LeverPitchPositionTransit[4]  := 6;     FPC_LeverPitchValuesTransit[4]  := 69.37;
-  FPC_LeverPitchPositionTransit[5]  := 5;     FPC_LeverPitchValuesTransit[5]  := 67.67;
-  FPC_LeverPitchPositionTransit[6]  := 4;     FPC_LeverPitchValuesTransit[6]  := 65.20;
-  FPC_LeverPitchPositionTransit[7]  := 3.5;   FPC_LeverPitchValuesTransit[7]  := 62.72;
-  FPC_LeverPitchPositionTransit[8]  := 3;     FPC_LeverPitchValuesTransit[8]  := 60.25;
-  FPC_LeverPitchPositionTransit[9]  := 2;     FPC_LeverPitchValuesTransit[9]  := 40.17;
-  FPC_LeverPitchPositionTransit[10] := 1;     FPC_LeverPitchValuesTransit[10] := 20.00;
+  FPC_LeverPitchPositionTransit[0]  := 10;    FPC_LeverPitchValuesTransit[0]  := 95.0;
+  FPC_LeverPitchPositionTransit[1]  := 9;     FPC_LeverPitchValuesTransit[1]  := 95.0;
+  FPC_LeverPitchPositionTransit[2]  := 8;     FPC_LeverPitchValuesTransit[2]  := 95.0;
+  FPC_LeverPitchPositionTransit[3]  := 7;     FPC_LeverPitchValuesTransit[3]  := 95.0;
+  FPC_LeverPitchPositionTransit[4]  := 6;     FPC_LeverPitchValuesTransit[4]  := 95.0;
+  FPC_LeverPitchPositionTransit[5]  := 5;     FPC_LeverPitchValuesTransit[5]  := 95.0;
+  FPC_LeverPitchPositionTransit[6]  := 4;     FPC_LeverPitchValuesTransit[6]  := 95.0;
+  FPC_LeverPitchPositionTransit[7]  := 3.5;   FPC_LeverPitchValuesTransit[7]  := 79.51;
+  FPC_LeverPitchPositionTransit[8]  := 3;     FPC_LeverPitchValuesTransit[8]  := 66.26;
+  FPC_LeverPitchPositionTransit[9]  := 2;     FPC_LeverPitchValuesTransit[9]  := 39.75;
+  FPC_LeverPitchPositionTransit[10] := 1;     FPC_LeverPitchValuesTransit[10] := 13.25;
   FPC_LeverPitchPositionTransit[11] := 0.5;   FPC_LeverPitchValuesTransit[11] := 00.0;
   FPC_LeverPitchPositionTransit[12] := 0;     FPC_LeverPitchValuesTransit[12] := 00.0;
 end;
@@ -612,6 +622,33 @@ begin
     begin
       ActualPitch   := FPC_LeverPitchValuesManouver[i];
       SetpointPitch := FPC_LeverPitchValuesManouver[i];
+      Break;
+    end;
+  end;
+
+  Listener.TriggerEvents(Self,epPCSCPPLeverPitch, ActualPitch);
+end;
+
+procedure TCPP.SetLeverPitchTransit(const Value: Double);
+var
+  i : Integer;
+  epsilon : Double;
+begin
+  if FLeverPitch = Value then
+    exit;
+
+  FLeverPitch := Value;
+
+  ActualPitch   := 0;
+  SetpointPitch := 0;
+  epsilon       := 0.01;
+
+  for i := 0 to High(FPC_LeverPitchValuesTransit) do
+  begin
+    if Abs(FPC_LeverPitchPositionTransit[i] - Value) < epsilon then
+    begin
+      ActualPitch   := FPC_LeverPitchValuesTransit[i];
+      SetpointPitch := FPC_LeverPitchValuesTransit[i];
       Break;
     end;
   end;
@@ -647,24 +684,21 @@ end;
 
 procedure TCPP.SetPitchInManual(const aValue: Double);
 begin
-//  if not Failure then
-//  begin
-    if aValue > 0 then
-    begin
-      if SetpointPitch < 95 then
-        SetpointPitch := SetpointPitch + aValue
-      else
-        SetpointPitch := 95;
-    end
+  if aValue > 0 then
+  begin
+    if SetpointPitch < 95 then
+      SetpointPitch := SetpointPitch + aValue
     else
-    if aValue < 0 then
-    begin
-      if SetpointPitch > -95 then
-        SetpointPitch := SetpointPitch + aValue
-      else
-        SetpointPitch := -95;
-    end;
-//  end;
+      SetpointPitch := 95;
+  end
+  else
+  if aValue < 0 then
+  begin
+    if SetpointPitch > -95 then
+      SetpointPitch := SetpointPitch + aValue
+    else
+      SetpointPitch := -95;
+  end;
 end;
 
 procedure TCPP.SetPitchNotZero(const Value: Boolean);

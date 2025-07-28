@@ -94,6 +94,8 @@ type
     procedure btnLamp_TestMouseDown(Sender: TObject; Button: TMouseButton;Shift: TShiftState; X, Y: Integer);
     procedure btnLamp_TestMouseUp(Sender: TObject; Button: TMouseButton;Shift: TShiftState; X, Y: Integer);
     procedure btnAlarm_AcceptClick(Sender: TObject);
+    procedure btnTransitClick(Sender: TObject);
+    procedure btnManoeuvreClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -130,7 +132,7 @@ var
 
 implementation
 
-  uses uPCSSystem, uAlarmPCS;
+  uses uPCSSystem, uAlarmPCS, MainForm;
 
 {$R *.dfm}
 
@@ -193,6 +195,8 @@ begin
 end;
 
 procedure Tfrm_GeneralPanel.btnModeClick(Sender: TObject);
+var
+  aPortStarboard: string;
 begin
   if RemoteAutoCheck then
   begin
@@ -208,6 +212,36 @@ begin
       imgTransit.Picture.LoadFromFile(fIndikatorOn);
       PCSSystem.Mode(False);
     end;
+  end;
+end;
+
+procedure Tfrm_GeneralPanel.btnManoeuvreClick(Sender: TObject);
+begin
+  if RemoteAutoCheck then
+  begin
+    FTransit  := False;
+    FManouvre := True;
+    FManouvre_Flashing := True;
+    imgManouvre.Picture.LoadFromFile(fIndikatorOn);
+    PCSSystem.ModeManouver(C_PCS_ME_PORTS, True);
+
+    PCSSystem.Manouver := True;
+    PCSSystem.Transit  := False;
+  end
+end;
+
+procedure Tfrm_GeneralPanel.btnTransitClick(Sender: TObject);
+begin
+  if RemoteAutoCheck then
+  begin
+    FTransit  := True;
+    FManouvre := False;
+    FTransit_Flashing := True;
+    imgTransit.Picture.LoadFromFile(fIndikatorOn);
+    PCSSystem.ModeTransit(C_PCS_ME_PORTS, False);
+
+    PCSSystem.Transit  := True;
+    PCSSystem.Manouver := False;
   end;
 end;
 
