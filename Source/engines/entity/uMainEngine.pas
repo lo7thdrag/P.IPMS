@@ -57,7 +57,7 @@ type
     FAvgTempB,
     FCompProbA,
     FCompProbB,
-    FAlarmPropulsionCheck : Double;
+    FAlarmPropulsionCheck, FDIGGOVSetPointSpeed : Double;
 
     FLeverControl : Integer;
     FSpeedState : Integer;
@@ -178,6 +178,7 @@ type
     procedure SetSTCInManual(const Value: Integer);
     procedure Set2TCInManual(const Value: Boolean);
 
+    procedure SetDIGGOVSetPointSpeed(const Value: Double);
     procedure SetSetpointSpeed(const Value: Double);
     procedure SetLeverSpeed(const Value: Double);
     procedure SetLeverSpeedTransit(const Value: Double);
@@ -384,6 +385,7 @@ type
     property PC_Alarms[i : Integer]: Boolean read GetPC_Alarms write SetPC_Alarms;
     property PC_SafetiesStop[i : Integer]: Boolean read GetPC_SafetiesStop write SetPC_SafetiesStop;
 
+    property DIGGOVSetPointSpeed : Double read FDIGGOVSetPointSpeed write SetDIGGOVSetPointSpeed;
     property SetPointSpeed : Double read FSetPointSpeed write SetSetPointSpeed;
     property LeverSpeed : Double read FLeverSpeed write SetLeverSpeed;
     property LeverSpeedTransit : Double read FLeverSpeedTransit write SetLeverSpeedTransit;
@@ -540,6 +542,7 @@ begin
 
     calcActualSpeed;
     Speed := ActualSpeed;
+    DIGGOVSetPointSpeed := ActualSpeed;
   end;
 
   calcDelayActualSpeed;
@@ -692,7 +695,7 @@ end;
 procedure TMainEngine.calcExhaustGasTemp(aTemp: Double);
 var
   i : Integer;
-  ValueAvgTempA, ValueAvgTempB, ValueComProbA, ValueComProbB, TotalDevA, TotalDevB : Double;
+  ValueAvgTempA, ValueAvgTempB : Double;
 begin
   ValueAvgTempA := 0;
   ValueAvgTempB := 0;
@@ -709,23 +712,11 @@ begin
   AvgTempA := Round(ValueAvgTempA/10);
   AvgTempB := Round(ValueAvgTempB/10);
 
-  TotalDevA := 0;
-  TotalDevB := 0;
-
   for i := 0 to 9 do
   begin
     DevTempExhCylA[i] := (TempExhCylA[i] - AvgTempA)*10;
     DevTempExhCylB[i] := (TempExhCylB[i] - AvgTempB)*10;
-
-    TotalDevA := TotalDevA + Abs(DevTempExhCylA[i]);
-    TotalDevB := TotalDevB + Abs(DevTempExhCylB[i]);
   end;
-
-  ValueComProbA := TotalDevA /10;
-  ValueComProbB := TotalDevB /10;
-
-  CompProbA := Min(100, Round(35 + (ValueComProbA / 5)));
-  CompProbB := Min(100, Round(35 + (ValueComProbB / 5)));
 end;
 
 procedure TMainEngine.calcFuelMainEngine(aRPM: Double);
@@ -781,11 +772,13 @@ begin
   if aRPM < 400 then
   begin
     TCOutlLOTempA := Random(3)+35;
-    TempTCInletA := Random(3)+35;
+    TempTCInletA  := Random(3)+35;
     TempTCOutletA := Random(3)+35;
     TCOutlLOTempB := Random(3)+35;
-    TempTCInletB := Random(3)+35;
+    TempTCInletB  := Random(3)+35;
     TempTCOutletB := Random(3)+35;
+    CompProbA     := Random(3)+35;
+    CompProbB     := Random(3)+35;
   end
   else if (aRPM >= 400) and (aRPM < 700) then
   begin
@@ -795,6 +788,8 @@ begin
     TCOutlLOTempB := Random(10)+40;
     TempTCInletB := Random(30)+80;
     TempTCOutletB := Random(100)+100;
+    CompProbA     := Random(3)+35;
+    CompProbB     := Random(3)+35;
   end
   else if (aRPM >= 700) and (aRPM < 1000) then
   begin
@@ -804,6 +799,8 @@ begin
     TCOutlLOTempB := Random(10)+40;
     TempTCInletB := Random(20)+80;
     TempTCOutletB := Random(100)+200;
+    CompProbA     := Random(3)+35;
+    CompProbB     := Random(3)+35;
   end
   else if (aRPM >= 1000) then
   begin
@@ -813,6 +810,8 @@ begin
     TCOutlLOTempB := Random(10)+50;
     TempTCInletB := Random(20)+90;
     TempTCOutletB := Random(100)+300;
+    CompProbA     := Random(3)+35;
+    CompProbB     := Random(3)+35;
   end;
 end;
 
@@ -822,21 +821,21 @@ begin
   begin
     StartingAir := Random(30)/10;
     ControlAir := RandomRange(68,70)/10;            // nilai awal (60,70)
-    TCAirSeal := 0;
+    TCAirSeal := 0.1;
     TCLOPressInlet := 0;         // awalnya di comment
-    PressAirInlet := 0;
+    PressAirInlet := 0.3;
     PressFWHTInlet := RandomRange(1,25)/10;
     PressSeaWaterOutlet := 0.1;
     LOPressInlet := -0.1;
     PressFOInlet := 0.1;
   end
-  else if aRPM >= 400 then                     // nilai awal (60,70)
+  else if aRPM >= 400 then
   begin
     StartingAir := RandomRange(250,350)/10;
     ControlAir := RandomRange(68,70)/10;
     TCAirSeal := 0;
     TCLOPressInlet := (30)/10;
-    PressAirInlet := 0;
+    PressAirInlet := 0.4;
     PressFWHTInlet := RandomRange(25,35)/10;
     PressSeaWaterOutlet := Random(7)/10 + 1;
     LOPressInlet := RandomRange(40,50)/10;
@@ -1438,7 +1437,7 @@ begin
     Exit;
 
   FCompProbA := Value;
-  Listener.TriggerEvents(Self,epPCSMECompProbA,Value);
+  Listener.TriggerEvents(Self,epPCSMECompProbA,Value*10);
 end;
 
 procedure TMainEngine.SetCompProbB(const Value: Double);
@@ -1447,7 +1446,7 @@ begin
     Exit;
 
   FCompProbB := Value;
-  Listener.TriggerEvents(Self,epPCSMECompProbB,Value);
+  Listener.TriggerEvents(Self,epPCSMECompProbB,Value*10);
 end;
 
 procedure TMainEngine.SetConRodBearingTempHigh(const Value: Boolean);
@@ -2408,6 +2407,15 @@ begin
 
   FSpeed := Value;
   Listener.TriggerEvents(Self,epPCSMESpeed,Value);
+end;
+
+procedure TMainEngine.SetDIGGOVSetPointSpeed(const Value: Double);
+begin
+  if FDIGGOVSetPointSpeed = Value then
+     Exit;
+
+  FDIGGOVSetPointSpeed := Value;
+  Listener.TriggerEvents(Self,epPCSDIGGOVSpeedSetPoint,Value);
 end;
 
 procedure TMainEngine.SetStartingAir(const Value: Double);

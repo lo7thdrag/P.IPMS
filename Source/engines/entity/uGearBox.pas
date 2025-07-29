@@ -31,7 +31,7 @@ type
     FCtrlOilPressIn,
     FCtrlOilPressOut,
     FLOPressInlet,
-    FLOTempInlet : Double;
+    FLOTempInlet: Double;
 
     FLeverShaft, FLeverShaftTransit: Double;
 
@@ -331,6 +331,7 @@ begin
 
   FCtrlOilPressOut := Value;
   Listener.TriggerEvents(Self,epPCSGBCtrlOilPressOut,Value);
+  Listener.TriggerEvents(Self,epPCSGBDisengage,Value);
 end;
 
 procedure TGearBox.SetShaftValue;
@@ -465,6 +466,8 @@ begin
 
   FLOPressInlet := Value;
   Listener.TriggerEvents(Self,epPCSGBLOPressInlet,Value);
+  Listener.TriggerEvents(Self,epPCSGBStandbyStart,Value);
+  Listener.TriggerEvents(Self,epPCSGBEmergencyStop,Value);
 end;
 
 procedure TGearBox.SetLOPressInletLow(const Value: Boolean);

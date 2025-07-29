@@ -429,7 +429,7 @@ type
       epPCSMEPressAirInlet, epPCSMETempSuperChargAir, epPCSMEPressFOInlet, epPCSMETempFWHTOutlet,
       epPCSMETempFWHTInlet, epPCSMEPressFWHTInlet, epPCSMEPressSeaWaterOutlet, epPCSMELOPressInlet,
       epPCSMELOTempInlet, epPCSMEAlarmPropulsionCheck,
-      epPCSSpeedState,
+      epPCSSpeedState, epPCSDIGGOVSpeedSetPoint,
 
       epPCSMEAvgTempA, epPCSMEAvgTempB, epPCSMECompProbA, epPCSMECompProbB,
       epPCSMETempExhCylA1, epPCSMETempExhCylA2, epPCSMETempExhCylA3, epPCSMETempExhCylA4, epPCSMETempExhCylA5,
@@ -515,7 +515,7 @@ type
       epPCSGBClutched, epPCSGBDeclutched, epPCSGBSafetyDeclutch,
       epPCSGBFailure, epPCSGBFailurePS, epPCSGBFailureSB,
       epPCSGBShaftPowerLimited, epPCSGBShaftPowerLimitedPS, epPCSGBShaftPowerLimitedSB,
-      epPCSGBClutchInterlocks,
+      epPCSGBClutchInterlocks, epPCSGBStandbyStart, epPCSGBEmergencyStop, epPCSGBDisengage,
 
       //Alarm
       epPCSAlarms, epPCSAlarmsPS, epPCSAlarmsSB,

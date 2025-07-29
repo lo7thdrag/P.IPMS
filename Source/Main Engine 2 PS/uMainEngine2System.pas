@@ -914,7 +914,7 @@ begin
     end;
     epPCSCPPSetPointPitch :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      if rec.PortStaboardID = C_PCS_CPP_PORTS then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
       end;

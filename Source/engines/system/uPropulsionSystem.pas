@@ -421,16 +421,16 @@ procedure TPropulsionSystem.setGearboxPressValue(aPortStarboard: string;
 begin
   if aPortStarboard = C_PCS_PORTS then
   begin
-    GB[0].CtrlOilPressIn := Random(10)/10 + aPress;
+    GB[0].CtrlOilPressIn  := 15.9 + (Random(10)/100 + aPress);
     GB[0].CtrlOilPressOut := Random(10)/10 + aPress;
-    GB[0].LOPressInlet := Random(10)/10 + aPress;
+    GB[0].LOPressInlet    := 3.45 + (Random(10)/100 + aPress);
   end
   else
   if aPortStarboard = C_PCS_STARBOARD then
   begin
-    GB[1].CtrlOilPressIn := Random(10)/10 + aPress;
+    GB[1].CtrlOilPressIn  := 15.9 + (Random(10)/100 + aPress);
     GB[1].CtrlOilPressOut := Random(10)/10 + aPress;
-    GB[1].LOPressInlet := Random(10)/10 + aPress;
+    GB[1].LOPressInlet    := 3.45 + (Random(10)/100 + aPress);
   end;
 end;
 

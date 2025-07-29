@@ -1411,7 +1411,7 @@ begin
     epPCSCPPDelayActualPitch, epPCSCPPServoOil, epPCSCPPStaticHub, epPCSCPPHydrOil,
     epPCSGBDelayShaftSpeed, epPCSGBPLB1, epPCSGBPLB2, epPCSGBThrAH, epPCSGBTHrAS,
     epPCSGBCtrlOilPressIn, epPCSGBCtrlOilPressOut, epPCSGBLOPressInlet, epPCSGBLOTempInlet,
-    epPCSGBShaftTemp,
+    epPCSGBShaftTemp, epPCSGBStandbyStart, epPCSGBEmergencyStop, epPCSGBDisengage,
     epRudderValuePS, epRudderValueSB:
     begin
       if aElement.ElementType = eltSSE then
@@ -1423,7 +1423,7 @@ begin
     end;
 
     epPCSMELeverSpeed, epPCSMELeverSpeedPS, epPCSMELeverSpeedSB, epPCSMESetPointSpeed,
-    epPCSMESpeed, epPCSMESpeedPS, epPCSMESpeedSB, epPCSMETCLOPressInlet,
+    epPCSMESpeed, epPCSDIGGOVSpeedSetPoint, epPCSMESpeedPS, epPCSMESpeedSB, epPCSMETCLOPressInlet,
     epPCSMEPressAirInlet, epPCSMETurboChargerSpeedA, epPCSMETurboChargerSpeedB, epPCSMETCOutlLOTempA,
     epPCSMETCOutlLOTempB, epPCSMETempTCInletA, epPCSMETempTCInletB, epPCSMETempTCOutletA,
     epPCSMETempTCOutletB, epPCSMETempSuperChargAir,  epPCSMETempFWHTOutlet, epPCSMETempFWHTInlet,
@@ -1573,13 +1573,13 @@ begin
     epPCSCPPDelayActualPitch, epPCSCPPServoOil, epPCSCPPStaticHub, epPCSCPPHydrOil,
     epPCSGBDelayShaftSpeed, epPCSGBPLB1, epPCSGBPLB2, epPCSGBThrAH, epPCSGBTHrAS,
     epPCSGBCtrlOilPressIn, epPCSGBCtrlOilPressOut, epPCSGBLOPressInlet, epPCSGBLOTempInlet,
-    epPCSGBShaftTemp,
+    epPCSGBShaftTemp, epPCSGBStandbyStart, epPCSGBEmergencyStop, epPCSGBDisengage,
     epRudderValuePS, epRudderValueSB:
     begin
       setPCSSSEElementID(recCmd.PortStaboardID, recCmd.ValueDouble, recCmd.CommandPropsID);
     end;
 
-    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSMETCLOPressInlet, epPCSMESpeed,
+    epPCSMELeverSpeed, epPCSMESetPointSpeed, epPCSMETCLOPressInlet, epPCSMESpeed, epPCSDIGGOVSpeedSetPoint,
     epPCSMEPressAirInlet, epPCSMETurboChargerSpeedA, epPCSMETurboChargerSpeedB, epPCSMETCOutlLOTempA,
     epPCSMETCOutlLOTempB, epPCSMETempTCInletA, epPCSMETempTCInletB, epPCSMETempTCOutletA,
     epPCSMETempTCOutletB, epPCSMETempSuperChargAir,  epPCSMETempFWHTOutlet, epPCSMETempFWHTInlet,

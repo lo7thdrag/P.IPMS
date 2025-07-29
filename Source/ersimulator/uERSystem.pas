@@ -754,10 +754,11 @@ begin
     epPCSCPPActualPitch,
     epPCSCPPServoOil, epPCSCPPStaticHub, epPCSCPPHydrOil,
 
-    epPCSGBShaftSpeed,
+    epPCSGBShaftSpeed, epPCSDIGGOVSpeedSetPoint,
 
     epPCSGBShaftTemp, epPCSGBLubOil, epPCSGBCtrlOilPressIn,
     epPCSGBCtrlOilPressOut, epPCSGBLOPressInlet, epPCSGBLOTempInlet,
+    epPCSGBStandbyStart, epPCSGBEmergencyStop, epPCSGBDisengage,
     epPCSGBPLB1, epPCSGBPLB2,
     epPCSGBThrAH, epPCSGBTHrAS:
     begin

@@ -113,7 +113,6 @@ begin
     else
     if Order = epRudderValuePS then
       value := '5610E0024A';
-
   end
   else
   if PortStaboardID = C_PCS_ME_STARBOARD then
@@ -161,7 +160,16 @@ begin
       value := '2410A0001F'
     else
     if Order = epPCSGBShaftTemp then
-      value := '2440A0006A';
+      value := '2440A0006A'
+    else
+    if Order = epPCSGBStandbyStart then
+      value := '2410A0001B'
+    else
+    if Order = epPCSGBEmergencyStop then
+      value := '2410A0001S'
+    else
+    if Order = epPCSGBDisengage then
+      value := '2410A0001T';
   end
   else
   if PortStaboardID = C_PCS_GB_STARBOARD then
@@ -195,6 +203,15 @@ begin
     else
     if Order = epPCSGBShaftTemp then
       value := '2440A0005A'
+    else
+    if Order = epPCSGBStandbyStart then
+      value := '2410A0002B'
+    else
+    if Order = epPCSGBEmergencyStop then
+      value := '2410A0002S'
+    else
+    if Order = epPCSGBDisengage then
+      value := '2410A0002T';
   end
   else
   if PortStaboardID = C_PCS_CPP_PORTS then
@@ -652,7 +669,10 @@ begin
       value := '2331E0011154'
     else
     if Order = epPCSMEAlarmPropulsionCheck then
-      value := '';
+      value := ''
+    else
+    if Order = epPCSDIGGOVSpeedSetPoint then
+      value := '2331E0011229';
   end
   else
   if PortStaboardID = C_PCS_ME_STARBOARD then
@@ -904,7 +924,10 @@ begin
       value := '2331E0012154'
     else
     if Order = epPCSMEAlarmPropulsionCheck then
-      value := '';
+      value := ''
+    else
+    if Order = epPCSDIGGOVSpeedSetPoint then
+      value := '2331E0012229';
   end
   else
   if PortStaboardID = C_PCS_CPP_PORTS then
