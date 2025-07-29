@@ -154349,7 +154349,7 @@ object frmShorePanel: TfrmShorePanel
         Height = 360
         MaxValue = 750.000000000000000000
         MinValue = 100.000000000000000000
-        Position = 200.000000000000000000
+        Position = 550.000000000000000000
         Angle = 90
         AngleOffset = 90
         Spacing = 10
@@ -154396,9 +154396,8 @@ object frmShorePanel: TfrmShorePanel
         Top = 0
         Width = 360
         Height = 360
-        MaxValue = 1050.000000000000000000
-        MinValue = 100.000000000000000000
-        Position = 100.000000000000000000
+        MaxValue = 400.000000000000000000
+        MinValue = -400.000000000000000000
         Decimals = 0
         Angle = 90
         AngleOffset = 90
@@ -154521,6 +154520,36 @@ object frmShorePanel: TfrmShorePanel
         ParentColor = False
         ParentFont = False
       end
+      object Label5: TLabel
+        Left = 72
+        Top = 123
+        Width = 49
+        Height = 16
+        Caption = 'IMPORT'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 152
+        Top = 59
+        Width = 56
+        Height = 16
+        Caption = 'EKSPORT'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
     end
     object VrShoreMode: TVrRotarySwitch
       Left = 906
@@ -154551,7 +154580,9 @@ object frmShorePanel: TfrmShorePanel
       Width = 140
       Height = 140
       SwitchPositions.Strings = (
-        'LT')
+        'L1'
+        'L2'
+        'L3')
       SwitchAngleStart = 180
       WinchColor = clWhite
       SwitchColor = clBlack
@@ -154630,7 +154661,7 @@ object frmShorePanel: TfrmShorePanel
     Top = 290
   end
   object tmrSync: TTimer
-    Interval = 200
+    Interval = 100
     OnTimer = tmrSyncTimer
     Left = 1192
     Top = 192

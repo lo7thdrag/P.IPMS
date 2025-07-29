@@ -35504,7 +35504,7 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         ColorZone3 = clBlack
         Percent1 = 20
         Percent2 = 50
-        Labels = 0
+        Labels = 2
         LabelsOffset = -35
         NeedleLength = 120
         NeedleBaseWidth = 10
@@ -35530,45 +35530,6 @@ object frmGeneratorPanel: TfrmGeneratorPanel
         Width = 38
         Height = 16
         Caption = 'FAGET'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object lbl8: TLabel
-        Left = 41
-        Top = 173
-        Width = 16
-        Height = 16
-        Caption = '55'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object lbl9: TLabel
-        Left = 77
-        Top = 78
-        Width = 16
-        Height = 16
-        Caption = '60'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object lbl10: TLabel
-        Left = 172
-        Top = 38
-        Width = 16
-        Height = 16
-        Caption = '65'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13

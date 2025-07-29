@@ -29,9 +29,6 @@ type
     pnlHz: TPanel;
     VraFrequency: TVrAngularMeter;
     lbl7: TLabel;
-    lbl8: TLabel;
-    lbl9: TLabel;
-    lbl10: TLabel;
     lbl11: TLabel;
     pnlV: TPanel;
     VraV: TVrAngularMeter;
@@ -1542,7 +1539,7 @@ begin
     'Information 1/2',
     'Power : Waiting',
     'Engine : Waiting',
-    'Generator freq >20     = 000.00 Hz',
+    'Generator freq >20     = ' + FloatToStr(Generator.Frequency) +' Hz',
     'Bus frequency >23      = 059.99 Hz',
     'Engine speed >33       = 000000 rpm',
     'Speed sign sum > 2058  = 000000',
@@ -1559,7 +1556,7 @@ begin
     'Information 2/2',
     'Power : Waiting',
     'Engine : Waiting',
-    'Generator freq >20     = 000.00 Hz',
+    'Generator freq >20     = ' + FloatToStr(Generator.Frequency) +' Hz',
     'Freq G >1111           = 000020%',
     'Freq P >1112           = 000080%',
     'Freq I >1113           = 000020%',

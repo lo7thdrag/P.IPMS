@@ -615,7 +615,11 @@ begin
       end;
 
       if Assigned(frmShorePanel) then
+      begin
+//        GeneratorTemp.Power := Value;
+//        frmShorePanel.generator := GeneratorTemp;
         frmShorePanel.VraPower.Position := Value;
+      end;
     end;
     epPMSFrequency:
     begin
@@ -628,7 +632,11 @@ begin
       end;
 
       if Assigned(frmShorePanel) then
+      begin
+//        GeneratorTemp.Frequency := Value;
+//        frmShorePanel.Generator := GeneratorTemp;
         frmShorePanel.lblFrequency.Caption := FloatToStr(value);
+      end;
     end;
     epPMSVoltage:
     begin
@@ -647,7 +655,9 @@ begin
       end;
 
       if Assigned(frmShorePanel) then
+      begin
         frmShorePanel.lblVoltageBusbar.Caption := FloatToStr(value);
+      end;
     end;
     epPMSCurrent:
     begin

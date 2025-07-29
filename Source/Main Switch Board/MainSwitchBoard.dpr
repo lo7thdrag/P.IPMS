@@ -25,8 +25,10 @@ uses
   uTCPServer in '..\network\uTCPServer.pas',
   uGenerator in '..\engines\entity\uGenerator.pas',
   uEntity in '..\engines\entity\uEntity.pas',
-  uConsumption in '..\engines\entity\uConsumption.pas',
-  uNetworkManagerTimer in '..\network\uNetworkManagerTimer.pas';
+  uConsumption in '..\engines\entity\uConsumption.pas' {/  uNetworkManagerTimer in '..\network\uNetworkManagerTimer.pas';},
+  uSwitchboard in '..\engines\entity\uSwitchboard.pas';
+
+//  uNetworkManagerTimer in '..\network\uNetworkManagerTimer.pas';
 
 {$R *.res}
 

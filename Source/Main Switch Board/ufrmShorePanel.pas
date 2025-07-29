@@ -72,6 +72,8 @@ type
     img22: TImage;
     img23: TImage;
     tmrSync: TTimer;
+    Label5: TLabel;
+    Label6: TLabel;
     procedure ImgIndicatorCBOpenClick(Sender: TObject);
     procedure ImgIndicatorCBCloseClick(Sender: TObject);
     procedure tmrAmpereTimer(Sender: TObject);
@@ -87,6 +89,7 @@ type
     procedure IndicatorSync;
   public
     OrderAmpere : Double;
+    Generator : TGenerator;
 
     procedure UpdateForm(Switchboard : TSwitchboard);
   end;
@@ -103,7 +106,15 @@ uses
 
 procedure TfrmShorePanel.FormCreate(Sender: TObject);
 begin
-  IndicatorSync;
+  if not MainSwitchBoardSystem.Freezed then
+  begin
+    IndicatorSync;
+  end;
+
+  {Create Generator Temporary}
+  Generator := TGenerator.Create;
+  Generator.Identifier := MainSwitchBoardSystem.IdGenerator;
+  Generator.GeneratorState := 1;
 end;
 
 procedure TfrmShorePanel.ImgIndicatorCBCloseClick(Sender: TObject);
@@ -188,21 +199,18 @@ begin
   if Switchboard.ShoreInterconnectionMode = 1 then
   begin
     VrShoreMode.SwitchPosition := 0;
-//    ImgIndicatorCBClose.Visible := True;
-//    ImgIndicatorCBOpen.Visible := True;
   end
   else if Switchboard.ShoreInterconnectionMode = 2 then
   begin
     VrShoreMode.SwitchPosition := 1;
-//    ImgIndicatorCBClose.Visible := True;
-//    ImgIndicatorCBOpen.Visible := True;
+    MainSwitchBoardSystem.CBShore(False);
+    ImgIndicatorCBOpen.Visible := True;
+    ImgIndicatorCBClose.Visible := True;
   end
   else
   begin
     VrShoreMode.SwitchPosition := 2;
     MainSwitchBoardSystem.CBShore(True);
-//    ImgIndicatorCBClose.Visible := False;
-//    ImgIndicatorCBOpen.Visible := True;
   end;
 
   if Switchboard.ShoresbCircuitBreaker = True then
@@ -215,7 +223,6 @@ begin
     ImgIndicatorCBClose.Visible := True;
     ImgIndicatorCBOpen.Visible := False;
   end;
-
 end;
 
 procedure TfrmShorePanel.VrShoreModeChange(Sender: TObject);
@@ -227,9 +234,17 @@ begin
   else if VrShoreMode.SwitchPosition = 1 then
   begin
     MainSwitchBoardSystem.ShoreMode(2);
+    MainSwitchBoardSystem.CBShore(False);
+    ImgIndicatorCBOpen.Visible := True;
+    ImgIndicatorCBClose.Visible := True;
   end
   else
+  begin
     MainSwitchBoardSystem.ShoreMode(3);
+    MainSwitchBoardSystem.CBShore(True);
+    ImgIndicatorCBOpen.Visible := True;
+    ImgIndicatorCBClose.Visible := False;
+  end;
 
 end;
 
