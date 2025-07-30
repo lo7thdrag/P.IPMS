@@ -189,9 +189,9 @@ type
     pnl3: TPanel;
     lbl8: TLabel;
     lbl4: TLabel;
-    rb1: TRadioButton;
+    rbImportShore: TRadioButton;
     lbl5: TLabel;
-    rb2: TRadioButton;
+    rbEksportShore: TRadioButton;
     lbl7: TLabel;
     lbl11: TLabel;
     pnl5: TPanel;
@@ -202,9 +202,9 @@ type
     btnStartGenShore: TButton;
     btnStopGenShore: TButton;
     pnlShoreExport: TPanel;
-    lbl12: TLabel;
+    lblBebanShore: TLabel;
     lbl13: TLabel;
-    TrackBar1: TTrackBar;
+    trckbrBebanShore: TTrackBar;
     btn2: TButton;
 
     procedure Gen1ModeClick(Sender: TObject);
@@ -234,7 +234,7 @@ type
     procedure emergency(Sender: TObject);
 
   private
-    FwdPosition, AftPosition : Integer;
+    FwdPosition, AftPosition, ShorePosition : Integer;
     PwrFlagMode : Integer;
 
     procedure EnginePropertyIntChange(Sender : TObject; PropsID : E_PropsID;Value : Integer);overload;
@@ -570,6 +570,10 @@ begin
       SetValueInt(C_SWITCHBOARD, 3, 2, epPMSMsbShoreMode)
     else if TRadioButton(Sender).Name = 'rbAutShore' then
       SetValueInt(C_SWITCHBOARD, 3, 3, epPMSMsbShoreMode)
+    else if TRadioButton(Sender).Name = 'rbImportShore' then
+      pnlShoreImport.BringToFront
+    else if TRadioButton(Sender).Name = 'rbEksportShore' then
+      pnlShoreExport.BringToFront
   end;
 end;
 
@@ -1141,13 +1145,16 @@ procedure TfrmPMSSystemPanel.trckbrBebanChange(Sender: TObject);
 begin
   FwdPosition := -1 * (trckbrBebanFwd.Position);
   AftPosition := -1 * (trckbrBebanAft.Position);
+  ShorePosition := (trckbrBebanShore.Position);
 
-  trckbrBebanFwd.Position := -1 * FwdPosition;
-  trckbrBebanAft.Position := -1 * AftPosition;
+//  trckbrBebanFwd.Position := -1 * FwdPosition;
+//  trckbrBebanAft.Position := -1 * AftPosition;
+//  trckbrBebanShore.Position := -1 * ShorePosition;
 
   lblBeban1.Caption := IntToStr(FwdPosition);
   lblBeban2.Caption := IntToStr(AftPosition);
   lblBesarbeban.Caption := IntToStr(FwdPosition + AftPosition);
+  lblBebanShore.Caption := IntToStr(FwdPosition + AftPosition);
 
   SetPowerConnection(lblCBCloseInn1.Color, lblCBCloseInn2.Color)
 end;
@@ -1166,6 +1173,10 @@ begin
   Power := ERSystem.ERManager.EngineRoom.getPMSSystem.GetPower('Power AFT');
   power.PowerMode := PwrFlagMode;
   Power.PowerConsmr := AftPosition;
+
+  Power := ERSystem.ERManager.EngineRoom.getPMSSystem.GetPower('Power Shore');
+  power.PowerMode := PwrFlagMode;
+  Power.PowerConsmr := ShorePosition;
 end;
 
 end.

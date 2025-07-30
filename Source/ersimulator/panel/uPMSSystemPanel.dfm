@@ -1157,8 +1157,8 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentFont = False
       end
       object rbManGen3: TRadioButton
-        Left = 28
-        Top = 60
+        Left = 27
+        Top = 64
         Width = 15
         Height = 17
         Font.Charset = DEFAULT_CHARSET
@@ -2453,7 +2453,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
     end
     object pnl3: TPanel
       Left = 30
-      Top = 558
+      Top = 559
       Width = 307
       Height = 215
       BevelOuter = bvNone
@@ -2512,6 +2512,74 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+      end
+      object pnlShoreExport: TPanel
+        Left = 12
+        Top = 89
+        Width = 284
+        Height = 121
+        BevelOuter = bvNone
+        Color = 3749426
+        ParentBackground = False
+        TabOrder = 4
+        object lblBebanShore: TLabel
+          Left = 114
+          Top = 5
+          Width = 49
+          Height = 39
+          Alignment = taCenter
+          AutoSize = False
+          Caption = '0'
+          Color = clBtnFace
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -32
+          Font.Name = 'Agency FB'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+        object lbl13: TLabel
+          Left = 167
+          Top = 23
+          Width = 16
+          Height = 13
+          Caption = 'Kw'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object trckbrBebanShore: TTrackBar
+          Left = 16
+          Top = 45
+          Width = 249
+          Height = 41
+          Max = 250
+          Frequency = 50
+          TabOrder = 0
+          ThumbLength = 15
+          TickMarks = tmBoth
+          OnChange = trckbrBebanChange
+        end
+        object btn2: TButton
+          Tag = 10
+          Left = 72
+          Top = 89
+          Width = 141
+          Height = 25
+          Caption = 'Apply'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+          OnClick = btnApplyClick
+        end
       end
       object pnlShoreImport: TPanel
         Left = 12
@@ -2591,75 +2659,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
           OnClick = btnStopClick
         end
       end
-      object pnlShoreExport: TPanel
-        Left = 12
-        Top = 89
-        Width = 284
-        Height = 121
-        BevelOuter = bvNone
-        Color = 3749426
-        ParentBackground = False
-        TabOrder = 4
-        object lbl12: TLabel
-          Left = 121
-          Top = 5
-          Width = 42
-          Height = 39
-          Alignment = taCenter
-          AutoSize = False
-          Caption = '0'
-          Color = clBtnFace
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -32
-          Font.Name = 'Agency FB'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-        end
-        object lbl13: TLabel
-          Left = 167
-          Top = 23
-          Width = 16
-          Height = 13
-          Caption = 'Kw'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object TrackBar1: TTrackBar
-          Left = 16
-          Top = 45
-          Width = 249
-          Height = 41
-          Max = 250
-          Frequency = 50
-          TabOrder = 0
-          ThumbLength = 15
-          TickMarks = tmBoth
-          OnChange = trckbrBebanChange
-        end
-        object btn2: TButton
-          Tag = 10
-          Left = 72
-          Top = 89
-          Width = 141
-          Height = 25
-          Caption = 'Apply'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 1
-          OnClick = btnApplyClick
-        end
-      end
-      object rb1: TRadioButton
+      object rbImportShore: TRadioButton
         Left = 53
         Top = 57
         Width = 15
@@ -2675,7 +2675,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         TabStop = True
         OnClick = InterShoreModeClick
       end
-      object rb2: TRadioButton
+      object rbEksportShore: TRadioButton
         Left = 172
         Top = 57
         Width = 15

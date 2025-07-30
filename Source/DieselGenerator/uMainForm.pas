@@ -205,21 +205,39 @@ begin
   case PropsID of
     epPMSGeneratorEngineRun :
     begin
-      if DieselGeneratorSystem.Freezed then
-        Exit;
-
+//      if DieselGeneratorSystem.Freezed then
+//        Exit;
+//
       GeneratorTemp.EngineRun := Value;
-      imgStart.Visible := Value;
-      tmrRunningHours.Enabled := Value;
-      imgRunning.Visible := Value;
-      VrMainSwitch.SwitchPosition := 0;
 
 //      if not DieselGeneratorSystem.Freezed then
+//      begin
+//        GeneratorTemp.EngineRun := Value;
+//
+//        if Value then
+//        begin
+//          imgStart.Visible := Value;
+//          tmrRunningHours.Enabled := Value;
+//          imgRunning.Visible := Value;
+//          VrMainSwitch.SwitchPosition := 0;
+//          EngineSound(True);
+//        end;
+//      end;
+
+      if Value then
+      begin
+        imgStart.Visible := Value;
+        tmrRunningHours.Enabled := Value;
+        imgRunning.Visible := Value;
+        VrMainSwitch.SwitchPosition := 0;
         EngineSound(True);
+      end;
+
 
       if not GeneratorTemp.EngineRun then
       begin
         imgStop.Visible := True;
+        imgStart.Visible := False;
         tmrStop.Enabled := True;
         imgRunning.Visible := False;
         VrMainSwitch.SwitchPosition := 1;
@@ -388,10 +406,8 @@ begin
       else if Value = 0 then
       begin
         MainForm.Enabled := True;
-        if Assigned(DieselGeneratorSystem.FFormFreezed[1]) then
-          FreeAndNil(DieselGeneratorSystem.FFormFreezed[1]);
-
-        MainForm.DieselGeneratorSystemEvent(DieselGeneratorSystem, epPMSGeneratorEngineRun, True);
+        if Assigned(DieselGeneratorSystem.FFormFreezed[0]) then
+          FreeAndNil(DieselGeneratorSystem.FFormFreezed[0]);
       end;
     end;
   end;
