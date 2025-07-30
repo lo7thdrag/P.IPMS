@@ -80,6 +80,8 @@ type
     LampStatus  : array of Boolean;
     FRunningHourTemp : Integer;
     FRunningHour : Integer;
+    FLastEngineRunValue: Boolean;
+    FNeedReplayEngineRun: Boolean;
 
     procedure WndProc(var Msg: TMessage); override;
     procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
@@ -205,44 +207,37 @@ begin
   case PropsID of
     epPMSGeneratorEngineRun :
     begin
-//      if DieselGeneratorSystem.Freezed then
-//        Exit;
-//
-      GeneratorTemp.EngineRun := Value;
+    if DieselGeneratorSystem.Freezed then
+      begin
+        // Simpan nilai terakhir saat sedang freeze
+        FLastEngineRunValue := Value;
+        FNeedReplayEngineRun := True;
+        Exit;
+      end;
 
-//      if not DieselGeneratorSystem.Freezed then
-//      begin
-//        GeneratorTemp.EngineRun := Value;
-//
-//        if Value then
-//        begin
-//          imgStart.Visible := Value;
-//          tmrRunningHours.Enabled := Value;
-//          imgRunning.Visible := Value;
-//          VrMainSwitch.SwitchPosition := 0;
-//          EngineSound(True);
-//        end;
-//      end;
+      GeneratorTemp.EngineRun := Value;
 
       if Value then
       begin
-        imgStart.Visible := Value;
-        tmrRunningHours.Enabled := Value;
-        imgRunning.Visible := Value;
+        // EngineRun = True
+        imgStart.Visible := True;
+        imgStop.Visible := False;
+        tmrRunningHours.Enabled := True;
+        tmrStop.Enabled := False;
+        imgRunning.Visible := True;
         VrMainSwitch.SwitchPosition := 0;
         EngineSound(True);
-      end;
-
-
-      if not GeneratorTemp.EngineRun then
+      end
+      else
       begin
-        imgStop.Visible := True;
+        // EngineRun = False
         imgStart.Visible := False;
+        imgStop.Visible := True;
+        tmrRunningHours.Enabled := False;
         tmrStop.Enabled := True;
         imgRunning.Visible := False;
         VrMainSwitch.SwitchPosition := 1;
         EngineSound(False);
-        Exit;
       end;
     end;
 
@@ -406,8 +401,15 @@ begin
       else if Value = 0 then
       begin
         MainForm.Enabled := True;
-        if Assigned(DieselGeneratorSystem.FFormFreezed[0]) then
-          FreeAndNil(DieselGeneratorSystem.FFormFreezed[0]);
+        if Assigned(DieselGeneratorSystem.FFormFreezed[1]) then
+          FreeAndNil(DieselGeneratorSystem.FFormFreezed[1]);
+
+        // Replay jika ada event tertunda
+        if FNeedReplayEngineRun then
+        begin
+          FNeedReplayEngineRun := False;
+          DieselGeneratorSystemEvent(Self, epPMSGeneratorEngineRun, FLastEngineRunValue);
+        end;
       end;
     end;
   end;
