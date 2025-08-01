@@ -5,11 +5,13 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, uDataType, IniFiles, VrControls, VrTrackBar,
-  ComCtrls, uListener;
+  ComCtrls, uListener, CPort, NLDJoystick;
 
 var
-  LeverValuesPosition: array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
+  LeverValuesPositionManouver: array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
   LeverValuesPositionTransit : array[0..12] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0);
+
+//  LeverValuesPosition: array[0..14] of Double = (8,9,10,11,12,13,4,3,2,1,0,18,17,16,15);
 
 type
   TForm1 = class(TForm)
@@ -49,6 +51,9 @@ type
     mmoLogReceive: TMemo;
     btnLeverInServicePS: TButton;
     btnLeverInServiceSB: TButton;
+    ComPort1: TComPort;
+    tmrThrottle: TTimer;
+    Memo1: TMemo;
     procedure btnGeneralPanelStartClick(Sender: TObject);
     procedure btnPSPanelStartClick(Sender: TObject);
     procedure btnSBPanelStartClick(Sender: TObject);
@@ -82,6 +87,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnLeverInServicePSClick(Sender: TObject);
     procedure btnLeverInServiceSBClick(Sender: TObject);
+    procedure tmrThrottleTimer(Sender: TObject);
   private
     { Private declarations }
 
@@ -97,9 +103,11 @@ type
     procedure LoadSettingForm(filepath: string);
 
     function TrackbarSpeed(Position: Integer): Double;
+    function ThrottleValue(Position: Integer): Double;
   public
     { Public declarations }
-    LeverValuesPosition: array[0..18] of Double;
+    ComPort: TComPort;
+    LeverValuesPositionManouver: array[0..18] of Double;
     LeverValuesPositionTransit : array[0..12] of Double;
     counterCheck, idServoTest, idLeverTest : Integer;
     procedure LeverValuePosition;
@@ -113,6 +121,7 @@ var
   Form1: TForm1;
 
   MonitorCount : Integer;
+  SerialBuffer : string;
 
 
 implementation
@@ -275,12 +284,12 @@ end;
 
 procedure TForm1.btnTransferOverridePSClick(Sender: TObject);
 begin
-  PCSSystem.PanelThrottleTesting(C_ORD_BTN_TRANSFER_OVERRIDE_PS,True);
+  PCSSystem.TransferOverride(C_PCS_ME_PORTS,True);
 end;
 
 procedure TForm1.btnTransferOverrideSBClick(Sender: TObject);
 begin
-  PCSSystem.PanelThrottleTesting(C_ORD_BTN_TRANSFER_OVERRIDE_SB,True);
+  PCSSystem.TransferOverride(C_PCS_ME_STARBOARD,True);
 end;
 
 procedure TForm1.btnViewAllClick(Sender: TObject);
@@ -329,7 +338,12 @@ begin
 
   counterCheck := 0;
 
+  // Untuk Throttle
   LeverValuePosition;
+
+  ComPort1.Port := 'COM3';
+  ComPort1.BaudRate := br9600;
+  ComPort1.Open;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -529,34 +543,140 @@ begin
   mmo1.Lines.Add('Buffer: '+ IntToStr(PCSSystem.Network.VREngineSocket.GetBufferCount));
 end;
 
+procedure TForm1.tmrThrottleTimer(Sender: TObject);
+var
+  RawValue : Integer;
+  Rawline, TempStr, Line: string;
+  Lines: TStringList;
+  LeverIndex, i : Integer;
+  Key : string;
+  Value: Boolean;
+begin
+  if ComPort1.InputCount > 0 then
+  begin
+    SetLength(TempStr, ComPort1.InputCount);
+    ComPort1.ReadStr(TempStr, Length(TempStr));
+    SerialBuffer := SerialBuffer + TempStr;
+
+    Lines := TStringList.Create;
+    try
+      while Pos(#10, SerialBuffer) > 0 do
+      begin
+        Line := Trim(Copy(SerialBuffer, 1, Pos(#10, SerialBuffer) -1));
+        Delete(SerialBuffer, 1, Pos(#10, SerialBuffer));
+        Lines.Add(Line);
+      end;
+
+    for i := 0 to Lines.Count - 1 do
+      begin
+        Rawline := Lines[i];
+        Memo1.Lines.Add('Rawline: ' + Rawline);
+
+        if TryStrToInt(Rawline, RawValue) then
+        begin
+          LeverIndex := VarEnsureRange(RawValue, 0, 18);
+
+          if PCSSystem.Manouver then
+          begin
+            lblLeverPS.Caption := FloatToStr(LeverValuesPositionManouver[LeverIndex]);
+
+            // Port side  (kiri)
+            PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverValuesPositionManouver[LeverIndex], True);
+            PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverValuesPositionManouver[LeverIndex], True);
+            PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverValuesPositionManouver[LeverIndex], True);
+
+            // Starboard side (kanan)
+            PCSSystem.LeverSpeed(C_PCS_ME_STARBOARD, LeverValuesPositionManouver[LeverIndex], True);
+            PCSSystem.LeverPitch(C_PCS_CPP_STARBOARD, LeverValuesPositionManouver[LeverIndex], True);
+            PCSSystem.LeverShaft(C_PCS_GB_STARBOARD, LeverValuesPositionManouver[LeverIndex], True);
+          end
+          else if PCSSystem.Transit then
+          begin
+            lblLeverPS.Caption := FloatToStr(LeverValuesPositionTransit[LeverIndex]);
+
+            // Port side (kiri)
+            PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverValuesPositionTransit[LeverIndex], False);
+            PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverValuesPositionTransit[LeverIndex], False);
+            PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverValuesPositionTransit[LeverIndex], False);
+
+            // Starboard side (kanan)
+            PCSSystem.LeverSpeed(C_PCS_ME_STARBOARD, LeverValuesPositionTransit[LeverIndex], False);
+            PCSSystem.LeverPitch(C_PCS_CPP_STARBOARD, LeverValuesPositionTransit[LeverIndex], False);
+            PCSSystem.LeverShaft(C_PCS_GB_STARBOARD, LeverValuesPositionTransit[LeverIndex], False);
+          end;
+        end
+        else if Pos(':', Rawline) > 0 then
+        begin
+          // Button
+          Key   := Copy(Rawline, 1, Pos(':', Rawline) - 1);
+          Value := Copy(Rawline, Pos(':', Rawline) + 1, 1) = '1';
+
+          if Key = 'ShaftDrivenPS' then
+            PCSSystem.ShaftDriven(C_PCS_GB_PORTS, Value)
+          else if Key = 'EmergencyStopPS' then
+//            PCSSystem.EmergencyStop(C_PCS_ME_PORTS, Value)
+          else if Key = 'LeverInServicePS' then
+            PCSSystem.LeverInService(C_PCS_ME_PORTS, Value)
+          else if Key = 'ShaftStopPS' then
+            PCSSystem.ShaftDriven(C_PCS_GB_PORTS, False)
+          else if Key = 'ShaftTrailingPS' then
+            PCSSystem.ShaftTrailing(C_PCS_GB_PORTS, Value)
+          else if Key = 'TransferOverridePS' then
+            PCSSystem.TransferOverride(C_PCS_ME_PORTS, Value);
+
+          if Key = 'ShaftDrivenSB' then
+            PCSSystem.ShaftDriven(C_PCS_GB_STARBOARD, Value)
+          else if Key = 'EmergencyStopSB' then
+            PCSSystem.EmergencyStop(C_PCS_ME_STARBOARD, Value)
+          else if Key = 'LeverInServiceSB' then
+            PCSSystem.LeverInService(C_PCS_ME_STARBOARD, Value)
+          else if Key = 'ShaftStopSB' then
+            PCSSystem.ShaftDriven(C_PCS_GB_STARBOARD, False)
+          else if Key = 'ShaftTrailingSB' then
+            PCSSystem.ShaftTrailing(C_PCS_GB_STARBOARD, Value)
+          else if Key = 'TransferOverrideSB' then
+            PCSSystem.TransferOverride(C_PCS_ME_STARBOARD, Value);
+        end;
+      end;
+    finally
+      Lines.Free;
+    end;
+  end;
+end;
+
+function TForm1.ThrottleValue(Position: Integer): Double;
+begin
+  Result := VarEnsureRange(Round(Position / 1023 * 18), 0, 18);
+end;
+
 function TForm1.TrackbarSpeed(Position: Integer): Double;
 begin
-  Result := LeverValuesPosition[Position];
+  Result := LeverValuesPositionManouver[Position];
   Result := LeverValuesPositionTransit[Position];
 end;
 
 procedure TForm1.LeverValuePosition;
 begin
   // Mode Manouver
-  LeverValuesPosition[0]  := 10;
-  LeverValuesPosition[1]  := 9;
-  LeverValuesPosition[2]  := 8;
-  LeverValuesPosition[3]  := 7;
-  LeverValuesPosition[4]  := 6;
-  LeverValuesPosition[5]  := 5;
-  LeverValuesPosition[6]  := 4;
-  LeverValuesPosition[7]  := 3.5;
-  LeverValuesPosition[8]  := 3;
-  LeverValuesPosition[9]  := 2;
-  LeverValuesPosition[10] := 1;
-  LeverValuesPosition[11] := 0.5;
-  LeverValuesPosition[12] := 0;
-  LeverValuesPosition[13] := -0.5;
-  LeverValuesPosition[14] := -2;
-  LeverValuesPosition[15] := -4;
-  LeverValuesPosition[16] := -6;
-  LeverValuesPosition[17] := -8;
-  LeverValuesPosition[18] := -10;
+  LeverValuesPositionManouver[0]  := 10;
+  LeverValuesPositionManouver[1]  := 9;
+  LeverValuesPositionManouver[2]  := 8;
+  LeverValuesPositionManouver[3]  := 7;
+  LeverValuesPositionManouver[4]  := 6;
+  LeverValuesPositionManouver[5]  := 5;
+  LeverValuesPositionManouver[6]  := 4;
+  LeverValuesPositionManouver[7]  := 3.5;
+  LeverValuesPositionManouver[8]  := 3;
+  LeverValuesPositionManouver[9]  := 2;
+  LeverValuesPositionManouver[10] := 1;
+  LeverValuesPositionManouver[11] := 0.5;
+  LeverValuesPositionManouver[12] := 0;
+  LeverValuesPositionManouver[13] := -0.5;
+  LeverValuesPositionManouver[14] := -2;
+  LeverValuesPositionManouver[15] := -4;
+  LeverValuesPositionManouver[16] := -6;
+  LeverValuesPositionManouver[17] := -8;
+  LeverValuesPositionManouver[18] := -10;
 
   // Mode Transit
   LeverValuesPositionTransit[0]  := 10;
@@ -580,7 +700,7 @@ var
 begin
   if PCSSystem.Manouver then
   begin
-    LeverSpeed := LeverValuesPosition[trckbrPS.Position];
+    LeverSpeed := LeverValuesPositionManouver[trckbrPS.Position];
 
     if LeverSpeed < 0 then
     begin
@@ -636,7 +756,7 @@ procedure TForm1.trckbrSBChange(Sender: TObject);
 var
   LeverSpeed : Double;
 begin
-  LeverSpeed := LeverValuesPosition[trckbrSB.Position];
+  LeverSpeed := LeverValuesPositionManouver[trckbrSB.Position];
 
   if LeverSpeed < 0 then
   begin

@@ -1336,6 +1336,7 @@ begin
     epPCSLeverInService :
     begin
       main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(recERPCS.PortStaboardID, recERPCS.ValueBool);
 
       if recERPCS.ValueBool = True then
       begin
@@ -1368,13 +1369,28 @@ begin
       end;
     end;
 
+    epPCSLeverEmergencyStop :
+    begin
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+//      main_engine.EmergencyStop := recERPCS.ValueBool;
+      main_engine.LocalEmergencyStop := recERPCS.ValueBool;
+    end;
+
+    epPCSLeverTransferOverride :
+    begin
+      main_engine := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(recERPCS.PortStaboardID);
+      main_engine.TransferOverride := recERPCS.ValueBool;
+    end;
+
     epPCSLeverShaftTrailing :
     begin
+      ERSystem.ERManager.EngineRoom.getPCSSystem.ShaftTrailing(recERPCS.PortStaboardID);
       gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
       if recERPCS.ValueBool = True then
       begin
-        gearbox.ShaftTrailing       := True;
-        gearbox.ClutchEngagedDelay  := False;
+        gearbox.ShaftTrailing       := recERPCS.ValueBool;
+        gearbox.ClutchEngagedDelay  := True;
+        gearbox.LeverShaft          := recERPCS.ValueDouble;
       end
       else if recERPCS.ValueBool = False then
       begin

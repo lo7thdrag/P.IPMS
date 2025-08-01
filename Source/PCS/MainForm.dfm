@@ -348,9 +348,42 @@ object Form1: TForm1
     TabOrder = 14
     WordWrap = False
   end
+  object Memo1: TMemo
+    Left = 408
+    Top = 360
+    Width = 137
+    Height = 65
+    Lines.Strings = (
+      'Memo1')
+    TabOrder = 15
+  end
   object tmr1: TTimer
     OnTimer = tmr1Timer
     Left = 208
     Top = 8
+  end
+  object ComPort1: TComPort
+    BaudRate = br9600
+    Port = 'COM3'
+    Parity.Bits = prNone
+    StopBits = sbOneStopBit
+    DataBits = dbEight
+    Events = [evRxChar, evTxEmpty, evRxFlag, evRing, evBreak, evCTS, evDSR, evError, evRLSD, evRx80Full]
+    FlowControl.OutCTSFlow = False
+    FlowControl.OutDSRFlow = False
+    FlowControl.ControlDTR = dtrDisable
+    FlowControl.ControlRTS = rtsDisable
+    FlowControl.XonXoffOut = False
+    FlowControl.XonXoffIn = False
+    StoredProps = [spBasic]
+    TriggersOnRxChar = True
+    Left = 512
+    Top = 520
+  end
+  object tmrThrottle: TTimer
+    Interval = 100
+    OnTimer = tmrThrottleTimer
+    Left = 464
+    Top = 448
   end
 end

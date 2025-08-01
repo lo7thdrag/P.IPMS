@@ -12,6 +12,10 @@ const
   FPC_LeverSpeedValuesTransit    : array[0..12] of Double = (1050, 942, 833, 725, 617, 508, 400, 400, 400, 400,
                                                           400, 400, 400);
 
+//  FPC_LeverValuesPositionManouver : array[0..14] of Double = (8,9,10,11,12,13,4,3,2,1,0,18,17,16,15);
+//  FPC_LeverSpeedValuesManouver    : array[0..14] of Double = (1000, 940, 880, 820, 760, 700, 656, 613, 570, 513,
+//                                                  457, 400, 400, 400, 447);
+
 type
 
   TMainEngine = class(TEntity)
@@ -783,10 +787,10 @@ begin
   else if (aRPM >= 400) and (aRPM < 700) then
   begin
     TCOutlLOTempA := Random(10)+40;
-    TempTCInletA := Random(3)+35;
+    TempTCInletA  := Random(3)+35;
     TempTCOutletA := Random(10)+40;
     TCOutlLOTempB := Random(10)+40;
-    TempTCInletB := Random(30)+80;
+    TempTCInletB  := Random(30)+80;
     TempTCOutletB := Random(100)+100;
     CompProbA     := Random(3)+35;
     CompProbB     := Random(3)+35;
@@ -794,10 +798,10 @@ begin
   else if (aRPM >= 700) and (aRPM < 1000) then
   begin
     TCOutlLOTempA := Random(10)+40;
-    TempTCInletA := Random(30)+80;
+    TempTCInletA  := Random(30)+80;
     TempTCOutletA := Random(100)+200;
     TCOutlLOTempB := Random(10)+40;
-    TempTCInletB := Random(20)+80;
+    TempTCInletB  := Random(20)+80;
     TempTCOutletB := Random(100)+200;
     CompProbA     := Random(3)+35;
     CompProbB     := Random(3)+35;
@@ -805,10 +809,10 @@ begin
   else if (aRPM >= 1000) then
   begin
     TCOutlLOTempA := Random(10)+50;
-    TempTCInletA := Random(30)+90;
+    TempTCInletA  := Random(30)+90;
     TempTCOutletA := Random(100)+300;
     TCOutlLOTempB := Random(10)+50;
-    TempTCInletB := Random(20)+90;
+    TempTCInletB  := Random(20)+90;
     TempTCOutletB := Random(100)+300;
     CompProbA     := Random(3)+35;
     CompProbB     := Random(3)+35;

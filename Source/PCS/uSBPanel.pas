@@ -175,7 +175,7 @@ var
 
 implementation
 
-uses uPCSSystem;
+uses uPCSSystem, MainForm;
 
 {$R *.dfm}
 
@@ -395,6 +395,7 @@ begin
         imgRemote_Auto_Clutch_SB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteAuto := True;
         PCSSystem.Remote(C_PCS_GB_STARBOARD, C_ORD_GB_REMOTEAUTO, True);
+        Form1.ComPort1.WriteStr('LeverInServiceSB:1' + #10)
       end;
     end
     else
@@ -405,6 +406,7 @@ begin
         imgRemote_Auto_CPP_SB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteAuto := True;
         PCSSystem.Remote(C_PCS_CPP_STARBOARD, C_ORD_CPP_REMOTEAUTO, True);
+        Form1.ComPort1.WriteStr('LeverInServiceSB:1' + #10)
       end;
     end
     else
@@ -415,6 +417,7 @@ begin
         imgRemote_Auto_ME_SB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteAuto := True;
         PCSSystem.Remote(C_PCS_ME_STARBOARD, C_ORD_ME_REMOTEAUTO, True);
+        Form1.ComPort1.WriteStr('LeverInServiceSB:1' + #10)
       end;
     end;
   end;
@@ -431,6 +434,7 @@ begin
         imgRemote_Manual_Clutch_SB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteManual := True;
         PCSSystem.RemoteManual(C_PCS_GB_STARBOARD, C_ORD_GB_REMOTEMAN, True);
+        Form1.ComPort1.WriteStr('LeverInServiceSB:0' + #10)
       end;
     end
     else
@@ -441,6 +445,7 @@ begin
         imgRemote_Manual_CPP_SB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteManual := True;
         PCSSystem.RemoteManual(C_PCS_CPP_STARBOARD, C_ORD_CPP_REMOTEMAN, True);
+        Form1.ComPort1.WriteStr('LeverInServiceSB:0' + #10)
       end;
     end
     else
@@ -451,6 +456,7 @@ begin
         imgRemote_Manual_ME_SB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteManual := True;
         PCSSystem.RemoteManual(C_PCS_ME_STARBOARD, C_ORD_ME_REMOTEMAN, True);
+        Form1.ComPort1.WriteStr('LeverInServiceSB:0' + #10)
       end;
     end;
   end;

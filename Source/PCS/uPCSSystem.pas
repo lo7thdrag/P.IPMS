@@ -30,7 +30,7 @@ type
     FRunningStartSB, FStoppedStopPS, FStoppedStopSB: Boolean;
     FLampTest : Integer;
 
-    FTransitMode, FManouverMode : Boolean;
+    FTransitMode, FManouverMode, FRemoteAuto : Boolean;
 
     procedure NetworkEventAssignment;
 
@@ -64,6 +64,7 @@ type
 
     procedure SetTransitMode(const aOnOff : Boolean);
     procedure SetManouverMode(const aOnOff : Boolean);
+    procedure SetRemoteAuto(const aOnOff : Boolean);
     {--}
 
   public
@@ -101,6 +102,8 @@ type
     {Testing Throttle}
     procedure LeverInService(aPortStarboard : string; aOnOff : Boolean);
     procedure ShaftDriven(aPortStarboard : string; aOnOff : Boolean);
+    procedure EmergencyStop(aPortStarboard : string; aOnOff : Boolean);
+    procedure TransferOverride(aPortStarboard : string; aOnOff : Boolean);
     procedure StopShaftDriven(aPortStarboard : string; aOnOff : Boolean);
     procedure ShaftTrailing(aPortStarboard: string; aOnOff: Boolean);
     procedure LeverPitch(aPortStarboard : String; aValue: Double; aOnOff : Boolean);
@@ -128,8 +131,9 @@ type
     property LeverInServiceSB: Boolean read FLeverInServiceSB write SetLeverInServiceSB;
     property TransferOverrideSB: Boolean read FTransferOverrideSB write SetTransferOverrideSB;
 
-    property Transit  : Boolean read FTransitMode write SetTransitMode;
-    property Manouver : Boolean read FManouverMode write SetManouverMode;
+    property Transit    : Boolean read FTransitMode write SetTransitMode;
+    property Manouver   : Boolean read FManouverMode write SetManouverMode;
+    property RemoteAuto : Boolean read FRemoteAuto write SetRemoteAuto;
 
     public
       FFormFreezed : array[0..2] of TfrmFreeze;
@@ -214,7 +218,6 @@ begin
 
   inherited;
 end;
-
 
 procedure TPCSSystem.GeneralControl(aControl: Byte; aOnOff: Boolean);
 var
@@ -323,6 +326,17 @@ begin
   Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
+procedure TPCSSystem.EmergencyStop(aPortStarboard: string; aOnOff: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSLeverEmergencyStop;
+  recCmd.ValueBool      := aOnOff;
+
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
 procedure TPCSSystem.StopShaftDriven(aPortStarboard: string; aOnOff: Boolean);
 var
   recCmd : R_Common_PCS_Command;
@@ -331,6 +345,17 @@ begin
   recCmd.CommandPropsID := epPCSLeverShaftDriven;
   recCmd.CommandID      := C_ORD_LEVER_SHAFTSTOP;
   recCmd.ValueBool      := not aOnOff;
+
+  Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
+end;
+
+procedure TPCSSystem.TransferOverride(aPortStarboard: string; aOnOff: Boolean);
+var
+  recCmd : R_Common_PCS_Command;
+begin
+  recCmd.PortStaboardID := aPortStarboard;
+  recCmd.CommandPropsID := epPCSLeverTransferOverride;
+  recCmd.ValueBool      := aOnOff;
 
   Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
@@ -667,6 +692,15 @@ begin
 
   FManouverMode := aOnOff;
   Listener.TriggerEvents(Self,epPCSMEManouveringMode, aOnOff);
+end;
+
+procedure TPCSSystem.SetRemoteAuto(const aOnOff: Boolean);
+begin
+  if FRemoteAuto = aOnOff then
+     Exit;
+
+  FRemoteAuto := aOnOff;
+  Listener.TriggerEvents(Self,epPCSMERemoteAuto, aOnOff);
 end;
 
 { fungsi untuk menangani event dari jaringan untuk PCSCommand }
