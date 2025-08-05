@@ -46,8 +46,8 @@ type
     Panel1: TPanel;
     lblVoltageBusbar: TLabel;
     lblFrequency: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
+    lblVoltage: TLabel;
+    lblCosphi: TLabel;
     img1: TImage;
     img2: TImage;
     img3: TImage;
@@ -121,8 +121,6 @@ end;
 procedure TfrmShorePanel.ImgIndicatorCBCloseClick(Sender: TObject);
 begin
   MainSwitchBoardSystem.CBShore(True);
-//  ImgIndicatorCBClose.Visible := False;
-//  ImgIndicatorCBOpen.Visible := True;
 
   tmrSync.Enabled:= True;
   CurrentIndex := 0;
@@ -134,8 +132,6 @@ end;
 procedure TfrmShorePanel.ImgIndicatorCBOpenClick(Sender: TObject);
 begin
   MainSwitchBoardSystem.CBShore(False);
-  ImgIndicatorCBClose.Visible := True;
-  ImgIndicatorCBOpen.Visible := False;
 end;
 
 procedure TfrmShorePanel.IndicatorSync;
@@ -217,14 +213,10 @@ begin
   else if Switchboard.ShoreInterconnectionMode = 2 then
   begin
     VrShoreMode.SwitchPosition := 1;
-    MainSwitchBoardSystem.CBShore(False);
-//    ImgIndicatorCBOpen.Visible := True;
-//    ImgIndicatorCBClose.Visible := True;
   end
   else
   begin
     VrShoreMode.SwitchPosition := 2;
-    MainSwitchBoardSystem.CBShore(True);
 
     CurrentIndex := 0;
     Loop := 0;
@@ -242,7 +234,6 @@ begin
     ImgIndicatorCBOpen.Visible := False;
   end;
 
-//  VraPower.Position := Generator.Power;
 end;
 
 procedure TfrmShorePanel.VrShoreModeChange(Sender: TObject);
@@ -254,22 +245,11 @@ begin
   else if VrShoreMode.SwitchPosition = 1 then
   begin
     MainSwitchBoardSystem.ShoreMode(2);
-//    MainSwitchBoardSystem.CBShore(False);
-//    ImgIndicatorCBOpen.Visible := True;
-//    ImgIndicatorCBClose.Visible := True;
   end
   else
   begin
     MainSwitchBoardSystem.ShoreMode(3);
-//    MainSwitchBoardSystem.CBShore(True);
-//    ImgIndicatorCBOpen.Visible := True;
-//    ImgIndicatorCBClose.Visible := False;
-//
-//    CurrentIndex := 0;
-//    Loop := 0;
-//    StopIndex := 24;
   end;
-
 end;
 
 end.

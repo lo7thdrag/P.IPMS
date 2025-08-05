@@ -154627,7 +154627,7 @@ object frmShorePanel: TfrmShorePanel
         Font.Style = []
         ParentFont = False
       end
-      object Label7: TLabel
+      object lblVoltage: TLabel
         Left = 13
         Top = 34
         Width = 41
@@ -154640,12 +154640,12 @@ object frmShorePanel: TfrmShorePanel
         Font.Style = []
         ParentFont = False
       end
-      object Label8: TLabel
+      object lblCosphi: TLabel
         Left = 101
         Top = 34
-        Width = 53
+        Width = 62
         Height = 23
-        Caption = '-000.0'
+        Caption = '-000.0'#176
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -19

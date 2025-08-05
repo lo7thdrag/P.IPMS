@@ -633,9 +633,7 @@ begin
 
       if Assigned(frmShorePanel) then
       begin
-//        GeneratorTemp.Frequency := Value;
-//        frmShorePanel.Generator := GeneratorTemp;
-        frmShorePanel.lblFrequency.Caption := FloatToStr(value) + ' Hz';
+        frmShorePanel.lblFrequency.Caption := FormatFloat('##.##', value/100) + ' Hz';
       end;
     end;
     epPMSVoltage:
@@ -657,6 +655,7 @@ begin
       if Assigned(frmShorePanel) then
       begin
         frmShorePanel.lblVoltageBusbar.Caption := FloatToStr(value) + 'V';
+        frmShorePanel.lblVoltage.Caption := FloatToStr(value + 1) + 'V';
       end;
     end;
     epPMSCurrent:
@@ -696,6 +695,11 @@ begin
       begin
         GeneratorTemp.CosPhi := Value;
         frmEmergencyPanel.Generator := GeneratorTemp;
+      end;
+
+      if Assigned(frmShorePanel) then
+      begin
+//        frmShorePanel.lblCosPhi.Caption :=
       end;
     end;
   end;
