@@ -151104,7 +151104,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image5: TImage
+    object imgUbb: TImage
       Left = 862
       Top = 412
       Width = 14
@@ -151224,7 +151224,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image7: TImage
+    object imgU: TImage
       Left = 862
       Top = 391
       Width = 14
@@ -151344,7 +151344,7 @@ object frmShorePanel: TfrmShorePanel
       Stretch = True
       Visible = False
     end
-    object Image9: TImage
+    object imgUGen: TImage
       Left = 1068
       Top = 412
       Width = 14

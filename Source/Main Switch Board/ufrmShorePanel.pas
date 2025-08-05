@@ -40,9 +40,9 @@ type
     tmrAmpere: TTimer;
     imgSync: TImage;
     img24: TImage;
-    Image5: TImage;
-    Image7: TImage;
-    Image9: TImage;
+    imgUbb: TImage;
+    imgU: TImage;
+    imgUGen: TImage;
     Panel1: TPanel;
     lblVoltageBusbar: TLabel;
     lblFrequency: TLabel;
@@ -90,6 +90,7 @@ type
   public
     OrderAmpere : Double;
     Generator : TGenerator;
+    Switchboard : TSwitchboard;
 
     procedure UpdateForm(Switchboard : TSwitchboard);
   end;
@@ -120,8 +121,14 @@ end;
 procedure TfrmShorePanel.ImgIndicatorCBCloseClick(Sender: TObject);
 begin
   MainSwitchBoardSystem.CBShore(True);
-  ImgIndicatorCBClose.Visible := False;
-  ImgIndicatorCBOpen.Visible := True;
+//  ImgIndicatorCBClose.Visible := False;
+//  ImgIndicatorCBOpen.Visible := True;
+
+  tmrSync.Enabled:= True;
+  CurrentIndex := 0;
+  Loop := 0;
+  StopIndex := 24;
+
 end;
 
 procedure TfrmShorePanel.ImgIndicatorCBOpenClick(Sender: TObject);
@@ -172,16 +179,23 @@ begin
 
   IndSync[CurrentIndex].Visible := True;
 
-  if (CurrentIndex = StopIndex) {and (Loop >= 2)} then
+  if (CurrentIndex = StopIndex) and (Loop >= 1) then
   begin
     tmrSync.Enabled := False;
+    for i := 0 to 23 do
+      IndSync[i].Visible := False;
 
     img24.Visible := True;
     imgSync.Visible := True;
-
+    imgUbb.Visible := True;
+    imgUGen.Visible := True;
   end
   else
   begin
+    imgSync.Visible := False;
+    imgUbb.Visible := False;
+    imgUGen.Visible := False;
+
     Inc(currentIndex);
     if CurrentIndex > High(IndSync) then
     begin
@@ -204,13 +218,17 @@ begin
   begin
     VrShoreMode.SwitchPosition := 1;
     MainSwitchBoardSystem.CBShore(False);
-    ImgIndicatorCBOpen.Visible := True;
-    ImgIndicatorCBClose.Visible := True;
+//    ImgIndicatorCBOpen.Visible := True;
+//    ImgIndicatorCBClose.Visible := True;
   end
   else
   begin
     VrShoreMode.SwitchPosition := 2;
     MainSwitchBoardSystem.CBShore(True);
+
+    CurrentIndex := 0;
+    Loop := 0;
+    StopIndex := 24;
   end;
 
   if Switchboard.ShoresbCircuitBreaker = True then
@@ -223,6 +241,8 @@ begin
     ImgIndicatorCBClose.Visible := True;
     ImgIndicatorCBOpen.Visible := False;
   end;
+
+//  VraPower.Position := Generator.Power;
 end;
 
 procedure TfrmShorePanel.VrShoreModeChange(Sender: TObject);
@@ -234,16 +254,20 @@ begin
   else if VrShoreMode.SwitchPosition = 1 then
   begin
     MainSwitchBoardSystem.ShoreMode(2);
-    MainSwitchBoardSystem.CBShore(False);
-    ImgIndicatorCBOpen.Visible := True;
-    ImgIndicatorCBClose.Visible := True;
+//    MainSwitchBoardSystem.CBShore(False);
+//    ImgIndicatorCBOpen.Visible := True;
+//    ImgIndicatorCBClose.Visible := True;
   end
   else
   begin
     MainSwitchBoardSystem.ShoreMode(3);
-    MainSwitchBoardSystem.CBShore(True);
-    ImgIndicatorCBOpen.Visible := True;
-    ImgIndicatorCBClose.Visible := False;
+//    MainSwitchBoardSystem.CBShore(True);
+//    ImgIndicatorCBOpen.Visible := True;
+//    ImgIndicatorCBClose.Visible := False;
+//
+//    CurrentIndex := 0;
+//    Loop := 0;
+//    StopIndex := 24;
   end;
 
 end;
