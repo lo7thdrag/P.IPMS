@@ -234,7 +234,17 @@ end;
 procedure TfrmMainForm.MainSwitchBoardSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: Boolean);
 begin
   case PropsID of
-    epPMSGeneratorEngineRun : GeneratorTemp.EngineRun := Value;
+    epPMSGeneratorEngineRun :
+    begin
+      GeneratorTemp.EngineRun := Value;
+
+      if Assigned(frmShorePanel) then
+      begin
+        frmShorePanel.CurrentIndex := 0;
+        frmShorePanel.Loop := 0;
+        frmShorePanel.StopIndex := 24;
+      end;
+    end;
     epPMSGeneratorSupplied : GeneratorTemp.GeneratorSupplied := Value;
     epPMSGeneratorCBClosed : GeneratorTemp.CBClosed := Value;
     epPMSGeneratorPreference : GeneratorTemp.Preference := Value;
@@ -616,9 +626,9 @@ begin
 
       if Assigned(frmShorePanel) then
       begin
-        SwitchboardTemp.Power := Value;
-        frmShorePanel.switchboard := SwitchboardTemp;
-        frmShorePanel.VraPower.Position := -Value;
+//        SwitchboardTemp.Power := Value;
+//        frmShorePanel.switchboard := SwitchboardTemp;
+        frmShorePanel.VraPower.Position := Value;
       end;
     end;
     epPMSFrequency:
@@ -696,19 +706,8 @@ begin
         GeneratorTemp.CosPhi := Value;
         frmEmergencyPanel.Generator := GeneratorTemp;
       end;
-
-      if Assigned(frmShorePanel) then
-      begin
-//        frmShorePanel.lblCosPhi.Caption :=
-      end;
     end;
   end;
-
-//  if Assigned(frmShorePanel) then
-//  begin
-//    frmShorePanel.Generator := GeneratorTemp;
-//    frmShorePanel.UpdateForm{(GeneratorTemp)};
-//  end;
 
 end;
 

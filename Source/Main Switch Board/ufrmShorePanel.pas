@@ -82,15 +82,15 @@ type
     procedure FormCreate(Sender: TObject);
   private
     IndSync : array of TImage;
-    CurrentIndex : Integer;
-    StopIndex : Integer;
-    Loop : Integer;
 
     procedure IndicatorSync;
   public
     OrderAmpere : Double;
     Generator : TGenerator;
     Switchboard : TSwitchboard;
+    CurrentIndex : Integer;
+    StopIndex : Integer;
+    Loop : Integer;
 
     procedure UpdateForm(Switchboard : TSwitchboard);
   end;
@@ -175,7 +175,7 @@ begin
 
   IndSync[CurrentIndex].Visible := True;
 
-  if (CurrentIndex = StopIndex) and (Loop >= 1) then
+  if (CurrentIndex = StopIndex) and (Loop >= 2) then
   begin
     tmrSync.Enabled := False;
     for i := 0 to 23 do
@@ -218,9 +218,9 @@ begin
   begin
     VrShoreMode.SwitchPosition := 2;
 
-    CurrentIndex := 0;
-    Loop := 0;
-    StopIndex := 24;
+//    CurrentIndex := 0;
+//    Loop := 0;
+//    StopIndex := 24;
   end;
 
   if Switchboard.ShoresbCircuitBreaker = True then
