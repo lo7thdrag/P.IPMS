@@ -12,10 +12,6 @@ const
   FPC_LeverSpeedValuesTransit    : array[0..12] of Double = (1050, 942, 833, 725, 617, 508, 400, 400, 400, 400,
                                                           400, 400, 400);
 
-//  FPC_LeverValuesPositionManouver : array[0..14] of Double = (8,9,10,11,12,13,4,3,2,1,0,18,17,16,15);
-//  FPC_LeverSpeedValuesManouver    : array[0..14] of Double = (1000, 940, 880, 820, 760, 700, 656, 613, 570, 513,
-//                                                  457, 400, 400, 400, 447);
-
 type
 
   TMainEngine = class(TEntity)
@@ -1845,9 +1841,6 @@ var
   i : Integer;
   epsilon : Double;
 begin
-  if FLeverSpeed = Value then
-    exit;
-
   FLeverSpeed := Value;
 
   ActualSpeed   := 0;

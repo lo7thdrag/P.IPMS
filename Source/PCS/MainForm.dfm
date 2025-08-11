@@ -364,7 +364,7 @@ object Form1: TForm1
   end
   object ComPort1: TComPort
     BaudRate = br9600
-    Port = 'COM3'
+    Port = 'COM4'
     Parity.Bits = prNone
     StopBits = sbOneStopBit
     DataBits = dbEight

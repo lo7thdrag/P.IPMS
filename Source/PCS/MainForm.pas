@@ -5,13 +5,12 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, uDataType, IniFiles, VrControls, VrTrackBar,
-  ComCtrls, uListener, CPort, NLDJoystick;
+  ComCtrls, uListener, CPort, NLDJoystick, Math;
 
 var
   LeverValuesPositionManouver: array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
   LeverValuesPositionTransit : array[0..12] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0);
 
-//  LeverValuesPosition: array[0..14] of Double = (8,9,10,11,12,13,4,3,2,1,0,18,17,16,15);
 
 type
   TForm1 = class(TForm)
@@ -341,7 +340,7 @@ begin
   // Untuk Throttle
   LeverValuePosition;
 
-  ComPort1.Port := 'COM3';
+  ComPort1.Port := 'COM4';
   ComPort1.BaudRate := br9600;
   ComPort1.Open;
 end;
@@ -551,6 +550,7 @@ var
   LeverIndex, i : Integer;
   Key : string;
   Value: Boolean;
+  LeverSpeed : Double;
 begin
   if ComPort1.InputCount > 0 then
   begin
@@ -568,85 +568,102 @@ begin
       end;
 
     for i := 0 to Lines.Count - 1 do
-      begin
-        Rawline := Lines[i];
-        Memo1.Lines.Add('Rawline: ' + Rawline);
+    begin
+      Rawline := Lines[i];
+      Memo1.Lines.Add('Rawline: ' + Rawline);
 
-        if TryStrToInt(Rawline, RawValue) then
+      // === Proses ThrottlePS ===
+      if Rawline.StartsWith('ThrottlePS :') then
+      begin
+        if TryStrToInt(Copy(Rawline, 13, MaxInt), RawValue) then
         begin
-          LeverIndex := VarEnsureRange(RawValue, 0, 18);
+          LeverIndex := EnsureRange(RawValue, 0, 18);
+          LeverSpeed := LeverValuesPositionManouver[LeverIndex];
 
           if PCSSystem.Manouver then
           begin
-            lblLeverPS.Caption := FloatToStr(LeverValuesPositionManouver[LeverIndex]);
-
-            // Port side  (kiri)
-            PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverValuesPositionManouver[LeverIndex], True);
-            PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverValuesPositionManouver[LeverIndex], True);
-            PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverValuesPositionManouver[LeverIndex], True);
-
-            // Starboard side (kanan)
-            PCSSystem.LeverSpeed(C_PCS_ME_STARBOARD, LeverValuesPositionManouver[LeverIndex], True);
-            PCSSystem.LeverPitch(C_PCS_CPP_STARBOARD, LeverValuesPositionManouver[LeverIndex], True);
-            PCSSystem.LeverShaft(C_PCS_GB_STARBOARD, LeverValuesPositionManouver[LeverIndex], True);
+            lblLeverPS.Caption := FloatToStr(LeverSpeed);
+            PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverSpeed, True);
+            PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverSpeed, True);
+            PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverSpeed, True);
           end
           else if PCSSystem.Transit then
           begin
             lblLeverPS.Caption := FloatToStr(LeverValuesPositionTransit[LeverIndex]);
-
-            // Port side (kiri)
             PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverValuesPositionTransit[LeverIndex], False);
             PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverValuesPositionTransit[LeverIndex], False);
             PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverValuesPositionTransit[LeverIndex], False);
+          end;
+        end;
+      end
 
-            // Starboard side (kanan)
+      // === Proses ThrottleSB ===
+      else if Rawline.StartsWith('ThrottleSB :') then
+      begin
+        if TryStrToInt(Copy(Rawline, 13, MaxInt), RawValue) then
+        begin
+          LeverIndex := EnsureRange(RawValue, 0, 18);
+          LeverSpeed := LeverValuesPositionManouver[LeverIndex];
+
+          if PCSSystem.Manouver then
+          begin
+            lblLeverSB.Caption := FloatToStr(LeverSpeed);
+            PCSSystem.LeverSpeed(C_PCS_ME_STARBOARD, LeverSpeed, True);
+            PCSSystem.LeverPitch(C_PCS_CPP_STARBOARD, LeverSpeed, True);
+            PCSSystem.LeverShaft(C_PCS_GB_STARBOARD, LeverSpeed, True);
+          end
+          else if PCSSystem.Transit then
+          begin
+            lblLeverSB.Caption := FloatToStr(LeverValuesPositionTransit[LeverIndex]);
             PCSSystem.LeverSpeed(C_PCS_ME_STARBOARD, LeverValuesPositionTransit[LeverIndex], False);
             PCSSystem.LeverPitch(C_PCS_CPP_STARBOARD, LeverValuesPositionTransit[LeverIndex], False);
             PCSSystem.LeverShaft(C_PCS_GB_STARBOARD, LeverValuesPositionTransit[LeverIndex], False);
           end;
-        end
-        else if Pos(':', Rawline) > 0 then
-        begin
-          // Button
-          Key   := Copy(Rawline, 1, Pos(':', Rawline) - 1);
-          Value := Copy(Rawline, Pos(':', Rawline) + 1, 1) = '1';
-
-          if Key = 'ShaftDrivenPS' then
-            PCSSystem.ShaftDriven(C_PCS_GB_PORTS, Value)
-          else if Key = 'EmergencyStopPS' then
-//            PCSSystem.EmergencyStop(C_PCS_ME_PORTS, Value)
-          else if Key = 'LeverInServicePS' then
-            PCSSystem.LeverInService(C_PCS_ME_PORTS, Value)
-          else if Key = 'ShaftStopPS' then
-            PCSSystem.ShaftDriven(C_PCS_GB_PORTS, False)
-          else if Key = 'ShaftTrailingPS' then
-            PCSSystem.ShaftTrailing(C_PCS_GB_PORTS, Value)
-          else if Key = 'TransferOverridePS' then
-            PCSSystem.TransferOverride(C_PCS_ME_PORTS, Value);
-
-          if Key = 'ShaftDrivenSB' then
-            PCSSystem.ShaftDriven(C_PCS_GB_STARBOARD, Value)
-          else if Key = 'EmergencyStopSB' then
-            PCSSystem.EmergencyStop(C_PCS_ME_STARBOARD, Value)
-          else if Key = 'LeverInServiceSB' then
-            PCSSystem.LeverInService(C_PCS_ME_STARBOARD, Value)
-          else if Key = 'ShaftStopSB' then
-            PCSSystem.ShaftDriven(C_PCS_GB_STARBOARD, False)
-          else if Key = 'ShaftTrailingSB' then
-            PCSSystem.ShaftTrailing(C_PCS_GB_STARBOARD, Value)
-          else if Key = 'TransferOverrideSB' then
-            PCSSystem.TransferOverride(C_PCS_ME_STARBOARD, Value);
         end;
+      end
+
+      // === Proses Tombol ===
+      else if Pos(':', Rawline) > 0 then
+      begin
+        Key   := Copy(Rawline, 1, Pos(':', Rawline) - 1);
+        Value := Copy(Rawline, Pos(':', Rawline) + 1, 1) = '1';
+
+        if Key = 'ShaftDrivenPS' then
+          PCSSystem.ShaftDriven(C_PCS_GB_PORTS, Value)
+        else if Key = 'EmergencyStopPS' then
+          PCSSystem.EmergencyStop(C_PCS_ME_PORTS, Value)
+        else if Key = 'LeverInServicePS' then
+          PCSSystem.LeverInService(C_PCS_ME_PORTS, Value)
+        else if Key = 'ShaftStopPS' then
+          PCSSystem.ShaftDriven(C_PCS_GB_PORTS, False)
+        else if Key = 'ShaftTrailingPS' then
+          PCSSystem.ShaftTrailing(C_PCS_GB_PORTS, Value)
+        else if Key = 'TransferOverridePS' then
+          PCSSystem.TransferOverride(C_PCS_ME_PORTS, Value)
+
+        else if Key = 'ShaftDrivenSB' then
+          PCSSystem.ShaftDriven(C_PCS_GB_STARBOARD, Value)
+        else if Key = 'EmergencyStopSB' then
+          PCSSystem.EmergencyStop(C_PCS_ME_STARBOARD, Value)
+        else if Key = 'LeverInServiceSB' then
+          PCSSystem.LeverInService(C_PCS_ME_STARBOARD, Value)
+        else if Key = 'ShaftStopSB' then
+          PCSSystem.ShaftDriven(C_PCS_GB_STARBOARD, False)
+        else if Key = 'ShaftTrailingSB' then
+          PCSSystem.ShaftTrailing(C_PCS_GB_STARBOARD, Value)
+        else if Key = 'TransferOverrideSB' then
+          PCSSystem.TransferOverride(C_PCS_ME_STARBOARD, Value);
       end;
+    end;
     finally
-      Lines.Free;
+
     end;
   end;
 end;
 
 function TForm1.ThrottleValue(Position: Integer): Double;
 begin
-  Result := VarEnsureRange(Round(Position / 1023 * 18), 0, 18);
+  Result := EnsureRange(Round(Position / 1023 * 18), 0, 18);
 end;
 
 function TForm1.TrackbarSpeed(Position: Integer): Double;
