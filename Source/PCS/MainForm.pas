@@ -11,6 +11,8 @@ var
   LeverValuesPositionManouver: array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
   LeverValuesPositionTransit : array[0..12] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0);
 
+const
+  ThrottleMap: array[0..18] of Integer = (18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0);
 
 type
   TForm1 = class(TForm)
@@ -589,10 +591,10 @@ begin
           end
           else if PCSSystem.Transit then
           begin
-            lblLeverPS.Caption := FloatToStr(LeverValuesPositionTransit[LeverIndex]);
-            PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverValuesPositionTransit[LeverIndex], False);
-            PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverValuesPositionTransit[LeverIndex], False);
-            PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverValuesPositionTransit[LeverIndex], False);
+            lblLeverPS.Caption := FloatToStr(LeverSpeed);
+            PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverSpeed, False);
+            PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverSpeed, False);
+            PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverSpeed, False);
           end;
         end;
       end
@@ -614,10 +616,10 @@ begin
           end
           else if PCSSystem.Transit then
           begin
-            lblLeverSB.Caption := FloatToStr(LeverValuesPositionTransit[LeverIndex]);
-            PCSSystem.LeverSpeed(C_PCS_ME_STARBOARD, LeverValuesPositionTransit[LeverIndex], False);
-            PCSSystem.LeverPitch(C_PCS_CPP_STARBOARD, LeverValuesPositionTransit[LeverIndex], False);
-            PCSSystem.LeverShaft(C_PCS_GB_STARBOARD, LeverValuesPositionTransit[LeverIndex], False);
+            lblLeverSB.Caption := FloatToStr(LeverSpeed);
+            PCSSystem.LeverSpeed(C_PCS_ME_STARBOARD, LeverSpeed, False);
+            PCSSystem.LeverPitch(C_PCS_CPP_STARBOARD, LeverSpeed, False);
+            PCSSystem.LeverShaft(C_PCS_GB_STARBOARD, LeverSpeed, False);
           end;
         end;
       end
@@ -656,7 +658,7 @@ begin
       end;
     end;
     finally
-
+      Lines.Free;
     end;
   end;
 end;

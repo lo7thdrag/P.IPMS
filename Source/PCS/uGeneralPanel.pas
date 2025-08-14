@@ -217,7 +217,7 @@ end;
 
 procedure Tfrm_GeneralPanel.btnManoeuvreClick(Sender: TObject);
 begin
-  if RemoteAutoCheck then
+  if PCSSystem.ControlRemotePS then
   begin
     FTransit  := False;
     FManouvre := True;
@@ -228,6 +228,17 @@ begin
     PCSSystem.Manouver := True;
     PCSSystem.Transit  := False;
   end
+//  else if PCSSystem.ControlRemoteSB then
+//  begin
+//    FTransit  := False;
+//    FManouvre := True;
+//    FManouvre_Flashing := True;
+//    imgManouvre.Picture.LoadFromFile(fIndikatorOn);
+//    PCSSystem.ModeManouver(C_PCS_ME_STARBOARD, True);
+//
+//    PCSSystem.Manouver := True;
+//    PCSSystem.Transit  := False;
+//  end;
 end;
 
 procedure Tfrm_GeneralPanel.btnTransitClick(Sender: TObject);
