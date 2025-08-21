@@ -657,7 +657,7 @@ begin
   end
   else if cbbMsbFormType.Text = 'SHORE' then
   begin
-    cbbMsbGeneratorID.Items.Add('Shore');
+    cbbMsbGeneratorID.Items.Add('Shore Generator');
   end;
 
   cbbMsbGeneratorID.ItemIndex := 0;
