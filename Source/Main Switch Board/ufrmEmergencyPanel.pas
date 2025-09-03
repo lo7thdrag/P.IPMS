@@ -396,7 +396,6 @@ begin
     begin
       pnlPassword.Visible := False;
       lstMenu.Visible := True;
-//      SetLCDLook;
       InitMenu;
       CurrentMenuIndex := 0;
       LoadMainMenu(CurrentMenuIndex);
@@ -1033,8 +1032,6 @@ end;
 
 
 procedure TfrmEmergencyPanel.InitMenu;
-var
-  Generator : TGenerator;
 begin
   SetLength(MainMenu, 3);
 
