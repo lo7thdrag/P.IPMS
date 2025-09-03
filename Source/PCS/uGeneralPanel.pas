@@ -227,29 +227,42 @@ begin
 
     PCSSystem.Manouver := True;
     PCSSystem.Transit  := False;
-  end
-//  else if PCSSystem.ControlRemoteSB then
-//  begin
-//    FTransit  := False;
-//    FManouvre := True;
-//    FManouvre_Flashing := True;
-//    imgManouvre.Picture.LoadFromFile(fIndikatorOn);
-//    PCSSystem.ModeManouver(C_PCS_ME_STARBOARD, True);
-//
-//    PCSSystem.Manouver := True;
-//    PCSSystem.Transit  := False;
-//  end;
+  end;
+
+  if PCSSystem.ControlRemoteSB then
+  begin
+    FTransit  := False;
+    FManouvre := True;
+    FManouvre_Flashing := True;
+    imgManouvre.Picture.LoadFromFile(fIndikatorOn);
+    PCSSystem.ModeManouver(C_PCS_ME_STARBOARD, True);
+
+    PCSSystem.Manouver := True;
+    PCSSystem.Transit  := False;
+  end;
 end;
 
 procedure Tfrm_GeneralPanel.btnTransitClick(Sender: TObject);
 begin
-  if RemoteAutoCheck then
+  if PCSSystem.ControlRemotePS then
   begin
     FTransit  := True;
     FManouvre := False;
     FTransit_Flashing := True;
     imgTransit.Picture.LoadFromFile(fIndikatorOn);
-    PCSSystem.ModeTransit(C_PCS_ME_PORTS, False);
+    PCSSystem.ModeTransit(C_PCS_ME_PORTS, True);
+
+    PCSSystem.Transit  := True;
+    PCSSystem.Manouver := False;
+  end;
+
+  if PCSSystem.ControlRemoteSB then
+  begin
+    FTransit  := True;
+    FManouvre := False;
+    FTransit_Flashing := True;
+    imgTransit.Picture.LoadFromFile(fIndikatorOn);
+    PCSSystem.ModeTransit(C_PCS_ME_STARBOARD, True);
 
     PCSSystem.Transit  := True;
     PCSSystem.Manouver := False;
@@ -425,15 +438,15 @@ end;
 procedure Tfrm_GeneralPanel.btnStop_HornClick(Sender: TObject);
 begin
   PCSSystem.StopHorn(C_ORD_CTRL_STOPHORN,True);
-//  frmPCSAlarm.StopAlarmSound(True);
+  frmPCSAlarm.StopAlarmSound(True);
 end;
 
 procedure Tfrm_GeneralPanel.FlashingIndicatorTimer(Sender: TObject);
 begin
   if FStopHorn then
   begin
-//    mpAlarmPCS.Stop;
-//    mpAlarmPCS.Close;
+    frmPCSAlarm.mpAlarmPCS.Stop;
+    frmPCSAlarm.mpAlarmPCS.Close;
     FStopHorn := False;
   end;
 

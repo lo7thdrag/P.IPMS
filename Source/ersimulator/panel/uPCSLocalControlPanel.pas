@@ -1909,12 +1909,10 @@ begin
     if vrtryswtchRemotePS.SwitchPosition = 0 then
     begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(C_PCS_ME_PORTS, False);
-//      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(C_PCS_ME_PORTS, False);
     end
     else if vrtryswtchRemotePS.SwitchPosition = 1 then
     begin
       ERSystem.ERManager.EngineRoom.getPCSSystem.RemoteToMCR(C_PCS_ME_PORTS, True);
-//      ERSystem.ERManager.EngineRoom.getPCSSystem.Remote(C_PCS_ME_PORTS, True);
     end;
   end
   else if TVrRotarySwitch(Sender).Tag = 1 then

@@ -516,6 +516,7 @@ begin
   recCmd.PortStaboardID := aPortStarboard;
   recCmd.CommandPropsID := epPCSMEManouveringMode;
   recCmd.ValueBool      := aControl;
+  recCmd.ValueInt       := Ord(epPCSMEManouveringMode);
 
   Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
@@ -526,7 +527,8 @@ var
 begin
   recCmd.PortStaboardID := aPortStarboard;
   recCmd.CommandPropsID := epPCSMETransitMode;
-  recCmd.ValueBool      := not aControl;
+  recCmd.ValueBool      := aControl;
+  recCmd.ValueInt       := Ord(epPCSMETransitMode);
 
   Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;

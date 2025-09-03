@@ -363,6 +363,7 @@ object Form1: TForm1
     Top = 8
   end
   object ComPort1: TComPort
+    Connected = True
     BaudRate = br9600
     Port = 'COM4'
     Parity.Bits = prNone
@@ -380,8 +381,13 @@ object Form1: TForm1
     Left = 512
     Top = 520
   end
+  object tmrThrottleReading: TTimer
+    Interval = 50
+    Left = 760
+    Top = 320
+  end
   object tmrThrottle: TTimer
-    Interval = 100
+    Interval = 500
     OnTimer = tmrThrottleTimer
     Left = 464
     Top = 448

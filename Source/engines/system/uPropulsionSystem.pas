@@ -973,12 +973,12 @@ procedure TPropulsionSystem.TransferOverride(aPortStaboard: String);
 begin
   if aPortStaboard = C_PCS_PORTS then
   begin
-//    ME[0].TransferOverride := True;
+    ME[0].TransferOverride := True;
   end
   else
   if aPortStaboard = C_PCS_STARBOARD then
   begin
-//    ME[1].TransferOverride := True;
+    ME[1].TransferOverride := True;
   end;
 end;
 
