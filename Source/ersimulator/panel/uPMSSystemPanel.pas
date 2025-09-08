@@ -1145,16 +1145,16 @@ procedure TfrmPMSSystemPanel.trckbrBebanChange(Sender: TObject);
 begin
   FwdPosition := -1 * (trckbrBebanFwd.Position);
   AftPosition := -1 * (trckbrBebanAft.Position);
-  ShorePosition := (trckbrBebanShore.Position);
+  ShorePosition := 1 * (trckbrBebanShore.Position);
 
 //  trckbrBebanFwd.Position := -1 * FwdPosition;
 //  trckbrBebanAft.Position := -1 * AftPosition;
-//  trckbrBebanShore.Position := -1 * ShorePosition;
+//  trckbrBebanShore.Position := 1 * ShorePosition;
 
   lblBeban1.Caption := IntToStr(FwdPosition);
   lblBeban2.Caption := IntToStr(AftPosition);
   lblBesarbeban.Caption := IntToStr(FwdPosition + AftPosition);
-  lblBebanShore.Caption := IntToStr(FwdPosition + AftPosition);
+  lblBebanShore.Caption := IntToStr(ShorePosition);
 
   SetPowerConnection(lblCBCloseInn1.Color, lblCBCloseInn2.Color)
 end;
@@ -1174,7 +1174,7 @@ begin
   power.PowerMode := PwrFlagMode;
   Power.PowerConsmr := AftPosition;
 
-  Power := ERSystem.ERManager.EngineRoom.getPMSSystem.GetPower('Power Shore');
+  Power := ERSystem.ERManager.EngineRoom.getPMSSystem.GetPower('Power SHORE');
   power.PowerMode := PwrFlagMode;
   Power.PowerConsmr := ShorePosition;
 end;

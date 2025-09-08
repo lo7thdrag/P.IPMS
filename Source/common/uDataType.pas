@@ -266,7 +266,7 @@ const
   C_CPP_ID : array [0..1] of string = ('CPP PS', 'CPP SB');
   C_GENERATOR_ID : array [0..5] of string = ('Generator 1', 'Generator 2', 'Generator 3', 'Generator 4', 'Emergency Generator', 'Shore Generator');
   C_SWITCHBOARD_ID : array [0..3] of string = ('Switchboard FWD', 'Switchboard AFT', 'Switchboard Emergency', 'Switchboard Shore');
-  C_POWER_ID : array [0..1] of string = ('Power FWD', 'Power AFT');
+  C_POWER_ID : array [0..2] of string = ('Power FWD', 'Power AFT', 'Power SHORE');
   C_PUMP_ID : array [0..5] of string = ('BALLAST PUMP', 'SW PUMP PROV REFRIG UNIT 1', 'COOLING PUMP CHILLER 1',
                                         'FIFI PUMP 2', 'SW PUMP PROV REFRIG UNIT 2', 'SLUDGE DIRTY OIL PUMP');
 
