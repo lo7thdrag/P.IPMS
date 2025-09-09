@@ -32,8 +32,8 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Panel2: TPanel;
-    VrDemoButton4: TVrDemoButton;
-    VrDemoButton5: TVrDemoButton;
+    lblStartingAirLowPressure: TVrDemoButton;
+    lbl7BarAirLowPressure: TVrDemoButton;
     VrDemoButton7: TVrDemoButton;
     Label8: TLabel;
     btnPrevious: TRzBmpButton;

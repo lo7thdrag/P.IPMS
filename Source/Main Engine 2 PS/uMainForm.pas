@@ -1145,6 +1145,11 @@ begin
       begin
         frmCompressedAirCircuit.VrControlAirCompress.Position := Value;
         frmCompressedAirCircuit.lblControlAirCompress.Caption := FloatToStr(Value);
+
+        if Value < 6 then
+          frmCompressedAirCircuit.lbl7BarAirLowPressure.Color := clRed
+        else
+          frmCompressedAirCircuit.lbl7BarAirLowPressure.Color := clGray
       end;
     end;
     epPCSMEStartingAir :
@@ -1153,6 +1158,41 @@ begin
       begin
         frmCompressedAirCircuit.VrStartingAirPressureCompress.Position := Value;
         frmCompressedAirCircuit.lblStartingAirPressureCompress.Caption := FloatToStr(Value);
+
+        if Value < 0 then
+          frmCompressedAirCircuit.lblStartingAirLowPressure.Color := clRed;
+      end;
+    end;
+    epPCSMEBearingTempVeryHigh :
+    begin
+      if Assigned(frmEngineBearingTemperature) then
+      begin
+         frmEngineBearingTemperature.lblEngineBearingVeryHighTemp.Color := clRed;
+
+         frmAlarms.AddAlarmToLog('ENGINE BEARING TEMPERATURE VERY HIGH');
+         frmAlarms.Alarm(True);
+      end
+      else
+      begin
+         frmEngineBearingTemperature.lblEngineBearingVeryHighTemp.Color := clGray;
+
+         frmAlarms.Alarm(False);
+      end;
+    end;
+    epPCSMEBearingTempHigh :
+    begin
+      if Assigned(frmEngineBearingTemperature) then
+      begin
+         frmEngineBearingTemperature.lblEngineBearingHighTemp.Color := clRed;
+
+         frmAlarms.AddAlarmToLog('ENGINE BEARING TEMPERATURE HIGH');
+         frmAlarms.Alarm(True);
+      end
+      else
+      begin
+         frmEngineBearingTemperature.lblEngineBearingHighTemp.Color := clGray;
+
+         frmAlarms.Alarm(False);
       end;
     end;
     epPCSMETCAirSeal :

@@ -961,6 +961,20 @@ begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueDouble);
       end;
     end;
+    epPCSMEBearingTempVeryHigh :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
+    epPCSMEBearingTempHigh :
+    begin
+      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      begin
+       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
+      end;
+    end;
     epPCSMETCAirSeal :
     begin
       if rec.PortStaboardID = C_PCS_ME_PORTS then

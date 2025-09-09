@@ -9570,7 +9570,7 @@ object frmEngineBearingTemperature: TfrmEngineBearingTemperature
       BorderWidth = 2
       BorderStyle = bsSingle
       TabOrder = 0
-      object VrDemoButton1: TVrDemoButton
+      object lblEngineBearingVeryHighTemp: TVrDemoButton
         Tag = 1
         Left = 2
         Top = 30
@@ -9593,7 +9593,7 @@ object frmEngineBearingTemperature: TfrmEngineBearingTemperature
         ParentBiDiMode = False
         TabOrder = 0
       end
-      object VrDemoButton3: TVrDemoButton
+      object lblEngineBearingHighTemp: TVrDemoButton
         Tag = 1
         Left = 0
         Top = 4

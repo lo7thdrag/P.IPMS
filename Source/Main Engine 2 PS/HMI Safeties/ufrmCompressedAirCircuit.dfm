@@ -22,7 +22,7 @@ object frmCompressedAirCircuit: TfrmCompressedAirCircuit
     Height = 1024
     TabOrder = 0
     object ImgBackground: TImage
-      Left = 0
+      Left = 8
       Top = 0
       Width = 1280
       Height = 1024
@@ -7013,7 +7013,7 @@ object frmCompressedAirCircuit: TfrmCompressedAirCircuit
       BorderWidth = 2
       BorderStyle = bsSingle
       TabOrder = 3
-      object VrDemoButton4: TVrDemoButton
+      object lblStartingAirLowPressure: TVrDemoButton
         Tag = 1
         Left = 4
         Top = 4
@@ -7036,7 +7036,7 @@ object frmCompressedAirCircuit: TfrmCompressedAirCircuit
         ParentBiDiMode = False
         TabOrder = 0
       end
-      object VrDemoButton5: TVrDemoButton
+      object lbl7BarAirLowPressure: TVrDemoButton
         Tag = 1
         Left = 4
         Top = 56

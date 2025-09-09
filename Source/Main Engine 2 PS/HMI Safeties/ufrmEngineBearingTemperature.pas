@@ -13,8 +13,8 @@ type
   TfrmEngineBearingTemperature = class(TForm)
     pnlMain: TPanel;
     Panel8: TPanel;
-    VrDemoButton1: TVrDemoButton;
-    VrDemoButton3: TVrDemoButton;
+    lblEngineBearingVeryHighTemp: TVrDemoButton;
+    lblEngineBearingHighTemp: TVrDemoButton;
     Label24: TLabel;
     ImgBackground: TImage;
     btnAlarms: TRzBmpButton;
