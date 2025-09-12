@@ -240,15 +240,15 @@ procedure TfrmShorePanel.VrShoreModeChange(Sender: TObject);
 begin
   if VrShoreMode.SwitchPosition = 0 then
   begin
-    MainSwitchBoardSystem.ShoreMode(1);
+    MainSwitchBoardSystem.ShoreMode(1);     //1:manual
   end
   else if VrShoreMode.SwitchPosition = 1 then
   begin
-    MainSwitchBoardSystem.ShoreMode(2);
+    MainSwitchBoardSystem.ShoreMode(2);     //2:Off
   end
   else
   begin
-    MainSwitchBoardSystem.ShoreMode(3);
+    MainSwitchBoardSystem.ShoreMode(3);     //3:Auto
   end;
 end;
 

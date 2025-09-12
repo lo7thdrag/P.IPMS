@@ -221,7 +221,7 @@ begin
 
     end;
 
-    epPMSMsbCBShore, epPMSMsbCircuitBreaker, epPMSMsbTripReduct :
+    epPMSMsbCBShore, epPMSMsbCircuitBreaker, epPMSMsbTripReduct, epPMSShorePowerMode :
     begin
       rPmsCmd.GenSwitchID := '';
 

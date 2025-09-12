@@ -20,7 +20,7 @@ type
     procedure FormCreate(Sender: TObject);
 
   private
-
+    FIsExport : Boolean;
 //    FListener : TListeners;
 
     procedure MainSwitchBoardSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
@@ -33,6 +33,7 @@ type
     GeneratorTemp : TGenerator;
     SwitchboardTemp : TSwitchboard;
 
+    property IsExport : Boolean read FIsExport write FIsExport;
   end;
 
 var
@@ -189,6 +190,7 @@ begin
         end;
       end;
     end;
+
     epPMSGeneratorMode:
     begin
       GeneratorTemp.GeneratorMode := Value;
@@ -203,6 +205,7 @@ begin
         frmEmergencyPanel.UpdateForm(GeneratorTemp);
       end;
     end;
+
     epPMSGeneratorState:
     begin
       GeneratorTemp.GeneratorState := Value;
@@ -217,6 +220,7 @@ begin
         frmEmergencyPanel.UpdateForm(GeneratorTemp);
       end;
     end;
+
     epPMSMsbShoreMode:
     begin
       if Assigned(SwitchboardTemp) then
@@ -583,6 +587,19 @@ begin
         SwitchboardTemp.ShoresbCircuitBreaker := Value;
       end;
     end;
+
+    epPMSShorePowerMode:
+    begin
+      if Assigned(SwitchboardTemp) then
+      begin
+        SwitchboardTemp.ShorePowerMode := Value;
+
+        if Assigned(frmShorePanel) then
+        begin
+          IsExport := Value;
+        end;
+      end;
+    end;
   end;
 
 
@@ -626,11 +643,13 @@ begin
 
       if Assigned(frmShorePanel) then
       begin
-//        SwitchboardTemp.Power := Value;
-//        frmShorePanel.switchboard := SwitchboardTemp;
-        frmShorePanel.VraPower.Position := Value;
+        if IsExport then
+          frmShorePanel.VraPower.Position := Value    //Export
+        else
+          frmShorePanel.VraPower.Position := -Value;   //Import
       end;
     end;
+
     epPMSFrequency:
     begin
       if Assigned(frmGeneratorPanel) then
@@ -646,6 +665,7 @@ begin
         frmShorePanel.lblFrequency.Caption := FormatFloat('##.##', value/100) + ' Hz';
       end;
     end;
+
     epPMSVoltage:
     begin
       if Assigned(frmGeneratorPanel) then
@@ -668,6 +688,7 @@ begin
         frmShorePanel.lblVoltage.Caption := FloatToStr(value + 1) + 'V';
       end;
     end;
+
     epPMSCurrent:
     begin
       if Assigned(frmGeneratorPanel) then
@@ -693,6 +714,7 @@ begin
         frmShorePanel.tmrAmpere.Enabled := True;
       end;
     end;
+
     epPMSCosPhi:
     begin
       if Assigned(frmGeneratorPanel) then

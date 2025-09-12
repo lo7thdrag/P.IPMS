@@ -259,7 +259,7 @@ begin
     epPMSMeasPowFailure, epPMSAutStartFailure, epPMSSpeedSensorFailureAlrm, epPMSLubOilPressLowAlrm,
     epPMSLubOilTempHigh, epPMSCoolWaterTempHighAlrm, epPMSCoolWaterLevelLow, epPMSFuelOilLeakage,
     epPMSSpeedSensorFailureShutdown, epPMSLubOilPressLowShutdown, epPMSCoolWaterTempHighShutdown,
-    epPMSMsbCBShore :
+    epPMSMsbCBShore, epPMSShorePowerMode :
     begin
       FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool)
     end;

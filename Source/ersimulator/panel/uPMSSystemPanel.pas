@@ -571,9 +571,15 @@ begin
     else if TRadioButton(Sender).Name = 'rbAutShore' then
       SetValueInt(C_SWITCHBOARD, 3, 3, epPMSMsbShoreMode)
     else if TRadioButton(Sender).Name = 'rbImportShore' then
-      pnlShoreImport.BringToFront
+    begin
+      pnlShoreImport.BringToFront;
+      SetValueBool(C_SWITCHBOARD, 3, False, epPMSShorePowerMode)
+    end
     else if TRadioButton(Sender).Name = 'rbEksportShore' then
-      pnlShoreExport.BringToFront
+    begin
+      pnlShoreExport.BringToFront;
+      SetValueBool(C_SWITCHBOARD, 3, True, epPMSShorePowerMode)
+    end;
   end;
 end;
 
@@ -716,6 +722,7 @@ begin
     case PropsID of
       epPMSMsbCircuitBreaker: switchboard.MsbCircuitBreaker := value;
       epPMSMsbCBShore: switchboard.ShoresbCircuitBreaker  := value;
+      epPMSShorePowerMode: switchboard.ShorePowerMode := value;
 //      epPMSEsbCBIntr: switchboard.EsbCBIntr := value;
 //      epPMSEsbFwdCBIntr: switchboard.EsbFwdCBIntr := value;
       epPMSEsbCBIntr:
@@ -1147,14 +1154,10 @@ begin
   AftPosition := -1 * (trckbrBebanAft.Position);
   ShorePosition := 1 * (trckbrBebanShore.Position);
 
-//  trckbrBebanFwd.Position := -1 * FwdPosition;
-//  trckbrBebanAft.Position := -1 * AftPosition;
-//  trckbrBebanShore.Position := 1 * ShorePosition;
-
   lblBeban1.Caption := IntToStr(FwdPosition);
   lblBeban2.Caption := IntToStr(AftPosition);
-  lblBesarbeban.Caption := IntToStr(FwdPosition + AftPosition);
   lblBebanShore.Caption := IntToStr(ShorePosition);
+  lblBesarbeban.Caption := IntToStr(FwdPosition + AftPosition);
 
   SetPowerConnection(lblCBCloseInn1.Color, lblCBCloseInn2.Color)
 end;

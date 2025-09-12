@@ -30,6 +30,7 @@ type
 //    FIsEsbFwdCBIntr : boolean;
     FIsMsbCBShore : boolean;
     FIsMsbCBNavNaut : boolean;
+    FShorePowerMode : Boolean;
 
     procedure SetFrequency (const Value : Double);
     procedure SetVoltage (const Value : Double);
@@ -49,6 +50,7 @@ type
     procedure SetTripReduct(const Value : Boolean);
     procedure SetBusbar(const Value : Boolean);
     procedure SetEmergencyCon(const Value : Boolean);
+    procedure SetShorePowerMode(const Value : Boolean);
 
   public
     constructor Create;override;
@@ -62,6 +64,9 @@ type
     property ESBInterconnectionMode : Integer read FESBIntrMode write SetESBIntrMode;
     {1:Man; 2:Off; 3:Aut}
     property ShoreInterconnectionMode : Integer read FShoreIntrMode write SetShoreIntrMode;
+
+    {True:Export; False:Import}
+    property ShorePowerMode : Boolean read FShorePowerMode write SetShorePowerMode;
 
     property MsbCircuitBreaker : Boolean read FIsMsbCircuitBreaker write SetMsbCircuitBreaker;
     property EsbCircuitBreaker : Boolean read FIsEsbCBIntr write SetEsbCBIntr;
@@ -278,6 +283,14 @@ begin
     exit;
   FShoreIntrMode := Value;
   Listener.TriggerEvents(Self,epPMSMsbShoreMode,Value);
+end;
+
+procedure TSwitchboard.SetShorePowerMode(const Value: Boolean);
+begin
+  if FShorePowerMode = Value then
+    exit;
+  FShorePowerMode := Value;
+  Listener.TriggerEvents(Self,epPMSShorePowerMode,Value);
 end;
 
 procedure TSwitchboard.SetTrafo115Volt(const Value: Double);
