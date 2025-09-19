@@ -55,6 +55,7 @@ type
 
     FSeqNumber : Integer;
     FChecked   : Boolean;
+    FAlarmIsActive : Boolean;
 
     FRunner : TMSTimer;
     FDelayer : TDelayer;
@@ -257,13 +258,16 @@ begin
     end;
     1:
     begin
+      if FAlarmIsActive then
+      begin
       try
         frmMainDisplay.mpAlarm.Open;
         frmMainDisplay.mpAlarm.Stop;
       finally
       end;
-      frmMainDisplay.mpAlarm.Notify := True;
-      frmMainDisplay.silence := False;
+        frmMainDisplay.mpAlarm.Notify := True;
+        frmMainDisplay.silence := False;
+      end;
     end;
   end;
 end;
