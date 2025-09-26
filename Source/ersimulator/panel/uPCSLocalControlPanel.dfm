@@ -3364,7 +3364,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnStartClick
             Color = clGreen
           end
-          object btnSafeties: TSpeedButtonImage
+          object btnSafetiesResetPS: TSpeedButtonImage
             Left = 195
             Top = 35
             Width = 66
@@ -14489,10 +14489,6 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
     object tsSB: TTabSheet
       Caption = 'LCP Startboard Side'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pnlLCPSB: TPanel
         Left = 0
         Top = 0
@@ -18618,7 +18614,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
             OnClick = btnStartClick
             Color = clGreen
           end
-          object btnAlarm_Accept3: TSpeedButtonImage
+          object btnSafetiesResetSB: TSpeedButtonImage
             Tag = 1
             Left = 195
             Top = 35

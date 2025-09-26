@@ -21,7 +21,7 @@ type
     img21: TImage;
     btnStopPS: TSpeedButtonImage;
     btnStartPS: TSpeedButtonImage;
-    btnSafeties: TSpeedButtonImage;
+    btnSafetiesResetPS: TSpeedButtonImage;
     btnClutchPS: TSpeedButtonImage;
     btnDeclutchPS: TSpeedButtonImage;
     btnSafetiesStopPS: TSpeedButtonImage;
@@ -106,7 +106,7 @@ type
     vrtryswtchPumpHeaterSB: TVrRotarySwitch;
     pnlAlarm: TPanel;
     btnStopSB: TSpeedButtonImage;
-    btnAlarm_Accept3: TSpeedButtonImage;
+    btnSafetiesResetSB: TSpeedButtonImage;
     btnClutchSB: TSpeedButtonImage;
     btnDeclutchSB: TSpeedButtonImage;
     btnSafetiesStopSB: TSpeedButtonImage;
@@ -313,6 +313,8 @@ type
 
     FStopDecrease: Boolean;
     FStopIncrease: Boolean;
+
+    FemergencyActive_PS, FEmergencyActiveSB : Boolean;
 
     {Proses Prelube}
     PrelubeCounter : Integer;
@@ -771,9 +773,14 @@ begin
 end;
 
 procedure TfrmPCSLocalControlPanel.btnStartClick(Sender: TObject);
+var
+  SenderOn, SenderOff : TSpeedButtonImage;
 begin
   if TButton(Sender).Tag = 0 then
   begin
+    if FemergencyActive_PS then
+      Exit;
+
     if main_engine_PS.ReadyForUse and main_engine_PS.LocalControl then
     begin
       FIsStarting      := True;
@@ -806,6 +813,9 @@ begin
       main_engine.HeaterAuto         := True;
 
       gearbox.ClutchEngaged := True;
+
+      main_engine.StopIncrease := False;
+      main_engine.Decrease     := False;
     end;
   end
   else if TButton(Sender).Tag = 1 then
@@ -841,6 +851,8 @@ begin
       main_engine.HeaterAuto         := True;
 
       gearbox.ClutchEngaged := True;
+      main_engine.StopIncrease := False;
+      main_engine.Decrease     := False;
     end;
   end;
 end;
@@ -1147,15 +1159,24 @@ begin
         end;
         epPCSMESafetyStopsOverriden :
         begin
-          main_engine_PS.EmergencyStop := True;
+          main_engine_PS.SafetyStopsOverriden := True;
+
+          if Value then
+            img10.Picture.LoadFromFile(fAlarmIndicatorRedOn)
+          else
+            img10.Picture.LoadFromFile(fAlarmIndicatorRedOff);
+
+          btnSafetiesStopPS.Color := clLime;
         end;
         epPCSMELocalEmergencyStop :
         begin
           main_engine_PS.LocalEmergencyStop := True;
+          btnEmergencStopPS.Color := clLime;
         end;
         epPCSMEResetSafetyStopPossible :
         begin
           main_engine.ResetSafetyStopPossible := True;
+          btnSafetiesResetPS.Color := clRed;
         end;
       end;
     end
@@ -1234,15 +1255,24 @@ begin
         end;
         epPCSMESafetyStopsOverriden :
         begin
-           main_engine_PS.EmergencyStop := True;
+           main_engine_SB.SafetyStopsOverriden := True;
+
+          if Value then
+            img41.Picture.LoadFromFile(fAlarmIndicatorRedOn)
+          else
+            img41.Picture.LoadFromFile(fAlarmIndicatorRedOff);
+
+          btnSafetiesStopSB.Color := clLime;
         end;
         epPCSMELocalEmergencyStop :
         begin
-          main_engine_PS.LocalEmergencyStop := True;
+          main_engine_SB.LocalEmergencyStop := True;
+          btnEmergencStopSB.Color := clLime;
         end;
         epPCSMEResetSafetyStopPossible :
         begin
-          main_engine.ResetSafetyStopPossible := True;
+          main_engine_SB.ResetSafetyStopPossible := True;
+          btnSafetiesResetSB.Color := clRed;
         end;
       end;
     {$ENDREGION}

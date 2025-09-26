@@ -25,8 +25,8 @@ unsigned long lastSerialTime = 0;
 const int buttonPins[12] = {14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25};
 const int ledPins[12] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 String buttonNames[12] = {
-  "ShaftDrivenPS", "EmergencyStopPS", "LeverInServicePS",
-  "ShaftStopPS", "ShaftTrailingPS", "TransferOverridePS",
+  "ShaftDrivenPS", "ShaftStopPS", "ShaftTrailingPS",
+  "EmergencyStopPS", "LeverInServicePS", "TransferOverridePS",
   "EmergencyStopSB", "LeverInServiceSB", "TransferOverrideSB", 
   "ShaftDrivenSB", "ShaftStopSB", "ShaftTrailingSB"
 };
@@ -37,6 +37,10 @@ bool toggleState[12] = {false};
 String inputString = "";
 boolean stringComplete = false;
 
+enum ControlSource {SOURCE_NONE, SOURCE_BUTTON, SOURCE_REMOTE};
+ControlSource lastSourcePS = SOURCE_NONE;
+ControlSource lastSourceSB = SOURCE_NONE;
+
 void setup() {  
     Serial.begin(9600);
   
@@ -46,6 +50,7 @@ void setup() {
     digitalWrite(ledPins[i], LOW);
     }
     inputString.reserve(50);
+    
     pinMode(4, OUTPUT);
     pinMode(9, OUTPUT);
     digitalWrite(4, LOW);
@@ -72,7 +77,7 @@ void loop() {
     
     throttlePSValue    = analogRead(throttlePSPin);
     throttlePSValue    = constrain(throttlePSValue, 0, 1023);
-    throttlePSPosition = map(throttlePSValue, 0, 1023, 24, 0);
+    throttlePSPosition = map(throttlePSValue, 0, 1023, 22, 0);
     
     if (throttlePSPosition != lastThrottlePS) {
     Serial.print("ThrottlePS :");
@@ -82,7 +87,7 @@ void loop() {
    }
     throttleSBValue    = analogRead(throttleSBPin);
     throttleSBValue    = constrain(throttleSBValue, 0, 1023);
-    throttleSBPosition = map(throttleSBValue, 0, 1023, 24, 0);
+    throttleSBPosition = map(throttleSBValue, 0, 1023, 22, 0);
     
     if (throttleSBPosition != lastThrottleSB) {
     Serial.print("ThrottleSB :");
@@ -108,31 +113,70 @@ void loop() {
         Serial.println(toggleState[i] ? "1" : "0");
         Serial.print('\n');
       }
+ // Button shaft driven dan shaft stop PS
+      if (i == 0 && toggleState[0]) {     //shaft driven
+        toggleState[1] = false;           // shaft stop
+        digitalWrite(ledPins[1], LOW);
+      }
+      if (i == 1 && toggleState[1]) { 
+        toggleState[0] = false;
+        digitalWrite(ledPins[0], LOW);
+      }
+   
+      if (i == 2 && toggleState[2]) {     
+        toggleState[1] = false;
+        digitalWrite(ledPins[1], LOW);
+      }
+      if (i == 1 && toggleState[1]) {
+        toggleState[2] = false;
+        digitalWrite(ledPins[2], LOW);
+      }
+
+ // Button shaft driven dan shaft stop SB
+      if (i == 9 && toggleState[9]) {
+        toggleState[10] = false;
+        digitalWrite(ledPins[10], LOW);
+      }
+      if (i == 10 && toggleState[10]) {
+        toggleState[9] = false;
+        digitalWrite(ledPins[9], LOW);
+      }
   
-      lastState[i] = currentState;
+      if (i == 11 && toggleState[11]) {
+        toggleState[10] = false;
+        digitalWrite(ledPins[10], LOW);
+      }
+      if (i == 10 && toggleState[10]) {
+        toggleState[11] = false;
+        digitalWrite(ledPins[11], LOW);
+      }
+        lastState[i] = currentState;
       }
     }
 
 // Astern dan Ahead
-  if (!remoteOverridePS) {
     if (toggleState[5]) {
       digitalWrite(26, HIGH);
       digitalWrite(29, LOW);
+      lastSourcePS = SOURCE_BUTTON;
+    } else if (remoteOverridePS) {
+      lastSourcePS = SOURCE_REMOTE;
     } else {
       digitalWrite(26, LOW);
       digitalWrite(29, HIGH);
     }
-  }
 
-  if (!remoteOverrideSB) {
     if (toggleState[8]) {
       digitalWrite(27, HIGH);
       digitalWrite(28, LOW);
+      lastSourceSB = SOURCE_BUTTON;
+    } else if (remoteOverrideSB) {
+      lastSourceSB = SOURCE_REMOTE;
     } else {
       digitalWrite(27, LOW);
       digitalWrite(28, HIGH);
     }
-  }
+
 
     if (currentMillis - lastSerialTime >= serialInterval) {
       lastSerialTime = currentMillis;
@@ -143,10 +187,10 @@ void loop() {
       inputString.trim();  
   
       if (inputString == "LeverInServicePS:1") {
-        digitalWrite(4, HIGH);
+        digitalWrite(6, HIGH);
       } 
       else if (inputString == "LeverInServicePS:0") {
-        digitalWrite(4, LOW);
+        digitalWrite(6, LOW);
       }
       
       if (inputString == "LeverInServiceSB:1") {
@@ -158,24 +202,32 @@ void loop() {
   
       if (inputString == "AheadPS:1") {
         remoteOverridePS = true;
-        digitalWrite(29, HIGH);
-        digitalWrite(26, LOW);
+        if (lastSourcePS != SOURCE_BUTTON) {
+          digitalWrite(29, HIGH);
+          digitalWrite(26, LOW);
+        }
       } else if (inputString == "AsternPS:1") {
         remoteOverridePS = true;
-        digitalWrite(26, HIGH);
-        digitalWrite(29, LOW);
+        if (lastSourcePS != SOURCE_BUTTON) {
+          digitalWrite(26, HIGH);
+          digitalWrite(29, LOW);
+        }
       } else if (inputString == "AheadPS:0" || inputString == "AsternPS:0") {
         remoteOverridePS = false;
       }
   
       if (inputString == "AheadSB:1") {
         remoteOverrideSB = true;
-        digitalWrite(28, HIGH);
-        digitalWrite(27, LOW);
+        if (lastSourceSB != SOURCE_BUTTON) {
+          digitalWrite(28, HIGH);
+          digitalWrite(27, LOW);
+        }
       } else if (inputString == "AsternSB:1") {
         remoteOverrideSB = true;
-        digitalWrite(27, HIGH);
-        digitalWrite(28, LOW);
+        if (lastSourceSB != SOURCE_BUTTON) {
+          digitalWrite(27, HIGH);
+          digitalWrite(28, LOW);
+        }
       } else if (inputString == "AheadSB:0" || inputString == "AsternSB:0") {
         remoteOverrideSB = false;
       }
