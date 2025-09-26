@@ -816,6 +816,9 @@ begin
 
       main_engine.StopIncrease := False;
       main_engine.Decrease     := False;
+
+      btnSafetiesResetPS.Color := clMaroon;
+      btnEmergencStopPS.Color  := clGreen;
     end;
   end
   else if TButton(Sender).Tag = 1 then
@@ -853,6 +856,9 @@ begin
       gearbox.ClutchEngaged := True;
       main_engine.StopIncrease := False;
       main_engine.Decrease     := False;
+
+      btnSafetiesResetSB.Color := clMaroon;
+      btnEmergencStopSB.Color  := clGreen;
     end;
   end;
 end;
@@ -1115,6 +1121,9 @@ begin
             FFlashingStopPS  := False;
 
             img18.Picture.LoadFromFile(fAlarmIndicatorGreenOn);
+
+            btnSafetiesResetPS.Color := clMaroon;
+            btnEmergencStopPS.Color  := clGreen;
           end
           else
           begin
@@ -1211,6 +1220,9 @@ begin
             FFlashingStartSB := True;
             FFlashingStopSB  := False;
             img30.Picture.LoadFromFile(fAlarmIndicatorGreenOff);
+
+            btnSafetiesResetSB.Color := clMaroon;
+            btnEmergencStopSB.Color  := clGreen;
           end
           else
           begin
