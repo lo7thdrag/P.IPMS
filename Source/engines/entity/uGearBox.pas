@@ -5,7 +5,7 @@ interface
 uses uEntity, Math;
 
 const
-  FPC_LeverShaftPositionTransit  : array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
+  FPC_LeverShaftPositionTransit  : array[0..12] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0);
   FPC_LeverSpeedShaftTransit     : array[0..12] of Double = (237.3, 210.9, 186.9, 162.7, 138.5, 114.6, 90.4, 90.4, 90.4, 90.4,
                                                           90.4, 90.4, 90.4);
 
@@ -34,7 +34,7 @@ type
     FLOPressInlet,
     FLOTempInlet: Double;
 
-    FLeverShaft, FLeverShaftTransit: Double;
+    FLeverShaft, FLeverShaftTransit, FShaftLeverTrail: Double;
 
     FReadyForUse,
     FRemoteManual,
@@ -87,6 +87,8 @@ type
     procedure SetCtrlOilPressOut(const Value : Double);
     procedure SetLOPressInlet(const Value : Double);
     procedure SetLOTempInlet(const Value : Double);
+
+    procedure SetShaftLeverTrail(const Value : Double);
 
     procedure SetReadyForUse(const Value : Boolean);
     procedure SetRemoteAuto(const Value : Boolean);
@@ -146,6 +148,8 @@ type
     property LOPressInlet : Double read FLOPressInlet write SetLOPressInlet;
     property LOTempInlet : Double read FLOTempInlet write SetLOTempInlet;
 
+    property ShaftLeverTrail : Double read FShaftLeverTrail write SetShaftLeverTrail;
+
     property ReadyForUse : Boolean read FReadyForUse write SetReadyForUse;
     property RemoteAuto : Boolean read FRemoteAuto write SetRemoteAuto;
     property RemoteManual : Boolean read FRemoteManual write SetRemoteManual;
@@ -187,7 +191,9 @@ begin
   if FDelayerShaftSpeed > 1 then
   begin
     FDelayerShaftSpeed := 0;
-    DelayShaftSpeed := ShaftSpeed;
+
+    if ShaftSpeed <> 0 then
+      DelayShaftSpeed := ShaftSpeed;
   end;
 end;
 
@@ -691,6 +697,12 @@ begin
 
   FShaftTrailing := Value;
   Listener.TriggerEvents(Self,epPCSLeverShaftTrailing,Value);
+end;
+
+procedure TGearBox.SetShaftLeverTrail(const Value: Double);
+begin
+  FDelayShaftSpeed := 40;
+  Listener.TriggerEvents(Self,epPCSGBDelayShaftSpeed,FDelayShaftSpeed);
 end;
 
 procedure TGearBox.SetStandbyPump(const Value: Boolean);

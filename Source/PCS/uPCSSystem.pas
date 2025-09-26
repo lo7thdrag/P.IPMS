@@ -105,7 +105,7 @@ type
     procedure EmergencyStop(aPortStarboard : string; aOnOff : Boolean);
     procedure TransferOverride(aPortStarboard : string; aOnOff : Boolean);
     procedure StopShaftDriven(aPortStarboard : string; aOnOff : Boolean);
-    procedure ShaftTrailing(aPortStarboard: string; aOnOff: Boolean);
+    procedure ShaftTrailing(aPortStarboard: string; aValue: Double; aOnOff: Boolean);
     procedure LeverPitch(aPortStarboard : String; aValue: Double; aOnOff : Boolean);
     procedure LeverSpeed(aPortStarboard : String; aValue: Double; aOnOff : Boolean);
     procedure LeverShaft(aPortStarboard : String; aValue: Double; aOnOff : Boolean);
@@ -360,13 +360,13 @@ begin
   Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
 end;
 
-procedure TPCSSystem.ShaftTrailing(aPortStarboard: string; aOnOff: Boolean);
+procedure TPCSSystem.ShaftTrailing(aPortStarboard: string; aValue: Double; aOnOff: Boolean);
 var
   recCmd : R_Common_PCS_Command;
 begin
   recCmd.PortStaboardID := aPortStarboard;
   recCmd.CommandPropsID := epPCSLeverShaftTrailing;
-  recCmd.CommandID      := C_ORD_LEVER_SHAFTTRAILING;
+  recCmd.ValueDouble    := aValue;
   recCmd.ValueBool      := aOnOff;
 
   Network.PCSControllerSocket.SendData(C_PCS_COMMAND,@recCmd);
@@ -1064,14 +1064,14 @@ begin
     begin
       if rec.PortStaboardID = C_PCS_GB_PORTS then
       begin
-        FLIstener.TriggerEvents(Self,epPCSLeverShaftTrailingPS,rec.ValueBool);
-        ShaftTrailingPS := rec.ValueBool;
+        FLIstener.TriggerEvents(Self,epPCSLeverShaftTrailingPS,Round(rec.ValueDouble));
+//        ShaftTrailingPS := rec.ValueBool;
       end
       else
       if rec.PortStaboardID = C_PCS_GB_STARBOARD then
       begin
-        FLIstener.TriggerEvents(Self,epPCSLeverShaftTrailingSB,rec.ValueBool);
-        ShaftTrailingSB := rec.ValueBool;
+        FLIstener.TriggerEvents(Self,epPCSLeverShaftTrailingSB,Round(rec.ValueDouble));
+//        ShaftTrailingSB := rec.ValueBool;
       end;
     end;
 

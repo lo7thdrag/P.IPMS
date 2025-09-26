@@ -1384,19 +1384,9 @@ begin
 
     epPCSLeverShaftTrailing :
     begin
-      ERSystem.ERManager.EngineRoom.getPCSSystem.ShaftTrailing(recERPCS.PortStaboardID);
       gearbox := ERSystem.ERManager.EngineRoom.getPCSSystem.getGearBox(recERPCS.PortStaboardID);
-      if recERPCS.ValueBool = True then
-      begin
-        gearbox.ShaftTrailing       := recERPCS.ValueBool;
-        gearbox.ClutchEngagedDelay  := True;
-        gearbox.LeverShaft          := recERPCS.ValueDouble;
-      end
-      else if recERPCS.ValueBool = False then
-      begin
-        gearbox.ShaftTrailing       := False;
-        gearbox.ClutchEngagedDelay  := False;
-      end;
+      gearbox.ShaftLeverTrail     := recERPCS.ValueDouble;
+      gearbox.ClutchEngagedDelay  := False;
     end;
 
     epPCSMELeverSpeed :
@@ -1426,7 +1416,7 @@ begin
       if recERPCS.ValueBool = True then
         gearbox.LeverShaft  := recERPCS.ValueDouble
       else if recERPCS.ValueBool = False then
-        gearbox.LeverShaftTransit  := recERPCS.ValueDouble
+        gearbox.LeverShaftTransit  := recERPCS.ValueDouble;
     end;
 
     epPCSMETransitMode :
