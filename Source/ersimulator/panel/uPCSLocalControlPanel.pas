@@ -298,6 +298,7 @@ type
     procedure btnByPassClosedClick(Sender: TObject);
     procedure PrelubTimerTimer(Sender: TObject);
     procedure btnSafetiesResetClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
   private
     aplctnvntsKey : TApplicationEvents;
@@ -1514,6 +1515,24 @@ begin
 //        pnlCPP_SB.Visible := False;
       end;
     end;
+  end;
+end;
+
+procedure TfrmPCSLocalControlPanel.FormShow(Sender: TObject);
+begin
+  main_engine_PS := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(C_PCS_ME_PORTS);
+  main_engine_SB := ERSystem.ERManager.EngineRoom.getPCSSystem.getMainEngine(C_PCS_ME_STARBOARD);
+
+  if not main_engine_PS.EngineRun then
+  begin
+    main_engine_PS.StopIncrease := True;
+    main_engine_PS.Decrease     := True;
+  end;
+
+  if not main_engine_SB.EngineRun then
+  begin
+    main_engine_SB.StopIncrease := True;
+    main_engine_SB.Decrease     := True;
   end;
 end;
 

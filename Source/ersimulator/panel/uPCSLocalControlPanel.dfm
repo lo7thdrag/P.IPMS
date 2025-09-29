@@ -14,6 +14,7 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pgc1: TPageControl
@@ -14489,6 +14490,10 @@ object frmPCSLocalControlPanel: TfrmPCSLocalControlPanel
     object tsSB: TTabSheet
       Caption = 'LCP Startboard Side'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pnlLCPSB: TPanel
         Left = 0
         Top = 0
