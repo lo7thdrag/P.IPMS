@@ -86523,6 +86523,7 @@ object MainForm: TMainForm
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 8
+      Visible = False
       WordWrap = False
     end
     object mmoLogReceive: TMemo
@@ -86533,6 +86534,7 @@ object MainForm: TMainForm
       ReadOnly = True
       ScrollBars = ssBoth
       TabOrder = 9
+      Visible = False
       WordWrap = False
     end
   end

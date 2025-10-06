@@ -303,7 +303,6 @@ end;
 {$ENDREGION}
 
 {$REGION ' Event Procedure '}
-
 procedure TMainForm.MCRMachineLeftSystemEvent(Sender: TObject; PropsID: E_PropsID; Value: TObject);
 begin
   case PropsID of
@@ -879,19 +878,17 @@ begin
 end;
 
 procedure TMainForm.tmrCPPTimer(Sender: TObject);
+var
+  TargetPos : Integer;
 begin
-  if vraCPP.Position > OrderCPP then
-  begin
-    vraCPP.Position := vraCPP.Position - 1;
-  end
-  else if vraCPP.Position < OrderCPP then
-  begin
-    vraCPP.Position := vraCPP.Position + 1;
-  end
+  TargetPos := Round(50 - (OrderCPP / 2));
+
+  if vraCPP.Position < TargetPos then
+    vraCPP.Position := vraCPP.Position + 1
+  else if vraCPP.Position > TargetPos then
+    vraCPP.Position := vraCPP.Position - 1
   else
-  begin
     tmrCPP.Enabled := False;
-  end;
 end;
 
 procedure TMainForm.tmrMeSpeedTimer(Sender: TObject);
