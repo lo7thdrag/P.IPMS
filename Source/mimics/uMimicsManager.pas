@@ -10,7 +10,17 @@ uses
   Windows, uDataType, ufrmMimics, Forms, Controls, Graphics,
   Sysutils, classes, Dialogs, uDatabase, ExtCtrls,
   uListener, uDBSupportClasses, uFreezeFrom, uBaseComponent,
-  DateUtils, uThreadTimer, uSteppers, ComCtrls;
+  DateUtils, uThreadTimer, uSteppers, ComCtrls, StrUtils;
+
+const
+  ExcludedElementIDs: array[0..16] of string = (
+    '5411S0004A', '5411S0002A', '5411S0001A',
+    '5412S0010A', '5412S0001A', '5411S0003A',
+    '5412S0004A', '5411S0006A', '5321S0002A',
+    '5321S0001A', '5321S0003A', '5292S0002A',
+    '5292S0001A', '5292S0003A', '2621S0001A',
+    '2621S0002A', '5932S0001A'
+  );
 
 type
 
@@ -55,7 +65,6 @@ type
 
     FSeqNumber : Integer;
     FChecked   : Boolean;
-    FAlarmIsActive : Boolean;
 
     FRunner : TMSTimer;
     FDelayer : TDelayer;
@@ -258,16 +267,13 @@ begin
     end;
     1:
     begin
-      if FAlarmIsActive then
-      begin
       try
         frmMainDisplay.mpAlarm.Open;
         frmMainDisplay.mpAlarm.Stop;
       finally
       end;
-        frmMainDisplay.mpAlarm.Notify := True;
-        frmMainDisplay.silence := False;
-      end;
+      frmMainDisplay.mpAlarm.Notify := True;
+      frmMainDisplay.silence := False;
     end;
   end;
 end;
@@ -1301,7 +1307,8 @@ begin
 //      if role <> FRole then
 //        FFuncAllocSoundArray[objElm.AlarmgroupID] := False;
 
-      if FFuncAllocSoundArray[objElm.AlarmgroupID] then
+      if FFuncAllocSoundArray[objElm.AlarmgroupID] and not MatchStr(objElm.ElementID, ExcludedElementIDs) then
+//      if FFuncAllocSoundArray[objElm.AlarmgroupID] then
       begin
         if (objElm.aAck = 'N') then
         begin
@@ -1337,7 +1344,8 @@ begin
 
       objElm.aAck := 'N';
 
-      if FFuncAllocSoundArray[objElm.AlarmgroupID] then
+      if FFuncAllocSoundArray[objElm.AlarmgroupID] and not MatchStr(objElm.ElementID, ExcludedElementIDs) then
+//      if FFuncAllocSoundArray[objElm.AlarmgroupID] then
       begin
 //        if (objElm.aAck = 'N') then
 //        begin

@@ -2170,6 +2170,26 @@ begin
            'WHERE Running_ID = ' + IntToStr(aRunningID) +
            ' GROUP BY alarm_id) ' +
          'AND Running_ID = ' + IntToStr(aRunningID) +
+         'AND alarm_id NOT IN (' +
+          '  ''5411S0004A.ALM.TRU'', ' +
+          '  ''5411S0002A.ALM.TRU'', ' +
+          '  ''5411S0001A.ALM.TRU'', ' +
+          '  ''5412S0010A.ALM.TRU'', ' +
+          '  ''5412S0001A.ALM.TRU'', ' +
+          '  ''5411S0003A.ALM.TRU'', ' +
+          '  ''5412S0004A.ALM.TRU'', ' +
+          '  ''5411S0006A.ALM.TRU'', ' +
+          '  ''2621S0001A.ALM.TRU'', ' +
+          '  ''2621S0002A.ALM.TRU'', ' +
+          '  ''5932S0001A.ALM.TRU'', ' +
+          '  ''5321S0002A.ALM.TRU'', ' +
+          '  ''5321S0001A.ALM.TRU'', ' +
+          '  ''5321S0003A.ALM.TRU'', ' +
+          '  ''5292S0002A.ALM.TRU'', ' +
+          '  ''5292S0001A.ALM.TRU'', ' +
+          '  ''5292S0003A.ALM.TRU'' ' +
+          ')' +
+
          'ORDER BY final_state DESC, timestamp DESC';
 
     SQL.Add(query);
