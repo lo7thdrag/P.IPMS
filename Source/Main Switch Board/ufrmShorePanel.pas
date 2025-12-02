@@ -77,9 +77,9 @@ type
     procedure ImgIndicatorCBOpenClick(Sender: TObject);
     procedure ImgIndicatorCBCloseClick(Sender: TObject);
     procedure tmrAmpereTimer(Sender: TObject);
-    procedure VrShoreModeChange(Sender: TObject);
     procedure tmrSyncTimer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure VrShoreModeClick(Sender: TObject);
   private
     IndSync : array of TImage;
 
@@ -233,10 +233,9 @@ begin
     ImgIndicatorCBClose.Visible := True;
     ImgIndicatorCBOpen.Visible := False;
   end;
-
 end;
 
-procedure TfrmShorePanel.VrShoreModeChange(Sender: TObject);
+procedure TfrmShorePanel.VrShoreModeClick(Sender: TObject);
 begin
   if VrShoreMode.SwitchPosition = 0 then
   begin
@@ -246,7 +245,7 @@ begin
   begin
     MainSwitchBoardSystem.ShoreMode(2);     //2:Off
   end
-  else
+  else if VrShoreMode.SwitchPosition = 2 then
   begin
     MainSwitchBoardSystem.ShoreMode(3);     //3:Auto
   end;

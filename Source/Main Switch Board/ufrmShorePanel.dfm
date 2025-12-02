@@ -154556,7 +154556,6 @@ object frmShorePanel: TfrmShorePanel
       Top = 769
       Width = 140
       Height = 140
-      OnChange = VrShoreModeChange
       SwitchPositions.Strings = (
         '2'
         '0'
@@ -154573,6 +154572,7 @@ object frmShorePanel: TfrmShorePanel
       Font.Height = -13
       Font.Name = 'Arial'
       Font.Style = [fsBold]
+      OnClick = VrShoreModeClick
     end
     object VrRotarySwitch3: TVrRotarySwitch
       Left = 465

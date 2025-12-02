@@ -2553,8 +2553,8 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
           ParentFont = False
         end
         object trckbrBebanShore: TTrackBar
-          Left = 16
-          Top = 45
+          Left = 14
+          Top = 42
           Width = 249
           Height = 41
           Max = 250
@@ -2564,7 +2564,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
           TickMarks = tmBoth
           OnChange = trckbrBebanChange
         end
-        object btn2: TButton
+        object btnApplyShore: TButton
           Tag = 10
           Left = 72
           Top = 89
@@ -2578,7 +2578,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 1
-          OnClick = btnApplyClick
+          OnClick = btnApplyShoreClick
         end
       end
       object pnlShoreImport: TPanel

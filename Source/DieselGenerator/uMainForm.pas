@@ -158,6 +158,13 @@ begin
   else
     mpAlarm.FileName:= ExtractFilePath(Application.Exename) + 'ACS_ALARM.mp3';
 
+  if not FileExists(ExtractFilePath(Application.Exename) + 'Suara_dieselgenerator.wav') then
+  begin
+    raise Exception.Create('Suara_dieselgenerator.wav Not found');
+  end
+  else
+    mpDiesel.FileName:= ExtractFilePath(Application.Exename) + 'Suara_dieselgenerator.wav';
+
   IsFirstPlay := True;
   silence := False;
 
@@ -209,6 +216,7 @@ begin
     begin
     if DieselGeneratorSystem.Freezed then
       begin
+        EngineSound(False);
         // Simpan nilai terakhir saat sedang freeze
         FLastEngineRunValue := Value;
         FNeedReplayEngineRun := True;

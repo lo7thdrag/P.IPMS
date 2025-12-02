@@ -10566,7 +10566,6 @@ object MainForm: TMainForm
       Top = 208
       Width = 253
       Height = 30
-      FileName = 'D:\IPMS\P.IPMS\Source\bin\Suara_dieselgenerator.wav'
       Visible = False
       TabOrder = 2
       OnNotify = mpDieselNotify

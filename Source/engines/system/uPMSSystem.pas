@@ -59,7 +59,7 @@ type
   public
     Gen : array [0..5] of TGenerator;
     Msb : array [0..3] of TSwitchboard;
-    Pwr : array [0..1] of TPower;
+    Pwr : array [0..2] of TPower;
 
     constructor Create;override;
     destructor Destroy;override;

@@ -205,7 +205,7 @@ type
     lblBebanShore: TLabel;
     lbl13: TLabel;
     trckbrBebanShore: TTrackBar;
-    btn2: TButton;
+    btnApplyShore: TButton;
 
     procedure Gen1ModeClick(Sender: TObject);
     procedure Gen2ModeClick(Sender: TObject);
@@ -232,6 +232,7 @@ type
     procedure btn1Click(Sender: TObject);
 
     procedure emergency(Sender: TObject);
+    procedure btnApplyShoreClick(Sender: TObject);
 
   private
     FwdPosition, AftPosition, ShorePosition : Integer;
@@ -1176,10 +1177,14 @@ begin
   Power := ERSystem.ERManager.EngineRoom.getPMSSystem.GetPower('Power AFT');
   power.PowerMode := PwrFlagMode;
   Power.PowerConsmr := AftPosition;
+end;
 
+procedure TfrmPMSSystemPanel.btnApplyShoreClick(Sender: TObject);
+begin
   Power := ERSystem.ERManager.EngineRoom.getPMSSystem.GetPower('Power SHORE');
   power.PowerMode := PwrFlagMode;
   Power.PowerConsmr := ShorePosition;
+
 end;
 
 end.
