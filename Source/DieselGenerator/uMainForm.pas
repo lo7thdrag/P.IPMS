@@ -80,8 +80,6 @@ type
     LampStatus  : array of Boolean;
     FRunningHourTemp : Integer;
     FRunningHour : Integer;
-    FLastEngineRunValue: Boolean;
-    FNeedReplayEngineRun: Boolean;
 
     procedure WndProc(var Msg: TMessage); override;
     procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
@@ -214,15 +212,6 @@ begin
   case PropsID of
     epPMSGeneratorEngineRun :
     begin
-    if DieselGeneratorSystem.Freezed then
-      begin
-        EngineSound(False);
-        // Simpan nilai terakhir saat sedang freeze
-        FLastEngineRunValue := Value;
-        FNeedReplayEngineRun := True;
-        Exit;
-      end;
-
       GeneratorTemp.EngineRun := Value;
 
       if Value then
@@ -396,6 +385,8 @@ begin
     begin
       if Value = 1 then
       begin
+        EngineSound(False);
+
         MainForm.Enabled := False;
         DieselGeneratorSystem.FFormFreezed[1] := TfrmFreeze.Create(MainForm);
         with DieselGeneratorSystem.FFormFreezed[1] do
@@ -409,15 +400,11 @@ begin
       else if Value = 0 then
       begin
         MainForm.Enabled := True;
+
+        EngineSound(True);
+
         if Assigned(DieselGeneratorSystem.FFormFreezed[1]) then
           FreeAndNil(DieselGeneratorSystem.FFormFreezed[1]);
-
-        // Replay jika ada event tertunda
-        if FNeedReplayEngineRun then
-        begin
-          FNeedReplayEngineRun := False;
-          DieselGeneratorSystemEvent(Self, epPMSGeneratorEngineRun, FLastEngineRunValue);
-        end;
       end;
     end;
   end;
@@ -568,15 +555,28 @@ end;
 
 procedure TMainForm.EngineSound(Value: Boolean);
 begin
-  if Value then
+  if GeneratorTemp.EngineRun then
   begin
-    silence := True;
-    IsFirstPlay:= True;
+    {Jika permainan jalan valuenya true}
+    if Value then
+    begin
+      silence := True;
+      IsFirstPlay:= True;
 
-    mciSendString('Close Diesel', nil, 0, 0);
-    mciSendString('open "Suara_dieselgenerator.wav" alias Diesel', nil, 0, 0);
+      mciSendString('Close Diesel', nil, 0, 0);
+      mciSendString('open "Suara_dieselgenerator.wav" alias Diesel', nil, 0, 0);
 
-    mciSendString('Play Diesel notify', nil, 0, Handle);
+      mciSendString('Play Diesel notify', nil, 0, Handle);
+    end
+    else
+    begin
+      silence := False;
+
+      mciSendString('stop diesel', nil, 0, 0);
+      mciSendString('close diesel', nil, 0, 0);
+      IsFirstPlay := True;
+    end;
+
   end
   else
   begin
@@ -586,6 +586,7 @@ begin
     mciSendString('close diesel', nil, 0, 0);
     IsFirstPlay := True;
   end;
+
 end;
 
 procedure TMainForm.Alarm(Value: Boolean);

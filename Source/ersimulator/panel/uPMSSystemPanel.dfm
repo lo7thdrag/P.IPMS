@@ -2482,6 +2482,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       object lbl7: TLabel
         Left = 190
@@ -2495,6 +2496,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       object lbl11: TLabel
         Left = 126
@@ -2522,6 +2524,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Color = 3749426
         ParentBackground = False
         TabOrder = 4
+        Visible = False
         object lblBebanShore: TLabel
           Left = 114
           Top = 5
@@ -2590,6 +2593,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Color = 3749426
         ParentBackground = False
         TabOrder = 3
+        Visible = False
         object lblEngineRunGenShore: TLabel
           Left = 16
           Top = 23
@@ -2673,6 +2677,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         ParentFont = False
         TabOrder = 0
         TabStop = True
+        Visible = False
         OnClick = InterShoreModeClick
       end
       object rbEksportShore: TRadioButton
@@ -2687,6 +2692,7 @@ object frmPMSSystemPanel: TfrmPMSSystemPanel
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        Visible = False
         OnClick = InterShoreModeClick
       end
       object pnl5: TPanel
