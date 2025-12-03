@@ -400,7 +400,7 @@ begin
         imgRemote_Auto_Clutch_PS.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteAuto := True;
         PCSSystem.Remote(C_PCS_GB_PORTS, C_ORD_GB_REMOTEAUTO, True);
-        Form1.ComPort1.WriteStr('LeverInServicePS:1' + #10)
+        PCSSystem.LeverInServicePS := True;
       end;
     end
     else
@@ -411,7 +411,7 @@ begin
         imgRemote_Auto_CPP_PS.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteAuto := True;
         PCSSystem.Remote(C_PCS_CPP_PORTS, C_ORD_CPP_REMOTEAUTO, True);
-        Form1.ComPort1.WriteStr('LeverInServicePS:1' + #10)
+        PCSSystem.LeverInServicePS := True;
       end;
     end
     else
@@ -422,7 +422,7 @@ begin
         imgRemote_Auto_ME_PS.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteAuto := True;
         PCSSystem.Remote(C_PCS_ME_PORTS, C_ORD_ME_REMOTEAUTO, True);
-        Form1.ComPort1.WriteStr('LeverInServicePS:1' + #10)
+        PCSSystem.LeverInServicePS := True;
       end;
     end;
   end;
@@ -439,7 +439,7 @@ begin
         imgRemote_Manual_Clutch_PS.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteManual := True;
         PCSSystem.RemoteManual(C_PCS_GB_PORTS, C_ORD_GB_REMOTEMAN, True);
-        Form1.ComPort1.WriteStr('LeverInServicePS:0' + #10)
+        PCSSystem.LeverInServicePS := False;
       end;
     end
     else
@@ -450,7 +450,7 @@ begin
         imgRemote_Manual_CPP_PS.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteManual := True;
         PCSSystem.RemoteManual(C_PCS_CPP_PORTS, C_ORD_CPP_REMOTEMAN, True);
-        Form1.ComPort1.WriteStr('LeverInServicePS:0' + #10)
+        PCSSystem.LeverInServicePS := False;
       end;
     end
     else
@@ -461,7 +461,7 @@ begin
         imgRemote_Manual_ME_PS.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteManual := True;
         PCSSystem.RemoteManual(C_PCS_ME_PORTS, C_ORD_ME_REMOTEMAN, True);
-        Form1.ComPort1.WriteStr('LeverInServicePS:0' + #10)
+        PCSSystem.LeverInServicePS := False;
       end;
     end;
   end;

@@ -9,9 +9,12 @@ const
   FPC_LeverSpeedValuesTransit    : array[0..12] of Double = (1050, 942, 833, 725, 617, 508, 400, 400, 400, 400,
                                                           400, 400, 400);
 
-  FPC_LeverValuesPositionManouver : array[0..21] of Double = (0,0.5,1,2,3,3.5,4,5,6,7,8,9,10,-10,-9,-8,-7,-6,-5,-4,-3,-2);
-  FPC_LeverSpeedValuesManouver    : array[0..21] of Double = (0, 400, 457, 513, 570, 613, 656, 700, 760, 820, 880, 940, 1000,
-                                                              700, 637, 637, 574, 574, 510, 510, 447, 447);
+  FPC_LeverValuesPositionManouverPS : array[0..21] of Double = (6,5,4,3,2,1,0.5,0,-0.5,-2,-3,-4,-6,-8,-9,-10,-7,-6,-5,-4,-10,10);
+  FPC_LeverSpeedValuesManouverPS    : array[0..21] of Double = (760, 700, 656, 570, 513, 457, 400, 400, 400, 447, 447, 510, 574,
+                                                              637, 700, 700, 574, 574, 510, 510, 447, 1000);
+  FPC_LeverValuesPositionManouverSB : array[0..21] of Double = (-0.5,-1,-2,-4,-6,-8,-9,-10,-10,-10,-10,10,9,8,7,6,5,4,3,2,1,0.5);
+  FPC_LeverSpeedValuesManouverSB    : array[0..21] of Double = (400, 400, 457, 510, 574, 637, 637, 700, 700, 700, 700, 1000, 940,
+                                                              880, 820, 760, 700, 656, 570, 513, 447, 400);
 
 type
 
@@ -362,8 +365,12 @@ type
     FPC_LeverValuesPositionTransit  : array[0..12] of Double;
     FPC_LeverSpeedValuesTransit     : array[0..12] of Double;
 
-    FPC_LeverValuesPositionManouver : array[0..21] of Double;
-    FPC_LeverSpeedValuesManouver    : array[0..21] of Double;
+    FPC_LeverValuesPositionManouverPS : array[0..21] of Double;
+    FPC_LeverSpeedValuesManouverPS    : array[0..21] of Double;
+    FPC_LeverValuesPositionManouverSB : array[0..21] of Double;
+    FPC_LeverSpeedValuesManouverSB    : array[0..21] of Double;
+
+    IsManouver : Integer;
 
     constructor Create;override;
     destructor Destroy;override;
@@ -1801,53 +1808,53 @@ end;
 
 procedure TMainEngine.LeverValuesManual;
 begin
-  // Mode Manouver
-//  FPC_LeverValuesPositionManouver[0]  := 11;    FPC_LeverSpeedValuesManouver[0]  := 1000;
-//  FPC_LeverValuesPositionManouver[1]  := 10;    FPC_LeverSpeedValuesManouver[1]  := 1000;
-//  FPC_LeverValuesPositionManouver[2]  := 9;     FPC_LeverSpeedValuesManouver[2]  := 940;
-//  FPC_LeverValuesPositionManouver[3]  := 8;     FPC_LeverSpeedValuesManouver[3]  := 880;
-//  FPC_LeverValuesPositionManouver[4]  := 7;     FPC_LeverSpeedValuesManouver[4]  := 820;
-//  FPC_LeverValuesPositionManouver[5]  := 6;     FPC_LeverSpeedValuesManouver[5]  := 760;
-//  FPC_LeverValuesPositionManouver[6]  := 5;     FPC_LeverSpeedValuesManouver[6]  := 700;
-//  FPC_LeverValuesPositionManouver[7]  := 4;     FPC_LeverSpeedValuesManouver[7]  := 656;
-//  FPC_LeverValuesPositionManouver[8]  := 3.5;   FPC_LeverSpeedValuesManouver[8]  := 613;
-//  FPC_LeverValuesPositionManouver[9]  := 3;     FPC_LeverSpeedValuesManouver[9]  := 570;
-//  FPC_LeverValuesPositionManouver[10] := 2;     FPC_LeverSpeedValuesManouver[10] := 513;
-//  FPC_LeverValuesPositionManouver[11] := 1;     FPC_LeverSpeedValuesManouver[11] := 457;
-//  FPC_LeverValuesPositionManouver[12] := 0.5;   FPC_LeverSpeedValuesManouver[12] := 400;
-//  FPC_LeverValuesPositionManouver[13] := 0;     FPC_LeverSpeedValuesManouver[13] := 400;
-//  FPC_LeverValuesPositionManouver[14] := -0.5;  FPC_LeverSpeedValuesManouver[14] := 400;
-//  FPC_LeverValuesPositionManouver[15] := -2;    FPC_LeverSpeedValuesManouver[15] := 447;
-//  FPC_LeverValuesPositionManouver[16] := -4;    FPC_LeverSpeedValuesManouver[16] := 510;
-//  FPC_LeverValuesPositionManouver[17] := -6;    FPC_LeverSpeedValuesManouver[17] := 574;
-//  FPC_LeverValuesPositionManouver[18] := -7;    FPC_LeverSpeedValuesManouver[18] := 637;
-//  FPC_LeverValuesPositionManouver[19] := -8;    FPC_LeverSpeedValuesManouver[19] := 637;
-//  FPC_LeverValuesPositionManouver[20] := -9;    FPC_LeverSpeedValuesManouver[20] := 700;
-//  FPC_LeverValuesPositionManouver[21] := -10;   FPC_LeverSpeedValuesManouver[21] := 700;
+  // Mode Manouver PS
+  FPC_LeverValuesPositionManouverPS[0]  := 6;     FPC_LeverSpeedValuesManouverPS[0]  := 760;
+  FPC_LeverValuesPositionManouverPS[1]  := 5;     FPC_LeverSpeedValuesManouverPS[1]  := 700;
+  FPC_LeverValuesPositionManouverPS[2]  := 4;     FPC_LeverSpeedValuesManouverPS[2]  := 656;
+  FPC_LeverValuesPositionManouverPS[3]  := 3;     FPC_LeverSpeedValuesManouverPS[3]  := 570;
+  FPC_LeverValuesPositionManouverPS[4]  := 2;     FPC_LeverSpeedValuesManouverPS[4]  := 513;
+  FPC_LeverValuesPositionManouverPS[5]  := 1;     FPC_LeverSpeedValuesManouverPS[5]  := 457;
+  FPC_LeverValuesPositionManouverPS[6]  := 0.5;   FPC_LeverSpeedValuesManouverPS[6]  := 400;
+  FPC_LeverValuesPositionManouverPS[7]  := 0;     FPC_LeverSpeedValuesManouverPS[7]  := 400;
+  FPC_LeverValuesPositionManouverPS[8]  := -0.5;  FPC_LeverSpeedValuesManouverPS[8]  := 400;
+  FPC_LeverValuesPositionManouverPS[9]  := -2;    FPC_LeverSpeedValuesManouverPS[9]  := 447;
+  FPC_LeverValuesPositionManouverPS[10] := -3;    FPC_LeverSpeedValuesManouverPS[10] := 447;
+  FPC_LeverValuesPositionManouverPS[11] := -4;    FPC_LeverSpeedValuesManouverPS[11] := 510;
+  FPC_LeverValuesPositionManouverPS[12] := -6;    FPC_LeverSpeedValuesManouverPS[12] := 574;
+  FPC_LeverValuesPositionManouverPS[13] := -8;    FPC_LeverSpeedValuesManouverPS[13] := 637;
+  FPC_LeverValuesPositionManouverPS[14] := -9;    FPC_LeverSpeedValuesManouverPS[14] := 700;
+  FPC_LeverValuesPositionManouverPS[15] := -10;   FPC_LeverSpeedValuesManouverPS[15] := 700;
+  FPC_LeverValuesPositionManouverPS[16] := -7;    FPC_LeverSpeedValuesManouverPS[16] := 574;
+  FPC_LeverValuesPositionManouverPS[17] := -6;    FPC_LeverSpeedValuesManouverPS[17] := 574;
+  FPC_LeverValuesPositionManouverPS[18] := -5;    FPC_LeverSpeedValuesManouverPS[18] := 510;
+  FPC_LeverValuesPositionManouverPS[19] := -4;    FPC_LeverSpeedValuesManouverPS[19] := 510;
+  FPC_LeverValuesPositionManouverPS[20] := -10;   FPC_LeverSpeedValuesManouverPS[20] := 447;
+  FPC_LeverValuesPositionManouverPS[21] := 10;    FPC_LeverSpeedValuesManouverPS[21] := 1000;
 
-  // Mode Manouver
-  FPC_LeverValuesPositionManouver[0]  := 0;     FPC_LeverSpeedValuesManouver[0]  := 400;
-  FPC_LeverValuesPositionManouver[1]  := 0.5;   FPC_LeverSpeedValuesManouver[1]  := 400;
-  FPC_LeverValuesPositionManouver[2]  := 1;     FPC_LeverSpeedValuesManouver[2]  := 457;
-  FPC_LeverValuesPositionManouver[3]  := 2;     FPC_LeverSpeedValuesManouver[3]  := 513;
-  FPC_LeverValuesPositionManouver[4]  := 3;     FPC_LeverSpeedValuesManouver[4]  := 570;
-  FPC_LeverValuesPositionManouver[5]  := 3.5;   FPC_LeverSpeedValuesManouver[5]  := 613;
-  FPC_LeverValuesPositionManouver[6]  := 4;     FPC_LeverSpeedValuesManouver[6]  := 656;
-  FPC_LeverValuesPositionManouver[7]  := 5;     FPC_LeverSpeedValuesManouver[7]  := 700;
-  FPC_LeverValuesPositionManouver[8]  := 6;     FPC_LeverSpeedValuesManouver[8]  := 760;
-  FPC_LeverValuesPositionManouver[9]  := 7;     FPC_LeverSpeedValuesManouver[9]  := 820;
-  FPC_LeverValuesPositionManouver[10] := 8;     FPC_LeverSpeedValuesManouver[10] := 880;
-  FPC_LeverValuesPositionManouver[11] := 9;     FPC_LeverSpeedValuesManouver[11] := 940;
-  FPC_LeverValuesPositionManouver[12] := 10;    FPC_LeverSpeedValuesManouver[12] := 1000;
-  FPC_LeverValuesPositionManouver[13] := -10;   FPC_LeverSpeedValuesManouver[13] := 700;
-  FPC_LeverValuesPositionManouver[14] := -9;    FPC_LeverSpeedValuesManouver[14] := 637;
-  FPC_LeverValuesPositionManouver[15] := -8;    FPC_LeverSpeedValuesManouver[15] := 637;
-  FPC_LeverValuesPositionManouver[16] := -7;    FPC_LeverSpeedValuesManouver[16] := 574;
-  FPC_LeverValuesPositionManouver[17] := -6;    FPC_LeverSpeedValuesManouver[17] := 574;
-  FPC_LeverValuesPositionManouver[18] := -5;    FPC_LeverSpeedValuesManouver[18] := 510;
-  FPC_LeverValuesPositionManouver[19] := -4;    FPC_LeverSpeedValuesManouver[19] := 510;
-  FPC_LeverValuesPositionManouver[20] := -3;    FPC_LeverSpeedValuesManouver[20] := 447;
-  FPC_LeverValuesPositionManouver[21] := -2;    FPC_LeverSpeedValuesManouver[21] := 447;
+  // Mode Manouver SB
+  FPC_LeverValuesPositionManouverSB[0]  := -0.5;   FPC_LeverSpeedValuesManouverSB[0]  := 400;
+  FPC_LeverValuesPositionManouverSB[1]  := -1;     FPC_LeverSpeedValuesManouverSB[1]  := 400;
+  FPC_LeverValuesPositionManouverSB[2]  := -2;     FPC_LeverSpeedValuesManouverSB[2]  := 457;
+  FPC_LeverValuesPositionManouverSB[3]  := -4;     FPC_LeverSpeedValuesManouverSB[3]  := 510;
+  FPC_LeverValuesPositionManouverSB[4]  := -6;     FPC_LeverSpeedValuesManouverSB[4]  := 574;
+  FPC_LeverValuesPositionManouverSB[5]  := -8;     FPC_LeverSpeedValuesManouverSB[5]  := 637;
+  FPC_LeverValuesPositionManouverSB[6]  := -9;     FPC_LeverSpeedValuesManouverSB[6]  := 637;
+  FPC_LeverValuesPositionManouverSB[7]  := -10;    FPC_LeverSpeedValuesManouverSB[7]  := 700;
+  FPC_LeverValuesPositionManouverSB[8]  := -10;    FPC_LeverSpeedValuesManouverSB[8]  := 700;
+  FPC_LeverValuesPositionManouverSB[9]  := -10;    FPC_LeverSpeedValuesManouverSB[9]  := 700;
+  FPC_LeverValuesPositionManouverSB[10] := -10;    FPC_LeverSpeedValuesManouverSB[10] := 700;
+  FPC_LeverValuesPositionManouverSB[11] := 10;     FPC_LeverSpeedValuesManouverSB[11] := 1000;
+  FPC_LeverValuesPositionManouverSB[12] := 9;      FPC_LeverSpeedValuesManouverSB[12] := 940;
+  FPC_LeverValuesPositionManouverSB[13] := 8;      FPC_LeverSpeedValuesManouverSB[13] := 880;
+  FPC_LeverValuesPositionManouverSB[14] := 7;      FPC_LeverSpeedValuesManouverSB[14] := 820;
+  FPC_LeverValuesPositionManouverSB[15] := 6;      FPC_LeverSpeedValuesManouverSB[15] := 760;
+  FPC_LeverValuesPositionManouverSB[16] := 5;      FPC_LeverSpeedValuesManouverSB[16] := 700;
+  FPC_LeverValuesPositionManouverSB[17] := 4;      FPC_LeverSpeedValuesManouverSB[17] := 656;
+  FPC_LeverValuesPositionManouverSB[18] := 3;      FPC_LeverSpeedValuesManouverSB[18] := 570;
+  FPC_LeverValuesPositionManouverSB[19] := 2;      FPC_LeverSpeedValuesManouverSB[19] := 513;
+  FPC_LeverValuesPositionManouverSB[20] := 1;      FPC_LeverSpeedValuesManouverSB[20] := 447;
+  FPC_LeverValuesPositionManouverSB[21] := 0.5;    FPC_LeverSpeedValuesManouverSB[21] := 400;
 
   // Mode Transit
   FPC_LeverValuesPositionTransit[0]  := 10;    FPC_LeverSpeedValuesTransit[0]  := 1050;
@@ -1869,6 +1876,7 @@ procedure TMainEngine.SetLeverSpeed(const Value: Double);
 var
   i : Integer;
   epsilon : Double;
+  recERPCS    : ^R_Common_PCS_Command;
 begin
 //  if FLeverSpeed = Value then
 //    exit;
@@ -1879,13 +1887,28 @@ begin
   SetPointSpeed := 0;
   epsilon       := 0.01;
 
-  for i := 0 to High(FPC_LeverValuesPositionManouver) do
+  if recERPCS.PortStaboardID = C_PCS_ME_PORTS then
   begin
-    if Abs(FPC_LeverValuesPositionManouver[i] - Value) < epsilon then
+    for i := 0 to High(FPC_LeverValuesPositionManouverPS) do
     begin
-      ActualSpeed   := FPC_LeverSpeedValuesManouver[i];
-      SetPointSpeed := FPC_LeverSpeedValuesManouver[i];
-      Break;
+      if Abs(FPC_LeverValuesPositionManouverPS[i] - Value) < epsilon then
+      begin
+        ActualSpeed   := FPC_LeverSpeedValuesManouverPS[i];
+        SetPointSpeed := FPC_LeverSpeedValuesManouverPS[i];
+        Break;
+      end;
+    end;
+  end
+  else if recERPCS.PortStaboardID = C_PCS_ME_STARBOARD then
+  begin
+    for i := 0 to High(FPC_LeverValuesPositionManouverSB) do
+    begin
+      if Abs(FPC_LeverValuesPositionManouverSB[i] - Value) < epsilon then
+      begin
+        ActualSpeed   := FPC_LeverSpeedValuesManouverSB[i];
+        SetPointSpeed := FPC_LeverSpeedValuesManouverSB[i];
+        Break;
+      end;
     end;
   end;
 

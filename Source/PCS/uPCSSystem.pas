@@ -30,6 +30,8 @@ type
     FRunningStartSB, FStoppedStopPS, FStoppedStopSB: Boolean;
     FLampTest : Integer;
 
+    FAheadPS, FAheadSB, FAsternPS, FAsternSB: Boolean;
+
     FTransitMode, FManouverMode, FRemoteAuto : Boolean;
 
     procedure NetworkEventAssignment;
@@ -65,6 +67,11 @@ type
     procedure SetTransitMode(const aOnOff : Boolean);
     procedure SetManouverMode(const aOnOff : Boolean);
     procedure SetRemoteAuto(const aOnOff : Boolean);
+
+    procedure SetAheadPS(const aOnOff : Boolean);
+    procedure SetAheadSB(const aOnOff : Boolean);
+    procedure SetAsternPS(const aOnOff : Boolean);
+    procedure SetAsternSB(const aOnOff : Boolean);
     {--}
 
   public
@@ -135,6 +142,11 @@ type
     property Manouver   : Boolean read FManouverMode write SetManouverMode;
     property RemoteAuto : Boolean read FRemoteAuto write SetRemoteAuto;
 
+    property AheadPS: Boolean read FAheadPS write SetAheadPS;
+    property AheadSB: Boolean read FAheadSB write SetAheadSB;
+    property AsternPS: Boolean read FAsternPS write SetAheadPS;
+    property AsternSB: Boolean read FAsternSB write SetAheadSB;
+
     public
       FFormFreezed : array[0..2] of TfrmFreeze;
 
@@ -146,7 +158,6 @@ type
       throttleTest, alarmAcceptControlPS, alarmAcceptControlSB,
       ControlRemotePS, ControlRemoteSB,
       FPrelubInProgressPS, FPrelubInProgressSB : Boolean;
-
 
   end;
 
@@ -603,6 +614,46 @@ begin
 //    FTransferOverrideSB := False;
 //  end;
   ControlThrottleIndicator(C_ORD_LEVER_IN_SERVICE_SB,aOnOff);
+end;
+
+procedure TPCSSystem.SetAheadPS(const aOnOff: Boolean);
+begin
+  if FAheadPS = aOnOff then
+    Exit;
+
+  FAheadPS := aOnOff;
+
+  ControlThrottleIndicator(C_ORD_AHEAD_PS,aOnOff);
+end;
+
+procedure TPCSSystem.SetAheadSB(const aOnOff: Boolean);
+begin
+  if FAheadSB = aOnOff then
+    Exit;
+
+  FAheadSB := aOnOff;
+
+  ControlThrottleIndicator(C_ORD_AHEAD_SB,aOnOff);
+end;
+
+procedure TPCSSystem.SetAsternPS(const aOnOff: Boolean);
+begin
+  if FAsternPS = aOnOff then
+    Exit;
+
+  FAsternPS := aOnOff;
+
+  ControlThrottleIndicator(C_ORD_ASTERN_PS,aOnOff);
+end;
+
+procedure TPCSSystem.SetAsternSB(const aOnOff: Boolean);
+begin
+  if FAsternSB = aOnOff then
+    Exit;
+
+  FAsternSB := aOnOff;
+
+  ControlThrottleIndicator(C_ORD_ASTERN_SB,aOnOff);
 end;
 
 procedure TPCSSystem.SetShaftDrivenPS(const aOnOff: Boolean);

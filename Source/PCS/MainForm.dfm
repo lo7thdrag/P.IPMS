@@ -362,34 +362,9 @@ object Form1: TForm1
     Left = 208
     Top = 8
   end
-  object ComPort1: TComPort
-    Connected = True
-    BaudRate = br9600
-    Port = 'COM4'
-    Parity.Bits = prNone
-    StopBits = sbOneStopBit
-    DataBits = dbEight
-    Events = [evRxChar, evTxEmpty, evRxFlag, evRing, evBreak, evCTS, evDSR, evError, evRLSD, evRx80Full]
-    FlowControl.OutCTSFlow = False
-    FlowControl.OutDSRFlow = False
-    FlowControl.ControlDTR = dtrDisable
-    FlowControl.ControlRTS = rtsDisable
-    FlowControl.XonXoffOut = False
-    FlowControl.XonXoffIn = False
-    StoredProps = [spBasic]
-    TriggersOnRxChar = True
-    Left = 512
-    Top = 520
-  end
   object tmrThrottleReading: TTimer
     Interval = 50
     Left = 760
     Top = 320
-  end
-  object tmrThrottle: TTimer
-    Interval = 500
-    OnTimer = tmrThrottleTimer
-    Left = 464
-    Top = 448
   end
 end

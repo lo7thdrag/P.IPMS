@@ -10,7 +10,9 @@ object frmLeverControl: TfrmLeverControl
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsStayOnTop
   OldCreateOrder = False
+  Visible = True
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -82,7 +84,7 @@ object frmLeverControl: TfrmLeverControl
     AutoSize = False
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWhite
+    Font.Color = clBlack
     Font.Height = -96
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
@@ -98,7 +100,7 @@ object frmLeverControl: TfrmLeverControl
     AutoSize = False
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWhite
+    Font.Color = clBtnText
     Font.Height = -96
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
@@ -143,5 +145,24 @@ object frmLeverControl: TfrmLeverControl
     OnTimer = tmrLeverTimer
     Left = 320
     Top = 272
+  end
+  object ComPort1: TComPort
+    BaudRate = br9600
+    Port = 'COM4'
+    Parity.Bits = prNone
+    StopBits = sbOneStopBit
+    DataBits = dbEight
+    Events = [evRxChar, evTxEmpty, evRxFlag, evRing, evBreak, evCTS, evDSR, evError, evRLSD, evRx80Full]
+    FlowControl.OutCTSFlow = False
+    FlowControl.OutDSRFlow = False
+    FlowControl.ControlDTR = dtrDisable
+    FlowControl.ControlRTS = rtsDisable
+    FlowControl.XonXoffOut = False
+    FlowControl.XonXoffIn = False
+    StoredProps = [spBasic]
+    TriggersOnRxChar = True
+    OnRxChar = ComPort1RxChar
+    Left = 193
+    Top = 268
   end
 end
