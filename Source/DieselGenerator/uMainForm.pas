@@ -80,6 +80,8 @@ type
     LampStatus  : array of Boolean;
     FRunningHourTemp : Integer;
     FRunningHour : Integer;
+    FLastEngineRunValue: Boolean;
+    FNeedReplayEngineRun: Boolean;
 
     procedure WndProc(var Msg: TMessage); override;
     procedure DieselGeneratorSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Integer);overload;
@@ -212,6 +214,14 @@ begin
   case PropsID of
     epPMSGeneratorEngineRun :
     begin
+      if DieselGeneratorSystem.Freezed then
+      begin
+        // Simpan nilai terakhir saat sedang freeze
+        FLastEngineRunValue := Value;
+        FNeedReplayEngineRun := True;
+        Exit;
+      end;
+
       GeneratorTemp.EngineRun := Value;
 
       if Value then
@@ -405,6 +415,12 @@ begin
 
         if Assigned(DieselGeneratorSystem.FFormFreezed[1]) then
           FreeAndNil(DieselGeneratorSystem.FFormFreezed[1]);
+
+        if FNeedReplayEngineRun then
+        begin
+          FNeedReplayEngineRun := False;
+          DieselGeneratorSystemEvent(Self, epPMSGeneratorEngineRun, FLastEngineRunValue);
+        end;
       end;
     end;
   end;
