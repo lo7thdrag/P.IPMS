@@ -870,6 +870,9 @@ begin
   else
     SwitchFreq := 0;
 
+  if IdMsb = 4 then
+    exit;
+
   Gen[IdGen1].Busbar := ValBus;
   Gen[IdGen2].Busbar := ValBus;
   Gen[IdGen1].SwitchFrequency := SwitchFreq;
@@ -1083,6 +1086,17 @@ begin
       SetSwitchFreqValue(1, 2, 3, True);
 
       calcModeTemp := emFull;
+
+      {$REGION ' Cek apakah nyambung ke shore '}
+      if CekBusKoplerHandle(4,0) then
+      begin
+        Msb[3].Busbar := True;
+        Msb[3].Frequency := EsbFreq;
+        Msb[3].Voltage := EsbVolt;
+
+        SetSwitchFreqValue(4, 0, 1, True);
+      end;
+      {$ENDREGION}
 //      SetStateRun(emFull, 2)
       {$ENDREGION}
     end
@@ -1105,6 +1119,18 @@ begin
 
         calcModeTemp := emFull;
 //        SetStateRun(emFull, 2);
+
+        {$REGION ' Cek apakah nyambung ke shore '}
+        if CekBusKoplerHandle(4,0) then
+        begin
+          Msb[3].Busbar := True;
+          Msb[3].Frequency := EsbFreq;
+          Msb[3].Voltage := EsbVolt;
+
+          SetSwitchFreqValue(4, 0, 1, True);
+        end;
+        {$ENDREGION}
+
       end
       else
         calcModeTemp := emAft;
@@ -1242,6 +1268,16 @@ begin
         Msb[1].Frequency := (FwdFreq + AftFreq)/ 2;
         Msb[1].Voltage := (FwdVolt + AftVolt)/ 2;
 
+        {Set MSB Shore '}
+        if CekBusKoplerHandle(4,0) then
+        begin
+          Msb[3].Busbar := True;
+          Msb[3].Frequency := (FwdFreq + AftFreq)/ 2;
+          Msb[3].Voltage := (FwdVolt + AftVolt)/ 2;
+
+          SetSwitchFreqValue(4, 0, 1, True);
+        end;
+
         {Set MSB Emergency}
         if (CekBusKoplerHandle(3,3) or CekBusKoplerHandle(3,1))  then
         begin
@@ -1287,6 +1323,16 @@ begin
             AftToEsb := CekBusKoplerHandle(3,1);
 
             calcModeTemp := emFull;
+
+            {Set MSB Shore}
+            if CekBusKoplerHandle(4,0) then
+            begin
+              Msb[3].Busbar := True;
+              Msb[3].Frequency := (FwdFreq + AftFreq)/ 2;
+              Msb[3].Voltage := (FwdVolt + AftVolt)/ 2;
+
+              SetSwitchFreqValue(4, 0, 1, True);
+            end;
           end
           else
             calcModeTemp := emFwd;
@@ -1322,6 +1368,16 @@ begin
         Msb[1].Voltage := AftVolt;
 
         SetSwitchFreqValue(1, 2, 3, True);
+
+        {Set MSB Shore}
+        if CekBusKoplerHandle(4,0) then
+        begin
+          Msb[3].Busbar := True;
+          Msb[3].Frequency := (FwdFreq + AftFreq)/ 2;
+          Msb[3].Voltage := (FwdVolt + AftVolt)/ 2;
+
+          SetSwitchFreqValue(4, 0, 1, True);
+        end;
 
         if (Msb[1].Busbar) and (Msb[1].MsbCircuitBreaker) then
         begin

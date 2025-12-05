@@ -214,13 +214,9 @@ begin
   begin
     VrShoreMode.SwitchPosition := 1;
   end
-  else
+  else if Switchboard.ShoreInterconnectionMode = 3 then
   begin
     VrShoreMode.SwitchPosition := 2;
-
-//    CurrentIndex := 0;
-//    Loop := 0;
-//    StopIndex := 24;
   end;
 
   if Switchboard.ShoresbCircuitBreaker = True then
