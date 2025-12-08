@@ -173,11 +173,13 @@ end;
 procedure TForm1.btnLeverInServicePSClick(Sender: TObject);
 begin
   PCSSystem.LeverInService(C_PCS_ME_PORTS, True);
+  frmLeverControl.ComPort1.WriteStr('LeverInServicePS:1' + #10);
 end;
 
 procedure TForm1.btnLeverInServiceSBClick(Sender: TObject);
 begin
   PCSSystem.LeverInService(C_PCS_ME_STARBOARD,True);
+  frmLeverControl.ComPort1.WriteStr('LeverInServiceSB:1' + #10);
 end;
 
 procedure TForm1.btnGeneralPanelStartClick(Sender: TObject);

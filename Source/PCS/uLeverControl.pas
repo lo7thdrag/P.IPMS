@@ -8,8 +8,8 @@ uses
   CPort, CPortCtl, UBinaryPacketizer, System.Generics.Collections;
 
 var
-  LeverValuesPositionManouverPS: array[0..21] of Double = (6,5,4,3,2,1,0.5,0,-0.5,-2,-3,-4,-6,-8,-9,-10,-7,-6,-5,-4,-10,10);
-  LeverValuesPositionManouverSB: array[0..21] of Double = (-0.5,-1,-2,-4,-6,-8,-9,-10,-10,-10,-10,10,9,8,7,6,5,4,3,2,1,0.5);
+  LeverValuesPositionManouverSB: array[0..21] of Double = (10,9,8,6,4,2,1,0,-0.5,-1,-2,-4,-6,-8,-9,-10,-10,-10,-10,-10,-10,10);
+  LeverValuesPositionManouverPS: array[0..21] of Double = (-0.5,-1,-2,-4,-6,-8,-9,-10,-10,-10,-10,10,10,10,10,9,8,6,4,2,1,0);
   LeverValuesPositionTransit   : array[0..12] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0);
 
 type
@@ -53,9 +53,7 @@ type
     LastSentAheadSB: Boolean;
     LastSentAsternSB: Boolean;
 
-    procedure SyncLeverCommandsToArduino;
-
-     procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
+    procedure PCSSystemEvent(Sender : TObject;PropsID : E_PropsID;Value : Boolean);overload;
     function ThrottleValue(Position: Integer): Double;
   public
   counterCheck : Integer;
@@ -63,6 +61,7 @@ type
   SpeedPS, SpeedSB, LastSpeedPS, LastSpeedSB : Integer;
   constThrottlePS, constThrottleSB : Double;
   CekPS, CekSB : Boolean;
+  CekManouver, CekTransit : Boolean;
 
   SerialPortName : string;
   SerialBuffer   : string;
@@ -92,7 +91,7 @@ var
   RawValue : Integer;
   Rawline, TempStr, Line: string;
   Lines: TStringList;
-  LeverIndex, i : Integer;
+  LeverIndexPS, LeverIndexSB, i : Integer;
   Key : string;
   Value: Boolean;
   LeverSpeedPS, LeverSpeedSB : Double;
@@ -121,34 +120,37 @@ begin
       begin
         if TryStrToInt(Copy(Rawline, 13, MaxInt), RawValue) then
         begin
-          LeverIndex := EnsureRange(RawValue, 0, 21);
+          LeverIndexPS := EnsureRange(RawValue, 0, 21);
 
-          if LastLeverIndexPS <> LeverIndex then
+          if LastLeverIndexPS <> LeverIndexPS then
           begin
-            LastLeverIndexPS := LeverIndex;
-            LeverSpeedPS     := LeverValuesPositionManouverPS[LeverIndex];
-            LeverTransit     := LeverValuesPositionTransit[LeverIndex];
+            LastLeverIndexPS := LeverIndexPS;
+            LeverSpeedPS     := LeverValuesPositionManouverPS[LeverIndexPS];
+            LeverTransit     := LeverValuesPositionTransit[LeverIndexPS];
           end;
 
-          if LeverIndex < 13 then
-            ComPort1.WriteStr('AheadPS:1' + #10)
-          else if LeverIndex > 13 then
-            ComPort1.WriteStr('AsternPS:1' + #10);
+//          if PCSSystem.RemoteAutoPS = True then
+//          begin
+            if LeverIndexPS >= 11 then
+              ComPort1.WriteStr('AheadPS:1' + #10)
+            else if LeverIndexPS < 11 then
+              ComPort1.WriteStr('AsternPS:1' + #10);
+//          end;
 
-          if PCSSystem.Manouver then
-          begin
+//          if PCSSystem.Manouver then
+//          begin
             lbl9.Caption := FloatToStr(LeverSpeedPS);
             PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverSpeedPS, True);
             PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverSpeedPS, True);
             PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverSpeedPS, True);
-          end
-          else if PCSSystem.Transit then
-          begin
-            lbl9.Caption := FloatToStr(LeverTransit);
-            PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverTransit, False);
-            PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverTransit, False);
-            PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverTransit, False);
-          end;
+//          end
+//          else if PCSSystem.Transit then
+//          begin
+//            lbl9.Caption := FloatToStr(LeverTransit);
+//            PCSSystem.LeverSpeed(C_PCS_ME_PORTS, LeverTransit, False);
+//            PCSSystem.LeverPitch(C_PCS_CPP_PORTS, LeverTransit, False);
+//            PCSSystem.LeverShaft(C_PCS_GB_PORTS, LeverTransit, False);
+//          end;
         end;
       end
 
@@ -157,34 +159,38 @@ begin
       begin
         if TryStrToInt(Copy(Rawline, 13, MaxInt), RawValue) then
         begin
-          LeverIndex := EnsureRange(RawValue, 0, 21);
+          LeverIndexSB := EnsureRange(RawValue, 0, 21);
 
-          if LastLeverIndexSB <> LeverIndex then
+          if LastLeverIndexSB <> LeverIndexSB then
           begin
-            LastLeverIndexSB := LeverIndex;
-            LeverSpeedSB     := LeverValuesPositionManouverSB[LeverIndex];
-            LeverTransit   := LeverValuesPositionTransit[LeverIndex];
+            LastLeverIndexSB := LeverIndexSB;
+            LeverSpeedSB     := LeverValuesPositionManouverSB[LeverIndexSB];
+            LeverTransit     := LeverValuesPositionTransit[LeverIndexSB];
           end;
 
-          if LeverIndex < 13 then
-            ComPort1.WriteStr('AheadSB:1' + #10)
-          else if LeverIndex > 13 then
-            ComPort1.WriteStr('AsternSB:1' + #10);
+//          if PCSSystem.RemoteAutoSB = True then
+//          begin
+            if (LeverIndexSB <= 7) or (LeverIndexSB = 21) then
+              ComPort1.WriteStr('AheadSB:1' + #10)
+            else if (LeverIndexSB > 7) and (LeverIndexSB < 21) then
+              ComPort1.WriteStr('AsternSB:1' + #10);
+//          end;
 
-          if PCSSystem.Manouver then
-          begin
+
+//          if PCSSystem.Manouver then
+//          begin
             lbl10.Caption := FloatToStr(LeverSpeedSB);
             PCSSystem.LeverSpeed(C_PCS_ME_STARBOARD, LeverSpeedSB, True);
             PCSSystem.LeverPitch(C_PCS_CPP_STARBOARD, LeverSpeedSB, True);
             PCSSystem.LeverShaft(C_PCS_GB_STARBOARD, LeverSpeedSB, True);
-          end
-          else if PCSSystem.Transit then
-          begin
-            lbl10.Caption := FloatToStr(LeverTransit);
-            PCSSystem.LeverSpeed(C_PCS_ME_STARBOARD, LeverTransit, False);
-            PCSSystem.LeverPitch(C_PCS_CPP_STARBOARD, LeverTransit, False);
-            PCSSystem.LeverShaft(C_PCS_GB_STARBOARD, LeverTransit, False);
-          end;
+//          end
+//          else if PCSSystem.Transit then
+//          begin
+//            lbl10.Caption := FloatToStr(LeverTransit);
+//            PCSSystem.LeverSpeed(C_PCS_ME_STARBOARD, LeverTransit, False);
+//            PCSSystem.LeverPitch(C_PCS_CPP_STARBOARD, LeverTransit, False);
+//            PCSSystem.LeverShaft(C_PCS_GB_STARBOARD, LeverTransit, False);
+//          end;
         end;
       end
 
@@ -225,8 +231,6 @@ begin
   finally
     Lines.Free;
   end;
-
-  SyncLeverCommandsToArduino;
 end;
 
 function TfrmLeverControl.ThrottleValue(Position: Integer): Double;
@@ -236,53 +240,53 @@ end;
 
 procedure TfrmLeverControl.LeverValuePosition;
 begin
-  // Mode Manouver SB
-  LeverValuesPositionManouverSB[0]  := -0.5;
-  LeverValuesPositionManouverSB[1]  := -1;
-  LeverValuesPositionManouverSB[2]  := -2;
-  LeverValuesPositionManouverSB[3]  := -4;
-  LeverValuesPositionManouverSB[4]  := -6;
-  LeverValuesPositionManouverSB[5]  := -8;
-  LeverValuesPositionManouverSB[6]  := -9;
-  LeverValuesPositionManouverSB[7]  := -10;
-  LeverValuesPositionManouverSB[8]  := -10;
-  LeverValuesPositionManouverSB[9]  := -10;
-  LeverValuesPositionManouverSB[10] := -10;
-  LeverValuesPositionManouverSB[11] := 10;
-  LeverValuesPositionManouverSB[12] := 9;
-  LeverValuesPositionManouverSB[13] := 8;
-  LeverValuesPositionManouverSB[14] := 7;
-  LeverValuesPositionManouverSB[15] := 6;
-  LeverValuesPositionManouverSB[16] := 5;
-  LeverValuesPositionManouverSB[17] := 4;
-  LeverValuesPositionManouverSB[18] := 3;
-  LeverValuesPositionManouverSB[19] := 2;
-  LeverValuesPositionManouverSB[20] := 1;
-  LeverValuesPositionManouverSB[21] := 0;
+  // Mode Manouver PS
+  LeverValuesPositionManouverPS[0]  := -0.5;
+  LeverValuesPositionManouverPS[1]  := -1;
+  LeverValuesPositionManouverPS[2]  := -2;
+  LeverValuesPositionManouverPS[3]  := -4;
+  LeverValuesPositionManouverPS[4]  := -6;
+  LeverValuesPositionManouverPS[5]  := -8;
+  LeverValuesPositionManouverPS[6]  := -9;
+  LeverValuesPositionManouverPS[7]  := -10;
+  LeverValuesPositionManouverPS[8]  := -10;
+  LeverValuesPositionManouverPS[9]  := -10;
+  LeverValuesPositionManouverPS[10] := -10;
+  LeverValuesPositionManouverPS[11] := 10;
+  LeverValuesPositionManouverPS[12] := 10;
+  LeverValuesPositionManouverPS[13] := 10;
+  LeverValuesPositionManouverPS[14] := 10;
+  LeverValuesPositionManouverPS[15] := 9;
+  LeverValuesPositionManouverPS[16] := 8;
+  LeverValuesPositionManouverPS[17] := 6;
+  LeverValuesPositionManouverPS[18] := 4;
+  LeverValuesPositionManouverPS[19] := 2;
+  LeverValuesPositionManouverPS[20] := 1;
+  LeverValuesPositionManouverPS[21] := 0;
 
-  // Manouver PS
-  LeverValuesPositionManouverPS[0]  := 6;
-  LeverValuesPositionManouverPS[1]  := 5;
-  LeverValuesPositionManouverPS[2]  := 4;
-  LeverValuesPositionManouverPS[3]  := 3;
-  LeverValuesPositionManouverPS[4]  := 2;
-  LeverValuesPositionManouverPS[5]  := 1;
-  LeverValuesPositionManouverPS[6]  := 0.5;
-  LeverValuesPositionManouverPS[7]  := 0;
-  LeverValuesPositionManouverPS[8]  := -0.5;
-  LeverValuesPositionManouverPS[9]  := -2;
-  LeverValuesPositionManouverPS[10] := -3;
-  LeverValuesPositionManouverPS[11] := -4;
-  LeverValuesPositionManouverPS[12] := -6;
-  LeverValuesPositionManouverPS[13] := -8;
-  LeverValuesPositionManouverPS[14] := -9;
-  LeverValuesPositionManouverPS[15] := -10;
-  LeverValuesPositionManouverPS[16] := -7;
-  LeverValuesPositionManouverPS[17] := -6;
-  LeverValuesPositionManouverPS[18] := -5;
-  LeverValuesPositionManouverPS[19] := -4;
-  LeverValuesPositionManouverPS[20] := -10;
-  LeverValuesPositionManouverPS[21] := 10;
+  // Manouver SB
+  LeverValuesPositionManouverSB[0]  := 10;
+  LeverValuesPositionManouverSB[1]  := 9;
+  LeverValuesPositionManouverSB[2]  := 8;
+  LeverValuesPositionManouverSB[3]  := 6;
+  LeverValuesPositionManouverSB[4]  := 4;
+  LeverValuesPositionManouverSB[5]  := 2;
+  LeverValuesPositionManouverSB[6]  := 1;
+  LeverValuesPositionManouverSB[7]  := 0;
+  LeverValuesPositionManouverSB[8]  := -0.5;
+  LeverValuesPositionManouverSB[9]  := -1;
+  LeverValuesPositionManouverSB[10] := -2;
+  LeverValuesPositionManouverSB[11] := -4;
+  LeverValuesPositionManouverSB[12] := -6;
+  LeverValuesPositionManouverSB[13] := -8;
+  LeverValuesPositionManouverSB[14] := -9;
+  LeverValuesPositionManouverSB[15] := -10;
+  LeverValuesPositionManouverSB[16] := -10;
+  LeverValuesPositionManouverSB[17] := -10;
+  LeverValuesPositionManouverSB[18] := -10;
+  LeverValuesPositionManouverSB[19] := -10;
+  LeverValuesPositionManouverSB[20] := -10;
+  LeverValuesPositionManouverSB[21] := 10;
 
   // Mode Transit PS
   LeverValuesPositionTransit[0]  := 6;
@@ -318,12 +322,6 @@ begin
   LastSentLeverInServicePS := False;
   LastSentLeverInServiceSB := False;
 
-  LastSentAheadPS := False;
-  LastSentAsternPS := False;
-
-  LastSentAheadSB := False;
-  LastSentAsternSB := False;
-
 //  ComPort1.Port := 'COM4';
 //  ComPort1.BaudRate := br9600;
   ComPort1.Open;
@@ -331,7 +329,7 @@ end;
 
 procedure TfrmLeverControl.FormShow(Sender: TObject);
 begin
-  Top  := 0;  //1945
+  Top  := 1945;
   Left := 0;
   FormStyle := fsStayOnTop;
   BringToFront;
@@ -438,39 +436,57 @@ begin
   case PropsID of
     epPCSMEPSRemoteAuto:
       if Value then
-        CekPS := Value
+      begin
+        CekPS := Value;
+        ComPort1.WriteStr('LeverInServicePS:1' + #10);
+      end
       else
+      begin
         CekPS := not Value;
+        ComPort1.WriteStr('LeverInServicePS:0' + #10);
+      end;
 
     epPCSMESBRemoteAuto:
       if Value then
-        CekSB := Value
+      begin
+        CekSB := Value;
+        ComPort1.WriteStr('LeverInServiceSB:1' + #10);
+      end
       else
+      begin
         CekSB := not Value;
-  end;
-end;
+        ComPort1.WriteStr('LeverInServiceSB:0' + #10);
+      end;
 
-procedure TfrmLeverControl.SyncLeverCommandsToArduino;
-begin
- if PCSSystem.LeverInServicePS <> LastSentLeverInServicePS then
-  begin
-    LastSentLeverInServicePS := PCSSystem.LeverInServicePS;
-
-    if PCSSystem.LeverInServicePS then
-      ComPort1.WriteStr('LeverInServicePS:1' + #10)
-    else
-      ComPort1.WriteStr('LeverInServicePS:0' + #10);
-  end;
-
-  // ========== LEVER IN SERVICE SB ==========
-  if PCSSystem.LeverInServiceSB <> LastSentLeverInServiceSB then
-  begin
-    LastSentLeverInServiceSB := PCSSystem.LeverInServiceSB;
-
-    if PCSSystem.LeverInServiceSB then
-      ComPort1.WriteStr('LeverInServiceSB:1' + #10)
-    else
-      ComPort1.WriteStr('LeverInServiceSB:0' + #10);
+//    epPCSMEManouveringMode:
+//      if Value then
+//      begin
+//        CekManouver := Value;
+//        ComPort1.WriteStr('ModeManouverPS:1' + #10);
+//        ComPort1.WriteStr('ModeManouverSB:1' + #10);
+//        PCSSystem.Manouver := True;
+//        PCSSystem.Transit  := False;
+//      end
+//      else
+//      begin
+//        CekManouver := not Value;
+//        ComPort1.WriteStr('ModeManouverPS:0' + #10);
+//        ComPort1.WriteStr('ModeManouverSB:0' + #10);
+//      end;
+//
+//    epPCSMETransitMode:
+//      if Value then
+//      begin
+//        CekTransit := Value;
+//        ComPort1.WriteStr('ModeTransitPS:1' + #10);
+//        ComPort1.WriteStr('ModeTransitSB:1' + #10);
+//      end
+//      else
+//      begin
+//        CekTransit := not Value;
+//        ComPort1.WriteStr('ModeTransitPS:0' + #10);
+//        ComPort1.WriteStr('ModeTransitSB:0' + #10);
+//      end;
   end;
 end;
 

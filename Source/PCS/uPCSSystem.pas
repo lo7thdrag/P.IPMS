@@ -34,6 +34,8 @@ type
 
     FTransitMode, FManouverMode, FRemoteAuto : Boolean;
 
+    FRemoteAutoPS, FRemoteAutoSB : Boolean;
+
     procedure NetworkEventAssignment;
 
     procedure LoadSettingForm(filepath: string);
@@ -67,6 +69,9 @@ type
     procedure SetTransitMode(const aOnOff : Boolean);
     procedure SetManouverMode(const aOnOff : Boolean);
     procedure SetRemoteAuto(const aOnOff : Boolean);
+
+    procedure SetRemoteAutoPS(const aOnOff : Boolean);
+    procedure SetRemoteAutoSB(const aOnOff : Boolean);
 
     procedure SetAheadPS(const aOnOff : Boolean);
     procedure SetAheadSB(const aOnOff : Boolean);
@@ -141,6 +146,9 @@ type
     property Transit    : Boolean read FTransitMode write SetTransitMode;
     property Manouver   : Boolean read FManouverMode write SetManouverMode;
     property RemoteAuto : Boolean read FRemoteAuto write SetRemoteAuto;
+
+    property RemoteAutoPS : Boolean read FRemoteAutoPS write SetRemoteAutoPS;
+    property RemoteAutoSB : Boolean read FRemoteAutoSB write SetRemoteAutoSB;
 
     property AheadPS: Boolean read FAheadPS write SetAheadPS;
     property AheadSB: Boolean read FAheadSB write SetAheadSB;
@@ -754,6 +762,24 @@ begin
 
   FRemoteAuto := aOnOff;
   Listener.TriggerEvents(Self,epPCSMERemoteAuto, aOnOff);
+end;
+
+procedure TPCSSystem.SetRemoteAutoPS(const aOnOff: Boolean);    // Tambahan
+begin
+  if FRemoteAutoPS = aOnOff then
+    Exit;
+
+  FRemoteAutoPS := aOnOff;
+  Listener.TriggerEvents(Self,epPCSMEPSRemoteAuto, aOnOff);
+end;
+
+procedure TPCSSystem.SetRemoteAutoSB(const aOnOff: Boolean);
+begin
+  if FRemoteAutoSB = aOnOff then
+    Exit;
+
+  FRemoteAutoSB := aOnOff;
+  Listener.TriggerEvents(Self,epPCSMESBRemoteAuto, aOnOff);
 end;
 
 { fungsi untuk menangani event dari jaringan untuk PCSCommand }

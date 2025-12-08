@@ -395,7 +395,7 @@ begin
         imgRemote_Auto_Clutch_SB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteAuto := True;
         PCSSystem.Remote(C_PCS_GB_STARBOARD, C_ORD_GB_REMOTEAUTO, True);
-        PCSSystem.LeverInServiceSB := True;
+        PCSSystem.RemoteAutoSB := True;
       end;
     end
     else
@@ -406,7 +406,7 @@ begin
         imgRemote_Auto_CPP_SB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteAuto := True;
         PCSSystem.Remote(C_PCS_CPP_STARBOARD, C_ORD_CPP_REMOTEAUTO, True);
-        PCSSystem.LeverInServiceSB := True;
+        PCSSystem.RemoteAutoSB := True;
       end;
     end
     else
@@ -417,7 +417,7 @@ begin
         imgRemote_Auto_ME_SB.Picture.LoadFromFile(fIndikatorOn);
         FFlashing_RemoteAuto := True;
         PCSSystem.Remote(C_PCS_ME_STARBOARD, C_ORD_ME_REMOTEAUTO, True);
-        PCSSystem.LeverInServiceSB := True;
+        PCSSystem.RemoteAutoSB := True;
       end;
     end;
   end;
