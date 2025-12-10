@@ -225,8 +225,9 @@ begin
         frmSignalingLightME1.img24VDCControlME1.Visible   := True;
         frmSignalingLightME1.img24VDCSafetiesME1.Visible  := True;
 
-        frmSignalingLightME1.imgSafetiesorECResetME1.Visible  := False;
-        frmSignalingLightME1.imgEmergencyStopME1.Visible      := False;
+        frmSignalingLightME1.imgSafetiesorECResetME1.Visible      := False;
+        frmSignalingLightME1.imgEmergencyStopME1.Visible          := False;
+        frmSignalingLightME1.imgSafetiesStopOverbiddenME1.Visible := False;
       end
       else if FIsStopBlink then
       begin

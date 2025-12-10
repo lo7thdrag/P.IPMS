@@ -628,6 +628,7 @@ begin
   else if pcsConditionStatus  = 'SAFETY STOPS OVERRIDEN' then
   begin
     main_engine.SafetyStopsOverriden := isAlarm;
+    main_engine.PC_SafetiesStop[0] := isAlarm;
   end
   else if pcsConditionStatus  = 'OVERSPEED' then
   begin
@@ -688,6 +689,7 @@ begin
   else if pcsConditionStatus  = 'LOCAL EMERG STOP' then
   begin
     main_engine.LocalEmergencyStop := isAlarm;
+    main_engine.PC_SafetiesStop[10] := isAlarm;
   end
   else if pcsConditionStatus  = 'ENG INLET LUB OIL VERY HIGH' then
   begin
@@ -760,6 +762,7 @@ begin
   else if pcsConditionStatus  = 'RESET SAFETY STOP POSSIBLE' then
   begin
     main_engine.ResetSafetyStopPossible := isAlarm;
+    main_engine.PC_SafetiesStop[16] := isAlarm;
   end
   else if pcsConditionStatus = 'CONTROL FAILURE' then
   begin

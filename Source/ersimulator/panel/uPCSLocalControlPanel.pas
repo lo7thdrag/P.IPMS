@@ -7,7 +7,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, RzBmpBtn, Buttons, SpeedButtonImage, VrControls,
   VrRotarySwitch, StdCtrls, uCommonSystem, uListener,uDataType, uMainEngine,
-  uCPP, uGearBox, VrButtons, AppEvnts, ComCtrls;
+  uCPP, uGearBox, VrButtons, AppEvnts, ComCtrls, Math;
 
 type
   TfrmPCSLocalControlPanel = class(TForm)
@@ -464,34 +464,26 @@ begin
 end;
 
 procedure TfrmPCSLocalControlPanel.btnSafetiesResetClick(Sender: TObject);
-var
-  SenderOn, SenderOff : TSpeedButtonImage;
 begin
   if (TButton(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
-    main_engine_PS.ResetSafetyStopPossible := True;
-    TSpeedButtonImage(SenderOn).Color      := clRed;
+    main_engine_PS.ResetSafetyStopPossible := not main_engine_PS.ResetSafetyStopPossible;
   end
   else if (TButton(Sender).Tag = 1) and main_engine_SB.LocalControl then
   begin
-    main_engine_SB.ResetSafetyStopPossible := True;
-    TSpeedButtonImage(SenderOn).Color      := clRed;
+    main_engine_SB.ResetSafetyStopPossible := not main_engine_SB.ResetSafetyStopPossible;
   end;
 end;
 
 procedure TfrmPCSLocalControlPanel.btnSafetiesStopClick(Sender: TObject);
-var
-  SenderOn, SenderOff : TSpeedButtonImage;
 begin
   if (TButton(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
-    main_engine_PS.SafetyStopsOverriden := True;
-    TSpeedButtonImage(SenderOn).Color   := clLime;
+    main_engine_PS.SafetyStopsOverriden := not main_engine_PS.SafetyStopsOverriden;
   end
   else if (TButton(Sender).Tag = 1) and main_engine_SB.LocalControl then
   begin
-    main_engine_SB.SafetyStopsOverriden := True;
-    TSpeedButtonImage(SenderOn).Color   := clLime;
+    main_engine_SB.SafetyStopsOverriden := not main_engine_SB.SafetyStopsOverriden;
   end;
 end;
 
@@ -568,18 +560,14 @@ begin
 end;
 
 procedure TfrmPCSLocalControlPanel.btnEmergencStopClick(Sender: TObject);
-var
-  SenderOn, SenderOff : TSpeedButtonImage;
 begin
   if (TButton(Sender).Tag = 0) and main_engine_PS.LocalControl then
   begin
-    main_engine_PS.LocalEmergencyStop := True;
-    TSpeedButtonImage(SenderOn).Color := clLime;
+      main_engine_PS.LocalEmergencyStop := not main_engine_PS.LocalEmergencyStop;
   end
   else if (TButton(Sender).Tag = 1) and main_engine_SB.LocalControl then
   begin
-    main_engine_SB.LocalEmergencyStop := True;
-    TSpeedButtonImage(SenderOn).Color := clLime;
+    main_engine_SB.LocalEmergencyStop := not main_engine_SB.LocalEmergencyStop;
   end;
 end;
 
@@ -818,6 +806,10 @@ begin
       main_engine.StopIncrease := False;
       main_engine.Decrease     := False;
 
+      main_engine_PS.LocalEmergencyStop := False;
+      main_engine_PS.SafetyStopsOverriden := False;
+      main_engine_PS.ResetSafetyStopPossible := False;
+
       btnSafetiesResetPS.Color := clMaroon;
       btnEmergencStopPS.Color  := clGreen;
     end;
@@ -857,6 +849,10 @@ begin
       gearbox.ClutchEngaged := True;
       main_engine.StopIncrease := False;
       main_engine.Decrease     := False;
+
+      main_engine_SB.LocalEmergencyStop := False;
+      main_engine_SB.SafetyStopsOverriden := False;
+      main_engine_SB.ResetSafetyStopPossible := False;
 
       btnSafetiesResetSB.Color := clMaroon;
       btnEmergencStopSB.Color  := clGreen;
@@ -1169,24 +1165,27 @@ begin
         end;
         epPCSMESafetyStopsOverriden :
         begin
-          main_engine_PS.SafetyStopsOverriden := True;
+          main_engine_PS.SafetyStopsOverriden := Value;
+          btnSafetiesStopPS.Color := IfThen(Value, clLime, clGreen);
 
           if Value then
             img10.Picture.LoadFromFile(fAlarmIndicatorRedOn)
           else
             img10.Picture.LoadFromFile(fAlarmIndicatorRedOff);
 
-          btnSafetiesStopPS.Color := clLime;
+          main_engine_PS.PC_SafetiesStop[0] := Value;
         end;
         epPCSMELocalEmergencyStop :
         begin
-          main_engine_PS.LocalEmergencyStop := True;
-          btnEmergencStopPS.Color := clLime;
+          main_engine_PS.LocalEmergencyStop := Value;
+          btnEmergencStopPS.Color := IfThen(Value, clLime, clGreen);
+          main_engine_PS.PC_SafetiesStop[10] := Value;
         end;
         epPCSMEResetSafetyStopPossible :
         begin
-          main_engine.ResetSafetyStopPossible := True;
-          btnSafetiesResetPS.Color := clRed;
+          main_engine_PS.ResetSafetyStopPossible := Value;
+          btnSafetiesResetPS.Color := IfThen(Value, clRed, clRed);
+          main_engine_PS.PC_SafetiesStop[16] := Value;
         end;
       end;
     end
@@ -1268,24 +1267,27 @@ begin
         end;
         epPCSMESafetyStopsOverriden :
         begin
-           main_engine_SB.SafetyStopsOverriden := True;
+           main_engine_SB.SafetyStopsOverriden := Value;
+           btnSafetiesStopSB.Color := IfThen(Value, clLime, clGreen);
 
           if Value then
             img41.Picture.LoadFromFile(fAlarmIndicatorRedOn)
           else
             img41.Picture.LoadFromFile(fAlarmIndicatorRedOff);
 
-          btnSafetiesStopSB.Color := clLime;
+          main_engine_SB.PC_SafetiesStop[0] := Value;
         end;
         epPCSMELocalEmergencyStop :
         begin
-          main_engine_SB.LocalEmergencyStop := True;
-          btnEmergencStopSB.Color := clLime;
+          main_engine_SB.LocalEmergencyStop := Value;
+          btnEmergencStopSB.Color := IfThen(Value, clLime, clGreen);
+          main_engine_SB.PC_SafetiesStop[10] := Value;
         end;
         epPCSMEResetSafetyStopPossible :
         begin
-          main_engine_SB.ResetSafetyStopPossible := True;
-          btnSafetiesResetSB.Color := clRed;
+          main_engine_SB.ResetSafetyStopPossible := Value;
+          btnSafetiesResetSB.Color := IfThen(Value, clRed, clRed);
+          main_engine_SB.PC_SafetiesStop[16] := Value;
         end;
       end;
     {$ENDREGION}

@@ -264,9 +264,9 @@ object frmSignalingLightME2: TfrmSignalingLightME2
         object lblHoorCounter: TLabel
           Left = 19
           Top = -4
-          Width = 80
+          Width = 160
           Height = 45
-          Caption = '7670'
+          Caption = '00000000'
           Color = clWhite
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
