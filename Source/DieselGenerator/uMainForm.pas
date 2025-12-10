@@ -195,13 +195,13 @@ begin
   end;
 
   if GeneratorTemp.Identifier = 'Generator 1' then
-    lblRunningHours.Caption := '14405'
+    lblRunningHours.Caption := '30'
   else if GeneratorTemp.Identifier = 'Generator 2' then
-    lblRunningHours.Caption := '14048'
+    lblRunningHours.Caption := '30'
   else if GeneratorTemp.Identifier = 'Generator 3' then
-    lblRunningHours.Caption := '13243'
+    lblRunningHours.Caption := '30'
   else if GeneratorTemp.Identifier = 'Generator 4' then
-    lblRunningHours.Caption := '14598';
+    lblRunningHours.Caption := '30';
 
 end;
 
