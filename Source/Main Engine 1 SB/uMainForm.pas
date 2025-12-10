@@ -584,7 +584,7 @@ begin
   else
     frmSignalingLightME1.imgDeclutchME1.Visible := False;
 
-  if FBlinkCounter >= 8000 then
+  if FBlinkCounter >= 60000 then
   begin
     tmrBlinkTimer.Enabled := False;
     FBlinkCounter := 0;

@@ -1055,21 +1055,21 @@ begin
     end;
     epPCSMESafetyStopsOverriden :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
     epPCSMELocalEmergencyStop :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;
     end;
     epPCSMEResetSafetyStopPossible :
     begin
-      if rec.PortStaboardID = C_PCS_ME_PORTS then
+      if rec.PortStaboardID = C_PCS_ME_STARBOARD then
       begin
        FLIstener.TriggerEvents(Self,rec.CommandPropsID,rec.ValueBool);
       end;

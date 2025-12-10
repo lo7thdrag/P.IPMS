@@ -192,7 +192,7 @@ begin
     begin
       if Trunc(Value) > Trunc(CurrentHourCounter) then
       begin
-        CurrentHourCounter := 7674;
+        CurrentHourCounter := 15;      //7674
         frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Trunc(CurrentHourCounter));
 
         if not FIsRunningHours then
@@ -204,7 +204,7 @@ begin
       end
       else if Trunc(Value) < Trunc(CurrentHourCounter) then
       begin
-        CurrentHourCounter := 7674;
+        CurrentHourCounter := 15;
         frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Trunc(CurrentHourCounter));
 
         if FIsRunningHours then
