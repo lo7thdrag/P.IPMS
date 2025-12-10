@@ -76805,8 +76805,8 @@ object frmSWPumpProvRefrig1: TfrmSWPumpProvRefrig1
       OnClick = imgShadowStartClick
     end
     object imgShadowStop: TImage
-      Left = 621
-      Top = 415
+      Left = 533
+      Top = 615
       Width = 125
       Height = 124
       OnClick = imgShadowStopClick

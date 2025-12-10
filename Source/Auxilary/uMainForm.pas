@@ -27,7 +27,8 @@ type
     procedure AuxiliarySystemEvent(Sender : TObject;PropsID : E_PropsID;Value : TObject);overload;
 
   public
-    pumpTemp : array [0..5] of TPump;
+    pumpTemp : array [0..5] of TPump; //'BALLAST PUMP', 'SW PUMP PROV REFRIG UNIT 1', 'COOLING PUMP CHILLER 1',
+                                      //'FIFI PUMP 2', 'SW PUMP PROV REFRIG UNIT 2', 'SLUDGE DIRTY OIL PUMP');
 
     function GetPumpID(identifier : string) : Integer;
 

@@ -87,15 +87,14 @@ end;
 
 procedure TfrmSludge.imgShadowStartClick(Sender: TObject);
 begin
-  if frmMainForm.pumpTemp[2].PowerSupply then
-    AuxiliarySystem.EngineRun(C_PUMP_ID[2], True);
-
+  if frmMainForm.pumpTemp[5].PowerSupply then
+    AuxiliarySystem.EngineRun(C_PUMP_ID[5], True);
 end;
 
 procedure TfrmSludge.imgShadowStopClick(Sender: TObject);
 begin
-  if frmMainForm.pumpTemp[2].PowerSupply then
-    AuxiliarySystem.EngineRun(C_PUMP_ID[2], False);
+  if frmMainForm.pumpTemp[5].PowerSupply then
+    AuxiliarySystem.EngineRun(C_PUMP_ID[5], False);
 end;
 
 procedure TfrmSludge.vrAcHeatingClick(Sender: TObject);
@@ -106,8 +105,8 @@ end;
 procedure TfrmSludge.vrPowerSupplyClick(Sender: TObject);
 begin
   case vrPowerSupply.SwitchPosition of
-    0: AuxiliarySystem.PowerSupply(C_PUMP_ID[2], False);
-    1: AuxiliarySystem.PowerSupply(C_PUMP_ID[2], True)
+    0: AuxiliarySystem.PowerSupply(C_PUMP_ID[5], False);
+    1: AuxiliarySystem.PowerSupply(C_PUMP_ID[5], True)
   end;
 end;
 

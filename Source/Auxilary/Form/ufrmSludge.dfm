@@ -76873,7 +76873,7 @@ object frmSludge: TfrmSludge
         6277420E7C1D00FB6B6F63560000000049454E44AE426082}
     end
     object imgShadowStart: TImage
-      Left = 162
+      Left = 161
       Top = 614
       Width = 125
       Height = 124

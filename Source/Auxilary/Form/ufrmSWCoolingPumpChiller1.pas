@@ -83,21 +83,21 @@ end;
 
 procedure TfrmSWCoolingPumpChiller1.imgShadowStartClick(Sender: TObject);
 begin
-  if frmMainForm.pumpTemp[5].PowerSupply then
-    AuxiliarySystem.EngineRun(C_PUMP_ID[5], True);
+  if frmMainForm.pumpTemp[2].PowerSupply then
+    AuxiliarySystem.EngineRun(C_PUMP_ID[2], True);
 end;
 
 procedure TfrmSWCoolingPumpChiller1.imgShadowStopClick(Sender: TObject);
 begin
-  if frmMainForm.pumpTemp[5].PowerSupply then
-    AuxiliarySystem.EngineRun(C_PUMP_ID[5], False);
+  if frmMainForm.pumpTemp[2].PowerSupply then
+    AuxiliarySystem.EngineRun(C_PUMP_ID[2], False);
 end;
 
 procedure TfrmSWCoolingPumpChiller1.vrPowerSupplyClick(Sender: TObject);
 begin
   case vrPowerSupply.SwitchPosition of
-    0: AuxiliarySystem.PowerSupply(C_PUMP_ID[5], False);
-    1: AuxiliarySystem.PowerSupply(C_PUMP_ID[5], True)
+    0: AuxiliarySystem.PowerSupply(C_PUMP_ID[2], False);
+    1: AuxiliarySystem.PowerSupply(C_PUMP_ID[2], True)
   end;
 end;
 
