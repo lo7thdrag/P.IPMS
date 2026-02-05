@@ -14217,6 +14217,7 @@ object frmSignalingLightME1: TfrmSignalingLightME1
         B472A43C9890506959358DB916781164EF869FFACE8A0AC1889D60665F5391E0
         A988CD3DEAE4D5F9BBEAF580679920066FA8FE0BDA838789E23C0B8800000000
         49454E44AE426082}
+      Stretch = True
       Visible = False
       OnClick = imgStopME1Click
     end
@@ -16032,9 +16033,10 @@ object frmSignalingLightME1: TfrmSignalingLightME1
     object imgStopME1Shadow: TImage
       Left = 83
       Top = 473
-      Width = 144
+      Width = 150
       Height = 96
       Cursor = crHandPoint
+      Stretch = True
       OnClick = imgStopME1Click
     end
     object imgClutchME1Shadow: TImage

@@ -27112,5 +27112,16 @@ object frmPMSDieselEngineSafetiesME1: TfrmPMSDieselEngineSafetiesME1
       Font.Style = []
       Color = 10064258
     end
+    object mpStartME: TMediaPlayer
+      Left = 320
+      Top = 400
+      Width = 253
+      Height = 30
+      DoubleBuffered = True
+      Visible = False
+      ParentDoubleBuffered = False
+      TabOrder = 40
+      OnNotify = mpStartMENotify
+    end
   end
 end

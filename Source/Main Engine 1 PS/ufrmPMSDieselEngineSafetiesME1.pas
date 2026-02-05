@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch,
   Vcl.StdCtrls, Vcl.Samples.Spin, Vcl.ExtCtrls, VrAngularMeter, RzBmpBtn,
-  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage;
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.MPlayer;
 
 type
   TfrmPMSDieselEngineSafetiesME1 = class(TForm)
@@ -156,6 +156,7 @@ type
     Label14: TLabel;
     Label15: TLabel;
     FuelRackMeter: TVrAngularMeter;
+    mpStartME: TMediaPlayer;
     procedure NextClick(Sender: TObject);
     procedure AdjustSE1Change(Sender: TObject);
     procedure AdjustSE2Change(Sender: TObject);
@@ -166,11 +167,14 @@ type
     procedure switchATPChannelClick(Sender: TObject);
     procedure ptSVAEChange(Sender: TObject);
     procedure btnResetSVAEClick(Sender: TObject);
+    procedure mpStartMENotify(Sender: TObject);
+    procedure Alarm(Value: Boolean);
   private
 
   public
     imgLeds: array[0..15] of TImage;
     FBearingTemperatures: array[0..15] of Double;
+    Silence : Boolean;
   end;
 
 var
@@ -200,6 +204,44 @@ begin
   imgLeds[13] := imgLedGreenAIP6;
   imgLeds[14] := imgLedGreenAIP7;
   imgLeds[15] := imgLedGreenAIP8;
+
+  if not FileExists(ExtractFilePath(Application.Exename) + 'Suara_MainEngineStart.wav') then
+  begin
+    raise Exception.Create('Suara_MainEngineStart.wav Not found');
+  end
+  else
+    mpStartME.FileName:= ExtractFilePath(Application.Exename) + 'Suara_MainEngineStart.wav';
+
+  Silence := False;
+end;
+
+procedure TfrmPMSDieselEngineSafetiesME1.mpStartMENotify(Sender: TObject);
+begin
+  if (mpStartME.NotifyValue = nvSuccessful) and Silence then
+  begin
+    mpStartME.Play;
+    mpStartME.Notify := True;
+  end;
+end;
+
+procedure TfrmPMSDieselEngineSafetiesME1.Alarm(Value: Boolean);
+begin
+  if Value then
+  begin
+    silence := True;
+    mpStartME.OnNotify     := mpStartMENotify;
+    if not (mpStartME.Mode = mpPlaying) then
+    begin
+      mpStartME.Open;
+      mpStartME.Play;
+    end;
+  end
+  else
+  begin
+    mpStartME.Open;
+    mpStartME.Stop;
+    mpStartME.Notify := False;
+  end;
 end;
 
 procedure TfrmPMSDieselEngineSafetiesME1.AdjustSE1Change(Sender: TObject);

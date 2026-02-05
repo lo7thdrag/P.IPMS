@@ -463,6 +463,7 @@ begin
     begin
       if Assigned(frmPMSDieselEngineSafetiesME1) then
         frmPMSDieselEngineSafetiesME1.EngineSpeedMeter.Position := Value;
+//        frmPMSDieselEngineSafetiesME1.Alarm(True);
 
       if Value > 80 then
       begin
@@ -591,9 +592,15 @@ begin
     FBlinkCounter := 0;
 
     if FIsStartBlink then
+    begin
       frmSignalingLightME1.imgStartME1.Visible := True;
+      frmPMSDieselEngineSafetiesME1.Alarm(True);
+    end;
     if FIsStopBlink then
+    begin
       frmSignalingLightME1.imgStopME1.Visible := True;
+      frmPMSDieselEngineSafetiesME1.Alarm(False);
+    end;
     if FIsClutchBlink then
       frmSignalingLightME1.imgClutchME1.Visible := True;
     if FIsDeclutchBlink then
