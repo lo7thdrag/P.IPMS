@@ -5492,7 +5492,6 @@ object frmPSPanel: TfrmPSPanel
       Caption = ''
       Flat = True
       OnClick = btnDecr_SpeedPSClick
-      OnMouseUp = btnPSMouseUp
       ImageList = ilButton_PS
       Color = clBlack
     end

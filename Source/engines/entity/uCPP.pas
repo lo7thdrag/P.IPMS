@@ -10,12 +10,12 @@ const
   FPC_LeverPitchValuesTransit     : array[0..12] of Double = (95.0, 95.0, 95.0, 95.0, 95.0, 95.0, 95.0, 79.51, 66.26, 39.75,
                                                            13.25, 00.0, 00.0);
 
-  FPC_LeverPitchPositionManouverSB  : array[0..21] of Double = (10,9,8,6,4,2,1,0,-0.5,-1,-2,-4,-6,-8,-9,-10,-10,-10,-10,-10,-10,10);
-  FPC_LeverPitchValuesManouverSB    : array[0..21] of Double = (69.37, 67.67, 65.20, 60.25, 40.17, 20.00, 0.00, 0.00, 0.00, -15.79, -15.79, -36.84, -57.9,
-                                                              -78.95, -100, -100, -57.9, -57.9, -36.84, -36.84, -100, -100);
-  FPC_LeverPitchPositionManouverPS  : array[0..21] of Double = (-0.5,-1,-2,-4,-6,-8,-9,-10,-10,-10,-10,10,10,10,10,9,8,6,4,2,1,0);
-  FPC_LeverPitchValuesManouverPS    : array[0..21] of Double = (0.00, -15.79, -15.79, -36.84, -57.9, -78.95, -100, -100, -100, -100, -100, 74.2, 74.2, 74.2,
-                                                              74.2, 74.2, 72.72, 69.37, 65.20, 40.17, 20.00, 0.00);
+  FPC_LeverPitchPositionManouverSB  : array[0..21] of Double = (0,1,2,4,5,6,7,8,10,10,10,10,10,-10,-10,-10,-10,-8,-6,-4,-2,-0.5);
+  FPC_LeverPitchValuesManouverSB    : array[0..21] of Double = (0.00, 20.00, 40.17, 65.20, 67.67, 69.37, 71.07, 72.72, 74.2, 74.2, 74.2, 74.2, 74.2,
+                                                              -100, -100, -100, -100, -78.95, -57.9, -36.84, -15.79, -0.00);
+  FPC_LeverPitchPositionManouverPS  : array[0..21] of Double = (0,1,2,4,5,6,7,8,10,10,10,10,10,-10,-10,-10,-10,-8,-6,-4,-2,-0.5);
+  FPC_LeverPitchValuesManouverPS    : array[0..21] of Double = (0.00, 20.00, 40.17, 65.20, 67.67, 69.37, 71.07, 72.72, 74.2, 74.2, 74.2, 74.2, 74.2,
+                                                              -100, -100, -100, -100, -78.95, -57.9, -36.84, -15.79, -0.00);
 
 type
 
@@ -573,52 +573,52 @@ end;
 procedure TCPP.LeverPitchValues;
 begin
   // Mode Manouver SB
-  FPC_LeverPitchPositionManouverSB[0]  := 10;   FPC_LeverPitchValuesManouverSB[0]  := 74.2;
-  FPC_LeverPitchPositionManouverSB[1]  := 9;    FPC_LeverPitchValuesManouverSB[1]  := 74.2;
-  FPC_LeverPitchPositionManouverSB[2]  := 8;    FPC_LeverPitchValuesManouverSB[2]  := 72.72;
-  FPC_LeverPitchPositionManouverSB[3]  := 6;    FPC_LeverPitchValuesManouverSB[3]  := 69.37;
-  FPC_LeverPitchPositionManouverSB[4]  := 4;    FPC_LeverPitchValuesManouverSB[4]  := 65.20;
-  FPC_LeverPitchPositionManouverSB[5]  := 2;    FPC_LeverPitchValuesManouverSB[5]  := 40.17;
-  FPC_LeverPitchPositionManouverSB[6]  := 1;    FPC_LeverPitchValuesManouverSB[6]  := 20.00;
-  FPC_LeverPitchPositionManouverSB[7]  := 0;    FPC_LeverPitchValuesManouverSB[7]  := 0.00;
-  FPC_LeverPitchPositionManouverSB[8]  := -0.5; FPC_LeverPitchValuesManouverSB[8]  := 0.00;
-  FPC_LeverPitchPositionManouverSB[9]  := -1;   FPC_LeverPitchValuesManouverSB[9]  := -15.79;
-  FPC_LeverPitchPositionManouverSB[10] := -2;   FPC_LeverPitchValuesManouverSB[10] := -15.79;
-  FPC_LeverPitchPositionManouverSB[11] := -4;   FPC_LeverPitchValuesManouverSB[11] := -36.84;
-  FPC_LeverPitchPositionManouverSB[12] := -6;   FPC_LeverPitchValuesManouverSB[12] := -57.9;
-  FPC_LeverPitchPositionManouverSB[13] := -8;   FPC_LeverPitchValuesManouverSB[13] := -78.95;
-  FPC_LeverPitchPositionManouverSB[14] := -9;   FPC_LeverPitchValuesManouverSB[14] := -100;
+  FPC_LeverPitchPositionManouverSB[0]  := 0;    FPC_LeverPitchValuesManouverSB[0]  := 0.00;
+  FPC_LeverPitchPositionManouverSB[1]  := 1;    FPC_LeverPitchValuesManouverSB[1]  := 20.00;
+  FPC_LeverPitchPositionManouverSB[2]  := 2;    FPC_LeverPitchValuesManouverSB[2]  := 40.17;
+  FPC_LeverPitchPositionManouverSB[3]  := 4;    FPC_LeverPitchValuesManouverSB[3]  := 65.20;
+  FPC_LeverPitchPositionManouverSB[4]  := 5;    FPC_LeverPitchValuesManouverSB[4]  := 67.67;
+  FPC_LeverPitchPositionManouverSB[5]  := 6;    FPC_LeverPitchValuesManouverSB[5]  := 69.37;
+  FPC_LeverPitchPositionManouverSB[6]  := 7;    FPC_LeverPitchValuesManouverSB[6]  := 71.07;
+  FPC_LeverPitchPositionManouverSB[7]  := 8;    FPC_LeverPitchValuesManouverSB[7]  := 72.72;
+  FPC_LeverPitchPositionManouverSB[8]  := 10;   FPC_LeverPitchValuesManouverSB[8]  := 74.2;
+  FPC_LeverPitchPositionManouverSB[9]  := 10;   FPC_LeverPitchValuesManouverSB[9]  := 74.2;
+  FPC_LeverPitchPositionManouverSB[10] := 10;   FPC_LeverPitchValuesManouverSB[10] := 74.2;
+  FPC_LeverPitchPositionManouverSB[11] := 10;   FPC_LeverPitchValuesManouverSB[11] := 74.2;
+  FPC_LeverPitchPositionManouverSB[12] := 10;   FPC_LeverPitchValuesManouverSB[12] := 74.2;
+  FPC_LeverPitchPositionManouverSB[13] := -10;  FPC_LeverPitchValuesManouverSB[13] := -100;
+  FPC_LeverPitchPositionManouverSB[14] := -10;  FPC_LeverPitchValuesManouverSB[14] := -100;
   FPC_LeverPitchPositionManouverSB[15] := -10;  FPC_LeverPitchValuesManouverSB[15] := -100;
   FPC_LeverPitchPositionManouverSB[16] := -10;  FPC_LeverPitchValuesManouverSB[16] := -100;
-  FPC_LeverPitchPositionManouverSB[17] := -10;  FPC_LeverPitchValuesManouverSB[17] := -100;
-  FPC_LeverPitchPositionManouverSB[18] := -10;  FPC_LeverPitchValuesManouverSB[18] := -100;
-  FPC_LeverPitchPositionManouverSB[19] := -10;  FPC_LeverPitchValuesManouverSB[19] := -100;
-  FPC_LeverPitchPositionManouverSB[20] := -10;  FPC_LeverPitchValuesManouverSB[20] := -100;
-  FPC_LeverPitchPositionManouverSB[21] := 10;   FPC_LeverPitchValuesManouverSB[21] := 74.2;
+  FPC_LeverPitchPositionManouverSB[17] := -8;   FPC_LeverPitchValuesManouverSB[17] := -78.95;
+  FPC_LeverPitchPositionManouverSB[18] := -6;   FPC_LeverPitchValuesManouverSB[18] := -57.9;
+  FPC_LeverPitchPositionManouverSB[19] := -4;   FPC_LeverPitchValuesManouverSB[19] := -36.84;
+  FPC_LeverPitchPositionManouverSB[20] := -2;   FPC_LeverPitchValuesManouverSB[20] := -15.79;
+  FPC_LeverPitchPositionManouverSB[21] := -0.5; FPC_LeverPitchValuesManouverSB[21] := 0.00;
 
   // Mode Manouver PS
-  FPC_LeverPitchPositionManouverPS[0]  := -0.5;   FPC_LeverPitchValuesManouverPS[0]  := 0.00;
-  FPC_LeverPitchPositionManouverPS[1]  := -1;     FPC_LeverPitchValuesManouverPS[1]  := -15.79;
-  FPC_LeverPitchPositionManouverPS[2]  := -2;     FPC_LeverPitchValuesManouverPS[2]  := -15.79;
-  FPC_LeverPitchPositionManouverPS[3]  := -4;     FPC_LeverPitchValuesManouverPS[3]  := -36.84;
-  FPC_LeverPitchPositionManouverPS[4]  := -6;     FPC_LeverPitchValuesManouverPS[4]  := -57.9;
-  FPC_LeverPitchPositionManouverPS[5]  := -8;     FPC_LeverPitchValuesManouverPS[5]  := -78.95;
-  FPC_LeverPitchPositionManouverPS[6]  := -9;     FPC_LeverPitchValuesManouverPS[6]  := -100;
-  FPC_LeverPitchPositionManouverPS[7]  := -10;    FPC_LeverPitchValuesManouverPS[7]  := -100;
-  FPC_LeverPitchPositionManouverPS[8]  := -10;    FPC_LeverPitchValuesManouverPS[8]  := -100;
-  FPC_LeverPitchPositionManouverPS[9]  := -10;    FPC_LeverPitchValuesManouverPS[9]  := -100;
-  FPC_LeverPitchPositionManouverPS[10] := -10;    FPC_LeverPitchValuesManouverPS[10] := -100;
-  FPC_LeverPitchPositionManouverPS[11] := 10;     FPC_LeverPitchValuesManouverPS[11] := 74.2;
-  FPC_LeverPitchPositionManouverPS[12] := 10;     FPC_LeverPitchValuesManouverPS[12] := 74.2;
-  FPC_LeverPitchPositionManouverPS[13] := 10;     FPC_LeverPitchValuesManouverPS[13] := 74.2;
-  FPC_LeverPitchPositionManouverPS[14] := 10;     FPC_LeverPitchValuesManouverPS[14] := 74.2;
-  FPC_LeverPitchPositionManouverPS[15] := 9;      FPC_LeverPitchValuesManouverPS[15] := 74.2;
-  FPC_LeverPitchPositionManouverPS[16] := 8;      FPC_LeverPitchValuesManouverPS[16] := 72.72;
-  FPC_LeverPitchPositionManouverPS[17] := 6;      FPC_LeverPitchValuesManouverPS[17] := 69.37;
-  FPC_LeverPitchPositionManouverPS[18] := 4;      FPC_LeverPitchValuesManouverPS[18] := 65.20;
-  FPC_LeverPitchPositionManouverPS[19] := 2;      FPC_LeverPitchValuesManouverPS[19] := 40.17;
-  FPC_LeverPitchPositionManouverPS[20] := 1;      FPC_LeverPitchValuesManouverPS[20] := 20.00;
-  FPC_LeverPitchPositionManouverPS[21] := 0;      FPC_LeverPitchValuesManouverPS[21] := 0.00;
+  FPC_LeverPitchPositionManouverPS[0]  := 0;    FPC_LeverPitchValuesManouverPS[0]  := 0.00;
+  FPC_LeverPitchPositionManouverPS[1]  := 1;    FPC_LeverPitchValuesManouverPS[1]  := 20.00;
+  FPC_LeverPitchPositionManouverPS[2]  := 2;    FPC_LeverPitchValuesManouverPS[2]  := 40.17;
+  FPC_LeverPitchPositionManouverPS[3]  := 4;    FPC_LeverPitchValuesManouverPS[3]  := 65.20;
+  FPC_LeverPitchPositionManouverPS[4]  := 5;    FPC_LeverPitchValuesManouverPS[4]  := 67.67;
+  FPC_LeverPitchPositionManouverPS[5]  := 6;    FPC_LeverPitchValuesManouverPS[5]  := 69.37;
+  FPC_LeverPitchPositionManouverPS[6]  := 7;    FPC_LeverPitchValuesManouverPS[6]  := 71.07;
+  FPC_LeverPitchPositionManouverPS[7]  := 8;    FPC_LeverPitchValuesManouverPS[7]  := 72.72;
+  FPC_LeverPitchPositionManouverPS[8]  := 10;   FPC_LeverPitchValuesManouverPS[8]  := 74.2;
+  FPC_LeverPitchPositionManouverPS[9]  := 10;   FPC_LeverPitchValuesManouverPS[9]  := 74.2;
+  FPC_LeverPitchPositionManouverPS[10] := 10;   FPC_LeverPitchValuesManouverPS[10] := 74.2;
+  FPC_LeverPitchPositionManouverPS[11] := 10;   FPC_LeverPitchValuesManouverPS[11] := 74.2;
+  FPC_LeverPitchPositionManouverPS[12] := 10;   FPC_LeverPitchValuesManouverPS[12] := 74.2;
+  FPC_LeverPitchPositionManouverPS[13] := -10;  FPC_LeverPitchValuesManouverPS[13] := -100;
+  FPC_LeverPitchPositionManouverPS[14] := -10;  FPC_LeverPitchValuesManouverPS[14] := -100;
+  FPC_LeverPitchPositionManouverPS[15] := -10;  FPC_LeverPitchValuesManouverPS[15] := -100;
+  FPC_LeverPitchPositionManouverPS[16] := -10;  FPC_LeverPitchValuesManouverPS[16] := -100;
+  FPC_LeverPitchPositionManouverPS[17] := -8;   FPC_LeverPitchValuesManouverPS[17] := -78.95;
+  FPC_LeverPitchPositionManouverPS[18] := -6;   FPC_LeverPitchValuesManouverPS[18] := -57.9;
+  FPC_LeverPitchPositionManouverPS[19] := -4;   FPC_LeverPitchValuesManouverPS[19] := -36.84;
+  FPC_LeverPitchPositionManouverPS[20] := -2;   FPC_LeverPitchValuesManouverPS[20] := -15.79;
+  FPC_LeverPitchPositionManouverPS[21] := -0.5; FPC_LeverPitchValuesManouverPS[21] := 0.00;
 
   // Mode Transit
   FPC_LeverPitchPositionTransit[0]  := 10;    FPC_LeverPitchValuesTransit[0]  := 95.0;

@@ -252,12 +252,14 @@ begin
       if PCSSystem.FClutchAllowedPS then
       begin
         imgClutch_InPS.Picture.LoadFromFile(fIndikatorOn);
+        imgClutch_OutPS.Picture.LoadFromFile(fIndikatorOff);
         FFlashing_ClutchIn := True;
         PCSSystem.Clutch(C_PCS_GB_PORTS,True);
       end;
       2:
       begin
         imgClutch_OutPS.Picture.LoadFromFile(fIndikatorOn);
+        imgClutch_InPS.Picture.LoadFromFile(fIndikatorOff);
         FFlashing_ClutchOut := True;
         PCSSystem.Clutch(C_PCS_GB_PORTS,False);
       end;

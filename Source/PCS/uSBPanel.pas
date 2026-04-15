@@ -247,12 +247,14 @@ begin
       if PCSSystem.FClutchAllowedSB then
       begin
         imgClutch_InSB.Picture.LoadFromFile(fIndikatorOn);
+        imgClutch_OutSB.Picture.LoadFromFile(fIndikatorOff);
         FFlashing_ClutchIn := True;
         PCSSystem.Clutch(C_PCS_GB_STARBOARD, True);
       end;
       2:
       begin
         imgClutch_OutSB.Picture.LoadFromFile(fIndikatorOn);
+        imgClutch_InSB.Picture.LoadFromFile(fIndikatorOff);
         FFlashing_ClutchOut := True;
         PCSSystem.Clutch(C_PCS_GB_STARBOARD, False);
       end;
@@ -286,7 +288,7 @@ begin
   begin
     imgPitch_AH_SB.Picture.LoadFromFile(fIndikatorOn);
     imgPitch_AS_SB.Picture.LoadFromFile(fIndikatorOff);
-    PitchInChange(1,True);
+    PitchInChange(10,True);
   end
 end;
 
@@ -296,7 +298,7 @@ begin
   begin
     imgPitch_AS_SB.Picture.LoadFromFile(fIndikatorOn);
     imgPitch_AH_SB.Picture.LoadFromFile(fIndikatorOff);
-    PitchInChange(-1,True);
+    PitchInChange(-10,True);
   end;
 end;
 

@@ -464,11 +464,13 @@ begin
       if Assigned(frmPMSDieselEngineSafetiesME1) then
       begin
         frmPMSDieselEngineSafetiesME1.EngineSpeedMeter.Position := Value;
-        frmPMSDieselEngineSafetiesME1.Alarm(True);
+
       end;
 
       if Value = 0 then
-        frmPMSDieselEngineSafetiesME1.Alarm(False);
+        frmPMSDieselEngineSafetiesME1.Alarm(False)
+      else if Value > 1  then
+        frmPMSDieselEngineSafetiesME1.Alarm(True);
 
       if Value > 80 then
       begin
