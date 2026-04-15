@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrRotarySwitch,
   Vcl.StdCtrls, Vcl.ExtCtrls,
 
-  uDataType, uListener, uFreezeFrom;
+  uDataType, uListener, uFreezeFrom, Vcl.MPlayer;
 
 type
   TfrmSignalingLightME2 = class(TForm)
@@ -29,16 +29,21 @@ type
     Label2: TLabel;
     Panel1: TPanel;
     lblHoorCounter: TLabel;
+    mpStartME: TMediaPlayer;
 
 
     procedure vrtryswtchRemoteSBClick(Sender: TObject);
     procedure vrtryswtchSpeedSBClick(Sender: TObject);
     procedure vrtryswtchSTC_SBClick(Sender: TObject);
     procedure vrtryswtchPreStartSBClick(Sender: TObject);
+    procedure mpStartMENotify(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Alarm(Value: Boolean);
   private
 
 
   public
+    silence : Boolean;
 
   end;
 
@@ -51,6 +56,47 @@ uses
   ufrmSetofPressureGaugesME2, uMainEngine2System;
 
 {$R *.dfm}
+
+procedure TfrmSignalingLightME2.Alarm(Value: Boolean);
+begin
+  if Value then
+  begin
+    silence := True;
+    mpStartME.OnNotify     := mpStartMENotify;
+    if not (mpStartME.Mode = mpPlaying) then
+    begin
+      mpStartME.Open;
+      mpStartME.Play;
+    end;
+  end
+  else
+  begin
+    mpStartME.Open;
+    mpStartME.Stop;
+    mpStartME.Notify := False;
+  end;
+end;
+
+procedure TfrmSignalingLightME2.FormCreate(Sender: TObject);
+begin
+  if not FileExists(ExtractFilePath(Application.Exename) + 'Suara_MainEngineStart.wav') then
+  begin
+    raise Exception.Create('Suara_MainEngineStart.wav Not found');
+  end
+  else
+    mpStartME.FileName:= ExtractFilePath(Application.Exename) + 'Suara_MainEngineStart.wav';
+
+  Silence := False;
+end;
+
+procedure TfrmSignalingLightME2.mpStartMENotify(Sender: TObject);
+begin
+  if (mpStartME.NotifyValue = nvSuccessful) and Silence then
+  begin
+    mpStartME.Play;
+    mpStartME.Notify := True;
+  end;
+end;
 
 procedure TfrmSignalingLightME2.vrtryswtchPreStartSBClick(Sender: TObject);
 begin

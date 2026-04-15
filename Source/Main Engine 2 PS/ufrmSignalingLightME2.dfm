@@ -12,6 +12,7 @@ object frmSignalingLightME2: TfrmSignalingLightME2
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -277,6 +278,17 @@ object frmSignalingLightME2: TfrmSignalingLightME2
           ParentFont = False
         end
       end
+    end
+    object mpStartME: TMediaPlayer
+      Left = 151
+      Top = 196
+      Width = 253
+      Height = 30
+      DoubleBuffered = True
+      Visible = False
+      ParentDoubleBuffered = False
+      TabOrder = 5
+      OnNotify = mpStartMENotify
     end
   end
 end

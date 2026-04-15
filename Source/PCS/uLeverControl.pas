@@ -5,11 +5,11 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, NLDJoystick, ExtCtrls, StdCtrls, math, uDataType, uListener, IniFiles,
-  CPort, CPortCtl, UBinaryPacketizer, System.Generics.Collections;
+  CPort, CPortCtl, {UBinaryPacketizer,} System.Generics.Collections;
 
 var
-  LeverValuesPositionManouverSB: array[0..21] of Double = (10,9,8,6,4,2,1,0,-0.5,-1,-2,-4,-6,-8,-9,-10,-10,-10,-10,-10,-10,10);
-  LeverValuesPositionManouverPS: array[0..21] of Double = (-0.5,-1,-2,-4,-6,-8,-9,-10,-10,-10,-10,10,10,10,10,9,8,6,4,2,1,0);
+  LeverValuesPositionManouverSB: array[0..21] of Double = (0,1,2,4,5,6,7,8,10,10,10,10,10,-10,-10,-10,-10,-8,-6,-4,-2,-0.5);
+  LeverValuesPositionManouverPS: array[0..21] of Double = (0,1,2,4,5,6,7,8,10,10,10,10,10,-10,-10,-10,-10,-8,-6,-4,-2,-0.5);
   LeverValuesPositionTransit   : array[0..12] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0);
 
 type
@@ -131,9 +131,9 @@ begin
 
 //          if PCSSystem.RemoteAutoPS = True then
 //          begin
-            if LeverIndexPS >= 11 then
+            if LeverIndexPS <= 12 then
               ComPort1.WriteStr('AheadPS:1' + #10)
-            else if LeverIndexPS < 11 then
+            else if LeverIndexPS > 12 then
               ComPort1.WriteStr('AsternPS:1' + #10);
 //          end;
 
@@ -170,9 +170,9 @@ begin
 
 //          if PCSSystem.RemoteAutoSB = True then
 //          begin
-            if (LeverIndexSB <= 7) or (LeverIndexSB = 21) then
+            if (LeverIndexSB <= 12) then
               ComPort1.WriteStr('AheadSB:1' + #10)
-            else if (LeverIndexSB > 7) and (LeverIndexSB < 21) then
+            else if (LeverIndexSB > 12) then
               ComPort1.WriteStr('AsternSB:1' + #10);
 //          end;
 
@@ -241,52 +241,52 @@ end;
 procedure TfrmLeverControl.LeverValuePosition;
 begin
   // Mode Manouver PS
-  LeverValuesPositionManouverPS[0]  := -0.5;
-  LeverValuesPositionManouverPS[1]  := -1;
-  LeverValuesPositionManouverPS[2]  := -2;
-  LeverValuesPositionManouverPS[3]  := -4;
-  LeverValuesPositionManouverPS[4]  := -6;
-  LeverValuesPositionManouverPS[5]  := -8;
-  LeverValuesPositionManouverPS[6]  := -9;
-  LeverValuesPositionManouverPS[7]  := -10;
-  LeverValuesPositionManouverPS[8]  := -10;
-  LeverValuesPositionManouverPS[9]  := -10;
-  LeverValuesPositionManouverPS[10] := -10;
+  LeverValuesPositionManouverPS[0]  := 0;
+  LeverValuesPositionManouverPS[1]  := 1;
+  LeverValuesPositionManouverPS[2]  := 2;
+  LeverValuesPositionManouverPS[3]  := 4;
+  LeverValuesPositionManouverPS[4]  := 5;
+  LeverValuesPositionManouverPS[5]  := 6;
+  LeverValuesPositionManouverPS[6]  := 7;
+  LeverValuesPositionManouverPS[7]  := 8;
+  LeverValuesPositionManouverPS[8]  := 10;
+  LeverValuesPositionManouverPS[9]  := 10;
+  LeverValuesPositionManouverPS[10] := 10;
   LeverValuesPositionManouverPS[11] := 10;
   LeverValuesPositionManouverPS[12] := 10;
-  LeverValuesPositionManouverPS[13] := 10;
-  LeverValuesPositionManouverPS[14] := 10;
-  LeverValuesPositionManouverPS[15] := 9;
-  LeverValuesPositionManouverPS[16] := 8;
-  LeverValuesPositionManouverPS[17] := 6;
-  LeverValuesPositionManouverPS[18] := 4;
-  LeverValuesPositionManouverPS[19] := 2;
-  LeverValuesPositionManouverPS[20] := 1;
-  LeverValuesPositionManouverPS[21] := 0;
+  LeverValuesPositionManouverPS[13] := -10;
+  LeverValuesPositionManouverPS[14] := -10;
+  LeverValuesPositionManouverPS[15] := -10;
+  LeverValuesPositionManouverPS[16] := -10;
+  LeverValuesPositionManouverPS[17] := -8;
+  LeverValuesPositionManouverPS[18] := -6;
+  LeverValuesPositionManouverPS[19] := -4;
+  LeverValuesPositionManouverPS[20] := -2;
+  LeverValuesPositionManouverPS[21] := -0.5;
 
   // Manouver SB
-  LeverValuesPositionManouverSB[0]  := 10;
-  LeverValuesPositionManouverSB[1]  := 9;
-  LeverValuesPositionManouverSB[2]  := 8;
-  LeverValuesPositionManouverSB[3]  := 6;
-  LeverValuesPositionManouverSB[4]  := 4;
-  LeverValuesPositionManouverSB[5]  := 2;
-  LeverValuesPositionManouverSB[6]  := 1;
-  LeverValuesPositionManouverSB[7]  := 0;
-  LeverValuesPositionManouverSB[8]  := -0.5;
-  LeverValuesPositionManouverSB[9]  := -1;
-  LeverValuesPositionManouverSB[10] := -2;
-  LeverValuesPositionManouverSB[11] := -4;
-  LeverValuesPositionManouverSB[12] := -6;
-  LeverValuesPositionManouverSB[13] := -8;
-  LeverValuesPositionManouverSB[14] := -9;
+  LeverValuesPositionManouverSB[0]  := 0;
+  LeverValuesPositionManouverSB[1]  := 1;
+  LeverValuesPositionManouverSB[2]  := 2;
+  LeverValuesPositionManouverSB[3]  := 4;
+  LeverValuesPositionManouverSB[4]  := 5;
+  LeverValuesPositionManouverSB[5]  := 6;
+  LeverValuesPositionManouverSB[6]  := 7;
+  LeverValuesPositionManouverSB[7]  := 8;
+  LeverValuesPositionManouverSB[8]  := 10;
+  LeverValuesPositionManouverSB[9]  := 10;
+  LeverValuesPositionManouverSB[10] := 10;
+  LeverValuesPositionManouverSB[11] := 10;
+  LeverValuesPositionManouverSB[12] := 10;
+  LeverValuesPositionManouverSB[13] := -10;
+  LeverValuesPositionManouverSB[14] := -10;
   LeverValuesPositionManouverSB[15] := -10;
   LeverValuesPositionManouverSB[16] := -10;
-  LeverValuesPositionManouverSB[17] := -10;
-  LeverValuesPositionManouverSB[18] := -10;
-  LeverValuesPositionManouverSB[19] := -10;
-  LeverValuesPositionManouverSB[20] := -10;
-  LeverValuesPositionManouverSB[21] := 10;
+  LeverValuesPositionManouverSB[17] := -8;
+  LeverValuesPositionManouverSB[18] := -6;
+  LeverValuesPositionManouverSB[19] := -4;
+  LeverValuesPositionManouverSB[20] := -2;
+  LeverValuesPositionManouverSB[21] := -0.5;
 
   // Mode Transit PS
   LeverValuesPositionTransit[0]  := 6;
@@ -324,7 +324,21 @@ begin
 
 //  ComPort1.Port := 'COM4';
 //  ComPort1.BaudRate := br9600;
-  ComPort1.Open;
+//  ComPort1.Open;
+
+  if PCSSystem.idFormPCS = 3 then
+  begin
+    ComPort1.Port := SerialPortName;
+
+    try
+      if not ComPort1.Connected then
+        ComPort1.Open;
+    except
+      on E: Exception do
+        ShowMessage('Gagal buka COM: ' + E.Message);
+    end;
+  end;
+
 end;
 
 procedure TfrmLeverControl.FormShow(Sender: TObject);

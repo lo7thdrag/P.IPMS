@@ -148,7 +148,7 @@ object frmLeverControl: TfrmLeverControl
   end
   object ComPort1: TComPort
     BaudRate = br9600
-    Port = 'COM4'
+    Port = 'COM7'
     Parity.Bits = prNone
     StopBits = sbOneStopBit
     DataBits = dbEight

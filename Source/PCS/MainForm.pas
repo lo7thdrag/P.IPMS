@@ -9,7 +9,7 @@ uses
 
 var
 //  LeverValuesPositionManouver: array[0..21] of Double = (11,10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10,-11,-12);
-  LeverValuesPositionManouver: array[0..21] of Double = (0,0.5,1,2,3,3.5,4,5,6,7,8,9,10,-10,-9,-8,-7,-6,-5,-4,-3,-2);
+  LeverValuesPositionManouver: array[0..21] of Double = (0,1,2,4,5,6,7,8,10,10,10,10,10,-10,-10,-10,-10,-8,-6,-4,-2,-0.5);
   LeverValuesPositionTransit : array[0..12] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0);
 
 type
@@ -156,8 +156,6 @@ begin
     frmLeverControl := TfrmLeverControl(self);
     frmLeverControl.Show;
   end;
-
-
 end;
 
 procedure TForm1.btnEmergencyStopPSClick(Sender: TObject);
@@ -173,13 +171,13 @@ end;
 procedure TForm1.btnLeverInServicePSClick(Sender: TObject);
 begin
   PCSSystem.LeverInService(C_PCS_ME_PORTS, True);
-  frmLeverControl.ComPort1.WriteStr('LeverInServicePS:1' + #10);
+//  frmLeverControl.ComPort1.WriteStr('LeverInServicePS:1' + #10);
 end;
 
 procedure TForm1.btnLeverInServiceSBClick(Sender: TObject);
 begin
   PCSSystem.LeverInService(C_PCS_ME_STARBOARD,True);
-  frmLeverControl.ComPort1.WriteStr('LeverInServiceSB:1' + #10);
+//  frmLeverControl.ComPort1.WriteStr('LeverInServiceSB:1' + #10);
 end;
 
 procedure TForm1.btnGeneralPanelStartClick(Sender: TObject);

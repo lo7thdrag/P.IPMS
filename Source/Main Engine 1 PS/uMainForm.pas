@@ -462,8 +462,13 @@ begin
     epPCSMESpeed :
     begin
       if Assigned(frmPMSDieselEngineSafetiesME1) then
+      begin
         frmPMSDieselEngineSafetiesME1.EngineSpeedMeter.Position := Value;
-//        frmPMSDieselEngineSafetiesME1.Alarm(True);
+        frmPMSDieselEngineSafetiesME1.Alarm(True);
+      end;
+
+      if Value = 0 then
+        frmPMSDieselEngineSafetiesME1.Alarm(False);
 
       if Value > 80 then
       begin
@@ -594,12 +599,12 @@ begin
     if FIsStartBlink then
     begin
       frmSignalingLightME1.imgStartME1.Visible := True;
-      frmPMSDieselEngineSafetiesME1.Alarm(True);
+//      frmPMSDieselEngineSafetiesME1.Alarm(True);
     end;
     if FIsStopBlink then
     begin
       frmSignalingLightME1.imgStopME1.Visible := True;
-      frmPMSDieselEngineSafetiesME1.Alarm(False);
+//      frmPMSDieselEngineSafetiesME1.Alarm(False);
     end;
     if FIsClutchBlink then
       frmSignalingLightME1.imgClutchME1.Visible := True;

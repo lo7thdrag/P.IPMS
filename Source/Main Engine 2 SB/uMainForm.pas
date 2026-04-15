@@ -194,6 +194,7 @@ begin
       begin
         CurrentHourCounter := 15;      //7674
         frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Trunc(CurrentHourCounter));
+        frmSignalingLightME2.Alarm(True);
 
         if not FIsRunningHours then
         begin
@@ -211,6 +212,7 @@ begin
         begin
           tmrRunningMETimer1.Enabled := False;
           FIsRunningHours := False;
+          frmSignalingLightME2.Alarm(False);
         end;
       end;
     end;
