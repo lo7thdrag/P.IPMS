@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VrControls, VrButtons, Vcl.ExtCtrls,
-  Vcl.StdCtrls, VrAngularMeter, Vcl.Imaging.pngimage, RzBmpBtn;
+  Vcl.StdCtrls, VrAngularMeter, Vcl.Imaging.pngimage, RzBmpBtn, Vcl.MPlayer;
 
 
 type
@@ -98,6 +98,7 @@ type
     Label52: TLabel;
     Label53: TLabel;
     Label54: TLabel;
+    mpStartME: TMediaPlayer;
     procedure FormCreate(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure btnPreviousClick(Sender: TObject);
@@ -105,10 +106,12 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure btnAlarmsClick(Sender: TObject);
     procedure btnCurvesClick(Sender: TObject);
+    procedure mpStartMENotify(Sender: TObject);
+    procedure Alarm(Value: Boolean);
   private
     { Private declarations }
   public
-    { Public declarations }
+    silence : Boolean;
   end;
 
 var
@@ -120,6 +123,26 @@ uses
   ufrmPLCNetwork, ufrmGeneralScreen, ufrmMenu, ufrmAlarms, ufrmCurves;
 
 {$R *.dfm}
+
+procedure TfrmClutchingAssistance.Alarm(Value: Boolean);
+begin
+  if Value then
+  begin
+    silence := True;
+    mpStartME.OnNotify     := mpStartMENotify;
+    if not (mpStartME.Mode = mpPlaying) then
+    begin
+      mpStartME.Open;
+      mpStartME.Play;
+    end;
+  end
+  else
+  begin
+    mpStartME.Open;
+    mpStartME.Stop;
+    mpStartME.Notify := False;
+  end;
+end;
 
 procedure TfrmClutchingAssistance.btnAlarmsClick(Sender: TObject);
 begin
@@ -152,12 +175,30 @@ begin
   lblTime.Transparent := True;
   imgBackground.SendToBack;
   pnlTime.DoubleBuffered := True;
+
+  if not FileExists(ExtractFilePath(Application.Exename) + 'Suara_MainEngineStart.wav') then
+  begin
+    raise Exception.Create('Suara_MainEngineStart.wav Not found');
+  end
+  else
+    mpStartME.FileName:= ExtractFilePath(Application.Exename) + 'Suara_MainEngineStart.wav';
+
+  Silence := False;
 end;
 
 procedure TfrmClutchingAssistance.MenuClick(Sender: TObject);
 begin
   frmMenu.Show;
   Self.Hide;
+end;
+
+procedure TfrmClutchingAssistance.mpStartMENotify(Sender: TObject);
+begin
+  if (mpStartME.NotifyValue = nvSuccessful) and Silence then
+  begin
+    mpStartME.Play;
+    mpStartME.Notify := True;
+  end;
 end;
 
 procedure TfrmClutchingAssistance.Timer1Timer(Sender: TObject);

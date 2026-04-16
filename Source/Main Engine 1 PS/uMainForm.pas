@@ -467,10 +467,10 @@ begin
 
       end;
 
-      if Value = 0 then
-        frmPMSDieselEngineSafetiesME1.Alarm(False)
-      else if Value > 1  then
-        frmPMSDieselEngineSafetiesME1.Alarm(True);
+//      if Value = 0 then
+//        frmPMSDieselEngineSafetiesME1.Alarm(False)
+//      else if Value > 1  then
+//        frmPMSDieselEngineSafetiesME1.Alarm(True);
 
       if Value > 80 then
       begin
@@ -601,12 +601,10 @@ begin
     if FIsStartBlink then
     begin
       frmSignalingLightME1.imgStartME1.Visible := True;
-//      frmPMSDieselEngineSafetiesME1.Alarm(True);
     end;
     if FIsStopBlink then
     begin
       frmSignalingLightME1.imgStopME1.Visible := True;
-//      frmPMSDieselEngineSafetiesME1.Alarm(False);
     end;
     if FIsClutchBlink then
       frmSignalingLightME1.imgClutchME1.Visible := True;

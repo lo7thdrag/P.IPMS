@@ -174,6 +174,12 @@ begin
           BringToFront;
           Show;
         end;
+
+        if Assigned(MainEngine2System.FFormFreezed[0]) and
+          Assigned(MainEngine2System.FFormFreezed[2]) then
+        begin
+          frmClutchingAssistance.Alarm(False);
+        end;
       end
       else if Value = 0 then
       begin
@@ -194,7 +200,6 @@ begin
       begin
         CurrentHourCounter := 15;      //7674
         frmSignalingLightME2.lblHoorCounter.Caption := IntToStr(Trunc(CurrentHourCounter));
-        frmSignalingLightME2.Alarm(True);
 
         if not FIsRunningHours then
         begin
@@ -212,7 +217,6 @@ begin
         begin
           tmrRunningMETimer1.Enabled := False;
           FIsRunningHours := False;
-          frmSignalingLightME2.Alarm(False);
         end;
       end;
     end;
@@ -1052,6 +1056,11 @@ begin
         frmClutchingAssistance.VrEngineSpeedClutching.Position := Value;
         frmClutchingAssistance.lblEngineSpeedClutching.Caption := FloatToStr(Value);
       end;
+
+      if frmClutchingAssistance.lblEngineSpeedClutching.Caption = FloatToStr(0) then
+        frmClutchingAssistance.Alarm(False)
+      else if frmClutchingAssistance.lblEngineSpeedClutching.Caption = FloatToStr(1) then
+        frmClutchingAssistance.Alarm(True);
 
       if Assigned(frmGeneralScreen) then
       begin

@@ -16872,6 +16872,17 @@ object frmClutchingAssistance: TfrmClutchingAssistance
         ParentFont = False
       end
     end
+    object mpStartME: TMediaPlayer
+      Left = 24
+      Top = 408
+      Width = 253
+      Height = 30
+      DoubleBuffered = True
+      Visible = False
+      ParentDoubleBuffered = False
+      TabOrder = 11
+      OnNotify = mpStartMENotify
+    end
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer

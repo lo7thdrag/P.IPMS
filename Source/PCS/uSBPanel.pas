@@ -298,7 +298,7 @@ begin
   begin
     imgPitch_AS_SB.Picture.LoadFromFile(fIndikatorOn);
     imgPitch_AH_SB.Picture.LoadFromFile(fIndikatorOff);
-    PitchInChange(-10,True);
+    PitchInChange(-10,False);
   end;
 end;
 
