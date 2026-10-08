@@ -5,16 +5,16 @@ interface
 uses uEntity, Math;
 
 const
-  FPC_LeverShaftPositionTransit  : array[0..12] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0);
-  FPC_LeverSpeedShaftTransit     : array[0..12] of Double = (237.3, 210.9, 186.9, 162.7, 138.5, 114.6, 90.4, 90.4, 90.4, 90.4,
-                                                          90.4, 90.4, 90.4);
+  FPC_LeverShaftPositionTransit  : array[0..12] of Double = (0,0.5,1,2,3,3.5,4,5,6,7,8,9,10);
+  FPC_LeverSpeedShaftTransit     : array[0..12] of Double = (90.4, 90.4, 90.4, 90.4, 90.4, 90.4, 90.4, 114.6, 138.5, 162.7,
+                                                          186.9, 210.9, 237.3);
 
-  FPC_LeverShaftPositionManouverSB  : array[0..21] of Double = (0,1,2,4,5,6,7,8,10,10,10,10,10,-10,-10,-10,-10,-8,-6,-4,-2,-0.5);
-  FPC_LeverSpeedShaftManouverSB     : array[0..21] of Double = (90.4, 103.3, 115.9, 148.3, 158.2, 171.8, 185.3, 198.9, 226.0, 226.0, 226.0, 226.0, 226.0,
-                                                              158.2, 158.2, 158.2, 158.2, 144.0, 129.7, 115.3, 101.0, 90.4);
-  FPC_LeverShaftPositionManouverPS  : array[0..21] of Double = (0,1,2,4,5,6,7,8,10,10,10,10,10,-10,-10,-10,-10,-8,-6,-4,-2,-0.5);
-  FPC_LeverSpeedShaftManouverPS     : array[0..21] of Double = (90.4, 103.3, 115.9, 148.3, 158.2, 171.8, 185.3, 198.9, 226.0, 226.0, 226.0, 226.0, 226.0,
-                                                              158.2, 158.2, 158.2, 158.2, 144.0, 129.7, 115.3, 101.0, 90.4);
+  FPC_LeverShaftPositionManouverSB  : array[0..21] of Double = (0,-0.5,-1,-2,-4,-6,-8,-9,-10,-10,10,10,10,10,10,10,9,8,6,4,2,1);
+  FPC_LeverSpeedShaftManouverSB     : array[0..21] of Double = (90.4, 90.4, 90.4, 101.0, 115.3, 129.7, 144.0, 144.0, 158.2, 158.2, 226.0, 226.0, 226.0,
+                                                              226.0, 226.0, 226.0, 212.5, 198.9, 171.8, 148.3, 115.9, 103.3);
+  FPC_LeverShaftPositionManouverPS  : array[0..21] of Double = (0,-0.5,-1,-2,-4,-6,-8,-9,-10,-10,10,10,10,10,10,10,9,8,6,4,2,1);
+  FPC_LeverSpeedShaftManouverPS     : array[0..21] of Double = (90.4, 90.4, 90.4, 101.0, 115.3, 129.7, 144.0, 144.0, 158.2, 158.2, 226.0, 226.0, 226.0,
+                                                              226.0, 226.0, 226.0, 212.5, 198.9, 171.8, 148.3, 115.9, 103.3);
 
 type
 
@@ -351,66 +351,66 @@ procedure TGearBox.SetShaftValue;
 begin
   // Mode Manouver SB
   FPC_LeverShaftPositionManouverSB[0]  := 0;     FPC_LeverSpeedShaftManouverSB[0]  := 90.4;
-  FPC_LeverShaftPositionManouverSB[1]  := 1;     FPC_LeverSpeedShaftManouverSB[1]  := 103.3;
-  FPC_LeverShaftPositionManouverSB[2]  := 2;     FPC_LeverSpeedShaftManouverSB[2]  := 115.9;
-  FPC_LeverShaftPositionManouverSB[3]  := 4;     FPC_LeverSpeedShaftManouverSB[3]  := 148.3;
-  FPC_LeverShaftPositionManouverSB[4]  := 5;     FPC_LeverSpeedShaftManouverSB[4]  := 158.2;
-  FPC_LeverShaftPositionManouverSB[5]  := 6;     FPC_LeverSpeedShaftManouverSB[5]  := 171.8;
-  FPC_LeverShaftPositionManouverSB[6]  := 7;     FPC_LeverSpeedShaftManouverSB[6]  := 185.3;
-  FPC_LeverShaftPositionManouverSB[7]  := 8;     FPC_LeverSpeedShaftManouverSB[7]  := 198.9;
-  FPC_LeverShaftPositionManouverSB[8]  := 10;    FPC_LeverSpeedShaftManouverSB[8]  := 226.0;
-  FPC_LeverShaftPositionManouverSB[9]  := 10;    FPC_LeverSpeedShaftManouverSB[9]  := 226.0;
+  FPC_LeverShaftPositionManouverSB[1]  := -0.5;  FPC_LeverSpeedShaftManouverSB[1]  := 90.4;
+  FPC_LeverShaftPositionManouverSB[2]  := -1;    FPC_LeverSpeedShaftManouverSB[2]  := 90.4;
+  FPC_LeverShaftPositionManouverSB[3]  := -2;    FPC_LeverSpeedShaftManouverSB[3]  := 101.0;
+  FPC_LeverShaftPositionManouverSB[4]  := -4;    FPC_LeverSpeedShaftManouverSB[4]  := 115.3;
+  FPC_LeverShaftPositionManouverSB[5]  := -6;    FPC_LeverSpeedShaftManouverSB[5]  := 129.7;
+  FPC_LeverShaftPositionManouverSB[6]  := -8;    FPC_LeverSpeedShaftManouverSB[6]  := 144.0;
+  FPC_LeverShaftPositionManouverSB[7]  := -9;    FPC_LeverSpeedShaftManouverSB[7]  := 144.0;
+  FPC_LeverShaftPositionManouverSB[8]  := -10;   FPC_LeverSpeedShaftManouverSB[8]  := 158.2;
+  FPC_LeverShaftPositionManouverSB[9]  := -10;   FPC_LeverSpeedShaftManouverSB[9]  := 158.2;
   FPC_LeverShaftPositionManouverSB[10] := 10;    FPC_LeverSpeedShaftManouverSB[10] := 226.0;
   FPC_LeverShaftPositionManouverSB[11] := 10;    FPC_LeverSpeedShaftManouverSB[11] := 226.0;
   FPC_LeverShaftPositionManouverSB[12] := 10;    FPC_LeverSpeedShaftManouverSB[12] := 226.0;
-  FPC_LeverShaftPositionManouverSB[13] := -10;   FPC_LeverSpeedShaftManouverSB[13] := 158.2;
-  FPC_LeverShaftPositionManouverSB[14] := -10;   FPC_LeverSpeedShaftManouverSB[14] := 158.2;
-  FPC_LeverShaftPositionManouverSB[15] := -10;   FPC_LeverSpeedShaftManouverSB[15] := 158.2;
-  FPC_LeverShaftPositionManouverSB[16] := -10;   FPC_LeverSpeedShaftManouverSB[16] := 158.2;
-  FPC_LeverShaftPositionManouverSB[17] := -8;    FPC_LeverSpeedShaftManouverSB[17] := 144.0;
-  FPC_LeverShaftPositionManouverSB[18] := -6;    FPC_LeverSpeedShaftManouverSB[18] := 129.7;
-  FPC_LeverShaftPositionManouverSB[19] := -4;    FPC_LeverSpeedShaftManouverSB[19] := 115.3;
-  FPC_LeverShaftPositionManouverSB[20] := -2;    FPC_LeverSpeedShaftManouverSB[20] := 101.0;
-  FPC_LeverShaftPositionManouverSB[21] := -0.5;  FPC_LeverSpeedShaftManouverSB[21] := 90.4;
+  FPC_LeverShaftPositionManouverSB[13] := 10;    FPC_LeverSpeedShaftManouverSB[13] := 226.0;
+  FPC_LeverShaftPositionManouverSB[14] := 10;    FPC_LeverSpeedShaftManouverSB[14] := 226.0;
+  FPC_LeverShaftPositionManouverSB[15] := 10;    FPC_LeverSpeedShaftManouverSB[15] := 226.0;
+  FPC_LeverShaftPositionManouverSB[16] := 9;     FPC_LeverSpeedShaftManouverSB[16] := 212.5;
+  FPC_LeverShaftPositionManouverSB[17] := 8;     FPC_LeverSpeedShaftManouverSB[17] := 198.9;
+  FPC_LeverShaftPositionManouverSB[18] := 6;     FPC_LeverSpeedShaftManouverSB[18] := 171.8;
+  FPC_LeverShaftPositionManouverSB[19] := 4;     FPC_LeverSpeedShaftManouverSB[19] := 148.3;
+  FPC_LeverShaftPositionManouverSB[20] := 2;     FPC_LeverSpeedShaftManouverSB[20] := 115.9;
+  FPC_LeverShaftPositionManouverSB[21] := 1;     FPC_LeverSpeedShaftManouverSB[21] := 103.3;
 
   // Mode Manouver PS
   FPC_LeverShaftPositionManouverPS[0]  := 0;     FPC_LeverSpeedShaftManouverPS[0]  := 90.4;
-  FPC_LeverShaftPositionManouverPS[1]  := 1;     FPC_LeverSpeedShaftManouverPS[1]  := 103.3;
-  FPC_LeverShaftPositionManouverPS[2]  := 2;     FPC_LeverSpeedShaftManouverPS[2]  := 115.9;
-  FPC_LeverShaftPositionManouverPS[3]  := 4;     FPC_LeverSpeedShaftManouverPS[3]  := 148.3;
-  FPC_LeverShaftPositionManouverPS[4]  := 5;     FPC_LeverSpeedShaftManouverPS[4]  := 158.2;
-  FPC_LeverShaftPositionManouverPS[5]  := 6;     FPC_LeverSpeedShaftManouverPS[5]  := 171.8;
-  FPC_LeverShaftPositionManouverPS[6]  := 7;     FPC_LeverSpeedShaftManouverPS[6]  := 185.3;
-  FPC_LeverShaftPositionManouverPS[7]  := 8;     FPC_LeverSpeedShaftManouverPS[7]  := 198.9;
-  FPC_LeverShaftPositionManouverPS[8]  := 10;    FPC_LeverSpeedShaftManouverPS[8]  := 226.0;
-  FPC_LeverShaftPositionManouverPS[9]  := 10;    FPC_LeverSpeedShaftManouverPS[9]  := 226.0;
+  FPC_LeverShaftPositionManouverPS[1]  := -0.5;  FPC_LeverSpeedShaftManouverPS[1]  := 90.4;
+  FPC_LeverShaftPositionManouverPS[2]  := -1;    FPC_LeverSpeedShaftManouverPS[2]  := 90.4;
+  FPC_LeverShaftPositionManouverPS[3]  := -2;    FPC_LeverSpeedShaftManouverPS[3]  := 101.0;
+  FPC_LeverShaftPositionManouverPS[4]  := -4;    FPC_LeverSpeedShaftManouverPS[4]  := 115.3;
+  FPC_LeverShaftPositionManouverPS[5]  := -6;    FPC_LeverSpeedShaftManouverPS[5]  := 129.7;
+  FPC_LeverShaftPositionManouverPS[6]  := -8;    FPC_LeverSpeedShaftManouverPS[6]  := 144.0;
+  FPC_LeverShaftPositionManouverPS[7]  := -9;    FPC_LeverSpeedShaftManouverPS[7]  := 144.0;
+  FPC_LeverShaftPositionManouverPS[8]  := -10;   FPC_LeverSpeedShaftManouverPS[8]  := 158.2;
+  FPC_LeverShaftPositionManouverPS[9]  := -10;   FPC_LeverSpeedShaftManouverPS[9]  := 158.2;
   FPC_LeverShaftPositionManouverPS[10] := 10;    FPC_LeverSpeedShaftManouverPS[10] := 226.0;
   FPC_LeverShaftPositionManouverPS[11] := 10;    FPC_LeverSpeedShaftManouverPS[11] := 226.0;
   FPC_LeverShaftPositionManouverPS[12] := 10;    FPC_LeverSpeedShaftManouverPS[12] := 226.0;
-  FPC_LeverShaftPositionManouverPS[13] := -10;   FPC_LeverSpeedShaftManouverPS[13] := 158.2;
-  FPC_LeverShaftPositionManouverPS[14] := -10;   FPC_LeverSpeedShaftManouverPS[14] := 158.2;
-  FPC_LeverShaftPositionManouverPS[15] := -10;   FPC_LeverSpeedShaftManouverPS[15] := 158.2;
-  FPC_LeverShaftPositionManouverPS[16] := -10;   FPC_LeverSpeedShaftManouverPS[16] := 158.2;
-  FPC_LeverShaftPositionManouverPS[17] := -8;    FPC_LeverSpeedShaftManouverPS[17] := 144.0;
-  FPC_LeverShaftPositionManouverPS[18] := -6;    FPC_LeverSpeedShaftManouverPS[18] := 129.7;
-  FPC_LeverShaftPositionManouverPS[19] := -4;    FPC_LeverSpeedShaftManouverPS[19] := 115.3;
-  FPC_LeverShaftPositionManouverPS[20] := -2;    FPC_LeverSpeedShaftManouverPS[20] := 101.0;
-  FPC_LeverShaftPositionManouverPS[21] := -0.5;  FPC_LeverSpeedShaftManouverPS[21] := 90.4;
+  FPC_LeverShaftPositionManouverPS[13] := 10;    FPC_LeverSpeedShaftManouverPS[13] := 226.0;
+  FPC_LeverShaftPositionManouverPS[14] := 10;    FPC_LeverSpeedShaftManouverPS[14] := 226.0;
+  FPC_LeverShaftPositionManouverPS[15] := 10;    FPC_LeverSpeedShaftManouverPS[15] := 226.0;
+  FPC_LeverShaftPositionManouverPS[16] := 9;     FPC_LeverSpeedShaftManouverPS[16] := 212.5;
+  FPC_LeverShaftPositionManouverPS[17] := 8;     FPC_LeverSpeedShaftManouverPS[17] := 198.9;
+  FPC_LeverShaftPositionManouverPS[18] := 6;     FPC_LeverSpeedShaftManouverPS[18] := 171.8;
+  FPC_LeverShaftPositionManouverPS[19] := 4;     FPC_LeverSpeedShaftManouverPS[19] := 148.3;
+  FPC_LeverShaftPositionManouverPS[20] := 2;     FPC_LeverSpeedShaftManouverPS[20] := 115.9;
+  FPC_LeverShaftPositionManouverPS[21] := 1;     FPC_LeverSpeedShaftManouverPS[21] := 103.3;
 
   // Mode Transit
-  FPC_LeverShaftPositionTransit[0]  := 10;    FPC_LeverSpeedShaftTransit[0]  := 237.3;
-  FPC_LeverShaftPositionTransit[1]  := 9;     FPC_LeverSpeedShaftTransit[1]  := 210.9;
-  FPC_LeverShaftPositionTransit[2]  := 8;     FPC_LeverSpeedShaftTransit[2]  := 186.9;
-  FPC_LeverShaftPositionTransit[3]  := 7;     FPC_LeverSpeedShaftTransit[3]  := 162.7;
-  FPC_LeverShaftPositionTransit[4]  := 6;     FPC_LeverSpeedShaftTransit[4]  := 138.5;
-  FPC_LeverShaftPositionTransit[5]  := 5;     FPC_LeverSpeedShaftTransit[5]  := 114.6;
-  FPC_LeverShaftPositionTransit[6]  := 4;     FPC_LeverSpeedShaftTransit[6]  := 90.4;
-  FPC_LeverShaftPositionTransit[7]  := 3.5;   FPC_LeverSpeedShaftTransit[7]  := 90.4;
-  FPC_LeverShaftPositionTransit[8]  := 3;     FPC_LeverSpeedShaftTransit[8]  := 90.4;
-  FPC_LeverShaftPositionTransit[9]  := 2;     FPC_LeverSpeedShaftTransit[9]  := 90.4;
-  FPC_LeverShaftPositionTransit[10] := 1;     FPC_LeverSpeedShaftTransit[10] := 90.4;
-  FPC_LeverShaftPositionTransit[11] := 0.5;   FPC_LeverSpeedShaftTransit[11] := 90.4;
-  FPC_LeverShaftPositionTransit[12] := 0;     FPC_LeverSpeedShaftTransit[12] := 90.4;
+  FPC_LeverShaftPositionTransit[0]  := 0.;      FPC_LeverSpeedShaftTransit[0]  := 90.4;
+  FPC_LeverShaftPositionTransit[1]  := 0.5;     FPC_LeverSpeedShaftTransit[1]  := 90.4;
+  FPC_LeverShaftPositionTransit[2]  := 1;       FPC_LeverSpeedShaftTransit[2]  := 90.4;
+  FPC_LeverShaftPositionTransit[3]  := 2;       FPC_LeverSpeedShaftTransit[3]  := 90.4;
+  FPC_LeverShaftPositionTransit[4]  := 3;       FPC_LeverSpeedShaftTransit[4]  := 90.4;
+  FPC_LeverShaftPositionTransit[5]  := 3.5;     FPC_LeverSpeedShaftTransit[5]  := 90.4;
+  FPC_LeverShaftPositionTransit[6]  := 4;       FPC_LeverSpeedShaftTransit[6]  := 90.4;
+  FPC_LeverShaftPositionTransit[7]  := 5;       FPC_LeverSpeedShaftTransit[7]  := 114.6;
+  FPC_LeverShaftPositionTransit[8]  := 6;       FPC_LeverSpeedShaftTransit[8]  := 138.5;
+  FPC_LeverShaftPositionTransit[9]  := 7;       FPC_LeverSpeedShaftTransit[9]  := 162.7;
+  FPC_LeverShaftPositionTransit[10] := 8;       FPC_LeverSpeedShaftTransit[10] := 186.9;
+  FPC_LeverShaftPositionTransit[11] := 9;       FPC_LeverSpeedShaftTransit[11] := 210.9;
+  FPC_LeverShaftPositionTransit[12] := 1;       FPC_LeverSpeedShaftTransit[12] := 237.3;
 end;
 
 procedure TGearBox.SetLeverShaft(const Value: Double);

@@ -6,16 +6,16 @@ interface
 uses uEntity;
 
 const
-  FPC_LeverPitchPositionTransit   : array[0..18] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0,-0.5,-2,-4,-6,-8,-10);
-  FPC_LeverPitchValuesTransit     : array[0..12] of Double = (95.0, 95.0, 95.0, 95.0, 95.0, 95.0, 95.0, 79.51, 66.26, 39.75,
-                                                           13.25, 00.0, 00.0);
+  FPC_LeverPitchPositionTransit   : array[0..12] of Double = (0,0.5,1,2,3,3.5,4,5,6,7,8,9,10);
+  FPC_LeverPitchValuesTransit     : array[0..12] of Double = (00.0, 00.0, 13.25, 39.75, 66.26, 79.51, 95.0, 95.0, 95.0, 95.0,
+                                                           95.0, 95.0, 95.0);
 
-  FPC_LeverPitchPositionManouverSB  : array[0..21] of Double = (0,1,2,4,5,6,7,8,10,10,10,10,10,-10,-10,-10,-10,-8,-6,-4,-2,-0.5);
-  FPC_LeverPitchValuesManouverSB    : array[0..21] of Double = (0.00, 20.00, 40.17, 65.20, 67.67, 69.37, 71.07, 72.72, 74.2, 74.2, 74.2, 74.2, 74.2,
-                                                              -100, -100, -100, -100, -78.95, -57.9, -36.84, -15.79, -0.00);
-  FPC_LeverPitchPositionManouverPS  : array[0..21] of Double = (0,1,2,4,5,6,7,8,10,10,10,10,10,-10,-10,-10,-10,-8,-6,-4,-2,-0.5);
-  FPC_LeverPitchValuesManouverPS    : array[0..21] of Double = (0.00, 20.00, 40.17, 65.20, 67.67, 69.37, 71.07, 72.72, 74.2, 74.2, 74.2, 74.2, 74.2,
-                                                              -100, -100, -100, -100, -78.95, -57.9, -36.84, -15.79, -0.00);
+  FPC_LeverPitchPositionManouverSB  : array[0..21] of Double = (0,-0.5,-1,-2,-4,-6,-8,-9,-10,-10,10,10,10,10,10,10,9,8,6,4,2,1);
+  FPC_LeverPitchValuesManouverSB    : array[0..21] of Double = (0.00, 0.00, 0.00, -15.79, -36.84, -57.9, -78.95, -78.95, -100, -100, 74.2, 74.2, 74.2,
+                                                              74.2, 74.2, 74.2, 74.2, 72.72, 69.37, 65.20, 40.17, 20.00);
+  FPC_LeverPitchPositionManouverPS  : array[0..21] of Double = (0,-0.5,-1,-2,-4,-6,-8,-9,-10,-10,10,10,10,10,10,10,9,8,6,4,2,1);
+  FPC_LeverPitchValuesManouverPS    : array[0..21] of Double = (0.00, 0.00, 0.00, -15.79, -36.84, -57.9, -78.95, -78.95, -100, -100, 74.2, 74.2, 74.2,
+                                                              74.2, 74.2, 74.2, 74.2, 72.72, 69.37, 65.20, 40.17, 20.00);
 
 type
 
@@ -574,66 +574,66 @@ procedure TCPP.LeverPitchValues;
 begin
   // Mode Manouver SB
   FPC_LeverPitchPositionManouverSB[0]  := 0;    FPC_LeverPitchValuesManouverSB[0]  := 0.00;
-  FPC_LeverPitchPositionManouverSB[1]  := 1;    FPC_LeverPitchValuesManouverSB[1]  := 20.00;
-  FPC_LeverPitchPositionManouverSB[2]  := 2;    FPC_LeverPitchValuesManouverSB[2]  := 40.17;
-  FPC_LeverPitchPositionManouverSB[3]  := 4;    FPC_LeverPitchValuesManouverSB[3]  := 65.20;
-  FPC_LeverPitchPositionManouverSB[4]  := 5;    FPC_LeverPitchValuesManouverSB[4]  := 67.67;
-  FPC_LeverPitchPositionManouverSB[5]  := 6;    FPC_LeverPitchValuesManouverSB[5]  := 69.37;
-  FPC_LeverPitchPositionManouverSB[6]  := 7;    FPC_LeverPitchValuesManouverSB[6]  := 71.07;
-  FPC_LeverPitchPositionManouverSB[7]  := 8;    FPC_LeverPitchValuesManouverSB[7]  := 72.72;
-  FPC_LeverPitchPositionManouverSB[8]  := 10;   FPC_LeverPitchValuesManouverSB[8]  := 74.2;
-  FPC_LeverPitchPositionManouverSB[9]  := 10;   FPC_LeverPitchValuesManouverSB[9]  := 74.2;
+  FPC_LeverPitchPositionManouverSB[1]  := -0.5; FPC_LeverPitchValuesManouverSB[1]  := 0.00;
+  FPC_LeverPitchPositionManouverSB[2]  := -1;   FPC_LeverPitchValuesManouverSB[2]  := 0.00;
+  FPC_LeverPitchPositionManouverSB[3]  := -2;   FPC_LeverPitchValuesManouverSB[3]  := -15.79;
+  FPC_LeverPitchPositionManouverSB[4]  := -4;   FPC_LeverPitchValuesManouverSB[4]  := -36.84;
+  FPC_LeverPitchPositionManouverSB[5]  := -6;   FPC_LeverPitchValuesManouverSB[5]  := -57.9;
+  FPC_LeverPitchPositionManouverSB[6]  := -8;   FPC_LeverPitchValuesManouverSB[6]  := -78.95;
+  FPC_LeverPitchPositionManouverSB[7]  := -9;   FPC_LeverPitchValuesManouverSB[7]  := -78.95;
+  FPC_LeverPitchPositionManouverSB[8]  := -10;  FPC_LeverPitchValuesManouverSB[8]  := -100;
+  FPC_LeverPitchPositionManouverSB[9]  := -10;  FPC_LeverPitchValuesManouverSB[9]  := -100;
   FPC_LeverPitchPositionManouverSB[10] := 10;   FPC_LeverPitchValuesManouverSB[10] := 74.2;
   FPC_LeverPitchPositionManouverSB[11] := 10;   FPC_LeverPitchValuesManouverSB[11] := 74.2;
   FPC_LeverPitchPositionManouverSB[12] := 10;   FPC_LeverPitchValuesManouverSB[12] := 74.2;
-  FPC_LeverPitchPositionManouverSB[13] := -10;  FPC_LeverPitchValuesManouverSB[13] := -100;
-  FPC_LeverPitchPositionManouverSB[14] := -10;  FPC_LeverPitchValuesManouverSB[14] := -100;
-  FPC_LeverPitchPositionManouverSB[15] := -10;  FPC_LeverPitchValuesManouverSB[15] := -100;
-  FPC_LeverPitchPositionManouverSB[16] := -10;  FPC_LeverPitchValuesManouverSB[16] := -100;
-  FPC_LeverPitchPositionManouverSB[17] := -8;   FPC_LeverPitchValuesManouverSB[17] := -78.95;
-  FPC_LeverPitchPositionManouverSB[18] := -6;   FPC_LeverPitchValuesManouverSB[18] := -57.9;
-  FPC_LeverPitchPositionManouverSB[19] := -4;   FPC_LeverPitchValuesManouverSB[19] := -36.84;
-  FPC_LeverPitchPositionManouverSB[20] := -2;   FPC_LeverPitchValuesManouverSB[20] := -15.79;
-  FPC_LeverPitchPositionManouverSB[21] := -0.5; FPC_LeverPitchValuesManouverSB[21] := 0.00;
+  FPC_LeverPitchPositionManouverSB[13] := 10;   FPC_LeverPitchValuesManouverSB[13] := 74.2;
+  FPC_LeverPitchPositionManouverSB[14] := 10;   FPC_LeverPitchValuesManouverSB[14] := 74.2;
+  FPC_LeverPitchPositionManouverSB[15] := 10;   FPC_LeverPitchValuesManouverSB[15] := 74.2;
+  FPC_LeverPitchPositionManouverSB[16] := 9;    FPC_LeverPitchValuesManouverSB[16] := 72.72;
+  FPC_LeverPitchPositionManouverSB[17] := 8;    FPC_LeverPitchValuesManouverSB[17] := 72.72;
+  FPC_LeverPitchPositionManouverSB[18] := 6;    FPC_LeverPitchValuesManouverSB[18] := 69.37;
+  FPC_LeverPitchPositionManouverSB[19] := 4;    FPC_LeverPitchValuesManouverSB[19] := 65.20;
+  FPC_LeverPitchPositionManouverSB[20] := 2;    FPC_LeverPitchValuesManouverSB[20] := 40.17;
+  FPC_LeverPitchPositionManouverSB[21] := 1;    FPC_LeverPitchValuesManouverSB[21] := 20.00;
 
   // Mode Manouver PS
   FPC_LeverPitchPositionManouverPS[0]  := 0;    FPC_LeverPitchValuesManouverPS[0]  := 0.00;
-  FPC_LeverPitchPositionManouverPS[1]  := 1;    FPC_LeverPitchValuesManouverPS[1]  := 20.00;
-  FPC_LeverPitchPositionManouverPS[2]  := 2;    FPC_LeverPitchValuesManouverPS[2]  := 40.17;
-  FPC_LeverPitchPositionManouverPS[3]  := 4;    FPC_LeverPitchValuesManouverPS[3]  := 65.20;
-  FPC_LeverPitchPositionManouverPS[4]  := 5;    FPC_LeverPitchValuesManouverPS[4]  := 67.67;
-  FPC_LeverPitchPositionManouverPS[5]  := 6;    FPC_LeverPitchValuesManouverPS[5]  := 69.37;
-  FPC_LeverPitchPositionManouverPS[6]  := 7;    FPC_LeverPitchValuesManouverPS[6]  := 71.07;
-  FPC_LeverPitchPositionManouverPS[7]  := 8;    FPC_LeverPitchValuesManouverPS[7]  := 72.72;
-  FPC_LeverPitchPositionManouverPS[8]  := 10;   FPC_LeverPitchValuesManouverPS[8]  := 74.2;
-  FPC_LeverPitchPositionManouverPS[9]  := 10;   FPC_LeverPitchValuesManouverPS[9]  := 74.2;
+  FPC_LeverPitchPositionManouverPS[1]  := -0.5; FPC_LeverPitchValuesManouverPS[1]  := 0.00;
+  FPC_LeverPitchPositionManouverPS[2]  := -1;   FPC_LeverPitchValuesManouverPS[2]  := 0.00;
+  FPC_LeverPitchPositionManouverPS[3]  := -2;   FPC_LeverPitchValuesManouverPS[3]  := -15.79;
+  FPC_LeverPitchPositionManouverPS[4]  := -4;   FPC_LeverPitchValuesManouverPS[4]  := -36.84;
+  FPC_LeverPitchPositionManouverPS[5]  := -6;   FPC_LeverPitchValuesManouverPS[5]  := -57.9;
+  FPC_LeverPitchPositionManouverPS[6]  := -8;   FPC_LeverPitchValuesManouverPS[6]  := -78.95;
+  FPC_LeverPitchPositionManouverPS[7]  := -9;   FPC_LeverPitchValuesManouverPS[7]  := -78.95;
+  FPC_LeverPitchPositionManouverPS[8]  := -10;  FPC_LeverPitchValuesManouverPS[8]  := -100;
+  FPC_LeverPitchPositionManouverPS[9]  := -10;  FPC_LeverPitchValuesManouverPS[9]  := -100;
   FPC_LeverPitchPositionManouverPS[10] := 10;   FPC_LeverPitchValuesManouverPS[10] := 74.2;
   FPC_LeverPitchPositionManouverPS[11] := 10;   FPC_LeverPitchValuesManouverPS[11] := 74.2;
   FPC_LeverPitchPositionManouverPS[12] := 10;   FPC_LeverPitchValuesManouverPS[12] := 74.2;
-  FPC_LeverPitchPositionManouverPS[13] := -10;  FPC_LeverPitchValuesManouverPS[13] := -100;
-  FPC_LeverPitchPositionManouverPS[14] := -10;  FPC_LeverPitchValuesManouverPS[14] := -100;
-  FPC_LeverPitchPositionManouverPS[15] := -10;  FPC_LeverPitchValuesManouverPS[15] := -100;
-  FPC_LeverPitchPositionManouverPS[16] := -10;  FPC_LeverPitchValuesManouverPS[16] := -100;
-  FPC_LeverPitchPositionManouverPS[17] := -8;   FPC_LeverPitchValuesManouverPS[17] := -78.95;
-  FPC_LeverPitchPositionManouverPS[18] := -6;   FPC_LeverPitchValuesManouverPS[18] := -57.9;
-  FPC_LeverPitchPositionManouverPS[19] := -4;   FPC_LeverPitchValuesManouverPS[19] := -36.84;
-  FPC_LeverPitchPositionManouverPS[20] := -2;   FPC_LeverPitchValuesManouverPS[20] := -15.79;
-  FPC_LeverPitchPositionManouverPS[21] := -0.5; FPC_LeverPitchValuesManouverPS[21] := 0.00;
+  FPC_LeverPitchPositionManouverPS[13] := 10;   FPC_LeverPitchValuesManouverPS[13] := 74.2;
+  FPC_LeverPitchPositionManouverPS[14] := 10;   FPC_LeverPitchValuesManouverPS[14] := 74.2;
+  FPC_LeverPitchPositionManouverPS[15] := 10;   FPC_LeverPitchValuesManouverPS[15] := 74.2;
+  FPC_LeverPitchPositionManouverPS[16] := 9;    FPC_LeverPitchValuesManouverPS[16] := 72.72;
+  FPC_LeverPitchPositionManouverPS[17] := 8;    FPC_LeverPitchValuesManouverPS[17] := 72.72;
+  FPC_LeverPitchPositionManouverPS[18] := 6;    FPC_LeverPitchValuesManouverPS[18] := 69.37;
+  FPC_LeverPitchPositionManouverPS[19] := 4;    FPC_LeverPitchValuesManouverPS[19] := 65.20;
+  FPC_LeverPitchPositionManouverPS[20] := 2;    FPC_LeverPitchValuesManouverPS[20] := 40.17;
+  FPC_LeverPitchPositionManouverPS[21] := 1;    FPC_LeverPitchValuesManouverPS[21] := 20.00;
 
   // Mode Transit
-  FPC_LeverPitchPositionTransit[0]  := 10;    FPC_LeverPitchValuesTransit[0]  := 95.0;
-  FPC_LeverPitchPositionTransit[1]  := 9;     FPC_LeverPitchValuesTransit[1]  := 95.0;
-  FPC_LeverPitchPositionTransit[2]  := 8;     FPC_LeverPitchValuesTransit[2]  := 95.0;
-  FPC_LeverPitchPositionTransit[3]  := 7;     FPC_LeverPitchValuesTransit[3]  := 95.0;
-  FPC_LeverPitchPositionTransit[4]  := 6;     FPC_LeverPitchValuesTransit[4]  := 95.0;
-  FPC_LeverPitchPositionTransit[5]  := 5;     FPC_LeverPitchValuesTransit[5]  := 95.0;
-  FPC_LeverPitchPositionTransit[6]  := 4;     FPC_LeverPitchValuesTransit[6]  := 95.0;
-  FPC_LeverPitchPositionTransit[7]  := 3.5;   FPC_LeverPitchValuesTransit[7]  := 79.51;
-  FPC_LeverPitchPositionTransit[8]  := 3;     FPC_LeverPitchValuesTransit[8]  := 66.26;
-  FPC_LeverPitchPositionTransit[9]  := 2;     FPC_LeverPitchValuesTransit[9]  := 39.75;
-  FPC_LeverPitchPositionTransit[10] := 1;     FPC_LeverPitchValuesTransit[10] := 13.25;
-  FPC_LeverPitchPositionTransit[11] := 0.5;   FPC_LeverPitchValuesTransit[11] := 00.0;
-  FPC_LeverPitchPositionTransit[12] := 0;     FPC_LeverPitchValuesTransit[12] := 00.0;
+  FPC_LeverPitchPositionTransit[0]  := 0;      FPC_LeverPitchValuesTransit[0]  := 00.0;
+  FPC_LeverPitchPositionTransit[1]  := 0.5;    FPC_LeverPitchValuesTransit[1]  := 00.0;
+  FPC_LeverPitchPositionTransit[2]  := 1;      FPC_LeverPitchValuesTransit[2]  := 13.25;
+  FPC_LeverPitchPositionTransit[3]  := 2;      FPC_LeverPitchValuesTransit[3]  := 39.75;
+  FPC_LeverPitchPositionTransit[4]  := 3;      FPC_LeverPitchValuesTransit[4]  := 66.26;
+  FPC_LeverPitchPositionTransit[5]  := 3.5;    FPC_LeverPitchValuesTransit[5]  := 79.51;
+  FPC_LeverPitchPositionTransit[6]  := 4;      FPC_LeverPitchValuesTransit[6]  := 95.0;
+  FPC_LeverPitchPositionTransit[7]  := 5;      FPC_LeverPitchValuesTransit[7]  := 95.0;
+  FPC_LeverPitchPositionTransit[8]  := 6;      FPC_LeverPitchValuesTransit[8]  := 95.0;
+  FPC_LeverPitchPositionTransit[9]  := 7;      FPC_LeverPitchValuesTransit[9]  := 95.0;
+  FPC_LeverPitchPositionTransit[10] := 8;      FPC_LeverPitchValuesTransit[10] := 95.0;
+  FPC_LeverPitchPositionTransit[11] := 9;      FPC_LeverPitchValuesTransit[11] := 95.0;
+  FPC_LeverPitchPositionTransit[12] := 10;     FPC_LeverPitchValuesTransit[12] := 95.0;
 end;
 
 procedure TCPP.SetLeverPitch(const Value: Double);

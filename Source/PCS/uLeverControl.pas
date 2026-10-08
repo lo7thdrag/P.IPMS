@@ -8,9 +8,9 @@ uses
   CPort, CPortCtl, {UBinaryPacketizer,} System.Generics.Collections;
 
 var
-  LeverValuesPositionManouverSB: array[0..21] of Double = (0,1,2,4,5,6,7,8,10,10,10,10,10,-10,-10,-10,-10,-8,-6,-4,-2,-0.5);
-  LeverValuesPositionManouverPS: array[0..21] of Double = (0,1,2,4,5,6,7,8,10,10,10,10,10,-10,-10,-10,-10,-8,-6,-4,-2,-0.5);
-  LeverValuesPositionTransit   : array[0..12] of Double = (10,9,8,7,6,5,4,3.5,3,2,1,0.5,0);
+  LeverValuesPositionManouverSB: array[0..21] of Double = (0,-0.5,-1,-2,-4,-6,-8,-9,-10,-10,10,10,10,10,10,10,9,8,6,4,2,1);
+  LeverValuesPositionManouverPS: array[0..21] of Double = (0,-0.5,-1,-2,-4,-6,-8,-9,-10,-10,10,10,10,10,10,10,9,8,6,4,2,1);
+  LeverValuesPositionTransit   : array[0..12] of Double = (0,0.5,1,2,3,3.5,4,5,6,7,8,9,10);
 
 type
   TfrmLeverControl = class(TForm)
@@ -131,9 +131,9 @@ begin
 
 //          if PCSSystem.RemoteAutoPS = True then
 //          begin
-            if LeverIndexPS <= 12 then
+            if LeverIndexPS > 12 then
               ComPort1.WriteStr('AheadPS:1' + #10)
-            else if LeverIndexPS > 12 then
+            else if LeverIndexPS <12 then
               ComPort1.WriteStr('AsternPS:1' + #10);
 //          end;
 
@@ -170,9 +170,9 @@ begin
 
 //          if PCSSystem.RemoteAutoSB = True then
 //          begin
-            if (LeverIndexSB <= 12) then
+            if (LeverIndexSB > 12) then
               ComPort1.WriteStr('AheadSB:1' + #10)
-            else if (LeverIndexSB > 12) then
+            else if (LeverIndexSB < 12) then
               ComPort1.WriteStr('AsternSB:1' + #10);
 //          end;
 
@@ -242,66 +242,66 @@ procedure TfrmLeverControl.LeverValuePosition;
 begin
   // Mode Manouver PS
   LeverValuesPositionManouverPS[0]  := 0;
-  LeverValuesPositionManouverPS[1]  := 1;
-  LeverValuesPositionManouverPS[2]  := 2;
-  LeverValuesPositionManouverPS[3]  := 4;
-  LeverValuesPositionManouverPS[4]  := 5;
-  LeverValuesPositionManouverPS[5]  := 6;
-  LeverValuesPositionManouverPS[6]  := 7;
-  LeverValuesPositionManouverPS[7]  := 8;
-  LeverValuesPositionManouverPS[8]  := 10;
-  LeverValuesPositionManouverPS[9]  := 10;
+  LeverValuesPositionManouverPS[1]  := -0.5;
+  LeverValuesPositionManouverPS[2]  := -1;
+  LeverValuesPositionManouverPS[3]  := -2;
+  LeverValuesPositionManouverPS[4]  := -4;
+  LeverValuesPositionManouverPS[5]  := -6;
+  LeverValuesPositionManouverPS[6]  := -8;
+  LeverValuesPositionManouverPS[7]  := -9;
+  LeverValuesPositionManouverPS[8]  := -10;
+  LeverValuesPositionManouverPS[9]  := -10;
   LeverValuesPositionManouverPS[10] := 10;
   LeverValuesPositionManouverPS[11] := 10;
   LeverValuesPositionManouverPS[12] := 10;
-  LeverValuesPositionManouverPS[13] := -10;
-  LeverValuesPositionManouverPS[14] := -10;
-  LeverValuesPositionManouverPS[15] := -10;
-  LeverValuesPositionManouverPS[16] := -10;
-  LeverValuesPositionManouverPS[17] := -8;
-  LeverValuesPositionManouverPS[18] := -6;
-  LeverValuesPositionManouverPS[19] := -4;
-  LeverValuesPositionManouverPS[20] := -2;
-  LeverValuesPositionManouverPS[21] := -0.5;
+  LeverValuesPositionManouverPS[13] := 10;
+  LeverValuesPositionManouverPS[14] := 10;
+  LeverValuesPositionManouverPS[15] := 10;
+  LeverValuesPositionManouverPS[16] := 9;
+  LeverValuesPositionManouverPS[17] := 8;
+  LeverValuesPositionManouverPS[18] := 6;
+  LeverValuesPositionManouverPS[19] := 4;
+  LeverValuesPositionManouverPS[20] := 2;
+  LeverValuesPositionManouverPS[21] := 1;
 
   // Manouver SB
   LeverValuesPositionManouverSB[0]  := 0;
-  LeverValuesPositionManouverSB[1]  := 1;
-  LeverValuesPositionManouverSB[2]  := 2;
-  LeverValuesPositionManouverSB[3]  := 4;
-  LeverValuesPositionManouverSB[4]  := 5;
-  LeverValuesPositionManouverSB[5]  := 6;
-  LeverValuesPositionManouverSB[6]  := 7;
-  LeverValuesPositionManouverSB[7]  := 8;
-  LeverValuesPositionManouverSB[8]  := 10;
-  LeverValuesPositionManouverSB[9]  := 10;
+  LeverValuesPositionManouverSB[1]  := -0.5;
+  LeverValuesPositionManouverSB[2]  := -1;
+  LeverValuesPositionManouverSB[3]  := -2;
+  LeverValuesPositionManouverSB[4]  := -4;
+  LeverValuesPositionManouverSB[5]  := -6;
+  LeverValuesPositionManouverSB[6]  := -8;
+  LeverValuesPositionManouverSB[7]  := -9;
+  LeverValuesPositionManouverSB[8]  := -10;
+  LeverValuesPositionManouverSB[9]  := -10;
   LeverValuesPositionManouverSB[10] := 10;
   LeverValuesPositionManouverSB[11] := 10;
   LeverValuesPositionManouverSB[12] := 10;
-  LeverValuesPositionManouverSB[13] := -10;
-  LeverValuesPositionManouverSB[14] := -10;
-  LeverValuesPositionManouverSB[15] := -10;
-  LeverValuesPositionManouverSB[16] := -10;
-  LeverValuesPositionManouverSB[17] := -8;
-  LeverValuesPositionManouverSB[18] := -6;
-  LeverValuesPositionManouverSB[19] := -4;
-  LeverValuesPositionManouverSB[20] := -2;
-  LeverValuesPositionManouverSB[21] := -0.5;
+  LeverValuesPositionManouverSB[13] := 10;
+  LeverValuesPositionManouverSB[14] := 10;
+  LeverValuesPositionManouverSB[15] := 10;
+  LeverValuesPositionManouverSB[16] := 9;
+  LeverValuesPositionManouverSB[17] := 8;
+  LeverValuesPositionManouverSB[18] := 6;
+  LeverValuesPositionManouverSB[19] := 4;
+  LeverValuesPositionManouverSB[20] := 2;
+  LeverValuesPositionManouverSB[21] := 1;
 
   // Mode Transit PS
-  LeverValuesPositionTransit[0]  := 6;
-  LeverValuesPositionTransit[1]  := 5;
-  LeverValuesPositionTransit[2]  := 4;
-  LeverValuesPositionTransit[3]  := 3;
-  LeverValuesPositionTransit[4]  := 2;
-  LeverValuesPositionTransit[5]  := 1;
-  LeverValuesPositionTransit[6]  := 0.5;
-  LeverValuesPositionTransit[7]  := 0;
-  LeverValuesPositionTransit[8]  := 3;
-  LeverValuesPositionTransit[9]  := 2;
-  LeverValuesPositionTransit[10] := 1;
-  LeverValuesPositionTransit[11] := 0.5;
-  LeverValuesPositionTransit[12] := 0;
+  LeverValuesPositionTransit[0]  := 0;
+  LeverValuesPositionTransit[1]  := 0.5;
+  LeverValuesPositionTransit[2]  := 1;
+  LeverValuesPositionTransit[3]  := 2;
+  LeverValuesPositionTransit[4]  := 3;
+  LeverValuesPositionTransit[5]  := 3.5;
+  LeverValuesPositionTransit[6]  := 4;
+  LeverValuesPositionTransit[7]  := 5;
+  LeverValuesPositionTransit[8]  := 6;
+  LeverValuesPositionTransit[9]  := 7;
+  LeverValuesPositionTransit[10] := 8;
+  LeverValuesPositionTransit[11] := 9;
+  LeverValuesPositionTransit[12] := 10;
 end;
 
 procedure TfrmLeverControl.FormCreate(Sender: TObject);

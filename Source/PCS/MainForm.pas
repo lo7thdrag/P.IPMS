@@ -171,13 +171,13 @@ end;
 procedure TForm1.btnLeverInServicePSClick(Sender: TObject);
 begin
   PCSSystem.LeverInService(C_PCS_ME_PORTS, True);
-//  frmLeverControl.ComPort1.WriteStr('LeverInServicePS:1' + #10);
+  frmLeverControl.ComPort1.WriteStr('LeverInServicePS:1' + #10);
 end;
 
 procedure TForm1.btnLeverInServiceSBClick(Sender: TObject);
 begin
   PCSSystem.LeverInService(C_PCS_ME_STARBOARD,True);
-//  frmLeverControl.ComPort1.WriteStr('LeverInServiceSB:1' + #10);
+  frmLeverControl.ComPort1.WriteStr('LeverInServiceSB:1' + #10);
 end;
 
 procedure TForm1.btnGeneralPanelStartClick(Sender: TObject);
@@ -409,15 +409,15 @@ begin
 
   if idLeverTest = 1 then
   begin
-//    if Assigned(frmLeverControl) then
-//    begin
-//      frmLeverControl.Show;
-//    end
-//    else
-//    begin
-//      frmLeverControl := TfrmLeverControl.Create(self);
-//      frmLeverControl.Show;
-//    end;
+  //    if Assigned(frmLeverControl) then
+  //    begin
+  //      frmLeverControl.Show;
+  //    end
+  //    else
+  //    begin
+  //      frmLeverControl := TfrmLeverControl.Create(self);
+  //      frmLeverControl.Show;
+  //    end;
   end;
 
   if idServoTest = 1  then
